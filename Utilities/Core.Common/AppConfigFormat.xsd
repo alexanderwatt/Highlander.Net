@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AppConfigFormat"
+    targetNamespace="http://tempuri.org/AppConfigFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/AppConfigFormat.xsd"
+    xmlns:mstns="http://tempuri.org/AppConfigFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="ApplConfigRuleV1">
+    <xs:sequence>
+      <xs:element name="Priority" type="xs:int" />
+      <xs:element name="Disabled" type="xs:boolean" />
+      <xs:element name="Env" type="xs:string" />
+      <xs:element name="ApplName" type="xs:string" />
+      <xs:element name="HostName" type="xs:string" />
+      <xs:element name="UserName" type="xs:string" />
+      <!--configuration settings-->
+      <xs:element name="Settings" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppConfigRuleSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="setName" type="xs:string" />
+        <xs:element name="applConfigV1Rules" type="ApplConfigRuleV1" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

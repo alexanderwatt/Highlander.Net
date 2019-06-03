@@ -1,0 +1,22 @@
+PricingStructureType/String=RateCurve
+IndexTenor/String=6M
+Currency/String=AUD
+Index/String=Swap
+Algorithm/String=Base algorithm
+MarketName/String=LiveTest
+IndexName/String=AUDSwap
+Validity/String=Official
+BuildDateTime/DateTime=2010-07-20T14:20:30
+BaseDate/DateTime=2010-07-20T00:00:00
+StructureType/String=RateCurve
+Identifier/String=LiveTest.AUDSwap.6M.Official.SydSwapDesk.20/07/2010
+Domain/String=Highlander.Market
+DomainId/String=Highlander.Market.LiveTest.RateCurve.AUD-Swap-6M
+ExpiryIntervalInMins/Double=60
+LPMCopy/Boolean=True
+TimeState/String=LiveTest
+CurveType/String=RateCurve
+Owner/String=SydSwapDesk
+BuildDateTimeString/String=20/07/2010
+EventName/String=LiveTest.AUDSwap.6M.Official.SydSwapDesk.20/07/2010
+

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.HKD-ZERO-BANK-6M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.HKD-ZERO-BANK-6M">
+    <name>HKD-ZERO-BANK-6M</name>
+    <currency>HKD</currency>
+    <algorithm>LinearSpreadZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>ZERO-BANK</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.HKD-ZERO-BANK-6M" definitionRef="RateBasisCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-21T08:49:17.9139522+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-1Y-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-2Y-6M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-3Y-6M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-4Y-6M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-5Y-6M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-7Y-6M">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-10Y-6M">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-12Y-6M">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-BASISSWAP-15Y-6M">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-1Y-6M" />
+        <quote>
+          <value>-0.0015</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-2Y-6M" />
+        <quote>
+          <value>-0.0015</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-3Y-6M" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-4Y-6M" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-5Y-6M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-7Y-6M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-10Y-6M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-12Y-6M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-BASISSWAP-15Y-6M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.00259902197680528</mid>
+        </point>
+        <point id="HKD-BASISSWAP-1Y-6M">
+          <term>
+            <date>2011-08-30</date>
+          </term>
+          <mid>0.00259902197680528</mid>
+        </point>
+        <point id="HKD-BASISSWAP-2Y-6M">
+          <term>
+            <date>2012-08-30</date>
+          </term>
+          <mid>0.00490572234947617</mid>
+        </point>
+        <point id="HKD-BASISSWAP-3Y-6M">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.00833652769794302</mid>
+        </point>
+        <point id="HKD-BASISSWAP-4Y-6M">
+          <term>
+            <date>2014-08-29</date>
+          </term>
+          <mid>0.0115960238811921</mid>
+        </point>
+        <point id="HKD-BASISSWAP-5Y-6M">
+          <term>
+            <date>2015-08-31</date>
+          </term>
+          <mid>0.0153159938468255</mid>
+        </point>
+        <point id="HKD-BASISSWAP-7Y-6M">
+          <term>
+            <date>2017-08-30</date>
+          </term>
+          <mid>0.0199382948086839</mid>
+        </point>
+        <point id="HKD-BASISSWAP-10Y-6M">
+          <term>
+            <date>2020-08-31</date>
+          </term>
+          <mid>0.0242546090394269</mid>
+        </point>
+        <point id="HKD-BASISSWAP-12Y-6M">
+          <term>
+            <date>2022-08-30</date>
+          </term>
+          <mid>0.0256544539473031</mid>
+        </point>
+        <point id="HKD-BASISSWAP-15Y-6M">
+          <term>
+            <date>2025-08-29</date>
+          </term>
+          <mid>0.0260895777419323</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="HKD-BASISSWAP-1Y-6M">
+        <term>
+          <date>2011-08-30</date>
+        </term>
+        <mid>0.997405194365145</mid>
+      </point>
+      <point id="HKD-BASISSWAP-2Y-6M">
+        <term>
+          <date>2012-08-30</date>
+        </term>
+        <mid>0.990229182484471</mid>
+      </point>
+      <point id="HKD-BASISSWAP-3Y-6M">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.975303695767057</mid>
+      </point>
+      <point id="HKD-BASISSWAP-4Y-6M">
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.954739270176492</mid>
+      </point>
+      <point id="HKD-BASISSWAP-5Y-6M">
+        <term>
+          <date>2015-08-31</date>
+        </term>
+        <mid>0.926336709632932</mid>
+      </point>
+      <point id="HKD-BASISSWAP-7Y-6M">
+        <term>
+          <date>2017-08-30</date>
+        </term>
+        <mid>0.869940595103013</mid>
+      </point>
+      <point id="HKD-BASISSWAP-10Y-6M">
+        <term>
+          <date>2020-08-31</date>
+        </term>
+        <mid>0.784994401315314</mid>
+      </point>
+      <point id="HKD-BASISSWAP-12Y-6M">
+        <term>
+          <date>2022-08-30</date>
+        </term>
+        <mid>0.735591304707429</mid>
+      </point>
+      <point id="HKD-BASISSWAP-15Y-6M">
+        <term>
+          <date>2025-08-29</date>
+        </term>
+        <mid>0.676862804796272</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

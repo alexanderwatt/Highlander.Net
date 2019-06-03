@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{320D2E83-2352-4A7B-AB1A-C5CABE9FFE93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r3.TestHelpers</RootNamespace>
+    <AssemblyName>FpML.V5r3.TestHelpers</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssertExtension.cs" />
+    <Compile Include="AssertThrows.cs" />
+    <Compile Include="CollectionAssertExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataLoader.cs" />
+    <Compile Include="TestItem2.cs">
+      <DependentUpon>TestItem2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TestItem2Ext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestItem2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
+      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
+      <Name>FpML.V5r3.ConfigTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Helpers\FpML.V5r3.Reporting.Helpers.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>FpML.V5r3.Reporting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
+      <Name>FpML.V5r3.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

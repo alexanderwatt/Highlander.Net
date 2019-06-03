@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+--><!--Example Trade: CDX.NA.IG.9-V3 10Y Tranche: 3-7% Notional: 10MM Traded@: 500bps+ 25%
+	Trade Date: 28 May 2009 Maturity Date: 20 Dec 2017
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DataDocument" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="BankA"/>
+            <tradeId tradeIdScheme="http://www.banka.com/trade-id">TraderA</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="BankB"/>
+            <tradeId tradeIdScheme="http://www.bankb.com/trade-id">TraderB</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2009-05-28Z</tradeDate><!--tradeTime>09:20:18</tradeTime-->
+      </tradeHeader>
+      <creditDefaultSwap>
+         <generalTerms>
+            <effectiveDate><!--should this show the effective date of the underlying index ?-->
+               <unadjustedDate>2007-09-21Z</unadjustedDate>
+            </effectiveDate>
+            <scheduledTerminationDate>
+               <adjustableDate>
+                  <unadjustedDate>2017-09-20Z</unadjustedDate>
+               </adjustableDate>
+            </scheduledTerminationDate>
+            <sellerPartyReference href="BankB"/>
+            <buyerPartyReference href="BankA"/>
+            <indexReferenceInformation>
+               <indexName indexNameScheme="http://www.fpml.org/spec/2003/entity-name-RED-1-0">IG9 10y 03-07%</indexName>
+               <indexId indexIdScheme="http://www.fpml.org/spec/2003/instrument-id-RED-pair-1-0">2I65BYAY1</indexId>
+               <tranche>
+                  <attachmentPoint>0.03</attachmentPoint>
+                  <exhaustionPoint>0.07</exhaustionPoint>
+               </tranche>
+            </indexReferenceInformation>
+         </generalTerms>
+         <feeLeg>
+            <initialPayment>
+               <payerPartyReference href="BankA"/>
+               <receiverPartyReference href="BankB"/><!--adjustablePaymentDate>2009-03-28Z</adjustablePaymentDate>
+					<adjustedPaymentDate>2009-03-30Z</adjustedPaymentDate-->
+               <paymentAmount>
+                  <currency>USD</currency>
+                  <amount>2380000</amount>
+               </paymentAmount>
+            </initialPayment>
+            <periodicPayment>
+               <paymentFrequency>
+                  <periodMultiplier>3</periodMultiplier>
+                  <period>M</period>
+               </paymentFrequency><!--Pay Date immediately following T+1 --><!--firstPeriodStartDate>2009-06-20Z</firstPeriodStartDate-->
+               <firstPaymentDate>2009-06-20Z</firstPaymentDate>
+               <rollConvention>20</rollConvention>
+               <fixedAmountCalculation>
+                  <fixedRate>0.05</fixedRate>
+               </fixedAmountCalculation>
+            </periodicPayment><!--should mFR element show the traded % level in bps?-->
+            <marketFixedRate>0.025</marketFixedRate>
+         </feeLeg>
+         <protectionTerms>
+            <calculationAmount>
+               <currency>USD</currency>
+               <amount>10000000</amount>
+            </calculationAmount>
+         </protectionTerms>
+      </creditDefaultSwap>
+      <documentation>
+         <brokerConfirmation>
+            <brokerConfirmationType brokerConfirmationTypeScheme="http://www.fpml.org/spec/2004/broker-confirmation-type-2-0">StandardCDXTranche </brokerConfirmationType>
+         </brokerConfirmation>
+      </documentation>
+   </trade>
+   <party id="BankA">
+      <partyId>ABICXXX</partyId>
+      <partyName>Bank A</partyName>
+   </party>
+   <party id="BankB">
+      <partyId>BBICXXX</partyId>
+      <partyName>Bank B</partyName>
+   </party>
+</FpML>

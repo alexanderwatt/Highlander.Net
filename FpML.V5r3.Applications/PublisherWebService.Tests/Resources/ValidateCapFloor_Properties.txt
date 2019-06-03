@@ -1,0 +1,11 @@
+ExpiryIntervalInMins/Double=60
+MarketName/String=LpmTest
+LPMCopy/Boolean=True
+Source/String=SydSPU
+Instrument/String=CapFloor
+Currency/String=AUD
+Name/String=CapFloor-AUD-SydSPU-20/07/2010
+TimeState/String=LpmTest
+IndexName/String=Volatility
+Owner/String=SydSPU
+SurfaceType/String=VolatilitySurface

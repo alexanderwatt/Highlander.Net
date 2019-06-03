@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59568E73-D745-4D85-83D7-E367FA375CD3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceHostGui</RootNamespace>
+    <AssemblyName>ServiceHostGui</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\..\Common\Keys\National.QRSC.Key.Net4.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bloomberg.Api, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloomberg.Api.DataTypes, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.Api.DataTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloomberg.Api.Diagnostics, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.Api.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloomberg.BBComm.Protocol, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.BBComm.Protocol.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloomberg.BBComm.Transport, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.BBComm.Transport.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloomberg.BBComm.Util, Version=1.9.0.4, Culture=neutral, PublicKeyToken=65c07ea3148235aa">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Bloomberg\SAPI.1.9\Bloomberg.BBComm.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="..\..\..\..\Common\Keys\National.QRSC.Key.Net4.snk">
+      <Link>National.QRSC.Key.Net4.snk</Link>
+    </None>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.3.3\National.QRSC.Runtime.3.3.Client.csproj">
+      <Project>{725FEAA0-7035-415B-96CB-43732ACE6529}</Project>
+      <Name>National.QRSC.Runtime.3.3.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.Common\National.QRSC.Runtime.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>National.QRSC.Runtime.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Metadata\National.QRSC.Configuration.Types.csproj">
+      <Project>{C146FEAB-E8B5-4B7F-B47F-B85796A3CDF5}</Project>
+      <Name>National.QRSC.Configuration.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\StressDefinitions\National.QRSC.Configuration.Data.csproj">
+      <Project>{C5A8B8DF-60D9-43BC-BC3D-28F890ABE831}</Project>
+      <Name>National.QRSC.Configuration.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\nabCap.QR.Utility\National.QRSC.Utility.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>National.QRSC.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceHost\National.QRSC.Server.ServiceHost.csproj">
+      <Project>{6D3F9A56-4662-4B15-B935-F56636EF5BEA}</Project>
+      <Name>National.QRSC.Server.ServiceHost</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

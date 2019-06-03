@@ -1,0 +1,8 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateCurve
+IndexName/String=AUD-AONIA-OIS-COMPOUND
+IndexTenor/String=1D
+CurveName/String=AUD-AONIA-OIS-COMPOUND-1D
+DependencyDepth/Int32=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=AUD

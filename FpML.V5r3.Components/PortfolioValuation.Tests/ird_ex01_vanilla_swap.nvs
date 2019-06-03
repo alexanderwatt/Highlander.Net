@@ -1,0 +1,13 @@
+﻿OriginatingPartyId/String=party1
+CounterPartyId/String=party2
+TradingBookId/String=party3
+PayStreamType/String=FLOATING
+RecStreamType/String=FIXED
+ProductType/String=InterestRateSwap
+TradeType/String=swap
+TradeDate/DateTime=2009-05-11T00:00:00
+TradeSource/String=FpML
+TradeId/String=TW9235
+AsAtDate/DateTime=2009-12-07T00:00:00
+SchemaType/String=FpML
+SchemaVersion/String=4.3

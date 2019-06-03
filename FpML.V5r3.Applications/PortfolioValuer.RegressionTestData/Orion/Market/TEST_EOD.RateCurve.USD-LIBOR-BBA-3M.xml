@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.USD-LIBOR-BBA-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.USD-LIBOR-BBA-3M">
+    <name>USD-LIBOR-BBA-3M</name>
+    <currency>USD</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>LIBOR-BBA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.USD-LIBOR-BBA-3M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:35:39.1990851+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="USD-DEPOSIT-ON">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-DEPOSIT-TN">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="RateIndex" id="USD-XIBOR-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="RateIndex" id="USD-XIBOR-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="RateIndex" id="USD-XIBOR-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-U0" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-Z0" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-H1" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-M1" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-U1" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-Z1" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-H2" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-M2" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-U2" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-Z2" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-H3" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFUTURE-ED-M3" />
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-6Y">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-8Y">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-9Y">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-11Y">
+          <term>
+            <periodMultiplier>11</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-13Y">
+          <term>
+            <periodMultiplier>13</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-14Y">
+          <term>
+            <periodMultiplier>14</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-35Y">
+          <term>
+            <periodMultiplier>35</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-40Y">
+          <term>
+            <periodMultiplier>40</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSWAP-50Y">
+          <term>
+            <periodMultiplier>50</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="USD-DEPOSIT-ON" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-DEPOSIT-TN" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-XIBOR-1M" />
+        <quote>
+          <value>0.0025938</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-XIBOR-2M" />
+        <quote>
+          <value>0.0027531</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-XIBOR-3M" />
+        <quote>
+          <value>0.0029688</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-U0" />
+        <quote>
+          <value>0.003137228</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-Z0" />
+        <quote>
+          <value>0.004172487</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-H1" />
+        <quote>
+          <value>0.004668949</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-M1" />
+        <quote>
+          <value>0.005664141</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-U1" />
+        <quote>
+          <value>0.007007054</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-Z1" />
+        <quote>
+          <value>0.008696437</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-H2" />
+        <quote>
+          <value>0.010532274</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-M2" />
+        <quote>
+          <value>0.01251396</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-U2" />
+        <quote>
+          <value>0.014341472</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-Z2" />
+        <quote>
+          <value>0.016291275</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-H3" />
+        <quote>
+          <value>0.017886513</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFUTURE-ED-M3" />
+        <quote>
+          <value>0.019726749</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-4Y" />
+        <quote>
+          <value>0.01359</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-5Y" />
+        <quote>
+          <value>0.01681</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-6Y" />
+        <quote>
+          <value>0.01959</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-7Y" />
+        <quote>
+          <value>0.02185</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-8Y" />
+        <quote>
+          <value>0.0237</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-9Y" />
+        <quote>
+          <value>0.02521</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-10Y" />
+        <quote>
+          <value>0.02647</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-11Y" />
+        <quote>
+          <value>0.02747</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-12Y" />
+        <quote>
+          <value>0.02846</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-13Y" />
+        <quote>
+          <value>0.0291235</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-14Y" />
+        <quote>
+          <value>0.0298065</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-15Y" />
+        <quote>
+          <value>0.03047</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-20Y" />
+        <quote>
+          <value>0.03208</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-25Y" />
+        <quote>
+          <value>0.03287</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-30Y" />
+        <quote>
+          <value>0.03334</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-35Y" />
+        <quote>
+          <value>0.0333</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-40Y" />
+        <quote>
+          <value>0.03326</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSWAP-50Y" />
+        <quote>
+          <value>0.03281</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.002250625896008</mid>
+        </point>
+        <point id="USD-DEPOSIT-ON">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.002250625896008</mid>
+        </point>
+        <point id="USD-DEPOSIT-TN">
+          <term>
+            <date>2010-09-01</date>
+          </term>
+          <mid>0.00225062589601421</mid>
+        </point>
+        <point id="USD-XIBOR-1M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.00257287640075798</mid>
+        </point>
+        <point id="USD-XIBOR-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.0027374430424878</mid>
+        </point>
+        <point id="USD-XIBOR-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.00295334206476472</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-U0">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.00302711853152182</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-Z0">
+          <term>
+            <date>2011-03-15</date>
+          </term>
+          <mid>0.00355034266021015</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-H1">
+          <term>
+            <date>2011-06-16</date>
+          </term>
+          <mid>0.00390778209142528</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-M1">
+          <term>
+            <date>2011-09-15</date>
+          </term>
+          <mid>0.00432888191355829</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-U1">
+          <term>
+            <date>2011-12-21</date>
+          </term>
+          <mid>0.00486546590086068</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-Z1">
+          <term>
+            <date>2012-03-21</date>
+          </term>
+          <mid>0.00547788916021474</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-H2">
+          <term>
+            <date>2012-06-21</date>
+          </term>
+          <mid>0.00618094930984636</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-M2">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.00694843358834607</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-U2">
+          <term>
+            <date>2012-12-19</date>
+          </term>
+          <mid>0.00773923160804735</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-Z2">
+          <term>
+            <date>2013-03-19</date>
+          </term>
+          <mid>0.00856427774747015</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-H3">
+          <term>
+            <date>2013-06-20</date>
+          </term>
+          <mid>0.00940830324830344</mid>
+        </point>
+        <point id="USD-IRFUTURE-ED-M3">
+          <term>
+            <date>2013-09-19</date>
+          </term>
+          <mid>0.0102495063630039</mid>
+        </point>
+        <point id="USD-IRSWAP-4Y">
+          <term>
+            <date>2014-09-02</date>
+          </term>
+          <mid>0.0134734068084352</mid>
+        </point>
+        <point id="USD-IRSWAP-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.0167480344716857</mid>
+        </point>
+        <point id="USD-IRSWAP-6Y">
+          <term>
+            <date>2016-09-01</date>
+          </term>
+          <mid>0.0196056624299059</mid>
+        </point>
+        <point id="USD-IRSWAP-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0219672763681409</mid>
+        </point>
+        <point id="USD-IRSWAP-8Y">
+          <term>
+            <date>2018-09-04</date>
+          </term>
+          <mid>0.0239246257485952</mid>
+        </point>
+        <point id="USD-IRSWAP-9Y">
+          <term>
+            <date>2019-09-03</date>
+          </term>
+          <mid>0.0255411492975171</mid>
+        </point>
+        <point id="USD-IRSWAP-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0268978298989664</mid>
+        </point>
+        <point id="USD-IRSWAP-11Y">
+          <term>
+            <date>2021-09-01</date>
+          </term>
+          <mid>0.0279868354664767</mid>
+        </point>
+        <point id="USD-IRSWAP-12Y">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0290896578357342</mid>
+        </point>
+        <point id="USD-IRSWAP-13Y">
+          <term>
+            <date>2023-09-01</date>
+          </term>
+          <mid>0.029816703443057</mid>
+        </point>
+        <point id="USD-IRSWAP-14Y">
+          <term>
+            <date>2024-09-03</date>
+          </term>
+          <mid>0.0305813782570592</mid>
+        </point>
+        <point id="USD-IRSWAP-15Y">
+          <term>
+            <date>2025-09-02</date>
+          </term>
+          <mid>0.0313483628214168</mid>
+        </point>
+        <point id="USD-IRSWAP-20Y">
+          <term>
+            <date>2030-09-03</date>
+          </term>
+          <mid>0.0331413047064499</mid>
+        </point>
+        <point id="USD-IRSWAP-25Y">
+          <term>
+            <date>2035-09-04</date>
+          </term>
+          <mid>0.0339880464054811</mid>
+        </point>
+        <point id="USD-IRSWAP-30Y">
+          <term>
+            <date>2040-09-04</date>
+          </term>
+          <mid>0.0344779520108549</mid>
+        </point>
+        <point id="USD-IRSWAP-35Y">
+          <term>
+            <date>2045-09-01</date>
+          </term>
+          <mid>0.0341542973763582</mid>
+        </point>
+        <point id="USD-IRSWAP-40Y">
+          <term>
+            <date>2050-09-01</date>
+          </term>
+          <mid>0.0338903244176221</mid>
+        </point>
+        <point id="USD-IRSWAP-50Y">
+          <term>
+            <date>2060-09-01</date>
+          </term>
+          <mid>0.032642115511444</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="USD-DEPOSIT-ON">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999937500390622558559009319</mid>
+      </point>
+      <point id="USD-DEPOSIT-TN">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>0.9999875001171862675808276823</mid>
+      </point>
+      <point id="USD-XIBOR-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.9997713995291777683118196354</mid>
+      </point>
+      <point id="USD-XIBOR-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.999521225964076824294672768</mid>
+      </point>
+      <point id="USD-XIBOR-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.9992376255718676764825122508</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-U0">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.999101017705884</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-Z0">
+        <term>
+          <date>2011-03-15</date>
+        </term>
+        <mid>0.9980599196958460096426909993</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-H1">
+        <term>
+          <date>2011-06-16</date>
+        </term>
+        <mid>0.996858545831994</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-M1">
+        <term>
+          <date>2011-09-15</date>
+        </term>
+        <mid>0.995431544514627</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-U1">
+        <term>
+          <date>2011-12-21</date>
+        </term>
+        <mid>0.993564465662506</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-Z1">
+        <term>
+          <date>2012-03-21</date>
+        </term>
+        <mid>0.9913851374027712245680845324</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-H2">
+        <term>
+          <date>2012-06-21</date>
+        </term>
+        <mid>0.9887239067891816089091260636</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-M2">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.985602732618704</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-U2">
+        <term>
+          <date>2012-12-19</date>
+        </term>
+        <mid>0.982078814978637</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-Z2">
+        <term>
+          <date>2013-03-19</date>
+        </term>
+        <mid>0.9780952104661652061079658621</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-H3">
+        <term>
+          <date>2013-06-20</date>
+        </term>
+        <mid>0.973598696414804</mid>
+      </point>
+      <point id="USD-IRFUTURE-ED-M3">
+        <term>
+          <date>2013-09-19</date>
+        </term>
+        <mid>0.968765371259802</mid>
+      </point>
+      <point id="USD-IRSWAP-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.946769342552806</mid>
+      </point>
+      <point id="USD-IRSWAP-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.918636057487962</mid>
+      </point>
+      <point id="USD-IRSWAP-6Y">
+        <term>
+          <date>2016-09-01</date>
+        </term>
+        <mid>0.887635805137852</mid>
+      </point>
+      <point id="USD-IRSWAP-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.855795776216469</mid>
+      </point>
+      <point id="USD-IRSWAP-8Y">
+        <term>
+          <date>2018-09-04</date>
+        </term>
+        <mid>0.823706436215636</mid>
+      </point>
+      <point id="USD-IRSWAP-9Y">
+        <term>
+          <date>2019-09-03</date>
+        </term>
+        <mid>0.792354500897794</mid>
+      </point>
+      <point id="USD-IRSWAP-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.761722013197828</mid>
+      </point>
+      <point id="USD-IRSWAP-11Y">
+        <term>
+          <date>2021-09-01</date>
+        </term>
+        <mid>0.732397828395547</mid>
+      </point>
+      <point id="USD-IRSWAP-12Y">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.702544878857918</mid>
+      </point>
+      <point id="USD-IRSWAP-13Y">
+        <term>
+          <date>2023-09-01</date>
+        </term>
+        <mid>0.67573398643667</mid>
+      </point>
+      <point id="USD-IRSWAP-14Y">
+        <term>
+          <date>2024-09-03</date>
+        </term>
+        <mid>0.648488039735731</mid>
+      </point>
+      <point id="USD-IRSWAP-15Y">
+        <term>
+          <date>2025-09-02</date>
+        </term>
+        <mid>0.621571059564902</mid>
+      </point>
+      <point id="USD-IRSWAP-20Y">
+        <term>
+          <date>2030-09-03</date>
+        </term>
+        <mid>0.51166333877621</mid>
+      </point>
+      <point id="USD-IRSWAP-25Y">
+        <term>
+          <date>2035-09-04</date>
+        </term>
+        <mid>0.423629000830264</mid>
+      </point>
+      <point id="USD-IRSWAP-30Y">
+        <term>
+          <date>2040-09-04</date>
+        </term>
+        <mid>0.351533511791018</mid>
+      </point>
+      <point id="USD-IRSWAP-35Y">
+        <term>
+          <date>2045-09-01</date>
+        </term>
+        <mid>0.298824975713658</mid>
+      </point>
+      <point id="USD-IRSWAP-40Y">
+        <term>
+          <date>2050-09-01</date>
+        </term>
+        <mid>0.254163885226042</mid>
+      </point>
+      <point id="USD-IRSWAP-50Y">
+        <term>
+          <date>2060-09-01</date>
+        </term>
+        <mid>0.192162660738618</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

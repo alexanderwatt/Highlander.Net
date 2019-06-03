@@ -1,0 +1,10 @@
+ExpiryIntervalInMins/Double=10
+MarketName/String=LpmTest
+LPMCopy/Boolean=True
+Source/String=SydSPU
+Instrument/String=Swaption
+Currency/String=AUD
+Name/String=Swaption-AUD-SydSPU-20/07/2010
+TimeState/String=LpmTest
+IndexName/String=Volatility
+Owner/String=SydSPU

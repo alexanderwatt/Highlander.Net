@@ -1,0 +1,10 @@
+﻿Party1/String=X-1131063516
+Party2/String=X638746280
+TradingBookId/String=X1893229717
+MaturityDate/DateTime=2012-05-12T00:00:00
+ProductType/String=TermDeposit
+TradeType/String=Deposit
+TradeDate/DateTime=2009-05-11T00:00:00
+TradeSource/String=CALYPSO
+TradeId/String=100043
+AsAtDate/DateTime=2009-12-07T00:00:00

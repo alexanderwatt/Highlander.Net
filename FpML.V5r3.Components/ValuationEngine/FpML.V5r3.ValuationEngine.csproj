@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F9217F4F-10C1-4192-B8CC-8AEC06362FB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orion.ValuationEngine</RootNamespace>
+    <AssemblyName>FpML.V5r3.ValuationEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.20.2.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\user_awatt\packages\MathNet.Numerics.Signed.3.20.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ArrayExtension.cs" />
+    <Compile Include="Helpers\CashflowCombined.cs" />
+    <Compile Include="Helpers\FpMLFieldResolver.cs" />
+    <Compile Include="Helpers\Functions.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
+    <Compile Include="Instruments\PriceableCommodityFixedLeg.cs" />
+    <Compile Include="Instruments\PriceableFxOptionPremium.cs" />
+    <Compile Include="Instruments\PriceableCapFloorCoupon.cs" />
+    <Compile Include="Instruments\PriceableCapFloorStream.cs" />
+    <Compile Include="Instruments\PriceableFloatingCashflow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Instruments\PriceableCommoditySwapLeg.cs" />
+    <Compile Include="Instruments\PriceableVanillaFxOption.cs" />
+    <Compile Include="Instruments\PriceableFxRateCashflow.cs" />
+    <Compile Include="Reports\FutureTransactionReporter.cs" />
+    <Compile Include="Reports\FxOptionLegReporter.cs" />
+    <Compile Include="Pricers\PropertyTransactionPricer.cs" />
+    <Compile Include="Pricers\BillsSwapPricer2.cs" />
+    <Compile Include="Pricers\BillSwapPricer.cs" />
+    <Compile Include="Pricers\CapFloorPricer.cs" />
+    <Compile Include="Pricers\BondTransactionPricer.cs" />
+    <Compile Include="Instruments\PriceableFxSwapLeg.cs" />
+    <Compile Include="Pricers\EquityTransactionPricer.cs" />
+    <Compile Include="Pricers\FutureTransactionPricer.cs" />
+    <Compile Include="Pricers\InterestRateSwaptionPricer.cs" />
+    <Compile Include="Pricers\SwaptionPricer.cs" />
+    <Compile Include="Pricers\FloaterPricer.cs" />
+    <Compile Include="Pricers\TermDepositPricer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Reports\BulletPaymentReporter.cs" />
+    <Compile Include="Reports\CapFloorReporter.cs" />
+    <Compile Include="Helpers\CashflowReportHelper.cs" />
+    <Compile Include="Reports\BondTransactionReporter.cs" />
+    <Compile Include="Pricers\VanillaEuropeanFxOptionPricer.cs" />
+    <Compile Include="Reports\PropertyTransactionReporter.cs" />
+    <Compile Include="Reports\EquityTransactionReporter.cs" />
+    <Compile Include="Reports\InterestRateSwaptionReporter.cs" />
+    <Compile Include="Reports\FxSingleLegReporter.cs" />
+    <Compile Include="Reports\FxSwapReporter.cs" />
+    <Compile Include="Reports\TermDepositReporter.cs" />
+    <Compile Include="Reports\ForwardRateAgreementReporter.cs" />
+    <Compile Include="Reports\InterestRateSwapFpMLCashflowsReporter.cs" />
+    <Compile Include="Reports\InterestRateSwapReporter.cs" />
+    <Compile Include="Helpers\PriceableHelper.cs" />
+    <Compile Include="Helpers\CalculationPeriodsPrincipalExchangesAndStubs.cs" />
+    <Compile Include="Helpers\Conversion.cs" />
+    <Compile Include="Helpers\ForecastRateHelper.cs" />
+    <Compile Include="Helpers\InterestRateQuote.cs" />
+    <Compile Include="Helpers\InterestRateProduct.cs" />
+    <Compile Include="Helpers\ProductFactory.cs" />
+    <Compile Include="Generators\InterestRateStreamParametricDefinitionGenerator.cs" />
+    <Compile Include="Helpers\ScenarioRule.cs" />
+    <Compile Include="Helpers\StubCalculationPeriodAmountHelper.cs" />
+    <Compile Include="Helpers\TradeHelper.cs" />
+    <Compile Include="Instruments\PriceableCashflow.cs" />
+    <Compile Include="Instruments\PriceablePayment.cs" />
+    <Compile Include="Instruments\PriceablePrincipalExchange.cs" />
+    <Compile Include="Factory\PriceableInstrumentsFactory.cs" />
+    <Compile Include="Generators\CalculationPeriodGenerator.cs" />
+    <Compile Include="Generators\CapFloorGenerator.cs" />
+    <Compile Include="Generators\FixedAndFloatingRateStreamCashflowGenerator.cs" />
+    <Compile Include="Generators\StreamCashflowsGenerator.cs" />
+    <Compile Include="Generators\SwapGenerator.cs" />
+    <Compile Include="Generators\SwaptionGenerator.cs" />
+    <Compile Include="Instruments\PriceableFixedRateCoupon.cs" />
+    <Compile Include="Instruments\PriceableFloatingRateCoupon.cs" />
+    <Compile Include="Instruments\PriceableRateCoupon.cs" />
+    <Compile Include="Instruments\PriceableInterestRateStream.cs" />
+    <Compile Include="PortfolioPricer.cs" />
+    <Compile Include="Pricers\AssetSwapPricer.cs" />
+    <Compile Include="Pricers\BulletPaymentPricer.cs" />
+    <Compile Include="Pricers\FraPricer.cs" />
+    <Compile Include="Pricers\FxSingleLegPricer.cs" />
+    <Compile Include="Pricers\FxSwapPricer.cs" />
+    <Compile Include="Pricers\InterestRateSwapPricer.cs" />
+    <Compile Include="Pricers\SwapPricer.cs" />
+    <Compile Include="Pricers\CrossCurrencySwapPricer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TradePricer.cs" />
+    <Compile Include="ValuationService.cs" />
+    <Compile Include="Valuations\Valuation.cs" />
+    <Compile Include="Valuations\ValuationReportGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
+      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
+      <Name>FpML.V5r3.ConfigTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj">
+      <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
+      <Name>FpML.V5r3.Confirmation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ConfigData\FpML.V5r3.ConfigData.csproj">
+      <Project>{a99322d4-6d41-499f-be4e-62dab22ff97f}</Project>
+      <Name>FpML.V5r3.ConfigData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Contracts\FpML.V5r3.Reporting.Contracts.csproj">
+      <Project>{4559a0ee-c1ab-43b5-8eb5-9e4cd7a75af3}</Project>
+      <Name>FpML.V5r3.Reporting.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Helpers\FpML.V5r3.Reporting.Helpers.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>FpML.V5r3.Reporting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>FpML.V5r3.Reporting.Identifiers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>FpML.V5r3.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Models\FpML.V5r3.Reporting.Models.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>FpML.V5r3.Reporting.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
+      <Name>FpML.V5r3.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.V34\Core.V34.csproj">
+      <Project>{A96292E1-00DD-434D-A3F9-FC04CBFD75A7}</Project>
+      <Name>Core.V34</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalendarEngine\FpML.V5r3.CalendarEngine.csproj">
+      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
+      <Name>FpML.V5r3.CalendarEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveEngine\FpML.V5r3.CurveEngine.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>FpML.V5r3.CurveEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

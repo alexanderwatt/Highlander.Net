@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<itemlist>
+<item>
+<key>
+<string>SwapTerms</string>
+</key>
+<value>
+<ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<anyType xsi:type="ArrayOfAnyType">
+<anyType xsi:type="xsd:string">SwapId</anyType>
+<anyType xsi:type="xsd:string">EffectiveDate</anyType>
+<anyType xsi:type="xsd:string">TerminationDate</anyType>
+<anyType xsi:type="xsd:string">AdjustDates</anyType>
+<anyType xsi:type="xsd:string">BasePartyPayReceiveInd</anyType>
+<anyType xsi:type="xsd:string">CounterpartyName</anyType>
+<anyType xsi:type="xsd:string">SpotRate</anyType>
+<anyType xsi:type="xsd:string">HasInitialExchange</anyType>
+<anyType xsi:type="xsd:string">HasFinalExchange</anyType>
+<anyType xsi:type="xsd:string">PrincipalExchangeCalendars</anyType>
+<anyType xsi:type="xsd:string">PrincipalExchangeRollConvention</anyType>
+</anyType>
+<anyType xsi:type="ArrayOfAnyType">
+<anyType xsi:type="xsd:string">AUD-AUD.XCCYSwap.200929</anyType>
+<anyType xsi:type="xsd:dateTime">2009-02-09T00:00:00</anyType>
+<anyType xsi:type="xsd:dateTime">2019-02-09T00:00:00</anyType>
+<anyType xsi:type="xsd:boolean">true</anyType>
+<anyType xsi:type="xsd:string">Pays</anyType>
+<anyType xsi:type="xsd:string">ANZ</anyType>
+<anyType xsi:type="xsd:double">1</anyType>
+<anyType xsi:type="xsd:boolean">false</anyType>
+<anyType xsi:type="xsd:boolean">false</anyType>
+<anyType xsi:type="xsd:string">Sydney</anyType>
+<anyType xsi:type="xsd:string">MODFOLLOWING</anyType>
+</anyType>
+</ArrayOfAnyType>
+</value>
+</item>
+<item>
+<key>
+<string>PayTerms</string>
+</key>
+<value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">StreamType</anyType>
+          <anyType xsi:type="xsd:string">NotionalAmount</anyType>
+          <anyType xsi:type="xsd:string">Currency</anyType>
+          <anyType xsi:type="xsd:string">ScheduleDirection</anyType>
+          <anyType xsi:type="xsd:string">BusinessCenters</anyType>
+          <anyType xsi:type="xsd:string">CouponPeriod</anyType>
+          <anyType xsi:type="xsd:string">RollDay</anyType>
+          <anyType xsi:type="xsd:string">DateAdjustment</anyType>
+          <anyType xsi:type="xsd:string">DayCountConvention</anyType>
+          <anyType xsi:type="xsd:string">DiscountingType</anyType>
+          <anyType xsi:type="xsd:string">DiscountingCurve</anyType>
+          <anyType xsi:type="xsd:string">FixedOrObservedRate</anyType>
+          <anyType xsi:type="xsd:string">ObservedRateSpecified</anyType>
+          <anyType xsi:type="xsd:string">ForwardCurve</anyType>
+          <anyType xsi:type="xsd:string">FixingDateBusinessCenters</anyType>
+          <anyType xsi:type="xsd:string">FixingDateResetInterval</anyType>
+          <anyType xsi:type="xsd:string">FixingDateAdjustment</anyType>
+          <anyType xsi:type="xsd:string">RateIndexName</anyType>
+          <anyType xsi:type="xsd:string">RateIndexTenor</anyType>
+          <anyType xsi:type="xsd:string">Spread</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Floating</anyType>
+          <anyType xsi:type="xsd:double">100000000</anyType>
+          <anyType xsi:type="xsd:string">AUD</anyType>
+          <anyType xsi:type="xsd:string">Forward</anyType>
+          <anyType xsi:type="xsd:string">Sydney</anyType>
+          <anyType xsi:type="xsd:string">3M</anyType>
+          <anyType xsi:type="xsd:double">17</anyType>
+          <anyType xsi:type="xsd:string">FOLLOWING</anyType>
+          <anyType xsi:type="xsd:string">ACT/365.FIXED</anyType>
+          <anyType xsi:type="xsd:string">Standard</anyType>
+          <anyType xsi:type="xsd:string">LIVE-AUD-3M</anyType>
+          <anyType xsi:type="xsd:double">0.047535</anyType>
+          <anyType xsi:type="xsd:boolean">false</anyType>
+          <anyType xsi:type="xsd:string">LIVE-AUD-3M</anyType>
+          <anyType xsi:type="xsd:string">Sydney</anyType>
+          <anyType xsi:type="xsd:string">0D</anyType>
+          <anyType xsi:type="xsd:string">NONE</anyType>
+          <anyType xsi:type="xsd:string">AUD-LIBOR-BBA</anyType>
+          <anyType xsi:type="xsd:string">3M</anyType>
+          <anyType xsi:type="xsd:double">0</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>ReceiveTerms</string>
+    </key>
+    <value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">StreamType</anyType>
+          <anyType xsi:type="xsd:string">NotionalAmount</anyType>
+          <anyType xsi:type="xsd:string">Currency</anyType>
+          <anyType xsi:type="xsd:string">ScheduleDirection</anyType>
+          <anyType xsi:type="xsd:string">BusinessCenters</anyType>
+          <anyType xsi:type="xsd:string">CouponPeriod</anyType>
+          <anyType xsi:type="xsd:string">RollDay</anyType>
+          <anyType xsi:type="xsd:string">DateAdjustment</anyType>
+          <anyType xsi:type="xsd:string">DayCountConvention</anyType>
+          <anyType xsi:type="xsd:string">DiscountingType</anyType>
+          <anyType xsi:type="xsd:string">DiscountingCurve</anyType>
+          <anyType xsi:type="xsd:string">FixedOrObservedRate</anyType>
+          <anyType xsi:type="xsd:string">ObservedRateSpecified</anyType>
+          <anyType xsi:type="xsd:string">ForwardCurve</anyType>
+          <anyType xsi:type="xsd:string">FixingDateBusinessCenters</anyType>
+          <anyType xsi:type="xsd:string">FixingDateResetInterval</anyType>
+          <anyType xsi:type="xsd:string">FixingDateAdjustment</anyType>
+          <anyType xsi:type="xsd:string">RateIndexName</anyType>
+          <anyType xsi:type="xsd:string">RateIndexTenor</anyType>
+          <anyType xsi:type="xsd:string">Spread</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Fixed</anyType>
+          <anyType xsi:type="xsd:double">100000000</anyType>
+          <anyType xsi:type="xsd:string">AUD</anyType>
+          <anyType xsi:type="xsd:string">Forward</anyType>
+          <anyType xsi:type="xsd:string">Sydney</anyType>
+          <anyType xsi:type="xsd:string">3M</anyType>
+          <anyType xsi:type="xsd:double">17</anyType>
+          <anyType xsi:type="xsd:string">FOLLOWING</anyType>
+          <anyType xsi:type="xsd:string">ACT/365.FIXED</anyType>
+          <anyType xsi:type="xsd:string">Standard</anyType>
+          <anyType xsi:type="xsd:string">LIVE-AUD-3M</anyType>
+          <anyType xsi:type="xsd:double">4.36201978812595E-02</anyType>
+          <anyType xsi:type="xsd:boolean">false</anyType>
+          <anyType xsi:type="xsd:string">LIVE-AUD-3M</anyType>
+          <anyType xsi:type="xsd:string">Sydney</anyType>
+          <anyType xsi:type="xsd:string">0D</anyType>
+          <anyType xsi:type="xsd:string">NONE</anyType>
+          <anyType xsi:type="xsd:string">AUD-LIBOR-BBA</anyType>
+          <anyType xsi:type="xsd:string">3M</anyType>
+          <anyType xsi:type="xsd:double">0</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>FXTerms</string>
+    </key>
+    <value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Curves</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">LIVE-AUD-USD</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>RegulatoryCapital</string>
+    </key>
+    <value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Capital</anyType>
+          <anyType xsi:type="xsd:string">TransactionProduct</anyType>
+          <anyType xsi:type="xsd:string">Counterparty</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">TIER1</anyType>
+          <anyType xsi:type="xsd:string">IR</anyType>
+          <anyType xsi:type="xsd:string">CORPORATE</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>BoundaryRider</string>
+    </key>
+    <value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">DefaultTimeBuckets</anyType>
+          <anyType xsi:type="xsd:string">Product</anyType>
+          <anyType xsi:type="xsd:string">Region</anyType>
+          <anyType xsi:type="xsd:string">ServerUrl</anyType>
+          <anyType xsi:type="xsd:string">SimulationMethod</anyType>
+          <anyType xsi:type="xsd:string">CalculationBaseCurrency</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">0,7,30,90,180,365,730,1095,1460,1825,2555,3650,36163</anyType>
+          <anyType xsi:type="xsd:string">IR Swap</anyType>
+          <anyType xsi:type="xsd:string">Australia</anyType>
+          <anyType xsi:type="xsd:string">http://sydwadqur04/RiskEngineService/Analytics.asmx</anyType>
+          <anyType xsi:type="xsd:string">RiderSim</anyType>
+          <anyType xsi:type="xsd:string">USD</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+    </value>
+  </item>
+<item>
+<key>
+<string>Valuation</string>
+</key>
+<value>
+      <ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Date</anyType>
+          <anyType xsi:type="xsd:string">Metrics</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:dateTime">2009-02-25T00:00:00</anyType>
+          <anyType xsi:type="xsd:string">NPV,BreakEvenRate,ROE,PCE</anyType>
+        </anyType>
+      </ArrayOfAnyType>
+</value>
+</item>
+<item>
+<key>
+<string>Counterparty</string>
+</key>
+<value>
+<ArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">LGD</anyType>
+          <anyType xsi:type="xsd:string">LendingCategory</anyType>
+          <anyType xsi:type="xsd:string">ECRSRating</anyType>
+        </anyType>
+        <anyType xsi:type="ArrayOfAnyType">
+          <anyType xsi:type="xsd:string">Large Corporate</anyType>
+          <anyType xsi:type="xsd:string">J</anyType>
+          <anyType xsi:type="xsd:string">1</anyType>
+        </anyType>
+</ArrayOfAnyType>
+</value>
+</item>
+</itemlist>

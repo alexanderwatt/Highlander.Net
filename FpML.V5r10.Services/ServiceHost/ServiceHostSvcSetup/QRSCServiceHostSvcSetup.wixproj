@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{2af062bb-f605-4691-b370-3b30647ced4e}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>QRSC_ServiceHost_SvcSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.5\Wix2010.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.5\Wix2010.targets</WixTargetsPath>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <Name>QRSCServiceHostSvcSetup</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+    <Compile Include="Product.Generated.wxs">
+      <DependentUpon>Product.wxs</DependentUpon>
+      <GenerateComponentGroups>True</GenerateComponentGroups>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Adapters\GWML\GWMLAdapter\National.QRSC.Adapter.GWML.csproj">
+      <Name>National.QRSC.Adapter.GWML</Name>
+      <Project>{b1a7d7e8-77f4-4ded-b754-2b94c5898e74}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\AnalyticModels\AnalyticModels\National.QRSC.AnalyticModels.csproj">
+      <Name>National.QRSC.AnalyticModels</Name>
+      <Project>{c4feb04d-0d9f-42b7-8002-9ce83497a118}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Analytics\Analytics\National.QRSC.Analytics.csproj">
+      <Name>National.QRSC.Analytics</Name>
+      <Project>{79e82ddc-203c-43ef-999b-19761a6718f3}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Calendars\Calendars\National.QRSC.Calendars.csproj">
+      <Name>National.QRSC.Calendars</Name>
+      <Project>{87c4fa37-ae4e-4195-9666-e4767cf5f046}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\HLEngine\HLEngine\National.QRSC.Engine.csproj">
+      <Name>National.QRSC.Engine</Name>
+      <Project>{d2e3ed31-3f24-4aa7-9dc2-4fad83cad6cb}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\HLTrades\HLTrades\National.QRSC.Trades.csproj">
+      <Name>National.QRSC.Trades</Name>
+      <Project>{e299069d-6c79-4715-8109-7437a331815f}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\MarketData\MarketDataClient\MarketDataClient.csproj">
+      <Name>MarketDataClient</Name>
+      <Project>{90fbbe79-0646-4522-9080-178abff4574f}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\ModelFrameworks\ModelFrameworks\National.QRSC.ModelFramework.csproj">
+      <Name>National.QRSC.ModelFramework</Name>
+      <Project>{617cfb80-ad3a-41f8-ae7c-bfef514fca93}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Numerics\Numerics\National.QRSC.Numerics.csproj">
+      <Name>National.QRSC.Numerics</Name>
+      <Project>{89200628-d89e-4336-9cfd-68aed3937254}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\ObjectCache\ObjectCache\National.QRSC.ObjectCache.csproj">
+      <Name>National.QRSC.ObjectCache</Name>
+      <Project>{a094d9be-5355-4b4c-b7c7-b920fbdbd9dc}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.3.3\National.QRSC.Runtime.3.3.Client.csproj">
+      <Name>National.QRSC.Runtime.3.3.Client</Name>
+      <Project>{725feaa0-7035-415b-96cb-43732ace6529}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.Common\National.QRSC.Runtime.Common.csproj">
+      <Name>National.QRSC.Runtime.Common</Name>
+      <Project>{d280d461-4fbe-4b9a-8012-9fe26cb2ef71}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Configuration\Metadata\National.QRSC.Configuration.Types.csproj">
+      <Name>National.QRSC.Configuration.Types</Name>
+      <Project>{c146feab-e8b5-4b7f-b47f-b85796a3cdf5}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Constants\National.QRSC.Constants.csproj">
+      <Name>National.QRSC.Constants</Name>
+      <Project>{88e62221-55e9-481d-ac88-d77dbb226fb5}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Identifiers\National.QRSC.Identifiers\National.QRSC.Identifiers.csproj">
+      <Name>National.QRSC.Identifiers</Name>
+      <Project>{8ac0c3e5-b4ea-448c-b1fb-6ee729a6b2d1}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Schemas\FpML\Codes\National.QRSC.FpML.V47.Codes.csproj">
+      <Name>National.QRSC.FpML.V47.Codes</Name>
+      <Project>{d39da979-fc4a-4468-9e72-c8c6908f8b4f}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Schemas\FpML\V4.7\QRFpML.4.7\National.QRSC.FpML.4.7.csproj">
+      <Name>National.QRSC.FpML.4.7</Name>
+      <Project>{13c45230-0011-4f32-b09e-13a1faa96d73}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Schemas\GWML\V6.5\QRGWML\QRGWML.csproj">
+      <Name>QRGWML</Name>
+      <Project>{7ca0de52-7f01-4c4f-a1b6-84849b6011a2}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\nabCap.QR.Utility\National.QRSC.Utility.csproj">
+      <Name>National.QRSC.Utility</Name>
+      <Project>{c094fb37-4c14-425e-8977-69079f4f7aa0}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Workflows\CurveGeneration\National.QRSC.Workflow.CurveGeneration.csproj">
+      <Name>National.QRSC.Workflow.CurveGeneration</Name>
+      <Project>{dd8d3f9b-9de4-46a8-960e-4c36cfbf8faa}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Workflows\TradeValuation\National.QRSC.Workflow.TradeValuation.csproj">
+      <Name>National.QRSC.Workflow.TradeValuation</Name>
+      <Project>{387cb499-c633-4c12-8a0f-3c60f1423151}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Workflows\WorkflowFramework\National.QRSC.Workflow.csproj">
+      <Name>National.QRSC.Workflow</Name>
+      <Project>{81b3563f-724a-4c6c-8295-e2c4a5392c5a}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AlertServer\AlertServer\National.QRSC.Server.Alerting.csproj">
+      <Name>National.QRSC.Server.Alerting</Name>
+      <Project>{7f997959-0bfc-48bc-8451-4038a60c2451}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CurveGenServer\National.QRSC.Server.CurveGenerator.csproj">
+      <Name>National.QRSC.Server.CurveGenerator</Name>
+      <Project>{8c502f52-357b-4be5-9e03-14df9bf2ae77}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CurveImporter\National.QRSC.Server.CurveImporter.csproj">
+      <Name>National.QRSC.Server.CurveImporter</Name>
+      <Project>{ac334304-51ec-4e7a-a85c-8ae433ed452d}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FileImporter\National.QRSC.Server.FileImporter.csproj">
+      <Name>National.QRSC.Server.FileImporter</Name>
+      <Project>{888c6b6a-d4cf-4edc-a7dd-09c14fa22201}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\MarketDataProviders\QrMdpBloomberg\QrMdpBloomberg.csproj">
+      <Name>QrMdpBloomberg</Name>
+      <Project>{5c8070d4-064a-46d4-99b9-ce7c59178265}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMarketDataServer\QRMarketDataServer.csproj">
+      <Name>QRMarketDataServer</Name>
+      <Project>{f18a2dae-2d4a-4bd8-8259-68b2e33cd7db}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMdpBaseProvider\QRMdpBaseProvider.csproj">
+      <Name>QRMdpBaseProvider</Name>
+      <Project>{55cf8f66-9151-4f03-a777-779b59eabb85}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QrMdpNabCapital\QrMdpNabCapital.csproj">
+      <Name>QrMdpNabCapital</Name>
+      <Project>{95430edb-5138-40c9-98f8-5cbd04cfa17f}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMdpSimulator\QRMdpSimulator.csproj">
+      <Name>QRMdpSimulator</Name>
+      <Project>{99e42d7b-7c3b-4b80-a7c3-ae4cbdb44988}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\StressGenServer\National.QRSC.Server.StressGenerator.csproj">
+      <Name>National.QRSC.Server.StressGenerator</Name>
+      <Project>{3ae0449f-3214-4f3e-8be5-75d286d32a44}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TradeImporter\TradeImporter\National.QRSC.Server.TradeImporter.csproj">
+      <Name>National.QRSC.Server.TradeImporter</Name>
+      <Project>{750b91e4-5226-4d3e-af10-7961f4460438}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TradeRevaluer\National.QRSC.Server.TradeRevaluer.csproj">
+      <Name>National.QRSC.Server.TradeRevaluer</Name>
+      <Project>{d7730366-8830-4ffb-b9c1-5926abf5a05b}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceHost\National.QRSC.Server.ServiceHost.csproj">
+      <Name>National.QRSC.Server.ServiceHost</Name>
+      <Project>{6d3f9a56-4662-4b15-b935-f56636ef5bea}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

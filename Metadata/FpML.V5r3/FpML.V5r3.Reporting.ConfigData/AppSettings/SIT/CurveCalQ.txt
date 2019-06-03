@@ -1,0 +1,1 @@
+﻿ConnectionString/String=Data Source%3DSYDWDDQUR02;Initial Catalog%3DQR;Integrated Security%3DTrue

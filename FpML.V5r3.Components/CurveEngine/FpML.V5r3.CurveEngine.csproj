@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{96EBE4A4-8389-498F-B6F2-326D7C7FEA8A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orion.CurveEngine</RootNamespace>
+    <AssemblyName>FpML.V5r3.CurveEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.20.2.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\Solutions\user_awatt\packages\MathNet.Numerics.Signed.3.20.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Commodities\Swaps\PriceableCommodityAverageForward.cs" />
+    <Compile Include="Assets\Commodities\Cash\PriceableCommodityForward.cs" />
+    <Compile Include="Assets\Commodities\Cash\PriceableCommoditySpot.cs" />
+    <Compile Include="Assets\Commodities\FuturesOptions\PriceableCEROption.cs" />
+    <Compile Include="Assets\Commodities\Futures\PriceableLMEFuture.cs" />
+    <Compile Include="Assets\Commodities\Futures\PriceableIceBrentFuture.cs" />
+    <Compile Include="Assets\Commodities\Futures\PriceableCER.cs" />
+    <Compile Include="Assets\Commodities\Futures\PriceableCommodityFuturesAsset.cs" />
+    <Compile Include="Assets\Commodities\Futures\PriceableWheatFuture.cs" />
+    <Compile Include="Assets\Commodities\PriceableCommodityAssetController.cs" />
+    <Compile Include="Assets\Commodities\Spreads\PriceableCommoditySpread.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assets\Commodities\Spreads\PriceableSimpleCommoditySpreadAsset.cs" />
+    <Compile Include="Assets\Credit\PriceableCreditAssetController.cs" />
+    <Compile Include="Assets\Equity\PriceableEquityForward.cs" />
+    <Compile Include="Assets\Equity\PriceableEquityAssetController.cs" />
+    <Compile Include="Assets\Equity\PriceableEquityAsset.cs" />
+    <Compile Include="Assets\Equity\PriceableEquitySpot.cs" />
+    <Compile Include="Assets\ExchangeTraded\PriceableFuturesOptionAssetController.cs" />
+    <Compile Include="Assets\ExchangeTraded\PriceableFuturesAssetController.cs" />
+    <Compile Include="Assets\FX\Cash\PriceableFxForwardRate.cs" />
+    <Compile Include="Assets\FX\Cash\PriceableFxONRate.cs" />
+    <Compile Include="Assets\FX\Cash\PriceableFxSpotRate.cs" />
+    <Compile Include="Assets\FX\Cash\PriceableFxTNRate.cs" />
+    <Compile Include="Assets\FX\FXOptions\PriceableSimpleFxOptionAsset.cs" />
+    <Compile Include="Assets\FX\PriceableFxAssetController.cs" />
+    <Compile Include="Assets\FX\PriceableFxOptionAssetController.cs" />
+    <Compile Include="Assets\Helpers\AssetHelper.cs" />
+    <Compile Include="Assets\Helpers\BondHelper.cs" />
+    <Compile Include="Assets\Inflation\Index\PriceableInflationIndex.cs" />
+    <Compile Include="Assets\Inflation\Index\PriceableInflationXibor.cs" />
+    <Compile Include="Assets\Inflation\PriceableInflationAssetController.cs" />
+    <Compile Include="Assets\Inflation\Swaps\PriceableInflationSwapAsset.cs" />
+    <Compile Include="Assets\Inflation\Swaps\PriceableSimpleInflationAsset.cs" />
+    <Compile Include="Assets\Inflation\Swaps\PriceableSimpleRevenueInflationSwap.cs" />
+    <Compile Include="Assets\Inflation\Swaps\PriceableSimpleZeroCouponInflationSwap.cs" />
+    <Compile Include="Assets\Options\PriceableOptionAssetController.cs" />
+    <Compile Include="Assets\Options\PriceableSimpleOptionAsset.cs" />
+    <Compile Include="Assets\Property\PriceablePropertyAssetController.cs" />
+    <Compile Include="Assets\Rates\Bonds\PriceableBondSpot.cs" />
+    <Compile Include="Assets\Rates\Bonds\PriceableBondForward.cs" />
+    <Compile Include="Assets\Rates\Bonds\PriceableBond.cs" />
+    <Compile Include="Assets\Rates\Bonds\PriceableBondAsset.cs" />
+    <Compile Include="Assets\Rates\Bonds\PriceableSimpleBond.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\ExchangeTraded\SimpleExchangeBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Volatility\VolatilityCurveBootstrapper.cs" />
+    <Compile Include="PricingStructures\Curves\VolatilityCurve.cs" />
+    <Compile Include="PricingStructures\Curves\ExchangeTradedCurve.cs" />
+    <Compile Include="PricingStructures\Curves\RateBasisCurve.cs" />
+    <Compile Include="PricingStructures\Curves\RateSpreadCurve.cs" />
+    <Compile Include="PricingStructures\Curves\GenericVolatilityCurve.cs" />
+    <Compile Include="PricingStructures\Helpers\ExpiryInterpolatedVolatility.cs" />
+    <Compile Include="PricingStructures\Helpers\SmileCalibrationSettings.cs" />
+    <Compile Include="PricingStructures\Helpers\MDSQuotedAssetSetManager.cs" />
+    <Compile Include="PricingStructures\LPM\LPMCapFloorHelper.cs" />
+    <Compile Include="PricingStructures\LPM\LPMCapFloorCurve.cs" />
+    <Compile Include="PricingStructures\LPM\LPMSwaptionCurve.cs" />
+    <Compile Include="PricingStructures\SABR\SmileCalibrationEngine.cs" />
+    <Compile Include="PricingStructures\SABR\CapletSmileCalibrationEngine.cs" />
+    <Compile Include="Assets\Rates\CapFloorLet\PriceableCapLet.cs" />
+    <Compile Include="Assets\Rates\CapFloorLet\PriceableDiscountCapLet.cs" />
+    <Compile Include="Assets\Rates\CapFloorLet\PriceableDiscountFloorlet.cs" />
+    <Compile Include="Assets\Rates\CapFloorLet\PriceableFloorlet.cs" />
+    <Compile Include="Assets\Rates\CapFloorLet\PriceableSimpleRateOptionAsset.cs" />
+    <Compile Include="Assets\Rates\CapsFloors\PriceableCapRateAsset.cs" />
+    <Compile Include="Assets\Rates\CapsFloors\PriceableIRCap.cs" />
+    <Compile Include="Assets\Rates\CapsFloors\PriceableIRFloor.cs" />
+    <Compile Include="Assets\Rates\CapsFloors\PriceableSimpleIRFloor.cs" />
+    <Compile Include="Assets\Rates\CapsFloors\PriceableSimpleIRCap.cs" />
+    <Compile Include="Assets\Rates\Cash\PriceableRepo.cs" />
+    <Compile Include="Assets\Rates\Cash\PriceableBankBill.cs" />
+    <Compile Include="Assets\Rates\Cash\PriceableCash.cs" />
+    <Compile Include="Assets\Rates\Cash\PriceableDeposit.cs" />
+    <Compile Include="Assets\Rates\Cash\PriceableZeroRate.cs" />
+    <Compile Include="Assets\Rates\Fra\PriceableSimpleDiscountFra.cs" />
+    <Compile Include="Assets\Rates\Fra\PriceableSimpleFra.cs" />
+    <Compile Include="Assets\Rates\Futures\PriceableRateFuturesOptionAsset.cs" />
+    <Compile Include="Assets\Rates\Futures\PriceableRateFuturesAsset.cs" />
+    <Compile Include="Assets\Rates\Index\PriceablePropertyRate.cs" />
+    <Compile Include="Assets\Rates\Index\PriceableOis.cs" />
+    <Compile Include="Assets\Rates\Index\PriceableRateIndex.cs" />
+    <Compile Include="Assets\Rates\Index\PriceableXibor.cs" />
+    <Compile Include="Assets\Rates\PriceableBondAssetController.cs" />
+    <Compile Include="Assets\Rates\PriceableRateAssetController.cs" />
+    <Compile Include="Assets\Rates\PriceableRateOptionAssetController.cs" />
+    <Compile Include="Assets\Rates\PriceableSimpleRateAsset.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableSpreadRepo.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableResettableXccyBasisSwap.cs" />
+    <Compile Include="Assets\Rates\Swaps\PriceableIRSwap.cs" />
+    <Compile Include="Assets\Rates\Swaps\PriceableSimpleIRSwap.cs" />
+    <Compile Include="Assets\Rates\Swaps\PriceableSwapRateAsset.cs" />
+    <Compile Include="Assets\Commodities\Spreads\PriceableCommoditySpreadAssetController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assets\Rates\Spreads\PriceableRateSpreadAssetController.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableSimpleRateSpreadAsset.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableSpreadDeposit.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableSpreadFra.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableBasisSwap.cs" />
+    <Compile Include="Assets\Rates\Spreads\PriceableXccyBasisSwap.cs" />
+    <Compile Include="CurveEngine.cs" />
+    <Compile Include="Extensions\DictionaryExtension.cs" />
+    <Compile Include="Extensions\ExceptionExtension.cs" />
+    <Compile Include="Extensions\RangeExtension.cs" />
+    <Compile Include="Factory\PricingStructureFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Factory\CurveLoader.cs" />
+    <Compile Include="Factory\MarketFactory.cs" />
+    <Compile Include="Factory\PriceableAssetFactory.cs" />
+    <Compile Include="Helpers\ArrayIndex.cs" />
+    <Compile Include="Helpers\CompoundingHelper.cs" />
+    <Compile Include="Helpers\ObjectToArrayOfPropertiesConverter.cs" />
+    <Compile Include="Helpers\ParameterFormatter.cs" />
+    <Compile Include="Helpers\PDHHelper.cs" />
+    <Compile Include="Helpers\CurveHelper.cs" />
+    <Compile Include="Helpers\FrequencyHelper.cs" />
+    <Compile Include="Helpers\InstrumentDataHelper.cs" />
+    <Compile Include="Helpers\MarketEnvironmentHelper.cs" />
+    <Compile Include="Helpers\MarketQuoteHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\MetricsHelper.cs" />
+    <Compile Include="Helpers\PricingStructureAlgorithmsHolder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\PricingStructureHelper.cs" />
+    <Compile Include="Helpers\QuotedAssetSetFactory.cs" />
+    <Compile Include="Helpers\SABRHelper.cs" />
+    <Compile Include="Helpers\TermCurveExtension.cs" />
+    <Compile Include="Helpers\TermPointsFactory.cs" />
+    <Compile Include="Helpers\UnderyingCurveTypes.cs" />
+    <Compile Include="Information.cs" />
+    <Compile Include="Markets\FxLegEnvironment.cs" />
+    <Compile Include="Markets\SimpleCommodityMarketEnvironment.cs" />
+    <Compile Include="Markets\SimpleFxMarketEnvironment.cs" />
+    <Compile Include="Markets\SimpleRateMarketEnvironment.cs" />
+    <Compile Include="Markets\SwapLegEnvironment.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Bonds\BondAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Bonds\BondBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\CapFloor\CapFloorAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\CapFloor\CapFloorBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Commodity\CommodityAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Commodity\CommodityBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Commodity\CommoditySpreadBootstrapper2.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Credit\CreditAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Credit\CreditBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Equity\EquityAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Equity\EquityBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Fx\FxAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Fx\FxBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\NewtonRaphsonSolverFunctions.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\ClearedRateAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateBootstrapperNewtonRaphson.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateSpreadAssetQuote.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\ClearedRateBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateSpreadBootstrapper.cs" />
+    <Compile Include="PricingStructures\Bootstrappers\Rate\RateXccySpreadBootstrapper.cs" />
+    <Compile Include="PricingStructures\Curves\ClearedRateCurve.cs" />
+    <Compile Include="PricingStructures\Curves\PropertyRateCurve.cs" />
+    <Compile Include="PricingStructures\Curves\CapVolatilityCurve.cs" />
+    <Compile Include="PricingStructures\Interpolators\VolSurfaceInterpolator.cs" />
+    <Compile Include="PricingStructures\SABR\SABRInterface.cs" />
+    <Compile Include="PricingStructures\SimpleCapletCurve.cs" />
+    <Compile Include="PricingStructures\SimpleExchangeTradedCurve.cs" />
+    <Compile Include="PricingStructures\SimplePropertyRateCurve.cs" />
+    <Compile Include="PricingStructures\Curves\SecuredRateBasisCurve.cs" />
+    <Compile Include="PricingStructures\Curves\SecuredRateCurve.cs" />
+    <Compile Include="PricingStructures\Curves\IssuerCurve.cs" />
+    <Compile Include="PricingStructures\Curves\EquityCurve.cs" />
+    <Compile Include="PricingStructures\SimpleEquityCurve.cs" />
+    <Compile Include="PricingStructures\SimpleBondCurve.cs" />
+    <Compile Include="PricingStructures\Cubes\ExpiryTermTenorStrikeVolatilityCube.cs" />
+    <Compile Include="PricingStructures\Cubes\VolatilityCube.cs" />
+    <Compile Include="PricingStructures\Curves\BondCurve.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PricingStructures\Curves\CommodityCurve.cs" />
+    <Compile Include="PricingStructures\Curves\CommoditySpreadCurve2.cs" />
+    <Compile Include="PricingStructures\Curves\CurveBase.cs" />
+    <Compile Include="PricingStructures\Curves\DiscountCurveSolver.cs" />
+    <Compile Include="PricingStructures\Curves\FxCurve.cs" />
+    <Compile Include="PricingStructures\Curves\FxDerivedCurve.cs" />
+    <Compile Include="PricingStructures\Curves\InflationCurve.cs" />
+    <Compile Include="PricingStructures\Curves\RateCurve.cs" />
+    <Compile Include="PricingStructures\Curves\RateXccySpreadCurve.cs" />
+    <Compile Include="PricingStructures\Curves\XccySpreadCurve.cs" />
+    <Compile Include="PricingStructures\Helpers\CapletExpiryInterpolatedVolatility.cs" />
+    <Compile Include="PricingStructures\Helpers\CapletSmileCalibrationSettings.cs" />
+    <Compile Include="PricingStructures\Helpers\FraSolver.cs" />
+    <Compile Include="PricingStructures\Helpers\SpreadSplicer.cs" />
+    <Compile Include="PricingStructures\Helpers\SwapRate.cs" />
+    <Compile Include="PricingStructures\Helpers\VolatilitySurfaceHelper.cs" />
+    <Compile Include="PricingStructures\Helpers\VolatilitySurfaceHelper2.cs" />
+    <Compile Include="PricingStructures\Helpers\YieldCurveConverter.cs" />
+    <Compile Include="PricingStructures\Interpolators\CommodityCurveInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\CommoditySpreadInterpolator2.cs" />
+    <Compile Include="PricingStructures\Interpolators\ExtendedVolatilitySurfaceInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\FxCurveInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\GapStepInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\InflationCurveInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\RateSpreadInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\SpreadInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\TermCurveInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\TurnInterpolator.cs" />
+    <Compile Include="PricingStructures\Interpolators\VolCurveInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PricingStructures\SABR\SABRCapFloorInterface.cs" />
+    <Compile Include="PricingStructures\SABR\SABRSwaptionInterface.cs" />
+    <Compile Include="PricingStructures\SimpleBaseCurve.cs" />
+    <Compile Include="PricingStructures\SimpleCommodityCurve.cs" />
+    <Compile Include="PricingStructures\SimpleDFToZeroRateCurve.cs" />
+    <Compile Include="PricingStructures\SimpleDiscountFactorCurve.cs" />
+    <Compile Include="PricingStructures\SimpleFxCurve.cs" />
+    <Compile Include="PricingStructures\SimpleInflationCurve.cs" />
+    <Compile Include="PricingStructures\SimpleRateCurve.cs" />
+    <Compile Include="PricingStructures\SimpleSpreadDiscountFactorCurve.cs" />
+    <Compile Include="PricingStructures\SimpleVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\SimpleZeroInflationRateCurve.cs" />
+    <Compile Include="PricingStructures\SimpleZeroRateCurve.cs" />
+    <Compile Include="PricingStructures\Surfaces\CapVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\CommodityVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\EquityVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\ExpiryTermStrikeVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\ExpiryTermTenorATMVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\ExtendedEquityVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\ExtendedExpiryTermStrikeVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\FxVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\RateATMVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\SABRVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\RateVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\VolatilitySurface.cs" />
+    <Compile Include="PricingStructures\Surfaces\VolatilitySurface2.cs" />
+    <Compile Include="Helpers\PricingStructureTerms.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PricingStructures\SABR\Swaption.cs" />
+    <Compile Include="ScenarioRule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
+      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
+      <Name>FpML.V5r3.ConfigTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Helpers\FpML.V5r3.Reporting.Helpers.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>FpML.V5r3.Reporting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>FpML.V5r3.Reporting.Identifiers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>FpML.V5r3.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Models\FpML.V5r3.Reporting.Models.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>FpML.V5r3.Reporting.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
+      <Name>FpML.V5r3.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalendarEngine\FpML.V5r3.CalendarEngine.csproj">
+      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
+      <Name>FpML.V5r3.CalendarEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CurveEngineClasses.cd" />
+    <None Include="Key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Credit\CDS\" />
+    <Folder Include="Assets\Credit\CorporateBonds\" />
+    <Folder Include="Assets\Rates\Swaption\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

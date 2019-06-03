@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Stock>
+  <Name>WAN</Name>
+  <AssetId>WAN</AssetId>
+  <VolatilitySurface>
+    <StockId>WAN</StockId>
+    <Date>2009-09-09T00:00:00</Date>
+    <IsComplete>false</IsComplete>
+    <Expiries>
+      <ForwardExpiry>
+        <ExpiryDate>2009-09-24T00:00:00</ExpiryDate>
+        <FwdPrice>651.598679</FwdPrice>
+        <InterestRate>0.030939</InterestRate>
+        <NodalPoint>true</NodalPoint>
+        <Strikes>
+          <Strike>
+            <Call>
+              <ContractId>WAN09SEP600C.D17</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Call</Type>
+              <Volatility>
+                <Value>0.458175</Value>
+              </Volatility>
+            </Call>
+            <Put>
+              <ContractId>WAN09SEP600P.CZ7</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Put</Type>
+              <Volatility>
+                <Value>0.429079</Value>
+              </Volatility>
+            </Put>
+            <Moneyness>0.92081217985403563</Moneyness>
+            <StrikePrice>600</StrikePrice>
+            <Volatility>
+              <Value>0.44362700</Value>
+            </Volatility>
+            <VolatilityHasBeenSet>true</VolatilityHasBeenSet>
+          </Strike>
+        </Strikes>
+      </ForwardExpiry>
+    </Expiries>
+  </VolatilitySurface>
+</Stock>

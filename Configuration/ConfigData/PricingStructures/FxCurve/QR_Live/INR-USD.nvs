@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=INR-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=INR
+Currency2/String=USD
+CurrencyPair/String=INR-USD
+QuoteBasis/String=Currency2PerCurrency1

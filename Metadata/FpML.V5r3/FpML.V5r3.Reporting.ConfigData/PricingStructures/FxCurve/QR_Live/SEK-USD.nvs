@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=SEK-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=SEK
+Currency2/String=USD
+CurrencyPair/String=SEK-USD
+QuoteBasis/String=Currency2PerCurrency1

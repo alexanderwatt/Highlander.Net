@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="Product.Generated">
+      <ComponentGroupRef Id="National.QRSC.Contracts.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Contracts.Content" />
+      <ComponentGroupRef Id="National.QRSC.Contracts.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Grid.Worker.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Grid.Worker.Content" />
+      <ComponentGroupRef Id="National.QRSC.Grid.Worker.Satellites" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

@@ -1,0 +1,107 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\Orion\Applications\Core.WinSvc\bin\Debug\Core.WinSvc.exe assembly's progress.
+The file is located at C:\Development\Orion\Applications\Core.WinSvc\bin\Debug\Core.WinSvc.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Development\Orion\Applications\Core.WinSvc\bin\Debug\Core.WinSvc.exe assembly's progress.
+The file is located at C:\Development\Orion\Applications\Core.WinSvc\bin\Debug\Core.WinSvc.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\StressGenWinSvc\bin\Debug\StressGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\StressGenWinSvc\bin\Debug\StressGenWinSvc.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\StressGenWinSvc\bin\Debug\StressGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\StressGenWinSvc\bin\Debug\StressGenWinSvc.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: The specified service already exists
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: The specified service already exists
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+An exception occurred during the Install phase.
+System.ComponentModel.Win32Exception: The specified service already exists
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.exe assembly's progress.
+The file is located at C:\Development\OrionVS12\Services\CurveGenWinSvc\bin\Debug\CurveGenWinSvc.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.

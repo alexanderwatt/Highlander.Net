@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F28CE90C-41B6-4E1D-9077-9C7047F2A787}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orion.Models</RootNamespace>
+    <AssemblyName>FpML.V5r3.Reporting.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.20.2.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Solutions\user_awatt\packages\MathNet.Numerics.Signed.3.20.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\ISwaptionAssetParameters.cs" />
+    <Compile Include="Commodities\CommodityAssetAnalytic.cs" />
+    <Compile Include="Commodities\CommodityAssetParameters.cs" />
+    <Compile Include="Commodities\CommodityAssetResults.cs" />
+    <Compile Include="Commodities\CommodityAverageAssetAnalytic.cs" />
+    <Compile Include="Commodities\CommodityAverageAssetParameters.cs" />
+    <Compile Include="Commodities\CommodityAverageAssetResults.cs" />
+    <Compile Include="Commodities\CommoditySwapLeg\CommoditySwapLegAnalytic.cs" />
+    <Compile Include="Commodities\CommoditySwapLeg\CommoditySwapLegInstrumentResults.cs" />
+    <Compile Include="Commodities\CommoditySwapLeg\CommoditySwapLegParameters.cs" />
+    <Compile Include="Commodities\CommoditySwapLeg\ICommoditySwapLegInstrumentResults.cs" />
+    <Compile Include="Commodities\CommoditySwapLeg\ICommoditySwapLegParameters.cs" />
+    <Compile Include="Commodities\ICommodityAverageAssetParameters.cs" />
+    <Compile Include="Commodities\ICommodityAssetParameters.cs" />
+    <Compile Include="Commodities\ICommodityAssetResults.cs" />
+    <Compile Include="Commodities\CommodityFuturesAssetAnalytic.cs" />
+    <Compile Include="Commodities\CommodityFuturesAssetParameters.cs" />
+    <Compile Include="Commodities\ICommodityFuturesAssetParameters.cs" />
+    <Compile Include="Commodities\CommoditySpreadAssetAnalytic.cs" />
+    <Compile Include="Commodities\CommoditySpreadAssetResults.cs" />
+    <Compile Include="Commodities\ICommoditySpreadAssetResults.cs" />
+    <Compile Include="Futures\FuturesOptionAssetAnalytic.cs" />
+    <Compile Include="Futures\FuturesOptionAssetParameters.cs" />
+    <Compile Include="Futures\IFuturesOptionAssetResults.cs" />
+    <Compile Include="Futures\IFuturesOptionAssetParameters.cs" />
+    <Compile Include="Property\PropertyAssetAnalytic.cs" />
+    <Compile Include="Property\PropertyAssetParameters.cs" />
+    <Compile Include="Property\PropertyAssetResults.cs" />
+    <Compile Include="Property\PropertyTransactionAnalytic.cs" />
+    <Compile Include="Property\IPropertyAssetParameters.cs" />
+    <Compile Include="Property\IPropertyAssetResults.cs" />
+    <Compile Include="Equity\EquityAssetParameters.cs" />
+    <Compile Include="Equity\EquityAssetResults.cs" />
+    <Compile Include="Equity\EquityAssetAnalytic.cs" />
+    <Compile Include="Equity\EquityTransactionAnalytic.cs" />
+    <Compile Include="Equity\IEquityAssetParameters.cs" />
+    <Compile Include="Equity\IEquityAssetResults.cs" />
+    <Compile Include="ForeignExchange\CashAssetAnalytic.cs" />
+    <Compile Include="ForeignExchange\CashAssetParameters.cs" />
+    <Compile Include="ForeignExchange\FxOptionLeg\FxOptionLegAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxOptionLeg\FxOptionLegInstrumentResults.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForeignExchange\FxOptionLeg\FxOptionLegParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForeignExchange\FxOptionLeg\IFxOptionLegParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ForeignExchange\FxRateCashflowAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxRateCashflowParameters.cs" />
+    <Compile Include="ForeignExchange\FxOption\FxOptionAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxOptionLeg\IFxOptionLegInstrumentResults.cs" />
+    <Compile Include="ForeignExchange\FxSwap\FxSwapAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxSwap\FxSwapInstrumentResults.cs" />
+    <Compile Include="ForeignExchange\FxSwap\FxSwapParameters.cs" />
+    <Compile Include="ForeignExchange\FxSwap\IFxSwapInstrumentResults.cs" />
+    <Compile Include="ForeignExchange\FxSwap\IFxSwapParameters.cs" />
+    <Compile Include="ForeignExchange\FxAssetResults.cs" />
+    <Compile Include="ForeignExchange\FxLeg\IFxLegInstrumentResults.cs" />
+    <Compile Include="ForeignExchange\FxLeg\IFxLegParameters.cs" />
+    <Compile Include="ForeignExchange\FxLeg\FxLegAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxLeg\FxLegParameters.cs" />
+    <Compile Include="ForeignExchange\FxLeg\FxLegInstrumentResults.cs" />
+    <Compile Include="ForeignExchange\FxRateAssetAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxRateAssetParameters.cs" />
+    <Compile Include="ForeignExchange\FxOptionAssetResults.cs" />
+    <Compile Include="ForeignExchange\FxOptionAssetAnalytic.cs" />
+    <Compile Include="ForeignExchange\FxOptionAssetParameters.cs" />
+    <Compile Include="ForeignExchange\ICashAssetParameters.cs" />
+    <Compile Include="ForeignExchange\IFxRateCashflowParameters.cs" />
+    <Compile Include="ForeignExchange\IFxAssetResults.cs" />
+    <Compile Include="ForeignExchange\IFxOptionAssetParameters.cs" />
+    <Compile Include="ForeignExchange\IFxOptionAssetResults.cs" />
+    <Compile Include="ForeignExchange\IFxRateAssetParameters.cs" />
+    <Compile Include="ForeignExchange\IFxInstrumentResults.cs" />
+    <Compile Include="Futures\FuturesAssetAnalytic.cs" />
+    <Compile Include="Futures\FuturesAssetParameters.cs" />
+    <Compile Include="Futures\FuturesAssetResults.cs" />
+    <Compile Include="Futures\FuturesTransactionAnalytic.cs" />
+    <Compile Include="Futures\IFuturesAssetParameters.cs" />
+    <Compile Include="Futures\IFuturesAssetResults.cs" />
+    <Compile Include="Generic\Cashflows\CashflowAnalytic.cs" />
+    <Compile Include="Generic\Cashflows\CashflowParameters.cs" />
+    <Compile Include="Generic\Cashflows\CashflowResults.cs" />
+    <Compile Include="Generic\Cashflows\FloatingCashflowParameters.cs" />
+    <Compile Include="Generic\Cashflows\IFloatingCashflowParameters.cs" />
+    <Compile Include="Generic\Cashflows\FloatingCashflowAnalytic.cs" />
+    <Compile Include="Generic\Cashflows\FloatingCashflowResults.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generic\Cashflows\ICashflowParameters.cs" />
+    <Compile Include="Generic\Cashflows\ICashflowResults.cs" />
+    <Compile Include="Generic\Cashflows\IFloatingCashflowResults.cs" />
+    <Compile Include="Generic\Coupons\ICouponResults.cs" />
+    <Compile Include="Generic\Coupons\CouponResults.cs" />
+    <Compile Include="Generic\Coupons\CouponParameters.cs" />
+    <Compile Include="Generic\Coupons\ICouponParameters.cs" />
+    <Compile Include="Assets\SimpleDiscountSwapAssetAnalytic.cs" />
+    <Compile Include="Assets\IRSwapAssetParameters.cs" />
+    <Compile Include="Assets\SimpleSwapAssetAnalytic.cs" />
+    <Compile Include="Assets\Swaps\IIRSwapAssetParameters.cs" />
+    <Compile Include="Assets\Swaps\IIRSwapAssetResults.cs" />
+    <Compile Include="Assets\Swaps\IRSwapAssetAnalytic.cs" />
+    <Compile Include="Assets\Swaps\IRSwapAssetParameters.cs" />
+    <Compile Include="Assets\Swaps\IRSwapAssetResults.cs" />
+    <Compile Include="Rates\CapFloor\CapFloorInstrumentAnalytic.cs" />
+    <Compile Include="Rates\Bonds\BondTransactionAnalytic.cs" />
+    <Compile Include="Rates\FuturesOptions\IRateFuturesOptionAssetResults.cs" />
+    <Compile Include="Rates\FuturesOptions\RateFuturesOptionAssetResults.cs" />
+    <Compile Include="Rates\Stream\ICapFloorStreamInstrumentResults.cs" />
+    <Compile Include="Rates\Stream\ICapFloorStreamParameters.cs" />
+    <Compile Include="Rates\Stream\CapFloorStreamInstrumentResults.cs" />
+    <Compile Include="Rates\Stream\CapFloorStreamAnalytic.cs" />
+    <Compile Include="Rates\Stream\CapFloorStreamParameters.cs" />
+    <Compile Include="Rates\Swaption\ISwaptionInstrumentResults.cs" />
+    <Compile Include="Rates\Swaption\ISwaptionInstrumentParameters.cs" />
+    <Compile Include="Rates\Swaption\SwaptionInstrumentParameters.cs" />
+    <Compile Include="Rates\Swaption\SwaptionInstrumentResults.cs" />
+    <Compile Include="Rates\TermDeposit\TermDepositInstrumentAnalytic.cs" />
+    <Compile Include="Rates\TermDeposit\TermDepositInstrumentParameters.cs" />
+    <Compile Include="Rates\TermDeposit\TermDepositInstrumentResults.cs" />
+    <Compile Include="Rates\TermDeposit\ITermDepositInstrumentParameters.cs" />
+    <Compile Include="Rates\TermDeposit\ITermDepositInstrumentResults.cs" />
+    <Compile Include="Rates\Coupons\StructuredRateCouponAnalytic.cs" />
+    <Compile Include="Rates\Fra\IFraInstrumentParameters.cs" />
+    <Compile Include="Rates\Fra\IFraInstrumentResults.cs" />
+    <Compile Include="Rates\Fra\FraInstrumentAnalytic.cs" />
+    <Compile Include="Rates\Fra\FraInstrumentParameters.cs" />
+    <Compile Include="Rates\Fra\FraInstrumentResults.cs" />
+    <Compile Include="Rates\Futures\RateFutureAssetAnalyticModelIdentifier.cs" />
+    <Compile Include="Rates\IRateInstrumentResults.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Assets\BondAssetAnalytic.cs" />
+    <Compile Include="Assets\BondAssetParameters.cs" />
+    <Compile Include="Assets\BondAssetResults.cs" />
+    <Compile Include="Assets\IBondAssetParameters.cs" />
+    <Compile Include="Assets\IBondAssetResults.cs" />
+    <Compile Include="Assets\IRateAssetResults.cs" />
+    <Compile Include="Assets\ISimpleRateAssetParameters.cs" />
+    <Compile Include="Assets\ISimpleDualAssetParameters.cs" />
+    <Compile Include="Assets\IRateSpreadAssetResults.cs" />
+    <Compile Include="Assets\ISwapAssetParameters.cs" />
+    <Compile Include="Assets\ISwapDualAssetParameters.cs" />
+    <Compile Include="Assets\IZeroRateAssetParameters.cs" />
+    <Compile Include="Rates\Coupons\ICollarletParameters.cs" />
+    <Compile Include="Rates\Coupons\IRateCouponParameters.cs" />
+    <Compile Include="Rates\FuturesOptions\IRateFuturesOptionAssetParameters.cs" />
+    <Compile Include="Rates\Futures\IRateFuturesAssetParameters.cs" />
+    <Compile Include="Rates\Futures\NZDFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroSwissFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroHKDFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Options\RateOptionAssetAnalytic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\Options\RateOptionAssetResults.cs" />
+    <Compile Include="Rates\Options\IRateOptionAssetResults.cs" />
+    <Compile Include="Rates\Options\IRateOptionAssetParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\Options\ISimpleRateOptionAssetResults.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\Options\ISimpleOptionAssetParameters.cs" />
+    <Compile Include="Rates\Options\RateOptionAssetParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\Options\SimpleRateOptionAssetResults.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\Options\SimpleRateOptionAssetParameters.cs" />
+    <Compile Include="Rates\Options\SimpleRateOptionAssetAnalytic.cs" />
+    <Compile Include="Assets\RateAssetAnalytic.cs" />
+    <Compile Include="Assets\RateSpreadAssetResults.cs" />
+    <Compile Include="Assets\RateSpreadAssetAnalytic.cs" />
+    <Compile Include="Assets\ZeroRateAssetParameters.cs" />
+    <Compile Include="Assets\DiscountRateAssetAnalytic.cs" />
+    <Compile Include="Assets\DiscountSwapAssetAnalytic.cs" />
+    <Compile Include="Assets\ZeroCouponRateAssetAnalytic.cs" />
+    <Compile Include="Rates\FuturesOptions\BankBillsFuturesOptionAssetAnalytic.cs" />
+    <Compile Include="Rates\FuturesOptions\RateFuturesOptionAssetParameters.cs" />
+    <Compile Include="Rates\FuturesOptions\RateFuturesOptionImpliedQuote.cs" />
+    <Compile Include="Rates\Stream\IStreamInstrumentResults.cs" />
+    <Compile Include="Rates\Stream\IStructuredStreamParameters.cs" />
+    <Compile Include="Rates\Swaption\SimpleIRSwaptionInstrumentAnalytic.cs" />
+    <Compile Include="Rates\Coupons\RateOptionCouponAnalytic.cs" />
+    <Compile Include="Rates\Coupons\RateCollarletParameters.cs" />
+    <Compile Include="Rates\Coupons\RateCouponParameters.cs" />
+    <Compile Include="Rates\Coupons\FixedRateCouponAnalytic.cs" />
+    <Compile Include="Rates\Coupons\FloatingRateCouponAnalytic.cs" />
+    <Compile Include="Rates\Futures\BankBillsFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\CashFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroYenFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroSterlingFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\EuroDollarFuturesAssetAnalytic.cs" />
+    <Compile Include="Rates\Futures\RateFuturesAssetParameters.cs" />
+    <Compile Include="Rates\Stream\StructuredStreamAnalytic.cs" />
+    <Compile Include="Assets\DualRateAssetParameters.cs" />
+    <Compile Include="Rates\Futures\RateFuturesImpliedQuote.cs" />
+    <Compile Include="Assets\InflationAssetAnalytic.cs" />
+    <Compile Include="Assets\RateAssetParameters.cs" />
+    <Compile Include="Assets\RateAssetResults.cs" />
+    <Compile Include="Rates\RateInstrumentResults.cs" />
+    <Compile Include="Rates\Stream\StructuredStreamParameters.cs" />
+    <Compile Include="Rates\Swap\SimpleXccySwapInstrumentAnalytic.cs" />
+    <Compile Include="Rates\Swap\IIRSwapInstrumentParameters.cs" />
+    <Compile Include="Rates\Swap\IIRSwapInstrumentResults.cs" />
+    <Compile Include="Rates\Swap\SimpleIRSwapInstrumentAnalytic.cs" />
+    <Compile Include="Rates\Stream\StreamInstrumentResults.cs" />
+    <Compile Include="Assets\SwapAssetAnalytic.cs" />
+    <Compile Include="Rates\Swap\SwapInstrumentParameters.cs" />
+    <Compile Include="Rates\Swap\SwapInstrumentResults.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>FpML.V5r3.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
+      <Name>FpML.V5r3.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

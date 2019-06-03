@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+== Copyright (c) 2002-2017. All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/documents/license.html
+-->
+<xsd:schema xmlns="http://www.fpml.org/FpML-5/ext" xmlns:fpml="http://www.fpml.org/FpML-5/reporting" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.fpml.org/FpML-5/ext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<xsd:include schemaLocation="fpmlext-shared.xsd"/>
+	
+	<xsd:import namespace="http://www.fpml.org/FpML-5/reporting" schemaLocation="../reporting/fpml-main-5-9.xsd"/>
+
+	<xsd:complexType name="EquityTransaction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Equity Transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractUnitTransaction">
+				<xsd:sequence>
+					<xsd:element name="equity" type="fpml:EquityAsset">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">Identification of a Equity.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="equityTransaction" type="EquityTransaction" substitutionGroup="fpml:product">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Global element representing an Equity Transaction.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+</xsd:schema>

@@ -1,0 +1,416 @@
+Market Sector,Security Type
+Comdty,Calendar Spread Option
+Comdty,Financial commodity future.
+Comdty,Financial commodity generic.
+Comdty,Financial commodity option.
+Comdty,Financial commodity spot.
+Comdty,Financial index future.
+Comdty,Financial index option.
+Comdty,Generic index future.
+Comdty,Physical commodity forward.
+Comdty,Physical commodity future.
+Comdty,Physical commodity generic.
+Comdty,Physical commodity option.
+Comdty,Physical commodity spot.
+Comdty,SINGLE STOCK FUTURE
+Comdty,Strategy Trade.
+Corp,2ND LIEN
+Corp,ABL REVOLVER
+Corp,ASSET BACK
+Corp,ASSET BACK BRIDGE
+Corp,ASSET BACK BRIDGE REV
+Corp,ASSET BACK BRIDGE TERM
+Corp,ASSET BACK COV-LITE DIP PIK
+Corp,ASSET BACK COV-LITE REV
+Corp,ASSET BACK DELAY-DRAW TERM
+Corp,ASSET BACK DIP REV
+Corp,ASSET BACK DIP TERM
+Corp,ASSET BACK LOC
+Corp,ASSET BACK REV
+Corp,ASSET BACK REV FILO
+Corp,ASSET BACK REV LIFO
+Corp,ASSET BACK REV OVERDRAFT
+Corp,ASSET BACK TERM
+Corp,ASSET BACK TERM FILO
+Corp,AUSTRALIAN
+Corp,BRIDGE
+Corp,BRIDGE DELAY-DRAW TERM
+Corp,BRIDGE ISLAMIC
+Corp,BRIDGE PIK
+Corp,BRIDGE PIK TERM
+Corp,BRIDGE REV
+Corp,BRIDGE TERM
+Corp,BULLDOG
+Corp,CANADIAN
+Corp,CDS Index
+Corp,COV-LITE LOC
+Corp,COV-LITE PIK TERM
+Corp,COV-LITE REV
+Corp,COV-LITE TERM
+Corp,DEBT IN POSSESS
+Corp,DELAY-DRAW
+Corp,DELAY-DRAW LOC
+Corp,DELAY-DRAW PIK TERM
+Corp,DELAY-DRAW REV
+Corp,DELAY-DRAW TERM
+Corp,DELAY-DRAW TERM INCREMENT
+Corp,DELAY-DRAW TERM MULTI-DRAW
+Corp,DELAY-DRAW VAT-TRNCH
+Corp,DIP
+Corp,DIP DELAY-DRAW TERM
+Corp,DIP LOC
+Corp,DIP PIK TERM
+Corp,DIP REV
+Corp,DIP SYNTH LOC
+Corp,DIP TERM
+Corp,DIP TERM FILO
+Corp,DIP TERM INCREMENT
+Corp,DIP TERM MULTI-DRAW
+Corp,DOMESTIC
+Corp,DOMESTIC MTN
+Corp,EURO MTN
+Corp,EURO NON-DOLLAR
+Corp,EURO-DOLLAR
+Corp,EURO-ZONE
+Corp,GLOBAL
+Corp,GUARANTEE FAC
+Corp,INCREMENT
+Corp,ISLAMIC
+Corp,ISLAMIC LOC
+Corp,ISLAMIC REV
+Corp,ISLAMIC STANDBY
+Corp,ISLAMIC STANDBY REV
+Corp,ISLAMIC TERM
+Corp,LOC
+Corp,LTR OF CREDIT
+Corp,MEZZANINE
+Corp,OVERDRAFT
+Corp,OVERDRAFT FACILITY
+Corp,PIK
+Corp,PIK REV
+Corp,PIK REVOLVER
+Corp,PIK STANDBY TERM
+Corp,PIK TERM
+Corp,PIK TERM LOAN
+Corp,PRIV PLACEMENT
+Corp,RESTRUCTURD DEBT
+Corp,REV
+Corp,REV GUARANTEE FAC
+Corp,REV INCREMENT
+Corp,REV MULTI-DRAW
+Corp,REV OVERDRAFT
+Corp,REV VAT-TRNCH
+Corp,REVOLVER
+Corp,REVOLVER/TERM
+Corp,SAMURAI
+Corp,SHOGUN
+Corp,SPARE - N/A
+Corp,STANDBY
+Corp,STANDBY LOC
+Corp,STANDBY REV
+Corp,STANDBY TERM
+Corp,SWING LINE LOAN
+Corp,SWINGLINE
+Corp,SYNTH
+Corp,SYNTH LOC
+Corp,SYNTH REV
+Corp,SYNTH TERM
+Corp,SYNTHETIC LOC
+Corp,SYNTHETIC REVOLVER
+Corp,TAX-SPARED
+Corp,TERM
+Corp,TERM GUARANTEE FAC
+Corp,TERM INCREMENT
+Corp,TERM LIFO
+Corp,TERM MULTI-DRAW
+Corp,TERM OVERDRAFT
+Corp,TERM REV
+Corp,TERM TAX-SPARED
+Corp,TERM VAT-TRNCH
+Corp,UK GILT STOCK
+Corp,US DOMESTIC
+Corp,US NON-DOLLAR
+Corp,VAT-TRNCH
+Corp,WARRANT
+Corp,YANKEE
+Curncy,BANKERS ACCEPTANCE
+Curncy,BASIS SWAP
+Curncy,BUTTERFLY SWAP
+Curncy,CAPS & FLOORS
+Curncy,CD
+Curncy,COMMERCIAL PAPER
+Curncy,CONTRACT FRA
+Curncy,CREDIT DEFAULT SWAP
+Curncy,CROSS
+Curncy,Currency future.
+Curncy,Currency option.
+Curncy,Currency spot
+Curncy,DEPOSIT
+Curncy,FED NOON BUYING RATE
+Curncy,FIXING RATE
+Curncy,FORWARD
+Curncy,FORWARD CROSS
+Curncy,FORWARD CURVE
+Curncy,FRA
+Curncy,FUTURE
+Curncy,FWD SWAP
+Curncy,Generic currency future.
+Curncy,IMM SWAP
+Curncy,INFLATION SWAP
+Curncy,INTERBANK OFFERED RATE
+Curncy,INTEREST RATE GUARANTEE
+Curncy,MONEY MARKET CALL
+Curncy,MUNI SWAP
+Curncy,N.A.
+Curncy,NDF FIXING
+Curncy,NDF SWAP
+Curncy,NON-DELIVERABLE FORWARD
+Curncy,NON-DELIVERABLE IRS SWAP
+Curncy,NON-DELIVERABLE OIS SWAP
+Curncy,ONSHORE FIXING
+Curncy,ONSHORE FORWARD
+Curncy,ONSHORE SWAP
+Curncy,OPTION
+Curncy,OPTION VOLATILITY
+Curncy,OTHER
+Curncy,OVERNIGHT INDEXED SWAP
+Curncy,PROMISSORY NOTE
+Curncy,PROPERTY SWAP
+Curncy,QUARTERLY SWAP
+Curncy,REPO
+Curncy,RETURN IDX
+Curncy,SEMI-ANNUAL SWAP
+Curncy,SPOT
+Curncy,Strategy Trade.
+Curncy,SWAP
+Curncy,SWAP SPREAD
+Curncy,SWAPTION VOLATILITY
+Curncy,TREASURY BILL
+Curncy,VOLATILITY DERIVATIVE
+Equity,A/T Unit
+Equity,ADR
+Equity,Austrian Crt
+Equity,Basket WRT
+Equity,BDR
+Equity,Belgium Cert
+Equity,Bond
+Equity,Car Forward
+Equity,CDR
+Equity,Closed-End Fund
+Equity,Cmdt Fut WRT
+Equity,Cmdt Idx WRT
+Equity,Common Stock
+Equity,Conv Bond
+Equity,Conv Prfd
+Equity,Corp Bnd WRT
+Equity,Currency WRT
+Equity,Dutch Cert
+Equity,EDR
+Equity,Equity Option
+Equity,Equity OTC Option
+Equity,Equity WRT
+Equity,ETF
+Equity,ETP
+Equity,FDIC
+Equity,French Cert
+Equity,Fund of Funds
+Equity,GDR
+Equity,German Cert
+Equity,Hedge Fund
+Equity,I.R. Fut WRT
+Equity,I.R. Swp WRT
+Equity,IDR
+Equity,Index WRT
+Equity,Indx Fut WRT
+Equity,Int. Rt. WRT
+Equity,Ltd Part
+Equity,Misc.
+Equity,Mutual Fund
+Equity,NY Reg Shrs
+Equity,Open-End Fund
+Equity,OTC Option
+Equity,Preference
+Equity,Preferred
+Equity,PRES
+Equity,Prfd WRT
+Equity,Private Comp
+Equity,Private Eqty
+Equity,RDC
+Equity,Receipt
+Equity,REIT
+Equity,Right
+Equity,Royalty Trst
+Equity,Sec Lending
+Equity,SINGLE STOCK FUTURE
+Equity,Swiss Cert
+Equity,Tracking Stk
+Equity,UIT
+Equity,Unit
+Equity,Unit Inv Tst
+Equity,Variable Annuity
+Equity,Warrant
+Govt,US GOVERNMENT
+Index,Equity Index
+Index,Financial index future.
+Index,Financial index generic.
+Index,Financial index option.
+Index,Generic index future.
+Index,Index
+Index,Index Option
+Index,Index OTC Option
+Index,Non-Equity Index
+Index,Physical index future.
+Index,Physical index option.
+Index,Spot index.
+Index,Strategy Trade.
+Mmkt,ACCEPT BANCARIA
+Mmkt,AUSTRALIAN CD
+Mmkt,AUSTRALIAN CP
+Mmkt,BANK ACCEPT BILL
+Mmkt,BANK NOTE
+Mmkt,BANKERS ACCEPT
+Mmkt,BEARER DEP NOTE
+Mmkt,BELGIUM CP
+Mmkt,BILL OF EXCHANGE
+Mmkt,BRAZILIAN CDI
+Mmkt,CAD INT BEAR CP
+Mmkt,CALL LOANS
+Mmkt,CANADIAN CD
+Mmkt,CANADIAN CP
+Mmkt,CBLO
+Mmkt,COLLAT CALL NOTE
+Mmkt,COMMERCIAL NOTE
+Mmkt,CP-LIKE EXT NOTE
+Mmkt,DEPOSIT NOTE
+Mmkt,DISCOUNT FIXBIS
+Mmkt,DISCOUNT NOTES
+Mmkt,DOMESTC TIME DEP
+Mmkt,DUTCH CP
+Mmkt,EURO CD
+Mmkt,EURO CP
+Mmkt,EURO MTN
+Mmkt,EURO STRUCTRD LN
+Mmkt,EURO TIME DEPST
+Mmkt,EXTEND COMM NOTE
+Mmkt,EXTEND. NOTE MTN
+Mmkt,FED FUNDS
+Mmkt,FINNISH CD
+Mmkt,FINNISH CP
+Mmkt,FLOATING CP
+Mmkt,FRENCH CD
+Mmkt,FRENCH CP
+Mmkt,FX DISCOUNT NOTE
+Mmkt,GERMAN CP
+Mmkt,HONG KONG CD
+Mmkt,INDIAN CD
+Mmkt,INDIAN CP
+Mmkt,INDONESIAN CP
+Mmkt,INT BEAR FIXBIS
+Mmkt,ISLAMIC BA
+Mmkt,ISLAMIC CP
+Mmkt,JUMBO CD
+Mmkt,KOREAN CD
+Mmkt,KOREAN CP
+Mmkt,LEBANESE CP
+Mmkt,LIQUIDITY NOTE
+Mmkt,MALAYSIAN CP
+Mmkt,MARGIN TERM DEP
+Mmkt,MASTER NOTES
+Mmkt,MED TERM NOTE
+Mmkt,MEDIUM TERM CD
+Mmkt,MEDIUM TERM ECD
+Mmkt,MEDIUM TERM YCD
+Mmkt,MEXICAN CP
+Mmkt,MEXICAN PAGARE
+Mmkt,MTN SUBORDINATED
+Mmkt,MUNI CP
+Mmkt,MUNI INT BEAR CP
+Mmkt,MURABAHA
+Mmkt,MX CERT BURSATIL
+Mmkt,NEG INST DEPOSIT
+Mmkt,NEGOTIABLE CD
+Mmkt,NEW ZEALAND CP
+Mmkt,NORWEGIAN CD
+Mmkt,OVER/NIGHT
+Mmkt,PHILIPPINE CP
+Mmkt,PLAZOS FIJOS
+Mmkt,PORTUGUESE CP
+Mmkt,PROMISSORY NOTE
+Mmkt,PROV T-BILL
+Mmkt,RETAIL CD
+Mmkt,S.TERM LOAN NOTE
+Mmkt,S/A MD TERM YCD
+Mmkt,SHORT TERM BN
+Mmkt,SHORT TERM DN
+Mmkt,SINGAPORE CP
+Mmkt,SPECIAL LMMK PGM
+Mmkt,STERLING CD
+Mmkt,STERLING CP
+Mmkt,SWEDISH CP
+Mmkt,TAIWAN CP
+Mmkt,TAIWAN CP GUAR
+Mmkt,TAIWAN NEGO CD
+Mmkt,TAIWAN TIME DEPO
+Mmkt,TERM DEPOSITS
+Mmkt,THAILAND CP
+Mmkt,U.S. CD
+Mmkt,U.S. CP
+Mmkt,U.S. INT BEAR CP
+Mmkt,VAR RATE DEM OBL
+Mmkt,VENEZUELAN CP
+Mmkt,YANKEE CD
+Mmkt,YEN CD
+Mmkt,YEN CP
+Mtge,ABS Auto
+Mtge,ABS Card
+Mtge,ABS Home
+Mtge,ABS Other
+Mtge,Agncy ABS Home
+Mtge,Agncy ABS Other
+Mtge,Agncy CMO FLT
+Mtge,Agncy CMO INV
+Mtge,Agncy CMO IO
+Mtge,Agncy CMO Other
+Mtge,Agncy CMO PO
+Mtge,Agncy CMO Z
+Mtge,Canadian
+Mtge,CF
+Mtge,CMBS
+Mtge,HB
+Mtge,MBS 10yr
+Mtge,MBS 15yr
+Mtge,MBS 20yr
+Mtge,MBS 30yr
+Mtge,MBS ARM
+Mtge,MBS balloon
+Mtge,MBS Other
+Mtge,MV
+Mtge,Prvt CMO FLT
+Mtge,Prvt CMO INV
+Mtge,Prvt CMO IO
+Mtge,Prvt CMO Other
+Mtge,Prvt CMO PO
+Mtge,Prvt CMO Z
+Mtge,SBA Pool
+Mtge,SN
+Muni,ADJ CONV. TO FIXED
+Muni,"ADJ CONV. TO FIXED, OID"
+Muni,ADJUSTABLE
+Muni,"ADJUSTABLE, OID"
+Muni,CPI LINKED
+Muni,"CPI LINKED, OID"
+Muni,FIXED
+Muni,"FIXED, OID"
+Muni,FLOATING
+Muni,"FLOATING, OID"
+Muni,INTER. APPRECIATION
+Muni,"INTER. APPRECIATION, OID"
+Muni,OID
+Muni,TAX CREDIT
+Muni,"TAX CREDIT, OID"
+Muni,WHEN ISSUED
+Muni,"WHEN ISSUED, OID"
+Muni,ZERO COUPON
+Muni,"ZERO COUPON, OID"
+Pfd,PRIVATE
+Pfd,PUBLIC

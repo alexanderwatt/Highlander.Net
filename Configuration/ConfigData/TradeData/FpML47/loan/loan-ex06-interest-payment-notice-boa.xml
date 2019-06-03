@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="InterestPaymentNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://www.bankofamerica.com/messageId">000001</messageId>
+      <sentBy>BOARDN01AXX</sentBy>
+      <sendTo>BOADTDUS31XXX</sendTo>
+      <creationTimestamp>2007-09-26T09:30:47.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2007-09-26</noticeDate>
+   <agentBankPartyReference href="boana"/>
+   <borrowerPartyReference href="iiieiilp"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+      <description>III Exploration II LP</description>
+      <creditAgreementDate>2007-04-30</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+      <description>Term Loan</description>
+      <originalCommitmentAmount>
+         <currency>USD</currency>
+         <amount>84787500.0</amount>
+      </originalCommitmentAmount>
+   </facilitySummary>
+   <loanContractSummary>
+      <identifier>
+         <partyReference href="boana"/>
+         <contractId contractIdScheme="http://www.bankofamerica.com/contractId">007578584</contractId>
+      </identifier>
+      <originalAmount>
+         <currency>USD</currency>
+         <amount>787500.0</amount>
+      </originalAmount>
+      <maturityDate>2013-10-29</maturityDate>
+   </loanContractSummary>
+   <interestPayment>
+      <calculationMethod>FacilityPosition</calculationMethod>
+      <paymentDate>2007-09-28</paymentDate>
+      <amount>
+         <globalAmount>
+            <currency>USD</currency>
+            <amount>20998.20</amount>
+         </globalAmount>
+         <shareAmount>
+            <currency>USD</currency>
+            <amount>3149.73</amount>
+         </shareAmount>
+      </amount>
+   </interestPayment>
+   <interestAccrualSchedule>
+      <interestRatePeriod>
+         <rateFixingDate>2007-09-26</rateFixingDate>
+         <startDate>2007-09-26</startDate>
+         <endDate>2007-09-26</endDate>
+         <floatingRateIndex>USD-Prime-H.15</floatingRateIndex>
+         <indexTenor>
+            <periodMultiplier>0</periodMultiplier>
+            <period>D</period>
+         </indexTenor>
+         <interestRate>0.075</interestRate>
+         <allInRate>0.075</allInRate>
+         <interestDayBasis>ACT/ACT.ISDA</interestDayBasis>
+         <tenor>
+            <periodMultiplier>0</periodMultiplier>
+            <period>D</period>
+         </tenor>
+      </interestRatePeriod>
+      <lenderLoanContractPeriod>
+         <startDate>2007-08-30</startDate>
+         <endDate>2007-09-28</endDate>
+         <shareCommitmentAmount>
+            <currency>USD</currency>
+            <amount>565250000</amount>
+         </shareCommitmentAmount>
+         <shareLoanContractAmount>
+            <currency>USD</currency>
+            <amount>118125.0</amount>
+         </shareLoanContractAmount>
+      </lenderLoanContractPeriod>
+      <interestAccrualPeriod>
+         <startDate>2007-08-30</startDate>
+         <endDate>2007-09-28</endDate>
+         <shareInterestAccrualAmount>
+            <currency>USD</currency>
+            <amount>3149.73</amount>
+         </shareInterestAccrualAmount>
+      </interestAccrualPeriod>
+   </interestAccrualSchedule>
+   <party id="boana">
+      <partyId>BOARDN01AXX</partyId>
+      <partyName>Bank of America NA</partyName>
+      <account id="id_1">
+         <accountId accountIdScheme="http://www.bankofamerica.com/accountId">XXXXX9593:XXXXXXXXXX7300</accountId>
+         <accountName>Bank of America NA</accountName>
+         <accountBeneficiary href="iiieiilp"/>
+      </account>
+   </party>
+   <party id="lenderParty">
+      <partyId>BOADTDUS31XXX</partyId>
+      <partyName>Bank of America Distressed Trade Desk</partyName>
+   </party>
+   <party id="iiieiilp">
+      <partyId>IIIEIILPUS31XXX</partyId>
+      <partyName>III Exploration II LP</partyName>
+   </party>
+</FpML>

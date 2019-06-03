@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.FxCurve.JPY-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="JPY-USD">
+    <name>JPY-USD</name>
+    <currency>JPY</currency>
+    <quotedCurrencyPair>
+      <currency1>JPY</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="JPY-USD">
+    <baseDate>2010-08-30</baseDate>
+    <spotDate id="SpotDate">2010-09-01</spotDate>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-12M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="JPYUSD-FxForward-5Y" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-ON" />
+        <quote>
+          <value>85.3733</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPYON BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-TN" />
+        <quote>
+          <value>85.3713</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPYTN BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxSpot-SP" />
+        <quote>
+          <value>85.37</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-1W" />
+        <quote>
+          <value>85.3643</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY1W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-2W" />
+        <quote>
+          <value>85.3597</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY2W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-3W" />
+        <quote>
+          <value>85.3533</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY3W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-1M" />
+        <quote>
+          <value>85.3456</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY1M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-2M" />
+        <quote>
+          <value>85.3144</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY2M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-3M" />
+        <quote>
+          <value>85.2849</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY3M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-4M" />
+        <quote>
+          <value>85.2431</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY4M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-5M" />
+        <quote>
+          <value>85.2177</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY5M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-6M" />
+        <quote>
+          <value>85.187</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY6M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-9M" />
+        <quote>
+          <value>85.0605</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY9M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-12M" />
+        <quote>
+          <value>84.899</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY12M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-15M" />
+        <quote>
+          <value>84.7325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY15M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-18M" />
+        <quote>
+          <value>84.525</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY18M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-2Y" />
+        <quote>
+          <value>83.95</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY2Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-3Y" />
+        <quote>
+          <value>82.53</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY3Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-4Y" />
+        <quote>
+          <value>80.56</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY4Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPYUSD-FxForward-5Y" />
+        <quote>
+          <value>78.31</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JPY5Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.1207112+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="JPYUSD-FxForward-ON">
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>85.3733</mid>
+      </point>
+      <point id="JPYUSD-FxForward-TN">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>85.3713</mid>
+      </point>
+      <point id="JPYUSD-FxSpot-SP">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>85.37</mid>
+      </point>
+      <point id="JPYUSD-FxForward-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>85.3643</mid>
+      </point>
+      <point id="JPYUSD-FxForward-2W">
+        <term>
+          <date>2010-09-15</date>
+        </term>
+        <mid>85.3597</mid>
+      </point>
+      <point id="JPYUSD-FxForward-3W">
+        <term>
+          <date>2010-09-22</date>
+        </term>
+        <mid>85.3533</mid>
+      </point>
+      <point id="JPYUSD-FxForward-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>85.3456</mid>
+      </point>
+      <point id="JPYUSD-FxForward-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>85.3144</mid>
+      </point>
+      <point id="JPYUSD-FxForward-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>85.2849</mid>
+      </point>
+      <point id="JPYUSD-FxForward-4M">
+        <term>
+          <date>2011-01-04</date>
+        </term>
+        <mid>85.2431</mid>
+      </point>
+      <point id="JPYUSD-FxForward-5M">
+        <term>
+          <date>2011-02-01</date>
+        </term>
+        <mid>85.2177</mid>
+      </point>
+      <point id="JPYUSD-FxForward-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>85.187</mid>
+      </point>
+      <point id="JPYUSD-FxForward-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>85.0605</mid>
+      </point>
+      <point id="JPYUSD-FxForward-12M">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>84.899</mid>
+      </point>
+      <point id="JPYUSD-FxForward-15M">
+        <term>
+          <date>2011-12-01</date>
+        </term>
+        <mid>84.7325</mid>
+      </point>
+      <point id="JPYUSD-FxForward-18M">
+        <term>
+          <date>2012-03-01</date>
+        </term>
+        <mid>84.525</mid>
+      </point>
+      <point id="JPYUSD-FxForward-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>83.95</mid>
+      </point>
+      <point id="JPYUSD-FxForward-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>82.53</mid>
+      </point>
+      <point id="JPYUSD-FxForward-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>80.56</mid>
+      </point>
+      <point id="JPYUSD-FxForward-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>78.31</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

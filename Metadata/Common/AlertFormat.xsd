@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AlertFormat"
+    targetNamespace="http://tempuri.org/AlertFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/AlertFormat.xsd"
+    xmlns:mstns="http://tempuri.org/AlertFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="AlertRule">
+    <xs:complexType>
+      <xs:sequence>
+        <!--standard rule object properties-->
+        <xs:element name="Priority" type="xs:int" />
+        <xs:element name="Disabled" type="xs:boolean" />
+        <xs:element name="hostEnvName" type="xs:string" />
+        <xs:element name="hostComputer" type="xs:string" />
+        <xs:element name="hostInstance" type="xs:string" />
+        <xs:element name="hostUserName" type="xs:string" />
+        <!--output-->
+        <xs:element name="RuleName" type="xs:string" />
+        <xs:element name="DataItemType" type="xs:string" />
+        <xs:element name="DataTypeName" type="xs:string" />
+        <xs:element name="DataSubsExpr" type="xs:string" />
+        <xs:element name="Constraint" type="xs:string" />
+        <xs:element name="Condition" type="xs:string" />
+        <xs:element name="AlertProperties" type="xs:string" />
+        <xs:element name="MonitorPeriod" type="xs:string" />
+        <xs:element name="PublishPeriod" type="xs:string" />
+        <xs:element name="SignalFormat" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AlertSignal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RuleName" type="xs:string" />
+        <xs:element name="AlertServer" type="xs:string" />
+        <xs:element name="Status" type="xs:string" />
+        <xs:element name="SignalMessage" type="xs:string" />
+        <xs:element name="LastMonitored" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

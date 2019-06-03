@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="ANZ 0 02/17/14" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <instrumentId>AU000ANZHAH6 Corp Isin</instrumentId>
+  <description>ANZ 0 02/17/14</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>ANZ</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Float</couponType>
+  <couponRate>4.67</couponRate>
+  <maturity>2014-02-17</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>3</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+</bond>

@@ -1,0 +1,8 @@
+Market/String=QR_LIVE
+PricingStructureType/String=DiscountCurve
+CreditInstrumentId/String=LIBOR
+CreditSeniority/String=SENIOR
+CurveName/String=JPY-LIBOR-SENIOR
+DependencyDepth/Int32=1
+Algorithm/String=CalypsoAlgo4_360
+Currency/String=JPY

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include '..\..\..\..\Common\Configuration\Build.wxi' ?>
+  <!--hack to allow SIT deployment on same machine as DEV-->
+  <?if $(var.BuildEnv) != "SIT" ?>
+  <!--temporary SIT values-->
+  <?define Guid1 = "{128966FC-FB6C-4E5B-A6D3-051024BD51E3}" ?>
+  <?define Guid2 = "{F5AA6ABF-A415-4AD9-8AA1-BC66A1142D07}" ?>
+  <?else ?>
+  <!--standard values-->
+  <?define Guid1 = "{b01c6c79-cf50-4b2a-8485-65227322c27c}" ?>
+  <?define Guid2 = "{07d74f22-2ac6-4e14-9c56-7ce70b1a7b7c}" ?>
+  <?endif ?>
+  <Product Id="*" Name="QRSC Grid Manager (V3.4.1011.0) ($(var.BuildEnv))" Language="1033"
+           Version="3.4.1011.0" Manufacturer="National.QRSC"
+           UpgradeCode="$(var.Guid1)">
+    <Package InstallerVersion="200" Compressed="yes" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <Property Id="ALLUSERS" Value="1"/>
+    <Upgrade Id="$(var.Guid1)">
+      <UpgradeVersion OnlyDetect="no" Property="PREVIOUSVERSIONFOUND" Minimum="3.4.0.0" IncludeMinimum="yes" Maximum="99.0.0.0" IncludeMaximum="yes" />
+    </Upgrade>
+    <!--hack path for TFS Team Build-->
+    <?if $(var.OutDir) != "bin\$(var.Configuration)\" ?>
+    <?define BinPath = $(var.TargetDir) ?>
+    <?else ?>
+    <?define BinPath = ..\QRSCGridManagerService\$(var.OutDir) ?>
+    <?endif ?>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="National" Name="National" >
+          <Directory Id="QRSC_$(var.BuildEnv)" Name="QRSC_$(var.BuildEnv)" >
+            <Directory Id="Services" Name="Services" >
+              <Directory Id="INSTALLLOCATION" Name="QRSCGridManager">
+                <!-- service -->
+                <Component Id="Component1" Guid="$(var.Guid2)" >
+                  <File Id='FileCG' Name='QRSCGridManager_$(var.BuildEnv).exe' DiskId='1' Source='$(var.BinPath)QRSCGridManagerService.exe'  />
+                  <ServiceInstall Id="SvcInst1" Name="QRSCGridManager_$(var.BuildEnv)" DisplayName="QRSC Grid Manager (V3.4.1011.0) ($(var.BuildEnv))"
+                    Description = "QRSC Grid Manager (V3.4.1011.0) ($(var.BuildEnv))" Type="ownProcess" Interactive="no" Start="auto"
+                    Vital="yes" ErrorControl="normal" Account="NT3GWM01\svc_qrbuild" Password="Reticuli99" >
+                  </ServiceInstall>
+                  <ServiceControl Id="SvcCtrl1" Name="QRSCGridManager_$(var.BuildEnv)" Stop="both" Remove="uninstall" />
+                </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="QRSC Grid Manager (V3.4.1011.0) ($(var.BuildEnv))" Level="1">
+      <ComponentRef Id="Component1" />
+      <!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
+      <ComponentGroupRef Id="Product.Generated" />
+    </Feature>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallValidate">PREVIOUSVERSIONFOUND</RemoveExistingProducts>
+      <!-- Only execute action when installing-->
+      <Custom Action='ServiceInstall' After="InstallFinalize">$Component1>2</Custom>
+      <!-- Only execute action when uninstalling-->
+      <Custom Action='ServiceUnInstall' Before="RemoveFiles">$Component1=2</Custom>
+    </InstallExecuteSequence>
+    <!-- Action to install the service-->
+    <CustomAction Id="ServiceInstall"
+          Directory='INSTALLLOCATION'
+          ExeCommand='"[WindowsFolder]Microsoft.NET\Framework\v4.0.30319\installUtil.exe" /LogToConsole=true /LogFile=wix_install.log QRSCGridManagerService.exe'
+          Return='ignore' >
+    </CustomAction>
+    <!-- Action to uninstall the service-->
+    <CustomAction Id="ServiceUnInstall"
+          Directory='INSTALLLOCATION'
+          ExeCommand='"[WindowsFolder]Microsoft.NET\Framework\v4.0.30319\installUtil.exe" /u /LogToConsole=true /LogFile=wix_uninstall.log QRSCGridManagerService.exe'
+          Return='ignore'>
+    </CustomAction>
+  </Product>
+</Wix>

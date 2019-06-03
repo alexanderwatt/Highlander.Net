@@ -1,0 +1,15 @@
+﻿OriginatingPartyId/String=X-1131063516
+CounterPartyId/String=X638746280
+Party1/String=X-1131063516
+Party2/String=X638746280
+TradeType/String=Swaption
+TradingBookId/String=X1893229717
+ProductType/String=InterestRateSwaption
+TradeType/String=swaption
+TradeDate/DateTime=2009-05-11T00:00:00
+TradeSource/String=CALYPSO
+TradeId/String=100043
+AsAtDate/DateTime=2009-12-07T00:00:00
+TradeSvcRev/Int32=2
+SchemaType/String=FpML
+SchemaVersion/String=4.3

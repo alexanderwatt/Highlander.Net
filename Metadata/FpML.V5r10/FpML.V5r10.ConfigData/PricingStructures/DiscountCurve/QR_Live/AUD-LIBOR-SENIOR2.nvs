@@ -1,0 +1,13 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateXccyCurve
+ReferenceCurveName/String=DiscountCurve.USD-LIBOR-SENIOR
+ReferenceFxCurveName/String=FxCurve.AUD-USD
+ReferenceCurrency2CurveName/String=RateCurve.AUD-BBR-BBSW-3M
+CreditInstrumentId/String=LIBOR
+CreditSeniority/String=SENIOR
+CurveName/String=AUD-LIBOR-SENIOR
+DependencyDepth/Int32=1
+Algorithm/String=LinearSpreadZero
+Currency/String=AUD
+CutOverTerm/String=6M
+Currency1RateCurve/Boolean=true

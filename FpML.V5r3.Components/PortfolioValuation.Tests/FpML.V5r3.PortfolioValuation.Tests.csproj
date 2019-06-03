@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{143E11F7-79C1-4A05-9BE5-F55609508804}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TradeValuation.Tests</RootNamespace>
+    <AssemblyName>FpML.V5r3.PortfolioValuation.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TradeWorkflowTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\WorkflowFramework\Workflow.csproj">
+      <Project>{108628B0-D080-45AB-B019-E36B31E5B2CE}</Project>
+      <Name>Workflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
+      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
+      <Name>FpML.V5r3.ConfigTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ConfigData\FpML.V5r3.ConfigData.csproj">
+      <Project>{a99322d4-6d41-499f-be4e-62dab22ff97f}</Project>
+      <Name>FpML.V5r3.ConfigData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>FpML.V5r3.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Models\FpML.V5r3.Reporting.Models.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>FpML.V5r3.Reporting.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\FpML.V5r3.TestHelpers\FpML.V5r3.TestHelpers.csproj">
+      <Project>{320d2e83-2352-4a7b-ab1a-c5cabe9ffe93}</Project>
+      <Name>FpML.V5r3.TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\FpML.V5r3.UnitTestEnv\FpML.V5r3.UnitTestEnv.csproj">
+      <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
+      <Name>FpML.V5r3.UnitTestEnv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveEngine\FpML.V5r3.CurveEngine.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>FpML.V5r3.CurveEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SampleFra.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SampleFra.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SampleSwap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SampleSwap.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ird_ex01_vanilla_swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ird_ex01_vanilla_swap.nvs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

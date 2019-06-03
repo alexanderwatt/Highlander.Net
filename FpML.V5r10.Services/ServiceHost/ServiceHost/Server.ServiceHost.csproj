@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6D3F9A56-4662-4B15-B935-F56636EF5BEA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orion.Server.ServiceHost</RootNamespace>
+    <AssemblyName>Server.ServiceHost</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\..\Common\Keys\National.QRSC.Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ServiceHost.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\FpML.V5r3.Components\MarketDataServer\MDAS.Client\FpML.V5r3.MDAS.Client.csproj">
+      <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>
+      <Name>FpML.V5r3.MDAS.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\FpML.V5r3.Components\MarketDataServer\MDAS.Server\FpMl.V5r3.MDAS.Server.csproj">
+      <Project>{af46b9ee-db72-4599-95d3-8d16c5ba58f5}</Project>
+      <Name>FpMl.V5r3.MDAS.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
+      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
+      <Name>FpML.V5r3.ConfigTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Core.V34\Core.V34.csproj">
+      <Project>{a96292e1-00dd-434d-a3f9-fc04cbfd75a7}</Project>
+      <Name>Core.V34</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Core.Alert.Server\Core.Alert.Server.csproj">
+      <Project>{7F997959-0BFC-48BC-8451-4038A60C2451}</Project>
+      <Name>Core.Alert.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CurveGenServer\Server.CurveGenerator.csproj">
+      <Project>{8C502F52-357B-4BE5-9E03-14DF9BF2AE77}</Project>
+      <Name>Server.CurveGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\StressGenerator\Server.StressGenerator.csproj">
+      <Project>{3AE0449F-3214-4F3E-8BE5-75D286D32A44}</Project>
+      <Name>Server.StressGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TradeRevaluer\Server.TradeRevaluer.csproj">
+      <Project>{D7730366-8830-4FFB-B9C1-5926ABF5A05B}</Project>
+      <Name>Server.TradeRevaluer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

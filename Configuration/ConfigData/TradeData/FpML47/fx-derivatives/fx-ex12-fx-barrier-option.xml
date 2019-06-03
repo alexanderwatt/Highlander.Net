@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  --><!-- 
+  == Example 12 Knockin Barrier FX Option
+  ==              Trade Date      : 2001-08-16
+  ==              Expiry Date     : 2002-02-06
+  ==              Expiry Time     : 10:00 
+  ==              Option Buyer    : DB
+  ==              Option Seller   : Chase
+  ==              Single Barrier Option   : 5m EUR call on 4.5m  USD put @ 0.9 strike w/ knockin at 0.8975
+  ==              Option Premium  : 45,000 USD
+  ==              Premium Payment: 2001-08-20
+  ==              Value Date      : 2002-02-08
+  ==              Business Center : New York
+  ==              Reference Spot : 0.8935
+  ==              Trigger Rate : 0.8975 (option is knocked in when this price is hit)
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.chase.com/coding-scheme/conversationId">FX01234</conversationId>
+      <messageId messageIdScheme="http://www.chase.com/coding-scheme/messageId">FX109876</messageId>
+      <sentBy partyIdScheme="http://www.chase.com/partyId">CHASUS33</sentBy>
+      <sendTo partyIdScheme="http://www.chase.com/partyId">DEUTDEFF</sendTo>
+      <creationTimestamp>2001-08-16T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.chase.com/swaps/trade-id">CHASUS33</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.db.com/swaps/trade-id">DEUTDEFF</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2001-08-16Z</tradeDate>
+      </tradeHeader>
+      <fxBarrierOption>
+         <buyerPartyReference href="party2"/>
+         <sellerPartyReference href="party1"/>
+         <expiryDateTime>
+            <expiryDate>2002-02-06Z</expiryDate>
+            <expiryTime>
+               <hourMinuteTime>10:00:00</hourMinuteTime>
+               <businessCenter>USNY</businessCenter>
+            </expiryTime>
+         </expiryDateTime>
+         <exerciseStyle>European</exerciseStyle>
+         <fxOptionPremium>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <premiumAmount>
+               <currency>USD</currency>
+               <amount>45000</amount>
+            </premiumAmount>
+            <premiumSettlementDate>2001-11-06Z</premiumSettlementDate>
+         </fxOptionPremium>
+         <valueDate>2002-02-08Z</valueDate>
+         <putCurrencyAmount>
+            <currency>USD</currency>
+            <amount>4500000</amount>
+         </putCurrencyAmount>
+         <callCurrencyAmount>
+            <currency>EUR</currency>
+            <amount>5000000</amount>
+         </callCurrencyAmount>
+         <fxStrikePrice>
+            <rate>0.9</rate>
+            <strikeQuoteBasis>PutCurrencyPerCallCurrency</strikeQuoteBasis>
+         </fxStrikePrice>
+         <spotRate>0.8935</spotRate>
+         <fxBarrier>
+            <fxBarrierType>Knockin</fxBarrierType>
+            <quotedCurrencyPair>
+               <currency1>EUR</currency1>
+               <currency2>USD</currency2>
+               <quoteBasis>Currency2PerCurrency1</quoteBasis>
+            </quotedCurrencyPair>
+            <triggerRate>0.8975</triggerRate>
+            <informationSource>
+               <rateSource>Reuters</rateSource>
+               <rateSourcePage>EUR=</rateSourcePage>
+            </informationSource>
+         </fxBarrier>
+      </fxBarrierOption>
+   </trade>
+   <party id="party1">
+      <partyId>CHASUS33</partyId>
+   </party>
+   <party id="party2">
+      <partyId>DEUTDEFF</partyId>
+   </party>
+</FpML>

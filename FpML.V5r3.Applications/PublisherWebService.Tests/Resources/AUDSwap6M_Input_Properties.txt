@@ -1,0 +1,11 @@
+PricingStructureType/String=RateCurve
+IndexTenor/String=6M
+Currency/String=AUD
+Index/String=Swap
+Algorithm/String=Base algorithm
+MarketName/String=Live
+IndexName/String=AUDSwap
+Validity/String=Official
+UniqueIdentifier/String=Highlander.Market.Live.RateCurve.AUD-Swap-6M
+Domain/String=Highlander.Market
+Market/String=Live

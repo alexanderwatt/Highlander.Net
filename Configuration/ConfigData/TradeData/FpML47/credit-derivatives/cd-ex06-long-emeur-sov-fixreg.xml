@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DataDocument" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.swapswire.com/spec/2001/trade-id-1-0">37261</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.swapswire.com/spec/2001/trade-id-1-0">37261</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2002-07-10Z</tradeDate>
+      </tradeHeader>
+      <creditDefaultSwap>
+         <generalTerms>
+            <effectiveDate>
+               <unadjustedDate>2002-07-11Z</unadjustedDate>
+               <dateAdjustments>
+                  <businessDayConvention>NONE</businessDayConvention>
+               </dateAdjustments>
+            </effectiveDate>
+            <scheduledTerminationDate>
+               <adjustableDate>
+                  <unadjustedDate>2006-07-11Z</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>MODFOLLOWING</businessDayConvention>
+                     <businessCenters>
+                        <businessCenter>GBLO</businessCenter>
+                        <businessCenter>USNY</businessCenter>
+                     </businessCenters>
+                  </dateAdjustments>
+               </adjustableDate>
+            </scheduledTerminationDate>
+            <sellerPartyReference href="party1"/>
+            <buyerPartyReference href="party2"/>
+            <dateAdjustments>
+               <businessDayConvention>MODFOLLOWING</businessDayConvention>
+               <businessCenters>
+                  <businessCenter>GBLO</businessCenter>
+                  <businessCenter>USNY</businessCenter>
+               </businessCenters>
+            </dateAdjustments>
+            <referenceInformation>
+               <referenceEntity id="referenceEntity">
+                  <entityName>Republic of Bulgaria</entityName>
+                  <entityId entityIdScheme="http://www.fpml.org/spec/2003/entity-id-RED-1-0">1D216P</entityId>
+               </referenceEntity>
+               <referenceObligation>
+                  <bond>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">XS0145624432</instrumentId>
+                     <couponRate>0.075</couponRate>
+                     <maturity>2013-01-15</maturity>
+                  </bond>
+                  <primaryObligorReference href="referenceEntity"/>
+               </referenceObligation>
+               <referencePrice>1.0</referencePrice>
+            </referenceInformation>
+         </generalTerms>
+         <feeLeg>
+            <periodicPayment>
+               <paymentFrequency>
+                  <periodMultiplier>3</periodMultiplier>
+                  <period>M</period>
+               </paymentFrequency>
+               <firstPaymentDate>2002-10-11Z</firstPaymentDate>
+               <rollConvention>11</rollConvention>
+               <fixedAmountCalculation>
+                  <calculationAmount>
+                     <currency>USD</currency>
+                     <amount>5000000.0</amount>
+                  </calculationAmount>
+                  <fixedRate>0.0027</fixedRate>
+                  <dayCountFraction>ACT/360</dayCountFraction>
+               </fixedAmountCalculation>
+            </periodicPayment>
+         </feeLeg>
+         <protectionTerms>
+            <calculationAmount>
+               <currency>USD</currency>
+               <amount>5000000.0</amount>
+            </calculationAmount>
+            <creditEvents>
+               <failureToPay>
+                  <paymentRequirement>
+                     <currency>USD</currency>
+                     <amount>1000000.0</amount>
+                  </paymentRequirement>
+               </failureToPay>
+               <obligationAcceleration/>
+               <repudiationMoratorium/>
+               <restructuring>
+                  <restructuringType>R</restructuringType>
+               </restructuring>
+               <defaultRequirement>
+                  <currency>USD</currency>
+                  <amount>10000000.0</amount>
+               </defaultRequirement>
+               <creditEventNotice>
+                  <notifyingParty>
+                     <buyerPartyReference href="party2"/>
+                     <sellerPartyReference href="party1"/>
+                  </notifyingParty>
+                  <publiclyAvailableInformation>
+                     <standardPublicSources/>
+                     <specifiedNumber>2</specifiedNumber>
+                  </publiclyAvailableInformation>
+               </creditEventNotice>
+            </creditEvents>
+            <obligations>
+               <category>Bond</category>
+               <notSubordinated/>
+               <notDomesticCurrency/>
+               <notDomesticLaw/>
+               <notDomesticIssuance/>
+            </obligations>
+         </protectionTerms>
+         <physicalSettlementTerms>
+            <settlementCurrency>USD</settlementCurrency>
+            <physicalSettlementPeriod>
+               <businessDaysNotSpecified/>
+            </physicalSettlementPeriod>
+            <deliverableObligations>
+               <accruedInterest>false</accruedInterest>
+               <category>Bond</category>
+               <notSubordinated/>
+               <specifiedCurrency/>
+               <notDomesticLaw/>
+               <notContingent/>
+               <notDomesticIssuance/>
+               <transferable/>
+               <notBearer/>
+            </deliverableObligations>
+            <escrow>true</escrow>
+         </physicalSettlementTerms>
+      </creditDefaultSwap>
+      <calculationAgent>
+         <calculationAgentPartyReference href="party1"/>
+      </calculationAgent>
+      <calculationAgentBusinessCenter>GBLO</calculationAgentBusinessCenter>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>1992</masterAgreementVersion>
+         </masterAgreement>
+         <contractualDefinitions>ISDA1999Credit</contractualDefinitions>
+         <contractualTermsSupplement>
+            <type>ISDA1999CreditConvertibleExchangeableAccretingObligations</type>
+         </contractualTermsSupplement>
+      </documentation>
+   </trade>
+   <party id="party1">
+      <partyId>XYZBICXXX</partyId>
+      <partyName>XYZ Bank</partyName>
+   </party>
+   <party id="party2">
+      <partyId>ABCBICXXX</partyId>
+      <partyName>ABC Bank</partyName>
+   </party>
+</FpML>

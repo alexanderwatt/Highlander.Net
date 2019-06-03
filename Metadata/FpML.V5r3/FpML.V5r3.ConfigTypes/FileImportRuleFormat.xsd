@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ImportRuleFormat"
+    targetNamespace="http://tempuri.org/ImportRuleFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/ImportRuleFormat.xsd"
+    xmlns:mstns="http://tempuri.org/ImportRuleFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:element name="ImportRuleResult">
+    <xs:complexType>
+      <xs:sequence>
+        <!--server-->
+        <xs:element name="hostEnvName" type="xs:string" />
+        <xs:element name="hostComputer" type="xs:string" />
+        <xs:element name="hostInstance" type="xs:string" />
+        <xs:element name="hostUserName" type="xs:string" />
+        <!--result-->
+        <xs:element name="RuleName" type="xs:string" />
+        <xs:element name="FileNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="ImportResult" type="xs:string" />
+        <xs:element name="ImportException" type="xs:string" />
+        <xs:element name="ImportDateTime" type="xs:string" />
+        <xs:element name="SourceSystem" type="xs:string" />
+        <xs:element name="SourceLocation" type="xs:string" />
+        <xs:element name="TargetLocation" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="ImportFileResult">
+    <xs:complexType>
+      <xs:sequence>
+        <!--server-->
+        <xs:element name="hostEnvName" type="xs:string" />
+        <xs:element name="hostComputer" type="xs:string" />
+        <xs:element name="hostInstance" type="xs:string" />
+        <xs:element name="hostUserName" type="xs:string" />
+        <!--result-->
+        <xs:element name="RuleName" type="xs:string" />
+        <xs:element name="FileName" type="xs:string" />
+        <xs:element name="FileContentType" type="xs:string" />
+        <xs:element name="DebugEnabled" type="xs:boolean" />
+        <xs:element name="DebugProperties" type="xs:string" />
+        <xs:element name="ImportResult" type="xs:string" />
+        <xs:element name="ImportException" type="xs:string" />
+        <xs:element name="ImportDateTime" type="xs:string" />
+        <xs:element name="SourceSystem" type="xs:string" />
+        <xs:element name="SourceLocation" type="xs:string" />
+        <xs:element name="TargetLocation" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ProcessFileResult">
+    <xs:complexType>
+      <xs:sequence>
+        <!--server-->
+        <xs:element name="hostEnvName" type="xs:string" />
+        <xs:element name="hostComputer" type="xs:string" />
+        <xs:element name="hostInstance" type="xs:string" />
+        <xs:element name="hostUserName" type="xs:string" />
+        <!--result-->
+        <xs:element name="Location" type="xs:string" />
+        <xs:element name="FileName" type="xs:string" />
+        <xs:element name="ProcessResult" type="xs:string" />
+        <xs:element name="ProcessException" type="xs:string" />
+        <xs:element name="ProcessDateTime" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

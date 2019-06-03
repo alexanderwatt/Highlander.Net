@@ -1,0 +1,14 @@
+PricingStructureType/String=XccySpreadCurve
+Market/String=TEST_EOD
+Currency/String=AUD
+CurveName/String=AUD-USD-BASIS
+BaseDate/DateTime=2010-08-30T00%3a00%3a00
+Algorithm/String=LinearZero
+SourceSystem/String=Orion
+Function/String=Market
+Type/String=PricingStructures
+Index/String=USD-BASIS
+MarketName/String=TEST_EOD
+Domain/String=Orion.Market
+UniqueIdentifier/String=Orion.Market.TEST_EOD.2010-08-30.RateCurve.AUD-USD-BASIS
+MarketDate/DateTime=2010-08-30T00%3a00%3a00

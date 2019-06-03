@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+== Copyright (c) 2002-2007. All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/documents/license.html
+-->
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" 
+	targetNamespace="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified">
+	
+	<xsd:include schemaLocation="fpmlext-shared.xsd"/>
+	
+	<xsd:import namespace="http://www.fpml.org/2009/FpML-4-7" schemaLocation="fpml-main-4-7.xsd"/>
+	
+	<xsd:complexType name="InterestRateSwapTransaction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Interest Rate Derivative Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractNotionalTransaction">
+				<xsd:sequence>
+					<xsd:element name="price" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Price of the Interest Rate Swap Transaction expressed as a Percentage
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swap" type="fpml:RateIndex">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Identification of an Interest Rate Swap. In cases where you require access to additional definition information you may use type substitution to access the Interest Rate Swap complex type in the extension namespace
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InterestRateSwap">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Extension of an identified Interest Rate Swap to provide definition information
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:RateIndex">
+				<xsd:sequence>
+					<xsd:element name="effectiveDate" type="fpml:AdjustableOrRelativeDate" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								The first date when the swap is effective
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="terminationDate" type="fpml:AdjustableOrRelativeDate" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								The last date when the swap is effective
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="swapTransaction" type="InterestRateSwapTransaction" substitutionGroup="fpml:product">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Global element representing an Interest Rate Swap Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+</xsd:schema>

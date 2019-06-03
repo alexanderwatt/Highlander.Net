@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnvConfigRuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/EnvConfigRuleFormat.xsd">
+  <setName>QDS_Core</setName>
+  <!-- Sample settings for Core (overrides default settings in Default.cfg.xml) -->
+  <!-- Example 1 - redirect connections to a nominated server for a specific enviroment
+      In this case we have redirected the live env (STG) connections to the test server
+      for the purposes of pre-rollout integration testing.
+      Note: Priority must be 2 or greater to override default setting.
+      Note: removes fallback server setting by assigning blank.
+  -->
+  <!--<v2Rules>
+    <Priority>2</Priority>
+    <Env>STG</Env>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=sydwadqds01|FallbackServers/String=</Settings>
+  </v2Rules>-->
+  <!-- Example 2 - redirect all connections to localhost (useful for web servers and other services)
+      In this case we have redirected the live env (STG) connections to the test server
+      for the purposes of pre-rollout integration testing.
+      Note: Priority must be 2 or greater to override default setting.
+      Note: removes fallback server setting by assigning blank.
+      Note: environemnt is not specified.
+  -->
+  <!--<v2Rules>
+    <Priority>2</Priority>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=localhost|FallbackServers/String=</Settings>
+  </v2Rules>-->
+</EnvConfigRuleSet>

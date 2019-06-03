@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Core_DEV" Class="ItemData2DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=simtopia;Initial Catalog=Core_DEV;Integrated Security=True" SettingsObjectName="Core.Server.Properties.Settings" SettingsPropertyName="Core_DEVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ItemData" Member="ItemDatas">
+    <Type Name="ItemData">
+      <Column Name="ItemId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppScope" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AppProps" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Created" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Expires" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DataType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="YData" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="YSign" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="NetScope" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SysProps" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="StoreSRN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StoreUSN" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

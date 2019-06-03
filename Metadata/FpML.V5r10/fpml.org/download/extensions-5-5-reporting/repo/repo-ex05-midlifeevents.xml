@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requestValuationReport xmlns="http://www.fpml.org/FpML-5/reporting" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/reporting ../../reporting/fpml-main-5-9.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-9">
+	
+	<header>
+		<messageId messageIdScheme="http://www.partya.com/message-id">AD97C979F855EAF</messageId>
+		<sentBy>ACLIENTX</sentBy>
+		<sendTo>PARTUS33</sendTo>
+		<creationTimestamp>2007-04-12T06:55:42-07:00</creationTimestamp>
+	</header>
+	<party id="party1">
+		<partyId>ACLIENTX</partyId>
+		<partyName>SOME CLIENT</partyName>
+	</party>
+	<party id="party2">
+		<partyId>PARTUS33BDB</partyId>
+		<partyName>Party A</partyName>
+	</party>
+	<tradeValuationItem>
+		<trade>
+			<tradeHeader>
+				<partyTradeIdentifier>
+					<partyReference href="party2"/>
+					<tradeId tradeIdScheme="http://www.partya.com/coding-scheme/trade-id">NE9989244</tradeId>
+				</partyTradeIdentifier>
+				<tradeDate>2007-03-12-07:00</tradeDate>
+			</tradeHeader>
+			<ext:repo>
+				<productType>Repo</productType>
+				<ext:fixedRateSchedule>
+					<initialValue>0.0103</initialValue>
+				</ext:fixedRateSchedule>
+				<ext:dayCountFraction>ACT/365.FIXED</ext:dayCountFraction>
+				<ext:duration>Overnight</ext:duration>
+				<ext:margin>
+					<ext:marginType>Cash</ext:marginType>
+					<ext:marginFactor>1.00</ext:marginFactor>
+				</ext:margin>
+				<ext:spotLeg>
+					<buyerPartyReference href="party1"/>
+					<sellerPartyReference href="party2"/>
+					<ext:settlementDate>
+						<adjustableDate>
+							<unadjustedDate>2007-03-14-07:00</unadjustedDate>
+							<dateAdjustments>
+								<businessDayConvention>NONE</businessDayConvention>
+							</dateAdjustments>
+						</adjustableDate>
+					</ext:settlementDate>
+					<settlementAmount>
+						<currency>EUR</currency>
+						<amount>20250000.00</amount>
+					</settlementAmount>
+					<ext:collateral>
+						<ext:nominalAmount>
+							<currency>EUR</currency>
+							<amount>10000000.00</amount>
+						</ext:nominalAmount>
+						<ext:cleanPrice>97.53</ext:cleanPrice>
+						<ext:accruals>2.47</ext:accruals>
+						<ext:dirtyPrice>100.00</ext:dirtyPrice>
+						<ext:assetReference href="oate"/>
+					</ext:collateral>
+					<ext:collateral>
+						<ext:nominalAmount>
+							<currency>EUR</currency>
+							<amount>10000000.00</amount>
+						</ext:nominalAmount>
+						<ext:cleanPrice>101.17</ext:cleanPrice>
+						<ext:accruals>1.33</ext:accruals>
+						<ext:dirtyPrice>102.50</ext:dirtyPrice>
+						<ext:assetReference href="bune"/>
+					</ext:collateral>
+				</ext:spotLeg>
+				<ext:forwardLeg>
+					<buyerPartyReference href="party2"/>
+					<sellerPartyReference href="party1"/>
+					<ext:settlementDate>
+						<adjustableDate>
+							<unadjustedDate>2007-04-13-07:00</unadjustedDate>
+							<dateAdjustments>
+								<businessDayConvention>NONE</businessDayConvention>
+							</dateAdjustments>
+						</adjustableDate>
+					</ext:settlementDate>
+					<settlementAmount>
+						<currency>EUR</currency>
+						<amount>20250571.44</amount>
+					</settlementAmount>
+					<ext:repoInterest>17143.15</ext:repoInterest>
+				</ext:forwardLeg>
+				<ext:rateChange>
+					<ext:eventDate>2007-03-20-07:00</ext:eventDate>
+					<ext:rate>0.01</ext:rate>
+				</ext:rateChange>
+				<ext:billingEvent>
+					<ext:eventDate>2007-03-30-07:00</ext:eventDate>
+					<ext:payment>
+						<currency>EUR</currency>
+						<amount>5000</amount>
+					</ext:payment>
+				</ext:billingEvent>
+				<ext:cashRepricing>
+					<ext:eventDate>2007-04-05-07:00</ext:eventDate>
+					<ext:collateral>
+						<ext:nominalAmount>
+							<currency>EUR</currency>
+							<amount>10000000.00</amount>
+						</ext:nominalAmount>
+						<ext:cleanPrice>99.61</ext:cleanPrice>
+						<ext:accruals>1.39</ext:accruals>
+						<ext:dirtyPrice>101.00</ext:dirtyPrice>
+						<ext:assetReference href="bune"/>
+					</ext:collateral>
+					<ext:combinedInterestPayout>false</ext:combinedInterestPayout>
+				</ext:cashRepricing>
+				<bond id="oate">
+					<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">FR0010011130</instrumentId>
+					<description>OAT 4% 10-2013</description>
+				</bond>
+				<bond id="bune">
+					<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">DE0001135242</instrumentId>
+					<description>BUND 4.25% 01-2014</description>
+				</bond>
+			</ext:repo>
+		</trade>
+		<valuationSet>
+			<valuationScenario>
+				<valuationDate>2007-04-12</valuationDate>
+			</valuationScenario>
+			<quotationCharacteristics>
+				<measureType>AccruedInterest</measureType>
+			</quotationCharacteristics>
+		</valuationSet>
+	</tradeValuationItem>
+</requestValuationReport>

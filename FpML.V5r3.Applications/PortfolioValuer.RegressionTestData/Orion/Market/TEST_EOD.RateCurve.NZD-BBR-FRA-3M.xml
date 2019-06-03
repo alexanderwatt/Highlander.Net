@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.NZD-BBR-FRA-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.NZD-BBR-FRA-3M">
+    <name>NZD-BBR-FRA-3M</name>
+    <currency>NZD</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>BBR-FRA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.NZD-BBR-FRA-3M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:35:50.3085312+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="NZD-DEPOSIT-ON">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="NZD-DEPOSIT-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="NZD-DEPOSIT-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="NZD-DEPOSIT-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="NZD-IRFUTURE-ZB-U0" />
+        <underlyingAsset xsi:type="Future" id="NZD-IRFUTURE-ZB-Z0" />
+        <underlyingAsset xsi:type="Future" id="NZD-IRFUTURE-ZB-H1" />
+        <underlyingAsset xsi:type="Future" id="NZD-IRFUTURE-ZB-M1" />
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="NZD-IRSWAP-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="NZD-DEPOSIT-ON" />
+        <quote>
+          <value>0.03</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-DEPOSIT-1M" />
+        <quote>
+          <value>0.0309</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-DEPOSIT-2M" />
+        <quote>
+          <value>0.0321</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-DEPOSIT-3M" />
+        <quote>
+          <value>0.0326</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRFUTURE-ZB-U0" />
+        <quote>
+          <value>0.032698851</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRFUTURE-ZB-Z0" />
+        <quote>
+          <value>0.033890364</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRFUTURE-ZB-H1" />
+        <quote>
+          <value>0.035977017</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRFUTURE-ZB-M1" />
+        <quote>
+          <value>0.037458919</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-2Y" />
+        <quote>
+          <value>0.0378</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-3Y" />
+        <quote>
+          <value>0.03975</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-4Y" />
+        <quote>
+          <value>0.041325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-5Y" />
+        <quote>
+          <value>0.042825</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-7Y" />
+        <quote>
+          <value>0.0455</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-10Y" />
+        <quote>
+          <value>0.048575</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-15Y" />
+        <quote>
+          <value>0.050575</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZD-IRSWAP-20Y" />
+        <quote>
+          <value>0.05087</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.0301115396883036</mid>
+        </point>
+        <point id="NZD-DEPOSIT-ON">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.0301115396883036</mid>
+        </point>
+        <point id="NZD-DEPOSIT-1M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>0.030978869567682</mid>
+        </point>
+        <point id="NZD-DEPOSIT-2M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.0321440729131899</mid>
+        </point>
+        <point id="NZD-DEPOSIT-3M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.0325989111259366</mid>
+        </point>
+        <point id="NZD-IRFUTURE-ZB-U0">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.0323627334749448</mid>
+        </point>
+        <point id="NZD-IRFUTURE-ZB-Z0">
+          <term>
+            <date>2011-03-16</date>
+          </term>
+          <mid>0.0330621230916162</mid>
+        </point>
+        <point id="NZD-IRFUTURE-ZB-H1">
+          <term>
+            <date>2011-06-15</date>
+          </term>
+          <mid>0.0339772630816357</mid>
+        </point>
+        <point id="NZD-IRFUTURE-ZB-M1">
+          <term>
+            <date>2011-09-14</date>
+          </term>
+          <mid>0.0348091384432196</mid>
+        </point>
+        <point id="NZD-IRSWAP-2Y">
+          <term>
+            <date>2012-09-03</date>
+          </term>
+          <mid>0.0376716888276869</mid>
+        </point>
+        <point id="NZD-IRSWAP-3Y">
+          <term>
+            <date>2013-09-02</date>
+          </term>
+          <mid>0.0396685252053137</mid>
+        </point>
+        <point id="NZD-IRSWAP-4Y">
+          <term>
+            <date>2014-09-01</date>
+          </term>
+          <mid>0.04130484030361</mid>
+        </point>
+        <point id="NZD-IRSWAP-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.0428929197845962</mid>
+        </point>
+        <point id="NZD-IRSWAP-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0458102628046353</mid>
+        </point>
+        <point id="NZD-IRSWAP-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0493378418198729</mid>
+        </point>
+        <point id="NZD-IRSWAP-15Y">
+          <term>
+            <date>2025-09-01</date>
+          </term>
+          <mid>0.051669058615853</mid>
+        </point>
+        <point id="NZD-IRSWAP-20Y">
+          <term>
+            <date>2030-09-02</date>
+          </term>
+          <mid>0.0517744927124237</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="NZD-DEPOSIT-ON">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999178149741117168534086334</mid>
+      </point>
+      <point id="NZD-DEPOSIT-1M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>0.9973824857995960727875532504</mid>
+      </point>
+      <point id="NZD-DEPOSIT-2M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.9947509852122771227157221687</mid>
+      </point>
+      <point id="NZD-DEPOSIT-3M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.9918499822825701777430869729</mid>
+      </point>
+      <point id="NZD-IRFUTURE-ZB-U0">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.990595516929126</mid>
+      </point>
+      <point id="NZD-IRFUTURE-ZB-Z0">
+        <term>
+          <date>2011-03-16</date>
+        </term>
+        <mid>0.982297214498863</mid>
+      </point>
+      <point id="NZD-IRFUTURE-ZB-H1">
+        <term>
+          <date>2011-06-15</date>
+        </term>
+        <mid>0.973566711660884</mid>
+      </point>
+      <point id="NZD-IRFUTURE-ZB-M1">
+        <term>
+          <date>2011-09-14</date>
+        </term>
+        <mid>0.96456035128546</mid>
+      </point>
+      <point id="NZD-IRSWAP-2Y">
+        <term>
+          <date>2012-09-03</date>
+        </term>
+        <mid>0.927275616937403</mid>
+      </point>
+      <point id="NZD-IRSWAP-3Y">
+        <term>
+          <date>2013-09-02</date>
+        </term>
+        <mid>0.887939265220228</mid>
+      </point>
+      <point id="NZD-IRSWAP-4Y">
+        <term>
+          <date>2014-09-01</date>
+        </term>
+        <mid>0.848139718270008</mid>
+      </point>
+      <point id="NZD-IRSWAP-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.807611991148119</mid>
+      </point>
+      <point id="NZD-IRSWAP-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.726622161179352</mid>
+      </point>
+      <point id="NZD-IRSWAP-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.611994393165102</mid>
+      </point>
+      <point id="NZD-IRSWAP-15Y">
+        <term>
+          <date>2025-09-01</date>
+        </term>
+        <mid>0.462588765051307</mid>
+      </point>
+      <point id="NZD-IRSWAP-20Y">
+        <term>
+          <date>2030-09-02</date>
+        </term>
+        <mid>0.357016552332907</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

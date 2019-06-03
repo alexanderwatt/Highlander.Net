@@ -1,0 +1,8 @@
+PricingStructureType/String=RateCurve
+Market/String=QR_LIVE
+IndexName/String=JPY-LIBOR-BBA
+IndexTenor/String=1M
+CurveName/String=JPY-LIBOR-BBA-1M
+DependencyDepth/Double=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=JPY

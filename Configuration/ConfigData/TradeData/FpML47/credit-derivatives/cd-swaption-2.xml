@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">2342342</messageId>
+      <sentBy>JPM</sentBy>
+      <sendTo>ABC</sendTo>
+      <creationTimestamp>2007-01-05T15:38:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="Party1"/>
+            <tradeId tradeIdScheme="http://www.PartyA.com/eqd-trade-id">Trade234</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate id="TRADEDATE">2006-06-27Z</tradeDate>
+      </tradeHeader>
+      <creditDefaultSwapOption>
+         <buyerPartyReference href="Party1"/>
+         <sellerPartyReference href="Party2"/>
+         <optionType>Put</optionType>
+         <premium>
+            <payerPartyReference href="Party1"/>
+            <receiverPartyReference href="Party2"/>
+            <paymentAmount>
+               <currency>USD</currency>
+               <amount>65000</amount>
+            </paymentAmount>
+            <paymentDate>
+               <relativeDate>
+                  <periodMultiplier>3</periodMultiplier>
+                  <period>D</period>
+                  <dayType>Business</dayType>
+                  <businessDayConvention>NONE</businessDayConvention>
+                  <businessCenters>
+                     <businessCenter>USNY</businessCenter>
+                     <businessCenter>GBLO</businessCenter>
+                  </businessCenters>
+                  <dateRelativeTo href="TRADEDATE"/>
+               </relativeDate>
+            </paymentDate>
+            <premiumType>Fixed</premiumType>
+         </premium>
+         <europeanExercise>
+            <expirationDate>
+               <adjustableDate>
+                  <unadjustedDate>2006-09-20Z</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>FOLLOWING</businessDayConvention>
+                     <businessCenters>
+                        <businessCenter>GBLO</businessCenter>
+                        <businessCenter>USNY</businessCenter>
+                     </businessCenters>
+                  </dateAdjustments>
+               </adjustableDate>
+            </expirationDate>
+            <earliestExerciseTime>
+               <hourMinuteTime>09:00:00</hourMinuteTime>
+               <businessCenter>USNY</businessCenter>
+            </earliestExerciseTime>
+            <expirationTime>
+               <hourMinuteTime>11:00:00</hourMinuteTime>
+               <businessCenter>USNY</businessCenter>
+            </expirationTime>
+         </europeanExercise>
+         <exerciseProcedure>
+            <manualExercise>
+               <fallbackExercise>false</fallbackExercise>
+            </manualExercise>
+            <followUpConfirmation>true</followUpConfirmation>
+         </exerciseProcedure>
+         <feature>
+            <knock>
+               <knockOut>
+                  <trigger>
+                     <creditEventsReference href="CREDITEVENT"/>
+                  </trigger>
+               </knockOut>
+            </knock>
+         </feature>
+         <notionalReference href="NOTIONAL"/>
+         <settlementType>Physical</settlementType>
+         <strike>
+            <strikeReference href="SPREAD"/>
+         </strike>
+         <creditDefaultSwap>
+            <generalTerms>
+               <effectiveDate>
+                  <unadjustedDate>2006-09-21Z</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </effectiveDate>
+               <scheduledTerminationDate>
+                  <adjustableDate>
+                     <unadjustedDate>2011-09-21Z</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NONE</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </scheduledTerminationDate>
+               <sellerPartyReference href="Party1"/>
+               <buyerPartyReference href="Party2"/>
+               <dateAdjustments>
+                  <businessDayConvention>FOLLOWING</businessDayConvention>
+                  <businessCenters>
+                     <businessCenter>GBLO</businessCenter>
+                     <businessCenter>USNY</businessCenter>
+                  </businessCenters>
+               </dateAdjustments>
+               <referenceInformation>
+                  <referenceEntity>
+                     <entityName>Entity1</entityName>
+                  </referenceEntity>
+                  <referenceObligation>
+                     <bond>
+                        <instrumentId instrumentIdScheme="CUSIP">ExampleCUSIP1</instrumentId>
+                        <couponRate>0.07125</couponRate>
+                        <maturity>2013-07-15</maturity>
+                     </bond>
+                     <primaryObligor>
+                        <entityName>Entity1</entityName>
+                     </primaryObligor>
+                  </referenceObligation>
+                  <allGuarantees>false</allGuarantees>
+                  <referencePrice>1.0000000000</referencePrice>
+               </referenceInformation>
+            </generalTerms>
+            <feeLeg>
+               <periodicPayment>
+                  <paymentFrequency>
+                     <periodMultiplier>3</periodMultiplier>
+                     <period>M</period>
+                  </paymentFrequency>
+                  <firstPaymentDate>2006-12-20Z</firstPaymentDate>
+                  <lastRegularPaymentDate>2011-09-20Z</lastRegularPaymentDate>
+                  <rollConvention>20</rollConvention>
+                  <fixedAmountCalculation>
+                     <calculationAmount>
+                        <currency>USD</currency>
+                        <amount>10000000</amount>
+                     </calculationAmount>
+                     <fixedRate id="SPREAD">0.085</fixedRate>
+                     <dayCountFraction>ACT/360</dayCountFraction>
+                  </fixedAmountCalculation>
+               </periodicPayment>
+            </feeLeg>
+            <protectionTerms>
+               <calculationAmount id="NOTIONAL">
+                  <currency>USD</currency>
+                  <amount>10000000</amount>
+               </calculationAmount>
+               <creditEvents id="CREDITEVENT">
+                  <bankruptcy/>
+                  <failureToPay>
+                     <paymentRequirement>
+                        <currency>USD</currency>
+                        <amount>1000000</amount>
+                     </paymentRequirement>
+                  </failureToPay>
+                  <restructuring>
+                     <restructuringType>ModR</restructuringType>
+                     <multipleHolderObligation/>
+                  </restructuring>
+                  <defaultRequirement>
+                     <currency>USD</currency>
+                     <amount>10000000</amount>
+                  </defaultRequirement>
+                  <creditEventNotice>
+                     <notifyingParty>
+                        <buyerPartyReference href="Party2"/>
+                        <sellerPartyReference href="Party1"/>
+                     </notifyingParty>
+                     <publiclyAvailableInformation>
+                        <publicSource>Standard Public Sources</publicSource>
+                        <specifiedNumber>2</specifiedNumber>
+                     </publiclyAvailableInformation>
+                  </creditEventNotice>
+               </creditEvents>
+               <obligations>
+                  <category>BorrowedMoney</category>
+                  <excluded/>
+                  <othReferenceEntityObligations/>
+               </obligations>
+            </protectionTerms>
+            <physicalSettlementTerms>
+               <physicalSettlementPeriod>
+                  <maximumBusinessDays>30</maximumBusinessDays>
+               </physicalSettlementPeriod>
+               <deliverableObligations>
+                  <accruedInterest>false</accruedInterest>
+                  <category>BondOrLoan</category>
+                  <notSubordinated/>
+                  <specifiedCurrency>
+                     <currency>USD</currency>
+                  </specifiedCurrency>
+                  <notContingent/>
+                  <assignableLoan/>
+                  <consentRequiredLoan/>
+                  <transferable/>
+                  <maximumMaturity>
+                     <periodMultiplier>30</periodMultiplier>
+                     <period>Y</period>
+                  </maximumMaturity>
+                  <notBearer/>
+                  <excluded/>
+                  <othReferenceEntityObligations/>
+               </deliverableObligations>
+               <escrow>true</escrow>
+            </physicalSettlementTerms>
+         </creditDefaultSwap>
+      </creditDefaultSwapOption>
+      <calculationAgent>
+         <calculationAgentPartyReference href="Party1"/>
+      </calculationAgent>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>1992</masterAgreementVersion>
+            <masterAgreementDate>1997-11-05Z</masterAgreementDate>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2000</contractualDefinitions>
+         <contractualDefinitions>ISDA2003Credit</contractualDefinitions>
+      </documentation>
+   </trade>
+   <party id="Party1">
+      <partyId>Party A</partyId>
+   </party>
+   <party id="Party2">
+      <partyId>Party B</partyId>
+   </party>
+</FpML>

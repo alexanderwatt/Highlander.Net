@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.QR_LIVE.FxCurve.AUD-GBP" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <fxCurve id="AUD-GBP">
+    <name>AUD-GBP</name>
+    <currency>AUD</currency>
+    <quotedCurrencyPair>
+      <currency1>AUD</currency1>
+      <currency2>GBP</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="AUD-GBP">
+    <baseDate>2010-08-30</baseDate>
+    <spotDate id="SpotDate">2010-09-01</spotDate>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDGBP-FxForward-5Y" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-ON" />
+        <quote>
+          <value>0.578716</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBPON BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-TN" />
+        <quote>
+          <value>0.5786684</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBPTN BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxSpot-SP" />
+        <quote>
+          <value>0.57861</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-1W" />
+        <quote>
+          <value>0.5781612</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP1W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-1M" />
+        <quote>
+          <value>0.5766318</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP1M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-2M" />
+        <quote>
+          <value>0.57465</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP2M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-3M" />
+        <quote>
+          <value>0.572665</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP3M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-4M" />
+        <quote>
+          <value>0.5705221</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP4M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-5M" />
+        <quote>
+          <value>0.5687359</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP5M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-6M" />
+        <quote>
+          <value>0.566974</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP6M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-9M" />
+        <quote>
+          <value>0.5612477</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP9M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-2Y" />
+        <quote>
+          <value>0.5347465</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP2Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-3Y" />
+        <quote>
+          <value>0.518038</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP3Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-4Y" />
+        <quote>
+          <value>0.5015325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP4Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDGBP-FxForward-5Y" />
+        <quote>
+          <value>0.4871406</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>AUDGBP5Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:54.7788074+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="AUDGBP-FxForward-ON">
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>0.578716</mid>
+      </point>
+      <point id="AUDGBP-FxForward-TN">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.5786684</mid>
+      </point>
+      <point id="AUDGBP-FxSpot-SP">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>0.57861</mid>
+      </point>
+      <point id="AUDGBP-FxForward-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>0.5781612</mid>
+      </point>
+      <point id="AUDGBP-FxForward-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.5766318</mid>
+      </point>
+      <point id="AUDGBP-FxForward-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.57465</mid>
+      </point>
+      <point id="AUDGBP-FxForward-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.572665</mid>
+      </point>
+      <point id="AUDGBP-FxForward-4M">
+        <term>
+          <date>2011-01-04</date>
+        </term>
+        <mid>0.5705221</mid>
+      </point>
+      <point id="AUDGBP-FxForward-5M">
+        <term>
+          <date>2011-02-01</date>
+        </term>
+        <mid>0.5687359</mid>
+      </point>
+      <point id="AUDGBP-FxForward-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>0.566974</mid>
+      </point>
+      <point id="AUDGBP-FxForward-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>0.5612477</mid>
+      </point>
+      <point id="AUDGBP-FxForward-2Y">
+        <term>
+          <date>2012-09-03</date>
+        </term>
+        <mid>0.5347465</mid>
+      </point>
+      <point id="AUDGBP-FxForward-3Y">
+        <term>
+          <date>2013-09-02</date>
+        </term>
+        <mid>0.518038</mid>
+      </point>
+      <point id="AUDGBP-FxForward-4Y">
+        <term>
+          <date>2014-09-01</date>
+        </term>
+        <mid>0.5015325</mid>
+      </point>
+      <point id="AUDGBP-FxForward-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.4871406</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

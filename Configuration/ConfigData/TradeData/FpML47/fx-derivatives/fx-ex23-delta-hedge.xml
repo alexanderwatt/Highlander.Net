@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  --><!-- Example 23 Simple FX Option With Delta Hedge
+  == FX Option
+  ==              Trade Date      : 2001-12-04
+  ==              Expiry Date     : 2002-06-04
+  ==              Option Buyer    : Chase
+  ==              Option Seller   : ABN Amro
+  ==              European Option : 75m AUD Put on 36.9m USD @ 0.4920
+  ==              Option Premium  : 36,900 USD
+  ==              Business Center : New York
+  ==              Cut Name        : New York
+  == 
+  == Delta Hedge:
+  ==              Value Date      : 2001-12-06
+  ==              CCY1/CCY2       : AUD/USD 
+  ==              Spot            : 0.5193
+  ==              Chase Buys      : 18,750,000 AUD
+  ==              ABN Buys        :  9,736,875 USD                                        
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="TradeConfirmed" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.abn.com/coding-scheme/conversationId">FX65432</conversationId>
+      <messageId messageIdScheme="http://www.abn.com/coding-scheme/messageId">FX87654</messageId>
+      <sentBy partyIdScheme="http://www.abn.com/partyId">ABNANL2A</sentBy>
+      <sendTo partyIdScheme="http://www.abn.com/partyId">CHASUS33</sendTo>
+      <creationTimestamp>2001-12-04T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.markets.Reuters.com/rss/spec/2001/trade-id-3-0">123456789</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.markets.Reuters.com/rss/spec/2001/trade-id-3-0">123456789</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2001-12-04Z</tradeDate>
+      </tradeHeader>
+      <strategy>
+         <productType>Delta-Hedge</productType>
+         <fxSimpleOption>
+            <productType>European FX Option</productType>
+            <buyerPartyReference href="party1"/>
+            <sellerPartyReference href="party2"/>
+            <expiryDateTime>
+               <expiryDate>2002-06-04Z</expiryDate>
+               <expiryTime>
+                  <hourMinuteTime>14:00:00</hourMinuteTime>
+                  <businessCenter>USNY</businessCenter>
+               </expiryTime>
+               <cutName>NewYork</cutName>
+            </expiryDateTime>
+            <exerciseStyle>European</exerciseStyle>
+            <fxOptionPremium>
+               <payerPartyReference href="party1"/>
+               <receiverPartyReference href="party2"/>
+               <premiumAmount>
+                  <currency>USD</currency>
+                  <amount>36900</amount>
+               </premiumAmount>
+               <premiumSettlementDate>2001-12-06Z</premiumSettlementDate>
+               <premiumQuote>
+                  <premiumValue>0.001</premiumValue>
+                  <premiumQuoteBasis>PercentageOfCallCurrencyAmount</premiumQuoteBasis>
+               </premiumQuote>
+            </fxOptionPremium>
+            <valueDate>2002-06-06Z</valueDate>
+            <putCurrencyAmount>
+               <currency>AUD</currency>
+               <amount>75000000</amount>
+            </putCurrencyAmount>
+            <callCurrencyAmount>
+               <currency>USD</currency>
+               <amount>36900000</amount>
+            </callCurrencyAmount>
+            <fxStrikePrice>
+               <rate>0.4920</rate>
+               <strikeQuoteBasis>CallCurrencyPerPutCurrency</strikeQuoteBasis>
+            </fxStrikePrice>
+            <quotedAs>
+               <optionOnCurrency>AUD</optionOnCurrency>
+               <faceOnCurrency>USD</faceOnCurrency>
+               <quotedTenor>
+                  <periodMultiplier>6</periodMultiplier>
+                  <period>M</period>
+               </quotedTenor>
+            </quotedAs>
+         </fxSimpleOption>
+         <fxSingleLeg>
+            <productType>Spot-Hedge</productType>
+            <exchangedCurrency1>
+               <payerPartyReference href="party2"/>
+               <receiverPartyReference href="party1"/>
+               <paymentAmount>
+                  <currency>AUD</currency>
+                  <amount>18750000</amount>
+               </paymentAmount>
+            </exchangedCurrency1>
+            <exchangedCurrency2>
+               <payerPartyReference href="party1"/>
+               <receiverPartyReference href="party2"/>
+               <paymentAmount>
+                  <currency>USD</currency>
+                  <amount>9736875</amount>
+               </paymentAmount>
+            </exchangedCurrency2>
+            <valueDate>2001-12-06Z</valueDate>
+            <exchangeRate>
+               <quotedCurrencyPair>
+                  <currency1>AUD</currency1>
+                  <currency2>USD</currency2>
+                  <quoteBasis>Currency2PerCurrency1</quoteBasis>
+               </quotedCurrencyPair>
+               <rate>0.5193</rate>
+            </exchangeRate>
+         </fxSingleLeg>
+      </strategy>
+   </trade>
+   <party id="party1">
+      <partyId>CHASUS33</partyId>
+      <partyName>CHASE</partyName>
+   </party>
+   <party id="party2">
+      <partyId>ABNANL2A</partyId>
+      <partyName>ABN Amro</partyName>
+   </party>
+</FpML>

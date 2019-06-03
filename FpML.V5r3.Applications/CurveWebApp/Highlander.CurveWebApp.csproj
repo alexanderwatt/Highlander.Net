@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FpML.V5r3.Components\CurveEngine\FpML.V5r3.CurveEngine.csproj" />
+    <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.Server\Core.Server.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.V34\Core.V34.csproj" />
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj" />
+  </ItemGroup>
+
+</Project>

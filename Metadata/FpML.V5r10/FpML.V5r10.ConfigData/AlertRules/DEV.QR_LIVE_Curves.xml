@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AlertRule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/AlertFormat.xsd">
+  <Priority>0</Priority>
+  <Disabled>false</Disabled>
+  <hostEnvName>DEV</hostEnvName>
+  <hostInstance>AlertServer</hostInstance>
+  <RuleName>QR_LIVE_Curves</RuleName>
+  <DataItemType>Object</DataItemType>
+  <DataTypeName>FpML.V5r3.Reporting.Market</DataTypeName>
+  <DataSubsExpr>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;QuerySpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/ExprFormat.xsd"&gt;
+  &lt;version&gt;1&lt;/version&gt;
+  &lt;v1QueryExpr node="EXPR" name="STARTS"&gt;
+    &lt;args node="FIELD" name="UniqueIdentifier" /&gt;
+    &lt;args node="CONST" name="String" value="Orion.Market.QR_LIVE." /&gt;
+  &lt;/v1QueryExpr&gt;
+&lt;/QuerySpec&gt;</DataSubsExpr>
+  <Constraint>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;QuerySpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/ExprFormat.xsd"&gt;
+  &lt;version&gt;1&lt;/version&gt;
+  &lt;v1QueryExpr node="EXPR" name="AND"&gt;
+    &lt;args node="EXPR" name="GEQ"&gt;
+      &lt;args node="EXPR" name="DOW"&gt;
+        &lt;args node="EXPR" name="DATE" /&gt;
+      &lt;/args&gt;
+      &lt;args node="CONST" name="DayOfWeek" value="Monday" /&gt;
+    &lt;/args&gt;
+    &lt;args node="EXPR" name="LEQ"&gt;
+      &lt;args node="EXPR" name="DOW"&gt;
+        &lt;args node="EXPR" name="DATE" /&gt;
+      &lt;/args&gt;
+      &lt;args node="CONST" name="DayOfWeek" value="Friday" /&gt;
+    &lt;/args&gt;
+    &lt;args node="EXPR" name="GEQ"&gt;
+      &lt;args node="EXPR" name="TIME" /&gt;
+      &lt;args node="CONST" name="TimeSpan" value="04:30:00" /&gt;
+    &lt;/args&gt;
+    &lt;args node="EXPR" name="LEQ"&gt;
+      &lt;args node="EXPR" name="TIME" /&gt;
+      &lt;args node="CONST" name="TimeSpan" value="20:30:00" /&gt;
+    &lt;/args&gt;
+  &lt;/v1QueryExpr&gt;
+&lt;/QuerySpec&gt;</Constraint>
+  <Condition>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;QuerySpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/ExprFormat.xsd"&gt;
+  &lt;version&gt;1&lt;/version&gt;
+  &lt;v1QueryExpr node="EXPR" name="GTR"&gt;
+    &lt;args node="EXPR" name="SUB"&gt;
+      &lt;args node="EXPR" name="NOW" /&gt;
+      &lt;args node="FIELD" name="$ItemCreated" /&gt;
+    &lt;/args&gt;
+    &lt;args node="CONST" name="TimeSpan" value="00:15:00" /&gt;
+  &lt;/v1QueryExpr&gt;
+&lt;/QuerySpec&gt;</Condition>
+  <AlertProperties>BaseDate/DateTime=2000-01-01T00%3a00%3a00|MailHost/String=sydwatqur01%3a2525|MailTo/String[]=simon.dudley@nab.com.au|DebugEnabled/Boolean=True</AlertProperties>
+  <MonitorPeriod>00:01:00</MonitorPeriod>
+  <PublishPeriod>01:00:00</PublishPeriod>
+  <SignalFormat>QR_LIVE curves (DEV) are out of date!</SignalFormat>
+</AlertRule>

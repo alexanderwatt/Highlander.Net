@@ -1,0 +1,8 @@
+PricingStructureType/String=RateCurve
+Market/String=QR_LIVE
+IndexName/String=HKD-HIBOR-HKAB
+IndexTenor/String=3M
+CurveName/String=HKD-HIBOR-HKAB-3M
+DependencyDepth/Double=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=HKD

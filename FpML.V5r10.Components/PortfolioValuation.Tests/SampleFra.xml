@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Trade xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="99875">
+  <tradeHeader xmlns="http://www.fpml.org/2009/FpML-4-7">
+    <partyTradeIdentifier>
+      <partyReference href="ORIGINATING_PARTY" />
+      <tradeId tradeIdScheme="CALYPSO/tradeId/1.0">99875</tradeId>
+      <tradeId tradeIdScheme="CALYPSO/tradeVersion/1.0">217759</tradeId>
+      <tradeId tradeIdScheme="CALYPSO/calypsoTradeVersion/1.0">0</tradeId>
+    </partyTradeIdentifier>
+    <tradeDate>2009-05-08</tradeDate>
+  </tradeHeader>
+  <fra xmlns="http://www.fpml.org/2009/FpML-4-7">
+    <productType productTypeScheme="FpML/ProductType/1.0">Fra</productType>
+    <buyerPartyReference href="ORIGINATING_PARTY" />
+    <sellerPartyReference href="COUNTER_PARTY" />
+    <adjustedEffectiveDate id="resetDate">2009-05-15</adjustedEffectiveDate>
+    <adjustedTerminationDate>2009-11-16</adjustedTerminationDate>
+    <paymentDate>
+      <unadjustedDate>2009-05-15</unadjustedDate>
+      <dateAdjustments>
+        <businessDayConvention>MODFOLLOWING</businessDayConvention>
+        <businessCenters>
+          <businessCenter>AUSY</businessCenter>
+        </businessCenters>
+      </dateAdjustments>
+    </paymentDate>
+    <fixingDateOffset>
+      <periodMultiplier>0</periodMultiplier>
+      <period>D</period>
+      <dayType>Calendar</dayType>
+      <businessDayConvention>NONE</businessDayConvention>
+      <dateRelativeTo href="resetDate" />
+    </fixingDateOffset>
+    <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+    <calculationPeriodNumberOfDays>185</calculationPeriodNumberOfDays>
+    <notional>
+      <currency>AUD</currency>
+      <amount>350000000</amount>
+    </notional>
+    <fixedRate>0.0317</fixedRate>
+    <fraDiscounting>AFMA</fraDiscounting>
+  </fra>
+</Trade>

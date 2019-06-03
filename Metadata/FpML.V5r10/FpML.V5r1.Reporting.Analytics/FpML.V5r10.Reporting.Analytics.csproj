@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3CD6D12-E27C-429A-8FD7-0304C0CF9420}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r10.Reporting.Analytics</RootNamespace>
+    <AssemblyName>FpML.V5r10.Reporting.Analytics</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessCenters\Budapest.cs" />
+    <Compile Include="BusinessCenters\Frankfurt.cs" />
+    <Compile Include="BusinessCenters\Hell.cs" />
+    <Compile Include="BusinessCenters\Helsinki.cs" />
+    <Compile Include="BusinessCenters\Johannesburg.cs" />
+    <Compile Include="BusinessCenters\London.cs" />
+    <Compile Include="BusinessCenters\Milan.cs" />
+    <Compile Include="BusinessCenters\NewYork.cs" />
+    <Compile Include="BusinessCenters\Oslo.cs" />
+    <Compile Include="BusinessCenters\Stockholm.cs" />
+    <Compile Include="BusinessCenters\Sydney.cs" />
+    <Compile Include="BusinessCenters\Target.cs" />
+    <Compile Include="BusinessCenters\Tokyo.cs" />
+    <Compile Include="BusinessCenters\Toronto.cs" />
+    <Compile Include="BusinessCenters\Warsaw.cs" />
+    <Compile Include="BusinessCenters\Wellington.cs" />
+    <Compile Include="BusinessCenters\WesternCalendarBase.cs" />
+    <Compile Include="BusinessCenters\Zurich.cs" />
+    <Compile Include="Counterparty\EquityPCEAnalytics.cs" />
+    <Compile Include="Equities\BinomialTreePricer.cs" />
+    <Compile Include="Equities\BinaryEuro.cs" />
+    <Compile Include="Equities\BlackScholes.cs" />
+    <Compile Include="Equities\ARO.cs" />
+    <Compile Include="Equities\Collar.cs" />
+    <Compile Include="Equities\CrankNicolson.cs" />
+    <Compile Include="Equities\CliquetPricer.cs" />
+    <Compile Include="Equities\DivList.cs" />
+    <Compile Include="Equities\Greeks.cs" />
+    <Compile Include="Equities\Grid.cs" />
+    <Compile Include="Equities\LinearProgramming.cs" />
+    <Compile Include="Equities\MathFunction.cs" />
+    <Compile Include="Equities\Pricer.cs" />
+    <Compile Include="Equities\Stock.cs" />
+    <Compile Include="Equities\Tree.cs" />
+    <Compile Include="Helpers\Exchanges.cs" />
+    <Compile Include="Counterparty\Basel2Calcs.cs" />
+    <Compile Include="Counterparty\PCEAnalytics.cs" />
+    <Compile Include="Counterparty\RAROCAnalytics.cs" />
+    <Compile Include="Counterparty\RiskCapitalAnalytics.cs" />
+    <Compile Include="Counterparty\ROEAnalytics.cs" />
+    <Compile Include="Counterparty\ROREAnalytics.cs" />
+    <Compile Include="Helpers\InterpolationHelper.cs" />
+    <Compile Include="Helpers\Misc.cs" />
+    <Compile Include="Helpers\RangeExtension.cs" />
+    <Compile Include="Helpers\RangeHelper.cs" />
+    <Compile Include="Interpolations\CommodityBasisSpreadInterpolation.cs" />
+    <Compile Include="Interpolations\CommodityBasisSpreadInterpolation2.cs" />
+    <Compile Include="Interpolations\RateBasisSpreadInterpolation.cs" />
+    <Compile Include="Interpolations\Points\DateTimePoint1D.cs" />
+    <Compile Include="Interpolations\Points\DateTimePoint2D.cs" />
+    <Compile Include="Dates\BondSettlementDate.cs" />
+    <Compile Include="Helpers\DateTypesHelper.cs" />
+    <Compile Include="Dates\DateHelper.cs" />
+    <Compile Include="Dates\ExDivDate.cs" />
+    <Compile Include="DayCounters\Actual360.cs" />
+    <Compile Include="DayCounters\Actual365.cs" />
+    <Compile Include="DayCounters\ActualActualAFB.cs" />
+    <Compile Include="DayCounters\ActualActualISDA.cs" />
+    <Compile Include="DayCounters\ActualActualISMA.cs" />
+    <Compile Include="DayCounters\ActualMY.cs" />
+    <Compile Include="DayCounters\ActualQuarters.cs" />
+    <Compile Include="DayCounters\Business252.cs" />
+    <Compile Include="DayCounters\DayCounterHelper.cs" />
+    <Compile Include="DayCounters\OneOne.cs" />
+    <Compile Include="DayCounters\Thirty360EU.cs" />
+    <Compile Include="DayCounters\Thirty360Italian.cs" />
+    <Compile Include="DayCounters\Thirty360US.cs" />
+    <Compile Include="Equities\EquityAnalytics.cs" />
+    <Compile Include="ForeignExchange\FxForwardAnalytics.cs" />
+    <Compile Include="Helpers\RangeClasses.cs" />
+    <Compile Include="Interpolations\Spaces\ExtendedInterpolatedSurface.cs" />
+    <Compile Include="NabLib\Math Classes\BlackGreeks.cs" />
+    <Compile Include="NabLib\Math Classes\SmileCalculation.cs" />
+    <Compile Include="NabLib\Model Classes\OptionGreeks.cs" />
+    <Compile Include="NabLib\Resource.Designer.cs" />
+    <Compile Include="Options\BlackModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\BasicRateAnalytics.cs" />
+    <Compile Include="Rates\BGSConvexityCorrection.cs" />
+    <Compile Include="Rates\BondAnalytics.cs" />
+    <Compile Include="Rates\CashForward.cs" />
+    <Compile Include="Rates\CashflowAnalytics.cs" />
+    <Compile Include="Rates\CurveAnalytics.cs" />
+    <Compile Include="IInstrument.cs" />
+    <Compile Include="Instrument.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="Interpolations\InterpolationWrappers.cs" />
+    <Compile Include="Rates\FraAnalytics.cs" />
+    <Compile Include="Interpolations\InterpolationFunctions.cs" />
+    <Compile Include="Rates\OisAnalytics.cs" />
+    <Compile Include="Rates\ZeroCurve.cs" />
+    <Compile Include="Schedulers\DatesMetaSchedule.cs" />
+    <Compile Include="Rates\YieldCurveAnalytics.cs" />
+    <Compile Include="Schedulers\CalculationPeriodSchedule.cs" />
+    <Compile Include="Schedulers\CreditFoncierSchedule.cs" />
+    <Compile Include="Schedulers\DateScheduler.cs" />
+    <Compile Include="Schedulers\ICalculationDateSchedule.cs" />
+    <Compile Include="Schedulers\NotionalScheduleGenerator.cs" />
+    <Compile Include="Schedulers\SpreadScheduleGenerator.cs" />
+    <Compile Include="Schedulers\StrikeScheduleGenerator.cs" />
+    <Compile Include="Stochastics\MonteCarlo\ArithmeticApoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\ArithmeticAsoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\BasketPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\EuropeanPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\GeometricApoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\GeometricAsoPathPricer.cs" />
+    <Compile Include="PricingEngines\AutoColumnAttribute.cs" />
+    <Compile Include="PricingEngines\DataColumns.cs" />
+    <Compile Include="PricingEngines\EuropeanAnalyticalEngine.cs" />
+    <Compile Include="PricingEngines\IArguments.cs" />
+    <Compile Include="PricingEngines\IPricingEngine.cs" />
+    <Compile Include="PricingEngines\IResults.cs" />
+    <Compile Include="PricingEngines\OptionGreeks.cs" />
+    <Compile Include="PricingEngines\OptionValue.cs" />
+    <Compile Include="PricingEngines\PricingEngine.cs" />
+    <Compile Include="PricingEngines\SABRCalibrationEngine.cs" />
+    <Compile Include="PricingEngines\VanillaEngine.cs" />
+    <Compile Include="PricingEngines\VanillaOptionArguments.cs" />
+    <Compile Include="Rates\CrossCurrencyIRSwap.cs" />
+    <Compile Include="Rates\FixedPaymentStream.cs" />
+    <Compile Include="Rates\FloatingPaymentStream.cs" />
+    <Compile Include="Rates\PaymentStream.cs" />
+    <Compile Include="Interpolators\BilinearInterpolation.cs" />
+    <Compile Include="Interpolators\BilinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\Interpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\IOneDimensionalInterpolation.cs" />
+    <Compile Include="Interpolators\ITwoDimensionalInterpolation.cs" />
+    <Compile Include="Interpolators\LinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\SABRInterpolationInterface.cs" />
+    <Compile Include="Interpolators\TrilinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Options\BlackCapletFlooret.cs" />
+    <Compile Include="Options\BlackScholesMertonModel.cs" />
+    <Compile Include="Rates\FuturesAnalytics.cs" />
+    <Compile Include="Options\CapletBootstrapResults.cs" />
+    <Compile Include="Options\OptionAnalytics.cs" />
+    <Compile Include="Interpolations\Points\Point1D.cs" />
+    <Compile Include="Interpolations\Points\GeneralPoint.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPoint2D.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPoint3D.cs" />
+    <Compile Include="Interpolations\Points\TimeDimensionFactory.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPointCoordinateFactory.cs" />
+    <Compile Include="Interpolations\Points\Coordinate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\ForwardRatesMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Rates\RateAnalytics.cs" />
+    <Compile Include="Rates\SwapAnalytics.cs" />
+    <Compile Include="Options\BlackVanillaSwaption.cs" />
+    <Compile Include="Stochastics\SABR\SABRCalibrationSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRDataMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRImpliedVolatility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolations\Spaces\DiscreteCube.cs" />
+    <Compile Include="Utilities\DataQualityValidator.cs" />
+    <Compile Include="Utilities\InstrumentType.cs" />
+    <Compile Include="Utilities\TwoDimensionalKey.cs" />
+    <Compile Include="Utilities\TwoDimensionalKeyEqualityComparer.cs" />
+    <Compile Include="Interpolations\InterpolationFactory.cs" />
+    <Compile Include="Interpolations\Points\Point.cs" />
+    <Compile Include="Interpolations\Points\Point2D.cs" />
+    <Compile Include="Interpolations\Points\Point3D.cs" />
+    <Compile Include="Interpolations\Points\PointHelpers.cs" />
+    <Compile Include="Interpolations\Points\ValueBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteCurve.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteSpace.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteSurface.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedCurve.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedSpace.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedSurface.cs" />
+    <Compile Include="Stochastics\Volatilities\CapFloorATMMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\CapFloorVolatilityMatrix.cs" />
+    <Compile Include="Stochastics\Volatilities\CapVolatilityDataElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\CapVolatilityDataElementComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\ImpliedVolatilityParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\OrcWingVol.cs" />
+    <Compile Include="Stochastics\Volatilities\PPDGrid.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionDataMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionPPDGrid.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionVolatilityMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessCenters\some.txt" />
+    <Content Include="PricingEngines\EuropeanAnalytical.xml" />
+    <Content Include="PricingEngines\namespace-summary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Reporting.Helpers\FpML.V5r10.Reporting.Helpers.csproj">
+      <Project>{2ab71510-a56b-4acc-bad0-eb0bc95f31d7}</Project>
+      <Name>FpML.V5r10.Reporting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Reporting.ModelFramework\FpML.V5r10.Reporting.ModelFramework.csproj">
+      <Project>{551358af-6bc4-44ca-b524-d669519f1868}</Project>
+      <Name>FpML.V5r10.Reporting.ModelFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NabLib\Resource.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Stochastics\Libor\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="InterestPaymentNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.jpm.com/conversationId">IDC001</conversationId>
+      <messageId messageIdScheme="http://www.jpm.com/messageId">IDM001</messageId>
+      <inReplyTo messageIdScheme="http://www.jpm.com/messageId">Payments against JAS FPML EXAMPLE1</inReplyTo>
+      <sentBy partyIdScheme="http://www.jpm.com/partyId">JPMorgan Chase NA</sentBy>
+      <sendTo partyIdScheme="http://www.jpm.com/partyId">JEFF STUDER LENDER A</sendTo>
+      <creationTimestamp>2007-11-23T09:30:47-05:00</creationTimestamp>
+      <expiryTimestamp>2007-11-23T09:30:47-05:00</expiryTimestamp>
+   </header>
+   <noticeDate>2007-11-19</noticeDate>
+   <agentBankPartyReference href="agentParty"/>
+   <borrowerPartyReference href="borrowerParty"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary id="ID04039GAD3">
+      <instrumentId instrumentIdScheme="http://www.jpm.com/coding-scheme/productId">ID_PROD_001</instrumentId>
+      <description>JPM Example11 Interest Payment Notice (Principal and Interest)</description>
+      <creditAgreementDate>2007-11-19</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary id="ID000133">
+      <instrumentId instrumentIdScheme="http://www.jpm.com/coding-scheme/productId">ID_PROD_001</instrumentId>
+      <description>REVOLVING CREDIT</description>
+      <originalCommitmentAmount>
+         <currency>USD</currency>
+         <amount>10000000</amount>
+      </originalCommitmentAmount>
+   </facilitySummary>
+   <facilityCommitmentPosition>
+      <currentAmount>
+         <globalAmount id="ID000134">
+            <currency>USD</currency>
+            <amount>10000000</amount>
+         </globalAmount>
+         <shareAmount id="ID000135">
+            <currency>USD</currency>
+            <amount>5000000</amount>
+         </shareAmount>
+      </currentAmount>
+      <priorAmount>
+         <globalAmount id="ID000136">
+            <currency>USD</currency>
+            <amount>10000000</amount>
+         </globalAmount>
+         <shareAmount id="ID000137">
+            <currency>USD</currency>
+            <amount>5000000</amount>
+         </shareAmount>
+      </priorAmount>
+      <loanContractPosition>
+         <loanContractSummary>
+            <identifier id="ID000138">
+               <partyReference href="agentParty"/>
+               <contractId contractIdScheme="http://www.jpm.com/contractId" id="ID000139">ID000139 Contract</contractId>
+            </identifier>
+            <originalAmount id="ID000140">
+               <currency>USD</currency>
+               <amount>10000000</amount>
+            </originalAmount>
+            <maturityDate>2007-11-22</maturityDate>
+         </loanContractSummary>
+         <currentAmount>
+            <globalAmount id="ID000142">
+               <currency>USD</currency>
+               <amount>10000000</amount>
+            </globalAmount>
+            <shareAmount id="ID000143">
+               <currency>USD</currency>
+               <amount>5000000</amount>
+            </shareAmount>
+         </currentAmount>
+         <priorAmount>
+            <globalAmount id="ID000144">
+               <currency>USD</currency>
+               <amount>10000000</amount>
+            </globalAmount>
+            <shareAmount id="ID000145">
+               <currency>USD</currency>
+               <amount>5000000</amount>
+            </shareAmount>
+         </priorAmount>
+      </loanContractPosition>
+   </facilityCommitmentPosition>
+   <comments>LIBOR Interest Payment JEFF STUDER BORROWER A will pay interest on the Libor Option loan effective 25-Oct-2007, scheduled to reprice on 23-Nov-2007, totaling USD 59,208.33. JEFF STUDER LENDER A's share is: USD 29,604.17.</comments>
+   <loanContractSummary>
+      <identifier id="ID000146">
+         <partyReference href="lenderParty"/>
+         <contractId contractIdScheme="http://www.jpm.com/contractId" id="ID000147">contract ID000147</contractId>
+      </identifier>
+      <originalAmount id="ID000148">
+         <currency>USD</currency>
+         <amount>10000000</amount>
+      </originalAmount>
+      <maturityDate>2007-11-22</maturityDate>
+   </loanContractSummary>
+   <interestPayment>
+      <calculationMethod>ProRataShare</calculationMethod>
+      <paymentDate>2007-11-23</paymentDate>
+      <amount>
+         <globalAmount id="ID000150">
+            <currency>USD</currency>
+            <amount>59208.33</amount>
+         </globalAmount>
+         <shareAmount id="ID000151">
+            <currency>USD</currency>
+            <amount>29604.17</amount>
+         </shareAmount>
+      </amount>
+   </interestPayment>
+   <interestAccrualSchedule>
+      <interestRatePeriod>
+         <rateFixingDate>2007-10-25</rateFixingDate>
+         <startDate>2007-10-25</startDate>
+         <endDate>2007-11-22</endDate>
+         <floatingRateIndex floatingRateIndexScheme="http://www.jpm.com/coding-scheme/floating-rate-index">JPM-PRIME</floatingRateIndex>
+         <indexTenor id="ID000152">
+            <periodMultiplier>0</periodMultiplier>
+            <period>Y</period>
+         </indexTenor>
+         <interestRate>0.0735</interestRate>
+         <allInRate>0.0735</allInRate>
+         <interestDayBasis>30/360</interestDayBasis>
+         <tenor id="ID000154">
+            <periodMultiplier>0</periodMultiplier>
+            <period>Y</period>
+         </tenor>
+      </interestRatePeriod>
+      <lenderLoanContractPeriod>
+         <startDate>2007-10-25</startDate>
+         <endDate>2007-11-22</endDate>
+         <shareCommitmentAmount id="ID000155">
+            <currency>USD</currency>
+            <amount>5029604.17</amount>
+         </shareCommitmentAmount>
+         <shareLoanContractAmount id="ID000156">
+            <currency>USD</currency>
+            <amount>5029604.17</amount>
+         </shareLoanContractAmount>
+      </lenderLoanContractPeriod>
+      <interestAccrualPeriod>
+         <startDate>1967-08-13</startDate>
+         <endDate>1967-08-13</endDate>
+         <shareInterestAccrualAmount id="ID000158">
+            <currency>USD</currency>
+            <amount>5029604.17</amount>
+         </shareInterestAccrualAmount>
+      </interestAccrualPeriod>
+   </interestAccrualSchedule>
+   <party id="agentParty">
+      <partyId partyIdScheme="http://www.jpm.com/partyId">JPMBICXXXX</partyId>
+      <partyName>JPMorgan Chase NA</partyName>
+   </party>
+   <party id="borrowerParty">
+      <partyId partyIdScheme="http://www.jpm.com/partyId">JSL1234</partyId>
+      <partyName>JEFF STUDER LENDER A</partyName>
+   </party>
+   <party id="lenderBeneficiary">
+      <partyId partyIdScheme="http://www.jpm.com/partyId">IND12456</partyId>
+      <partyName>lndr A</partyName>
+      <account id="ID1234567">
+         <accountId accountIdScheme="http://www.altova.com">ID04039GAD3</accountId>
+         <accountName>JEFF STUDER LENDER A</accountName>
+      </account>
+   </party>
+   <party id="lenderParty">
+      <partyId partyIdScheme="http://www.jpm.com/partyId">JSLA2345</partyId>
+      <partyName>JEFF STUDER LENDER A</partyName>
+      <account id="ID000163">
+         <accountId accountIdScheme="http://www.altova.com">JPMC-001</accountId>
+         <accountBeneficiary href="lenderBeneficiary"/>
+      </account>
+   </party>
+</FpML>

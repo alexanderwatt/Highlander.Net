@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.TEST_EOD.2010-08-30.RateCurve.AUD-ZERO-BANK-6M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-ZERO-BANK-6M">
+    <name>AUD-ZERO-BANK-6M</name>
+    <currency>AUD</currency>
+    <algorithm>LinearSpreadZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>ZERO-BANK</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-ZERO-BANK-6M" definitionRef="RateBasisCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:36:04.9805001+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-ON-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-1M-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-2M-6M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-3M-6M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-6M-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-1Y-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-2Y-6M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-3Y-6M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-4Y-6M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-5Y-6M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-6Y-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-7Y-6M">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-8Y-6M">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-9Y-6M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-10Y-6M">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-12Y-6M">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-15Y-6M">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-20Y-6M">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-25Y-6M">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-30Y-6M">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-40Y-6M">
+          <term>
+            <periodMultiplier>40</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-ON-6M" />
+        <quote>
+          <value>0.001623</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-1M-6M" />
+        <quote>
+          <value>0.001623</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-2M-6M" />
+        <quote>
+          <value>0.001623</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-3M-6M" />
+        <quote>
+          <value>0.001623</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-6M-6M" />
+        <quote>
+          <value>0.001623</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-1Y-6M" />
+        <quote>
+          <value>0.000975</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-2Y-6M" />
+        <quote>
+          <value>0.00095</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-3Y-6M" />
+        <quote>
+          <value>0.00095</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-4Y-6M" />
+        <quote>
+          <value>0.000925</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-5Y-6M" />
+        <quote>
+          <value>0.0009</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-6Y-6M" />
+        <quote>
+          <value>0.000875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-7Y-6M" />
+        <quote>
+          <value>0.00085</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-8Y-6M" />
+        <quote>
+          <value>0.000834</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-9Y-6M" />
+        <quote>
+          <value>0.000816</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-10Y-6M" />
+        <quote>
+          <value>0.0008</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-12Y-6M" />
+        <quote>
+          <value>0.00075</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-15Y-6M" />
+        <quote>
+          <value>0.000675</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-20Y-6M" />
+        <quote>
+          <value>0.0006</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-25Y-6M" />
+        <quote>
+          <value>0.000525</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-30Y-6M" />
+        <quote>
+          <value>0.0005</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-40Y-6M" />
+        <quote>
+          <value>0.000441</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.0468927594226463</mid>
+        </point>
+        <point id="AUD-SPREADDEPOSIT-ON-6M">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.0468927594226463</mid>
+        </point>
+        <point id="AUD-SPREADDEPOSIT-1M-6M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>0.0478813921848982</mid>
+        </point>
+        <point id="AUD-SPREADDEPOSIT-2M-6M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.0485486098449233</mid>
+        </point>
+        <point id="AUD-SPREADDEPOSIT-3M-6M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.0491984863143156</mid>
+        </point>
+        <point id="AUD-SPREADDEPOSIT-6M-6M">
+          <term>
+            <date>2011-02-28</date>
+          </term>
+          <mid>0.0485021522372957</mid>
+        </point>
+        <point id="AUD-BASISSWAP-1Y-6M">
+          <term>
+            <date>2011-08-31</date>
+          </term>
+          <mid>0.0477709301291531</mid>
+        </point>
+        <point id="AUD-BASISSWAP-2Y-6M">
+          <term>
+            <date>2012-08-31</date>
+          </term>
+          <mid>0.0482776765674764</mid>
+        </point>
+        <point id="AUD-BASISSWAP-3Y-6M">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.0488691946056159</mid>
+        </point>
+        <point id="AUD-BASISSWAP-4Y-6M">
+          <term>
+            <date>2014-08-29</date>
+          </term>
+          <mid>0.0495147709451107</mid>
+        </point>
+        <point id="AUD-BASISSWAP-5Y-6M">
+          <term>
+            <date>2015-08-31</date>
+          </term>
+          <mid>0.0504048330844551</mid>
+        </point>
+        <point id="AUD-BASISSWAP-6Y-6M">
+          <term>
+            <date>2016-08-31</date>
+          </term>
+          <mid>0.0512866583475233</mid>
+        </point>
+        <point id="AUD-BASISSWAP-7Y-6M">
+          <term>
+            <date>2017-08-31</date>
+          </term>
+          <mid>0.0519853119308467</mid>
+        </point>
+        <point id="AUD-BASISSWAP-8Y-6M">
+          <term>
+            <date>2018-08-31</date>
+          </term>
+          <mid>0.0524256942796635</mid>
+        </point>
+        <point id="AUD-BASISSWAP-9Y-6M">
+          <term>
+            <date>2019-08-30</date>
+          </term>
+          <mid>0.0527561911896406</mid>
+        </point>
+        <point id="AUD-BASISSWAP-10Y-6M">
+          <term>
+            <date>2020-08-31</date>
+          </term>
+          <mid>0.0530245975869361</mid>
+        </point>
+        <point id="AUD-BASISSWAP-12Y-6M">
+          <term>
+            <date>2022-08-31</date>
+          </term>
+          <mid>0.0535470453468481</mid>
+        </point>
+        <point id="AUD-BASISSWAP-15Y-6M">
+          <term>
+            <date>2025-08-29</date>
+          </term>
+          <mid>0.0540871385652304</mid>
+        </point>
+        <point id="AUD-BASISSWAP-20Y-6M">
+          <term>
+            <date>2030-08-30</date>
+          </term>
+          <mid>0.0534184562298092</mid>
+        </point>
+        <point id="AUD-BASISSWAP-25Y-6M">
+          <term>
+            <date>2035-08-31</date>
+          </term>
+          <mid>0.0510684086310027</mid>
+        </point>
+        <point id="AUD-BASISSWAP-30Y-6M">
+          <term>
+            <date>2040-08-31</date>
+          </term>
+          <mid>0.0482435593210253</mid>
+        </point>
+        <point id="AUD-BASISSWAP-40Y-6M">
+          <term>
+            <date>2050-08-31</date>
+          </term>
+          <mid>0.0440460927452353</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="AUD-SPREADDEPOSIT-ON-6M">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.999872282067434</mid>
+      </point>
+      <point id="AUD-SPREADDEPOSIT-1M-6M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>0.9959656681153</mid>
+      </point>
+      <point id="AUD-SPREADDEPOSIT-2M-6M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.992098828751669</mid>
+      </point>
+      <point id="AUD-SPREADDEPOSIT-3M-6M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.98775057068426</mid>
+      </point>
+      <point id="AUD-SPREADDEPOSIT-6M-6M">
+        <term>
+          <date>2011-02-28</date>
+        </term>
+        <mid>0.976247456155793</mid>
+      </point>
+      <point id="AUD-BASISSWAP-1Y-6M">
+        <term>
+          <date>2011-08-31</date>
+        </term>
+        <mid>0.953497927677575</mid>
+      </point>
+      <point id="AUD-BASISSWAP-2Y-6M">
+        <term>
+          <date>2012-08-31</date>
+        </term>
+        <mid>0.908245767845288</mid>
+      </point>
+      <point id="AUD-BASISSWAP-3Y-6M">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.864285336111433</mid>
+      </point>
+      <point id="AUD-BASISSWAP-4Y-6M">
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.821319364341952</mid>
+      </point>
+      <point id="AUD-BASISSWAP-5Y-6M">
+        <term>
+          <date>2015-08-31</date>
+        </term>
+        <mid>0.778237181312892</mid>
+      </point>
+      <point id="AUD-BASISSWAP-6Y-6M">
+        <term>
+          <date>2016-08-31</date>
+        </term>
+        <mid>0.736252045461158</mid>
+      </point>
+      <point id="AUD-BASISSWAP-7Y-6M">
+        <term>
+          <date>2017-08-31</date>
+        </term>
+        <mid>0.696298149884211</mid>
+      </point>
+      <point id="AUD-BASISSWAP-8Y-6M">
+        <term>
+          <date>2018-08-31</date>
+        </term>
+        <mid>0.658949104463242</mid>
+      </point>
+      <point id="AUD-BASISSWAP-9Y-6M">
+        <term>
+          <date>2019-08-30</date>
+        </term>
+        <mid>0.623760343165006</mid>
+      </point>
+      <point id="AUD-BASISSWAP-10Y-6M">
+        <term>
+          <date>2020-08-31</date>
+        </term>
+        <mid>0.590173042159376</mid>
+      </point>
+      <point id="AUD-BASISSWAP-12Y-6M">
+        <term>
+          <date>2022-08-31</date>
+        </term>
+        <mid>0.527880925129937</mid>
+      </point>
+      <point id="AUD-BASISSWAP-15Y-6M">
+        <term>
+          <date>2025-08-29</date>
+        </term>
+        <mid>0.446501534574453</mid>
+      </point>
+      <point id="AUD-BASISSWAP-20Y-6M">
+        <term>
+          <date>2030-08-30</date>
+        </term>
+        <mid>0.34575491395423</mid>
+      </point>
+      <point id="AUD-BASISSWAP-25Y-6M">
+        <term>
+          <date>2035-08-31</date>
+        </term>
+        <mid>0.280943365652084</mid>
+      </point>
+      <point id="AUD-BASISSWAP-30Y-6M">
+        <term>
+          <date>2040-08-31</date>
+        </term>
+        <mid>0.236967832391079</mid>
+      </point>
+      <point id="AUD-BASISSWAP-40Y-6M">
+        <term>
+          <date>2050-08-31</date>
+        </term>
+        <mid>0.173160874414732</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

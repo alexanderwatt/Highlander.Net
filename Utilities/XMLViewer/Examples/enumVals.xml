@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?><schemeDefinitions><scheme name="averagingMethodScheme" uri="http//www.fpml.org/spec/2000/averaging-method-1-0"><schemeValues><schemeValue name="Unweighted"/><schemeValue name="Weighted"/></schemeValues></scheme><scheme name="businessCenterScheme" uri="http://www.fpml.org/spec/2000/business-center-1-0"><schemeValues><schemeValue name="ARBA" caption="Buenos Aires"/><schemeValue name="ATVI" caption="Vienna"/><schemeValue name="AUME" caption="Melbourne"/><schemeValue name="AUSY" caption="Sydney"/><schemeValue name="BEBR" caption="Brussels"/><schemeValue name="BRSP" caption="Sao Paulo"/><schemeValue name="CAMO" caption="Montreal"/><schemeValue name="CATO" caption="Toronto"/><schemeValue name="CHGE" caption="Geneva"/><schemeValue name="CHZU" caption="Zurich"/><schemeValue name="CLSA" caption="Santiago"/><schemeValue name="CNBE" caption="Beijing"/><schemeValue name="CZPR" caption="Prague"/><schemeValue name="DEFR" caption="Frankfurt"/><schemeValue name="DKCO" caption="Copenhagen"/><schemeValue name="EETA" caption="Tallinn"/><schemeValue name="ESMA" caption="Madrid"/><schemeValue name="EUTA" caption="Target"/><schemeValue name="FIHE" caption="Helsinki"/><schemeValue name="FRPA" caption="Paris"/><schemeValue name="GBLO" caption="London"/><schemeValue name="GRAT" caption="Athens"/><schemeValue name="HKHK" caption="Hong Kong"/><schemeValue name="IDJA" caption="Jakarta"/><schemeValue name="ILTA" caption="Tel Aviv"/><schemeValue name="ITMI" caption="Milan"/><schemeValue name="ITRO" caption="Rome"/><schemeValue name="JPTO" caption="Tokyo"/><schemeValue name="KRSE" caption="Seoul"/><schemeValue name="LBBE" caption="Beirut"/><schemeValue name="LULU" caption="Luxembourg"/><schemeValue name="MXMC" caption="Mexico City"/><schemeValue name="MYKL" caption="Kuala Lumpur"/><schemeValue name="NLAM" caption="Amsterdam"/><schemeValue name="NOOS" caption="Oslo"/><schemeValue name="NZAU" caption="Auckland"/><schemeValue name="NZWE" caption="Wellington"/><schemeValue name="PAPC" caption="Panama City"/><schemeValue name="PHMA" caption="Manila"/><schemeValue name="PLWA" caption="Warsaw"/><schemeValue name="RUMO" caption="Moscow"/><schemeValue name="SARI" caption="Riyadh"/><schemeValue name="SEST" caption="Stockholm"/><schemeValue name="SGSI" caption="Warsaw"/><schemeValue name="SKBR" caption="Bratislava"/><schemeValue name="THBA" caption="Bangkok"/><schemeValue name="TRAN" caption="Ankara"/><schemeValue name="TWTA" caption="Taipei"/><schemeValue name="USCH" caption="Chicago"/><schemeValue name="USLA" caption="Los Angeles"/><schemeValue name="USNY" caption="New York"/><schemeValue name="ZAJO" caption="Johannesburg"/></schemeValues></scheme><scheme name="businessDayConventionScheme" uri="http://www.fpml.org/spec/2000/business-day-convention-1-0"><schemeValues><schemeValue name="FOLLOWING" description="subject to adjustment in accordance with the Following Business Day Convention."/><schemeValue name="FRN" description="subject to adjustment in accordance with the Floating Rate Note Business Day Convention."/><schemeValue name="MODFOLLOWING" description="subject to adjustment in accordance with the Modified Following Business Day Convention."/><schemeValue name="PRECEDING" description="subject to adjustment in accordance with the Preceding Day Convention."/><schemeValue name="MODPRECEDING" description="subject to adjustment in accordance with the Modified Preceding Business Day Convention."/><schemeValue name="NONE" description="unadjusted"/><schemeValue name="NotApplicable" description="date adjustments not applicable"/></schemeValues></scheme><scheme name="compoundingMethodScheme" uri="http://www.fpml.org/spec/2000/compounding-method-1-0"><schemeValues><schemeValue name="Flat"/><schemeValue name="None"/><schemeValue name="Straight"/></schemeValues></scheme><scheme name="currencyScheme" source="config" uri="http://www.fpml.org/ext/isda-2000-definitions">
+		<schemeValues>
+			<schemeValue name="ARS"/>
+			<schemeValue name="AUD"/>
+			<schemeValue name="BRL"/>
+			<schemeValue name="CAD"/>
+			<schemeValue name="CLP"/>
+			<schemeValue name="CZK"/>
+			<schemeValue name="DKK"/>
+			<schemeValue name="EEK"/>
+			<schemeValue name="EUR"/>
+			<schemeValue name="GRD"/>
+			<schemeValue name="HKD"/>
+			<schemeValue name="HUF"/>
+			<schemeValue name="IDR"/>
+			<schemeValue name="ILS"/>
+			<schemeValue name="JPY"/>
+			<schemeValue name="KRW"/>
+			<schemeValue name="LBP"/>
+			<schemeValue name="MYR"/>
+			<schemeValue name="MXP"/>
+			<schemeValue name="NZD"/>
+			<schemeValue name="NOK"/>
+			<schemeValue name="PHP"/>
+			<schemeValue name="PLZ"/>
+			<schemeValue name="RUR"/>
+			<schemeValue name="SAR"/>
+			<schemeValue name="SGD"/>
+			<schemeValue name="SKK"/>
+			<schemeValue name="ZAR"/>
+			<schemeValue name="GBP"/>
+			<schemeValue name="SEK"/>
+			<schemeValue name="CHF"/>
+			<schemeValue name="THB"/>
+			<schemeValue name="TRL"/>
+			<schemeValue name="USD"/>
+		</schemeValues>
+	</scheme><scheme name="dateRelativeToScheme" uri="http://www.fpml.org/spec/2001/date-relative-to-3-0"><schemeValues><schemeValue name="ResetDate"/><schemeValue name="CashSettlementPaymentDate"/><schemeValue name="MandatoryEarlyTerminationDate"/><schemeValue name="ExerciseDate"/><schemeValue name="CalculationPeriodStartDate"/><schemeValue name="CalculationPeriodEndDate"/><schemeValue name="PaymentDate"/><schemeValue name="ValuationDate"/><schemeValue name="SettlementDate"/></schemeValues></scheme><scheme name="dayCountFractionScheme" uri="http://www.fpml.org/spec/2000/day-count-fraction-1-0"><schemeValues><schemeValue name="1/1"/><schemeValue name="ACT/ACT.ISDA"/><schemeValue name="ACT/ACT.ISMA"/><schemeValue name="ACT/ACT.AFB"/><schemeValue name="ACT/365.FIXED"/><schemeValue name="ACT/360"/><schemeValue name="30/360"/><schemeValue name="30E/360"/></schemeValues></scheme><scheme name="dayTypeScheme" uri="http://www.fpml.org/spec/2000/day-type-1-0"><schemeValues><schemeValue name="Business"/><schemeValue name="Calendar"/></schemeValues></scheme><scheme name="discountingTypeScheme" uri="http://www.fpml.org/spec/2000/discounting-type-1-0"><schemeValues><schemeValue name="Standard"/><schemeValue name="FRA"/></schemeValues></scheme><scheme name="floatingRateIndexScheme" source="config" uri="http://www.fpml.org/ext/isda-2000-definitions">
+		<schemeValues>
+			<schemeValue name="AUD-BBR-ISDC" dcb="ACT/365.FIXED"/>
+			<schemeValue name="AUD-BBR-BBSW" dcb="ACT/365.FIXED"/>
+			<schemeValue name="AUD-BBR-BBSW (BID)" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-BA-ISDD" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-BA-CDOR" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-BA-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-BA-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-LIBOR-BBA" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-LIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-TBILL-ISDD" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-TBILL-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-TBILL-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="CAD-REPO-CORRA" dcb="ACT/365.FIXED"/>
+			<schemeValue name="EUR-EURIBOR-Act/365" dcb="ACT/365.FIXED"/>
+			<schemeValue name="EUR-TAM-CDC" dcb="1/1"/>
+			<schemeValue name="EUR-TAM-CDC-COMPOUND" dcb="1/1"/>
+			<schemeValue name="EUR-EONIA-OIS-COMPOUND" dcb="1/1"/>
+			<schemeValue name="GBP-LIBOR-ISDA" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GBP-LIBOR-BBA" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GBP-LIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GBP-Semi-Annual Swap Rate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GBP-Semi-Annual Swap Rate-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GBP-WMBA-SONIA-COMPOUND" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GRD-ATHIBOR-ARHTIBOR" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GRD-ATHIBOR-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GRD-ATHIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GRD-ATHIMID-Reuters" dcb="ACT/365.FIXED"/>
+			<schemeValue name="GRD-ATHIMID-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="HKD-HIBOR-ISDC" dcb="ACT/365.FIXED"/>
+			<schemeValue name="HKD-HIBOR-HKAB" dcb="ACT/365.FIXED"/>
+			<schemeValue name="HKD-HIBOR-HIBOR=" dcb="ACT/365.FIXED"/>
+			<schemeValue name="HKD-HIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="MYR-KLIBOR-BNM" dcb="ACT/365.FIXED"/>
+			<schemeValue name="MYR-KLIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="PLZ-WIBOR-WIBO" dcb="ACT/365.FIXED"/>
+			<schemeValue name="PLZ-WIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="SGD-SIBOR-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="SGD-SIBOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="SGD-SOR-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="SGD-SOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="THB-SOR-Telerate" dcb="ACT/365.FIXED"/>
+			<schemeValue name="THB-SOR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="USD-TBILL-H.15" dcb="ACT/365"/>
+			<schemeValue name="USD-CP-H.15"/>
+			<schemeValue name="USD-Federal Funds-H.15"/>
+			<schemeValue name="USD-Prime-H.15"/>
+			<schemeValue name="USD-LIBOR-Telerate"/>
+			<schemeValue name="USD-TBILL-Secondary Market" dcb="ACT/365"/>
+			<schemeValue name="ZAR-JIBAR-SAFEX" dcb="ACT/365.FIXED"/>
+			<schemeValue name="ZAR-JIBAR-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="ZAR-PRIME-AVERAGE" dcb="ACT/365.FIXED"/>
+			<schemeValue name="ZAR-PRIME-AVERAGE-Reference Banks" dcb="ACT/365.FIXED"/>
+			<schemeValue name="ZAR-DEPOSIT-SAFEX" dcb="ACT/365.FIXED"/>
+			<schemeValue name="ZAR-DEPOSIT-Reference Banks" dcb="ACT/365.FIXED"/>
+		</schemeValues>
+	</scheme><scheme name="calculationAgentPartyScheme" uri="http://www.fpml.org/spec/2001/calculation-agent-party-1-0"><schemeValues><schemeValue name="ExercisingParty"/><schemeValue name="NonExercisingParty"/><schemeValue name="AsSpecifiedInMasterAgreement"/></schemeValues></scheme><scheme name="payRelativeToScheme" uri="http://www.fpml.org/spec/2000/pay-relative-to-1-0"><schemeValues><schemeValue name="CalculationPeriodStartDate"/><schemeValue name="CalculationPeriodEndDate"/><schemeValue name="ResetDate"/></schemeValues></scheme><scheme name="periodScheme" uri="http://www.fpml.org/spec/2000/period-1-0"><schemeValues><schemeValue name="D" caption="Day"/><schemeValue name="W" caption="Week"/><schemeValue name="M" caption="Month"/><schemeValue name="Y" caption="Year"/><schemeValue name="T" caption="Term"/></schemeValues></scheme><scheme name="rateTreatmentScheme" uri="http://www.fpml.org/spec/2000/rate-treatment-1-0"><schemeValues><schemeValue name="BondEquivalentYield"/><schemeValue name="MoneyMarketYield"/></schemeValues></scheme><scheme name="resetRelativeToScheme" uri="http://www.fpml.org/spec/2000/reset-relative-to-1-0"><schemeValues><schemeValue name="CalculationPeriodStartDate"/><schemeValue name="CalculationPeriodEndDate"/></schemeValues></scheme><scheme name="rollConventionScheme" uri="http://www.fpml.org/spec/2000/roll-convention-1-0"><schemeValues><schemeValue name="EOM"/><schemeValue name="FRN"/><schemeValue name="IMM"/><schemeValue name="CADIMM"/><schemeValue name="SFE"/><schemeValue name="None"/><schemeValue name="TBILL"/><schemeValue name="1"/><schemeValue name="2"/><schemeValue name="3"/><schemeValue name="4"/><schemeValue name="5"/><schemeValue name="6"/><schemeValue name="7"/><schemeValue name="8"/><schemeValue name="9"/><schemeValue name="10"/><schemeValue name="11"/><schemeValue name="12"/><schemeValue name="13"/><schemeValue name="14"/><schemeValue name="15"/><schemeValue name="16"/><schemeValue name="17"/><schemeValue name="18"/><schemeValue name="19"/><schemeValue name="20"/><schemeValue name="21"/><schemeValue name="22"/><schemeValue name="23"/><schemeValue name="24"/><schemeValue name="25"/><schemeValue name="26"/><schemeValue name="27"/><schemeValue name="28"/><schemeValue name="29"/><schemeValue name="30"/><schemeValue name="MON"/><schemeValue name="TUE"/><schemeValue name="WED"/><schemeValue name="THU"/><schemeValue name="FRI"/><schemeValue name="SAT"/><schemeValue name="SUN"/></schemeValues></scheme><scheme name="roundingDirectionScheme" uri="http://www.fpml.org/spec/2000/rounding-direction-1-0"><schemeValues><schemeValue name="Up"/><schemeValue name="Down"/><schemeValue name="Nearest"/></schemeValues></scheme><scheme name="stepRelativeToScheme" uri="http://ww.fpml.org/spec/2000/step-relative-to-1-0"><schemeValues><schemeValue name="Initial"/><schemeValue name="Previous"/></schemeValues></scheme><scheme name="weeklyRollConventionScheme" uri="http://wwww.fpml.org/spec/2000/weekly-roll-convention-1-0"><schemeValues><schemeValue name="MON" caption="Monday"/><schemeValue name="TUE" caption="Tuesday"/><schemeValue name="WED" caption="Wednesday"/><schemeValue name="THU" caption="Thursday"/><schemeValue name="FRI" caption="Friday"/><schemeValue name="SAT" caption="Saturday"/><schemeValue name="SUN" caption="Sunday"/></schemeValues></scheme><scheme name="negativeInterestRateTreatmentScheme" uri="http://www.fpml.org/spec/2001/negative-interest-rate-treatment-scheme-1-0"><schemeValues><schemeValue name="NegativeInterestRateMethod"/><schemeValue name="ZeroInterestRateMethod"/></schemeValues></scheme><scheme name="quoteBasisScheme" uri="http://www.fpml.org/spec/2001/quote-basis-1-0"><schemeValues><schemeValue name="Currency1PERCurrency2"/><schemeValue name="Currency2PERCurrency1"/></schemeValues></scheme><scheme name="informationProviderScheme" uri="http://www.fpml.org/spec/2001/information-provider-1-0"><schemeValues><schemeValue name="BankOfCanada"/><schemeValue name="Bloomberg"/><schemeValue name="FederalReserve"/><schemeValue name="FHLBSF"/><schemeValue name="ISDA"/><schemeValue name="Reuters"/><schemeValue name="SAFEX"/><schemeValue name="Telerate"/></schemeValues></scheme><scheme name="payerReceiverScheme" uri="http://www.fpml.org/spec/2001/payer-receiver-1-0"><schemeValues><schemeValue name="Payer"/><schemeValue name="Receiver"/></schemeValues></scheme><scheme name="quotationRateTypeScheme" uri="http://www.fpml.org/spec/2001/quotation-rate-type-scheme-1-0"><schemeValues><schemeValue name="Bid"/><schemeValue name="Ask"/><schemeValue name="Mid"/><schemeValue name="ExercisingPartyPays"/></schemeValues></scheme><scheme name="exerciseStyleScheme" uri="http://www.fpml.org/spec/2002/exercise-style-scheme-1-0"><schemeValues><schemeValue name="American"/><schemeValue name="European"/></schemeValues></scheme><scheme name="payoutScheme" uri="http://www.fpml.org/spec/2002/payout-scheme-1-0"><schemeValues><schemeValue name="Deferred"/><schemeValue name="Immediate"/></schemeValues></scheme><scheme name="premiumQuoteBasisScheme" uri="http://www.fpml.org/spec/2002/premium-quote-basis-scheme-1-0"><schemeValues><schemeValue name="Percentageofcallcurrencyamount"/><schemeValue name="Percentageofputcurrencyamount"/><schemeValue name="Callcurrencyperputcurrency"/><schemeValue name="Putcurrencypercallcurrency"/><schemeValue name="Explicit"/></schemeValues></scheme><scheme name="routingIdCodeScheme" uri="http://www.fpml.org/spec/2002/routing-id-code-scheme-1-0"><schemeValues><schemeValue name="ABA"/><schemeValue name="BIC"/><schemeValue name="ChipsUID"/><schemeValue name="ChapsNumber"/><schemeValue name="NatBankId"/><schemeValue name="IBAN"/></schemeValues></scheme><scheme name="settlementMethodScheme" uri="http://www.fpml.org/spec/2002/settlement-method-scheme-1-0"><schemeValues><schemeValue name="CLS"/><schemeValue name="Fedwire"/><schemeValue name="ChipsABA"/><schemeValue name="ChipsUID"/><schemeValue name="Chaps"/><schemeValue name="SWIFT"/><schemeValue name="DDA"/></schemeValues></scheme><scheme name="sideRateBasisScheme" uri="http://www.fpml.org/spec/2002/side-rate-basis-scheme-1-0"><schemeValues><schemeValue name="Currency1perbasecurrency"/><schemeValue name="Basecurrencypercurrency1"/><schemeValue name="Currency2perbasecurrency"/><schemeValue name="Basecurrencypercurrency2"/></schemeValues></scheme><scheme name="strikeQuoteBasisScheme" uri="http://www.fpml.org/spec/2002/strike-quote-basis-scheme-1-0"><schemeValues><schemeValue name="Putcurrencypercallcurrency"/><schemeValue name="Callcurrencyperputcurrency"/></schemeValues></scheme><scheme name="cutNameScheme" uri="http://www.fpml.org/spec/2002/cut-name-scheme-1-0"><schemeValues><schemeValue name="Comex"/><schemeValue name="Mexico"/><schemeValue name="NewYork"/><schemeValue name="NewYorkPgm"/><schemeValue name="LondonMorningGold"/><schemeValue name="ECB"/><schemeValue name="LondonEveningPgm"/><schemeValue name="LondonMorningPgm"/><schemeValue name="LondonEveningGold"/><schemeValue name="SilverLondon"/></schemeValues></scheme><scheme name="touchConditionScheme" uri="http://www.fpml.org/spec/2002/touch-condition-scheme-1-0"><schemeValues><schemeValue name="Touch"/><schemeValue name="Notouch"/></schemeValues></scheme><scheme name="triggerConditionScheme" uri="http://www.fpml.org/spec/2002/trigger-condition-scheme-1-0"><schemeValues><schemeValue name="Above"/><schemeValue name="Below"/></schemeValues></scheme><scheme name="countryScheme" source="config">
+		<schemeValues>
+			<schemeValue name="US"/>
+			<schemeValue name="UK"/>
+			<schemeValue name="FR"/>
+		</schemeValues>
+	</scheme><scheme name="standardSettlementStyleScheme" uri="http://www.fpml.org/spec/2002/standard-settlement-style-scheme-1-0"><schemeValues><schemeValue name="Standard"/><schemeValue name="Net"/><schemeValue name="StandardAndNet"/></schemeValues></scheme><scheme name="fxBarrierTypeScheme" uri="http://www.fpml.org/spec/2002/fx-barrier-type-1-0"><schemeValues><schemeValue name="Knockin"/><schemeValue name="Knockout"/><schemeValue name="Reverseknockin"/><schemeValue name="Reverseknockout"/></schemeValues></scheme><scheme name="clearanceSystemScheme" uri="http://www.fpml.org/spec/2002/clearance-system-scheme-1-0"><schemeValues><schemeValue name="Clearstream"/><schemeValue name="CREST"/><schemeValue name="DTCC"/><schemeValue name="Euroclear"/><schemeValue name="MonteTitoli"/></schemeValues></scheme><scheme name="contractualDefinitionsScheme" uri="http://www.fpml.org/spec/2002/contractual-definitions-scheme-1-0"><schemeValues><schemeValue name="ISDA1991" description="ISDA 1991 Definitions"/><schemeValue name="ISDA1996Equity" description="ISDA 1996 Equity Derivatives Definitions"/><schemeValue name="ISDA1997GovernmentBond" description="ISDA 1997 Government Bond Option Definitions"/><schemeValue name="ISDA1998FX" description="ISDA 1998 FX and Currency Option Definitions"/><schemeValue name="ISDA2000" description="ISDA 2000 Definitions"/><schemeValue name="ISDA2002Equity" description="ISDA 2002 Equity Derivatives Definitions"/><schemeValue name="ISDA1999Credit" description="ISDA 1999 Credit Derivatives Definitions"/><schemeValue name="ISDA2003Credit" description="ISDA 2003 Credit Derivatives Definitions"/></schemeValues></scheme><scheme name="exchangeIdScheme" source="config">
+		<schemeValues>
+			<schemeValue caption="FpML41" name="http://www.fpml.org/schemes/4.1/exchangeId"/>
+		</schemeValues>
+	</scheme><scheme name="governingLawScheme" uri="http://www.fpml.org/spec/2002/governing-law-scheme-1-0"><schemeValues><schemeValue name="CAAB" caption="Alberta law"/><schemeValue name="CABC" caption="British Columbia Law"/><schemeValue name="CAMN" caption="Manitoba law"/><schemeValue name="CAON" caption="Ontario law"/><schemeValue name="CAQC" caption="Quebec law"/><schemeValue name="DE" caption="German law"/><schemeValue name="FR" caption="French law"/><schemeValue name="GBEN" caption="English law"/><schemeValue name="GBGY" caption="The law of the island of Guernsey"/><schemeValue name="GBIM" caption="The law of the Isle of Man"/><schemeValue name="GBJY" caption="The law of the island of Jersey"/><schemeValue name="GBSC" caption="Scottish law"/><schemeValue name="JP" caption="Japanese law"/><schemeValue name="USCA" caption="Californian law"/><schemeValue name="USIL" caption="Illinois law"/><schemeValue name="USNY" caption="New York law"/></schemeValues></scheme><scheme name="instrumentIdScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue caption="FpML41" name="http://www.fpml.org/schemes/4.1/instrumentId"/>
+			<Schemevalue caption="Bloomberg" name="http://www.fpml.org/spec/2002/instrument-id-Bloomberg-1-0" description="Bloomberg ticker symbol"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0" caption="CUSIP" description="Committee on Uniform Securities Identification Procedures"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0" caption="ISIN" description="International Securities Identification Number"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-RIC-1-0" caption="Reuters" description="Reuters Instrument Code"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-SEDOL-1-0" caption="LSE" description="London Stock Exchange Daily Official List"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-Sicovam-1-0" caption="Sicovam" description="Sicovam code"/>
+		</schemeValues>
+	</scheme><scheme name="masterAgreementTypeScheme" uri="http://www.fpml.org/spec/2002/master-agreement-type-scheme-1-0"><schemeValues><schemeValue name="AFB" description="AFB Master Agreement for Foreign Exchange and Derivatives Transactions"/><schemeValue name="German" description="German Master Agreement for Financial derivatives and Addendum for Options on Stock Exchange Indices or Securities"/><schemeValue name="ISDA1987" description="ISDA 1987 Master Agreement"/><schemeValue name="ISDA1992" description="ISDA 1992 Master Agreement"/><schemeValue name="ISDA2002" description="ISDA 2002 Master Agreement"/><schemeValue name="Swiss" description="Swiss Master Agreement for OTC Derivatives Instruments"/></schemeValues></scheme><scheme name="methodOfAdjustmentScheme" uri="http://www.fpml.org/spec/2002/method-of-adjustment-scheme-1-0"><schemeValues><schemeValue name="CalculationAgent" description="The Calculation Agent has the right to adjust the terms of the trade following a corporate action."/><schemeValue name="OptionsExchange" description="The trade will be adjusted in accordance with any adjustment made by the exchange on which options on the underlying are listed."/></schemeValues></scheme><scheme name="nationalisationOrInsolvencyOrDelistingEventScheme" uri="http://www.fpml.org/spec/2002/nationalisation-or-insolvency-event-scheme-1-0"><schemeValues><schemeValue name="NegotiatedCloseout" description="The parties may, but are not obliged, to terminate the transaction on mutually acceptable terms and if the terms are not agreed then the transaction continues."/><schemeValue name="CancellationAndPayment" description="The trade is terminated."/></schemeValues></scheme><scheme name="optionTypeScheme" uri="http://www.fpml.org/spec/2002/option-type-scheme-1-0"><schemeValues><schemeValue name="Call"/><schemeValue name="Put"/><schemeValue name="Forward"/></schemeValues></scheme><scheme name="partyContactDetailsScheme" uri="http://www.fpml.org/spec/2002/party-contact-details-scheme-email-1-0"/><scheme name="settlementPriceSourceScheme" uri="http://www.fpml.org/spec/2002/settlement-price-source-scheme-1-0"><schemeValues><schemeValue name="Bid"/><schemeValue name="Offer"/><schemeValue name="Mid"/><schemeValue name="NASDAQ"/><schemeValue name="OfficialClose"/><schemeValue name="OfficialSettlement"/><schemeValue name="PrezzoDiRiferimento"/></schemeValues></scheme><scheme name="settlementTypeScheme" uri="http://www.fpml.org/spec/2002/settlement-type-scheme-1-0"><schemeValues><schemeValue name="Cash"/><schemeValue name="Physical"/></schemeValues></scheme><scheme name="shareExtraordinaryEventScheme" uri="http://www.fpml.org/spec/2002/share-extraordinary-event-scheme-1-0"><schemeValues><schemeValue name="AlternativeObligation" description="The trade continues on the consideration paid out to holders of the original shares."/><schemeValue name="CancellationAndPayment" description="The trade is terminated."/><schemeValue name="OptionsExchange" description="The trade will be adjusted in accordance with any adjustment made by the exchange on which options on the underlying are listed."/></schemeValues></scheme><scheme name="timeTypeScheme" uri="http://www.fpml.org/spec/2002/time-type-scheme-1-0"><schemeValues><schemeValue name="Close"/><schemeValue name="Open"/><schemeValue name="OSP"/><schemeValue name="SpecificTime"/><schemeValue name="XETRA"/></schemeValues></scheme><scheme name="partyIdScheme" uri="http://www.fpml.org/ext/iso9362"/><scheme name="masterAgreementTypeScheme" uri="http://www.fpml.org/spec/2002/master-agreement-type-1-0"><schemeValues><schemeValue name="AFB" description="AFB Master Agreement for Foreign Exchange and Derivatives Transactions"/><schemeValue name="German" description="German Master Agreement for Financial derivatives and Addendum for Options on Stock Exchange Indices or Securities"/><schemeValue name="ISDA1987" description="ISDA 1987 Master Agreement"/><schemeValue name="ISDA1992" description="ISDA 1992 Master Agreement"/><schemeValue name="ISDA2002" description="ISDA 2002 Master Agreement"/><schemeValue name="Swiss" description="Swiss Master Agreement for OTC Derivatives Instruments"/></schemeValues></scheme><scheme name="masterConfirmationTypeScheme" uri="http://www.fpml.org/spec/2003/master-confirmation-type-1-0"><schemeValues><schemeValue name="ISDA1999Credit" description="ISDA 1999 Master Credit Derivatives Confirmation Agreement"/><schemeValue name="ISDA2003CreditAsia" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Asia had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditAustraliaNewZealand" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Australia and New Zealand had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditEuropean" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if European had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditJapan" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Japan had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditNorthAmerican" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if North American had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSingapore" description="ISDA 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Singapore had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignAsia" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Asia had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignCentralAndEasternEurope" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Central and Eastern Europe had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignJapan" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Japan had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignLatinAmerica" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Latin America had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignMiddleEast" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Middle East had been specified as the relevant Transaction Type in the Transaction Supplement."/><schemeValue name="ISDA2003CreditSovereignWesternEurope" description="ISDA Sovereign 2003 Master Credit Derivatives Confirmation Agreement interpreted as if Western Europe had been specified as the relevant Transaction Type in the Transaction Supplement."/></schemeValues></scheme><scheme name="contractualDefinitionsScheme" uri="http://www.fpml.org/spec/2003/contractual-definitions-2-0"><schemeValues><schemeValue name="ISDA1991" description="ISDA 1991 Definitions"/><schemeValue name="ISDA1996Equity" description="ISDA 1996 Equity Derivatives Definitions"/><schemeValue name="ISDA1997GovernmentBond" description="ISDA 1997 Government Bond Option Definitions"/><schemeValue name="ISDA1998FX" description="ISDA 1998 FX and Currency Option Definitions"/><schemeValue name="ISDA2000" description="ISDA 2000 Definitions"/><schemeValue name="ISDA2002Equity" description="ISDA 2002 Equity Derivatives Definitions"/><schemeValue name="ISDA1999Credit" description="ISDA 1999 Credit Derivatives Definitions"/><schemeValue name="ISDA2003Credit" description="ISDA 2003 Credit Derivatives Definitions"/></schemeValues></scheme><scheme name="contractualSupplementScheme" uri="http://www.fpml.org/spec/2003/contractual-supplement-1-0"><schemeValues><schemeValue name="ISDA1999CreditRestructuring" description="Restructuring Supplement to the 1999 ISDA Credit Derivatives Definitions dated May 11, 2001."/><schemeValue name="ISDA1999CreditConvertibleExchangeableAccretingObligations" description="Supplement to the 1999 ISDA Credit Derivatives Definitions Relating to Convertible, Exchangeable or Accreting Obligations dated November 9, 2001."/><schemeValue name="ISDA1999CreditSuccessorAndCreditEvents" description="Supplement Relating to Successor and Credit Events to the 1999 ISDA Credit Derivatives Definitions dated November 28, 2001."/><schemeValue name="ISDA2003CreditMay2003" description="May 2003 Supplement to the 2003 ISDA Credit Derivatives Definitions."/><schemeValue name="ISDA2003CreditMonolineInsurers" description="Additional Provisions for Physically Settled Default Swaps Monoline Insurer as Reference Entity dated May 9, 2003."/><schemeValue name="ISDA2003CreditUSMunicipals" description="Additional Provisions for Credit Derivative Transactions - U.S. Municipal Entity as Reference Entity dated September 17, 2004."/><schemeValue name="ISDA2003CreditRussianFederation" description="Additional Provisions for the Russian Federation: Obligation Characteristics and Deliverable Obligation Characteristics dated August 13, 2004."/><schemeValue name="ISDA2003CreditRepublicOfHungary" description="Additional Provisions for the Republic of Hungary: Obligation Characteristics and Deliverable Obligation Characteristics dated August 13, 2004."/><schemeValue name="ISDA2003CreditRepublicOfHungary2005" description="Additional Provisions for the Republic of Hungary: Obligation Characteristics and Deliverable Obligation Characteristics dated February 14, 2005. "/><schemeValue name="ISDA2003CreditMonolineInsurers2005" description="Additional Provisions for Physically Settled Default Swaps Monoline Insurer as Reference Entity dated January 21, 2005."/><schemeValue name="ISDA2003Credit2005MatrixSupplement" description="2005 Matrix Supplement to the 2003 ISDA Credit Derivatives."/></schemeValues></scheme><scheme name="additionalTermScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="ISDA2003Credit60BusinessDaySettlementCap"/>
+		</schemeValues>
+	</scheme><scheme name="obligationCategoryScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="Payment"/>
+			<schemeValue name="BorrowedMoney"/>
+			<schemeValue name="ReferenceObligationsOnly"/>
+			<schemeValue name="Bond"/>
+			<schemeValue name="Load"/>
+			<schemeValue name="BondOrLoan"/>
+		</schemeValues>
+	</scheme><scheme name="valuationMethod" type="additional" source="config">
+		<schemeValues>
+		      <schemeValue name="Market"/>
+		      <schemeValue name="Highest"/>
+		      <schemeValue name="AverageMarket"/>
+		      <schemeValue name="AverageHighest"/>
+		      <schemeValue name="BlendedMarket"/>
+		      <schemeValue name="BlendedHighest"/>
+		      <schemeValue name="AverageBlendedMarket"/>
+		      <schemeValue name="AverageBlendedHighest"/>
+		</schemeValues>
+	</scheme><scheme name="restructuringScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="R"/>
+			<schemeValue name="ModR"/>
+			<schemeValue name="ModModR"/>
+		</schemeValues>
+	</scheme><scheme name="marketDisruptionScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="Omission"/>
+			<schemeValue name="Postponement"/>
+			<schemeValue name="ModifiedPostponement"/>
+		</schemeValues>
+	</scheme><scheme name="frequencyType" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="Day"/>
+			<schemeValue name="Business"/>
+		</schemeValues>
+	</scheme><scheme name="averagingInOut" type="additional" source="config">
+		<schemeValues>
+			<schemeValue name="In"/>
+			<schemeValue name="Out"/>
+			<schemeValue name="Both"/>
+		</schemeValues>
+	</scheme><scheme name="businessCenterReferenceScheme" type="additional" source="config">
+		<schemeValues>
+		  <Schemevalue name="S1EffDtBC" caption="Side1 Effective"/> 
+		  <Schemevalue name="S1MatDtBC" caption="Side1 Maturity"/> 
+		  <Schemevalue name="S1CalcPdBC" caption="Side1 Calc Periods"/> 
+		  <Schemevalue name="S1PmtBC" caption="Side1 Payments"/> 
+		  <Schemevalue name="S1ResetBC" caption="Side1 Resets"/> 
+		  <Schemevalue name="S1FixBC" caption="Side1 Fixings"/> 
+		  <Schemevalue name="S2EffDtBC" caption="Side2 Effective"/> 
+		  <Schemevalue name="S2MatDtBC" caption="Side2 Maturity"/> 
+		  <Schemevalue name="S2CalcPdBC" caption="Side2 Calc Periods"/> 
+		  <Schemevalue name="S2PmtBC" caption="Side2 Payments"/> 
+		  <Schemevalue name="S2ResetBC" caption="Side2 Resets"/> 
+		  <Schemevalue name="S2FixBC" caption="Side2 Fixings"/> 
+		</schemeValues>
+	</scheme><scheme name="resetRelToRef" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="S1CalcDates" caption="Side1 Calculation Dates"/> 
+			<Schemevalue name="S1PmtDates" caption="Side1 Payment Dates"/> 
+			<Schemevalue name="S1ResetDates" caption="Side1 Reset Dates"/> 
+			<Schemevalue name="S2CalcDates" caption="Side2 Calculation Dates"/> 
+			<Schemevalue name="S2PmtDates" caption="Side2 Payment Dates"/> 
+			<Schemevalue name="S2ResetDates" caption="Side2 Reset Dates"/> 
+		</schemeValues>
+	</scheme><scheme name="valScenarios" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Scen_1" caption="Scenario #1"/> 
+			<Schemevalue name="Scen_2" caption="Scenario #2"/> 
+			<Schemevalue name="Scen_3" caption="Scenario #3"/> 
+			<Schemevalue name="Scen_4" caption="Scenario #4"/> 
+			<Schemevalue name="Scen_5" caption="Scenario #5"/> 
+		</schemeValues>
+	</scheme><scheme name="valItemSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Trade_1tid-1" caption="Trade ID #1"/> 
+			<Schemevalue name="Trade_2tid-2" caption="Trade ID #2"/> 
+			<Schemevalue name="Trade_3tid-3" caption="Trade ID #3"/> 
+			<Schemevalue name="Trade_4tid-4" caption="Trade ID #4"/> 
+			<Schemevalue name="Trade_5tid-5" caption="Trade ID #5"/> 
+			<Schemevalue name="Trade_1" caption="Trade #1"/> 
+			<Schemevalue name="Trade_2" caption="Trade #2"/> 
+			<Schemevalue name="Trade_3" caption="Trade #3"/> 
+			<Schemevalue name="Trade_4" caption="Trade #4"/> 
+			<Schemevalue name="Trade_5" caption="Trade #5"/> 
+			<Schemevalue name="Port_1" caption="Portfolio #1"/> 
+			<Schemevalue name="Port_2" caption="Portfolio #2"/> 
+			<Schemevalue name="Port_3" caption="Portfolio #3"/> 
+			<Schemevalue name="Port_4" caption="Portfolio #4"/> 
+			<Schemevalue name="Port_5" caption="Portfolio #5"/> 
+		</schemeValues>
+	</scheme><scheme name="fixRelToRef" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="S1ResetDates" caption="Side1 Reset Dates"/> 
+			<Schemevalue name="S1PmtDates" caption="Side1 Payment Dates"/> 
+			<Schemevalue name="S2ResetDates" caption="Side2 Reset Dates"/> 
+			<Schemevalue name="S2PmtDates" caption="Side2 Payment Dates"/> 
+		</schemeValues>
+	</scheme><scheme name="notionalRefSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Notional" caption="Product Notional"/> 
+			<Schemevalue name="S1notionals" caption="Side1 Notionals"/> 
+			<Schemevalue name="S2notionals" caption="Side2 Notionals"/> 
+		</schemeValues>
+	</scheme><scheme name="OptionPartyScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="NonExerciseingParty"/> 
+			<Schemevalue name="ExerciseingParty"/> 
+		</schemeValues>
+	</scheme><scheme name="payRelToRef" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="S1CalcDates" caption="Side1 Calculation Dates"/> 
+			<Schemevalue name="S1ResetDates" caption="Side1 Reset Dates"/> 
+			<Schemevalue name="S2CalcDates" caption="Side2 Calculation Dates"/> 
+			<Schemevalue name="S2ResetDates" caption="Side2 Reset Dates"/> 
+		</schemeValues>
+	</scheme><scheme name="partyRefSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Party_1" caption="Party 1"/> 
+			<Schemevalue name="Party_2" caption="Party 2"/> 
+			<Schemevalue name="Party_3" caption="Party 3"/> 
+			<Schemevalue name="Party_4" caption="Party 4"/> 
+		</schemeValues>
+	</scheme><scheme name="partyOrSideRefSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Party_1" caption="Party 1"/> 
+			<Schemevalue name="Party_2" caption="Party 2"/> 
+			<Schemevalue name="Party_3" caption="Party 3"/> 
+			<Schemevalue name="Party_4" caption="Party 4"/> 
+			<Schemevalue name="TradeSide_1" caption="Side 1"/> 
+			<Schemevalue name="TradeSide_2" caption="Side 2"/> 
+		</schemeValues>
+	</scheme><scheme name="accountRefSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Party_1account1" caption="Party 1 / Acct 1"/> 
+			<Schemevalue name="Party_1account2" caption="Party 1 / Acct 2"/> 
+			<Schemevalue name="Party_2account1" caption="Party 2 / Acct 1"/> 
+			<Schemevalue name="Party_2account2" caption="Party 2 / Acct 2"/> 
+			<Schemevalue name="Party_3account1" caption="Party 3 / Acct 1"/> 
+			<Schemevalue name="Party_3account2" caption="Party 3 / Acct 2"/> 
+		</schemeValues>
+	</scheme><scheme name="quoteBasis" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="CURRENCY1PERCURRENCY2" caption="Ccy1/Ccy2"/> 
+			<Schemevalue name="CURRENCY2PERCURRENCY1" caption="Ccy2/Ccy1"/> 
+		</schemeValues>
+	</scheme><scheme name="dividendEntitlement" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="ExDate" caption="Ex-date"/> 
+			<Schemevalue name="RecordDate" caption="Record Date"/> 
+		</schemeValues>
+	</scheme><scheme name="dividendAmountType" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="RecordAmount" caption="Record Amount"/> 
+			<Schemevalue name="ExAmount" caption="Ex-Amount"/> 
+			<Schemevalue name="PaidAmount" caption="Paid Amount"/> 
+		</schemeValues>
+	</scheme><scheme name="amountRelativeTo" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="EqNotionalAmount" caption="Equity Notional Amount"/> 
+			<Schemevalue name="IntNotionalAmount" caption="Interest Notional Amount"/> 
+		</schemeValues>
+	</scheme><scheme name="eqsCurrencyRef" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="EqPaymentCurrency" caption="Equity Payment Currency"/> 
+			<Schemevalue name="IntPaymentCurrency" caption="Interest Payment Currency"/> 
+			<Schemevalue name="EqFX1ReferenceCurrency" caption="Reference Currency"/> 
+		</schemeValues>
+	</scheme><scheme name="dividendDateReference" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="ExDate" caption="Ex-Date"/> 
+			<Schemevalue name="DividendPaymentDate" caption="Payment Date"/> 
+			<Schemevalue name="RecordDate" caption="Record Date"/> 
+			<Schemevalue name="TerminationDate" caption="Termination Date"/> 
+			<Schemevalue name="EquityPaymentDate" caption="Payment Date"/> 
+			<Schemevalue name="FollowingPaymentDate" caption="Following Payment Date"/> 
+			<Schemevalue name="IntCalcDates" caption="Interest Leg Calc Dates"/> 
+			<Schemevalue name="EqPmtDates" caption="Equity Payment Dates"/> 
+		</schemeValues>
+	</scheme><scheme name="premiumType" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="PrePaid"/> 
+			<Schemevalue name="PostPaid"/> 
+			<Schemevalue name="Variable"/> 
+			<Schemevalue name="Fixed"/> 
+		</schemeValues>
+	</scheme><scheme name="indexEventConsequence" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="CalculationAgentAdjustment"/> 
+			<Schemevalue name="NegotiatedCloseout"/> 
+			<Schemevalue name="CancellationAndPayment"/> 
+		</schemeValues>
+	</scheme><scheme name="productType" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="FXSWAP"/> 
+			<Schemevalue name="Delta-Put-FX-Option"/>
+			<Schemevalue name="Delta-Call-FX-Option"/> 
+			<Schemevalue name="American FX Option"/> 
+			<Schemevalue name="European FX Option"/> 
+			<Schemevalue name="Nondeliverable Option"/> 
+			<Schemevalue name="DOUBLEBARRIER"/> 
+			<Schemevalue name="Euro Binary"/> 
+			<Schemevalue name="Euro Range Binary"/> 
+			<Schemevalue name="One Touch"/> 
+			<Schemevalue name="No Touch"/> 
+			<Schemevalue name="Double one touch"/> 
+			<Schemevalue name="Double no touch"/> 
+			<Schemevalue name="Straddle"/> 
+			<Schemevalue name="Delta-Hedge"/> 
+			<Schemevalue name="Spot-Hedge"/> 
+			<Schemevalue name="Overnight Term Deposit"/> 
+		</schemeValues>
+	</scheme><scheme name="rateSourcePageScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="EUR="/> 
+			<Schemevalue name="USD="/> 
+			<Schemevalue name="JPY="/> 
+			<Schemevalue name="GPB="/> 
+		</schemeValues>
+	</scheme><scheme name="entityIdScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue caption="RED" name="http://www.fpml.org/spec/2003/entity-id-RED-1-0"/>
+		</schemeValues>
+	</scheme><scheme name="instrumentIdScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue caption="FpML41" name="http://www.fpml.org/schemes/4.1/instrumentId"/>
+			<Schemevalue caption="Bloomberg" name="http://www.fpml.org/spec/2002/instrument-id-Bloomberg-1-0" description="Bloomberg ticker symbol"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0" caption="CUSIP" description="Committee on Uniform Securities Identification Procedures"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0" caption="ISIN" description="International Securities Identification Number"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-RIC-1-0" caption="Reuters" description="Reuters Instrument Code"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-SEDOL-1-0" caption="LSE" description="London Stock Exchange Daily Official List"/>
+			<Schemevalue name="http://www.fpml.org/spec/2002/instrument-id-Sicovam-1-0" caption="Sicovam" description="Sicovam code"/>
+		</schemeValues>
+	</scheme><scheme name="equityOptionDateReference" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeDate"/> 
+			<Schemevalue name="Expiration"/> 
+			<Schemevalue name="FinalValuation"/> 
+			<Schemevalue name="Valuation"/> 
+		</schemeValues>
+	</scheme><scheme name="equityForwardDateReference" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeDate" caption="Trade Date"/> 
+			<Schemevalue name="FinalValuation" caption="Final Valuation Date"/> 
+		</schemeValues>
+	</scheme><scheme name="equitySwapDateReference" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeDate" caption="Trade Date"/> 
+			<Schemevalue name="EqEffectiveDate" caption="Effective Date"/> 
+			<Schemevalue name="EqTerminationDate" caption="Termination Date"/> 
+			<Schemevalue name="EqInterimValuationDate" caption="Interim Valuation Date"/> 
+			<Schemevalue name="EqFinalValuationDate" caption="Final Valuation Date"/> 
+			<Schemevalue name="EqFinalPmtDate" caption="Final Equity Payment Date"/> 
+		</schemeValues>
+	</scheme><scheme name="commissionDenom" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="BPS" caption="Basis Points"/> 
+			<Schemevalue name="Percentage" caption="Percentage"/> 
+			<Schemevalue name="CentsPerShare" caption="Cents Per Share"/> 
+			<Schemevalue name="FixedAmount" caption="Fixed Amount"/> 
+		</schemeValues>
+	</scheme><scheme name="priceExpression" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="AbsoluteTerms" caption="Absolute Terms"/> 
+			<Schemevalue name="PercentageOfNotional" caption="Percentage Of Notional"/> 
+		</schemeValues>
+	</scheme><scheme name="legAmountScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="ISDA Standard"/> 
+		</schemeValues>
+	</scheme><scheme name="returnTypeScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Dividend"/> 
+			<Schemevalue name="Price"/> 
+			<Schemevalue name="Total"/> 
+		</schemeValues>
+	</scheme><scheme name="weeklyRollConvention" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="MON"/> 
+			<Schemevalue name="TUE"/> 
+			<Schemevalue name="WED"/> 
+			<Schemevalue name="THU"/> 
+			<Schemevalue name="FRI"/> 
+			<Schemevalue name="SAT"/> 
+			<Schemevalue name="SUN"/> 
+		</schemeValues>
+	</scheme><scheme name="notionalAdjustments" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Execution"/> 
+			<Schemevalue name="PortfolioRebalancing"/> 
+			<Schemevalue name="Standard"/> 
+		</schemeValues>
+	</scheme><scheme name="valuationSetDetail" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Summary"/> 
+		</schemeValues>
+	</scheme><scheme name="measureSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="NPV" caption="Net Present Value"/> 
+			<Schemevalue name="NPVLocalCurrency" caption="NPV in Local CCY"/> 
+			<Schemevalue name="ImpliedVolatility" caption="Implied Volatility"/> 
+		</schemeValues>
+	</scheme><scheme name="scheduledDateTypeSelector" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="NextReset"/> 
+			<Schemevalue name="PreviousReset"/> 
+			<Schemevalue name="NextPayment"/> 
+			<Schemevalue name="PreviousPayment"/> 
+		</schemeValues>
+	</scheme><scheme name="quoteUnits" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Shares"/> 
+		</schemeValues>
+	</scheme><scheme name="quoteSide" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Ask"/> 
+			<Schemevalue name="Mid"/> 
+			<Schemevalue name="Bid"/> 
+		</schemeValues>
+	</scheme><scheme name="quoteTiming" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Open"/> 
+			<Schemevalue name="Close"/> 
+			<Schemevalue name="Settle"/> 
+		</schemeValues>
+	</scheme><scheme name="DataDocTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="DataDocument" caption="None"/>
+		</schemeValues>
+	</scheme><scheme name="positionReport" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="PositionReport" caption="None"/>
+		</schemeValues>
+	</scheme><scheme name="ValuationDocTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="ValuationDocument" caption="None"/>
+		</schemeValues>
+	</scheme><scheme name="tradeMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="RequestTradeConfirmation" caption="Request Trade Confirmation"/>
+			<Schemevalue name="ModifyTradeConfirmation" caption="Modify Trade Confirmation"/>
+			<Schemevalue name="RequestTradeMatch" caption="Request Trade Match"/>
+			<Schemevalue name="ModifyTradeMatch" caption="Modify Trade Match"/>
+			<Schemevalue name="TradeCreated" caption="Trade Created"/>
+			<Schemevalue name="TradeAmended" caption="Trade Amended"/>
+		</schemeValues>
+	</scheme><scheme name="terminationMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeTerminationRequest" caption="Termination Request"/>
+			<Schemevalue name="TradeTerminationResponse" caption="Termination Response"/>
+			<Schemevalue name="RequestTerminationConfirmation" caption="Request Termination Confirmation"/>
+			<Schemevalue name="TerminationConfirmed" caption="Termination Confirmed"/>
+		</schemeValues>
+	</scheme><scheme name="creditEventMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Credit Event Notification" caption="Credit Event Notification"/>
+		</schemeValues>
+	</scheme><scheme name="cancellationMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeCancelled" caption="Trade Cancelled"/>
+		</schemeValues>
+	</scheme><scheme name="cancelConfMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="CanceTradeConfirmation" caption="Confirmation Cancelled"/>
+		</schemeValues>
+	</scheme><scheme name="requestAllocationMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="RequestAllocation" caption="Request Allocation"/>
+		</schemeValues>
+	</scheme><scheme name="allocationCreatedMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="AllocationCreated" caption="Create Allocation"/>
+		</schemeValues>
+	</scheme><scheme name="allocationAmendedMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="AllocationAmended" caption="Amend Allocation"/>
+		</schemeValues>
+	</scheme><scheme name="allocationCancelledMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="AllocationCancelled" caption="Cancel Allocation"/>
+		</schemeValues>
+	</scheme><scheme name="increaseMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeIncreaseRequest" caption="Increase Request"/>
+			<Schemevalue name="TradeIncreaseResponse" caption="Increase Response"/>
+			<Schemevalue name="RequestIncreaseConfirmation" caption="Request Increase Confirmation"/>
+			<Schemevalue name="IncreaseConfirmed" caption="Increase Confirmed"/>
+		</schemeValues>
+	</scheme><scheme name="amendmentMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeAmendmentRequest" caption="Amendment Request"/>
+			<Schemevalue name="TradeAmendmentResponse" caption="Amendment Response"/>
+			<Schemevalue name="RequestAmendmentConfirmation" caption="Request Amendment Confirmation"/>
+			<Schemevalue name="AmendmentConfirmed" caption="Amendment Confirmed"/>
+		</schemeValues>
+	</scheme><scheme name="novationMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="TradeNovated" caption="Trade Novated"/>
+			<Schemevalue name="NovationAlleged" caption="Novation Alleged"/>
+			<Schemevalue name="NovationMatched" caption="Novation Matched"/>
+			<Schemevalue name="RequestNovationConfirmation" caption="Request Novation Confirmation"/>
+			<Schemevalue name="NovationConfirmed" caption="Novation Confirmed"/>
+			<Schemevalue name="NovationConsentRequest" caption="Novation Consent Request"/>
+			<Schemevalue name="NovationConsentGranted" caption="Novation Consent Granted"/>
+			<Schemevalue name="NovationConsentRefused" caption="Novation Consent Refused"/>
+			<Schemevalue name="NovationStatusNotification" caption="Novation Status Notification"/>
+			<Schemevalue name="NovationConfirmed" caption="Novation Confirmed"/>
+		</schemeValues>
+	</scheme><scheme name="valuationMessageTypes" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="RequestValuationReport" caption="Request Valuation"/>
+			<Schemevalue name="ValuationReport" caption="Valuation Report"/>
+		</schemeValues>
+	</scheme><scheme name="resourceIdScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="text/html" caption="HTML"/>
+			<Schemevalue name="text/xml" caption="XML"/>
+			<Schemevalue name="app/pdf" caption="PDF"/>
+		</schemeValues>
+	</scheme><scheme name="lengthScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Pages" caption="Pages"/>
+			<Schemevalue name="Words" caption="Words"/>
+		</schemeValues>
+	</scheme><scheme name="mimeScheme" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="text/html" caption="HTML"/>
+			<Schemevalue name="text/xml" caption="XML"/>
+			<Schemevalue name="app/pdf" caption="PDF"/>
+		</schemeValues>
+	</scheme><scheme name="sensitivities" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Input1" caption="Pricing Input #1"/> 
+			<Schemevalue name="Input2" caption="Pricing Input #2"/> 
+			<Schemevalue name="Input3" caption="Pricing Input #3"/> 
+		</schemeValues>
+	</scheme><scheme name="queryParameterOperator" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Equals" caption="="/> 
+			<Schemevalue name="LessThan" caption="&lt;"/> 
+			<Schemevalue name="GreaterThan" caption="&gt;"/> 
+			<Schemevalue name="NotEquals" caption="&lt;&gt;"/> 
+		</schemeValues>
+	</scheme><scheme name="queryParameterIdScheme" type="additional" source="config">
+		<schemeValues>
+			<schemeValue caption="FpML42" name="http://www.fpml.org//spec/2004/query-parameter-id-1-0"/>
+		</schemeValues>
+	</scheme><scheme name="cashFlowType" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="Coupon"/>
+			<Schemevalue name="Premium"/>
+			<Schemevalue name="Brokerage Fee"/>
+			<Schemevalue name="Exercise Fee"/>
+		</schemeValues>
+	</scheme><scheme name="markets" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="DefaultMarket" caption="Market #1"/> 
+			<!--
+			<Schemevalue name="Market_1" caption="Market #1" /> 
+			<Schemevalue name="Market_2" caption="Market #2" /> 
+			<Schemevalue name="Market_3" caption="Market #3" /> 
+			-->
+		</schemeValues>
+	</scheme><scheme name="spreadSchedules" type="additional" source="config">
+		<schemeValues>
+			<Schemevalue name="IntSpreadSchedule_1" caption="Spread Schedule #1"/> 
+			<Schemevalue name="IntSpreadSchedule_2" caption="Spread Schedule #2"/> 
+			<Schemevalue name="IntSpreadSchedule_3" caption="Spread Schedule #3"/> 
+			<Schemevalue name="IntSpreadSchedule_4" caption="Spread Schedule #4"/> 
+			<Schemevalue name="IntSpreadSchedule_5" caption="Spread Schedule #5"/> 
+			<Schemevalue name="IntSpreadSchedule_6" caption="Spread Schedule #6"/> 
+			<Schemevalue name="IntSpreadSchedule_7" caption="Spread Schedule #7"/> 
+			<Schemevalue name="IntSpreadSchedule_8" caption="Spread Schedule #8"/> 
+			<Schemevalue name="IntSpreadSchedule_9" caption="Spread Schedule #9"/> 
+		</schemeValues>
+	</scheme></schemeDefinitions>

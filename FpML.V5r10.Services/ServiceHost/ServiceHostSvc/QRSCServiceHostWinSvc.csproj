@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B816B92B-7972-4011-8F7C-6A9B80C83B48}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QRSCServiceHostWinSvc</RootNamespace>
+    <AssemblyName>QRSCServiceHost</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\..\..\Common\Keys\National.QRSC.Key.Net4.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Extreme.Numerics">
+      <HintPath>..\..\..\External\ExtremeOptRunTime\Version2.2\Extreme.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ServiceHost.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServiceHost.Designer.cs">
+      <DependentUpon>ServiceHost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.3.3\National.QRSC.Runtime.3.3.Client.csproj">
+      <Project>{725FEAA0-7035-415B-96CB-43732ACE6529}</Project>
+      <Name>National.QRSC.Runtime.3.3.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Runtime\Runtime.Common\National.QRSC.Runtime.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>National.QRSC.Runtime.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\nabCap.QR.Utility\National.QRSC.Utility.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>National.QRSC.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FileImporter\National.QRSC.Server.FileImporter.csproj">
+      <Project>{888C6B6A-D4CF-4EDC-A7DD-09C14FA22201}</Project>
+      <Name>National.QRSC.Server.FileImporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\MarketDataProviders\QrMdpBloomberg\QrMdpBloomberg.csproj">
+      <Project>{5C8070D4-064A-46D4-99B9-CE7C59178265}</Project>
+      <Name>QrMdpBloomberg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMarketDataServer\QRMarketDataServer.csproj">
+      <Project>{F18A2DAE-2D4A-4BD8-8259-68B2E33CD7DB}</Project>
+      <Name>QRMarketDataServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMdpBaseProvider\QRMdpBaseProvider.csproj">
+      <Project>{55CF8F66-9151-4F03-A777-779B59EABB85}</Project>
+      <Name>QRMdpBaseProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QrMdpNabCapital\QrMdpNabCapital.csproj">
+      <Project>{95430EDB-5138-40C9-98F8-5CBD04CFA17F}</Project>
+      <Name>QrMdpNabCapital</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MarketDataServer\QRMdpSimulator\QRMdpSimulator.csproj">
+      <Project>{99E42D7B-7C3B-4B80-A7C3-AE4CBDB44988}</Project>
+      <Name>QRMdpSimulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceHost\National.QRSC.Server.ServiceHost.csproj">
+      <Project>{6D3F9A56-4662-4B15-B935-F56636EF5BEA}</Project>
+      <Name>National.QRSC.Server.ServiceHost</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Common\Keys\National.QRSC.Key.Net4.snk">
+      <Link>National.QRSC.Key.Net4.snk</Link>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ServiceHost.resx">
+      <DependentUpon>ServiceHost.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

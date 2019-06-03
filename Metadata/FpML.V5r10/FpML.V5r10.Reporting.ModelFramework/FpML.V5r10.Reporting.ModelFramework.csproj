@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{551358AF-6BC4-44CA-B524-D669519F1868}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r10.Reporting.ModelFramework</RootNamespace>
+    <AssemblyName>FpML.V5r10.Reporting.ModelFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\AssetControllerBase.cs" />
+    <Compile Include="Assets\AssetControllerData.cs" />
+    <Compile Include="Assets\IPriceableClearedRateAssetController.cs" />
+    <Compile Include="Assets\IPriceableCommodityFuturesAssetController.cs" />
+    <Compile Include="Assets\IPriceableCommodityFuturesOptionAssetController.cs" />
+    <Compile Include="Assets\IPriceableCommoditySpreadAssetController.cs" />
+    <Compile Include="Assets\IPriceableFuturesAssetController.cs" />
+    <Compile Include="Assets\IPriceableFuturesOptionAssetController.cs" />
+    <Compile Include="Assets\IPriceableFxRateCashflow.cs" />
+    <Compile Include="Assets\IPriceableFloatingCashflow.cs" />
+    <Compile Include="Assets\IPriceablePropertyAssetController.cs" />
+    <Compile Include="Assets\IPriceablePropertyRateAssetController.cs" />
+    <Compile Include="Identifiers\IFixedIncomeIdentifier.cs" />
+    <Compile Include="Identifiers\IAssetIdentifier.cs" />
+    <Compile Include="Instruments\Equity\IPriceableEquityTransaction.cs" />
+    <Compile Include="Instruments\ForeignExchange\IPriceableFxCashflow.cs" />
+    <Compile Include="Assets\IPriceableCapFloorCoupon.cs" />
+    <Compile Include="Assets\IPriceableCashflow.cs" />
+    <Compile Include="Assets\IPriceableRateSpreadAssetController.cs" />
+    <Compile Include="Assets\IPriceableComplexRateCoupon.cs" />
+    <Compile Include="Assets\IPriceableCoupon.cs" />
+    <Compile Include="Assets\IPriceableFixedRateCoupon.cs" />
+    <Compile Include="Assets\IPriceableFloatingRateCoupon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assets\IPriceableRateCoupon.cs" />
+    <Compile Include="Assets\IPriceableOptionAssetController.cs" />
+    <Compile Include="Assets\IPriceableBondAssetController.cs" />
+    <Compile Include="Assets\IPriceableRateOptionAssetController.cs" />
+    <Compile Include="Assets\IPriceableSpreadAssetController.cs" />
+    <Compile Include="Assets\IPriceableRepoAssetController.cs" />
+    <Compile Include="Assets\IPriceableDividendAssetController.cs" />
+    <Compile Include="Assets\IPriceableEquityAssetController.cs" />
+    <Compile Include="Assets\IPriceableCreditAssetController.cs" />
+    <Compile Include="Assets\IPriceableFxAssetController.cs" />
+    <Compile Include="Assets\IAssetControllerData.cs" />
+    <Compile Include="Assets\IPriceableCommodityAssetController.cs" />
+    <Compile Include="Assets\IPriceableInflationAssetController.cs" />
+    <Compile Include="Assets\IPriceableRateAssetController.cs" />
+    <Compile Include="Business\CalendarBase.cs" />
+    <Compile Include="Business\DayCounterBase.cs" />
+    <Compile Include="Calibrators\Bootstrappers\BootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\BootstrapControllerData.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleSpreadBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleRepoBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleDividendBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleEquityBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleInflationBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleCreditBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableSpreadAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableRepoAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableDividendAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableEquityAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableInflationAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableCreditAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableFxAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableCommodityAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleFxBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableRateAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleCommodityBootstrapper.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapPriceableAssetController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableCommodityAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableCreditAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableDividendAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableEquityAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableFxAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableInflationAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableRateAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableRepoAssetBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\PriceableSpreadAssetBootstrapController.cs" />
+    <Compile Include="Instruments\Futures\IPriceableFutureTransaction.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableBondTransaction.cs" />
+    <Compile Include="Instruments\Property\IPriceablePropertyTransaction.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="ICurveEngine.cs" />
+    <Compile Include="Instruments\ForeignExchange\IPriceableTermDeposit.cs" />
+    <Compile Include="IPortfolioPricer.cs" />
+    <Compile Include="IBusinessCalendar.cs" />
+    <Compile Include="IDayCounter.cs" />
+    <Compile Include="Instruments\ForeignExchange\IPriceableFxLeg.cs" />
+    <Compile Include="Instruments\ForeignExchange\IPriceableFxSwap.cs" />
+    <Compile Include="Identifiers\IPricingStructureIdentifier.cs" />
+    <Compile Include="ITradePricer.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFra.cs" />
+    <Compile Include="Identifiers\IValuationReportIdentifier.cs" />
+    <Compile Include="IValuationService.cs" />
+    <Compile Include="MarketEnvironmentBase.cs" />
+    <Compile Include="MarketEnvironmentRegistry.cs" />
+    <Compile Include="Helpers\ClassFactory.cs" />
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
+    <Compile Include="IDiscreteSpace.cs" />
+    <Compile Include="IMarketInstrument.cs" />
+    <Compile Include="IMetricsCalculation.cs" />
+    <Compile Include="Instruments\MarketInstrument.cs" />
+    <Compile Include="Instruments\IInstrumentControllerData.cs" />
+    <Compile Include="IInterpolatedSpace.cs" />
+    <Compile Include="IInterpolation.cs" />
+    <Compile Include="IModelAnalytic.cs" />
+    <Compile Include="IModelController.cs" />
+    <Compile Include="IAnalyticParameters.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapController.cs" />
+    <Compile Include="Calibrators\Bootstrappers\IBootstrapControllerData.cs" />
+    <Compile Include="IController.cs" />
+    <Compile Include="IIdentifier.cs" />
+    <Compile Include="IIndex.cs" />
+    <Compile Include="IMarketEnvironment.cs" />
+    <Compile Include="Instruments\InstrumentControllerBase.cs" />
+    <Compile Include="Instruments\InstrumentControllerData.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableCashflow.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFloorlet.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableRateOption.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableCaplet.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFloatingRateCoupon.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableRateCoupon.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableCapFloor.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableRateOptionStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFloorStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableCapStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFixedInterestRateStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableFloatingInterestRateStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableInterestRateStream.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableInterestRateSwaption.cs" />
+    <Compile Include="Instruments\InterestRates\IPriceableInterestRateSwap.cs" />
+    <Compile Include="IPoint.cs" />
+    <Compile Include="IPointFunction.cs" />
+    <Compile Include="Assets\IPriceableAssetController.cs" />
+    <Compile Include="Instruments\IPriceableInstrumentController.cs" />
+    <Compile Include="MarketEnvironments\IFxLegEnvironment.cs" />
+    <Compile Include="MarketEnvironments\IMarketEnvironmentIdentifier.cs" />
+    <Compile Include="MarketEnvironments\ISimpleCommodityMarketEnvironment.cs" />
+    <Compile Include="MarketEnvironments\ISimpleFxMarketEnvironment.cs" />
+    <Compile Include="MarketEnvironments\ISimpleMarketEnvironment.cs" />
+    <Compile Include="MarketEnvironments\ISwapLegEnvironment.cs" />
+    <Compile Include="MarketEnvironments\ISimpleRateMarketEnvironment.cs" />
+    <Compile Include="MarketEnvironments\MarketEnvironment.cs" />
+    <Compile Include="MarketEnvironments\SimpleMarketEnvironment.cs" />
+    <Compile Include="ModelAnalyticBase.cs" />
+    <Compile Include="ModelControllerBase.cs" />
+    <Compile Include="PricingStructures\IExchangeTradedCurve.cs" />
+    <Compile Include="PricingStructures\IPropertyRateCurve.cs" />
+    <Compile Include="PricingStructures\ISecuredRateCurve.cs" />
+    <Compile Include="PricingStructures\IBondCurve.cs" />
+    <Compile Include="PricingStructures\ICurve.cs" />
+    <Compile Include="PricingStructures\IDiscountCurve.cs" />
+    <Compile Include="PricingStructures\IStrikeVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\ISwaptionATMVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\IVolatilityCube.cs" />
+    <Compile Include="PricingStructures\IVolatilitySurface.cs" />
+    <Compile Include="PricingStructures\ICommodityCurve.cs" />
+    <Compile Include="PricingStructures\IInflationCurve.cs" />
+    <Compile Include="PricingStructures\ISpreadCurve.cs" />
+    <Compile Include="PricingStructures\IDividendCurve.cs" />
+    <Compile Include="PricingStructures\IEquityCurve.cs" />
+    <Compile Include="PricingStructures\ICreditCurve.cs" />
+    <Compile Include="PricingStructures\IRepoCurve.cs" />
+    <Compile Include="PricingStructures\IFxCurve.cs" />
+    <Compile Include="PricingStructures\IRateCurve.cs" />
+    <Compile Include="PricingStructures\IVolatilitySurface2.cs" />
+    <Compile Include="PricingStructures\PricingStructureBase.cs" />
+    <Compile Include="IPricingStructure.cs" />
+    <Compile Include="IRateIndex.cs" />
+    <Compile Include="Calibrators\Bootstrappers\ISimpleRateBootstrapper.cs" />
+    <Compile Include="IValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReporterBase.cs" />
+    <Compile Include="Trades\IPartyIdentifier.cs" />
+    <Compile Include="Trades\ITradeIdentifier.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+    <None Include="Migrated rules for National.QRSC.ModelFramework.ruleset" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Codes\FpML.V5r10.Codes.csproj">
+      <Project>{9003b832-35d4-45b7-9b85-6d23a1984523}</Project>
+      <Name>FpML.V5r10.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Reporting.Helpers\FpML.V5r10.Reporting.Helpers.csproj">
+      <Project>{2ab71510-a56b-4acc-bad0-eb0bc95f31d7}</Project>
+      <Name>FpML.V5r10.Reporting.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Reporting\FpML.V5r10.Reporting.csproj">
+      <Project>{560374aa-175b-49f5-aed1-813ba1aeb713}</Project>
+      <Name>FpML.V5r10.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="WSTP 0 08/18/14" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU000WBCHAI2 Corp Isin</instrumentId>
+  <description>WSTP 0 08/18/14</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>WSTP</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Float</couponType>
+  <couponRate>0.047383</couponRate>
+  <maturity>2014-08-18</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>3</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+</bond>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Stock>
+  <Name>NUF</Name>
+  <AssetId>NUF</AssetId>
+  <VolatilitySurface>
+    <StockId>NUF</StockId>
+    <Date>2009-09-09T00:00:00</Date>
+    <IsComplete>false</IsComplete>
+    <Expiries>
+      <ForwardExpiry>
+        <ExpiryDate>2009-12-17T00:00:00</ExpiryDate>
+        <FwdPrice>1114.951811</FwdPrice>
+        <InterestRate>0.034375</InterestRate>
+        <NodalPoint>true</NodalPoint>
+        <Strikes>
+          <Strike>
+            <Call>
+              <ContractId>NUF09DEC1200C.BF7</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Call</Type>
+              <Volatility>
+                <Value>0.451284</Value>
+              </Volatility>
+            </Call>
+            <Put>
+              <ContractId>NUF09DEC1200P.B97</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Put</Type>
+              <Volatility>
+                <Value>0.432925</Value>
+              </Volatility>
+            </Put>
+            <Moneyness>1.0762796994102555</Moneyness>
+            <StrikePrice>1200</StrikePrice>
+            <Volatility>
+              <Value>0.44210450</Value>
+            </Volatility>
+            <VolatilityHasBeenSet>true</VolatilityHasBeenSet>
+          </Strike>
+        </Strikes>
+      </ForwardExpiry>
+    </Expiries>
+  </VolatilitySurface>
+</Stock>

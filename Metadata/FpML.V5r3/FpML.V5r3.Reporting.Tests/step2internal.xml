@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<terminatingEventsReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-3" actualBuild="4" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <header>
+    <messageId messageIdScheme="scheme/1.0">12345678</messageId>
+    <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
+    <sendTo messageAddressScheme="scheme/1.0">client@company.com</sendTo>
+  </header>
+  <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
+  <party id="Party0">
+    <partyId partyIdScheme="scheme/1.0">Participant 0</partyId>
+  </party>
+  <party id="Party1">
+    <partyId partyIdScheme="scheme/1.0">Participant 1</partyId>
+  </party>
+  <account id="Account0">
+    <accountId accountIdScheme="scheme/1.0">Account0_Id</accountId>
+    <accountName accountNameScheme="scheme/1.0">Account0_Name</accountName>
+    <accountBeneficiary href="Party0" />
+  </account>
+</terminatingEventsReport>

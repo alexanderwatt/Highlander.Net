@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.FxCurve.NZD-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="NZD-USD">
+    <name>NZD-USD</name>
+    <currency>NZD</currency>
+    <quotedCurrencyPair>
+      <currency1>NZD</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="NZD-USD">
+    <baseDate>2010-08-30</baseDate>
+    <spotDate id="SpotDate">2010-09-01</spotDate>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-12M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="NZDUSD-FxForward-5Y" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-ON" />
+        <quote>
+          <value>0.7103595</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZDON BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-TN" />
+        <quote>
+          <value>0.7103055</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZDTN BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxSpot-SP" />
+        <quote>
+          <value>0.7103</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-1W" />
+        <quote>
+          <value>0.70991</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD1W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-2W" />
+        <quote>
+          <value>0.709506</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD2W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-3W" />
+        <quote>
+          <value>0.709106</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD3W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-1M" />
+        <quote>
+          <value>0.708609</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD1M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-2M" />
+        <quote>
+          <value>0.706797</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD2M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-3M" />
+        <quote>
+          <value>0.705008</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD3M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-4M" />
+        <quote>
+          <value>0.702956</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD4M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-5M" />
+        <quote>
+          <value>0.70135</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD5M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-6M" />
+        <quote>
+          <value>0.699685</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD6M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-9M" />
+        <quote>
+          <value>0.694025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD9M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-12M" />
+        <quote>
+          <value>0.68827</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD12M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-15M" />
+        <quote>
+          <value>0.6825</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD15M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-18M" />
+        <quote>
+          <value>0.67681</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD18M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-2Y" />
+        <quote>
+          <value>0.665453</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD2Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-3Y" />
+        <quote>
+          <value>0.645215</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD3Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-4Y" />
+        <quote>
+          <value>0.628419</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD4Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="NZDUSD-FxForward-5Y" />
+        <quote>
+          <value>0.612017</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>NZD5Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:43.9158879+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="NZDUSD-FxForward-ON">
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>0.7103595</mid>
+      </point>
+      <point id="NZDUSD-FxForward-TN">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.7103055</mid>
+      </point>
+      <point id="NZDUSD-FxSpot-SP">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>0.7103</mid>
+      </point>
+      <point id="NZDUSD-FxForward-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>0.70991</mid>
+      </point>
+      <point id="NZDUSD-FxForward-2W">
+        <term>
+          <date>2010-09-15</date>
+        </term>
+        <mid>0.709506</mid>
+      </point>
+      <point id="NZDUSD-FxForward-3W">
+        <term>
+          <date>2010-09-22</date>
+        </term>
+        <mid>0.709106</mid>
+      </point>
+      <point id="NZDUSD-FxForward-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.708609</mid>
+      </point>
+      <point id="NZDUSD-FxForward-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.706797</mid>
+      </point>
+      <point id="NZDUSD-FxForward-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.705008</mid>
+      </point>
+      <point id="NZDUSD-FxForward-4M">
+        <term>
+          <date>2011-01-05</date>
+        </term>
+        <mid>0.702956</mid>
+      </point>
+      <point id="NZDUSD-FxForward-5M">
+        <term>
+          <date>2011-02-01</date>
+        </term>
+        <mid>0.70135</mid>
+      </point>
+      <point id="NZDUSD-FxForward-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>0.699685</mid>
+      </point>
+      <point id="NZDUSD-FxForward-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>0.694025</mid>
+      </point>
+      <point id="NZDUSD-FxForward-12M">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>0.68827</mid>
+      </point>
+      <point id="NZDUSD-FxForward-15M">
+        <term>
+          <date>2011-12-01</date>
+        </term>
+        <mid>0.6825</mid>
+      </point>
+      <point id="NZDUSD-FxForward-18M">
+        <term>
+          <date>2012-03-01</date>
+        </term>
+        <mid>0.67681</mid>
+      </point>
+      <point id="NZDUSD-FxForward-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>0.665453</mid>
+      </point>
+      <point id="NZDUSD-FxForward-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>0.645215</mid>
+      </point>
+      <point id="NZDUSD-FxForward-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.628419</mid>
+      </point>
+      <point id="NZDUSD-FxForward-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.612017</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.HKD-USD-BASIS-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.HKD-USD-BASIS-3M">
+    <name>HKD-USD-BASIS-3M</name>
+    <currency>HKD</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>USD-BASIS</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.HKD-USD-BASIS-3M" definitionRef="RateSpreadCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:36:03.3398646+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XccySwap-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XccySwap-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XccySwap-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XccySwap-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XccySwap-9M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-1Y">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-XCCYSWAP-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="HKD-XccySwap-1M" />
+        <quote>
+          <value>-0.00161355746497576</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XccySwap-2M" />
+        <quote>
+          <value>-0.00201113754311108</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XccySwap-3M" />
+        <quote>
+          <value>-0.00219639975763588</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XccySwap-6M" />
+        <quote>
+          <value>-0.00289332372327824</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XccySwap-9M" />
+        <quote>
+          <value>-0.00412278247397657</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-1Y" />
+        <quote>
+          <value>-0.0017</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-2Y" />
+        <quote>
+          <value>-0.0016</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-3Y" />
+        <quote>
+          <value>-0.0016</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-4Y" />
+        <quote>
+          <value>-0.0015</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-5Y" />
+        <quote>
+          <value>-0.0015</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-7Y" />
+        <quote>
+          <value>-0.0016</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-XCCYSWAP-10Y" />
+        <quote>
+          <value>-0.0019</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-ON" />
+        <quote>
+          <value>0.0004</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-1W" />
+        <quote>
+          <value>0.0004107</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-2W" />
+        <quote>
+          <value>0.0006</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-1M" />
+        <quote>
+          <value>0.0015107</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-2M" />
+        <quote>
+          <value>0.0020036</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-3M" />
+        <quote>
+          <value>0.0024964</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-4M" />
+        <quote>
+          <value>0.0028857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-5M" />
+        <quote>
+          <value>0.0032857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-6M" />
+        <quote>
+          <value>0.0037857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-DEPOSIT-9M" />
+        <quote>
+          <value>0.0055857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-1Y" />
+        <quote>
+          <value>0.0041</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-18M" />
+        <quote>
+          <value>0.0052</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-2Y" />
+        <quote>
+          <value>0.0064</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-3Y" />
+        <quote>
+          <value>0.0096</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-4Y" />
+        <quote>
+          <value>0.0128</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-5Y" />
+        <quote>
+          <value>0.0161</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-7Y" />
+        <quote>
+          <value>0.0205</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-10Y" />
+        <quote>
+          <value>0.0245</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-12Y" />
+        <quote>
+          <value>0.0258</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="HKD-IRSWAP-15Y" />
+        <quote>
+          <value>0.0263</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-DEPOSIT-ON" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-DEPOSIT-TN" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-1M" />
+        <quote>
+          <value>0.0025938</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-2M" />
+        <quote>
+          <value>0.0027531</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-3M" />
+        <quote>
+          <value>0.0029688</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U0" />
+        <quote>
+          <value>0.003137228</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z0" />
+        <quote>
+          <value>0.004172487</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H1" />
+        <quote>
+          <value>0.004668949</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M1" />
+        <quote>
+          <value>0.005664141</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U1" />
+        <quote>
+          <value>0.007007054</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z1" />
+        <quote>
+          <value>0.008696437</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H2" />
+        <quote>
+          <value>0.010532274</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M2" />
+        <quote>
+          <value>0.01251396</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U2" />
+        <quote>
+          <value>0.014341472</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z2" />
+        <quote>
+          <value>0.016291275</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H3" />
+        <quote>
+          <value>0.017886513</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M3" />
+        <quote>
+          <value>0.019726749</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-4Y" />
+        <quote>
+          <value>0.01359</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-5Y" />
+        <quote>
+          <value>0.01681</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-6Y" />
+        <quote>
+          <value>0.01959</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-7Y" />
+        <quote>
+          <value>0.02185</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-8Y" />
+        <quote>
+          <value>0.0237</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-9Y" />
+        <quote>
+          <value>0.02521</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-10Y" />
+        <quote>
+          <value>0.02647</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-11Y" />
+        <quote>
+          <value>0.02747</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-12Y" />
+        <quote>
+          <value>0.02846</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-13Y" />
+        <quote>
+          <value>0.0291235</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-14Y" />
+        <quote>
+          <value>0.0298065</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-15Y" />
+        <quote>
+          <value>0.03047</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-20Y" />
+        <quote>
+          <value>0.03208</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-25Y" />
+        <quote>
+          <value>0.03287</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-30Y" />
+        <quote>
+          <value>0.03334</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-35Y" />
+        <quote>
+          <value>0.0333</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-40Y" />
+        <quote>
+          <value>0.03326</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-50Y" />
+        <quote>
+          <value>0.03281</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>-0.000416543497862243</mid>
+        </point>
+        <point>
+          <term>
+            <date>2010-09-01</date>
+          </term>
+          <mid>-0.000416543497862243</mid>
+        </point>
+        <point id="HKD-DEPOSIT-1W">
+          <term>
+            <date>2010-09-07</date>
+          </term>
+          <mid>-0.0010209526482079</mid>
+        </point>
+        <point id="HKD-DEPOSIT-2W">
+          <term>
+            <date>2010-09-13</date>
+          </term>
+          <mid>-0.000919276194730756</mid>
+        </point>
+        <point id="HKD-DEPOSIT-1M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>-0.0000725067165672222</mid>
+        </point>
+        <point id="HKD-XccySwap-1M">
+          <term>
+            <date>2010-10-04</date>
+          </term>
+          <mid>-0.0000105554807001695</mid>
+        </point>
+        <point id="HKD-DEPOSIT-2M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.0000466121263231756</mid>
+        </point>
+        <point id="HKD-XccySwap-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.0000816674478754109</mid>
+        </point>
+        <point id="HKD-DEPOSIT-3M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.000329872798263686</mid>
+        </point>
+        <point id="HKD-XccySwap-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.000336184668078054</mid>
+        </point>
+        <point id="HKD-DEPOSIT-4M">
+          <term>
+            <date>2010-12-30</date>
+          </term>
+          <mid>0.000476870326027168</mid>
+        </point>
+        <point id="HKD-DEPOSIT-5M">
+          <term>
+            <date>2011-01-31</date>
+          </term>
+          <mid>0.000655058039069623</mid>
+        </point>
+        <point id="HKD-DEPOSIT-6M">
+          <term>
+            <date>2011-02-28</date>
+          </term>
+          <mid>0.000928416556559064</mid>
+        </point>
+        <point id="HKD-XccySwap-6M">
+          <term>
+            <date>2011-03-01</date>
+          </term>
+          <mid>0.000907872363665518</mid>
+        </point>
+        <point id="HKD-DEPOSIT-9M">
+          <term>
+            <date>2011-05-31</date>
+          </term>
+          <mid>0.00147868173505294</mid>
+        </point>
+        <point id="HKD-XccySwap-9M">
+          <term>
+            <date>2011-06-01</date>
+          </term>
+          <mid>0.00144886756919327</mid>
+        </point>
+        <point id="HKD-IRSWAP-1Y">
+          <term>
+            <date>2011-08-30</date>
+          </term>
+          <mid>0.00235542222179497</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-1Y">
+          <term>
+            <date>2011-09-01</date>
+          </term>
+          <mid>0.00242019598198517</mid>
+        </point>
+        <point id="HKD-IRSWAP-18M">
+          <term>
+            <date>2012-02-29</date>
+          </term>
+          <mid>0.00355813045625819</mid>
+        </point>
+        <point id="HKD-IRSWAP-2Y">
+          <term>
+            <date>2012-08-30</date>
+          </term>
+          <mid>0.00481130754497094</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-2Y">
+          <term>
+            <date>2012-09-04</date>
+          </term>
+          <mid>0.00485688803172213</mid>
+        </point>
+        <point id="HKD-IRSWAP-3Y">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.00804393569626605</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-3Y">
+          <term>
+            <date>2013-09-03</date>
+          </term>
+          <mid>0.0080797956457106</mid>
+        </point>
+        <point id="HKD-IRSWAP-4Y">
+          <term>
+            <date>2014-08-29</date>
+          </term>
+          <mid>0.0114086461752869</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-4Y">
+          <term>
+            <date>2014-09-02</date>
+          </term>
+          <mid>0.0114469593727309</mid>
+        </point>
+        <point id="HKD-IRSWAP-5Y">
+          <term>
+            <date>2015-08-31</date>
+          </term>
+          <mid>0.0148222118858596</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.014828554424227</mid>
+        </point>
+        <point id="HKD-IRSWAP-7Y">
+          <term>
+            <date>2017-08-30</date>
+          </term>
+          <mid>0.019347243886056</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0193548426923007</mid>
+        </point>
+        <point id="HKD-IRSWAP-10Y">
+          <term>
+            <date>2020-08-31</date>
+          </term>
+          <mid>0.0233450549668257</mid>
+        </point>
+        <point id="HKD-XCCYSWAP-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0233466788986343</mid>
+        </point>
+        <point id="HKD-IRSWAP-12Y">
+          <term>
+            <date>2022-08-30</date>
+          </term>
+          <mid>0.0247485159213969</mid>
+        </point>
+        <point id="HKD-IRSWAP-15Y">
+          <term>
+            <date>2025-08-29</date>
+          </term>
+          <mid>0.0251819191806497</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>1.00000228255158</mid>
+      </point>
+      <point id="HKD-DEPOSIT-1W">
+        <term>
+          <date>2010-09-07</date>
+        </term>
+        <mid>1.000022380151</mid>
+      </point>
+      <point id="HKD-DEPOSIT-2W">
+        <term>
+          <date>2010-09-13</date>
+        </term>
+        <mid>1.00003526458294</mid>
+      </point>
+      <point id="HKD-DEPOSIT-1M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>1.00000615817947</mid>
+      </point>
+      <point id="HKD-XccySwap-1M">
+        <term>
+          <date>2010-10-04</date>
+        </term>
+        <mid>1.00000101217123</mid>
+      </point>
+      <point id="HKD-DEPOSIT-2M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.999992337806658</mid>
+      </point>
+      <point id="HKD-XccySwap-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.999985904217993</mid>
+      </point>
+      <point id="HKD-DEPOSIT-3M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.999916860864128</mid>
+      </point>
+      <point id="HKD-XccySwap-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.999914349256328</mid>
+      </point>
+      <point id="HKD-DEPOSIT-4M">
+        <term>
+          <date>2010-12-30</date>
+        </term>
+        <mid>0.999840629927828</mid>
+      </point>
+      <point id="HKD-DEPOSIT-5M">
+        <term>
+          <date>2011-01-31</date>
+        </term>
+        <mid>0.999723680159461</mid>
+      </point>
+      <point id="HKD-DEPOSIT-6M">
+        <term>
+          <date>2011-02-28</date>
+        </term>
+        <mid>0.999537224355343</mid>
+      </point>
+      <point id="HKD-XccySwap-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>0.999544975360356</mid>
+      </point>
+      <point id="HKD-DEPOSIT-9M">
+        <term>
+          <date>2011-05-31</date>
+        </term>
+        <mid>0.998890796645312</mid>
+      </point>
+      <point id="HKD-XccySwap-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>0.998909180477015</mid>
+      </point>
+      <point id="HKD-IRSWAP-1Y">
+        <term>
+          <date>2011-08-30</date>
+        </term>
+        <mid>0.997648041207338</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-1Y">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>0.997570235222557</mid>
+      </point>
+      <point id="HKD-IRSWAP-18M">
+        <term>
+          <date>2012-02-29</date>
+        </term>
+        <mid>0.994674535561003</mid>
+      </point>
+      <point id="HKD-IRSWAP-2Y">
+        <term>
+          <date>2012-08-30</date>
+        </term>
+        <mid>0.990416213725742</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>0.990260069075924</mid>
+      </point>
+      <point id="HKD-IRSWAP-3Y">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.976159199838334</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>0.975967971504378</mid>
+      </point>
+      <point id="HKD-IRSWAP-4Y">
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.955453072463044</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.955187413977274</mid>
+      </point>
+      <point id="HKD-IRSWAP-5Y">
+        <term>
+          <date>2015-08-31</date>
+        </term>
+        <mid>0.928620475329977</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.92855344874227</mid>
+      </point>
+      <point id="HKD-IRSWAP-7Y">
+        <term>
+          <date>2017-08-30</date>
+        </term>
+        <mid>0.873532459449879</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.873393775198634</mid>
+      </point>
+      <point id="HKD-IRSWAP-10Y">
+        <term>
+          <date>2020-08-31</date>
+        </term>
+        <mid>0.792132152576528</mid>
+      </point>
+      <point id="HKD-XCCYSWAP-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.79206883179299</mid>
+      </point>
+      <point id="HKD-IRSWAP-12Y">
+        <term>
+          <date>2022-08-30</date>
+        </term>
+        <mid>0.743586621131165</mid>
+      </point>
+      <point id="HKD-IRSWAP-15Y">
+        <term>
+          <date>2025-08-29</date>
+        </term>
+        <mid>0.686086827633672</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

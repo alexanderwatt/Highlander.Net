@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7FE86DE4-EA04-4466-8F08-AA343540252A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PortfolioValuer.Regression.Data</RootNamespace>
+    <AssemblyName>FpML.V5r3.PortfolioValuer.Regression.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
+      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
+      <Name>FpML.V5r3.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj">
+      <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
+      <Name>FpML.V5r3.Confirmation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
+      <Name>FpML.V5r3.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.JPY-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-EUR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-GBP.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-JPY.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-NZD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.EUR-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.GBP-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.JPY-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.NZD-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-AONIA-OIS-COMPOUND-1D.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-2M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.JPY-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-EUR.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-GBP.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-JPY.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-NZD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.AUD-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.EUR-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.GBP-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.JPY-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.FxCurve.NZD-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-AONIA-OIS-COMPOUND-1D.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-2M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\QR_LIVE.RateCurve.NZD-BBR-FRA-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExpectedResults\ExpectedNPVs.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExpectedResults\QR_LIVE_ExpectedNPVs.csv" />
+    <None Include="ExpectedResults\NAB_EOD Market Data.xlsx" />
+    <None Include="ExpectedResults\NAB_EOD Trade Valuation.xlsx" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.AUD-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.EUR-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.GBP-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.NZD-USD.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.USD-HKD.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.USD-JPY.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-USD-BASIS.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-EURIBOR-Reuters-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-HIBOR-HKAB-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.JPY-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.JPY-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.NZD-BBR-FRA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.NZD-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-ZERO-BANK-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.AUD-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.EUR-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.GBP-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.NZD-USD.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.USD-HKD.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.FxCurve.USD-JPY.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-USD-BASIS.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-EURIBOR-Reuters-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-HIBOR-HKAB-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.JPY-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.JPY-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.NZD-BBR-FRA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.NZD-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Orion\Market\TEST_EOD.RateCurve.USD-ZERO-BANK-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex01-fx-spot.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex02-spot-cross-w-side-rates.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex03-fx-fwd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex04-fx-fwd-w-settlement.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex05-fx-fwd-w-ssi.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex06-fx-fwd-w-splits.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex07-non-deliverable-forward.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex08-fx-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex09-euro-opt.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex10-amer-opt.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex11-non-deliverable-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex12-fx-barrier-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex13-fx-dbl-barrier-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex14-euro-digital-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex15-euro-range-digital-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex16-one-touch-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex17-no-touch-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex18-double-one-touch-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex19-double-no-touch-option.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex20-avg-rate-option-parametric.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex21-avg-rate-option-specific.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex22-straddle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\fx-ex23-delta-hedge.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\td-ex01-simple-term-deposit.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\td-ex02-term-deposit-w-settlement-etc.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\fx-derivatives\td-ex03-dual-currency-deposit-strategy.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex01-vanilla-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex02-stub-amort-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex03-compound-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex04-arrears-stepup-fee-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex05-long-stub-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex06-xccy-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex07-ois-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex08-fra.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex09-euro-swaption-explicit.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex10-euro-swaption-relative.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex11-euro-swaption-partial-auto-ex.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex12-euro-swaption-straddle-cash.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex13-euro-swaption-cash-with-cfs.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex14-berm-swaption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex15-amer-swaption.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex16-mand-term-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex17-opt-euro-term-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex18-opt-berm-term-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex19-opt-amer-term-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex20-euro-cancel-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex21-euro-extend-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex22-cap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex23-floor.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex24-collar.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex25-fxnotional-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex26-fxnotional-swap-with-cfs.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex27-inverse-floater.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex27a-inverse-floater-inverse-vs-floating.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex28-bullet-payments.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex29-non-deliverable-settlement-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex30-swap-comp-avg-relative-date.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex31-non-deliverable-settlement-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex32-zero-coupon-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpMLTrades\interest-rate-derivatives\ird-ex33-BRL-CDI-swap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FpMLTrades\market-data-quotes\aud_depos_swaps_data.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

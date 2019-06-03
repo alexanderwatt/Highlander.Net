@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateBasisCurve
+ReferenceCurveName/String=RateCurve.AUD-BBR-BBSW-3M
+IndexName/String=AUD-BBR-BBSW
+IndexTenor/String=6M
+CurveName/String=AUD-BBR-BBSW-6M
+DpendencyDepth/Int32=1
+Algorithm/String=LinearSpreadZero
+Currency/String=AUD

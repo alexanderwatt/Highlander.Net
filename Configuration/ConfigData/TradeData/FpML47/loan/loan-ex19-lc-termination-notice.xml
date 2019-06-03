@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="LcTerminationNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://www.bankofamerica.com/messageId">54321</messageId>
+      <sentBy partyIdScheme="http://www.fpml.org/ext/iso9362">BOAUS3XXXXX</sentBy>
+      <sendTo partyIdScheme="http://www.fpml.org/ext/iso9362">BOLEUS31XXX</sendTo>
+      <creationTimestamp>2008-12-17T09:30:47.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2008-12-17</noticeDate>
+   <eventId eventIdScheme="http://www.bankofamerica.com/lcTerminationId">66554433</eventId>
+   <agentBankPartyReference href="agentBankParty"/>
+   <borrowerPartyReference href="borrowerParty"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+      <description>Borrower Inc 08/2006</description>
+      <creditAgreementDate>2006-08-13</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">567891234</instrumentId>
+      <description>Revolver</description>
+      <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+   </facilitySummary>
+   <facilityCommitmentPosition>
+      <currentAmount>
+         <globalAmount>
+            <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+            <amount>85000000.00</amount>
+         </globalAmount>
+         <shareAmount>
+            <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+            <amount>17000000.00</amount>
+         </shareAmount>
+      </currentAmount>
+      <priorAmount>
+         <globalAmount>
+            <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+            <amount>86000000.00</amount>
+         </globalAmount>
+         <shareAmount>
+            <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+            <amount>17200000.00</amount>
+         </shareAmount>
+      </priorAmount>
+      <loanContractPosition>
+         <loanContractSummary>
+            <identifier>
+               <partyReference href="agentBankParty"/>
+               <contractId contractIdScheme="http://www.bankofamerica.com/loanContractId">001234567</contractId>
+            </identifier>
+            <originalAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>85000000.00</amount>
+            </originalAmount>
+            <maturityDate>2015-08-13</maturityDate>
+         </loanContractSummary>
+         <currentAmount>
+            <globalAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>85000000.00</amount>
+            </globalAmount>
+            <shareAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>17000000.00</amount>
+            </shareAmount>
+         </currentAmount>
+         <priorAmount>
+            <globalAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>85000000.00</amount>
+            </globalAmount>
+            <shareAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>17000000.00</amount>
+            </shareAmount>
+         </priorAmount>
+      </loanContractPosition>
+      <lcPosition>
+         <lcSummary>
+            <identifier>
+               <partyReference href="agentBankParty"/>
+               <contractId contractIdScheme="http://www.bankofamerica.com/letterOfCreditId">567891234</contractId>
+            </identifier>
+         </lcSummary>
+         <currentAmount>
+            <globalAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>0.0</amount>
+            </globalAmount>
+            <shareAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>0.0</amount>
+            </shareAmount>
+         </currentAmount>
+         <priorAmount>
+            <globalAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>1000000.00</amount>
+            </globalAmount>
+            <shareAmount>
+               <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+               <amount>200000.00</amount>
+            </shareAmount>
+         </priorAmount>
+      </lcPosition>
+   </facilityCommitmentPosition>
+   <comments>Comments</comments>
+   <lcSummary>
+      <identifier>
+         <partyReference href="agentBankParty"/>
+         <contractId contractIdScheme="http://www.bankofamerica.com/letterOfCreditId">567891234</contractId>
+      </identifier>
+   </lcSummary>
+   <effectiveDate>2008-12-17</effectiveDate>
+   <lcExpiryFlag>false</lcExpiryFlag>
+   <currentAmount>
+      <globalAmount>
+         <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+         <amount>0.0</amount>
+      </globalAmount>
+      <shareAmount>
+         <currency currencyScheme="http://www.fpml.org/ext/iso4217-2001-08-15">USD</currency>
+         <amount>0.0</amount>
+      </shareAmount>
+   </currentAmount>
+   <party id="agentBankParty">
+      <partyId partyIdScheme="http://www.fpml.org/ext/iso9362">BOAUS3XXXXX</partyId>
+      <partyName>Bank of America, NA</partyName>
+   </party>
+   <party id="lenderParty">
+      <partyId partyIdScheme="http://www.fpml.org/ext/iso9362">BOLEUS31XXX</partyId>
+      <partyName>Bank of Lender</partyName>
+   </party>
+   <party id="borrowerParty">
+      <partyId partyIdScheme="http://www.fpml.org/ext/iso9362">BOBOUS31XXX</partyId>
+      <partyName>Bank of Borrower</partyName>
+   </party>
+</FpML>

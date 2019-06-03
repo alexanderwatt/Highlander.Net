@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.NAB_EOD.2010-10-27.RateCurve.AUD-ZERO-BANK-1M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.AUD-ZERO-BANK-1M">
+    <name>AUD-ZERO-BANK-1M</name>
+    <currency>AUD</currency>
+    <algorithm>LinearSpreadZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>ZERO-BANK</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-ZERO-BANK-1M" definitionRef="RateBasisCurve">
+    <baseDate>2010-10-27</baseDate>
+    <buildDateTime>2010-10-28T04:08:04.9464111+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-ON-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-1M-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-2M-1M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-3M-1M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-SPREADDEPOSIT-6M-1M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-1Y-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-2Y-1M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-3Y-1M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-4Y-1M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-5Y-1M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-6Y-1M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-7Y-1M">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-8Y-1M">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-9Y-1M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-10Y-1M">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-12Y-1M">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-15Y-1M">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-20Y-1M">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-25Y-1M">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-30Y-1M">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BASISSWAP-40Y-1M">
+          <term>
+            <periodMultiplier>40</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-ON-1M" />
+        <quote>
+          <value>0</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-1M-1M" />
+        <quote>
+          <value>0</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-2M-1M" />
+        <quote>
+          <value>-0.0006</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-3M-1M" />
+        <quote>
+          <value>-0.0011</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-SPREADDEPOSIT-6M-1M" />
+        <quote>
+          <value>-0.001132</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-1Y-1M" />
+        <quote>
+          <value>0.001325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-2Y-1M" />
+        <quote>
+          <value>0.001325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-3Y-1M" />
+        <quote>
+          <value>0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-4Y-1M" />
+        <quote>
+          <value>0.001225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-5Y-1M" />
+        <quote>
+          <value>0.001175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-6Y-1M" />
+        <quote>
+          <value>0.0011</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-7Y-1M" />
+        <quote>
+          <value>0.001025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-8Y-1M" />
+        <quote>
+          <value>0.000967</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-9Y-1M" />
+        <quote>
+          <value>0.000908</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-10Y-1M" />
+        <quote>
+          <value>0.00085</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-12Y-1M" />
+        <quote>
+          <value>0.000746</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-15Y-1M" />
+        <quote>
+          <value>0.000644</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-20Y-1M" />
+        <quote>
+          <value>0.000545</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-25Y-1M" />
+        <quote>
+          <value>0.000486</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-30Y-1M" />
+        <quote>
+          <value>0.000447</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BASISSWAP-40Y-1M" />
+        <quote>
+          <value>0.000397</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+  </yieldCurveValuation>
+</market>

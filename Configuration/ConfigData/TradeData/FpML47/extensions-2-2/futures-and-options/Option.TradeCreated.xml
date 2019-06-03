@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:ext="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../FpML-4-7-8-TR-1/fpml-main-4-7.xsd http://www.fpml.org/2009/FpML-4-7/ext ../fpmlext-main.xsd" 
+	xsi:type="TradeCreated" 
+	version="4-7">
+	
+	<!-- AP interest rate option based on CBOE specification -->
+	<!-- http://www.cboe.com/Products/InterestRateOptionsSpecs.aspx -->
+	
+	<header>
+		<messageId 
+			messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">345345</messageId>
+		<sentBy 
+			partyIdScheme="http://www.jpmorgan.com/coding-scheme/party-id">bmf</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	<trade>
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="jb2890"/>
+				<tradeId 
+					tradeIdScheme="http://www.PartyA.com/coding-scheme/trade-id">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate id="kwo019">2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:optionTransaction>
+		
+			<buyerPartyReference href="jb2890"/>
+			<sellerPartyReference href="kloq890"/>
+			
+			<ext:numberOfUnits>20</ext:numberOfUnits>
+			<ext:unitPrice>
+				<currency>USD</currency>
+				<amount>78.20</amount>
+			</ext:unitPrice>
+			
+			<!-- strike at 4.50% -->
+			<ext:strikePrice>0.0450</ext:strikePrice>
+			<!-- stated in decimals, one point equals USD 100 -->
+			<ext:optionPremium>500</ext:optionPremium>
+			
+			<ext:option>
+				<instrumentId
+					instrumentIdScheme="http://www.cboe.com/coding-scheme/instrument-id">TNX</instrumentId>
+				<description>10 Year Treasury Note Option on CBOE</description>
+				<currency>USD</currency>
+				<exchangeId>CBOE</exchangeId>
+				<!-- multiplier is USD 100 -->
+				<multiplier>100</multiplier>
+				<expirationDate id="nwo920">
+					<adjustableDate>
+						<unadjustedDate>2006-06-17</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</expirationDate>
+			</ext:option>
+			
+		</ext:optionTransaction>
+
+	</trade>
+	
+	<party id="jb2890">
+		<partyId>Party A</partyId>
+	</party>
+	<party id="kloq890">
+		<partyId>Party B</partyId>
+	</party>
+	
+</FpML>

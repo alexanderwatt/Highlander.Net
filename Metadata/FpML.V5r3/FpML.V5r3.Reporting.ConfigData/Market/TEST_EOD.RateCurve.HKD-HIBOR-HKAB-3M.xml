@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.HKD-HIBOR-HKAB-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.HKD-HIBOR-HKAB-3M">
+    <name>HKD-HIBOR-HKAB-3M</name>
+    <currency>HKD</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>HIBOR-HKAB</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.HKD-HIBOR-HKAB-3M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:35:51.2616623+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-ON">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-2W">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-4M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-5M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="HKD-DEPOSIT-9M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-1Y">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-18M">
+          <term>
+            <periodMultiplier>18</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="HKD-IRSWAP-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-ON" />
+        <quote>
+          <value>0.0004</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-1W" />
+        <quote>
+          <value>0.0004107</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-2W" />
+        <quote>
+          <value>0.0006</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-1M" />
+        <quote>
+          <value>0.0015107</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-2M" />
+        <quote>
+          <value>0.0020036</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-3M" />
+        <quote>
+          <value>0.0024964</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-4M" />
+        <quote>
+          <value>0.0028857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-5M" />
+        <quote>
+          <value>0.0032857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-6M" />
+        <quote>
+          <value>0.0037857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-DEPOSIT-9M" />
+        <quote>
+          <value>0.0055857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-1Y" />
+        <quote>
+          <value>0.0041</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-18M" />
+        <quote>
+          <value>0.0052</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-2Y" />
+        <quote>
+          <value>0.0064</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-3Y" />
+        <quote>
+          <value>0.0096</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-4Y" />
+        <quote>
+          <value>0.0128</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-5Y" />
+        <quote>
+          <value>0.0161</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-7Y" />
+        <quote>
+          <value>0.0205</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-10Y" />
+        <quote>
+          <value>0.0245</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-12Y" />
+        <quote>
+          <value>0.0258</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="HKD-IRSWAP-15Y" />
+        <quote>
+          <value>0.0263</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.000400019781448435</mid>
+        </point>
+        <point id="HKD-DEPOSIT-ON">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.000400019781448435</mid>
+        </point>
+        <point id="HKD-DEPOSIT-1W">
+          <term>
+            <date>2010-09-07</date>
+          </term>
+          <mid>0.000410719236364265</mid>
+        </point>
+        <point id="HKD-DEPOSIT-2W">
+          <term>
+            <date>2010-09-13</date>
+          </term>
+          <mid>0.000600038097210209</mid>
+        </point>
+        <point id="HKD-DEPOSIT-1M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>0.00151088836845492</mid>
+        </point>
+        <point id="HKD-DEPOSIT-2M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.00200377184083056</mid>
+        </point>
+        <point id="HKD-DEPOSIT-3M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.00249639359860065</mid>
+        </point>
+        <point id="HKD-DEPOSIT-4M">
+          <term>
+            <date>2010-12-30</date>
+          </term>
+          <mid>0.00288534936936813</mid>
+        </point>
+        <point id="HKD-DEPOSIT-5M">
+          <term>
+            <date>2011-01-31</date>
+          </term>
+          <mid>0.00328477260581384</mid>
+        </point>
+        <point id="HKD-DEPOSIT-6M">
+          <term>
+            <date>2011-02-28</date>
+          </term>
+          <mid>0.00378392005358741</mid>
+        </point>
+        <point id="HKD-DEPOSIT-9M">
+          <term>
+            <date>2011-05-31</date>
+          </term>
+          <mid>0.00557790745154918</mid>
+        </point>
+        <point id="HKD-IRSWAP-1Y">
+          <term>
+            <date>2011-08-30</date>
+          </term>
+          <mid>0.004099427379888</mid>
+        </point>
+        <point id="HKD-IRSWAP-18M">
+          <term>
+            <date>2012-02-29</date>
+          </term>
+          <mid>0.00520249891910041</mid>
+        </point>
+        <point id="HKD-IRSWAP-2Y">
+          <term>
+            <date>2012-08-30</date>
+          </term>
+          <mid>0.00640823921115885</mid>
+        </point>
+        <point id="HKD-IRSWAP-3Y">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.00964100036822746</mid>
+        </point>
+        <point id="HKD-IRSWAP-4Y">
+          <term>
+            <date>2014-08-29</date>
+          </term>
+          <mid>0.0129057007395827</mid>
+        </point>
+        <point id="HKD-IRSWAP-5Y">
+          <term>
+            <date>2015-08-31</date>
+          </term>
+          <mid>0.0163189656688472</mid>
+        </point>
+        <point id="HKD-IRSWAP-7Y">
+          <term>
+            <date>2017-08-30</date>
+          </term>
+          <mid>0.0209506488466902</mid>
+        </point>
+        <point id="HKD-IRSWAP-10Y">
+          <term>
+            <date>2020-08-31</date>
+          </term>
+          <mid>0.025279079521086</mid>
+        </point>
+        <point id="HKD-IRSWAP-12Y">
+          <term>
+            <date>2022-08-30</date>
+          </term>
+          <mid>0.0266828421441545</mid>
+        </point>
+        <point id="HKD-IRSWAP-15Y">
+          <term>
+            <date>2025-08-29</date>
+          </term>
+          <mid>0.0271162454034073</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="HKD-DEPOSIT-ON">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999989041107900155726952627</mid>
+      </point>
+      <point id="HKD-DEPOSIT-1W">
+        <term>
+          <date>2010-09-07</date>
+        </term>
+        <mid>0.9999909984371932459046622731</mid>
+      </point>
+      <point id="HKD-DEPOSIT-2W">
+        <term>
+          <date>2010-09-13</date>
+        </term>
+        <mid>0.9999769868309879992065929964</mid>
+      </point>
+      <point id="HKD-DEPOSIT-1M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>0.9998717104329274472720459411</mid>
+      </point>
+      <point id="HKD-DEPOSIT-2M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.999670749537461929304917907</mid>
+      </point>
+      <point id="HKD-DEPOSIT-3M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.9993711660918604976981634424</mid>
+      </point>
+      <point id="HKD-DEPOSIT-4M">
+        <term>
+          <date>2010-12-30</date>
+        </term>
+        <mid>0.9990363940894911405513807901</mid>
+      </point>
+      <point id="HKD-DEPOSIT-5M">
+        <term>
+          <date>2011-01-31</date>
+        </term>
+        <mid>0.9986156238117961743018886807</mid>
+      </point>
+      <point id="HKD-DEPOSIT-6M">
+        <term>
+          <date>2011-02-28</date>
+        </term>
+        <mid>0.9981158924526067803157443044</mid>
+      </point>
+      <point id="HKD-DEPOSIT-9M">
+        <term>
+          <date>2011-05-31</date>
+        </term>
+        <mid>0.9958244078569292968410172903</mid>
+      </point>
+      <point id="HKD-IRSWAP-1Y">
+        <term>
+          <date>2011-08-30</date>
+        </term>
+        <mid>0.995911054445398</mid>
+      </point>
+      <point id="HKD-IRSWAP-18M">
+        <term>
+          <date>2012-02-29</date>
+        </term>
+        <mid>0.99222458616164</mid>
+      </point>
+      <point id="HKD-IRSWAP-2Y">
+        <term>
+          <date>2012-08-30</date>
+        </term>
+        <mid>0.987258108369415</mid>
+      </point>
+      <point id="HKD-IRSWAP-3Y">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.971499443396378</mid>
+      </point>
+      <point id="HKD-IRSWAP-4Y">
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.94976594056319</mid>
+      </point>
+      <point id="HKD-IRSWAP-5Y">
+        <term>
+          <date>2015-08-31</date>
+        </term>
+        <mid>0.92171605075432</mid>
+      </point>
+      <point id="HKD-IRSWAP-7Y">
+        <term>
+          <date>2017-08-30</date>
+        </term>
+        <mid>0.863823932517819</mid>
+      </point>
+      <point id="HKD-IRSWAP-10Y">
+        <term>
+          <date>2020-08-31</date>
+        </term>
+        <mid>0.77703373369267</mid>
+      </point>
+      <point id="HKD-IRSWAP-12Y">
+        <term>
+          <date>2022-08-30</date>
+        </term>
+        <mid>0.726621584726983</mid>
+      </point>
+      <point id="HKD-IRSWAP-15Y">
+        <term>
+          <date>2025-08-29</date>
+        </term>
+        <mid>0.666581190021177</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

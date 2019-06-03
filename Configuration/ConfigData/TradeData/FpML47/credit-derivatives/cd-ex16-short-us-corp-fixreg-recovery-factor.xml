@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+   == Copyright (c) 2002-2009. All rights reserved.
+   == Financial Products Markup Language is subject to the FpML public license.
+   == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DataDocument" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.xyzbank.com/cd-trade-id">xyz1234</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.abcbank.com/cd-trade-id">abc1234</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2002-12-03Z</tradeDate>
+      </tradeHeader>
+      <creditDefaultSwap>
+         <generalTerms>
+            <effectiveDate>
+               <unadjustedDate>2002-12-04Z</unadjustedDate>
+            </effectiveDate>
+            <scheduledTerminationDate>
+               <adjustableDate>
+                  <unadjustedDate>2007-09-06Z</unadjustedDate>
+               </adjustableDate>
+            </scheduledTerminationDate>
+            <sellerPartyReference href="party2"/>
+            <buyerPartyReference href="party1"/>
+            <referenceInformation>
+               <referenceEntity id="referenceEntity">
+                  <entityName>Tenet Healthcare Corporation</entityName>
+                  <entityId entityIdScheme="http://www.fpml.org/spec/2003/entity-id-RED-1-0">8G836J</entityId>
+               </referenceEntity>
+               <referenceObligation>
+                  <bond>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">88033GAT7</instrumentId>
+                     <couponRate>0.06</couponRate>
+                     <maturity>2011-12-01</maturity>
+                  </bond>
+                  <primaryObligorReference href="referenceEntity"/>
+               </referenceObligation>
+            </referenceInformation>
+         </generalTerms>
+         <feeLeg>
+            <periodicPayment>
+               <paymentFrequency>
+                  <periodMultiplier>3</periodMultiplier>
+                  <period>M</period>
+               </paymentFrequency>
+               <firstPaymentDate>2003-03-06Z</firstPaymentDate>
+               <rollConvention>6</rollConvention>
+               <fixedAmountCalculation>
+                  <fixedRate>0.01</fixedRate>
+               </fixedAmountCalculation>
+            </periodicPayment>
+         </feeLeg>
+         <protectionTerms>
+            <calculationAmount>
+               <currency>USD</currency>
+               <amount>5000000</amount>
+            </calculationAmount>
+            <creditEvents>
+               <restructuring>
+                  <restructuringType>ModR</restructuringType>
+               </restructuring>
+            </creditEvents>
+         </protectionTerms>
+         <cashSettlementTerms>
+            <recoveryFactor>0.60</recoveryFactor>
+         </cashSettlementTerms>
+      </creditDefaultSwap>
+      <documentation>
+         <masterConfirmation>
+            <masterConfirmationType>ISDA1999Credit</masterConfirmationType>
+            <masterConfirmationDate>2001-01-04Z</masterConfirmationDate>
+         </masterConfirmation>
+      </documentation>
+   </trade>
+   <party id="party1">
+      <partyId>XYZBICXXX</partyId>
+      <partyName>XYZ Bank</partyName>
+   </party>
+   <party id="party2">
+      <partyId>ABCBICXXX</partyId>
+      <partyName>ABC Bank</partyName>
+   </party>
+</FpML>

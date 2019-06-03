@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.FxCurve.GBP-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="GBP-USD">
+    <name>GBP-USD</name>
+    <currency>GBP</currency>
+    <quotedCurrencyPair>
+      <currency1>GBP</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="GBP-USD">
+    <baseDate>2010-08-30</baseDate>
+    <spotDate id="SpotDate">2010-09-01</spotDate>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-12M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-5Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-6Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-7Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-8Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-9Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="GBPUSD-FxForward-10Y" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-ON" />
+        <quote>
+          <value>1.552418</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBPON BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-TN" />
+        <quote>
+          <value>1.552363</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBPTN BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxSpot-SP" />
+        <quote>
+          <value>1.5524</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-1W" />
+        <quote>
+          <value>1.552318</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP1W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-2W" />
+        <quote>
+          <value>1.552247</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP2W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-3W" />
+        <quote>
+          <value>1.552195</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP3W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-1M" />
+        <quote>
+          <value>1.552095</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP1M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-2M" />
+        <quote>
+          <value>1.551803</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP2M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-3M" />
+        <quote>
+          <value>1.551515</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP3M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-4M" />
+        <quote>
+          <value>1.551162</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP4M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-5M" />
+        <quote>
+          <value>1.550871</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP5M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-6M" />
+        <quote>
+          <value>1.550594</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP6M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-9M" />
+        <quote>
+          <value>1.549625</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP9M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-12M" />
+        <quote>
+          <value>1.548714</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP12M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-15M" />
+        <quote>
+          <value>1.5484</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP15M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-18M" />
+        <quote>
+          <value>1.54775</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP18M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-2Y" />
+        <quote>
+          <value>1.545468</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP2Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-3Y" />
+        <quote>
+          <value>1.54497</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP3Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-4Y" />
+        <quote>
+          <value>1.544533</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP4Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-5Y" />
+        <quote>
+          <value>1.5487</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP5Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-6Y" />
+        <quote>
+          <value>1.550851</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP6Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-7Y" />
+        <quote>
+          <value>1.552937</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP7Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-8Y" />
+        <quote>
+          <value>1.552678</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP8Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-9Y" />
+        <quote>
+          <value>1.551806</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP9Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBPUSD-FxForward-10Y" />
+        <quote>
+          <value>1.549655</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>GBP10Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:47.8234129+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="GBPUSD-FxForward-ON">
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1.552418</mid>
+      </point>
+      <point id="GBPUSD-FxForward-TN">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>1.552363</mid>
+      </point>
+      <point id="GBPUSD-FxSpot-SP">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>1.5524</mid>
+      </point>
+      <point id="GBPUSD-FxForward-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>1.552318</mid>
+      </point>
+      <point id="GBPUSD-FxForward-2W">
+        <term>
+          <date>2010-09-15</date>
+        </term>
+        <mid>1.552247</mid>
+      </point>
+      <point id="GBPUSD-FxForward-3W">
+        <term>
+          <date>2010-09-22</date>
+        </term>
+        <mid>1.552195</mid>
+      </point>
+      <point id="GBPUSD-FxForward-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>1.552095</mid>
+      </point>
+      <point id="GBPUSD-FxForward-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>1.551803</mid>
+      </point>
+      <point id="GBPUSD-FxForward-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>1.551515</mid>
+      </point>
+      <point id="GBPUSD-FxForward-4M">
+        <term>
+          <date>2011-01-04</date>
+        </term>
+        <mid>1.551162</mid>
+      </point>
+      <point id="GBPUSD-FxForward-5M">
+        <term>
+          <date>2011-02-01</date>
+        </term>
+        <mid>1.550871</mid>
+      </point>
+      <point id="GBPUSD-FxForward-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>1.550594</mid>
+      </point>
+      <point id="GBPUSD-FxForward-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>1.549625</mid>
+      </point>
+      <point id="GBPUSD-FxForward-12M">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>1.548714</mid>
+      </point>
+      <point id="GBPUSD-FxForward-15M">
+        <term>
+          <date>2011-12-01</date>
+        </term>
+        <mid>1.5484</mid>
+      </point>
+      <point id="GBPUSD-FxForward-18M">
+        <term>
+          <date>2012-03-01</date>
+        </term>
+        <mid>1.54775</mid>
+      </point>
+      <point id="GBPUSD-FxForward-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>1.545468</mid>
+      </point>
+      <point id="GBPUSD-FxForward-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>1.54497</mid>
+      </point>
+      <point id="GBPUSD-FxForward-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>1.544533</mid>
+      </point>
+      <point id="GBPUSD-FxForward-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>1.5487</mid>
+      </point>
+      <point id="GBPUSD-FxForward-6Y">
+        <term>
+          <date>2016-09-01</date>
+        </term>
+        <mid>1.550851</mid>
+      </point>
+      <point id="GBPUSD-FxForward-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>1.552937</mid>
+      </point>
+      <point id="GBPUSD-FxForward-8Y">
+        <term>
+          <date>2018-09-04</date>
+        </term>
+        <mid>1.552678</mid>
+      </point>
+      <point id="GBPUSD-FxForward-9Y">
+        <term>
+          <date>2019-09-03</date>
+        </term>
+        <mid>1.551806</mid>
+      </point>
+      <point id="GBPUSD-FxForward-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>1.549655</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

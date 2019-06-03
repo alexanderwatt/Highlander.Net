@@ -1,0 +1,8 @@
+PricingStructureType/String=LPMSwaptionCurve
+Currency/String=AUD
+Instrument/String=Swaption
+Source/String=SydSPU
+MarketName/String=LPM
+IndexName/String=Volatility
+Index/String=LIBOR-BBA
+Identifier/Sring=LPM.Volatility.Swaption.AUD.SydSPU.2010.Week30

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <ComponentGroup Id="Product.Generated">
+      <ComponentGroupRef Id="National.QRSC.AnalyticModels.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.AnalyticModels.Content" />
+      <ComponentGroupRef Id="National.QRSC.AnalyticModels.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Analytics.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Analytics.Content" />
+      <ComponentGroupRef Id="National.QRSC.Analytics.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Calendars.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Calendars.Content" />
+      <ComponentGroupRef Id="National.QRSC.Calendars.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Factory.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Factory.Content" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Factory.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Content" />
+      <ComponentGroupRef Id="National.QRSC.Engine.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.ModelFramework.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.ModelFramework.Content" />
+      <ComponentGroupRef Id="National.QRSC.ModelFramework.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Numerics.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Numerics.Content" />
+      <ComponentGroupRef Id="National.QRSC.Numerics.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.ObjectCache.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.ObjectCache.Content" />
+      <ComponentGroupRef Id="National.QRSC.ObjectCache.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Configuration.Types.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Configuration.Types.Content" />
+      <ComponentGroupRef Id="National.QRSC.Configuration.Types.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Constants.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Constants.Content" />
+      <ComponentGroupRef Id="National.QRSC.Constants.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Contracts.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Contracts.Content" />
+      <ComponentGroupRef Id="National.QRSC.Contracts.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Identifiers.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Identifiers.Content" />
+      <ComponentGroupRef Id="National.QRSC.Identifiers.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.FpML.V47.Codes.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.FpML.V47.Codes.Content" />
+      <ComponentGroupRef Id="National.QRSC.FpML.V47.Codes.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.FpML.4.7.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.FpML.4.7.Content" />
+      <ComponentGroupRef Id="National.QRSC.FpML.4.7.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.CurveGeneration.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.CurveGeneration.Content" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.CurveGeneration.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.Content" />
+      <ComponentGroupRef Id="National.QRSC.Workflow.Satellites" />
+      <ComponentGroupRef Id="National.QRSC.Server.StressGenerator.Binaries" />
+      <ComponentGroupRef Id="National.QRSC.Server.StressGenerator.Content" />
+      <ComponentGroupRef Id="National.QRSC.Server.StressGenerator.Satellites" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

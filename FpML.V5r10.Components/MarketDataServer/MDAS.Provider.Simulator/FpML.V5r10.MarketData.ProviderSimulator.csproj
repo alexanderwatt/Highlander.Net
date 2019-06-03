@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39B95A61-81B1-4A0D-B3A2-E95618C91789}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Orion.MDAS.Provider</RootNamespace>
+    <AssemblyName>FpML.V5r10.MarketData.ProviderSimulator</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MdpSimulator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Metadata\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Codes\FpML.V5r10.Codes.csproj">
+      <Project>{9003b832-35d4-45b7-9b85-6d23a1984523}</Project>
+      <Name>FpML.V5r10.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\FpML.V5r10\FpML.V5r10.ConfigData\FpML.V5r10.ConfigData.csproj">
+      <Project>{5cabddd1-d09d-4e8e-9bd0-e86ecdc85503}</Project>
+      <Name>FpML.V5r10.ConfigData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\FpML.V5r10.Reporting.csproj">
+      <Project>{560374aa-175b-49f5-aed1-813ba1aeb713}</Project>
+      <Name>FpML.V5r10.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Client\FpML.V5r10.MarketData.Client.csproj">
+      <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>
+      <Name>FpML.V5r10.MarketData.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
+      <Project>{e9d01625-9697-4dec-bcbf-499bbc7c4e79}</Project>
+      <Name>FpML.V5r10.Reporting.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Provider.Base\FpML.V5r10.MarketData.ProviderBase.csproj">
+      <Project>{c60cbe91-0845-462d-ac61-4d64412bf164}</Project>
+      <Name>FpML.V5r10.MarketData.ProviderBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

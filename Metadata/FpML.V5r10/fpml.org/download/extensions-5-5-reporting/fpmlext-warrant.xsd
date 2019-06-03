@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+== Copyright (c) 2002-2017. All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/documents/license.html
+-->
+<xsd:schema xmlns="http://www.fpml.org/FpML-5/ext" xmlns:fpml="http://www.fpml.org/FpML-5/reporting" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.fpml.org/FpML-5/ext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<xsd:include schemaLocation="fpmlext-shared.xsd"/>
+	
+	<xsd:import namespace="http://www.fpml.org/FpML-5/reporting" schemaLocation="../reporting/fpml-main-5-9.xsd"/>
+	
+	<!-- TODO 1) correctness of fpml base types -->
+	<xsd:complexType name="Warrant">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Traditional warrants are issued in conjunction with a Bond 
+				(known as a warrant-linked bond), and represent the right 
+				to acquire shares in the entity issuing the bond. In other 
+				words, the writer of a traditional warrant is also the issuer 
+				of the underlying instrument
+				
+				Naked warrants are issued without an accompanying bond, and 
+				like traditional warrants, are traded on the stock exchange. 
+				They are typically issued by banks and securities firms. 
+				These are also called covered warrants, and are settled for 
+				cash, i.e. do not involve the company who issues the shares 
+				that underly the warrant. In most markets around the world, 
+				covered warrants are more popular than the traditional warrants 
+				described above. Financially they are also similar to call 
+				options, but are typically bought by retail investors, rather 
+				than investment funds or banks, who prefer the more keenly priced 
+				options which tend to trade on a different market. Covered 
+				warrants normally trade alongside equities, which makes them 
+				easier for retail investors to buy and sell them
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ExchangeTradedOption">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en"> 
+								Specifies the issuer name of a warrant. This name can either be explicitly stated, or specified as an href to another party on the document
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:element name="issuerName" type="xsd:string"/>
+						<xsd:element name="issuerPartyReference" type="fpml:PartyReference"/>
+					</xsd:choice>
+					<xsd:element name="exercisePrice" type="xsd:decimal" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								This is the amount of money which must be paid upon exercising the warrant.
+
+								The exercise price is paid by the holder to the warrant issuer (in the case 
+								of a call warrant) or by the warrant issuer to the holder (in the case of a 
+								put warrant) for the transfer of the underlying instrument.
+
+								The exercise price is generally fixed when the warrants are issued. 
+								However, the exercise price of some types of warrants may be variable. 
+								For example, the exercise price of endowments and some instalments are not fixed.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="conversionRatio" type="xsd:decimal" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								The conversion ratio refers to the number of warrants that must be exercised 
+								in order to transfer the underlying instrument.
+
+								The terms of issue may require one warrant to be exercised to trigger settlement. 
+								Alternatively, a number of warrants may need to be exercised.
+
+								The conversion ratio will affect the absolute price of the warrant on a per 
+								share basis. It is therefore important to know the conversion ratio of a 
+								warrant series before investing.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="capLevel" type="xsd:decimal" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								Some warrants have their upside potential capped at a certain level. 
+								
+								A cap level is fixed by the issuer at the time the warrant is issued.
+
+								Cap levels do not cause the warrant to terminate but will limit the 
+								upside profit potential of the warrant. If the value of the underlying 
+								instrument is above the cap level on exercise or at expiry, settlement 
+								of the warrant is based on a return equal to the cap level.
+
+								The holder may be entitled to a cash payment or a transfer of the 
+								underlying instrument at a value equal to the cap level.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="knockOutLevel" type="xsd:decimal" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								Knock-out warrants contain a knock-out or barrier feature
+								
+								The warrant terminates and ceases to exist, if the relevant price of the 
+								underlying asset touches the barrier. 
+								
+								Some knock-out warrants may pay an intrinsic value after being knocked out.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="associatedBond" type="fpml:Bond" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								Bond which is issued in conjunction with a Traditional Warrant
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="underlyer" type="fpml:Underlyer" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">	
+								Warrant Underlyer
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="WarrantTransaction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				A Warrant Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractUnitTransaction">
+				<xsd:sequence>
+					<xsd:element name="warrant" type="fpml:ExchangeTradedContract">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Identification of a Warrant. In cases where you require access to additional definition information you may use type substitution to access the Warrant complex type in the extension namespace
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="warrantTransaction" type="WarrantTransaction" substitutionGroup="fpml:product">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Global element representing a Warrant Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+</xsd:schema>

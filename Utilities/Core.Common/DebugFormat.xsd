@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DebugFormat"
+    targetNamespace="http://tempuri.org/DebugFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/DebugFormat.xsd"
+    xmlns:mstns="http://tempuri.org/DebugFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="DebugTraceEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TraceName" type="xs:string" />
+        <xs:element name="Id" type="xs:string" />
+        <xs:element name="NodeId" type="xs:string" />
+        <xs:element name="HostName" type="xs:string" />
+        <xs:element name="UserName" type="xs:string" />
+        <xs:element name="ApplName" type="xs:string" />
+        <xs:element name="Instance" type="xs:string" />
+        <xs:element name="ArrivedUtc" type="xs:dateTime" />
+        <xs:element name="OtherInfo" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DebugCacheStats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HostName" type="xs:string" />
+        <xs:element name="UserWNId" type="xs:string" />
+        <xs:element name="ApplName" type="xs:string" />
+        <xs:element name="NodeId" type="xs:string" />
+        <xs:element name="OrigEnv" type="xs:string" />
+        <xs:element name="RTVersion" type="xs:string" />
+        <xs:element name="RTPubKey" type="xs:string" />
+        <xs:element name="Updated" type="xs:string" />
+        <xs:element name="Counters" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DebugLogEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HostName" type="xs:string" />
+        <xs:element name="UserName" type="xs:string" />
+        <xs:element name="ApplName" type="xs:string" />
+        <xs:element name="ProcessId" type="xs:int" />
+        <xs:element name="SeqNumber" type="xs:int" />
+        <xs:element name="OrigEnv" type="xs:string" />
+        <xs:element name="Created" type="xs:string" />
+        <xs:element name="Severity" type="xs:int" />
+        <xs:element name="Message" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

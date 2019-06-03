@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-3-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<executionNotification xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" fpmlVersion="5-3" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../fpml-main-5-3.xsd http://www.w3.org/2000/09/xmldsig# ../../xmldsig-core-schema.xsd">
+<!-- AP interest rate option based on CBOE specification -->
+<!-- http://www.cboe.com/Products/InterestRateOptionsSpecs.aspx -->
+  <header>
+    <messageId messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">345345</messageId>
+    <sentBy messageAddressScheme="http://www.jpmorgan.com/coding-scheme/messageAddress">bmf</sentBy>
+    <creationTimestamp>2005-07-13T08:57:00-00:00</creationTimestamp>
+  </header>
+  <isCorrection>false</isCorrection>
+  <correlationId correlationIdScheme="http://www.jpmorgan.com/coding-scheme/correlation-id">ExchOpt-12345</correlationId>
+  <sequenceNumber>1</sequenceNumber>
+  <trade>
+    <tradeHeader>
+      <partyTradeIdentifier>
+        <partyReference href="jb2890" />
+        <tradeId tradeIdScheme="http://www.PartyA.com/coding-scheme/trade-id">1234</tradeId>
+      </partyTradeIdentifier>
+      <tradeDate id="kwo019">2005-07-13</tradeDate>
+    </tradeHeader>
+    <instrumentTradeDetails>
+      <buyerPartyReference href="jb2890" />
+      <sellerPartyReference href="kloq890" />
+      <future>
+        <instrumentId instrumentIdScheme="http://www.cboe.com/coding-scheme/instrument-id">TNX</instrumentId>
+        <description>10 Year Treasury Note Call Option on CBOE</description>
+        <currency>USD</currency>
+        <optionsExchangeId>CBOE</optionsExchangeId>
+        <multiplier>100</multiplier>
+        <maturity>2006-06-17</maturity>
+      </future>
+<!--Number of options-->
+      <quantity>
+        <number>20</number>
+      </quantity>
+<!-- the price of the trade is the strike of the option -->
+      <pricing>
+        <quote>
+          <value>32.00</value>
+          <measureType>CleanGrossCurrentMarketPrice</measureType>
+        </quote>
+      </pricing>
+      <principal>
+<!--Price of the options-->
+        <principalAmount>
+          <net>78.20</net>
+        </principalAmount>
+      </principal>
+<!--            strikePrice=0.0450
+                        option Premium=500-->
+    </instrumentTradeDetails>
+  </trade>
+  <party id="jb2890">
+    <partyId>Party A</partyId>
+  </party>
+  <party id="kloq890">
+    <partyId>Party B</partyId>
+  </party>
+</executionNotification>
+

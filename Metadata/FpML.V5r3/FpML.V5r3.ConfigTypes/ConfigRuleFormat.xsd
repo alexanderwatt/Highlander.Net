@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigRuleFormat"
+    targetNamespace="http://tempuri.org/ConfigRuleFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/ConfigRuleFormat.xsd"
+    xmlns:mstns="http://tempuri.org/ConfigRuleFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="ConfigRule">
+    <xs:sequence>
+      <xs:element name="Priority" type="xs:int" />
+      <xs:element name="Disabled" type="xs:boolean" />
+      <!--rule selection-->
+      <xs:element name="hostEnvName" type="xs:string" />
+      <xs:element name="hostComputer" type="xs:string" />
+      <xs:element name="hostInstance" type="xs:string" />
+      <xs:element name="hostUserName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BridgeConfigRule">
+    <xs:complexContent>
+      <xs:extension base="ConfigRule">
+        <xs:sequence>
+          <!--rule properties-->
+          <xs:element name="ruleName" type="xs:string" />
+          <xs:element name="sourceAddress" type="xs:string" />
+          <xs:element name="targetAddress" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BridgeConfigRule" type="BridgeConfigRule" />
+
+  <xs:complexType name="HostConfigRule">
+    <xs:complexContent>
+      <xs:extension base="ConfigRule">
+        <xs:sequence>
+          <xs:element name="buildConfig" type="xs:string" />
+          <!--server instances-->
+          <xs:element name="serverApplName" type="xs:string" />
+          <xs:element name="serverImplType" type="xs:string" />
+          <xs:element name="serverAssmName" type="xs:string" />
+          <xs:element name="serverAssmPath" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <!--configuration settings-->
+          <xs:element name="serverEnabled" type="xs:boolean" />
+          <xs:element name="serverInstanceLocalStart" type="xs:int" nillable="true" />
+          <xs:element name="serverInstanceLocalCount" type="xs:int" nillable="true" />
+          <xs:element name="serverInstanceTotalCount" type="xs:int" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="HostConfigRule" type="HostConfigRule" />
+  
+  <xs:element name="HostConfigRuleSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="setName" type="xs:string" />
+        <xs:element name="defaultHostEnvName" type="xs:string" />
+        <xs:element name="defaultHostComputer" type="xs:string" />
+        <xs:element name="hostConfigRule" type="HostConfigRule" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="FileImportRule">
+    <xs:complexContent>
+      <xs:extension base="ConfigRule">
+        <xs:sequence>
+          <xs:element name="DebugEnabled" type="xs:boolean" />
+          <xs:element name="DebugProperties" type="xs:string" />
+          <!--rule properties-->
+          <xs:element name="RuleName" type="xs:string" />
+          <!--check frequency (TimeSpan)-->
+          <xs:element name="MonitorPeriod" type="xs:string" />
+          <xs:element name="AsAtDateOffset" type="xs:int" />
+          <xs:element name="OtherProperties" type="xs:string" />
+          <!--check constraint (true = no constraint)-->
+          <xs:element name="CheckConstraintExpr" type="xs:string" />
+          <!--effective date (DateTimeOffset) -->
+          <xs:element name="EffectiveDateExpr" type="xs:string" />
+          <!--import condition (true = always)-->
+          <xs:element name="ImportConditionExpr" type="xs:string" />
+          <!--import delay (TimeSpan)-->
+          <xs:element name="ImportDelayExpr" type="xs:string" />
+          <!--next date (DateTimeOffset) -->
+          <xs:element name="DateUpdateExpr" type="xs:string" />
+          <!--source and target locations-->
+          <xs:element name="SourceSystem" type="xs:string" />
+          <xs:element name="SourceLocation" type="xs:string" />
+          <xs:element name="TargetLocation" type="xs:string" />
+          <xs:element name="RemoveOldTargetFiles" type="xs:boolean" />
+          <xs:element name="OnlyCopyUpdatedFiles" type="xs:boolean" />
+          <xs:element name="CopyFilePatterns" type="xs:string" />
+          <xs:element name="FileContentType" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ImportRuleSet">
+    <xs:sequence>
+      <xs:element name="ImportRules" type="FileImportRule" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="ImportRuleSet" type="ImportRuleSet" />
+
+  <!--rule results-->
+
+  <xs:element name="HostConfigResult">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="hostEnvName" type="xs:string" />
+        <xs:element name="hostComputer" type="xs:string" />
+        <xs:element name="hostInstance" type="xs:string" />
+        <xs:element name="hostUserName" type="xs:string" />
+        <xs:element name="serverApplName" type="xs:string" />
+        <xs:element name="serverInstance" type="xs:int" />
+        <!--results-->
+        <xs:element name="serverImplType" type="xs:string" />
+        <xs:element name="serverRunning" type="xs:boolean" />
+        <xs:element name="serverComment" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+</xs:schema>

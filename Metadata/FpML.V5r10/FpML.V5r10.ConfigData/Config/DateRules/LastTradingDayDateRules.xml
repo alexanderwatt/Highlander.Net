@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DateRules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://tempuri.org/DateRules.xsd">
+  <DateRuleProfile name="SFE-IR" fPmlIdentifier="IR" culture="en-AU">
+    <DateRule name="IRMonthlyCycle">
+      <DateRuleId>SecondFriday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="CBOT-W" fPmlIdentifier="W" culture="en-US">
+    <DateRule name="EDMonthlyCycle">
+      <DateRuleId>ThirdWednesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="SFE-IB" fPmlIdentifier="IB" culture="en-AU">
+    <DateRule name="SFE-IBMonthlyCycle">
+      <DateRuleId>SecondFriday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="LIFFE-L" fPmlIdentifier="L" culture="en-GB">
+    <DateRule name="LIFFE-LMonthlyCycle">
+      <DateRuleId>ThirdWednesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="CME-ED" fPmlIdentifier="ED" culture="en-US">
+    <DateRule name="CME-EDMonthlyCycle">
+      <DateRuleId>SecondWednesdayPlusFiveDays</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="TIFFE-EY" fPmlIdentifier="EY" culture="ja-JP">
+    <DateRule name="TIFFE-EYMonthlyCycle">
+      <DateRuleId>ThirdWednesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="LIFFE-ER" fPmlIdentifier="ER" culture="de-DE">
+    <DateRule name="EUREX-RDMonthlyCycle">
+      <DateRuleId>ThirdWednesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="NZX-ZB" fPmlIdentifier="ZB" culture="en-NZ">
+    <DateRule name="NZX-ZBMonthlyCycle">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <OffsetBefore>9</OffsetBefore>
+          <DayOfWeek>3</DayOfWeek>
+          <WeekOfMonth>1</WeekOfMonth>
+          <OffsetAfter>0</OffsetAfter>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="LIFFE-ES" fPmlIdentifier="ES" culture="de-CH">
+    <DateRule name="LIFFE-ESMonthlyCycle">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>3</DayOfWeek>
+          <WeekOfMonth>3</WeekOfMonth>
+          <OffsetAfter>-2</OffsetAfter>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="PMI-RA" fPmlIdentifier="RA" culture="se-SE">
+    <DateRule name="PMI-RAMonthlyCycle">
+      <DateRuleId>ThirdWednesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="HKFE-HR" fPmlIdentifier="HR" culture="zh-HK">
+    <DateRule name="HKFE-HRMonthlyCycle">
+      <DateRuleId>SecondTuesday</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <DateRuleProfile name="ME-BAX" fPmlIdentifier="BAX" culture="en-CA">
+    <DateRule name="ME-BAXMonthlyCycle">
+      <DateRuleId>SecondWednesdayPlusFiveDays</DateRuleId>
+    </DateRule>
+  </DateRuleProfile>
+  <Global>
+    <DateRule name="SecondFriday" id="SecondFriday">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>5</DayOfWeek>
+          <WeekOfMonth>2</WeekOfMonth>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+    <DateRule name="ThirdWednesday" id="ThirdWednesday">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>3</DayOfWeek>
+          <WeekOfMonth>3</WeekOfMonth>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+    <DateRule name="SecondWednesdayPlusFiveDays" id="SecondWednesdayPlusFiveDays">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>3</DayOfWeek>
+          <WeekOfMonth>2</WeekOfMonth>
+          <OffsetAfter>5</OffsetAfter>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+    <DateRule name="SecondTuesday" id="SecondTuesday">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>2</DayOfWeek>
+          <WeekOfMonth>2</WeekOfMonth>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+    <DateRule name="SecondMonday" id="SecondMonday">
+      <EveryNMonth>
+        <DayOfWeekInWeek>
+          <DayOfWeek>1</DayOfWeek>
+          <WeekOfMonth>2</WeekOfMonth>
+        </DayOfWeekInWeek>
+        <MonthCycle>1</MonthCycle>
+      </EveryNMonth>
+    </DateRule>
+  </Global>
+</DateRules>

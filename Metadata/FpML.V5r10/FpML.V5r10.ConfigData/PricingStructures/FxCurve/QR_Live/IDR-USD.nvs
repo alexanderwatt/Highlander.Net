@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=IDR-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=IDR
+Currency2/String=USD
+CurrencyPair/String=IDR-USD
+QuoteBasis/String=Currency2PerCurrency1

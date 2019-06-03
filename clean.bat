@@ -1,0 +1,1 @@
+@call .\Utilities\clean.bat %*

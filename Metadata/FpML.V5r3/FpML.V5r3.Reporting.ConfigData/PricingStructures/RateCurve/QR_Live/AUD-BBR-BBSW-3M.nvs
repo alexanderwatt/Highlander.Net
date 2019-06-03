@@ -1,0 +1,8 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateCurve
+IndexName/String=AUD-BBR-BBSW
+IndexTenor/String=3M
+CurveName/String=AUD-BBR-BBSW-3M
+DependencyDepth/Int32=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=AUD

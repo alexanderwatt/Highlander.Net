@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2AB71510-A56B-4ACC-BAD0-EB0BC95F31D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r10.Reporting.Helpers</RootNamespace>
+    <AssemblyName>FpML.V5r10.Reporting.Helpers</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdjustableOrAdjustedDateHelper.cs" />
+    <Compile Include="AmountScheduleHelper.cs" />
+    <Compile Include="AssetMeasureTypeHelper.cs" />
+    <Compile Include="AssetValuationHelper.cs" />
+    <Compile Include="BasicAssetValuationHelper.cs" />
+    <Compile Include="BasicQuotationHelper.cs" />
+    <Compile Include="BusinessCentersHelper.cs" />
+    <Compile Include="BusinessCentersResolver.cs" />
+    <Compile Include="BusinessCenterTimeHelper.cs" />
+    <Compile Include="BusinessDayAdjustmentsHelper.cs" />
+    <Compile Include="BusinessDayConventionHelper.cs" />
+    <Compile Include="CalculationFactory.cs" />
+    <Compile Include="CalculationPeriodFactory.cs" />
+    <Compile Include="CalculationPeriodFrequencyHelper.cs" />
+    <Compile Include="CalculationPeriodHelper.cs" />
+    <Compile Include="CapFloorFactory.cs" />
+    <Compile Include="CapFloorHelper.cs" />
+    <Compile Include="CashflowsFactory.cs" />
+    <Compile Include="CashflowsHelper.cs" />
+    <Compile Include="CashflowTypeHelper.cs" />
+    <Compile Include="CommodityHelper.cs" />
+    <Compile Include="QueryHelper.cs" />
+    <Compile Include="ExchangeHelper.cs" />
+    <Compile Include="CurrencyHelper.cs" />
+    <Compile Include="DayCountFractionHelper.cs" />
+    <Compile Include="DiscountingHelper.cs" />
+    <Compile Include="FixedRateScheduleHelper.cs" />
+    <Compile Include="FloatingRateCalculationFactory.cs" />
+    <Compile Include="FloatingRateCalculationHelper.cs" />
+    <Compile Include="FloatingRateDefinitionHelper.cs" />
+    <Compile Include="FloatingRateIndexHelper.cs" />
+    <Compile Include="FpMLHelpers.cs" />
+    <Compile Include="FraDiscountingEnumHelper.cs" />
+    <Compile Include="InformationProviderHelper.cs" />
+    <Compile Include="InformationSourceHelper.cs" />
+    <Compile Include="InterestRateStreamFactory.cs" />
+    <Compile Include="InterestRateStreamHelper.cs" />
+    <Compile Include="InterpolationMethodHelper.cs" />
+    <Compile Include="IntervalComparer.cs" />
+    <Compile Include="IntervalHelper.cs" />
+    <Compile Include="MarketFactory.cs" />
+    <Compile Include="MarketHelper.cs" />
+    <Compile Include="MoneyHelper.cs" />
+    <Compile Include="NotionalFactory.cs" />
+    <Compile Include="NotionalHelper.cs" />
+    <Compile Include="OffsetHelper.cs" />
+    <Compile Include="PartyReferenceFactory.cs" />
+    <Compile Include="PartyReferenceHelper.cs" />
+    <Compile Include="PaymentCalculationPeriodHelper.cs" />
+    <Compile Include="PaymentHelper.cs" />
+    <Compile Include="PaymentTypeHelper.cs" />
+    <Compile Include="PeriodHelper.cs" />
+    <Compile Include="PortfolioNameHelper.cs" />
+    <Compile Include="PriceQuoteUnitsHelper.cs" />
+    <Compile Include="PricingStructureConfigHelper.cs" />
+    <Compile Include="PrincipalExchangeHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuotationHelper.cs" />
+    <Compile Include="RateIndexHelper.cs" />
+    <Compile Include="RateObservationFactory.cs" />
+    <Compile Include="RateReferenceHelper.cs" />
+    <Compile Include="RateSourcePageHelper.cs" />
+    <Compile Include="RelativeDateOffsetHelper.cs" />
+    <Compile Include="ResetFrequencyHelper.cs" />
+    <Compile Include="RollConventionEnumHelper.cs" />
+    <Compile Include="RoundingHelper.cs" />
+    <Compile Include="ScheduleHelper.cs" />
+    <Compile Include="SensitivitySetHelper.cs" />
+    <Compile Include="SpreadScheduleFactory.cs" />
+    <Compile Include="StepHelper.cs" />
+    <Compile Include="StrikeScheduleFactory.cs" />
+    <Compile Include="SwapFactory.cs" />
+    <Compile Include="SwapHelper.cs" />
+    <Compile Include="SwaptionFactory.cs" />
+    <Compile Include="TermPointFactory.cs" />
+    <Compile Include="TermPointHelper.cs" />
+    <Compile Include="UnderlyingAssetHelper.cs" />
+    <Compile Include="XsdClassesFieldResolver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Codes\FpML.V5r10.Codes.csproj">
+      <Project>{9003b832-35d4-45b7-9b85-6d23a1984523}</Project>
+      <Name>FpML.V5r10.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpML.V5r10.Reporting\FpML.V5r10.Reporting.csproj">
+      <Project>{560374aa-175b-49f5-aed1-813ba1aeb713}</Project>
+      <Name>FpML.V5r10.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

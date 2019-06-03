@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TradeImportRuleFormat"
+    targetNamespace="http://tempuri.org/TradeImportRuleFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/TradeImportRuleFormat.xsd"
+    xmlns:mstns="http://tempuri.org/TradeImportRuleFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="TradeImportRule">
+    <xs:sequence>
+      <xs:element name="Priority" type="xs:int" />
+      <xs:element name="Disabled" type="xs:boolean" />
+      <!--filter-->
+      <xs:element name="hostEnvName" type="xs:string" />
+      <xs:element name="hostComputer" type="xs:string" />
+      <xs:element name="hostInstance" type="xs:string" />
+      <xs:element name="hostUserName" type="xs:string" />
+      <!--output-->
+      <xs:element name="RuleName" type="xs:string" />
+      <xs:element name="IncludeCounterpartyIds" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="TradeImportRule" type="TradeImportRule" />
+  
+  <xs:element name="TradeImportRuleSet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="defaultHostEnvName" type="xs:string" />
+        <xs:element name="defaultHostComputer" type="xs:string" />
+        <xs:element name="defaultIncludeCounterpartyIds" type="xs:string" />
+        <xs:element name="TradeImportRule" type="TradeImportRule" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

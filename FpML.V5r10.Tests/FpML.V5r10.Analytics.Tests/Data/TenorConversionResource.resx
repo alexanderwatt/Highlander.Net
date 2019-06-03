@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Get5yqDiscountFactors" xml:space="preserve">
+    <value>0.999801;0.981786;0.964789;0.949085;0.933347;0.917956;0.902846;0.888466;0.873824;0.859298;0.844749;0.831545;0.817847;0.803936;0.790705;0.777707;0.764934;0.752455;0.740066;0.728166</value>
+  </data>
+  <data name="Get5yqRollDates" xml:space="preserve">
+    <value>26/08/2008;26/11/2008;26/02/2009;26/05/2009;26/08/2009;26/11/2009;26/02/2010;26/05/2010;26/08/2010;26/11/2010;28/02/2011;26/05/2011;26/08/2011;28/11/2011;27/02/2012;28/05/2012;27/08/2012;26/11/2012;26/02/2013;27/05/2013</value>
+  </data>
+  <data name="Get5yqVols" xml:space="preserve">
+    <value>7.85437;11.70246;13.67505;16.07381;16.64788;17.17488;17.40261;17.52067;17.14061;16.2994;15.70438;15.59911;15.54087;15.12467;14.81604;14.67057;14.59605;14.43131;14.19835;13.87621</value>
+  </data>
+  <data name="Get5ysRollDates" xml:space="preserve">
+    <value>26/08/2008;26/02/2009;26/08/2009;26/02/2010;26/08/2010;28/02/2011;26/08/2011;27/02/2012;27/08/2012;26/02/2013</value>
+  </data>
+  <data name="Get5ysVols" xml:space="preserve">
+    <value>9.81668;15.00831;17.05;17.60516;16.85902;15.77684;15.46703;14.86546;14.63321;14.15085</value>
+  </data>
+  <data name="GetMonthlyRollDates" xml:space="preserve">
+    <value>31/07/2008;29/08/2008;30/09/2008;31/10/2008;28/11/2008;31/12/2008;30/01/2009;27/02/2009;31/03/2009;30/04/2009;29/05/2009;30/06/2009;31/07/2009;31/08/2009;30/09/2009;30/10/2009;30/11/2009;31/12/2009;29/01/2010;26/02/2010;31/03/2010;30/04/2010;31/05/2010;30/06/2010;30/07/2010;31/08/2010;30/09/2010;29/10/2010;30/11/2010;31/12/2010;31/01/2011;28/02/2011;31/03/2011;29/04/2011;31/05/2011;30/06/2011;29/07/2011;31/08/2011;30/09/2011;31/10/2011;30/11/2011;30/12/2011;31/01/2012;29/02/2012;30/03/2012;30/04/2012;31/05/2012;29/06/2012;31/07/2012;31/08/2012;28/09/2012;31/10/2012;30/11/2012;31/12/2012;31/01/2013;28/02/2013;28/03/2013;30/04/2013;31/05/2013;28/06/2013;31/07/2013;30/08/2013;30/09/2013;31/10/2013;29/11/2013;31/12/2013;31/01/2014;28/02/2014;31/03/2014;30/04/2014;30/05/2014;30/06/2014;31/07/2014;29/08/2014;30/09/2014;31/10/2014;28/11/2014;31/12/2014;30/01/2015;27/02/2015;31/03/2015;30/04/2015;29/05/2015;30/06/2015;31/07/2015;31/08/2015;30/09/2015;30/10/2015;30/11/2015;31/12/2015;29/01/2016;29/02/2016;31/03/2016;9/04/2016;31/05/2016;30/06/2016;29/07/2016;31/08/2016;30/09/2016;31/10/2016;30/11/2016;30/12/2016;31/01/2017;28/02/2017;31/03/2017;28/04/2017;31/05/2017;30/06/2017;31/07/2017;31/08/2017;29/09/2017;31/10/2017;30/11/2017;29/12/2017;31/01/2018;28/02/2018;29/03/2018;30/04/2018;31/05/2018;29/06/2018</value>
+  </data>
+  <data name="GetMonthlyVols" xml:space="preserve">
+    <value>0.0;6.09521;6.77061;7.55474;8.08209;9.0419;10.28326;12.11852;12.11207;12.10973;11.82664;12.21789;12.67259;13.09066;13.55836;14.00521;14.53551;14.86184;15.1973;15.67051;15.72168;15.79672;16.03169;15.83536;15.64652;15.48516;15.23917;15.00966;14.74484;14.57694;14.415;14.15457;14.14392;14.13663;14.13347;14.1137;14.09467;14.16201;13.99775;13.851;13.63334;13.58182;13.52973;13.38238;13.46721;13.55515;13.55483;13.79576;14.00459;14.28753;14.47145;14.61556;14.92198;14.9233;14.92566;15.07394;14.87022;14.67398;14.48306;14.17176;13.90943;13.51843;13.31485;13.10301;12.87496;12.69984;12.50132;12.29251;12.14276;11.9722;11.78195;11.65757;11.52838;11.36633;11.29202;11.20937;11.09276;11.07044;11.04805;10.98362;11.02193;11.07367;11.1176;11.16378;11.22011;11.32021;11.30365;11.28712;11.27273;11.25161;11.23147;11.21388;11.18801;11.16301;11.14254;11.1088;11.07691;11.04885;11.00725;10.96849;10.93456;10.88777;10.84067;10.80075;10.74366;10.6804;10.62924;10.55242;10.48298;10.4208;10.33371;10.25365;10.17282;10.07518;9.98302;9.88674;9.77828;9.66725;9.55093;9.41446</value>
+  </data>
+  <data name="GetQuarterlyDiscountFactors" xml:space="preserve">
+    <value>0.999801;0.980585;0.962215;0.944695;0.927418;0.910863;0.894766;0.879082;0.863755;0.84846;0.833027;0.818909;0.804636;0.789903;0.775767;0.762214;0.748626;0.735443;0.722531;0.710298;0.697909;0.685667;0.673667;0.662291;0.650758;0.639458;0.6285;0.617877;0.607229;0.596726;0.586418;0.576304;0.566378;0.55632;0.546662;0.537701;0.528196;0.519072;0.510118;0.501619</value>
+  </data>
+  <data name="GetQuarterlyRollDates" xml:space="preserve">
+    <value>31/07/2008;31/10/2008;30/01/2009;30/04/2009;31/07/2009;30/10/2009;29/01/2010;30/04/2010;30/07/2010;29/10/2010;31/01/2011;29/04/2011;29/07/2011;31/10/2011;31/01/2012;30/04/2012;31/07/2012;31/10/2012;31/01/2013;30/04/2013;31/07/2013;31/10/2013;31/01/2014;30/04/2014;31/07/2014;31/10/2014;30/01/2015;30/04/2015;31/07/2015;30/10/2015;29/01/2016;29/04/2016;29/07/2016;31/10/2016;31/01/2017;28/04/2017;31/07/2017;31/10/2017;31/01/2018;30/04/2018;31/07/2018</value>
+  </data>
+  <data name="GetQuarterlyVols" xml:space="preserve">
+    <value>8.82612;12.16186;12.16864;13.44969;14.81009;15.77106;15.96527;15.38966;14.68872;14.1951;14.17646;14.11025;13.6533;13.48809;13.77415;14.46835;14.98418;14.99689;14.331;13.42817;12.79745;12.2377;11.74091;11.35739;11.11962;11.05046;11.19729;11.35323;11.30283;11.24052;11.16422;11.06824;10.94534;10.80079;10.62163;10.40289;10.14464;9.85091;9.49573;0.0</value>
+  </data>
+  <data name="GetSemiRollDates" xml:space="preserve">
+    <value>31/07/2008;30/01/2009;31/07/2009;29/01/2010;30/07/2010;31/01/2011;29/07/2011;31/01/2012;31/07/2012;31/01/2013;31/07/2013;31/01/2014;31/07/2014;30/01/2015;31/07/2015;29/01/2016;29/07/2016;31/01/2017;31/07/2017;31/01/2018</value>
+  </data>
+  <data name="GetSemiVols" xml:space="preserve">
+    <value>7.79389;12.27736;14.25304;16.00783;15.17059;14.30854;14.01558;13.75391;14.85372;14.78618;13.22941;12.08924;11.33799;11.22032;11.4268;11.29977;11.10454;10.79972;10.36309;9.75312</value>
+  </data>
+</root>

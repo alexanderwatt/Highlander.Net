@@ -1,0 +1,13 @@
+﻿PricingStructureType/String=XccySpreadCurve
+Market/String=GlobalIB_EOD
+Currency/String=AUD
+CurveName/String=AUD-USD-BASIS
+BaseDate/DateTime=2010-10-28T00:00:00
+Algorithm/String=LinearZero
+SourceSystem/String=Orion
+Function/String=Market
+Type/String=PricingStructures
+Index/String=USD-BASIS
+UniqueIdentifier/String=Market.GlobalIB_EOD.RateCurve.AUD-USD-BASIS
+Domain/String=Orion.Market
+MarketName/String=GlobalIB_EOD

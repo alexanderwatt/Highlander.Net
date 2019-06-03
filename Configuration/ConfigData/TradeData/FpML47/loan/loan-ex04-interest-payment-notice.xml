@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="InterestPaymentNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://bankj.com/messageId">12346</messageId>
+      <sentBy>BNKJUS33XXX</sentBy>
+      <sendTo>DCCXUS33XXX</sendTo>
+      <creationTimestamp>2007-03-17T09:30:47.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2003-08-07</noticeDate>
+   <agentBankPartyReference href="BANKJ"/>
+   <borrowerPartyReference href="ACC"/>
+   <lenderPartyReference href="DCC"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">9876543</instrumentId>
+      <description>Term Loan B - Katun</description>
+      <currency>USD</currency>
+   </facilitySummary>
+   <loanContractSummary>
+      <identifier>
+         <partyReference href="BANKJ"/>
+         <contractId contractIdScheme="http://bankj.com/loanContractId">00000002</contractId>
+      </identifier>
+   </loanContractSummary>
+   <interestPayment>
+      <calculationMethod>FacilityPosition</calculationMethod>
+      <paymentDate>2003-08-01</paymentDate>
+      <amount>
+         <shareAmount>
+            <currency>USD</currency>
+            <amount>263.19</amount>
+         </shareAmount>
+      </amount>
+   </interestPayment>
+   <interestAccrualSchedule>
+      <interestRatePeriod>
+         <rateFixingDate>2003-07-01</rateFixingDate>
+         <startDate>2003-07-01</startDate>
+         <endDate>2003-07-03</endDate>
+         <floatingRateIndex floatingRateIndexScheme="http:/bankj.com/floating-rate-index">PRIME</floatingRateIndex>
+         <interestRate>0.04</interestRate>
+         <margin>0.03</margin>
+         <allInRate>0.07</allInRate>
+         <interestDayBasis>ACT/ACT.ISDA</interestDayBasis>
+         <tenor>
+            <periodMultiplier>2</periodMultiplier>
+            <period>D</period>
+         </tenor>
+      </interestRatePeriod>
+      <lenderLoanContractPeriod>
+         <startDate>2003-07-01</startDate>
+         <endDate>2003-07-03</endDate>
+         <shareLoanContractAmount>
+            <currency>USD</currency>
+            <amount>686171.28</amount>
+         </shareLoanContractAmount>
+      </lenderLoanContractPeriod>
+      <interestAccrualPeriod>
+         <startDate>2003-07-01</startDate>
+         <endDate>2003-07-03</endDate>
+         <shareInterestAccrualAmount>
+            <currency>USD</currency>
+            <amount>263.19</amount>
+         </shareInterestAccrualAmount>
+      </interestAccrualPeriod>
+   </interestAccrualSchedule>
+   <party id="BANKJ">
+      <partyId>BNKJUS33XXX</partyId>
+      <partyName>Bank J</partyName>
+   </party>
+   <party id="ACC">
+      <partyId>ACCXUS33XXX</partyId>
+      <partyName>ACC Inc</partyName>
+   </party>
+   <party id="DCC">
+      <partyId>DCCXUS33XXX</partyId>
+      <partyName>DCC Inc</partyName>
+   </party>
+</FpML>

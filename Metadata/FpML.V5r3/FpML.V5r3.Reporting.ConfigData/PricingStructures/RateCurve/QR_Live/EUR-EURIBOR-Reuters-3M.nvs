@@ -1,0 +1,8 @@
+PricingStructureType/String=RateCurve
+Market/String=QR_LIVE
+IndexName/String=EUR-EURIBOR-Reuters
+IndexTenor/String=3M
+CurveName/String=EUR-EURIBOR-Reuters-3M
+DependencyDepth/Double=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=EUR

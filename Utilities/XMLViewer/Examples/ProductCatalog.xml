@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<productCatalog>
+    <catalogName>Jones and Jones Unique Catalog 2004</catalogName>
+    <expiryDate>2005-01-01</expiryDate>
+
+    <products>
+        <product id="1001">
+            <productName>Gourmet Coffee</productName>
+            <description>The finest beans from rare Chillean plantations.</description>
+            <productPrice>0.99</productPrice>
+            <inStock>true</inStock>
+        </product>
+        <product id="1002">
+            <productName>Blue China Tea Pot</productName>
+            <description>A trendy update for tea drinkers.</description>
+            <productPrice>102.99</productPrice>
+            <inStock>true</inStock>
+        </product>
+    </products>
+</productCatalog>

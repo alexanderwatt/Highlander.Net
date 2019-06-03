@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Stock>
+  <Name>ERC</Name>
+  <AssetId>ERC</AssetId>
+  <VolatilitySurface>
+    <StockId>ERC</StockId>
+    <Date>2009-09-09T00:00:00</Date>
+    <IsComplete>false</IsComplete>
+    <Expiries>
+      <ForwardExpiry>
+        <ExpiryDate>2009-09-24T00:00:00</ExpiryDate>
+        <FwdPrice>124.667944</FwdPrice>
+        <InterestRate>0.030939</InterestRate>
+        <NodalPoint>true</NodalPoint>
+        <Strikes>
+          <Strike>
+            <Call>
+              <ContractId>ERC09SEP152C.NOX</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Call</Type>
+              <Volatility>
+                <Value>0.484480</Value>
+              </Volatility>
+            </Call>
+            <Moneyness>1.2192388445902342</Moneyness>
+            <StrikePrice>152</StrikePrice>
+            <Volatility>
+              <Value>0.48448000</Value>
+            </Volatility>
+            <VolatilityHasBeenSet>true</VolatilityHasBeenSet>
+          </Strike>
+        </Strikes>
+      </ForwardExpiry>
+    </Expiries>
+  </VolatilitySurface>
+</Stock>

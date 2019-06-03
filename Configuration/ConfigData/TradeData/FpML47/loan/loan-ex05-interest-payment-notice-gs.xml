@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="InterestPaymentNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="GSPrivate">2558848187</messageId>
+      <sentBy>GSANDCOUS33XX</sentBy>
+      <sendTo>NOT_FOUND_RECIPIENT</sendTo>
+      <creationTimestamp>2007-11-26T22:53:53.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2007-11-01</noticeDate>
+   <agentBankPartyReference href="agentBankParty"/>
+   <borrowerPartyReference href="borrowerParty"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">9876543</instrumentId>
+      <description>XYZ Corp</description>
+      <creditAgreementDate>2006-10-04</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">1234567</instrumentId>
+      <description>XYZ Corp Revolver</description>
+      <originalCommitmentAmount>
+         <currency>USD</currency>
+         <amount>60000000.00</amount>
+      </originalCommitmentAmount>
+   </facilitySummary>
+   <loanContractSummary>
+      <identifier>
+         <partyReference href="agentBankParty"/>
+         <contractId contractIdScheme="GSPrivate">170806</contractId>
+      </identifier>
+      <originalAmount>
+         <currency>USD</currency>
+         <amount>0.00</amount>
+      </originalAmount>
+      <maturityDate>2007-01-05</maturityDate>
+   </loanContractSummary>
+   <interestPayment>
+      <calculationMethod>FacilityPosition</calculationMethod>
+      <paymentDate>2007-01-05</paymentDate>
+      <amount>
+         <globalAmount>
+            <currency>USD</currency>
+            <amount>6759.72</amount>
+         </globalAmount>
+         <shareAmount>
+            <currency>USD</currency>
+            <amount>112.66</amount>
+         </shareAmount>
+      </amount>
+   </interestPayment>
+   <interestAccrualSchedule>
+      <interestRatePeriod>
+         <rateFixingDate>2006-12-01</rateFixingDate>
+         <startDate>2006-12-05</startDate>
+         <endDate>2007-01-05</endDate>
+         <floatingRateIndex>USD-LIBOR-BBA</floatingRateIndex>
+         <interestRate>0.0250</interestRate>
+         <margin>0.0535</margin>
+         <allInRate>0.0785</allInRate>
+         <interestDayBasis>ACT/360</interestDayBasis>
+         <tenor>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+         </tenor>
+      </interestRatePeriod>
+      <lenderLoanContractPeriod>
+         <startDate>2006-12-05</startDate>
+         <endDate>2007-01-05</endDate>
+         <shareLoanContractAmount>
+            <currency>USD</currency>
+            <amount>16666.67</amount>
+         </shareLoanContractAmount>
+      </lenderLoanContractPeriod>
+      <interestAccrualPeriod>
+         <startDate>2006-12-05</startDate>
+         <endDate>2007-01-05</endDate>
+         <shareInterestAccrualAmount>
+            <currency>USD</currency>
+            <amount>112.66</amount>
+         </shareInterestAccrualAmount>
+      </interestAccrualPeriod>
+   </interestAccrualSchedule>
+   <party id="agentBankParty">
+      <partyId>GSANDCOUS33XX</partyId>
+      <partyName>Goldman Sachs Group, Inc</partyName>
+   </party>
+   <party id="borrowerParty">
+      <partyId>13579</partyId>
+      <partyName>XYZ Corp</partyName>
+   </party>
+   <party id="lenderParty">
+      <partyId>NOT_FOUND_RECIPIENT</partyId>
+      <partyName>Lender Bank</partyName>
+   </party>
+</FpML>

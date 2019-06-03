@@ -1,0 +1,8 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateCurve
+IndexName/String=NZD-BBR-FRA
+IndexTenor/String=3M
+CurveName/String=NZD-BBR-FRA-3M
+DependencyDepth/Int32=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=NZD

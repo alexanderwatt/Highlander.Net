@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuotedAssetSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <instrumentSet xmlns="http://www.fpml.org/FpML-5/reporting">
+    <simpleIrSwap id="AUD-IRSwap-1W-1Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1W-2Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1W-3Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1W-5Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1W-7Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1W-10Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>W</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-1Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-2Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-3Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-5Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-7Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1M-10Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-1Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-2Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-3Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-5Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-7Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2M-10Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-1Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-2Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-3Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-5Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-7Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3M-10Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-1Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-2Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-3Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-5Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-7Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-6M-10Y">
+      <term>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-1Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-2Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-3Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-5Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-7Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-9M-10Y">
+      <term>
+        <periodMultiplier>9</periodMultiplier>
+        <period>M</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-1Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-2Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-3Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-5Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-7Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-1Y-10Y">
+      <term>
+        <periodMultiplier>1</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-1Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-2Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-3Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-5Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-7Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-2Y-10Y">
+      <term>
+        <periodMultiplier>2</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-1Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-2Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-3Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-5Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-7Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-3Y-10Y">
+      <term>
+        <periodMultiplier>3</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-1Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-2Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-3Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-5Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-7Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-4Y-10Y">
+      <term>
+        <periodMultiplier>4</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-1Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-2Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-3Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-5Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-7Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-5Y-10Y">
+      <term>
+        <periodMultiplier>5</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-1Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-2Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-3Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-5Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-7Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-7Y-10Y">
+      <term>
+        <periodMultiplier>7</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-1Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-2Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-3Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-5Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-7Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+    <simpleIrSwap id="AUD-IRSwap-10Y-10Y">
+      <term>
+        <periodMultiplier>10</periodMultiplier>
+        <period>Y</period>
+      </term>
+    </simpleIrSwap>
+  </instrumentSet>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1W-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1M-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2M-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3M-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-6M-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-9M-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-1Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-2Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-3Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-4Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-5Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-7Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-1Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-2Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-3Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-5Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-7Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-IRSwap-10Y-10Y" />
+    <quote>
+      <value>0.1</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>LogNormalVolatility</quoteUnits>
+    </quote>
+  </assetQuote>
+</QuotedAssetSet>

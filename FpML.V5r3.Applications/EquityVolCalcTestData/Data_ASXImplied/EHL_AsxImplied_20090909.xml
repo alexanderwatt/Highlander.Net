@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Stock>
+  <Name>EHL</Name>
+  <AssetId>EHL</AssetId>
+  <VolatilitySurface>
+    <StockId>EHL</StockId>
+    <Date>2009-09-09T00:00:00</Date>
+    <IsComplete>false</IsComplete>
+    <Expiries>
+      <ForwardExpiry>
+        <ExpiryDate>2009-09-24T00:00:00</ExpiryDate>
+        <FwdPrice>89.120056</FwdPrice>
+        <InterestRate>0.030939</InterestRate>
+        <NodalPoint>true</NodalPoint>
+        <Strikes>
+          <Strike>
+            <Call>
+              <ContractId>EHL09SEP110C.BQ7</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Call</Type>
+              <Volatility>
+                <Value>1.523605</Value>
+              </Volatility>
+            </Call>
+            <Moneyness>1.2342900682198854</Moneyness>
+            <StrikePrice>110</StrikePrice>
+            <Volatility>
+              <Value>1.52360500</Value>
+            </Volatility>
+            <VolatilityHasBeenSet>true</VolatilityHasBeenSet>
+          </Strike>
+        </Strikes>
+      </ForwardExpiry>
+    </Expiries>
+  </VolatilitySurface>
+</Stock>

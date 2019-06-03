@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.EUR-LIBOR-BBA-3M">
+    <name>EUR-LIBOR-BBA-3M</name>
+    <currency>EUR</currency>
+    <algorithm>CalypsoAlgo4_360</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>LIBOR-BBA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.EUR-LIBOR-BBA-3M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-08-30T15:07:44.4785715+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="EUR-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="EUR-Deposit-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="EUR-Deposit-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="EUR-Deposit-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="EUR-Deposit-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="EUR-IRSwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-1" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-2" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-3" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-4" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-5" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-6" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-7" />
+        <underlyingAsset xsi:type="Future" id="EUR-IRFuture-ER-8" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="EUR-Deposit-1D" />
+        <quote>
+          <value>0.004</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUDR1T CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-Deposit-1W" />
+        <quote>
+          <value>0.0046</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUDR1Z CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-Deposit-1M" />
+        <quote>
+          <value>0.0054</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUDRA CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-Deposit-2M" />
+        <quote>
+          <value>0.0062</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUDRB CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-Deposit-3M" />
+        <quote>
+          <value>0.008</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUDRC CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-3Y" />
+        <quote>
+          <value>0.01435</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA3 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-4Y" />
+        <quote>
+          <value>0.01611</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA4 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-5Y" />
+        <quote>
+          <value>0.01789</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA5 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-7Y" />
+        <quote>
+          <value>0.02094</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA7 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-10Y" />
+        <quote>
+          <value>0.02414</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA10 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-12Y" />
+        <quote>
+          <value>0.02559</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA12 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-15Y" />
+        <quote>
+          <value>0.02691</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA15 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-20Y" />
+        <quote>
+          <value>0.02784</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA20 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-25Y" />
+        <quote>
+          <value>0.02761</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA25 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRSwap-30Y" />
+        <quote>
+          <value>0.02667</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUSA30 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-1" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00885</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER1 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-2" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00935</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER2 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-3" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0099</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER3 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-4" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.01035</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER4 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-5" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0109</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER5 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-6" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.01185</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER6 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-7" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0125</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER7 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EUR-IRFuture-ER-8" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.01335</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ER8 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:44.4629414+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.00400197842251071</mid>
+        </point>
+        <point id="EUR-Deposit-1D">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.00400197842251071</mid>
+        </point>
+        <point id="EUR-Deposit-1W">
+          <term>
+            <date>2010-09-08</date>
+          </term>
+          <mid>0.00448221914678193</mid>
+        </point>
+        <point id="EUR-Deposit-1M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.005318015869892</mid>
+        </point>
+        <point id="EUR-Deposit-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.00613482869190385</mid>
+        </point>
+        <point id="EUR-Deposit-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.00791518429518056</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-1">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.00823452894191501</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-2">
+          <term>
+            <date>2011-03-15</date>
+          </term>
+          <mid>0.0087439900076145</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-3">
+          <term>
+            <date>2011-06-16</date>
+          </term>
+          <mid>0.00911305964485542</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-4">
+          <term>
+            <date>2011-09-15</date>
+          </term>
+          <mid>0.00940831971217282</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-5">
+          <term>
+            <date>2011-12-21</date>
+          </term>
+          <mid>0.00970690487880255</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-6">
+          <term>
+            <date>2012-03-21</date>
+          </term>
+          <mid>0.0100489274273556</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-7">
+          <term>
+            <date>2012-06-21</date>
+          </term>
+          <mid>0.0103891191736434</mid>
+        </point>
+        <point id="EUR-IRFuture-ER-8">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.010746908734065</mid>
+        </point>
+        <point id="EUR-IRSwap-3Y">
+          <term>
+            <date>2013-09-02</date>
+          </term>
+          <mid>0.014101743639773</mid>
+        </point>
+        <point id="EUR-IRSwap-4Y">
+          <term>
+            <date>2014-09-01</date>
+          </term>
+          <mid>0.0158557283012932</mid>
+        </point>
+        <point id="EUR-IRSwap-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.0176456667575371</mid>
+        </point>
+        <point id="EUR-IRSwap-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0207502850229817</mid>
+        </point>
+        <point id="EUR-IRSwap-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0240947763347465</mid>
+        </point>
+        <point id="EUR-IRSwap-12Y">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0256465170991929</mid>
+        </point>
+        <point id="EUR-IRSwap-15Y">
+          <term>
+            <date>2025-09-01</date>
+          </term>
+          <mid>0.0270624683590679</mid>
+        </point>
+        <point id="EUR-IRSwap-20Y">
+          <term>
+            <date>2030-09-02</date>
+          </term>
+          <mid>0.0280194838786008</mid>
+        </point>
+        <point id="EUR-IRSwap-25Y">
+          <term>
+            <date>2035-09-03</date>
+          </term>
+          <mid>0.0275380887040901</mid>
+        </point>
+        <point id="EUR-IRSwap-30Y">
+          <term>
+            <date>2040-09-03</date>
+          </term>
+          <mid>0.0261068215052536</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="EUR-Deposit-1D">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999888890123443072765859145</mid>
+      </point>
+      <point id="EUR-Deposit-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>0.999888013527574</mid>
+      </point>
+      <point id="EUR-Deposit-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.99952771299921</mid>
+      </point>
+      <point id="EUR-Deposit-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.998927802643071</mid>
+      </point>
+      <point id="EUR-Deposit-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.997959349434015</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-1">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.997558017295304</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-2">
+        <term>
+          <date>2011-03-15</date>
+        </term>
+        <mid>0.9952317211528943692253114895</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-3">
+        <term>
+          <date>2011-06-16</date>
+        </term>
+        <mid>0.992694092796967</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-4">
+        <term>
+          <date>2011-09-15</date>
+        </term>
+        <mid>0.990103845709035</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-5">
+        <term>
+          <date>2011-12-21</date>
+        </term>
+        <mid>0.987209503380445</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-6">
+        <term>
+          <date>2012-03-21</date>
+        </term>
+        <mid>0.9842621835974958219479363775</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-7">
+        <term>
+          <date>2012-06-21</date>
+        </term>
+        <mid>0.9811294728422748800948271739</mid>
+      </point>
+      <point id="EUR-IRFuture-ER-8">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.977830443286072</mid>
+      </point>
+      <point id="EUR-IRSwap-3Y">
+        <term>
+          <date>2013-09-02</date>
+        </term>
+        <mid>0.957936503592651</mid>
+      </point>
+      <point id="EUR-IRSwap-4Y">
+        <term>
+          <date>2014-09-01</date>
+        </term>
+        <mid>0.93771562765128</mid>
+      </point>
+      <point id="EUR-IRSwap-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.9144763060508</mid>
+      </point>
+      <point id="EUR-IRSwap-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.863191529954332</mid>
+      </point>
+      <point id="EUR-IRSwap-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.783569849660574</mid>
+      </point>
+      <point id="EUR-IRSwap-12Y">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.732426982359856</mid>
+      </point>
+      <point id="EUR-IRSwap-15Y">
+        <term>
+          <date>2025-09-01</date>
+        </term>
+        <mid>0.663226624587992</mid>
+      </point>
+      <point id="EUR-IRSwap-20Y">
+        <term>
+          <date>2030-09-02</date>
+        </term>
+        <mid>0.567330865862384</mid>
+      </point>
+      <point id="EUR-IRSwap-25Y">
+        <term>
+          <date>2035-09-03</date>
+        </term>
+        <mid>0.498383905513813</mid>
+      </point>
+      <point id="EUR-IRSwap-30Y">
+        <term>
+          <date>2040-09-03</date>
+        </term>
+        <mid>0.452770575990997</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

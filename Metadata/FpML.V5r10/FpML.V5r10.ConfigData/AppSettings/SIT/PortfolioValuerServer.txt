@@ -1,0 +1,4 @@
+﻿BaseServiceAddress/String=net.tcp://localhost:4504
+ReportingTempPath/String=c:\Program Files\National\QRSC\QRSCPortal\documentTemp
+PortalWebSiteUrl/String=http://sydwadtur01:8914
+PurgeOlderThanDays/Int32=7

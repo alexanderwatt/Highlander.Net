@@ -1,0 +1,21 @@
+﻿1.
+SQL Server needs to be installed.
+
+2.
+A database named QDS_Core must be created using SSMS.
+
+3.
+Once the database exists run the "Store_Create.sql".
+
+4.
+The creates the table that will persist all data.
+
+5.
+Server Core Messaging must be turned on in Windows.
+
+6.
+Install the Core.WinSvc using the installation project.
+
+7.
+The file "Default.cfg.xm" in Core.Common must be updated to include a new entry for the pc that the system is now running on.
+For example: alexmobile-pc.

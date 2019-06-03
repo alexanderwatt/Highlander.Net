@@ -1,0 +1,11 @@
+TimeState/String=Highlander
+IndexName/String=Market
+Instrument/String=LPM
+Currency/String=LpmCapFloorCurve
+Owner/String=AUD-SydSPU-2009-Week50
+BuildDateTime/DateTime=2009-12-18T13:18:26
+MachineId/String=SYDWADBRL01
+PublisherId/String=SYDWADBRL01$
+Name/String=Highlander.Market.LPM.LpmCapFloorCurve.AUD-SydSPU-15/07/2010
+SurfaceType/String=VolatilitySurface
+Identifier/String=LPM.Volatility.CapFloor.AUD.SydSPU.2010.Week29
