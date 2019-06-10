@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -28,7 +43,7 @@ namespace Orion.ValuationEngine.Generators
         {
             CalculationPeriodsPrincipalExchangesAndStubs calculationPeriodsPrincipalExchangesAndStubs =
                 StreamCashflowsGenerator.GenerateCalculationPeriodsPrincipalExchangesAndStubs(interestRateStream, fixingCalendar, paymentCalendar);
-            return GetCashfows(interestRateStream, calculationPeriodsPrincipalExchangesAndStubs, paymentCalendar);
+            return GetCashflows(interestRateStream, calculationPeriodsPrincipalExchangesAndStubs, paymentCalendar);
         }
 
         /// <summary>
@@ -42,10 +57,10 @@ namespace Orion.ValuationEngine.Generators
         {
             CalculationPeriodsPrincipalExchangesAndStubs calculationPeriodsPrincipalExchangesAndStubs =
                 StreamCashflowsGenerator.GenerateCalculationPeriodsPrincipalExchangesAndStubsFromRollDates(interestRateStream, rollDates, paymentCalendar);
-            return GetCashfows(interestRateStream, calculationPeriodsPrincipalExchangesAndStubs, paymentCalendar);
+            return GetCashflows(interestRateStream, calculationPeriodsPrincipalExchangesAndStubs, paymentCalendar);
         }
 
-        private static Cashflows GetCashfows(
+        private static Cashflows GetCashflows(
             InterestRateStream interestRateStream, CalculationPeriodsPrincipalExchangesAndStubs calculationPeriodsPrincipalExchangesAndStubs,
             IBusinessCalendar paymentCalendar)
         {

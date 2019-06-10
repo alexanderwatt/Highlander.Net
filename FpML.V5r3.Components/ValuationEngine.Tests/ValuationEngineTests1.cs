@@ -2829,7 +2829,7 @@ namespace Orion.ValuationEngine.Tests
                                                   Volatility = 0.2m
                                               };
 
-            Swaption swaption = SwaptionGenerator.GenerateSwaptionDefiniton(payLeg, PaymentCalendar, receiveLeg, PaymentCalendar, swaptionParametersRange);
+            Swaption swaption = SwaptionGenerator.GenerateSwaptionDefinition(payLeg, PaymentCalendar, receiveLeg, PaymentCalendar, swaptionParametersRange);
 
             Assert.AreEqual(swaption.swap.swapStream.Length, 2);
             Assert.IsNull(swaption.swap.swapStream[0].cashflows);
@@ -3292,7 +3292,7 @@ namespace Orion.ValuationEngine.Tests
                 DiscountingType = "None"
             };
 
-            Swap swap = SwapGenerator.GenerateDefiniton(payLeg, receiveLeg);
+            Swap swap = SwapGenerator.GenerateDefinition(payLeg, receiveLeg);
 
             //  Apply spread schedule to floating stream
             //
@@ -3373,7 +3373,7 @@ namespace Orion.ValuationEngine.Tests
                 DiscountingType = "None"
             };
 
-            Swap swap = SwapGenerator.GenerateDefiniton(payLeg, receiveLeg);
+            Swap swap = SwapGenerator.GenerateDefinition(payLeg, receiveLeg);
 
             //  Apply fixed rate schedule to stream
             //
@@ -3456,7 +3456,7 @@ namespace Orion.ValuationEngine.Tests
                 DiscountingType = "None"
             };
 
-            Swap swap = SwapGenerator.GenerateDefiniton(payLeg, receiveLeg);
+            Swap swap = SwapGenerator.GenerateDefinition(payLeg, receiveLeg);
 
             //  Apply notional schedule to BOTH streams
             //
@@ -4202,7 +4202,7 @@ namespace Orion.ValuationEngine.Tests
                 DiscountingType = "None"
             };
 
-            Swap swap = SwapGenerator.GenerateDefiniton(payLeg, receiveLeg);
+            Swap swap = SwapGenerator.GenerateDefinition(payLeg, receiveLeg);
 
 
             Assert.AreEqual(swap.swapStream.Length, 2);
@@ -4863,7 +4863,7 @@ namespace Orion.ValuationEngine.Tests
             Schedule capOrFloorSchedule = null;
             NonNegativeSchedule notionalSchedule = null;
 
-            CapFloor capFloor = CapFloorGenerator.GenerateDefiniton(capFloorLegParametersRange, spreadSchedule, capOrFloorSchedule, notionalSchedule);
+            CapFloor capFloor = CapFloorGenerator.GenerateDefinition(capFloorLegParametersRange, spreadSchedule, capOrFloorSchedule, notionalSchedule);
 
             Assert.IsNotNull(capFloor.capFloorStream);
             Assert.IsNotNull(capFloor.capFloorStream.calculationPeriodAmount);
@@ -4889,7 +4889,7 @@ namespace Orion.ValuationEngine.Tests
             Schedule capOrFloorSchedule = null;
             NonNegativeSchedule notionalSchedule = null;
 
-            CapFloor capFloor = CapFloorGenerator.GenerateDefiniton(capFloorLegParametersRange, spreadSchedule, capOrFloorSchedule, notionalSchedule);
+            CapFloor capFloor = CapFloorGenerator.GenerateDefinition(capFloorLegParametersRange, spreadSchedule, capOrFloorSchedule, notionalSchedule);
 
             Assert.IsNotNull(capFloor.capFloorStream);
             Assert.IsNotNull(capFloor.capFloorStream.calculationPeriodAmount);

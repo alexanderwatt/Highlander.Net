@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
 using Core.Common;
 using FpML.V5r3.Reporting.Helpers;
@@ -11,6 +28,8 @@ using Orion.Identifiers;
 using Orion.Util.Helpers;
 using Orion.Util.Logging;
 using FpML.V5r3.Reporting;
+
+#endregion
 
 namespace Orion.CurveEngine.PricingStructures.LPM
 {
@@ -25,7 +44,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         #region Static Processing Method
 
         /// <summary>
-        /// Process a PPD Grid. The result is a Market structure that camn be published.
+        /// Process a PPD Grid. The result is a Market structure that can be published.
         /// </summary>
         /// <param name="logger">The logger</param>
         /// <param name="cache">The cache.</param>
@@ -47,7 +66,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
             IBusinessCalendar bc = BusinessCenterHelper.ToBusinessCalendar(cache, new[] { "AUSY" }, nameSpace); //BusinessCalendarHelper("AUSY");
 
             // Use some logic to get the spot date to use
-            // LPM Spot lag is 2 days (modfollowing)
+            // LPM Spot lag is 2 days (mod following)
             DateTime spotDate = curve.GetSpotDate();
 
             // Extract each surface and build an ATM engine therefrom
@@ -60,7 +79,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
 
                 foreach (string t in TenorKeys)
                 {
-                    // Create a Swaprate for each expiry/tenor pair
+                    // Create a Swap rate for each expiry/tenor pair
                     // Assume frequency = 4 months until 3 years tenor is reached
                     double tenorYearFraction = PeriodHelper.Parse(t).ToYearFraction();
                     int frequency = tenorYearFraction < 4 ? 4 : 2;

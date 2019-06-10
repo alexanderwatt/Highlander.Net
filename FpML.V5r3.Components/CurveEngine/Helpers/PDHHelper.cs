@@ -1,10 +1,22 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
 using System.Collections.Generic;
-using Orion.Analytics.Interpolations.Points;
-using Orion.Analytics.Interpolations.Spaces;
-using Orion.ModelFramework;
 using Orion.ModelFramework.Assets;
 using Orion.CurveEngine.PricingStructures.Bootstrappers;
 
@@ -21,7 +33,7 @@ namespace Orion.CurveEngine.Helpers
         /// <summary>
         /// Generate a set of perturbed rate curves by just changing the market quote values of the priceable assets and
         /// thus not requiring the use of the cache or business calendars.
-        /// THIS ONLY WORKS FOR MARKETQUOTES.
+        /// THIS ONLY WORKS FOR MARKET QUOTES.
         /// </summary>
         /// <param name="baseDate"></param>
         /// <param name="perturbation"></param>
@@ -40,13 +52,14 @@ namespace Orion.CurveEngine.Helpers
                 foreach (var rateAsset in priceableRateAssets)
                 {
                     //Set up the new term curve.
-                    var termCurve = new TermCurve();
-                    termCurve.extrapolationPermitted = extrapolationPermitted;
-                    termCurve.interpolationMethod = interpolationMethod;
-                    //Perturb the aset quote.
+                    var termCurve = new TermCurve
+                    {
+                        extrapolationPermitted = extrapolationPermitted, interpolationMethod = interpolationMethod
+                    };
+                    //Perturb the asset quote.
                     var quote = rateAsset.MarketQuote.value;
-                    var pertrubedQuote = rateAsset.MarketQuote.value + perturbation;
-                    rateAsset.MarketQuote.value = pertrubedQuote;
+                    var perturbedQuote = rateAsset.MarketQuote.value + perturbation;
+                    rateAsset.MarketQuote.value = perturbedQuote;
                     termCurve.point = RateBootstrapper.Bootstrap(priceableRateAssets, baseDate, extrapolationPermitted,
                                         interpolationMethod, tolerance);
                     //Reset the old value.
@@ -74,16 +87,17 @@ namespace Orion.CurveEngine.Helpers
             bool extrapolationPermitted, InterpolationMethod interpolationMethod, double tolerance)
         {
             //Set up the new term curve.
-            var termCurve = new TermCurve();
-            termCurve.extrapolationPermitted = extrapolationPermitted;
-            termCurve.interpolationMethod = interpolationMethod;
+            var termCurve = new TermCurve
+            {
+                extrapolationPermitted = extrapolationPermitted, interpolationMethod = interpolationMethod
+            };
             //Modify the quotes.
             if (priceableRateAssets != null && assetPosition <= priceableRateAssets.Count)
             {
-                //Perturb the aset quote.
+                //Perturb the asset quote.
                 var quote = priceableRateAssets[assetPosition].MarketQuote.value;
-                var pertrubedQuote = priceableRateAssets[assetPosition].MarketQuote.value + value;
-                priceableRateAssets[assetPosition].MarketQuote.value = pertrubedQuote;
+                var perturbedQuote = priceableRateAssets[assetPosition].MarketQuote.value + value;
+                priceableRateAssets[assetPosition].MarketQuote.value = perturbedQuote;
                 termCurve.point = RateBootstrapper.Bootstrap(priceableRateAssets, baseDate, extrapolationPermitted,
                                     interpolationMethod, tolerance);
                 //Reset the old value.
@@ -106,13 +120,14 @@ namespace Orion.CurveEngine.Helpers
             bool extrapolationPermitted, InterpolationMethod interpolationMethod, double tolerance)
         {
             //Set up the new term curve.
-            var termCurve = new TermCurve();
-            termCurve.extrapolationPermitted = extrapolationPermitted;
-            termCurve.interpolationMethod = interpolationMethod;
+            var termCurve = new TermCurve
+            {
+                extrapolationPermitted = extrapolationPermitted, interpolationMethod = interpolationMethod
+            };
             //Modify the quotes.
             if (priceableRateAssets != null)
             {
-                var quotes = new List<Decimal>();
+                var quotes = new List<decimal>();
                 var numControllers = priceableRateAssets.Count;
                 var valuesArray = new decimal[numControllers];
                 if (values.Length == numControllers)
@@ -140,11 +155,11 @@ namespace Orion.CurveEngine.Helpers
                 var index = 0;
                 foreach (var rateController in priceableRateAssets)
                 {
-                    //Perturb the aset quote.
+                    //Perturb the asset quote.
                     var quote = rateController.MarketQuote.value;
                     quotes.Add(quote);
-                    var pertrubedQuote = quote + valuesArray[index];
-                    rateController.MarketQuote.value = pertrubedQuote;
+                    var perturbedQuote = quote + valuesArray[index];
+                    rateController.MarketQuote.value = perturbedQuote;
                     index++;
                 }
                 termCurve.point =

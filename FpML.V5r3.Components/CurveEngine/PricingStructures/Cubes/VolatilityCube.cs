@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -30,7 +45,7 @@ namespace Orion.CurveEngine.PricingStructures.Cubes
         #region Private Fields
 
         /// <summary>
-        /// An auxilliary structure used to track indexes within the volatility surface.
+        /// An auxiliary structure used to track indexes within the volatility surface.
         /// This should make lookups faster than the default linear search.
         /// </summary>
         private readonly SortedList<ExpiryTenorStrikeKey, int> _matrixIndexHelper;
@@ -330,7 +345,7 @@ namespace Orion.CurveEngine.PricingStructures.Cubes
         #endregion
 
         /// <summary>
-        /// Unpack the keyt lists and create a set of coordinates from them
+        /// Unpack the key lists and create a set of coordinates from them
         /// </summary>
         /// <param name="expiry">The list of expiry terms</param>
         /// <param name="tenor">The list of tenor terms</param>

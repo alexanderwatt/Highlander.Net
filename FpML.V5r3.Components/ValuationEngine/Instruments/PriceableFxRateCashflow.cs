@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -89,7 +104,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableFxRateCashflow"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="startIndex">The start Index. If null then the cash flow is not a differenctial.</param>
         /// <param name="observedIndex">The observed Index. If null then the cash flow is not a differenctial. </param>
         /// <param name="isCurrency1Base">The isCurrency1Base flag. </param>
@@ -103,7 +118,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableFxRateCashflow
             (
-            string cashlfowId
+            string cashflowId
             , FxRate startIndex
             , FxRate observedIndex
             , bool isCurrency1Base
@@ -117,7 +132,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , FloatingIndexType.Fx
                 , startIndex.rate
                 , IsObserved(observedIndex)
@@ -217,10 +232,9 @@ namespace Orion.ValuationEngine.Instruments
                 CurveYearFraction =
                     YearFractionToCashFlowPayment,
                 PeriodAsTimesPerYear = 0.25m,
-                BuckettingRate = 0.05m
+                BucketingRate = 0.05m
             };
-            var environment = modelData.MarketEnvironment as ISwapLegEnvironment;
-            if (environment != null)
+            if (modelData.MarketEnvironment is ISwapLegEnvironment environment)
             {
                 var marketEnvironment = environment;
                 //The discount curve.
@@ -281,7 +295,7 @@ namespace Orion.ValuationEngine.Instruments
             } //TODO Fix this with a generic index curve.
             //AnalyticsModel = analyticsModel;
             CalculationResults = AnalyticsModel.Calculate<IFloatingCashflowResults, FloatingCashflowResults>(AnalyticModelParameters, metrics.ToArray());
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             PaymentDiscountFactor = ((FxRateCashflowAnalytic)AnalyticsModel).PaymentDiscountFactor;
             ForecastAmount = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyExpectedValue, PaymentAmount.currency);
             NPV = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyNPV, PaymentAmount.currency);
@@ -331,7 +345,7 @@ namespace Orion.ValuationEngine.Instruments
         //        cp.forecastRate = floatingRateDefinition.calculatedRate;
         //        cp.forecastRateSpecified = true;
         //    }
-        //    if (CalculationPerfomedIndicator)
+        //    if (CalculationPerformedIndicator)
         //    {
         //        cp.forecastAmount = MoneyHelper.GetAmount(CalculationResults.ExpectedValue, NotionalAmount.currency.Value);
         //    }

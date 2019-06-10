@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Globalization;
@@ -214,7 +229,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         protected ExpiryTermStrikeVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace, Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties)
         {
             var data = (VolatilityMatrix)fpmlData.Second;
-            Algorithm = "Linear";//Add as a propert in the id.
+            Algorithm = "Linear";//Add as a property in the id.
             //Creates the property collection. This should be backward compatable with V1.
             var surfaceId = new VolatilitySurfaceIdentifier(properties);
             PricingStructureIdentifier = surfaceId;
@@ -590,9 +605,9 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         {
             #region Properties
 
-            public Period Expiry { get; private set; }
-            public Period Tenor { get; private set; }
-            public decimal Strike { get; private set; }
+            public Period Expiry { get; }
+            public Period Tenor { get; }
+            public decimal Strike { get; }
 
             #endregion
 
@@ -611,7 +626,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             /// Expiry or tenor can be null but not both.
             /// </summary>
             /// <param name="expiry">Expiry key part</param>
-            /// <param name="strike">Strike key pary</param>
+            /// <param name="strike">Strike key part</param>
             public ExpiryTenorStrikeKey(string expiry, Double strike)
             {
                 try

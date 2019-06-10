@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -40,7 +55,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             var index = 0;
             foreach (var startOfPeriodDateTime in dates)
             {
-                var yearFractionsbeginPeriod = yearFractions[index];
+                var yearFractionsBeginPeriod = yearFractions[index];
                 var endOfPeriodDateTime = forwardRateTenor.Add(startOfPeriodDateTime);
                 var yearFractionAtEndOfPeriod = (endOfPeriodDateTime - baseDate).TotalDays / 365.0;
                 //get df corresponding to end of period
@@ -48,9 +63,9 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
                 IInterpolation interpolation = new LinearRateInterpolation();
                 interpolation.Initialize(yearFractions.ToArray(), discountFactors.ToArray());
                 var dfAtEndOfPeriod = interpolation.ValueAt(yearFractionAtEndOfPeriod, true);
-                var dfAtTheBeginingOfPeriod = discountFactors[index];
-                var forwardRate = (dfAtTheBeginingOfPeriod / dfAtEndOfPeriod - 1) /
-                                  (yearFractionAtEndOfPeriod - yearFractionsbeginPeriod);
+                var dfAtTheBeginningOfPeriod = discountFactors[index];
+                var forwardRate = (dfAtTheBeginningOfPeriod / dfAtEndOfPeriod - 1) /
+                                  (yearFractionAtEndOfPeriod - yearFractionsBeginPeriod);
                 var zeroPoint = TermPointFactory.Create(Convert.ToDecimal(forwardRate), startOfPeriodDateTime);
                 forwardTermCurve.Add(zeroPoint);
                 ++index;

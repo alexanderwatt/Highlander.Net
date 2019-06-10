@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -9,12 +24,12 @@ using Orion.CalendarEngine.Helpers;
 using Orion.Analytics.Schedulers;
 using Orion.CurveEngine.Factory;
 using Orion.ModelFramework.Assets;
-using Orion.ModelFramework.Instruments.Equity;
 using Orion.Models.Property;
 using Orion.Util.Logging;
 using FpML.V5r3.Reporting;
 using Orion.ModelFramework;
 using Orion.ModelFramework.Instruments;
+using Orion.ModelFramework.Instruments.Property;
 using Orion.Util.Serialisation;
 
 #endregion
@@ -158,7 +173,7 @@ namespace Orion.ValuationEngine.Pricers
             SettlementCalendar = settlementCalendar;
             PaymentDate = paymentDate;
             //
-            //Set the issuer indormation
+            //Set the issuer information
             //
             ReferenceContract = referenceContract;
             //
@@ -167,7 +182,7 @@ namespace Orion.ValuationEngine.Pricers
             PurchasePrice = MoneyHelper.GetAmount(propertyFpML.purchasePrice.amount, propertyFpML.purchasePrice.currency.Value);
             PaymentCurrencies = new List<string> { propertyFpML.purchasePrice.currency.Value };
             //
-            //Get the insturment configuration information.
+            //Get the instrument configuration information.
             //
             var propertyTypeInfo = propertyFpML.property;
             if (propertyFpML.property != null && propertyTypeInfo != null)
@@ -176,9 +191,9 @@ namespace Orion.ValuationEngine.Pricers
                 {
                     SettlementCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, propertyTypeInfo.businessDayAdjustments.businessCenters, nameSpace);
                 }
-                //Preprocesses the data for the priceableasset.
+                //Pre processes the data for the priceable asset.
                 PropertyInfo = XmlSerializerHelper.Clone(propertyTypeInfo);
-                //This is done because the config data is not stored in the ciorrect way. Need to add a price quote units.
+                //This is done because the config data is not stored in the correct way. Need to add a price quote units.
                 //TODO Set other relevant bond information
                 //PropertyTypeInfo.Property.faceAmount = NotionalAmount.amount;
                 if (!PaymentCurrencies.Contains(propertyFpML.purchasePrice.currency.Value))
@@ -213,7 +228,7 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public PropertyTransaction Build()
@@ -222,7 +237,7 @@ namespace Orion.ValuationEngine.Pricers
             var buyerPartyReference = PartyReferenceHelper.Parse(BuyerReference);
             var sellerPartyReference = PartyReferenceHelper.Parse(SellerReference);
             var productType = new object[] {ProductTypeHelper.Create("PropertyTransaction")};
-            //var productId = new ProductId {Value = "BondTransation"};
+            //var productId = new ProductId {Value = "BondTransaction"};
             var itemName = new[] {ItemsChoiceType2.productType};
             //TODO extend this
             //var productIds = new[] {productId};
@@ -263,7 +278,7 @@ namespace Orion.ValuationEngine.Pricers
             //AnalyticModelParameters = ((PriceableFutureAssetController)UnderlyingFutures).AnalyticModelParameters;
             //AnalyticsModel = ((PriceableIRFuturesAssetController)UnderlyingFutures).AnalyticsModel;
             //CalculationResults = ((PriceableEquityAssetController)UnderlyingFutures).CalculationResults;
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             return GetValue(CalculationResults, modelData.ValuationDate);
         }
 
@@ -292,9 +307,7 @@ namespace Orion.ValuationEngine.Pricers
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate));
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             return bucketDates.ToArray();
         }
 

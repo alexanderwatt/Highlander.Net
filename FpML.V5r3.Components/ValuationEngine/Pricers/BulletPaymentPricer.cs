@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -73,8 +88,8 @@ namespace Orion.ValuationEngine.Pricers
                     Items = new object[] {ProductTypeHelper.Create(ProductTypeSimpleEnum.BulletPayment.ToString())},
                     ItemsElementName = new[] {ItemsChoiceType2.productType}
                 };
-            //Settting the items array which containes product type and oroduct is information.
-            //payment type informtation
+            //Setting the items array which contains product type and product is information.
+            //payment type information
             px.payment.paymentType = PaymentTypeHelper.Create("Payment");
             //Set the party information
             px.payment.payerPartyReference = new PartyReference {href = "Party2"};
@@ -86,7 +101,7 @@ namespace Orion.ValuationEngine.Pricers
             }
             //The payment date
             px.payment.paymentDate = AdjustableOrAdjustedDateHelper.Create(null, PaymentDate, PaymentDateAdjustments);
-            if (CalculationPerfomedIndicator)
+            if (CalculationPerformedIndicator)
             {
                 px.payment.discountFactor = PaymentDiscountFactor;
                 px.payment.discountFactorSpecified = true;
@@ -106,13 +121,13 @@ namespace Orion.ValuationEngine.Pricers
         /// <param name="payerIsBaseParty"></param>
         /// <param name="paymentDate"></param>
         /// <param name="businessDayCalendar"></param>
-        /// <param name="businessDayAdjustements"> </param>
+        /// <param name="businessDayAdjustments"> </param>
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
         public static BulletPayment Parse(string productType, Boolean payerIsBaseParty,
             DateTime paymentDate, string businessDayCalendar,
-            string businessDayAdjustements, string currency, decimal amount)
+            string businessDayAdjustments, string currency, decimal amount)
         {
             var px = new BulletPayment
                 {
@@ -125,11 +140,11 @@ namespace Orion.ValuationEngine.Pricers
                     Items = new object[] {ProductTypeHelper.Create("BulletPayment")},
                     ItemsElementName = new[] {ItemsChoiceType2.productType}
                 };
-            var tempDate = DateTypesHelper.ToAdjustableDate(paymentDate, businessDayAdjustements,
+            var tempDate = DateTypesHelper.ToAdjustableDate(paymentDate, businessDayAdjustments,
                                                             businessDayCalendar);
             px.payment.paymentDate = AdjustableOrAdjustedDateHelper.Create(tempDate.unadjustedDate.Value, null, tempDate.dateAdjustments);//TODO
-            //Settting the items array which containes product type and oroduct is information.
-            //payment type informtation
+            //Setting the items array which contains product type and product is information.
+            //payment type information
             px.payment.paymentType = PaymentTypeHelper.Create("Payment");
             //Set the party information
             px.payment.payerPartyReference = new PartyReference {href = "Party2"};
@@ -151,19 +166,19 @@ namespace Orion.ValuationEngine.Pricers
         /// <param name="payerIsBaseParty"></param>
         /// <param name="paymentDate"></param>
         /// <param name="businessDayCalendar"></param>
-        /// <param name="businessDayAdjustements"></param>
+        /// <param name="businessDayAdjustments"></param>
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
         public static Trade CreateBulletPayment(string tradeId, DateTime tradeDate, string productType, Boolean payerIsBaseParty,
-            DateTime paymentDate, string businessDayCalendar, string businessDayAdjustements, string currency, decimal amount)
+            DateTime paymentDate, string businessDayCalendar, string businessDayAdjustments, string currency, decimal amount)
         {
             var trade = new Trade {id = tradeId, tradeHeader = new TradeHeader()};
             var party1 =  PartyTradeIdentifierHelper.Parse(tradeId, "party1") ;
             var party2 =  PartyTradeIdentifierHelper.Parse(tradeId, "party2") ;
             trade.tradeHeader.partyTradeIdentifier = new[] { party1, party2};
             trade.tradeHeader.tradeDate = new IdentifiedDate {Value = tradeDate};
-            var payment = Parse(productType, payerIsBaseParty, paymentDate, businessDayCalendar, businessDayAdjustements, currency, amount);
+            var payment = Parse(productType, payerIsBaseParty, paymentDate, businessDayCalendar, businessDayAdjustments, currency, amount);
             FpMLFieldResolver.TradeSetBulletPayment(trade, payment);
             return trade;
         }

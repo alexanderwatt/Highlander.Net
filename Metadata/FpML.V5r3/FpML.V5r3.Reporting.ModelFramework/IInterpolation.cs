@@ -1,9 +1,21 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-
 
 #endregion
 
@@ -18,7 +30,7 @@ namespace Orion.ModelFramework
 	/// <remarks>
 	/// Classes derived from this class
 	/// provide interpolated values from two sequences of equal length,
-	/// representing discretized values of a variable and a function of
+	/// representing discrete values of a variable and a function of
 	/// the former, respectively.
 	/// </remarks>
 	public interface IInterpolation 
@@ -32,7 +44,7 @@ namespace Orion.ModelFramework
 		/// </remarks>
         /// <param name="point"><c>IPoint</c> This can be a one or many dimensional point.</param>
 		/// <param name="allowExtrapolation"></param>
-		/// <returns><c>decimal</c> The interpolated value as a decimasl for FpML compatability.</returns>
+		/// <returns><c>decimal</c> The interpolated value as a decimal for FpML compatibility.</returns>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// Thrown when extrapolation has not been allowed and the passed value
 		/// is outside the allowed range.

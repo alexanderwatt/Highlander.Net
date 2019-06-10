@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -603,7 +618,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <param name="atmVolatility">The ATM volatility</param>
         /// <param name="assetPrice">Asset Price to use</param>
         /// <param name="optionExpiry">The ATM pointer</param>
-        /// <param name="assetCode">The ATM identifiier (if used)</param>
+        /// <param name="assetCode">The ATM identifier (if used)</param>
         private static SortedDictionary<SABRKey, SABRCalibrationEngine> BuildEngineCollection(SABRCalibrationSettings settings,
                                                                                        string calibrationEngineId, decimal nu, decimal rho, decimal atmVolatility, decimal assetPrice,
                                                                                        string optionExpiry, string assetCode)
@@ -661,7 +676,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// </summary>
         /// <param name="rawVolatility">The raw volatility data</param>
         /// <param name="expiry">The expiry for this grid</param>
-        /// <returns>the rawdata as a SwaptiondataGrid</returns>
+        /// <returns>the raw data as a Swaption data Grid</returns>
         private static SwaptionDataMatrix ParseVolatilityInput(object[,] rawVolatility, string expiry)
         {
             // Set the upper/lower bounds of the converted array
@@ -706,13 +721,13 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <summary>
         /// Parse the raw assets grid to create the labels and values arrays
         /// required by a SwaptionDataGrid{T,U} used to store the data
-        /// for use by the SABR calibration/calulation routines
+        /// for use by the SABR calibration/calculation routines
         /// This version uses Interpolation to include Swap Tenors that are not
         /// included as part of the grid but fall within the minimum and maximum tenor
         /// values of the grid.
         /// </summary>
         /// <param name="rawAsset">The raw volatility data</param>
-        /// <returns>The rawdata as a SwaptionDataGrid</returns>
+        /// <returns>The raw data as a SwaptionDataGrid</returns>
         private static ForwardRatesMatrix ParseAssetInputWithInterpolation(object[,] rawAsset)
         {
             // Set the upper/lower bounds of the converted array
@@ -791,8 +806,8 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         private static string GenerateTenorLabel(string rawLabel)
         {
             string alpha = string.Empty;
-            decimal numero = 0;
-            LabelSplitter(rawLabel, ref alpha, ref numero);
+            decimal num = 0;
+            LabelSplitter(rawLabel, ref alpha, ref num);
             Period i = CreateInterval(rawLabel);
             return i.ToString();
         }
@@ -884,21 +899,21 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         private static decimal GenerateDayValue(string term, decimal dayCountConvention)
         {
             Period i = CreateInterval(term);
-            decimal numero = Convert.ToDecimal(i.periodMultiplier);
+            decimal num = Convert.ToDecimal(i.periodMultiplier);
             decimal yearFraction = 0;
             switch (i.period)
             {
                 case PeriodEnum.D:
-                    yearFraction = numero / dayCountConvention;
+                    yearFraction = num / dayCountConvention;
                     break;
                 case PeriodEnum.W:
-                    yearFraction = (numero / 52.0m);
+                    yearFraction = (num / 52.0m);
                     break;
                 case PeriodEnum.M:
-                    yearFraction = (numero / 12.0m);
+                    yearFraction = (num / 12.0m);
                     break;
                 case PeriodEnum.Y:
-                    yearFraction = numero;
+                    yearFraction = num;
                     break;
             }
             return yearFraction;

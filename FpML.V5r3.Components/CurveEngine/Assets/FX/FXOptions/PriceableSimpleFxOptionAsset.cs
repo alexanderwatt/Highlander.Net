@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using FpML.V5r3.Reporting;
@@ -106,12 +121,12 @@ namespace Orion.CurveEngine.Assets.FX.FXOptions
         public BusinessDayAdjustments BusinessDayAdjustments { get; set; }
 
         /// <summary>
-        /// The reset date offseets.
+        /// The reset date offsets.
         /// </summary>
         public RelativeDateOffset ResetDateOffset { get; set; }
 
         /// <summary>
-        /// The spot date offseets.
+        /// The spot date offsets.
         /// </summary>
         public RelativeDateOffset SpotDateOffset { get; set; }
 
@@ -196,7 +211,7 @@ namespace Orion.CurveEngine.Assets.FX.FXOptions
         /// <param name="amount">The amount.</param>
         /// <param name="strike">The strike.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
-        /// <param name="volMarketQuote">The marketQuote, whih must be a volatility.</param>
+        /// <param name="volMarketQuote">The marketQuote, with must be a volatility.</param>
         protected PriceableSimpleFxOptionAsset(DateTime baseDate, RelativeDateOffset resetDates, SimpleFra rateOption,
                                                Decimal amount, Decimal strike, BusinessDayAdjustments businessDayAdjustments, BasicQuotation volMarketQuote)
         {
@@ -279,12 +294,12 @@ namespace Orion.CurveEngine.Assets.FX.FXOptions
             var metricsToEvaluate = metrics.ToArray();
             if (IsVolatilityQuote)
             {
-                analyticModelParameters.IsVolatiltiyQuote = true;
+                analyticModelParameters.IsVolatilityQuote = true;
                 analyticModelParameters.Volatility = Volatility;
             }
             if (bEvalVolatilityAtRiskMaturity && IsVolatilityQuote)
             {
-                analyticModelParameters.IsVolatiltiyQuote = true;
+                analyticModelParameters.IsVolatilityQuote = true;
                 AnalyticResults = AnalyticsModel.Calculate<ISimpleRateOptionAssetResults, SimpleRateOptionAssetResults>(analyticModelParameters, metricsToEvaluate);
                 return GetValue(AnalyticResults);
             }

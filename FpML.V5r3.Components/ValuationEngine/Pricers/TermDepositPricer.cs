@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -75,7 +90,7 @@ namespace Orion.ValuationEngine.Pricers
         /// </summary>
         public decimal FixedRate { get; set; }
 
-        ////Prodcut parameters
+        ////Product parameters
         ////public FraInputRange FraInputRange { get; set; } 
         //public TermDeposit Deposit { get; set; }
 
@@ -165,12 +180,12 @@ namespace Orion.ValuationEngine.Pricers
             Payments = new List<PriceablePayment>();
             if (depositFpML.payment != null && depositFpML.payment.Length == 3)
             {
-                //Modify to be princiap and interest.
+                //Modify to be principal and interest.
                 //A principal payment ->priceable payment
-                //An interest payment -> priceablefixedcoupon
-                var intialDate = AdjustableOrAdjustedDateHelper.Create(null, EffectiveDate, null);
+                //An interest payment -> priceable fixed coupon
+                var initialDate = AdjustableOrAdjustedDateHelper.Create(null, EffectiveDate, null);
                 var maturityDate = AdjustableOrAdjustedDateHelper.Create(null, PaymentDate, null);
-                depositFpML.payment[0].paymentDate = intialDate;
+                depositFpML.payment[0].paymentDate = initialDate;
                 depositFpML.payment[1].paymentDate = maturityDate;
                 depositFpML.payment[2].paymentDate = maturityDate;//Remove this and replace with depositFpML.interest
                 Payments.AddRange(PriceableInstrumentsFactory.CreatePriceablePayments(BaseParty, depositFpML.payment, null));
@@ -178,8 +193,8 @@ namespace Orion.ValuationEngine.Pricers
             }
             else//This will change the input FpML as well!
             {
-                var intial = PaymentHelper.Create(depositFpML.payerPartyReference.href, depositFpML.receiverPartyReference.href, Principal.currency.Value, Principal.amount, EffectiveDate);
-                Payments.Add(PriceableInstrumentsFactory.CreatePriceablePayment(BaseParty, intial, null));
+                var initial = PaymentHelper.Create(depositFpML.payerPartyReference.href, depositFpML.receiverPartyReference.href, Principal.currency.Value, Principal.amount, EffectiveDate);
+                Payments.Add(PriceableInstrumentsFactory.CreatePriceablePayment(BaseParty, initial, null));
                 var final = PaymentHelper.Create(depositFpML.receiverPartyReference.href, depositFpML.payerPartyReference.href, depositFpML.principal.currency.Value, Principal.amount, TerminationDate);
                 Payments.Add(PriceableInstrumentsFactory.CreatePriceablePayment(BaseParty, final, null));
                 //Payments.Add(PaymentHelper.Create("interest payment");
@@ -294,7 +309,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public TermDeposit Build()
@@ -325,9 +340,9 @@ namespace Orion.ValuationEngine.Pricers
             //deposit payments. 
             if (deposit.payment?.Length == 3)
             {
-                var intialDate = AdjustableOrAdjustedDateHelper.Create(null, EffectiveDate, null);
+                var initialDate = AdjustableOrAdjustedDateHelper.Create(null, EffectiveDate, null);
                 var maturityDate = AdjustableOrAdjustedDateHelper.Create(null, PaymentDate, null);
-                deposit.payment[0].paymentDate = intialDate;
+                deposit.payment[0].paymentDate = initialDate;
                 deposit.payment[1].paymentDate = maturityDate;
                 deposit.payment[2].paymentDate = maturityDate;
             }
@@ -348,7 +363,7 @@ namespace Orion.ValuationEngine.Pricers
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new TermDepositInstrumentAnalytic();
@@ -397,7 +412,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 depositValuation = childControllerValuations;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             depositValuation.id = Id;
             return depositValuation;
         }
@@ -480,7 +495,7 @@ namespace Orion.ValuationEngine.Pricers
         ///// <summary>
         ///// Updates the bucketing interval.
         ///// </summary>
-        ///// <param name="baseDate">The base date for bucketting.</param>
+        ///// <param name="baseDate">The base date for bucketing.</param>
         ///// <param name="bucketingInterval">The bucketing interval.</param>
         //public void UpdateBucketingInterval(DateTime baseDate, Period bucketingInterval)
         //{

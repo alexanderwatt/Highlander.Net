@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -17,7 +32,7 @@ namespace Orion.ModelFramework.MarketEnvironments
         public decimal Perturbation { get; set; }
 
         ///<summary>
-        /// The simple market containing only one pricing structure and pricingstructurevaluation.
+        /// The simple market containing only one pricing structure and pricing structure valuation.
         ///</summary>
         public Market TheMarket { get; set; }
 
@@ -158,7 +173,7 @@ namespace Orion.ModelFramework.MarketEnvironments
         }
 
         ///<summary>
-        /// Gets the properties linked to the spefied pricing structure.
+        /// Gets the properties linked to the specified pricing structure.
         ///</summary>
         ///<param name="identifier"></param>
         ///<returns></returns>
@@ -179,8 +194,7 @@ namespace Orion.ModelFramework.MarketEnvironments
         ///<returns></returns>
         public IPricingStructure SearchForPricingStructureType(string name)
         {
-            IPricingStructure pricingStructure;
-            if(!PricingStructures.TryGetValue(name, out pricingStructure))
+            if(!PricingStructures.TryGetValue(name, out var pricingStructure))
             {
                 throw new ApplicationException($"The pricing structure with name '{name}' was not found.");
             }
@@ -195,8 +209,7 @@ namespace Orion.ModelFramework.MarketEnvironments
         ///<returns></returns>
         public ICollection<IPricingStructure> SearchForPerturbedPricingStructures(string pricingStructureName, string riskName)
         {
-            IMarketEnvironment marketEnvironment;
-            var marketExist = RiskMarkets.TryGetValue(pricingStructureName + '.' + riskName, out marketEnvironment);
+            var marketExist = RiskMarkets.TryGetValue(pricingStructureName + '.' + riskName, out var marketEnvironment);
             if (!marketExist)
             {
                 return GenerateRiskMarket(pricingStructureName, riskName, Perturbation);

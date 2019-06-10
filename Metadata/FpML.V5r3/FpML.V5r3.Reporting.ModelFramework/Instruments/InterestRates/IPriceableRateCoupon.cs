@@ -1,14 +1,29 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using FpML.V5r3.Reporting;
 
 namespace Orion.ModelFramework.Instruments.InterestRates
 {
     /// <summary>
-    /// Base interface for a priceabl rate coupon
+    /// Base interface for a priceable rate coupon
     /// </summary>
-    /// <typeparam name="AMP">The type of the Analyic Model Parameters.</typeparam>
-    /// <typeparam name="AMR">The type of the Analyic Model Results.</typeparam>
+    /// <typeparam name="AMP">The type of the Analytic Model Parameters.</typeparam>
+    /// <typeparam name="AMR">The type of the Analytic Model Results.</typeparam>
     public interface IPriceableRateCoupon<AMP , AMR> : IPriceableCashflow<AMP, AMR>
     {
         /// <summary>
@@ -116,7 +131,7 @@ namespace Orion.ModelFramework.Instruments.InterestRates
         IList<DateTime> BucketedDates { get; set; }
 
         /// <summary>
-        /// Gets the bucketed dates list (comma seperated)
+        /// Gets the bucketed dates list (comma separated)
         /// </summary>
         /// <value>The bucketed dates list.</value>
         string BucketedDatesList { get; }

@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FpML.V5r3.Reporting;
@@ -12,15 +27,15 @@ namespace Orion.ValuationEngine.Helpers
         /// Creates the money amounts.
         /// </summary>
         /// <param name="amounts">The amounts.</param>
-        /// <param name="currencys">The currencys.</param>
+        /// <param name="currencies">The currencies.</param>
         /// <returns></returns>
-        internal static Money[] CreateMoneyAmounts(decimal[] amounts, string[] currencys)
+        internal static Money[] CreateMoneyAmounts(decimal[] amounts, string[] currencies)
         {
             var currencyAmounts = new List<Money>();
             int index = 0;
             foreach (decimal amount in amounts)
             {
-                currencyAmounts.Add(MoneyHelper.GetAmount(amount, currencys[index]));
+                currencyAmounts.Add(MoneyHelper.GetAmount(amount, currencies[index]));
                 index++;
             }
             return currencyAmounts.ToArray();
@@ -42,7 +57,7 @@ namespace Orion.ValuationEngine.Helpers
                 {
                     if (observedRateSpecified)
                     {
-                        rateObservations.Add(new RateObservation { observedRate = observedRates[index], observedRateSpecified = observedRateSpecified });
+                        rateObservations.Add(new RateObservation { observedRate = observedRates[index], observedRateSpecified = true });
                     }
                     index++;
                 }
@@ -106,7 +121,7 @@ namespace Orion.ValuationEngine.Helpers
             {
                 for (int index = 0; index < maxCapacity; index++)
                 {
-                    if (items.Length > 0 && index < items.Length && items[index] != null)
+                    if (items != null && (items.Length > 0 && index < items.Length && items[index] != null))
                     {
                         itemsList.Add(items[index]);
                     }

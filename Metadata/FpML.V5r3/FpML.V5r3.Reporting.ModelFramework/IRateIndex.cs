@@ -1,7 +1,21 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
-
 using FpML.V5r3.Reporting;
 using Orion.ModelFramework.PricingStructures;
 
@@ -28,7 +42,7 @@ namespace Orion.ModelFramework
 	    RateIndex GetRateIndex();
 
         /// <summary>
-        /// The date adjustemnt rules of the index.
+        /// The date adjustment rules of the index.
         /// </summary>
         BusinessDayAdjustments GetBusinessDayAdjustments();
 
@@ -39,13 +53,13 @@ namespace Orion.ModelFramework
         DateTime GetRiskMaturityDate();
 
         /// <summary>
-        /// Intialises the start date of a specific rate index.
+        /// Intialise the start date of a specific rate index.
         /// </summary>
         /// <param name="startDate"></param>
 	    void SetIndexStartDate(DateTime startDate);
 
 	    /// <summary>
-	    /// Gets the initialised start date. Otherwise returns null.
+	    /// Gets the initialise start date. Otherwise returns null.
 	    /// </summary>
 	    DateTime GetStartDate();
 

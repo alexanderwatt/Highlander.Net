@@ -1,7 +1,4 @@
-﻿using System;
-using Core.Common;
-using Core.V34;
-/*
+﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
  This file is part of Highlander Project https://github.com/awatt/highlander
@@ -18,6 +15,9 @@ using Core.V34;
 
 #region Usings
 
+using System;
+using Core.Common;
+using Core.V34;
 using Orion.Constants;
 using Orion.Util.Expressions;
 using Orion.Util.Logging;

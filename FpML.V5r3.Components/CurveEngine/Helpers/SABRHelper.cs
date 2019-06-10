@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -141,10 +156,10 @@ namespace Orion.CurveEngine.Helpers
         /// Each engineId will point to a set of engines indexed by swap tenor and option expiry
         /// </summary>
         /// <param name="engineHandle">Calibration Engine handle</param>
-        /// <param name="settingsHandle">Calibartion settings handle</param>
+        /// <param name="settingsHandle">Calibration settings handle</param>
         /// <param name="rawVols">A grid of volatilities (with row/column labels)</param>
         /// <param name="rawAssets">A grid of asset values</param>
-        /// <param name="optionEx">The ption expiry to index against</param>
+        /// <param name="optionEx">The option expiry to index against</param>
         /// <returns></returns>
         public static string CalibrateSabrModel(string engineHandle, string settingsHandle, object[,] rawVols, object[,] rawAssets, string optionEx)
         {
@@ -185,7 +200,7 @@ namespace Orion.CurveEngine.Helpers
 
         /// <summary>
         /// Generate an Interpolated Swaption Calibration Engine using the supplied parameters.
-        /// The calibrationArray has the handles of the Calibrated Engines to use in the interpolation processs.
+        /// The calibrationArray has the handles of the Calibrated Engines to use in the interpolation process.
         /// The interpolation can only be used in the ExpiryTime dimension to generate a new engine.
         /// If the engine array refers to unknown engines the process will fail (TBD)
         /// </summary>
@@ -401,7 +416,7 @@ namespace Orion.CurveEngine.Helpers
 
         /// <summary>
         /// A range will devolve to a 2d array of object. This method will take this and generate
-        /// an array of strings. This is required by the Interpolated clibration engine routines.
+        /// an array of strings. This is required by the Interpolated calibration engine routines.
         /// </summary>
         private static string[] ConvertRangeToStringArray(object[,] objHandles)
         {
@@ -492,21 +507,21 @@ namespace Orion.CurveEngine.Helpers
         public static double GenerateDayValue(string term, double dayCountConvention)
         {
             var i = PeriodHelper.Parse(term);
-            var numero = Convert.ToDouble(i.periodMultiplier);
+            var num = Convert.ToDouble(i.periodMultiplier);
             double yearFraction = 0;
             switch (i.period)
             {
                 case PeriodEnum.D:
-                    yearFraction = numero / dayCountConvention;
+                    yearFraction = num / dayCountConvention;
                     break;
                 case PeriodEnum.W:
-                    yearFraction = numero / 52.0d;
+                    yearFraction = num / 52.0d;
                     break;
                 case PeriodEnum.M:
-                    yearFraction = numero / 12.0d;
+                    yearFraction = num / 12.0d;
                     break;
                 case PeriodEnum.Y:
-                    yearFraction = numero;
+                    yearFraction = num;
                     break;
             }
             return yearFraction;
@@ -532,8 +547,8 @@ namespace Orion.CurveEngine.Helpers
         public static string GenerateTenorLabel(string rawLabel)
         {
             var alpha = string.Empty;
-            decimal numero = 0;
-            LabelSplitter(rawLabel, ref alpha, ref numero);
+            decimal num = 0;
+            LabelSplitter(rawLabel, ref alpha, ref num);
             var i = PeriodHelper.Parse(rawLabel);
             return i.ToString();
         }

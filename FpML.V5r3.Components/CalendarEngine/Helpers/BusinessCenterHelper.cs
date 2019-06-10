@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -21,7 +36,7 @@ namespace Orion.CalendarEngine.Helpers
     public class BusinessCenterHelper
     {
         /// <summary>
-        /// Creates a consolidated business calendar for a given sset of business centers
+        /// Creates a consolidated business calendar for a given set of business centers
         /// </summary>
         /// <param name="centers">The centers.</param>
         /// <param name="cache">The cache.</param>
@@ -41,7 +56,7 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Creates a consolidated business calendar for a given sset of business centers
+        /// Creates a consolidated business calendar for a given set of business centers
         /// </summary>
         /// <param name="cache">The cache.</param>
         /// <param name="centers">The centers.</param>
@@ -80,7 +95,7 @@ namespace Orion.CalendarEngine.Helpers
 
 
         /// <summary>
-        /// Signficants the date.
+        /// Significant date.
         /// </summary>
         /// <param name="cache">The cache.</param>
         /// <param name="businessCenters">The city names.</param>
@@ -109,7 +124,7 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Dedupes the specified calendar names.
+        /// De-dupes the specified calendar names.
         /// </summary>
         /// <param name="calendarNames">The calendar names.</param>
         /// <returns></returns>

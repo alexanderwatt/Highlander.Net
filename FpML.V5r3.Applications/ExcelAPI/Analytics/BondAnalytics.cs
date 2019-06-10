@@ -236,7 +236,7 @@ namespace HLV5r3.Analytics
         /// <param name="annualCoupon">The annual coupon payment for 100 unit of face value.</param>
         /// <param name="finalCoupon">The final coupon with an odd final period. This is zero for all other bonds.</param>
         /// <param name="couponsPerYear">The number of coupon periods in a year.</param>
-        /// <param name="periodDiscountFactor">The disoount factor for one period, v = 1/(1+y/h)</param>
+        /// <param name="periodDiscountFactor">The discount factor for one period, v = 1/(1+y/h)</param>
         /// <param name="annualYield">The required annual nominal redemption yield expressed as a decimal.</param>
         /// <returns>Te dirty price according to ISMA convention.</returns>
         public double ISMADirtyPrice(double accrualYearFraction, double finalAccrualYearFraction, int numberOfFullCoupons, 

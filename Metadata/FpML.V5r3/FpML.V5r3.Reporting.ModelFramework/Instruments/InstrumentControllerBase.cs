@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -42,9 +57,9 @@ namespace Orion.ModelFramework.Instruments
         public string CollateralCurrency { get; set; }
 
         /// <summary>
-        /// Gets the multipier. This is useful particularly for option calculations.
+        /// Gets the multiplier. This is useful particularly for option calculations.
         /// </summary>
-        /// <value>The multipier.</value>
+        /// <value>The multiplier.</value>
         public decimal Multiplier { get; set; }
 
         /// <summary>
@@ -78,14 +93,14 @@ namespace Orion.ModelFramework.Instruments
         /// <summary>
         /// Updates the bucketing interval.
         /// </summary>
-        /// <param name="baseDate">The base date for bucketting.</param>
+        /// <param name="baseDate">The base date for bucketing.</param>
         /// <param name="bucketingInterval">The bucketing interval.</param>
         public abstract DateTime[] GetBucketingDates(DateTime baseDate, Period bucketingInterval);
 
         /// <summary>
         /// Updates the bucketing interval.
         /// </summary>
-        /// <param name="baseDate">The base date for bucketting.</param>
+        /// <param name="baseDate">The base date for bucketing.</param>
         /// <param name="bucketingInterval">The bucketing interval.</param>
         public void UpdateBucketingInterval(DateTime baseDate, Period bucketingInterval)
         {
@@ -122,12 +137,12 @@ namespace Orion.ModelFramework.Instruments
         public string BucketedDatesList => string.Join(",", BucketedDates.Select(date => date.ToString("yyyy-MM-dd")).ToArray());
 
         /// <summary>
-        /// Gets or sets a value indicating whether [calculation perfomed indicator].
+        /// Gets or sets a value indicating whether [calculation performed indicator].
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if [calculation perfomed indicator]; otherwise, <c>false</c>.
+        /// 	<c>true</c> if [calculation performed indicator]; otherwise, <c>false</c>.
         /// </value>
-        public bool CalculationPerfomedIndicator { get; set; }
+        public bool CalculationPerformedIndicator { get; set; }
 
         ///<summary>
         /// The identifier.
@@ -145,7 +160,7 @@ namespace Orion.ModelFramework.Instruments
         public List<string> PaymentCurrencies = new List<string>();
 
         ///<summary>
-        /// The type of curve evolution to use. The defualt is ForwardToSpot
+        /// The type of curve evolution to use. The default is ForwardToSpot
         ///</summary>
         public PricingStructureEvolutionType PricingStructureEvolutionType { get; set; }
 
@@ -510,7 +525,6 @@ namespace Orion.ModelFramework.Instruments
         {
             Decimal result;
             string[] metricArray = { metric };
-
             var controller = (IPriceableInstrumentController<TFpML>)this;
             {
                 var metricsList = new List<string>(metricArray);
@@ -590,7 +604,7 @@ namespace Orion.ModelFramework.Instruments
         }
 
         /// <summary>
-        /// Gets the quotaion by metric.
+        /// Gets the quotation by metric.
         /// </summary>
         /// <typeparam name="TEnumT">The type of the num T.</typeparam>
         /// <param name="metric">The metric.</param>
@@ -939,7 +953,7 @@ namespace Orion.ModelFramework.Instruments
                     results.AddRange(matchedQuotes.Select(quotation => quotation.value));
                 }
             }
-                return results.ToArray();
+            return results.ToArray();
         }
 
         /// <summary>

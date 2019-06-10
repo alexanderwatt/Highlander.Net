@@ -1,13 +1,23 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Orion.Util.NamedValues;
-using FpML.V5r3.Reporting;
-using Orion.ModelFramework.Instruments;
-using Orion.Constants;
 
 #endregion
 
@@ -106,7 +116,7 @@ namespace Orion.ModelFramework
         /// <returns></returns>
         string CreateTermDeposit(string tradeId, bool isLenderBase, string lenderParty, string borrowerParty, DateTime tradeDate, DateTime startDate, DateTime maturityDate,
             string currency, double notionalAmount, double fixedRate, string dayCount);
-            //TODO replace with a generaic createtrade...
+            //TODO replace with a generic create trade...
 
         /// <summary>
         /// Values a trade that has already been created.

@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -161,7 +176,7 @@ namespace Orion.CurveEngine.Assets
             AnalyticsModel = new RateSpreadAssetAnalytic();
             //DependencyCreator.Resolve<IModelAnalytic<ISimpleAssetParameters, SpreadMetrics>>(_modelIdentifier);
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that all we evaluate - every other metric is ignored
             var bEvalDiscountFactorAtMaturity = false;
             var bEvalDiscountFactorAtStart = false;
             if (metrics.Contains(RateSpreadMetrics.DiscountFactorAtMaturity))
@@ -215,14 +230,14 @@ namespace Orion.CurveEngine.Assets
             }
             if (bEvalDiscountFactorAtMaturity)
             {
-                //4. Set the anaytic input parameters and Calculate the respective metrics
+                //4. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
                         metricsToEvaluate);
             }
             if (bEvalDiscountFactorAtStart)
             {
-                //4. Set the anaytic input parameters and Calculate the respective metrics
+                //4. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
                         metricsToEvaluate);
@@ -232,7 +247,7 @@ namespace Orion.CurveEngine.Assets
                 //3. Get the end discount factor
                 EndDiscountFactor = GetDiscountFactor(curve, GetRiskMaturityDate(), modelData.ValuationDate);
                 analyticModelParameters.EndDiscountFactor = EndDiscountFactor;
-                //4. Set the anaytic input parameters and Calculate the respective metrics
+                //4. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
                         metricsToEvaluate);
@@ -243,7 +258,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateDiscountFactorAtMaturity(IInterpolatedSpace interpolatedSpace)
         {
@@ -281,7 +296,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateImpliedQuoteWithSpread(IInterpolatedSpace interpolatedSpace)
         {
@@ -310,7 +325,7 @@ namespace Orion.CurveEngine.Assets
                                                        "DecimalRate").value;
             }
             AnalyticResults = new RateSpreadAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults =
                 AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
@@ -321,7 +336,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace)
         {
@@ -349,7 +364,7 @@ namespace Orion.CurveEngine.Assets
                                                        "DecimalRate").value;
             }
             AnalyticResults = new RateSpreadAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults =
                 AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,

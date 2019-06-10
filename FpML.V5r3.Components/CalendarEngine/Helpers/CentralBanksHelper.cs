@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -9,7 +24,7 @@ using Orion.CalendarEngine.Dates;
 namespace Orion.CalendarEngine.Helpers
 {
     /// <summary>
-    /// Produces the relevan CB dates.
+    /// Produces the relevant CB dates.
     /// </summary>
     public static class CentralBanksHelper
     {
@@ -42,13 +57,13 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Creates the datatime vector for the request Central Bank.
+        /// Creates the date time vector for the request Central Bank.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
         /// <param name="validCentralBank">The requested central bank.</param>
         /// <param name="centralBankDateRuleMonths">The rules.</param>
         /// <param name="lastDate">The last date required.</param>
-        /// <returns>An aray of relevant dates.</returns>
+        /// <returns>An array of relevant dates.</returns>
         public static DateTime[] GetCBDates(DateTime baseDate, string validCentralBank,
                                              int centralBankDateRuleMonths, DateTime lastDate)//TODO splice in the quarterly dates afterwards..
         {
@@ -58,13 +73,13 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Creates the datatime vector for the request Central Bank.
+        /// Creates the date time vector for the request Central Bank.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
         /// <param name="centralBank">The requested central bank.</param>
         /// <param name="centralBankDateRuleMonths">The rules.</param>
         /// <param name="lastDate">The last date required.</param>
-        /// <returns>An aray of relevant dates.</returns>
+        /// <returns>An array of relevant dates.</returns>
         public static DateTime[] GetCentralBankDays(DateTime baseDate, CentralBanks centralBank,
                                                     int centralBankDateRuleMonths, DateTime lastDate)
         {

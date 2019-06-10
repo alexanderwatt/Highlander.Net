@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -151,7 +166,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public FxSwap Build()
@@ -197,7 +212,7 @@ namespace Orion.ValuationEngine.Pricers
         /// Gets all the child controllers.
         ///</summary>
         ///<returns></returns>
-        public IList<IPriceableInstrumentController<InterestRateStream>> GetInstumentControllers()
+        public IList<IPriceableInstrumentController<InterestRateStream>> GetInstrumentControllers()
         {
             return GetLegs().Cast<IPriceableInstrumentController<InterestRateStream>>().ToList();
         }
@@ -239,8 +254,8 @@ namespace Orion.ValuationEngine.Pricers
         /// <summary>
         /// Updates the name of the discount curve.
         /// </summary>
-        /// <param name="currency1CurveName">New name of the currecny1 discount curve.</param>
-        /// <param name="currency2CurveName">New name of the currecny2 discount curve.</param>
+        /// <param name="currency1CurveName">New name of the currency1 discount curve.</param>
+        /// <param name="currency2CurveName">New name of the currency2 discount curve.</param>
         public void UpdateDiscountCurveNames(string currency1CurveName, string currency2CurveName)
         {
             DiscountCurveName1 = currency1CurveName;
@@ -249,9 +264,7 @@ namespace Orion.ValuationEngine.Pricers
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate));
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
 
             return bucketDates.ToArray();
         }
@@ -272,7 +285,7 @@ namespace Orion.ValuationEngine.Pricers
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new FxSwapAnalytic();
@@ -320,7 +333,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 swapValuation = childControllerValuations;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             swapValuation.id = Id;
             return swapValuation;
         }

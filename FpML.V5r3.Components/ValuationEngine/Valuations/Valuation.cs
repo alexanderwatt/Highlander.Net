@@ -1,3 +1,20 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +24,8 @@ using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
 using Orion.Analytics.Helpers;
+
+#endregion
 
 namespace Orion.ValuationEngine.Valuations
 {
@@ -24,26 +43,24 @@ namespace Orion.ValuationEngine.Valuations
             var item = cache.LoadItem<ValuationReport>(nameSpace + "." + valuationId);
             if (item != null)
             {
-                var valutionReport = (ValuationReport)item.Data;
+                var valuationReport = (ValuationReport)item.Data;
                 var envelope = new ValuationInfoRangeItem
                                    {
-                                       Id = valutionReport.header.messageId.Value,
+                                       Id = valuationReport.header.messageId.Value,
                                        Description = "envelope"
                                    };
                 list.Add(envelope);
-                foreach (TradeValuationItem tradeValuationItem in valutionReport.tradeValuationItem)
+                foreach (TradeValuationItem tradeValuationItem in valuationReport.tradeValuationItem)
                 {
                     foreach (Trade trade in tradeValuationItem.Items)
                     {
-                        var tradeId = trade.tradeHeader.partyTradeIdentifier[0].Items[0] as TradeId;
-                        if (tradeId != null)
+                        if (trade.tradeHeader.partyTradeIdentifier[0].Items[0] is TradeId tradeId)
                         {
                             var product = new ValuationInfoRangeItem
                                 {
                                     Id = tradeId.Value
                                 };
-                            var swap1 = trade.Item as Swap;
-                            if (swap1 != null)
+                            if (trade.Item is Swap swap1)
                             {
                                 product.Description = "swap";
                                 var swap = swap1;
@@ -58,8 +75,7 @@ namespace Orion.ValuationEngine.Valuations
                             }
                             else
                             {
-                                var floor = trade.Item as CapFloor;
-                                if (floor != null)//could be cap, floor, or collar
+                                if (trade.Item is CapFloor floor)//could be cap, floor, or collar
                                 {
                                     var capFloor = floor;
                                     Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(
@@ -126,8 +142,7 @@ namespace Orion.ValuationEngine.Valuations
 
         public void ReplacePartiesInValuationReport(ICoreCache cache, string nameSpace, string valuationId, List<Party> partyList)
         {
-            var valuationReport = cache.LoadItem<ValuationReport>(nameSpace + "." + valuationId).Data as ValuationReport;
-            if (valuationReport != null) valuationReport.party = partyList.ToArray();
+            if (cache.LoadItem<ValuationReport>(nameSpace + "." + valuationId).Data is ValuationReport valuationReport) valuationReport.party = partyList.ToArray();
         }
 
         public ValuationReport Get(ICoreCache cache, string nameSpace, string valuationId)

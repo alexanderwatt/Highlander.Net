@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -162,7 +177,7 @@ namespace Orion.ValuationEngine.Pricers
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new SimpleIRSwaptionInstrumentAnalytic();
@@ -208,10 +223,9 @@ namespace Orion.ValuationEngine.Pricers
             //This is European only.
             var expiryTime = (ExerciseDates[0] - ModelData.ValuationDate).Days / 365.0;
             IVolatilitySurface indexVolSurface = null;
-            if (modelData.MarketEnvironment as ISwapLegEnvironment != null)
+            if (modelData.MarketEnvironment is ISwapLegEnvironment streamMarket1)
             {
-                var streamMarket = (ISwapLegEnvironment)modelData.MarketEnvironment;
-                indexVolSurface = streamMarket.GetVolatilitySurface();
+                indexVolSurface = streamMarket1.GetVolatilitySurface();
                 indexVolSurface.PricingStructureEvolutionType = PricingStructureEvolutionType;
                 VolatilitySurfaceName = indexVolSurface.GetPricingStructureId().UniqueIdentifier;
             }
@@ -251,9 +265,8 @@ namespace Orion.ValuationEngine.Pricers
                     //OtherNPV = 
                 };
                 // Curve Related
-                if (modelData.MarketEnvironment as ISwapLegEnvironment != null)
+                if (modelData.MarketEnvironment is ISwapLegEnvironment streamMarket)
                 {
-                    var streamMarket = (ISwapLegEnvironment)modelData.MarketEnvironment;
                     analyticModelParameters.VolatilitySurface = indexVolSurface;
                     //Check for currency.
                     if (ModelData.ReportingCurrency != null)
@@ -284,7 +297,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 swaptionValuation = childControllerValuations;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             swaptionValuation.id = Id;
             return swaptionValuation;
         }

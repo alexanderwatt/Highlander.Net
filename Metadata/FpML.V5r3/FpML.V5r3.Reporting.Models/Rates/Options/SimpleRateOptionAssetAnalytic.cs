@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using Orion.Analytics.Options;
@@ -45,7 +60,7 @@ namespace Orion.Models.Rates.Options
         /// Gets the market quote.
         /// </summary>
         /// <value>The quote.</value>
-        public Decimal MarketQuote => !AnalyticParameters.IsVolatiltiyQuote ? AnalyticParameters.Premium : AnalyticParameters.Volatility;
+        public Decimal MarketQuote => !AnalyticParameters.IsVolatilityQuote ? AnalyticParameters.Premium : AnalyticParameters.Volatility;
 
         /// <summary>
         /// Gets the Implied Quote.
@@ -287,7 +302,7 @@ namespace Orion.Models.Rates.Options
         /// <returns></returns>
         protected virtual Decimal EvaluateVolatilityAtExpiry()
         {
-            return AnalyticParameters.IsVolatiltiyQuote ? AnalyticParameters.Volatility : CalculateVolatility();
+            return AnalyticParameters.IsVolatilityQuote ? AnalyticParameters.Volatility : CalculateVolatility();
         }
 
         /// <summary>
@@ -296,7 +311,7 @@ namespace Orion.Models.Rates.Options
         /// <returns></returns>
         protected virtual Decimal EvaluateImpliedQuote()
         {
-            return !AnalyticParameters.IsVolatiltiyQuote ? EvaluatePremium() : CalculateVolatility();
+            return !AnalyticParameters.IsVolatilityQuote ? EvaluatePremium() : CalculateVolatility();
         }
 
         protected virtual Decimal CalculateOptionValue()

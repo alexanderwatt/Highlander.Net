@@ -1,7 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using Orion.Constants;
-//using Orion.ModelFramework.Calibrators.Bootstrappers;
 using Orion.ModelFramework.Identifiers;
 using Orion.Util.Helpers;
 using Orion.Util.NamedValues;
@@ -31,7 +45,7 @@ namespace Orion.ModelFramework.PricingStructures
         public PricingStructureValuation PricingStructureValuation { get; set; }
 
         ///<summary>
-        /// The type of curve evolution to use. The defualt is ForwardToSpot
+        /// The type of curve evolution to use. The default is ForwardToSpot
         ///</summary>
         public PricingStructureEvolutionType PricingStructureEvolutionType { get; set; }
 
@@ -89,7 +103,7 @@ namespace Orion.ModelFramework.PricingStructures
         }
 
         /// <summary>
-        /// Gets the nunderlying discrete space that is used for interpolation.
+        /// Gets the underlying discrete space that is used for interpolation.
         /// </summary>
         /// <returns></returns>
         public IDiscreteSpace GetDiscreteSpace()
@@ -159,7 +173,7 @@ namespace Orion.ModelFramework.PricingStructures
         }
 
         /// <summary>
-        /// The pricing strucutre properties.
+        /// The pricing structure properties.
         /// </summary>
         public NamedValueSet GetProperties()
         {

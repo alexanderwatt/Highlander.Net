@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -36,7 +51,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         public string Algorithm { get; set; }
 
         /// <summary>
-        /// An auxilliary structure used to track indexes within the volatility surface.
+        /// An auxiliary structure used to track indexes within the volatility surface.
         /// This should make lookups faster than the default linear search.
         /// </summary>
         private readonly SortedList<ExpiryTenorStrikeKey, int> _matrixIndexHelper;
@@ -62,13 +77,13 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <param name="surfaceId"></param>
         /// <param name="logger"></param>
         /// <param name="cache">The cache.</param>
-        /// <param name="forwards">The array of forwards. The first element is the spot value. Conseuently, the length of this array is expiryTenors.Length + 1.</param>
+        /// <param name="forwards">The array of forwards. The first element is the spot value. Consequently, the length of this array is expiryTenors.Length + 1.</param>
         protected ExtendedExpiryTermStrikeVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace, String[] expiryTenors, Double[] strikes, Double[] forwards, Double[,]
                                                                                                  volSurface, VolatilitySurfaceIdentifier surfaceId)
         {
             Algorithm = surfaceId.Algorithm;
             PricingStructureIdentifier = surfaceId;
-            //Build the parameteric adjustment set from th3e forwards.
+            //Build the parametric adjustment set from the forwards.
             var parametricAdjustment = GenerateForwards(forwards);
             var holder = new PricingStructureAlgorithmsHolder(logger, cache, nameSpace, surfaceId.PricingStructureType, surfaceId.Algorithm);
             var xDimensionInterpolationMethod = InterpolationMethodHelper.Parse(holder.GetValue("xDimensionInterpolation"));
@@ -122,13 +137,13 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <param name="volSurface">The vol surface.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="properties">The properties.</param>
-        /// <param name="forwards">The array of forwards. The first element is the spot value. Conseuently, the length of this array is expiryTenors.Length + 1.</param>
+        /// <param name="forwards">The array of forwards. The first element is the spot value. Consequently, the length of this array is expiryTenors.Length + 1.</param>
         protected ExtendedExpiryTermStrikeVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace, NamedValueSet properties, String[] expiryTenors, Double[] strikes, Double[] forwards, Double[,] volSurface)
         {
             var surfaceId = new VolatilitySurfaceIdentifier(properties);
             Algorithm = surfaceId.Algorithm;
             PricingStructureIdentifier = surfaceId;
-            //Build the parameteric adjustment set from th3e forwards.
+            //Build the parametric adjustment set from the forwards.
             var parametricAdjustment = GenerateForwards(forwards);
             var holder = new PricingStructureAlgorithmsHolder(logger, cache, nameSpace, surfaceId.PricingStructureType, surfaceId.Algorithm);
             var xDimensionInterpolationMethod = InterpolationMethodHelper.Parse(holder.GetValue("xDimensionInterpolation"));
@@ -222,7 +237,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
                 //assume the forwards are the first parameter set.
                 adjustments = data.adjustment[0];
             }
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             PricingStructureIdentifier = new VolatilitySurfaceIdentifier(properties);
             var xDimensionInterpolationMethod = InterpolationMethodHelper.Parse(holder.GetValue("xDimensionInterpolation"));
             var yDimensionInterpolationMethod = InterpolationMethodHelper.Parse(holder.GetValue("yDimensionInterpolation"));
@@ -533,9 +548,9 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         {
             #region Properties
 
-            public Period Expiry { get; private set; }
-            public Period Tenor { get; private set; }
-            public decimal Strike { get; private set; }
+            public Period Expiry { get; }
+            public Period Tenor { get; }
+            public decimal Strike { get; }
 
             #endregion
 

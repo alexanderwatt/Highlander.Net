@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -274,7 +289,7 @@ namespace Orion.Models.Generic.Cashflows
         public decimal MarketQuote => EvaluateMarketQuote();
 
         /// <summary>
-        /// Gets the Net Future Valuie of realised cash flows.
+        /// Gets the Net Future Value of realised cash flows.
         /// </summary>
         /// <value>The NFV.</value>
         public Decimal LocalCurrencyNFV
@@ -396,7 +411,7 @@ namespace Orion.Models.Generic.Cashflows
         /// <summary>
         /// Gets the derivative with respect to the discount Rate.
         /// </summary>
-        /// <value>The fistorical delta1.</value>
+        /// <value>The historical delta1.</value>
         public decimal LocalCurrencyHistoricalDelta1
         {
             get
@@ -417,13 +432,13 @@ namespace Orion.Models.Generic.Cashflows
         public Decimal IndexAtMaturity => 0.0m;
 
         /// <summary>
-        /// Gets the reporting cxurrency spectrum numerical derivative with respect to the discount Rate.
+        /// Gets the reporting currency spectrum numerical derivative with respect to the discount Rate.
         /// </summary>
         /// <value>The delta1.</value>
         public IDictionary<string, Decimal> Delta1PDH { get; protected set; }
 
         /// <summary>
-        /// Gets the reporting cxurrency spectrum numerical derivative with respect to the discount Rate.
+        /// Gets the reporting currency spectrum numerical derivative with respect to the discount Rate.
         /// </summary>
         /// <value>The delta0.</value>
         public IDictionary<string, Decimal> Delta0PDH { get; protected set; }
@@ -443,13 +458,13 @@ namespace Orion.Models.Generic.Cashflows
         /// <summary>
         /// Gets the PCE.
         /// </summary>
-        /// <value>The PCCE.</value>
+        /// <value>The PCE.</value>
         public Decimal[] PCE => new[] { 0.0m };
 
         /// <summary>
         /// Gets the PCE Term.
         /// </summary>
-        /// <value>The PCCE Term.</value>
+        /// <value>The PCE Term.</value>
         public int[] PCETerm => new[] { 0 };
 
         #endregion
@@ -457,7 +472,7 @@ namespace Orion.Models.Generic.Cashflows
         #region Constructor
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         public FloatingCashflowAnalytic()
         {
@@ -465,7 +480,7 @@ namespace Orion.Models.Generic.Cashflows
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="fixingDate">The fixing date of the index.</param>

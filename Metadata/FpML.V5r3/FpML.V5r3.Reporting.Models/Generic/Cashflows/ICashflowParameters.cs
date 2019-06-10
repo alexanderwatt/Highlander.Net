@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -6,7 +21,6 @@ using Orion.ModelFramework;
 using Orion.ModelFramework.PricingStructures;
 
 #endregion
-
 
 namespace Orion.Models.Generic.Cashflows
 {
@@ -73,7 +87,7 @@ namespace Orion.Models.Generic.Cashflows
         DateTime PaymentDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the reportiong currency.
+        /// Gets or sets the reporting currency.
         /// </summary>
         /// <value>The currency.</value>
         String ReportingCurrency { get; set; }
@@ -115,10 +129,10 @@ namespace Orion.Models.Generic.Cashflows
         Decimal PeriodAsTimesPerYear { get; set; }
 
         /// <summary>
-        /// Gets or sets the rate to be used for bucketting.
+        /// Gets or sets the rate to be used for bucketing.
         /// </summary>
-        /// <value>The bucketting rate.</value>
-        Decimal BuckettingRate { get; set; }
+        /// <value>The bucketing rate.</value>
+        Decimal BucketingRate { get; set; }
 
         /// <summary>
         /// Gets or sets the bucketed discount factors.

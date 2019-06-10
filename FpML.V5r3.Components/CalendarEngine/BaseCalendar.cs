@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -199,8 +214,8 @@ namespace Orion.CalendarEngine
         public List<DateTime> HolidaysBetweenDates(DateTime startDate, DateTime endDate)
         {
             // Now just return the dates in the range specified by start and end dates
-            var allSignicantDates = GetDatesInRange(startDate, endDate);
-            return allSignicantDates;
+            var allSignificantDates = GetDatesInRange(startDate, endDate);
+            return allSignificantDates;
         }
 
         /// <summary>
@@ -296,7 +311,7 @@ namespace Orion.CalendarEngine
 
             #endregion
 
-            // handling the NONE day conevention
+            // handling the NONE day convention
             if (businessDayConvention == BusinessDayConventionEnum.NONE)
             {
                 // No rolling if multiplier is zero
@@ -403,7 +418,7 @@ namespace Orion.CalendarEngine
         #region Helpers
 
         /// <summary>
-        /// A stringified representation of the Calendar.
+        /// A string representation of the Calendar.
         /// </summary>
         /// <returns>A String representing the object.</returns>
         public override String ToString()
@@ -412,7 +427,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// A stringified representation of this Calendar for use with FpML.
+        /// A string representation of this Calendar for use with FpML.
         /// </summary>
         /// <returns>An FpML String representing the object.</returns>
         /// <remarks>

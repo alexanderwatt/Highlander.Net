@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 
 namespace Orion.Models.Assets
 {
@@ -7,7 +22,7 @@ namespace Orion.Models.Assets
     /// </summary>
     public class DiscountRateAssetAnalytic : RateAssetAnalytic
     {
-        private const Decimal cOne = 1.0m; //TODO not done this model yet.
+        private const Decimal COne = 1.0m; //TODO not done this model yet.
         
         /// <summary>
         /// Evaluates the npv.
@@ -56,7 +71,7 @@ namespace Orion.Models.Assets
         /// <returns></returns>
         protected override Decimal EvaluateImpliedQuote()
         {
-            return ((AnalyticParameters.StartDiscountFactor / AnalyticParameters.EndDiscountFactor) - cOne) /
+            return ((AnalyticParameters.StartDiscountFactor / AnalyticParameters.EndDiscountFactor) - COne) /
                    AnalyticParameters.YearFraction;
         }
 
@@ -67,7 +82,7 @@ namespace Orion.Models.Assets
         protected override Decimal EvaluateDiscountFactorAtMaturity()
         {
             return AnalyticParameters.StartDiscountFactor /
-                   (cOne + AnalyticParameters.YearFraction * AnalyticParameters.Rate);
+                   (COne + AnalyticParameters.YearFraction * AnalyticParameters.Rate);
         }
     }
 }

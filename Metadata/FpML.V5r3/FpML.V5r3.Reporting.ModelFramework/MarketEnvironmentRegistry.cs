@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -24,7 +39,18 @@ namespace Orion.ModelFramework
         /// Gets the markets.
         /// </summary>
         /// <value>The markets.</value>
-        public static IList<string> Markets => new List<string>(_marketEnvironments.Keys);
+        public static IList<string> Markets
+        {
+            get
+            {
+                if (_marketEnvironments != null)
+                    lock (_marketEnvironments)
+                    {
+                        return new List<string>(_marketEnvironments.Keys);
+                    }
+                return null;
+            }
+        }
 
         /// <summary>
         /// Adds the specified market environment.
@@ -55,8 +81,8 @@ namespace Orion.ModelFramework
                 {
                     foreach (var marketEnvironment in _marketEnvironments.Values)
                     {
-                        var marketEnvionment = (MarketEnvironment) marketEnvironment;
-                        items.Add(marketEnvionment.Id, marketEnvionment.PricingStructureIds);
+                        var market = (MarketEnvironment) marketEnvironment;
+                        items.Add(market.Id, market.PricingStructureIds);
                     }
                 }
             }
@@ -64,14 +90,14 @@ namespace Orion.ModelFramework
         }
 
         /// <summary>
-        /// Pricings the structure ids by market.
+        /// Pricing the structure ids by market.
         /// </summary>
         /// <param name="marketEnvironmentId">The market environment id.</param>
         /// <returns></returns>
         public static IList<string> PricingStructureIdsByMarket(string marketEnvironmentId)
         {
-            MarketEnvironment marketEnvionment = Get(marketEnvironmentId);
-            var items = marketEnvionment != null ? marketEnvionment.PricingStructureIds : new List<string>();
+            MarketEnvironment marketEnvironment = Get(marketEnvironmentId);
+            var items = marketEnvironment != null ? marketEnvironment.PricingStructureIds : new List<string>();
             return items;
         }
 

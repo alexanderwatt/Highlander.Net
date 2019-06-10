@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -87,8 +102,6 @@ namespace Orion.ValuationEngine.Helpers
             floatingRateDefinition.calculatedRateSpecified = true;
         }
 
-
-
         private static decimal GetForecastRate(CalculationPeriod calculationPeriod, IRateCurve forecastCurve, DayCountFraction dayCountFraction)
         {
             double startOfPeriodDiscount = forecastCurve.GetDiscountFactor(calculationPeriod.adjustedStartDate);
@@ -97,11 +110,12 @@ namespace Orion.ValuationEngine.Helpers
             double accrualPeriod = dayCounter.YearFraction(calculationPeriod.adjustedStartDate, calculationPeriod.adjustedEndDate);
             if (0 == accrualPeriod)
             {
-                string message = String.Format("Accrual period is 0 days. calculationPeriod.adjustedStartDate = '{0}', calculationPeriod.adjustedEndDate = '{1}'", calculationPeriod.adjustedStartDate, calculationPeriod.adjustedEndDate);
+                string message =
+                    $"Accrual period is 0 days. calculationPeriod.adjustedStartDate = '{calculationPeriod.adjustedStartDate}', calculationPeriod.adjustedEndDate = '{calculationPeriod.adjustedEndDate}'";
                 throw new System.Exception(message);
             }
-            double forecastContinouslyCompoundingRate = (startOfPeriodDiscount / endOfPeriodDiscount - 1.0) / accrualPeriod;
-            return (decimal)forecastContinouslyCompoundingRate;
+            double forecastContinuouslyCompoundingRate = (startOfPeriodDiscount / endOfPeriodDiscount - 1.0) / accrualPeriod;
+            return (decimal)forecastContinuouslyCompoundingRate;
         }
     }
 }

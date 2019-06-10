@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System.Diagnostics;
@@ -93,7 +108,7 @@ namespace Orion.ValuationEngine.Reports
         //        result[4, 0] = "lenderPartyReference";
         //        result[5, 0] = "borrowerPartyReference";
         //        result[6, 0] = "currency";
-        //        result[7, 0] = "notionalamount";
+        //        result[7, 0] = "notionalAmount";
         //        result[8, 0] = "interest";
         //        result[9, 0] = "dayCount";
 
@@ -115,7 +130,7 @@ namespace Orion.ValuationEngine.Reports
 
         public override object[,] DoReport(Product product, NamedValueSet properties)
         {
-            if (product is FxSwap fxswap)
+            if (product is FxSwap fxSwap)
             {
                 var party1 = properties.GetValue<string>(TradeProp.Party1, true);
                 var party2 = properties.GetValue<string>(TradeProp.Party2, true);
@@ -127,14 +142,13 @@ namespace Orion.ValuationEngine.Reports
                 result[4, 0] = "paymentDate";
                 result[5, 0] = "party1";
                 result[6, 0] = "party2";
-
-                var temp1 = fxswap.nearLeg;
+                var temp1 = fxSwap.nearLeg;
                 result[0, 1] = temp1.exchangedCurrency1.payerPartyReference.href;
                 result[1, 1] = temp1.exchangedCurrency1.receiverPartyReference.href;
                 result[2, 1] = temp1.exchangedCurrency1.paymentAmount.amount;
                 result[3, 1] = temp1.exchangedCurrency1.paymentAmount.currency.Value;
-                var containdUnadjustedDate = AdjustableOrAdjustedDateHelper.Contains(temp1.exchangedCurrency1.paymentDate, ItemsChoiceType.unadjustedDate, out var unadjustedDate);
-                if (containdUnadjustedDate)
+                var containedUnadjustedDate = AdjustableOrAdjustedDateHelper.Contains(temp1.exchangedCurrency1.paymentDate, ItemsChoiceType.unadjustedDate, out var unadjustedDate);
+                if (containedUnadjustedDate)
                 {
                     result[4, 1] = ((IdentifiedDate) unadjustedDate).Value;
                 }              

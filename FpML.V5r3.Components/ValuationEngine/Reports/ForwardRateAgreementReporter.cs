@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System.Diagnostics;
@@ -95,8 +110,7 @@ namespace Orion.ValuationEngine.Reports
                 result[5, 0] = "buyerPartyReference";
                 result[6, 0] = "sellerPartyReference";
                 result[7, 0] = "currency";
-                result[8, 0] = "notionalamount";
-
+                result[8, 0] = "notionalAmount";
                 result[0, 1] = forwardRateAgreement.adjustedEffectiveDate.Value;
                 result[1, 1] = forwardRateAgreement.fixedRate;
                 result[2, 1] = forwardRateAgreement.paymentDate.unadjustedDate.Value;
@@ -106,7 +120,6 @@ namespace Orion.ValuationEngine.Reports
                 result[6, 1] = forwardRateAgreement.sellerPartyReference.href;
                 result[7, 1] = forwardRateAgreement.notional.currency.Value;
                 result[8, 1] = forwardRateAgreement.notional.amount;
-
                 return result;
             }
             return null;
@@ -127,10 +140,9 @@ namespace Orion.ValuationEngine.Reports
                 result[5, 0] = "buyerPartyReference";
                 result[6, 0] = "sellerPartyReference";
                 result[7, 0] = "currency";
-                result[8, 0] = "notionalamount";
+                result[8, 0] = "notionalAmount";
                 result[9, 0] = "party1";
                 result[10, 0] = "party2";
-
                 result[0, 1] = forwardRateAgreement.adjustedEffectiveDate.Value;
                 result[1, 1] = forwardRateAgreement.fixedRate;
                 result[2, 1] = forwardRateAgreement.paymentDate.unadjustedDate.Value;
@@ -142,7 +154,6 @@ namespace Orion.ValuationEngine.Reports
                 result[8, 1] = forwardRateAgreement.notional.amount;
                 result[9, 1] = party1;
                 result[10, 1] = party2;
-
                 return result;
             }
             return null;

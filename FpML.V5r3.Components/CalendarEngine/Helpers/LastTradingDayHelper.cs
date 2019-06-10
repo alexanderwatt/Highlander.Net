@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
@@ -18,9 +33,9 @@ namespace Orion.CalendarEngine.Helpers
     public class LastTradingDayHelper
     {
         /// <summary>
-        /// Gets the appropriate excahnge calendar class for the contract defined.
+        /// Gets the appropriate exchange calendar class for the contract defined.
         /// </summary>
-        /// <param name="futuresCode">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expity must be concatenated. </param>
+        /// <param name="futuresCode">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expiry must be concatenated. </param>
         /// <returns></returns>
         public static ILastTradingDate ParseCode(string futuresCode)
         {
@@ -28,9 +43,9 @@ namespace Orion.CalendarEngine.Helpers
             return Parse(code);
         }
         /// <summary>
-        /// Gets the appropriate excahnge calendar class for the contract defined.
+        /// Gets the appropriate exchange calendar class for the contract defined.
         /// </summary>
-        /// <param name="futuresCode">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expity must be concatenated. </param>
+        /// <param name="futuresCode">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expiry must be concatenated. </param>
         /// <returns></returns>
         public static ILastTradingDate Parse(RateFutureAssetAnalyticModelIdentifier futuresCode)
         {
@@ -65,9 +80,9 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Gets the appropriate excahnge calendar class for the contract defined.
+        /// Gets the appropriate exchange calendar class for the contract defined.
         /// </summary>
-        /// <param name="futuresCodeWithDelivery">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expity must be concatenated. </param>
+        /// <param name="futuresCodeWithDelivery">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W. The expiry must be concatenated. </param>
         /// <returns></returns>
         public static ILastTradingDate Parse(string futuresCodeWithDelivery)
         {
@@ -103,7 +118,7 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Gets the appropriate excahnge calendar class for the contract defined.
+        /// Gets the appropriate exchange calendar class for the contract defined.
         /// </summary>
         /// <param name="tradingName">Currently defined for:  ED, ER, RA, BAX, L, ES, EY, HR, IR, IB and W </param>
         /// <param name="expiryCode">E.g. Z8 </param>
@@ -153,10 +168,9 @@ namespace Orion.CalendarEngine.Helpers
         {
             var code = EnumHelper.Parse<RateFutureAssetAnalyticModelIdentifier>(futuresCode);
             var exchangeCal = Parse(code);
-            var result = exchangeCal.nextFuturesCode(date, mainCycle);
+            var result = exchangeCal.NextFuturesCode(date, mainCycle);
             return result;
         }
-
 
         /// <summary>
         /// Gets the next valid futures code.
@@ -186,7 +200,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             var code = EnumHelper.Parse<RateFutureAssetAnalyticModelIdentifier>(futuresCode);
             var exchangeCal = Parse(code);
-            var date = exchangeCal.nextLastTradingDate(refDate, mainCycle);
+            var date = exchangeCal.NextLastTradingDate(refDate, mainCycle);
             return date;
         }
 
@@ -201,7 +215,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             var code = EnumHelper.Parse<RateFutureAssetAnalyticModelIdentifier>(futuresCode);
             var exchangeCal = Parse(code);
-            var result = exchangeCal.isLastTradingDate(date, mainCycle);
+            var result = exchangeCal.IsLastTradingDate(date, mainCycle);
             return result;
         }
 

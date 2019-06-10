@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using Orion.Analytics.Options;
@@ -79,7 +94,7 @@ namespace Orion.Models.Rates.Swaption
         /// <summary>
         /// Gets the value.
         /// </summary>
-        /// <value>The vlaue.</value>
+        /// <value>The value.</value>
         public Decimal NPV
         {
             get 
@@ -141,7 +156,7 @@ namespace Orion.Models.Rates.Swaption
         ///// <param name="rate">The rate.</param>
         ///// <param name="timeToExpiry">The time To Expiry.</param>
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="timeToIndex">The timeToIndex. Not necessarily the time to expiry. This is used for surface interpolation..</param>

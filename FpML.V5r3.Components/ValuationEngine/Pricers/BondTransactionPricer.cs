@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -244,7 +259,7 @@ namespace Orion.ValuationEngine.Pricers
                 QuoteType = BondPriceEnum.DirtyPrice;
                 Quote = BasicQuotationHelper.Create(BondPrice.dirtyPrice, RateQuotationType);
             }
-            //Get the insturment configuration information.
+            //Get the instrument configuration information.
             var assetIdentifier = bondFpML.bond.currency.Value + "-Bond-" + BondType;
             BondNodeStruct bondTypeInfo = null;
             var instrument = InstrumentDataHelper.GetInstrumentConfigurationData(cache, nameSpace, assetIdentifier);
@@ -262,11 +277,11 @@ namespace Orion.ValuationEngine.Pricers
                 {
                     PaymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, bondTypeInfo.BusinessDayAdjustments.businessCenters, nameSpace);
                 }
-                //Preprocesses the data for the priceableasset.
+                //Pre-processes the data for the priceable asset.
                 var bond = XmlSerializerHelper.Clone(bondFpML.bond);
                 BondTypeInfo = XmlSerializerHelper.Clone(bondTypeInfo);
                 BondTypeInfo.Bond = bond;
-                //This is done because the config data is not stored in the ciorrect way. Need to add a price quote units.
+                //This is done because the config data is not stored in the correct way. Need to add a price quote units.
                 if (bond.couponRateSpecified)
                 {
                     var coupon = bond.couponRate;
@@ -291,7 +306,7 @@ namespace Orion.ValuationEngine.Pricers
             //Add payments like the settlement price
             if (!BondPrice.dirtyPriceSpecified) return;
             var amount = BondPrice.dirtyPrice * NotionalAmount.amount / 100;
-            var settlementPayment = PaymentHelper.Create("BondSettlemetAmount", BuyerReference, SellerReference, amount, SettlementDate);
+            var settlementPayment = PaymentHelper.Create("BondSettlementAmount", BuyerReference, SellerReference, amount, SettlementDate);
             AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, SettlementCalendar);
             if (!PaymentCurrencies.Contains(settlementPayment.paymentAmount.currency.Value))
             {
@@ -304,7 +319,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public BondTransaction Build()
@@ -355,7 +370,7 @@ namespace Orion.ValuationEngine.Pricers
             AnalyticModelParameters = ((PriceableBondAssetController)UnderlyingBond).AnalyticModelParameters;
             AnalyticsModel = ((PriceableBondAssetController)UnderlyingBond).AnalyticsModel;
             CalculationResults = ((PriceableBondAssetController)UnderlyingBond).CalculationResults;
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             return GetValue(CalculationResults, modelData.ValuationDate);
         }
 
@@ -393,9 +408,7 @@ namespace Orion.ValuationEngine.Pricers
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate));
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             return bucketDates.ToArray();
         }
 

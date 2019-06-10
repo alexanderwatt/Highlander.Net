@@ -271,7 +271,7 @@ namespace HLV5r3.Analytics
             putCall = putCall.ToUpper();
             putCall = putCall.Trim();
             putCall = putCall.Substring(0, 1);
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -302,7 +302,7 @@ namespace HLV5r3.Analytics
             putCall = putCall.ToUpper();
             putCall = putCall.Trim();
             putCall = putCall.Substring(0, 1);
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -328,7 +328,7 @@ namespace HLV5r3.Analytics
         public double SFEConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate,
             DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -359,7 +359,7 @@ namespace HLV5r3.Analytics
             putCall = putCall.ToUpper();
             putCall = putCall.Trim();
             putCall = putCall.Substring(0, 1);
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -390,7 +390,7 @@ namespace HLV5r3.Analytics
             putCall = putCall.ToUpper();
             putCall = putCall.Trim();
             putCall = putCall.Substring(0, 1);
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -415,7 +415,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public double CMEConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate, DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -436,7 +436,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] SFEBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -457,7 +457,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] SFEBondDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -478,7 +478,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] CMEEuroDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -499,7 +499,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] NZBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -520,7 +520,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] CBOT5YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -541,7 +541,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime[] CBOT10YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -565,7 +565,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime DateRoll(DateTime startDate, int numRolls, string dwmy, string rollMethod, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -590,7 +590,7 @@ namespace HLV5r3.Analytics
         ///<returns></returns>
         public DateTime BizDayRoll(DateTime startDate, int numDays, [Optional] Excel.Range xlHolidays)
         {
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {
@@ -662,7 +662,7 @@ namespace HLV5r3.Analytics
         {
             if (pmtFreq < 0 | rateSet < 0 | rateToNextCoup < 0 | swapRate < 0 | exInt < 0) return 0;
             if (settlement > maturity) return 0;
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
             if (values.GetType().Name == "Missing")
             {

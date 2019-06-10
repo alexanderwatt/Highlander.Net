@@ -505,13 +505,13 @@ namespace Orion.CurveEngine
             {
                 properties.Set("Bootstrap", true);
             }
-            //Handle ratebasiscurves that are dependent on another ratecurve.
+            //Handle rate basis curves that are dependent on another ratecurve.
             //TODO This functionality needs to be extended for calibrations (bootstrapping),
             //TODO where there is AccountReference dependency on one or more pricing structures.
             var pst = PropertyHelper.ExtractPricingStructureType(properties);
             if (pst == PricingStructureTypeEnum.RateBasisCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = Cache.LoadItem<Market>(NameSpace + "." + refCurveId);
@@ -567,7 +567,7 @@ namespace Orion.CurveEngine
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
                                                                                             properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = PricingStructureFactory.Create(Logger, Cache, NameSpace, null, null, refCurveFpmlTriplet, refFxCurveFpmlTriplet,
                                                                     currency2CurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
@@ -576,7 +576,7 @@ namespace Orion.CurveEngine
             //
             var fpmlPair = new Pair<PricingStructure, PricingStructureValuation>(deserializedMarket.Items[0],
                                                                                  deserializedMarket.Items1[0]);
-            //create and set the pricingstructure
+            //create and set the pricing structure
             var ps = PricingStructureFactory.Create(Logger, Cache, NameSpace, null, null, fpmlPair, properties);
             return ps;
         }
@@ -997,15 +997,15 @@ namespace Orion.CurveEngine
 
         /// <summary>
         /// Creates the specified asset. This a factory for simple assets, where the configuration data stored
-        /// in the cache is used for constructing the priceableasset.
+        /// in the cache is used for constructing the priceable asset.
         /// </summary>
-        /// <param name="rate">The rate. In the case of a bond this would be the yiel-to-maturity.</param>
+        /// <param name="rate">The rate. In the case of a bond this would be the yield-to-maturity.</param>
         /// <param name="additional">The additional. For a future this is the volatility. For a bond this is the coupon.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
         public string CreateLocalAsset(Decimal rate, Decimal additional, NamedValueSet properties)
         {
-            //sets the deafult.
+            //sets the default.
             const string result = "Asset not built-";
             ////make sure there is an AssetId.
             var assetIdentifier = PropertyHelper.ExtractStringProperty(CurveProp.AssetId, properties);
@@ -1013,9 +1013,9 @@ namespace Orion.CurveEngine
             {
                 return result + "because of a non-existent AssetId property.";
             }
-            //create the asset-basicassetvaluation pair.
+            //create the asset-basic asset valuation pair.
             var asset = AssetHelper.Parse(assetIdentifier, rate, additional);
-            //sets up the uniqueidentifier.
+            //sets up the unique identifier.
             var uniqueIdentifier = PropertyHelper.ExtractStringProperty(CurveProp.UniqueIdentifier, properties);
             if (uniqueIdentifier == "Unknown Property.")
             {
@@ -1024,7 +1024,7 @@ namespace Orion.CurveEngine
             }
             //create the priceable asset.
             var priceableAsset = CreatePriceableAsset(asset.Second, properties);
-            //set the priceableasset in the cache.
+            //set the priceable asset in the cache.
             SetLocalAsset(uniqueIdentifier, priceableAsset, properties);
             //return the cache id.
             return uniqueIdentifier;
@@ -1032,7 +1032,7 @@ namespace Orion.CurveEngine
 
         /// <summary>
         /// Creates the specified asset. This a factory for simple assets, where the configuration data stored
-        /// in the cache is used for constructing the priceableasset.
+        /// in the cache is used for constructing the priceable asset.
         /// </summary>
         /// <param name="values">The adjusted rates.</param>
         /// <param name="measureType">The additional.</param>
@@ -1050,7 +1050,7 @@ namespace Orion.CurveEngine
             {
                 //get the uniqueId.
                 var uniqueId = PropertyHelper.ExtractStringProperty(CurveProp.UniqueIdentifier, clonedNvs);
-                //set the priceableasset in the cache.
+                //set the priceable asset in the cache.
                 SetLocalAsset(uniqueId, priceableAsset, clonedNvs);
                 //return the cache id.
                 return uniqueId;
@@ -1063,7 +1063,7 @@ namespace Orion.CurveEngine
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         /// <param name="properties"></param>
@@ -1601,7 +1601,7 @@ namespace Orion.CurveEngine
             {
                 resetRates = lastResetsAsArray;
             }
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
             //Create the realtivvedateoffset.
@@ -2184,23 +2184,24 @@ namespace Orion.CurveEngine
         /// </summary>
         /// <param name="maturityDate">THe maturity Date.</param>
         /// <param name="dayCountFraction">The fixed leg daycount basis.</param>
-        /// <param name="couponFrequency">The coupoin frequency.</param>
+        /// <param name="couponFrequency">The coupon frequency.</param>
         /// <param name="issuerName">The issuer name.</param>
         /// <param name="rollConvention">The roll convention e.g. FOLLOWING.</param>
         /// <param name="businessCenters">The business centers e.g. AUSY.</param>
         /// <param name="ytm">The ytm.</param>
         /// <param name="curve">The curve to use for calculations.</param>
+        /// <param name="identifier">The identifier of the bond.</param>
         /// <param name="valuationDate">The base date and valuation Date.</param>
-        /// <param name="settlemetDate">The settlement date.</param>
+        /// <param name="settlementDate">The settlement date.</param>
         /// <param name="exDivDate">The next ex div date.</param>
-        /// <param name="notional">The actual first notional. This must be cxonsistent with the weights.</param>
+        /// <param name="notional">The actual first notional. This must be consistent with the weights.</param>
         /// <param name="coupon">The coupon.</param>
         /// <param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
-        public Decimal GetBondAssetSwapSpread(DateTime valuationDate, DateTime settlemetDate, DateTime exDivDate,
+        public Decimal GetBondAssetSwapSpread(string identifier, DateTime valuationDate, DateTime settlementDate, DateTime exDivDate,
             Money notional, Decimal coupon, DateTime maturityDate, String dayCountFraction, string couponFrequency, String issuerName,
             string rollConvention, string businessCenters, IRateCurve curve, Decimal ytm, IBusinessCalendar paymentCalendar)
         {
-            var asw = PriceableAssetFactory.GetBondAssetSwapSpread(Logger, Cache, NameSpace, valuationDate, settlemetDate, exDivDate, notional, coupon, maturityDate,
+            var asw = PriceableAssetFactory.GetBondAssetSwapSpread(Logger, Cache, NameSpace, identifier, valuationDate, settlementDate, exDivDate, notional, coupon, maturityDate,
                 dayCountFraction, couponFrequency, issuerName, rollConvention, businessCenters, curve, ytm, paymentCalendar);
             return asw;
         }

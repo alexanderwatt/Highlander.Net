@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -75,7 +90,7 @@ namespace Orion.ValuationEngine.Generators
                             return PayRelativeToEnum.CalculationPeriodStartDate;
                         }
                     default:
-                        throw new ArgumentOutOfRangeException("discountingType");
+                        throw new ArgumentOutOfRangeException(nameof(discountingType));
                 }
             }
             return PayRelativeToEnum.CalculationPeriodEndDate;
@@ -93,8 +108,8 @@ namespace Orion.ValuationEngine.Generators
             }
             else
             {
-            // Create the stream object
-            //
+                // Create the stream object
+                //
                 stream = InterestRateStreamFactory.CreateFloatingRateStream(DiscountingTypeToPayRelativeTo(null));
             }
             // Set effective and termination dates of the stream.
@@ -278,19 +293,19 @@ namespace Orion.ValuationEngine.Generators
             XsdClassesFieldResolver.CalculationSetFixedRateSchedule(calculation, fixedRateSchedule);
         }
 
-        public static void SetSpreadSchedule(InterestRateStream stream, Schedule spreadShedule)
+        public static void SetSpreadSchedule(InterestRateStream stream, Schedule spreadSchedule)
         {
             Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(stream.calculationPeriodAmount);
             FloatingRateCalculation floatingRateCalculation = XsdClassesFieldResolver.CalculationGetFloatingRateCalculation(calculation);
-            var schedule = new SpreadSchedule {initialValue = spreadShedule.initialValue, step = spreadShedule.step};
+            var schedule = new SpreadSchedule {initialValue = spreadSchedule.initialValue, step = spreadSchedule.step};
             floatingRateCalculation.spreadSchedule = new[] { schedule };
         }
 
-        public static void SetCapRateSchedule(InterestRateStream stream, Schedule capRateShedule, bool isReceiverBuyer)
+        public static void SetCapRateSchedule(InterestRateStream stream, Schedule capRateSchedule, bool isReceiverBuyer)
         {
             Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(stream.calculationPeriodAmount);
             FloatingRateCalculation floatingRateCalculation = XsdClassesFieldResolver.CalculationGetFloatingRateCalculation(calculation);           
-            var schedule = new StrikeSchedule {initialValue = capRateShedule.initialValue, step = capRateShedule.step};
+            var schedule = new StrikeSchedule {initialValue = capRateSchedule.initialValue, step = capRateSchedule.step};
             floatingRateCalculation.capRateSchedule = new[] { schedule };
             if (isReceiverBuyer)
             {
@@ -304,14 +319,14 @@ namespace Orion.ValuationEngine.Generators
             }
         }
 
-        public static void SetFloorRateSchedule(InterestRateStream stream, Schedule floorRateShedule, bool isReceiverBuyer)
+        public static void SetFloorRateSchedule(InterestRateStream stream, Schedule floorRateSchedule, bool isReceiverBuyer)
         {
             Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(stream.calculationPeriodAmount);
             FloatingRateCalculation floatingRateCalculation = XsdClassesFieldResolver.CalculationGetFloatingRateCalculation(calculation);
             var schedule = new StrikeSchedule
                                {
-                                   initialValue = floorRateShedule.initialValue,
-                                   step = floorRateShedule.step
+                                   initialValue = floorRateSchedule.initialValue,
+                                   step = floorRateSchedule.step
                                };
             floatingRateCalculation.floorRateSchedule = new[] { schedule };
             if (isReceiverBuyer)
@@ -403,12 +418,12 @@ namespace Orion.ValuationEngine.Generators
         private static void SetEffectiveAndTerminationDates(InterestRateStream stream, 
                                                             DateTime rawEffectiveDate, 
                                                             DateTime rawTerminationDate, 
-                                                            string terminationDateBusinessDayAdjustements,
+                                                            string terminationDateBusinessDayAdjustments,
                                                             string terminationDateBusinessDayCalendar)
         {
             AdjustableDate effectiveDate = DateTypesHelper.ToAdjustableDate(rawEffectiveDate);
             XsdClassesFieldResolver.CalculationPeriodDatesSetEffectiveDate(stream.calculationPeriodDates, effectiveDate);
-            AdjustableDate terminationDate = DateTypesHelper.ToAdjustableDate(rawTerminationDate, terminationDateBusinessDayAdjustements, terminationDateBusinessDayCalendar);
+            AdjustableDate terminationDate = DateTypesHelper.ToAdjustableDate(rawTerminationDate, terminationDateBusinessDayAdjustments, terminationDateBusinessDayCalendar);
             XsdClassesFieldResolver.CalculationPeriodDatesSetTerminationDate(stream.calculationPeriodDates, terminationDate);
         }
 

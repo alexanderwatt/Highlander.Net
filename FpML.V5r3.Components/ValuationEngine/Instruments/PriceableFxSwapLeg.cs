@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -112,7 +127,7 @@ namespace Orion.ValuationEngine.Instruments
         public bool HybridValuation { get; protected set; }
 
         /// <summary>
-        /// THe ifx index curve, if hybrid vakuation is used.
+        /// THe ifx index curve, if hybrid valuation is used.
         /// </summary>
         public string FxIndexCurveName { get; set; }
 
@@ -142,7 +157,7 @@ namespace Orion.ValuationEngine.Instruments
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PriceableFxSwapLeg"/> class.  All the cashfloews must be signed.
+        /// Initializes a new instance of the <see cref="PriceableFxSwapLeg"/> class.  All the cashflows must be signed.
         /// </summary>
         /// <param name="fxLeg">The fxLeg.</param>
         /// <param name="baseParty">The the base party.</param>
@@ -173,8 +188,8 @@ namespace Orion.ValuationEngine.Instruments
             //Set the default discount curve name.
             Currency2DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Currency2.Value, true);
             //TODO
-            //Set the appropraiet cross
-            //if the quotebasis is : Currency1PerCurrency2 the currency curve is: currency1-currency2
+            //Set the appropriate cross
+            //if the quote basis is : Currency1PerCurrency2 the currency curve is: currency1-currency2
             if (ExchangeRate.quotedCurrencyPair.quoteBasis == QuoteBasisEnum.Currency2PerCurrency1)
             {
                 FxIndexCurveName = MarketEnvironmentHelper.ResolveFxCurveNames(Currency1.Value,
@@ -193,7 +208,7 @@ namespace Orion.ValuationEngine.Instruments
             }
             //Build the coupons and principal exchanges.
             Payments = PriceableInstrumentsFactory.CreatePriceableFxLegPayment(baseParty, fxLeg);                   
-            //TODO: add extra cashflowss.
+            //TODO: add extra cashflows.
             RiskMaturityDate = fxLeg.ItemsElementName[0] == ItemsChoiceType12.valueDate ? fxLeg.Items[0] : LastDate();
         }
 
@@ -204,7 +219,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Gets the bucketed coupon dates.
         /// </summary>
-        /// <param name="baseDate">The base datew.</param>
+        /// <param name="baseDate">The base date.</param>
         /// <param name="bucketInterval">The bucket interval.</param>
         /// <returns></returns>
         protected IDictionary<string, DateTime[]> GetBucketedPaymentDates(DateTime baseDate, Period bucketInterval)
@@ -264,7 +279,7 @@ namespace Orion.ValuationEngine.Instruments
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new FxLegAnalytic();
@@ -300,8 +315,8 @@ namespace Orion.ValuationEngine.Instruments
                 var market = (MarketEnvironment)modelData.MarketEnvironment;
                 if (delta0PDH)
                 {
-                //    //Force building of the risk curves.
-                //    market.SearchForPerturbedPricingStructures(FxIndexCurveName, "delta0PDH");//TODO Need to add this perturbation to fxCurve.
+                    //    //Force building of the risk curves.
+                    //    market.SearchForPerturbedPricingStructures(FxIndexCurveName, "delta0PDH");//TODO Need to add this perturbation to fxCurve.
                 }
                 if (delta1PDH)
                 {
@@ -365,7 +380,7 @@ namespace Orion.ValuationEngine.Instruments
             {
                 streamValuation = paymentValuation;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             streamValuation.id = Id;
             return streamValuation;
         }
@@ -466,11 +481,11 @@ namespace Orion.ValuationEngine.Instruments
         protected static List<T> RemoveDuplicates<T>(List<T> inputList)
         {
             var uniqueStore = new List<T>();
-            foreach (T currValue in inputList)
+            foreach (T currencyValue in inputList)
             {
-                if (!uniqueStore.Contains(currValue))
+                if (!uniqueStore.Contains(currencyValue))
                 {
-                    uniqueStore.Add(currValue);
+                    uniqueStore.Add(currencyValue);
                 }
             }
             return uniqueStore;

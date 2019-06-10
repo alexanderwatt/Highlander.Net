@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -233,7 +248,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="pricingStructureAlgorithmsHolder">The pricingStructureAlgorithmsHolder.</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="settlementCalendar">The settlementCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public ExchangeTradedCurve(String nameSpace, PricingStructureAlgorithmsHolder pricingStructureAlgorithmsHolder, 
@@ -259,10 +274,10 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="settlementCalendar">The settlementCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
-        /// <param name="buildAssets">This is a flag which allows no assets to be built. Mainly for dervived rate curve from fx curve. </param>
+        /// <param name="buildAssets">This is a flag which allows no assets to be built. Mainly for derived rate curve from fx curve. </param>
         public ExchangeTradedCurve(ILogger logger, ICoreCache cache, string nameSpace,
             Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties,
             IBusinessCalendar settlementCalendar, IBusinessCalendar rollCalendar, bool buildAssets)
@@ -324,7 +339,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="settlementCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public ExchangeTradedCurve(ILogger logger, ICoreCache cache, string nameSpace,
@@ -346,7 +361,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var qas = tempFpml.inputs;
             //This is to catch it when there are no discount factor points.
             var discountsAbsent = tempFpml.discountFactorCurve?.point == null || tempFpml.discountFactorCurve.point.Length == 0;
-            //This is an overrice if the cache is null, as the bootstrapper will not work.
+            //This is an override if the cache is null, as the bootstrapper will not work.
             if (cache == null)
             {
                 //optimize = true;
@@ -764,7 +779,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //  nullify the discount factor curve to make sure that bootstrapping will happen)
             //
             var ycv = (YieldCurveValuation)ycvCurveCloned;
-            //Dont want to null ther dfs
+            //Don't want to null thr dfs
             //
             //ycv.discountFactorCurve.point = null;
             //ycv.zeroCurve = null;
@@ -893,9 +908,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// </summary>
         /// <param name="underlyingCurveAsString">The underlying curve.</param>
         /// <returns></returns>
-        protected static UnderyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
+        protected static UnderlyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
         {
-            return EnumHelper.Parse<UnderyingCurveTypes>(underlyingCurveAsString);
+            return EnumHelper.Parse<UnderlyingCurveTypes>(underlyingCurveAsString);
         }
 
 
@@ -1077,7 +1092,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         }
 
         /// <summary>
-        /// Clones a curve, sets the quoted assetset specified and then returns an FpML structure back.
+        /// Clones a curve, sets the quoted asset set specified and then returns an FpML structure back.
         /// </summary>
         /// <param name="referenceCurve"></param>
         /// <param name="cleanedAssetSet"></param>
@@ -1094,7 +1109,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             ycvCurveCloned.discountFactorCurve.point = null;
             ycvCurveCloned.zeroCurve = null;
             ycvCurveCloned.forwardCurve = null;
-            //Manipulate the quated asset set.
+            //Manipulate the quoted asset set.
             //
             ycvCurveCloned.inputs = cleanedAssetSet;
             return fpml;

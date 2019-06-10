@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -312,7 +327,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 swapValuation = childControllerValuations;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             swapValuation.id = Id;
             return swapValuation;
         }
@@ -369,7 +384,7 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         /// <summary>
-        /// Definiton of the objective function.
+        /// Definition of the objective function.
         /// </summary>
         /// <param name="margin">Argument to the objective function.</param>
         /// <returns>The value of the objective function, <i>f(x)</i>.</returns>
@@ -553,8 +568,8 @@ namespace Orion.ValuationEngine.Pricers
             List<AdditionalPaymentRangeItem> leg1AdditionalPaymentList,
             List<AdditionalPaymentRangeItem> leg2AdditionalPaymentList)
         {
-            InterestRateStream stream1 = GetCashflowsSchedule(null, null, leg1ParametersRange);//parametric definiton + cashflows schedule
-            InterestRateStream stream2 = GetCashflowsSchedule(null, null, leg2ParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule(null, null, leg1ParametersRange);//parametric definition + cashflows schedule
+            InterestRateStream stream2 = GetCashflowsSchedule(null, null, leg2ParametersRange);//parametric definition + cashflows schedule
             var swap = SwapFactory.Create(stream1, stream2);
             // Update FpML cashflows
             //
@@ -618,8 +633,8 @@ namespace Orion.ValuationEngine.Pricers
             List<AdditionalPaymentRangeItem> leg1AdditionalPaymentList,
             List<AdditionalPaymentRangeItem> leg2AdditionalPaymentList)
         {
-            InterestRateStream stream1 = GetCashflowsSchedule( null, null, leg1ParametersRange);//parametric definiton + cashflows schedule
-            InterestRateStream stream2 = GetCashflowsSchedule(null, null, leg2ParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule( null, null, leg1ParametersRange);//parametric definition + cashflows schedule
+            InterestRateStream stream2 = GetCashflowsSchedule(null, null, leg2ParametersRange);//parametric definition + cashflows schedule
             var swap = SwapFactory.Create(stream1, stream2);
             // Update FpML cashflows
             //
@@ -808,7 +823,7 @@ namespace Orion.ValuationEngine.Pricers
         {
             InterestRateStream stream1 = GetCashflowsSchedule(null, null, leg1ParametersRange);
             InterestRateStream stream2 = GetCashflowsSchedule(null, null, leg2ParametersRange);
-            // Update FpML cashflows structure with the DATA FROM THE SPREASHEET
+            // Update FpML cashflows structure with the DATA FROM THE SPREADSHEET
             //
             UpdateCashflowsWithDetailedCashflows(stream1.cashflows, leg1DetailedCashflowsList/*, leg1ParametersRange.IsFixedLegType()*/);
             UpdateCashflowsWithDetailedCashflows(stream2.cashflows, leg2DetailedCashflowsList/*, leg2ParametersRange.IsFixedLegType()*/);
@@ -876,14 +891,14 @@ namespace Orion.ValuationEngine.Pricers
                                                        Schedule spreadSchedule,
                                                        NonNegativeAmountSchedule notionalSchedule)
         {
-            //var swap = SwapGenerator.GenerateDefiniton(null, null, leg1Parameters, leg1PaymentCalendar, leg2Parameters, leg2PaymentCalendar);
+            //var swap = SwapGenerator.GenerateDefinition(null, null, leg1Parameters, leg1PaymentCalendar, leg2Parameters, leg2PaymentCalendar);
             //InterestRateStream stream1 = swap.swapStream[0];
             //InterestRateStream stream2 = swap.swapStream[1];
-            //InterestRateStream stream1 = GetCashflowsSchedule(logger, cache, null, leg1PaymentCalendar, leg1Parameters);//parametric definiton + cashflows schedule
+            //InterestRateStream stream1 = GetCashflowsSchedule(logger, cache, null, leg1PaymentCalendar, leg1Parameters);//parametric definition + cashflows schedule
             InterestRateStream stream1 = InterestRateStreamParametricDefinitionGenerator.GenerateStreamDefinition(leg1Parameters);
             var cashflows1 = FixedAndFloatingRateStreamCashflowGenerator.GetCashflows(stream1, leg1FixingCalendar, leg1PaymentCalendar);
             stream1.cashflows = cashflows1;
-            //InterestRateStream stream2 = GetCashflowsSchedule(logger, cache, null, leg2PaymentCalendar, leg2Parameters);//parametric definiton + cashflows schedule
+            //InterestRateStream stream2 = GetCashflowsSchedule(logger, cache, null, leg2PaymentCalendar, leg2Parameters);//parametric definition + cashflows schedule
             InterestRateStream stream2 = InterestRateStreamParametricDefinitionGenerator.GenerateStreamDefinition(leg2Parameters);
             var cashflows2 = FixedAndFloatingRateStreamCashflowGenerator.GetCashflows(stream2, leg2FixingCalendar, leg2PaymentCalendar);
             stream2.cashflows = cashflows2;           
@@ -994,7 +1009,7 @@ namespace Orion.ValuationEngine.Pricers
                         }
                     case "float":
                         {
-                            //  Create floating rate definiton...
+                            //  Create floating rate definition...
                             //
                             var floatingRateDefinition = new FloatingRateDefinition();
                             calculationPeriod.Item1 = floatingRateDefinition;
@@ -1076,7 +1091,7 @@ namespace Orion.ValuationEngine.Pricers
             //
             RollConventionEnum rollDayConvention = RollConventionEnumHelper.GetRollDayConvention(directionDateGeneration, effectiveDate, terminationDate);
             Period periodInterval = PeriodHelper.Parse(cashFlowFrequency);
-            DateTime[] unajustedDates = DateScheduler.GetUnajustedDates(directionDateGeneration, effectiveDate, terminationDate, periodInterval, rollDayConvention);
+            DateTime[] unadjustedDates = DateScheduler.GetUnajustedDates(directionDateGeneration, effectiveDate, terminationDate, periodInterval, rollDayConvention);
             //  Adjust the schedule 
             //
             IBusinessCalendar paymentCalendar = null;
@@ -1085,8 +1100,8 @@ namespace Orion.ValuationEngine.Pricers
             {
                 paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessDayAdjustments.businessCenters, nameSpace);
             }
-            var adjustedDateSchedule = AdjustedDateScheduler.GetAdjustedDateSchedule(unajustedDates, businessDayAdjustments.businessDayConvention, paymentCalendar);
-            //AdjustedDateScheduler.AdjustedDateSchedule(unajustedDates, businessDayAdjustments);
+            var adjustedDateSchedule = AdjustedDateScheduler.GetAdjustedDateSchedule(unadjustedDates, businessDayAdjustments.businessDayConvention, paymentCalendar);
+            //AdjustedDateScheduler.AdjustedDateSchedule(unadjustedDates, businessDayAdjustments);
             // generate cashflows ...
             //
             var stream = new PriceableInterestRateStream();
@@ -1104,7 +1119,7 @@ namespace Orion.ValuationEngine.Pricers
                 //  assumption is Payment date is coincide with a accrual end date
                 //
                 cashflow.PaymentDate = cashflow.AccrualEndDate = adjustedDateSchedule[i + 1];
-                //  workaround for datescheduler's bugs
+                //  workaround for date scheduler bugs
                 //
                 // *1*
                 //
@@ -1120,7 +1135,7 @@ namespace Orion.ValuationEngine.Pricers
                 }
                 // *3*
                 //
-                if (cashflow.AccrualStartDate < effectiveDate) //another scheduler's bug
+                if (cashflow.AccrualStartDate < effectiveDate) //another scheduler bug
                 {
                     continue;
                 }

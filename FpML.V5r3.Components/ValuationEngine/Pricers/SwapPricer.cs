@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -38,7 +53,7 @@ namespace Orion.ValuationEngine.Pricers
         public bool BasePartyPayingFixed { get; set; }
 
         /// <summary>
-        /// The type of swap: fixedfloat, floatfloat, fixedfixed.
+        /// The type of swap: fixed/float, float/float, fixed/fixed.
         /// </summary>
         public SwapType SwapType { get; set; }
 
@@ -176,7 +191,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public Swap Build()
@@ -246,7 +261,7 @@ namespace Orion.ValuationEngine.Pricers
         /// Gets all the child controllers.
         ///</summary>
         ///<returns></returns>
-        public IList<PriceableInterestRateStream> GetInstumentControllers()
+        public IList<PriceableInterestRateStream> GetInstrumentControllers()
         {
             return Legs != null ? GetLegs().Cast<PriceableInterestRateStream>().ToList() : null;
         }
@@ -312,9 +327,7 @@ namespace Orion.ValuationEngine.Pricers
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate));
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             return bucketDates.ToArray();
         }
 

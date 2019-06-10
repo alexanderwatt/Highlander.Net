@@ -1,4 +1,19 @@
-﻿#region Using Directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using Directives
 
 using Core.Common;
 using Orion.Analytics.Interpolations;
@@ -120,7 +135,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// Helper function used by the function that computes the swap price.
         /// The function generates the accrual factors for each swap period.
         /// Precondition: method GenerateSwapSchedule has been called.
-        /// Postcondition: private field _accrualFactors is set.
+        /// Post-condition: private field _accrualFactors is set.
         /// </summary>
         private void GenerateAccrualFactors()
         {
@@ -141,7 +156,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// The function generates the discount factors from the Calculation
         /// Date to each date in the swap schedule.
         /// Precondition: method GenerateSwapSchedule has been called.
-        /// Postcondition: private field _discountFactors is set.
+        /// Post-condition: private field _discountFactors is set.
         /// </summary>
         private void GenerateDiscountFactors()
         {
@@ -160,7 +175,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// <summary>
         /// Helper function used by the function that computes the swap price.
         /// The function generates the dates in swap schedule.
-        /// Postcondition: private field _swapSchedule is initialised with all
+        /// Post-condition: private field _swapSchedule is initialised with all
         /// dates in the swap schedule (start to maturity).
         /// </summary>
         /// <param name="swapStart">Start (first rate set) date.</param>
@@ -190,7 +205,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
 
         /// <summary>
         /// Overload of the method that generates the swap schedule.
-        /// Postcondition: private field _swapSchedule is initialised with 
+        /// Post-condition: private field _swapSchedule is initialised with 
         /// the given swap schedule.
         /// </summary>
         /// <param name="swapSchedule">Existing swap schedule.</param>
@@ -301,7 +316,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             _swapSchedule = null;
             // Initialise the one dimensional interpolation object.
             InitialiseDiscountFactorObject(discountFactors, offsets);
-            logger.LogDebug("Discount factors intitialised.");
+            logger.LogDebug("Discount factors initialised.");
         }
 
         #endregion

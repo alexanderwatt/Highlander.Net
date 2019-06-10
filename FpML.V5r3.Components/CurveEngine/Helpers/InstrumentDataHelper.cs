@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Linq;
@@ -57,7 +72,7 @@ namespace Orion.CurveEngine.Helpers
         /// Gets the instrument config data.
         /// </summary>
         /// <param name="cache">The cache.</param>
-        /// <param name="nameSpace">The client namespce</param>
+        /// <param name="nameSpace">The client namespace</param>
         /// <param name="parts">The AssetId or the parts of the AssetId.</param>
         /// <returns></returns>
         public static Instrument GetInstrumentConfigurationData(ICoreCache cache, string nameSpace, params string[] parts)
@@ -127,8 +142,7 @@ namespace Orion.CurveEngine.Helpers
                 }
                 uniqueName = CreateEquityExchangeKey(nameSpace, exchangeMIC);
                 loadedItem = cache.LoadItem<ExchangeConfigData>(uniqueName);
-                var exchange = loadedItem.Data as ExchangeConfigData;
-                if (assetType == AssetTypesEnum.Equity && exchange != null)
+                if (assetType == AssetTypesEnum.Equity && loadedItem.Data is ExchangeConfigData exchange)
                 {
                     instrument = new Instrument();
                     var equityNode = new EquityNodeStruct
@@ -155,7 +169,7 @@ namespace Orion.CurveEngine.Helpers
             }
             else if (otherTypes.Contains(assetType) && parts.Length > 3)
             {
-                //This is to simplify the configuration data and no bondforward is required
+                //This is to simplify the configuration data and no bond forward is required
                 uniqueName = CreateKey(nameSpace, parts[1], parts[0], parts[2], parts[3]);
             }
             //Default Area that sweeps all the standard keys structures.
@@ -187,7 +201,7 @@ namespace Orion.CurveEngine.Helpers
                 }
                 else if (otherTypes.Contains(assetType))
                 {
-                    //This is to simplify the configuration data and no bondforward is required
+                    //This is to simplify the configuration data and no bond forward is required
                     uniqueName = CreateKey(nameSpace, AssetTypesEnum.Bond.ToString(), parts[0], parts[2]);
                 }
                 else

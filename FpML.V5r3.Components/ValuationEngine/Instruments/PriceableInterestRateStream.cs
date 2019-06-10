@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -262,8 +277,8 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="swapId">The swap Id.</param>
         /// <param name="payerPartyReference">The payer party reference.</param>
         /// <param name="receiverPartyReference">The receiver party reference.</param>
-        /// <param name="payerIsBase">The flag for whether the payerreference is the base party.</param>
-        /// <param name="calculationPeriodDates">The caluclation period date information.</param>
+        /// <param name="payerIsBase">The flag for whether the payer reference is the base party.</param>
+        /// <param name="calculationPeriodDates">The calculation period date information.</param>
         /// <param name="paymentDates">The payment dates of the swap leg.</param>
         /// <param name="resetDates">The reset dates of the swap leg.</param>
         /// <param name="principalExchanges">The principal Exchange type.</param>
@@ -301,12 +316,12 @@ namespace Orion.ValuationEngine.Instruments
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
-        /// <param name="nameSpace">The client namesspace.</param>
+        /// <param name="nameSpace">The client namespace.</param>
         /// <param name="swapId">The swap Id.</param>
         /// <param name="payerPartyReference">The payer party reference.</param>
         /// <param name="receiverPartyReference">The receiver party reference.</param>
-        /// <param name="payerIsBase">The flag for whether the payerreference is the base party.</param>
-        /// <param name="calculationPeriodDates">The caluclation period date information.</param>
+        /// <param name="payerIsBase">The flag for whether the payer reference is the base party.</param>
+        /// <param name="calculationPeriodDates">The calculation period date information.</param>
         /// <param name="paymentDates">The payment dates of the swap leg.</param>
         /// <param name="resetDates">The reset dates of the swap leg.</param>
         /// <param name="principalExchanges">The principal Exchange type.</param>
@@ -351,8 +366,7 @@ namespace Orion.ValuationEngine.Instruments
             CalculationPeriodAmount = calculationPeriodAmount;
             AnalyticsModel = new StructuredStreamAnalytic();
             Calculation = (Calculation)CalculationPeriodAmount.Item;
-            var strikeSchedule = Calculation.Items?[0] as Schedule;
-            if (strikeSchedule != null)
+            if (Calculation.Items?[0] is Schedule strikeSchedule)
             {
                 Strike = strikeSchedule.initialValue;//Only picks up the first fixed rate for the swaption calculation.
             }
@@ -421,7 +435,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="cache">The cache.</param>
         /// <param name="stream">The stream.</param>
         /// <param name="nameSpace">The namespace</param>
-        /// <param name="payerIsBase">The flag for whether the payerreference is the base party.</param>
+        /// <param name="payerIsBase">The flag for whether the payer reference is the base party.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public PriceableInterestRateStream(ILogger logger, ICoreCache cache
@@ -437,7 +451,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="cache">The cache.</param>
         /// <param name="stream">The stream.</param>
         /// <param name="nameSpace">The namespace</param>
-        /// <param name="payerIsBase">The flag for whether the payerreference is the base party.</param>
+        /// <param name="payerIsBase">The flag for whether the payer reference is the base party.</param>
         /// <param name="forecastRateInterpolation">ForwardEndDate = forecastRateInterpolation ? AccrualEndDate 
         /// : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
@@ -529,10 +543,8 @@ namespace Orion.ValuationEngine.Instruments
             var bucketDates = new List<DateTime>();
             foreach (IPriceableInstrumentController<PaymentCalculationPeriod> coupon in Coupons)
             {
-                var priceableRateCoupon = (IPriceableRateCoupon<IRateCouponParameters, IRateInstrumentResults>)coupon;
-                DateTime firstRegularPeriodStartDate;
-                DateTime lastRegularPeriodEndDate;
-                bucketDates.AddRange(new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(priceableRateCoupon.UnadjustedStartDate, priceableRateCoupon.UnadjustedEndDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate)));
+                var priceableRateCoupon = (IPriceableRateCoupon<IRateCouponParameters, IRateInstrumentResults>) coupon;
+                bucketDates.AddRange(new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(priceableRateCoupon.UnadjustedStartDate, priceableRateCoupon.UnadjustedEndDate, BucketingInterval, RollConventionEnum.NONE, out _, out _)));
                 bucketDates = RemoveDuplicates(bucketDates);
                 bucketCouponDates.Add(coupon.Id, bucketDates.ToArray());
             }
@@ -550,9 +562,7 @@ namespace Orion.ValuationEngine.Instruments
             var bucketDates = new List<DateTime>();
             if (Coupons.Count > 1)
             {
-                DateTime firstRegularPeriodStartDate;
-                DateTime lastRegularPeriodEndDate;
-                bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out firstRegularPeriodStartDate, out lastRegularPeriodEndDate));
+                bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             }
             return bucketDates.ToArray();
         }
@@ -561,7 +571,7 @@ namespace Orion.ValuationEngine.Instruments
         /// A mapping function to label a stream correctly.
         /// </summary>
         /// <param name="calculation"></param>
-        /// <returns>The couponstreamtype</returns>
+        /// <returns>The coupon stream type</returns>
         private static CouponStreamType CouponTypeFromCalculation(Calculation calculation)
         {
             var cpt = CouponStreamType.GenericFloatingRate;
@@ -570,8 +580,7 @@ namespace Orion.ValuationEngine.Instruments
             {
                 cpt = CouponStreamType.GenericFixedRate;
             }
-            var frc = calculation.Items?[0] as FloatingRateCalculation;
-            if (frc != null)
+            if (calculation.Items?[0] is FloatingRateCalculation frc)
             {
                 if (frc.capRateSchedule != null && frc.floorRateSchedule == null)
                 {
@@ -601,7 +610,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <returns></returns>
         public InterestRateStream Build()
         {
-            var irstream = new InterestRateStream
+            var interestRateStream = new InterestRateStream
                                {
                                    cashflows = BuildCashflows(),
                                    payerPartyReference = PartyReferenceFactory.Create(Payer),
@@ -616,7 +625,7 @@ namespace Orion.ValuationEngine.Instruments
                                    stubCalculationPeriodAmount = StubCalculationPeriodAmount
                                };
             
-            return irstream;
+            return interestRateStream;
         }
 
         /// <summary>
@@ -653,7 +662,7 @@ namespace Orion.ValuationEngine.Instruments
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new StructuredStreamAnalytic();
@@ -720,7 +729,7 @@ namespace Orion.ValuationEngine.Instruments
             {
                 streamValuation = AssetValuationHelper.AggregateMetrics(childControllerValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             streamValuation.id = Id;
             return streamValuation;
         }
@@ -740,7 +749,7 @@ namespace Orion.ValuationEngine.Instruments
         /// Aggregates the metric.
         /// </summary>
         /// <param name="metric">The metric.</param>
-        /// <param name="valuationDate">The vluation date. </param>
+        /// <param name="valuationDate">The valuation date. </param>
         /// <returns></returns>
         public Decimal AggregateMetric(string metric, DateTime valuationDate)
         {
@@ -1080,11 +1089,11 @@ namespace Orion.ValuationEngine.Instruments
         protected static List<T> RemoveDuplicates<T>(List<T> inputList)
         {
             var uniqueStore = new List<T>();
-            foreach (T currValue in inputList)
+            foreach (T currencyValue in inputList)
             {
-                if (!uniqueStore.Contains(currValue))
+                if (!uniqueStore.Contains(currencyValue))
                 {
-                    uniqueStore.Add(currValue);
+                    uniqueStore.Add(currencyValue);
                 }
             }
             return uniqueStore;

@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FpML.V5r3.Reporting;
@@ -12,7 +27,7 @@ namespace Orion.CurveEngine.Helpers
     public static class MarketQuoteHelper
     {
         /// <summary>
-        /// Maps from priceunits other than decimals, to a decimal for consumption primarily by a rate curve.
+        /// Maps from price units other than decimals, to a decimal for consumption primarily by a rate curve.
         /// </summary>
         /// <param name="rateQuotationType">The rate quotation type. eg MarketQuote, Spread or Volatility.</param>
         /// <param name="fromQuote">The basic quotation to be mapped from ie normalised.</param>
@@ -60,7 +75,7 @@ namespace Orion.CurveEngine.Helpers
                     {
                         return BasicQuotationHelper.Create(fromQuote.value, rateQuotationType, convertToType);
                     }
-                case "FowardValue"://Format is .07
+                case "ForwardValue"://Format is .07
                     {
                         return BasicQuotationHelper.Create(fromQuote.value, rateQuotationType, convertToType);
                     }
@@ -76,7 +91,7 @@ namespace Orion.CurveEngine.Helpers
         }
 
         /// <summary>
-        /// Maps from priceunits other than decimals, to a decimal for consumption primarily by a rate curve.
+        /// Maps from price units other than decimals, to a decimal for consumption primarily by a rate curve.
         /// </summary>
         /// <param name="fromQuote">The basic quotation to be mapped from ie normalised.</param>
         /// <param name="convertToType">The type to convert to: only implemented for decimals.</param>
@@ -140,9 +155,9 @@ namespace Orion.CurveEngine.Helpers
         }
 
         /// <summary>
-        /// Maps from decimal priceunits to a other types, mainly for display purposes..
+        /// Maps from decimal price units to a other types, mainly for display purposes..
         /// </summary>
-        /// <param name="toQuote">The basic quotation to be mapped to ie denormalised.</param>
+        /// <param name="toQuote">The basic quotation to be mapped to ie de-normalised.</param>
         /// <param name="convertFromType">The type to convert from: only implemented for decimals.</param>
         /// <returns></returns>
         public static BasicQuotation DeNormalisePriceUnits(BasicQuotation toQuote, string convertFromType)
@@ -204,10 +219,10 @@ namespace Orion.CurveEngine.Helpers
         }
 
         /// <summary>
-        /// Maps from decimal priceunits to a other types, mainly for display purposes..
+        /// Maps from decimal price units to a other types, mainly for display purposes..
         /// </summary>
         /// <param name="rateQuotationType">The quotation type.</param>
-        /// <param name="toQuote">The basic quotation to be mapped to ie denormalised.</param>
+        /// <param name="toQuote">The basic quotation to be mapped to ie de-normalised.</param>
         /// <param name="convertFromType">The type to convert from: only implemented for decimals.</param>
         /// <returns></returns>
         public static BasicQuotation DeNormaliseGeneralPriceUnits(String rateQuotationType, BasicQuotation toQuote, string convertFromType)
@@ -312,7 +327,7 @@ namespace Orion.CurveEngine.Helpers
             return normalisedValue;
         }
 
-        /// <summary>//TODO set the quotesideenum.
+        /// <summary>//TODO set the quotes side enum.
         /// Finds the spread, if it exists, and add to the market quote. Otherwise returns 0.
         /// </summary>
         /// <param name="quotations">The quotations.</param>
@@ -338,7 +353,7 @@ namespace Orion.CurveEngine.Helpers
             return normalisedValue;
         }
 
-        /// <summary>//TODO set the quotesideenum.
+        /// <summary>//TODO set the quote side enum.
         /// Finds the spread, if it exists, and add to the market quote. Otherwise returns 0.
         /// </summary>
         /// <param name="quotations">The quotations.</param>
@@ -364,7 +379,7 @@ namespace Orion.CurveEngine.Helpers
             return normalisedValue;
         }
 
-        /// <summary>//TODO set the quotesideenum.
+        /// <summary>//TODO set the quote side enum.
         /// Finds the spread, if it exists, and add to the market quote. Otherwise returns 0.
         /// </summary>
         /// <param name="quotations">The quotations.</param>

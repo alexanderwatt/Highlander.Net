@@ -1,9 +1,24 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 
 namespace Orion.ModelFramework.Assets
 {
     /// <summary>
-    /// The Priceable base commodity asset controller
+    /// The Priceable base property asset controller
     /// </summary>
     public interface IPriceablePropertyAssetController : IPriceableAssetController
     {
@@ -14,12 +29,12 @@ namespace Orion.ModelFramework.Assets
         Decimal Price { get; }
 
         ///<summary>
-        /// Gets the date on which the eqity settles.
+        /// Gets the date on which the property settles.
         ///</summary>
         DateTime SettlementDate { get; set; }
 
         /// <summary>
-        /// THe equity valuation curve.
+        /// THe property valuation curve.
         /// </summary>
         string PropertyCurveName { get; set; }
 

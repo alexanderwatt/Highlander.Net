@@ -73,7 +73,6 @@ namespace HLV5r3.Analytics
             IDayCounter dayCountObj = Actual365.Instance;
             double tenor = dayCountObj.YearFraction(lastAmortisationDate,
                                                     amortisationDate);
-
             var bgs = new BGSConvexityCorrection();
             return bgs.ComputeBGSConvexityCorrection(tenor,
                                                      currentBondFactor,
@@ -83,7 +82,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the npv for a collection of coupon cashlows provided.
+        /// Gets the npv for a collection of coupon cash flows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -123,7 +122,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the break even rate for a collection of coupon cashlows provided.
+        /// Gets the break even rate for a collection of coupon cashflows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -140,7 +139,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the break even rate for a collection of coupons and princiapal exchanges provided.
+        /// Gets the break even rate for a collection of coupons and principal exchanges provided.
         /// </summary>
         /// <param name="couponPaymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -172,7 +171,7 @@ namespace HLV5r3.Analytics
         /// <param name="notionals">The notionals</param>
         /// <param name="fixedFlag">Delta0 is zero for fixed coupons.</param>
         /// <returns>The break even rate.</returns>
-        public double Delta0(Excel.Range notionals, Excel.Range paymentDiscountFactors, Excel.Range yearFractions, Boolean fixedFlag)
+        public double Delta0(Excel.Range notionals, Excel.Range paymentDiscountFactors, Excel.Range yearFractions, bool fixedFlag)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -191,7 +190,7 @@ namespace HLV5r3.Analytics
         /// <param name="principalNotionals">The principal Exchanges.</param>
         /// <returns>The break even rate.</returns>
         public double Delta0WithExchanges(Excel.Range notionals, Excel.Range paymentDiscountFactors, Excel.Range yearFractions,
-                                                  Excel.Range principalNotionals, Excel.Range principalPaymentDiscountFactors, Boolean fixedFlag)
+                                                  Excel.Range principalNotionals, Excel.Range principalPaymentDiscountFactors, bool fixedFlag)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -226,14 +225,14 @@ namespace HLV5r3.Analytics
         /// <param name="yearFractions">The year fractions.</param>
         /// <param name="notionals">The notionals</param>
         /// <param name="principalPaymentDiscountFactors">The dfs for the principal exchanges.</param>
-        /// <param name="principalCurveYearFractionss">The principal exchange curve year fractions.</param>
+        /// <param name="principalCurveYearFractions">The principal exchange curve year fractions.</param>
         /// <param name="compoundingFrequency">Delta1 compounding Frequency.</param>
         /// <param name="couponCurveYearsFractions">The coupon time to payments.</param>
         /// <param name="principalNotionals">The principal Exchanges.</param>
         /// <returns>The break even rate.</returns>
         public double Delta1WithExchanges(Excel.Range notionals, Excel.Range paymentDiscountFactors,
                                                   Excel.Range yearFractions, Excel.Range couponCurveYearsFractions, Excel.Range principalNotionals,
-                                                  Excel.Range principalPaymentDiscountFactors, Excel.Range principalCurveYearFractionss, double compoundingFrequency)
+                                                  Excel.Range principalPaymentDiscountFactors, Excel.Range principalCurveYearFractions, double compoundingFrequency)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -241,7 +240,7 @@ namespace HLV5r3.Analytics
             var unqCouponCurveYearsFractions = DataRangeHelper.StripDoubleRange(couponCurveYearsFractions);
             var unqPrincipalNotionals = DataRangeHelper.StripDoubleRange(principalNotionals);
             var unqPrincipalPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(principalPaymentDiscountFactors);
-            var unqPrincipalCurveYearFractions = DataRangeHelper.StripDoubleRange(principalCurveYearFractionss);
+            var unqPrincipalCurveYearFractions = DataRangeHelper.StripDoubleRange(principalCurveYearFractions);
             return SwapAnalytics.Delta1WithExchanges(unqNotionals.ToArray(), unqCouponPaymentDiscountFactors.ToArray(),
                                                      unqYearFractions.ToArray(), unqCouponCurveYearsFractions.ToArray(), unqPrincipalNotionals.ToArray(),
                                                      unqPrincipalPaymentDiscountFactors.ToArray(), unqPrincipalCurveYearFractions.ToArray(), compoundingFrequency);
@@ -269,7 +268,7 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the discount rate R.
         /// </summary>
         /// <param name="notionals">The notionals.</param>
-        /// <param name="yearfractions">The daycount fractions.</param>
+        /// <param name="yearfractions">The day count fractions.</param>
         /// <param name="rates">The rates.</param>
         /// <param name="paymentDiscountFactors">The payment discount factors.</param>
         /// <param name="periodAsTimesPerYears">The compounding year fractions.</param>
@@ -291,7 +290,7 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the discount rate R.
         /// </summary>
         /// <param name="notional">The notional for that period.</param>
-        /// <param name="yearfraction">the daycount fraction for that coupon.</param>
+        /// <param name="yearfraction">the day count fraction for that coupon.</param>
         /// <param name="rate">The rate for that period.</param>
         /// <param name="paymentDiscountFactor">The payment discount factor.</param>
         /// <param name="periodAsTimesPerYear">the compounding year fraction.</param>
@@ -346,11 +345,11 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Converts a sting period to a tiem interval.
+        /// Converts a sting period to a time interval.
         /// </summary>
         /// <param name="interval">The string interval. Valid intervals are: </param>
         /// <returns>The double interval.</returns>
-        public Double TimeFromInterval(String interval)
+        public double TimeFromInterval(string interval)
         {
             return PeriodHelper.Parse(interval).ToYearFraction();
         }

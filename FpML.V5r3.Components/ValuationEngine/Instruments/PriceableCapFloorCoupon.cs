@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Linq;
@@ -43,7 +58,7 @@ namespace Orion.ValuationEngine.Instruments
         #region Constructors
 
         /// <summary>
-        /// The defualt type is a cap.
+        /// The default type is a cap.
         /// </summary>
         public PriceableCapFloorCoupon()
         {
@@ -55,7 +70,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableCapFloorCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashlFowId">The stream id.</param>
         /// <param name="buyerIsBase">The buyer is base flag.</param>
         /// <param name="capStrike">The Cap strike.</param>
         /// <param name="floorStrike">The floor strike.</param>
@@ -65,25 +80,25 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="observedRate">The observed Rate. If this is not null, then it is used.</param>
         /// <param name="notionalAmount">The notional amount.</param>
         /// <param name="adjustedFixingDate">The adjusted fixing date.</param>
-        /// <param name="dayCountfraction">Type of day Countfraction.</param>
+        /// <param name="dayCountFraction">Type of day Count fraction.</param>
         /// <param name="paymentDate">The payment date.</param>
-        /// <param name="forecastRateIndex">The forecastrate index.</param>
+        /// <param name="forecastRateIndex">The forecast rate index.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="fixingCalendar"> The fixingCalendar. </param>
         /// <param name="paymentCalendar"> The paymentCalendar. </param>
         public PriceableCapFloorCoupon
             (
-            string cashlfowId
+            string cashlFowId
             , bool buyerIsBase
             , decimal? capStrike
             , decimal? floorStrike
             , DateTime accrualStartDate
             , DateTime accrualEndDate
             , DateTime adjustedFixingDate
-            , DayCountFraction dayCountfraction
+            , DayCountFraction dayCountFraction
             , Decimal margin
             , Decimal? observedRate
             , Money notionalAmount
@@ -95,12 +110,12 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar) 
             : base(
-                cashlfowId
+                cashlFowId
                 , buyerIsBase
                 ,  accrualStartDate
                 ,  accrualEndDate
                 ,  adjustedFixingDate
-                ,  dayCountfraction
+                ,  dayCountFraction
                 ,  margin
                 ,  observedRate
                 ,  notionalAmount
@@ -136,7 +151,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableCapFloorCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashFlowId">The stream id.</param>
         /// <param name="buyerIsBase">The buyer is base flag.</param>
         /// <param name="capStrike">The Cap strike.</param>
         /// <param name="floorStrike">The floor strike.</param>
@@ -147,21 +162,21 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="margin">The margin.</param>
         /// <param name="observedRate">The observed Rate.</param>
         /// <param name="notionalAmount">The notional amount.</param>
-        /// <param name="dayCountfraction">Type of day Countfraction.</param>
+        /// <param name="dayCountFraction">Type of day Count fraction.</param>
         /// <param name="paymentDate">The payment date.</param>
         /// <param name="accrualRollConvention">The accrual roll convention.</param>
         /// <param name="resetRelativeTo">reset relative to?</param>
         /// <param name="fixingDateRelativeOffset">The fixing date offset.</param>
-        /// <param name="forecastRateIndex">The forecastrateindex.</param>
+        /// <param name="forecastRateIndex">The forecast rate index.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public PriceableCapFloorCoupon
             (
-            string cashlfowId
+            string cashFlowId
             , bool buyerIsBase
             , decimal? capStrike
             , decimal? floorStrike
@@ -170,7 +185,7 @@ namespace Orion.ValuationEngine.Instruments
             , Boolean adjustAccrualDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
-            , DayCountFraction dayCountfraction
+            , DayCountFraction dayCountFraction
             , ResetRelativeToEnum resetRelativeTo
             , RelativeDateOffset fixingDateRelativeOffset
             , Decimal margin
@@ -184,14 +199,14 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar)
             : base(
-                cashlfowId
+                cashFlowId
                 , buyerIsBase
                 , accrualStartDate
                 , accrualEndDate
                 , adjustAccrualDatesIndicator
                 , accrualBusinessCenters
                 , accrualRollConvention
-                , dayCountfraction
+                , dayCountFraction
                 , resetRelativeTo
                 , fixingDateRelativeOffset
                 , margin
@@ -361,12 +376,12 @@ namespace Orion.ValuationEngine.Instruments
                 || AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.Delta0PDH.ToString()) != null;
             ModelData.AssetValuation.quote = quotes.ToArray();
             var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
-            //// Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            //// Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
             //if (metrics.Contains(InstrumentMetrics.DiscountFactorAtMaturity))
             //{
             //    metrics.RemoveAll(metricItem => metricItem != InstrumentMetrics.DiscountFactorAtMaturity);
             //}
-            //Set the forrecast rate dates. The ForecastRateInterpolation shhould have been set.
+            //Set the forecast rate dates. The ForecastRateInterpolation should have been set.
             ForwardStartDate = AccrualStartDate;
             ForwardEndDate = ForecastRateInterpolation ? AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(FixingCalendar, ForecastRateIndex.indexTenor.Add(ForwardStartDate), AccrualBusinessDayAdjustments);  
             //Set the strike
@@ -410,8 +425,7 @@ namespace Orion.ValuationEngine.Instruments
                                                                                              IsCall = IsCall
                                                                                          };
                 // Curve Related
-                var environment = modelData.MarketEnvironment as ISwapLegEnvironment;
-                if (environment != null)
+                if (modelData.MarketEnvironment is ISwapLegEnvironment environment)
                 {
                     var streamMarket = environment;
                     discountCurve = streamMarket.GetDiscountRateCurve();
@@ -515,7 +529,7 @@ namespace Orion.ValuationEngine.Instruments
                         strike1, strike2, fxCurve, discountCurve, forecastCurve, indexVolSurface);
                 }
                 CalculationResults = AnalyticsModel.Calculate<IRateInstrumentResults, RateInstrumentResults>(AnalyticModelParameters, metrics.ToArray());
-                CalculationPerfomedIndicator = true;
+                CalculationPerformedIndicator = true;
                 PaymentDiscountFactor = ((FixedRateCouponAnalytic)AnalyticsModel).PaymentDiscountFactor;
                 if (!UseObservedRate)
                 {
@@ -562,7 +576,7 @@ namespace Orion.ValuationEngine.Instruments
                     cp.forecastRateSpecified = true;
                 }
             }
-            if (CalculationPerfomedIndicator)
+            if (CalculationPerformedIndicator)
             {
                 cp.forecastAmount = ForecastAmount;
             }

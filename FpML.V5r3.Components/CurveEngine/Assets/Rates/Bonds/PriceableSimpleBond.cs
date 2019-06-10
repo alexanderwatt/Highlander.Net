@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -28,12 +43,12 @@ namespace Orion.CurveEngine.Assets
         /// </summary>
         /// <param name="baseDate">The base date.</param>
         /// <param name="bond">The bond</param>
-        /// <param name="settlementDate">The settleemnt date.</param>
+        /// <param name="settlementDate">The settlement date.</param>
         /// <param name="exDivDate">The ex dividend date.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
         /// <param name="marketQuote">The market quote.</param>
-        /// <param name="quoteType">THe quote type</param>
+        /// <param name="quoteType">The quote type</param>
         public PriceableSimpleBond(DateTime baseDate, Bond bond, DateTime settlementDate, DateTime exDivDate,
         BusinessDayAdjustments businessDayAdjustments, IBusinessCalendar paymentCalendar, BasicQuotation marketQuote, BondPriceEnum quoteType)
             : base(baseDate, bond.faceAmount, bond.currency, null, null, businessDayAdjustments, marketQuote, quoteType)
@@ -87,11 +102,9 @@ namespace Orion.CurveEngine.Assets
                     InstrumentIds.Add(identifier);
                 }
             }
-            //This handles the case of a bondforward used in curve building.
+            //This handles the case of a bond forward used in curve building.
             if (MaturityDate > BaseDate)
             {
-                DateTime lastCouponDate;
-                DateTime nextCouponDate;
                 var rollConvention =
                     RollConventionEnumHelper.Parse(MaturityDate.Day.ToString(CultureInfo.InvariantCulture));
                 Frequency = FrequencyHelper.ToFrequency(bond.paymentFrequency);
@@ -100,8 +113,8 @@ namespace Orion.CurveEngine.Assets
                                                                                                MaturityDate,
                                                                                                CouponFrequency,
                                                                                                rollConvention,
-                                                                                               out lastCouponDate,
-                                                                                               out nextCouponDate);
+                                                                                               out _,
+                                                                                               out var nextCouponDate);
                 LastCouponDate = UnAdjustedPeriodDates[0];
                 NextCouponDate = nextCouponDate;
                 AdjustedPeriodDates =
@@ -180,11 +193,9 @@ namespace Orion.CurveEngine.Assets
                     InstrumentIds.Add(identifier);
                 }
             }
-            //This handles the case of a bondforward used in curve building.
+            //This handles the case of a bond forward used in curve building.
             if (MaturityDate > BaseDate)
             {
-                DateTime lastCouponDate;
-                DateTime nextCouponDate;
                 var rollConvention =
                     RollConventionEnumHelper.Parse(MaturityDate.Day.ToString(CultureInfo.InvariantCulture));
                 Frequency = FrequencyHelper.ToFrequency(nodeStruct.Bond.paymentFrequency);
@@ -196,8 +207,8 @@ namespace Orion.CurveEngine.Assets
                                                                                                MaturityDate,
                                                                                                CouponFrequency,
                                                                                                rollConvention,
-                                                                                               out lastCouponDate,
-                                                                                               out nextCouponDate);
+                                                                                               out _,
+                                                                                               out var nextCouponDate);
                 LastCouponDate = UnAdjustedPeriodDates[0];
                 NextCouponDate = nextCouponDate;
                 AdjustedPeriodDates =
@@ -218,7 +229,7 @@ namespace Orion.CurveEngine.Assets
         /// </summary>
         /// <param name="baseDate">The base date.</param>
         /// <param name="bond">The bond</param>
-        /// <param name="settlementDateOffset">The settleemnt date offset.</param>
+        /// <param name="settlementDateOffset">The settlement date offset.</param>
         /// <param name="exDivDateOffset">The ex dividend offset.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
         /// <param name="settlementCalendar">The settlement Calendar.</param>
@@ -280,11 +291,9 @@ namespace Orion.CurveEngine.Assets
                     InstrumentIds.Add(identifier);
                 }
             }
-            //This handles the case of a bondforward used in curve building.
+            //This handles the case of a bond forward used in curve building.
             if (MaturityDate > BaseDate)
             {
-                DateTime lastCouponDate;
-                DateTime nextCouponDate;
                 var rollConvention =
                     RollConventionEnumHelper.Parse(MaturityDate.Day.ToString(CultureInfo.InvariantCulture));
                 Frequency = FrequencyHelper.ToFrequency(bond.paymentFrequency);
@@ -293,8 +302,8 @@ namespace Orion.CurveEngine.Assets
                                                                                                MaturityDate,
                                                                                                CouponFrequency,
                                                                                                rollConvention,
-                                                                                               out lastCouponDate,
-                                                                                               out nextCouponDate);
+                                                                                               out _,
+                                                                                               out var nextCouponDate);
                 LastCouponDate = UnAdjustedPeriodDates[0];
                 NextCouponDate = nextCouponDate;
                 AdjustedPeriodDates =

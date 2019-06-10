@@ -1,16 +1,21 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+#region Usings
 
 using System;
-using Orion.Models.Rates.Swap;
-using Orion.Models.Generic.Cashflows;
-using Orion.Models.Rates.Coupons;
-using System.Collections.Generic;
-using Orion.ModelFramework;
-using Orion.ModelFramework.Assets;
-using Orion.ModelFramework.Instruments;
-using Orion.ModelFramework.MarketEnvironments;
 using Orion.ModelFramework.PricingStructures;
-using Orion.ModelFramework.Instruments.InterestRates;
 
 #endregion
 
@@ -21,7 +26,7 @@ namespace Orion.Models.Rates.Swaption
         Decimal MarketQuote { get; set; }
 
         /// <summary>
-        /// Gets or sets the IsBoughtn flag.
+        /// Gets or sets the IsBought flag.
         /// </summary>
         /// <value>The IsBought flag.</value>
         Boolean IsBought{ get; set; }

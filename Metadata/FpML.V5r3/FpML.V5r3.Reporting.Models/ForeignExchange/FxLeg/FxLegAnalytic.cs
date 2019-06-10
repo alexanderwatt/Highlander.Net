@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using Orion.ModelFramework;
@@ -45,7 +60,7 @@ namespace Orion.Models.ForeignExchange.FxLeg
         /// <param name="valuationDate"></param>
         /// <param name="paymentDate">The payment date. The same rest period is assumed as with the spot date.</param>
         /// <param name="indexCurve">The index curve should be already in the correct form for the fx.</param>
-        /// <param name="currency2">Normaly the foreign rate curve.</param>
+        /// <param name="currency2">Normally the foreign rate curve.</param>
         /// <param name="currency2PerCurrency1">The currency2PerCurrency1 flag. </param>
         /// <param name="currency1">Normally the domestic rate curve. </param>
         public FxLegAnalytic(DateTime valuationDate, DateTime paymentDate, IFxCurve indexCurve, IRateCurve currency1, IRateCurve currency2, 

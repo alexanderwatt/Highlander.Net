@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -504,7 +519,7 @@ namespace Orion.Models.Rates.Coupons
         /// <summary>
         /// Gets the derivative with respect to the discount Rate.
         /// </summary>
-        /// <value>The fistorical delta1.</value>
+        /// <value>The historical delta1.</value>
         public decimal LocalCurrencyHistoricalDelta1
         {
             get
@@ -526,13 +541,13 @@ namespace Orion.Models.Rates.Coupons
 
 
         /// <summary>
-        /// Gets the reporting cxurrency spectrum numerical derivative with respect to the discount Rate.
+        /// Gets the reporting currency spectrum numerical derivative with respect to the discount Rate.
         /// </summary>
         /// <value>The delta1.</value>
         public IDictionary<string, Decimal> Delta1PDH => EvaluateDelta1PDH();
 
         /// <summary>
-        /// Gets the reporting cxurrency spectrum numerical derivative with respect to the discount Rate.
+        /// Gets the reporting currency spectrum numerical derivative with respect to the discount Rate.
         /// </summary>
         /// <value>The delta0.</value>
         public IDictionary<string, Decimal> Delta0PDH => EvaluateDelta0PDH();
@@ -558,13 +573,13 @@ namespace Orion.Models.Rates.Coupons
         /// <summary>
         /// Gets the PCE.
         /// </summary>
-        /// <value>The PCCE.</value>
+        /// <value>The PCE.</value>
         public Decimal[] PCE => new[] { 0.0m };
 
         /// <summary>
         /// Gets the PCE Term.
         /// </summary>
-        /// <value>The PCCE Term.</value>
+        /// <value>The PCE Term.</value>
         public Decimal[] PCETerm => new[] { 0.0m };
 
         #endregion
@@ -572,7 +587,7 @@ namespace Orion.Models.Rates.Coupons
         #region Constructor
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         public FixedRateCouponAnalytic()
         {
@@ -580,7 +595,7 @@ namespace Orion.Models.Rates.Coupons
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
@@ -607,7 +622,7 @@ namespace Orion.Models.Rates.Coupons
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
@@ -635,7 +650,7 @@ namespace Orion.Models.Rates.Coupons
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
@@ -664,7 +679,7 @@ namespace Orion.Models.Rates.Coupons
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
@@ -974,8 +989,7 @@ namespace Orion.Models.Rates.Coupons
             {
                 foreach (var curve in AnalyticParameters.Delta1PDHCurves)
                 {
-                    var rateCurve = curve as IRateCurve;
-                    if (rateCurve != null)
+                    if (curve is IRateCurve rateCurve)
                     {
                         var properties = rateCurve.GetPricingStructureId().Properties;
                         var assetId = properties.GetValue<string>("PerturbedAsset", false);

@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -31,27 +46,27 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableRateCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="accrualStartDate">The accrual start date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
         /// <param name="accrualEndDate">The accrual end date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
         /// <param name="fixedRate">The fixed rate.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="notionalAmount">The notional amount.</param>
-        /// <param name="dayCountfraction">Type of day Countfraction.</param>
+        /// <param name="dayCountFraction">Type of day Count fraction.</param>
         /// <param name="expectedAmount">The expected amount. This is normally null, unless a calculated amount is overwritten.</param>
         /// <param name="paymentDate">The payment date.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public PriceableFixedRateCoupon
             (
-            string cashlfowId
+            string cashflowId
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , DayCountFraction dayCountfraction
+            , DayCountFraction dayCountFraction
             , Decimal fixedRate
             , Money notionalAmount
             , Money expectedAmount
@@ -60,12 +75,12 @@ namespace Orion.ValuationEngine.Instruments
             , Decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
-            : base(cashlfowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate,
-            notionalAmount, dayCountfraction, fixedRate, paymentDate, discountingType, discountRate, 
+            : base(cashflowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate,
+            notionalAmount, dayCountFraction, fixedRate, paymentDate, discountingType, discountRate, 
             fraDiscounting, paymentCalendar)
         {
             ForecastAmount = expectedAmount;
-            Id = cashlfowId;
+            Id = cashflowId;
             CalculatePaymentAmount(0);
             ForecastAmount = PaymentAmount;
         }
@@ -73,7 +88,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableRateCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="accrualStartDate">The accrual start date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
         /// <param name="accrualEndDate">The accrual end date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
@@ -81,24 +96,24 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="accrualBusinessCenters">The accrual business centers.</param>
         /// <param name="fixedRate">The fixed rate.</param>
         /// <param name="notionalAmount">The notional amount.</param>
-        /// <param name="dayCountfraction">Type of day Countfraction.</param>
+        /// <param name="dayCountFraction">Type of day Count fraction.</param>
         /// <param name="paymentDate">The payment date.</param>
         /// <param name="accrualRollConvention">The accrual roll convention.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public PriceableFixedRateCoupon
             (
-            string cashlfowId
+            string cashflowId
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
             , Boolean adjustCalculationDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
-            , DayCountFraction dayCountfraction
+            , DayCountFraction dayCountFraction
             , Decimal fixedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
@@ -106,11 +121,11 @@ namespace Orion.ValuationEngine.Instruments
             , Decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
-            : base(cashlfowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate, adjustCalculationDatesIndicator,
-                     accrualBusinessCenters, accrualRollConvention, dayCountfraction, fixedRate, notionalAmount, paymentDate, 
+            : base(cashflowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate, adjustCalculationDatesIndicator,
+                     accrualBusinessCenters, accrualRollConvention, dayCountFraction, fixedRate, notionalAmount, paymentDate, 
                     discountingType, discountRate, fraDiscounting, paymentCalendar)
         {
-            Id = cashlfowId;
+            Id = cashflowId;
             CalculatePaymentAmount(0);
             ForecastAmount = PaymentAmount;
         }
@@ -217,7 +232,7 @@ namespace Orion.ValuationEngine.Instruments
                     || AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.Delta1PDH.ToString()) != null;
                 ModelData.AssetValuation.quote = quotes.ToArray();
                 var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
-                //// Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+                //// Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
                 //if (metrics.Contains(InstrumentMetrics.DiscountFactorAtMaturity))
                 //{
                 //    metrics.RemoveAll(metricItem => metricItem != InstrumentMetrics.DiscountFactorAtMaturity);
@@ -310,7 +325,7 @@ namespace Orion.ValuationEngine.Instruments
                     AnalyticsModel = analyticsModel;
                     if (AnalyticsModel != null)
                         CalculationResults = AnalyticsModel.Calculate<IRateInstrumentResults, RateInstrumentResults>(AnalyticModelParameters, metrics.ToArray());
-                    CalculationPerfomedIndicator = true;
+                    CalculationPerformedIndicator = true;
                     if (analyticsModel != null) PaymentDiscountFactor = analyticsModel.PaymentDiscountFactor;
                     ForecastAmount = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyExpectedValue, PaymentAmount.currency);
                     NPV = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyNPV, PaymentAmount.currency);

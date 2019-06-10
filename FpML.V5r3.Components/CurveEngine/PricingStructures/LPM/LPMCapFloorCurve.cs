@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core.Common;
@@ -17,6 +34,8 @@ using Orion.CurveEngine.Assets.Helpers;
 using Orion.CurveEngine.PricingStructures.Curves;
 using Orion.ModelFramework.PricingStructures;
 using Orion.Util.NamedValues;
+
+#endregion
 
 namespace Orion.CurveEngine.PricingStructures.LPM
 {
@@ -61,7 +80,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         /// <summary>
         /// Convert the cap/floor PPD values to an ATM parVols structure
         /// This method then calls the bootstrapper <see cref="ProcessCapFloorPpd"/>
-        /// to generate the capvol curve
+        /// to generate the cap vol curve
         /// </summary>
         /// <param name="logger">The logger</param>
         /// <param name="cache">The cache.</param>
@@ -86,7 +105,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
             // Step through each vol and convert ppd to ATM vol
             for (var i = 0; i < expiry.Length; i++)
             {
-                // Create a Swaprate for each expiry
+                // Create a Swap rate for each expiry
                 // Assume frequency = 4 months until 4 years tenor is reached
                 Period tv = PeriodHelper.Parse(expiry[i]);
                 //double tvYearFraction = tv.ToYearFraction();
@@ -141,7 +160,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         }
 
         /// <summary>
-        /// Process a CapFloor ATM parvVols structure.
+        /// Process a CapFloor ATM par Vols structure.
         /// The process Bootstraps the parVols using the supplied ratecurve
         /// </summary>
         /// <param name="logger">The logger</param>
@@ -178,7 +197,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
                 var businessCalendar = settings.GetValue("BusinessCalendar", "AUSY");
                 var bc = BusinessCenterHelper.ToBusinessCalendar(cache, new[] { businessCalendar }, nameSpace);
                 // Use some logic to get the spot date to use
-                // LPM Spot lag is 2 days (modfollowing)
+                // LPM Spot lag is 2 days (mod following)
                 var spotDate = curve.GetSpotDate();
                 var rollConvention = settings.GetValue("RollConvention", BusinessDayConventionEnum.FOLLOWING);
                 spotDate = spotDate == curve.GetBaseDate() ? bc.Roll(spotDate.Add(new TimeSpan(2, 0, 0, 0)), rollConvention) : spotDate;
@@ -214,7 +233,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         #region Build Engines
 
         /// <summary>
-        /// Create a Sortedlist of bootstrap engines from the data matrix
+        /// Create a Sorted list of bootstrap engines from the data matrix
         /// </summary>
         /// <param name="logger">The logger</param>
         /// <param name="cache">The cache.</param>
@@ -269,7 +288,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
             //The quoted asset set
             var volTypes = matrix.CapVolatilities();
             var instruments = new List<string>();
-            var volatilties = new List<decimal>();
+            var volatilities = new List<decimal>();
             foreach(var volType in volTypes)
             {
                 string tempName;
@@ -286,9 +305,9 @@ namespace Orion.CurveEngine.PricingStructures.LPM
                     tenor = volType.Expiry + "Y";
                 }               
                 instruments.Add(tempName + tenor);
-                volatilties.Add(volType.Volatility);
+                volatilities.Add(volType.Volatility);
             }
-            var qas = AssetHelper.Parse(instruments.ToArray(), volatilties.ToArray());
+            var qas = AssetHelper.Parse(instruments.ToArray(), volatilities.ToArray());
             //The volatilities
             // Create a new ATM CapletBootstrap engine. The default decimal should be 0
             var engine = new CapVolatilityCurve(logger, cache, nameSpace, properties, qas, discountCurve, discountCurve,
@@ -315,7 +334,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         {
             var settingsHandle = Convert.ToString(FindValueFromName(settings, "Handle"));
             var calculationDate = Convert.ToDateTime(FindValueFromName(settings, "Calculation Date"));
-            var baseDate = calculationDate;//For backward compatability
+            var baseDate = calculationDate;//For backward compatibility
             var capFrequency = CalculateCapFrequency(Convert.ToString(FindValueFromName(settings, "Cap Frequency")));
             var capStartLag = Convert.ToInt32(FindValueFromName(settings, "Cap Start Lag"));
             var currency = Convert.ToString(FindValueFromName(settings, "Currency"));
@@ -442,12 +461,12 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         {
             CapFrequency capFrequency;
 
-            // Process the term string to give us the frequncy
+            // Process the term string to give us the frequency
             decimal multiplier = 0;
             var period = "";
             LabelSplitter(frequency, ref period, ref multiplier);
 
-            // Try to matrch the term structure to an allowable frequency
+            // Try to match the term structure to an allowable frequency
             switch (period)
             {
                 case "M":
@@ -505,7 +524,7 @@ namespace Orion.CurveEngine.PricingStructures.LPM
         /// The curve provides forward rates for the calculation
         /// </summary>
         /// <param name="settings">The settings object used to build the fwd rate</param>
-        /// <param name="spotDate">The spot date used to calcualte fwd rate from</param>
+        /// <param name="spotDate">The spot date used to calculate fwd rate from</param>
         /// <param name="etoDate">The calculation date to calculate fwd rate to</param>
         /// <param name="offsets">The offset for each discount factor</param>
         /// <param name="df">The discount factor at each offset</param>

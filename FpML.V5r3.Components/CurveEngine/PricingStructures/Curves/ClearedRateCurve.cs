@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -141,7 +156,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var indexTenor = curveId.ForecastRateIndex?.indexTenor;
             //This is to catch it when there are no discount factor points.
             var discountsAbsent = tempFpml.discountFactorCurve?.point == null || tempFpml.discountFactorCurve.point.Length == 0;
-            //This is an overrice if the cache is null, as the bootstrapper will not work.
+            //This is an override if the cache is null, as the bootstrapper will not work.
             if (cache == null)
             {
                 //optimize = true;
@@ -151,7 +166,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //Test to see if a bootstrap is required.
             if (bootstrap || discountsAbsent)
             {
-                //There must be a valid quotedassetset in order to bootstrap.
+                //There must be a valid quoted asset set in order to bootstrap.
                 if (!validAssets) return;
                 PriceableClearedRateAssets = PriceableAssetFactory.CreatePriceableClearedRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, GetRateCurveId().BaseDate, fixingCalendar, rollCalendar);
                 termCurve.point = RateBootstrapper.Bootstrap(PriceableClearedRateAssets, curveId.BaseDate,
@@ -214,7 +229,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var indexTenor = curveId.ForecastRateIndex?.indexTenor;
             if (bootstrap || discountsAbsent)
             {
-                //There must be a valid quotedassetset in order to bootstrap.
+                //There must be a valid quoted asset set in order to bootstrap.
                 if (!XsdClassesFieldResolver.QuotedAssetSetIsValid(spreadAssets)) return;
                 PriceableClearedRateAssets =
                     PriceableAssetFactory.CreatePriceableClearedRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, spreadAssets, pricingStructureId.BaseDate, fixingCalendar, rollCalendar);

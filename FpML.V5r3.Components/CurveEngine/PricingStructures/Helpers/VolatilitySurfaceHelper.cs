@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections;
@@ -345,19 +360,19 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             if (numberOfUniqueStrikes <= 1) ++numberOfMissingDimensions;
             var numberOfUniqueExpirations = expirationList.Distinct(new TimeDimensionEqualityComparer()).Count();
             if (numberOfUniqueExpirations <= 1) ++numberOfMissingDimensions;
-            var numberOfUniquieTerms = termList.Distinct(new TimeDimensionEqualityComparer()).Count();
-            if (numberOfUniquieTerms <= 1) ++numberOfMissingDimensions;
+            var numberOfUniqueTerms = termList.Distinct(new TimeDimensionEqualityComparer()).Count();
+            if (numberOfUniqueTerms <= 1) ++numberOfMissingDimensions;
             if (1 != numberOfMissingDimensions)
             {
                 var message =
-                    $"Number of missing dimesions is not 1 (actual value : '{numberOfMissingDimensions}'). Only 1 dimesion out of 3 (strike, tenor, expiration) could be missing in a surface.";
+                    $"Number of missing dimensions is not 1 (actual value : '{numberOfMissingDimensions}'). Only 1 dimension out of 3 (strike, tenor, expiration) could be missing in a surface.";
                 throw new NotSupportedException(message);
             }
             switch (dimension)
             {
                 case CubeDimension.Term:
                     {
-                        return numberOfUniquieTerms;
+                        return numberOfUniqueTerms;
                     }
                 case CubeDimension.Expiration:
                     {
@@ -461,12 +476,12 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             if (numberOfUniqueStrikes <= 1) ++numberOfMissingDimensions;
             var numberOfUniqueExpirations = expirationList.Distinct(new TimeDimensionEqualityComparer()).Count();
             if (numberOfUniqueExpirations <= 1) ++numberOfMissingDimensions;
-            var numberOfUniquieTerms = termList.Distinct(new TimeDimensionEqualityComparer()).Count();
-            if (numberOfUniquieTerms <= 1) ++numberOfMissingDimensions;
+            var numberOfUniqueTerms = termList.Distinct(new TimeDimensionEqualityComparer()).Count();
+            if (numberOfUniqueTerms <= 1) ++numberOfMissingDimensions;
             if (1 != numberOfMissingDimensions)
             {
                 var message =
-                    $"Number of missing dimesions is not 1 (actual value : '{numberOfMissingDimensions}'). Only 1 dimesion out of 3 (strike, tenor, expiration) could be missing in a surface.";
+                    $"Number of missing dimensions is not 1 (actual value : '{numberOfMissingDimensions}'). Only 1 dimension out of 3 (strike, tenor, expiration) could be missing in a surface.";
                 throw new NotSupportedException(message);
             }
             if (numberOfUniqueStrikes <= 1)
@@ -477,7 +492,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             {
                 return CubeDimension.Expiration;
             }
-            if (numberOfUniquieTerms <= 1)
+            if (numberOfUniqueTerms <= 1)
             {
                 return CubeDimension.Term;
             }

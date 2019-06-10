@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -97,7 +112,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         public NamedValueSet CreateCapFloorProperties(object[,] settings)
         {
             var columns = settings.GetUpperBound(1);
-            //This will only process a two column obect matrix.
+            //This will only process a two column object matrix.
             if (columns != 1) return null;
             var properties = (object[,])TrimNulls(settings);
             var namedValueSet = properties.ToNamedValueSet();
@@ -119,7 +134,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         public string CreateCapFloorCurve(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet properties, 
             String[] instruments, Decimal[] rawVolatilityGrid, DateTime[] dfDataTimeGrid, Decimal[] dfGrid)
         {
-            var volatilityCheck = CheckVolatilties(rawVolatilityGrid);
+            var volatilityCheck = CheckVolatilities(rawVolatilityGrid);
             if (volatilityCheck != null) throw new ArgumentException(volatilityCheck);
             var id = properties.GetString("EngineHandle", true);
             var baseDate = properties.GetValue<DateTime>("BaseDate", true);
@@ -280,7 +295,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties of the engine, including the reference handle to access this engine collection</param>
-        /// <param name="instruments">An array of volatiltiy types with instruments.</param>
+        /// <param name="instruments">An array of volatility types with instruments.</param>
         /// <param name="strikes">An array of strikes.</param>
         /// <param name="rawVolatilityGrid">The raw grid used to build the engines. Assume that all volatility and strike values are 100x true</param>
         /// <param name="dfDataTimeGrid">The discount factor dates array.</param>
@@ -334,7 +349,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties of the engine, including the reference handle to access this engine collection</param>
-        /// <param name="instruments">An array of volatiltiy types with instruments.</param>
+        /// <param name="instruments">An array of volatility types with instruments.</param>
         /// <param name="strikes">An array of strikes.</param>
         /// <param name="rawVolatilityGrid">The raw grid used to build the engines. Assume that all volatility and strike values are 100x true</param>
         /// <returns>The engine handle or an error message</returns>
@@ -396,7 +411,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         public string CreateCapFloorATMCurve(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet properties, 
             String[] instruments, Decimal[] rawVolatilityGrid, DateTime[] dfDataTimeGrid, Decimal[] dfGrid)
         {
-            var volatilityCheck = CheckVolatilties(rawVolatilityGrid);
+            var volatilityCheck = CheckVolatilities(rawVolatilityGrid);
             if (volatilityCheck != null) throw new ArgumentException(volatilityCheck);
             var id = properties.GetString("EngineHandle", true);
             var baseDate = properties.GetValue<DateTime>("BaseDate", true);
@@ -451,7 +466,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         public string CreateCapFloorATMCurve(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet properties,
             String[] instruments, Decimal[] rawVolatilityGrid)
         {
-            var volatilityCheck = CheckVolatilties(rawVolatilityGrid);
+            var volatilityCheck = CheckVolatilities(rawVolatilityGrid);
             if (volatilityCheck != null) throw new ArgumentException(volatilityCheck);
             var id = properties.GetString("EngineHandle", true);
             var baseDate = properties.GetValue<DateTime>("BaseDate", true);
@@ -659,7 +674,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         #region Private Methods for backward compatability
 
         /// <summary>
-        /// Create a Sortedlist of bootstrap engines from the data matrix
+        /// Create a Sorted list of bootstrap engines from the data matrix
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
@@ -686,7 +701,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         }
 
         /// <summary>
-        /// Create a Sortedlist of bootstrap engines from the data matrix
+        /// Create a Sorted list of bootstrap engines from the data matrix
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
@@ -739,7 +754,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
 
         #region Utility methods
 
-        private string CheckVolatilties(Decimal[] rawVolatilityGrid)
+        private string CheckVolatilities(Decimal[] rawVolatilityGrid)
         {
             foreach (var vol in rawVolatilityGrid)
             {
@@ -751,7 +766,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <summary>
         /// Build up the matrix of capfloor volatilities (expiry x strike)
         /// </summary>
-        /// <param name="column">The volaility to extract.</param>
+        /// <param name="column">The volatility to extract.</param>
         /// <param name="instrument">The type of the volatility surface at each expiry</param>
         /// <param name="volatility">A 2d array of the volatilities</param>
         private decimal[] GenerateVolatilityMatrix(string[] instrument, int column, decimal[,] volatility)

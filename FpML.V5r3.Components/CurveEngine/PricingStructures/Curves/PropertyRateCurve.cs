@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -24,12 +39,12 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties.</param>
-        /// <param name="instrumetData">The instrument data.</param>
+        /// <param name="instrumentData">The instrument data.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
         public PropertyRateCurve(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet properties, 
-            QuotedAssetSet instrumetData, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
-            : base(logger, cache, nameSpace, properties, instrumetData, fixingCalendar, rollCalendar)
+            QuotedAssetSet instrumentData, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
+            : base(logger, cache, nameSpace, properties, instrumentData, fixingCalendar, rollCalendar)
         {}
 
         /// <summary>

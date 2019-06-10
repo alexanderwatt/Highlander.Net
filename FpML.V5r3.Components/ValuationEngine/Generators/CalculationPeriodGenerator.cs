@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -32,10 +47,10 @@ namespace Orion.ValuationEngine.Generators
 
         public static CalculationPeriodsPrincipalExchangesAndStubs GenerateAdjustedCalculationPeriods(
           
-            DateTime unadjustedstartDate,
+            DateTime unadjustedStartDate,
             DateTime unadjustedTerminationDate,
-            DateTime? firstunadjustedRegularPeriodStartDate,
-            DateTime? lastunadjustedRegularPeriodEndDate,
+            DateTime? firstUnadjustedRegularPeriodStartDate,
+            DateTime? lastUnadjustedRegularPeriodEndDate,
             CalculationPeriodFrequency frequency,
             BusinessDayAdjustments calculationPeriodDatesAdjustments,
             IBusinessCalendar paymentCalendar)
@@ -43,8 +58,8 @@ namespace Orion.ValuationEngine.Generators
             var result = new CalculationPeriodsPrincipalExchangesAndStubs();
             //  Generate periods backwards (toward the unadjustedEffectiveDate)
             //
-            GeneratePeriods(unadjustedstartDate, unadjustedTerminationDate, firstunadjustedRegularPeriodStartDate,
-                            lastunadjustedRegularPeriodEndDate, frequency, calculationPeriodDatesAdjustments, result, paymentCalendar);
+            GeneratePeriods(unadjustedStartDate, unadjustedTerminationDate, firstUnadjustedRegularPeriodStartDate,
+                            lastUnadjustedRegularPeriodEndDate, frequency, calculationPeriodDatesAdjustments, result, paymentCalendar);
             result.CalculationPeriods.Sort((calculationPeriod1, calculationPeriod2) =>
                                            calculationPeriod1.adjustedEndDate.CompareTo(calculationPeriod2.adjustedEndDate));
             return result;
@@ -66,14 +81,14 @@ namespace Orion.ValuationEngine.Generators
             {
                 if ((initialStubType != StubPeriodTypeEnum.LongInitial) && (initialStubType != StubPeriodTypeEnum.ShortInitial))
                 {
-                    throw new ArgumentOutOfRangeException("initialStubType", initialStubType, "Wrong stub type.");
+                    throw new ArgumentOutOfRangeException(nameof(initialStubType), initialStubType, "Wrong stub type.");
                 }
             }
             if (finalStubType.HasValue)
             {
                 if ((finalStubType == StubPeriodTypeEnum.LongFinal) && (initialStubType == StubPeriodTypeEnum.ShortFinal))
                 {
-                    throw new ArgumentOutOfRangeException("finalStubType", finalStubType, "Wrong stub type.");
+                    throw new ArgumentOutOfRangeException(nameof(finalStubType), finalStubType, "Wrong stub type.");
                 }
             }
 //            if (!RollConventionEnumHelper.IsAdjusted(frequency.rollConvention, unadjustedFirstRollDate))
@@ -98,8 +113,8 @@ namespace Orion.ValuationEngine.Generators
 
         public static void GeneratePeriods(DateTime unadjustedStartDate,
                                            DateTime unadjustedTerminationDate,
-                                           DateTime? firstunadjustedRegularPeriodStartDate,
-                                           DateTime? lastunadjustedRegularPeriodEndDate,
+                                           DateTime? firstUnadjustedRegularPeriodStartDate,
+                                           DateTime? lastUnadjustedRegularPeriodEndDate,
                                            //StubPeriodTypeEnum? initialStubType,
                                            //StubPeriodTypeEnum? finalStubType,
                                            CalculationPeriodFrequency frequency,
@@ -109,16 +124,16 @@ namespace Orion.ValuationEngine.Generators
         {
             DateTime periodEndDate = unadjustedTerminationDate;
             DateTime periodStartDate;
-            bool isInitialStub = firstunadjustedRegularPeriodStartDate != null;
+            bool isInitialStub = firstUnadjustedRegularPeriodStartDate != null;
             var startDate = unadjustedStartDate;
             if (isInitialStub)
             {
-                startDate = (DateTime) firstunadjustedRegularPeriodStartDate;
+                startDate = (DateTime) firstUnadjustedRegularPeriodStartDate;
             }
-            var isFinalStub = lastunadjustedRegularPeriodEndDate != null;
+            var isFinalStub = lastUnadjustedRegularPeriodEndDate != null;
             if (isFinalStub)
             {
-                periodStartDate = (DateTime)lastunadjustedRegularPeriodEndDate;
+                periodStartDate = (DateTime)lastUnadjustedRegularPeriodEndDate;
             }
             else
             {

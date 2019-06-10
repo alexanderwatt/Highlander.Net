@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
@@ -57,7 +72,6 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             _rollCalendar = rollCalendar;
             // Calculate the function value for zero spread
             decimal[] zeroAdjustments = adjustments.Select(a => 0m).ToArray();
-
             _valueForZeroAdjustment
                 = RateCurve.CalculateImpliedQuote(_logger, _cache, _nameSpace, _baseDate, _properties, _instruments, _rates, zeroAdjustments, _spreadAssetId, _spreadAssetValuation,
                 _fixingCalendar, _rollCalendar);

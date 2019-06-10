@@ -80,7 +80,7 @@ namespace HLV5r3.Analytics
         /// <param name="ffp"></param>
         /// <param name="fxRate"></param>
         /// <returns></returns>
-        public Decimal[,] CalculateROE(Decimal[,] revenue, decimal[] sp, decimal[] cost, decimal[] rore,
+        public decimal[,] CalculateROE(decimal[,] revenue, decimal[] sp, decimal[] cost, decimal[] rore,
             decimal[] dfCapital, decimal[] dfMarket, decimal taxRate, decimal frankingRate,
             decimal[] regCap, decimal ffp, decimal fxRate)
         {
@@ -95,7 +95,7 @@ namespace HLV5r3.Analytics
         /// <param name="revenueBuckets"></param>
         /// <param name="costCapital"></param>
         /// <returns></returns>
-        public Decimal[,] GetCostOfCapitalDFs(int[,] revenueBuckets, Decimal costCapital)
+        public decimal[,] GetCostOfCapitalDFs(int[,] revenueBuckets, decimal costCapital)
         {
             var result = ROEAnalytics.GetCostOfCapitalDFs(ArrayHelper.MatrixToArray(revenueBuckets), costCapital);
             return ArrayHelper.ArrayToVerticalMatrix(result);
@@ -115,8 +115,8 @@ namespace HLV5r3.Analytics
         /// <param name="ffp"></param>
         /// <param name="fxRate"></param>
         /// <returns></returns>
-        public Decimal[,] CalculateRAROC(Decimal[,] revenue, Decimal[,] sp, Decimal[,] cost, Decimal[,] rorc, Decimal[,] dfCapital,
-                                       Decimal taxRate, Decimal frankingRate, Decimal[,] riskCap, Decimal ffp, Decimal fxRate)
+        public decimal[,] CalculateRAROC(decimal[,] revenue, decimal[,] sp, decimal[,] cost, decimal[,] rorc, decimal[,] dfCapital,
+            decimal taxRate, decimal frankingRate, decimal[,] riskCap, decimal ffp, decimal fxRate)
         {
             var result = RAROCAnalytics.CalculateRAROC(ArrayHelper.MatrixToArray(revenue), ArrayHelper.MatrixToArray(sp), ArrayHelper.MatrixToArray(cost), 
                                         ArrayHelper.MatrixToArray(rorc), ArrayHelper.MatrixToArray(dfCapital),

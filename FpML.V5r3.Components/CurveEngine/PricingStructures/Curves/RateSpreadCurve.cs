@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -27,7 +42,7 @@ using AssetClass = Orion.Constants.AssetClass;
 namespace Orion.CurveEngine.PricingStructures.Curves
 {
     /// <summary>
-    /// A rate spreadcurve.
+    /// A rate spread curve.
     /// </summary>
     public class RateSpreadCurve : RateCurve, ISpreadCurve
     {
@@ -84,7 +99,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="referenceCurve">The reference parent curveid.</param>
+        /// <param name="referenceCurve">The reference parent curve id.</param>
         /// <param name="spreadAssets">The spreads by asset.</param>
         /// <param name="properties">The properties of the new spread curve.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
@@ -105,7 +120,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="referenceCurve">The reference curve.</param>
         /// <param name="spreadAssets">The spreads by asset.</param>
         /// <param name="properties">The properties of the new spread curve.</param>
-        /// <param name="algorithm">The alogorithm holder. </param>
+        /// <param name="algorithm">The algorithm holder. </param>
         public RateSpreadCurve(NamedValueSet properties, IRateCurve referenceCurve, 
             List<IPriceableRateSpreadAssetController> spreadAssets, PricingStructureAlgorithmsHolder algorithm)
             : base(properties, algorithm)
@@ -126,7 +141,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties.</param>
-        /// <param name="refCurve">The reference parent curveid.</param>
+        /// <param name="refCurve">The reference parent curve id.</param>
         /// <param name="values">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
@@ -146,7 +161,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties.</param>
-        /// <param name="refCurve">The reference parent curveid.</param>
+        /// <param name="refCurve">The reference parent curve id.</param>
         /// <param name="spreadValueSet">The spread ValueSet.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
@@ -166,7 +181,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="properties">The properties.</param>
-        /// <param name="refCurve">The reference parent curveid.</param>
+        /// <param name="refCurve">The reference parent curve id.</param>
         /// <param name="value">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
@@ -231,7 +246,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         #region Value and risk Functions
 
         /// <summary>
-        /// Gets the spread sjusted value.
+        /// Gets the spread adjusted value.
         /// </summary>
         /// <param name="baseDate"></param>
         /// <param name="targetDate"></param>
@@ -244,10 +259,10 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// Creates the basic rate curve risk set, using the current curve as the base curve.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <returns>A list of perturbed rate curves</returns>
         public override List<IPricingStructure> CreateCurveRiskSet(decimal basisPointPerturbation)
         {
             return CreateCurveRiskSet(basisPointPerturbation, PricingStructureRiskSetType.Parent);
@@ -256,11 +271,11 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// Creates the basic rate curve risk set, using the current curve as the base curve.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <param name="pricingStructureRiskSetType">This determins which assets to perturb. </param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <param name="pricingStructureRiskSetType">This determine which assets to perturb. </param>
+        /// <returns>A list of perturbed rate curves</returns>
         private List<IPricingStructure> CreateCurveRiskSet(decimal basisPointPerturbation, PricingStructureRiskSetType pricingStructureRiskSetType)
         {
             var structures = new List<IPricingStructure>();
@@ -300,7 +315,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                     index++;
                 }
             }
-            //Perturb the spread curve quotess
+            //Perturb the spread curve quotes
             if (pricingStructureRiskSetType != PricingStructureRiskSetType.Parent)
             {
                 var spreadquotes = GetMarketQuotes(PriceableRateSpreadAssets);
@@ -366,7 +381,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 ycvCurveCloned.discountFactorCurve.point = null;
                 ycvCurveCloned.zeroCurve = null;
                 ycvCurveCloned.forwardCurve = null;
-                //Manipulate the quated asset set.
+                //Manipulate the quoted asset set.
                 //
                 ycvCurveCloned.inputs = MappedQuotedAssetSet(logger, cache, nameSpace, referenceCurve, spreadValues, properties, fixingCalendar, rollCalendar);
             }
@@ -390,7 +405,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 //Get the implied quote to use as the input market quote. Make sure it is rate controller.
                 var priceableAsset = (PriceableRateAssetController)PriceableAssetFactory.Create(logger, cache, nameSpace, quote, namedValueSet, fixingCalendar, rollCalendar);
                 var value = priceableAsset.CalculateImpliedQuote(referenceCurve);
-                //Replace the marketquote in the bav and remove the spread.
+                //Replace the market quote in the bav and remove the spread.
                 var quotes = new List<BasicQuotation>(quote.quote);
                 var impliedQuote = MarketQuoteHelper.ReplaceQuotationByMeasureType("MarketQuote", quotes, value);
                 var marketQuote = new List<BasicQuotation>(impliedQuote);
@@ -421,7 +436,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var interpDayCounter = Actual365.Instance;
             var underlyingCurve = ParseUnderlyingCurve(UnderlyingInterpolatedCurve);
             // interpolate the DiscountFactor curve based on the respective curve interpolation 
-            if (underlyingCurve != UnderyingCurveTypes.ZeroCurve)
+            if (underlyingCurve != UnderlyingCurveTypes.ZeroCurve)
             {
                 Interpolator = new TermCurveInterpolator(discountFactorCurve, GetBaseDate(), interpDayCounter);
             }

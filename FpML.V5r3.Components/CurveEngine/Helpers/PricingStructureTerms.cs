@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Orion.Constants;
@@ -151,7 +166,7 @@ namespace Orion.CurveEngine.Helpers
             foreach (object term in Terms.Values)
             {
                 string value = term.ToString();
-                if (term is int && ((int)term) == 0)
+                if (term is int i && i == 0)
                 {
                     value = string.Empty;
                 }
@@ -169,7 +184,6 @@ namespace Orion.CurveEngine.Helpers
         {
             CurveReferenceIdentifier = curveReferenceIdentifier;
             string[] curveParts = curveReferenceIdentifier.Split('-');
-
             if (curveParts.Length < 3)
             {
                 throw new ArgumentOutOfRangeException(
@@ -178,7 +192,6 @@ namespace Orion.CurveEngine.Helpers
             Market = curveParts[0];
             Currency = curveParts[1];
             Tenor = curveParts[2];
-
             if (curveParts.Length == 4)
             {
                 BaseDate = DateTime.Parse(curveParts[curveParts.Length - 1]);
@@ -229,7 +242,6 @@ namespace Orion.CurveEngine.Helpers
             Terms = terms;
             var nvs = new NamedValueSet();
             nvs.Add(terms);
-
             Market = nvs.GetValue<string>("Market", null);
             Currency1 = nvs.GetValue<string>("Currency1", null);
             Currency2 = nvs.GetValue<string>("Currency2", null);
@@ -245,7 +257,6 @@ namespace Orion.CurveEngine.Helpers
         {
             CurveReferenceIdentifier = curveReferenceIdentifier;
             string[] curveParts = curveReferenceIdentifier.Split('-');
-
             if (curveParts.Length < 2)
             {
                 throw new ArgumentOutOfRangeException(
@@ -253,7 +264,6 @@ namespace Orion.CurveEngine.Helpers
             }
             Market = curveParts[0];
             Currency1 = curveParts[1];
-
             if (curveParts.Length == 3)
             {
                 Currency2 = curveParts[2];
@@ -318,12 +328,10 @@ namespace Orion.CurveEngine.Helpers
             Terms = terms;
             var nvs = new NamedValueSet();
             nvs.Add(terms);
-
             if (nvs.Get(CurveProp.Market, false) != null)
                 Market = nvs.GetValue<string>(CurveProp.Market, null);
             else if (nvs.Get("Market", false) != null)
                 Market = nvs.GetValue<string>("Market", null);
-
             Currency = nvs.GetValue<string>(CurveProp.Currency1, null);
             BaseDate = nvs.GetValue(CurveProp.BaseDate, DateTime.MinValue);
             ReferenceKey = BuildKey();
@@ -338,7 +346,6 @@ namespace Orion.CurveEngine.Helpers
         {
             SurfaceReferenceIdentifier = surfaceReferenceIdentifier;
             string[] surfaceParts = surfaceReferenceIdentifier.Split('-');
-
             if (surfaceParts.Length < 2)
             {
                 throw new ArgumentOutOfRangeException(
@@ -346,8 +353,6 @@ namespace Orion.CurveEngine.Helpers
             }
             Market = surfaceParts[0];
             Currency = surfaceParts[1];
-
-
             if (surfaceParts.Length == 3)
             {
                 BaseDate = DateTime.Parse(surfaceParts[surfaceParts.Length - 1]);
@@ -365,11 +370,10 @@ namespace Orion.CurveEngine.Helpers
             foreach (object term in Terms.Values)
             {
                 string value = term.ToString();
-                if (term is int && ((int)term) == 0)
+                if (term is int i && i == 0)
                 {
                     value = string.Empty;
                 }
-
                 sb.Append(value);
             }
             return sb.ToString();

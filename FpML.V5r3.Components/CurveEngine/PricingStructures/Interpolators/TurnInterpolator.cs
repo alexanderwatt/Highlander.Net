@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
@@ -29,13 +44,13 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         /// </summary>
         /// <param name="termCurve"></param>
         /// <param name="baseDate"></param>
-        /// <param name="turndates"></param>
+        /// <param name="turnDates"></param>
         /// <param name="dayCounter"></param>
-        public TurnInterpolator(TermCurve termCurve, DateTime baseDate, DateTime[] turndates, IDayCounter dayCounter)
-            : base(ConvertTermCurve(termCurve, baseDate, turndates, dayCounter), baseDate, dayCounter)
+        public TurnInterpolator(TermCurve termCurve, DateTime baseDate, DateTime[] turnDates, IDayCounter dayCounter)
+            : base(ConvertTermCurve(termCurve, baseDate, turnDates, dayCounter), baseDate, dayCounter)
         {
-            TurnDates = turndates;
-            TermCurve = InterpolateTurnPoints(termCurve, turndates, baseDate, dayCounter);
+            TurnDates = turnDates;
+            TermCurve = InterpolateTurnPoints(termCurve, turnDates, baseDate, dayCounter);
         }
 
         /// <summary>
@@ -58,7 +73,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
             var resultTermCurve = Load(termCurve, turnDates, baseDate, dayCounter);
             //Step 2. 
             //
-            //Step 3. SortPoints the termcurve if necessary.
+            //Step 3. SortPoints the term curve if necessary.
             return SortPoints(resultTermCurve);//TODO add the new points...need to sort the termcurve points...
         }
 
@@ -73,13 +88,13 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         /// <returns></returns>
         public static int[] GetPreviousIndices(TermCurve termCurve, DateTime[] dates)
         {
-            var termdates = termCurve.GetListTermDates();//GetDiscreteSpace().GetCoordinateArray(1);
+            var termDates = termCurve.GetListTermDates();//GetDiscreteSpace().GetCoordinateArray(1);
             var results = new List<int>();
             var temp = new int[dates.Length];
             var counter = 0;
             foreach (var date in dates)  //This handles or is supposed to handle the case of multiple central bank dates between node points.
             {
-                var index = Array.BinarySearch(termdates.ToArray(), date);
+                var index = Array.BinarySearch(termDates.ToArray(), date);
 
                 if (index >= 0)
                 {
@@ -241,9 +256,9 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
             {
                 var date = (DateTime) point.term.Items[0];
                 var dates = rbaDates.Where(t => GetPreviousIndex(termCurve, t) == counter).ToList();
-                foreach (var RBAdate in dates)
+                foreach (var rbAdate in dates)
                 {
-                    if (dates.IndexOf(RBAdate) == 1)
+                    if (dates.IndexOf(rbAdate) == 1)
                     {
                         var termPoint =
                             TermPointFactory.Create(InterpolateRate(termCurve, baseDate, dayCounter, dates[0]), dates[0]);
@@ -252,7 +267,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
                     else
                     {
                         var termPoint =
-                            TermPointFactory.Create(InterpolateRate2(termCurve, baseDate, dayCounter, RBAdate), RBAdate);
+                            TermPointFactory.Create(InterpolateRate2(termCurve, baseDate, dayCounter, rbAdate), rbAdate);
                         points.Insert(GetPreviousIndex(termCurve, date), termPoint);
                     }
                 }
@@ -262,7 +277,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         }
 
         /// <summary>
-        /// Sorts a termcurve.
+        /// Sorts a term curve.
         /// <remarks>
         /// No two dates are to be the same!
         /// </remarks>

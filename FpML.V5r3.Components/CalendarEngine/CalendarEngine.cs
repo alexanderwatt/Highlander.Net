@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -140,7 +155,7 @@ namespace Orion.CalendarEngine
             {
                 return referenceDate;
             }
-            //The default daytype.
+            //The default day type.
             if (relativeDateOffset.dayTypeSpecified == false || relativeDateOffset.businessCenters == null)
             {
                 relativeDateOffset.dayType = DayTypeEnum.Calendar;
@@ -211,23 +226,19 @@ namespace Orion.CalendarEngine
                                     // Advance using given number of business days
                                     //
                                     int periodMultiplierSign = System.Math.Sign(periodMultiplier);
-                                    DateTime offsetedDate = unadjustedDate;
+                                    DateTime offsetDate = unadjustedDate;
                                     while (periodMultiplier-- > 0)
                                     {
-                                        offsetedDate = offsetedDate.AddDays(periodMultiplierSign);
-                                        offsetedDate = businessCalendar.Roll(offsetedDate, businessDayAdjustments.businessDayConvention);
+                                        offsetDate = offsetDate.AddDays(periodMultiplierSign);
+                                        offsetDate = businessCalendar.Roll(offsetDate, businessDayAdjustments.businessDayConvention);
                                     }
-
-                                    return offsetedDate;
+                                    return offsetDate;
                                 }
-
                             default:
                                 throw new NotSupportedException(
                                     $"{offset.period} not supported in conjunction with '{offset.dayType} day type'");
-
                         }//~switch(offset.period)
                     }
-
                 case DayTypeEnum.Calendar:
                     {
                         // Convert offset to period.
@@ -249,7 +260,7 @@ namespace Orion.CalendarEngine
         #region Business Calendars and Calendar Related Functions.
 
         /// <summary>
-        /// Creates a consolidated business calendar for a given sset of business centers
+        /// Creates a consolidated business calendar for a given set of business centers
         /// </summary>
         /// <param name="centers">The centers.</param>
         /// <returns></returns>
@@ -323,9 +334,9 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Gets the supported business centres of the set provided.
+        /// Gets the supported business centre of the set provided.
         /// </summary>
-        /// <param name="businessCenters">The list of centres in the calendar.</param>
+        /// <param name="businessCenters">The list of centre in the calendar.</param>
         /// <returns></returns>
         public List<string> CalendarsSupported(string[] businessCenters)
         {
@@ -335,9 +346,9 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Determines if the list of business centres creates a valid calendar.
+        /// Determines if the list of business centre creates a valid calendar.
         /// </summary>
-        /// <param name="businessCenters">The list of business centres to check.</param>
+        /// <param name="businessCenters">The list of business centre to check.</param>
         /// <returns></returns>
         public bool IsValidBusinessCalendar(string[] businessCenters)
         {
@@ -348,9 +359,9 @@ namespace Orion.CalendarEngine
         /// <summary>
         /// Determines whether [is valid calendar] [the specified rule profile].
         /// </summary>
-        /// <param name="businessCenters">The list of business centres to check.</param>
+        /// <param name="businessCenters">The list of business centre to check.</param>
         /// <returns></returns>
-        public Dictionary<string, Boolean> IsValidCalendar(string[] businessCenters)
+        public Dictionary<string, bool> IsValidCalendar(string[] businessCenters)
         {
             var retVals = new Dictionary<string, bool>();
             if (businessCenters != null)
@@ -365,7 +376,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Signficant dates for the requested busuiness centres.
+        /// Significant dates for the requested business centre.
         /// </summary>
         /// <param name="businessCenters">The city names.</param>
         /// <returns></returns>
@@ -387,7 +398,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Signficants the date.
+        /// Significant date.
         /// </summary>
         /// <param name="years">The years to return.</param>
         /// <param name="businessCenter">The city name.</param>
@@ -406,7 +417,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Signficants the date.
+        /// Significant date.
         /// </summary>
         /// <param name="years">The years.</param>
         /// <param name="businessCenters">The city names.</param>
@@ -440,7 +451,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Signficant dates for the requested busuiness centres. This uses a query and will be slower than using specific years.
+        /// Significant dates for the requested business centre. This uses a query and will be slower than using specific years.
         /// </summary>
         /// <param name="businessCenters">The city names.</param>
         /// <returns></returns>
@@ -466,7 +477,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Signficants the date.
+        /// Significant date.
         /// </summary>
         /// <param name="years">The years to return.</param>
         /// <param name="businessCenter">The city name.</param>
@@ -502,7 +513,7 @@ namespace Orion.CalendarEngine
         /// <returns>
         /// 	<c>true</c> if [is business day] [the specified calendars]; otherwise, <c>false</c>.
         /// </returns>
-        public Boolean IsBusinessDay(string[] calendars, DateTime date)
+        public bool IsBusinessDay(string[] calendars, DateTime date)
         {
             IBusinessCalendar calendar = GetCalendar(calendars);
             return calendar.IsBusinessDay(date);
@@ -516,7 +527,7 @@ namespace Orion.CalendarEngine
         /// <returns>
         /// 	<c>true</c> if the specified calendars is holiday; otherwise, <c>false</c>.
         /// </returns>
-        public Boolean IsHoliday(string[] calendars, DateTime date)
+        public bool IsHoliday(string[] calendars, DateTime date)
         {
             IBusinessCalendar calendar = GetCalendar(calendars);
             return calendar.IsHoliday(date);
@@ -561,11 +572,9 @@ namespace Orion.CalendarEngine
         {
             IBusinessCalendar calendar = GetCalendar(calendars);
             Period interval = PeriodHelper.Parse(periodInterval);
-
             var dayType = DayTypeEnum.Calendar;
             if (dayTypeString.Length > 0)
                 dayType = (DayTypeEnum)Enum.Parse(typeof(DayTypeEnum), dayTypeString, true);
-
             Offset offset = OffsetHelper.FromInterval(interval, dayType);
             BusinessDayConventionEnum dayConvention = BusinessDayConventionHelper.Parse(businessDayConvention);
             return calendar.Advance(date, offset, dayConvention);
@@ -632,7 +641,7 @@ namespace Orion.CalendarEngine
         #region Central Bank Dates
 
         ///// <summary>
-        ///// Signficants the date.
+        ///// Signficant date.
         ///// </summary>
         ///// <param name="years">The years to return.</param>
         ///// <param name="centralBank">The central Bank.</param>
@@ -649,13 +658,13 @@ namespace Orion.CalendarEngine
         //}
 
         /// <summary>
-        /// Creates the datatime vector for the request Central Bank.
+        /// Creates the date time vector for the request Central Bank.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
         /// <param name="validCentralBank">The requested central bank.</param>
         /// <param name="centralBankDateRuleMonths">The rules.</param>
         /// <param name="lastDate">The last date required.</param>
-        /// <returns>An aray of relevant dates.</returns>
+        /// <returns>An array of relevant dates.</returns>
         public DateTime[] GetCBDates(DateTime baseDate, string validCentralBank,
                                              int centralBankDateRuleMonths, DateTime lastDate)//TODO splice in the quarterly dates afterwards..
         {
@@ -682,7 +691,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Dedupes the specified calendar names.
+        /// De-dupes the specified calendar names.
         /// </summary>
         /// <param name="calendarNames">The calendar names.</param>
         /// <returns></returns>
@@ -704,7 +713,7 @@ namespace Orion.CalendarEngine
         #region Schedulers
 
         /// <summary>
-        /// Adjusteds the dates from termination date.
+        /// Adjusted dates from termination date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -715,15 +724,13 @@ namespace Orion.CalendarEngine
         /// <returns></returns>
         public DateTime[] AdjustedDatesFromTerminationDate(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, BusinessCenters businessCenters, BusinessDayConventionEnum dateAdjustmentConvention)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromTerminationDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out firstRegularPeriodStartDate, out lastRegularPeriodEndDate);
+            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromTerminationDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out _, out _);
             DateTime[] adjustedDateSchedule = AdjustDates(dateSchedule, businessCenters, dateAdjustmentConvention);
             return adjustedDateSchedule;
         }
 
         /// <summary>
-        /// Adjusteds the dates from termination date.
+        /// Adjusted dates from termination date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -734,15 +741,13 @@ namespace Orion.CalendarEngine
         /// <returns></returns>
         public DateTime[] AdjustedDatesFromTerminationDate(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, string businessCenters, string dateAdjustmentConvention)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromTerminationDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out firstRegularPeriodStartDate, out lastRegularPeriodEndDate);
+            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromTerminationDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out _, out _);
             DateTime[] adjustedDateSchedule = AdjustDates(dateSchedule, businessCenters, dateAdjustmentConvention);
             return adjustedDateSchedule;
         }
 
         /// <summary>
-        /// Adjusteds the dates from effective date.
+        /// Adjusted dates from effective date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -753,9 +758,7 @@ namespace Orion.CalendarEngine
         /// <returns></returns>
         public DateTime[] AdjustedDatesFromEffectiveDate(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, string businessCenters, string dateAdjustmentConvention)
         {
-            DateTime firstRegularPeriodStartDate;
-            DateTime lastRegularPeriodEndDate;
-            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromEffectiveDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out firstRegularPeriodStartDate, out lastRegularPeriodEndDate);
+            DateTime[] dateSchedule = DateScheduler.GetUnadjustedDatesFromEffectiveDate(effectiveDate, terminationDate, PeriodHelper.Parse(periodInterval), RollConventionEnumHelper.Parse(rollConvention), out _, out _);
             DateTime[] adjustedDateSchedule = AdjustDates(dateSchedule, businessCenters, dateAdjustmentConvention);
             return adjustedDateSchedule;
         }
@@ -775,7 +778,7 @@ namespace Orion.CalendarEngine
         /// <summary>
         /// Gets the adjusted date schedule.
         /// </summary>
-        /// <param name="unadjustedDates">An unadjy=usted date list.</param>
+        /// <param name="unadjustedDates">An unadjusted date list.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
         /// <returns></returns>
         public DateTime[] AdjustedDateSchedule(DateTime[] unadjustedDates, BusinessDayAdjustments businessDayAdjustments)
@@ -1047,10 +1050,10 @@ namespace Orion.CalendarEngine
                     fixingDatesOffset.businessDayConvention
             };
             IBusinessCalendar businessCalendar = ToBusinessCalendar(businessDayAdjustments.businessCenters);
-            foreach (DateTime adjustredResetDate in listAdjustedResetDates)
+            foreach (DateTime adjustedResetDate in listAdjustedResetDates)
             {
                 int offsetInBusinessDays = numberOfDays;
-                DateTime adjustedFixingDate = adjustredResetDate;
+                DateTime adjustedFixingDate = adjustedResetDate;
                 while (offsetInBusinessDays++ < 0)
                 {
                     // Adjust fixing date for one days back.
@@ -1120,7 +1123,6 @@ namespace Orion.CalendarEngine
                         }
                 }
             }
-
             return adjustedResetDates;
         }
 

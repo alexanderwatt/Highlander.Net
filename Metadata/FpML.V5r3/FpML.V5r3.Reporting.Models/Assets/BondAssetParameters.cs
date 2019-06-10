@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 
 namespace Orion.Models.Assets
@@ -9,12 +24,12 @@ namespace Orion.Models.Assets
         #region ISwapAssetParameters Members
 
         /// <summary>
-        /// Flag that sets whether the quote is yield to maturiy or dirty price - as a decimal
+        /// Flag that sets whether the quote is yield to maturity or dirty price - as a decimal
         /// </summary>
         public bool IsYTMQuote { get; set; }
 
         /// <summary>
-        /// Flag that sets whether the forst coupon is ex div.
+        /// Flag that sets whether the first coupon is ex div.
         /// </summary>
         public bool IsExDiv { get; set; }
 
@@ -79,13 +94,13 @@ namespace Orion.Models.Assets
         public decimal CouponRate { get; set; }
 
         /// <summary>
-        /// Gets or sets the deltaR that is used as the denominator in assetswap calculations.
+        /// Gets or sets the deltaR that is used as the denominator in asset swap calculations.
         /// </summary>
         /// <value>The deltaR.</value>
         public decimal SpreadDeltaR { get; set; }
 
         /// <summary>
-        /// Gets or sets the accraul year fractions.
+        /// Gets or sets the accrual year fractions.
         /// </summary>
         /// <value>The accrual year fractions.</value>
         public decimal[] AccrualYearFractions { get; set; }

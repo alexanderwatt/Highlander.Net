@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using FpML.V5r3.Reporting;
@@ -11,7 +26,7 @@ namespace Orion.ModelFramework.PricingStructures
     {
         ///// <summary>
         ///// Updates a basic quotation value and then perturbs and rebuilds the curve. 
-        ///// Uses the measuretype to determine which one.
+        ///// Uses the measure type to determine which one.
         ///// </summary>
         ///// <param name="values">The perturbation value array. This must be the same length as the number of assets in the QuotedAssetSet,
         ///// or it will not work.</param>

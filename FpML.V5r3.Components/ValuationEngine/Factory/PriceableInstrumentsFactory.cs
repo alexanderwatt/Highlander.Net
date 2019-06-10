@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Diagnostics;
@@ -103,7 +118,7 @@ namespace Orion.ValuationEngine.Factory
                     //The forecast rate index.
                     var floatingRateIndex = floatingRateCalculation.floatingRateIndex;
                     var indexTenor = floatingRateCalculation.indexTenor.ToString();
-                    var foreecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex.Value, indexTenor);
+                    var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex.Value, indexTenor);
                     //The rate observation
                     // Apply spread from schedule if it hasn't been specified yet.
                     decimal margin = 0m;
@@ -138,7 +153,7 @@ namespace Orion.ValuationEngine.Factory
                                                                          capStrike, floorStrike, accrualStartDate, accrualEndDate,
                                                                          rateObservation.adjustedFixingDate, dayCountFraction,
                                                                          margin, observedRate, money, paymentDate,
-                                                                         foreecastRate, discounting.discountingType,
+                                                                         forecastRate, discounting.discountingType,
                                                                          observedRate, null, fixingCalendar, paymentCalendar);
                             if (fOCalculationMethod)
                             {
@@ -151,7 +166,7 @@ namespace Orion.ValuationEngine.Factory
                                                                      accrualStartDate, accrualEndDate,
                                                                      rateObservation.adjustedFixingDate, dayCountFraction,
                                                                      margin, observedRate, money, paymentDate,
-                                                                     foreecastRate, null, null, null,
+                                                                     forecastRate, null, null, null,
                                                                      fixingCalendar, paymentCalendar);
                         if (fOCalculationMethod)
                         {
@@ -162,9 +177,9 @@ namespace Orion.ValuationEngine.Factory
                     }
                     throw new NotImplementedException("Need to return a rate coupon, Alex!");
                 }
-                throw new System.Exception("CalculationPeriod has neither fixedRate nor floatngRateDefinition.");
+                throw new System.Exception("CalculationPeriod has neither fixedRate nor floatingRateDefinition.");
             }
-            throw new System.Exception("PayentCalculationPeriod has zero, or multiple CalculationPeriods.");
+            throw new System.Exception("PaymentCalculationPeriod has zero, or multiple CalculationPeriods.");
         }
 
         /// <summary>
@@ -412,12 +427,12 @@ namespace Orion.ValuationEngine.Factory
         {
             bool payerIsBase = baseParty == optionPremia.payerPartyReference.href;
             var multiplier = payerIsBase ? -1.0m : 1.0m;
-            var settlemenDate = AdjustedDateHelper.GetAdjustedDate(cache, nameSpace, fixingCalendar, baseDateForRelativeOffset, optionPremia.paymentDate);
-            if (settlemenDate == null) return null;
+            var settlementDate = AdjustedDateHelper.GetAdjustedDate(cache, nameSpace, fixingCalendar, baseDateForRelativeOffset, optionPremia.paymentDate);
+            if (settlementDate == null) return null;
             var date = new PriceableFxOptionPremium("FxOptionPremiumPayment", optionPremia.payerPartyReference.href,
                                                     optionPremia.receiverPartyReference.href, payerIsBase,
                                                     MoneyHelper.Mul(optionPremia.paymentAmount, multiplier),
-                                                    (DateTime) settlemenDate, optionPremia.quote,
+                                                    (DateTime) settlementDate, optionPremia.quote,
                                                     optionPremia.settlementInformation, paymentCalendar);
             return date;
         }
@@ -474,8 +489,8 @@ namespace Orion.ValuationEngine.Factory
             if (calculationPeriods.Length == 1)
             {
                 var calculationPeriod = calculationPeriods[0];
-                var notionalamount = XsdClassesFieldResolver.CalculationPeriodGetNotionalAmount(calculationPeriod);
-                var money = payerIsBase ? MoneyHelper.GetAmount(-1 * notionalamount, currency) : MoneyHelper.GetAmount(notionalamount, currency);               
+                var notionalAmount = XsdClassesFieldResolver.CalculationPeriodGetNotionalAmount(calculationPeriod);
+                var money = payerIsBase ? MoneyHelper.GetAmount(-1 * notionalAmount, currency) : MoneyHelper.GetAmount(notionalAmount, currency);               
                 var accrualStartDate = calculationPeriod.adjustedStartDateSpecified
                                            ? calculationPeriod.adjustedStartDate
                                            : calculationPeriod.unadjustedStartDate;
@@ -488,11 +503,11 @@ namespace Orion.ValuationEngine.Factory
                 if (XsdClassesFieldResolver.CalculationPeriodHasFixedRate(calculationPeriod))
                 {
                     decimal finalRate = XsdClassesFieldResolver.CalculationPeriodGetFixedRate(calculationPeriod);
-                    //tThe discount rate must be set. It would normally be the final rate. The assumption is that, it the disounting rate is zero then the final rate should be used.
+                    //The discount rate must be set. It would normally be the final rate. The assumption is that, it the discounting rate is zero then the final rate should be used.
                     if (isThereDiscounting)
                     {
                         var discounting = XsdClassesFieldResolver.CalculationGetDiscounting(calculation);
-                        //This test works because if the rate is zero, then the coupon is not discounted and disountingType should be null.
+                        //This test works because if the rate is zero, then the coupon is not discounted and discounting Type should be null.
                         var discountRate = discounting.discountRate == 0.0m ? finalRate : discounting.discountRate;
                         rateCoupon = new PriceableFixedRateCoupon(coupon.id, payerIsBase, accrualStartDate, accrualEndDate,
                                                             dayCountFraction, finalRate, money, null, paymentDate, discounting.discountingType, discountRate,
@@ -516,7 +531,7 @@ namespace Orion.ValuationEngine.Factory
                 {
                     //The floating rate definition.
                     FloatingRateDefinition floatingRateDefinition = XsdClassesFieldResolver.CalculationPeriodGetFloatingRateDefinition(calculationPeriod);
-                    //The floatingrateCalculation.
+                    //The floating rate Calculation.
                     Debug.Assert(calculation.Items != null);
                     Debug.Assert(calculation.Items.Length > 0);
                     Debug.Assert(calculation.Items[0] is FloatingRateCalculation);
@@ -552,7 +567,7 @@ namespace Orion.ValuationEngine.Factory
                             observedRate = rateObservation.observedRate;
                         }
                         //Removed because Igor's old code populates these fields when the trade is created. This means the coupon is not recalculated!
-                        //Now the coupon will ignore any previous calculations and only treat as a fixed coupon if the observed rate has been specigficed.
+                        //Now the coupon will ignore any previous calculations and only treat as a fixed coupon if the observed rate has been specified.
                         if (isThereDiscounting)
                         {
                             var discounting = XsdClassesFieldResolver.CalculationGetDiscounting(calculation);
@@ -606,9 +621,9 @@ namespace Orion.ValuationEngine.Factory
                     }
                     throw new NotImplementedException("Need to return a rate coupon, Alex!");
                 }
-                throw new System.Exception("CalculationPeriod has neither fixedRate nor floatngRateDefinition.");
+                throw new System.Exception("CalculationPeriod has neither fixedRate nor floatingRateDefinition.");
             }
-            throw new System.Exception("PayentCalculationPeriod has zero, or multiple CalculationPeriods.");
+            throw new System.Exception("PaymentCalculationPeriod has zero, or multiple CalculationPeriods.");
         }
 
         /// <summary>

@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -191,9 +206,9 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableFloatingCashflow"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="indexType">Type of the floating index.</param>
-        /// <param name="startIndex">The start Index. If null then the cash flow is not a differenctial.</param>
+        /// <param name="startIndex">The start Index. If null then the cash flow is not a differential.</param>
         /// <param name="observedIndex">The observed index - if reset. </param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="notionalAmount">The notional amount.</param>
@@ -203,7 +218,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableFloatingCashflow
             (
-            string cashlfowId
+            string cashflowId
             , FloatingIndexType indexType
             , Decimal? startIndex
             , Decimal? observedIndex
@@ -215,7 +230,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , $"{indexType}Rate{CashflowTypeEnum.Coupon}"
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
@@ -241,10 +256,10 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableFloatingCashflow"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="indexType">Type of the floating index.</param>
         /// <param name="observedIndex">The observed index - if reset. </param>
-        /// <param name="startIndex">The start Index. If null then the cash flow is not a differenctial.</param>
+        /// <param name="startIndex">The start Index. If null then the cash flow is not a differential.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="fixingDateRelativeOffset">The fixingDateRelativeOffset.</param>
         /// <param name="notionalAmount">The notional amount.</param>
@@ -252,7 +267,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="fixingCalendar">THe fixing calendar </param>
         protected PriceableFloatingCashflow
             (
-            string cashlfowId
+            string cashflowId
             , FloatingIndexType indexType
             , Decimal startIndex
             , Decimal? observedIndex
@@ -263,7 +278,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar fixingCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , $"{indexType}RateFloatingCashflow"
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
@@ -402,7 +417,7 @@ namespace Orion.ValuationEngine.Instruments
                 CurveYearFraction =
                     YearFractionToCashFlowPayment,
                 PeriodAsTimesPerYear = 0.25m,
-                BuckettingRate = 0.05m
+                BucketingRate = 0.05m
             };
             if (modelData.MarketEnvironment is ISwapLegEnvironment environment)
             {
@@ -450,7 +465,7 @@ namespace Orion.ValuationEngine.Instruments
             var analyticsModel = new FloatingCashflowAnalytic(ModelData.ValuationDate, PaymentDate, PaymentDate, fxCurve, fxCurve, discountCurve);//TODO Fix this with a generic index curve.
             AnalyticsModel = analyticsModel;
             CalculationResults = AnalyticsModel.Calculate<IFloatingCashflowResults, FloatingCashflowResults>(AnalyticModelParameters, metrics.ToArray());
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             PaymentDiscountFactor = analyticsModel.PaymentDiscountFactor;
             ForecastAmount = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyExpectedValue, PaymentAmount.currency);
             NPV = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyNPV, PaymentAmount.currency);

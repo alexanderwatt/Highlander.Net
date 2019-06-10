@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +34,7 @@ namespace Orion.CalendarEngine.Schedulers
     public static class AdjustedDateScheduler
     {
         /// <summary>
-        /// Adjusteds the dates from termination date.
+        /// Adjusted dates from termination date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -37,7 +52,7 @@ namespace Orion.CalendarEngine.Schedulers
         }
 
         /// <summary>
-        /// Adjusteds the dates from effective date.
+        /// Adjusted dates from effective date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -65,7 +80,7 @@ namespace Orion.CalendarEngine.Schedulers
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <param name="businessCalendar">The businessCalendar.</param>
         /// <param name="businessDayConvention">The business day convention.</param>
-        /// <returns>A vertival range of dates.</returns>
+        /// <returns>A vertical range of dates.</returns>
         public static DateTime[] GetAdjustedCalculationPeriodDates(DateTime effectiveDate, DateTime terminationDate,
                                                                     string periodInterval, string rollConvention, DateTime firstRegularPeriodDate, string stubPeriodType,
                                                                     IBusinessCalendar businessCalendar, string businessDayConvention)

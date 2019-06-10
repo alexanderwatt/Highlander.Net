@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Linq;
@@ -45,7 +60,7 @@ namespace Orion.ValuationEngine.Instruments
         public ICashflowParameters AnalyticModelParameters { get; set; }
 
         /// <summary>
-        /// THe expecetd cashflow calculated  with the Multiplier.
+        /// THe expected cashflow calculated  with the Multiplier.
         /// </summary>
         public Money ForecastAmount { get; set; }
 
@@ -322,7 +337,7 @@ namespace Orion.ValuationEngine.Instruments
                 CurveYearFraction =
                     YearFractionToCashFlowPayment,
                 PeriodAsTimesPerYear = 0.25m,
-                BuckettingRate = 0.05m //TODO make this dervived from the discount factor.
+                BucketingRate = 0.05m //TODO make this dervived from the discount factor.
             };
             if (modelData.MarketEnvironment is ISwapLegEnvironment environment)
             {
@@ -364,7 +379,7 @@ namespace Orion.ValuationEngine.Instruments
             var analyticsModel = new CashflowAnalytic(ModelData.ValuationDate, PaymentDate, fxCurve, discountCurve);
             AnalyticsModel = analyticsModel;
             CalculationResults = AnalyticsModel.Calculate<ICashflowResults, RateInstrumentResults>(AnalyticModelParameters, metrics.ToArray());
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             PaymentDiscountFactor = analyticsModel.PaymentDiscountFactor;
             ForecastAmount = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyExpectedValue, PaymentAmount.currency);
             NPV = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyNPV, PaymentAmount.currency);

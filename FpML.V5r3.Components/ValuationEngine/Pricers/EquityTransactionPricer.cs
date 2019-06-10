@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -230,7 +245,7 @@ namespace Orion.ValuationEngine.Pricers
             //Add payments like the settlement price
             if (PurchasePrice == null || !PurchasePrice.amountSpecified) return;
             var amount = PurchasePrice.amount * NumberOfShares;
-            var settlementPayment = PaymentHelper.Create("EquitySettlemetAmount", BuyerReference, SellerReference, amount, SettlementDate);
+            var settlementPayment = PaymentHelper.Create("EquitySettlementAmount", BuyerReference, SellerReference, amount, SettlementDate);
             AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, PaymentCalendar);
             if (!PaymentCurrencies.Contains(settlementPayment.paymentAmount.currency.Value))
             {
@@ -257,7 +272,7 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public EquityTransaction Build()
@@ -293,7 +308,7 @@ namespace Orion.ValuationEngine.Pricers
             AnalyticsModel = new EquityTransactionAnalytic();
             //1. Create the equity
             UnderlyingEquity = new PriceableEquitySpot(modelData.ValuationDate, NumberOfShares, EquityTypeInfo, SettlementCalendar, Quote);
-            //Setting other releavnt information
+            //Setting other relevant information
             SettlementDate = UnderlyingEquity.SettlementDate;
             var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
             var metricsAsString = metrics.Select(metric => metric.ToString()).ToList();
@@ -305,7 +320,7 @@ namespace Orion.ValuationEngine.Pricers
             AnalyticModelParameters = ((PriceableEquityAssetController)UnderlyingEquity).AnalyticModelParameters;
             AnalyticsModel = ((PriceableEquityAssetController)UnderlyingEquity).AnalyticsModel;
             CalculationResults = ((PriceableEquityAssetController)UnderlyingEquity).CalculationResults;
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             return GetValue(CalculationResults, modelData.ValuationDate);
         }
 

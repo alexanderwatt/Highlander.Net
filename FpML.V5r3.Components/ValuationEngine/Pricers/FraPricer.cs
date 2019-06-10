@@ -1,3 +1,20 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,6 +45,8 @@ using Orion.ValuationEngine.Helpers;
 using Orion.CurveEngine.Markets;
 using XsdClassesFieldResolver = FpML.V5r3.Reporting.XsdClassesFieldResolver;
 
+#endregion
+
 namespace Orion.ValuationEngine.Pricers
 {
     public class FraPricer : InstrumentControllerBase, IPriceableInstrumentController<Fra>, IPriceableFra<IFraInstrumentParameters, IFraInstrumentResults>
@@ -43,7 +62,7 @@ namespace Orion.ValuationEngine.Pricers
         /// </summary>
         public Boolean ForecastRateInterpolation { get; set; }
 
-        //Prodcut parameters
+        //Product parameters
         //public FraInputRange FraInputRange { get; set; } 
         //public Fra Fra { get; set; }
 
@@ -283,13 +302,13 @@ namespace Orion.ValuationEngine.Pricers
             Fra fraFpML, String nameSpace)
         {
             var effectiveDateId = fraFpML.adjustedEffectiveDate.id;
-            var fixingdateRef = fraFpML.fixingDateOffset.dateRelativeTo.href;
+            var fixingDateRef = fraFpML.fixingDateOffset.dateRelativeTo.href;
             DateTime resetDate = fraFpML.adjustedEffectiveDate.Value;
             if (fixingCalendar == null)
             {
                 fixingCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, fraFpML.fixingDateOffset.businessCenters, nameSpace);
             }
-            if(fixingdateRef==effectiveDateId)
+            if(fixingDateRef==effectiveDateId)
             {
                 resetDate = AdjustedDateHelper.ToAdjustedDate(fixingCalendar, fraFpML.adjustedEffectiveDate.Value, fraFpML.fixingDateOffset);
             }
@@ -302,7 +321,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public Fra Build()
@@ -348,7 +367,7 @@ namespace Orion.ValuationEngine.Pricers
             var quotes = ModelData.AssetValuation.quote.ToList();
             ModelData.AssetValuation.quote = quotes.ToArray();
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new FraInstrumentAnalytic();
@@ -371,7 +390,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 ChildValuations = EvaluateChildMetrics(childControllers, modelData, Metrics);
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             ChildValuations[0].id = Id;
             return ChildValuations[0];// fraValuation;
         }
@@ -413,7 +432,7 @@ namespace Orion.ValuationEngine.Pricers
         /// Gets all the child controllers.
         ///</summary>
         ///<returns></returns>
-        public IList<IPriceableInstrumentController<PaymentCalculationPeriod>> GetInstumentControllers()
+        public IList<IPriceableInstrumentController<PaymentCalculationPeriod>> GetInstrumentControllers()
         {
             return GetChildren().Cast<IPriceableInstrumentController<PaymentCalculationPeriod>>().ToList();
         }
@@ -589,7 +608,7 @@ namespace Orion.ValuationEngine.Pricers
         protected virtual Decimal AggregateCouponMetric(InstrumentMetrics metric)
         {
             string[] metrics = { metric.ToString() };
-            var childValuations = GetChildValuations(GetInstumentControllers().ToArray(), new List<string>(metrics), ModelData);
+            var childValuations = GetChildValuations(GetInstrumentControllers().ToArray(), new List<string>(metrics), ModelData);
             decimal result = Aggregator.SumDecimals(childValuations.Select(valuation => Aggregator.SumDecimals(GetMetricResults(valuation, metric))).ToArray());
             return result;
         }
@@ -658,7 +677,7 @@ namespace Orion.ValuationEngine.Pricers
             FraInputRange fraInputRange, string[] metrics,
             NamedValueSet properties, String nameSpace)
         {
-            //get the balues reqired from the property bag.
+            //get the values required from the property bag.
             var valuationId = new ValuationReportIdentifier(properties);
             var baseParty = properties.GetString("BaseParty", true);
             var reportingCurrency = properties.GetString("ReportingCurrency", true);
@@ -675,7 +694,7 @@ namespace Orion.ValuationEngine.Pricers
             var market = CreateMarket(discountCurve, forwardCurve);
             var agreement = new FraPricer(logger, cache, null, null, fra, nameSpace);
             var modelData = CreateInstrumentModelData(metrics, fraInputRange.ValuationDate, market, reportingCurrency);
-            var asetValuation = agreement.Calculate(modelData);
+            var assetValuation = agreement.Calculate(modelData);
             //  Add forward yield curve to the market environment ...
             //
             //var forwardCurve = (IRateCurve)ObjectCacheHelper.GetPricingStructureFromSerialisable(fraInputRange.ForwardCurveId);
@@ -698,7 +717,7 @@ namespace Orion.ValuationEngine.Pricers
             var valuation = new Valuation();
             //  create ValuationReport and add it to in-memory collection.
             //
-            valuation.CreateFraValuationReport(cache, nameSpace, valuationId.UniqueIdentifier, baseParty, fra, marketFactory.Create(), asetValuation, properties);
+            valuation.CreateFraValuationReport(cache, nameSpace, valuationId.UniqueIdentifier, baseParty, fra, marketFactory.Create(), assetValuation, properties);
             return valuationId.UniqueIdentifier;
         }
 

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -98,7 +113,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableIRSwap"/> class.
         /// </summary>
-        /// <param name="amount">The ammount.</param>
+        /// <param name="amount">The amount.</param>
         /// <param name="discountingType">The discounting type.</param>
         /// <param name="effectiveDate">The base date.</param>
         /// <param name="tenor">The maturity tenor.</param>
@@ -135,7 +150,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="baseDate">The base date.</param>
         /// <param name="simpleIRSwap">This contains the minimal information for the swap.</param>
         /// <param name="spotDateOffset">All necessary data related to the spot period for the swap type.</param>
-        /// <param name="calculation">Contians information related to the floating leg.</param>
+        /// <param name="calculation">Contains information related to the floating leg.</param>
         /// <param name="businessDayAdjustments">The business day adjustments for all payments.</param>
         /// <param name="underlyingRateIndex">Index of the floating leg.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
@@ -238,7 +253,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="notional">The notional amount.</param>
         /// <param name="paymentBusinessDayAdjustments">The business day adjustments.</param>
         /// <param name="floatingLegSwap">The floating leg details.</param>
-        /// <param name="floatingLegcalculation">The floatingLegcalculation.</param>
+        /// <param name="floatingLegCalculation">The floatingLegCalculation.</param>
         /// <param name="fixingDateOffset">The fixing date business day adjustments.</param>
         /// <param name="resetRates">The reset rates of the floating leg - if any.</param>
         /// <param name="fixingCalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
@@ -247,9 +262,9 @@ namespace Orion.CurveEngine.Assets
         /// <param name="spread">The spread on the floating leg.</param>
         public PriceableIRSwap(DateTime baseDate, SimpleIRSwap fixedLegSwap, DateTime spotDate, MoneyBase notional,
                                BusinessDayAdjustments paymentBusinessDayAdjustments, SimpleIRSwap floatingLegSwap, 
-                               Calculation floatingLegcalculation, RelativeDateOffset fixingDateOffset, List<Decimal> resetRates, 
+                               Calculation floatingLegCalculation, RelativeDateOffset fixingDateOffset, List<Decimal> resetRates, 
                                IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, BasicQuotation fixedRate, BasicQuotation spread)
-            : base(baseDate, fixedLegSwap, fixingDateOffset, floatingLegcalculation, paymentBusinessDayAdjustments, null, fixingCalendar, paymentCalendar, fixedRate)
+            : base(baseDate, fixedLegSwap, fixingDateOffset, floatingLegCalculation, paymentBusinessDayAdjustments, null, fixingCalendar, paymentCalendar, fixedRate)
         {
             ModelIdentifier = DiscountingType == null ? "SwapAsset" : "DiscountSwapAsset";
             FloatingLegSpread = GetSpread(spread);
@@ -287,7 +302,7 @@ namespace Orion.CurveEngine.Assets
             ForwardRates = resetRates?.ToArray();
             FloatingLegSpread = floatingSpread;
             FloatingLegAdjustedPeriodDates = floatingDates;
-            //Exract the notional weights from the fixed calculation.
+            //Extract the notional weights from the fixed calculation.
             var fixedNotionalSchedule = (Notional)fixedCalculation.Item;
             Weightings = CreateWeightingsFromNonNegativeNotionalSchedule(fixedNotionalSchedule.notionalStepSchedule, fixedDates);
             //Extract the floating weights from the floating calculation.
@@ -318,7 +333,7 @@ namespace Orion.CurveEngine.Assets
                     break;
             }
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that all we evaluate - every other metric is ignored
             var bEvalDiscountFactorAtMaturity = false;
             if (metrics.Contains(RateMetrics.DiscountFactorAtMaturity))
             {
@@ -368,12 +383,12 @@ namespace Orion.CurveEngine.Assets
             analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             if (bEvalDiscountFactorAtMaturity)
             {
-                //3. Set the start diccount factor
+                //3. Set the start discount factor
                 analyticModelParameters.StartDiscountFactor =
                     GetDiscountFactor(curve, AdjustedStartDate, modelData.ValuationDate);
                 //4. Get the respective year fractions
                 analyticModelParameters.YearFractions = YearFractions;
-                //5. Set the anaytic input parameters and Calculate the respective metrics
+                //5. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters,
                                                                                    metricsToEvaluate);
@@ -405,7 +420,7 @@ namespace Orion.CurveEngine.Assets
                             GetDiscountFactors(forecastCurve, FloatingLegAdjustedPeriodDates.ToArray(), modelData.ValuationDate);
                 //9. Get the Spread
                 analyticModelParameters.FloatingLegSpread = FloatingLegSpread?.value ?? 0.0m;
-                //10. Set the anaytic input parameters and Calculate the respective metrics            
+                //10. Set the analytic input parameters and Calculate the respective metrics            
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters,
                                                                                    metricsToEvaluate);
@@ -416,7 +431,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <param name="discountedSpace">The OIS Space.</param>
         /// <returns></returns>
         public Decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace, IInterpolatedSpace discountedSpace)
@@ -631,7 +646,7 @@ namespace Orion.CurveEngine.Assets
             parameters.FloatingLegForecastDiscountFactors = GetDiscountFactors(forecastcurve,
                 AdjustedPeriodDates.ToArray(),
                 BaseDate);
-            //Set the anaytic input parameters and Calculate the respective metrics
+            //Set the analytic input parameters and Calculate the respective metrics
             //
             return AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(parameters, new[] { RateMetrics.NPVChange });
         }

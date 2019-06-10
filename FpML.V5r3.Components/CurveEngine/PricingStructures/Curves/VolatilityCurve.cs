@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -39,7 +54,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         #region Properties
 
         /// <summary>
-        /// The asset referenced by the cap volaility curve.
+        /// The asset referenced by the cap volatility curve.
         /// </summary>
         public AnyAssetReference Asset { get; set; }
 
@@ -54,7 +69,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         public IBusinessCalendar PaymentCalendar { get; set; }
 
         /// <summary>
-        /// The underlying vurve to use for interpolation.
+        /// The underlying curve to use for interpolation.
         /// </summary>
         public string UnderlyingInterpolatedCurve = "VolatilityCurve";
 
@@ -183,12 +198,12 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         public bool IsFixedStrikeBootstrap { get; set; }
 
         /// <summary>
-        /// The daycounter
+        /// The day counter
         /// </summary>
         public IDayCounter DayCounter { get; set; }
 
         /// <summary>
-        /// The underlying numeraire of the volaitility curve.
+        /// The underlying numeraire of the volatility curve.
         /// This would normally be a Xibor type instrument for a cap volatility curve.
         /// </summary>
         public Tuple<Asset, BasicAssetValuation> UnderlyingAssetDetails { get; set; }
@@ -244,7 +259,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 CompoundingFrequency = compoundingFrequency != null
                                            ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
                                            : GetDefaultCompounding(algorithmHolder);
-                //If there is an input propoert for extrapolation and interpolation then this overrides the algorithm configuration.
+                //If there is an input property for extrapolation and interpolation then this overrides the algorithm configuration.
                 var extrapolation = properties.GetString(CurveProp.ExtrapolationPermitted, null);
                 ExtrapolationPermittedInput = extrapolation != null ? bool.Parse(extrapolation) : GetDefaultExtrapolationFlag(algorithmHolder);                
                 var interpolation = properties.GetString(CurveProp.BootstrapperInterpolation, null) ?? GetDefaultInterpolationMethod(algorithmHolder);
@@ -305,7 +320,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         protected VolatilityCurve(ILogger logger, ICoreCache cache, String nameSpace, 
@@ -374,7 +389,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         {
             //1. Find the underlying asset of the volatility curve. This should be a Xibor type of 1M, 1M or 6M tenor.
             var assetId = Asset?.href;         
-            //3. Create the asset-basicassetvaluation pair.
+            //3. Create the asset-basic asset valuation pair.
             var asset = AssetHelper.Parse(assetId, .05m, 0.0m);
             var result = new Tuple<Asset, BasicAssetValuation>(asset.First, asset.Second) ;
             return result;
@@ -526,7 +541,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             }
             var underlyingCurve = ParseUnderlyingCurve(UnderlyingInterpolatedCurve);
             // interpolate the curve based on the respective curve interpolation 
-            if (underlyingCurve == UnderyingCurveTypes.VolatilityCurve)
+            if (underlyingCurve == UnderlyingCurveTypes.VolatilityCurve)
             {
                 var interpolationMethod = InterpolationMethod;
                 var extrapolationPermitted = ExtrapolationPermittedInput ?? ExtrapolationPermitted;
@@ -720,7 +735,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
 
         //TODO Get RId of This!!!!!
         /// <summary>
-        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measuretype to determine which one.
+        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measure type to determine which one.
         /// The original curve is modified. This does not create a copy!!
         /// </summary>
         /// <param name="logger">The logger.</param>
@@ -900,9 +915,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// </summary>
         /// <param name="underlyingCurveAsString">The underlying curve.</param>
         /// <returns></returns>
-        protected static UnderyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
+        protected static UnderlyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
         {
-            return EnumHelper.Parse<UnderyingCurveTypes>(underlyingCurveAsString);
+            return EnumHelper.Parse<UnderlyingCurveTypes>(underlyingCurveAsString);
         }
 
         #endregion

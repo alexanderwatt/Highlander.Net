@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -14,30 +29,30 @@ namespace Orion.ValuationEngine.Helpers
         public int Compare(CashflowCombined x, CashflowCombined y)
         {
             if (
-                x.AccrualStartDate == y.AccrualStartDate
-                &&
-                x.AccrualEndDate == y.AccrualEndDate
-                &&
-                x.PaymentDate == y.PaymentDate
-                &&
-                x.YearFraction == y.YearFraction
+                y != null && x != null && (x.AccrualStartDate == y.AccrualStartDate
+                                           &&
+                                           x.AccrualEndDate == y.AccrualEndDate
+                                           &&
+                                           x.PaymentDate == y.PaymentDate
+                                           &&
+                                           x.YearFraction == y.YearFraction)
                 )
             {
                 return 0;
             }
-            if (x.PaymentDate != y.PaymentDate)
+            if (y != null && x != null && x.PaymentDate != y.PaymentDate)
             {
                 return DateTime.Compare(x.PaymentDate, y.PaymentDate);
             }
-            if (x.AccrualEndDate != y.AccrualEndDate)
+            if (y != null && x != null && x.AccrualEndDate != y.AccrualEndDate)
             {
                 return DateTime.Compare(x.AccrualEndDate, y.AccrualEndDate);
             }
-            if (x.AccrualStartDate != y.AccrualStartDate)
+            if (y != null && x != null && x.AccrualStartDate != y.AccrualStartDate)
             {
                 return DateTime.Compare(x.AccrualStartDate, y.AccrualStartDate);
             }
-            if (x.YearFraction != y.YearFraction)
+            if (y != null && (x != null && x.YearFraction != y.YearFraction))
             {
                 return x.YearFraction > y.YearFraction ? 1 : 0;
             }

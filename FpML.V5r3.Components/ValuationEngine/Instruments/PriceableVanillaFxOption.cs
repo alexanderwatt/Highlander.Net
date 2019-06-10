@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Linq;
@@ -58,7 +73,7 @@ namespace Orion.ValuationEngine.Instruments
         #region Constructors
 
         /// <summary>
-        /// The defualt type is a cap.
+        /// The default type is a cap.
         /// </summary>
         public PriceableVanillaFxOption()
         {
@@ -68,9 +83,9 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableVanillaFxOption"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
-        /// <param name="startIndex">The start Index. If null then the cash flow is not a differenctial.</param>
-        /// <param name="observedIndex">The observed Index. If null then the cash flow is not a differenctial. </param>
+        /// <param name="cashflowId">The stream id.</param>
+        /// <param name="startIndex">The start Index. If null then the cash flow is not a differential.</param>
+        /// <param name="observedIndex">The observed Index. If null then the cash flow is not a differential. </param>
         /// <param name="isCurrency1Base">The isCurrency1Base flag. </param>
         /// <param name="currency2PayerIsBase">The currency2PayerIsBase lag.</param>
         /// <param name="isSettlementInCurrency1">The isSettlementInCurrency1 flag</param>
@@ -84,7 +99,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableVanillaFxOption
             (
-            string cashlfowId
+            string cashflowId
             , FxRate startIndex
             , FxRate observedIndex
             , bool isCurrency1Base
@@ -100,7 +115,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , startIndex
                 , observedIndex
                 , isCurrency1Base
@@ -174,7 +189,7 @@ namespace Orion.ValuationEngine.Instruments
             bool delta0PDH = AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.LocalCurrencyDelta0PDH.ToString()) != null
                 || AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.Delta0PDH.ToString()) != null;
             ModelData.AssetValuation.quote = quotes.ToArray();
-            //Set the cash flowdetails.
+            //Set the cash flow details.
             HasReset = modelData.ValuationDate > ResetDate;
             IsRealised = HasBeenRealised(ModelData.ValuationDate);
             TimeToExpiry = GetPaymentYearFraction(ModelData.ValuationDate, AdjustedFixingDate);
@@ -266,7 +281,7 @@ namespace Orion.ValuationEngine.Instruments
             CalculationResults =
                 AnalyticsModel.Calculate<IFloatingCashflowResults, FloatingCashflowResults>(
                     AnalyticModelParameters, metrics.ToArray());
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             PaymentDiscountFactor = ((FxRateCashflowAnalytic)AnalyticsModel).PaymentDiscountFactor;
             ForecastAmount = MoneyHelper.GetAmount(CalculationResults.LocalCurrencyExpectedValue,
                                                    PaymentAmount.currency);

@@ -1,4 +1,19 @@
-﻿#region usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region usings
 
 using System;
 using Orion.Models.Generic.Coupons;
@@ -90,9 +105,9 @@ namespace Orion.Models.Rates.Coupons
         Decimal Premium { get; set; }
 
         /// <summary>
-        /// Gets or sets the iscall flag.
+        /// Gets or sets the isCall flag.
         /// </summary>
-        /// <value>The iscall flag.</value>
+        /// <value>The isCall flag.</value>
         bool IsCall { get; set; }
 
         /// <summary>
@@ -100,6 +115,5 @@ namespace Orion.Models.Rates.Coupons
         /// </summary>
         /// <value>The expiry year fraction.</value>
         Decimal ExpiryYearFraction { get; set; }
-
     }
 }

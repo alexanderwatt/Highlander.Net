@@ -3090,10 +3090,10 @@ namespace HLV5r3.Financial
             var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
-            List<AmortResultItem> payRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(payrolls);
-            List<AmortResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(recrolls);
+            List<AmortisingResultItem> payRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
+            List<AmortisingResultItem> receiveRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             double fixedRate = BillsSwapPricer2.CalculateFixedRate(valuationDate, floatMargin, payTermsFormat, payRollsFormat, receiveTermsFormat,
                 receiveRollsFormat, rc, bulletPaymentDate, bulletPaymentValue);
@@ -3125,10 +3125,10 @@ namespace HLV5r3.Financial
             var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
-            List<AmortResultItem> payRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(payrolls);
-            List<AmortResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(recrolls);
+            List<AmortisingResultItem> payRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
+            List<AmortisingResultItem> receiveRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             double fixedSidePV = BillsSwapPricer2.CalculateFixedSidePV(valuationDate, floatMargin, fixedRate,
                 payTermsFormat, payRollsFormat, receiveTermsFormat, receiveRollsFormat, rc, bulletPaymentDate, bulletPaymentValue);
@@ -3162,10 +3162,10 @@ namespace HLV5r3.Financial
             var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
-            List<AmortResultItem> payRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(payrolls);
-            List<AmortResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(recrolls);
+            List<AmortisingResultItem> payRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
+            List<AmortisingResultItem> receiveRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             var sensititity = BillsSwapPricer2.CalculateFixedSideSensitivity(valuationDate,
                 floatMargin, fixedRate, payTermsFormat, payRollsFormat, receiveTermsFormat, receiveRollsFormat, rc,
@@ -3204,10 +3204,10 @@ namespace HLV5r3.Financial
             var instruments = listInstrumentIdAndQuotes.Value[System.Reflection.Missing.Value] as object[,];
             var perturbations = listPerturbations.Value[System.Reflection.Missing.Value] as object[,];
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
-            List<AmortResultItem> payRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(payrolls);
-            List<AmortResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(recrolls);
+            List<AmortisingResultItem> payRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
+            List<AmortisingResultItem> receiveRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotesFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<InstrumentIdAndQuoteRangeItem>(instruments);
             List<DoubleRangeItem> listPerturbationsFormat =
@@ -3252,10 +3252,10 @@ namespace HLV5r3.Financial
             var perturbations = listPerturbations.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
-            List<AmortResultItem> payRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(payrolls);
-            List<AmortResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(recrolls);
+            List<AmortisingResultItem> payRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
+            List<AmortisingResultItem> receiveRollsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotesFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<InstrumentIdAndQuoteRangeItem>(instruments);
             List<DoubleRangeItem> listPerturbationsFormat =
@@ -3278,8 +3278,8 @@ namespace HLV5r3.Financial
             var cash = cashflowsSchedule.Value[System.Reflection.Missing.Value] as object[,];
             var t = terms.Value[System.Reflection.Missing.Value] as object[,];
             var termsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(t));
-            List<AmortResultItem> cashflowsScheduleFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(cash);
+            List<AmortisingResultItem> cashflowsScheduleFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(cash);
             double effectiveFrequency = BillsSwapPricer2.GetEffectiveFrequency(cashflowsScheduleFormat, termsFormat);
             return effectiveFrequency;
         }
@@ -3311,10 +3311,10 @@ namespace HLV5r3.Financial
         {
             var termsr = cfItems.Value[System.Reflection.Missing.Value] as object[,];
             var amort = amortSchedule.Value[System.Reflection.Missing.Value] as object[,];
-            List<AmortResultItem> cfItemsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortResultItem>(termsr);
-            List<AmortScheduleItem> amortScheduleFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortScheduleItem>(amort);
+            List<AmortisingResultItem> cfItemsFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(termsr);
+            List<AmortisingScheduleItem> amortScheduleFormat =
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingScheduleItem>(amort);
             var amortizationSchedule = BillsSwapPricer2.GenerateAmortisationSchedule(cfItemsFormat, amortScheduleFormat);
             object[,] result = ObjectToArrayOfPropertiesConverter.ConvertListToHorizontalArrayRange(amortizationSchedule);
             return result;

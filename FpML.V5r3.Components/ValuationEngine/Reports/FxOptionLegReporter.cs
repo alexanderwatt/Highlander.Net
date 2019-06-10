@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System.Diagnostics;
@@ -18,10 +33,10 @@ namespace Orion.ValuationEngine.Reports
     {
         public override object DoReport(InstrumentControllerBase priceable)
         {
-            if (priceable is VanillaEuropeanFxOptionPricer fxswap)
+            if (priceable is VanillaEuropeanFxOptionPricer fxSwap)
             {
-                Debug.Print("Payment {0} coupons", fxswap.GetChildren().Count);
-                foreach (var cashflow in fxswap.GetChildren())
+                Debug.Print("Payment {0} coupons", fxSwap.GetChildren().Count);
+                foreach (var cashflow in fxSwap.GetChildren())
                 {
                     var flow = (PriceableCashflow)cashflow;
                     var forecast = flow.ForecastAmount ?? new Money();
@@ -34,12 +49,12 @@ namespace Orion.ValuationEngine.Reports
 
         public override object[,] DoXLReport(InstrumentControllerBase pricer)
         {
-            if (pricer is VanillaEuropeanFxOptionPricer fxswap)
+            if (pricer is VanillaEuropeanFxOptionPricer fxSwap)
             {
-                var result = new object[fxswap.GetChildren().Count, 5];
+                var result = new object[fxSwap.GetChildren().Count, 5];
 
                 var index = 0;
-                foreach (var cashflow in fxswap.GetChildren())
+                foreach (var cashflow in fxSwap.GetChildren())
                 {
                     var flow = (PriceableCashflow)cashflow;
                     result[index, 0] = flow.CashflowType.Value;

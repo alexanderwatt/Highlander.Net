@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -117,11 +132,11 @@ namespace Orion.ValuationEngine.Pricers
             //Resolve the payer
             if (capFloorFpML.capFloorStream == null) return;
             var calculation = capFloorFpML.capFloorStream.calculationPeriodAmount.Item as Calculation;
-            var floatingRatecalculation = calculation?.Items[0] as FloatingRateCalculation;
-            if (floatingRatecalculation == null) return;
-            if (floatingRatecalculation.capRateSchedule != null)
+            var floatingRateCalculation = calculation?.Items[0] as FloatingRateCalculation;
+            if (floatingRateCalculation == null) return;
+            if (floatingRateCalculation.capRateSchedule != null)
             {
-                var schedule = floatingRatecalculation.capRateSchedule[0];
+                var schedule = floatingRateCalculation.capRateSchedule[0];
                 var buyerPartyReference = schedule.buyer.Value;
                 if (buyerPartyReference == PayerReceiverEnum.Receiver)
                 {
@@ -134,9 +149,9 @@ namespace Orion.ValuationEngine.Pricers
                     SellerPartyReference = capFloorFpML.capFloorStream.receiverPartyReference.href;
                 }
             }
-            if (floatingRatecalculation.capRateSchedule == null && floatingRatecalculation.floorRateSchedule != null)
+            if (floatingRateCalculation.capRateSchedule == null && floatingRateCalculation.floorRateSchedule != null)
             {
-                var schedule = floatingRatecalculation.floorRateSchedule[0];
+                var schedule = floatingRateCalculation.floorRateSchedule[0];
                 var buyerPartyReference = schedule.buyer.Value;
                 if (buyerPartyReference == PayerReceiverEnum.Receiver)
                 {
@@ -187,7 +202,7 @@ namespace Orion.ValuationEngine.Pricers
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new CapFloorInstrumentAnalytic();
@@ -242,7 +257,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 swapValuation = childControllerValuations;
             }
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             swapValuation.id = Id;
             return swapValuation;
         }
@@ -262,7 +277,7 @@ namespace Orion.ValuationEngine.Pricers
 
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public new CapFloor Build()
@@ -481,7 +496,7 @@ namespace Orion.ValuationEngine.Pricers
             )
         {
             //Check if the calendars are null. If not build them!
-            InterestRateStream stream1 = GetCashflowsSchedule(null, null, capFloorParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule(null, null, capFloorParametersRange);//parametric definition + cashflows schedule
             // Update FpML cashflows
             //
             stream1.cashflows = UpdateCashflowsWithDetailedCashflows(capFloorDetailedCashflowsList);
@@ -535,7 +550,7 @@ namespace Orion.ValuationEngine.Pricers
             )
         {
             //Check if the calendars are null. If not build them!
-            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definition + cashflows schedule
             // Update FpML cashflows
             //
             stream1.cashflows = UpdateCashflowsWithDetailedCashflows(leg1DetailedCashflowsList);
@@ -704,7 +719,7 @@ namespace Orion.ValuationEngine.Pricers
             {
                 return "Floor";
             }
-            throw new System.Exception("Invalid coupond type. Only Cap & Floor coupons are expected here.");
+            throw new System.Exception("Invalid coupon type. Only Cap & Floor coupons are expected here.");
         }
 
         private static InterestRateStream GetCashflowsScheduleWithNotionalSchedule(

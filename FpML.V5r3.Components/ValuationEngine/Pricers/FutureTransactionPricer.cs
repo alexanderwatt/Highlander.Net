@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -245,9 +260,9 @@ namespace Orion.ValuationEngine.Pricers
             FuturesTypeInfo = new FutureNodeStruct();
             var exchangeMICData = InstrumentDataHelper.CreateEquityExchangeKey(nameSpace, exchangeMIC.Value);
             var exchangeData = cache.LoadItem<ExchangeConfigData>(exchangeMICData);
-            if (exchangeData?.Data is ExchangeConfigData)
+            if (exchangeData?.Data is ExchangeConfigData data)
             {
-                Exchange = (ExchangeConfigData) exchangeData.Data;
+                Exchange = data;
                 FuturesTypeInfo.SpotDate = Exchange.SettlementDate;           
             }
             if (futureFpML.future != null)
@@ -289,7 +304,7 @@ namespace Orion.ValuationEngine.Pricers
             //Add payments like the settlement price
             if (!PurchasePrice.amountSpecified) return;
             var amount = PurchasePrice.amount * NumberOfContracts / 100;
-            var settlementPayment = PaymentHelper.Create("FuturesSettlemetAmount", BuyerReference, SellerReference, amount, SettlementDate);
+            var settlementPayment = PaymentHelper.Create("FuturesSettlementAmount", BuyerReference, SellerReference, amount, SettlementDate);
             AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, SettlementCalendar);
             if (!PaymentCurrencies.Contains(settlementPayment.paymentAmount.currency.Value))
             {
@@ -316,7 +331,7 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public FutureTransaction Build()
@@ -379,14 +394,14 @@ namespace Orion.ValuationEngine.Pricers
             AnalyticModelParameters.NumberOfContracts = NumberOfContracts;
             AnalyticModelParameters.TradePrice = PurchasePrice.amount;
             AnalyticModelParameters.ContractNotional = Convert.ToDecimal(FuturesTypeInfo.Future.multiplier);
-            //Get the discountfactor to the settlemetn date
+            //Get the discount factor to the settlement date
             if (futuresCurve != null)
                 AnalyticModelParameters.Quote = Convert.ToDecimal(futuresCurve.GetForward(LastTradeDate));
             AnalyticResults =
                 AnalyticsModel.Calculate<IFuturesAssetResults, FuturesAssetResults>(AnalyticModelParameters,
                     metricsAsArray);
             // store inputs and results from this run
-            CalculationPerfomedIndicator = true;
+            CalculationPerformedIndicator = true;
             return GetValue(CalculationResults, modelData.ValuationDate);
         }
 
@@ -424,7 +439,7 @@ namespace Orion.ValuationEngine.Pricers
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
-            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out DateTime firstRegularPeriodStartDate, out DateTime lastRegularPeriodEndDate));
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             return bucketDates.ToArray();
         }
 

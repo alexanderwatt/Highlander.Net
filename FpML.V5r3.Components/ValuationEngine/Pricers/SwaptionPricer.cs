@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -201,7 +216,7 @@ namespace Orion.ValuationEngine.Pricers
                 ExerciseType = ExerciseType.European;
                 Exercise = exercise;
                 var exerciseDate = AdjustedDateHelper.ToAdjustedDate(cache, null, exercise.expirationDate, nameSpace);
-                ExerciseDates = new[] { exerciseDate };//TODO Only does adjustabledate exercise.
+                ExerciseDates = new[] { exerciseDate };//TODO Only does adjustable date exercise.
             }
 
             if (swaptionFpML.exerciseProcedure?.Item is AutomaticExercise)
@@ -255,7 +270,7 @@ namespace Orion.ValuationEngine.Pricers
                 ExerciseType = ExerciseType.European;
                 Exercise = exercise;
                 var exerciseDate = AdjustedDateHelper.ToAdjustedDate(cache, null, exercise.expirationDate, nameSpace);
-                ExerciseDates = new[] { exerciseDate };//TODO Only does adjustabledate exercise
+                ExerciseDates = new[] { exerciseDate };//TODO Only does adjustable date exercise
             }
 
             if (swaptionFpML.exerciseProcedure?.Item is AutomaticExercise)
@@ -306,7 +321,7 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         /// <summary>
-        /// Builds this instance and retruns the underlying instrument associated with the controller
+        /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
         public Swaption Build()
@@ -427,7 +442,7 @@ namespace Orion.ValuationEngine.Pricers
             var swaption = SwaptionFactory.Create(swap, premium, swaptionParametersRange.PremiumPayer, swaptionParametersRange.PremiumReceiver,
                                                                               paymentDate, expirationDate,
                                                                               earliestExerciseTime, expirationTime, swaptionParametersRange.AutomaticExcercise);
-            // overrides the premium created by SwaptionFactort.Create
+            // overrides the premium created by SwaptionFactory.Create
             //
             var feeList = new List<Payment>();
             if (null != feePaymentList)
@@ -474,8 +489,8 @@ namespace Orion.ValuationEngine.Pricers
             //
             //
             //
-            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definiton + cashflows schedule
-            InterestRateStream stream2 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg2ParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definition + cashflows schedule
+            InterestRateStream stream2 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg2ParametersRange);//parametric definition + cashflows schedule
             var swap = SwapFactory.Create(stream1, stream2);
             // Update FpML cashflows
             //

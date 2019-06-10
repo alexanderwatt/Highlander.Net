@@ -80,7 +80,7 @@ namespace HLV5r3.Analytics
         /// <param name="yearFraction">The year fraction.</param>
         /// <param name="rate">the rate.</param>
         /// <returns></returns>
-        public Decimal GetDeltaZeroRate(decimal discountFactor, decimal yearFraction, decimal rate)
+        public decimal GetDeltaZeroRate(decimal discountFactor, decimal yearFraction, decimal rate)
         {
             return RateAnalytics.GetDeltaZeroRate(discountFactor, yearFraction, rate);
         }
@@ -92,7 +92,7 @@ namespace HLV5r3.Analytics
         /// <param name="yearFraction">The year fraction.</param>
         /// <param name="rate">the rate.</param>
         /// <returns></returns>
-        public Decimal GetDFAtMaturity(decimal startDiscountFactor, decimal yearFraction, decimal rate)
+        public decimal GetDFAtMaturity(decimal startDiscountFactor, decimal yearFraction, decimal rate)
         {
             return RateAnalytics.GetDiscountFactorAtMaturity(startDiscountFactor, yearFraction, rate); 
         }
@@ -104,7 +104,7 @@ namespace HLV5r3.Analytics
         /// <param name="endDiscountFactor">The end discount factor.</param>
         /// <param name="yearFraction">The year fraction.</param>
         /// <returns></returns>
-        public Decimal GetRate(Decimal startDiscountFactor, Decimal endDiscountFactor, Decimal yearFraction)
+        public decimal GetRate(decimal startDiscountFactor, decimal endDiscountFactor, decimal yearFraction)
         {
             return RateAnalytics.GetRate(startDiscountFactor, endDiscountFactor, yearFraction);
         }
@@ -113,7 +113,7 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        public static Decimal GetDelta1(Decimal npv, Decimal curveYearFraction, Decimal rate, Decimal yearFraction)
+        public static decimal GetDelta1(decimal npv, decimal curveYearFraction, decimal rate, decimal yearFraction)
         {
             return RateAnalytics.GetDelta1(npv, curveYearFraction, rate,yearFraction);
         }
@@ -122,7 +122,7 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the continuously compounding rate R.
         /// </summary>
         /// <returns></returns>
-        public Decimal GetDeltaCCR(Decimal npv, Decimal curveYearFraction, Decimal rate, Decimal yearFraction)
+        public decimal GetDeltaCCR(decimal npv, decimal curveYearFraction, decimal rate, decimal yearFraction)
         {
             return RateAnalytics.GetDeltaCcr(npv, curveYearFraction, rate, yearFraction);
         }
@@ -133,10 +133,10 @@ namespace HLV5r3.Analytics
         /// <param name="pt">The pt.</param>
         /// <param name="interpolationType">The interpolation.</param>
         /// <param name="extrapolation">if set to <c>true</c> [extrapolation].</param>
-        /// <param name="times">A vetical array of times.</param>
+        /// <param name="times">A vertical array of times.</param>
         /// <param name="values">A vertical array of values.</param>
         /// <returns>The value at that point.</returns>
-        public Double GetPointValue(Double pt, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
+        public double GetPointValue(double pt, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
         {
             List<double> unqtimes = DataRangeHelper.StripDoubleRange(times);
             List<double> unqvalues = DataRangeHelper.StripDoubleRange(values);
@@ -150,10 +150,10 @@ namespace HLV5r3.Analytics
         ///<param name="targetDate">The target date.</param>
         /// <param name="interpolationType">The interpolation.</param>
         /// <param name="extrapolation">if set to <c>true</c> [extrapolation].</param>
-        /// <param name="times">A vetical array of times.</param>
+        /// <param name="times">A vertical array of times.</param>
         /// <param name="values">A vertical array of values.</param>
         /// <returns>The value at that point.</returns>
-        public Double GetDateValue(DateTime baseDate, DateTime targetDate, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
+        public double GetDateValue(DateTime baseDate, DateTime targetDate, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
         {
             List<double> unqtimes = DataRangeHelper.StripDoubleRange(times);
             List<double> unqvalues = DataRangeHelper.StripDoubleRange(values);
@@ -170,7 +170,7 @@ namespace HLV5r3.Analytics
         /// Semi-Annual,SemiAnnual,Semi and Annual.</param>
         ///<param name="baseDate">The base date.</param>
         ///<returns>The compounded zero rate requested.</returns>
-        public double DiscountFactorToZeroRate1(DateTime baseDate, DateTime targetDate, double discountFactor, String frequency)
+        public double DiscountFactorToZeroRate1(DateTime baseDate, DateTime targetDate, double discountFactor, string frequency)
         {
             double yearFraction = Actual365.Instance.YearFraction(baseDate, targetDate);
             return RateAnalytics.DiscountFactorToZeroRate(discountFactor, yearFraction, frequency);
@@ -199,7 +199,7 @@ namespace HLV5r3.Analytics
         ///<param name="frequency">The compounding frequency. Can take: Continuous, Daily, Quarterly,
         /// Semi-Annual,SemiAnnual,Semi and Annual</param>
         ///<returns>The compounded zero rate requested.</returns>
-        public double DiscountFactorToZeroRate3(double yearFraction, double discountFactor, String frequency)
+        public double DiscountFactorToZeroRate3(double yearFraction, double discountFactor, string frequency)
         {
             return RateAnalytics.DiscountFactorToZeroRate(discountFactor, yearFraction, frequency);
         }

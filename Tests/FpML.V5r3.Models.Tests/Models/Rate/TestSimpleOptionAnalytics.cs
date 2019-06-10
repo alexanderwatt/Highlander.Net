@@ -17,7 +17,7 @@ namespace Orion.V5r3.Models.Tests.Models.Rate
             {
                 ISimpleOptionAssetParameters analyticModelParameters = new SimpleRateOptionAssetParameters
                                                                            {
-                                                                               IsVolatiltiyQuote = true,
+                                                                               IsVolatilityQuote = true,
                                                                                NotionalAmount = 10000000.0m,
                                                                                Rate = .05m,
                                                                                IsDiscounted = false,

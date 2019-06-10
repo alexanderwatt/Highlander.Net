@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -172,8 +187,7 @@ namespace Orion.CurveEngine.Helpers
         {
             foreach (object fieldAsObject in listOfFields)
             {
-                var s = fieldAsObject as string;
-                if (s != null)
+                if (fieldAsObject is string s)
                 {
                     var fieldAsString = s;
                     if (!String.IsNullOrEmpty(fieldAsString))
@@ -183,7 +197,7 @@ namespace Orion.CurveEngine.Helpers
                 }
                 else
                 {
-                    return false;//at least one fiels is not string at all
+                    return false;//at least one field is not string at all
                 }
             }
             return true;
@@ -234,8 +248,7 @@ namespace Orion.CurveEngine.Helpers
             var result = new List<T>();
             foreach(var listOfProperties in listOfListOfFields)
             {
-                bool error;
-                var obj = CreateObject<T>(listOfProperties, out error);
+                var obj = CreateObject<T>(listOfProperties, out var error);
                 if (!error)
                 {
                     if (null != obj)
@@ -258,8 +271,7 @@ namespace Orion.CurveEngine.Helpers
             int numberOfObjects = 1;
             FieldInfo[] fields          = typeof(T).GetFields();
             PropertyInfo[] properties   = typeof(T).GetProperties();
-            var list1 = obj as IList;
-            if (list1 != null)
+            if (obj is IList list1)
             {
                 numberOfObjects = list1.Count;
                 object arrayItemObject = list1[0];
@@ -271,8 +283,7 @@ namespace Orion.CurveEngine.Helpers
                 for (int objectNumber = 0; objectNumber < numberOfObjects; ++objectNumber)
                 {
                     object objectToExtractValuesFrom = obj;
-                    var list = obj as IList;
-                    if (list != null)
+                    if (obj is IList list)
                     {                       
                         objectToExtractValuesFrom = list[objectNumber];
                     }
@@ -285,8 +296,7 @@ namespace Orion.CurveEngine.Helpers
                 for (int objectNumber = 0; objectNumber < numberOfObjects; ++objectNumber)
                 {
                     object objectToExtractValuesFrom = obj;
-                    var list = obj as IList;
-                    if (list != null)
+                    if (obj is IList list)
                     {
                         objectToExtractValuesFrom = list[objectNumber];
                     }

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -14,7 +29,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using FpML.V5r3.Reporting;
 using Orion.Analytics.Options;
-using Orion.CurveEngine.PricingStructures.Bootstrappers.Volatility;
+using Orion.CurveEngine.PricingStructures.Bootstrappers;
 using Orion.Identifiers;
 using Orion.ModelFramework;
 using Orion.ModelFramework.Assets;
@@ -176,7 +191,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public GenericVolatilityCurve(ILogger logger, ICoreCache cache, String nameSpace, 
@@ -248,10 +263,10 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// Creates the basic rate curve risk set, using the current curve as the base curve.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <returns>A list of perturbed rate curves</returns>
         public override List<IPricingStructure> CreateCurveRiskSet(decimal basisPointPerturbation)
         {
             if (PriceableOptionAssets == null) return null;

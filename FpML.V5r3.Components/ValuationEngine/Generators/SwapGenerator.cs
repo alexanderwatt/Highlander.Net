@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -28,7 +43,7 @@ namespace Orion.ValuationEngine.Generators
         /// <param name="leg1Parameters"></param>
         /// <param name="leg2Parameters"></param>
         /// <returns></returns>
-        public static Swap GenerateDefiniton(
+        public static Swap GenerateDefinition(
             SwapLegParametersRange leg1Parameters,
 
             SwapLegParametersRange leg2Parameters)
@@ -106,7 +121,7 @@ namespace Orion.ValuationEngine.Generators
                     leg2FixingCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, fixingCalendar, nameSpace);
                 }
             }
-            var swap = GenerateDefiniton(leg1Parameters, leg2Parameters);           
+            var swap = GenerateDefinition(leg1Parameters, leg2Parameters);           
             InterestRateStream stream1 = swap.swapStream[0];
             InterestRateStream stream2 = swap.swapStream[1];
             if (null != fixedRateSchedule)
@@ -253,8 +268,7 @@ namespace Orion.ValuationEngine.Generators
                 }
                 if (paymentCalendar == null)
                 {
-                    object dateAdjustments;
-                    var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out dateAdjustments);
+                    var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out var dateAdjustments);
                     if (containsPaymentDateAdjustments && dateAdjustments != null)
                     {
                         paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, ((BusinessDayAdjustments)dateAdjustments).
@@ -292,8 +306,7 @@ namespace Orion.ValuationEngine.Generators
                     }
                     if (paymentCalendar == null)
                     {
-                        object dateAdjustments;
-                        var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out dateAdjustments);
+                        var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out var dateAdjustments);
                         if (containsPaymentDateAdjustments && dateAdjustments != null)
                         {
                             paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, ((BusinessDayAdjustments)dateAdjustments).
@@ -391,8 +404,7 @@ namespace Orion.ValuationEngine.Generators
                 }
                 if (paymentCalendar == null)
                 {
-                    object dateAdjustments;
-                    var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out dateAdjustments);
+                    var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out var dateAdjustments);
                     if (containsPaymentDateAdjustments && dateAdjustments != null)
                     {
                         paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, ((BusinessDayAdjustments)dateAdjustments).
@@ -432,8 +444,7 @@ namespace Orion.ValuationEngine.Generators
                     }
                     if (paymentCalendar == null)
                     {
-                        object dateAdjustments;
-                        var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out dateAdjustments);
+                        var containsPaymentDateAdjustments = AdjustableOrAdjustedDateHelper.Contains(payment.paymentDate, ItemsChoiceType.dateAdjustments, out var dateAdjustments);
                         if (containsPaymentDateAdjustments && dateAdjustments != null)
                         {
                             paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, ((BusinessDayAdjustments)dateAdjustments).

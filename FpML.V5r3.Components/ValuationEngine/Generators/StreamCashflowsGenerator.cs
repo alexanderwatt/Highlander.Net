@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -22,7 +37,8 @@ namespace Orion.ValuationEngine.Generators
             var result = new List<List<CalculationPeriod>>();
             if (0 != calculationPeriods.CalculationPeriods.Count % calculationPeriodsInPaymentPeriod)
             {
-                throw new System.Exception(String.Format("Invalid number of calculation periods {0}. Calculation periods per payment period : {1}", calculationPeriods.CalculationPeriods.Count, calculationPeriodsInPaymentPeriod));
+                throw new System.Exception(
+                    $"Invalid number of calculation periods {calculationPeriods.CalculationPeriods.Count}. Calculation periods per payment period : {calculationPeriodsInPaymentPeriod}");
             }
             int calculationPeriodIndex = 0;
             while (calculationPeriodIndex < calculationPeriods.CalculationPeriods.Count)
@@ -59,7 +75,8 @@ namespace Orion.ValuationEngine.Generators
             //or one that is not a multiple of the calculation period frequency is invalid.
             if (paymentFrequency.period != calculationPeriodFrequency.period)
             {
-                throw new NotSupportedException(String.Format("Payment period type ({0}) and calculation period type ({1}) are different. This is not supported.", paymentFrequency.period, calculationPeriodFrequency.period));
+                throw new NotSupportedException(
+                    $"Payment period type ({paymentFrequency.period}) and calculation period type ({calculationPeriodFrequency.period}) are different. This is not supported.");
             }
             if (0 != int.Parse(paymentFrequency.periodMultiplier) % int.Parse(calculationPeriodFrequency.periodMultiplier))
             {
@@ -100,18 +117,18 @@ namespace Orion.ValuationEngine.Generators
             }
             //  Regular periods
             //
-            foreach (List<CalculationPeriod> calculationPeriodsInPamentPeriod in listOfCalculationPeriodsInSinglePayPeriod)
+            foreach (List<CalculationPeriod> calculationPeriodsInPayPeriod in listOfCalculationPeriodsInSinglePayPeriod)
             {
                 var paymentCalculationPeriod = new PaymentCalculationPeriod
                                                    {
                                                        adjustedPaymentDate =
                                                            CalculatePaymentDate(paymentDates, payRelativeTo,
-                                                                                calculationPeriodsInPamentPeriod,
+                                                                                calculationPeriodsInPayPeriod,
                                                                                 paymentDaysOffset,
                                                                                 paymentDatesBusinessDayAdjustments, paymentCalendar),
                                                        adjustedPaymentDateSpecified = true
                                                    };
-                XsdClassesFieldResolver.SetPaymentCalculationPeriodCalculationPeriodArray(paymentCalculationPeriod, calculationPeriodsInPamentPeriod.ToArray());
+                XsdClassesFieldResolver.SetPaymentCalculationPeriodCalculationPeriodArray(paymentCalculationPeriod, calculationPeriodsInPayPeriod.ToArray());
                 result.Add(paymentCalculationPeriod);
             }
             // Final stub
@@ -139,7 +156,7 @@ namespace Orion.ValuationEngine.Generators
 
         private static DateTime CalculatePaymentDate(PaymentDates paymentDates, 
                                                      PayRelativeToEnum payRelativeTo, 
-                                                     IList<CalculationPeriod> calculationPeriodsInPamentPeriod, 
+                                                     IList<CalculationPeriod> calculationPeriodsInPayPeriod, 
                                                      Offset paymentDaysOffset, 
                                                      BusinessDayAdjustments paymentDatesBusinessDayAdjustments,
                                                      IBusinessCalendar paymentCalendar)
@@ -150,11 +167,11 @@ namespace Orion.ValuationEngine.Generators
                     {
                         // To get the calculation period start date - obtain a reference to FIRST calculation period in the payment period.
                         //
-                        CalculationPeriod firstCalculatinPeriodInPaymentPeriod = calculationPeriodsInPamentPeriod[0];
+                        CalculationPeriod firstCalculationPeriodInPaymentPeriod = calculationPeriodsInPayPeriod[0];
                         BusinessDayAdjustments paymentDatesAdjustments = paymentDates.paymentDatesAdjustments;
                         // Adjust using paymentDatesAdjustments...
                         //
-                        DateTime adjustedPaymentDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, firstCalculatinPeriodInPaymentPeriod.unadjustedStartDate, paymentDatesAdjustments);
+                        DateTime adjustedPaymentDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, firstCalculationPeriodInPaymentPeriod.unadjustedStartDate, paymentDatesAdjustments);
                         // Apply offset 
                         //
                         if (null != paymentDaysOffset)
@@ -167,11 +184,11 @@ namespace Orion.ValuationEngine.Generators
                     {
                         // To get the calculation period end date - obtain a reference to LAST calculation period in the payment period.
                         //
-                        CalculationPeriod lastCalculatinPeriodInPaymentPeriod = calculationPeriodsInPamentPeriod[calculationPeriodsInPamentPeriod.Count - 1];
+                        CalculationPeriod lastCalculationPeriodInPaymentPeriod = calculationPeriodsInPayPeriod[calculationPeriodsInPayPeriod.Count - 1];
                         BusinessDayAdjustments paymentDatesAdjustments = paymentDates.paymentDatesAdjustments;
                         // Adjust using paymentDatesAdjustments...
                         //
-                        DateTime adjustedPaymentDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, lastCalculatinPeriodInPaymentPeriod.unadjustedEndDate, paymentDatesAdjustments);
+                        DateTime adjustedPaymentDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, lastCalculationPeriodInPaymentPeriod.unadjustedEndDate, paymentDatesAdjustments);
                         // Apply offset (if present)
                         //
                         return null != paymentDaysOffset ? AdjustedDateHelper.ToAdjustedDate(paymentCalendar, adjustedPaymentDate, paymentDatesBusinessDayAdjustments, paymentDaysOffset) : adjustedPaymentDate;
@@ -206,7 +223,7 @@ namespace Orion.ValuationEngine.Generators
             }
             DateTime? lastRegularPeriodEndDate =
                 XsdClassesFieldResolver.CalculationPeriodDatesGetLastRegularPeriodEndDate(calculationPeriodDates);
-            //            This assumes automatic adjustment of calculationperiods.
+            //            This assumes automatic adjustment of calculation periods.
             CalculationPeriodsPrincipalExchangesAndStubs result = CalculationPeriodGenerator.GenerateAdjustedCalculationPeriods(
                                                                                                                                 adjustableFirstPeriodDate.unadjustedDate.Value,
                                                                                                                                 adjustableTerminationDate.unadjustedDate.Value,
@@ -215,7 +232,7 @@ namespace Orion.ValuationEngine.Generators
                                                                                                                                 calculationPeriodDates.calculationPeriodFrequency,
                                                                                                                                 calculationPeriodDates.calculationPeriodDatesAdjustments,
                                                                                                                                 paymentCalendar);
-            //Determine whether the reset dates must be calcuated.
+            //Determine whether the reset dates must be calculated.
             Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(interestRateStream.calculationPeriodAmount);
             //  Add principle exchanges if this need is defined in parametric representation of the interest rate steam.
             //
@@ -232,19 +249,19 @@ namespace Orion.ValuationEngine.Generators
                     PrincipalExchange initialExchange = PrincipalExchangeHelper.Create(AdjustedDateHelper.ToAdjustedDate(paymentCalendar, adjustableEffectiveDate));
                     result.InitialPrincipalExchange = initialExchange;
                 }
-                //  intermediatory PE
+                //  intermediary PE
                 //
                 if (interestRateStream.principalExchanges.intermediateExchange)
                 {
-                    // Generate a list of intermediatory PE exchanges 
+                    // Generate a list of intermediary PE exchanges 
                     //
                     Notional notionalSchedule = XsdClassesFieldResolver.CalculationGetNotionalSchedule(calculation);
                     if (null != notionalSchedule.notionalStepSchedule.step)//there should be steps - otherwise NO interm. exchanges.
                     {
                         foreach (DateTime stepDate in ScheduleHelper.GetStepDates(notionalSchedule.notionalStepSchedule))
                         {
-                            PrincipalExchange intermediatoryExchange = PrincipalExchangeHelper.Create(stepDate);
-                            result.Add(intermediatoryExchange);
+                            PrincipalExchange intermediaryExchange = PrincipalExchangeHelper.Create(stepDate);
+                            result.Add(intermediaryExchange);
                         }
                     }
                 }
@@ -366,11 +383,11 @@ namespace Orion.ValuationEngine.Generators
                     PrincipalExchange initialExchange = PrincipalExchangeHelper.Create(AdjustedDateHelper.ToAdjustedDate(paymentCalendar, adjustableEffectiveDate));
                     result.InitialPrincipalExchange = initialExchange;
                 }
-                //  intermediatory PE
+                //  intermediary PE
                 //
                 if (interestRateStream.principalExchanges.intermediateExchange)
                 {
-                    // Generate a list of intermediatory PE exchanges 
+                    // Generate a list of intermediary PE exchanges 
                     //
                     Calculation calculation = XsdClassesFieldResolver.CalculationPeriodAmountGetCalculation(interestRateStream.calculationPeriodAmount);
                     Notional notionalSchedule = XsdClassesFieldResolver.CalculationGetNotionalSchedule(calculation);
@@ -378,8 +395,8 @@ namespace Orion.ValuationEngine.Generators
                     {
                         foreach (DateTime stepDate in ScheduleHelper.GetStepDates(notionalSchedule.notionalStepSchedule))
                         {
-                            PrincipalExchange intermediatoryExchange = PrincipalExchangeHelper.Create(stepDate);
-                            result.Add(intermediatoryExchange);
+                            PrincipalExchange intermediaryExchange = PrincipalExchangeHelper.Create(stepDate);
+                            result.Add(intermediaryExchange);
                         }
                     }
                 }
@@ -419,11 +436,11 @@ namespace Orion.ValuationEngine.Generators
                 calculationPeriodsPrincipalExchangesAndStubs.InitialPrincipalExchange.principalExchangeAmount = -initialNotionalValue;
                 calculationPeriodsPrincipalExchangesAndStubs.InitialPrincipalExchange.principalExchangeAmountSpecified = true;
             }
-            //  intermediatory PE
+            //  intermediary PE
             //
-            foreach (PrincipalExchange intermediatoryExchange in calculationPeriodsPrincipalExchangesAndStubs.IntermediatePrincipalExchanges)
+            foreach (PrincipalExchange intermediaryExchange in calculationPeriodsPrincipalExchangesAndStubs.IntermediatePrincipalExchanges)
             {
-                DateTime principleExchangeDate = intermediatoryExchange.adjustedPrincipalExchangeDate; 
+                DateTime principleExchangeDate = intermediaryExchange.adjustedPrincipalExchangeDate; 
                 //value at the day before principle exchange day
                 //
                 decimal prevNotionalValue = ScheduleHelper.GetValue(notionalSchedule.notionalStepSchedule, principleExchangeDate.AddDays(-1));
@@ -431,8 +448,8 @@ namespace Orion.ValuationEngine.Generators
                 //
                 decimal newNotionalValue = ScheduleHelper.GetValue(notionalSchedule.notionalStepSchedule, principleExchangeDate);
                 decimal principalExchangeAmount = prevNotionalValue - newNotionalValue;
-                intermediatoryExchange.principalExchangeAmount = principalExchangeAmount;
-                intermediatoryExchange.principalExchangeAmountSpecified = true;
+                intermediaryExchange.principalExchangeAmount = principalExchangeAmount;
+                intermediaryExchange.principalExchangeAmountSpecified = true;
             }
             //  Final PE
             //
@@ -491,12 +508,12 @@ namespace Orion.ValuationEngine.Generators
         {
             StubCalculationPeriodAmountHelper.UpdateStubCalculationPeriod(interestRateStream, stubCalculationPeriod, stubValue);
             decimal notional = NotionalHelper.GetNotionalValue(notinalSchedule, stubCalculationPeriod.adjustedStartDate);
-            // Notinal amount
+            // Notional amount
             //
             XsdClassesFieldResolver.CalculationPeriodSetNotionalAmount(stubCalculationPeriod, notional);
         }
 
-        private static void UpdateCalculationPeriodData(Calculation calculation, CalculationPeriod calculationPeriod, Notional notinalSchedule)
+        private static void UpdateCalculationPeriodData(Calculation calculation, CalculationPeriod calculationPeriod, Notional notionalSchedule)
         {
             bool hasFloatingRateCalculation = XsdClassesFieldResolver.CalculationHasFloatingRateCalculation(calculation);
             bool hasFixedRate = XsdClassesFieldResolver.CalculationHasFixedRateSchedule(calculation);
@@ -504,7 +521,7 @@ namespace Orion.ValuationEngine.Generators
             {
                 throw new System.Exception("at least one type of rate (floating or fixed) must be specified.");
             }            
-            decimal notional = NotionalHelper.GetNotionalValue(notinalSchedule, calculationPeriod.adjustedStartDate);
+            decimal notional = NotionalHelper.GetNotionalValue(notionalSchedule, calculationPeriod.adjustedStartDate);
             // Notional amount
             //
             XsdClassesFieldResolver.CalculationPeriodSetNotionalAmount(calculationPeriod, notional);
@@ -516,8 +533,8 @@ namespace Orion.ValuationEngine.Generators
                 decimal fixedRate = ScheduleHelper.GetValue(fixedRateSchedule, calculationPeriod.adjustedStartDate);
                 XsdClassesFieldResolver.SetCalculationPeriodFixedRate(calculationPeriod, fixedRate);
             }
-                //  Floating rate
-                //
+            //  Floating rate
+            //
             else// if (hasFloatingRateCalculation)
             {
                 // no observed, no calculated rate, spread == 0.0

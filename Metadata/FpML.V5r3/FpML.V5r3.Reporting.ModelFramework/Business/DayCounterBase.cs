@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -32,7 +47,7 @@ namespace Orion.ModelFramework.Business
         private readonly String _name;
 
         public DayCountConvention DayCountConvention { get; set; }
-        public double Basis { get; private set; }
+        public double Basis { get; }
 
         /// <summary>
         /// Constructor for act/n and 30/n types of day counters.
@@ -62,7 +77,7 @@ namespace Orion.ModelFramework.Business
         /// The literal name of this day counter.
         /// </summary>
         /// <returns></returns>
-        override public String ToString()
+        public override String ToString()
         {
             return _name;
         }
@@ -72,7 +87,7 @@ namespace Orion.ModelFramework.Business
         /// The literal name of this day counter.
         /// </summary>
         /// <returns></returns>
-        abstract public string ToFpML();
+        public abstract string ToFpML();
 
 
         /// <summary>
@@ -81,7 +96,7 @@ namespace Orion.ModelFramework.Business
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        internal protected static int ActualDays(DateTime startDate, DateTime endDate) 
+        protected internal static int ActualDays(DateTime startDate, DateTime endDate) 
         {
             return (endDate.Date - startDate.Date).Days;
         }
@@ -98,15 +113,11 @@ namespace Orion.ModelFramework.Business
             {
                 return ActualDays(startDate, endDate);
             }
-
             // otherwise we count 30 somethings
-
             int dd1 = startDate.Day;
             int dd2 = endDate.Day;
-
             int mm1 = startDate.Month; 
             int mm2 = endDate.Month;
-
             switch (DayCountConvention) 
             {
                 case DayCountConvention.US:
@@ -115,29 +126,23 @@ namespace Orion.ModelFramework.Business
                         dd2 = 1; 
                         ++mm2; 
                     }
-
                     break;
-
                 case DayCountConvention.Italian:
                     if (mm1 == 2 && dd1 > 27) dd1 = 30;
                     if (mm2 == 2 && dd2 > 27) dd2 = 30;
-
                     break;
-
                 case DayCountConvention.EU:
                     break;
-
                 default:
                     //Trace.Fail("Unknown Option " + _countConvention, "Assuming EU convention");
                     throw new ArgumentOutOfRangeException("Unknown Option " + DayCountConvention);
                     //break;
             }
-			
             return 360 * (endDate.Year - startDate.Year) + 30*(mm2 - mm1 -1) + Math.Max(0, 30 - dd1) + Math.Min(30, dd2);
         }
 
         /// <summary>
-        /// Returns the period between two dates as a fraction of year. Start date after end date generates negative yearfractions.
+        /// Returns the period between two dates as a fraction of year. Start date after end date generates negative year fraction.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
@@ -191,12 +196,10 @@ namespace Orion.ModelFramework.Business
         /// <param name="refPeriodStart"></param>
         /// <param name="refPeriodEnd"></param>
         /// <returns></returns>
-        virtual protected double YearFractionImpl(DateTime startDate, DateTime endDate, 
+        protected virtual double YearFractionImpl(DateTime startDate, DateTime endDate, 
                                                   DateTime refPeriodStart, DateTime refPeriodEnd) 
         {
             return DayCount(startDate, endDate) / Basis;
         }
-
-   
     }
 }

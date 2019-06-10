@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -288,8 +303,8 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <returns>The interpolated value of the point</returns>
         public override IList<IValue> GetClosestValues(IPoint pt)
         {
-            // Test each dimensiuon for the two closest points
-            // then buuild a set of points from each dimension point
+            // Test each dimension for the two closest points
+            // then build a set of points from each dimension point
             var hasTerm = ((Coordinate)pt).PricingDataCoordinate.term != null;
             var expiryOrigin = ((Period)((Coordinate)pt).PricingDataCoordinate.expiration[0].Items[0]).ToYearFraction();
             var termOrigin = hasTerm ? ((Period)((Coordinate)pt).PricingDataCoordinate.term[0].Items[0]).ToYearFraction() : 0;
@@ -357,7 +372,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
                 pt = ToDoublePoint2D(point);
                 bounds.AddRange((from VolatilityValue value in values select ToDoublePoint2D(value)));
             }
-                // Build list of DoublePoint3D
+            // Build list of DoublePoint3D
             else
             {
                 pt = ToDoublePoint3D(point);
@@ -423,7 +438,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
 
         /// <summary>
         /// Convert a VolatilityValue into a <see cref="Point2D"/>
-        /// that represents the year fraction expiry and a sPoint2Dtrike
+        /// that represents the year fraction expiry and a Point2D strike
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
@@ -482,7 +497,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         #endregion
 
         /// <summary>
-        /// Unpack the keyt lists and create a set of coordinates from them
+        /// Unpack the key lists and create a set of coordinates from them
         /// </summary>
         /// <param name="expiry">The list of expiry terms</param>
         /// <param name="tenor">The list of tenor terms</param>
@@ -822,7 +837,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             /// </summary>
             /// <param name="expiry">Expiry key part</param>
             /// <param name="tenor">Tenor key part (can be null)</param>
-            /// <param name="strike">Strike key pary</param>
+            /// <param name="strike">Strike key part</param>
             public ExpiryTenorStrikeKey(string expiry, string tenor, string strike)
             {
                 try

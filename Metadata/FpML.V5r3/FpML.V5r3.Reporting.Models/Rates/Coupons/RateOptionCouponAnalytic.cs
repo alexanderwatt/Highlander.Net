@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using Orion.Analytics.Options;
@@ -59,7 +74,7 @@ namespace Orion.Models.Rates.Coupons
         { }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
@@ -81,26 +96,26 @@ namespace Orion.Models.Rates.Coupons
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Initiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="startDate">The start date of the coupon.</param>
         /// <param name="endDate">The end date of the coupon.</param>
         /// <param name="paymentDate">The payment date of the cash flow.</param>
         /// <param name="timeToIndex">The timeToIndex. Not necessarily the time to expiry. This is used for surface interpolation..</param>
-        /// <param name="capstrike">The cap strike.</param>
-        /// <param name="floorstrike">The floor strike.</param>
+        /// <param name="capStrike">The cap strike.</param>
+        /// <param name="floorStrike">The floor strike.</param>
         /// <param name="reportingCurrencyFxCurve">THe fx curve. It must already be normalised.</param>
         /// <param name="discountCurve">The rate curve to use for discounting.</param>
         /// <param name="forecastCurve">The forecast curve.</param>
         /// <param name="indexVolSurface">The index volatility surface.</param>
         public RateOptionCouponAnalytic(DateTime valuationDate, DateTime startDate, DateTime endDate, DateTime paymentDate,
-            decimal timeToIndex, decimal capstrike, decimal floorstrike, IFxCurve reportingCurrencyFxCurve, IRateCurve discountCurve, IRateCurve forecastCurve, IVolatilitySurface indexVolSurface)
-            : this(valuationDate, startDate, endDate, paymentDate, timeToIndex, capstrike, reportingCurrencyFxCurve, discountCurve, forecastCurve, indexVolSurface)
+            decimal timeToIndex, decimal capStrike, decimal floorStrike, IFxCurve reportingCurrencyFxCurve, IRateCurve discountCurve, IRateCurve forecastCurve, IVolatilitySurface indexVolSurface)
+            : this(valuationDate, startDate, endDate, paymentDate, timeToIndex, capStrike, reportingCurrencyFxCurve, discountCurve, forecastCurve, indexVolSurface)
         {
             IsCollar = true;
-            CollarFloorStrike = floorstrike;
-            CollarFloorVolatility = (decimal)indexVolSurface.GetValue((double)timeToIndex, (double)floorstrike);
+            CollarFloorStrike = floorStrike;
+            CollarFloorVolatility = (decimal)indexVolSurface.GetValue((double)timeToIndex, (double)floorStrike);
         }
 
         #endregion

@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -7,7 +22,7 @@ using System.Diagnostics;
 namespace Orion.ModelFramework.Helpers
 {
     /// <summary>
-    /// Factrory for creating an instance of the supplied generic Type
+    /// Factory for creating an instance of the supplied generic Type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ClassFactory<T>
@@ -29,7 +44,6 @@ namespace Orion.ModelFramework.Helpers
             Register(callingAssembly);
         }
 
-
         /// <summary>
         /// Gets the referencing assembly.
         /// </summary>
@@ -39,7 +53,6 @@ namespace Orion.ModelFramework.Helpers
             StackTrace st = new StackTrace();
             return st.GetFrame(3).GetMethod().DeclaringType.Assembly.GetName().Name;
         }
-
 
         private static readonly List<string> RegisteredAssemblies = new List<string>();
 
@@ -193,7 +206,7 @@ namespace Orion.ModelFramework.Helpers
         /// <summary>
         /// Remove a class from the Pricing model Factory
         /// </summary>
-        /// <param name="className">The name of the class to unregiter</param>
+        /// <param name="className">The name of the class to unregister</param>
         public static void UnregisterAssets(string className)
         {
             foreach (string assemblyName in AssemblyAssetRegistry.Keys)
@@ -227,7 +240,7 @@ namespace Orion.ModelFramework.Helpers
 
 
         /// <summary>
-        /// Unregisters the assets.
+        /// Unregister the assets.
         /// </summary>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
@@ -255,7 +268,7 @@ namespace Orion.ModelFramework.Helpers
         }
 
         /// <summary>
-        /// Unregisters all assets.
+        /// Unregister all assets.
         /// </summary>
         /// <param name="assemblyName">Name of the assembly.</param>
         public static void UnregisterAllAssets(string assemblyName)

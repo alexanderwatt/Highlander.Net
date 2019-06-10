@@ -1,6 +1,21 @@
-#region Using directives
-using System.Collections.Generic;
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
+
+using System.Collections.Generic;
 using System;
 using System.Globalization;
 using FpML.V5r3.Reporting;
@@ -20,30 +35,18 @@ namespace Orion.ModelFramework.Business
         /// The literal name of this day counter.
         /// </summary>
         /// <returns></returns>
-        abstract public string ToFpML();
+        public abstract string ToFpML();
 
         /// <summary>
         /// Name(s) of the calendar(s)
         /// </summary>
-        public string NameList
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public string NameList { get; }
 
         /// <summary>
         /// Gets the deduped name list.
         /// </summary>
         /// <value>The deduped name list.</value>
-        public string DedupedNameList
-        {
-            get
-            {
-                return NameList.Trim();
-            }
-        }
+        public string DedupedNameList => NameList.Trim();
 
         #region Constructors
 
@@ -66,60 +69,49 @@ namespace Orion.ModelFramework.Business
         /// <param name="calendar">The underlying <see cref="System.Globalization.Calendar"/>.</param>
         protected CalendarBase( String name, CultureInfo culture, Calendar calendar )
         {
-            this.name = name;
-            this.calendar = calendar;
-            this.culture = culture;
+            NameList = name;
+            _calendar = calendar;
+            _culture = culture;
         }
 
         #endregion
 
         #region Properties
 
-        private readonly String name;
-
         /// <summary>
-        /// A stringified representation of the Calendar.
+        /// A string representation of the Calendar.
         /// </summary>
         /// <returns>A String representing the object.</returns>
-        override public String ToString() 
+        public override String ToString() 
         { 
-            return name; 
+            return NameList; 
         }
 
 
         /// <summary>
         /// The underlying <see cref="System.Globalization.Calendar"/>.
         /// </summary>
-        private readonly Calendar calendar;
+        private readonly Calendar _calendar;
 
         /// <summary>
         /// The underlying <see cref="System.Globalization.Calendar"/>.
         /// </summary>
-        public Calendar Calendar
-        {
-            get { return calendar; }
-        }
+        public Calendar Calendar => _calendar;
 
         /// <summary>
         /// The associated <see cref="System.Globalization.CultureInfo"/>.
         /// </summary>
-        private readonly CultureInfo culture;
+        private readonly CultureInfo _culture;
 
         /// <summary>
         /// The associated <see cref="System.Globalization.CultureInfo"/>.
         /// </summary>
-        public CultureInfo Culture
-        {
-            get { return culture; }
-        }
+        public CultureInfo Culture => _culture;
 
         /// <summary>
         /// The associated <see cref="System.Globalization.RegionInfo"/>.
         /// </summary>
-        public RegionInfo Region
-        {
-            get { return new RegionInfo(culture.LCID); }
-        }
+        public RegionInfo Region => new RegionInfo(_culture.LCID);
 
         #endregion
 
@@ -144,7 +136,7 @@ namespace Orion.ModelFramework.Business
 
 
         /// <summary>
-        /// Holidayses the between.
+        /// Holidays between.
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
@@ -208,7 +200,7 @@ namespace Orion.ModelFramework.Business
             } 
             else if ( businessDayConvention != BusinessDayConventionEnum.NONE ) 
             {
-                throw new ArgumentOutOfRangeException("businessDayConvention", "Unknown rolling convention.");
+                throw new ArgumentOutOfRangeException(nameof(businessDayConvention), "Unknown rolling convention.");
             }
 
             return rolledDate;
@@ -247,7 +239,7 @@ namespace Orion.ModelFramework.Business
 
             if ((dayType != DayTypeEnum.Business) & (dayType != DayTypeEnum.Calendar))
             {
-                throw new ArgumentOutOfRangeException("dayType", dayType, "Only 'DayTypeEnum.Business' and 'DayTypeEnum.Calendar' day types are currently supported.");
+                throw new ArgumentOutOfRangeException(nameof(dayType), dayType, "Only 'DayTypeEnum.Business' and 'DayTypeEnum.Calendar' day types are currently supported.");
             }
 
             //  We can only use Business dayType for days intervals.
@@ -332,7 +324,7 @@ namespace Orion.ModelFramework.Business
                     }
 
                 case PeriodEnum.M:
-                    // dito with months resp. Calendar.AddMonths()
+                    // ditto with months resp. Calendar.AddMonths()
                     //
                     {
                         return dateTime.AddMonths(periodMultiplierAsInt);
@@ -345,7 +337,7 @@ namespace Orion.ModelFramework.Business
                     {
                         string intervalAsString = IntervalToString(interval);
 
-                        throw new ArgumentOutOfRangeException("interval", intervalAsString, "specified period type is not supported by this function");
+                        throw new ArgumentOutOfRangeException(nameof(interval), intervalAsString, "specified period type is not supported by this function");
                     }
             }
         }
@@ -357,9 +349,8 @@ namespace Orion.ModelFramework.Business
         /// <returns></returns>
         public static string IntervalToString(Period interval)
         {
-            return String.Format("{0}{1}", interval.periodMultiplier, interval.period);
+            return $"{interval.periodMultiplier}{interval.period}";
         }
-
 
         #endregion
 

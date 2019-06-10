@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
@@ -79,7 +94,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
             var resultTermCurve = Load(termCurve, centralBankDates, baseDate, dayCounter);
             //Step 2. 
             //
-            //Step 3. SortPoints the termcurve if necessary.
+            //Step 3. SortPoints the term curve if necessary.
             return SortPoints(resultTermCurve);//TODO add the new points...need to sort the termcurve points...
         }
 
@@ -94,13 +109,13 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         /// <returns></returns>
         public static int[] GetPreviousIndices(TermCurve termCurve, DateTime[] dates)
         {
-            var termdates = termCurve.GetListTermDates();//GetDiscreteSpace().GetCoordinateArray(1);
+            var termDates = termCurve.GetListTermDates();//GetDiscreteSpace().GetCoordinateArray(1);
             var results = new List<int>();
             var temp = new int[dates.Length];
             var counter = 0;
             foreach (var date in dates)  //This handles or is supposed to handle the case of multiple central bank dates between node points.
             {
-                var index = Array.BinarySearch(termdates.ToArray(), date);
+                var index = Array.BinarySearch(termDates.ToArray(), date);
                 if (index >= 0)
                 {
                     temp[counter] = index;
@@ -267,10 +282,10 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
                     //They need to be spliced into the term curve.
                     //Also, the interpolation routine needs to be set to the appropriate back fill/forward fill logic.
                     var dates = centralBankDates.Where(t => GetPreviousIndex(termCurve, t) == counter).ToList();
-                    foreach (var centralBankdate in dates)
+                    foreach (var centralBankDate in dates)
                     {
-                        if (date == centralBankdate) continue;
-                        if (dates.IndexOf(centralBankdate) == 1)
+                        if (date == centralBankDate) continue;
+                        if (dates.IndexOf(centralBankDate) == 1)
                         {
                             var termPoint =
                                 TermPointFactory.Create(InterpolateRate(termCurve, baseDate, dayCounter, dates[0]), dates[0]);
@@ -279,7 +294,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
                         else
                         {
                             var termPoint =
-                                TermPointFactory.Create(InterpolateRate2(termCurve, baseDate, dayCounter, centralBankdate), centralBankdate);
+                                TermPointFactory.Create(InterpolateRate2(termCurve, baseDate, dayCounter, centralBankDate), centralBankDate);
                             points.Insert(GetPreviousIndex(termCurve, date), termPoint);
                         }
                     }
@@ -292,7 +307,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         }
 
         /// <summary>
-        /// Sorts a termcurve.
+        /// Sorts a term curve.
         /// <remarks>
         /// No two dates are to be the same!
         /// </remarks>

@@ -1,4 +1,19 @@
-﻿#region Using Directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using Directives
 
 using System;
 using System.Collections.Generic;
@@ -199,7 +214,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// the calibration of the SABR engine.
         /// Preconditions: Methods SetStrikesForSABREngine and 
         /// SetVolatilitiesForSABREngine have been called.
-        /// Postconditions: data structures that store the strikes and
+        /// Post-conditions: data structures that store the strikes and
         /// volatilities used in the calibration of the SABR engine are each
         /// expanded by one element and then sorted, and the private field
         /// _assetPrice is set.
@@ -242,7 +257,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <summary>
         /// Helper function used to set the expiry used in the calibration of
         /// the SABR engine.
-        /// Postcondition: _excerciseTime is set.
+        /// Post-condition: _excerciseTime is set.
         /// </summary>
         /// <param name="expiry">Caplet expiry.</param>
         private void SetExerciseTimeForSABREngine(DateTime expiry)
@@ -259,7 +274,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <summary>
         /// Helper function used to set the strikes used in the calibration
         /// of the SABR engine.
-        /// Postcondition: private field _sabrStrikes is set.
+        /// Post-condition: private field _sabrStrikes is set.
         /// </summary>
         private void SetStrikesForSABREngine()
         {
@@ -275,7 +290,7 @@ namespace Orion.CurveEngine.PricingStructures.SABR
         /// <summary>
         /// Helper function used to set the volatilities used in the 
         /// calibration of the SABR engine.
-        /// Postcondition: private field _sabrVolatilities is set.
+        /// Post-condition: private field _sabrVolatilities is set.
         /// </summary>
         /// <param name="expiry">The expiry.</param>
         private void SetVolatilitiesForSABREngine(DateTime expiry)

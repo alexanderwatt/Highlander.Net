@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
@@ -19,6 +36,7 @@ using BusinessCenters=FpML.V5r3.Reporting.BusinessCenters;
 using BusinessDayConventionEnum=FpML.V5r3.Reporting.BusinessDayConventionEnum;
 using DayCounterHelper = Orion.Analytics.DayCounters.DayCounterHelper;
 
+#endregion
 
 namespace Orion.CurveEngine.PricingStructures.Helpers
 {
@@ -61,7 +79,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// <param name="instruments">list of instruments</param>
         /// <param name="values">value of each instrument</param>
         /// <param name="initialFraRates">initial guesses for fra rate</param>
-        /// <param name="shockedInsturmentIndices">array of shocked instrument indices</param>
+        /// <param name="shockedInstrumentIndices">array of shocked instrument indices</param>
         /// <param name="initialRates"></param>
         public FraSolver(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
@@ -69,7 +87,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             List<string> instruments,
             IEnumerable<decimal> values,
             IEnumerable<decimal> initialFraRates, 
-            ICollection<int> shockedInsturmentIndices, 
+            ICollection<int> shockedInstrumentIndices, 
             List<decimal> initialRates)
         {
             //SetInstruments(GetInstrumentIds(instruments));
@@ -79,14 +97,14 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             FixingCalendar = fixingCalendar;
             RollCalendar = rollCalendar;
             //initially set the rates value to the initial curve rates
-            SetRateAdjustment(shockedInsturmentIndices.Count);
+            SetRateAdjustment(shockedInstrumentIndices.Count);
             SetFraGuesses(initialFraRates);
             Currency = Properties.GetString(CurveProp.Currency1, true);
             SetDayCounter(cache, nameSpace, Currency);
-            SetShockedInstrumentIndices(shockedInsturmentIndices);
-            SetPropertiesOfShockedCurves(properties, shockedInsturmentIndices.Count);
+            SetShockedInstrumentIndices(shockedInstrumentIndices);
+            SetPropertiesOfShockedCurves(properties, shockedInstrumentIndices.Count);
             SetInitialCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, Properties, Instruments.ToArray(), Rates.ToArray());
-            SetFraDates(cache, nameSpace, _initialCurve, ShockedInsturmentsIndices);
+            SetFraDates(cache, nameSpace, _initialCurve, ShockedInstrumentsIndices);
             SetInitalFraRates(_initialCurve, FraStartDates, FraEndDates );
             InitialRates = initialRates;
         }
@@ -112,7 +130,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             var ratesAdj = new List<decimal>();
             var updatedRates = new List<decimal>(Rates.ToArray());
             var fraValues = CalculateFraValuesFromCurve(_initialCurve, FraStartDates, FraEndDates);
-            int len = ShockedInsturmentsIndices.Count;
+            int len = ShockedInstrumentsIndices.Count;
             _differences = new List<decimal>();
             for (int i = 0; i < len; ++i )      
                 SetDifferences(fraValues.ToArray(),FraGuesses.ToArray());
@@ -121,7 +139,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
                 //1. Create shocked Curves
                 shockedCurves.Clear();
                 shockedCurves = SetShockedCurves(logger, cache, nameSpace, ShockedCurvesProperties, Instruments, updatedRates,
-                                                 ShockedInsturmentsIndices);
+                                                 ShockedInstrumentsIndices);
 
                 //2. Calculate rates Adjustments
                 ratesAdj.Clear();
@@ -129,7 +147,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
                                                     FraStartDates, FraEndDates, _differences);
                 //3. Reset Rates
                 UpdateRateAdjustments(RateAdjustmens, ratesAdj);
-                updatedRates = UpdateRates(Rates, ShockedInsturmentsIndices, RateAdjustmens);
+                updatedRates = UpdateRates(Rates, ShockedInstrumentsIndices, RateAdjustmens);
 
                 //4. Update the curve
                 _initialCurve = CreateCurve(logger, cache, nameSpace, Properties, Instruments.ToArray(), updatedRates.ToArray());
@@ -146,7 +164,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         }
 
         /// <summary>
-        /// Create intial Curve
+        /// Create initial Curve
         /// store it in _initialCurve
         /// </summary>
         private void SetInitialCurve(ILogger logger, ICoreCache cache, string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
@@ -206,14 +224,14 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// <param name="properties"></param>
         /// <param name="instruments"></param>
         /// <param name="rates"></param>
-        /// <param name="indexOfShockedInsturment"></param>
+        /// <param name="indexOfShockedInstrument"></param>
         /// <returns></returns>
         public static RateCurve CreateShockedCurve(ILogger logger, ICoreCache cache,
             string nameSpace,
             NamedValueSet properties,
             string[] instruments,
             decimal[] rates,
-            int indexOfShockedInsturment)
+            int indexOfShockedInstrument)
         {
             int len = instruments.Length;
             var additional = new decimal[len];
@@ -221,10 +239,10 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
             var newRates = new decimal[rates.Length];
             rates.CopyTo(newRates, 0);
             // check the index
-            if( indexOfShockedInsturment < 0 || indexOfShockedInsturment >= len )
+            if( indexOfShockedInstrument < 0 || indexOfShockedInstrument >= len )
                 throw new ArgumentException("The index of shocked instrument is not within the range");
             // bump the rate one basis point
-            newRates[indexOfShockedInsturment] += ShockValue;
+            newRates[indexOfShockedInstrument] += ShockValue;
             var qas = AssetHelper.Parse(instruments, newRates, additional);
             return new RateCurve(logger, cache, nameSpace, properties, qas, null, null);
         }
@@ -272,14 +290,14 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         /// Calculating FRA
         /// </summary>
         /// <param name="firstDiscountFactor">df1</param>
-        /// <param name="secondDiscountFacotr">df2</param>
+        /// <param name="secondDiscountFactor">df2</param>
         /// <param name="timeFraction">alpha</param>
         /// <returns></returns>
         private static decimal CalculateForwardRate(decimal firstDiscountFactor,
-                                             decimal secondDiscountFacotr,
+                                             decimal secondDiscountFactor,
                                              decimal timeFraction)
         {
-            return (firstDiscountFactor - secondDiscountFacotr)/(secondDiscountFacotr*timeFraction);         
+            return (firstDiscountFactor - secondDiscountFactor)/(secondDiscountFactor*timeFraction);         
         }
 
 
@@ -403,10 +421,10 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         }
 
 
-        //private void CheckSheockedProperties()
+        //private void CheckShockedProperties()
         //{
-        //    if (ShockedInsturmentsIndices.Count <= 0)
-        //        throw new ArgumentException("No Cash Insturments have been specified.");
+        //    if (ShockedInstrumentsIndices.Count <= 0)
+        //        throw new ArgumentException("No Cash Instruments have been specified.");
 
 
         //    if (ShockedCurvesProperties.Count <= 0)
@@ -418,7 +436,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
 
         #region Helper Functions
 
-        public static void GetFraGuesses(List<object> guesses, ref List<decimal> dGusses, ref List<int> indicies)
+        public static void GetFraGuesses(List<object> guesses, ref List<decimal> Guesses, ref List<int> indicies)
         {
             int len = guesses.Count;
             for (int i = 0; i < len; ++i)
@@ -428,7 +446,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
                     if (guesses[i].GetType() == Type.GetType("System.Decimal") ||
                         guesses[i].GetType() == Type.GetType("System.Double"))
                     {
-                        dGusses.Add(Convert.ToDecimal(guesses[i]));
+                        Guesses.Add(Convert.ToDecimal(guesses[i]));
                         indicies.Add(i);
                     }
                 }
@@ -473,7 +491,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         ///<param name="curve"></param>
         ///<param name="index"></param>
         ///<returns></returns>
-        public IPriceableRateAssetController FindShockedInstument(RateCurve curve, int index)
+        public IPriceableRateAssetController FindShockedInstrument(RateCurve curve, int index)
         {
             List<IPriceableRateAssetController> rateAssetController = curve.PriceableRateAssets;
             return rateAssetController[index];     
@@ -515,22 +533,22 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
 
 
         /// <summary>
-        /// PreCondition, check the initialCurvePorperties
+        /// PreCondition, check the initialCurveProperties
         /// </summary>
-        /// <param name="initialCurvePorperties"></param>
-        /// <param name="numOfShockedInsturments"></param>
-        private void SetPropertiesOfShockedCurves(NamedValueSet initialCurvePorperties, int numOfShockedInsturments)
+        /// <param name="initialCurveProperties"></param>
+        /// <param name="numOfShockedInstruments"></param>
+        private void SetPropertiesOfShockedCurves(NamedValueSet initialCurveProperties, int numOfShockedInstruments)
         {
             ShockedCurvesProperties = new List<NamedValueSet>();
-            for (int i = 0; i < numOfShockedInsturments; ++i )
+            for (int i = 0; i < numOfShockedInstruments; ++i )
             {
-                NamedValueSet newProperties = initialCurvePorperties.Clone();
-                string curveName = initialCurvePorperties.GetString(CurveProp.CurveName, false);
+                NamedValueSet newProperties = initialCurveProperties.Clone();
+                string curveName = initialCurveProperties.GetString(CurveProp.CurveName, false);
                 if (!string.IsNullOrEmpty(curveName))
                 {
                     newProperties.Set(CurveProp.CurveName, curveName + "ShockedCurve-" + i);
                 }
-                string id = initialCurvePorperties.GetString("Identifier", false);
+                string id = initialCurveProperties.GetString("Identifier", false);
                 if (!string.IsNullOrEmpty(id))
                 {
                     newProperties.Set(CurveProp.CurveName, id + "ShockedCurve-" + i);
@@ -588,9 +606,9 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         //    return sInstruments;
         //}
 
-        private void SetShockedInstrumentIndices(IEnumerable<int> shockecIndices)
+        private void SetShockedInstrumentIndices(IEnumerable<int> shockedIndices)
         {
-            ShockedInsturmentsIndices = new List<int>(shockecIndices);
+            ShockedInstrumentsIndices = new List<int>(shockedIndices);
         }
 
         private void SetFraGuesses(IEnumerable<decimal> fraGuesses)
@@ -624,8 +642,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
         private void SetDayCounter(ICoreCache cache, string nameSpace, string currency)
         {
             Instrument instrument = InstrumentDataHelper.GetInstrumentConfigurationData(cache, nameSpace, currency, "ZeroRate");
-            var zeroRateNode = instrument.InstrumentNodeItem as ZeroRateNodeStruct;
-            if (zeroRateNode != null)
+            if (instrument.InstrumentNodeItem is ZeroRateNodeStruct zeroRateNode)
             {
                 DayCounter = DayCounterHelper.Parse(zeroRateNode.DayCountFraction.Value);
             }
@@ -649,7 +666,7 @@ namespace Orion.CurveEngine.PricingStructures.Helpers
 
         ///<summary>
         ///</summary>
-        public List<int> ShockedInsturmentsIndices { get; private set; }
+        public List<int> ShockedInstrumentsIndices { get; private set; }
 
         ///<summary>
         ///</summary>

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -239,7 +254,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             IDayCounter dayCounter = DayCounterHelper.Parse(Holder.GetValue("DayCounter"));
             UnderlyingInterpolatedCurve = Holder.GetValue("UnderlyingCurve"); 
             // Retrieve the Discount factor curve and assign the curve interpolation we want to initiate
-            // This dependends on the underyling curve type (i.e. rate or discount factor)
+            // This depends on the underlying curve type (i.e. rate or discount factor)
             TermCurve termCurve = GetEquityCurveValuation().fxForwardCurve;
             termCurve.interpolationMethod = curveInterpolationMethod;
             // interpolate the DiscountFactor curve based on the respective curve interpolation 
@@ -667,10 +682,10 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// Creates the basic rate curve risk set.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <returns>A list of perturbed rate curves</returns>
         public override List<IPricingStructure> CreateCurveRiskSet(decimal basisPointPerturbation)//TODO make proportional perturbations!
         {
             if (PriceableEquityAssets == null) return null;
@@ -768,7 +783,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //  nullify the discount factor curve to make sure that bootstrapping will happen)
             //
             var eqv = (FxCurveValuation)eqvCurveCloned;
-            //Dont want to null ther dfs
+            //Don't want to null the dfs
             //
             //fxv.fxForwardCurve.point = null;
             return new Pair<PricingStructure, PricingStructureValuation>(eq, eqv);
@@ -806,7 +821,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //
             fxvCurveCloned.fxForwardCurve.point = null;
             fxvCurveCloned.fxForwardPointsCurve = null;
-            //Manipulate the quated asset set.
+            //Manipulate the quoted asset set.
             //
             fxvCurveCloned.spotRate = MappedQuotedAssetSet(logger, cache, nameSpace, referenceCurve, spreadValues, fixingCalendar, rollCalendar, baseDate);
             return fpml;
@@ -829,7 +844,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 //Get the implied quote to use as the input market quote. Make sure it is rate controller.
                 var priceableAsset = (PriceableFxAssetController)PriceableAssetFactory.Create(logger, cache, nameSpace, quote, namedValueSet, fixingCalendar, rollCalendar);
                 var value = priceableAsset.CalculateImpliedQuote(referenceCurve);
-                //Replace the marketquote in the bav and remove the spread.
+                //Replace the market quote in the bav and remove the spread.
                 var quotes = new List<BasicQuotation>(quote.quote);
                 var impliedQuote = MarketQuoteHelper.ReplaceQuotationByMeasureType("MarketQuote", quotes, value);
                 var marketQuote = new List<BasicQuotation>(impliedQuote);

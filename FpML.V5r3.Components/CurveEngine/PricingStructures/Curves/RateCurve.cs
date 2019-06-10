@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -115,7 +130,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 int index = 0;
                 foreach (var point in pointCurve)
                 {
-                    int time = ((DateTime)point.term.Items[0] - GetBaseDate()).Days;//This is risky...assumes an ordered termcurve.                  
+                    int time = ((DateTime)point.term.Items[0] - GetBaseDate()).Days;//This is risky...assumes an ordered term curve.                  
                     if (time == 0)
                     {
                         var tempTime = ((DateTime)pointCurve[index + 1].term.Items[0] - GetBaseDate()).Days;
@@ -199,7 +214,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var index = 0;
             foreach (var point in pointCurve)
             {
-                var time = ((DateTime)point.term.Items[0] - GetBaseDate()).Days;//This is risky...assumes an ordered termcurve.
+                var time = ((DateTime)point.term.Items[0] - GetBaseDate()).Days;//This is risky...assumes an ordered term curve.
                 if (time == 0)
                 {
                     var tempTime = ((DateTime)pointCurve[index + 1].term.Items[0] - GetBaseDate()).Days;
@@ -475,7 +490,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="pricingStructureAlgorithmsHolder">The pricingStructureAlgorithmsHolder.</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public RateCurve(String nameSpace, PricingStructureAlgorithmsHolder pricingStructureAlgorithmsHolder, 
@@ -537,7 +552,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //Test to see if a bootstrap is required.
             if (bootstrap || discountsAbsent)
             {
-                //There must be a valid quotedassetset in order to bootstrap.
+                //There must be a valid quoted asset set in order to bootstrap.
                 if (!validAssets) return;
                 PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
                 PriceableRateAssets.Sort();
@@ -568,7 +583,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public RateCurve(ILogger logger, ICoreCache cache, string nameSpace,
@@ -590,7 +605,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var qas = tempFpml.inputs;
             //This is to catch it when there are no discount factor points.
             var discountsAbsent = tempFpml.discountFactorCurve?.point == null || tempFpml.discountFactorCurve.point.Length == 0;
-            //This is an overrice if the cache is null, as the bootstrapper will not work.
+            //This is an override if the cache is null, as the bootstrapper will not work.
             if (cache == null)
             {
                 //optimize = true;
@@ -601,7 +616,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //Test to see if a bootstrap is required.
             if (bootstrap || discountsAbsent)
             {
-                //There must be a valid quotedassetset in order to bootstrap.
+                //There must be a valid quoted asset set in order to bootstrap.
                 if (!validAssets) return;
                 PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
                 PriceableRateAssets.Sort();
@@ -706,7 +721,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var underlyingCurve = ParseUnderlyingCurve(UnderlyingInterpolatedCurve);
             IDayCounter interpolateDayCounter = Actual365.Instance; 
             // interpolate the DiscountFactor curve based on the respective curve interpolation 
-            if (underlyingCurve != UnderyingCurveTypes.ZeroCurve)
+            if (underlyingCurve != UnderlyingCurveTypes.ZeroCurve)
             {
                 Interpolator = new TermCurveInterpolator(discountFactorCurve, GetBaseDate(), interpolateDayCounter);
             }
@@ -1183,7 +1198,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         }
 
         /// <summary>
-        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measuretype to determine which one.
+        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measure type to determine which one.
         /// The original curve is modified. This does not create a copy!!
         /// </summary>
         /// <param name="logger">The logger.</param>
@@ -1215,10 +1230,10 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// Creates the basic rate curve risk set, using the current curve as the base curve.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <returns>A list of perturbed rate curves</returns>
         public override List<IPricingStructure> CreateCurveRiskSet(decimal basisPointPerturbation)
         {
             if (PriceableRateAssets == null) return null;
@@ -1461,9 +1476,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// </summary>
         /// <param name="underlyingCurveAsString">The underlying curve.</param>
         /// <returns></returns>
-        protected static UnderyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
+        protected static UnderlyingCurveTypes ParseUnderlyingCurve(string underlyingCurveAsString)
         {
-            return EnumHelper.Parse<UnderyingCurveTypes>(underlyingCurveAsString);
+            return EnumHelper.Parse<UnderlyingCurveTypes>(underlyingCurveAsString);
         }
 
 
@@ -1510,7 +1525,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// The array of spread values must be the same length as the array of assets.
         /// The curve is renamed with the id provided.
         /// </summary>
-        /// <param name="spreadValueSet">THe assets must be the same as thoe in the reference curve. Any asset not the same the spread value will be excluded.
+        /// <param name="spreadValueSet">THe assets must be the same as the in the reference curve. Any asset not the same the spread value will be excluded.
         /// and the base value reapplied. Also any basis swaps will be removed.</param>
         /// <param name="rateCurve"></param>
         /// <param name="curveId"></param>
@@ -1644,7 +1659,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         }
 
         /// <summary>
-        /// Clones a curve, sets the quoted assetset specified and then returns an FpML structure back.
+        /// Clones a curve, sets the quoted asset set specified and then returns an FpML structure back.
         /// </summary>
         /// <param name="referenceCurve"></param>
         /// <param name="cleanedAssetSet"></param>
@@ -1661,7 +1676,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             ycvCurveCloned.discountFactorCurve.point = null;
             ycvCurveCloned.zeroCurve = null;
             ycvCurveCloned.forwardCurve = null;
-            //Manipulate the quated asset set.
+            //Manipulate the quoted asset set.
             //
             ycvCurveCloned.inputs = cleanedAssetSet;
             return fpml;

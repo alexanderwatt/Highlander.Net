@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -40,18 +55,15 @@ namespace Orion.CurveEngine.PricingStructures
         #region Public Methods
 
         ///<summary>
-        /// The type of curve evolution to use. The defualt is ForwardToSpot
+        /// The type of curve evolution to use. The default is ForwardToSpot
         ///</summary>
         public PricingStructureEvolutionType PricingStructureEvolutionType
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
-        public PricingStructureData PricingStructureData
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public PricingStructureData PricingStructureData => throw new NotImplementedException();
 
         ///<summary>
         ///</summary>
@@ -65,12 +77,12 @@ namespace Orion.CurveEngine.PricingStructures
 
         /// <summary>
         /// Get the spot date for this yield curve
-        /// If there is no defined spot then return the basedate
+        /// If there is no defined spot then return the base date
         /// </summary>
         /// <returns></returns>
         public DateTime GetSpotDate()
         {
-            var spot = _wrapped.Items1[0].spotDate != null ? _wrapped.Items1[0].spotDate.Value : _wrapped.Items1[0].baseDate.Value;
+            var spot = _wrapped.Items1[0].spotDate?.Value ?? _wrapped.Items1[0].baseDate.Value;
             return spot;
         }
 
@@ -126,8 +138,8 @@ namespace Orion.CurveEngine.PricingStructures
         ///<exception cref="NotImplementedException"></exception>
         public IIdentifier PricingStructureIdentifier
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         ///<summary>
@@ -136,8 +148,8 @@ namespace Orion.CurveEngine.PricingStructures
         ///<exception cref="NotImplementedException"></exception>
         public IInterpolatedSpace Interpolator
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         /// <summary>

@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Linq;
@@ -69,7 +84,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// CutOverTerm, is the tenor at which point all Fx Curve points are removed form the RateXccyCurve bootstrap.
         /// Normally this is 1Y.</param>
         /// <param name="currency1Curve">The base zero curve.</param>
-        /// <param name="fxCurve">The FX curve, used for constructing synthetic deposits. The fx points map from the base curve to the nonbase curve.</param>
+        /// <param name="fxCurve">The FX curve, used for constructing synthetic deposits. The fx points map from the base curve to the non-base curve.</param>
         /// <param name="currency2Curve">The non-Base Curve.</param>
         /// <param name="spreadInstruments">The spread instruments and their values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
@@ -83,7 +98,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             ReferenceCurveId = BaseCurve.GetPricingStructureId();
             //PricingStructureIdentifier = new RateCurveIdentifier(properties);
             Currency2Curve = currency2Curve;
-            //Get the cutover date.
+            //Get the cut-over date.
             var cutOverTerm = properties.GetValue<string>("CutOverTerm");
             if (cutOverTerm != null)
             {
@@ -92,11 +107,11 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //set the fx curve.
             ReferenceFxCurve = fxCurve;
             IsCurrency1RateCurve = properties.GetValue<bool>("Currency1RateCurve");
-            //Check the pricingstructuretype.
+            //Check the pricing structure type.
             var pricingStructureId = (RateCurveIdentifier)PricingStructureIdentifier;
             if (pricingStructureId.PricingStructureType != PricingStructureTypeEnum.RateXccyCurve ||
                 ReferenceFxCurve == null) return;
-            //There must be a valid quotedassetset in order to bootstrap.
+            //There must be a valid quoted asset set in order to bootstrap.
             if (!XsdClassesFieldResolver.QuotedAssetSetIsValid(spreadInstruments)) return;
             PriceableRateSpreadAssets =
                 PriceableAssetFactory.CreatePriceableRateSpreadAssets(logger, cache, nameSpace, pricingStructureId.BaseDate, spreadInstruments, fixingCalendar, rollCalendar);
@@ -132,7 +147,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var refCurveId = nvs.GetValue<string>(CurveProp.ReferenceCurveUniqueId);
             ReferenceCurveId = refCurveId != null ? new Identifier(refCurveId) : ReferenceCurveId = null;
             if (pricingStructureId.PricingStructureType != PricingStructureTypeEnum.RateXccyCurve) return;
-            //Set the curoverterm.
+            //Set the curve term.
             var cutOverTerm = spreadCurveData.Third.GetValue<string>("CutOverTerm");
             if (cutOverTerm != null)
             {
@@ -166,7 +181,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             }
             if (bootstrap || discountsAbsent)
             {
-                //There must be a valid quotedassetset in order to bootstrap.
+                //There must be a valid quoted asset set in order to bootstrap.
                 if (!XsdClassesFieldResolver.QuotedAssetSetIsValid(spreadAssets)) return;
                 PriceableRateSpreadAssets = PriceableAssetFactory.CreatePriceableRateSpreadAssets(logger, cache, nameSpace, pricingStructureId.BaseDate, spreadAssets, fixingCalendar, rollCalendar);
                 Build(logger, cache, nameSpace, fixingCalendar, rollCalendar);

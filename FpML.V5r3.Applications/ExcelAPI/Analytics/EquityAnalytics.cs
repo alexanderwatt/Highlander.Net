@@ -127,17 +127,17 @@ namespace HLV5r3.Analytics
             /// <param name="divRange"></param>
             /// <param name="orcParamsRange"></param>
         /// <returns></returns>
-        public double PutCollarPricer(String underlying, double spot, double callStrike,
+        public double PutCollarPricer(string underlying, double spot, double callStrike,
                                       string style, DateTime tradeDate, DateTime expiryDate,
                                       Excel.Range zeroRange,
                                       Excel.Range divRange, Excel.Range orcParamsRange)
         {
-            var values = orcParamsRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var values = orcParamsRange.Value[System.Reflection.Missing.Value] as object[,];
             values = (object[,])DataRangeHelper.TrimNulls(values);
             var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(values));
-            var zeroArray = zeroRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var zeroArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
             var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroArray);
-            var divArray = zeroRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var divArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
             var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divArray);
             var result = Orion.EquityCollarPricer.Collar.PutCollarPricer(underlying, spot, callStrike,
                                                                    style, tradeDate, expiryDate,
@@ -158,17 +158,17 @@ namespace HLV5r3.Analytics
         /// <param name="divRange"></param>
         /// <param name="orcParamsRange"></param>
         /// <returns></returns>
-        public double CallCollarPricer(String underlying, double spot, double callStrike,
+        public double CallCollarPricer(string underlying, double spot, double callStrike,
                                       string style, DateTime tradeDate, DateTime expiryDate,
                                       Excel.Range zeroRange,
                                       Excel.Range divRange, Excel.Range orcParamsRange)
         {
-            var values = orcParamsRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var values = orcParamsRange.Value[System.Reflection.Missing.Value] as object[,];
             values = (object[,])DataRangeHelper.TrimNulls(values);
             var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(values));
-            var zeroArray = zeroRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var zeroArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
             var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroArray);
-            var divArray = zeroRange.get_Value(System.Reflection.Missing.Value) as object[,];
+            var divArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
             var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divArray);
             var result = Orion.EquityCollarPricer.Collar.CallCollarPricer(underlying, spot, callStrike,
                                                                    style, tradeDate, expiryDate,
@@ -239,7 +239,7 @@ namespace HLV5r3.Analytics
                     TimeSpan ts = dp - today;
                     myZero.SetR(idx, r, ts.Days / 365.0);
                 }
-                //compute the dicounted dividents to  expirey and work out continuous
+                //compute the discounted dividends to  expiry and work out continuous
                 double sum = 0.0;
                 TimeSpan tsE = dexp - today;
                 double texp = tsE.Days / 365.0;
@@ -374,7 +374,7 @@ namespace HLV5r3.Analytics
                     TimeSpan ts = dp - today;
                     myZero.SetR(idx, r, ts.Days / 365.0);
                 }
-                //compute the dicounted dividents to  expirey and work out continuous
+                //compute the discounted dividends to  expiry and work out continuous
                 TimeSpan tsE = dexp - today;
                 double texp = tsE.Days / 365.0;
                 for (int idx = 0; idx != nd; idx++)
@@ -454,7 +454,7 @@ namespace HLV5r3.Analytics
                 var divdays = DataRangeHelper.StripIntRange(divdaysAsArray);
                 var ratedays = DataRangeHelper.StripIntRange(ratedaysAsArray);
                 var profile = DataRangeHelper.StripDoubleRange(profiletimes);
-                var volatilities = volatilitiesAsRange.get_Value(System.Reflection.Missing.Value) as object[,];
+                var volatilities = volatilitiesAsRange.Value[System.Reflection.Missing.Value] as object[,];
                 var volatilitiesAsDoubles = RangeHelper.RangeToDoubleMatrix(volatilities);
                 List<OrcWingParameters> volSurf = UnpackWing(volatilitiesAsDoubles, voltimes.ToArray(), spot, ratedays.ToArray(), rateamts.ToArray(), divdays.ToArray(), divamts.ToArray());          
                 CleanDivs(ref divdays, ref divamts);
@@ -823,7 +823,7 @@ namespace HLV5r3.Analytics
             }
 
             /// <summary>
-            /// Gets the AT mforward.
+            /// Gets the ATM forward.
             /// </summary>
             /// <param name="spot"></param>
             /// <param name="zeroDatesAsArray"></param>

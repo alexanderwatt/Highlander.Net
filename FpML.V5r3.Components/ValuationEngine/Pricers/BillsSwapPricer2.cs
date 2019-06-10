@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -32,19 +47,19 @@ namespace Orion.ValuationEngine.Pricers
         //don't need to store a PV - since it could be easily calculated on-the-fly
     }
 
-    public class AmortScheduleItem
+    public class AmortisingScheduleItem
     {
         public DateTime StartDate;
         public DateTime EndDate;
         public int ApplyEveryNthRoll;
-        public double AmortAmount;
+        public double AmortisingAmount;
     }
 
-    public class AmortResultItem
+    public class AmortisingResultItem
     {
-        public string WasRolled;//indicated whether the roll date been ajusted or not.
+        public string WasRolled;//indicated whether the roll date been adjusted or not.
         public DateTime RollDate;
-        public double AmortAmount;
+        public double AmortisingAmount;
         public double OutstandingValue;
     }
 
@@ -80,14 +95,14 @@ namespace Orion.ValuationEngine.Pricers
             return effectiveRate;
         }
 
-        public static List<AmortResultItem> GetAmortizationSchedule(List<Pair<DateTime, string>> rollDates, double initialNotional, List<AmortScheduleItem> amortSchedule)
+        public static List<AmortisingResultItem> GetAmortizationSchedule(List<Pair<DateTime, string>> rollDates, double initialNotional, List<AmortisingScheduleItem> amortisingSchedule)
         {
-            var result = rollDates.Select(pair => new AmortResultItem
+            var result = rollDates.Select(pair => new AmortisingResultItem
                                                       {
                                                           RollDate = pair.First, WasRolled = pair.Second, OutstandingValue = initialNotional
                                                       }).ToList();
             double currentNotional = initialNotional;
-            foreach (AmortScheduleItem amortScheduleItem in amortSchedule)
+            foreach (AmortisingScheduleItem amortScheduleItem in amortisingSchedule)
             {
                 DateTime startDate = amortScheduleItem.StartDate;
                 DateTime endDate = amortScheduleItem.EndDate;
@@ -97,12 +112,12 @@ namespace Orion.ValuationEngine.Pricers
                 {
                     if (cashflowNumber % amortScheduleItem.ApplyEveryNthRoll == 0)
                     {
-                        //  implement AS EVERY 1ST ROLL (amortScheduleItem.ApplyEveryNthRoll)
+                        //  implement AS EVERY 1ST ROLL (amortisingScheduleItem.ApplyEveryNthRoll)
                         //
-                        AmortResultItem amortResultItem = GetItem(result, time);
-                        amortResultItem.AmortAmount = amortScheduleItem.AmortAmount;
-                        amortResultItem.OutstandingValue = currentNotional + amortResultItem.AmortAmount;
-                        currentNotional = amortResultItem.OutstandingValue;
+                        AmortisingResultItem amortisingResultItem = GetItem(result, time);
+                        amortisingResultItem.AmortisingAmount = amortScheduleItem.AmortisingAmount;
+                        amortisingResultItem.OutstandingValue = currentNotional + amortisingResultItem.AmortisingAmount;
+                        currentNotional = amortisingResultItem.OutstandingValue;
                     }
                     ++cashflowNumber;
                 }
@@ -111,19 +126,19 @@ namespace Orion.ValuationEngine.Pricers
             //
             for (int i = 0; i < result.Count; ++i)
             {
-                AmortResultItem currentItem = result[i];
-                if (currentItem.AmortAmount == 0 && i > 0)
+                AmortisingResultItem currentItem = result[i];
+                if (currentItem.AmortisingAmount == 0 && i > 0)
                 {
-                    AmortResultItem prevItem = result[i - 1];
+                    AmortisingResultItem prevItem = result[i - 1];
                     currentItem.OutstandingValue = prevItem.OutstandingValue;
                 }
             }
             return result;
         }
 
-        private static AmortResultItem GetItem(IEnumerable<AmortResultItem> amortResultItems, DateTime rollDate)
+        private static AmortisingResultItem GetItem(IEnumerable<AmortisingResultItem> amortisingResultItems, DateTime rollDate)
         {
-            foreach (AmortResultItem item in amortResultItems)
+            foreach (AmortisingResultItem item in amortisingResultItems)
             {
                 if (item.RollDate == rollDate)
                 {
@@ -138,7 +153,7 @@ namespace Orion.ValuationEngine.Pricers
             return (from pair in rollDates where pair.First >= startDate && pair.First <= endDate select pair.First).ToList();
         }
 
-        public static double GetEffectiveFrequency(List<AmortResultItem> cashflowsSchedule,
+        public static double GetEffectiveFrequency(List<AmortisingResultItem> cashflowsSchedule,
                                                    BillsSwapPricer2TermsRange terms)
         {
             IDayCounter dayCounter = DayCounterHelper.Parse(terms.DayCountConvention);
@@ -147,14 +162,14 @@ namespace Orion.ValuationEngine.Pricers
             return effectiveFrequency;
         }
 
-        public static double GetEffectiveFrequency(List<AmortResultItem> cashflowsSchedule, IDayCounter dayCounter)
+        public static double GetEffectiveFrequency(List<AmortisingResultItem> cashflowsSchedule, IDayCounter dayCounter)
         {
-            List<BillSwapPricer2CashflowItem> cashflows = GenerateFixedCashlowsFromAmortResultItems(cashflowsSchedule, dayCounter, 0);
+            List<BillSwapPricer2CashflowItem> cashflows = GenerateFixedCashflowsFromAmortisingResultItems(cashflowsSchedule, dayCounter, 0);
             double totalNotional = cashflows.Sum(item => item.Notional);
             return cashflows.Sum(item => item.AccrualPeriod*(item.Notional/totalNotional));
         }
 
-        public static double GetFixedRate(DateTime valuationDate, List<AmortResultItem> fixedCFs, List<AmortResultItem> floatCFs, IDayCounter dayCounter, RateCurve curve, double floatRateMargin, DateTime bulletPaymentDate, double bulletPaymentValue)
+        public static double GetFixedRate(DateTime valuationDate, List<AmortisingResultItem> fixedCFs, List<AmortisingResultItem> floatCFs, IDayCounter dayCounter, RateCurve curve, double floatRateMargin, DateTime bulletPaymentDate, double bulletPaymentValue)
         {
             //  solve for the fixed rate
             //
@@ -168,7 +183,7 @@ namespace Orion.ValuationEngine.Pricers
             return solver.Solve(objectiveFunction, accuracy, guess, min, max);
         }
 
-        public static double GetFixedSidePV(DateTime valuationDate, List<AmortResultItem> fixedCFs, List<AmortResultItem> floatCFs, IDayCounter dayCounter, RateCurve curve, double floatRateMargin, double fixedRate, DateTime bulletPaymentDate, double bulletPaymentValue)
+        public static double GetFixedSidePV(DateTime valuationDate, List<AmortisingResultItem> fixedCFs, List<AmortisingResultItem> floatCFs, IDayCounter dayCounter, RateCurve curve, double floatRateMargin, double fixedRate, DateTime bulletPaymentDate, double bulletPaymentValue)
         {
             //  solve for the fixed rate
             //
@@ -177,7 +192,7 @@ namespace Orion.ValuationEngine.Pricers
             return presentValueOfFixedSide;
         }
 
-        public static double GetFixedSideSensitivity(DateTime valuationDate, List<AmortResultItem> fixedCFs, List<AmortResultItem> floatCFs, 
+        public static double GetFixedSideSensitivity(DateTime valuationDate, List<AmortisingResultItem> fixedCFs, List<AmortisingResultItem> floatCFs, 
                                                      IDayCounter dayCounter, 
                                                      RateCurve originalCurve, RateCurve perturbedCurve, 
                                                      double floatRateMargin, double fixedRate, DateTime bulletPaymentDate, double bulletPaymentValue)
@@ -207,8 +222,8 @@ namespace Orion.ValuationEngine.Pricers
         ///<param name="listPerturbations"></param>
         ///<returns></returns>
         public static List<DoubleRangeItem> CalculateFixedSideSensitivity2(DateTime valuationDate, double floatMargin, double fixedRate,
-                                                                           BillsSwapPricer2TermsRange payTerms, List<AmortResultItem> payRolls,
-                                                                           BillsSwapPricer2TermsRange receiveTerms, List<AmortResultItem> receiveRolls,
+                                                                           BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
+                                                                           BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
                                                                            RateCurve originalCurve, DateTime bulletPaymentDate, double bulletPaymentValue,
                                                                            List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotes, List<DoubleRangeItem> listPerturbations)
         {
@@ -219,11 +234,11 @@ namespace Orion.ValuationEngine.Pricers
                 foreach (InstrumentIdAndQuoteRangeItem item in listInstrumentIdAndQuotes)
                 {
                     item.InstrumentId = RemoveExtraInformationFromInstrumentId(item.InstrumentId);
-                    var defaultPerturbationAnount = new DoubleRangeItem
+                    var defaultPerturbationAmount = new DoubleRangeItem
                                                         {
                                                             Value = GetDefaultPerturbationAmount(item.InstrumentId)
                                                         };
-                    listPerturbations.Add(defaultPerturbationAnount);
+                    listPerturbations.Add(defaultPerturbationAmount);
                 }
             }
             for (int i = 0; i < listInstrumentIdAndQuotes.Count; i++)
@@ -237,11 +252,11 @@ namespace Orion.ValuationEngine.Pricers
                 var perturbationArray = new List<Pair<string, decimal>> { new Pair<string, decimal>(item.InstrumentId, (decimal)perturbItem.Value) };
                 //var perturbedCurveId = ObjectCacheHelper.PerturbRateCurve(curveId, perturbationArray);
 
-                //  Perturbe the curve
+                //  Perturb the curve
                 //
                 var perturbedReceiveCurve = (RateCurve)originalCurve.PerturbCurve(perturbationArray);
-                double sensititity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, originalCurve, perturbedReceiveCurve, floatMargin, fixedRate, bulletPaymentDate, bulletPaymentValue);
-                var bucketSensitivityItem = new DoubleRangeItem {Value = sensititity};
+                double sensitivity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, originalCurve, perturbedReceiveCurve, floatMargin, fixedRate, bulletPaymentDate, bulletPaymentValue);
+                var bucketSensitivityItem = new DoubleRangeItem {Value = sensitivity};
                 result.Add(bucketSensitivityItem);
             }
             return result;
@@ -264,8 +279,8 @@ namespace Orion.ValuationEngine.Pricers
         ///<param name="filterByInstruments"></param>
         ///<returns></returns>
         public static double CalculateFixedSideDelta(DateTime valuationDate, double floatMargin, double fixedRate,
-                                                     BillsSwapPricer2TermsRange payTerms, List<AmortResultItem> payRolls,
-                                                     BillsSwapPricer2TermsRange receiveTerms, List<AmortResultItem> receiveRolls,
+                                                     BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
+                                                     BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
                                                      RateCurve originalReceiveCurve, DateTime bulletPaymentDate, double bulletPaymentValue,
                                                      List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotes, List<DoubleRangeItem> listPerturbations, string filterByInstruments)
         {
@@ -275,11 +290,11 @@ namespace Orion.ValuationEngine.Pricers
                 foreach (InstrumentIdAndQuoteRangeItem item in listInstrumentIdAndQuotes)
                 {
                     item.InstrumentId = RemoveExtraInformationFromInstrumentId(item.InstrumentId);
-                    var defaultPerturbationAnount = new DoubleRangeItem
+                    var defaultPerturbationAmount = new DoubleRangeItem
                                                         {
                                                             Value = GetDefaultPerturbationAmount(item.InstrumentId)
                                                         };
-                    listPerturbations.Add(defaultPerturbationAnount);
+                    listPerturbations.Add(defaultPerturbationAmount);
                 }
             }
             var perturbationArray = new List<Pair<string, decimal>>();
@@ -301,15 +316,15 @@ namespace Orion.ValuationEngine.Pricers
                 }
             }
             //var perturbedCurveId = originalReceiveCurve.PerturbCurve(perturbationArray);
-            //  Perturbe the curve
+            //  Perturb the curve
             //
             //Curves.RateCurve perturbedReceiveCurve = RateCurveInMemoryCollection.Instance.Get(perturbedCurveId);
             var perturbedReceiveCurve = (RateCurve)originalReceiveCurve.PerturbCurve(perturbationArray); //ObjectCacheHelper.GetPricingStructureFromSerialisable(perturbedCurveId);
             //  pay == fixed.
             //
             IDayCounter dayCounter = DayCounterHelper.Parse(payTerms.DayCountConvention);
-            double sensititity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, originalReceiveCurve, perturbedReceiveCurve, floatMargin, fixedRate, bulletPaymentDate, bulletPaymentValue);
-            return sensititity;
+            double sensitivity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, originalReceiveCurve, perturbedReceiveCurve, floatMargin, fixedRate, bulletPaymentDate, bulletPaymentValue);
+            return sensitivity;
         }
 
         ///<summary>
@@ -325,8 +340,8 @@ namespace Orion.ValuationEngine.Pricers
         ///<param name="bulletPaymentValue"></param>
         ///<returns></returns>
         public static double CalculateFixedRate(DateTime valuationDate, double floatMargin,
-                                                BillsSwapPricer2TermsRange payTerms, List<AmortResultItem> payRolls,
-                                                BillsSwapPricer2TermsRange receiveTerms, List<AmortResultItem> receiveRolls,
+                                                BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
+                                                BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
                                                 RateCurve rateCurve, DateTime bulletPaymentDate, double bulletPaymentValue)
         {
             //  pay == fixed.
@@ -337,8 +352,8 @@ namespace Orion.ValuationEngine.Pricers
         }
 
         public static double CalculateFixedSideSensitivity(DateTime valuationDate, double floatMargin, double fixedRate,
-                                                           BillsSwapPricer2TermsRange payTerms, List<AmortResultItem> payRolls,
-                                                           BillsSwapPricer2TermsRange receiveTerms, List<AmortResultItem> receiveRolls,
+                                                           BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
+                                                           BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
                                                            RateCurve rateCurve, DateTime bulletPaymentDate, double bulletPaymentValue,
                                                            string curveInstrumentId, double perturbationAmount)
         {
@@ -348,23 +363,23 @@ namespace Orion.ValuationEngine.Pricers
             IDayCounter dayCounter = DayCounterHelper.Parse(payTerms.DayCountConvention);
             //var originalCurve = (RateCurve)cache.LoadObject(curveId);
             var perturbedCurve = rateCurve.PerturbCurve(perturbationArray) as RateCurve;
-            //  Perturbe the curve
+            //  Perturb the curve
             //
-            //var perturnedReceiveCurve = (RateCurve)ObjectCacheHelper.GetPricingStructureFromSerialisable(perturbedCurveId);
-            double sensititity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, rateCurve, perturbedCurve, 
+            //var perturbedReceiveCurve = (RateCurve)ObjectCacheHelper.GetPricingStructureFromSerialisable(perturbedCurveId);
+            double sensitivity = GetFixedSideSensitivity(valuationDate, payRolls, receiveRolls, dayCounter, rateCurve, perturbedCurve, 
                 floatMargin, fixedRate, bulletPaymentDate, bulletPaymentValue);
-            return sensititity;
+            return sensitivity;
         }
 
         ///<summary>
         ///</summary>
         ///<param name="cfItems"></param>
-        ///<param name="amortSchedule"></param>
+        ///<param name="amortisingSchedule"></param>
         ///<returns></returns>
-        public static List<AmortResultItem> GenerateAmortisationSchedule(List<AmortResultItem> cfItems, List<AmortScheduleItem> amortSchedule)
+        public static List<AmortisingResultItem> GenerateAmortisationSchedule(List<AmortisingResultItem> cfItems, List<AmortisingScheduleItem> amortisingSchedule)
         {
             var dateTimeList = cfItems.Select(item => new Pair<DateTime, string>(item.RollDate, item.WasRolled)).ToList();
-            List<AmortResultItem> amortizationSchedule = GetAmortizationSchedule(dateTimeList, cfItems[0].OutstandingValue, amortSchedule);
+            List<AmortisingResultItem> amortizationSchedule = GetAmortizationSchedule(dateTimeList, cfItems[0].OutstandingValue, amortisingSchedule);
             return amortizationSchedule;
         }
 
@@ -375,7 +390,7 @@ namespace Orion.ValuationEngine.Pricers
         ///<param name="metaScheduleDefinitionRange"></param>
         ///<param name="paymentCalendar"></param>
         ///<returns></returns>
-        public static List<AmortResultItem> GenerateCashflowSchedule(BillsSwapPricer2TermsRange termsRange, 
+        public static List<AmortisingResultItem> GenerateCashflowSchedule(BillsSwapPricer2TermsRange termsRange, 
             List<MetaScheduleRangeItem> metaScheduleDefinitionRange, IBusinessCalendar paymentCalendar)
         {
 
@@ -403,19 +418,19 @@ namespace Orion.ValuationEngine.Pricers
                 adjustedDatesResult = AdjustedDatesMetaSchedule.GetAdjustedDates2(termsRange.StartDate, termsRange.EndDate,
                                                                           interval, rollConventionEnum, backwardGeneration, businessDayAdjustments, paymentCalendar);
             }
-            var result = new List<AmortResultItem>();
+            var result = new List<AmortisingResultItem>();
             for (int i = 0; i < adjustedDatesResult.Count; i++)
             {
                 DateTime adjustedTime = adjustedDatesResult[i];
                 DateTime unadjustedTime = unadjustedDatesResult[i];
-                var amortResultItem = new AmortResultItem
+                var amortisingResultItem = new AmortisingResultItem
                                           {
                                               WasRolled = (adjustedTime == unadjustedTime) ? "No" : "Yes",
                                               RollDate = adjustedTime,
-                                              AmortAmount = 0,
+                                              AmortisingAmount = 0,
                                               OutstandingValue = termsRange.FaceValue
                                           };
-                result.Add(amortResultItem);
+                result.Add(amortisingResultItem);
             }
             return result;
         }
@@ -434,8 +449,8 @@ namespace Orion.ValuationEngine.Pricers
         ///<param name="bulletPaymentValue"></param>
         ///<returns></returns>
         public static double CalculateFixedSidePV(DateTime valuationDate, double floatMargin, double fixedRate,
-                                                  BillsSwapPricer2TermsRange payTerms, List<AmortResultItem> payRolls,
-                                                  BillsSwapPricer2TermsRange receiveTerms, List<AmortResultItem> receiveRolls,
+                                                  BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
+                                                  BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
                                                   RateCurve rateCurve, DateTime bulletPaymentDate, double bulletPaymentValue)
         {
             //  pay == fixed.
@@ -447,8 +462,8 @@ namespace Orion.ValuationEngine.Pricers
 
         public class BillSwapPricer2SwapParRateObjectiveFunction : IObjectiveFunction
         {
-            private readonly List<AmortResultItem> _fixedCFs;
-            private readonly List<AmortResultItem> _floatCFs;
+            private readonly List<AmortisingResultItem> _fixedCFs;
+            private readonly List<AmortisingResultItem> _floatCFs;
             private readonly RateCurve _curve;
             private readonly IDayCounter _dayCounter;
             private readonly double _floatRateMargin;
@@ -456,7 +471,7 @@ namespace Orion.ValuationEngine.Pricers
             private readonly double _bulletPaymentValue;          
             private readonly DateTime _valuationDate;
           
-            public BillSwapPricer2SwapParRateObjectiveFunction(DateTime valuationDate, List<AmortResultItem> fixedCFs, List<AmortResultItem> floatCFs, RateCurve curve, IDayCounter dayCounter, double floatRateMargin, DateTime bulletPaymentDate, double bulletPaymentValue)
+            public BillSwapPricer2SwapParRateObjectiveFunction(DateTime valuationDate, List<AmortisingResultItem> fixedCFs, List<AmortisingResultItem> floatCFs, RateCurve curve, IDayCounter dayCounter, double floatRateMargin, DateTime bulletPaymentDate, double bulletPaymentValue)
             {
                 _fixedCFs = fixedCFs;
                 _floatCFs = floatCFs;
@@ -471,9 +486,9 @@ namespace Orion.ValuationEngine.Pricers
 
             public double Value(double fixedRate)
             {
-                List<BillSwapPricer2CashflowItem> floatCFs = GenerateFloatingCashlowsFromAmortResultItems(_floatCFs, _dayCounter, _curve,
+                List<BillSwapPricer2CashflowItem> floatCFs = GenerateFloatingCashflowsFromAmortisingResultItems(_floatCFs, _dayCounter, _curve,
                                                                                                           _floatRateMargin);
-                List<BillSwapPricer2CashflowItem> fixedCFs = GenerateFixedCashlowsFromAmortResultItems(_fixedCFs, _dayCounter, fixedRate);
+                List<BillSwapPricer2CashflowItem> fixedCFs = GenerateFixedCashflowsFromAmortisingResultItems(_fixedCFs, _dayCounter, fixedRate);
                 //  Float side PV
                 //
                 double floatPV = (from cf in floatCFs
@@ -504,22 +519,22 @@ namespace Orion.ValuationEngine.Pricers
             }
         }
 
-        internal static List<BillSwapPricer2CashflowItem> GenerateFloatingCashlowsFromAmortResultItems(List<AmortResultItem> amortResultItems, IDayCounter dayCounter, RateCurve curve, double floatRateMargin)
+        internal static List<BillSwapPricer2CashflowItem> GenerateFloatingCashflowsFromAmortisingResultItems(List<AmortisingResultItem> amortisingResultItems, IDayCounter dayCounter, RateCurve curve, double floatRateMargin)
         {
             var result = new List<BillSwapPricer2CashflowItem>();
-            for(int i = 0; i < amortResultItems.Count - 1; ++i)
+            for(int i = 0; i < amortisingResultItems.Count - 1; ++i)
             {
                 var billSwapPricer2CashflowItem = new BillSwapPricer2CashflowItem
                                                       {
-                                                          StartDate = amortResultItems[i].RollDate,
-                                                          EndDate = amortResultItems[i + 1].RollDate,
-                                                          Notional = amortResultItems[i].OutstandingValue
+                                                          StartDate = amortisingResultItems[i].RollDate,
+                                                          EndDate = amortisingResultItems[i + 1].RollDate,
+                                                          Notional = amortisingResultItems[i].OutstandingValue
                                                       };
                 billSwapPricer2CashflowItem.AccrualPeriod = dayCounter.YearFraction(billSwapPricer2CashflowItem.StartDate, billSwapPricer2CashflowItem.EndDate);
                 double startOfPeriodDiscount = curve.GetDiscountFactor(billSwapPricer2CashflowItem.StartDate);
                 double endOfPeriodDiscount = curve.GetDiscountFactor(billSwapPricer2CashflowItem.EndDate);
-                double forecastContinouslyCompoundingRate = floatRateMargin + ((startOfPeriodDiscount / endOfPeriodDiscount - 1.0) / billSwapPricer2CashflowItem.AccrualPeriod);
-                billSwapPricer2CashflowItem.ImpliedForwardRate = forecastContinouslyCompoundingRate;
+                double forecastContinuouslyCompoundingRate = floatRateMargin + ((startOfPeriodDiscount / endOfPeriodDiscount - 1.0) / billSwapPricer2CashflowItem.AccrualPeriod);
+                billSwapPricer2CashflowItem.ImpliedForwardRate = forecastContinuouslyCompoundingRate;
                 billSwapPricer2CashflowItem.DiscountedValue = billSwapPricer2CashflowItem.Notional /
                                                               (1 + billSwapPricer2CashflowItem.ImpliedForwardRate * billSwapPricer2CashflowItem.AccrualPeriod);
                 result.Add(billSwapPricer2CashflowItem);
@@ -547,16 +562,16 @@ namespace Orion.ValuationEngine.Pricers
             return instrumentId;
         }
         
-        internal static List<BillSwapPricer2CashflowItem>    GenerateFixedCashlowsFromAmortResultItems(List<AmortResultItem> amortResultItems, IDayCounter dayCounter, double fixedRate)
+        internal static List<BillSwapPricer2CashflowItem>    GenerateFixedCashflowsFromAmortisingResultItems(List<AmortisingResultItem> amortisingResultItems, IDayCounter dayCounter, double fixedRate)
         {
             var result = new List<BillSwapPricer2CashflowItem>();
-            for (int i = 0; i < amortResultItems.Count - 1; ++i)
+            for (int i = 0; i < amortisingResultItems.Count - 1; ++i)
             {
                 var billSwapPricer2CashflowItem = new BillSwapPricer2CashflowItem
                                                       {
-                                                          StartDate = amortResultItems[i].RollDate,
-                                                          EndDate = amortResultItems[i + 1].RollDate,
-                                                          Notional = amortResultItems[i].OutstandingValue
+                                                          StartDate = amortisingResultItems[i].RollDate,
+                                                          EndDate = amortisingResultItems[i + 1].RollDate,
+                                                          Notional = amortisingResultItems[i].OutstandingValue
                                                       };
                 billSwapPricer2CashflowItem.AccrualPeriod = dayCounter.YearFraction(billSwapPricer2CashflowItem.StartDate, billSwapPricer2CashflowItem.EndDate);
                 billSwapPricer2CashflowItem.ImpliedForwardRate = fixedRate;

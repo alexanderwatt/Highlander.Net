@@ -1956,21 +1956,21 @@ namespace Orion.ValuationEngine.Tests
             dates2Backward.RemoveAt(0);
             var date2BackwardWithWasRolled = dates2Backward.Select(time => new Pair<DateTime, string>(time, "No")).ToList();
             const double initialNotional = 500000;
-            var amortSchedule = new List<AmortScheduleItem>();
-            var item = new AmortScheduleItem
+            var amortSchedule = new List<AmortisingScheduleItem>();
+            var item = new AmortisingScheduleItem
                 {
                     StartDate = dates2Backward[0],
                     EndDate = dates2Backward[1],
                     ApplyEveryNthRoll = 1,
-                    AmortAmount = -100000
+                    AmortisingAmount = -100000
                 };
             amortSchedule.Add(item);
-            var item2 = new AmortScheduleItem
+            var item2 = new AmortisingScheduleItem
                 {
                     StartDate = dates2Backward[2],
                     EndDate = dates2Backward[3],
                     ApplyEveryNthRoll = 1,
-                    AmortAmount = 50000
+                    AmortisingAmount = 50000
                 };
             amortSchedule.Add(item2);
             var amortizationSchedule = BillsSwapPricer2.GetAmortizationSchedule(date2BackwardWithWasRolled, initialNotional, amortSchedule);

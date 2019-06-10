@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -19,7 +34,7 @@ namespace Orion.ValuationEngine.Generators
     /// </summary>
     public class CapFloorGenerator
     {
-        public static CapFloor GenerateDefiniton(CapFloorLegParametersRange capFloorLeg,
+        public static CapFloor GenerateDefinition(CapFloorLegParametersRange capFloorLeg,
                                                  Schedule spreadSchedule,
                                                  Schedule capOrFloorSchedule,
                                                  NonNegativeSchedule notionalSchedule)
@@ -30,7 +45,7 @@ namespace Orion.ValuationEngine.Generators
             return capFloor;
         }
 
-        public static CapFloor GenerateDefiniton(CapFloorLegParametersRange_Old capFloorLeg,
+        public static CapFloor GenerateDefinition(CapFloorLegParametersRange_Old capFloorLeg,
                                                  Schedule    spreadSchedule,
                                                  Schedule    capOrFloorSchedule,
                                                  NonNegativeSchedule notionalSchedule)
@@ -79,7 +94,7 @@ namespace Orion.ValuationEngine.Generators
                     fixingCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, fixCalendar, nameSpace);
                 }
             }
-            CapFloor capFloor = GenerateDefiniton(capFloorLeg, spreadSchedule, capOrFloorSchedule, notionalSchedule);
+            CapFloor capFloor = GenerateDefinition(capFloorLeg, spreadSchedule, capOrFloorSchedule, notionalSchedule);
             if (null != spreadSchedule)
             {
                 InterestRateStreamParametricDefinitionGenerator.SetSpreadSchedule(capFloor.capFloorStream, spreadSchedule);
@@ -121,7 +136,7 @@ namespace Orion.ValuationEngine.Generators
                                                             NonNegativeAmountSchedule notionalSchedule)
 
         {
-            CapFloor capFloor = GenerateDefiniton(capFloorLeg, spreadSchedule, capOrFloorSchedule, notionalSchedule);
+            CapFloor capFloor = GenerateDefinition(capFloorLeg, spreadSchedule, capOrFloorSchedule, notionalSchedule);
             if (null != spreadSchedule) 
             {
                 InterestRateStreamParametricDefinitionGenerator.SetSpreadSchedule(capFloor.capFloorStream, spreadSchedule);

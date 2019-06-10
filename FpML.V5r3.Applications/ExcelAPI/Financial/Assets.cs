@@ -145,7 +145,7 @@ namespace HLV5r3.Financial
             var index = 0;
             foreach (var element in nvs.ToArray())
             {
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 result[index, 0] = element.Name;
                 result[index, 1] = element.ValueString;
                 index++;
@@ -154,7 +154,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// A function to return the list of valid assetmeasures. 
+        /// A function to return the list of valid asset measures. 
         /// Only some have been implemented.
         /// </summary>
         /// <returns>A vertical range object, containing the list of asset measure types.</returns>
@@ -166,7 +166,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// A function to return the list of valid assetmeasures. 
+        /// A function to return the list of valid asset measures. 
         /// Only some have been implemented.
         /// </summary>
         /// <returns>A vertical range object, containing the list of asset measure types.</returns>
@@ -203,7 +203,7 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// A function to return the list of implemented bond assets. 
-        /// Each bond type has differenct static data information.
+        /// Each bond type has different static data information.
         /// <para>AGB,</para> 
         /// <para>BOBL,</para> 
         /// <para>Bund,</para> 
@@ -226,7 +226,7 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// A function to return the list of implemented bond assets. 
-        /// Each bond type has differenct static data information.
+        /// Each bond type has different static data information.
         /// <para>Govt,</para> 
         /// <para>Corp,</para> 
         /// <para>Mtge,</para> 
@@ -248,7 +248,7 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// A function to return the list of implemented bond assets. 
-        /// Each bond type has differenct static data information.
+        /// Each bond type has different static data information.
         /// <para>Senior,</para> 
         /// <para>SubTier1,</para> 
         /// <para>SubUpperTier2,</para> 
@@ -265,7 +265,7 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// A function to return the list of implemented bond assets. 
-        /// Each bond type has differenct static data information.
+        /// Each bond type has different static data information.
         /// <para>Fixed,</para> 
         /// <para>Float,</para> 
         /// <para>Struct,</para> 
@@ -280,7 +280,7 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// A function to return the list of implemented assets. 
-        /// Each asset type has differenct static data information.
+        /// Each asset type has different static data information.
         /// <para>BasisSwap,</para>
         /// <para>Bond,</para>
         /// <para>Deposit,</para> 
@@ -328,7 +328,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// A function to return the list of valid indices, which may or may not have been impletented.
+        /// A function to return the list of valid indices, which may or may not have been implemented.
         /// </summary>
         /// <returns>A range object</returns>
         public object[,] SupportedFloatingRates()
@@ -435,7 +435,7 @@ namespace HLV5r3.Financial
         }
     
         ///<summary>
-        /// Calculates the partial differrential hedge for a swap.
+        /// Calculates the partial differential hedge for a swap.
         ///</summary>
         ///<param name="curveId">The curve id. This must have been created already.</param>
         ///<param name="currency">The configuration currency.
@@ -481,6 +481,7 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Calculates the bond asset swap metric using the curve provided.
         /// </summary>
+        /// <param name="identifier">The identifier of the bond.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="exDivDate">The next ex div date.</param>
         /// <param name="maturityDate">The maturity date.</param>
@@ -492,16 +493,16 @@ namespace HLV5r3.Financial
         /// <param name="ytm">The yield to maturity.</param>
         /// <param name="curveId">The curve to use for calculation</param>
         /// <param name="daycount">The daycount convention.</param>
-        /// <param name="settlememtDate">The settlement date.</param>
+        /// <param name="settlementDate">The settlement date.</param>
         /// <param name="rollConvention">The roll convention.</param>
         /// <returns>The asset swap level.</returns>
-        public Decimal GetBondAssetSwapSpread(DateTime baseDate, DateTime settlememtDate, DateTime exDivDate, DateTime maturityDate,
+        public Decimal GetBondAssetSwapSpread(string identifier, DateTime baseDate, DateTime settlementDate, DateTime exDivDate, DateTime maturityDate,
             Decimal amount, Decimal coupon, String daycount, String frequency, String issuerName, String rollConvention, String businessCenters, Decimal ytm, String curveId)
         {
             //Get the curve.
             var ratecurve = (IRateCurve)Engine.GetCurve(curveId, false);
-            //Calculate the assetswap level.
-            var asw = Engine.GetBondAssetSwapSpread(baseDate, settlememtDate, exDivDate, MoneyHelper.GetAmount(amount)
+            //Calculate the asset swap level.
+            var asw = Engine.GetBondAssetSwapSpread(identifier, baseDate, settlementDate, exDivDate, MoneyHelper.GetAmount(amount)
                 , coupon, maturityDate, daycount, frequency, issuerName, rollConvention, businessCenters, ratecurve, ytm, null);
             return asw;
         }
@@ -512,7 +513,7 @@ namespace HLV5r3.Financial
         /// The function will return a series of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="curveId">The curve id. This must have been created already.</param>
@@ -542,11 +543,11 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a series of metrics for that cap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="rollBackward">If tru, roll back from the maturity date. Otherwise roll forward from the effective date.</param>
@@ -595,13 +596,13 @@ namespace HLV5r3.Financial
             {
                 resetRates = lastResets;
             }
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
-            //Create the realtivvedateoffset.
+            //Create the RelativeDateOffset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
-            //Create the realtivvedateoffset.
+            //Create the ForecastRateIndex.
             var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex, indexTenor);
             //create the cap/floor.
             var capfloor = isCap
@@ -611,7 +612,7 @@ namespace HLV5r3.Financial
                                : PriceableAssetFactory.CreateIRFloor(Engine.Logger, Engine.Cache, NameSpace, baseDate, effectiveDate, maturityTerm, currency,
                     indexTenor, includeStubFlag, notional, strike, rollBackward, resetRates,
                                                                      resetOffset, businessDayAdjustments, dayCount, forecastRate, null, null, namedValueSet);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation
                                 {
@@ -631,7 +632,7 @@ namespace HLV5r3.Financial
             //Create the interpolator and get the implied quote.
             var valuation = capfloor.Calculate(assetControllerData);
             if (valuation == null) return ArrayHelper.ConvertDictionaryTo2DArray(result);
-            //Check to see if details are reuqired.
+            //Check to see if details are required.
             if (cashFlowDetail)
             {
                 foreach (var metricQuote in valuation.quote)
@@ -654,16 +655,16 @@ namespace HLV5r3.Financial
 
         /// <summary>
         ///  This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        ///  This function does however allow differenct conventions on the floating side and a non-zero spread.
+        ///  This function does however allow different conventions on the floating side and a non-zero spread.
         ///  The function will return a series of metrics for that cap, depending on what is requested.
         /// </summary>
         ///  <remarks>
-        ///  The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        ///  The assumption is that only one curve is required for valuation, as the floating leg always 
         ///  values to zero when including principal exchanges.
         ///  </remarks>
         /// <param name="paymentBusinessDayConvention">The payment businessDayConvention.</param>
         /// <param name="strikesAsArray">The strike array.</param>
-        /// <param name="resetsAsArray">An arraqy of rest rates. This may be null.</param>
+        /// <param name="resetsAsArray">An array of rest rates. This may be null.</param>
         /// <param name="notionalsAsArray">The notionals.</param>
         /// <param name="resetPeriod">The reset period e.g. -2D.</param>
         /// <param name="paymentBusinessCentersAsString">The payment business centers.</param>
@@ -703,13 +704,13 @@ namespace HLV5r3.Financial
             {
                 resetRates = resets;
             }
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
-            //Create the realtivedateoffset.
+            //Create the RelativeDateOffset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
-            //Create the realtivedateoffset.
+            //Create the ForecastRateIndex.
             var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex, indexTenor);
             //create the cap/floor.
             var capfloor = isCap ? PriceableAssetFactory.CreateIRCap(Engine.Logger, Engine.Cache, NameSpace, "Local", baseDate, currency, rollDates,
@@ -718,7 +719,7 @@ namespace HLV5r3.Financial
                                                                     : PriceableAssetFactory.CreateIRFloor(Engine.Logger, Engine.Cache, NameSpace, "Local", baseDate, currency, rollDates,
                                                                     weights, strikeRates, resetRates, resetOffset,
                                                                     businessDayAdjustments, dayCount, forecastRate, null, namedValueSet);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation();
             var quoteMetric = BasicQuotationHelper.Create(0.0m, metric);
@@ -753,16 +754,16 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return the pdh for the forecast and discount curve together.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="paymentBusinessDayConvention">The payment businessDayConvention.</param>
         ///<param name="strikesAsArray">The strike array.</param>
-        ///<param name="resetsAsArray">An arraqy of rest rates. This may be null.</param>
+        ///<param name="resetsAsArray">An array of rest rates. This may be null.</param>
         ///<param name="notionalsAsArray">The notionals.</param>
         ///<param name="resetPeriod">The reset period e.g. -2D.</param>
         ///<param name="paymentBusinessCentersAsString">The payment business centers.</param>
@@ -802,13 +803,13 @@ namespace HLV5r3.Financial
             {
                 resetRates = resets;
             }
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
-            //Create the realtivvedateoffset.
+            //Create the RelativeDateOffset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
-            //Create the realtivvedateoffset.
+            //Create the ForecastRateIndex.
             var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex, indexTenor);
             //create the cap/floor.
             var capfloor = isCap ? PriceableAssetFactory.CreateIRCap(Engine.Logger, Engine.Cache, NameSpace, "Local", baseDate, currency, new List<DateTime>(rollDates),
@@ -833,11 +834,11 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a swap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a series of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="fixedNotionalsAsArray">The fixed notionals.</param>
@@ -846,7 +847,7 @@ namespace HLV5r3.Financial
         ///<param name="floatingRollDatesAsArray">The floating roll dates. Includes the maturity date</param>
         ///<param name="floatingNotionalsAsArray">The floating notionals.</param>
         ///<param name="floatingResetRatesAsArray">The floating leg rest rate array.</param>
-        ///<param name="propertiesRange">The properties asociated with the asset.</param>
+        ///<param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
         public Decimal GetIRSwapMetric(Excel.Range fixedRollDatesAsArray, Excel.Range fixedNotionalsAsArray, 
             Excel.Range floatingRollDatesAsArray, Excel.Range floatingNotionalsAsArray, 
@@ -875,7 +876,7 @@ namespace HLV5r3.Financial
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
             bav.quote = new[] { quote, spreadquote };
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                                                                              businessCentersAsString);
             //create the swap.
@@ -885,7 +886,7 @@ namespace HLV5r3.Financial
                                                                     floatingweights,
                                                                     floatingResets,
                                                                     businessDayAdjustments, bav, namedValueSet);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation();
             var quoteMetric = BasicQuotationHelper.Create(0.0m, metric);
@@ -907,11 +908,11 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a swap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a set of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="fixedRate">The fixed rate.</param>
@@ -949,7 +950,7 @@ namespace HLV5r3.Financial
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
             bav.quote = new[] { quote, spreadquote };
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                                                                              businessCentersAsString);
             //create the swap.
@@ -959,7 +960,7 @@ namespace HLV5r3.Financial
                                                                     floatingweights,
                                                                     floatingResets,
                                                                     businessDayAdjustments, bav, namedValueSet);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SimpleRateMarketEnvironment();
             var bavMetric = new BasicAssetValuation
                                 {
@@ -985,11 +986,11 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a series of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="rollBackward">If tru, roll back from the maturity date. Otherwise roll forward from the effective date.</param>
@@ -1000,7 +1001,7 @@ namespace HLV5r3.Financial
         ///<param name="resetBusinessCentersAsString">The rest business days.</param>
         ///<param name="effectiveDate">The roll dates with the maturity date included..</param>
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
-        ///<param name="propertiesRange">The properties asociated with the asset.</param>
+        ///<param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
         public String CreateIRSwap(DateTime effectiveDate,
             Double notional, Excel.Range floatingResetRatesAsArray,
@@ -1020,10 +1021,10 @@ namespace HLV5r3.Financial
             //Create the quotations
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                 businessCentersAsString);
-            //Create the realtivedateoffset.
+            //Create the RelativeDateOffset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
             //create the swap.
@@ -1035,11 +1036,11 @@ namespace HLV5r3.Financial
 
         ///<summary>
         /// This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a series of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for valuation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="rollBackward">If tru, roll back from the maturity date. Otherwise roll forward from the effective date.</param>
@@ -1053,7 +1054,7 @@ namespace HLV5r3.Financial
         ///<param name="metricsAsArray">The metrics as an array.</param>
         ///<param name="effectiveDate">The roll dates with the maturity date included..</param>
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
-        /// <param name="propertiesRange">The properties asociated with the asset.</param>
+        /// <param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
         public Object[,] GetIRSwapMetrics2(DateTime effectiveDate, Double notional, Excel.Range floatingResetRatesAsArray,
             Boolean includeStubFlag, Boolean rollBackward, string paymentBusinessDayConvention,
@@ -1073,16 +1074,16 @@ namespace HLV5r3.Financial
             var floatingSpread = namedValueSet.GetValue<Decimal>("Spread", true);
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
-            //Create the realtivvedateoffset.
+            //Create the RelativeDateOffset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
             //create the swap.
             var irSwap = PriceableAssetFactory.CreateIRSwap(Engine.Logger, Engine.Cache, NameSpace, effectiveDate, notional,
                 businessDayAdjustments, resetOffset, resets, null, null, quote, spreadquote, namedValueSet);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation
                                 {
@@ -1116,16 +1117,16 @@ namespace HLV5r3.Financial
         ///  but does allow different conventions on the floating side and a non-zero spread.
         /// </summary>
         ///  <remarks>
-        ///  The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        ///  The assumption is that only one curve is required for valuation, as the floating leg always 
         ///  values to zero when including principal exchanges.
         ///  The function will return the partial differential hedge for that swap. This will be a spectrum based 
-        ///  perturbation rather than a cummulative based interpoaltion. Fort this reason, the sum of the partials 
+        ///  perturbation rather than a cumulative based interpolation. Fort this reason, the sum of the partials 
         ///  will not equal a parallel shift delta.
         ///  </remarks>
         /// <param name="fixedNotionalsAsArray">The fixed notional weights.</param>
         /// <param name="fixedRollDatesAsArray">The fixed dates.</param>
         /// <param name="floatingResetRatesAsArray">The floating rest rates array.</param>
-        /// <param name="floatingRollDatesAsArray">The floatin dates.</param>
+        /// <param name="floatingRollDatesAsArray">The floating dates.</param>
         /// <param name="floatingNotionalsAsArray">The floating leg notional weights.</param>
         /// <param name="propertiesRange">The properties Range: currency, baseDate and isDiscounted.</param>
         /// <returns>The VERTICAL ARRAY OF PARTIAL DERIVATIVES, WITH RESPECT TO EACH ASSET IN THE REFERENCED CURVE.</returns>
@@ -1156,7 +1157,7 @@ namespace HLV5r3.Financial
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
             bav.quote = new[] { quote, spreadquote };
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCentersAsString);
             //create the swap.
             var swap = PriceableAssetFactory.CreateIRSwap(rollDates,
@@ -1304,18 +1305,18 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Creates a bond in the data store.
         /// </summary>
-        /// <param name="instrumentId">The instrument identfier.</param>
+        /// <param name="instrumentId">The instrument identifier.</param>
         /// <param name="clearanceSystem">A valid clearance system.</param>
         /// <param name="couponType">A valid coupon type: Fixed, Float or Struct as defined by the CouponTypeEnum.</param>
         /// <param name="couponRate">The coupon rate as a number i.e. 5.25. If the bond is a floater, then the rate is the spread.</param>
         /// <param name="currency">A valid currency.</param>
         /// <param name="faceAmount">The face amount. Normally 100.</param>
-        /// <param name="maturityDate">The maturitydate. Formatted if possible as MM/DD/YY</param>
+        /// <param name="maturityDate">The maturity date. Formatted if possible as MM/DD/YY</param>
         /// <param name="paymentFrequency">A valid payment frequency.</param>
         /// <param name="dayCountFraction">Defined by the DayCountFractionEnum types.</param>
-        /// <param name="creditSeniority">The credit senirotiy. Of the form: CreditSeniorityEnum</param>
+        /// <param name="creditSeniority">The credit seniority. Of the form: CreditSeniorityEnum</param>
         /// <param name="description">The issuer description. e.g. BHP 5.3 12/23/18</param>
-        /// <param name="exchangeId">The exchange identifier. These are sotroed as reference data.</param>
+        /// <param name="exchangeId">The exchange identifier. These are sorted by reference data.</param>
         /// <param name="issuerName">The issuer name, but as a ticker.</param>
         /// <param name="propertyHeaders">An array property headers. This includes:
         /// BondTypeEnum
@@ -1392,12 +1393,12 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Creates a equity in the data store.
         /// </summary>
-        /// <param name="instrumentId">The instrument identfier.</param>
+        /// <param name="instrumentId">The instrument identifier.</param>
         /// <param name="clearanceSystem">A valid clearance system.</param>
         /// <param name="currency">A valid currency.</param>
         /// <param name="assetId">The asset identifier. e.g. BHP 5.3 12/23/18</param>
         /// <param name="description">The issuer description.</param>
-        /// <param name="exchangeId">The exchange identifier. These are sotroed as reference data.</param>
+        /// <param name="exchangeId">The exchange identifier. These are sorted by reference data.</param>
         /// <param name="issuerName">The issuer name, but as a ticker.</param>
         /// <param name="propertyHeaders">An array property headers. This includes:
         /// BondTypeEnum
@@ -1425,7 +1426,7 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Creates a property in the data store.
         /// </summary>
-        /// <param name="propertyId">The property identfier.</param>
+        /// <param name="propertyId">The property identifier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
@@ -1461,7 +1462,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Creates the surface volatiltiy asset.
+        /// Creates the surface volatility asset.
         /// </summary>
         /// <param name="assetIdentifier">The asset identifier.</param>
         /// <param name="baseDate">The base date.</param>
@@ -1482,9 +1483,9 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Creates the surface volatiltiy asset.
+        /// Creates the surface volatility asset.
         /// </summary>
-        /// <param name="assetIdentifiersAsArray">The asset identifiersw.</param>
+        /// <param name="assetIdentifiersAsArray">The asset identifier.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="strikesAsArray">The strikes.</param>
         /// <param name="volatilityRange">The volatility matrix.</param>
@@ -1693,7 +1694,7 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="curveId">The curve id.</param>
         /// <param name="assetId">The asset id e.g. AUD-IRswap-3Y.</param>
-        /// <param name="additional">Any additional data reqquired e.g. Futures volatility.</param>
+        /// <param name="additional">Any additional data required e.g. Futures volatility.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="rate">The rate.</param>
         /// <returns>A decimal value - the break even rate.</returns>
@@ -1702,7 +1703,7 @@ namespace HLV5r3.Financial
         {
             //Create the properties.
             var properties = PriceableAssetFactory.BuildPropertiesForAssets(NameSpace, assetId, baseDate);
-            //create the asset-basicassetvaluation pair.
+            //create the asset-basic asset valuation pair.
             var asset = AssetHelper.Parse(assetId, rate, additional);
             //create the priceable asset.
             var priceableAsset = Engine.CreatePriceableAsset(asset.Second, properties);
@@ -1732,7 +1733,7 @@ namespace HLV5r3.Financial
 
 
         /// <summary>
-        /// Evaluates a matric of breakeven rates for a group of assets defined.
+        /// Evaluates a metric of breakeven rates for a group of assets defined.
         /// </summary>
         /// <param name="effectiveDatesAsArray">An array of effective dates.</param>
         /// <param name="assetTenorsAsArray">The array of asset tenors.</param>
@@ -1765,7 +1766,7 @@ namespace HLV5r3.Financial
                     var id = currency + "-" + assetType + "-" + tenors[j];
                     //Create the properties.
                     var assetProperties = PriceableAssetFactory.BuildPropertiesForAssets(NameSpace, id, dates[i]);
-                    //create the asset-basicassetvaluation pair.
+                    //create the asset-basic asset valuation pair.
                     var asset = AssetHelper.Parse(id, 0.05m, 0.0m);
                     //create the priceable asset.
                     var priceableAsset = Engine.CreatePriceableAsset(asset.Second, assetProperties);
@@ -1850,8 +1851,8 @@ namespace HLV5r3.Financial
         /// STATUS ;
         /// CREATION DATE ;
         ///</param>
-        /// <param name="exchangeSettlementData">THe setttlement data attached to each exchange. 
-        /// There should be at least 4 columns: period; daytype; businessdayconvention; businessCentres. RelativeTo is optional</param>
+        /// <param name="exchangeSettlementData">THe settlement data attached to each exchange. 
+        /// There should be at least 4 columns: period; daytype; businessdayconvention; businessCentre. RelativeTo is optional</param>
         /// <returns></returns>
         public string LoadExchangeConfigData(Excel.Range exchangeData, Excel.Range exchangeSettlementData)
         {

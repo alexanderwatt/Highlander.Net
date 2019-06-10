@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -115,12 +130,12 @@ namespace Orion.CurveEngine.Assets.Rates.CapFloorLet
         public BusinessDayAdjustments BusinessDayAdjustments { get; set; }
 
         /// <summary>
-        /// The reset date offseets.
+        /// The reset date offsets.
         /// </summary>
         public RelativeDateOffset ResetDateOffset { get; set; }
 
         /// <summary>
-        /// The spot date offseets.
+        /// The spot date offsets.
         /// </summary>
         public RelativeDateOffset SpotDateOffset { get; set; }
 
@@ -224,7 +239,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapFloorLet
                 AnalyticsModel = new SimpleRateOptionAssetAnalytic();
             }
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that all we evaluate - every other metric is ignored
             //
             var bEvalVolatilityAtRiskMaturity = false;
             if (metrics.Contains(RateOptionMetrics.VolatilityAtExpiry))
@@ -239,12 +254,12 @@ namespace Orion.CurveEngine.Assets.Rates.CapFloorLet
             var metricsToEvaluate = metrics.ToArray();
             if (IsVolatilityQuote)
             {
-                analyticModelParameters.IsVolatiltiyQuote = true;
+                analyticModelParameters.IsVolatilityQuote = true;
                 analyticModelParameters.Volatility = Volatility;
             }
             if (bEvalVolatilityAtRiskMaturity && IsVolatilityQuote)
             {
-                analyticModelParameters.IsVolatiltiyQuote = true;
+                analyticModelParameters.IsVolatilityQuote = true;
                 AnalyticResults = AnalyticsModel.Calculate<ISimpleRateOptionAssetResults, SimpleRateOptionAssetResults>(analyticModelParameters, metricsToEvaluate);
                 return GetValue(AnalyticResults);
             }
@@ -312,7 +327,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapFloorLet
                 analyticModelParameters.Volatility =
                     Convert.ToDecimal(volCurve.GetValue((double) TimeToExpiry, (double) Strike));
             }
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults =
                 AnalyticsModel.Calculate<ISimpleRateOptionAssetResults, SimpleRateOptionAssetResults>(analyticModelParameters,

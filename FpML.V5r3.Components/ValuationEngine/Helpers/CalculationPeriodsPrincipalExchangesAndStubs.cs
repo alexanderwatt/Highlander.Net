@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -40,17 +55,17 @@ namespace Orion.ValuationEngine.Helpers
             return result;
         }
 
-        public  bool    IsFirstRegularPeriod(CalculationPeriod calculationPeriod)
+        public bool IsFirstRegularPeriod(CalculationPeriod calculationPeriod)
         {
             return calculationPeriod == CalculationPeriods[0];
         }
 
-        public  bool    IsLastRegularPeriod(CalculationPeriod calculationPeriod)
+        public bool IsLastRegularPeriod(CalculationPeriod calculationPeriod)
         {
             return calculationPeriod == CalculationPeriods[CalculationPeriods.Count - 1];
         }
 
-        public List<CalculationPeriod>  GetRegularAndStubPeriods()
+        public List<CalculationPeriod> GetRegularAndStubPeriods()
         {
             var result = new List<CalculationPeriod>(CalculationPeriods);
             if (HasInitialStub)
@@ -64,37 +79,13 @@ namespace Orion.ValuationEngine.Helpers
             return result;
         }
 
-        public  bool    HasInitialStub
-        {
-            get
-            {
-                return null != InitialStubCalculationPeriod;
-            }
-        }
+        public bool HasInitialStub => null != InitialStubCalculationPeriod;
 
-        public  bool    HasFinalStub
-        {
-            get
-            {
-                return null != FinalStubCalculationPeriod;
-            }
-        }
-        
-        public  DateTime    FirstRegularPeriodUnadjustedStartDate
-        {
-            get
-            {
-                return CalculationPeriods[0].unadjustedStartDate;
-            }
-        }
+        public bool HasFinalStub => null != FinalStubCalculationPeriod;
 
-        public  DateTime    LastRegularPeriodUnadjustedEndDate
-        {
-            get
-            {
-                return CalculationPeriods[CalculationPeriods.Count - 1].unadjustedEndDate;
-            }
-        }
+        public DateTime FirstRegularPeriodUnadjustedStartDate => CalculationPeriods[0].unadjustedStartDate;
+
+        public DateTime LastRegularPeriodUnadjustedEndDate => CalculationPeriods[CalculationPeriods.Count - 1].unadjustedEndDate;
 
         public void Add(CalculationPeriod calculationPeriod)
         {
@@ -111,7 +102,7 @@ namespace Orion.ValuationEngine.Helpers
             CalculationPeriods.Insert(0, calculationPeriod); 
         }
 
-        public  void    CreateLongFinalStub()
+        public void CreateLongFinalStub()
         {
             CalculationPeriod lastRegularPeriod = CalculationPeriods[CalculationPeriods.Count - 1];
             CalculationPeriod shortFinalStub = FinalStubCalculationPeriod;
@@ -127,12 +118,12 @@ namespace Orion.ValuationEngine.Helpers
                                         unadjustedEndDate = shortFinalStub.unadjustedEndDate
                                     };
             FinalStubCalculationPeriod = longFinalStub;
-            // Remove last regulart period (after it was merged with short stub) 
+            // Remove last regular period (after it was merged with short stub) 
             //
             CalculationPeriods.Remove(lastRegularPeriod);
         }
 
-        public  void    CreateLongInitialStub()
+        public void CreateLongInitialStub()
         {
             var shortInitialStub = InitialStubCalculationPeriod;
             var firstRegularPeriod = CalculationPeriods[0];

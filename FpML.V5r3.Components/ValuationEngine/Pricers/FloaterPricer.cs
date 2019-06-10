@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -74,7 +89,7 @@ namespace Orion.ValuationEngine.Pricers
             List<PrincipalExchangeCashflowRangeItem> leg1PrincipalExchangeCashflowList,
             List<AdditionalPaymentRangeItem> leg1AdditionalPaymentList)
         {
-            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definiton + cashflows schedule
+            InterestRateStream stream1 = GetCashflowsSchedule(fixingCalendar, paymentCalendar, leg1ParametersRange);//parametric definition + cashflows schedule
             var swap = SwapFactory.Create(stream1);
             // Update FpML cashflows
             //
@@ -328,7 +343,7 @@ namespace Orion.ValuationEngine.Pricers
                 }
                 else if (detailedCashflowRangeItem.CouponType == "Float")
                 {
-                    //  Create floating rate definiton...
+                    //  Create floating rate definition...
                     //
                     var floatingRateDefinition = new FloatingRateDefinition();
                     //XsdClassesFieldResolver.CalculationPeriod_SetFloatingRateDefinition(calculationPeriod, floatingRateDefinition);

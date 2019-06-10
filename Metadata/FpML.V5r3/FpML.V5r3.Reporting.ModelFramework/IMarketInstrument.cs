@@ -1,4 +1,20 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
+
 using Orion.ModelFramework.Assets;
 
 #endregion
@@ -41,7 +57,7 @@ namespace Orion.ModelFramework
         ///<summary>
         /// Gets the contained priceable asset.
         /// This is to allow the binary serialiser
-        /// in the Local cache to recognise the type.
+        /// in the Local cache to recognize the type.
         ///</summary>
         ///<returns></returns>
         IPriceableAssetController GetPriceableAsset();

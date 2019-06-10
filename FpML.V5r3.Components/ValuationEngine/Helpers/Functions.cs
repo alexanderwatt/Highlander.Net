@@ -1,4 +1,19 @@
-﻿#region Using directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 using System;
 using System.Collections.Generic;
@@ -21,7 +36,7 @@ namespace Orion.ValuationEngine.Helpers
     {
 
         ///<summary>
-        /// The accuray of the solver.
+        /// The accuracy of the solver.
         ///</summary>
         public static Double Accuracy {get; set;}
 
@@ -119,7 +134,7 @@ namespace Orion.ValuationEngine.Helpers
                                                                       discountFactorCurvePayLeg,
                                                                       false);
             payFloatingCashflows.PayingFixedRate = false;
-            var objectiveFuncton = new InterestRateSwapPricer
+            var objectiveFunction = new InterestRateSwapPricer
                                        {
                                            ReceiveLeg = recFixedCashflows,
                                            PayLeg = payFloatingCashflows
@@ -130,7 +145,7 @@ namespace Orion.ValuationEngine.Helpers
                                  UpperBound = 100.0
                              };
 
-            return solver.Solve(objectiveFuncton, Accuracy, Guess, Step);
+            return solver.Solve(objectiveFunction, Accuracy, Guess, Step);
         }
 
 
@@ -211,7 +226,7 @@ namespace Orion.ValuationEngine.Helpers
                                                                       discountFactorCurvePayLeg,
                                                                       false);
             payFloatingCashflows.PayingFixedRate = false;
-            var objectiveFuncton = new InterestRateSwapPricer
+            var objectiveFunction = new InterestRateSwapPricer
                                        {
                                            ReceiveLeg = recFixedCashflows,
                                            PayLeg = payFloatingCashflows
@@ -221,7 +236,7 @@ namespace Orion.ValuationEngine.Helpers
                                  LowerBound = -100.0,
                                  UpperBound = 100.0
                              };
-            return solver.Solve(objectiveFuncton, Accuracy, Guess, Step);
+            return solver.Solve(objectiveFunction, Accuracy, Guess, Step);
         }
 
         private static IRateCurve GetDiscountFactorCurveFromObject(object discountFactorCurveObject, string paramName)
@@ -351,7 +366,7 @@ namespace Orion.ValuationEngine.Helpers
                                                                       holidaysPayLeg,
                                                                       discountFactorCurvePayLeg,
                                                                       false);
-            var objectiveFuncton = new InterestRateSwapPricer
+            var objectiveFunction = new InterestRateSwapPricer
                                        {
                                            ReceiveLeg = recFixedCashflows,
                                            PayLeg = payFloatingCashflows
@@ -361,7 +376,7 @@ namespace Orion.ValuationEngine.Helpers
                                  LowerBound = -100.0,
                                  UpperBound = 100.0
                              };
-            solver.Solve(objectiveFuncton, Accuracy, Guess, Step);
+            solver.Solve(objectiveFunction, Accuracy, Guess, Step);
 //            bool bothLegsHaveTheSameStructure =
 //                directionDateGenerationPayLeg == directionDateGenerationRecLeg &&
 //                cashFlowFrequencyPayLeg == cashFlowFrequencyRecLeg &&
@@ -456,7 +471,7 @@ namespace Orion.ValuationEngine.Helpers
                                                                       holidaysPayLeg,
                                                                       rateCurveRecLeg,
                                                                       false);
-            var objectiveFuncton = new InterestRateSwapPricer
+            var objectiveFunction = new InterestRateSwapPricer
                                        {
                                            ReceiveLeg = recFixedCashflows,
                                            PayLeg = payFloatingCashflows
@@ -466,7 +481,7 @@ namespace Orion.ValuationEngine.Helpers
                                  LowerBound = -100.0,
                                  UpperBound = 100.0
                              };
-            solver.Solve(objectiveFuncton, Accuracy, Guess, Step);
+            solver.Solve(objectiveFunction, Accuracy, Guess, Step);
             //            bool bothLegsHaveTheSameStructure =
             //                directionDateGenerationPayLeg == directionDateGenerationRecLeg &&
             //                cashFlowFrequencyPayLeg == cashFlowFrequencyRecLeg &&

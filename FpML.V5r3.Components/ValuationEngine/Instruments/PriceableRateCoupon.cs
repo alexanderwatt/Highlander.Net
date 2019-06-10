@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -196,7 +211,7 @@ namespace Orion.ValuationEngine.Instruments
         }
 
         ///<summary>
-        /// Gets the discountingtypeenum.
+        /// Gets the discounting type enum.
         ///</summary>
         ///<returns></returns>
         public DiscountingTypeEnum? GetDiscountingTypeEnum()
@@ -205,7 +220,7 @@ namespace Orion.ValuationEngine.Instruments
         }
 
         ///<summary>
-        /// Gets the discountingtypeenum.
+        /// Gets the discounting type enum.
         ///</summary>
         ///<returns></returns>
         public FraDiscountingEnum? GetFraDiscountingType()
@@ -228,7 +243,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableRateCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="couponType">Type of the coupon.</param>
         /// <param name="accrualStartDate">The accrual start date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
         /// <param name="accrualEndDate">The accrual end date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
@@ -237,17 +252,17 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="fixedRate">The fixed rate.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="notionalAmount">The notional amount.</param>
-        /// <param name="dayCountfraction">Type of day Countfraction.</param>
+        /// <param name="dayCountFraction">Type of day Count fraction.</param>
         /// <param name="paymentDate">The payment date.</param>
         /// <param name="accrualRollConvention">The accrual roll convention.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableRateCoupon
             (
-            string cashlfowId
+            string cashflowId
             , CouponType couponType
             , bool payerIsBase
             , DateTime accrualStartDate
@@ -255,7 +270,7 @@ namespace Orion.ValuationEngine.Instruments
             , Boolean adjustCalculationDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
-            , DayCountFraction dayCountfraction
+            , DayCountFraction dayCountFraction
             , Decimal? fixedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
@@ -265,7 +280,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , $"{couponType}Rate{CashflowTypeEnum.Coupon}"
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
@@ -293,9 +308,9 @@ namespace Orion.ValuationEngine.Instruments
             RiskMaturityDate = AccrualEndDate;
             //Set the discounting type.
             if (discountingType != null && fraDiscounting != null) return;
-            IDayCounter dayCounter = DayCounterHelper.Parse(dayCountfraction.Value);
+            IDayCounter dayCounter = DayCounterHelper.Parse(dayCountFraction.Value);
             CouponYearFraction = (decimal) dayCounter.YearFraction(AccrualStartDate, AccrualEndDate);
-            DayCountFraction = dayCountfraction;
+            DayCountFraction = dayCountFraction;
             Rate = fixedRate;
             DiscountingType = discountingType;
             DiscountType = GetDiscountType();
@@ -307,7 +322,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableRateCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="couponType">Type of the coupon.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="accrualStartDate">The accrual start date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
@@ -319,11 +334,11 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
-        /// then it is assumed that there is no fradiscounting</param>
+        /// then it is assumed that there is no fra discounting</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableRateCoupon
             (
-            string cashlfowId
+            string cashflowId
             , CouponType couponType
             , bool payerIsBase
             , DateTime accrualStartDate
@@ -338,7 +353,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , $"{couponType}Rate{CashflowTypeEnum.Coupon}"
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
@@ -370,7 +385,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableRateCoupon"/> class.
         /// </summary>
-        /// <param name="cashlfowId">The stream id.</param>
+        /// <param name="cashflowId">The stream id.</param>
         /// <param name="couponType">Type of the coupon.</param>
         /// <param name="payerIsBase">The payer is base flag.</param>
         /// <param name="accrualStartDate">The accrual start date. If adjusted, the adjustCalculationDatesIndicator should be false.</param>
@@ -383,7 +398,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         protected PriceableRateCoupon
             (
-            string cashlfowId
+            string cashflowId
             , CouponType couponType
             , bool payerIsBase
             , DateTime accrualStartDate
@@ -396,7 +411,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar paymentCalendar)
             : base
                 (
-                cashlfowId
+                cashflowId
                 , $"{couponType}Rate{CashflowTypeEnum.Coupon}"
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
@@ -427,7 +442,7 @@ namespace Orion.ValuationEngine.Instruments
             PriceableCouponType = couponType;
             var calculationPeriods = PriceableInstrumentsFactory.CreateSimpleCouponItem(AccrualStartDate, AccrualEndDate, notionalAmount, calculation);
             CouponYearFraction = calculationPeriods[0].dayCountYearFraction;
-            //Set the disocunting type.
+            //Set the discounting type.
             var discounting = XsdClassesFieldResolver.CalculationHasDiscounting(calculation)
                                   ? XsdClassesFieldResolver.CalculationGetDiscounting(calculation)
                                   : null;            
@@ -499,8 +514,8 @@ namespace Orion.ValuationEngine.Instruments
                 coupon.forecastRate = (decimal)Rate;
                 coupon.forecastRateSpecified = true;
             }
-            // Will only be set if the metrics have been excecuted via the Calculate api
-            if (CalculationPerfomedIndicator)
+            // Will only be set if the metrics have been executed via the Calculate api
+            if (CalculationPerformedIndicator)
             {
                 pcp.forecastPaymentAmount = ForecastAmount;
                 pcp.discountFactor = PaymentDiscountFactor;
