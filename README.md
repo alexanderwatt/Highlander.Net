@@ -1,4 +1,4 @@
-# Highlander.Netis a real-time event driven valuation engine for markets products.
+# Highlander.Net is a real-time event driven valuation engine for markets products.
 
 The Mission
 Build a “re-usable component library”, not just analytics libraries, but also workflows, calculation engines and other useful widgets
