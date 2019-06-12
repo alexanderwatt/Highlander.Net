@@ -28,8 +28,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             var irSwapPricer = new InterestRateSwapPricer();
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB( valuationDate);
             var payCFRangeItemList = InterestRateSwapPricer.GetDetailedCashflowsTestOnly(Engine.Logger, Engine.Cache, Engine.NameSpace, payFixed, valuationRange);
             var receiveCFRangeItemList = InterestRateSwapPricer.GetDetailedCashflowsTestOnly(Engine.Logger, Engine.Cache, Engine.NameSpace, receiveFloat, valuationRange);
@@ -224,8 +224,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
                 Result = result;
             }
 
-            public AddOrRemoveCashflows First;
-            public AddOrRemoveCashflows Second;
+            public readonly AddOrRemoveCashflows First;
+            public readonly AddOrRemoveCashflows Second;
             public readonly int Result;
         }
 
@@ -235,8 +235,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             var inputAndOutput = new List<AddOrRemoveCashflowsResult>
                 {
@@ -283,8 +283,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             var inputAndOutput = new List<AddOrRemoveCashflowsResult>
                 {
@@ -378,7 +378,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
                 Result = result;
             }
 
-            public ModifyFixedRateCashflows First;
+            public readonly ModifyFixedRateCashflows First;
             public ModifyFixedRateCashflows Second;
             public readonly int Result;
         }
@@ -484,8 +484,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             };
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             List<ModifyNotionalCashflowsResult> inputAndOutput = new List<ModifyNotionalCashflowsResult>
             {
@@ -542,8 +542,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             var irSwapPricer = new InterestRateSwapPricer();
             string discountCurveID = BuildAndCacheRateCurve(valuationDate); //RateCurveExcelInterfaceTests.ExcelInterface_CreateAUDCurveFromDepostSwapsFuturesFras_WithDates(valuationDate, valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             var inputAndOutput = new List<ModifyFixedRateCashflowsResult>
                 {
@@ -576,8 +576,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             var inputAndOutput = new List<ModifySpreadCashflowsResult>
             {
@@ -639,8 +639,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             List<ModifyPaymentDateCashflowsResult> inputAndOutput = new List<ModifyPaymentDateCashflowsResult>
             {
@@ -702,8 +702,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             List<ModifyStartOrEndDateCashflowsResult> inputAndOutput = new List<ModifyStartOrEndDateCashflowsResult>
             {
@@ -758,8 +758,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve( valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             //  Get price of vanilla swap
             //
@@ -821,8 +821,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             DateTime valuationDate = DateTime.Today;
             string discountCurveID = BuildAndCacheRateCurve(valuationDate);
             string projectionCurveID = discountCurveID;
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             //  Get price of vanilla swap
             //

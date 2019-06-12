@@ -25,7 +25,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
         //    string payer,
         //    string receiver,
 
-        //    decimal notinalAmount,
+        //    decimal notionalAmount,
         //    DateTime effectiveDate,
         //    DateTime maturityDate,
         //    DateTime firstRollDate,
@@ -52,7 +52,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
         //    result.Payer = payer;
         //    result.Receiver = receiver;
 
-        //    result.NotionalAmount = notinalAmount;
+        //    result.NotionalAmount = notionalAmount;
         //    result.EffectiveDate = effectiveDate;
         //    result.MaturityDate = maturityDate;
         //    result.FirstRegularPeriodStartDate = firstRollDate;
@@ -118,8 +118,8 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             string discountCurveID = BuildAndCacheRateCurve(valuationDate); //RateCurveExcelInterfaceTests.ExcelInterface_CreateAUDCurveFromDepostSwapsFuturesFras_WithDates(valuationDate, valuationDate);
             string projectionCurveID = discountCurveID;
 
-            SwapLegParametersRange_Old payFixed = CreateFixedAUD_6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
-            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD_6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
+            SwapLegParametersRange_Old payFixed = CreateFixedAUD6MSwapLegParametersRange(_NAB, CounterParty, valuationDate, 0.065m, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID);
+            SwapLegParametersRange_Old receiveFloat = CreateFloatingAUD6MSwapLegParametersRange(CounterParty, _NAB, valuationDate, 0, "ACT/365.FIXED", "AUSY", "FOLLOWING", "AUSY", "NONE", discountCurveID, projectionCurveID);
             ValuationRange valuationRange = CreateValuationRangeForNAB(valuationDate);
             var payCFRangeItemList = InterestRateSwapPricer.GetDetailedCashflowsTestOnly(Engine.Logger, Engine.Cache, Engine.NameSpace, payFixed, valuationRange);
             payCFRangeItemList[0].CouponType = "fixed";// that should test case insensitive nature of coupons

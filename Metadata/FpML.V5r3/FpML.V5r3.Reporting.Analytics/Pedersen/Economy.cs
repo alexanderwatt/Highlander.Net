@@ -1,5 +1,19 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
-using Orion.Pedersen.Utilities;
 
 namespace Orion.Analytics.Pedersen
 {
@@ -237,8 +251,6 @@ namespace Orion.Analytics.Pedersen
                     {0.1290,0.1270,0.1245,0.1215,0.1200,0.1195,0.1180,0.1175,0.1160,0.1150,0.1080,0.1025,0.1005,0.0985},
                     {0.1195,0.1185,0.1165,0.1135,0.1135,0.1125,0.1110,0.1095,0.1085,0.1070,0.1005,0.0960,0.0935,0.0920}
 				};
-
-
             RawCpltIvol = new[]
             {
                 0.11906,0.11967,0.12298,0.12287,0.14967,0.17235,0.19190,0.19664,0.19211,0.18947,
@@ -250,7 +262,6 @@ namespace Orion.Analytics.Pedersen
                 0.15118,0.14823,0.14690,0.14670,0.14636,0.14373,0.14281,0.14286,0.14251,0.14202,
                 0.13941,0.14167,0.14173,0.14197,0.14286,0.14363,0.14460,0.14581,0.14651,0.14845
             };
-
         }
 
         #region Initialisations
@@ -536,9 +547,9 @@ namespace Orion.Analytics.Pedersen
 
         public void OutputStatus()
         {
-            Orion.Pedersen.Write($"Expiry: {Param.OutputExpiry()}\n", "cal");
-            Orion.Pedersen.Write($"Tenor: {Param.OutputTenor()}\n", "cal");
-            Orion.Pedersen.Write($"Discounts: {DiscountStatus}, Cplt Ivols: {CpltIvolStatus}, Swpn Ivols: {SwpnIvolStatus}\n", "cal");
+            Write($"Expiry: {Param.OutputExpiry()}\n", "cal");
+            Write($"Tenor: {Param.OutputTenor()}\n", "cal");
+            Write($"Discounts: {DiscountStatus}, Cplt Ivols: {CpltIvolStatus}, Swpn Ivols: {SwpnIvolStatus}\n", "cal");
         }
 
         #region rates

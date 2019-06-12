@@ -141,16 +141,16 @@ namespace Orion.Util.WinTools
                 if (ViewHelper.IsFilterColumn(column))
                 {
                     string cellValue = GetDisplayValueHelper(data, column);
-                    result = result && FilterValues.EvaluateFilter(column, cellValue);
+                    result = FilterValues.EvaluateFilter(column, cellValue);
                 }
                 // call optional override
                 if (result)
-                    result = result && OnSelectColumn(data, column);
+                    result = OnSelectColumn(data, column);
                 // next
                 column++;
             } // while
             if (result)
-                result = result && OnSelect(data);
+                result = OnSelect(data);
             return result;
         }
     }

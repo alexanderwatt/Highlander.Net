@@ -30,7 +30,7 @@ namespace Orion.Analytics.Pedersen
 
         public static string[] SpecialSplit(string s, char c)
         {
-            var resultlist = new List<string>();
+            var resultList = new List<string>();
             int i = 0;
             while (i < s.Length)
             {
@@ -42,15 +42,15 @@ namespace Orion.Analytics.Pedersen
                 {
                     if (c == s[i] && (!Ops.Contains(s[i - 1])))
                     {
-                        resultlist.Add(s.Substring(0, i));
+                        resultList.Add(s.Substring(0, i));
                         s = s.Substring(i + 1);
                         i = -1;
                     }
                 }
                 i++;
             }
-            resultlist.Add(s);
-            string[] result = resultlist.ToArray();
+            resultList.Add(s);
+            string[] result = resultList.ToArray();
             return result;
         }
         public static string RemoveOuterBracket(string s)

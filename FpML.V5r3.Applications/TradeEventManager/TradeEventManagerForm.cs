@@ -125,7 +125,7 @@ namespace Orion.TradeEventManger
             //
             //debug
             Application.DoEvents();
-            //enddebug
+            //end debug
             //
             // setup the all trades view
             _tradeAllViewHelper = new TradeAllViewHelper();
@@ -136,7 +136,7 @@ namespace Orion.TradeEventManger
                 _tradeAllFilters, _tradeAllViewHelper, _tradeAllDataHelper);
             _tradeAllView = new ListViewManager<TradeObj>(
                 _logRef.Target, lvTradeAll, _tradeAllViewHelper,
-                _tradeAllSelecter, _tradeAllFilters, new TradeAllSorter(), _tradeAllDataHelper, true, Color.Aqua);
+                _tradeAllSelecter, _tradeAllFilters, new TradeAllSorter(), _tradeAllDataHelper, true, Color.Azure);
             //Play with the format
 
             //
@@ -502,8 +502,7 @@ namespace Orion.TradeEventManger
                                         if (!metricFound)
                                         {
                                             // try standard
-                                            InstrumentMetrics metricId;
-                                            if (EnumHelper.TryParse(quote.measureType.Value, true, out metricId))
+                                            if (EnumHelper.TryParse(quote.measureType.Value, true, out InstrumentMetrics metricId))
                                             {
                                                 Metrics[(int) metricId] = quote.value;
                                                 metricFound = true;
@@ -1603,7 +1602,10 @@ namespace Orion.TradeEventManger
             public int Compare(PortfolioObj a, PortfolioObj b)
             {
                 // descending update time
-                return DateTimeOffset.Compare(b.Created, a.Created);
+                if (b != null)
+                    if (a != null)
+                        return DateTimeOffset.Compare(b.Created, a.Created);
+                return 0;
             }
         }
 

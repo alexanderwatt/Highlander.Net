@@ -343,7 +343,7 @@ namespace Orion.Analytics.Pedersen
         {
             if (n.Length < 2)
             {
-                throw new Exception("!! Swaprate requires an expiry and a tenor.");
+                throw new Exception("!! Swap rate requires an expiry and a tenor.");
             }
             double n0 = n[0].Evaluate();
             double n1 = n[1].Evaluate();
