@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FpML.V5r3.Reporting")]
+[assembly: AssemblyTitle("FpML.V5r11.Reporting")]
 [assembly: AssemblyDescription("Highlander")]
 [assembly: AssemblyCulture("")]
 
@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ddf16004-0119-4b89-b01b-68a2180eaae7")]
+[assembly: Guid("4EA0874B-B7C7-4D35-83DB-780D88D2C4A5")]
 
 // Version information for an assembly consists of the following four values:
 //

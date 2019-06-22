@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{364A7CD7-5555-4821-8E56-9CE6400CDD1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r11.Reporting</RootNamespace>
+    <AssemblyName>FpML.V5r11.Reporting</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\BuildDef\BuildInfo.cs">
+      <Link>BuildInfo.cs</Link>
+    </Compile>
+    <Compile Include="ExtensionClasses.cs" />
+    <Compile Include="Period.cs" />
+    <Compile Include="CurveNameHelpers.cs" />
+    <Compile Include="PaymentHelper.cs" />
+    <Compile Include="Asset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BondTransaction.cs" />
+    <Compile Include="BulletPayment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CapFloor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CompoundingFrequency.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FutureTransaction.cs" />
+    <Compile Include="EquityTransaction.cs" />
+    <Compile Include="FxSwapLeg.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="DayCountFraction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExchangeRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fra.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxSingleLeg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxOption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxOptionPremium.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxSwap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InterestRateStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PaymentCalculationPeriod.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrincipalExchange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Market.cs" />
+    <Compile Include="Product.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QuotedAssetSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QuotedCurrencyPair.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Swap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Swaption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TermCurve.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TermDeposit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Trade.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValuationReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VolatilityMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportingHelpers.cs" />
+    <Compile Include="Reporting.cs" />
+    <Compile Include="XsdClassesFieldResolver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{c094fb37-4c14-425e-8977-69079f4f7aa0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Constants\Constants.csproj">
+      <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ExtensionSchemas\fpmlext-collective-investment-vehicles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-equities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-fixed-income.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-futures-and-options.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-interest-rate-derivatives.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-repo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-shared.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-trade.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-warrant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\qrscext-instruments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Key.snk" />
+    <None Include="qrscext-instruments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\changes.pdf" />
+    <None Include="ReportingShemas\fpml-asset-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-bond-option-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-business-events-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-cd-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-collateral-processes-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-com-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-correlation-swaps-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-credit-event-notification-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-dividend-swaps-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-doc-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-enum-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-eq-shared-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-eqd-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-fx-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-fx-accruals-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-fx-targets-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-generic-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-ird-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-main-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-mktenv-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-msg-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-option-shared-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-reconciliation-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-recordkeeping-processes-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-repo-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-reporting-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-return-swaps-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-riskdef-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-shared-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-standard-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-valuation-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-valuation-reporting-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-variance-swaps-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\fpml-volatility-swaps-5-11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\FpML.spp" />
+    <None Include="ReportingShemas\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportingShemas\xsdgen.bat" />
+    <None Include="xsdgen.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex28-cashflow-assertion-most-simple.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex29-cashflow-assertion-assetSwap.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex30-cashflow-assertion-ird.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex31-cashflow-match-result-ird-01.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex32-cashflow-match-result-ird-02.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex33-cashflow-match-result-ird-03.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex34-cashflow-assertion-cds-Termination.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex35-cashflow-assertion-cds-Coupon.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex36-cashflow-assertion-cds2.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex37-cashflow-match-result-cds2-01.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex38-cashflow-match-result-cds2-02.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex39-cashflow-match-result-cds2-03.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex40-cashflow-assertion-eqs-InterestReset.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex41-cashflow-assertion-eqs-InterestEquityReset.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex42-cashflow-assertion-eqs-InterestEquityDividendReset.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex43-cashflow-assertion-eqs-PartialTermination.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex44-cashflow-match-result-eqs-PartialTermination-01.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex45-cashflow-match-result-eqs-PartialTermination-02.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex46-cashflow-match-result-eqs-PartialTermination-03.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex47-cashflow-assertion-CompoundingSwap.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex48-cashflow-assertion-XCcy-PrincipalExchange.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex49-cashflow-assertion-EquityOption.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex50-cashflow-assertion-multiple-trades-cds.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex51-cashflow-assertion-multiple-trades-equity-option.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex52-cashflow-assertion-multiple-trades-multi-currency-cds.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex53-cashflow-cancel-multiple-trades-cds.xml" />
+    <Content Include="ReportingShemas\cash-flow-matching\msg-ex54-cashflow-match-result-multiple-trades-cds.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex01-MC1-request-margin-deliver.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex02-MC1-request-margin-IM-VM-split.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex03-MC1-request-margin-net-IM-antic-demand-2m-threshold.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex04-MC1-request-margin-netting-agreement.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex05-MC1-request-margin-standard.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex06-MC1-request-margin-template.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex07-MC2-rescind-issued-call.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex08-MC3b-margin-call-response.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex09-MC3b-margin-call-response-deliver-fully-agree.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex10-MC3b-margin-call-response-deliver-fully-agree-isda.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex11-MC3c-propose-collateral.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex12-MC4-rescind-margin-call-response.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex13-MC5-margin-call-response-deliver-dispute.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex14-MC5-margin-call-response-deliver-dispute-isda.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex15-MC6-margin-call-response-deliver-partially-agree.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex16-MC78-collateral-proposal-response.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex17-MC11-acknowledge-dispute.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex18-CS1-request-substitution.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex19-CS25-substitution-response.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex20-CS3-confirm-substitution.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex21-CS4-confirm-collateral-return.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex22-IN1-send-interest-notification.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex23-IN1-send-interest-notification-matching-service.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex24-IN1-send-interest-notification-with-interest-calculations.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex25-IN1-send-interest-notification-both-directions-net.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex26-IN1-send-interest-notification-both-directions-gross.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex27-IN235-interest-response.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex28-IN235-interest-response-matching-service.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex29-IN-interest-calculation-statement.xml" />
+    <Content Include="ReportingShemas\collateral\col-ex30-collateral-allocation-report.xml" />
+    <Content Include="ReportingShemas\credit-event-notice\msg-ex21-credit-event-notice.xml" />
+    <Content Include="ReportingShemas\entity-reporting\rpt-ex20-party-report.xml" />
+    <Content Include="ReportingShemas\entity-reporting\rpt-ex21-party-report-simple.xml" />
+    <Content Include="ReportingShemas\entity-reporting\rpt-ex22-party-report-multiple.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex101-phys-commod-large-trader-report-table1.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex104-phys-commod-large-trader-report-table4.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex110-guidebook-to-Part-20-Reports-table1-SD1.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex111-guidebook-to-Part-20-Reports-table2-SD1.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex130-phys-commod-part20-bilateral-basis-swap.xml" />
+    <Content Include="ReportingShemas\exposure\exp-ex131-phys-commod-part20-bilateral-index-swap.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex57-inc-update-1-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex58-inc-update-2-positions-acknowledged.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex59-inc-update-3-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex60-inc-update-4-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex61-inc-update-5-positions-acknowledged.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex62-inc-update-6-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex63-inc-update-7-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex64-inc-update-8-positions-acknowledged.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex65-inc-update-9-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex66-inc-update-10-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex67-inc-update-11-position1-updated.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex68-inc-update-12-positions-acknowledged.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex69-inc-update-13-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex70-inc-update-14-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex71-inc-update-15-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex72-inc-update-16-portfolio-requested.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex73-inc-update-17-positions-reported.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex74-inc-update-18-positions-requested.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex75-inc-update-19-positions-reported.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex76-snapshot-1-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex77-snapshot-2-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex78-snapshot-3-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex79-snapshot-4-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex80-snapshot-5-positions-asserted-updated.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex81-snapshot-6-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex82-snapshot-7-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex83-force-1-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex84-force-2-positions-asserted.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex85-force-3-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex86-force-4-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex87-force-6-positions-asserted-force.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex88-force-6-positions-match-results.xml" />
+    <Content Include="ReportingShemas\portfolio-reconciliation\msg-ex89-force-7-positions-match-results.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex10-position-report-fx.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex11-position-report-equity.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex12-position-report-commodity.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex13-position-report-with-payment.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex14-position-report-with-complex-payment.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex15-position-report-equity.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex2-position-report-orig-new-fields.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex2-position-report-orig-new-fields_irs_and_cds.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex20-matured-and-expired-trades.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex23-position-activity-report-netting.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex3-position-report-copper.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex4-position-report-copper-cds.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex5-position-activity-report-copper.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex6-event-activity-report-copper.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex7-position-report-multi-prod.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex8-position-report-credit.xml" />
+    <Content Include="ReportingShemas\position-and-activity-reporting\rpt-ex9-position-report-ir.xml" />
+    <Content Include="ReportingShemas\Readme.txt" />
+    <Content Include="ReportingShemas\recordkeeping\record-ex100-new-trade.xml" />
+    <Content Include="ReportingShemas\reset-reporting\rpt-ex13-reset-report.xml" />
+    <Content Include="ReportingShemas\securities\secrpt-ex01-activity-report.xml" />
+    <Content Include="ReportingShemas\securities\secrpt-ex100-position-report.xml" />
+    <Content Include="ReportingShemas\securities\secrpt-ex200-market-data.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-1-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-10-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-11-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-2-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-3-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-4-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-5-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-6-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-7-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-8-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-col-9-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-10-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-11-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-13-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-14-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-15-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-16-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-17-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-18-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-19-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-20-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-21-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-22-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-23-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-24-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-3-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-30-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-31-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-36-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-37-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-4-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-8-01.xml" />
+    <Content Include="ReportingShemas\validation\invalid-testcases\invalid-ref-9-01.xml" />
+    <Content Include="ReportingShemas\valuation\pr-eex100-sdr-valuations.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex01a-request-trade-val.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex01a-return-trade-val.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex01a-return-trade-val2.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex02a-request-port-val.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex02a-return-port-val.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex02b-request-port-val-and-sens.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex02b-return-port-val-and-sens.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex03a-request-sensitivity-generation.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex03a-return-sensitivities-and-description.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex03a-return-sensitivities.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex03b-request-sensitivity-generation.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex03b-return-sensitivities-with-definition.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex04-cds-sens-on-scenario-request.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex05-multiccy-val-report.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex06-option-sens-on-scenario-request.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex07-sens-on-scenario-report.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex08-sens-on-scenario-request.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex09-simple-scenario-val-report.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex10-simple-scenario-val-request.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex100-sdr-valuations.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex11-uc4C-sens-on-scenario-report.xml" />
+    <Content Include="ReportingShemas\valuation\pr-ex12-uc4C-sens-on-scenario-request.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
