@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" id="Extensions" targetNamespace="http://www.fpml.org/FpML-5/reporting" elementFormDefault="qualified"
+           xmlns="http://www.fpml.org/FpML-5/reporting"
+           xmlns:mstns="http://www.fpml.org/FpML-5/reporting" 
+           xmlns:fpml="http://www.fpml.org/FpML-5/reporting"
+>
+<xs:import xmlns="http://www.fpml.org/FpML-5/reporting" schemaLocation="xmldsig-core-schema.xsd"/>
+  
+  <xs:complexType name="InstrumentNode">
+  </xs:complexType>
+
+  <xs:complexType name="CommodityAverageSwapNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Commodity" type="fpml:Commodity" />
+          <xs:element name="Calculation" type="fpml:FloatingLegCalculation" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="XiborNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ZeroRateNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="AdjustDates" type="xs:boolean" />
+          <xs:element name="CompoundingFrequency" type="fpml:CompoundingFrequency" />
+          <xs:element name="DayCountFraction" type="fpml:DayCountFraction" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FxSpotNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="QuotedCurrencyPair" type="fpml:QuotedCurrencyPair" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CommoditySpotNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Commodity" type="fpml:Commodity" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+    <xs:complexType name="RepoNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="UnderlyingAsset" type="fpml:Asset" />
+          <xs:element name="Deposit" type="fpml:Deposit" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DepositNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="UnderlyingRateIndex" type="fpml:RateIndex" />
+          <xs:element name="Deposit" type="fpml:Deposit" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="BankBillNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="UnderlyingRateIndex" type="fpml:RateIndex" />
+          <xs:element name="Deposit" type="fpml:Deposit" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SimpleBillFraNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+          <xs:element name="SimpleFra" type="fpml:SimpleFra" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+    <xs:complexType name="FutureNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+          <xs:element name="Future" type="fpml:Future" />
+          <xs:element name="Exchange" type="fpml:Exchange" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SimpleFraNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+          <xs:element name="SimpleFra" type="fpml:SimpleFra" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FraNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="Fra" type="fpml:Fra" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CommodityFutureNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="FutureNodeStruct">
+        <xs:sequence>
+          <xs:element name="ContractMonthPeriod" type="fpml:Period" /> 
+          <xs:element name="PriceQuoteUnits" type="fpml:PriceQuoteUnitsEnum" /> 
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="IRFutureNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="FutureNodeStruct">
+        <xs:sequence>
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FutureOptionNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="FutureNodeStruct">
+        <xs:sequence>
+          <xs:element name="RateIndex" type="fpml:RelativeDateOffset" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="IRFutureOptionNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="FutureOptionNodeStruct">
+        <xs:sequence>
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="RateOptionNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="ResetDateAdjustment" type="fpml:RelativeDateOffset" />
+          <xs:element name="RateIndex" type="fpml:RateIndex" />
+          <xs:element name="SimpleRateOption" type="fpml:SimpleFra" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="XccyBasisSwapNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="BaseLegCalculation" type="fpml:Calculation" />
+          <xs:element name="BaseLegRateIndex" type="fpml:RateIndex" />
+          <xs:element name="MarginLegCalculation" type="fpml:Calculation" />
+          <xs:element name="MarginLegRateIndex" type="fpml:RateIndex" />
+          <xs:element name="MarginLeg" type="fpml:SimpleIRSwap" />
+          <xs:element name="MarginLegDateAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="BasisSwapNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="BaseLegRateIndex" type="fpml:RateIndex" />
+          <xs:element name="MarginLegCalculation" type="fpml:Calculation" />
+          <xs:element name="MarginLegRateIndex" type="fpml:RateIndex" />
+          <xs:element name="MarginLeg" type="fpml:SimpleIRSwap" />
+          <xs:element name="MarginLegDateAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SimpleIRSwapNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Calculation" type="fpml:Calculation" />
+          <xs:element name="UnderlyingRateIndex" type="fpml:RateIndex" />
+          <xs:element name="SimpleIRSwap" type="fpml:SimpleIRSwap" />
+          <xs:element name="DateAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SimpleIRCapNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="IncludeFirstCaplet" type="xs:boolean" />
+          <xs:element name="SpotDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Calculation" type="fpml:Calculation" />
+          <xs:element name="UnderlyingRateIndex" type="fpml:RateIndex" />
+          <xs:element name="AssetReference" type="fpml:AssetReference" />
+          <xs:element name="SimpleIRCap" type="fpml:SimpleIRSwap" />
+          <xs:element name="DateAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="EquityNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SettlementDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Equity" type="fpml:EquityAsset" />
+          <xs:element name="Exchange" type="fpml:Exchange" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="BondNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="SettlementDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="ExDivDate" type="fpml:RelativeDateOffset" />
+          <xs:element name="Bond" type="fpml:Bond" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PropertyNodeStruct">
+    <xs:complexContent>
+      <xs:extension base="InstrumentNode">
+        <xs:sequence>
+          <xs:element name="StreetIdentifier" type="xs:string" />
+          <xs:element name="Street" type="xs:string" />
+          <xs:element name="Suburb" type="xs:string" />
+          <xs:element name="City" type="xs:string" />
+          <xs:element name="State" type="xs:string" />
+          <xs:element name="Country" type="xs:string" />
+          <xs:element name="Bedrooms" type="xs:int" />
+          <xs:element name="Bathrooms" type="xs:int" />
+          <xs:element name="Parking" type="xs:int" />
+          <xs:element name="LastTradedPrice" type="fpml:PropertyPrice" />
+          <xs:element name="LastTradedDate" type="fpml:IdentifiedDate" />
+          <xs:element name="PropertyTaxonomyType" type="xs:string" />
+          <xs:element name="Property" type="fpml:PropertyAsset" />
+          <xs:element name="BusinessDayAdjustments" type="fpml:BusinessDayAdjustments" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- end of instrument node types -->
+
+  <xs:complexType name="Instrument">
+    <xs:sequence>
+      <xs:element name="AssetType" type="xs:string" />
+      <xs:element name="Currency" type="fpml:Currency" />
+      <xs:element name="ExtraItem" type="xs:string" />
+      <xs:element name="InstrumentNodeItem" type="InstrumentNode" />
+    </xs:sequence>
+  </xs:complexType>
+  
+    <xs:complexType name="ExchangeConfigData">
+    <xs:sequence>
+      <xs:element name="SettlementDate" type="fpml:RelativeDateOffset" />
+      <xs:element name="ExchangeData" type="fpml:Exchange" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AssetSetConfiguration">
+    <xs:sequence>
+      <xs:element name="Instruments" type="Instrument" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AssetSetConfiguration" type="AssetSetConfiguration" />
+
+  <!-- exchange data types -->
+
+  <xs:complexType name="ExchangeDataConfiguration">
+    <xs:sequence>
+      <xs:element name="ExchangeConfigData" type="ExchangeConfigData" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExchangeDataConfiguration" type="ExchangeDataConfiguration" />
+
+  <xs:complexType name="Exchange">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:string" />
+      <xs:element name="Country" type="xs:string" />
+      <xs:element name="ISOCountryCode" type="fpml:string" />
+      <xs:element name="MIC" type="xs:string" />
+      <xs:element name="OperatingMIC" type="string" />
+      <xs:element name="OS" type="xs:string" />
+      <xs:element name="Name" type="fpml:string" />
+      <xs:element name="Acronym" type="xs:string" />
+      <xs:element name="City" type="string" />
+      <xs:element name="Website" type="xs:string" />
+      <xs:element name="StatusDate" type="string" />
+      <xs:element name="Status" type="xs:string" />
+      <xs:element name="CreationDate" type="string" />
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

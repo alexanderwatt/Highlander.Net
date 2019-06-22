@@ -14,6 +14,7 @@
 */
 
 using System;
+using Orion.Analytics.Integration;
 using Orion.Analytics.Solvers;
 using Orion.Analytics.Maths;
 
@@ -169,7 +170,7 @@ namespace Orion.Analytics.Distributions
         public override double ProbabilityDensity(double x)
         {
             double xmu = x - _mu;
-            return Maths.Constants.InvSqrt2Pi / _sigma * Math.Exp(xmu * xmu / (-2.0 * _sigma * _sigma));
+            return Constants.InvSqrt2Pi / _sigma * Math.Exp(xmu * xmu / (-2.0 * _sigma * _sigma));
         }
 
         public override double CumulativeDistribution(double x)
@@ -195,16 +196,16 @@ namespace Orion.Analytics.Distributions
             else
             {
                 // Generic case.
-                double stdDevs = x / Math.Sqrt(upperBound);
+                double standardDeviations = x / Math.Sqrt(upperBound);
                 const double mult = -0.0625; // = -0.5 / UpperBound;
                 const int maxIterations = 25;
-                result = 0.5 * stdDevs;
+                result = 0.5 * standardDeviations;
                 int n = 1;
                 double oldResult;
                 do
                 {
                     oldResult = result;
-                    result += Math.Exp(mult * n * n) * Math.Sin(n * stdDevs) / n;
+                    result += Math.Exp(mult * n * n) * Math.Sin(n * standardDeviations) / n;
                     n++;
                 } while (result != oldResult && n <= maxIterations);
                 result = 0.5 + result / Math.PI;
@@ -218,13 +219,13 @@ namespace Orion.Analytics.Distributions
         ///<returns></returns>
         public double InverseCumulativeDistribution(double x)
         {
-            return _sigma * Maths.Constants.Sqrt12 * Fn.ErfInverse(2.0 * x - 1.0) + _mu;
+            return _sigma * Constants.Sqrt12 * Fn.ErfInverse(2.0 * x - 1.0) + _mu;
         }
         #endregion
 
         #region Generator
         /// <summary>
-        /// Returns a normal/gaussion distributed floating point random number.
+        /// Returns a normal/Gaussian distributed floating point random number.
         /// </summary>
         /// <returns>A normal distributed double-precision floating point number.</returns>
         public override double NextDouble()
@@ -257,7 +258,6 @@ namespace Orion.Analytics.Distributions
         public static double Probability(double numberOfStandardDeviations)
         {
             double p;
-
             const double p0 = 220.206867912376;
             const double p1 = 221.213596169931;
             const double p2 = 112.079291497871;
@@ -265,7 +265,6 @@ namespace Orion.Analytics.Distributions
             const double p4 = 6.37396220353165;
             const double p5 = 0.700383064443688;
             const double p6 = 0.0352624965998911;
-
             const double q0 = 440.413735824752;
             const double q1 = 793.826512519948;
             const double q2 = 637.333633378831;
@@ -274,15 +273,14 @@ namespace Orion.Analytics.Distributions
             const double q5 = 16.064177579207;
             const double q6 = 1.75566716318264;
             const double q7 = 0.0883883476483184;
-
-            const double rootpi = 2.506628274631;
+            const double rootPi = 2.506628274631;
             const double cutoff = 7.07106781186547;
             // 
-            var zabs = Math.Abs(numberOfStandardDeviations);
+            var zAbs = Math.Abs(numberOfStandardDeviations);
             // 
             // |Z| > 37 
             // 
-            if (zabs > 37)
+            if (zAbs > 37)
             {
                 p = 0;
             }
@@ -291,13 +289,13 @@ namespace Orion.Analytics.Distributions
                 // 
                 // |Z| <= 37 
                 // 
-                var expntl = Math.Exp(-Math.Pow(zabs, 2) / 2);
+                var exponential = Math.Exp(-Math.Pow(zAbs, 2) / 2);
                 // 
                 // |Z| < CUTOFF = 10/SQRT(2) 
                 // 
-                if (zabs < cutoff)
+                if (zAbs < cutoff)
                 {
-                    p = expntl * ((((((p6 * zabs + p5) * zabs + p4) * zabs + p3) * zabs + p2) * zabs + p1) * zabs + p0) / (((((((q7 * zabs + q6) * zabs + q5) * zabs + q4) * zabs + q3) * zabs + q2) * zabs + q1) * zabs + q0);
+                    p = exponential * ((((((p6 * zAbs + p5) * zAbs + p4) * zAbs + p3) * zAbs + p2) * zAbs + p1) * zAbs + p0) / (((((((q7 * zAbs + q6) * zAbs + q5) * zAbs + q4) * zAbs + q3) * zAbs + q2) * zAbs + q1) * zAbs + q0);
                 }
                 // 
                 // |Z| >= CUTOFF. 
@@ -309,11 +307,11 @@ namespace Orion.Analytics.Distributions
                     //*** Original Code 
                     //P = EXPNTL / (ZABS + 1 / (ZABS + 2 / (ZABS + 3 / (ZABS + 4 / (ZABS + 0.65))))) / ROOTPI 
 
-                    p = 4 / (zabs + 0.65);
-                    p = 3 / (zabs + p);
-                    p = 2 / (zabs + p);
-                    p = 1 / (zabs + p);
-                    p = expntl / (zabs + p) / rootpi;
+                    p = 4 / (zAbs + 0.65);
+                    p = 3 / (zAbs + p);
+                    p = 2 / (zAbs + p);
+                    p = 1 / (zAbs + p);
+                    p = exponential / (zAbs + p) / rootPi;
                 }
             }
 
@@ -330,8 +328,8 @@ namespace Orion.Analytics.Distributions
         {
             var normalizationFactor = 1.0 / (_sigma * Math.Sqrt(2.0 * Math.PI));
             var denominator = 2.0 * _sigma * _sigma;
-            double deltax = x - Mean;
-            double exponent = -deltax * deltax / denominator;
+            double deltaX = x - Mean;
+            double exponent = -deltaX * deltaX / denominator;
             // debian alpha had some strange problem in the very-low range
             return exponent <= -690.0 ? 0.0 :  // exp(x) < 1.0e-300 anyway
                 normalizationFactor * Math.Exp(exponent);
@@ -342,8 +340,8 @@ namespace Orion.Analytics.Distributions
         {
             var normalizationFactor = 1.0 / (_sigma * Math.Sqrt(2.0 * Math.PI));
             var denominator = 2.0 * _sigma * _sigma;
-            double deltax = x - Mean;
-            double exponent = -deltax * deltax / denominator;
+            double deltaX = x - Mean;
+            double exponent = -deltaX * deltaX / denominator;
             // debian alpha had some strange problem in the very-low range
             return exponent <= -690.0 ? 0.0 :  // exp(x) < 1.0e-300 anyway
                 normalizationFactor * Math.Exp(exponent);
@@ -351,7 +349,7 @@ namespace Orion.Analytics.Distributions
 
         /// <summary>
         /// A lightweight static delegate for average=0.0, sigma=1.0. 
-        /// You can also instatiate this class and then use
+        /// You can also instantiate this class and then use
         /// instance.Value as well.
         /// </summary>
         public static double Function(double x)
@@ -372,9 +370,9 @@ namespace Orion.Analytics.Distributions
         }
 
         /// <summary>
-        /// Cumulative bivariate normal distribution,
+        /// Cumulative biVariate normal distribution,
         /// N_2 (x_1, x_2; \rho) =
-        /// {1 \over 2\pi\sqrt{1-\rho^2}} \int_{-\infty}^{x_1} dx\int_{-\infty}^{x_2} dy
+        /// {1 \over 2\pi\sqrt{1-\rho^2}} \int_{-\infinity}^{x_1} dx\int_{-\infinity}^{x_2} dy
         /// exp(-{1\over 2}{(x^2 - 2\rho xy + y^2 \over 1-\rho^2)})
         /// where \rho is the correlation coefficient.
         /// This is needed to value options on options and complex choosers.
@@ -386,7 +384,6 @@ namespace Orion.Analytics.Distributions
         public double BivariateNormal(double x1, double x2, double corr)
         {
             const double OO2PI = 0.159154943091895;  // 1/(2.pi}
-
             if (corr < -1 || corr > 1) throw new Exception("Correlation must be between -1 and 1");
             if (corr == -1) return x1 > -x2 ? CumulativeDistribution(x1) - CumulativeDistribution(-x2) : 0;
             if (corr == 1) return CumulativeDistribution(Math.Min(x1, x2));

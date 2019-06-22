@@ -52,9 +52,9 @@ namespace Orion.Analytics.Integration
 
         /// <summary>
         /// The integral I1 used above is given by I1(u, a) =
-        /// \int_{-\infty}^u dx {a exp(-x^2/2) \over a^2 + x^2}.
+        /// \int_{-\infinity}^u dx {a exp(-x^2/2) \over a^2 + x^2}.
         /// We integrate from zero, since the integrand is even in x and
-        /// \int_0^\infty dx {a exp(-x^2/2) \over a^2 + x^2} = \pi exp(a^2/2) cn(-a)
+        /// \int_0^\infinity dx {a exp(-x^2/2) \over a^2 + x^2} = \pi exp(a^2/2) cn(-a)
         /// The integral \int _0 ^u dx {a exp(-x^2/2) \over a^2  + x^2}.
         /// (where u > 0), is done using Simpson's rule.   
         /// </summary>
@@ -65,22 +65,16 @@ namespace Orion.Analytics.Integration
         {
             double sm;
             double x = Math.Abs(u), aa = Math.Abs(a);
-
             /* outside -5 < u < 5, both the Simpson's rule evaluation & the analytic
                approximation start to get a bit kooky, so just assume infinity values */
-
             if (u < -5) return 0; /* Value will be less than 7.19e-8 anyway */
             var a2 = aa * aa;
             var q = Math.PI * Math.Exp(a2 / 2) * new NormalDistribution().CumulativeDistribution(-aa);
             if (u > 5) return 2 * (a > 0 ? q : -q);
-
             /* For small a, we approximate the function with a polynomial:
-
               a e^(-x^2/2)/(x^2 + a^2)  ~  a / ((x^2 + a^2)(1 + x^2/2 + x^4/8)),
-
               which we can do analytically, thereby bypassing the need for 10000000000
               Simpson's rule evaluations. Max error 1.5e-4 (for large |x|) */
-
             if (aa < 0.01)
             {
                 var u2 = u * u;
@@ -96,25 +90,25 @@ namespace Orion.Analytics.Integration
                 sm = 0;
                 double h;
                 var func0 = (aa * Math.Exp(-(0.0) * (0.0) / 2) / (a2 + (0.0) * (0.0)));
-                var funcx = (aa * Math.Exp(-(x) * (x) / 2) / (a2 + (x) * (x)));
-                var s = (h = x) * (func0 + funcx) / 2;
+                var funcX = (aa * Math.Exp(-(x) * (x) / 2) / (a2 + (x) * (x)));
+                var s = (h = x) * (func0 + funcX) / 2;
                 double osm;
                 do
                 {
                     var os = s;
                     osm = sm;
                     /* We are calculating the sum of FUNC(z) for z from h/2 to x-h/2 in steps of
-                       h, but have arranged it in this way to maximise speed ... */
+                       h, but have arranged it in this way to maximize speed ... */
                     double zi;
                     double zii;
                     var z = (zi = zii = h * h) / 8;
                     var f = Math.Exp(-z) * aa / 2;
                     z += a2 / 2;
-                    var zmax = (x * x + a2) / 2;
+                    var zMax = (x * x + a2) / 2;
                     double r;
                     var g = r = Math.Exp(-zii);
                     double sum;
-                    for (sum = 0; z < zmax; z += zi, zi += zii, f *= g, g *= r)
+                    for (sum = 0; z < zMax; z += zi, zi += zii, f *= g, g *= r)
                         sum += f / z;
                     s = s / 2 + (h /= 2) * sum;
                     sm = (4 * s - os) / 3;

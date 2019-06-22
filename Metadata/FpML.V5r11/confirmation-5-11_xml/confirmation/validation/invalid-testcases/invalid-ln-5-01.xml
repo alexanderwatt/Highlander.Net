@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<dealStatement xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">SentProfileMessageID1 ABC 2018-02-27T11:53:47Z false 2018-02-27 123456ABC CP0123456789 DEF 2018-02-28 USD 500000000 USD 500000000 ABC123456 USD 150MUSD Term Loan 1 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 150000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123457 USD 50MUSD Term Loan 2 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 50000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-01-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123458 USD 5MUSD Term Loan 3 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123459 USD 5MUSD Term Loan 4 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123460 USD 5MUSD Term Loan 5 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123461 USD 5MUSD Term Loan 6 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123462 USD 5MUSD Term Loan 7 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123463 USD 5MUSD Term Loan 8 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123464 USD 5MUSD Term Loan 9 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123465 USD 5MUSD Term Loan 10 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123466 USD 5MUSD Term Loan 11 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123467 USD 5MUSD Term Loan 12 Floating Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FloatingRate ACT/365.FIXED USD-Prime-Reference Banks 0.0250 USD 2018-02-27 2018-05-27 FloatingRate ACT/365.FIXED 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123468 USD 150MUSD Term Loan 1 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 150000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123469 USD 50MUSD Term Loan 2 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 50000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123470 USD 5MUSD Term Loan 3 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27
+2018-05-27 USD EUR ABC123471 USD 5MUSD Term Loan 4 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123472 USD 5MUSD Term Loan 5 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123473 USD 5MUSD Term Loan 6 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123474 USD 5MUSD Term Loan 7 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123475 USD 5MUSD Term Loan 8 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123476 USD 5MUSD Term Loan 9 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123477 USD 5MUSD Term Loan 10 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123478 USD 5MUSD Term Loan 11 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR ABC123479 USD 5MUSD Term Loan 12 Fixed Rate 2018-02-27 2018-02-27 2018-02-27 USD 5000000 USD 150000000 FixedRate ACT/ACT.ISDA 0.01275 2018-02-27 2018-05-27 USD FixedRate ACT/ACT.ISDA 1 M 0.25 Utilized 2018-02-27 2018-05-27 USD EUR DEF_ID DEF_ID DEF_ID DEF ABC_ID ABC John Smith Work 5553333333 Fax 5554444444 borrower.contact@avalon.com 1111 Main Street New York NY USA 10001 
+<header>
+  <messageId messageIdScheme="http://www.abc.com/messageIdScheme">SentProfileMessageID1</messageId>
+  <sentBy>ABC</sentBy>
+  <creationTimestamp>2018-02-27T11:53:47Z</creationTimestamp>
+</header>
+<isCorrection>false</isCorrection>
+<statementDate>2018-02-27</statementDate>
+<deal id="DEF_ID">
+  <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">123456ABC</instrumentId>
+  <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">CP0123456789</instrumentId>
+  <description>DEF</description>
+  <issuerPartyReference href="IssuerParty" />
+  <agentPartyReference href="AgentParty" />
+  <creditAgreementDate>2018-02-28</creditAgreementDate>
+  <issuedAmount>
+    <currency>USD</currency>
+    <amount>500000000</amount>
+  </issuedAmount>
+  <currentDealAmount>
+    <currency>USD</currency>
+    <amount>500000000</amount>
+  </currentDealAmount>
+  <termLoan id="TermLoanFloating1ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123456</instrumentId>
+    <description>USD 150MUSD Term Loan 1 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>150000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating2ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123457</instrumentId>
+    <description>USD 50MUSD Term Loan 2 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>50000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-01-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating3ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123458</instrumentId>
+    <description>USD 5MUSD Term Loan 3 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating4ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123459</instrumentId>
+    <description>USD 5MUSD Term Loan 4 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating5ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123460</instrumentId>
+    <description>USD 5MUSD Term Loan 5 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating6ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123461</instrumentId>
+    <description>USD 5MUSD Term Loan 6 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating7ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123462</instrumentId>
+    <description>USD 5MUSD Term Loan 7 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating8ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123463</instrumentId>
+    <description>USD 5MUSD Term Loan 8 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating9ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123464</instrumentId>
+    <description>USD 5MUSD Term Loan 9 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating10ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123465</instrumentId>
+    <description>USD 5MUSD Term Loan 10 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating11ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123466</instrumentId>
+    <description>USD 5MUSD Term Loan 11 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFloating12ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123467</instrumentId>
+    <description>USD 5MUSD Term Loan 12 Floating Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <floatingRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <floatingRateIndex>USD-Prime-Reference Banks</floatingRateIndex>
+      <spread>0.0250</spread>
+      <currency>USD</currency>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </floatingRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FloatingRate</accrualOptionId>
+      <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed1ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123468</instrumentId>
+    <description>USD 150MUSD Term Loan 1 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>150000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed2ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123469</instrumentId>
+    <description>USD 50MUSD Term Loan 2 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>50000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed3ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123470</instrumentId>
+    <description>USD 5MUSD Term Loan 3 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed4ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123471</instrumentId>
+    <description>USD 5MUSD Term Loan 4 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed5ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123472</instrumentId>
+    <description>USD 5MUSD Term Loan 5 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed6ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123473</instrumentId>
+    <description>USD 5MUSD Term Loan 6 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed7ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123474</instrumentId>
+    <description>USD 5MUSD Term Loan 7 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed8ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123475</instrumentId>
+    <description>USD 5MUSD Term Loan 8 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed9ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123476</instrumentId>
+    <description>USD 5MUSD Term Loan 9 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed10ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123477</instrumentId>
+    <description>USD 5MUSD Term Loan 10 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed11ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123478</instrumentId>
+    <description>USD 5MUSD Term Loan 11 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+  <termLoan id="TermLoanFixed12ID">
+    <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">ABC123479</instrumentId>
+    <description>USD 5MUSD Term Loan 12 Fixed Rate</description>
+    <borrowerPartyReference href="IssuerParty" />
+    <startDate>2018-02-27</startDate>
+    <expiryDate>2018-02-27</expiryDate>
+    <maturityDate>2018-02-27</maturityDate>
+    <currentCommitment>
+      <totalCommitmentAmount>
+        <currency>USD</currency>
+        <amount>5000000</amount>
+      </totalCommitmentAmount>
+    </currentCommitment>
+    <originalCommitment>
+      <currency>USD</currency>
+      <amount>150000000</amount>
+    </originalCommitment>
+    <fixedRateOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <rate>0.01275</rate>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+      <currency>USD</currency>
+    </fixedRateOption>
+    <accruingFeeOption>
+      <accrualOptionId accrualTypeIdScheme="http://www.abc.com/accrualTypeIdScheme">FixedRate</accrualOptionId>
+      <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+      <paymentFrequency>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </paymentFrequency>
+      <rate>0.25</rate>
+      <type>Utilized</type>
+      <startDate>2018-02-27</startDate>
+      <endDate>2018-05-27</endDate>
+    </accruingFeeOption>
+    <multiCurrency>
+      <drawCurrency>USD</drawCurrency>
+      <drawCurrency>EUR</drawCurrency>
+    </multiCurrency>
+  </termLoan>
+</deal>
+<party id="Beneficiary">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso17442">DEF_ID</partyId>
+</party>
+<party id="BorrowerParty">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso17442">DEF_ID</partyId>
+</party>
+<party id="IssuerParty">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso17442">DEF_ID</partyId>
+  <partyName>DEF</partyName>
+</party>
+<party id="AgentParty">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso17442">ABC_ID</partyId>
+  <partyName>ABC</partyName>
+  <person>
+    <firstName>John</firstName>
+    <surname>Smith</surname>
+    <contactInfo>
+      <telephone>
+        <type>Work</type>
+        <number>5553333333</number>
+      </telephone>
+      <telephone>
+        <type>Fax</type>
+        <number>5554444444</number>
+      </telephone>
+      <email>borrower.contact@avalon.com</email>
+      <address>
+        <streetAddress>
+          <streetLine>1111 Main Street</streetLine>
+        </streetAddress>
+        <city>New York</city>
+        <state>NY</state>
+        <country>USA</country>
+        <postalCode>10001</postalCode>
+      </address>
+    </contactInfo>
+  </person>
+</party>
+</dealStatement>
+

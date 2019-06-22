@@ -29,6 +29,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
+using MathNet.Numerics.LinearAlgebra.Double;
 using Orion.Analytics.DayCounters;
 using Orion.CalendarEngine;
 using Orion.CalendarEngine.Helpers;
@@ -50,6 +51,10 @@ using Orion.ModelFramework.MarketEnvironments;
 using Orion.CurveEngine.PricingStructures.Curves;
 using Orion.CurveEngine.PricingStructures.Cubes;
 using Orion.Analytics.Interpolations.Points;
+using Orion.Analytics.Pedersen;
+using Orion.Analytics.Processes;
+using Orion.Analytics.Rates;
+using Orion.Analytics.Stochastics.Pedersen;
 using Orion.CurveEngine.Assets.Rates.CapsFloors;
 using Orion.V5r3.Configuration;
 using Exception = System.Exception;
@@ -83,14 +88,14 @@ namespace Orion.CurveEngine
 
         internal const string DefaultTenor = "3M";
 
-        //public Pedersen.Pedersen Pedersen { get; }
+        public Pedersen Pedersen { get; }
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// THe main cinstructor.
+        /// The main constructor.
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
@@ -100,7 +105,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// THe main cinstructor.
+        /// The main constructor.
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
@@ -110,7 +115,7 @@ namespace Orion.CurveEngine
             Cache = cache;
             Logger = logger;
             NameSpace = nameSpace;
-            //Pedersen = new Pedersen.Pedersen();
+            Pedersen = new Pedersen();
             ////1. Load up relevant data. If the data is not available then the engine will not run.
             //If there is no cache then resource files can be loaded!
             try
@@ -154,7 +159,7 @@ namespace Orion.CurveEngine
         /// The type of the ICoreItem is always a Market with only a single PricingStructure and PricingStructureValuation. 
         /// The QuotedAssetSet must be populated with market data.
         /// Also, there must be properties that define the algorithm.
-        /// If no market data is provided, then the internal mrket data will be used.</param>
+        /// If no market data is provided, then the internal market data will be used.</param>
         /// <param name="calendars">Each curve requires a calendar. In the event of no calendar provided,
         /// the internal system calendars will be used.</param>
         /// <returns></returns>
@@ -264,7 +269,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Savesd the curve.
+        /// Saves the curve.
         /// </summary>
         /// <param name="curve"></param>
         /// <param name="uniqueId"></param>
@@ -411,13 +416,13 @@ namespace Orion.CurveEngine
             {
                 properties.Set("Bootstrap", true);
             }
-            //Handle ratebasiscurves that are dependent on another ratecurve.
+            //Handle rate basis curves that are dependent on another ratecurve.
             //TODO This functionality needs to be extended for calibrations (bootstrapping),
             //TODO where there is AccountReference dependency on one or more pricing structures.
             var pst = PropertyHelper.ExtractPricingStructureType(properties);
             if (pst == PricingStructureTypeEnum.RateBasisCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = cache.LoadItem<Market>(nameSpace + "." + refCurveId);
@@ -432,19 +437,19 @@ namespace Orion.CurveEngine
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
                                                                                             properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = PricingStructureFactory.Create(logger, cache, nameSpace, null, null, refCurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
             }
             if (pst == PricingStructureTypeEnum.RateXccyCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = cache.LoadItem<Market>(nameSpace + "." + refCurveId);
                 var deserializedRefCurveMarket = (Market)refItem.Data;
                 var refCurveProperties = refItem.AppProps;
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refFxCurveId = properties.GetValue<string>(CurveProp.ReferenceFxCurveUniqueId, true);
                 //Load the data.
                 var refFxItem = cache.LoadItem<Market>(nameSpace + "." + refFxCurveId);
@@ -453,9 +458,9 @@ namespace Orion.CurveEngine
                 //Get the currency2 curve identifier.
                 var currency2CurveId = properties.GetValue<string>(CurveProp.ReferenceCurrency2CurveId, true);
                 //Load the data.
-                var currrecny2Item = cache.LoadItem<Market>(nameSpace + "." + currency2CurveId);
-                var deserializedCurrecny2CurveMarket = (Market)currrecny2Item.Data;
-                var refCurrecnyCurveProperties = currrecny2Item.AppProps;
+                var currency2Item = cache.LoadItem<Market>(nameSpace + "." + currency2CurveId);
+                var deserializedCurrency2CurveMarket = (Market)currency2Item.Data;
+                var refCurrencyCurveProperties = currency2Item.AppProps;
                 //Format the ref curve data and call the pricing structure helper.
                 var refCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
@@ -467,13 +472,13 @@ namespace Orion.CurveEngine
                         deserializedRefFxCurveMarket.Items1[0], refFxCurveProperties);
                 var currency2CurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
-                        deserializedCurrecny2CurveMarket.Items[0],
-                        deserializedCurrecny2CurveMarket.Items1[0], refCurrecnyCurveProperties);
+                        deserializedCurrency2CurveMarket.Items[0],
+                        deserializedCurrency2CurveMarket.Items1[0], refCurrencyCurveProperties);
                 var spreadCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
                                                                                             properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = PricingStructureFactory.Create(logger, cache, nameSpace, null, null, refCurveFpmlTriplet, refFxCurveFpmlTriplet,
                                                                     currency2CurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
@@ -482,7 +487,7 @@ namespace Orion.CurveEngine
             //
             var fpmlPair = new Pair<PricingStructure, PricingStructureValuation>(deserializedMarket.Items[0],
                                                                                  deserializedMarket.Items1[0]);
-            //create and set the pricingstructure
+            //create and set the pricing structure
             var ps = PricingStructureFactory.Create(logger, cache, nameSpace, null, null, fpmlPair, properties);
             return ps;
         }
@@ -526,19 +531,19 @@ namespace Orion.CurveEngine
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
                                                                                             properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = PricingStructureFactory.Create(Logger, Cache, NameSpace, null, null, refCurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
             }
             if (pst == PricingStructureTypeEnum.RateXccyCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = Cache.LoadItem<Market>(NameSpace + "." + refCurveId);
                 var deserializedRefCurveMarket = (Market)refItem.Data;
                 var refCurveProperties = refItem.AppProps;
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refFxCurveId = properties.GetValue<string>(CurveProp.ReferenceFxCurveUniqueId, true);
                 //Load the data.
                 var refFxItem = Cache.LoadItem<Market>(NameSpace + "." + refFxCurveId);
@@ -547,9 +552,9 @@ namespace Orion.CurveEngine
                 //Get the currency2 curve identifier.
                 var currency2CurveId = properties.GetValue<string>(CurveProp.ReferenceCurrency2CurveId, true);
                 //Load the data.
-                var currrecny2Item = Cache.LoadItem<Market>(NameSpace + "." + currency2CurveId);
-                var deserializedCurrecny2CurveMarket = (Market)currrecny2Item.Data;
-                var refCurrecnyCurveProperties = currrecny2Item.AppProps;
+                var currency2Item = Cache.LoadItem<Market>(NameSpace + "." + currency2CurveId);
+                var deserializedCurrency2CurveMarket = (Market)currency2Item.Data;
+                var refCurrencyCurveProperties = currency2Item.AppProps;
                 //Format the ref curve data and call the pricing structure helper.
                 var refCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
@@ -561,8 +566,8 @@ namespace Orion.CurveEngine
                         deserializedRefFxCurveMarket.Items1[0], refFxCurveProperties);
                 var currency2CurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
-                        deserializedCurrecny2CurveMarket.Items[0],
-                        deserializedCurrecny2CurveMarket.Items1[0], refCurrecnyCurveProperties);
+                        deserializedCurrency2CurveMarket.Items[0],
+                        deserializedCurrency2CurveMarket.Items1[0], refCurrencyCurveProperties);
                 var spreadCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
@@ -586,7 +591,7 @@ namespace Orion.CurveEngine
         #region Business Calendars
 
         /// <summary>
-        /// Dedupes the specified calendar names.
+        /// De-dupes the specified calendar names.
         /// </summary>
         /// <param name="calendarNames">The calendar names.</param>
         /// <returns></returns>
@@ -604,7 +609,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Creates a consolidated business calendar for a given sset of business centers
+        /// Creates a consolidated business calendar for a given set of business centers
         /// </summary>
         /// <param name="centers">The centers.</param>
         /// <returns></returns>
@@ -627,7 +632,7 @@ namespace Orion.CurveEngine
 
 
         /// <summary>
-        /// Signficant dates for the requested busuiness centres. This uses a query and will be slower than using specific years.
+        /// Significant dates for the requested business centers. This uses a query and will be slower than using specific years.
         /// </summary>
         /// <param name="businessCenters">The city names.</param>
         /// <returns></returns>
@@ -1094,15 +1099,15 @@ namespace Orion.CurveEngine
                         quotes.Add(priceQuoteUnits[index - 1]);
                     }
                     var nvs = PriceableAssetFactory.BuildPropertiesForAssets("Local", assetIdentifier, baseDate);
-                    var newproperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
+                    var newProperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
                     priceableAssets.Add(CreateLocalAsset(vals, measures, quotes,
-                                                    newproperties));
+                                                    newProperties));
                 }
                 return priceableAssets;
             }
             catch (Exception ex)
             {
-                throw new Exception("No base dtae provided.", ex);
+                throw new Exception("No base date provided.", ex);
             }
         }
 
@@ -1140,7 +1145,7 @@ namespace Orion.CurveEngine
         /// <param name="rates">The rates.</param>
         /// <param name="additional">The additional.</param>
         /// <returns></returns>
-        /// <param name="properties">This must inclde a BaseDate.</param>
+        /// <param name="properties">This must include a BaseDate.</param>
         public List<string> CreateLocalAssets(List<string> assetIdentifiers, List<Decimal> rates,
                                             List<Decimal> additional, NamedValueSet properties)
         {
@@ -1273,7 +1278,7 @@ namespace Orion.CurveEngine
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
         /// <param name="ytms">The yield to maturities.</param>
-        /// <param name="properties">The propereties.</param>
+        /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
         public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<Decimal> coupons, List<Decimal> ytms, NamedValueSet properties)
         {
@@ -1301,12 +1306,12 @@ namespace Orion.CurveEngine
         /// <param name="baseDate">The base date.</param>
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
-        /// <param name="frequencys">The coupon frequency.</param>
+        /// <param name="frequencies">The coupon frequency.</param>
         /// <param name="ytms">The yield to maturities.</param>
         /// <param name="daycounts">The daycounts used for repo, accrual and coupons.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
-        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<Decimal> coupons, List<string> daycounts, List<string> frequencys, List<Decimal> ytms, NamedValueSet properties)
+        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<Decimal> coupons, List<string> daycounts, List<string> frequencies, List<Decimal> ytms, NamedValueSet properties)
         {
             if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != daycounts.Count && assetIdentifiers.Count != ytms.Count)
             {
@@ -1316,7 +1321,7 @@ namespace Orion.CurveEngine
             var priceableAssets = new List<string>();
             foreach (var assetIdentifier in assetIdentifiers)
             {
-                priceableAssets.Add(CreateLocalBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], daycounts[index], frequencys[index], ytms[index], properties));
+                priceableAssets.Add(CreateLocalBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], daycounts[index], frequencies[index], ytms[index], properties));
                 index++;
             }
             return priceableAssets;
@@ -1324,14 +1329,14 @@ namespace Orion.CurveEngine
 
         /// <summary>
         /// Creates the specified asset. This a factory for simple assets, where the configuration data stored
-        /// in the cache is used for constructing the priceableasset.
+        /// in the cache is used for constructing the priceable asset.
         /// </summary>
         /// <param name="priceableAsset">The priceable Asset.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
         public string SetIRSwap(IPriceableAssetController priceableAsset, NamedValueSet properties)
         {
-            //sets the deafult.
+            //sets the default.
             var uniqueId = "Asset not built-";
             //AssetType property - make sure it exists.
             var assetType = PropertyHelper.ExtractStringProperty("AssetType", properties);
@@ -1345,13 +1350,13 @@ namespace Orion.CurveEngine
             {
                 return uniqueId + "because of a non-existent AssetId property.";
             }
-            //sets up the uniqueidentifier.
+            //sets up the unique identifier.
             var uniqueIdentifier = PropertyHelper.ExtractStringProperty(CurveProp.UniqueIdentifier, properties);
             if (uniqueIdentifier == "Unknown Property.")
             {
                 uniqueId = assetIdentifier;
             }
-            //set the priceableasset in the cache.
+            //set the priceable asset in the cache.
             SetLocalAsset(uniqueId, priceableAsset, properties);
             //return the cache id.
             return uniqueId;
@@ -1466,7 +1471,7 @@ namespace Orion.CurveEngine
         /// The function will return a series of metrics for that swap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for calculation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="curveId">The curve id. This must have been created already.</param>
@@ -1491,13 +1496,13 @@ namespace Orion.CurveEngine
             var bav = new BasicAssetValuation();
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
             bav.quote = new[] { quote };
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                                                                              businessCentersAsString);
             //create the swap.
             var swap = CreateInterestRateSwap("Local", baseDate, MoneyHelper.GetAmount(notional, currency), dates.ToArray(),
                                                                     notionalWeights.ToArray(), fixedLegDayCount, businessDayAdjustments, bav);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SimpleRateMarketEnvironment();
             var bavMetric = new BasicAssetValuation();
             var quoteMetric = BasicQuotationHelper.Create(0.0m, metric);
@@ -1551,16 +1556,16 @@ namespace Orion.CurveEngine
 
         ///<summary>
         /// This function is a simple was to create a cap that has sequential roll dates and is adjusted, 
-        /// This function does however allow differenct conventions on the floating side and a non-zero spread.
+        /// This function does however allow different conventions on the floating side and a non-zero spread.
         /// The function will return a series of metrics for that cap, depending on what is requested.
         ///</summary>
         /// <remarks>
-        /// The assumption is that only one curve is required for cvaluation, as the floating leg always 
+        /// The assumption is that only one curve is required for calculation, as the floating leg always 
         /// values to zero when including principal exchanges.
         /// </remarks>
         ///<param name="rateCurveId">The curve id. This must have been created already.</param>
         ///<param name="volCurveId">The vol curve id.</param>
-        ///<param name="isCap">The isCap glag: if true, the product is a cap, if false, a floor.</param>
+        ///<param name="isCap">The isCap flag: if true, the product is a cap, if false, a floor.</param>
         ///<param name="currency">The configuration currency.
         /// This is used to get all default values and must exist in the cache.</param>
         ///<param name="baseDate">The base date.</param>
@@ -1604,10 +1609,10 @@ namespace Orion.CurveEngine
             //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
-            //Create the realtivvedateoffset.
+            //Create the relative date offset.
             var resetOffset = RelativeDateOffsetHelper.Create(resetPeriod, DayTypeEnum.Business,
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
-            //Create the realtivvedateoffset.
+            //Create the relative date offset.
             var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex, indexTenor);
             //create the cap/floor.
             var capfloor = isCap
@@ -1617,7 +1622,7 @@ namespace Orion.CurveEngine
                                : PriceableAssetFactory.CreateIRFloor(Logger, Cache, NameSpace, baseDate, effectiveDate, maturityTerm, currency,
                                                                      rollFrequency, includeStubFlag, notional, strike, rollBackward, resetRates,
                                                                      resetOffset, businessDayAdjustments, dayCount, forecastRate, null, null, properties);
-            //Get the AssetCntrollerData.
+            //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation
             {
@@ -1637,7 +1642,7 @@ namespace Orion.CurveEngine
             //Create the interpolator and get the implied quote.
             var valuation = capfloor.Calculate(assetControllerData);
             if (valuation == null) return ArrayHelper.ConvertDictionaryTo2DArray(result);
-            //Check to see if details are reuqired.
+            //Check to see if details are required.
             if (cashFlowDetail)
             {
                 foreach (var metricQuote in valuation.quote)
@@ -1665,13 +1670,13 @@ namespace Orion.CurveEngine
         /// <param name="baseDate">The base date.</param>
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
-        /// <param name="frequencys">The coupon frequency.</param>
+        /// <param name="frequencies">The coupon frequency.</param>
         /// <param name="ytms">The yield to maturities.</param>
         /// <param name="daycounts">The daycounts used for repo, accrual and coupons.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
         public List<IPriceableAssetController> CreateBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<Decimal> coupons,
-            List<string> daycounts, List<string> frequencys, List<Decimal> ytms, NamedValueSet properties)
+            List<string> daycounts, List<string> frequencies, List<Decimal> ytms, NamedValueSet properties)
         {
             if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != daycounts.Count && assetIdentifiers.Count != ytms.Count)
             {
@@ -1681,7 +1686,7 @@ namespace Orion.CurveEngine
             var priceableAssets = new List<IPriceableAssetController>();
             foreach (var assetIdentifier in assetIdentifiers)
             {
-                priceableAssets.Add(CreateBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], daycounts[index], frequencys[index], ytms[index], properties));
+                priceableAssets.Add(CreateBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], daycounts[index], frequencies[index], ytms[index], properties));
                 index++;
             }
             return priceableAssets;
@@ -1777,9 +1782,9 @@ namespace Orion.CurveEngine
         ///Query the cache with the above properties and return the Instrument set.
         ///If this set is null, return an error message, asking to create a default instrument.
         ///Can use the CreateInstrument function in Excel.
-        ///Check whether ther is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
-        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures optione and floatingrateindex if
-        ///the asset is a rateindex.
+        ///Check whether there is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
+        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures option and floating rate index if
+        ///the asset is a rate index.
         ///Find the marketQuote and the volatility? in the BAV.
         ///Extract the base date from the properties.
         ///Call the PriceableAsset create functions to create an IPriceableAssetController.
@@ -1829,9 +1834,9 @@ namespace Orion.CurveEngine
         ///Query the cache with the above properties and return the Instrument set.
         ///If this set is null, return an error message, asking to create a default instrument.
         ///Can use the CreateInstrument function in Excel.
-        ///Check whether ther is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
-        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures optione and floatingrateindex if
-        ///the asset is a rateindex.
+        ///Check whether there is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
+        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures option and floating rate index if
+        ///the asset is a rate index.
         ///Find the marketQuote and the volatility? in the BAV.
         ///Extract the base date from the properties.
         ///Call the PriceableAsset create functions to create an IPriceableAssetController.
@@ -1856,9 +1861,9 @@ namespace Orion.CurveEngine
         ///Query the cache with the above properties and return the Instrument set.
         ///If this set is null, return an error message, asking to create a default instrument.
         ///Can use the CreateInstrument function in Excel.
-        ///Check whether ther is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
-        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures optione and floatingrateindex if
-        ///the asset is a rateindex.
+        ///Check whether there is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
+        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures option and floating rate index if
+        ///the asset is a rate index.
         ///Find the marketQuote and the volatility? in the BAV.
         ///Extract the base date from the properties.
         ///Call the PriceableAsset create functions to create an IPriceableAssetController.
@@ -1877,15 +1882,15 @@ namespace Orion.CurveEngine
 
         /// <summary>
         /// Creates the specified asset. This a factory for simple assets, where the configuration data stored
-        /// in the cache is used for constructing the priceableasset.
+        /// in the cache is used for constructing the priceable asset.
         /// </summary>
-        /// <param name="rate">The rate. In the case of a bond this would be the yiel-to-maturity.</param>
+        /// <param name="rate">The rate. In the case of a bond this would be the yield-to-maturity.</param>
         /// <param name="additional">The additional. For a future this is the volatility. For a bond this is the coupon.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
         public IPriceableAssetController CreatePriceableAsset(Decimal rate, Decimal additional, NamedValueSet properties)
         {
-            //sets the deafult.
+            //sets the default.
             //AssetType property - make sure it exists.
             var assetType = PropertyHelper.ExtractStringProperty("AssetType", properties);
             if (assetType == null)
@@ -1916,13 +1921,13 @@ namespace Orion.CurveEngine
                     return null;
                 }
             }
-            //make sure there is a basedate.
+            //make sure there is a base date.
             var baseDate = PropertyHelper.ExtractDateTimeProperty(CurveProp.BaseDate, properties);
             if (baseDate == null)
             {
                 return null;
             }
-            //create the asset-basicassetvaluation pair.
+            //create the asset-basic asset valuation pair.
             var asset = AssetHelper.Parse(assetIdentifier, rate, additional);
             //create the priceable asset.
             var priceableAsset = PriceableAssetFactory.Create(Logger, Cache, NameSpace, asset.Second, properties, null, null);
@@ -1932,7 +1937,7 @@ namespace Orion.CurveEngine
 
         /// <summary>
         /// Creates the specified asset. This a factory for simple assets, where the configuration data stored
-        /// in the cache is used for constructing the priceableasset.
+        /// in the cache is used for constructing the priceable asset.
         /// </summary>
         /// <param name="values">The adjusted rates.</param>
         /// <param name="measureType">The additional.</param>
@@ -1982,7 +1987,7 @@ namespace Orion.CurveEngine
         /// <param name="rates">The rates.</param>
         /// <param name="additional">The additional.</param>
         /// <returns></returns>
-        /// <param name="properties">This must inclde a BaseDate.</param>
+        /// <param name="properties">This must include a BaseDate.</param>
         public List<IPriceableAssetController> CreatePriceableAssets(List<string> assetIdentifiers, List<Decimal> rates,
                                             List<Decimal> additional, NamedValueSet properties)
         {
@@ -2015,7 +2020,7 @@ namespace Orion.CurveEngine
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         /// <param name="properties"></param>
@@ -2046,15 +2051,15 @@ namespace Orion.CurveEngine
                         quotes.Add(priceQuoteUnits[index - 1]);
                     }
                     var nvs = PriceableAssetFactory.BuildPropertiesForAssets("Local", assetIdentifier, baseDate);
-                    var newproperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
+                    var newProperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
                     priceableAssets.Add(CreatePriceableAsset(vals, measures, quotes,
-                                                    newproperties));
+                                                    newProperties));
                 }
                 return priceableAssets;
             }
             catch (Exception ex)
             {
-                throw new Exception("No base dtae provided.", ex);
+                throw new Exception("No base date provided.", ex);
             }
         }
 
@@ -2091,9 +2096,9 @@ namespace Orion.CurveEngine
         ///Query the cache with the above properties and return the Instrument set.
         ///If this set is null, return an error message, asking to create a default instrument.
         ///Can use the CreateInstrument function in Excel.
-        ///Check whether ther is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
-        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures optione and floatingrateindex if
-        ///the asset is a rateindex.
+        ///Check whether there is an instrument with an ExtraItem and see if it matches with the Maturity Tenor.
+        ///Need to cover the case of Future Code as the ExtraItem if a future vor futures option and floating rate index if
+        ///the asset is a rate index.
         ///Find the marketQuote and the volatility? in the BAV.
         ///Extract the base date from the properties.
         ///Call the PriceableAsset create functions to create an IPriceableAssetController.
@@ -2114,7 +2119,7 @@ namespace Orion.CurveEngine
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableSimpleIRSwap"/> class.
         /// </summary>
-        /// <param name="amount">The ammount.</param>
+        /// <param name="amount">The amount.</param>
         /// <param name="discountingType">The discounting type.</param>
         /// <param name="effectiveDate">The base date.</param>
         /// <param name="tenor">The maturity tenor.</param>
@@ -2169,7 +2174,7 @@ namespace Orion.CurveEngine
         /// <param name="bav">The basic asset valuation.</param>
         /// <param name="identifier">The swap configuration identifier.</param>
         /// <param name="baseDate">The base date.</param>
-        /// <param name="notional">The actual first notional. THis must be cxonsistent with the weights.</param>
+        /// <param name="notional">The actual first notional. THis must be consistent with the weights.</param>
         /// <param name="dates">The dates.</param>
         public IPriceableAssetController CreateInterestRateSwap(String identifier, DateTime baseDate,
             Money notional, DateTime[] dates, Decimal[] notionalWeights, String fixedLegDayCount,
@@ -2270,7 +2275,7 @@ namespace Orion.CurveEngine
         /// <param name="baseDate">The base date.</param>
         /// <param name="term">THe term of the cap.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="effectiveDate">The efective Date.</param>
+        /// <param name="effectiveDate">The effective Date.</param>
         /// <param name="paymentFrequency">The cap roll frequency.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
@@ -2303,7 +2308,7 @@ namespace Orion.CurveEngine
         /// <param name="baseDate">The base date.</param>
         /// <param name="term">THe term of the cap.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="effectiveDate">The efective Date.</param>
+        /// <param name="effectiveDate">The effective Date.</param>
         /// <param name="paymentFrequency">The cap roll frequency.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
@@ -2333,14 +2338,14 @@ namespace Orion.CurveEngine
         /// <param name="identifier">The swap configuration identifier.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="rolldates">The roll dates.</param>
+        /// <param name="rollDates">The roll dates.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
         public PriceableIRCap CreateIRCap(String identifier, DateTime baseDate, string currency,
-            List<DateTime> rolldates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
+            List<DateTime> rollDates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex, IBusinessCalendar fixingCalendar, NamedValueSet properties)
         {
-            var instrument = PriceableAssetFactory.CreateIRCap(Logger, Cache, NameSpace, identifier, baseDate, currency, rolldates, notionals, strikes, resets,
+            var instrument = PriceableAssetFactory.CreateIRCap(Logger, Cache, NameSpace, identifier, baseDate, currency, rollDates, notionals, strikes, resets,
                 resetConvention, paymentDateAdjustments, dayCount, floatingIndex, fixingCalendar, properties);
             return instrument;
         }
@@ -2358,14 +2363,14 @@ namespace Orion.CurveEngine
         /// <param name="identifier">The swap configuration identifier.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="rolldates">The roll dates.</param>
+        /// <param name="rollDates">The roll dates.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
         public PriceableIRFloor CreateIRFloor(String identifier, DateTime baseDate, string currency,
-            List<DateTime> rolldates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
+            List<DateTime> rollDates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex, IBusinessCalendar fixingCalendar, NamedValueSet properties)
         {
-            var instrument = PriceableAssetFactory.CreateIRFloor(Logger, Cache, NameSpace, identifier, baseDate, currency, rolldates, notionals, strikes, resets,
+            var instrument = PriceableAssetFactory.CreateIRFloor(Logger, Cache, NameSpace, identifier, baseDate, currency, rollDates, notionals, strikes, resets,
                 resetConvention, paymentDateAdjustments, dayCount, floatingIndex, fixingCalendar, properties);
             return instrument;
         }
@@ -2431,7 +2436,7 @@ namespace Orion.CurveEngine
         //}
 
         ///// <summary>
-        ///// Gets the curvse.
+        ///// Gets the curves.
         ///// </summary>
         ///// <param name="requestProperties">The requestProperties.</param>
         ///// <returns></returns>
@@ -2465,7 +2470,7 @@ namespace Orion.CurveEngine
         ///// <param name="instruments">The instruments.</param>
         ///// <param name="values">The adjusted rates.</param>
         ///// <param name="measureTypes">The measure types.</param>
-        ///// <param name="priceQuoteUnits">The pricequote units.</param>
+        ///// <param name="priceQuoteUnits">The price quote units.</param>
         ///// <returns></returns>
         //public string CreatePrivateRateCurve(NamedValueSet properties, string[] instruments, decimal[] values,
         //                            string[] measureTypes, string[] priceQuoteUnits)
@@ -2516,9 +2521,7 @@ namespace Orion.CurveEngine
         //public Double GetValue(string pricingStructureId, DateTime targetDate)
         //{
         //    var pricingStructure = (PricingStructureBase)GetPrivatePricingStructure(pricingStructureId).Data;
-
         //    IPoint point = new DateTimePoint1D(targetDate);
-
         //    return (double)pricingStructure.GetValue(point).Value;
         //}
 
@@ -2547,7 +2550,6 @@ namespace Orion.CurveEngine
         //{
         //    var pricingStructure = (PricingStructureBase)GetPrivatePricingStructure(pricingStructureId).Data;
         //    IPoint point = new DateTimePoint1D(baseDate, targetDate);
-
         //    return (double)pricingStructure.GetValue(point).Value;
         //}
 
@@ -2562,7 +2564,6 @@ namespace Orion.CurveEngine
         //                              DateTime[] targetDates)
         //{
         //    var pricingStructure = (PricingStructureBase)GetPrivatePricingStructure(pricingStructureId).Data;
-
         //    return targetDates.Select(date => new DateTimePoint1D(baseDate, date)).Select(point => (double)pricingStructure.GetValue(point).Value).ToList();
         //}
 
@@ -2582,7 +2583,6 @@ namespace Orion.CurveEngine
         //    var df = (double)pricingStructure.GetValue(point).Value;
         //    IPoint point2 = new DateTimePoint1D(baseDate, targetDate);
         //    var df1 = (double)pricingStructure.GetValue(point2).Value;
-
         //    return df1 / df;
         //}
 
@@ -2878,7 +2878,7 @@ namespace Orion.CurveEngine
         /// Initializes a new instance of the <see cref="RateSpreadCurve"/> class.
         /// </summary>
         /// <param name="properties">The properties.</param>
-        /// <param name="refCurve">The reference parent curveid.</param>
+        /// <param name="refCurve">The reference parent curve id.</param>
         /// <param name="value">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
@@ -2893,7 +2893,7 @@ namespace Orion.CurveEngine
         /// Initializes a new instance of the <see cref="RateSpreadCurve"/> class.
         /// </summary>
         /// <param name="properties">The properties.</param>
-        /// <param name="refCurve">The reference parent curveid.</param>
+        /// <param name="refCurve">The reference parent curve id.</param>
         /// <param name="values">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
@@ -3031,8 +3031,8 @@ namespace Orion.CurveEngine
         /// <param name="properties">The properties.</param>
         /// <param name="expiryTerms">An array of expiry tenors..</param>
         /// <param name="strikesOrTenor">An array of strikes or tenors.</param>
-        /// <param name="volatilities">A range of volatiltiies of the correct dimension.</param>
-        /// <param name="forwards">An array of fprwards to the expiry dates. Used for calibration of the wing model.</param>
+        /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
+        /// <param name="forwards">An array of forwards to the expiry dates. Used for calibration of the wing model.</param>
         /// <returns></returns>
         public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenor, Double[,] volatilities, Double[] forwards)
         {
@@ -3086,7 +3086,7 @@ namespace Orion.CurveEngine
         /// <param name="properties">The properties.</param>
         /// <param name="expiryTerms">An array of expiry tenors..</param>
         /// <param name="tenors">An array of tenors.</param>
-        /// <param name="volatilities">A range of volatiltiies of the correct dimension.</param>
+        /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
         /// <param name="strikes">The strike array.</param>
         /// <returns></returns>
         public IPricingStructure CreateVolatilityCubeInMarketAndReturnId(NamedValueSet properties, String[] expiryTerms, String[] tenors, decimal[,] volatilities, decimal[] strikes)
@@ -3096,7 +3096,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         /// <param name="properties">The properties.</param>
@@ -3112,7 +3112,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         /// <param name="properties">The properties.</param>
@@ -3126,7 +3126,7 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Returns an pricingstructure. <see cref="NamedValueSet"/> class.
+        /// Returns an pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="referenceCurveData">The reference curve data.</param>//TODO need to add a collection of IBusinessCalendars - one for each curve!
         /// <param name="spreadCurveData">The spread curve data.</param>
@@ -3139,10 +3139,10 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Returns an pricingstructure. <see cref="NamedValueSet"/> class.
+        /// Returns an pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="referenceCurveData">The reference curve data.</param>
-        /// <param name="referenceFxCurveData">The Fx ewfwewncw curve.</param>
+        /// <param name="referenceFxCurveData">The Fx reference curve.</param>
         /// <param name="currency2CurveData">The currency2 data.</param>
         /// <param name="spreadCurveData">The spread curve data.</param>
         public IPricingStructure CreateCurve(Triplet<PricingStructure, PricingStructureValuation, NamedValueSet> referenceCurveData,
@@ -3158,11 +3158,11 @@ namespace Orion.CurveEngine
         /// <summary>
         /// Creates the basic rate curve risk set.
         /// This function takes a curves, creates a rate curve for each instrument and applying 
-        /// supplied basis point pertubation/spread to the underlying instrument in the spread curve
+        /// supplied basis point perturbation/spread to the underlying instrument in the spread curve
         /// </summary>
         /// <param name="baseCurve">The base curve.</param>
         /// <param name="basisPointPerturbation">The basis point perturbation.</param>
-        /// <returns>A list of pertubed rate curves</returns>
+        /// <returns>A list of perturbed rate curves</returns>
         public List<IPricingStructure> CreateRateCurveRiskSet(RateCurve baseCurve, decimal basisPointPerturbation)
         {
             var curveRiskSet = baseCurve.CreateCurveRiskSet(basisPointPerturbation);
@@ -3177,24 +3177,24 @@ namespace Orion.CurveEngine
         /// Updates the curve references.
         /// </summary>
         /// <param name="pricingStructureIdentifier"></param>
-        /// <param name="marketdata"></param>
+        /// <param name="marketData"></param>
         /// <returns></returns>
-        public string RefreshPricingStructure(string pricingStructureIdentifier, QuotedAssetSet marketdata)
+        public string RefreshPricingStructure(string pricingStructureIdentifier, QuotedAssetSet marketData)
         {
-            var result = RefreshPricingStructure(Logger, Cache, NameSpace, pricingStructureIdentifier, marketdata);    
+            var result = RefreshPricingStructure(Logger, Cache, NameSpace, pricingStructureIdentifier, marketData);    
             return result;
         }
 
         /// <summary>
-        /// Updates the curv
+        /// Updates the curve
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
         /// <param name="pricingStructureIdentifier"></param>
-        /// <param name="marketdata"></param>
+        /// <param name="marketData"></param>
         /// <returns></returns>
-        public static string RefreshPricingStructure(ILogger logger, ICoreCache cache, string nameSpace, string pricingStructureIdentifier, QuotedAssetSet marketdata)
+        public static string RefreshPricingStructure(ILogger logger, ICoreCache cache, string nameSpace, string pricingStructureIdentifier, QuotedAssetSet marketData)
         {
             var result = "Curve not found or recalculated.";
             //1) Find the curve
@@ -3205,7 +3205,7 @@ namespace Orion.CurveEngine
                 var curve = market.Items1[0] as YieldCurveValuation;
                 if (curve != null)
                 {
-                    curve.inputs = marketdata;
+                    curve.inputs = marketData;
                 }
                 //3) Rebuild the curve
                 var rateCurve = PricingStructureFactory.Create(logger, cache, nameSpace, null, null, new Pair<PricingStructure, PricingStructureValuation>(market.Items[0], curve), ps.AppProps);
@@ -3219,19 +3219,19 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Updates the curv
+        /// Updates the curve
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
         /// <param name="configIdentifier"></param>
         /// <param name="pricingStructureIdentifier"></param>
-        /// <param name="marketdata"></param>
+        /// <param name="marketData"></param>
         /// <param name="baseDate"></param>
         /// <param name="buildDateTime"></param>
         /// <returns></returns>
         public static string RefreshPricingStructureFromConfiguration(ILogger logger, ICoreCache cache, string nameSpace, string configIdentifier, 
-            string pricingStructureIdentifier, QuotedAssetSet marketdata, DateTime baseDate, DateTime buildDateTime)
+            string pricingStructureIdentifier, QuotedAssetSet marketData, DateTime baseDate, DateTime buildDateTime)
         {
             var result = "Curve not found or recalculated.";
             //1) Find the curve
@@ -3242,7 +3242,7 @@ namespace Orion.CurveEngine
                 var curve = market.Items1[0] as YieldCurveValuation;
                 if (curve != null)
                 {
-                    curve.inputs = marketdata;
+                    curve.inputs = marketData;
                 }
                 //3) Rebuild the curve
                 var properties = ps.AppProps.Clone();
@@ -3277,8 +3277,8 @@ namespace Orion.CurveEngine
                                              string curveId,
                                              string currency)
         {
-            string assetIdentifer = currency.ToUpper() + "-IRSwap-" + swapMaturity.ToString(CultureInfo.InvariantCulture) + "Y";
-            var assetIds = new List<string> { assetIdentifer };
+            string assetIdentifier = currency.ToUpper() + "-IRSwap-" + swapMaturity.ToString(CultureInfo.InvariantCulture) + "Y";
+            var assetIds = new List<string> { assetIdentifier };
             var metricsArray = new List<string> { "ImpliedQuote" };
             QuotedAssetSet valuations = EvaluateMetricsForAssetSet(metricsArray, curveId, assetIds, baseDate);
             // EvaluateMetricsForAssetSet(metricsArray, curveId, assetIds,  baseDate);
@@ -3470,21 +3470,21 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
         /// <param name="pricingStructureId"></param>
         /// <param name="baseDate">The base date.</param>
-        /// <param name="expirydate">The expiry date.</param>
+        /// <param name="expiryDate">The expiry date.</param>
         /// <param name="strike">The strike.</param>
         /// <returns>The interpolated value.</returns>
-        public Double GetExpiryDateStrikeValue(string pricingStructureId, DateTime baseDate, DateTime expirydate, Double strike)
+        public Double GetExpiryDateStrikeValue(string pricingStructureId, DateTime baseDate, DateTime expiryDate, Double strike)
         {
             var pricingStructure = (IStrikeVolatilitySurface)GetCurve(pricingStructureId, false);
-            return pricingStructure.GetValueByExpiryDateAndStrike(baseDate, expirydate, strike);
+            return pricingStructure.GetValueByExpiryDateAndStrike(baseDate, expiryDate, strike);
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
         /// <param name="pricingStructureId"></param>
         /// <param name="expiryTerm">The expiry term.</param>
@@ -3497,19 +3497,19 @@ namespace Orion.CurveEngine
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
-        /// <param name="pricingStructureId">The pricingstructure identifier.</param>
+        /// <param name="pricingStructureId">The pricing structure identifier.</param>
         /// <param name="expiryTermsAsList">The expiry terms.</param>
         /// <param name="strikesAsList">The strikes.</param>
         /// <returns>The interpolated value.</returns>
         public object[,] GetExpiryTermStrikeValues(string pricingStructureId, List<string> expiryTermsAsList, List<double> strikesAsList)
         {
-            //Get the curvbe.
+            //Get the curve.
             var pricingStructure = (IStrikeVolatilitySurface)GetCurve(pricingStructureId, false);
             var rows = expiryTermsAsList.Count;
             var width = strikesAsList.Count;
-            //popultate the result matrix.
+            //populate the result matrix.
             var result = new object[rows, width];
             for (var i = 0; i < rows; i++)
             {
@@ -3549,19 +3549,211 @@ namespace Orion.CurveEngine
         /// <param name="instruments">list of instruments</param>
         /// <param name="values">value of each instrument</param>
         /// <param name="initialFraRates">initial guesses for fra rate</param>
-        /// <param name="shockedInsturmentIndices">array of shocked instrument indices</param>
+        /// <param name="shockedInstrumentIndices">array of shocked instrument indices</param>
         /// <param name="initialRates"></param>
         public List<decimal> CalculateEquivalentFraValues(NamedValueSet properties, 
             List<string> instruments,
             IEnumerable<decimal> values,
             IEnumerable<decimal> initialFraRates,
-            ICollection<int> shockedInsturmentIndices, 
+            ICollection<int> shockedInstrumentIndices, 
             List<decimal> initialRates,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
         {
-            var fraSolver = new FraSolver(Logger, Cache, NameSpace, fixingCalendar, rollCalendar, properties, instruments, values, initialFraRates, shockedInsturmentIndices, initialRates);
+            var fraSolver = new FraSolver(Logger, Cache, NameSpace, fixingCalendar, rollCalendar, properties, instruments, values, initialFraRates, shockedInstrumentIndices, initialRates);
             return fraSolver.CalculateEquivalentFraValues(Logger, Cache, NameSpace);
         }
+
+        #endregion
+
+        #region Pedersen Calibration
+
+        /// <summary>
+        /// WIP stub. Still using dummy vol and correlation.
+        /// </summary>
+        /// <param name="curveId">RateCurve Id</param>
+        /// <returns></returns>
+        public object[,] PedersenCalibration(string curveId)
+        {
+            var discounts = CreateQuarterlyDiscount(curveId);
+
+            #region Correlation
+
+            var correlation = new DenseMatrix(16, 16, new[] {
+                                                                                   1.000000000000000,0.755977958030068,0.390753301173931,0.141216505072534,-0.104876511208397,-0.210627197463773,-0.261885066327489,-0.283855022953850,-0.278785040189639,-0.217616581561314,-0.131679872097756,-0.047119056221972,0.035536790425668,0.035012148706578,-0.056755438761266,-0.147067841427471,
+                                                                                   0.755977958030068,1.000000000000000,0.897859194192688,0.754250412789863,0.568584771816748,0.471717652445483,0.414331524248440,0.376892759651739,0.325307014928591,0.295739233811822,0.262631528920056,0.258819816282469,0.223110623543883,0.224277418597115,0.197179794618843,0.214946385346135,
+                                                                                   0.390753301173931,0.897859194192688,1.000000000000000,0.966206548235119,0.871487281927208,0.807411735395667,0.762317308365949,0.725676219350727,0.652204548346068,0.571439499258483,0.467957645337466,0.405073258382088,0.296785508080043,0.295698168204210,0.315008587168980,0.399744811477594,
+                                                                                   0.141216505072534,0.754250412789863,0.966206548235119,1.000000000000000,0.968097165525376,0.930197657405308,0.897664527480700,0.866199451465545,0.789464234299992,0.688558329945124,0.554848012298554,0.462969701618092,0.320322999574078,0.315132123632584,0.355543542028662,0.470322650948144,
+                                                                                   -0.104876511208397,0.568584771816748,0.871487281927208,0.968097165525376,1.000000000000000,0.991870609745447,0.976144403192061,0.954694443933486,0.886260319324773,0.778379798672846,0.628107300555259,0.514474740129681,0.344648740689955,0.329912317723686,0.378645793200518,0.511589751077290,
+                                                                                   -0.210627197463773,0.471717652445483,0.807411735395667,0.930197657405308,0.991870609745447,1.000000000000000,0.995420463837200,0.982645964956045,0.927529471279287,0.826459103514222,0.677480265864820,0.557530885234864,0.376387183783690,0.351182092624649,0.391830263736922,0.525549743054232,
+                                                                                   -0.261885066327489,0.414331524248440,0.762317308365949,0.897664527480700,0.976144403192061,0.995420463837200,1.000000000000000,0.995653842253138,0.956423399222447,0.868102357495867,0.727656184223354,0.607494148494469,0.420864536558254,0.384765297686029,0.410542083201468,0.538065091248112,
+                                                                                   -0.283855022953850,0.376892759651739,0.725676219350727,0.866199451465545,0.954694443933486,0.982645964956045,0.995653842253138,1.000000000000000,0.978998288038717,0.907731550317703,0.780823302873087,0.664381765576934,0.476000948658687,0.428541137695596,0.434866141266280,0.551343586803336,
+                                                                                   -0.278785040189639,0.325307014928591,0.652204548346068,0.789464234299992,0.886260319324773,0.927529471279287,0.956423399222447,0.978998288038717,1.000000000000000,0.973112904777601,0.886257099989342,0.788017307311586,0.608878175546937,0.540668413612633,0.501605787039908,0.584142099062795,
+                                                                                   -0.217616581561314,0.295739233811822,0.571439499258483,0.688558329945124,0.778379798672846,0.826459103514222,0.868102357495867,0.907731550317703,0.973112904777601,1.000000000000000,0.968305181763602,0.903436609813577,0.755190977445885,0.674824032661566,0.590245774772147,0.624331666978794,
+                                                                                   -0.131679872097756,0.262631528920056,0.467957645337466,0.554848012298554,0.628107300555259,0.677480265864820,0.727656184223354,0.780823302873087,0.886257099989342,0.968305181763602,1.000000000000000,0.980402212079355,0.884840913945599,0.806372358629370,0.688651955757898,0.667641768862761,
+                                                                                   -0.047119056221972,0.258819816282469,0.405073258382088,0.462969701618092,0.514474740129681,0.557530885234864,0.607494148494469,0.664381765576934,0.788017307311586,0.903436609813577,0.980402212079355,1.000000000000000,0.957995763948430,0.896533849250595,0.773428357979744,0.713936269134348,
+                                                                                   0.035536790425668,0.223110623543883,0.296785508080043,0.320322999574078,0.344648740689955,0.376387183783690,0.420864536558254,0.476000948658687,0.608878175546937,0.755190977445885,0.884840913945599,0.957995763948430,1.000000000000000,0.979255559959103,0.877721716091762,0.776614810578805,
+                                                                                   0.035012148706578,0.224277418597115,0.295698168204210,0.315132123632584,0.329912317723686,0.351182092624649,0.384765297686029,0.428541137695596,0.540668413612633,0.674824032661566,0.806372358629370,0.896533849250595,0.979255559959103,1.000000000000000,0.951797469031466,0.859107491550573,
+                                                                                   -0.056755438761266,0.197179794618843,0.315008587168980,0.355543542028662,0.378645793200518,0.391830263736922,0.410542083201468,0.434866141266280,0.501605787039908,0.590245774772147,0.688651955757898,0.773428357979744,0.877721716091762,0.951797469031466,1.000000000000000,0.961857372722260,
+                                                                                   -0.147067841427471,0.214946385346135,0.399744811477594,0.470322650948144,0.511589751077290,0.525549743054232,0.538065091248112,0.551343586803336,0.584142099062795,0.624331666978794,0.667641768862761,0.713936269134348,0.776614810578805,0.859107491550573,0.961857372722260,1.000000000000000
+                                                                               });
+            #endregion
+
+            var timeGrid = new PedersenTimeGrid(
+                new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 },
+                new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 }
+                );
+
+            #region Swaptions
+
+            var swaptionDataRaw = new[,]
+            {
+                {0.1290,0.1540,0.1550,0.1545,0.1535,0.1495,0.1465,0.1430,0.1400,0.1385,0.1340,0.1320,0.1305,0.1275},
+                {0.1465,0.1630,0.1630,0.1615,0.1595,0.1560,0.1530,0.1495,0.1460,0.1440,0.1390,0.1360,0.1340,0.1330},
+                {0.1755,0.1770,0.1740,0.1710,0.1680,0.1650,0.1615,0.1590,0.1560,0.1540,0.1480,0.1440,0.1425,0.1410},
+                {0.1875,0.1855,0.1820,0.1790,0.1750,0.1730,0.1700,0.1670,0.1645,0.1625,0.1555,0.1510,0.1475,0.1470},
+                {0.1895,0.1860,0.1840,0.1805,0.1780,0.1750,0.1730,0.1700,0.1680,0.1660,0.1580,0.1530,0.1505,0.1490},
+                {0.1880,0.1860,0.1830,0.1805,0.1775,0.1745,0.1725,0.1705,0.1680,0.1660,0.1575,0.1520,0.1500,0.1480},
+                {0.1830,0.1810,0.1790,0.1760,0.1735,0.1705,0.1685,0.1660,0.1640,0.1620,0.1525,0.1480,0.1455,0.1435},
+                {0.1795,0.1760,0.1730,0.1710,0.1685,0.1660,0.1635,0.1610,0.1590,0.1570,0.1470,0.1420,0.1395,0.1375},
+                {0.1670,0.1640,0.1615,0.1585,0.1570,0.1545,0.1525,0.1510,0.1490,0.1470,0.1355,0.1305,0.1285,0.1265},
+                {0.1505,0.1480,0.1460,0.1445,0.1425,0.1410,0.1395,0.1380,0.1360,0.1350,0.1250,0.1195,0.1175,0.1160},
+                {0.1380,0.1355,0.1340,0.1315,0.1305,0.1300,0.1290,0.1275,0.1260,0.1250,0.1170,0.1110,0.1090,0.1060},
+                {0.1290,0.1270,0.1245,0.1215,0.1200,0.1195,0.1180,0.1175,0.1160,0.1150,0.1080,0.1025,0.1005,0.0985},
+                {0.1195,0.1185,0.1165,0.1135,0.1135,0.1125,0.1110,0.1095,0.1085,0.1070,0.1005,0.0960,0.0935,0.0920}
+            };
+
+            var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
+            var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
+            var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
+            for (int i = 0; i < swaptionExpiry.Length; i++)
+            {
+                for (int j = 0; j < swaptionTenor.Length; j++)
+                {
+                    int index = i * swaptionTenor.Length + j;
+                    swaptionData[index, 0] = swaptionExpiry[i];
+                    swaptionData[index, 1] = swaptionTenor[j];
+                    swaptionData[index, 2] = swaptionDataRaw[i, j];
+                }
+            }
+
+            #endregion
+
+            #region Caplets
+
+            var capletDataRaw = new[]
+            {
+                0.11906,0.11967,0.12298,0.12287,0.14967,0.17235,0.19190,0.19664,0.19211,0.18947,
+                0.18688,0.19040,0.19305,0.18922,0.18837,0.18918,0.18956,0.18647,0.18588,0.18702,
+                0.18840,0.18758,0.18789,0.18336,0.18731,0.18205,0.17772,0.18107,0.18185,0.18163,
+                0.18125,0.17984,0.17829,0.17664,0.17450,0.17447,0.17354,0.17144,0.17014,0.17049,
+                0.17071,0.16730,0.16657,0.16679,0.16687,0.16312,0.16309,0.15872,0.16374,0.15930,
+                0.15564,0.15711,0.15583,0.15489,0.15341,0.15328,0.15306,0.15132,0.15106,0.15130,
+                0.15118,0.14823,0.14690,0.14670,0.14636,0.14373,0.14281,0.14286,0.14251,0.14202,
+                0.13941,0.14167,0.14173,0.14197,0.14286,0.14363,0.14460,0.14581,0.14651,0.14845
+            };
+            var capletData = new double[capletDataRaw.Length, 2];
+            for (int i = 0; i < capletDataRaw.Length; i++)
+            {
+                capletData[i, 0] = i + 1;
+                capletData[i, 1] = capletDataRaw[i];
+            }
+
+            #endregion
+
+            var targets = new CalibrationTargets(timeGrid, capletData, swaptionData);
+            //targets = CreateTargetIVols(timeGrid, marketEnvironmentId, curveIdCaplet, curveIdSwaption);
+            var shifts = new QuarterlyShifts(0);
+            //cascadeSettings = new CascadeParameters(1.15, 1.1);
+            //settings = new CalibrationSettings(0.001, 0.001, 1, 1, true, 2, 80, cascadeSettings);
+            var settings = new CalibrationSettings();
+            string outputString = "";
+            var vol = Analytics.Stochastics.Pedersen.PedersenCalibration.Calibrate(timeGrid, discounts, shifts, correlation, targets, settings, 3, true, ref outputString);
+            var result = new object[1, 1];
+            //result[0, 0] = outputString;
+            for (int i = 0; i < 60; i++)
+            {
+                for (int j = 0; j < 60 - i; j++)
+                {
+                    result[i + 1, j] = vol.VolNorm(i + 1, j + 1);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieves quarterly discounter factors from curveId
+        /// </summary>
+        /// <param name="curveId"></param>
+        /// <returns></returns>
+        private QuarterlyDiscounts CreateQuarterlyDiscount(string curveId)
+        {
+            DateTime current = DateTime.Today;
+            var discountFactors = new double[121];
+            for (int i = 0; i <= 120; i++)
+            {
+                discountFactors[i] = GetValue(curveId, current);
+                current = current.AddMonths(3);
+            }
+            return new QuarterlyDiscounts(discountFactors);
+        }
+
+        /// <summary>
+        /// Builds Calibration targets from implied volatility data
+        /// </summary>
+        /// <param name="timeGrid"></param>
+        /// <param name="curveIdCaplet"></param>
+        /// <param name="curveIdSwaption"></param>
+        /// <returns></returns>
+        public CalibrationTargets CreateTargetIVols(PedersenTimeGrid timeGrid, string curveIdCaplet, string curveIdSwaption)
+        {
+            DateTime current = DateTime.Today;
+            var capletData = new double[80, 2];
+            for (int i = 0; i < 80; i++)
+            {
+                capletData[i, 0] = i + 1;
+                capletData[i, 1] = GetExpiryDateStrikeValue(curveIdCaplet, current, current.AddMonths((i + 1) * 3), 0);
+            }
+            var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
+            var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
+            var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
+            for (int i = 0; i < swaptionExpiry.Length; i++)
+            {
+                for (int j = 0; j < swaptionTenor.Length; j++)
+                {
+                    int index = i * swaptionTenor.Length + j;
+                    swaptionData[index, 0] = swaptionExpiry[i];
+                    swaptionData[index, 1] = swaptionTenor[j];
+                    string term = (swaptionTenor[j] * 3).ToString(CultureInfo.InvariantCulture) + "M";
+                    swaptionData[index, 2] = GetExpiryDateTenorValue(curveIdSwaption, current, current.AddMonths(swaptionExpiry[i] * 3), term);
+                }
+            }
+            return new CalibrationTargets(timeGrid, capletData, swaptionData);
+        }
+
+        #region Pedersen Algorithm
+
+        public string PedersenSetCurrentDiscount(String rateCurveId)
+        {
+            return GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Pedersen.SetCurrentDiscount(rateCurve) : String.Format("Discount factors were not set.");
+        }
+
+        public string PedersenSetCurrentCapletImpliedVolatility(Double strike, String volSurfaceIdentifier)
+        {
+            return GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Pedersen.SetCurrentCapletImpliedVolatility(strike, volSurface) : null;
+        }
+
+        public string PedersenSetSwaptionImpliedVolatility(String volSurfaceIdentifier)
+        {
+            if (GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
+            {
+                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
+                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
+                return Pedersen.SetSwaptionImpliedVolatility(volObj);
+            }
+            return null;
+        }
+
+        #endregion
 
         #endregion
 

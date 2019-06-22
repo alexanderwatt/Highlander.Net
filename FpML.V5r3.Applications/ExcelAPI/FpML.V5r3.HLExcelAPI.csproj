@@ -227,6 +227,8 @@
     <None Include="Spreadsheets\Miscellaneous\ISDA OTC Derivatives Taxonomies - version 2012-10-22%281%29.xlsx" />
     <None Include="Spreadsheets\Miscellaneous\MarketData.xlsx" />
     <None Include="Spreadsheets\Miscellaneous\Miscellaneous.Curves.xlsm" />
+    <None Include="Spreadsheets\Pedersen\PedersenTest.xls" />
+    <None Include="Spreadsheets\Pedersen\PedersenTest.xlsm" />
     <None Include="Spreadsheets\Product Pricers\BasicSwapPricer.xlsm" />
     <None Include="Spreadsheets\Product Pricers\BillsSwapPricer.xlsm" />
     <None Include="Spreadsheets\Product Pricers\BondTransactionPricer.xlsx" />

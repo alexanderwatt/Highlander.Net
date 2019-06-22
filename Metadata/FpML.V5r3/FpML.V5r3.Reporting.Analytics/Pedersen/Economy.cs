@@ -13,7 +13,14 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+#region Usings
+
 using System;
+using MathNet.Numerics.LinearAlgebra.Double;
+using Orion.Analytics.Options;
+using Matrix = Orion.Analytics.LinearAlgebra.Matrix;
+
+#endregion
 
 namespace Orion.Analytics.Pedersen
 {
@@ -22,29 +29,30 @@ namespace Orion.Analytics.Pedersen
     {
         #region declarations
 
-        public SymmetricMatrix Correlation { get; private set; }
+        public DenseMatrix Correlation { get; private set; }
 
-        private double[,] _swpnIvol;
-        private double[] _cpltIvol;
-        public double ReturnIvol(int x, int y)
+        private double[,] _swaptionImpliedVolatility;
+        private double[] _capletImpliedVolatility;
+
+        public double ReturnImpliedVolatility(int x, int y)
         {
-            if (x < 0 || y < 0 || x >= Param.Uexpiry || y >= Param.Utenor)
+            if (x < 0 || y < 0 || x >= Param.UExpiry || y >= Param.UTenor)
             {
                 return 0;
             }
-            return _swpnIvol[x, y];
+            return _swaptionImpliedVolatility[x, y];
         }
 
-        public double ReturnIvol(int x)
+        public double ReturnImpliedVolatility(int x)
         {
             if (x < 0 || x >= Param.Tcplt)
             {
                 return 0;
             }
-            return _cpltIvol[x];
+            return _capletImpliedVolatility[x];
         }
 
-        public GeneralMatrix[] Xi { get; private set; }
+        public Matrix[] Xi { get; private set; }
 
         public double[][] Discount { get; private set; }
 
@@ -60,17 +68,17 @@ namespace Orion.Analytics.Pedersen
 
         public string DiscountStatus { get; set; } = "Preset";
 
-        public string CpltIvolStatus { get; set; } = "Preset";
+        public string CapletImpliedVolatilityStatus { get; set; } = "Preset";
 
-        public string SwpnIvolStatus { get; set; } = "Preset";
+        public string SwaptionImpliedVolatilityStatus { get; set; } = "Preset";
 
-        public double[,] RawSwpnIvol { get; set; }
+        public double[,] RawSwaptionImpliedVolatility { get; set; }
 
-        public double[] RawCpltIvol { get; set; }
+        public double[] RawCapletImpliedVolatility { get; set; }
 
         public double[] CurDiscount { get; set; }
 
-        public SymmetricMatrix CorData { get; set; }
+        public DenseMatrix CorrelationData { get; set; }
 
         public double ConstShift { get; set; }
 
@@ -110,7 +118,7 @@ namespace Orion.Analytics.Pedersen
                 0.190647841060984,0.188088571445035,0.185563657638890,0.183072638447817,0.180615058868192
             };
 
-            CorData = new SymmetricMatrix(121, new[]
+            CorrelationData = new DenseMatrix(121, 121, new[]
             {
 1,	0.755977958030068,	0.390753301173931,	0.141216505072534,	1.66105612516312E-03,	-0.104876511208397,	-0.166526401959382,	-0.210627197463773,	-0.24020035988893,	-0.261885066327489,	-0.277390709710889,	-0.28385502295385,	-0.292422680492512,	-0.29424880772361,	-0.284587911610322,	-0.278785040189639,	-0.269136359696982,	-0.257610367833318,	-0.237646332610728,	-0.217616581561314,	-0.199287046260965,	-0.177429362161628,	-0.153802026308276,	-0.131679872097756,	-0.107088758975711,	-8.20305258935592E-02,	-5.92965779030756E-02,	-4.71190562219716E-02,	-2.26792156751647E-02,	-4.92615240237562E-03,	7.12064022624764E-03,	1.97952518582516E-02,	0.029110842473614,	3.55367904256676E-02,	4.00971049850431E-02,	3.93570136898405E-02,	0.043535826453486,	4.40278589532654E-02,	3.55423642363072E-02,	3.50121487065775E-02,	2.67799180214584E-02,	2.56266938601864E-02,	8.20750214659724E-03,	3.33445054849843E-03,	-7.05507123732626E-03,	-1.79148054751458E-02,	-2.73608530391987E-02,	-3.98134795621311E-02,	-5.24564638249776E-02,	-5.67554387612656E-02,	-7.55496844474818E-02,	-8.61858680220058E-02,	-8.77937947228751E-02,	-0.102802627220293,	-0.110926601041377,	-0.11609016661922,	-0.129744325842617,	-0.125943088514952,	-0.146450813194273,	-0.147067841427471,	-0.150104347323637,	-0.154955380752266,	-0.15667698011286,	-0.163461897278328,	-0.166993436059678,	-0.170477558731831,	-0.166276006663218,	-0.163499384827335,	-0.158165900785399,	-0.171914068518687,	-0.158366979890614,	-0.165628034713235,	-0.161124096269855,	-0.146886523759948,	-0.152853783281886,	-0.143926135100898,	-0.13362622041783,	-0.134458303631902,	-0.112527363221117,	-0.127403311474209,	-0.114250711788152,	-9.53824678101732E-02,	-0.108458945399154,	-0.082806455625535,	-7.60966206661928E-02,	-6.47723787912023E-02,	-6.70169417814918E-02,	-0.048772175987887,	-4.99700506816743E-02,	-4.34653409752312E-02,	-2.91975725132272E-02,	-1.80932022889386E-02,	-8.34499626358296E-03,	-5.44762033030495E-03,	1.35019055780697E-03,	6.56528233791978E-03,	9.68090752193188E-03,	2.92632511434311E-02,	3.07820600568079E-02,	3.21324103614087E-02,	5.60346102364402E-02,	4.77370526449176E-02,	5.48841193766261E-02,	6.87376499398996E-02,	6.62444218371496E-02,	7.72754172409585E-02,	7.92726835163421E-02,	8.19212680131619E-02,	9.53149775163856E-02,	9.68082860744922E-02,	9.49664282385071E-02,	9.77795518741044E-02,	0.117653916264913,	0.119195727429157,	0.115323916428065,	0.122119404890852,	0.124691743767995,	0.130795558910938,	0.131336279854394,	0.139733482833416,	0.14146422646047,
 0.755977958030068,	1,	0.897859194192688,	0.754250412789863,	0.654363314484207,	0.568584771816748,	0.514037630530004,	0.471717652445483,	0.440317965424999,	0.41433152424844,	0.392197427899337,	0.376892759651739,	0.357538887553842,	0.341271506177132,	0.337040687264548,	0.325307014928591,	0.313506298091628,	0.300945046264738,	0.301312357526288,	0.295739233811822,	0.282777256942422,	0.274617676950209,	0.275282431756674,	0.262631528920056,	0.274186357729452,	0.233418354990457,	0.250091541777897,	0.258819816282469,	0.238272206726197,	0.236471062236338,	0.230206608210225,	0.2298973448008,	0.227749910529591,	0.223110623543883,	0.223017623832099,	0.226132775404367,	0.220380488732385,	0.218780889930535,	0.219941561282549,	0.224277418597115,	0.213381151975345,	0.208926359178529,	0.218958173781235,	0.222891801173648,	0.213831823016093,	0.204009778992903,	0.222779745037902,	0.213067254465184,	0.230237660562912,	0.197179794618843,	0.208138283466646,	0.230576873318223,	0.216157942813034,	0.210964998083335,	0.213353643521298,	0.218700164986733,	0.212742260771366,	0.208317110004757,	0.216791662710052,	0.214946385346135,	0.215376108975738,	0.210359981543688,	0.217023264791739,	0.217282089409125,	0.212111478643329,	0.207665539236937,	0.213555639563327,	0.218896198157626,	0.222588378107745,	0.205881775565476,	0.217873797841402,	0.220079649367814,	0.209502612464287,	0.216723808803662,	0.210333781619475,	0.209589485131214,	0.212709385357368,	0.206803711260425,	0.212210017325154,	0.212871058215631,	0.205462254436717,	0.211989045850576,	0.200639513731115,	0.207541120879551,	0.201238519575831,	0.210158950398848,	0.202418513192888,	0.19742379140891,	0.19271189884339,	0.184594179274686,	0.196424403645173,	0.193203252619722,	0.186963543727695,	0.179784644425543,	0.184725667540593,	0.174183039708357,	0.175372473775683,	0.172256510840017,	0.169940236245835,	0.1626695518918,	0.177194089105439,	0.162442655557325,	0.157155371631852,	0.164302161860279,	0.155619039974603,	0.147145875482461,	0.157237059514545,	0.150660371178288,	0.147671072736992,	0.146443902042566,	0.135585905546728,	0.137508848813604,	0.142074550204004,	0.145095558951054,	0.131868314053998,	0.130611050016193,	0.128631998018179,	0.13206076152642,	0.124129426402841,	0.130660161805865,	0.12563900455779,
@@ -233,9 +241,9 @@ namespace Orion.Analytics.Pedersen
 0.131336279854394,	0.124129426402841,	9.13116491348868E-02,	6.91122152034739E-02,	6.02702033030176E-02,	5.69461867017241E-02,	6.00786220019778E-02,	0.06629515687123,	7.46622125647428E-02,	8.49248378690419E-02,	9.62685394701002E-02,	0.108280035872852,	0.120850779563656,	0.134373770920791,	0.146938950901309,	0.158704719837473,	0.170422219864516,	0.181073599957325,	0.191602549424675,	0.195580015641424,	0.204005590635092,	0.208662525175301,	0.209586564007454,	0.211319036606374,	0.208611589822265,	0.208952228865783,	0.204063570766653,	0.200922428117555,	0.192182771954964,	0.188227030036306,	0.18045313216258,	0.17289669920132,	0.166012428209764,	0.160256514699431,	0.157419425015553,	0.151763684277912,	0.142852402083389,	0.139598052039554,	0.140770889166669,	0.137285991165406,	0.135431072562492,	0.138027745992673,	0.134997455918732,	0.138559726003795,	0.143448566462175,	0.144922591075717,	0.150014242671921,	0.156876927958818,	0.166784261903348,	0.164753911044347,	0.185267277590477,	0.193476421897048,	0.198395753848008,	0.217317492098767,	0.222522773228325,	0.24272545294684,	0.258432730371541,	0.267503957845518,	0.28573669792148,	0.301239426142469,	0.327782663708978,	0.343533992630341,	0.357879100392162,	0.383680062915762,	0.404060748974889,	0.424165308023557,	0.44654775414862,	0.472487287412348,	0.488636046823812,	0.516375456593147,	0.547542710261769,	0.554138412758806,	0.580207065006789,	0.612248760923776,	0.630203743332783,	0.651293528604215,	0.680190563508613,	0.696780693090824,	0.721565861032027,	0.725976524529566,	0.752716275652021,	0.777543991304716,	0.779632112254962,	0.80576926667477,	0.827417669494945,	0.832077125518092,	0.847470107224263,	0.866552732106386,	0.876812561437181,	0.887220978807167,	0.897034537396362,	0.907748699867338,	0.919437689315459,	0.927906970854881,	0.932024353441317,	0.943957942892644,	0.946581412079082,	0.957804393321936,	0.959724138049907,	0.964956463536562,	0.970282040023803,	0.973500211637219,	0.977714971007492,	0.980613225523652,	0.983672715364132,	0.988393493657541,	0.987996096856043,	0.989675318138138,	0.993347604411039,	0.993862820357669,	0.995772635725014,	0.996551229955237,	0.997641284957457,	0.998145859542027,	0.998904533054915,	0.999364273370822,	0.999675703092036,	0.999842235489373,	1,	0.99995131387181,	0.999902565545932,
 0.139733482833416,	0.130660161805865,	9.48624770781301E-02,	7.06134376373339E-02,	6.06410936578842E-02,	5.64721102723908E-02,	5.91450586247588E-02,	6.50607674525093E-02,	7.32669420143373E-02,	8.34428948721546E-02,	9.47663754221557E-02,	0.10684828723632,	0.119487929156268,	0.133152851885315,	0.145952987518082,	0.157937870837197,	0.169944493237167,	0.180898618596707,	0.191764683876742,	0.196130824606195,	0.204947096694608,	0.209999946704978,	0.211311305037238,	0.213459020770493,	0.211082635811008,	0.211969972535185,	0.207361794674713,	0.204401959518373,	0.196090814161113,	0.192403417708688,	0.184844724888983,	0.177487163504776,	0.170762421349657,	0.165124346146666,	0.162371188289349,	0.156735973314818,	0.147914513693952,	0.144683678148932,	0.145773555722907,	0.142281714706108,	0.140363040700246,	0.142936010352662,	0.139709736978136,	0.143189427755899,	0.147950835534932,	0.149303167559597,	0.154228406059772,	0.16093666131849,	0.170627862683353,	0.16856022747762,	0.188783328206131,	0.196801237576564,	0.201668976534467,	0.220362359953191,	0.225418923797692,	0.245480193054048,	0.260963556215751,	0.270021926320842,	0.287948489448383,	0.303363687588422,	0.329755906090297,	0.345383427146978,	0.359660241614592,	0.385257749562108,	0.405514092476794,	0.425461135287749,	0.447837248257368,	0.473670078521336,	0.489769303455816,	0.517269476374377,	0.548399094274078,	0.55490677177842,	0.58087427661916,	0.6128956459286,	0.630711421402581,	0.651795962675966,	0.680606676801105,	0.697115763095729,	0.721981719291873,	0.726197429329565,	0.75295180591942,	0.777771780357845,	0.779722557648991,	0.805952414200807,	0.82754853455547,	0.832228359668338,	0.847488239770274,	0.866663272082562,	0.876805637532431,	0.887170467679825,	0.897073588096525,	0.907774263609622,	0.919447594940981,	0.927895552545301,	0.932036345433472,	0.943857357253953,	0.946470144013304,	0.957798436837341,	0.959656934045308,	0.964898540641328,	0.97031503641058,	0.973437592844351,	0.977689809246499,	0.980593957298022,	0.983621075981201,	0.988322492778164,	0.987958874764757,	0.989615790306257,	0.993347800540211,	0.993864619219978,	0.995701734379624,	0.996445083261864,	0.997695167664012,	0.998142452776243,	0.998858409182721,	0.999378421535353,	0.999634340200803,	0.999829573267349,	0.99995131387181,	1,	0.999931625322798,
 0.14146422646047,	0.12563900455779,	8.65979879109663E-02,	6.11810948989834E-02,	5.07943983472256E-02,	4.64085069245328E-02,	4.89683074131641E-02,	5.47990503114812E-02,	6.29235729439169E-02,	7.30270801104227E-02,	8.42806725762045E-02,	9.62910252896972E-02,	0.108870509545777,	0.122489814507856,	0.135236101105969,	0.14720079419166,	0.159193079269804,	0.170172383958183,	0.181047495593439,	0.185450999197422,	0.194365761832717,	0.199533686441173,	0.200907067705426,	0.203232740722066,	0.200870805023775,	0.202249157540016,	0.197614506455499,	0.19462245802797,	0.186678770768728,	0.183136973447178,	0.175727538830626,	0.168472134962841,	0.161848500219937,	0.156323160878986,	0.153621843891706,	0.14794766098537,	0.139256238243209,	0.136073090629735,	0.137086342576391,	0.13357626619952,	0.131747312639586,	0.134433727551194,	0.130926385410736,	0.134368652476976,	0.139217059467834,	0.140641503134453,	0.145292879091719,	0.152065191426384,	0.161480389966302,	0.159903989774816,	0.179870777075511,	0.187530035028242,	0.192671497582166,	0.211361630322231,	0.216389773012173,	0.236404069142844,	0.251929103223708,	0.261168183256195,	0.27882770565658,	0.294359922784941,	0.32083328338616,	0.336562227348648,	0.350749385737083,	0.376403122940367,	0.396782780214926,	0.416895574539647,	0.439231474667377,	0.465141584045833,	0.48135818394404,	0.509025624127795,	0.540291982321014,	0.546666985847559,	0.573003944351598,	0.605218555388117,	0.623114970961447,	0.644387155502963,	0.673450653068003,	0.690085594564168,	0.715246860397537,	0.719305230903048,	0.746405818760107,	0.771540498122921,	0.773508755668037,	0.800068686865185,	0.821914886953613,	0.82671108043096,	0.84214465475866,	0.861657685202544,	0.871954716953535,	0.882637663585472,	0.892532626554721,	0.903546020627832,	0.915532048436398,	0.924141338914041,	0.928317674338668,	0.940526299618888,	0.943197258434813,	0.954855096863631,	0.95687052640741,	0.962192349948263,	0.967841296973429,	0.971077749957075,	0.975502986440792,	0.978631361547057,	0.981729230189447,	0.986832775175934,	0.986308364493195,	0.98815449066028,	0.992139815162159,	0.992703591433056,	0.994723945572686,	0.995541471489746,	0.996994527634313,	0.997498439461559,	0.998354200175748,	0.998958564375024,	0.999380406195986,	0.999624291231993,	0.999902565545932,	0.999931625322798,	1
-           }, MatrixTriangleMode.Upper, true);
+           });
 
-            RawSwpnIvol = new[,]
+            RawSwaptionImpliedVolatility = new[,]
 				{
                     {0.1290,0.1540,0.1550,0.1545,0.1535,0.1495,0.1465,0.1430,0.1400,0.1385,0.1340,0.1320,0.1305,0.1275},
                     {0.1465,0.1630,0.1630,0.1615,0.1595,0.1560,0.1530,0.1495,0.1460,0.1440,0.1390,0.1360,0.1340,0.1330},
@@ -251,7 +259,8 @@ namespace Orion.Analytics.Pedersen
                     {0.1290,0.1270,0.1245,0.1215,0.1200,0.1195,0.1180,0.1175,0.1160,0.1150,0.1080,0.1025,0.1005,0.0985},
                     {0.1195,0.1185,0.1165,0.1135,0.1135,0.1125,0.1110,0.1095,0.1085,0.1070,0.1005,0.0960,0.0935,0.0920}
 				};
-            RawCpltIvol = new[]
+
+            RawCapletImpliedVolatility = new[]
             {
                 0.11906,0.11967,0.12298,0.12287,0.14967,0.17235,0.19190,0.19664,0.19211,0.18947,
                 0.18688,0.19040,0.19305,0.18922,0.18837,0.18918,0.18956,0.18647,0.18588,0.18702,
@@ -267,144 +276,138 @@ namespace Orion.Analytics.Pedersen
         #region Initialisations
         public void Initialise()
         {
-            Discount = new double[Param.Uexpiry + 1][];
+            Discount = new double[Param.UExpiry + 1][];
             Discount[0] = CurDiscount;
-            for (int i = 0; i < Param.Uexpiry; i++)
+            for (int i = 0; i < Param.UExpiry; i++)
             {
-                Discount[i + 1] = new double[Param.Utenor + 1];
+                Discount[i + 1] = new double[Param.UTenor + 1];
             }
-            Correlation = SymmetricMatrix.Extract(CorData, Param.Ntenor, 0, 0, MatrixTriangleMode.Upper);
-            //Replaces the above!
-            //
-            //Correlation = new SymmetricMatrix(Param.Ntenor);
-            //for (int i = 0; i < Param.Ntenor; i++)
-            //{
-            //    for (int j = 0; j <= i; j++)
-            //    {
-            //        Correlation[i, j] = CorData[Param.Tenor[i + 1] - 1, Param.Tenor[j + 1] - 1];
-            //    }
-            //}
-            Xi = new GeneralMatrix[Param.Uexpiry];
-            for (int i = 0; i < Param.Uexpiry; i++)
+            Correlation = new DenseMatrix(Param.NTenor, Param.NTenor);
+            for (int i = 0; i < Param.NTenor; i++)
             {
-                Xi[i] = new GeneralMatrix(Param.Utenor, Param.NFAC);
+                for (int j = 0; j <= i; j++)
+                {
+                    Correlation[i, j] = CorrelationData[Param.Tenor[i + 1] - 1, Param.Tenor[j + 1] - 1];
+                }
             }
-            Shift = new double[Param.Utenor + 1];
+            Xi = new Matrix[Param.UExpiry];
+            for (int i = 0; i < Param.UExpiry; i++)
+            {
+                Xi[i] = new Matrix(Param.UTenor, Param.NFAC);
+            }
+            Shift = new double[Param.UTenor + 1];
             SetShift(ConstShift);
-            SwapShift = new double[Param.Uexpiry + 1][];
-            for (int i = 0; i <= Param.Uexpiry; i++)
+            SwapShift = new double[Param.UExpiry + 1][];
+            for (int i = 0; i <= Param.UExpiry; i++)
             {
-                SwapShift[i] = new double[Param.Utenor - i + 2];
+                SwapShift[i] = new double[Param.UTenor - i + 2];
             }
 
-            Ai = new double[Param.Uexpiry][][];
-            for (int i = 0; i < Param.Uexpiry; i++)
+            Ai = new double[Param.UExpiry][][];
+            for (int i = 0; i < Param.UExpiry; i++)
             {
-                Ai[i] = new double[Param.Utenor - i][];
-                for (int j = 0; j < Param.Utenor - i; j++)
+                Ai[i] = new double[Param.UTenor - i][];
+                for (int j = 0; j < Param.UTenor - i; j++)
                 {
                     Ai[i][j] = new double[j + 1];
                 }
             }
-            double tempivol;
+            double tempImpliedVolatility;
             SetAi();
-            _swpnIvol = new double[Param.Utenor, Param.Utenor];
-            Param.MinIvol = 99999;
-            Param.MaxIvol = 0;
-            Param.AvgSwpnIvol = 0;
+            _swaptionImpliedVolatility = new double[Param.UTenor, Param.UTenor];
+            Param.MinImpliedVolatility = 99999;
+            Param.MaxImpliedVolatility = 0;
+            Param.AverageSwaptionImpliedVolatility = 0;
             Param.Nswpn = 0;
             if (Param.SwpnOn)
             {
                 for (int i = 0; i < Param.SwpnExp.Length; i++)
                 {
-                    if (Param.SwpnExp[i] > Param.Uexpiry - 1)
+                    if (Param.SwpnExp[i] > Param.UExpiry - 1)
                     {
                         break;
                     }
                     for (int j = 0; j < Param.SwpnTen.Length; j++)
                     {
-                        if (Param.SwpnExp[i] + Param.SwpnTen[j] > Param.Utenor - 1)
+                        if (Param.SwpnExp[i] + Param.SwpnTen[j] > Param.UTenor - 1)
                         {
                             break;
                         }
-                        if (RawSwpnIvol[i, j] > 0)
+                        if (RawSwaptionImpliedVolatility[i, j] > 0)
                         {
-                            tempivol = SetSwpnIvol(Param.SwpnExp[i], Param.SwpnTen[j], RawSwpnIvol[i, j]);
-                            if (tempivol > Param.MaxIvol)
+                            tempImpliedVolatility = SetSwaptionImpliedVolatility(Param.SwpnExp[i], Param.SwpnTen[j], RawSwaptionImpliedVolatility[i, j]);
+                            if (tempImpliedVolatility > Param.MaxImpliedVolatility)
                             {
-                                Param.MaxIvol = tempivol;
+                                Param.MaxImpliedVolatility = tempImpliedVolatility;
                             }
-                            if (tempivol < Param.MinIvol)
+                            if (tempImpliedVolatility < Param.MinImpliedVolatility)
                             {
-                                Param.MinIvol = tempivol;
+                                Param.MinImpliedVolatility = tempImpliedVolatility;
                             }
-                            Param.AvgSwpnIvol += tempivol;
+                            Param.AverageSwaptionImpliedVolatility += tempImpliedVolatility;
                             Param.Nswpn++;
-                            _swpnIvol[Param.SwpnExp[i], Param.SwpnTen[j]] = tempivol;
+                            _swaptionImpliedVolatility[Param.SwpnExp[i], Param.SwpnTen[j]] = tempImpliedVolatility;
                         }
                     }
                 }
                 if (Param.Nswpn > 0)
                 {
-                    Param.AvgSwpnIvol = Param.AvgSwpnIvol / Param.Nswpn;
+                    Param.AverageSwaptionImpliedVolatility = Param.AverageSwaptionImpliedVolatility / Param.Nswpn;
                 }
             }
             Param.Ncplt = 0;
-            Param.AvgCpltIvol = 0;
+            Param.AverageCapletImpliedVolatility = 0;
             Param.Tcplt = 0;
             if (Param.CpltOn)
             {
-                Param.Tcplt = Math.Min(RawCpltIvol.Length, Param.Uexpiry);
-                _cpltIvol = new double[Param.Tcplt];
+                Param.Tcplt = Math.Min(RawCapletImpliedVolatility.Length, Param.UExpiry);
+                _capletImpliedVolatility = new double[Param.Tcplt];
                 for (int i = 0; i < Param.Tcplt; i++)
                 {
-                    if (RawCpltIvol[i] > 0)
+                    if (RawCapletImpliedVolatility[i] > 0)
                     {
-                        tempivol = SetCpltIvol(i, RawCpltIvol[i]);
-                        Param.AvgCpltIvol += tempivol;
-                        _cpltIvol[i] = tempivol;
+                        tempImpliedVolatility = SetCapImpliedVolatility(i, RawCapletImpliedVolatility[i]);
+                        Param.AverageCapletImpliedVolatility += tempImpliedVolatility;
+                        _capletImpliedVolatility[i] = tempImpliedVolatility;
                         Param.Ncplt++;
                     }
                 }
                 if (Param.Ncplt > 0)
                 {
-                    Param.AvgCpltIvol = Param.AvgCpltIvol / Param.Ncplt;
+                    Param.AverageCapletImpliedVolatility = Param.AverageCapletImpliedVolatility / Param.Ncplt;
                 }
             }
         }
 
         private void SetAi()
         {
-            var cash = new double[Param.Utenor];
-            var shiftedCash = new double[Param.Utenor];
-            var forward = new double[Param.Utenor];
-            var accForward = new double[Param.Utenor + 1];
-            var accForwardK = new double[Param.Utenor + 1];
-            var accForwardH = new double[Param.Utenor + 1];
-            var w = new double[Param.Utenor];
-            var h = new double[Param.Utenor];
-
+            var cash = new double[Param.UTenor];
+            var shiftedCash = new double[Param.UTenor];
+            var forward = new double[Param.UTenor];
+            var accForward = new double[Param.UTenor + 1];
+            var accForwardK = new double[Param.UTenor + 1];
+            var accForwardH = new double[Param.UTenor + 1];
+            var w = new double[Param.UTenor];
+            var h = new double[Param.UTenor];
             accForward[0] = 0;
             accForwardK[0] = 0;
             accForwardH[0] = 0;
-
-            for (int i = 0; i < Param.Utenor; i++)
+            for (int i = 0; i < Param.UTenor; i++)
             {
                 cash[i] = CashRate(0, i + 1);
                 //Cash[i] = SwapRate(0, i + 1, 1);
                 shiftedCash[i] = cash[i] + Shift[i + 1];
             }
 
-            for (int i = 0; i < Param.Uexpiry; i++)
+            for (int i = 0; i < Param.UExpiry; i++)
             {
-                for (int j = 0; j < Param.Utenor - i; j++)
+                for (int j = 0; j < Param.UTenor - i; j++)
                 {
                     forward[j] = Discount[0][i + j + 2] / Discount[0][j + 1];
                     accForward[j + 1] = accForward[j] + forward[j];
                     accForwardK[j + 1] = accForwardK[j] + forward[j] * cash[i + j];
                     accForwardH[j + 1] = accForwardH[j] + forward[j] * shiftedCash[i + j];
                     h[j] = 0.25 * shiftedCash[i + j] / (1 + 0.25 * cash[i + j]);
-
                     for (int k = 0; k < j + 1; k++)
                     {
                         w[k] = forward[k] * shiftedCash[i + k] / accForwardH[j + 1];
@@ -417,78 +420,76 @@ namespace Orion.Analytics.Pedersen
                         SwapShift[i + 1][j + 1] += forward[k] * Shift[i + k + 1];
                     }
                     SwapShift[i + 1][j + 1] = SwapShift[i + 1][j + 1] / accForward[j + 1];
-
                 }
             }
         }
 
         private void SetShift(double sh)
         {
-            for (int i = 0; i <= Param.Utenor; i++)
+            for (int i = 0; i <= Param.UTenor; i++)
             {
                 Shift[i] = sh;
             }
         }
 
-        private double SetCpltIvol(int exp, double vol)
+        private double SetCapImpliedVolatility(int exp, double vol)
         {
             double strike = CashRate(0, exp + 1);
-            double cpltPrice = BlackScholes.Black((exp + 1.0) / 4, strike, strike, vol, PayStyle.Call);
-            double result = BlackScholes.ImpVol((exp + 1.0) / 4, strike + Shift[exp + 1], strike + Shift[exp + 1], cpltPrice, vol, PayStyle.Call);
+            double price = BlackModel.GetValue((exp + 1.0) / 4, strike, strike, vol, PayStyle.Call);
+            double result = BlackModel.GetImpliedVolatility((exp + 1.0) / 4, strike + Shift[exp + 1], strike + Shift[exp + 1], price, vol, PayStyle.Call);
             return result;
         }
 
-        private double SetSwpnIvol(int exp, int ten, double vol)
+        private double SetSwaptionImpliedVolatility(int exp, int ten, double vol)
         {
             double strike = SwapRate(0, exp + 1, ten + 1);
-            double swpnPrice = BlackScholes.Black((exp + 1.0) / 4, strike, strike, vol, PayStyle.Call);
-            double result = BlackScholes.ImpVol((exp + 1.0) / 4, strike + SwapShift[exp + 1][ten + 1],
+            double swpnPrice = BlackModel.GetValue((exp + 1.0) / 4, strike, strike, vol, PayStyle.Call);
+            double result = BlackModel.GetImpliedVolatility((exp + 1.0) / 4, strike + SwapShift[exp + 1][ten + 1],
                 strike + SwapShift[exp + 1][ten + 1], swpnPrice, vol, PayStyle.Call);
             return result;
         }
         #endregion
 
-        public double FindIvol(int exp, int ten)
+        public double FindImpliedVolatility(int exp, int ten)
         {
-            Previous.IvolSq[exp][ten] = 0;
+            Previous.ImpliedVolatilitySquare[exp][ten] = 0;
             for (int i = 0; i <= exp; i++)
             {
-                var tempvec = new GeneralVector(Param.NFAC);
+                var tempVector = new DenseVector(Param.NFAC);
                 for (int j = exp - i; j <= exp - i + ten; j++)
                 {
-                    tempvec = (GeneralVector)tempvec.Add(Vector.Multiply(Ai[exp][ten][j - exp + i], Xi[i][j, Range.All]));
+                    tempVector = tempVector + (Ai[exp][ten][j - exp + i] * Xi[i].RowD(j));
                 }
-                double tempsum = Vector.DotProduct(tempvec, tempvec);
-                Previous.IvolSq[exp][ten] += tempsum;
-                Previous.IvolSqLarge[exp][ten][i] = tempsum;
+                double tempSum = tempVector * tempVector;
+                Previous.ImpliedVolatilitySquare[exp][ten] += tempSum;
+                Previous.ImpliedVolatilitySquareLarge[exp][ten][i] = tempSum;
             }
-            Previous.Ivol[exp][ten] = Math.Sqrt(Previous.IvolSq[exp][ten] / (exp + 1));
-            double result = Previous.Ivol[exp][ten];
-
+            Previous.ImpliedVolatility[exp][ten] = Math.Sqrt(Previous.ImpliedVolatilitySquare[exp][ten] / (exp + 1));
+            double result = Previous.ImpliedVolatility[exp][ten];
             return result;
         }
         
-        public double FindIvol(int exp, int ten, GeneralMatrix gm, int change)
+        public double FindImpliedVolatility(int exp, int ten, DenseMatrix gm, int change)
         {
             double result;
             if (exp >= Param.Expiry[change])
             {
-                result = Previous.IvolSq[exp][ten];
+                result = Previous.ImpliedVolatilitySquare[exp][ten];
                 for (int i = Param.Expiry[change]; i < Math.Min(Param.Expiry[change + 1], exp + 1); i++)
                 {
-                    var tempvec = new GeneralVector(Param.NFAC);
+                    var tempVector = new DenseVector(Param.NFAC);
                     for (int j = exp - i; j <= exp - i + ten; j++)
                     {
-                        tempvec = (GeneralVector)tempvec.Add(Vector.Multiply(Ai[exp][ten][j - exp + i], gm[j, Range.All]));
+                        tempVector = tempVector + (DenseVector)(Ai[exp][ten][j - exp + i] * gm.Row(j));
                     }
-                    double tempsum = Vector.DotProduct(tempvec, tempvec);
-                    result += tempsum - Previous.IvolSqLarge[exp][ten][i];
+                    double tempSum = tempVector * tempVector;
+                    result += tempSum - Previous.ImpliedVolatilitySquareLarge[exp][ten][i];
                 }
                 result = Math.Sqrt(result / (exp + 1));
             }
             else
             {
-                result = Previous.Ivol[exp][ten];
+                result = Previous.ImpliedVolatility[exp][ten];
             }
             return result;
         }
@@ -501,58 +502,59 @@ namespace Orion.Analytics.Pedersen
             {
                 foreach (int t1 in Param.SwpnExp)
                 {
-                    if (t1 > Param.Uexpiry - 1)
+                    if (t1 > Param.UExpiry - 1)
                     {
                         break;
                     }
                     foreach (int t in Param.SwpnTen)
                     {
-                        if (t1 + t > Param.Utenor - 1)
+                        if (t1 + t > Param.UTenor - 1)
                         {
                             break;
                         }
-                        if (_swpnIvol[t1, t] > 0)
+                        if (_swaptionImpliedVolatility[t1, t] > 0)
                         {
-                            temp = FindIvol(t1, t);
-                            sum += Math.Abs(temp - _swpnIvol[t1, t]);
+                            temp = FindImpliedVolatility(t1, t);
+                            sum += Math.Abs(temp - _swaptionImpliedVolatility[t1, t]);
                         }
                     }
                 }
                 temp = sum / Param.Nswpn;
-                Orion.Pedersen.Write($"  Average SWPN Abs Error: {temp}\n", "cal");
+                Pedersen.Write($"  Average Swaption (SWPN) Abs Error: {temp}\n", "cal");
             }
             else
             {
-                Orion.Pedersen.Write("  Average SWPN Abs Error: N/A\n", "cal");
+                Pedersen.Write("  Average Swaption (SWPN) Abs Error: N/A\n", "cal");
             }
             sum = 0;
             if (Param.Ncplt > 0)
             {
                 for (int i = 0; i < Param.Tcplt; i++)
                 {
-                    if (_cpltIvol[i] > 0)
+                    if (_capletImpliedVolatility[i] > 0)
                     {
-                        temp = FindIvol(i, 0);
-                        sum += Math.Abs(temp - _cpltIvol[i]);
+                        temp = FindImpliedVolatility(i, 0);
+                        sum += Math.Abs(temp - _capletImpliedVolatility[i]);
                     }
                 }
                 temp = sum / Param.Ncplt;
-                Orion.Pedersen.Write($"  Average CPLT Abs Error: {temp}\n", "cal");
+                Pedersen.Write($"  Average Caplet (CPLT) Abs Error: {temp}\n", "cal");
             }
             else
             {
-                Orion.Pedersen.Write("  Average CPLT Abs Error: N/A\n", "cal");
+                Pedersen.Write("  Average Caplet (CPLT) Abs Error: N/A\n", "cal");
             }
         }
 
         public void OutputStatus()
         {
-            Write($"Expiry: {Param.OutputExpiry()}\n", "cal");
-            Write($"Tenor: {Param.OutputTenor()}\n", "cal");
-            Write($"Discounts: {DiscountStatus}, Cplt Ivols: {CpltIvolStatus}, Swpn Ivols: {SwpnIvolStatus}\n", "cal");
+            Pedersen.Write($"Expiry: {Param.OutputExpiry()}\n", "cal");
+            Pedersen.Write($"Tenor: {Param.OutputTenor()}\n", "cal");
+            Pedersen.Write($"Discounts: {DiscountStatus}, Caplet Implied Volatilities: {CapletImpliedVolatilityStatus}, Swaption Implied Volatilities: {SwaptionImpliedVolatilityStatus}\n", "cal");
         }
 
-        #region rates
+        #region Rates
+
         public double SwapRate(int t, int exp, int ten)
         {
             double result = 0;
@@ -564,37 +566,44 @@ namespace Orion.Analytics.Pedersen
 
             return result;
         }
+
         public double ShiftedSwapRate(int t, int exp, int ten)
         {
             double result = SwapRate(t, exp, ten) + SwapShift[exp][ten];
             return result;
         }
+
         public double CashRate(int t, int T)
         {
             double result = 4 * (Discount[t][T] / Discount[t][T + 1] - 1);
             return result;
         }
+
         public double ShiftedCashRate(int t, int T)
         {
             double result = CashRate(t, T) + Shift[T];
             return result;
         }
+
         #endregion
 
-        #region sim payoffs and prices
-        public double CpltPayoff(int exp, double strike)
+        #region Simulation Payoffs and Prices
+
+        public double CapletPayoff(int exp, double strike)
         {
             double result = 0.25 * Math.Max(CashRate(exp, exp) - strike, 0);
             result = result * Discount[exp + 1][exp + 1];
             return result;
         }
-        public double CpltBS(int exp, double strike)
+
+        public double CapletBlackScholes(int exp, double strike)
         {
-            double result = 0.25 * Discount[0][exp + 1] * BlackScholes.Black(exp / 4.0,
-                ShiftedCashRate(0, exp), strike + Shift[exp], _cpltIvol[exp - 1], PayStyle.Call);
+            double result = 0.25 * Discount[0][exp + 1] * BlackModel.GetValue(exp / 4.0,
+                ShiftedCashRate(0, exp), strike + Shift[exp], _capletImpliedVolatility[exp - 1], PayStyle.Call);
             return result;
         }
-        public double SwpnPayoff(int exp, int ten, double strike)
+
+        public double SwaptionPayoff(int exp, int ten, double strike)
         {
             double result = 0;
             for (int i = exp + 1; i <= exp + ten; i++)
@@ -610,22 +619,23 @@ namespace Orion.Analytics.Pedersen
             //result = result * YieldCurve[exp][exp];
             return result;
         }
-        public double SwpnBS(int exp, int ten, double strike)
+        public double SwaptionBlackScholes(int exp, int ten, double strike)
         {
             double result = 0;
             for (int i = exp + 1; i <= exp + ten; i++)
             {
                 result += 0.25 * Discount[0][i];
             }
-            result = result * BlackScholes.Black(exp / 4.0,
-                ShiftedSwapRate(0, exp, ten), strike + SwapShift[exp][ten], _swpnIvol[exp - 1, ten - 1], PayStyle.Call);
+            result = result * BlackModel.GetValue(exp / 4.0,
+                ShiftedSwapRate(0, exp, ten), strike + SwapShift[exp][ten], _swaptionImpliedVolatility[exp - 1, ten - 1], PayStyle.Call);
             return result;
         }
+
         #endregion
 
         public double XiNorm(int exp, int ten)
         {
-            double result = Vector.DotProduct(Xi[exp][ten, Range.All], Xi[exp][ten, Range.All]);
+            double result = Xi[exp].RowD(ten) * Xi[exp].RowD(ten);
             result = Math.Sqrt(result);
             return result;
         }

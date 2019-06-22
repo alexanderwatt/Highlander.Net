@@ -226,25 +226,25 @@ namespace Orion.Analytics.Stochastics.SABR
         #region Public Accessor and Setter Methods
 
         /// <summary>
-        /// Public accessor and settor methods for the SABR parameter alpha.
+        /// Public accessor methods for the SABR parameter alpha.
         /// </summary>
         /// <value>Gets or sets the SABR parameter alpha.</value>
         public decimal Alpha { get; set; }
 
         /// <summary>
-        /// Public accessor and settor methods for the SABR parameter beta.
+        /// Public accessor methods for the SABR parameter beta.
         /// </summary>
         /// <value>Gets or sets the SABR parameter alpha.</value>
         public decimal Beta { get; set; }
 
         /// <summary>
-        /// Public accessor and settor methods for the SABR parameter nu.
+        /// Public accessor methods for the SABR parameter nu.
         /// </summary>
         /// <value>Gets or sets the SABR parameter nu.</value>
         public decimal Nu { get; set; }
 
         /// <summary>
-        /// Public accessor and settor methods for the SABR parameter rho.
+        /// Public accessor methods for the SABR parameter rho.
         /// </summary>
         /// <value>Gets or sets the SABR parameter rho.</value>
         public decimal Rho { get; set; }

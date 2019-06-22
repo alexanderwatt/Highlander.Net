@@ -51,18 +51,18 @@ namespace Orion.Analytics.Solvers
                 }
             }
             int n2 = n - n1;
-            var lnstrike1 = new double[n1];
-            var lnstrike2 = new double[n2];
+            var lnStrike1 = new double[n1];
+            var lnStrike2 = new double[n2];
             for (int idx = 0; idx < n1; idx++)
             {
-                lnstrike1[idx] = Math.Log(strikes[idx] / forward);
+                lnStrike1[idx] = Math.Log(strikes[idx] / forward);
             }
             for (int idx = 0; idx < n2; idx++)
             {
-                lnstrike2[idx] = Math.Log(strikes[n1 + idx] / forward);
+                lnStrike2[idx] = Math.Log(strikes[n1 + idx] / forward);
             }
-            Matrix xz = CreateXz(lnstrike1, lnstrike2);
-            Matrix xzTr = CreateXzdash(lnstrike1, lnstrike2);
+            Matrix xz = CreateXz(lnStrike1, lnStrike2);
+            Matrix xzTr = CreateXzdash(lnStrike1, lnStrike2);
             Matrix a = xzTr * xz;
             //int aCols = a.ColumnCount;
             //int aRows = a.RowCount;

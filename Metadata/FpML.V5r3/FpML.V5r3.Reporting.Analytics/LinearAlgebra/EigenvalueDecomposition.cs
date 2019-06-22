@@ -37,10 +37,10 @@ namespace Orion.Analytics.LinearAlgebra
         #region	 Class variables
 		
         /// <summary>Row and column dimension (square matrix).</summary>
-        private readonly int n;
+        private readonly int _n;
 		
         /// <summary>Symmetry flag.</summary>
-        private readonly bool issymmetric;
+        private readonly bool _isSymmetric;
 		
         /// <summary>Arrays for internal storage of eigenvalues.</summary>
         private readonly double[] d;
@@ -68,15 +68,12 @@ namespace Orion.Analytics.LinearAlgebra
             //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
             //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
             //  Fortran subroutine in EISPACK.
-			
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < _n; j++)
             {
-                d[j] = V[n - 1, j];
+                d[j] = V[_n - 1, j];
             }
-			
             // Householder reduction to tridiagonal form.
-			
-            for (int i = n - 1; i > 0; i--)
+            for (int i = _n - 1; i > 0; i--)
             {
                 // Scale to avoid under/overflow.
 				
@@ -99,7 +96,6 @@ namespace Orion.Analytics.LinearAlgebra
                 else
                 {
                     // Generate Householder vector.
-					
                     for (int k = 0; k < i; k++)
                     {
                         d[k] /= scale;
@@ -118,9 +114,7 @@ namespace Orion.Analytics.LinearAlgebra
                     {
                         e[j] = 0.0;
                     }
-					
                     // Apply similarity transformation to remaining columns.
-					
                     for (int j = 0; j < i; j++)
                     {
                         f = d[j];
@@ -158,12 +152,10 @@ namespace Orion.Analytics.LinearAlgebra
                 }
                 d[i] = h;
             }
-			
             // Accumulate transformations.
-			
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 0; i < _n - 1; i++)
             {
-                V[n - 1, i] = V[i, i];
+                V[_n - 1, i] = V[i, i];
                 V[i, i] = 1.0;
                 double h = d[i + 1];
                 if (h != 0.0)
@@ -190,12 +182,12 @@ namespace Orion.Analytics.LinearAlgebra
                     V[k, i + 1] = 0.0;
                 }
             }
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < _n; j++)
             {
-                d[j] = V[n - 1, j];
-                V[n - 1, j] = 0.0;
+                d[j] = V[_n - 1, j];
+                V[_n - 1, j] = 0.0;
             }
-            V[n - 1, n - 1] = 1.0;
+            V[_n - 1, _n - 1] = 1.0;
             e[0] = 0.0;
         }
 		
@@ -206,23 +198,20 @@ namespace Orion.Analytics.LinearAlgebra
             //  Bowdler, Martin, Reinsch, and Wilkinson, Handbook for
             //  Auto. Comp., Vol.ii-Linear Algebra, and the corresponding
             //  Fortran subroutine in EISPACK.
-			
-            for (int i = 1; i < n; i++)
+            for (int i = 1; i < _n; i++)
             {
                 e[i - 1] = e[i];
             }
-            e[n - 1] = 0.0;
-			
+            e[_n - 1] = 0.0;
             double f = 0.0;
             double tst1 = 0.0;
             double eps = Math.Pow(2.0, - 52.0);
-            for (int l = 0; l < n; l++)
+            for (int l = 0; l < _n; l++)
             {
                 // Find small subdiagonal element
-				
                 tst1 = Math.Max(tst1, Math.Abs(d[l]) + Math.Abs(e[l]));
                 int m = l;
-                while (m < n)
+                while (m < _n)
                 {
                     if (Math.Abs(e[m]) <= eps * tst1)
                     {
@@ -230,19 +219,15 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                     m++;
                 }
-				
                 // If m == l, d[l] is an eigenvalue,
                 // otherwise, iterate.
-				
                 if (m > l)
                 {
                     int iter = 0;
                     do 
                     {
                         iter = iter + 1; // (Could check iteration count here.)
-						
                         // Compute implicit shift
-						
                         double g = d[l];
                         double p = (d[l + 1] - g) / (2.0 * e[l]);
                         double r = Analytics.Maths.Fn.Hypot(p, 1.0);
@@ -254,14 +239,12 @@ namespace Orion.Analytics.LinearAlgebra
                         d[l + 1] = e[l] * (p + r);
                         double dl1 = d[l + 1];
                         double h = g - d[l];
-                        for (int i = l + 2; i < n; i++)
+                        for (int i = l + 2; i < _n; i++)
                         {
                             d[i] -= h;
                         }
                         f = f + h;
-						
                         // Implicit QL transformation.
-						
                         p = d[m];
                         double c = 1.0;
                         double c2 = c;
@@ -282,10 +265,8 @@ namespace Orion.Analytics.LinearAlgebra
                             c = p / r;
                             p = c * d[i] - s * g;
                             d[i + 1] = h + s * (c * g + s * d[i]);
-							
                             // Accumulate transformation.
-							
-                            for (int k = 0; k < n; k++)
+                            for (int k = 0; k < _n; k++)
                             {
                                 h = V[k, i + 1];
                                 V[k, i + 1] = s * V[k, i] + c * h;
@@ -295,7 +276,6 @@ namespace Orion.Analytics.LinearAlgebra
                         p = (- s) * s2 * c3 * el1 * e[l] / dl1;
                         e[l] = s * p;
                         d[l] = c * p;
-						
                         // Check for convergence.
                     }
                     while (Math.Abs(e[l]) > eps * tst1);
@@ -303,14 +283,12 @@ namespace Orion.Analytics.LinearAlgebra
                 d[l] = d[l] + f;
                 e[l] = 0.0;
             }
-			
             // Sort eigenvalues and corresponding vectors.
-			
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 0; i < _n - 1; i++)
             {
                 int k = i;
                 double p = d[i];
-                for (int j = i + 1; j < n; j++)
+                for (int j = i + 1; j < _n; j++)
                 {
                     if (d[j] < p)
                     {
@@ -322,7 +300,7 @@ namespace Orion.Analytics.LinearAlgebra
                 {
                     d[k] = d[i];
                     d[i] = p;
-                    for (int j = 0; j < n; j++)
+                    for (int j = 0; j < _n; j++)
                     {
                         p = V[j, i];
                         V[j, i] = V[j, k];
@@ -340,15 +318,11 @@ namespace Orion.Analytics.LinearAlgebra
             //  by Martin and Wilkinson, Handbook for Auto. Comp.,
             //  Vol.ii-Linear Algebra, and the corresponding
             //  Fortran subroutines in EISPACK.
-			
             int low = 0;
-            int high = n - 1;
-			
+            int high = _n - 1;
             for (int m = low + 1; m <= high - 1; m++)
             {
-				
                 // Scale column.
-				
                 double scale = 0.0;
                 for (int i = m; i <= high; i++)
                 {
@@ -356,9 +330,7 @@ namespace Orion.Analytics.LinearAlgebra
                 }
                 if (scale != 0.0)
                 {
-					
                     // Compute Householder transformation.
-					
                     double h = 0.0;
                     for (int i = high; i >= m; i--)
                     {
@@ -372,11 +344,9 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                     h = h - ort[m] * g;
                     ort[m] = ort[m] - g;
-					
                     // Apply Householder similarity transformation
                     // H = (I-u*u'/h)*H*(I-u*u')/h)
-					
-                    for (int j = m; j < n; j++)
+                    for (int j = m; j < _n; j++)
                     {
                         double f = 0.0;
                         for (int i = high; i >= m; i--)
@@ -389,7 +359,6 @@ namespace Orion.Analytics.LinearAlgebra
                             H[i, j] -= f * ort[i];
                         }
                     }
-					
                     for (int i = 0; i <= high; i++)
                     {
                         double f = 0.0;
@@ -407,17 +376,14 @@ namespace Orion.Analytics.LinearAlgebra
                     H[m, m - 1] = scale * g;
                 }
             }
-			
             // Accumulate transformations (Algol's ortran).
-			
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < _n; j++)
                 {
                     V[i, j] = (i == j?1.0:0.0);
                 }
             }
-			
             for (int m = high - 1; m >= low + 1; m--)
             {
                 if (H[m, m - 1] != 0.0)
@@ -443,8 +409,7 @@ namespace Orion.Analytics.LinearAlgebra
                 }
             }
         }
-		
-		
+
         [NonSerialized]
         private double cdivr, cdivi;
 
@@ -467,8 +432,7 @@ namespace Orion.Analytics.LinearAlgebra
                 cdivi = (r * xi - xr) / d;
             }
         }
-		
-		
+
         // Nonsymmetric reduction from Hessenberg to real Schur form.
         private void  hqr2()
         {
@@ -478,8 +442,7 @@ namespace Orion.Analytics.LinearAlgebra
             //  Fortran subroutine in EISPACK.
 			
             // Initialize
-			
-            int nn = this.n;
+            int nn = this._n;
             int n = nn - 1;
             const int low = 0;
             int high = nn - 1;
@@ -487,9 +450,7 @@ namespace Orion.Analytics.LinearAlgebra
             double exshift = 0.0;
             double p = 0, q = 0, r = 0, s = 0, z = 0;
             double w, x, y;
-
             // Store roots isolated by balanc and compute matrix norm
-			
             double norm = 0.0;
             for (int i = 0; i < nn; i++)
             {
@@ -503,15 +464,11 @@ namespace Orion.Analytics.LinearAlgebra
                     norm = norm + Math.Abs(H[i, j]);
                 }
             }
-			
             // Outer loop over eigenvalue index
-			
             int iter = 0;
             while (n >= low)
             {
-				
                 // Look for single small sub-diagonal element
-				
                 int l = n;
                 while (l > low)
                 {
@@ -526,10 +483,8 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                     l--;
                 }
-				
                 // Check for convergence
                 // One root found
-				
                 if (l == n)
                 {
                     H[n, n] = H[n, n] + exshift;
@@ -537,7 +492,6 @@ namespace Orion.Analytics.LinearAlgebra
                     e[n] = 0.0;
                     n--;
                     iter = 0;
-					
                     // Two roots found
                 }
                 else if (l == n - 1)
@@ -549,9 +503,7 @@ namespace Orion.Analytics.LinearAlgebra
                     H[n, n] = H[n, n] + exshift;
                     H[n - 1, n - 1] = H[n - 1, n - 1] + exshift;
                     x = H[n, n];
-					
                     // Real pair
-					
                     if (q >= 0)
                     {
                         if (p >= 0)
@@ -577,34 +529,27 @@ namespace Orion.Analytics.LinearAlgebra
                         r = Math.Sqrt(p * p + q * q);
                         p = p / r;
                         q = q / r;
-						
                         // Row modification
-						
                         for (int j = n - 1; j < nn; j++)
                         {
                             z = H[n - 1, j];
                             H[n - 1, j] = q * z + p * H[n, j];
                             H[n, j] = q * H[n, j] - p * z;
                         }
-						
                         // Column modification
-						
                         for (int i = 0; i <= n; i++)
                         {
                             z = H[i, n - 1];
                             H[i, n - 1] = q * z + p * H[i, n];
                             H[i, n] = q * H[i, n] - p * z;
                         }
-						
                         // Accumulate transformations
-						
                         for (int i = low; i <= high; i++)
                         {
                             z = V[i, n - 1];
                             V[i, n - 1] = q * z + p * V[i, n];
                             V[i, n] = q * V[i, n] - p * z;
                         }
-						
                         // Complex pair
                     }
                     else
@@ -616,14 +561,11 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                     n = n - 2;
                     iter = 0;
-					
                     // No convergence yet
                 }
                 else
                 {
-					
                     // Form shift
-					
                     x = H[n, n];
                     y = 0.0;
                     w = 0.0;
@@ -632,9 +574,7 @@ namespace Orion.Analytics.LinearAlgebra
                         y = H[n - 1, n - 1];
                         w = H[n, n - 1] * H[n - 1, n];
                     }
-					
                     // Wilkinson's original ad hoc shift
-					
                     if (iter == 10)
                     {
                         exshift += x;
@@ -646,9 +586,7 @@ namespace Orion.Analytics.LinearAlgebra
                         x = y = 0.75 * s;
                         w = (- 0.4375) * s * s;
                     }
-					
                     // MATLAB's new ad hoc shift
-					
                     if (iter == 30)
                     {
                         s = (y - x) / 2.0;
@@ -669,11 +607,8 @@ namespace Orion.Analytics.LinearAlgebra
                             x = y = w = 0.964;
                         }
                     }
-					
                     iter = iter + 1; // (Could check iteration count here.)
-					
                     // Look for two consecutive small sub-diagonal elements
-					
                     int m = n - 2;
                     while (m >= l)
                     {
@@ -697,7 +632,6 @@ namespace Orion.Analytics.LinearAlgebra
                         }
                         m--;
                     }
-					
                     for (int i = m + 2; i <= n; i++)
                     {
                         H[i, i - 2] = 0.0;
@@ -706,9 +640,7 @@ namespace Orion.Analytics.LinearAlgebra
                             H[i, i - 3] = 0.0;
                         }
                     }
-					
                     // Double QR step involving rows l:n and columns m:n
-					
                     for (int k = m; k <= n - 1; k++)
                     {
                         bool notlast = (k != n - 1);
@@ -750,9 +682,7 @@ namespace Orion.Analytics.LinearAlgebra
                             z = r / s;
                             q = q / p;
                             r = r / p;
-							
                             // Row modification
-							
                             for (int j = k; j < nn; j++)
                             {
                                 p = H[k, j] + q * H[k + 1, j];
@@ -764,9 +694,7 @@ namespace Orion.Analytics.LinearAlgebra
                                 H[k, j] = H[k, j] - p * x;
                                 H[k + 1, j] = H[k + 1, j] - p * y;
                             }
-							
                             // Column modification
-							
                             for (int i = 0; i <= Math.Min(n, k + 3); i++)
                             {
                                 p = x * H[i, k] + y * H[i, k + 1];
@@ -778,9 +706,7 @@ namespace Orion.Analytics.LinearAlgebra
                                 H[i, k] = H[i, k] - p;
                                 H[i, k + 1] = H[i, k + 1] - p * q;
                             }
-							
                             // Accumulate transformations
-							
                             for (int i = low; i <= high; i++)
                             {
                                 p = x * V[i, k] + y * V[i, k + 1];
@@ -796,21 +722,16 @@ namespace Orion.Analytics.LinearAlgebra
                     } // k loop
                 } // check convergence
             } // while (n >= low)
-			
             // Backsubstitute to find vectors of upper triangular form
-			
             if (norm == 0.0)
             {
                 return ;
             }
-			
             for (n = nn - 1; n >= 0; n--)
             {
                 p = d[n];
                 q = e[n];
-				
                 // Real vector
-
                 double t;
                 if (q == 0)
                 {
@@ -842,7 +763,6 @@ namespace Orion.Analytics.LinearAlgebra
                                 {
                                     H[i, n] = (- r) / (eps * norm);
                                 }
-								
                                 // Solve real equations
                             }
                             else
@@ -861,9 +781,7 @@ namespace Orion.Analytics.LinearAlgebra
                                     H[i + 1, n] = (- s - y * t) / z;
                                 }
                             }
-							
                             // Overflow control
-							
                             t = Math.Abs(H[i, n]);
                             if ((eps * t) * t > 1)
                             {
@@ -874,15 +792,12 @@ namespace Orion.Analytics.LinearAlgebra
                             }
                         }
                     }
-					
                     // Complex vector
                 }
                 else if (q < 0)
                 {
                     int l = n - 1;
-					
                     // Last vector component imaginary so matrix is triangular
-					
                     if (Math.Abs(H[n, n - 1]) > Math.Abs(H[n - 1, n]))
                     {
                         H[n - 1, n - 1] = q / H[n, n - 1];
@@ -906,7 +821,6 @@ namespace Orion.Analytics.LinearAlgebra
                             sa = sa + H[i, j] * H[j, n];
                         }
                         w = H[i, i] - p;
-						
                         if (e[i] < 0.0)
                         {
                             z = w;
@@ -924,9 +838,7 @@ namespace Orion.Analytics.LinearAlgebra
                             }
                             else
                             {
-								
                                 // Solve complex equations
-								
                                 x = H[i, i + 1];
                                 y = H[i + 1, i];
                                 var vr = (d[i] - p) * (d[i] - p) + e[i] * e[i] - q * q;
@@ -950,9 +862,7 @@ namespace Orion.Analytics.LinearAlgebra
                                     H[i + 1, n] = cdivi;
                                 }
                             }
-							
                             // Overflow control
-							
                             t = Math.Max(Math.Abs(H[i, n - 1]), Math.Abs(H[i, n]));
                             if ((eps * t) * t > 1)
                             {
@@ -966,9 +876,7 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                 }
             }
-			
             // Vectors of isolated roots
-			
             for (int i = 0; i < nn; i++)
             {
                 if (i < low | i > high)
@@ -979,9 +887,7 @@ namespace Orion.Analytics.LinearAlgebra
                     }
                 }
             }
-			
             // Back transformation to get eigenvectors of original matrix
-			
             for (int j = nn - 1; j >= low; j--)
             {
                 for (int i = low; i <= high; i++)
@@ -1006,52 +912,45 @@ namespace Orion.Analytics.LinearAlgebra
         public EigenvalueDecomposition(Matrix arg)
         {
             Matrix A = arg;
-            n = arg.ColumnCount;
-            V = new Matrix(n, n);
-            d = new double[n];
-            e = new double[n];
-			
-            issymmetric = true;
-            for (int j = 0; (j < n) & issymmetric; j++)
+            _n = arg.ColumnCount;
+            V = new Matrix(_n, _n);
+            d = new double[_n];
+            e = new double[_n];
+            _isSymmetric = true;
+            for (int j = 0; (j < _n) & _isSymmetric; j++)
             {
-                for (int i = 0; (i < n) & issymmetric; i++)
+                for (int i = 0; (i < _n) & _isSymmetric; i++)
                 {
-                    issymmetric = (A[i, j] == A[j, i]);
+                    _isSymmetric = (A[i, j] == A[j, i]);
                 }
             }
-			
-            if (issymmetric)
+            if (_isSymmetric)
             {
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < _n; i++)
                 {
-                    for (int j = 0; j < n; j++)
+                    for (int j = 0; j < _n; j++)
                     {
                         V[i, j] = A[i, j];
                     }
                 }
-				
                 // Tridiagonalize.
                 tred2();
-				
                 // Diagonalize.
                 Tql2();
             }
             else
             {
-                H = new double[n, n];
-                ort = new double[n];
-				
-                for (int j = 0; j < n; j++)
+                H = new double[_n, _n];
+                ort = new double[_n];
+                for (int j = 0; j < _n; j++)
                 {
-                    for (int i = 0; i < n; i++)
+                    for (int i = 0; i < _n; i++)
                     {
                         H[i, j] = A[i, j];
                     }
                 }
-				
                 // Reduce to Hessenberg form.
                 Orthes();
-				
                 // Reduce Hessenberg to real Schur form.
                 hqr2();
             }
@@ -1062,21 +961,16 @@ namespace Orion.Analytics.LinearAlgebra
         public EigenvalueDecomposition(double[] d, double[] e)
         {
             // TODO: unit test missing for EigenvalueDecomposition constructor.
-
-            n = d.Length;
-            V = new Matrix(n, n);
-
-            this.d = new double[n];
-            Array.Copy(d, 0, this.d, 0, n);
-
-            this.e = new double[n];
-            Array.Copy(e, 0, this.e, 1, n - 1);
-
-            for (int i = 0; i < n; i++)
+            _n = d.Length;
+            V = new Matrix(_n, _n);
+            this.d = new double[_n];
+            Array.Copy(d, 0, this.d, 0, _n);
+            this.e = new double[_n];
+            Array.Copy(e, 0, this.e, 1, _n - 1);
+            for (int i = 0; i < _n; i++)
             {
                 V[i, i] = 1;
             }
-
             // Diagonalize.
             Tql2();
         }
@@ -1084,6 +978,7 @@ namespace Orion.Analytics.LinearAlgebra
         #endregion //  Constructor
 		
         #region Public Properties
+
         ///// <summary>Gets the eigenvalues.</summary>
         ///// <returns>diag(D)</returns>
         //public Complex[] EigenValues => throw new NotImplementedException();
@@ -1103,12 +998,11 @@ namespace Orion.Analytics.LinearAlgebra
             {
                 // TODO: bad behavior of this property
                 // this method does not always return the *same* matrix
-
-                var X = new Matrix(n, n);
+                var X = new Matrix(_n, _n);
                 var D = X;
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < _n; i++)
                 {
-                    for (int j = 0; j < n; j++)
+                    for (int j = 0; j < _n; j++)
                     {
                         D[i, j] = 0.0;
                     }

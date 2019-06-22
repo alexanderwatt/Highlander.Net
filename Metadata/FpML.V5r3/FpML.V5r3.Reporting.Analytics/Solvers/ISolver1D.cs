@@ -130,6 +130,5 @@ namespace Orion.Analytics.Solvers
         {
             get; set;
         }
-
-    };
+    }
 }

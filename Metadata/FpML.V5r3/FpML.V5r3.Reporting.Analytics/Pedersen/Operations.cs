@@ -24,6 +24,7 @@ using System.Globalization;
 namespace Orion.Analytics.Pedersen
 {
     #region abstract classes
+
     public abstract class NodeOperation
     {
         public char Symbol { get; set; }
@@ -101,15 +102,15 @@ namespace Orion.Analytics.Pedersen
         {
             if (Cc != null)
             {
-                var counterid = (int)n[0].Evaluate();
+                var counterId = (int)n[0].Evaluate();
                 var start = (int)n[1].Evaluate();
                 var finish = (int)n[2].Evaluate();
-                Cc.Set(counterid, start);
+                Cc.Set(counterId, start);
                 double result = n[3].Evaluate();
 
                 for (int i = start + 1; i <= finish; i++)
                 {
-                    Cc.Set(counterid, i);
+                    Cc.Set(counterId, i);
                     result = EvaluateOnce(result, n[3].Evaluate());
                 }
                 return result;
@@ -203,6 +204,7 @@ namespace Orion.Analytics.Pedersen
     #endregion
 
     #region NodeFunctions
+
     class Sqrt : NodeFunction
     {
         public Sqrt()
@@ -215,6 +217,7 @@ namespace Orion.Analytics.Pedersen
             return Math.Sqrt(n0);
         }
     }
+
     class Exp : NodeFunction
     {
         public Exp()

@@ -64,7 +64,7 @@ namespace Orion.Analytics.LinearAlgebra
 		
 		/// <summary>Construct an m-by-n matrix of zeros. </summary>
 		/// <param name="m">Number of rows.</param>
-		/// <param name="n">Number of colums.</param>
+		/// <param name="n">Number of columns.</param>
 		public Matrix(int m, int n)
 		{
 		    Data = new double[m, n];
@@ -72,7 +72,7 @@ namespace Orion.Analytics.LinearAlgebra
 		
 		/// <summary>Construct an m-by-n constant matrix.</summary>
 		/// <param name="m">Number of rows.</param>
-		/// <param name="n">Number of colums.</param>
+		/// <param name="n">Number of columns.</param>
 		/// <param name="s">Fill the matrix with this scalar value.</param>
 		public Matrix(int m, int n, double s)
 		{
@@ -135,7 +135,7 @@ namespace Orion.Analytics.LinearAlgebra
 
 		/// <summary>Generates identity matrix</summary>
 		/// <param name="m">Number of rows.</param>
-		/// <param name="n">Number of colums.</param>
+		/// <param name="n">Number of columns.</param>
 		/// <returns>An m-by-n matrix with ones on the diagonal and zeros elsewhere.</returns>
 		public static Matrix Identity(int m, int n)
 		{
@@ -148,7 +148,7 @@ namespace Orion.Analytics.LinearAlgebra
 
 		/// <summary>Generates a diagonal matrix with a specifies diagonal value.</summary>
 		/// <param name="m">Number of rows.</param>
-		/// <param name="n">Number of colums.</param>
+		/// <param name="n">Number of columns.</param>
 		/// <param name="diagonalValue">The diagonal value.</param>
 		/// <returns>An m-by-n matrix with ones on the diagonal and zeros elsewhere.</returns>
 		public static Matrix DiagonalMatrix(int m, int n, double diagonalValue)
@@ -162,7 +162,7 @@ namespace Orion.Analytics.LinearAlgebra
 
 		/// <summary>Generates matrix with random elements</summary>
 		/// <param name="m">Number of rows.</param>
-		/// <param name="n">Number of colums.</param>
+		/// <param name="n">Number of columns.</param>
 		/// <returns>An m-by-n matrix with uniformly distributed
 		/// random elements in <c>[0, 1)</c> interval.</returns>
 		public static Matrix Random(int m, int n)
@@ -194,11 +194,25 @@ namespace Orion.Analytics.LinearAlgebra
 			return sp;
 		}
 
-		///<summary>
-		///</summary>
-		///<param name="i"></param>
-		///<returns></returns>
-		public SparseVector Column(int i)
+        ///<summary>
+        ///</summary>
+        ///<param name="i"></param>
+        ///<returns></returns>
+        public MathNet.Numerics.LinearAlgebra.Double.DenseVector RowD(int i)
+        {
+            var sp = new MathNet.Numerics.LinearAlgebra.Double.DenseVector(ColumnCount);
+            for (int j = 0; j < ColumnCount; j++)
+            {
+                sp[j] = this[i, j];
+            }
+            return sp;
+        }
+
+        ///<summary>
+        ///</summary>
+        ///<param name="i"></param>
+        ///<returns></returns>
+        public SparseVector Column(int i)
 		{
 			var sp = new SparseVector(RowCount);
 			for (int j = 0; j < RowCount; j++)
@@ -230,7 +244,7 @@ namespace Orion.Analytics.LinearAlgebra
 		
 
 		/// <summary>
-		/// Sets the vlaue in the matrix.
+		/// Sets the value in the matrix.
 		/// </summary>
 		/// <param name="value">The value to set.</param>
 		/// <param name="row">The row.</param>
@@ -246,13 +260,13 @@ namespace Orion.Analytics.LinearAlgebra
 
 		#region Sub-matrices operation
 
-		/// <summary>Gets a submatrix.</summary>
+		/// <summary>Gets a sub matrix.</summary>
 		/// <param name="i0">Initial row index.</param>
 		/// <param name="i1">Final row index.</param>
 		/// <param name="j0">Initial column index.</param>
 		/// <param name="j1">Final column index.</param>
 		/// <returns>A(i0:i1,j0:j1)</returns>
-		/// <exception cref="System.IndexOutOfRangeException">Submatrix indices</exception>
+		/// <exception cref="System.IndexOutOfRangeException">Sub matrix indices</exception>
 		public virtual Matrix GetMatrix(int i0, int i1, int j0, int j1)
 		{
 			var x = new Matrix(i1 - i0 + 1, j1 - j0 + 1);
@@ -274,11 +288,11 @@ namespace Orion.Analytics.LinearAlgebra
 			return x;
 		}
 		
-		/// <summary>Gets a submatrix.</summary>
+		/// <summary>Gets a sub matrix.</summary>
 		/// <param name="r">Array of row indices.</param>
 		/// <param name="c">Array of column indices.</param>
 		/// <returns>A(r(:),c(:))</returns>
-		/// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+		/// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
 		public virtual Matrix GetMatrix(int[] r, int[] c)
 		{
 			var x = new Matrix(r.Length, c.Length);
@@ -543,7 +557,7 @@ namespace Orion.Analytics.LinearAlgebra
 			}
 		}
 		
-		/// <summary>In place substraction of <c>m</c> to this <c>Matrix</c>.</summary>
+		/// <summary>In place subtraction of <c>m</c> to this <c>Matrix</c>.</summary>
 		/// <seealso cref="operator - (Matrix, Matrix)"/>
 		public virtual void Subtract(Matrix m)
 		{
@@ -578,19 +592,18 @@ namespace Orion.Analytics.LinearAlgebra
 				for(int i = 0; i < RowCount; i++)
 					for(int j = i + 1; j < ColumnCount; j++)
 					{
-						double thisIJ = this[i, j];
+						double thisIj = this[i, j];
 						this[i, j] = this[j, i];
-						this[j, i] = thisIJ;
+						this[j, i] = thisIj;
 					}
 			}
 			else
 			{
-				var X = new Matrix(ColumnCount, RowCount);
+				var x = new Matrix(ColumnCount, RowCount);
 				for (int i = 0; i < RowCount; i++)
 					for (int j = 0; j < ColumnCount; j++)
-						X[j, i] = this[i, j];
-
-			    Data = X.Data;
+						x[j, i] = this[i, j];
+                Data = x.Data;
 			}
 		}
 
@@ -734,8 +747,8 @@ namespace Orion.Analytics.LinearAlgebra
 			return Transpose(this).Solve(Transpose(B));
 		}
 		
-		/// <summary>Matrix inverse or pseudoinverse.</summary>
-		/// <returns> inverse(A) if A is square, pseudoinverse otherwise.</returns>
+		/// <summary>Matrix inverse or pseudo-inverse.</summary>
+		/// <returns> inverse(A) if A is square, pseudo-inverse otherwise.</returns>
 		public virtual Matrix Inverse()
 		{
 			return Solve(Identity(RowCount, RowCount));
@@ -774,7 +787,7 @@ namespace Orion.Analytics.LinearAlgebra
 		}
 		#endregion // Linear Algebra
 
-		#region vectorial products -- prefer operator
+		#region Vectorial products -- prefer operator
 
 		///<summary>
 		///</summary>
@@ -801,9 +814,9 @@ namespace Orion.Analytics.LinearAlgebra
 		{
 			if (matrixA.ColumnCount != vectorX.Length)
 				throw new ArgumentException("MatDimNeq");
-			IVector ytemp = new DoubleVector();
-			Blas.Default.Mult((IMatrix)matrixA, vectorX, ytemp);
-			return ytemp;
+			IVector yTemp = new DoubleVector();
+			Blas.Default.Mult((IMatrix)matrixA, vectorX, yTemp);
+			return yTemp;
 		}
 
 		///<summary>
@@ -816,9 +829,9 @@ namespace Orion.Analytics.LinearAlgebra
 		{
 			if (matrixA.ColumnCount != vectorX.Length)
 				throw new ArgumentException("MatDimNeq");
-			IVector ytemp = new DoubleVector();
-			Blas.Default.Mult((IMatrix)matrixA, vectorX, ytemp);
-			return (SparseVector) ytemp;
+			IVector yTemp = new DoubleVector();
+			Blas.Default.Mult((IMatrix)matrixA, vectorX, yTemp);
+			return (SparseVector) yTemp;
 		}
 		#endregion
 
@@ -938,14 +951,14 @@ namespace Orion.Analytics.LinearAlgebra
 			throw new ArgumentException("Can not divide by zero.");  
 		}
 		
-		/// <summary>Implicit convertion to a <c>double[,]</c> array.</summary>
+		/// <summary>Implicit conversion to a <c>double[,]</c> array.</summary>
 		public static implicit operator double[,] (Matrix m)
 		{
 			return m.Data;
 		}
 
 		/// <summary>
-		/// Explicit convertion to a <c>double[]</c> array of a single column matrix.
+		/// Explicit conversion to a <c>double[]</c> array of a single column matrix.
 		/// </summary>
 		/// <param name="m">Exactly one column expected.</param>
 		public static explicit operator double[] (Matrix m)
@@ -964,9 +977,9 @@ namespace Orion.Analytics.LinearAlgebra
 		#region	 Private Methods
 		
 		/// <summary>Check if size(A) == size(B) *</summary>
-		private void  CheckMatrixDimensions(Matrix B)
+		private void  CheckMatrixDimensions(Matrix b)
 		{
-			if (B.RowCount != RowCount || B.ColumnCount != ColumnCount)
+			if (b.RowCount != RowCount || b.ColumnCount != ColumnCount)
 			{
 				throw new ArgumentException("Matrix dimensions must agree.");
 			}
@@ -997,6 +1010,7 @@ namespace Orion.Analytics.LinearAlgebra
 		#endregion
 
 		#region Utilities
+
 		/*       public static Matrix Transpose2(Matrix m)
 		{
 			int cols = m.ColumnCount;
@@ -1027,34 +1041,31 @@ namespace Orion.Analytics.LinearAlgebra
 			const double tolerance = 1e-15;
 			var jd =
 				new SymmetricSchurDecomposition(realSymmetricMatrix);
-			Matrix evectors = jd.Eigenvectors;	// do not copy -- consume!
-			SparseVector evalues = jd.Eigenvalues;
+			Matrix eVectors = jd.Eigenvectors;	// do not copy -- consume!
+			SparseVector eValues = jd.Eigenvalues;
 			int size = realSymmetricMatrix.RowCount;
-
-			const double maxEvTolerance = tolerance;
+            const double maxEvTolerance = tolerance;
 			/*           for (int i = 0; i < size; i++)
 			{    
-				if evalues.GetValue(i) * tolerance;
+				if eValues.GetValue(i) * tolerance;
 
 			}   */
-
-			var D = new Matrix(size, size);
+            var D = new Matrix(size, size);
 			var diagonal = D.Diagonal;
 			for (int i = 0; i < size; i++)
 			{
-				if (Math.Abs(evalues.GetValue(i)) <= maxEvTolerance)
-					evalues.SetValue(i,0.0);
-				else if (evalues.GetValue(i) < 0.0)
+				if (Math.Abs(eValues.GetValue(i)) <= maxEvTolerance)
+					eValues.SetValue(i,0.0);
+				else if (eValues.GetValue(i) < 0.0)
 					throw new ApplicationException("TODO: Some eigenvalues are negative.");
-				diagonal.SetValue(i,Math.Sqrt(evalues.GetValue(i)));
+				diagonal.SetValue(i,Math.Sqrt(eValues.GetValue(i)));
 			}
-
-			// return evectors*D*Matrix.Transpose(evectors)
+            // return eVectors*D*Matrix.Transpose(eVectors)
 			//  - use gemm direct so we can skip transpose()
 			//  - use D to buffer return matrix
 			/*       BLAS.gemm('N', 'T', size, size, size,
 				1.0, ref temp.data[temp.offset], temp.ld,
-				ref evectors.data[evectors.offset], evectors.ld,
+				ref eVectors.data[eVectors.offset], eVectors.ld,
 				0.0, ref D.data[D.offset], D.ld);*/
 			return D;
 		}
@@ -1084,8 +1095,7 @@ namespace Orion.Analytics.LinearAlgebra
 			var s = new StringBuilder(RowCount * ColumnCount * 15);
 			s.AppendFormat("{{ // {0}x{1} {2}\n",
 						   RowCount, ColumnCount, base.ToString());
-
-			for (int i = 0; i < RowCount; )
+            for (int i = 0; i < RowCount; )
 			{
 				s.Append("  { ");
 				for (int j = 0; j < ColumnCount; )
@@ -1096,8 +1106,7 @@ namespace Orion.Analytics.LinearAlgebra
 				}
 			    s.Append(++i < RowCount ? " },\n" : " }\n");
 			}
-
-			s.Append("}\n");
+            s.Append("}\n");
 			return s.ToString();
 		}
 

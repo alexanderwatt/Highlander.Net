@@ -92,7 +92,7 @@ namespace Orion.Analytics.PricingEngines
         /// Constructor for the class <see cref="SABRCalibrationEngine"/>.
         /// The purpose of this constructor is to initialise the calibration
         /// engine when a full calibration of the SABR model is required.
-        /// Postcondition: private field _isFullCalibrationPossible is true.
+        /// Post condition: private field _isFullCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         ///  engine object.</param>
@@ -163,7 +163,7 @@ namespace Orion.Analytics.PricingEngines
         /// is required. The SABR parameters beta, nu and rho have been
         /// supplied by the client and the SABR parameter alpha is determined
         /// from the ATM calibration.
-        /// Postcondition: private field _isATMCalibrationPossible is true.
+        /// Post condition: private field _isATMCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         ///  engine object.</param>
@@ -230,7 +230,7 @@ namespace Orion.Analytics.PricingEngines
         /// <see cref="SABRCalibrationEngine"/>.
         /// The purpose of this constructor is to initialise the calibration
         /// engine when a full calibration of the SABR model is required.
-        /// Postcondition: private field _isInterpCalibrationPossible is true.
+        /// Post condition: private field _isInterpCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         /// engine object.</param>
@@ -314,7 +314,7 @@ namespace Orion.Analytics.PricingEngines
         /// Provides an ATM calibration of the SABR model; only the SABR 
         /// parameter alpha is determined by calibration to market data.
         /// Precondition: private field _isATMCalibrationPossible is true.
-        /// Postcondition: private field _isSABRModelCalibrated is set.
+        /// Post condition: private field _isSABRModelCalibrated is set.
         /// </summary>
         public void CalibrateATMSABRModel()
         {
@@ -332,7 +332,7 @@ namespace Orion.Analytics.PricingEngines
         /// of the SABR nu and rho surfaces, and the SABR parameter alpha is
         /// determined by calibration to market data.
         /// Precondition: private field _isInterpCalibrationPossible is true.
-        /// Postcondition: private field _isSABRModelCalibrated is set.
+        /// Post condition: private field _isSABRModelCalibrated is set.
         /// </summary>
         public void CalibrateInterpSABRModel()
         {
@@ -447,7 +447,7 @@ namespace Orion.Analytics.PricingEngines
         /// <summary>
         /// Helper function used to build the expiry (row) and tenor (column)
         /// labels used to index into the SABR Nu and Rho surfaces.
-        /// Postconditions: private fields _expiries and _tenors are set and
+        /// Post conditions: private fields _expiries and _tenors are set and
         /// sorted into ascending numerical order.
         /// </summary>
         /// <param name="engineHandles">Data structure that stores all existing
@@ -490,9 +490,9 @@ namespace Orion.Analytics.PricingEngines
         /// the sentinel "decimal.MinValue" used to designate an unavailable 
         /// SABR Nu and Rho parameter at a particular expiry tenor pair.
         /// Precondition: private field _calibrationSettings has been set.
-        /// Postconditions: private fields _expiries and _tenors are set and
+        /// Post conditions: private fields _expiries and _tenors are set and
         /// sorted into ascending numerical order.
-        /// Postconditions: private fields _countSABRSurfaceEntries, 
+        /// Post conditions: private fields _countSABRSurfaceEntries, 
         /// _sabrNuSurface and _sabrRhoSurface are set.
         /// </summary>
         /// <param name="engineHandles">Data structure that stores all existing
@@ -579,7 +579,7 @@ namespace Orion.Analytics.PricingEngines
         /// Helper function used by the method SetCalibrationSeeds to 
         /// compute the ATM slope of the curve log moneyness against
         /// implied volatility.
-        /// Postcondition: Private fields _atmIndex, _atmSlope and
+        /// Post condition: Private fields _atmIndex, _atmSlope and
         /// _atmVolatility are set.
         /// </summary>
         private void ComputeATMSlope()
@@ -693,7 +693,7 @@ namespace Orion.Analytics.PricingEngines
         /// optimization routine.
         /// Precondition: private fields _thetaGuess and _muGuess have been
         /// set.
-        /// Postconditions: private fields _isSABRModelCalibrated and 
+        /// Post conditions: private fields _isSABRModelCalibrated and 
         /// _calibrationError are set.
         /// </summary>
         private void Optimizer()
@@ -751,7 +751,7 @@ namespace Orion.Analytics.PricingEngines
         /// <summary>
         /// Helper function used by PerformEnhancedCalibration to select
         /// the candidates for enhanced calibration.
-        /// Postcondition: private field _bestCandidates is set.
+        /// Post condition: private field _bestCandidates is set.
         /// </summary>
         private void SelectCandidatesForEnhancedCalibration()
         {
@@ -827,7 +827,7 @@ namespace Orion.Analytics.PricingEngines
         /// moneyness value; if there is no zero log moneyness value, then
         /// it is the zero-based position of the element with the minimum
         /// magnitude. 
-        /// Postcondition: Private field _atmIndex is set.
+        /// Post condition: Private field _atmIndex is set.
         /// </summary>
         /// <param name="logMoneyness">List that contains the log moneyness,
         /// where log moneyness is Log(strike/_assetPrice)</param>
@@ -865,7 +865,7 @@ namespace Orion.Analytics.PricingEngines
         /// Helper function used by the method SetInitialGuesses to set the
         /// guess for the transformed SABR parameter mu.
         /// Preconditions: ComputeATMSlope and SetThetaGuess have been called.
-        /// Postcondition: private field _muGuess is set.
+        /// Post condition: private field _muGuess is set.
         /// </summary>
         private void SetMuGuess()
         {
@@ -881,7 +881,7 @@ namespace Orion.Analytics.PricingEngines
         /// Helper function used by the method SetInitialGuesses to set the
         /// guess for the transformed SABR parameter theta.
         /// Precondition: ComputeATMSlope has been called.
-        /// Postcondition: private fields _rhoGuess and _thetaGuess are set.
+        /// Post condition: private fields _rhoGuess and _thetaGuess are set.
         /// </summary>
         private void SetThetaGuess()
         {
@@ -1026,7 +1026,7 @@ namespace Orion.Analytics.PricingEngines
         /// <param name="x">Vector that contains the optimization variables.
         /// Contents are: x[0] stores the transformed SABR parameter theta;
         /// x[1] stores the transformed SABR parameter mu.</param>
-        /// Postcondition: SABR parameters alpha, nu and rho are updated to
+        /// Post condition: SABR parameters alpha, nu and rho are updated to
         /// their current values based on the status of the optimization
         /// variable.
         /// <returns>Least squares error.</returns>

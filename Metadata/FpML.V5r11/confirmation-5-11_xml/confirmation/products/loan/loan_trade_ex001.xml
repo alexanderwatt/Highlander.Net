@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<!--
+        == Copyright (c) 2014- All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<loanTradeNotification xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">BPLC0000444445555 GB1L213146 US1LFM0001 2018-09-26T10:00:00.0000000-04:00 false 2018-09-26 Buyer EID12345 DM3F10000 TN12345 USD 10000000.0 2018-07-21 Secondary false LSTA Assignment Seller 100.0 SplitFull Par SettledWithoutAccrued true Buyer false PassedOnToBuyer CUSIP0001 GB1L213246 US1LFM0001 
+<header>
+  <messageId messageIdScheme="http://www.abcbank.com/coding-scheme/message-id-1-0">BPLC0000444445555</messageId>
+  <sentBy messageAddressScheme="http://www.fpml.org/coding-scheme/external/party-id-MEI-1-0">GB1L213146</sentBy>
+  <sendTo messageAddressScheme="http://www.fpml.org/coding-scheme/external/party-id-MEI-1-0">US1LFM0001</sendTo>
+  <creationTimestamp>2018-09-26T10:00:00.0000000-04:00</creationTimestamp>
+</header>
+<isCorrection>false</isCorrection>
+<noticeDate>2018-09-26</noticeDate>
+<partyReference href="BANK12345" />
+<role tradingPartyRoleScheme="http://www.fpml.org/coding-scheme/trading-party-role-1-0">Buyer</role>
+<loanTrade>
+  <eventIdentifier>
+    <partyReference href="BANK67890" />
+    <eventId eventIdScheme="http://www.barclays.com/coding-scheme/event-id-1-0">EID12345</eventId>
+  </eventIdentifier>
+  <loanTradeReference href="T1" />
+</loanTrade>
+<trade id="T1">
+  <tradeIdentifier>
+    <issuer issuerIdScheme="http://www.fpml.org/coding-scheme/external/party-id-MEI-1-0">DM3F10000</issuer>
+    <tradeId tradeIdScheme="http://www.barclays.com/coding-scheme/trade-id-1-0">TN12345</tradeId>
+  </tradeIdentifier>
+  <facilityReference href="FAC12345" />
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/currency-1-0">USD</currency>
+    <amount>10000000.0</amount>
+  </amount>
+  <tradeDate>2018-07-21</tradeDate>
+  <buyerPartyReference href="BANK12345" />
+  <sellerPartyReference href="BANK67890" />
+  <type>Secondary</type>
+  <whenIssuedFlag>false</whenIssuedFlag>
+  <tradingAssociation>LSTA</tradingAssociation>
+  <formOfPurchase>Assignment</formOfPurchase>
+  <remittedBy>Seller</remittedBy>
+  <price>100.0</price>
+  <transferFee>
+    <paidBy>SplitFull</paidBy>
+  </transferFee>
+  <documentationType>Par</documentationType>
+  <accrualSettlementType>SettledWithoutAccrued</accrualSettlementType>
+  <delayedCompensationFlag>true</delayedCompensationFlag>
+  <otherFeesBenefactor>Buyer</otherFeesBenefactor>
+  <collateralRequiredFlag>false</collateralRequiredFlag>
+  <votingRights>PassedOnToBuyer</votingRights>
+</trade>
+<facilityIdentifier id="FAC12345">
+  <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP-1-0">CUSIP0001</instrumentId>
+</facilityIdentifier>
+<party id="BANK12345">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/party-id-MEI-1-0">GB1L213246</partyId>
+</party>
+<party id="BANK67890">
+  <partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/party-id-MEI-1-0">US1LFM0001</partyId>
+</party>
+</loanTradeNotification>
+

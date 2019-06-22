@@ -28,13 +28,13 @@ namespace Orion.Analytics.Solvers
     public interface IObjectiveFunction
     {
         /// <summary>
-        /// A stringified representation of the objective function.
+        /// A string representation of the objective function.
         /// </summary>
         /// <returns>A String representing the object.</returns>
         string ToString();
 
         /// <summary>
-        /// Definiton of the objective function.
+        /// Definition of the objective function.
         /// </summary>
         /// <param name="x">Argument to the objective function.</param>
         /// <returns>The value of the objective function, <i>f(x)</i>.</returns>
@@ -164,7 +164,7 @@ namespace Orion.Analytics.Solvers
     {
 
         /// <summary>
-        /// Definiton of the objective function.
+        /// Definition of the objective function.
         /// </summary>
         /// <param name="x">Argument to the objective function.</param>
         /// <returns>The value of the objective function, <i>f(x)</i>.</returns>

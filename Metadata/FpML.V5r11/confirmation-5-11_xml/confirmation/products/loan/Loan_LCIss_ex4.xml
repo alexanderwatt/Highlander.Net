@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<!--
+        == Copyright (c) 2014- All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<!--
+Letter of credit event notifications provide a means for agent bank to communicate issuance, amendment and termination of L/Cs.
+The agent bank also acts as a conduit between the issuing bank and lenders.
+
+This example represents issuance of a standby letter of credit (fx).
+-->
+<lcNotification xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">727445 US2A432121 US5L567878 2013-10-21T09:30:47Z BKLoanSys 1.0 2012-12-06 false 2014-11-12 true 61826 2014-09-29 EUR 900000.00 F234564REV US82704EAW66 Revolver LCDIFFCCY Standby 2014-09-29 EUR 900000.00 2019-01-14 2019-01-14 71154 ACT/360 0.02 60 D 1 Y USD EUR Currency2PerCurrency1 1.2423 US2A432121 US3B789454 US6I874125 US1B987656 
+<header>
+<!-- No message id in the original notice -->
+  <messageId messageIdScheme="http://www.bankofagentsna.com/messaging/messageids">727445</messageId>
+<!-- Not sure of this content? -->
+  <sentBy messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</sentBy>
+  <sendTo messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US5L567878</sendTo>
+  <creationTimestamp>2013-10-21T09:30:47Z</creationTimestamp>
+  <implementationSpecification>
+    <name>BKLoanSys</name>
+    <version implementationSpecificationVersionScheme="http://www.bkloansys.com/">1.0</version>
+    <date>2012-12-06</date>
+  </implementationSpecification>
+</header>
+<isCorrection>false</isCorrection>
+<noticeDate>2014-11-12</noticeDate>
+<isGlobalOnly>true</isGlobalOnly>
+<lcIssuance>
+  <eventIdentifier>
+    <partyReference href="BANKOFAGENTSNA" />
+<!-- LN88 No event id provided in the notice -->
+    <eventId eventIdScheme="http://www.bankofagentsna.com/messaging/eventids">61826</eventId>
+  </eventIdentifier>
+  <effectiveDate>2014-09-29</effectiveDate>
+  <letterOfCreditReference href="LOC234" />
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">EUR</currency>
+    <amount>900000.00</amount>
+  </amount>
+</lcIssuance>
+<!-- The deal CUSIP/ISIN were also provided. We don't have a place for the in the notice -->
+<facilityIdentifier id="FAC67890">
+  <instrumentId instrumentIdScheme="http://www.cusip.com/">F234564REV</instrumentId>
+  <instrumentId instrumentIdScheme="http://www.isin.com/">US82704EAW66</instrumentId>
+  <description>Revolver</description>
+</facilityIdentifier>
+<letterOfCredit>
+  <identifier id="LOC234">
+    <partyReference href="BANKOFAGENTSNA" />
+    <contractId contractIdScheme="http://www.bankofagentsna.com/messaging/contractids">LCDIFFCCY</contractId>
+    <facilityReference href="FAC67890" />
+  </identifier>
+  <type lcTypeScheme="http://www.fpml.org/coding-scheme/lc-type">Standby</type>
+  <effectiveDate>2014-09-29</effectiveDate>
+  <borrowerPartyReference href="BORROWERINC" />
+  <issuingBankPartyReference href="ISSUINGBANKINC" />
+  <beneficiaryPartyReference href="BENEFICIARYINC" />
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">EUR</currency>
+    <amount>900000.00</amount>
+  </amount>
+  <expiryDate>2019-01-14</expiryDate>
+  <finalExpiryDate>2019-01-14</finalExpiryDate>
+  <lcAccrual>
+<!-- No accrual id, day count or rate on the original notice -->
+    <accrualOptionId accrualTypeIdScheme="http://www.bankofagentsna.com/messaging/accrualids">71154</accrualOptionId>
+    <dayCountFraction>ACT/360</dayCountFraction>
+    <rate>0.02</rate>
+  </lcAccrual>
+  <evergreenOption>
+    <nonRenewalNoticePeriod>
+      <periodMultiplier>60</periodMultiplier>
+      <period>D</period>
+    </nonRenewalNoticePeriod>
+    <extensionPeriod>
+      <periodMultiplier>1</periodMultiplier>
+      <period>Y</period>
+    </extensionPeriod>
+  </evergreenOption>
+  <facilityFxRate>
+    <quotedCurrencyPair>
+      <currency1>USD</currency1>
+      <currency2>EUR</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+    <rate>1.2423</rate>
+  </facilityFxRate>
+</letterOfCredit>
+<party id="BANKOFAGENTSNA">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</partyId>
+</party>
+<party id="BORROWERINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US3B789454</partyId>
+</party>
+<party id="ISSUINGBANKINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US6I874125</partyId>
+</party>
+<party id="BENEFICIARYINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US1B987656</partyId>
+</party>
+</lcNotification>
+

@@ -168,7 +168,7 @@ namespace Orion.Analytics.Options
             else
             {
                 // Caplet/Floorlet price is computed from Black's formula.
-                // Map the arguments into Blacks's formula.
+                // Map the arguments into Black's formula.
                 var discountFactorAsDouble = decimal.ToDouble(discountFactor);
                 var forwardRateAsDouble = decimal.ToDouble(forwardRate);
                 var sigmaAsDouble = decimal.ToDouble(sigma);
@@ -220,14 +220,14 @@ namespace Orion.Analytics.Options
             else if (_optionExpiry < MinimumOptionExpiry)
             {
                 var omega = _optionType == OptionType.Caplet ? 1d : -1d;
-                // Caplet/Flooret price corresponds to its intrinsic value.
+                // Caplet/Floorlet price corresponds to its intrinsic value.
                 price = decimal.ToDouble(_notional * _tau)* discountFactor *
                         Math.Max(omega * (forwardRate - decimal.ToDouble(_strike)), 0d);
             }
             else
             {
                 // Caplet/Floorlet price is computed from Black's formula.
-                // Map the arguments into Blacks's formula.
+                // Map the arguments into Black's formula.
                 var temp = _pricer.PriceBlackVanillaSwaption(forwardRate, discountFactor, sigma);
                 price = decimal.ToDouble(_notional*_tau)*temp;
             }

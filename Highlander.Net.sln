@@ -64,7 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FpML.V5r3.Metadata", "FpML.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FpML.V5r3.Confirmation", "Metadata\FpML.V5r3\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj", "{672016A1-82F4-451F-8A12-4C40139995FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FpML.V5r3", "Metadata\FpML.V5r3\FpML.V5r3\FpML.V5r3.csproj", "{620D6440-0754-47DD-A1FF-542BFB1AF986}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FpML.V5r3.Schemas", "Metadata\FpML.V5r3\FpML.V5r3\FpML.V5r3.Schemas.csproj", "{620D6440-0754-47DD-A1FF-542BFB1AF986}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FpML.V5r3.Reporting", "Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj", "{60A9D3B8-34A8-4779-817F-9D87CBBCBFC1}"
 EndProject

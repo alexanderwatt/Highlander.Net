@@ -47,7 +47,7 @@ namespace Orion.Analytics.Options
         public double ForwardDelta { get; set; }
 
         ///<summary>
-        /// Mathematically the same as the black-scholes vanna.
+        /// Mathematically the same as the black-scholes Vanna.
         ///</summary>
         public double DDeltaDVol { get; set; }
 
@@ -72,7 +72,7 @@ namespace Orion.Analytics.Options
         public double GammaP { get; set; }
 
         ///<summary>
-        /// The black-scholes option zomma.
+        /// The black-scholes option Zomma.
         ///</summary>
         public double DGammaDVol { get; set; }
 

@@ -136,7 +136,7 @@ namespace Orion.Analytics.Rates
         /// <summary>
         /// The derivative with respect to the rate.
         /// </summary>
-        /// <param name="discountFactorFlowDate">The discount factor to the flow wate.</param>
+        /// <param name="discountFactorFlowDate">The discount factor to the flow rate.</param>
         /// <param name="flowYearFraction">The year fraction to the flow date.</param>
         /// <param name="discountFactorIndexStartDate">The discount factor to the index start date. The index might be LIBOR or a Swap.</param>
         /// <param name="discountFactorIndexEndDate">The discount factor to the index end date. </param>
@@ -149,16 +149,16 @@ namespace Orion.Analytics.Rates
             Decimal indexYearFraction, Decimal bucketYearFraction, Decimal discountFactorBucketStartDate, Decimal discountFactorBucketEndDate)
         {
             // dD(x,B,r)/dr
-            var derivx = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
+            var derivativeOfX = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
             // dD(y,B,r)/dr  
-            var derivy = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
+            var derivativeOfY = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
             // Daycount(indexStart, indexEnd, indexDaycount, indexCoupon);
             var days = indexYearFraction;//TODO Is this days or year fraction?
             // D(x,B,r)
             var dfx = discountFactorIndexStartDate;
             // D(y,B,r) 
             var dfy = discountFactorIndexEndDate;
-            return 1 / days * 1 / dfy * derivx - 1 / days * 1 / dfy * dfx / dfy * derivy;
+            return 1 / days * 1 / dfy * derivativeOfX - 1 / days * 1 / dfy * dfx / dfy * derivativeOfY;
         }
 
         /// <summary>
@@ -393,6 +393,106 @@ namespace Orion.Analytics.Rates
                 result = 1 / df;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="paymentDate">Contract payment time, in quarters.</param>
+        /// <param name="settleDate">Delivery time, in quarters.</param>
+        /// <param name="discount">Discount factors used.</param>
+        /// <returns></returns>
+        public static double ForwardContract(int paymentDate, int settleDate, QuarterlyDiscounts discount)
+        {
+            return discount.Get(settleDate) / discount.Get(paymentDate);
+        }
+
+        /// <summary>
+        /// Computes the quarterly cash forward rate for a specific future time.
+        /// </summary>
+        /// <param name="forwardDate"></param>
+        /// <param name="discount">Discount factors used.</param>
+        /// <returns></returns>
+        public static double CashForwardRate(int forwardDate, QuarterlyDiscounts discount)
+        {
+            double rate = 4 * (discount.Get(forwardDate) / discount.Get(forwardDate + 1) - 1);
+            return rate;
+        }
+
+        /// <summary>
+        /// Computes the shifted quarterly cash forward rate for a specific future time.
+        /// </summary>
+        /// <param name="forwardDate"></param>
+        /// <param name="discount">Discount factors used.</param>
+        /// <param name="shift">Shifts used.</param>
+        /// <returns></returns>
+        public static double ShiftedCashForwardRate(int forwardDate, QuarterlyDiscounts discount, QuarterlyShifts shift)
+        {
+            double rate = 4 * (discount.Get(forwardDate) / discount.Get(forwardDate + 1) - 1);
+            rate += shift.Get(forwardDate);
+            return rate;
+        }
+
+        /// <summary>
+        /// Computes the swap rate of a quarterly swap.
+        /// </summary>
+        /// <param name="expiry">Expiry time in quarters.</param>
+        /// <param name="tenor">Length of the swap in quarters.</param>
+        /// <param name="discount">Discount factors used.</param>
+        /// <returns></returns>
+        public static double SwapRate(int expiry, int tenor, QuarterlyDiscounts discount)
+        {
+            double numerator = 0;
+            double denominator = 0;
+            for (int i = 0; i < tenor; i++)
+            {
+                double forward = ForwardContract(expiry, expiry + i + 1, discount);
+                numerator += forward * CashForwardRate(expiry + i, discount);
+                denominator += forward;
+            }
+            return numerator / denominator;
+        }
+
+        /// <summary>
+        /// Computes the shifted swap rate of a quarterly swap.
+        /// </summary>
+        /// <param name="expiry">Expiry time in quarters.</param>
+        /// <param name="tenor">Length of the swap in quarters.</param>
+        /// <param name="discount">Discount factors used.</param>
+        /// <param name="shift">Shifts used.</param>
+        /// <returns></returns>
+        public static double ShiftedSwapRate(int expiry, int tenor, QuarterlyDiscounts discount, QuarterlyShifts shift)
+        {
+            double numerator = 0;
+            double denominator = 0;
+            for (int i = 0; i < tenor; i++)
+            {
+                double forward = ForwardContract(expiry, expiry + i + 1, discount);
+                numerator += forward * ShiftedCashForwardRate(expiry + i, discount, shift);
+                denominator += forward;
+            }
+            return numerator / denominator;
+        }
+
+        /// <summary>
+        /// The "shift" of the swap rate, or shifted swap rate - actual swap rate.
+        /// </summary>
+        /// <param name="expiry"></param>
+        /// <param name="tenor"></param>
+        /// <param name="discount"></param>
+        /// <param name="shift"></param>
+        /// <returns></returns>
+        public static double SwapShift(int expiry, int tenor, QuarterlyDiscounts discount, QuarterlyShifts shift)
+        {
+            double numerator = 0;
+            double denominator = 0;
+            for (int i = 0; i < tenor; i++)
+            {
+                double forward = ForwardContract(expiry, expiry + i + 1, discount);
+                numerator += forward * shift.Get(expiry + i);
+                denominator += forward;
+            }
+            return numerator / denominator;
         }
     }
 }

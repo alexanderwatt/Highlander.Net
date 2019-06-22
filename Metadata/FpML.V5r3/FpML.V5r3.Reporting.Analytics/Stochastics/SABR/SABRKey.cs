@@ -13,7 +13,6 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
 using System.Collections.Generic;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Reporting.Helpers;
@@ -111,7 +110,7 @@ namespace Orion.Analytics.Stochastics.SABR
         {
             try
             {
-                var match = (x.ExpiryAsDecimal == y.ExpiryAsDecimal);
+                var match = y != null && x != null && x.ExpiryAsDecimal == y.ExpiryAsDecimal;
                 if (match && (x.Tenor.ToLower() == DefaultTenor.ToLower() || y.Tenor.ToLower() == DefaultTenor.ToLower()))
                     return true;
 
@@ -210,7 +209,7 @@ namespace Orion.Analytics.Stochastics.SABR
             try
             {
                 var y = (SABRKey)obj;
-                var match = (Expiry == y.Expiry);
+                var match = y != null && (Expiry == y.Expiry);
                 if (match && (Tenor == DefaultTenor || y.Tenor == DefaultTenor))
                     return true;
 
@@ -235,10 +234,7 @@ namespace Orion.Analytics.Stochastics.SABR
         ///                
         ///</returns>
         ///<filterpriority>2</filterpriority>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
 

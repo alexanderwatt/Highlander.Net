@@ -17,6 +17,8 @@
 
 using System;
 using System.Globalization;
+using Matrix = Orion.Analytics.LinearAlgebra.Matrix;
+using DenseVector = MathNet.Numerics.LinearAlgebra.Double.DenseVector;
 
 #endregion
 
@@ -26,11 +28,11 @@ namespace Orion.Analytics.Pedersen
 
     public class Simulator
     {
-        #region declarations
+        #region Declarations
 
-        public Derivative Deriv { get; set; }
+        public Derivative Derivative { get; set; }
 
-        public int Iter { get; set; }
+        public int Iterate { get; set; }
 
         public int Exp { get; set; }
 
@@ -40,7 +42,7 @@ namespace Orion.Analytics.Pedersen
         private readonly Economy _economy;
         private double[][] _discount;
         private double[][] _v;
-        private GeneralMatrix[] _xi;
+        private Matrix[] _xi;
         private double[] _shift;
 
         public double Notional { get; set; } = 1;
@@ -53,8 +55,8 @@ namespace Orion.Analytics.Pedersen
 
         public Simulator(Economy eco, Parameters p)
         {
-            Iter = 1000;
-            Deriv = Derivative.Caplet;
+            Iterate = 1000;
+            Derivative = Derivative.Caplet;
             Exp = 1;
             _economy = eco;
             _param = p;
@@ -64,15 +66,15 @@ namespace Orion.Analytics.Pedersen
         {
             //ATM
             double result = 0;
-            if (Deriv == Derivative.Caplet)
+            if (Derivative == Derivative.Caplet)
             {
                 result = _economy.CashRate(0, p[0]);
             }
-            if (Deriv == Derivative.Swaption)
+            if (Derivative == Derivative.Swaption)
             {
                 result = _economy.SwapRate(0, p[0], p[1]);
             }
-            //if (Deriv == Derivative.custom)
+            //if (Derivative == Derivative.custom)
             //{
             //    result = economy.CashRate(0, p[0]);
             //}
@@ -82,15 +84,15 @@ namespace Orion.Analytics.Pedersen
         private double FindPayoff(int[] p, double k)
         {
             double result = 0;
-            if (Deriv == Derivative.Caplet)
+            if (Derivative == Derivative.Caplet)
             {
-                result = _economy.CpltPayoff(p[0], k);
+                result = _economy.CapletPayoff(p[0], k);
             }
-            if (Deriv == Derivative.Swaption)
+            if (Derivative == Derivative.Swaption)
             {
-                result = _economy.SwpnPayoff(p[0], p[1], k);
+                result = _economy.SwaptionPayoff(p[0], p[1], k);
             }
-            if (Deriv == Derivative.Custom)
+            if (Derivative == Derivative.Custom)
             {
                 result = Payoff.Evaluate();
             }
@@ -100,15 +102,15 @@ namespace Orion.Analytics.Pedersen
         private double FindTheoretical(int[] p, double k)
         {
             double result = 0;
-            if (Deriv == Derivative.Caplet)
+            if (Derivative == Derivative.Caplet)
             {
-                result = _economy.CpltBS(p[0], k);
+                result = _economy.CapletBlackScholes(p[0], k);
             }
-            if (Deriv == Derivative.Swaption)
+            if (Derivative == Derivative.Swaption)
             {
-                result = _economy.SwpnBS(p[0], p[1], k);
+                result = _economy.SwaptionBlackScholes(p[0], p[1], k);
             }
-            if (Deriv == Derivative.Custom)
+            if (Derivative == Derivative.Custom)
             {
                 result = 0;
             }
@@ -124,43 +126,41 @@ namespace Orion.Analytics.Pedersen
                 throw new Exception("Run Calibrator first!");
             }
             _shift = _economy.Shift;
-            SetV(_param.Uexpiry, _param.Utenor);
-            if (Deriv == Derivative.Custom)
+            SetV(_param.UExpiry, _param.UTenor);
+            if (Derivative == Derivative.Custom)
             {
                 Payoff = new PayoffParser(_economy, PayoffFunction);
             }
-
             double temp = 0;
             double temp2 = 0;
             var p = new[] { Exp, Ten };
             double k = SetStrike(p);
-
-            for (int i = 0; i < Iter; i++)
+            for (int i = 0; i < Iterate; i++)
             {
                 if (i % 100 == 0)
                 {
                     Pedersen.WriteRange($"Iteration # {i}");
                 }
-                Simulate(_param.Uexpiry, _param.Utenor);
+                Simulate(_param.UExpiry, _param.UTenor);
                 double c = FindPayoff(p, k);
                 temp += c;
                 temp2 += c * c;
             }
             double actual = Notional * FindTheoretical(p, k);
-            double mean = Notional * temp / Iter;
-            double sd = Notional * Math.Sqrt((temp2 / Iter - (temp / Iter) * (temp / Iter)) / (Iter - 1.0));
+            double mean = Notional * temp / Iterate;
+            double sd = Notional * Math.Sqrt((temp2 / Iterate - (temp / Iterate) * (temp / Iterate)) / (Iterate - 1.0));
             double error = (mean - actual) / sd;
-            if (Deriv == Derivative.Caplet)
+            if (Derivative == Derivative.Caplet)
             {
                 Pedersen.Write($"Caplet: {Exp}, ", "sim");
             }
-            else if (Deriv == Derivative.Swaption)
+            else if (Derivative == Derivative.Swaption)
             {
                 Pedersen.Write($"Swaption: ({Exp}, {Ten}), ", "sim");
             }
             if (actual == 0)
             {
-                Pedersen.Write($"Notional: {Notional}, Iterations: {Iter}\n", "sim");
+                Pedersen.Write($"Notional: {Notional}, Iterations: {Iterate}\n", "sim");
                 Pedersen.Write("Theoretical: N/A\n", "sim");
                 Pedersen.Write($"Sim Average: {mean}\n", "sim");
                 Pedersen.Write($"Sim Std.Dev: {sd}\n", "sim");
@@ -168,7 +168,7 @@ namespace Orion.Analytics.Pedersen
             }
             else
             {
-                Pedersen.Write($"Notional: {Notional}, Iterations: {Iter}\n", "sim");
+                Pedersen.Write($"Notional: {Notional}, Iterations: {Iterate}\n", "sim");
                 Pedersen.Write($"Theoretical: {actual}\n", "sim");
                 Pedersen.Write($"Sim Average: {mean}\n", "sim");
                 Pedersen.Write($"Sim Std.Dev: {sd}\n", "sim");
@@ -195,24 +195,24 @@ namespace Orion.Analytics.Pedersen
 
         private void Simulate(int expiry, int tenor)
         {
-            var accsum = new GeneralVector[tenor + 1];
+            var accumulateSum = new DenseVector[tenor + 1];
             for (int i = 0; i < tenor + 1; i++)
             {
-                accsum[i] = new GeneralVector(_param.NFAC);
+                accumulateSum[i] = new DenseVector(_param.NFAC);
             }
             for (int i = 0; i < expiry; i++)
             {
-                GeneralVector bm = BrownianMotion.BMStep(0.25, _param.NFAC);
-                accsum[i].SetToZero();
+                var bm = BrownianMotion.BMStep(0.25, _param.NFAC);
+                accumulateSum[i].Clear();
                 for (int j = i + 1; j < tenor + 1; j++)
                 {
                     double temp = Math.Max(0, Math.Min(1, _v[i][j] / _discount[i][j]));
-                    accsum[j] = (GeneralVector)Vector.Add(accsum[j - 1], Vector.Multiply(temp, _xi[i][j - i - 1, Range.All]));
+                    accumulateSum[j] = accumulateSum[j - 1] + temp * _xi[i].RowD(j - i - 1);//accumulateSum[j - 1] + temp * _xi[i][j - i - 1, Range.All];
                 }
                 for (int j = tenor; j > i; j--)
                 {
-                    var vol = (GeneralVector)Vector.Subtract(_xi[i][j - i - 1, Range.All], accsum[j]);
-                    _v[i + 1][j] = _v[i][j] * Math.Exp(Vector.DotProduct(vol, bm) - 0.5 * Vector.DotProduct(vol, vol) * 0.25);
+                    var vol = _xi[i].RowD(j - i - 1)  - accumulateSum[j];//_xi[i][j - i - 1, Range.All] - accumulateSum[j];
+                    _v[i + 1][j] = _v[i][j] * Math.Exp(vol * bm - 0.5 * (vol * vol) * 0.25);
                     if (j < tenor)
                     {
                         _discount[i + 1][j] = _discount[i + 1][j + 1] * (1 - 0.25 * _shift[j]) + _v[i + 1][j];

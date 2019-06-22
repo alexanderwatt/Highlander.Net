@@ -20,12 +20,12 @@ namespace Orion.Analytics.Pedersen
 {
     public class Cascade
     {
-        #region declarations
+        #region Declarations
 
         private readonly Parameters _param;
         private readonly Economy _economy;
         private double[][] _gamma;
-        private bool[][] _ischanged;
+        private bool[][] _isChanged;
         public double SwpnBound { get; set; }
 
         public double CpltBound { get; set; }
@@ -40,33 +40,33 @@ namespace Orion.Analytics.Pedersen
 
         public void Go()
         {
-            _gamma = new double[_param.Uexpiry][];
-            _ischanged = new bool[_param.Uexpiry][];
-            for (int i = 0; i < _param.Uexpiry; i++)
+            _gamma = new double[_param.UExpiry][];
+            _isChanged = new bool[_param.UExpiry][];
+            for (int i = 0; i < _param.UExpiry; i++)
             {
-                _gamma[i] = new double[_param.Utenor - i];
-                _ischanged[i] = new bool[_param.Utenor - i];
+                _gamma[i] = new double[_param.UTenor - i];
+                _isChanged[i] = new bool[_param.UTenor - i];
             }
-            for (int i = 0; i < _param.Uexpiry; i++)
+            for (int i = 0; i < _param.UExpiry; i++)
             {
-                for (int j = 0; j < _param.Utenor - i; j++)
+                for (int j = 0; j < _param.UTenor - i; j++)
                 {
                     double target;
                     double bound;
                     if (j == 0)
                     {
-                        target = _economy.ReturnIvol(i);
+                        target = _economy.ReturnImpliedVolatility(i);
                         bound = CpltBound;
                     }
                     else
                     {
-                        target = _economy.ReturnIvol(i , j);
+                        target = _economy.ReturnImpliedVolatility(i , j);
                         bound = SwpnBound;
                     }
                     if (target > 0)
                     {
-                        double tempgamma = FindGamma(i, j, bound, target);
-                        ScaleXi(i, j, tempgamma);
+                        double tempGamma = FindGamma(i, j, bound, target);
+                        ScaleXi(i, j, tempGamma);
                     }
                 }
             }
@@ -79,28 +79,28 @@ namespace Orion.Analytics.Pedersen
             double c1 = 0;
             double c2 = 0;
             double result;
-            var tempvec1 = new GeneralVector(_param.NFAC);
-            var tempvec2 = new GeneralVector(_param.NFAC);
-            GeneralMatrix[] xi = _economy.Xi;
+            var tempVector1 = new DenseVector(_param.NFAC);
+            var tempVector2 = new DenseVector(_param.NFAC);
+            var xi = _economy.Xi;
             double[][][] ai = _economy.Ai;
             for (int i = 0; i <= exp; i++)
             {
-                tempvec1.SetToZero();
-                tempvec2.SetToZero();
+                tempVector1.Clear();
+                tempVector2.Clear();
                 for (int j = exp - i; j <= exp - i + ten; j++)
                 {
-                    if (_ischanged[i][j])
+                    if (_isChanged[i][j])
                     {
-                        tempvec1 = (GeneralVector)tempvec1.Add(Vector.Multiply(ai[exp][ten][j - exp + i], xi[i][j, Range.All]));
+                        tempVector1 = tempVector1 + ai[exp][ten][j - exp + i] * xi[i].RowD(j);
                     }
                     else
                     {
-                        tempvec2 = (GeneralVector)tempvec2.Add(Vector.Multiply(ai[exp][ten][j - exp + i], xi[i][j, Range.All]));
+                        tempVector2 = tempVector2 + ai[exp][ten][j - exp + i] * xi[i].RowD(j);
                     }
                 }
-                c0 += Vector.DotProduct(tempvec1, tempvec1);
-                c1 += Vector.DotProduct(tempvec1, tempvec2);
-                c2 += Vector.DotProduct(tempvec2, tempvec2);
+                c0 += tempVector1 * tempVector1;
+                c1 += tempVector1 * tempVector2;
+                c2 += tempVector2 * tempVector2;
             }
             c1 = 2 * c1;
             c0 -= target * target * (exp + 1);
@@ -111,7 +111,7 @@ namespace Orion.Analytics.Pedersen
             }
             else
             {
-                result = (-c1) / (2 * c2);
+                result = -c1 / (2 * c2);
             }
             if (result > bound)
             {
@@ -124,20 +124,20 @@ namespace Orion.Analytics.Pedersen
             return result;
         }
 
-        private void ScaleXi(int exp, int ten, double newgamma)
+        private void ScaleXi(int exp, int ten, double newGamma)
         {
-            GeneralMatrix[] xi = _economy.Xi;
+            var xi = _economy.Xi;
             for (int i = 0; i <= exp; i++)
             {
                 for (int j = exp - i; j <= exp - i + ten; j++)
                 {
-                    if (!_ischanged[i][j])
+                    if (!_isChanged[i][j])
                     {
-                        _ischanged[i][j] = true;
-                        _gamma[i][j] = newgamma;
+                        _isChanged[i][j] = true;
+                        _gamma[i][j] = newGamma;
                         for (int k = 0; k < _param.NFAC; k++)
                         {
-                            xi[i][j, k] = xi[i][j, k] * newgamma;
+                            xi[i][j, k] = xi[i][j, k] * newGamma;
                         }
                     }
                 }

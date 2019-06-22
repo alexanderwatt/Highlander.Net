@@ -17,13 +17,13 @@ namespace Orion.Analytics.Pedersen
 {
     public class Recycle
     {
-        #region declarations
+        #region Declarations
 
-        public double[][] Ivol { get; private set; }
+        public double[][] ImpliedVolatility { get; private set; }
 
-        public double[][] IvolSq { get; private set; }
+        public double[][] ImpliedVolatilitySquare { get; private set; }
 
-        public double[][][] IvolSqLarge { get; private set; }
+        public double[][][] ImpliedVolatilitySquareLarge { get; private set; }
 
         private readonly Parameters _param;
 
@@ -36,17 +36,17 @@ namespace Orion.Analytics.Pedersen
 
         public void Initialise()
         {
-            Ivol = new double[_param.Uexpiry][];
-            IvolSq = new double[_param.Uexpiry][];
-            IvolSqLarge = new double[_param.Uexpiry][][];
-            for (int i = 0; i < _param.Uexpiry; i++)
+            ImpliedVolatility = new double[_param.UExpiry][];
+            ImpliedVolatilitySquare = new double[_param.UExpiry][];
+            ImpliedVolatilitySquareLarge = new double[_param.UExpiry][][];
+            for (int i = 0; i < _param.UExpiry; i++)
             {
-                Ivol[i] = new double[_param.Utenor - i];
-                IvolSq[i] = new double[_param.Utenor - i];
-                IvolSqLarge[i] = new double[_param.Utenor - i][];
-                for (int j = 0; j < _param.Utenor - i; j++)
+                ImpliedVolatility[i] = new double[_param.UTenor - i];
+                ImpliedVolatilitySquare[i] = new double[_param.UTenor - i];
+                ImpliedVolatilitySquareLarge[i] = new double[_param.UTenor - i][];
+                for (int j = 0; j < _param.UTenor - i; j++)
                 {
-                    IvolSqLarge[i][j] = new double[i + 1];
+                    ImpliedVolatilitySquareLarge[i][j] = new double[i + 1];
                 }
             }
         }

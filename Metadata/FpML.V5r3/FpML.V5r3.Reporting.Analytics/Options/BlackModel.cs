@@ -40,6 +40,7 @@ namespace Orion.Analytics.Options
     }
 
     #endregion Public Enum for Valid Swaption Types
+
     ///<summary>
     ///</summary>
     public static class BlackModel
@@ -53,7 +54,7 @@ namespace Orion.Analytics.Options
         /// <param name="v"></param>
         /// <param name="pay"></param>
         /// <returns></returns>
-        public static double GetBlackValue(double t, double f, double k, double v, PayStyle pay)
+        public static double GetValue(double t, double f, double k, double v, PayStyle pay)
         {
             var d1 = (Math.Log(f / k) + 0.5 * v * v * t) / v / Math.Sqrt(t);
             var d2 = d1 - v * Math.Sqrt(t);
@@ -64,6 +65,36 @@ namespace Orion.Analytics.Options
                 return f * n1 - k * n2;
             }
             return k * (1 - n2) - f * (1 - n1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="f"></param>
+        /// <param name="k"></param>
+        /// <param name="p"></param>
+        /// <param name="atm"></param>
+        /// <param name="pay"></param>
+        /// <returns></returns>
+        public static double GetImpliedVolatility(double t, double f, double k, double p, double atm, PayStyle pay)
+        {
+            const double tolerance = 0.000000001;
+            double result = atm;
+
+            for (int i = 0; i < 50; i++)
+            {
+                var fun = GetValue(t, f, k, result, pay) - p;
+                if (Math.Abs(fun) < tolerance)
+                {
+                    return result;
+                }
+                var f1 = GetValue(t, f, k, result + 0.00001, pay) - p;
+                var delta = -fun * 0.00001 / (f1 - fun);
+                result += 0.7 * delta;
+                //0.7 is a dampening factor
+            }
+            return result;
         }
 
         ///<summary>

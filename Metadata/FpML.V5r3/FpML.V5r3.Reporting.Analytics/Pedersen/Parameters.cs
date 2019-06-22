@@ -26,11 +26,11 @@ namespace Orion.Analytics.Pedersen
 
         public int NEXPIRY { get; private set; }
 
-        public int Ntenor { get; private set; }
+        public int NTenor { get; private set; }
 
-        public int Uexpiry { get; set; }
+        public int UExpiry { get; set; }
 
-        public int Utenor { get; set; }
+        public int UTenor { get; set; }
 
         public int[] Expiry { get; private set; }
 
@@ -52,13 +52,13 @@ namespace Orion.Analytics.Pedersen
 
         public bool SwpnOn { get; set; }
 
-        public double MaxIvol { get; set; }
+        public double MaxImpliedVolatility { get; set; }
 
-        public double MinIvol { get; set; }
+        public double MinImpliedVolatility { get; set; }
 
-        public double AvgSwpnIvol { get; set; }
+        public double AverageSwaptionImpliedVolatility { get; set; }
 
-        public double AvgCpltIvol { get; set; }
+        public double AverageCapletImpliedVolatility { get; set; }
 
         #endregion
 
@@ -77,15 +77,15 @@ namespace Orion.Analytics.Pedersen
 
         public void Initialise()
         {
-            SetExpiry(Uexpiry);
-            SetTenor(Utenor);
+            SetExpiry(UExpiry);
+            SetTenor(UTenor);
             NEXPIRY = Expiry.Length - 1;
-            Ntenor = Tenor.Length - 1;
-            if (NFAC > Ntenor)
+            NTenor = Tenor.Length - 1;
+            if (NFAC > NTenor)
             {
                 throw new Exception("To use " + NFAC.ToString(CultureInfo.InvariantCulture) + " factors, tenor must be at least " + Timeframe[NFAC].ToString(CultureInfo.InvariantCulture) + " quarters.");
             }
-            if (Uexpiry > Utenor)
+            if (UExpiry > UTenor)
             {
                 throw new Exception("Expiry cannot be greater than Tenor.");
             }
@@ -93,24 +93,24 @@ namespace Orion.Analytics.Pedersen
 
         public void SetExpiry(int exp)
         {
-            int exppos = RelativePositionOf(exp, Timeframe);
-            Expiry = new int[exppos + 1];
-            for (int i = 0; i < exppos; i++)
+            int expPos = RelativePositionOf(exp, Timeframe);
+            Expiry = new int[expPos + 1];
+            for (int i = 0; i < expPos; i++)
             {
                 Expiry[i] = Timeframe[i];
             }
-            Expiry[exppos] = exp;
+            Expiry[expPos] = exp;
         }
 
         public void SetTenor(int ten)
         {
-            int tenpos = RelativePositionOf(ten, Timeframe);
-            Tenor = new int[tenpos + 1];
-            for (int i = 0; i < tenpos; i++)
+            int tenPos = RelativePositionOf(ten, Timeframe);
+            Tenor = new int[tenPos + 1];
+            for (int i = 0; i < tenPos; i++)
             {
                 Tenor[i] = Timeframe[i];
             }
-            Tenor[tenpos] = ten;
+            Tenor[tenPos] = ten;
         }
 
         public string OutputExpiry()

@@ -814,7 +814,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
             return result;
         }
 
-        [Ignore]
+        //[Ignore]
         [TestMethod]
         public void VanillaAdditionalPayments1()
         {
@@ -847,7 +847,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
                                                                                                                 leg1BulletPaymentList, leg2BulletPaymentList);
             //  Payments made by payer of the swap 
             //
-            Assert.IsTrue(nonVanillaPriceImplTwoPaymentsByPayer.First.SwapPresentValue < valuationResultRange.SwapPresentValue);
+            Assert.IsTrue(nonVanillaPriceImplTwoPaymentsByPayer.First.SwapPresentValue > valuationResultRange.SwapPresentValue);
             Assert.IsTrue(nonVanillaPriceImplTwoPaymentsByPayer.First.FutureValue < valuationResultRange.FutureValue);
             // NO PExs
             //

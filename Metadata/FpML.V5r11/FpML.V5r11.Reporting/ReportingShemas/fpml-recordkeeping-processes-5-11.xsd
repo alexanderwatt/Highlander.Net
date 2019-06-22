@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+== Copyright (c) 2002- All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns="http://www.fpml.org/FpML-5/reporting" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:fpml-annotation="http://www.fpml.org/annotation" targetNamespace="http://www.fpml.org/FpML-5/reporting" ecore:documentRoot="FpML" ecore:nsPrefix="rpt" ecore:package="org.fpml.reporting" version="$Revision: 7629 $" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:include schemaLocation="fpml-business-events-5-11.xsd" />
+  <xsd:include schemaLocation="fpml-com-5-11.xsd" />
+  <xsd:include schemaLocation="fpml-eq-shared-5-11.xsd" />
+  <xsd:complexType name="RegReportingApplicability">
+    <xsd:sequence>
+      <xsd:element name="regulators" type="RegReportingApplicableRegulators" minOccurs="0" />
+      <xsd:element name="regulations" type="RegReportingApplicableRegulations" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegReportingApplicableRegulators">
+    <xsd:sequence>
+      <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegReportingApplicableRegulations">
+    <xsd:sequence>
+      <xsd:element name="cde" type="RegReporting.CDE" minOccurs="0" />
+      <xsd:element name="part43" type="RegReporting.Part43" minOccurs="0" />
+      <xsd:element name="part45" type="RegReporting.Part45" minOccurs="0" />
+      <xsd:element name="emir" type="RegReporting.EMIR" minOccurs="0" />
+      <xsd:element name="mifir" type="RegReporting.MIFIR" minOccurs="0" />
+      <xsd:element name="csa" type="RegReporting.CSA" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ApplicableRegulation">
+    <xsd:sequence>
+      <xsd:element name="dfaCftc" type="RegulatoryClassification.DFACFTC" minOccurs="0" />
+      <xsd:element name="emir" type="RegulatoryClassification.EMIR" minOccurs="0" />
+      <xsd:element name="hkma" type="RegulatoryClassification.HKMA" minOccurs="0" />
+      <xsd:element name="mifir" type="RegulatoryClassification.MIFIR" minOccurs="0" />
+      <xsd:element name="other" type="RegulatoryClassification.Other" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.CDE">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.Part43">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.Part45">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:sequence>
+            <xsd:element name="mandatorilyClearable" type="ReportingBoolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Whether the particular trade type in question is required by this regulator to be cleared.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0">
+              <xsd:sequence>
+                <xsd:element name="endUserException" type="xsd:boolean" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Specifies whether the trade is not obligated to be cleared via a derivative clearing organization, i.e. wehter there is an exemption from clearing. For historical reasons this is called "end-user exception", but this may be used to indication any exception from normal clearing mandates caused by the type of the partiees or their relationship, such as inter-affiliate trades. If a relatedParty block with a role of ClearingExceptionParty is present, that related party indicates which party is claiming the end user exception.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="endUserExceptionReason" type="ClearingExceptionReason" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Specifies a reason that the trade is exempted from a clearing requirement. This exemption may be an end-user exception, or another type such as in inter-affiliate trade.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+              <xsd:element name="endUserExceptionDeclaration" type="EndUserExceptionDeclaration" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en">Claims an end user exception and provides supporting evidence. If a relatedParty block with a role of ClearingExceptionParty is present, that related party indicates which party is claiming the end user exception.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:choice>
+            <xsd:element name="nonStandardTerms" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates that the trade has price-affecting characteristics in addition to the standard real-time reportable terms. The flag indicates that the price for this trade is not to be construed as being indicative of the market for standardised trades with otherwise identical reportable terms.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offMarketPrice" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates that the price does not reflect the current market. For example, in a credit trade where the two counterparties are not of equal credit standing, there is no initial margin and one party pays collateral to the other in the form of an add-on to the price (say a price that would otherwise be 100 at the market is struck at 105 to include the collateral, resulting in a very off-market looking price.)</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="largeSizeTrade" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Specifies whether the sender of this trade considers it to be a large notional trade or block trade for reporting purposes, and thus eligible for delayed public reporting. Normally this will only be applicable for off-facility trades.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="executionType" type="ExecutionType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was executed, e.g. via voice or electronically.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="executionVenueType" type="ExecutionVenueType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe the type of venue where trade was executed, e.g via an execution facility or privately.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="verificationMethod" type="VerificationMethod" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was or will be verified, e.g via a confirmation facility, via private electronic service, or via written documentation. This affect the timing of real-time reporting requirements. This field is provisional pending detailed confirmation of the data requirements, and may not be included in subsequent working drafts.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="confirmationMethod" type="ConfirmationMethod" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was confirmed, e.g via a confirmation facility, via private electronic service, or via written documentation. This affects the process flow for confirmation messages. This field is provisional pending detailed confirmation of the data requirements, and may not be included in subsequent working drafts.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reportingPartyOrganizationType" type="xsd:normalizedString" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">E.g. SD, MSP, etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyOrganizationType" type="xsd:normalizedString" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">E.g. SD, MSP, etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyIsUsPerson" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">whether the counterparty is a US person</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.EMIR">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody.EMIR" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. ESMA).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:sequence>
+            <xsd:element name="tradePartyRelationshipType" type="PartyRelationshipType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates how the parties to the trade (the counterparties) are related to each other with respect to this reporting regime, e.g. Affiliated, Intragroup, etc..</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="actionType" type="ActionType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Reports a regulator-specific code for the action associated with this submission. Used, for example, to report the ESMA action type.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mandatorilyClearable" type="CanonicalBoolean" minOccurs="0" />
+            <xsd:element name="exceedsClearingThreshold" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates whether the counterparty exceeds the volume threshold above which trades are required to be cleared.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reportingPartyClassification" type="EntityClassification" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyClassification" type="EntityClassification" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyisEEA" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates whether the counterparty is in the European Economic Area</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:group ref="ESMALevel3.model" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.MIFIR">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:group ref="RelatedPartyAndPerson.model" />
+          <xsd:element name="tradingObligation" type="RegulatoryTradingObligation" minOccurs="0" />
+          <xsd:group ref="TransactionClassification.model">
+            <xsd:annotation>
+              <xsd:documentation>Provides classification of the transaction being reported</xsd:documentation>
+            </xsd:annotation>
+          </xsd:group>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegReporting.CSA">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="xsd:token" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:group ref="ReportingRoleAndPurpose.model" minOccurs="0" />
+          <xsd:element name="interAffiliate" type="xsd:boolean" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ESMAContractType">
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="contractTypeScheme" default="http://www.fpml.org/coding-scheme/esma-contract-type" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ESMACreditSeniority">
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="creditSeniorityScheme" default="http://www.fpml.org/coding-scheme/esma-credit-seniority" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ESMADeliveryType">
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="deliveryTypeScheme" default="http://www.fpml.org/coding-scheme/esma-delivery-type" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ESMACreditDetails">
+    <xsd:sequence>
+      <xsd:element name="seniority" type="ESMACreditSeniority" minOccurs="0" />
+      <xsd:element name="indexFactor" type="NonNegativeDecimal" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ESMAIndexIdentification">
+    <xsd:choice>
+      <xsd:element name="code" type="ESMABenchmarkIndexCode" />
+      <xsd:element name="name" type="ESMAIndexName" />
+    </xsd:choice>
+  </xsd:complexType>
+  <xsd:complexType name="ESMAProductUnderlyer">
+    <xsd:annotation>
+      <xsd:documentation />
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:sequence>
+        <xsd:choice>
+          <xsd:element name="instrumentId" type="InstrumentId" maxOccurs="unbounded" />
+          <xsd:element name="index" type="ESMAIndexIdentification" />
+        </xsd:choice>
+        <xsd:element name="maturityDate" type="xsd:date" minOccurs="0" />
+      </xsd:sequence>
+      <xsd:element name="maturityDate" type="xsd:date" />
+    </xsd:choice>
+  </xsd:complexType>
+  <xsd:complexType name="EventTaxonomy">
+    <xsd:simpleContent>
+      <xsd:extension base="NonEmptyScheme">
+        <xsd:attribute name="eventTaxonomyScheme" type="NonEmptyURI" default="http://www.fpml.org/coding-scheme/event-taxonomy" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="EventTimestamps">
+    <xsd:sequence>
+      <xsd:element name="agreementDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>When the details of the event were agreed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="entryDateTime" type="xsd:dateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>When the agreed details where recorded.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="executionDateTime" type="xsd:dateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>When the event was executed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="effectiveDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>When the event is actually effective from</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HKMAConfirmationMethod">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type used to represent the type of mechanism that can be used to confirm a trade.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="confirmationMethodScheme" type="NonEmptyURI" default="http://www.fpml.org/coding-scheme/hkma-confirmation-method" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation">
+    <xsd:sequence>
+      <xsd:element name="dfaCftc" type="InapplicableRegulation.DFACFTC" minOccurs="0" maxOccurs="2" />
+      <xsd:element name="emir" type="InapplicableRegulation.EMIR" minOccurs="0" />
+      <xsd:element name="mifir" type="InapplicableRegulation.MIFIR" minOccurs="0" />
+      <xsd:element name="hkma" type="InapplicableRegulation.HKMA" minOccurs="0" />
+      <xsd:element name="other" type="InapplicableRegulation.Other" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation.DFACFTC">
+    <xsd:sequence>
+      <xsd:element name="supervisoryBody" type="SupervisoryBody.DFACFTC" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. SEC).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="withdrawalReasonCode" type="ReasonCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation.EMIR">
+    <xsd:sequence>
+      <xsd:element name="withdrawalReasonCode" type="ReasonCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation.HKMA">
+    <xsd:sequence>
+      <xsd:element name="withdrawalReasonCode" type="ReasonCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation.MIFIR">
+    <xsd:sequence>
+      <xsd:element name="withdrawalReasonCode" type="ReasonCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InapplicableRegulation.Other">
+    <xsd:sequence>
+      <xsd:element name="supervisoryBody" type="SupervisoryBody" minOccurs="0" />
+      <xsd:element name="withdrawalReasonCode" type="ReasonCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NonpublicExecutionReport">
+    <xsd:complexContent>
+      <xsd:extension base="CorrectableRequestMessage">
+        <xsd:sequence>
+          <xsd:element name="asOfDate" type="IdentifiedDate" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The date for which this document reports positions and valuations.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="asOfTime" type="xsd:time" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The time for which this report was generated (i.e., the cut-off time of the report).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="PortfolioReferenceBase.model" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Allows a reference to porftfolio request to be included, such as a portfolio compression request. NOTE: this is an element that is under assessment and may not be available in a subsequent working draft.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:group>
+          <xsd:choice minOccurs="0">
+            <xsd:sequence>
+              <xsd:element name="originatingEvent" type="OriginatingEvent" minOccurs="0" />
+              <xsd:element name="trade" type="Trade" minOccurs="0" />
+            </xsd:sequence>
+            <xsd:group ref="PostTradeEventsBase.model" />
+            <xsd:group ref="ChangeEventsBase.model" />
+            <xsd:group ref="OptionsEventsBase.model" />
+            <xsd:element ref="additionalEvent" />
+          </xsd:choice>
+          <xsd:group ref="EventValuation.model" minOccurs="0" />
+          <xsd:group ref="PartiesAndAccounts.model" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="NonpublicExecutionReportRetracted">
+    <xsd:complexContent>
+      <xsd:extension base="NonCorrectableRequestMessage">
+        <xsd:sequence>
+          <xsd:choice minOccurs="0">
+            <xsd:choice minOccurs="0">
+              <xsd:sequence>
+                <xsd:element name="originatingEvent" type="OriginatingEvent" minOccurs="0" />
+                <xsd:element name="trade" type="Trade" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:group ref="PostTradeEventsBase.model" />
+              <xsd:group ref="ChangeEventsBase.model" />
+              <xsd:group ref="OptionsEventsBase.model" />
+              <xsd:element ref="additionalEvent" />
+            </xsd:choice>
+            <xsd:sequence>
+              <xsd:element name="primaryAssetClass" type="AssetClass" minOccurs="0" />
+              <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0" />
+              <xsd:element name="eventIdentifier" type="BusinessEventIdentifier" minOccurs="0" maxOccurs="2">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en">Individual parties should only use a single event identifier to identify a retraction. Platforms providing services on behalf of both parties in a transaction may provide event identifiers for both parties; in this case it is up to the recipient (the trade repository) to validate that the event IDs refer to the same event.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="relatedParty" type="RelatedParty" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en">This may be used to identify one or more parties that perform a role within the transaction. If this is within a partyTradeInformation block, the related party performs the role with respect to the party identifie by the "partyReference" in the partyTradeInformation block.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:choice>
+          <xsd:group ref="PartiesAndAccounts.model" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="NovationDetails">
+    <xsd:sequence>
+      <xsd:element name="eventIdentifier" type="BusinessEventIdentifier" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:sequence>
+        <xsd:element name="transferor" type="PartyReference" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The party requesting the transfer.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="transferee" type="PartyReference" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The party that will take on the transferor's obligations.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="remainingParty" type="PartyReference">
+          <xsd:annotation>
+            <xsd:documentation>The party that keeps its obligations.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:sequence>
+          <xsd:element name="otherTransferor" type="PartyReference" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The other party that is requesting a transfer.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="otherTransferee" type="PartyReference" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The party that will take the other transferor's obligations.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:choice>
+      <xsd:group ref="NovationTerms.model">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Documentation and other terms relating to the novation.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:group>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The base type which all regulatory classification types extend.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence />
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification.DFACFTC">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody.DFACFTC" minOccurs="0" maxOccurs="2">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. SEC).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:sequence>
+            <xsd:element name="mandatorilyClearable" type="ReportingBoolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Whether the particular trade type in question is required by this regulator to be cleared.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0">
+              <xsd:sequence>
+                <xsd:element name="endUserException" type="xsd:boolean" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Specifies whether the trade is not obligated to be cleared via a derivative clearing organization, i.e. wehter there is an exemption from clearing. For historical reasons this is called "end-user exception", but this may be used to indication any exception from normal clearing mandates caused by the type of the partiees or their relationship, such as inter-affiliate trades. If a relatedParty block with a role of ClearingExceptionParty is present, that related party indicates which party is claiming the end user exception.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="endUserExceptionReason" type="ClearingExceptionReason" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Specifies a reason that the trade is exempted from a clearing requirement. This exemption may be an end-user exception, or another type such as in inter-affiliate trade.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+              <xsd:element name="endUserExceptionDeclaration" type="EndUserExceptionDeclaration" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en">Claims an end user exception and provides supporting evidence. If a relatedParty block with a role of ClearingExceptionParty is present, that related party indicates which party is claiming the end user exception.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:choice>
+            <xsd:element name="nonStandardTerms" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates that the trade has price-affecting characteristics in addition to the standard real-time reportable terms. The flag indicates that the price for this trade is not to be construed as being indicative of the market for standardised trades with otherwise identical reportable terms.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offMarketPrice" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates that the price does not reflect the current market. For example, in a credit trade where the two counterparties are not of equal credit standing, there is no initial margin and one party pays collateral to the other in the form of an add-on to the price (say a price that would otherwise be 100 at the market is struck at 105 to include the collateral, resulting in a very off-market looking price.)</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="largeSizeTrade" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Specifies whether the sender of this trade considers it to be a large notional trade or block trade for reporting purposes, and thus eligible for delayed public reporting. Normally this will only be applicable for off-facility trades.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="executionType" type="ExecutionType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was executed, e.g. via voice or electronically.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="executionVenueType" type="ExecutionVenueType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe the type of venue where trade was executed, e.g via an execution facility or privately.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="verificationMethod" type="VerificationMethod" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was or will be verified, e.g via a confirmation facility, via private electronic service, or via written documentation. This affect the timing of real-time reporting requirements. This field is provisional pending detailed confirmation of the data requirements, and may not be included in subsequent working drafts.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="confirmationMethod" type="ConfirmationMethod" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Used to describe how the trade was confirmed, e.g via a confirmation facility, via private electronic service, or via written documentation. This affects the process flow for confirmation messages. This field is provisional pending detailed confirmation of the data requirements, and may not be included in subsequent working drafts.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reportingPartyOrganizationType" type="xsd:normalizedString" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">E.g. SD, MSP, etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyOrganizationType" type="xsd:normalizedString" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">E.g. SD, MSP, etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyIsUsPerson" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">whether the counterparty is a US person</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification.EMIR">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody.EMIR" minOccurs="0" maxOccurs="2">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. ESMA).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:sequence>
+            <xsd:element name="tradePartyRelationshipType" type="PartyRelationshipType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates how the parties to the trade (the counterparties) are related to each other with respect to this reporting regime, e.g. Affiliated, Intragroup, etc..</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="actionType" type="ActionType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Reports a regulator-specific code for the action associated with this submission. Used, for example, to report the ESMA action type.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mandatorilyClearable" type="CanonicalBoolean" minOccurs="0" />
+            <xsd:element name="exceedsClearingThreshold" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates whether the counterparty exceeds the volume threshold above which trades are required to be cleared.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reportingPartyClassification" type="EntityClassification" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyClassification" type="EntityClassification" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="counterPartyisEEA" type="xsd:boolean" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Indicates whether the counterparty is in the European Economic Area</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+          <xsd:group ref="ESMALevel3.model" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification.HKMA">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody.HKMA" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. HKMA).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:group ref="RelatedPartyAndPerson.model" />
+          <xsd:element name="confirmationMethod" type="HKMAConfirmationMethod" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Used to describe how the trade was confirmed, e.g via a confirmation facility, via private electronic service, or via written documentation. This affects the process flow for confirmation messages. This field is provisional pending detailed confirmation of the data requirements, and may not be included in subsequent working drafts.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification.MIFIR">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody.MIFIR" minOccurs="0" maxOccurs="2">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. ESMA).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+          <xsd:group ref="RelatedPartyAndPerson.model" />
+          <xsd:element name="tradingObligation" type="RegulatoryTradingObligation" minOccurs="0" />
+          <xsd:group ref="TransactionClassification.model">
+            <xsd:annotation>
+              <xsd:documentation>Provides classification of the transaction being reported</xsd:documentation>
+            </xsd:annotation>
+          </xsd:group>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryClassification.Other">
+    <xsd:complexContent>
+      <xsd:extension base="RegulatoryClassification">
+        <xsd:sequence>
+          <xsd:element name="supervisoryBody" type="SupervisoryBody" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The regulator or other supervisory body the organization is registered with (e.g. SEC).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group ref="ReportingRoleAndPurpose.model" />
+          <xsd:group ref="RegulatoryBuyerAndSeller.model" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+<!--<xsd:complexType name="RegulatoryClearingObligation"/>-->
+  <xsd:complexType name="RegulatoryDisclosure">
+    <xsd:complexContent>
+      <xsd:extension base="AddressedMessage">
+        <xsd:sequence>
+          <xsd:element name="isCorrection" type="xsd:boolean" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates if this message corrects an earlier submission. If true, the recipient is directed to record information about the most recent lifecycle event affecting the trade as a correction of the previous submission, rather than as a new lifecycle event.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="onBehalfOf" type="OnBehalfOf" minOccurs="0" maxOccurs="4">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates which party (or parties) (and accounts) a trade or event is being processed for. Normally there will only be a maximum of 2 parties, but in the case of a novation there could be a transferor, transferee, remaining party, and other remaining party. Also, in the context of a trade package there could be several parties for which limit check is requested, necessitating multiple onBehalfOf elements. Except for these cases, there should be no more than two onBehalfOf references in a message.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="asOfDate" type="IdentifiedDate" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The date for which this document reports positions and valuations.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="asOfTime" type="xsd:time" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">The time for which this report was generated (i.e., the cut-off time of the report).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="eventId" type="EventId" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A unique event identifier.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="eventType" type="EventTaxonomy" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A structured code indicating the event type.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="eventTimestamps" type="EventTimestamps" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Various timestamps related to the event.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+<!--
+                                        <xsd:sequence minOccurs="0">
+                                                <xsd:element name="sizeChange" type="TradeLegSizeChange" maxOccurs="unbounded"/>
+                                                <xsd:element name="novationDetails" type="NovationDetails" minOccurs="0"/>
+                                        </xsd:sequence>
+                                        -->
+          <xsd:group ref="ReportingNotionalChange.model" minOccurs="0" />
+          <xsd:element name="payment" type="NonNegativePayment" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Payments in settlement of the event</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="applicableRegulation" type="ApplicableRegulation" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>All the regulator that applies to this trade.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="trade" type="Trade" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The revised state of the trade or its final state for a lifecycle ending event</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="quote" type="BasicQuotation" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>Pricing information for the trade.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>The supporting party definitions.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryReportingAcknowledgement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining an acknowledgement to a regulatory reporting submission, e.g. regulatoryDisclosure or regulatoryWithdrawal.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Message">
+        <xsd:sequence>
+          <xsd:element name="header" type="ResponseMessageHeader" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Standard FpML message header</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>identifies the affected trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="regulatorReportingStatus" type="RegulatorReportingStatus" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Information about how the position is being reported to regulators.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="additionalData" type="AdditionalData" minOccurs="0" />
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Reference information about parties, business units, and persons involed in the trade.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryReportingAcknowledgement2">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An alternative version of a type defining an acknowledgement to a regulatory reporting submission, e.g. regulatoryDisclosure or regulatoryWithdrawal.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Message">
+        <xsd:sequence>
+          <xsd:element name="header" type="ResponseMessageHeader" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Standard FpML message header</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>identifies the affected trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="regulatorReportingStatus" type="RegulatorReportingStatus2" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Information about how the position is being reported to regulators.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="additionalData" type="AdditionalData" minOccurs="0" />
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Reference information about parties, business units, and persons involed in the trade.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryReportingException">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining the basic content for a message sent to inform another system that some exception has been detected in a regulatory reporting message.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Message">
+        <xsd:sequence>
+          <xsd:element name="header" type="ExceptionMessageHeader" minOccurs="0" />
+          <xsd:group ref="Exception.model" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus">
+    <xsd:sequence>
+      <xsd:element name="name" type="ReportingRegimeName" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies the reporting regime under which this data is reported. For example, Dodd-Frank, EMIR, MiFID, HongKongOTCDRepository, ODRF</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="supervisoryBody" type="SupervisoryBody" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies the specific regulator or other supervisory body for which this data is produced. For example, CFTC, SEC, UKFSA, ODRF, SFC, ESMA.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">&gt;Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingStatus" type="RegulatorReportingStatusCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Describes the extent to which this trade is being reported to the regime (e.g. Not reported, reported with warnings, fully reported).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reason" type="Reason" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to describe and validation errors or warnings associated with the message for the regime.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus2">
+    <xsd:sequence>
+      <xsd:element name="dfaCftc" type="RegulatorReportingStatus.DFACFTC" minOccurs="0" />
+      <xsd:element name="emir" type="RegulatorReportingStatus.EMIR" minOccurs="0" />
+      <xsd:element name="mifir" type="RegulatorReportingStatus.MIFIR" minOccurs="0" />
+      <xsd:element name="hkma" type="RegulatorReportingStatus.HKMA" minOccurs="0" />
+      <xsd:element name="other" type="RegulatorReportingStatus" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Information about how the position is being reported to regulators.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus.DFACFTC">
+    <xsd:sequence>
+      <xsd:element name="supervisoryBody" type="SupervisoryBody.DFACFTC" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies the specific regulator or other supervisory body for which this data is produced. For example, CFTC, SEC, UKFSA, ODRF, SFC, ESMA.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">&gt;Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingStatus" type="RegulatorReportingStatusCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Describes the extent to which this trade is being reported to the regime (e.g. Not reported, reported with warnings, fully reported).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reason" type="Reason" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to describe and validation errors or warnings associated with the message for the regime.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus.EMIR">
+    <xsd:sequence>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">&gt;Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingStatus" type="RegulatorReportingStatusCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Describes the extent to which this trade is being reported to the regime (e.g. Not reported, reported with warnings, fully reported).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reason" type="Reason" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to describe and validation errors or warnings associated with the message for the regime.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus.MIFIR">
+    <xsd:sequence>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">&gt;Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingStatus" type="RegulatorReportingStatusCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Describes the extent to which this trade is being reported to the regime (e.g. Not reported, reported with warnings, fully reported).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reason" type="Reason" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to describe and validation errors or warnings associated with the message for the regime.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatus.HKMA">
+    <xsd:sequence>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">&gt;Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingStatus" type="RegulatorReportingStatusCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Describes the extent to which this trade is being reported to the regime (e.g. Not reported, reported with warnings, fully reported).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reason" type="Reason" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Used to describe and validation errors or warnings associated with the message for the regime.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryReportingStatusMessage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining message that can be used for returning the regulatory reporting status of a trade.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="Message">
+        <xsd:sequence>
+          <xsd:element name="header" type="ResponseMessageHeader" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Standard FpML message header</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>identifies the affected trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="regulatorReportingStatus" type="RegulatorReportingStatus" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Information about how the position is being reported to regulators.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Reference information about parties, business units, and persons involed in the trade.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatorReportingStatusCode">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type that can be used to identify the reporting status of a transaction. Examples include FullyReported, ReportedWithWarnings, NotReported, etc.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="reportingStatusScheme" type="NonEmptyURI" default="http://www.fpml.org/coding-scheme/reporting-status" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryTradingObligation">
+    <xsd:sequence>
+      <xsd:element name="tradedOnVenue" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Whether the particular product must be executed on a SEF or DCM. See to Dodd-Frank section 723(a)(8).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="exception" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Specifies whether the party invoked exception to not execute the trade on facility such as SEF and DCM even though the particular product is mandated to execute on a SEF.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="exceptionDeclaration" type="FacilityExecutionExceptionDeclaration" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Provides supporting evidence when a party invoked exception to not execute the trade on facility such as SEF and DCM even though the particular product is mandated to execute on a SEF.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RegulatoryWithdrawal">
+    <xsd:complexContent>
+      <xsd:extension base="AddressedMessage">
+        <xsd:sequence>
+          <xsd:element name="onBehalfOf" type="OnBehalfOf" minOccurs="0" maxOccurs="4">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates which party (or parties) (and accounts) a trade or event is being processed for. Normally there will only be a maximum of 2 parties, but in the case of a novation there could be a transferor, transferee, remaining party, and other remaining party. Also, in the context of a trade package there could be several parties for which limit check is requested, necessitating multiple onBehalfOf elements. Except for these cases, there should be no more than two onBehalfOf references in a message.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>identifies the affected trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="primaryAssetClass" type="AssetClass" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The asset class of the underlying product.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="inapplicableRegulation" type="InapplicableRegulation" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Indicates which regulation the trade is to withdrawn from. At least one child element must be selected.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+<!-- requested action? ( retain records, purge records )  -->
+          <xsd:element name="withdrawalReason" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:maxLength value="255" />
+                <xsd:minLength value="1" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="fullyWithdrawn" type="xsd:boolean" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Indicates if the trade is now fully withdrawn from all regulatory reports. This can be used by a trade repository to perform a consistency check. For instance, if "fullyWithdrawn" is "true" but the TR believes that the trade is still reportable to at least one regulator, it could report an exception with the identity of that regulator. Or if "fullyWithdrawn" is false but the TR believes that the trade is no longer reportable to any regulator, the TR should report that fact.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>The supporting party definitions.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RequestRegulatoryReportingStatusMessage">
+    <xsd:complexContent>
+      <xsd:extension base="AddressedMessage">
+        <xsd:sequence>
+          <xsd:element name="onBehalfOf" type="OnBehalfOf" minOccurs="0" maxOccurs="4">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates which party (or parties) (and accounts) a trade or event is being processed for. Normally there will only be a maximum of 2 parties, but in the case of a novation there could be a transferor, transferee, remaining party, and other remaining party. Also, in the context of a trade package there could be several parties for which limit check is requested, necessitating multiple onBehalfOf elements. Except for these cases, there should be no more than two onBehalfOf references in a message.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="tradeIdentifier" type="PartyTradeIdentifier" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>identifies the affected trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="primaryAssetClass" type="AssetClass" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>The asset class of the underlying product.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:documentation>The supporting party definitions.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:group name="ESMALevel3.model">
+    <xsd:sequence>
+      <xsd:element name="contractType" type="ESMAContractType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>ESMA prodcut classification</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="deliveryType" type="ESMADeliveryType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>ESMA delivery type</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="creditDetails" type="ESMACreditDetails" minOccurs="0" />
+      <xsd:element name="underlyer" type="ESMAProductUnderlyer" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="RelatedPartyAndPerson.model">
+    <xsd:sequence>
+      <xsd:element name="relatedParty" type="RelatedParty" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">This may be used to identify one or more parties that perform a role within the transaction. If this is within a partyTradeInformation block, the related party performs the role with respect to the party identifie by the "partyReference" in the partyTradeInformation block.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="relatedPerson" type="RelatedPerson" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Provides information about a person that executed or supports this trade</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="ReportingRoleAndPurpose.model">
+    <xsd:sequence>
+      <xsd:element name="reportingRole" type="ReportingRole" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reportingPurpose" type="ReportingPurpose" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:group name="RegulatoryBuyerAndSeller.model">
+    <xsd:sequence>
+      <xsd:element name="buyerPartyReference" type="PartyReference" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Indicates the party this regulator considers to be the buyer</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sellerPartyReference" type="PartyReference" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Indicates the party this regulator considers to be the seller.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:simpleType name="ESMABenchmarkIndexCode">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="BBSW" />
+      <xsd:enumeration value="BUBO" />
+      <xsd:enumeration value="CDOR" />
+      <xsd:enumeration value="CIBO" />
+      <xsd:enumeration value="EONA" />
+      <xsd:enumeration value="EONS" />
+      <xsd:enumeration value="EURI" />
+      <xsd:enumeration value="EUUS" />
+      <xsd:enumeration value="EUCH" />
+      <xsd:enumeration value="FUSW" />
+      <xsd:enumeration value="GCFR" />
+      <xsd:enumeration value="ISDA" />
+      <xsd:enumeration value="JIBA" />
+      <xsd:enumeration value="LIBI" />
+      <xsd:enumeration value="LIBO" />
+      <xsd:enumeration value="MAAA" />
+      <xsd:enumeration value="MOSP" />
+      <xsd:enumeration value="NIBO" />
+      <xsd:enumeration value="PFAN" />
+      <xsd:enumeration value="PRBO" />
+      <xsd:enumeration value="STBO" />
+      <xsd:enumeration value="SWAP" />
+      <xsd:enumeration value="TLBO" />
+      <xsd:enumeration value="TREA" />
+      <xsd:enumeration value="TIBO" />
+      <xsd:enumeration value="WIBO" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ESMAIndexName">
+    <xsd:restriction base="xsd:token">
+      <xsd:pattern value="[A-Z][A-Z0-9]{0,24}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SupervisoryBody.DFACFTC">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CFTC" />
+      <xsd:enumeration value="CAN.ON.OSC" />
+      <xsd:enumeration value="CAN.QC.AMF" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SupervisoryBody.EMIR">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="ESMA" />
+      <xsd:enumeration value="UKFCA" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SupervisoryBody.HKMA">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="HKMA" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SupervisoryBody.MIFIR">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="ESMA" />
+      <xsd:enumeration value="UKFCA" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:element name="nonpublicExecutionReport" type="NonpublicExecutionReport" />
+  <xsd:element name="nonpublicExecutionReportAcknowledgement" type="Acknowledgement" />
+  <xsd:element name="nonpublicExecutionReportException" type="Exception" />
+  <xsd:element name="nonpublicExecutionReportRetracted" type="NonpublicExecutionReportRetracted" />
+  <xsd:element name="regulatoryReportingAcknowledgement" type="RegulatoryReportingAcknowledgement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to report that a regulatory reporting message (e.g. regulatory disclosure or withdrawal) was processed successfully, and the status of reporting to any regulators.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="regulatoryReportingException" type="RegulatoryReportingException">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to report that a regulatory reporting message was not processed successfully, and the reasons for that.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="regulatoryReportingStatus" type="RegulatoryReportingStatusMessage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to report the status of reporting on a trade to any regulators.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="regulatoryReportingAcknowledgement2" type="RegulatoryReportingAcknowledgement2" />
+  <xsd:element name="regulatoryDisclosure" type="RegulatoryDisclosure" />
+  <xsd:element name="regulatoryWithdrawal" type="RegulatoryWithdrawal" />
+  <xsd:element name="requestRegulatoryReportingStatus" type="RequestRegulatoryReportingStatusMessage">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Used to request the status of reporting on a trade to any regulators.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>
+

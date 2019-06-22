@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<!--
+        == Copyright (c) 2014- All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<!--
+Interest payment notifications represent interest paid by the borrower against outstanding contracts on existing facilities.
+-->
+<loanContractNotification xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">541772 US2A432121 US5L567878 2013-10-21T09:30:47Z BKLoanSys 1.0 2012-12-06 false 2014-11-12 false 61724 2014-10-31 2014-09-30 2014-10-30 ContractPositionThruPeriod USD 141469.78 70734.89 2014-09-30 2014-10-14 15 USD 45125218.12 22562609.06 0.0181 USD 68063.88 34031.94 2014-10-15 2014-10-30 16 USD 45625218.12 22812609.06 0.0181 USD 73405.90 36702.95 F123452TLA Term Loan A LNC12345 US2A432121 US3B789454 US4C147258 US5L567878 US6G852363 
+<header>
+<!-- LN88 No message id in the original notice -->
+  <messageId messageIdScheme="http://www.bankofagentsna.com/messaging/messageids">541772</messageId>
+<!-- LN88 Not sure of this content? -->
+  <sentBy messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</sentBy>
+  <sendTo messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US5L567878</sendTo>
+  <creationTimestamp>2013-10-21T09:30:47Z</creationTimestamp>
+  <implementationSpecification>
+    <name>BKLoanSys</name>
+    <version implementationSpecificationVersionScheme="http://www.bkloansys.com/">1.0</version>
+    <date>2012-12-06</date>
+  </implementationSpecification>
+</header>
+<isCorrection>false</isCorrection>
+<noticeDate>2014-11-12</noticeDate>
+<isGlobalOnly>false</isGlobalOnly>
+<interestCapitalization>
+  <eventIdentifier>
+    <partyReference href="BANKOFAGENTSNA" />
+<!-- LN88 No event id provided in the notice -->
+    <eventId eventIdScheme="http://www.bankofagentsna.com/messaging/eventids">61724</eventId>
+  </eventIdentifier>
+  <lenderPartyReference href="LENDERCORP" />
+  <effectiveDate>2014-10-31</effectiveDate>
+<!-- Do we need something here to represent the total 'value' of the interest capitalization...? -->
+<!-- Normally we have a cash payable, but since there is no cash flow here, it is not applicable -->
+  <loanContractReference href="CONT123" />
+  <startDate>2014-09-30</startDate>
+  <endDate>2014-10-30</endDate>
+  <calculationMethod>ContractPositionThruPeriod</calculationMethod>
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+    <amount>141469.78</amount>
+    <shareAmount>70734.89</shareAmount>
+  </amount>
+  <accrualSchedule>
+    <startDate>2014-09-30</startDate>
+    <endDate>2014-10-14</endDate>
+    <numberOfDays>15</numberOfDays>
+    <referenceAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>45125218.12</amount>
+<!-- The reference share amount was not provided -->
+      <shareAmount>22562609.06</shareAmount>
+    </referenceAmount>
+    <rate>0.0181</rate>
+    <accrualAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>68063.88</amount>
+      <shareAmount>34031.94</shareAmount>
+    </accrualAmount>
+  </accrualSchedule>
+  <accrualSchedule>
+    <startDate>2014-10-15</startDate>
+    <endDate>2014-10-30</endDate>
+    <numberOfDays>16</numberOfDays>
+    <referenceAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>45625218.12</amount>
+<!-- The reference share amount was not provided -->
+      <shareAmount>22812609.06</shareAmount>
+    </referenceAmount>
+    <rate>0.0181</rate>
+    <accrualAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>73405.90</amount>
+      <shareAmount>36702.95</shareAmount>
+    </accrualAmount>
+  </accrualSchedule>
+</interestCapitalization>
+<facilityIdentifier id="FAC12345">
+  <instrumentId instrumentIdScheme="http://www.cusip.com/">F123452TLA</instrumentId>
+  <description>Term Loan A</description>
+</facilityIdentifier>
+<contractIdentifier id="CONT123">
+  <partyReference href="BANKOFAGENTSNA" />
+  <contractId contractIdScheme="http://www.bankofagentsna.com/messaging/contractids">LNC12345</contractId>
+  <facilityReference href="FAC12345" />
+</contractIdentifier>
+<party id="BANKOFAGENTSNA">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</partyId>
+</party>
+<party id="BORROWERCORP">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US3B789454</partyId>
+</party>
+<party id="COBORROWERINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US4C147258</partyId>
+</party>
+<party id="LENDERCORP">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US5L567878</partyId>
+</party>
+<party id="GUARANTORPARTNERSLLC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US6G852363</partyId>
+</party>
+</loanContractNotification>
+

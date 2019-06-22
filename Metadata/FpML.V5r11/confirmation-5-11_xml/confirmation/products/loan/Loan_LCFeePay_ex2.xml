@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<!--
+        == Copyright (c) 2014- All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<!--
+Letter of credit event notifications provide a means for agent bank to communicate issuance, amendment and termination of L/Cs.
+The agent bank also acts as a conduit between the issuing bank and lenders.
+
+This example represents an L/C fee payment against a single standby letter of credit.
+-->
+<lcNotification xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">152436 US2A432121 US5L567878 2013-10-21T09:30:47Z BKLoanSys 1.0 2012-12-06 false 2014-11-12 false 123765 123765 2014-06-30 54325 2014-05-01 2014-06-29 USD 684.62 50.56 2014-05-01 2014-06-29 60 USD 100000.00 23791.46 0.01275 USD 684.62 50.56 F234564REV US23311NAM74 Revolver ISO000376 US2A432121 US3B789454 US1B987656 US5L567878 Loan Administration 
+<header>
+<!-- No message id in the original notice -->
+  <messageId messageIdScheme="http://www.bankofagentsna.com/messaging/messageids">152436</messageId>
+<!-- Not sure of this content? -->
+  <sentBy messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</sentBy>
+  <sendTo messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US5L567878</sendTo>
+  <creationTimestamp>2013-10-21T09:30:47Z</creationTimestamp>
+  <implementationSpecification>
+    <name>BKLoanSys</name>
+    <version implementationSpecificationVersionScheme="http://www.bkloansys.com/">1.0</version>
+    <date>2012-12-06</date>
+  </implementationSpecification>
+</header>
+<isCorrection>false</isCorrection>
+<noticeDate>2014-11-12</noticeDate>
+<isGlobalOnly>false</isGlobalOnly>
+<eventPayment>
+  <payerPartyReference href="BORROWERINC" />
+  <receiverPartyReference href="LENDERCORP" />
+  <eventIdentifier>
+    <eventId>123765</eventId>
+  </eventIdentifier>
+</eventPayment>
+<lcIssuanceFeePayment>
+  <eventIdentifier>
+    <partyReference href="BANKOFAGENTSNA" />
+<!-- LN88 No event id provided in the notice -->
+    <eventId eventIdScheme="http://www.bankofagentsna.com/messaging/eventids">123765</eventId>
+  </eventIdentifier>
+  <lenderPartyReference href="LENDERCORP" />
+  <effectiveDate>2014-06-30</effectiveDate>
+  <letterOfCreditReference href="LOC3" />
+  <id accrualTypeIdScheme="http://www.bankofagentsna.com/messaging/accrualtypeids">54325</id>
+  <startDate>2014-05-01</startDate>
+  <endDate>2014-06-29</endDate>
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+    <amount>684.62</amount>
+    <shareAmount>50.56</shareAmount>
+  </amount>
+  <accrualSchedule>
+    <startDate>2014-05-01</startDate>
+    <endDate>2014-06-29</endDate>
+    <numberOfDays>60</numberOfDays>
+    <referenceAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+<!-- Global reference amount not provided, just share -->
+      <amount>100000.00</amount>
+      <shareAmount>23791.46</shareAmount>
+    </referenceAmount>
+    <rate>0.01275</rate>
+    <accrualAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>684.62</amount>
+      <shareAmount>50.56</shareAmount>
+    </accrualAmount>
+  </accrualSchedule>
+</lcIssuanceFeePayment>
+<!-- The deal CUSIP/ISIN were also provided. We don't have a place for the in the notice -->
+<facilityIdentifier id="FAC67890">
+  <instrumentId instrumentIdScheme="http://www.cusip.com/">F234564REV</instrumentId>
+  <instrumentId instrumentIdScheme="http://www.isin.com/">US23311NAM74</instrumentId>
+  <description>Revolver</description>
+</facilityIdentifier>
+<!-- There is no Issuing Bank in the L/C schema, but there is one on the notice -->
+<letterOfCreditIdentifier id="LOC3">
+  <partyReference href="BANKOFAGENTSNA" />
+  <contractId contractIdScheme="http://www.bankofagentsna.com/messaging/contractids">ISO000376</contractId>
+  <facilityReference href="FAC67890" />
+</letterOfCreditIdentifier>
+<party id="BANKOFAGENTSNA">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US2A432121</partyId>
+</party>
+<party id="BORROWERINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US3B789454</partyId>
+</party>
+<party id="BENEFICIARYINC">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US1B987656</partyId>
+</party>
+<party id="LENDERCORP">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US5L567878</partyId>
+  <businessUnit>
+    <name>Loan Administration</name>
+  </businessUnit>
+</party>
+</lcNotification>
+

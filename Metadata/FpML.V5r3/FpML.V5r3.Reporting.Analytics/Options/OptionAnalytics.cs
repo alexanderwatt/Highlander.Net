@@ -22,6 +22,7 @@ using Orion.Util.Helpers;
 using Orion.Analytics.Rates;
 using Orion.Analytics.Dates;
 using Orion.Analytics.Distributions;
+using Orion.Analytics.Integration;
 using Orion.Analytics.Maths;
 using Orion.Analytics.Maths.Collections;
 
@@ -122,8 +123,7 @@ namespace Orion.Analytics.Options
           double strike, double vol, double df, double t)
             {
               short i;
-                var b = Math.Pow(fwdPrice / spotPrice, 1.0 / nSteps);
-
+              var b = Math.Pow(fwdPrice / spotPrice, 1.0 / nSteps);
                 var u = SolveU(vol, t, b, nSteps);
                 var d = 1 / u;
                 var d2 = d * d;
@@ -139,11 +139,11 @@ namespace Orion.Analytics.Options
                 option += pf * v;
                 pf *= pd * i / (nSteps - i + 1);
               }
-                if(!callFlag)
-                {
-                    option = option + df * (strike - fwdPrice);
-                }
-                return option;
+              if(!callFlag)
+              {
+                  option = option + df * (strike - fwdPrice);
+              }
+              return option;
             }
 
         /// <summary>
@@ -161,8 +161,7 @@ namespace Orion.Analytics.Options
                             double vol, double df, double t)
         {
           short i;
-
-            var d2 = Math.Exp(-2 * vol * Math.Sqrt(t / nSteps));
+          var d2 = Math.Exp(-2 * vol * Math.Sqrt(t / nSteps));
           var pf = df * Math.Pow(0.5, nSteps);
           var x = fwdPrice * Math.Pow(2 / (1 + d2), nSteps);
           var option = 0.0d;
@@ -173,10 +172,10 @@ namespace Orion.Analytics.Options
             option += pf * v;
             pf *= i / (nSteps - i + 1.0);
           }
-            if(!callFlag)
-            {
-                option = option + df * (strike - fwdPrice);
-            }
+          if(!callFlag)
+          {
+              option = option + df * (strike - fwdPrice);
+          }
           return option;
         }
 
@@ -195,8 +194,7 @@ namespace Orion.Analytics.Options
           double strike, double vol, double df, double t)
         {
           int i;
-
-            var d2 = Math.Exp(-2 * vol * Math.Sqrt(t / nSteps));
+          var d2 = Math.Exp(-2 * vol * Math.Sqrt(t / nSteps));
           var pf = df * Math.Pow(0.5, nSteps - 1);
           var x = fwdPrice * Math.Pow(2 / (1 + d2), nSteps - 1);
           var option = 0.0;
@@ -205,10 +203,10 @@ namespace Orion.Analytics.Options
             option += pf * Opt(true, x, strike, vol, t / nSteps);
             pf *= (double)i / (nSteps - i);
           }
-            if(!callFlag)
-            {
-                option = option + df * (strike - fwdPrice);
-            }
+          if(!callFlag)
+          {
+              option = option + df * (strike - fwdPrice);
+          }
           return option;
         }
 
@@ -240,11 +238,11 @@ namespace Orion.Analytics.Options
             if ((v = f - strike) <= 0) break;
         option += v * Math.Exp(-.5 * x * x);
         }
-        option *= -Maths.Constants.InvSqrt2Pi * df * dx;
+        option *= -Constants.InvSqrt2Pi * df * dx;
         if (callFlag)
-            {
-                option = option + df * (strike - fwdPrice);
-            }
+        {
+            option = option + df * (strike - fwdPrice);
+        }
         return option;
         }
 
@@ -264,17 +262,16 @@ namespace Orion.Analytics.Options
           double strike, double vol, double df, double t) 
         {
             int i;
-            double umin;
+            double uMin;
             var call = new double[nSteps + 1];
             var put = new double[nSteps + 1];
-
             var r = Math.Pow(df, 1.0 / nSteps);
             var u = Math.Exp(vol * Math.Sqrt(t / nSteps));
             var u2 = u * u;
             var d = 1 / u;
             var c1 = r * (u - Math.Pow(fwdPrice / spotPrice, 1.0 / nSteps)) / (u - d);
             var c2 = r - c1;
-            var x = umin = spotPrice * Math.Pow(d, nSteps);
+            var x = uMin = spotPrice * Math.Pow(d, nSteps);
               for(i = 0; i <= nSteps; i++, x *= u2)  /* Set up final values ... */
               {
                 call[i] = Math.Max(x - strike, 0);
@@ -282,7 +279,7 @@ namespace Orion.Analytics.Options
               }
               for(i = nSteps - 1; i >= 0; i--)
               {
-                x = (umin *= u);
+                x = (uMin *= u);
                   int j;
                   for(j = 0; j <= i; j++, x *= u2)
                 {
@@ -315,11 +312,10 @@ namespace Orion.Analytics.Options
             int i;
             var call = new double[nSteps + 1];
           var put = new double[nSteps + 1];
-          double umin;
-
+          double uMin;
           var u = Math.Exp(vol * Math.Sqrt(t / nSteps));
           var u2 = u * u;
-          var x = umin = fwdPrice * Math.Pow(u, -nSteps);
+          var x = uMin = fwdPrice * Math.Pow(u, -nSteps);
           for(i = 0; i <= nSteps; i++, x *= u2)  // Values at expiry ...
           {
             call[i] = Math.Max(x - strike, 0);
@@ -330,7 +326,7 @@ namespace Orion.Analytics.Options
           var pd = r - pu;
           for(i = nSteps - 1; i >= 0;i--)
           {
-            x = umin *= u;
+            x = uMin *= u;
               int j;
               for(j = 0; j <= i; j++, x *= u2)
             {
@@ -381,9 +377,9 @@ namespace Orion.Analytics.Options
 
         /// <summary>
         /// The integral I1 used above is given by I1(u, a) =
-        /// \int_{-\infty}^u dx {a exp(-x^2/2) \over a^2 + x^2}.
+        /// \int_{-\infinity}^u dx {a exp(-x^2/2) \over a^2 + x^2}.
         /// We integrate from zero, since the integrand is even in x and
-        /// \int_0^\infty dx {a exp(-x^2/2) \over a^2 + x^2} = \pi exp(a^2/2) cn(-a)
+        /// \int_0^\infinity dx {a exp(-x^2/2) \over a^2 + x^2} = \pi exp(a^2/2) cn(-a)
         /// The integral \int _0 ^u dx {a exp(-x^2/2) \over a^2  + x^2}.
         /// (where u > 0), is done using Simpson's rule.   
         /// </summary>
@@ -401,22 +397,16 @@ namespace Orion.Analytics.Options
                        c5 = 0.0568862325702784,  /* sqrt(sqrt(2)-1)/(4*sqrt(8)) */
                        c6 = 3.1075479480600700,  /* 2 * sqrt(sqrt(2) + 1)       */
                        r8 = 2.8284271247461900;  /* sqrt(8)                     */
-
             /* outside -5 < u < 5, both the Simpson's rule evaluation & the analytic
                approximation start to get a bit kooky, so just assume infinity values */
-
             if (u < -5) return 0; /* Value will be less than 7.19e-8 anyway */
             var a2 = aa * aa;
             var q = Math.PI * Math.Exp(a2 / 2) * new NormalDistribution().CumulativeDistribution(-aa);
             if (u > 5) return 2 * (a > 0 ? q : -q);
-
             /* For small a, we approximate the function with a polynomial:
-
               a e^(-x^2/2)/(x^2 + a^2)  ~  a / ((x^2 + a^2)(1 + x^2/2 + x^4/8)),
-
               which we can do analytically, thereby bypassing the need for 10000000000
               Simpson's rule evaluations. Max error 1.5e-4 (for large |x|) */
-
             if (aa < 0.01)
             {
                 var u2 = u * u;
@@ -432,25 +422,25 @@ namespace Orion.Analytics.Options
                 sm = 0;
                 double h;
                 var func0 = (aa * Math.Exp(-(0.0) * (0.0) / 2) / (a2 + (0.0) * (0.0)));
-                var funcx = (aa * Math.Exp(-(x) * (x) / 2) / (a2 + (x) * (x)));
-                var s = (h = x) * (func0 + funcx) / 2;
+                var funcX = (aa * Math.Exp(-(x) * (x) / 2) / (a2 + (x) * (x)));
+                var s = (h = x) * (func0 + funcX) / 2;
                 double osm;
                 do
                 {
                     var os = s;
                     osm = sm;
                     /* We are calculating the sum of FUNC(z) for z from h/2 to x-h/2 in steps of
-                       h, but have arranged it in this way to maximise speed ... */
+                       h, but have arranged it in this way to maximize speed ... */
                     double zi;
                     double zii;
                     var z = (zi = zii = h * h) / 8;
                     var f = Math.Exp(-z) * aa / 2;
                     z += a2 / 2;
-                    var zmax = (x * x + a2) / 2;
+                    var zMax = (x * x + a2) / 2;
                     double r;
                     var g = r = Math.Exp(-zii);
                     double sum;
-                    for (sum = 0; z < zmax; z += zi, zi += zii, f *= g, g *= r)
+                    for (sum = 0; z < zMax; z += zi, zi += zii, f *= g, g *= r)
                         sum += f / z;
                     s = s / 2 + (h /= 2) * sum;
                     sm = (4 * s - os) / 3;
@@ -464,31 +454,31 @@ namespace Orion.Analytics.Options
         /// <summary>
         /// Cumulative bivariate normal distribution,
         /// N_2 (x_1, x_2; \rho) =
-        /// {1 \over 2\pi\sqrt{1-\rho^2}} \int_{-\infty}^{x_1} dx\int_{-\infty}^{x_2} dy
+        /// {1 \over 2\pi\sqrt{1-\rho^2}} \int_{-\infinity}^{x_1} dx\int_{-\infinity}^{x_2} dy
         /// exp(-{1\over 2}{(x^2 - 2\rho xy + y^2 \over 1-\rho^2)})
         /// where \rho is the correlation coefficient.
         /// This is needed to value options on options and complex choosers.
         /// </summary>
         /// <param name="x1"></param>
         /// <param name="x2"></param>
-        /// <param name="corr"></param>
+        /// <param name="correlation"></param>
         /// <returns></returns>
-        public static double Norm2(double x1, double x2, double corr)
+        public static double Norm2(double x1, double x2, double correlation)
         {
-            if (corr < -1 || corr > 1) throw new Exception("Correlation must be between -1 and 1");
-            if (corr == -1) return x1 > -x2 ? new NormalDistribution().CumulativeDistribution(x1) - new NormalDistribution().CumulativeDistribution(-x2) : 0;
-            if (corr == 1) return new NormalDistribution().CumulativeDistribution(Math.Min(x1, x2));
-            var s = 1 / Math.Sqrt(1 - corr * corr);
+            if (correlation < -1 || correlation > 1) throw new Exception("Correlation must be between -1 and 1");
+            if (correlation == -1) return x1 > -x2 ? new NormalDistribution().CumulativeDistribution(x1) - new NormalDistribution().CumulativeDistribution(-x2) : 0;
+            if (correlation == 1) return new NormalDistribution().CumulativeDistribution(Math.Min(x1, x2));
+            var s = 1 / Math.Sqrt(1 - correlation * correlation);
             if (x1 == 0)
             {
-                if (x2 == 0) return 0.25 + Maths.Constants.Inv2PI * Math.Atan(corr * s) * s;
-                return (x2 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(-corr * s * x2, x2);
+                if (x2 == 0) return 0.25 + Maths.Constants.Inv2PI * Math.Atan(correlation * s) * s;
+                return (x2 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x2, x2);
             }
             if (x2 == 0)
-                return (x1 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(-corr * s * x1, x1);
+                return (x1 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x1, x1);
             return (x1 < 0 || x2 < 0 ? 0 : 1) - Maths.Constants.Inv2PI * (
-               Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(s * (x1 - corr * x2), x2) +
-               Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(s * (x2 - corr * x1), x1));
+               Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(s * (x1 - correlation * x2), x2) +
+               Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(s * (x2 - correlation * x1), x1));
         }
 
         /// <summary>
@@ -501,7 +491,7 @@ namespace Orion.Analytics.Options
         /// <param name="strike">Exercise price of option</param>
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
-        /// <returns>An array of reuslts for Black Scholes.</returns>
+        /// <returns>An array of results for Black Scholes.</returns>
         public static double[] OptWithGreeks(Boolean callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
         {
             var result = new double[7];
@@ -547,13 +537,13 @@ namespace Orion.Analytics.Options
             var d2 = new NormalDistribution().CumulativeDistribution((h - srt));
             var d3 = new NormalDistribution().CumulativeDistribution(-1 * (h - srt));
             var deltaStrike = callFlag ? -d2 : d3;
-            var v = Maths.Constants.InvSqrt2Pi * Math.Exp(-h * h / 2);
+            var v = Constants.InvSqrt2Pi * Math.Exp(-h * h / 2);
             var gamma = v / (fwdPrice * srt);
             var vega = v * fwdPrice * sqrtT;
-            var prem = callFlag ? fwdPrice * delta - strike * d2 : fwdPrice * delta + strike * d3;
-            var rho = -t * prem;
+            var premium = callFlag ? fwdPrice * delta - strike * d2 : fwdPrice * delta + strike * d3;
+            var rho = -t * premium;
             var theta = vega * vol / (2 * t);
-            result[0] = prem;
+            result[0] = premium;
             result[1] = delta;
             result[2] = gamma;
             result[3] = vega;
@@ -574,7 +564,7 @@ namespace Orion.Analytics.Options
         /// <param name="strike">Exercise price of option</param>
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
-        /// <returns>An array of reuslts for Black Scholes.</returns>
+        /// <returns>An array of results for Black Scholes.</returns>
         public static double[,] BlackScholesWithGreeks(Boolean callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
         {
             var result = new double[6];
@@ -618,13 +608,13 @@ namespace Orion.Analytics.Options
           var srt = vol*(sqrtT = Math.Sqrt(t));
           var h = Math.Log(fwdPrice/strike)/srt + srt/2;
           var delta = callFlag ? new NormalDistribution().CumulativeDistribution(h) : -1 * new NormalDistribution().CumulativeDistribution(-1 * h);
-          var v = Maths.Constants.InvSqrt2Pi * Math.Exp(-h*h/2);
+          var v = Constants.InvSqrt2Pi * Math.Exp(-h*h/2);
           var gamma = v/(fwdPrice*srt);
           var vega = v*fwdPrice*sqrtT;
-          var prem = callFlag ? fwdPrice * delta - strike * new NormalDistribution().CumulativeDistribution((h - srt)) : fwdPrice * delta + strike * new NormalDistribution().CumulativeDistribution(-1 * (h - srt));
-          var rho = -t*prem;
+          var premium = callFlag ? fwdPrice * delta - strike * new NormalDistribution().CumulativeDistribution((h - srt)) : fwdPrice * delta + strike * new NormalDistribution().CumulativeDistribution(-1 * (h - srt));
+          var rho = -t*premium;
           var theta = vega*vol/(2*t) ;
-          result[0] = prem;
+          result[0] = premium;
           result[1] = delta;
           result[2] = gamma;
           result[3] = vega;
@@ -639,23 +629,23 @@ namespace Orion.Analytics.Options
         /// <param name="callFlag"></param>
         /// <param name="fwdPrice"></param>
         /// <param name="strike"></param>
-        /// <param name="prem"></param>
+        /// <param name="premium"></param>
         /// <param name="r"></param>
         /// <param name="t"></param>
-        /// <returns>The volatiltiy for that price.</returns>
-        public static double OptSolveVol(Boolean callFlag, double fwdPrice, double strike, double prem, double r, double t)
+        /// <returns>The volatility for that price.</returns>
+        public static double OptSolveVol(Boolean callFlag, double fwdPrice, double strike, double premium, double r, double t)
         {
-            double vol = 0.20, dvol;
+            double vol = 0.20, dVol;
             var cp = callFlag ? 1 : -1;
-            if (fwdPrice <= 0 || strike <= 0 || t <= 0 || prem <= 0) return 0;
-            if (prem < Math.Max(cp * Math.Exp(-r * t) * (fwdPrice - strike), 0)) throw new Exception("No solution for volatility");
+            if (fwdPrice <= 0 || strike <= 0 || t <= 0 || premium <= 0) return 0;
+            if (premium < Math.Max(cp * Math.Exp(-r * t) * (fwdPrice - strike), 0)) throw new Exception("No solution for volatility");
             do
             {
                 var risks = OptWithGreeks(callFlag, fwdPrice, strike, vol, t);
                 if (risks[3] == 0) throw new Exception("No volatility solution");
-                dvol = (risks[0] - prem) / risks[3];
-                vol -= dvol;
-            } while (Math.Abs(dvol) > Eps);
+                dVol = (risks[0] - premium) / risks[3];
+                vol -= dVol;
+            } while (Math.Abs(dVol) > Eps);
             return vol;
         }
 
@@ -669,25 +659,24 @@ namespace Orion.Analytics.Options
         /// <param name="vol">The volatility</param>
         /// <param name="r">The continuously compounded interest rate.</param>
         /// <param name="t">The time to expiry.</param>
-        /// <param name="prem"></param>
+        /// <param name="premium"></param>
         /// <returns>The forward value for that price and volatility.</returns>
-        public static double OptSolveFwd(Boolean callFlag, double strike, double vol, double r, double t, double prem)
+        public static double OptSolveFwd(Boolean callFlag, double strike, double vol, double r, double t, double premium)
         {
             double fold;
             var rt = r * t;
-
-            if (prem <= 0) throw new Exception("Invalid option parameters");
+            if (premium <= 0) throw new Exception("Invalid option parameters");
             var cp = callFlag ? 1:-1;
             var df = Math.Exp(-rt);
             var vrt = vol * Math.Sqrt(t);
-            var fwdPrice = (strike * df + cp * prem) / df;
+            var fwdPrice = (strike * df + cp * premium) / df;
             do
             {
                 var h = Math.Log(fwdPrice / strike) / vrt + vrt / 2;
                 var delta = cp * df * new NormalDistribution().CumulativeDistribution(cp * h);
-                var y = fwdPrice * delta - df * cp * strike * new NormalDistribution().CumulativeDistribution(cp * (h - vrt)) - prem;
+                var y = fwdPrice * delta - df * cp * strike * new NormalDistribution().CumulativeDistribution(cp * (h - vrt)) - premium;
                 fold = fwdPrice;
-                fwdPrice -= y / delta;     /* Employ Newton-Rapheson technique */
+                fwdPrice -= y / delta;     /* Employ Newton-Raphson technique */
             } while (Math.Abs(fwdPrice - fold) > Eps);
             return fwdPrice;
         }
@@ -700,22 +689,22 @@ namespace Orion.Analytics.Options
         /// <param name="vol"></param>
         /// <param name="r"></param>
         /// <param name="t"></param>
-        /// <param name="prem"></param>
+        /// <param name="premium"></param>
         /// <returns></returns>
-        public static double OptSolveStrike(Boolean callFlag, double fwd, double vol, double r, double t, double prem)
+        public static double OptSolveStrike(Boolean callFlag, double fwd, double vol, double r, double t, double premium)
         {
             double fold;
             var rt = r * t;
-            if (prem <= 0) throw new Exception("Invalid option parameters");
+            if (premium <= 0) throw new Exception("Invalid option parameters");
             var cp = callFlag ? 1 : -1;
             var df = Math.Exp(-rt);
             var vrt = vol * Math.Sqrt(t);
-            var strike = (fwd * df - cp * prem) / df;
+            var strike = (fwd * df - cp * premium) / df;
             do
             {
                 var h = Math.Log(fwd / strike) / vrt + vrt / 2;
                 var delta = -cp * df * new NormalDistribution().CumulativeDistribution(cp * (h - vrt));
-                var y = BlackScholesWithGreeks(callFlag, fwd, strike, vol, t)[0, 0] - prem;
+                var y = BlackScholesWithGreeks(callFlag, fwd, strike, vol, t)[0, 0] - premium;
                 fold = strike;
                 strike -= y / delta;
             } while (Math.Abs(strike - fold) > Eps);
@@ -736,7 +725,7 @@ namespace Orion.Analytics.Options
         /// <param name="tL">Time to expiry of underlying option (years; must be greater than tS)</param>
         /// <param name="fwdPrice">Outright: to pay now for assured delivery of asset at tL</param>
         /// <param name="vol">The volatility.</param>
-        /// <returns>The order of the return types is: Prem, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
+        /// <returns>The order of the return types is: Premium, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
         public static double[] CompoundOpt(Boolean callOnOptionFlag, double strikeS, double rS, double tS, 
           Boolean callFlag, double strikeL, double rL, double tL, double fwdPrice, double vol)
         {
@@ -756,16 +745,16 @@ namespace Orion.Analytics.Options
           var corr = cps * sqrttS / sqrttL;
           var xVrt = x - vrtS;
           var rtT = cpl / Math.Sqrt(tT);
-          var fvol = fwdPrice * vol;
+          var fVol = fwdPrice * vol;
           var b = cpCP * strikeL  * Math.Exp(-rtL) * new NormalDistribution().BivariateNormal(-cpCP * x, cpl * (y - vrtL), corr);
-          var cn1 = Maths.Constants.InvSqrt2Pi / sqrttS * Math.Exp(-xVrt * xVrt / 2) * new NormalDistribution().CumulativeDistribution(rtT * (xVrt * sqrttS + y * sqrttL));
-          var cn2 = cps * Maths.Constants.InvSqrt2Pi / sqrttL * Math.Exp(-y * y / 2) * new NormalDistribution().CumulativeDistribution(-cps * rtT * (xVrt * sqrttL + y * sqrttS));
+          var cn1 = Constants.InvSqrt2Pi / sqrttS * Math.Exp(-xVrt * xVrt / 2) * new NormalDistribution().CumulativeDistribution(rtT * (xVrt * sqrttS + y * sqrttL));
+          var cn2 = cps * Constants.InvSqrt2Pi / sqrttL * Math.Exp(-y * y / 2) * new NormalDistribution().CumulativeDistribution(-cps * rtT * (xVrt * sqrttL + y * sqrttS));
           var cn3 = cps * strikeS * Math.Exp(-rtS) * new NormalDistribution().CumulativeDistribution(-cpCP * x);
           result[1] = cpCP * new NormalDistribution().BivariateNormal(-cpCP * xVrt, cpl * y, corr);
-          result[2] = (cn1 + cn2) / fvol;
+          result[2] = (cn1 + cn2) / fVol;
           result[3] = fwdPrice * (tS * cn1 + tL * cn2);
-          result[4] = fvol * cn1 / 2 + rS * cn3;
-          result[5] = fvol * cn2 / 2 + rL * b;
+          result[4] = fVol * cn1 / 2 + rS * cn3;
+          result[5] = fVol * cn2 / 2 + rL * b;
           result[6] = tS * cn3;
           result[7] = tL * b;
           result[0] = fwdPrice * result[1] - b - cn3;
@@ -776,7 +765,7 @@ namespace Orion.Analytics.Options
         /// The basic put/call payoff function.
         ///</summary>
         ///<param name="blackScholesPrams">The first element is the stock price, the second is the strike.</param>
-        ///<returns>The stock preice minus the strike.</returns>
+        ///<returns>The stock price minus the strike.</returns>
         public static double FOpt(DoubleVector blackScholesPrams)
         {
             return blackScholesPrams[0] - blackScholesPrams[1];
@@ -785,31 +774,31 @@ namespace Orion.Analytics.Options
         /// <summary>
         /// Converts from price volatility to yield volatility.
         /// </summary>
-        /// <param name="pricevol"></param>
+        /// <param name="priceVol"></param>
         /// <param name="bpv"></param>
         /// <param name="price"></param>
         /// <param name="yield"></param>
         /// <returns/>
-        public static double PricetoYieldVol(double pricevol, double bpv, double price, double yield)
+        public static double PriceToYieldVol(double priceVol, double bpv, double price, double yield)
         {
-            if (pricevol < 0.0 || bpv < 0 || price <= 0.0 || yield <= 0.0) throw new Exception("Not valid inputs.");
+            if (priceVol < 0.0 || bpv < 0 || price <= 0.0 || yield <= 0.0) throw new Exception("Not valid inputs.");
             var convFactor = -Math.Log((price + bpv) / price) / Math.Log((yield - 0.0001) / yield);
-            return pricevol / convFactor;
+            return priceVol / convFactor;
         }
 
         /// <summary>
         /// Converts from yield volatility to price volatility.
         /// </summary>
-        /// <param name="yieldvol"></param>
+        /// <param name="yieldVol"></param>
         /// <param name="bpv"></param>
         /// <param name="price"></param>
         /// <param name="yield"></param>
         /// <returns></returns>
-        public static double YieldtoPriceVol(double yieldvol, double bpv, double price, double yield)
+        public static double YieldToPriceVol(double yieldVol, double bpv, double price, double yield)
         {
-            if (yieldvol < 0.0 || bpv < 0.0 || yield < 0.0) throw new Exception("Not valid inputs.");
+            if (yieldVol < 0.0 || bpv < 0.0 || yield < 0.0) throw new Exception("Not valid inputs.");
             var convFactor = -Math.Log((price + bpv) / price) / Math.Log((yield - 0.0001) / yield);
-            return yieldvol * convFactor;
+            return yieldVol * convFactor;
         }
 
         /// <summary>
@@ -843,9 +832,7 @@ namespace Orion.Analytics.Options
             var rhoL = tL * s;
             var thetaL = s * rL + .5 * vega * vol / tL;
             var prem1 = fwdPrice * delta - s;
-
             /* ... plus put option (fwdPrice, strike * exp(rS * tS - rL * tL), vol, rS, tS) */
-
             var srt = vol * (sqrttS = Math.Sqrt(tS));
             var h2 = -d / srt - srt / 2;
             s = kd * new NormalDistribution().CumulativeDistribution(h2 + srt);
@@ -1257,7 +1244,7 @@ namespace Orion.Analytics.Options
         /// <param name="corr">correlation coefficient</param>
         /// <param name="t">time to option expiry in years</param>
         /// <returns>delta1, delta2, gamma11, gamma22, 
-        /// gamma12, vega1, vega2, corrSens, theta and the nsteps</returns>
+        /// gamma12, vega1, vega2, corrSens, theta and the n steps</returns>
         public static double[] SpreadOptWithGreeks(long nSteps,   
           double fwdPrice1,   // price fixable now for purchase of asset 1 at time t
           double fwdPrice2,   // price fixable now for purchase of asset 2 at time t
@@ -1268,7 +1255,6 @@ namespace Orion.Analytics.Options
           double t)           // time to option expiry in years
         {
           long n2, n3, n4;
-
           var result = new double[11];
           result[0] = Math.Max(fwdPrice1 - fwdPrice2 - strike, 0);
           if (t < 0) throw new Exception("Negative time to expiry");
@@ -1290,7 +1276,6 @@ namespace Orion.Analytics.Options
           var c6k = corr * q2 / q1;
           var c7k = c3k - c5k;
           var P = SpreadOptParam(s, Kk, c1k, c2k, c3k, c4k, c5k, c6k, c7k);
-
           var T1 = IntegrationHelpers.LogNormalIntegration(nSteps, FSpread1, strike, -1, q1, fwdPrice1, P);
           var d1 = T1[1];
           var g1 = T1[2];
@@ -1339,17 +1324,18 @@ namespace Orion.Analytics.Options
         /// <returns></returns>
         public static DoubleVector BasketOptParam(double s1, double bc2, double bc3, double bc4, double bc5, double bc6, double bc7, double bc8)
         {
-            var vector = new DoubleVector(8);
-            vector[0] = s1;
-            vector[1] = bc2;
-            vector[2] = bc3;
-            vector[3] = bc4;
-            vector[4] = bc5;
-            vector[5] = bc6;
-            vector[6] = bc7;
-            vector[7] = bc8;
+            var vector = new DoubleVector(8)
+            {
+                [0] = s1,
+                [1] = bc2,
+                [2] = bc3,
+                [3] = bc4,
+                [4] = bc5,
+                [5] = bc6,
+                [6] = bc7,
+                [7] = bc8
+            };
             return vector;
-            
         }
 
         /// <summary>
@@ -1405,8 +1391,7 @@ namespace Orion.Analytics.Options
           if (t < 0) throw new Exception("Negative time to expiry in option");
           if (t == 0) return new[] {Math.Max((fwdPrice1 + fwdPrice2) / 2 - strike, 0), 0.0, 0.0, 0.0};
           if (Math.Abs(corr) >= 1) throw new Exception("Correlation must be between -1 and 1");
-          var
-              sqrtT = Math.Sqrt(t);
+          var sqrtT = Math.Sqrt(t);
           var q1 = vol1 * sqrtT;
           var q2 = vol2 * sqrtT;
           var x1 = fwdPrice1 * Math.Exp(-q1 * q1 / 2);
@@ -1422,14 +1407,13 @@ namespace Orion.Analytics.Options
           var bc8 = -1 / bc6;
           var p = BasketOptParam(s, bc2, bc3, bc4, bc5, bc6, bc7, bc8);
           var nMax = nSteps;
-
-        // For payoff 2.strike < S1 < Infinity (only contributes significantly when vol is high)
-          var prem = IntegrationHelpers.LogNormalIntegration(nMax, FBasket2, bc2, -1, q1, fwdPrice1, p)[0];
+          // For payoff 2.strike < S1 < Infinity (only contributes significantly when vol is high)
+          var premium = IntegrationHelpers.LogNormalIntegration(nMax, FBasket2, bc2, -1, q1, fwdPrice1, p)[0];
           nSteps += nMax;
         // ... plus payoff when 0 < S1 < 2.strike  (main contribution)
           var result = IntegrationHelpers.LogNormalIntegration(nSteps, FBasket1, 0, bc2, q1, fwdPrice1, p);
-            result[0] = prem + result[0];
-            return result;
+          result[0] = premium + result[0];
+          return result;
         }
    
         /// <summary>
@@ -1448,7 +1432,7 @@ namespace Orion.Analytics.Options
           double strike, double vol1, double vol2, double corr, double t)
         {
           double sqrtT;
-            var cp = callFlag ? 1 : -1;
+          var cp = callFlag ? 1 : -1;
           if (fwdPrice <= 0 || vol1 < 0 || vol2 < 0 || t < 0) throw new Exception("Invalid option parameters");
           var result = new[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
           if (t == 0 || strike <= 0 || vol1 == 0)
@@ -1464,7 +1448,7 @@ namespace Orion.Analytics.Options
           var h2 = h1 - srt;
           var s = cp * strike * new NormalDistribution().CumulativeDistribution(cp * h2);
           var dDfwdPrice = f * cp * new NormalDistribution().CumulativeDistribution(cp * h1);
-          var v = Maths.Constants.InvSqrt2Pi * Math.Exp(-h1 * h1 / 2);
+          var v = Constants.InvSqrt2Pi * Math.Exp(-h1 * h1 / 2);
             result[1] = dDfwdPrice;
             result[2] = f * v / (fwdPrice * srt);
             result[3] = f1 * v * sqrtT + dDfwdPrice * fwdPrice * corr * vol2 * t;
@@ -1492,10 +1476,10 @@ namespace Orion.Analytics.Options
           if (t == 0 || strike <= 0 || vol == 0)
           {
             if (callFlag)
-              {
+            {
                 result[0] = (fwdPrice > strike) ?  1 : 0;
-                  return result;
-              }
+                return result;
+            }
             result[0] = (fwdPrice > strike) ? 0 : 1;
               return result;
           }
@@ -1504,7 +1488,7 @@ namespace Orion.Analytics.Options
           var ksrt = strike * srt;
           var h = Math.Log(fwdPrice / strike) / srt - srt / 2;
           var hsrt = h + srt;
-          var q = -Maths.Constants.InvSqrt2Pi * cp * Math.Exp(-h * h / 2);
+          var q = -Constants.InvSqrt2Pi * cp * Math.Exp(-h * h / 2);
           var d = q / fsrt;
           var e = q * hsrt;
           var f = q / ksrt;
@@ -1530,18 +1514,14 @@ namespace Orion.Analytics.Options
         public static object[] BlackFwdPrice(double f, double k, double sigma, double T, int lambda)
         {
             var output = new object[4];
-
             double d1 = (Math.Log(f / k) + 0.5 * Math.Pow(sigma, 2) * T) / (sigma * Math.Sqrt(T));
             double d2 = d1 - sigma * Math.Sqrt(T);
-
             double nd1 = Misc.CummNormDist(d1 * lambda);
             double nd2 = Misc.CummNormDist(d2 * lambda);
-
             output[0] = (f * nd1 - k * nd2) * lambda;
             output[1] = nd1 * lambda;
             output[2] = (Math.Pow(2 * Math.PI, -0.5) * Math.Exp(-0.5 * Math.Pow(d1, 2))) / (f * sigma * Math.Sqrt(T));
             output[3] = (Math.Pow(2 * Math.PI, -0.5) * Math.Exp(-0.5 * Math.Pow(d1, 2))) * (f * Math.Sqrt(T));
-
             return output;
         }
 
@@ -1566,7 +1546,6 @@ namespace Orion.Analytics.Options
                 volatility += diff / (double)optPriceOut[3] * 0.01;
                 c++;
             }
-
             return volatility;
         }
 
@@ -1588,18 +1567,14 @@ namespace Orion.Analytics.Options
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
             T = T / 365;
-
             int lambda = 0;
             if (putCall == "C") lambda = 1;
             if (putCall == "P") lambda = -1;
-
             object[] output = BlackFwdPrice(FuturesAnalytics.SFEBondPrice(contract, futuresPrice), FuturesAnalytics.SFEBondPrice(contract, strikePrice), volatility, T, lambda);
-
             output[0] = (double)output[0] / FuturesAnalytics.SFEBondTickValue(contract, futuresPrice);
             output[1] = (double)output[1];
             output[2] = (double)output[2] / FuturesAnalytics.SFEBondTickValue(contract, futuresPrice) * 1000;
             output[3] = (double)output[3] / FuturesAnalytics.SFEBondTickValue(contract, futuresPrice) / 1000;
-
             return output;
         }
 
@@ -1627,7 +1602,6 @@ namespace Orion.Analytics.Options
                 volatility += diff / (double)optPriceOut[3] * 0.001;
                 c++;
             }
-
             return volatility;
         }
 
@@ -1650,18 +1624,14 @@ namespace Orion.Analytics.Options
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
             T = T / 365;
-
             int lambda = 0;
             if (putCall == "P") lambda = 1;
             if (putCall == "C") lambda = -1;
-
             object[] output = BlackFwdPrice(y, k, volatility, T, lambda);
-
             output[0] = (double)output[0] * 10000;
             output[1] = (double)output[1] * -1;
             output[2] = (double)output[2] / 1000;
             output[3] = (double)output[3] * 100;
-
             return output;
         }
 
@@ -1688,7 +1658,6 @@ namespace Orion.Analytics.Options
                 volatility += diff / (double)optPriceOut[3] * 0.01;
                 c++;
             }
-
             return volatility;
         }
 
@@ -1711,18 +1680,14 @@ namespace Orion.Analytics.Options
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
             T = T / 365;
-
             int lambda = 0;
             if (putCall == "P") lambda = 1;
             if (putCall == "C") lambda = -1;
-
             object[] output = BlackFwdPrice(y, k, volatility, T, lambda);
-
             output[0] = (double)output[0] * 10000;
             output[1] = (double)output[1] * -1;
             output[2] = (double)output[2] / 1000;
             output[3] = (double)output[3] * 100;
-
             return output;
         }
 
@@ -1749,7 +1714,6 @@ namespace Orion.Analytics.Options
                 volatility += diff / (double)optPriceOut[3] * 0.01;
                 c++;
             }
-
             return volatility;
         }
 
@@ -1768,14 +1732,11 @@ namespace Orion.Analytics.Options
         {
             double z = nu / alpha * Math.Pow((f * k), 0.5 * (1 - beta)) * Math.Log(f / k);
             double x = Math.Log((Math.Sqrt(1 - 2 * rho * z + z * z) + z - rho) / (1 - rho));
-
             double n1 = (Math.Pow(alpha, 2) * Math.Pow(1 - beta, 2)) / (24 * Math.Pow((f * k), 1 - beta));
             double n2 = (rho * beta * nu * alpha) / (4 * Math.Pow(f * k, 0.5 * (1 - beta)));
             double n3 = Math.Pow(nu, 2) * (2 - 3 * Math.Pow(rho, 2)) / 24;
-
             double d1 = Math.Pow(1 - beta, 2) / 24 * Math.Pow(Math.Log(f / k), 2);
             double d2 = Math.Pow(1 - beta, 4) / 1920 * Math.Pow(Math.Log(f / k), 4);
-
             if (f != k && nu != 0)
             {
                 return (alpha * (1 + (n1 + n2 + n3) * expiry)) / (Math.Pow(f * k, 0.5 * (1 - beta)) * (1 + d1 + d2)) * z / x;
@@ -1796,29 +1757,24 @@ namespace Orion.Analytics.Options
         {
             int size = Params.GetUpperBound(0);
             var sabrVolAtStrike = new object[size + 1, 2];
-
             for (int i = 0; i <= size; i++)
             {
                 sabrVolAtStrike[i, 0] = (double)Params[i, 0];
                 sabrVolAtStrike[i, 1] = BlackVolSABR(f, k, (double)Params[i, 0], (double)Params[i, 1], (double)Params[i, 2], (double)Params[i, 3], (double)Params[i, 4]);
             }
-
             if (interpMethod == "L")
             {
                 return InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry);
             }
-
             if (interpMethod == "H")
             {
                 return InterpolationFunctions.HSplineInterp(sabrVolAtStrike, expiry);
             }
-
             if (interpMethod == "V")
             {
                 for (int i = 0; i <= size; i++) { sabrVolAtStrike[i, 1] = Math.Pow((double)sabrVolAtStrike[i, 1], 2); }
                 return Math.Pow(InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry), 0.5);
             }
-
             return InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry);
         }
     }

@@ -43,7 +43,6 @@ namespace Orion.Analytics.Stochastics.SABR
             Handle = handle;
             Instrument = instrument;
             Currency = currency;
-            
             // Initialise the SABR parameter beta.
             InitialiseBeta(beta);
         }
@@ -125,22 +124,18 @@ namespace Orion.Analytics.Stochastics.SABR
         public override bool Equals(object elt)
         {
             var eq = false;
-            if (elt.GetType() == typeof (SABRCalibrationSettings))
+            if (elt != null && elt.GetType() == typeof (SABRCalibrationSettings))
             {
-                var b_instrument = ((SABRCalibrationSettings) elt).Instrument;
-                var b_currency = ((SABRCalibrationSettings) elt).Currency;
-                var b_Beta = ((SABRCalibrationSettings)elt).Beta;
-                eq = Instrument == b_instrument;
-                eq = eq && Currency == b_currency;
-                eq = eq && Beta == b_Beta;
+                var bInstrument = ((SABRCalibrationSettings) elt).Instrument;
+                var bCurrency = ((SABRCalibrationSettings) elt).Currency;
+                var bBeta = ((SABRCalibrationSettings)elt).Beta;
+                eq = Instrument == bInstrument;
+                eq = eq && Currency == bCurrency;
+                eq = eq && Beta == bBeta;
             }
             return eq;
         }
 
         #endregion
-
-        #region Private Fields
-
-        #endregion Private Fields
     }
 }

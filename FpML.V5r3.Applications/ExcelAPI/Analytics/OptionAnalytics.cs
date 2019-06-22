@@ -145,7 +145,7 @@ namespace HLV5r3.Analytics
         /// Standard (Black-Scholes) option valuation
         /// r = Continuously compounded interest rate between now and time t.
         /// Discount factor is exp(-r * t).
-        /// Different combinations in inputs to the generalised model instantiate different models:
+        /// Different combinations in inputs to the generalized model instantiate different models:
         /// b=r (the cost of carry rate = the risk free rate). Black Scholes 1973 stock option model.
         /// b=r-q, where q is the continuous dividend yield. Merton 1973 stock option model.
         /// b=0. The Black 1976 futures option model.
@@ -157,10 +157,10 @@ namespace HLV5r3.Analytics
         /// <param name="strike">The strike price K. Exercise price of option</param>
         /// <param name="rate">The risk free rate.</param>
         /// <param name="costOfCarry">The cost of carry rate.</param>
-        /// <param name="vol">Volatility of the relative price change of the underlting assset S. 
+        /// <param name="vol">Volatility of the relative price change of the underlying asset S. 
         /// Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
-        /// <returns>An array of reuslts for Black Scholes.</returns>
+        /// <returns>An array of results for Black Scholes.</returns>
         public object BSMGeneralisedWithGreeks(bool callFlag, double price, double strike,
                                                       double rate, double costOfCarry, double vol, double t)
         {
@@ -424,11 +424,11 @@ namespace HLV5r3.Analytics
         /// <param name="vol">The volatility</param>
         /// <param name="r">The continuously compounded interest rate.</param>
         /// <param name="t">The time to expiry.</param>
-        /// <param name="prem">The premium of the option.</param>
+        /// <param name="premium">The premium of the option.</param>
         /// <returns>The forward value for that price and volatility.</returns>
-        public double OptSolveFwd(bool callFlag, double strike, double vol, double r, double t, double prem)
+        public double OptSolveFwd(bool callFlag, double strike, double vol, double r, double t, double premium)
         {
-            var result = OptionAnalytics.OptSolveFwd(callFlag, strike, vol, r, t, prem);
+            var result = OptionAnalytics.OptSolveFwd(callFlag, strike, vol, r, t, premium);
             return result;
         }
 
@@ -445,7 +445,7 @@ namespace HLV5r3.Analytics
         /// <param name="tL">Time to expiry of underlying option (years; must be greater than tS)</param>
         /// <param name="fwdPrice">Outright: to pay now for assured delivery of asset at tL</param>
         /// <param name="vol">The volatility.</param>
-        /// <returns>The order of the return types is: Prem, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
+        /// <returns>The order of the return types is: Premium, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
         public double[] CompoundOpt(bool callOnOptionFlag, double strikeS, double rS, double tS,
             bool callFlag, double strikeL, double rL, double tL, double fwdPrice, double vol)
         {
@@ -626,7 +626,7 @@ namespace HLV5r3.Analytics
         /// <returns>The yield volatility measure.</returns>
         public double PricetoYieldVol(double pricevol, double bpv, double price, double yield)
         {
-            return OptionAnalytics.PricetoYieldVol(pricevol,  bpv,  price,  yield);
+            return OptionAnalytics.PriceToYieldVol(pricevol,  bpv,  price,  yield);
 
         }
 
@@ -640,7 +640,7 @@ namespace HLV5r3.Analytics
         /// <returns>The price volatility measure.</returns>
         public double YieldtoPriceVol(double yieldvol, double bpv, double price, double yield)
         {
-            return OptionAnalytics.YieldtoPriceVol(yieldvol,  bpv,  price,  yield);
+            return OptionAnalytics.YieldToPriceVol(yieldvol,  bpv,  price,  yield);
         }
 
         /// <summary>

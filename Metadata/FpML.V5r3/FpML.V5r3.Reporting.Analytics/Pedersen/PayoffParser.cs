@@ -21,7 +21,6 @@ namespace Orion.Analytics.Pedersen
 
         public NodeOperation[] NodeOps { get; set; }
 
-
         public PayoffParser(Economy e, string s)
         {
             var cc = new CounterCollection();

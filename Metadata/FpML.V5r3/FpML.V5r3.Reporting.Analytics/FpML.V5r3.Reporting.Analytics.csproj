@@ -70,8 +70,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics, Version=3.20.2.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Solutions\user_awatt\packages\MathNet.Numerics.Signed.3.20.2\lib\net40\MathNet.Numerics.dll</HintPath>
+    <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.Signed.4.8.1\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Solver.Foundation, Version=3.0.2.10889, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\Solutions\user_awatt\packages\Microsoft.Solver.Foundation.3.1.0\lib\Microsoft.Solver.Foundation.dll</HintPath>
@@ -83,6 +83,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -240,9 +242,7 @@
     <Compile Include="Maths\Collections\IntVector.cs" />
     <Compile Include="Maths\Collections\Vector.cs" />
     <Compile Include="Maths\Constants.cs" />
-    <Compile Include="Maths\IntegrationHelpers.cs" />
     <Compile Include="Maths\Number.cs" />
-    <Compile Include="Maths\SimpsonsRuleIntegration.cs" />
     <Compile Include="Maths\SpecialFunctions.cs" />
     <Compile Include="Options\BlackModel.cs">
       <SubType>Code</SubType>
@@ -251,6 +251,21 @@
     <Compile Include="Options\Option.cs" />
     <Compile Include="Options\OptionCodes.cs" />
     <Compile Include="Options\OrcWingVol.cs" />
+    <Compile Include="Pedersen\BrownianMotion.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationObjective.cs" />
+    <Compile Include="Pedersen\Calibrator.cs" />
+    <Compile Include="Pedersen\Cascade.cs" />
+    <Compile Include="Pedersen\Economy.cs" />
+    <Compile Include="Pedersen\Node.cs" />
+    <Compile Include="Pedersen\ObjectiveFunction.cs" />
+    <Compile Include="Pedersen\Operations.cs" />
+    <Compile Include="Pedersen\Parameters.cs" />
+    <Compile Include="Pedersen\ParseHelper.cs" />
+    <Compile Include="Pedersen\PayoffParser.cs" />
+    <Compile Include="Pedersen\Pedersen.cs" />
+    <Compile Include="Stochastics\Pedersen\PedersenCalibration.cs" />
+    <Compile Include="Pedersen\Recycle.cs" />
+    <Compile Include="Pedersen\Simulator.cs" />
     <Compile Include="Processes\BlackScholesProcess.cs" />
     <Compile Include="Processes\DiffusionProcess.cs" />
     <Compile Include="Processes\DiscretizedAsset.cs" />
@@ -272,7 +287,15 @@
     <Compile Include="Rates\CurveAnalytics.cs" />
     <Compile Include="Rates\FraAnalytics.cs" />
     <Compile Include="Interpolations\InterpolationFunctions.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationSettings.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationTargets.cs" />
+    <Compile Include="Stochastics\Pedersen\CascadeAlgorithm.cs" />
+    <Compile Include="Stochastics\Pedersen\CascadeParameters.cs" />
+    <Compile Include="Stochastics\Volatilities\InterestRateVolatilities.cs" />
     <Compile Include="Rates\OisAnalytics.cs" />
+    <Compile Include="Rates\QuarterlyDiscounts.cs" />
+    <Compile Include="Rates\QuarterlyShifts.cs" />
+    <Compile Include="Rates\SwaptionWeights.cs" />
     <Compile Include="Rates\ZeroCurve.cs" />
     <Compile Include="Schedulers\DatesMetaSchedule.cs" />
     <Compile Include="Rates\YieldCurveAnalytics.cs" />
@@ -460,9 +483,7 @@
     <None Include="Key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pedersen\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

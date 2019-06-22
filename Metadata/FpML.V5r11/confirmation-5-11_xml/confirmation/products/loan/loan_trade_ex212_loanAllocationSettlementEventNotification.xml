@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--View is confirmation-->
+<!--Version is 5-11-->
+<!--NS is http://www.fpml.org/FpML-5/confirmation-->
+<!--
+        == Copyright (c) 2014- All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<loanAllocationNotification xmlns="http://www.fpml.org/FpML-5/confirmation" fpmlVersion="5-11">P00001549667579 US1L142580 GB1L104502 2018-03-15T16:35:58.568-05:00 false 2018-03-15 Buyer 001 USD 5000000.00 USD 500000.0000 0.10 Back-UpWitholding 2018-03-15 USD 5000000.00 USD 100000000.00 001 USD 5000000.00 Test allocation for FpML sample messages. BBPLC_T_001 CUSIP1003 Term Loan A GB1L104502 US1L142580 KY1L151440 
+<header>
+  <messageId messageIdScheme="http://www.pimco.com/fpml/coding-scheme/internal/message-id">P00001549667579</messageId>
+  <sentBy messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US1L142580</sentBy>
+  <sendTo messageAddressScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">GB1L104502</sendTo>
+  <creationTimestamp>2018-03-15T16:35:58.568-05:00</creationTimestamp>
+</header>
+<isCorrection>false</isCorrection>
+<noticeDate>2018-03-15</noticeDate>
+<partyReference href="US1L142580" />
+<role tradingPartyRoleScheme="http://www.fpml.org/coding-scheme/trading-party-role">Buyer</role>
+<loanAllocationSettlement>
+  <eventIdentifier>
+    <partyReference href="GB1L104502" />
+    <eventId eventIdScheme="http://www.barclays.com/fpml/coding-scheme/internal/loan-allocation-settlement-event-id">001</eventId>
+  </eventIdentifier>
+  <lenderPartyReference href="KY1L151440" />
+  <cashPayable>
+    <payerPartyReference href="KY1L151440" />
+    <receiverPartyReference href="GB1L104502" />
+    <netAmount>
+      <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+      <amount>5000000.00</amount>
+    </netAmount>
+    <taxWithholding>
+      <amount>
+        <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+        <amount>500000.0000</amount>
+      </amount>
+      <taxRate>0.10</taxRate>
+      <reason withholdingTaxReasonScheme=" http://www.fpml.org/coding-scheme/withholding-tax-reason">Back-UpWitholding</reason>
+    </taxWithholding>
+  </cashPayable>
+  <allocationReference href="A_001" />
+  <settlementDate>2018-03-15</settlementDate>
+  <allocationAmount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+    <amount>5000000.00</amount>
+  </allocationAmount>
+  <facilityOutstandingsPosition>
+    <facilityReference href="CUSIP1003" />
+    <commitment>
+      <totalCommitmentAmount>
+        <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+        <amount>100000000.00</amount>
+      </totalCommitmentAmount>
+    </commitment>
+  </facilityOutstandingsPosition>
+</loanAllocationSettlement>
+<allocation id="A_001">
+  <allocationIdentifier id="AI_001">
+    <partyReference href="US1L142580" />
+    <tradeId tradeIdScheme="http://www.pimco.com/fpml/coding-scheme/internal/allocation-id" id="AT_001">001</tradeId>
+    <loanTradeReference href="TI_BBPLC_T_001" />
+  </allocationIdentifier>
+  <amount>
+    <currency currencyScheme="http://www.fpml.org/coding-scheme/external/iso4217-2001-08-15">USD</currency>
+    <amount>5000000.00</amount>
+  </amount>
+  <comment>Test allocation for FpML sample messages.</comment>
+  <originalPartyReference href="US1L142580" />
+  <allocatedPartyReference href="KY1L151440" />
+  <buyerPartyReference href="KY1L151440" />
+  <sellerPartyReference href="GB1L104502" />
+</allocation>
+<tradeIdentifier id="TI_BBPLC_T_001">
+  <partyReference href="GB1L104502" />
+  <tradeId tradeIdScheme="http://www.barclays.com/fpml/coding-scheme/internal/trade-id" id="BBPLC_T_001">BBPLC_T_001</tradeId>
+</tradeIdentifier>
+<facilityIdentifier id="CUSIP1003">
+  <instrumentId instrumentIdScheme="http://www.fpml.org/coding-scheme/external/instrument-id-CUSIP">CUSIP1003</instrumentId>
+  <description>Term Loan A</description>
+</facilityIdentifier>
+<party id="GB1L104502">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">GB1L104502</partyId>
+</party>
+<party id="US1L142580">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">US1L142580</partyId>
+</party>
+<party id="KY1L151440">
+  <partyId partyIdScheme="http://www.loanmarketdirectory.com/external/schemes/MEI">KY1L151440</partyId>
+</party>
+</loanAllocationNotification>
+
