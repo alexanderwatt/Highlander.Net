@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class PrincipalExchange
     {
@@ -35,7 +35,6 @@ namespace FpML.V5r3.Reporting
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(presentValuePrincipalExchangeAmount.currency, true);
                 result.Add(discountCurve);
             }
-
             return result;
         }
     }

@@ -21,7 +21,7 @@ using System.Linq;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class FxOption
     {
@@ -145,7 +145,7 @@ namespace FpML.V5r3.Reporting
             QuoteBasisEnum quoteBasis = strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate)
                                             : ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate, fxRate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -153,11 +153,11 @@ namespace FpML.V5r3.Reporting
                                     exchangedCurrency2 =
                                         PaymentHelper.Create(callCurrencyPayPartyReference, putCurrencyPayPartyReference,
                                                              callCurrency, callCurrencyAmount),
-                                    Items1 = new[] { valueDate },
-                                    Items1ElementName = new[] { Items1ChoiceType.valueDate },
+                                    Items = new[] { valueDate },
+                                    ItemsElementName = new[] { ItemsChoiceType31.valueDate },
                                     exchangeRate = exchangeRate,
                                 };
-            return fxforward;
+            return fxForward;
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace FpML.V5r3.Reporting
             QuoteBasisEnum quoteBasis = strike.strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate)
                                             : ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate, strike.rate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
             {
                 //exchangedCurrency1 =
                 //    PaymentHelper.Create(this.putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -179,13 +179,13 @@ namespace FpML.V5r3.Reporting
                 //    PaymentHelper.Create(callCurrencyPayPartyReference, putCurrencyPayPartyReference,
                 //                         callCurrency, callCurrencyAmount),
                 exchangeRate = exchangeRate,
-                Items1ElementName = new[] { Items1ChoiceType.valueDate }
+                ItemsElementName = new[] { ItemsChoiceType31.valueDate }
             };
             if (Item is FxEuropeanExercise exercise && exercise.expiryDateSpecified)
             {
-                fxforward.Items1 = new[] {exercise.expiryDate};
+                fxForward.Items = new[] {exercise.expiryDate};
             }
-            return fxforward;
+            return fxForward;
         }
     }
 }

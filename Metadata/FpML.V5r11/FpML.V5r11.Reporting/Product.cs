@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     /// <summary>
     /// 

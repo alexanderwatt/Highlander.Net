@@ -180,7 +180,7 @@ namespace Orion.CurveEngine.Assets
             AnalyticsModel = new CommodityAssetAnalytic();
                 //DependencyCreator.Resolve<IModelAnalytic<ICommodityAssetParameters, CommodityMetrics>>(_modelIdentifier);
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
             var bEvalForwardAtMaturity = false;
             if (metrics.Contains(CommodityMetrics.IndexAtMaturity))
             {
@@ -213,7 +213,7 @@ namespace Orion.CurveEngine.Assets
             if (marketEnvironment.GetType() == typeof(MarketEnvironment))
             {
                 commodityCurve = (ICommodityCurve)modelData.MarketEnvironment.GetPricingStructure(CommodityCurveName);
-            } 
+            }
             //3. Get the Rate
             if (CommodityValue != null)
             {
@@ -221,7 +221,7 @@ namespace Orion.CurveEngine.Assets
             }
             if (bEvalForwardAtMaturity)
             {
-                //4. Set the anaytic input parameters and Calculate the respective metrics
+                //4. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<ICommodityAssetResults, CommodityAssetResults>(analyticModelParameters,
                                                                                              metricsToEvaluate);
@@ -235,8 +235,7 @@ namespace Orion.CurveEngine.Assets
                 //3. Get the end discount factor - Need to fix this.
                 analyticModelParameters.CommodityCurveForward =
                     GetIndexAtMaturity(commodityCurve, GetRiskMaturityDate(), modelData.ValuationDate);
-
-                //4. Set the anaytic input parameters and Calculate the respective metrics
+                //4. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<ICommodityAssetResults, CommodityAssetResults>(analyticModelParameters,
                                                                                              metricsToEvaluate);

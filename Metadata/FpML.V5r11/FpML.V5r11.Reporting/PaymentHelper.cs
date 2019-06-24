@@ -15,7 +15,7 @@
 
 using System;
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     internal static class PaymentHelper
     {
@@ -138,8 +138,8 @@ namespace FpML.V5r3.Reporting
             var items = new object[1];
             items[0] = identifiedDate;
             date.Items = items;
-            var itemsElementName = new ItemsChoiceType[1];
-            itemsElementName[0] = ItemsChoiceType.adjustedDate;
+            var itemsElementName = new ItemsChoiceType1[1];
+            itemsElementName[0] = ItemsChoiceType1.adjustedDate;
             date.ItemsElementName = itemsElementName;
             return date;
         }

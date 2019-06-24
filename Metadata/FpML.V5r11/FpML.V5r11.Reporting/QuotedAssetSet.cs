@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Orion.Util.Serialisation;
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class QuotedAssetSet
     {
@@ -53,7 +53,7 @@ namespace FpML.V5r3.Reporting
             var result = new QuotedAssetSet();
             // build unique instrumentSet and valuation quote lists
             var instrumentMap = new Dictionary<string, Asset>();
-            var itemsMap = new Dictionary<string, ItemsChoiceType19>();
+            var itemsMap = new Dictionary<string, ItemsChoiceType45>();
             var valuationMap = new Dictionary<string, BasicAssetValuation>();
             if (instrumentSet?.Items != null && instrumentSet.ItemsElementName != null)
             {

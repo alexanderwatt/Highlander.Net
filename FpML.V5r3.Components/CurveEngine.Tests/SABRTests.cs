@@ -1089,7 +1089,7 @@ namespace Orion.CurveEngine.Tests
         }
 
         /// <summary>
-        /// Test ComuteCapletVol when the ATM curve only exists.
+        /// Test ComputeCapletVol when the ATM curve only exists.
         /// </summary>
         [TestMethod]
         public void BootstrapComputeATMCapletVolatilityTest()
@@ -1111,7 +1111,7 @@ namespace Orion.CurveEngine.Tests
         }
 
         /// <summary>
-        /// Test ComuteCapletVol fail with incorrect strike specified
+        /// Test ComputeCapletVol fail with incorrect strike specified
         /// </summary>
         [TestMethod]
         public void BootstrapComputeCapletVolatilityInvalidStrikeTest()
@@ -1126,12 +1126,12 @@ namespace Orion.CurveEngine.Tests
             properties.Set("Strike", 99.99m);//Don't understand this for an ATM;
             Assert.IsNotNull(properties);
             var baseDate = properties.GetValue<DateTime>("BaseDate", true);
-            string tempengineHandle = cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, properties, instruments,
+            string tempEngineHandle = cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, properties, instruments,
                     rawVolGrid, _atmdates, _atmdfGrid);
-            Assert.AreEqual(_engineHandle, tempengineHandle);
+            Assert.AreEqual(_engineHandle, tempEngineHandle);
             try
             {
-                cfInterface.BootstrapComputeCapletVolatility(tempengineHandle, 99.99m, baseDate, target);
+                cfInterface.BootstrapComputeCapletVolatility(tempEngineHandle, 99.99m, baseDate, target);
                 Assert.Fail();
             }
             catch (Exception ex)
@@ -1141,7 +1141,7 @@ namespace Orion.CurveEngine.Tests
         }
 
         /// <summary>
-        /// Test ComuteCapletVol fail with incorrect engine specified
+        /// Test ComputeCapletVol fail with incorrect engine specified
         /// </summary>
         [TestMethod]
         public void BootstrapComputeCapletVolatilityMissingEngineTest()
@@ -1163,7 +1163,7 @@ namespace Orion.CurveEngine.Tests
         }
 
         /// <summary>
-        /// Test ComuteCapletVol using an ATM engine
+        /// Test ComputeCapletVol using an ATM engine
         /// </summary>
         [TestMethod]
         public void Test24BootstrapComputeCapletVolatilityTest3()
@@ -1287,10 +1287,10 @@ namespace Orion.CurveEngine.Tests
             {
                 SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
                 var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-                var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+                var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
                 cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                     _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);//SurfaceFixedEngine, 
-                cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+                cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                     _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
                 cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
                 object actual = cfInterface.SABRCapFloorCalibrationEngine(calibrationEngine, SurfaceSmileSettings, SurfaceFixedEngine, "Broken Biscuit");
@@ -1315,10 +1315,10 @@ namespace Orion.CurveEngine.Tests
             string expected = "Fixed Strike Bootstrap engines not found.";
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
-            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                 _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
             try
@@ -1344,11 +1344,11 @@ namespace Orion.CurveEngine.Tests
             const string expected = "Caplet Smile Settings not found.";
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             string engine = cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
             Assert.AreEqual(SurfaceFixedEngine, engine);
-            string atmEngine = cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+            string atmEngine = cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                 _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             Assert.AreEqual(SurfaceATMEngine, atmEngine);
             string calibrationEngine = cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
@@ -1376,10 +1376,10 @@ namespace Orion.CurveEngine.Tests
             string calibrationEngine = "TestSurfaceEngine";
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
-            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                 _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
             object actual = cfInterface.SABRCapFloorCalibrationEngine(calibrationEngine, SurfaceSmileSettings, SurfaceFixedEngine, SurfaceATMEngine);
@@ -1398,10 +1398,10 @@ namespace Orion.CurveEngine.Tests
             const string calibrationEngine = "TestSurfaceEngine";
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             string fixedEngine = cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
-            string surfaceAtmEngine = cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+            string surfaceAtmEngine = cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                 _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             Assert.AreEqual(SurfaceATMEngine, surfaceAtmEngine);
             string calibrationSettings = cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
@@ -1429,10 +1429,10 @@ namespace Orion.CurveEngine.Tests
             string expected = "SABR Caplet Smile Calibration engine not found.";
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
-            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties, _surfaceInstruments,
+            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties, _surfaceInstruments,
                 _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
             cfInterface.SABRCapFloorCalibrationEngine(calibrationEngine, SurfaceSmileSettings, SurfaceFixedEngine, SurfaceATMEngine);
@@ -1477,17 +1477,17 @@ namespace Orion.CurveEngine.Tests
 
             SABRCapFloorInterface cfInterface = SABRCapFloorInterface.Instance();
             var surfaceFixedSettings = cfInterface.CreateCapFloorProperties(_surfaceFixSettings);
-            var surfaceATMproperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
+            var surfaceATMProperties = cfInterface.CreateCapFloorProperties(_surfaceATMSettings);
             cfInterface.CreateCapFloorCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceFixedSettings, _surfaceInstruments,
                 _surfaceStrikes, _surfaceFixedVols2, _surfaceatmdates, _surfaceAtmdfGrid);
-            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMproperties,
+            cfInterface.CreateCapFloorATMCurve(UTE.Logger, UTE.Cache, UTE.NameSpace, surfaceATMProperties,
                 _surfaceInstruments, _aTmVols, _surfaceatmdates, _surfaceAtmdfGrid);
             cfInterface.SABRCapFloorCalibrationSettings(SurfaceSmileSettings, smileBeta, interpolation);
             cfInterface.SABRCapFloorCalibrationEngine(calibrationEngine, SurfaceSmileSettings, SurfaceFixedEngine, SurfaceATMEngine);
-            var retvals = cfInterface.SABRCapFloorComputeVolatility(UTE.Logger, UTE.Cache, UTE.NameSpace, calibrationEngine, target, strikeArray);
+            var retVals = cfInterface.SABRCapFloorComputeVolatility(UTE.Logger, UTE.Cache, UTE.NameSpace, calibrationEngine, target, strikeArray);
             var actual = new List<decimal>();
             //var col = 0;
-            foreach (var row in retvals)
+            foreach (var row in retVals)
             {
                 actual.Add(row);
             }

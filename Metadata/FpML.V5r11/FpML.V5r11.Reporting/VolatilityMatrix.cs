@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class VolatilityMatrix
     {

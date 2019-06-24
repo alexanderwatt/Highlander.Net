@@ -123,7 +123,7 @@ namespace Orion.Models.Commodities
         }
 
         /// <summary>
-        /// Evaluates the implied quote.
+        /// Evaluates the implied quote from the curve.
         /// </summary>
         /// <returns></returns>
         private Decimal EvaluateImpliedQuote()
@@ -132,7 +132,7 @@ namespace Orion.Models.Commodities
         }
 
         /// <summary>
-        /// Evaluates the market quote.
+        /// Evaluates the market traded quote.
         /// </summary>
         /// <returns></returns>
         private Decimal EvaluateMarketQuote()

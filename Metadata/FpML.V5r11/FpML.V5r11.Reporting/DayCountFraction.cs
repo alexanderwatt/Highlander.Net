@@ -13,9 +13,9 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using FpML.V5r3.Codes;
+using FpML.V5r11.Codes;
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class DayCountFraction
     {

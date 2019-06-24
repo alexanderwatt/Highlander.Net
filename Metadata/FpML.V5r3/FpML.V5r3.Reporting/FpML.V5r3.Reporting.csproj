@@ -173,31 +173,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schemas\fpmlext-collective-investment-vehicles.xsd">
+    <None Include="ExtensionSchemas\fpmlext-collective-investment-vehicles.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-equities.xsd">
+    <None Include="ExtensionSchemas\fpmlext-equities.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-fixed-income.xsd">
+    <None Include="ExtensionSchemas\fpmlext-fixed-income.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-futures-and-options.xsd">
+    <None Include="ExtensionSchemas\fpmlext-futures-and-options.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-interest-rate-derivatives.xsd">
+    <None Include="ExtensionSchemas\fpmlext-interest-rate-derivatives.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-repo.xsd">
+    <None Include="ExtensionSchemas\fpmlext-repo.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-shared.xsd">
+    <None Include="ExtensionSchemas\fpmlext-shared.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-trade.xsd">
+    <None Include="ExtensionSchemas\fpmlext-trade.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\fpmlext-warrant.xsd">
+    <None Include="ExtensionSchemas\fpmlext-warrant.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Key.snk" />

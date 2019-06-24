@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class FxSingleLeg
     {
@@ -83,7 +83,7 @@ namespace FpML.V5r3.Reporting
             {
                 exchange2Amount = exchangeCurrency1Amount / forwardRate;
             }
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(exchangeCurrency1PayPartyReference,
@@ -93,13 +93,13 @@ namespace FpML.V5r3.Reporting
                                         PaymentHelper.Create(exchangeCurrency2PayPartyReference,
                                                              exchangeCurrency1PayPartyReference, exchangeCurrency2,
                                                              exchange2Amount),
-                                    Items1 = new[] { valueDate },
+                                    Items = new[] { valueDate },
                                     exchangeRate =
                                         ExchangeRate.Create(exchangeCurrency1, exchangeCurrency2, quoteBasis, spotRate,
                                                             forwardRate, forwardPoints),
-                                    Items1ElementName = new[] { Items1ChoiceType.valueDate }
+                                    ItemsElementName = new[] { ItemsChoiceType31.valueDate }
                                 };
-            return fxforward;
+            return fxForward;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace FpML.V5r3.Reporting
             {
                 exchange2Amount = exchangeCurrency1Amount / spotRate;
             }
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(exchangeCurrency1PayPartyReference,
@@ -136,12 +136,12 @@ namespace FpML.V5r3.Reporting
                                         PaymentHelper.Create(exchangeCurrency2PayPartyReference,
                                                              exchangeCurrency1PayPartyReference, exchangeCurrency2,
                                                              exchange2Amount),
-                                    Items1 = new[] {valueDate},
+                                    Items = new[] {valueDate},
                                     exchangeRate =
                                         ExchangeRate.Create(exchangeCurrency1, exchangeCurrency2, quoteBasis, spotRate),
-                                    Items1ElementName = new[] { Items1ChoiceType.valueDate }
+                                    ItemsElementName = new[] { ItemsChoiceType31.valueDate }
                                 };
-            return fxforward;
+            return fxForward;
         }
     }
 }

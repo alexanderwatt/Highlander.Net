@@ -15,28 +15,28 @@
 
 using System;
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class Trade
     {
-        public ItemChoiceType15 GetTradeTypeFromItem()
+        public ItemChoiceType16 GetTradeTypeFromItem()
         {
             if (Item == null)
                 throw new ArgumentNullException("Item");
             Type type = Item.GetType();
-            if (type == typeof(BondOption)) return ItemChoiceType15.bondOption;
-            if (type == typeof(Swap)) return ItemChoiceType15.swap;
-            if (type == typeof(Fra)) return ItemChoiceType15.fra;
-            if (type == typeof(FxSingleLeg)) return ItemChoiceType15.fxSingleLeg;
-            if (type == typeof(FxSwap)) return ItemChoiceType15.fxSwap;
-            if (type == typeof(FxOption)) return ItemChoiceType15.fxOption;
-            if (type == typeof(Swaption)) return ItemChoiceType15.swaption;
-            if (type == typeof(CapFloor)) return ItemChoiceType15.capFloor;
-            if (type == typeof(TermDeposit)) return ItemChoiceType15.termDeposit;
-            if (type == typeof(BulletPayment)) return ItemChoiceType15.bulletPayment;
-            if (type == typeof(BondTransaction)) return ItemChoiceType15.bondTransaction;
-            if (type == typeof(EquityTransaction)) return ItemChoiceType15.equityTransaction;
-            if (type == typeof(FutureTransaction)) return ItemChoiceType15.futureTransaction;
+            if (type == typeof(BondOption)) return ItemChoiceType16.bondOption;
+            if (type == typeof(Swap)) return ItemChoiceType16.swap;
+            if (type == typeof(Fra)) return ItemChoiceType16.fra;
+            if (type == typeof(FxSingleLeg)) return ItemChoiceType16.fxSingleLeg;
+            if (type == typeof(FxSwap)) return ItemChoiceType16.fxSwap;
+            if (type == typeof(FxOption)) return ItemChoiceType16.fxOption;
+            if (type == typeof(Swaption)) return ItemChoiceType16.swaption;
+            if (type == typeof(CapFloor)) return ItemChoiceType16.capFloor;
+            if (type == typeof(TermDeposit)) return ItemChoiceType16.termDeposit;
+            if (type == typeof(BulletPayment)) return ItemChoiceType16.bulletPayment;
+            if (type == typeof(BondTransaction)) return ItemChoiceType16.bondTransaction;
+            if (type == typeof(EquityTransaction)) return ItemChoiceType16.equityTransaction;
+            if (type == typeof(FutureTransaction)) return ItemChoiceType16.futureTransaction;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.commodityForward;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.equityForward;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.commoditySwap;

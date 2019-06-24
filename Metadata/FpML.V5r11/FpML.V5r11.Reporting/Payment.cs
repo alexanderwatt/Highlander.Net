@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class Payment
     {
@@ -50,33 +50,6 @@ namespace FpML.V5r3.Reporting
     }
 
     public partial class NonNegativePayment
-    {
-        /// <summary>
-        /// Gets and sets the required pricing structures to value this leg.
-        /// </summary>
-        public List<String> GetRequiredPricingStructures() 
-        {
-            var result = new List<String>();
-            if (paymentAmount.currency != null)
-            {
-                var discountCurve = CurveNameHelpers.GetDiscountCurveName(paymentAmount.currency, true);
-                result.Add(discountCurve);
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<String> GetRequiredCurrencies()
-        {
-            var result = new List<String> {paymentAmount.currency.Value};
-            return result;
-        }
-    }
-
-    public partial class PositivePayment
     {
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.

@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace FpML.V5r3.Reporting
+namespace FpML.V5r11.Reporting
 {
     public partial class FxSwapLeg
     {
@@ -76,7 +76,7 @@ namespace FpML.V5r3.Reporting
             {
                 exchange2Amount = exchangeCurrency1Amount / forwardRate;
             }
-            var fxforward = new FxSwapLeg
+            var fxForward = new FxSwapLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(exchangeCurrency1PayPartyReference,
@@ -90,9 +90,9 @@ namespace FpML.V5r3.Reporting
                                     exchangeRate =
                                         ExchangeRate.Create(exchangeCurrency1, exchangeCurrency2, quoteBasis, spotRate,
                                                             forwardRate, forwardPoints),
-                                    ItemsElementName = new[] { ItemsChoiceType12.valueDate }
+                                    ItemsElementName = new[] { ItemsChoiceType9.valueDate }
                                 };
-            return fxforward;
+            return fxForward;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace FpML.V5r3.Reporting
             {
                 exchange2Amount = exchangeCurrency1Amount / spotRate;
             }
-            var fxforward = new FxSwapLeg
+            var fxForward = new FxSwapLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(exchangeCurrency1PayPartyReference,
@@ -132,9 +132,9 @@ namespace FpML.V5r3.Reporting
                                     Items = new[] {valueDate},
                                     exchangeRate =
                                         ExchangeRate.Create(exchangeCurrency1, exchangeCurrency2, quoteBasis, spotRate),
-                                    ItemsElementName = new[] { ItemsChoiceType12.valueDate }
+                                    ItemsElementName = new[] { ItemsChoiceType9.valueDate }
                                 };
-            return fxforward;
+            return fxForward;
         }
     }
 }

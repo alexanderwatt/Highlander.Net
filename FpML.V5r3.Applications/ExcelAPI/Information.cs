@@ -1,7 +1,7 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net.git
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
