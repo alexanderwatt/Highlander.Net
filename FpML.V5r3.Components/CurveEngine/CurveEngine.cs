@@ -901,7 +901,8 @@ namespace Orion.CurveEngine
         /// <returns></returns>
         public object[,] GetAssetConfigurationData(string currency, string asset, string maturityTenor, string variant)
         {
-            #region validate and convert arguments
+            #region Validate and convert arguments
+
             if (string.IsNullOrEmpty(asset))
             {
                 throw new ArgumentException("Asset must be entered");
@@ -920,6 +921,7 @@ namespace Orion.CurveEngine
             {
                 id = $"{currency}-{asset}-{maturityTenor}-{variant.ToUpper()}";
             }
+
             #endregion
 
             Instrument instrument = InstrumentDataHelper.GetInstrumentConfigurationData(Cache, NameSpace, id);
@@ -3567,6 +3569,36 @@ namespace Orion.CurveEngine
 
         #region Pedersen Calibration
 
+        #region Set the curves
+
+        /// <summary>
+        /// Sets the discount factors to use
+        /// </summary>
+        /// <param name="rateCurveId"></param>
+        /// <returns></returns>
+        public string PedersenSetDiscountFactors(String rateCurveId)
+        {
+            return GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
+        }
+
+        public string PedersenSetCapletImpliedVolatility(Double strike, String volSurfaceIdentifier)
+        {
+            return GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
+        }
+
+        public string PedersenSetSwaptionImpliedVolatility(String volSurfaceIdentifier)
+        {
+            if (GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
+            {
+                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
+                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
+                return Pedersen.SetSwaptionImpliedVolatility(volObj);
+            }
+            return null;
+        }
+
+        #endregion
+
         /// <summary>
         /// WIP stub. Still using dummy vol and correlation.
         /// </summary>
@@ -3661,15 +3693,11 @@ namespace Orion.CurveEngine
             #endregion
 
             var targets = new CalibrationTargets(timeGrid, capletData, swaptionData);
-            //targets = CreateTargetIVols(timeGrid, marketEnvironmentId, curveIdCaplet, curveIdSwaption);
             var shifts = new QuarterlyShifts(0);
-            //cascadeSettings = new CascadeParameters(1.15, 1.1);
-            //settings = new CalibrationSettings(0.001, 0.001, 1, 1, true, 2, 80, cascadeSettings);
             var settings = new CalibrationSettings();
             string outputString = "";
             var vol = Analytics.Stochastics.Pedersen.PedersenCalibration.Calibrate(timeGrid, discounts, shifts, correlation, targets, settings, 3, true, ref outputString);
             var result = new object[1, 1];
-            //result[0, 0] = outputString;
             for (int i = 0; i < 60; i++)
             {
                 for (int j = 0; j < 60 - i; j++)
@@ -3704,7 +3732,7 @@ namespace Orion.CurveEngine
         /// <param name="curveIdCaplet"></param>
         /// <param name="curveIdSwaption"></param>
         /// <returns></returns>
-        public CalibrationTargets CreateTargetIVols(PedersenTimeGrid timeGrid, string curveIdCaplet, string curveIdSwaption)
+        private CalibrationTargets CreateTargetImpliedVolatilities(PedersenTimeGrid timeGrid, string curveIdCaplet, string curveIdSwaption)
         {
             DateTime current = DateTime.Today;
             var capletData = new double[80, 2];
@@ -3732,25 +3760,85 @@ namespace Orion.CurveEngine
 
         #region Pedersen Algorithm
 
-        public string PedersenSetCurrentDiscount(String rateCurveId)
+        #endregion
+
+        #region Investigation Functions
+
+        /// <summary>
+        /// Show the correlation data.
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenShowCorrelation()
         {
-            return GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Pedersen.SetCurrentDiscount(rateCurve) : String.Format("Discount factors were not set.");
+            return Pedersen.ShowCorrelation();
         }
 
-        public string PedersenSetCurrentCapletImpliedVolatility(Double strike, String volSurfaceIdentifier)
+        /// <summary>
+        /// Displays post-Calibration result summary.
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalSummary()
         {
-            return GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Pedersen.SetCurrentCapletImpliedVolatility(strike, volSurface) : null;
+            return Pedersen.CalSummary();
         }
 
-        public string PedersenSetSwaptionImpliedVolatility(String volSurfaceIdentifier)
+        /// <summary>
+        /// Displays post-Calibration vol surface (multi-factored)
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalVol()
         {
-            if (GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
-            {
-                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
-                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
-                return Pedersen.SetSwaptionImpliedVolatility(volObj);
-            }
-            return null;
+            return Pedersen.CalVol();
+        }
+
+        /// <summary>
+        /// Displays post-Calibration vol surface (vol sizes)
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalVolNorm()
+        {
+            return Pedersen.CalVolNorm();
+        }
+
+        #endregion
+
+        #region Simulation
+
+        /// <summary>
+        /// Settings range.
+        /// </summary>
+        /// <param name="r1"></param>
+        /// <returns></returns>
+        public object PedersenSimulation(object[,] r1)
+        {
+            return Pedersen.Simulation(r1);
+        }
+
+        /// <summary>
+        /// Returns details about the simulation.
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenSimSummary()
+        {
+            return Pedersen.SimSummary();
+        }
+
+        /// <summary>
+        /// Gets the debug information 
+        /// </summary>
+        /// <param name="s"></param>
+        public void PedersenDebug(string s)
+        {
+            Pedersen.Debug(s);
+        }
+
+        /// <summary>
+        /// Gets the debug information
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenDebugOutput()
+        {
+            return Pedersen.DebugOutput();
         }
 
         #endregion

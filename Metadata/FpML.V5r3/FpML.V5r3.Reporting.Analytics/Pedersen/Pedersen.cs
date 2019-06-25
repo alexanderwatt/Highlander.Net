@@ -154,7 +154,7 @@ namespace Orion.Analytics.Pedersen
         /// </summary>
         /// <param name="discountFactorArray"></param>
         /// <returns></returns>
-        public string SetDiscount(List<double> discountFactorArray)
+        public string SetDiscountFactors(List<double> discountFactorArray)
         {
             const int length = 123;
             string temp;
@@ -186,7 +186,7 @@ namespace Orion.Analytics.Pedersen
         /// </summary>
         /// <param name="rateCurve"></param>
         /// <returns></returns>
-        public string SetCurrentDiscount(IRateCurve rateCurve)
+        public string SetDiscountFactors(IRateCurve rateCurve)
         {
             const int length = 123;
             string temp;
@@ -245,7 +245,7 @@ namespace Orion.Analytics.Pedersen
             return temp;
         }
 
-        public string SetCurrentCapletImpliedVolatility(double strike, IStrikeVolatilitySurface volSurface)
+        public string SetCapletImpliedVolatility(double strike, IStrikeVolatilitySurface volSurface)
         {
             const int length = 120;
             try
@@ -337,6 +337,7 @@ namespace Orion.Analytics.Pedersen
             return temp;
 
         }
+
         #endregion
 
         #region Calibration

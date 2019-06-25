@@ -45,16 +45,196 @@ namespace HLV5r3.Financial
     {
         #region Pedersen Calibration
 
-        ///// <summary>
-        ///// WIP stub. Still using dummy vol and correlation.
-        ///// </summary>
-        ///// <param name="curveId">RateCurve Id</param>
-        ///// <returns></returns>
-        //public object[,] PedersenCalibration(string curveId)
-        //{
-        //    var result = Engine.PedersenCalibration(curveId);
-        //    return result;
-        //}
+        #region Set the curves with Identifiers
+
+        /// <summary>
+        /// Sets the discount factors to use
+        /// </summary>
+        /// <param name="rateCurveId"></param>
+        /// <returns></returns>
+        public string PedersenSetDiscountFactors(String rateCurveId)
+        {
+            return Engine.GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Engine.Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strike"></param>
+        /// <param name="volSurfaceIdentifier"></param>
+        /// <returns></returns>
+        public string PedersenSetCapletVolatilities(Double strike, String volSurfaceIdentifier)
+        {
+            return Engine.GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Engine.Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="volSurfaceIdentifier"></param>
+        /// <returns></returns>
+        public string PedersenSetSwaptionVolatilities(String volSurfaceIdentifier)
+        {
+            if (Engine.GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
+            {
+                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
+                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
+                return Engine.Pedersen.SetSwaptionImpliedVolatility(volObj);
+            }
+            return null;
+        }
+
+        #endregion
+
+        #region Set the curves with Ranges
+
+        /// <summary>
+        /// Setting discount function from a range in the spreadsheet
+        /// * Requires actual data
+        /// </summary>
+        /// <param name="discountFactorArray">THe discount factors by tenor.</param>
+        /// <returns></returns>
+        public string PedersenSetDiscountFactorRange(Excel.Range discountFactorArray)
+        {
+            var r1 = DataRangeHelper.StripDoubleRange(discountFactorArray);
+            return Engine.Pedersen.SetDiscountFactors(r1);
+        }
+
+        /// <summary>
+        /// Converts an Excel 2 column range of monthly tenors and volatilities.
+        /// </summary>
+        /// <param name="capletVolArray">the caplet volatilities by tenor.</param>
+        /// <returns></returns>
+        public string PedersenSetCapletRange(Excel.Range capletVolArray)
+        {
+            var r1 = DataRangeHelper.StripDoubleRange(capletVolArray);
+            return Engine.Pedersen.SetCapletImpliedVolatility(r1);
+        }
+
+        /// <summary>
+        /// Converts an Excel swaption matrix range of monthly tenors and volatilities.
+        /// </summary>
+        /// <param name="range">The matrix of volatilities and tenors.</param>
+        /// <returns></returns>
+        public string PedersenSetSwaptionRange(Excel.Range range)
+        {
+            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            return Engine.Pedersen.SetSwaptionImpliedVolatility(r1);
+        }
+
+        /// <summary>
+        /// Sets the correlation matrix as a range in Excel.
+        /// </summary>
+        /// <param name="range">The correlation matrix.</param>
+        /// <returns></returns>
+        public object PedersenSetCorrelation(Excel.Range range)
+        {
+            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            return Engine.Pedersen.SetCorrelation(r1);
+        }
+
+        #endregion
+
+        #region Calibration
+
+        /// <summary>
+        /// Performs the actual calibration with a setting range.
+        /// All the curves must be set, using the setter functions.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <returns></returns>
+        public object PedersenCalibration1(Excel.Range range)
+        {
+            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            return Engine.Pedersen.Calibration(r1);
+        }
+
+        /// <summary>
+        /// WIP stub. Still using dummy vol and correlation.
+        /// </summary>
+        /// <param name="rateCurveIdentifier">RateCurve Id</param>
+        /// <param name="capletCurveIdentifier">The caplet volatility curve.</param>
+        /// <param name="strike">The strike of the caplet volatility curve.</param>
+        /// <param name="swaptionVolSurfaceIdentifier">The swaption volatility surface identifier.</param>
+        /// <param name="correlationRange">The correlation matrix as a range.</param>
+        /// <returns></returns>
+        public object[,] PedersenCalibration2(string rateCurveIdentifier, String capletCurveIdentifier, Double strike, 
+            String swaptionVolSurfaceIdentifier, Excel.Range correlationRange)
+        {
+            Engine.PedersenSetDiscountFactors(rateCurveIdentifier);
+            Engine.PedersenSetCapletImpliedVolatility(strike, capletCurveIdentifier);
+            Engine.PedersenSetSwaptionImpliedVolatility(swaptionVolSurfaceIdentifier);
+            var r1 = Utility.Utilities.ConvertRangeTo2DArray(correlationRange);
+            Engine.Pedersen.SetCorrelation(r1);
+            var result = Engine.PedersenCalibration(rateCurveIdentifier);
+            return result;
+        }
+
+        #endregion
+
+        #region Investigative Functions
+
+        /// <summary>
+        /// Show the correlation data.
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenShowCorrelation()
+        {
+            return Engine.PedersenShowCorrelation();
+        }
+
+        /// <summary>
+        /// Displays post-Calibration result summary.
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalSummary()
+        {
+            return Engine.Pedersen.CalSummary();
+        }
+
+        /// <summary>
+        /// Displays post-Calibration vol surface (multi-factored)
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalVol()
+        {
+            return Engine.Pedersen.CalVol();
+        }
+
+        /// <summary>
+        /// Displays post-Calibration vol surface (vol sizes)
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenCalVolNorm()
+        {
+            return Engine.Pedersen.CalVolNorm();
+        }
+
+        #endregion
+
+        #region Simulation
+
+        public object PedersenSimulation(Excel.Range range)
+        {
+            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            return Engine.Pedersen.Simulation(r1);
+        }
+
+        public object PedersenSimSummary()
+        {
+            return Engine.Pedersen.SimSummary();
+        }
+
+        /// <summary>
+        /// Gets the debug information
+        /// </summary>
+        /// <returns></returns>
+        public object PedersenDebugOutput()
+        {
+            return Engine.Pedersen.DebugOutput();
+        }
+
+        #endregion
 
         #endregion
 
@@ -62,47 +242,47 @@ namespace HLV5r3.Financial
 
         /// <summary>
         /// The equities market data that is updated real-time and is distributed. 
-        /// This will become redundant once I work out how to use the market data service and eventuallt bond curves will be a type of discount curve.
+        /// This will become redundant once I work out how to use the market data service and eventually bond curves will be a type of discount curve.
         /// </summary>
-        /// <param name="propertiesAs2DRange">The market properties. This should inclue: MarketName, BaseDate, Currency etc.</param>
+        /// <param name="propertiesAs2DRange">The market properties. This should include: MarketName, BaseDate, Currency etc.</param>
         /// <param name="instrumentIdArray">A list of instrumentIds to update of the form Equity.Ticker.PricingSource e.g. Equity.ANZ.AU</param>
-        /// <param name="marketdataQuoteArray">The quotes can be: P(Price).</param>
+        /// <param name="marketDataQuoteArray">The quotes can be: P(Price).</param>
         /// <param name="quotesRange">The actual quote range consistent with the quote list.</param> 
         /// <returns></returns>
         public string UpdateEquitiesMarkets(Excel.Range propertiesAs2DRange,
-                                              Excel.Range instrumentIdArray, Excel.Range marketdataQuoteArray,
+                                              Excel.Range instrumentIdArray, Excel.Range marketDataQuoteArray,
                                               Excel.Range quotesRange)
         {
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
             List<string> instrumentIdList = DataRangeHelper.StripRange(instrumentIdArray);
-            List<string> marketdataQuoteList = DataRangeHelper.StripRange(marketdataQuoteArray);
+            List<string> marketDataQuoteList = DataRangeHelper.StripRange(marketDataQuoteArray);
             var quotesMatrix = DataRangeHelper.ToMatrix<Double>(quotesRange);
-            var result = ValService.UpdateSecuritiesMarkets(namedValueSet, instrumentIdList, marketdataQuoteList, quotesMatrix);
+            var result = ValService.UpdateSecuritiesMarkets(namedValueSet, instrumentIdList, marketDataQuoteList, quotesMatrix);
             return result;
         }
 
         /// <summary>
         /// The securities market data that is updated real-time and is distributed. 
-        /// This will become redundant once I work out how to use the market data service and eventuallt bond curves will be a type of discount curve.
+        /// This will become redundant once I work out how to use the market data service and eventually bond curves will be a type of discount curve.
         /// </summary>
-        /// <param name="propertiesAs2DRange">The market properties. This should inclue: MarketName, BaseDate, Currency etc.</param>
+        /// <param name="propertiesAs2DRange">The market properties. This should include: MarketName, BaseDate, Currency etc.</param>
         /// <param name="instrumentIdArray">A list of instrumentIds to update of the form Corp.Ticker.CouponType.Coupon.Maturity e.g. Corp.ANZ.Fixed.5,25.01-16-14</param>
-        /// <param name="marketdataQuoteArray">The quotes can be: DP(DirtyPrice), CP(CleanPrice), ASW (AssetSwapSpread),	DS (DiscountSPread), YTM (YieldToMaturity).</param>
+        /// <param name="marketDataQuoteArray">The quotes can be: DP(DirtyPrice), CP(CleanPrice), ASW (AssetSwapSpread),	DS (DiscountSpread), YTM (YieldToMaturity).</param>
         /// <param name="quotesRange">The actual quote range consistent with the quote list.</param> 
         /// <returns></returns>
         public string UpdateSecuritiesMarkets(Excel.Range propertiesAs2DRange,
-                                              Excel.Range instrumentIdArray, Excel.Range marketdataQuoteArray,
+                                              Excel.Range instrumentIdArray, Excel.Range marketDataQuoteArray,
                                               Excel.Range quotesRange)
         {
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
             List<string> instrumentIdList = DataRangeHelper.StripRange(instrumentIdArray);
-            List<string> marketdataQuoteList = DataRangeHelper.StripRange(marketdataQuoteArray);
+            List<string> marketDataQuoteList = DataRangeHelper.StripRange(marketDataQuoteArray);
             var quotesMatrix = DataRangeHelper.ToMatrix<Double>(quotesRange);
-            var result = ValService.UpdateSecuritiesMarkets(namedValueSet, instrumentIdList, marketdataQuoteList, quotesMatrix);
+            var result = ValService.UpdateSecuritiesMarkets(namedValueSet, instrumentIdList, marketDataQuoteList, quotesMatrix);
             return result;
         }
 
@@ -115,23 +295,23 @@ namespace HLV5r3.Financial
         /// </remarks>
         /// <param name="curveIdentifier">The curve identifier</param>
         /// <param name="assetIdentifierArray">The identifiers. 
-        /// These must be valid asset identifiers for the pricingstructuretype to be bootstrapped.
+        /// These must be valid asset identifiers for the pricing structure type to be bootstrapped.
         /// </param>
         /// <param name="valuesArray">The market quotes</param>
         /// <param name="additionalArray">The additional data. This will be volatilities, in the case of IRFutures, or spreads for all other assets.</param>
         /// <returns></returns>
         public string RefreshPricingStructure(String curveIdentifier, Excel.Range assetIdentifierArray, Excel.Range valuesArray, Excel.Range additionalArray)
         {
-            List<string> unqinstruments = DataRangeHelper.StripRange(assetIdentifierArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(valuesArray);
-            List<decimal> unqmeasureTypes = DataRangeHelper.StripDecimalRange(additionalArray);
-            var result = ValService.RefreshPricingStructure(curveIdentifier, unqinstruments.ToArray(), unqrates.ToArray(), unqmeasureTypes.ToArray());
+            List<string> unqInstruments = DataRangeHelper.StripRange(assetIdentifierArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(valuesArray);
+            List<decimal> unqMeasureTypes = DataRangeHelper.StripDecimalRange(additionalArray);
+            var result = ValService.RefreshPricingStructure(curveIdentifier, unqInstruments.ToArray(), unqRates.ToArray(), unqMeasureTypes.ToArray());
             return result;
         }
 
         /// <summary>
         /// Publishes the QuotedAssetSet.
-        /// A quotedassetset is used for storing market data, to be consumed by a curve.
+        /// A quoted asset set is used for storing market data, to be consumed by a curve.
         /// The QAS is retrieved from the local cache and published into the cloud for consumption.
         /// A set of properties is associated with the cached QAS and these properties 
         /// are also associated with the published QAS.
@@ -162,7 +342,7 @@ namespace HLV5r3.Financial
         /// <see cref="AssetTypesEnum"></see>
         /// </remarks>
         /// <param name="assetIdentifierArray">The identifiers. 
-        /// These must be valid asset identifiers for the pricingstructuretype to be bootstrapped.
+        /// These must be valid asset identifiers for the pricing structure type to be bootstrapped.
         /// </param>
         /// <param name="valuesArray">The market quotes</param>
         /// <param name="additionalArray">The additional data. This will be volatilities, in the case of IRFutures, or spreads for all other assets.</param>
@@ -172,16 +352,16 @@ namespace HLV5r3.Financial
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            List<string> unqinstruments = DataRangeHelper.StripRange(assetIdentifierArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(valuesArray);
-            List<decimal> unqmeasureTypes = DataRangeHelper.StripDecimalRange(additionalArray);
-            var result = ValService.CreateQuotedAssetSet(namedValueSet, unqinstruments.ToArray(), unqrates.ToArray(), unqmeasureTypes.ToArray());
+            List<string> unqInstruments = DataRangeHelper.StripRange(assetIdentifierArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(valuesArray);
+            List<decimal> unqMeasureTypes = DataRangeHelper.StripDecimalRange(additionalArray);
+            var result = ValService.CreateQuotedAssetSet(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqMeasureTypes.ToArray());
             return result;
         }
 
         /// <summary>
         /// Publishes the QuotedAssetSet.
-        /// A quotedassetset is used for storing market data, to be consumed by a curve.
+        /// A quoted asset set is used for storing market data, to be consumed by a curve.
         /// The QAS is retrieved from the local cache and published into the cloud for consumption.
         /// A set of properties is associated with the cached QAS and these properties 
         /// are also associated with the published QAS.
@@ -213,7 +393,7 @@ namespace HLV5r3.Financial
         /// <para>TimeToLive</para>
         /// </param>
         /// <param name="assetIdentifierArray">The identifiers. 
-        /// These must be valid asset identifiers for the pricingstructuretype to be bootstrapped.
+        /// These must be valid asset identifiers for the pricing structure type to be bootstrapped.
         /// </param>
         /// <param name="valuesArray">The market quotes. These will be rates when creating a RateCurve.</param>
         /// <param name="assetMeasuresArray">The measure type of the value. This would normally be MarketQuote.
@@ -226,11 +406,11 @@ namespace HLV5r3.Financial
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            List<string> unqinstruments = DataRangeHelper.StripRange(assetIdentifierArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(valuesArray);
-            List<string> unqmeasureTypes = DataRangeHelper.StripRange(assetMeasuresArray);
-            List<string> unqpriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsArray);
-            var result = ValService.CreateQuotedAssetSetWithUnits(namedValueSet, unqinstruments.ToArray(), unqrates.ToArray(), unqmeasureTypes.ToArray(), unqpriceQuoteUnits.ToArray());
+            List<string> unqInstruments = DataRangeHelper.StripRange(assetIdentifierArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(valuesArray);
+            List<string> unqMeasureTypes = DataRangeHelper.StripRange(assetMeasuresArray);
+            List<string> unqPriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsArray);
+            var result = ValService.CreateQuotedAssetSetWithUnits(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqMeasureTypes.ToArray(), unqPriceQuoteUnits.ToArray());
             return result;
         }
 
@@ -252,11 +432,11 @@ namespace HLV5r3.Financial
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            List<string> unqinstruments = DataRangeHelper.StripRange(assetIdentifierArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(valuesArray);
-            List<string> unqmeasureTypes = DataRangeHelper.StripRange(assetMeasuresArray);
-            List<string> unqpriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsArray);
-            var result = ValService.CreatePricingStructureProperties(namedValueSet, unqinstruments.ToArray(), unqrates.ToArray(), unqmeasureTypes.ToArray(), unqpriceQuoteUnits.ToArray(), includeMarketQuoteValues);
+            List<string> unqInstruments = DataRangeHelper.StripRange(assetIdentifierArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(valuesArray);
+            List<string> unqMeasureTypes = DataRangeHelper.StripRange(assetMeasuresArray);
+            List<string> unqPriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsArray);
+            var result = ValService.CreatePricingStructureProperties(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqMeasureTypes.ToArray(), unqPriceQuoteUnits.ToArray(), includeMarketQuoteValues);
             return result;
         }
 
@@ -357,7 +537,7 @@ namespace HLV5r3.Financial
         /// <remarks>
         /// Valid PricingStructureTypes are:
         /// </remarks>       
-        /// <returns>A range object listing all the pricingstructuretypes.</returns>
+        /// <returns>A range object listing all the pricing structure types.</returns>
         public object[,] SupportedPricingStructureTypes()
         {
             var names = Enum.GetNames(typeof(PricingStructureTypeEnum));
@@ -380,11 +560,11 @@ namespace HLV5r3.Financial
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            List<string> unqinstruments = DataRangeHelper.StripRange(instrumentsAsArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(ratesAsArray);
-            List<DateTime> unqdiscountFactorDates = DataRangeHelper.StripDateTimeRange(discountFactorDatesAsArray);
-            List<decimal> unqdiscountFactors = DataRangeHelper.StripDecimalRange(discountFactorsAsArray);          
-            var curve = Engine.CreateFincadRateCurve(namedValueSet, unqinstruments.ToArray(), unqrates.ToArray(), unqdiscountFactorDates.ToArray(), unqdiscountFactors.ToArray());
+            List<string> unqInstruments = DataRangeHelper.StripRange(instrumentsAsArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(ratesAsArray);
+            List<DateTime> unqDiscountFactorDates = DataRangeHelper.StripDateTimeRange(discountFactorDatesAsArray);
+            List<decimal> unqDiscountFactors = DataRangeHelper.StripDecimalRange(discountFactorsAsArray);          
+            var curve = Engine.CreateFincadRateCurve(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqDiscountFactorDates.ToArray(), unqDiscountFactors.ToArray());
             Engine.SaveCurve(curve);
             return curve.GetPricingStructureId().UniqueIdentifier;
         }
@@ -395,8 +575,8 @@ namespace HLV5r3.Financial
         /// <param name="propertiesAs2DRange">The properties as a 2D range.</param>
         /// <param name="instrumentsAsArray">A vertical range of instruments.</param>
         /// <param name="ratesAsArray">A vertical range of the adjusted rates.</param>
-        /// <param name="measureTypesAsArray">The masure types range.</param>
-        /// <param name="priceQuoteUnitsAsArray">The pricequote untis range.</param>
+        /// <param name="measureTypesAsArray">The measure types range.</param>
+        /// <param name="priceQuoteUnitsAsArray">The price quote units range.</param>
         /// <returns>The curve identifier as a handle.</returns>
         public string CreateRateCurveWithUnits(Excel.Range propertiesAs2DRange, Excel.Range instrumentsAsArray, Excel.Range ratesAsArray,
             Excel.Range measureTypesAsArray, Excel.Range priceQuoteUnitsAsArray)
@@ -404,11 +584,11 @@ namespace HLV5r3.Financial
             var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            List<string> unqinstruments = DataRangeHelper.StripRange(instrumentsAsArray);
-            List<decimal> unqrates = DataRangeHelper.StripDecimalRange(ratesAsArray);
-            List<string> unqmeasureTypes = DataRangeHelper.StripRange(measureTypesAsArray);
-            List<string> unqpriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsAsArray);
-            var curve = Engine.CreateCurve(namedValueSet, unqinstruments.ToArray(), unqrates.ToArray(), unqmeasureTypes.ToArray(), unqpriceQuoteUnits.ToArray(), null, null);
+            List<string> unqInstruments = DataRangeHelper.StripRange(instrumentsAsArray);
+            List<decimal> unqRates = DataRangeHelper.StripDecimalRange(ratesAsArray);
+            List<string> unqMeasureTypes = DataRangeHelper.StripRange(measureTypesAsArray);
+            List<string> unqPriceQuoteUnits = DataRangeHelper.StripRange(priceQuoteUnitsAsArray);
+            var curve = Engine.CreateCurve(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqMeasureTypes.ToArray(), unqPriceQuoteUnits.ToArray(), null, null);
             Engine.SaveCurve(curve);
             return curve.GetPricingStructureId().UniqueIdentifier;
         }
@@ -514,7 +694,7 @@ namespace HLV5r3.Financial
             var index = 0;
             foreach (var point in curve)
             {
-                var time = ((DateTime)point.term.Items[0] - baseDate).Days;//This is risky...assumes an ordered termcurve.
+                var time = ((DateTime)point.term.Items[0] - baseDate).Days;//This is risky...assumes an ordered term curve.
                 if (time == 0)
                 {
                     var tempTime = ((DateTime)curve[index + 1].term.Items[0] - baseDate).Days;
@@ -556,7 +736,7 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Gets the value assuming the curve base date.
         /// </summary>
-        /// <param name="pricingStructureId">The pricingstructure identifier.</param>
+        /// <param name="pricingStructureId">The pricing structure identifier.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
         public Double GetValue(string pricingStructureId, DateTime targetDate)
@@ -567,13 +747,13 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Gets the value assuming the curve base date.
         /// </summary>
-        /// <param name="pricingStructureId">The pricingstructure identifier.</param>
-        /// <param name="targetDatesAsArray">The target dates. THe defulat base date for this is the system date.</param>
+        /// <param name="pricingStructureId">The pricing structure identifier.</param>
+        /// <param name="targetDatesAsArray">The target dates. THe default base date for this is the system date.</param>
         /// <returns></returns>
         public object[,] GetValues(string pricingStructureId, Excel.Range targetDatesAsArray)
         {
-            List<DateTime> unqtargetDates = DataRangeHelper.StripDateTimeRange(targetDatesAsArray);
-            var values = Engine.GetValues(pricingStructureId, unqtargetDates.ToArray());
+            List<DateTime> unqTargetDates = DataRangeHelper.StripDateTimeRange(targetDatesAsArray);
+            var values = Engine.GetValues(pricingStructureId, unqTargetDates.ToArray());
             var result = RangeHelper.ConvertArrayToRange(values);
             return result;
         }
@@ -698,7 +878,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
         /// <param name="pricingStructureId"></param>
         /// <param name="baseDate">The base date.</param>
@@ -712,7 +892,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
         /// <param name="pricingStructureId"></param>
         /// <param name="expiryTerm">The expiry term.</param>
@@ -725,9 +905,9 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Gets the interpolated value from a strike volatiltiy surface.
+        /// Gets the interpolated value from a strike volatility surface.
         /// </summary>
-        /// <param name="pricingStructureId">The pricingstructure identifier.</param>
+        /// <param name="pricingStructureId">The pricing structure identifier.</param>
         /// <param name="expiryTermsAsArray">The expiry terms.</param>
         /// <param name="strikesAsArray">The strikes.</param>
         /// <returns>The interpolated value.</returns>
@@ -1291,9 +1471,9 @@ namespace HLV5r3.Financial
         {
             var pricingStructureIds = DataRangeHelper.StripRange(pricingStructureIdsAsArray);
             var result = new List<string>();
-            foreach (var curveid in pricingStructureIds)
+            foreach (var curveId in pricingStructureIds)
             {
-                var curve = Engine.GetCurve(curveid, false);
+                var curve = Engine.GetCurve(curveId, false);
                 Engine.SaveCurve(curve);
                 result.Add(curve.GetPricingStructureId().UniqueIdentifier);
             }
@@ -1328,7 +1508,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Displays data relavant to the provided pricingstructure.
+        /// Displays data relevant to the provided pricing structure.
         /// </summary>
         /// <param name="uniqueName">The uniqueId.</param>
         /// <returns>The range of information for that curve.</returns>
@@ -1341,7 +1521,7 @@ namespace HLV5r3.Financial
         }
 
         /// <summary>
-        /// Lists all pricing structures that satisy the set of properties provided.
+        /// Lists all pricing structures that satisfy the set of properties provided.
         /// </summary>
         /// <param name="propertiesRange">The Properties.</param>
         /// <returns>A list identifiers that can be uses as handles.</returns>
@@ -1354,7 +1534,7 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Displays data for that particular curve.
         /// </summary>
-        /// <param name="pricingStructureId">The pricingstructure identifer of the curve to expose.</param>
+        /// <param name="pricingStructureId">The pricing structure identifier of the curve to expose.</param>
         /// <returns>The range of information for that curve.</returns>
         public object[,] DisplayCurve(string pricingStructureId)
         {
@@ -1604,7 +1784,7 @@ namespace HLV5r3.Financial
         ///<param name="discountFactorCurveRecLegAsObject">The discount factor collection for the receive leg.</param>
         ///<param name="layout">A parameter clarifying the actual layout of the cashflows generated.</param>
         ///<returns>The collection of cashflows.</returns>
-        public object[,] FincadSwapCpnSchedule
+        public object[,] FincadSwapCouponSchedule
             (
             DateTime valueDate,
             DateTime effectiveDate,
@@ -1722,7 +1902,7 @@ namespace HLV5r3.Financial
         ///<param name="volatility">The volatility.</param>
         ///<param name="manReversionConstant">A mean reversion constant.</param>
         ///<returns>The convexity adjustment.</returns>
-        public double FincadEDFutuesCnvxAdjHW
+        public double FincadEDFuturesConvexityAdjHW
             (
             DateTime valueDate,
             DateTime effectiveDate,
