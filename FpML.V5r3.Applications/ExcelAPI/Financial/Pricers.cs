@@ -125,15 +125,15 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Saves the qas to files.
         /// </summary>
-        /// <param name="identifierArray">An array of identifiers. This is the identifer returned by the qGetFixedIncomeISINs function. </param>
+        /// <param name="identifierArray">An array of identifiers. This is the identifier returned by the qGetFixedIncomeISINs function. </param>
         /// <param name="directoryPath">The path to save to. </param>
-        /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: Curvename.
-        /// Otherwise it is of the form Orion.V5r3.QuuotedAssetSet.Curvename.</param>
+        /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: Curve name.
+        /// Otherwise it is of the form Orion.V5r3.QuotedAssetSet.CurveName.</param>
         /// <returns></returns>
         public string SaveQAS(Range identifierArray, string directoryPath, bool isShortName)
         {
-            var identifers = DataRangeHelper.StripRange(identifierArray);
-            var result = ValService.SaveQas(identifers, directoryPath, isShortName);
+            var identifiers = DataRangeHelper.StripRange(identifierArray);
+            var result = ValService.SaveQas(identifiers, directoryPath, isShortName);
             return result;
         }
 
@@ -224,15 +224,15 @@ namespace HLV5r3.Financial
         /// <summary>
         /// Saves the equities to files.
         /// </summary>
-        /// <param name="identifierArray">An array of identifiers. This is the identifer returned by the qGetFixedIncomeISINs function. </param>
+        /// <param name="identifierArray">An array of identifiers. This is the identifier returned by the qGetFixedIncomeISINs function. </param>
         /// <param name="directoryPath">The path to save to. </param>
         /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: FixedIncome.XXXX.YY.zz-zz-zzzz.
         /// Otherwise it is of the form Orion.ReferenceData.Equity.XXXX.YY.zz-zz-zzzz.</param>
         /// <returns></returns>
         public string SaveEquities(Range identifierArray, string directoryPath, bool isShortName)
         {
-            var identifers = DataRangeHelper.StripRange(identifierArray);
-            var result = ValService.SaveEquities(identifers, directoryPath, isShortName);
+            var identifiers = DataRangeHelper.StripRange(identifierArray);
+            var result = ValService.SaveEquities(identifiers, directoryPath, isShortName);
             return result;
         }
 
@@ -553,10 +553,10 @@ namespace HLV5r3.Financial
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             var props = properties.ToNamedValueSet();
             props.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.InterestRate_TermDeposit));
-            var tradeIDentifier = new Orion.Identifiers.TradeIdentifier(props);
-            var trade = TermDepositPricer.CreateSimpleTermDepositTrade(tradeIDentifier.Id, ProductTypeSimpleEnum.TermDeposit.ToString(), tradeDate, startDate,
+            var tradeIdentifier = new Orion.Identifiers.TradeIdentifier(props);
+            var trade = TermDepositPricer.CreateSimpleTermDepositTrade(tradeIdentifier.Id, ProductTypeSimpleEnum.TermDeposit.ToString(), tradeDate, startDate,
                 maturityDate, currency, Convert.ToDecimal(notionalAmount), Convert.ToDecimal(fixedRate), dayCount);
-            var identifier = NameSpace + "." + tradeIDentifier.UniqueIdentifier;
+            var identifier = NameSpace + "." + tradeIdentifier.UniqueIdentifier;
             Engine.Cache.SaveObject(trade, identifier, props);
             return identifier;
         }
@@ -618,7 +618,7 @@ namespace HLV5r3.Financial
         ///// </summary>
         ///// <param name="tradeId">The trade identifier.</param>
         ///// <param name="reportingParty">The base reporting Party. This allows valuations from both base party and counter party perspectives.</param>
-        //public object[,] ViewTermDeposit(string tradeId, string reportingParty)//TODO May need to calculate thia first to get the function working!
+        //public object[,] ViewTermDeposit(string tradeId, string reportingParty)//TODO May need to calculate this first to get the function working!
         //{
         //    object[,] report = null;
         //    var id = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.termDeposit, ProductTypeSimpleEnum.TermDeposit, tradeId);
@@ -815,10 +815,10 @@ namespace HLV5r3.Financial
         /// <param name="platform">The execution platform.</param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="unitPrice">The unit price.</param>
-        /// <param name="unitPriceCurrency">The unti price currency.</param>
+        /// <param name="unitPriceCurrency">The unit price currency.</param>
         /// <param name="equityIdentifier">The equity identifier. Currently assumed to be of the form:  Orion.ReferenceData.Equity.ANZ.AU </param>
         /// <param name="effectiveDate">The date when the bond is paid for.</param>
-        /// <param name="numberOfShares">The number of shares in the trade currencyn.</param>
+        /// <param name="numberOfShares">The number of shares in the trade currency.</param>
         /// <param name="party1">Party1, the first party.</param>
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="tradingBook">The trading book.</param>
@@ -867,10 +867,10 @@ namespace HLV5r3.Financial
         /// <param name="isParty1Buyer">Is party1 the bond buyer. If not then it is the seller. </param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="unitPrice">The unit price.</param>
-        /// <param name="unitPriceCurrency">The unti price currency.</param>
+        /// <param name="unitPriceCurrency">The unit price currency.</param>
         /// <param name="equityIdentifier">The equity identifier. Currently assumed to be of the form:  Orion.ReferenceData.Equity.ANZ.AU </param>
         /// <param name="effectiveDate">The date when the bond is paid for.</param>
-        /// <param name="numberOfShares">The number of shares in the trade currencyn.</param>
+        /// <param name="numberOfShares">The number of shares in the trade currency.</param>
         /// <param name="party1">Party1, the first party.</param>
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="properties2DRange">The properties range</param>
@@ -1028,7 +1028,7 @@ namespace HLV5r3.Financial
         /// <param name="isParty1Buyer">Is party1 the bond buyer. If not then it is the seller. </param>
         /// <param name="platform">The execution platform.</param>
         /// <param name="tradeDate">The trade date.</param>
-        /// <param name="priceHeaderArray">THe price header range. This must contian either:
+        /// <param name="priceHeaderArray">THe price header range. This must contain either:
         /// DirtyPrice OR CleanPrice and Accruals.</param>
         /// <param name="priceDataArray">The price data array. These are all decimal values.</param>
         /// <param name="bondIdentifier">The bond identifier. Currently assumed to be of the form:  Orion.ReferenceData.FixedIncome.Corp.ANZ.Fixed.5,25.01-16-14 </param>
@@ -1177,7 +1177,7 @@ namespace HLV5r3.Financial
                 properties.Set(TradeProp.BaseParty, TradeProp.Party2);
                 properties.Set(TradeProp.CounterPartyName, TradeProp.Party1);
             }
-            var puchasePrice = Convert.ToDecimal(price);
+            var purchasePrice = Convert.ToDecimal(price);
             //Set the pricing information
             properties.Set(TradeProp.EffectiveDate, tradeDate);
             properties.Set(TradeProp.TradingBookName, tradingBook);
@@ -1195,7 +1195,7 @@ namespace HLV5r3.Financial
             properties.Set(TradeProp.TradeId, tradeId);
             properties.Set(TradeProp.AsAtDate, DateTime.Today);
             properties.Set(FuturesProp.FuturesType, ExchangeContractTypeEnum.IRFuture.ToString());
-            return ValService.CreateRateFutureTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, numberOfContracts, puchasePrice, futuresIdentifier, properties);
+            return ValService.CreateRateFutureTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, numberOfContracts, purchasePrice, futuresIdentifier, properties);
         }
 
         /// <summary>
@@ -1205,7 +1205,7 @@ namespace HLV5r3.Financial
         /// <param name="isParty1Buyer">Is party1 the bond buyer. If not then it is the seller. </param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="effectiveDate">THe effective date for margin payments.</param>
-        /// <param name="puchasePrice">The purchase price information</param>
+        /// <param name="purchasePrice">The purchase price information</param>
         /// <param name="futuresIdentifier">The futures identifier. Currently assumed to be of the form AUD-IRFuture-IR-6 OR AUD-IRFuture-IR-Z7</param>
         /// <param name="numberOfContracts">The number of contracts.</param>
         /// <param name="party1">Party1, the first party.</param>
@@ -1214,7 +1214,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string CreateIRFutureTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, 
             string party2, DateTime tradeDate, DateTime effectiveDate, int numberOfContracts,
-            Decimal puchasePrice, string futuresIdentifier, Range properties2DRange)
+            Decimal purchasePrice, string futuresIdentifier, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
@@ -1243,7 +1243,7 @@ namespace HLV5r3.Financial
             namedValueSet.Set(TradeProp.TradeId, tradeId);
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
             namedValueSet.Set(FuturesProp.FuturesType, ExchangeContractTypeEnum.IRFuture.ToString());
-            return ValService.CreateRateFutureTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, numberOfContracts, puchasePrice, futuresIdentifier, namedValueSet);
+            return ValService.CreateRateFutureTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, numberOfContracts, purchasePrice, futuresIdentifier, namedValueSet);
         }
 
         #endregion
@@ -1259,16 +1259,16 @@ namespace HLV5r3.Financial
         /// <param name="receiver">The receiver.</param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="paymentDate">The paymentDate.</param>
-        /// <param name="businessDayAdjustements">The adjustments. </param>
+        /// <param name="businessDayAdjustments">The adjustments. </param>
         /// <param name="currency">The currency. If AUD and the reporting currency is AUD, then no FX curve is required for valuation.</param>
         /// <param name="amount">The amount.</param>
         /// <param name="businessDayCalendar">The calendar. </param>
         /// <returns></returns>
         public string CreateBullet(string tradeId, bool isPayerBase, string payer,
             string receiver, DateTime tradeDate, DateTime paymentDate, string businessDayCalendar, 
-            string businessDayAdjustements, string currency, double amount)
+            string businessDayAdjustments, string currency, double amount)
         {
-            return ValService.CreateBulletPayment(tradeId, isPayerBase, payer, receiver, tradeDate, paymentDate, businessDayCalendar, businessDayAdjustements, currency, amount, "SpreadSheet");
+            return ValService.CreateBulletPayment(tradeId, isPayerBase, payer, receiver, tradeDate, paymentDate, businessDayCalendar, businessDayAdjustments, currency, amount, "SpreadSheet");
         }
 
         /// <summary>
@@ -1276,7 +1276,7 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="paymentDate">The paymentDate.</param>
-        /// <param name="businessDayAdjustements">The adjustments. </param>
+        /// <param name="businessDayAdjustments">The adjustments. </param>
         /// <param name="currency">The currency. If AUD and the reporting currency is AUD, then no FX curve is required for valuation.</param>
         /// <param name="amount">The amount.</param>
         /// <param name="properties2DRange">The properties2DRange. This must contain:
@@ -1287,13 +1287,13 @@ namespace HLV5r3.Financial
         /// <param name="businessDayCalendar">The calendar. </param>
         /// <returns></returns>
         public string CreateBulletWithProperties(DateTime tradeDate, DateTime paymentDate,
-            string businessDayCalendar, string businessDayAdjustements, string currency, double amount, Range properties2DRange)
+            string businessDayCalendar, string businessDayAdjustments, string currency, double amount, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             var props = properties.ToNamedValueSet();
             var isPayerBase = props.GetValue<Boolean>("PayerIsBase", true);
             props.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Cash_Payment));
-            return ValService.CreateBulletPaymentWithProperties(tradeDate, paymentDate, isPayerBase, businessDayCalendar, businessDayAdjustements, currency, amount, props);
+            return ValService.CreateBulletPaymentWithProperties(tradeDate, paymentDate, isPayerBase, businessDayCalendar, businessDayAdjustments, currency, amount, props);
         }
 
         #endregion
@@ -1642,8 +1642,8 @@ namespace HLV5r3.Financial
             var newRates = rates.Select(Convert.ToDecimal).ToList();
             int fraCol = FraSolver.FindHeader(curveData, "Guess");
             var fraGuesses = FraSolver.GetObjects<object>(curveData, fraCol);
-            var fraEquivs = ValService.CalculateFraEquivalents(namedValueSet, instruments, newRates, fraGuesses);
-            var result = RangeHelper.ConvertArrayToRange(fraEquivs);
+            var fraEquivalents = ValService.CalculateFraEquivalents(namedValueSet, instruments, newRates, fraGuesses);
+            var result = RangeHelper.ConvertArrayToRange(fraEquivalents);
             return result;
         }
 
@@ -1922,26 +1922,26 @@ namespace HLV5r3.Financial
             namedValueSet.Set(EnvironmentProp.SourceSystem, sourceSystem);
             namedValueSet.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             //Set the market curves.
-            var maket1 = new SwapLegEnvironment();
+            var market1 = new SwapLegEnvironment();
             if (leg1ParamRange.DiscountCurve != null)
             {
-                maket1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
+                market1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
             }
             if (leg1ParamRange.ForecastCurve != null)
             {
-                maket1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
+                market1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
             }
-            var maket2 = new SwapLegEnvironment();
+            var market2 = new SwapLegEnvironment();
             if (leg2ParamRange.DiscountCurve != null)
             {
-                maket2.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg2ParamRange.DiscountCurve, false));
+                market2.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg2ParamRange.DiscountCurve, false));
             }
             if (leg2ParamRange.ForecastCurve!=null)
             {
-                maket2.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg2ParamRange.ForecastCurve, false));
+                market2.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg2ParamRange.ForecastCurve, false));
             }
             //Create the swap.
-            var swap = SwapGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, leg1ParamRange, null, leg2ParamRange, null, null, null, null, maket1, maket2, valuationDate);
+            var swap = SwapGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, leg1ParamRange, null, leg2ParamRange, null, null, null, null, market1, market2, valuationDate);
             var trade = new Trade();
             XsdClassesFieldResolver.TradeSetSwap(trade, swap);
             var identifier = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.swap, ProductTypeSimpleEnum.InterestRateSwap, tradeId, tradeDate, sourceSystem);
@@ -2132,7 +2132,7 @@ namespace HLV5r3.Financial
         /// <param name="leg2PrincipalExchangeCashflowListArray">See above for a description of the detailed object.</param>
         /// <param name="leg1AdditionalPaymentListArray">Any Leg1 additional cash flows.</param>
         /// <param name="leg2AdditionalPaymentListArray">Any Leg2 additional cash flows.</param>
-        /// <returns>The identifer string for this event.</returns>
+        /// <returns>The identifier string for this event.</returns>
         public string BuildSwap(
             Range propertiesRange,
             Range leg1ParametersRange,
@@ -2235,7 +2235,7 @@ namespace HLV5r3.Financial
         /// <para>string Currency</para>
         /// </param>
         ///<param name="leg2AdditionalPayment">See above for a description of the detailed object.</param>
-        ///<returns>The calulated price of the swap, given the curve provided.</returns>
+        ///<returns>The calculated price of the swap, given the curve provided.</returns>
         public Object[,] CreateSwapPrice(
             Range propertiesRange,
             Range leg1,
@@ -2268,7 +2268,7 @@ namespace HLV5r3.Financial
             var leg1AddPaymentListArray = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AdditionalPaymentRangeItem>(ArrayHelper.RangeToMatrix(leg1AdditionalPayment.Value[System.Reflection.Missing.Value] as object[,]));
             var leg2AddPaymentListArray = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AdditionalPaymentRangeItem>(ArrayHelper.RangeToMatrix(leg2AdditionalPayment.Value[System.Reflection.Missing.Value] as object[,]));
             var irSwap = new InterestRateSwapPricer();
-            //Get the curves and create a swapmarket environment.
+            //Get the curves and create a swap market environment.
             var leg1DiscountCurve = (RateCurve)Engine.GetCurve(leg1ParamRange.DiscountCurve, false);
             var leg2DiscountCurve = (RateCurve)Engine.GetCurve(leg2ParamRange.DiscountCurve, false);
             var result = irSwap.GetPrice(Engine.Logger, Engine.Cache, NameSpace, valRange, leg1ParamRange, leg1DiscountCurve, leg2ParamRange, leg2DiscountCurve,
@@ -2497,26 +2497,26 @@ namespace HLV5r3.Financial
             namedValueSet.Set(EnvironmentProp.SourceSystem, sourceSystem);
             namedValueSet.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             //Set the market curves.
-            var maket1 = new SwapLegEnvironment();
+            var market1 = new SwapLegEnvironment();
             if (leg1ParamRange.DiscountCurve != null)
             {
-                maket1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
+                market1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
             }
             if (leg1ParamRange.ForecastCurve != null)
             {
-                maket1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
+                market1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
             }
-            var maket2 = new SwapLegEnvironment();
+            var market2 = new SwapLegEnvironment();
             if (leg2ParamRange.DiscountCurve != null)
             {
-                maket2.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg2ParamRange.DiscountCurve, false));
+                market2.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg2ParamRange.DiscountCurve, false));
             }
             if (leg2ParamRange.ForecastCurve != null)
             {
-                maket2.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg2ParamRange.ForecastCurve, false));
+                market2.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg2ParamRange.ForecastCurve, false));
             }
             //Create the swap.
-            var swap = SwapGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, leg1ParamRange, null, leg2ParamRange, null, null, null, null, maket1, maket2, valuationDate);
+            var swap = SwapGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, leg1ParamRange, null, leg2ParamRange, null, null, null, null, market1, market2, valuationDate);
             var trade = new Trade();
             XsdClassesFieldResolver.TradeSetSwap(trade, swap);
             var identifier = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.swap, ProductTypeSimpleEnum.CrossCurrencySwap, tradeId, tradeDate, sourceSystem);
@@ -2565,7 +2565,7 @@ namespace HLV5r3.Financial
         /// <para>BaseParty:	NAB</para>
         /// <para>ValuationDate:	13/03/2010</para>
         /// </param>
-        ///<param name="notionalValueItems">An array of datetimes and values.
+        ///<param name="notionalValueItems">An array of date times and values.
         /// <para>System.DateTime DateTime</para>
         /// <para>double Value</para>
         ///</param>
@@ -2583,8 +2583,8 @@ namespace HLV5r3.Financial
             object[,] notionals = notionalValueItems.Value[System.Reflection.Missing.Value] as object[,];
             notionals = (object[,])DataRangeHelper.TrimNulls(notionals);
             var notionalArray = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DateTimeDoubleRangeItem>(ArrayHelper.RangeToMatrix(notionals));
-            var xccypricer = new CrossCurrencySwapPricer();
-            var result = xccypricer.GetPrincipalExchanges(Engine.Logger, Engine.Cache, NameSpace, legParamRange, notionalArray, valRange);
+            var xccyRricer = new CrossCurrencySwapPricer();
+            var result = xccyRricer.GetPrincipalExchanges(Engine.Logger, Engine.Cache, NameSpace, legParamRange, notionalArray, valRange);
             object[,] resultAsArray = ObjectToArrayOfPropertiesConverter.ConvertObjectToHorizontalArrayRange(result);
             return resultAsArray;
         }
@@ -2868,21 +2868,21 @@ namespace HLV5r3.Financial
             var tradeDate = namedValueSet.GetValue<DateTime>(TradeProp.TradeDate, true);
             var tradeId = namedValueSet.GetValue<string>(TradeProp.TradeId, true);
             //Set the market curves.
-            var maket1 = new SwapLegEnvironment();
+            var market1 = new SwapLegEnvironment();
             if (leg1ParamRange.DiscountCurve != null)
             {
-                maket1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
+                market1.AddPricingStructure("DiscountCurve", Engine.GetCurve(leg1ParamRange.DiscountCurve, false));
             }
             if (leg1ParamRange.ForecastCurve != null)
             {
-                maket1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
+                market1.AddPricingStructure("ForecastCurve", Engine.GetCurve(leg1ParamRange.ForecastCurve, false));
             }
             if (leg1ParamRange.VolatilitySurface != null)
             {
-                maket1.AddPricingStructure("VolatilitySurface", Engine.GetCurve(leg1ParamRange.VolatilitySurface, false));
+                market1.AddPricingStructure("VolatilitySurface", Engine.GetCurve(leg1ParamRange.VolatilitySurface, false));
             }
             //Create the cap.
-            var capfloor = CapFloorGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, null, null, leg1ParamRange, null, null, null, maket1, valuationDate);
+            var capfloor = CapFloorGenerator.GenerateDefinitionCashflowsAmounts(Engine.Logger, Engine.Cache, Engine.NameSpace, null, null, leg1ParamRange, null, null, null, market1, valuationDate);
             var trade = new Trade();
             XsdClassesFieldResolver.TradeSetCapFloor(trade, capfloor);
             var identifier = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.capFloor, ProductTypeSimpleEnum.CapFloor, tradeId, tradeDate, sourceSystem);
@@ -3087,13 +3087,13 @@ namespace HLV5r3.Financial
             var pay = payTerms.Value[System.Reflection.Missing.Value] as object[,];
             var payrolls = payRolls.Value[System.Reflection.Missing.Value] as object[,];
             var receive = receiveTerms.Value[System.Reflection.Missing.Value] as object[,];
-            var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
+            var recRolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
             List<AmortisingResultItem> payRollsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
             List<AmortisingResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recRolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             double fixedRate = BillsSwapPricer2.CalculateFixedRate(valuationDate, floatMargin, payTermsFormat, payRollsFormat, receiveTermsFormat,
                 receiveRollsFormat, rc, bulletPaymentDate, bulletPaymentValue);
@@ -3122,13 +3122,13 @@ namespace HLV5r3.Financial
             var pay = payTerms.Value[System.Reflection.Missing.Value] as object[,];
             var payrolls = payRolls.Value[System.Reflection.Missing.Value] as object[,];
             var receive = receiveTerms.Value[System.Reflection.Missing.Value] as object[,];
-            var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
+            var recRolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var receiveTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(receive));
             List<AmortisingResultItem> payRollsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
             List<AmortisingResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recRolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             double fixedSidePV = BillsSwapPricer2.CalculateFixedSidePV(valuationDate, floatMargin, fixedRate,
                 payTermsFormat, payRollsFormat, receiveTermsFormat, receiveRollsFormat, rc, bulletPaymentDate, bulletPaymentValue);
@@ -3167,10 +3167,10 @@ namespace HLV5r3.Financial
             List<AmortisingResultItem> receiveRollsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            var sensititity = BillsSwapPricer2.CalculateFixedSideSensitivity(valuationDate,
+            var sensitivity = BillsSwapPricer2.CalculateFixedSideSensitivity(valuationDate,
                 floatMargin, fixedRate, payTermsFormat, payRollsFormat, receiveTermsFormat, receiveRollsFormat, rc,
                 bulletPaymentDate, bulletPaymentValue, curveInstrumentId, perturbationAmount);
-            return sensititity;
+            return sensitivity;
         }
 
         ///<summary>
@@ -3199,7 +3199,7 @@ namespace HLV5r3.Financial
             var pay = payTerms.Value[System.Reflection.Missing.Value] as object[,];
             var payrolls = payRolls.Value[System.Reflection.Missing.Value] as object[,];
             var receive = receiveTerms.Value[System.Reflection.Missing.Value] as object[,];
-            var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
+            var recRolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
             var instruments = listInstrumentIdAndQuotes.Value[System.Reflection.Missing.Value] as object[,];
             var perturbations = listPerturbations.Value[System.Reflection.Missing.Value] as object[,];
@@ -3207,16 +3207,16 @@ namespace HLV5r3.Financial
             List<AmortisingResultItem> payRollsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
             List<AmortisingResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recRolls);
             List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotesFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<InstrumentIdAndQuoteRangeItem>(instruments);
             List<DoubleRangeItem> listPerturbationsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DoubleRangeItem>(perturbations);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            List<DoubleRangeItem> sensititity = BillsSwapPricer2.CalculateFixedSideSensitivity2(valuationDate, floatMargin,
+            List<DoubleRangeItem> sensitivity = BillsSwapPricer2.CalculateFixedSideSensitivity2(valuationDate, floatMargin,
                 fixedRate, payTermsFormat, payRollsFormat, receiveTermsFormat, receiveRollsFormat, rc, bulletPaymentDate,
                 bulletPaymentValue, listInstrumentIdAndQuotesFormat, listPerturbationsFormat);
-            object[,] result = ObjectToArrayOfPropertiesConverter.ConvertListToHorizontalArrayRange(sensititity);
+            object[,] result = ObjectToArrayOfPropertiesConverter.ConvertListToHorizontalArrayRange(sensitivity);
             return result;
         }
 
@@ -3247,7 +3247,7 @@ namespace HLV5r3.Financial
             var pay = payTerms.Value[System.Reflection.Missing.Value] as object[,];
             var payrolls = payRolls.Value[System.Reflection.Missing.Value] as object[,];
             var receive = receiveTerms.Value[System.Reflection.Missing.Value] as object[,];
-            var recrolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
+            var recRolls = receiveRolls.Value[System.Reflection.Missing.Value] as object[,];
             var instruments = listInstrumentIdAndQuotes.Value[System.Reflection.Missing.Value] as object[,];
             var perturbations = listPerturbations.Value[System.Reflection.Missing.Value] as object[,];
             var payTermsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(pay));
@@ -3255,17 +3255,17 @@ namespace HLV5r3.Financial
             List<AmortisingResultItem> payRollsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(payrolls);
             List<AmortisingResultItem> receiveRollsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recrolls);
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(recRolls);
             List<InstrumentIdAndQuoteRangeItem> listInstrumentIdAndQuotesFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<InstrumentIdAndQuoteRangeItem>(instruments);
             List<DoubleRangeItem> listPerturbationsFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DoubleRangeItem>(perturbations);
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            var sensititity = BillsSwapPricer2.CalculateFixedSideDelta(valuationDate, floatMargin, fixedRate,
+            var sensitivity = BillsSwapPricer2.CalculateFixedSideDelta(valuationDate, floatMargin, fixedRate,
                                                                        payTermsFormat, payRollsFormat, receiveTermsFormat,
                                                                        receiveRollsFormat, rc, bulletPaymentDate,
                                                                        bulletPaymentValue, listInstrumentIdAndQuotesFormat, listPerturbationsFormat, filterByInstruments);
-            return sensititity;
+            return sensitivity;
         }
 
         ///<summary>
@@ -3291,9 +3291,9 @@ namespace HLV5r3.Financial
         ///<returns></returns>
         public object[,] GenerateCashflowSchedule(Range termsRange, Range metaScheduleDefinitionRange)
         {
-            var termsr = termsRange.Value[System.Reflection.Missing.Value] as object[,];
+            var termsR = termsRange.Value[System.Reflection.Missing.Value] as object[,];
             var meta = metaScheduleDefinitionRange.Value[System.Reflection.Missing.Value] as object[,];
-            var terms = (object[,])DataRangeHelper.TrimNulls(termsr);
+            var terms = (object[,])DataRangeHelper.TrimNulls(termsR);
             var termsFormat = RangeHelper.Convert2DArrayToClass<BillsSwapPricer2TermsRange>(ArrayHelper.RangeToMatrix(terms));
             List<MetaScheduleRangeItem> metaScheduleDefinitionRangeFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<MetaScheduleRangeItem>(meta);
@@ -3309,10 +3309,10 @@ namespace HLV5r3.Financial
         ///<returns></returns>
         public object[,] GenerateAmortisationSchedule(Range cfItems, Range amortSchedule)
         {
-            var termsr = cfItems.Value[System.Reflection.Missing.Value] as object[,];
+            var termsR = cfItems.Value[System.Reflection.Missing.Value] as object[,];
             var amort = amortSchedule.Value[System.Reflection.Missing.Value] as object[,];
             List<AmortisingResultItem> cfItemsFormat =
-                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(termsr);
+                ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingResultItem>(termsR);
             List<AmortisingScheduleItem> amortScheduleFormat =
                 ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<AmortisingScheduleItem>(amort);
             var amortizationSchedule = BillsSwapPricer2.GenerateAmortisationSchedule(cfItemsFormat, amortScheduleFormat);

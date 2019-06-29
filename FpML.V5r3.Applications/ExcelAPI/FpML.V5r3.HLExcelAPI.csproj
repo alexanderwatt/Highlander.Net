@@ -229,7 +229,6 @@
     <None Include="Spreadsheets\Miscellaneous\Miscellaneous.Curves.xlsm" />
     <None Include="Spreadsheets\Pedersen\PedersenTest.xlsm" />
     <None Include="Spreadsheets\Product Pricers\BasicSwapPricer.xlsm" />
-    <None Include="Spreadsheets\Product Pricers\BillsSwapPricer.xlsm" />
     <None Include="Spreadsheets\Product Pricers\BondTransactionPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\BulletPaymentPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\CapFloorPricer.xlsx" />
@@ -245,15 +244,12 @@
     <None Include="Spreadsheets\Product Pricers\FxTransactionPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\InterestRateSwapPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\InterestRateSwaptionPricer.xlsx" />
-    <None Include="Spreadsheets\Product Pricers\ir swap roe margin matrix.xlsm" />
     <None Include="Spreadsheets\Product Pricers\Pricers.xlsx" />
     <None Include="Spreadsheets\Product Pricers\PropertyPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\PropertyReturns.xlsm" />
-    <None Include="Spreadsheets\Product Pricers\SampleTest.xls" />
+    <None Include="Spreadsheets\Product Pricers\SampleTest.xlsx" />
     <None Include="Spreadsheets\Product Pricers\StructuredSwapPricer.xlsx" />
-    <None Include="Spreadsheets\Product Pricers\Swap ROE Calq.xlsm" />
     <None Include="Spreadsheets\Product Pricers\SwapPricer.xlsm" />
-    <None Include="Spreadsheets\Product Pricers\SwapTemplate.xls" />
     <None Include="Spreadsheets\Product Pricers\TermDepositPricer.xlsx" />
     <None Include="Spreadsheets\Product Pricers\Trade.Orion.swap.nvs" />
     <None Include="Spreadsheets\Properties\CurvesConfiguration.xlsx" />

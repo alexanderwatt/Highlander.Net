@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executionNotification xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+	
+	
+	<header>
+		<messageId messageIdScheme="http://www.partya.com/coding-schemes/message-id">GW:2W81Q117</messageId>
+		<sentBy messageAddressScheme="http://www.partya.com/coding-schemes/messageAddress">Party A</sentBy>
+		<creationTimestamp>2005-03-14T09:55:42-07:00</creationTimestamp>
+	</header>
+	
+	<isCorrection>false</isCorrection>
+	<correlationId correlationIdScheme="http:///www.partya.com/coding-scheme/correlation-id">ExchSwp-12345</correlationId>
+	<sequenceNumber>1</sequenceNumber>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="cm9020"/>
+				<tradeId tradeIdScheme="http://www.partya.com/coding-schemes/trade-id">IFSGBPBAR14YR377</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-03-14</tradeDate>
+		</tradeHeader>
+		
+		<ext:swapTransaction>
+		
+			<buyerPartyReference href="gt2902"/>
+			<sellerPartyReference href="ko3626"/>
+					
+			<!-- USD 500,000 -->
+			<ext:notionalAmount>
+				<currency>USD</currency>
+				<amount>500000</amount>
+			</ext:notionalAmount>
+			
+			<!-- 5.355% -->
+			<ext:price>0.05355</ext:price>
+			
+			<ext:swap>
+				<instrumentId instrumentIdScheme="http://www.partya.com/coding-scheme/instrument-id">USD3L</instrumentId>
+				<floatingRateIndex>USD-LIBOR-BBA</floatingRateIndex>
+				<term>
+					<periodMultiplier>3</periodMultiplier>
+					<period>M</period>
+				</term>
+			</ext:swap>
+			
+		</ext:swapTransaction>
+		
+	</trade>
+	
+	<party id="gt2902">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party A</partyId>
+	</party>
+	<party id="ko3626">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party B</partyId>
+	</party>
+	<party id="cm9020">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Service</partyId>
+	</party>
+	
+</executionNotification>

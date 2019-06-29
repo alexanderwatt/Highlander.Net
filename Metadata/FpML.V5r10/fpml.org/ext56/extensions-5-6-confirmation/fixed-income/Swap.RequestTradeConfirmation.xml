@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requestConfirmation xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+		
+	<header>
+		<messageId messageIdScheme="http://www.partya.com/coding-scheme/message-id">345345</messageId>
+		<sentBy messageAddressScheme="http://www.partya.com/coding-scheme/party-id">Party A</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	<isCorrection>false</isCorrection>
+	<correlationId correlationIdScheme="http://www.partya.com/coding-scheme/correlation-id">ExchSwp-12345</correlationId>
+	<sequenceNumber>1</sequenceNumber>
+	
+	<trade>
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="jb2890"/>
+				<tradeId tradeIdScheme="http://www.partya.com/coding-scheme/trade-id">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:swapTransaction>
+			
+			<!-- mandatory reference to buyer -->
+			<buyerPartyReference href="hwy190"/>
+			<!-- mandatory reference to seller -->
+			<sellerPartyReference href="klq902"/>
+			
+			<!-- mandatory notional amount USD 5 million -->
+			<ext:notionalAmount>
+				<currency>USD</currency>
+				<amount>5000000</amount>
+			</ext:notionalAmount>
+			
+			<!-- mandatory price 6.5 % -->
+			<ext:price>0.0650</ext:price>
+			
+			<!-- mandatory identification of swap -->
+			<ext:swap>
+				<!-- CME identifier for this swap -->
+				<instrumentId instrumentIdScheme="http://www.cme.com/coding-scheme/instrument-id">82992</instrumentId>
+				<!-- optional currency -->
+				<currency>USD</currency>
+				<!-- optional exchange identifier -->
+				<exchangeId>CME</exchangeId>
+				<!-- mandatory floating rate index -->
+				<floatingRateIndex>USD-LIBOR</floatingRateIndex>
+				<!-- mandtory term -->
+				<term>
+					<periodMultiplier>1</periodMultiplier>
+					<period>Y</period>
+				</term>
+			</ext:swap>
+			
+		</ext:swapTransaction>
+
+	</trade>
+	
+	<party id="jb2890">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party A</partyId>
+	</party>
+	<party id="klq902">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">klq902</partyId>
+	</party>
+	<party id="hwy190">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">LWT</partyId>
+	</party>
+</requestConfirmation>

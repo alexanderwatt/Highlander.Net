@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executionNotification xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+	
+	<header>
+		<messageId messageIdScheme="http://www.party2.com/message-id">SXB-897987907855EAF</messageId>
+		<sentBy messageAddressScheme="http://www.party2.com/messageAddress">PARTUS33</sentBy>
+		<creationTimestamp>2004-06-23T06:55:42-07:00</creationTimestamp>
+	</header>
+	
+	<isCorrection>false</isCorrection>
+	<correlationId correlationIdScheme="http://www.party2.com/coding-scheme/correlation-id">ExchRepo-67891</correlationId>
+	<sequenceNumber>3</sequenceNumber>
+	
+	<trade>
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="party2"/>
+				<tradeId tradeIdScheme="http://www.party2.com/coding-scheme/trade-id">NE9989244</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-03-14-07:00</tradeDate>
+		</tradeHeader>
+		<ext:repo>
+			<productType>BuySellBack</productType>
+			<ext:fixedRateSchedule>
+				<initialValue>0.01</initialValue>
+			</ext:fixedRateSchedule>
+			<ext:dayCountFraction>ACT/365.FIXED</ext:dayCountFraction>
+			<ext:duration>Term</ext:duration>
+			<ext:margin>
+				<ext:marginType>Cash</ext:marginType>
+				<ext:marginFactor>1.00</ext:marginFactor>
+			</ext:margin>
+			<ext:spotLeg>
+				<buyerPartyReference href="party1"/>
+				<sellerPartyReference href="party2"/>
+				<ext:settlementDate>
+					<adjustableDate>
+						<unadjustedDate>2005-03-14-07:00</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</ext:settlementDate>
+				<settlementAmount>
+					<currency>EUR</currency>
+					<amount>10000000.00</amount>
+				</settlementAmount>
+				<ext:collateral>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>10000000.00</amount>
+					</ext:nominalAmount>
+					<ext:cleanPrice>98.79</ext:cleanPrice>
+					<ext:accruals>1.21</ext:accruals>
+					<ext:dirtyPrice>100.00</ext:dirtyPrice>
+					<ext:assetReference href="collateral1"/>
+				</ext:collateral>
+			</ext:spotLeg>
+			<ext:forwardLeg>
+				<buyerPartyReference href="party2"/>
+				<sellerPartyReference href="party1"/>
+				<ext:settlementDate>
+					<adjustableDate>
+						<unadjustedDate>2005-10-14-07:00</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</ext:settlementDate>
+				<settlementAmount>
+					<currency>EUR</currency>
+					<amount>9856876.71</amount>
+				</settlementAmount>
+				<ext:collateral>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>10000000.00</amount>
+					</ext:nominalAmount>
+					<ext:cleanPrice>97.234205</ext:cleanPrice>
+					<ext:accruals>1.334562</ext:accruals>
+					<ext:dirtyPrice>98.568767</ext:dirtyPrice>
+					<ext:assetReference href="collateral1"/>
+				</ext:collateral>
+				<ext:repoInterest>57534.24</ext:repoInterest>
+			</ext:forwardLeg>
+			<ext:couponEvent>
+				<ext:eventDate>2005-06-10-07:00</ext:eventDate>
+				<ext:couponAmount>200000</ext:couponAmount>
+				<ext:reinvestmentRate>0.0103</ext:reinvestmentRate>
+				<ext:assetReference href="collateral1"/>
+			</ext:couponEvent>
+			<bond id="collateral1">
+				<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">FR0010011130</instrumentId>
+				<description>OAT 4% 10-2013</description>
+			</bond>
+		</ext:repo>
+	</trade>
+	<party id="party1">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">CPRTGB21</partyId>
+	</party>
+	<party id="party2">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">PARTUS33</partyId>
+	</party>
+</executionNotification>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requestConfirmation xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+	
+	<header>
+		<messageId messageIdScheme="http://www.partya.com/coding-scheme/message-id">345435345345</messageId>
+		<sentBy messageAddressScheme="http://www.partya.com/coding-scheme/messageAddress">Party A</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	<isCorrection>false</isCorrection>
+	<correlationId correlationIdScheme="http://www.partya.com/coding-scheme/correlation-id">ExchEqd-12345</correlationId>
+	<sequenceNumber>1</sequenceNumber>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="sh9204"/>
+				<tradeId tradeIdScheme="http://www.partya.com/coding-scheme/trade-id">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate id="agasd0290">2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:equityTransaction>
+		
+			<buyerPartyReference href="mm8294"/>
+			<sellerPartyReference href="sh9204"/>
+			
+			<ext:numberOfUnits>10000</ext:numberOfUnits>
+			<ext:unitPrice>
+				<currency>USD</currency>
+				<amount>78.20</amount>
+			</ext:unitPrice>
+			
+			<ext:equity>
+				<instrumentId instrumentIdScheme="http://www.reuters.com/coding-scheme/instrument-id">STM-FP</instrumentId>
+				<description>STMicroelectronics N.V. ordinary shares</description>
+				<exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">NSE</exchangeId>
+			</ext:equity>
+			
+		</ext:equityTransaction>
+		
+	</trade>
+	
+	<party id="sh9204">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party A</partyId>
+	</party>
+	<party id="mm8294">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party B</partyId>
+	</party>
+	
+</requestConfirmation>

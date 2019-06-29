@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -118,7 +118,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string PedersenSetSwaptionRange(Excel.Range range)
         {
-            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
             return Engine.Pedersen.SetSwaptionImpliedVolatility(r1);
         }
 
@@ -129,7 +129,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public object PedersenSetCorrelation(Excel.Range range)
         {
-            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
             return Engine.Pedersen.SetCorrelation(r1);
         }
 
@@ -145,7 +145,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public object PedersenCalibration1(Excel.Range range)
         {
-            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
             return Engine.Pedersen.Calibration(r1);
         }
 
@@ -164,7 +164,7 @@ namespace HLV5r3.Financial
             Engine.PedersenSetDiscountFactors(rateCurveIdentifier);
             Engine.PedersenSetCapletImpliedVolatility(strike, capletCurveIdentifier);
             Engine.PedersenSetSwaptionImpliedVolatility(swaptionVolSurfaceIdentifier);
-            var r1 = Utility.Utilities.ConvertRangeTo2DArray(correlationRange);
+            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(correlationRange);
             Engine.Pedersen.SetCorrelation(r1);
             var result = Engine.PedersenCalibration(rateCurveIdentifier);
             return result;
@@ -216,7 +216,7 @@ namespace HLV5r3.Financial
 
         public object PedersenSimulation(Excel.Range range)
         {
-            var r1 = Utility.Utilities.ConvertRangeTo2DArray(range);
+            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
             return Engine.Pedersen.Simulation(r1);
         }
 

@@ -77,7 +77,7 @@ namespace HLV5r3.Utility
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikeArray">The strike array.</param>
         ///<returns></returns>
-        public static double[,] FilterSurface(Excel.Range inputRange, String tenorFilter, int numTenors, Excel.Range strikeArray)
+        public double[,] FilterSurface(Excel.Range inputRange, String tenorFilter, int numTenors, Excel.Range strikeArray)
         {
             var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
             var strike = DataRangeHelper.StripDoubleRange(strikeArray);
@@ -92,7 +92,7 @@ namespace HLV5r3.Utility
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikeArray">The strike array.</param>
         ///<returns></returns>
-        public static object[,] FilterSurfaceWithExpiries(Excel.Range inputRange, String tenorFilter, int numTenors, Double[] strikeArray)
+        public object[,] FilterSurfaceWithExpiries(Excel.Range inputRange, String tenorFilter, int numTenors, Double[] strikeArray)
         {
             var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
             return DataRangeHelper.FilterSurfaceWithExpiries(values, tenorFilter, numTenors, strikeArray); 
@@ -129,7 +129,7 @@ namespace HLV5r3.Utility
 
         #region Array Methods
 
-        public static object[,] ArrayAppend(Excel.Range arrayA, Excel.Range arrayB, string acrossOrDown, object pad = null)
+        public object[,] ArrayAppend(Excel.Range arrayA, Excel.Range arrayB, string acrossOrDown, object pad = null)
         {
             var values1 = arrayA.Value[System.Reflection.Missing.Value] as object[,];
             var values2 = arrayB.Value[System.Reflection.Missing.Value] as object[,];
@@ -138,7 +138,7 @@ namespace HLV5r3.Utility
             return AppendArray(values1, values2, across, pad);
         }
 
-        public static object[,] ArrayPad(Excel.Range inputArray, object pad = null, int rows = 0, int cols = 0)
+        public object[,] ArrayPad(Excel.Range inputArray, object pad = null, int rows = 0, int cols = 0)
         {
             return PadArray(inputArray, pad, rows, cols);
         }
@@ -180,7 +180,7 @@ namespace HLV5r3.Utility
         /// <param name="numRows">The number of rows in the padded array. The default is to use the input row size</param>
         /// <param name="numColumns">The number of columns in the padded array. The default is to use the input column size</param>
         /// <returns>The input array (or an enlarged version) with padding of any nulls</returns>
-        public static object[,] PadArray(Excel.Range inputArray, [Optional]  object padValue, [Optional] object numRows, [Optional] object numColumns)
+        public object[,] PadArray(Excel.Range inputArray, [Optional]  object padValue, [Optional] object numRows, [Optional] object numColumns)
         {
             var values1 = inputArray.Value[System.Reflection.Missing.Value] as object[,];
             int rows = values1.GetLength(RowDimension);
@@ -239,7 +239,7 @@ namespace HLV5r3.Utility
         /// <param name="appendAcross">If true append array B to array A across columns else join across rows</param>
         /// <param name="padValue">A value to use to fill short arrays (in either dimension)</param>
         /// <returns>A new array joining both source arrays (B appended to A)</returns>
-        public static object[,] AppendArray(object[,] arrayA, object[,] arrayB, bool appendAcross, [Optional] object padValue)
+        public object[,] AppendArray(object[,] arrayA, object[,] arrayB, bool appendAcross, [Optional] object padValue)
         {
             // Check that we have 2 correct arrays
             if (arrayA == null && arrayB == null)
@@ -354,7 +354,7 @@ namespace HLV5r3.Utility
         /// <param name="firstVertical1DRange"></param>
         /// <param name="secondVertical1DRange"></param>
         /// <returns></returns>
-        public static object StackVerticalArrays(Excel.Range firstVertical1DRange, Excel.Range secondVertical1DRange)
+        public object StackVerticalArrays(Excel.Range firstVertical1DRange, Excel.Range secondVertical1DRange)
         {
             object[,] firstColumn = ArrayHelper.RangeToMatrix(firstVertical1DRange.Value[System.Reflection.Missing.Value] as object[,]);
             object[,] secondColumn = ArrayHelper.RangeToMatrix(secondVertical1DRange.Value[System.Reflection.Missing.Value] as object[,]);
@@ -384,7 +384,7 @@ namespace HLV5r3.Utility
         /// <param name="number2">The [optional] second number as a [double];</param>
         /// <param name="number3">The [optional] third number as a [double];</param>
         /// <returns>The addition of all provided numbers.</returns>
-        public static double AddNumbers(double number1, [Optional] object number2, [Optional] object number3)
+        public double AddNumbers(double number1, [Optional] object number2, [Optional] object number3)
         {
             double result = 0;
             result += Convert.ToDouble(number1);
@@ -412,7 +412,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="range">The selected range passed to the function.</param>
         /// <returns>The area.</returns>
-        public static double CalculateArea(object range)
+        public double CalculateArea(object range)
         {
             return range is Excel.Range r ? Convert.ToDouble(r.Width)*Convert.ToDouble(r.Height) : 0;
         }
@@ -422,7 +422,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="range">The selected range.</param>
         /// <returns>The number of cells.</returns>
-        public static double NumberOfCells(object range)
+        public double NumberOfCells(object range)
         {
             var r = range as Excel.Range;
             return r?.Cells.Count ?? 0;
@@ -433,7 +433,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="input">The string to convert.</param>
         /// <returns>The upper case of the string.</returns>
-        public static string ToUpperCase(string input)
+        public string ToUpperCase(string input)
         {
             return input.ToUpper();
         }
@@ -443,7 +443,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="targetRange"></param>
         /// <returns></returns>
-        public static object[,] UNIQUEVALUES(Excel.Range targetRange)
+        public object[,] UniqueValues(Excel.Range targetRange)
         {
             var values = targetRange.Value[System.Reflection.Missing.Value] as object[,];
             var unqVals = new List<object>();
@@ -464,7 +464,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public static object[,] ConvertRangeTo2DArray(Excel.Range range)
+        public object[,] ConvertRangeTo2DArray(Excel.Range range)
         {
             var valueArray = range.Value[Type.Missing] as object[,];
             var formulaArray = (object[,])range.Formula;
@@ -513,7 +513,7 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static bool IsNAString(string value)
+        public bool IsNAString(string value)
         {
             return -1 != NAValues.IndexOf(value);
         }

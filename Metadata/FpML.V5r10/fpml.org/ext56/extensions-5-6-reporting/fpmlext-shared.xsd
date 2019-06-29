@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+== Copyright (c) 2002-2019. All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/documents/license.html
+-->
+<xsd:schema xmlns="http://www.fpml.org/FpML-5/ext" xmlns:fpml="http://www.fpml.org/FpML-5/reporting" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.fpml.org/FpML-5/ext" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<xsd:import namespace="http://www.fpml.org/FpML-5/reporting" schemaLocation="../reporting/fpml-main-5-10.xsd"/>
+		
+	<!--2014-03-03 Moved here from FpML. This type used to exist in FpML-4.x, in 5.x is was orphan-->
+	<xsd:simpleType name="ExerciseStyleEnum">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.FpML.org" xml:lang="en">The specification of how an OTC option will be exercised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="American">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Option can be exercised on any date up to the expiry date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Bermuda">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Option can be exercised on specified dates up to the expiry date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="European">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Option can only be exercised on the expiry date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:complexType name="AbstractTransaction" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Abstract Transaction, which is used as the base class for all Standardised Transactions. The term Transaction is used since they may occur in the context of messages for allocated contracts or unallocated trades.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Product">
+				<xsd:sequence>
+					<xsd:group ref="fpml:BuyerSeller.model">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								References to the buyer and seller of this Transaction.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:group>
+					<!-- AP 20070809 I think it would be a lot better if we had settlement 
+					as a separate process, and have removed settlement support within the 
+					transactions for the present
+					-->
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AbstractNotionalTransaction" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Abstract Notional Transaction, which is used as the base class for all Standardised Transactions which may be expressed in terms of Notional Amount
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractTransaction">
+				<xsd:sequence>
+					<xsd:element name="notionalAmount" type="fpml:Money">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Notional Amount of the this Transaction.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+		
+	<xsd:complexType name="AbstractUnitTransaction" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Abstract Unit Transaction, which is used as the base class for all Standardised Transactions which may be expressed in terms of Number of Units and Unit Price.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractTransaction">
+				<xsd:sequence>
+					<xsd:element name="numberOfUnits" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								The number of units (index or securities).
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="unitPrice" type="fpml:Money">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								The price of each unit. Some Transactions may have zero upfront cost.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ClockId">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				A clock reference identifier allocated by a party. 
+				FpML does not define the domain values associated with this element. 
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:token">
+				<xsd:attribute name="clockIdScheme" type="xsd:anyURI" use="required"/>
+				<xsd:attribute name="id" type="xsd:ID"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ClockDateTime">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Clock Date Time for use inside containing types which 
+				already have a Reference to a Party that has assigned
+				this clock date time.
+				
+				There is no single global clock. Clocks at each Messaging 
+				Endpoint may have different values, different rates of 
+				change and those rates of change may vary over time.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="dateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Date Time assigned by the Clock.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="clockId" type="ClockId" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Identification of the Clock.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- TODO 1) correctness of fpml base types  -->
+	<xsd:complexType name="ExchangeTradedOption">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Extension of an identified ExchangeTradedContract to provide definition information.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:ExchangeTradedContract">
+				<xsd:sequence>
+					<xsd:element name="optionType" type="fpml:OptionTypeEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Option Type, such as Put or Call.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="exerciseStyle" type="ExerciseStyleEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Exercise Style, such as American, Berumda, or European.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="settlementType" type="fpml:SettlementTypeEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								How the option will be settled.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PartyClockDateTime">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Clock Date Time assigned by the Referenced Party, for use
+				inside containing types which do not have a Reference to 
+				a Party which owns all of the information inside the containing
+				type.
+				
+				There is no single global clock. Clocks at each Messaging 
+				Endpoint may have different values, different rates of 
+				change and those rates of change may vary over time.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ClockDateTime">
+				<xsd:sequence>
+					<xsd:element name="partyReference" type="fpml:PartyReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Reference to a Party that has assigned this clock time.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- AP 20070809 I think it would be a lot better if we had settlement 
+	as a separate process, and have removed settlement support within the 
+	transactions for the present
+	-->
+	<!--
+	<xsd:complexType name="CashSettlement">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Transaction Settlement Information.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="date" type="fpml:AdjustableOrRelativeDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						Settlement Date
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">
+						When the exact money amount is not known, 
+						this structure allows participants to state the 
+						settlement currency of the transaction.
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="amount" type="fpml:Money">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							Settlement Amount.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="currency" type="fpml:Currency">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							Settlement Currency.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>	
+	</xsd:complexType>
+	-->
+	
+</xsd:schema>

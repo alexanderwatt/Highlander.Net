@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 
+	== Copyright (c) 2002-2019. All rights reserved. 
+	== Financial Products Markup Language is subject to the FpML public license. 
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<executionNotification xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+	<header>
+		<messageId messageIdScheme="http://www.party2.com/message-id">897987907855EAF</messageId>
+		<sentBy>PARTUS33</sentBy>
+		<creationTimestamp>2004-06-23T06:55:42-07:00</creationTimestamp>
+	</header>
+	<!-- The sample below is for a Security vs fee trade with one piece of collateral.  
+		The trade below is for a EUR. 20,250,000.00 7 days sec lending, with a fee of 25 bps
+		Trade date 14th March 2005, value date on the 16th, maturity on the 23rd.
+	-->
+	<isCorrection>false</isCorrection>
+	<trade>
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="party2" />
+				<tradeId tradeIdScheme="http://www.party2.com/coding-scheme/trade-id">NE99892987</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-03-14</tradeDate>
+		</tradeHeader>
+		<ext:securityLending>
+			<productType>SecurityVersusFee</productType>
+			<ext:feeRateSchedule>
+				<initialValue>0.0025</initialValue>
+			</ext:feeRateSchedule>
+			<ext:duration>Term</ext:duration>
+			<ext:margin>
+				<ext:marginType>Cash</ext:marginType>
+				<ext:marginFactor>1.00</ext:marginFactor>
+			</ext:margin>
+			<ext:spotLeg>
+				<ext:delivererPartyReference href="party1" />
+				<ext:receiverPartyReference href="party2" />
+				<ext:settlementDate>
+					<adjustableDate>
+						<unadjustedDate>2005-03-16</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</ext:settlementDate>
+				<settlementAmount>
+					<currency>EUR</currency>
+					<amount>20250000.00</amount>
+				</settlementAmount>
+				<ext:security>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>20250000.00</amount>
+					</ext:nominalAmount>
+					<ext:assetReference href="security" />
+				</ext:security>
+				<ext:collateral>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>10000000.00</amount>
+					</ext:nominalAmount>
+					<ext:assetReference href="coll1"/>
+				</ext:collateral>
+				<ext:collateral>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>10250000.00</amount>
+					</ext:nominalAmount>
+					<ext:assetReference href="coll2"/>
+				</ext:collateral>
+			</ext:spotLeg>
+			<ext:forwardLeg>
+				<ext:delivererPartyReference href="party2" />
+				<ext:receiverPartyReference href="party1" />
+				<ext:settlementDate>
+					<adjustableDate>
+						<unadjustedDate>2005-03-23</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</ext:settlementDate>
+				<settlementAmount>
+					<currency>EUR</currency>
+					<amount>20254055.62</amount>
+				</settlementAmount>
+				<ext:security>
+					<ext:nominalAmount>
+						<currency>EUR</currency>
+						<amount>20250000.00</amount>
+					</ext:nominalAmount>
+					<ext:assetReference href="security"/>
+				</ext:security>
+			</ext:forwardLeg>
+			<bond id="security">
+				<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">FR0010011130</instrumentId>
+				<description>OAT 4% 10-2013</description>
+			</bond>
+			<bond id="coll1">
+				<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">DE0001135242</instrumentId>
+				<description>BUND 4.25% 01-2014</description>
+			</bond>
+			<bond id="coll2">
+				<instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">FR0010011137</instrumentId>
+				<description>OAT 4.25% 10-2015</description>
+			</bond>
+		</ext:securityLending>
+	</trade>
+	<party id="party1">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">SELLGB22</partyId>
+	</party>
+	<party id="party2">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">BUYRGB22</partyId>
+	</party>
+</executionNotification>

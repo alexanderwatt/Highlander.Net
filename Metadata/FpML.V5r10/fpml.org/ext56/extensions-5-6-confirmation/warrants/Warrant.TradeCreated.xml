@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executionNotification xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:ext="http://www.fpml.org/FpML-5/ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fpml.org/FpML-5/confirmation ../../confirmation/fpml-main-5-10.xsd http://www.fpml.org/FpML-5/ext ../fpmlext-main.xsd" fpmlVersion="5-10">
+	
+	<!-- AP index warrant based on ASX specification-->
+	
+	<header>
+		<messageId messageIdScheme="http://www.partya.com/coding-scheme/message-id">345345</messageId>
+		<sentBy messageAddressScheme="http://www.partya.com/coding-scheme/messageAddress">Party A</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	
+	<isCorrection>false</isCorrection>
+	<correlationId correlationIdScheme="http://concorde.uk.partya.com/coding-scheme/correlation-id">ExchWar-86591</correlationId>
+	<sequenceNumber>3</sequenceNumber>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="jb2890"/>
+				<tradeId tradeIdScheme="http://www.partya.com/coding-scheme/trade-id">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:warrantTransaction>
+		
+			<buyerPartyReference href="jb2890"/>
+			<sellerPartyReference href="bko209"/>
+			
+			<ext:numberOfUnits>20</ext:numberOfUnits>
+			<ext:unitPrice>
+				<currency>AUD</currency>
+				<amount>39.00</amount>
+			</ext:unitPrice>
+
+			<!-- in this example xsi type is used because we wish
+			to carry some reference information on the warrant -->
+			<ext:warrant xsi:type="ext:Warrant">
+			
+				<instrumentId instrumentIdScheme="http://www.asx.com.au/coding-scheme/instrument-id">XSPWOU</instrumentId>
+				<description>CITIWARRANTS 1400 XSP INDEX PUT WARRANT 19-DEC-07</description>
+				<exchangeId>ASX</exchangeId>
+				<expirationDate id="sko290">
+					<adjustableDate>
+						<unadjustedDate>2006-06-17</unadjustedDate>
+						<dateAdjustments>
+							<businessDayConvention>NONE</businessDayConvention>
+						</dateAdjustments>
+					</adjustableDate>
+				</expirationDate>
+
+				<!-- Type: Put warrant -->
+				<ext:optionType>Put</ext:optionType>
+				<!-- Exercise style: European -->
+				<ext:exerciseStyle>European</ext:exerciseStyle>
+				<ext:settlementType>Cash</ext:settlementType>
+				<!-- Issuer: CITIWARRANTS (CGMA) -->
+				<ext:issuerName>CITIWARRANTS (CGMA)</ext:issuerName>
+				<!-- Exercise level: 1,400.000 (expressed in USD or index points) -->
+				<ext:exercisePrice>1400</ext:exercisePrice>
+				<!-- Warrants per underlying instrument: 0.0050 -->
+				<ext:conversionRatio>0.0050</ext:conversionRatio>
+				
+			</ext:warrant>
+			
+		</ext:warrantTransaction>
+
+	</trade>
+	
+	<party id="jb2890">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party A</partyId>
+	</party>
+	<party id="bko209">
+		<partyId partyIdScheme="http://www.fpml.org/coding-scheme/external/iso9362">Party B</partyId>
+	</party>
+	
+</executionNotification>
