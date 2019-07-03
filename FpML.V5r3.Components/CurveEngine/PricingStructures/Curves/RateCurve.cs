@@ -72,7 +72,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         public IBusinessCalendar PaymentCalendar { get; set; }
 
         /// <summary>
-        /// The underlying vurve to use for interpolation.
+        /// The underlying curve to use for interpolation.
         /// </summary>
         public string UnderlyingInterpolatedCurve = "ZeroCurve";
 
@@ -516,7 +516,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="buildAssets">This is a flag which allows no assets to be built. Mainly for dervived rate curve from fx curve. </param>
@@ -1335,7 +1335,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //  nullify the discount factor curve to make sure that bootstrapping will happen)
             //
             var ycv = (YieldCurveValuation)ycvCurveCloned;
-            //Dont want to null ther dfs
+            //Don't want to null the dfs
             //
             //ycv.discountFactorCurve.point = null;
             //ycv.zeroCurve = null;

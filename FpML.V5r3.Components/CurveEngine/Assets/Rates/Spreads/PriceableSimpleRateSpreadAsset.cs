@@ -346,7 +346,7 @@ namespace Orion.CurveEngine.Assets
                 // DependencyCreator.Resolve<IModelAnalytic<ISimpleAssetParameters, RateMetrics>>(_modelIdentifier);
             }
             //3. Get the Rate
-            StartDiscountFactor = GetDiscountFactor(interpolatedSpace, AdjustedStartDate, BaseDate);
+            StartDiscountFactor = GetDiscountFactor(interpolatedSpace, AdjustedEffectiveDate, BaseDate);
             EndDiscountFactor = GetDiscountFactor(interpolatedSpace, RiskMaturityDate, BaseDate);
             ISimpleRateAssetParameters analyticModelParameters = new RateAssetParameters
             {

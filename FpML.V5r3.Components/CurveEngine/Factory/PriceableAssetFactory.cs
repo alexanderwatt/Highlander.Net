@@ -722,14 +722,14 @@ namespace Orion.CurveEngine.Factory
                 //create the asset-basic asset valuation pair.
                 var asset = AssetHelper.CreateAssetPair(assetIdentifier, values, measureType, priceQuoteUnits);
                 //gets the data group.
-                var datagroup = properties.GetValue<string>(CurveProp.DataGroup, false) ?? "Local.PriceableAsset";
+                var dataGroup = properties.GetValue<string>(CurveProp.DataGroup, false) ?? "Local.PriceableAsset";
                 //sets up the unique identifier.
                 var uniqueIdentifier = properties.GetValue<string>(CurveProp.UniqueIdentifier, false);
                 if (uniqueIdentifier == null)
                 {
                     var uniqueId = isBondType
-                                                    ? datagroup + "." + bondId
-                                                    : datagroup + "." + assetIdentifier + '-' + values[0] + '-' +
+                                                    ? dataGroup + "." + bondId
+                                                    : dataGroup + "." + assetIdentifier + '-' + values[0] + '-' +
                                                       baseDate.ToShortDateString();
                     properties.Set(CurveProp.UniqueIdentifier, uniqueId);
                 }
@@ -1303,7 +1303,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="cache">The cache</param>
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="instrument">The instrument</param>
-        /// <param name="bav">The basic asset valution</param>
+        /// <param name="bav">The basic asset valuation</param>
         /// <param name="quoteType">The quote type</param>
         /// <param name="properties"></param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -1365,7 +1365,7 @@ namespace Orion.CurveEngine.Factory
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="instrument"></param>
         /// <param name="bav"></param>
-        /// <param name="quoteType">THe qote type</param>
+        /// <param name="quoteType">The quote type</param>
         /// <param name="properties"></param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
         private static IPriceableAssetController CreateBondSpot(ILogger logger, ICoreCache cache, string nameSpace,
@@ -1412,7 +1412,7 @@ namespace Orion.CurveEngine.Factory
         ///  <param name="nameSpace">The client namespace</param>
         /// <param name="instrument"></param>
         /// <param name="bav"></param>
-        /// <param name="quoteType">THe qote type</param>
+        /// <param name="quoteType">The quote type</param>
         /// <param name="properties"></param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
         /// <param name="paymentCalendar">The payment calendar.</param>
@@ -2151,7 +2151,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2353,7 +2353,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2406,7 +2406,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2458,7 +2458,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2511,7 +2511,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2563,7 +2563,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2617,7 +2617,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2669,7 +2669,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2721,7 +2721,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2773,7 +2773,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2848,7 +2848,7 @@ namespace Orion.CurveEngine.Factory
                     if (instrument.InstrumentNodeItem is BasisSwapNodeStruct nodeStruct)
                     {
                         nodeStruct.MarginLeg.term = PeriodHelper.Parse(term);
-                        //Invert the quote if the margi leg is not the index tenor.
+                        //Invert the quote if the margin leg is not the index tenor.
                         BasicQuotation normalisedSpread = nodeStruct.MarginLeg.paymentFrequency.Equals(PeriodHelper.Parse(indexTerm))
                             ? MarketQuoteHelper.GetInverseMarketQuoteAddSpreadAndNormalise(quotes)
                             : MarketQuoteHelper.GetMarketQuoteAddSpreadAndNormalise(quotes);
@@ -2886,7 +2886,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -2994,7 +2994,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -3046,7 +3046,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -3100,7 +3100,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -3155,7 +3155,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         ///  <param name="nameSpace">The client namespace</param>
-        /// <param name="instrument">The instument class.</param>
+        /// <param name="instrument">The instrument class.</param>
         /// <param name="bav">A basic asset valuation.</param>
         /// <param name="properties">A property bag.</param>
         /// <param name="fixingCalendar">The fixing calendar.</param>
@@ -3524,9 +3524,9 @@ namespace Orion.CurveEngine.Factory
                 if (term != null)
                 {
                     var expiryTenor = PeriodHelper.Parse(term);
-                    var priceableOptionASset = new PriceableSimpleOptionAsset(logger, cache, nameSpace, assetIdentifier, baseDate, expiryTenor, strike, 
+                    var priceableOptionAsset = new PriceableSimpleOptionAsset(logger, cache, nameSpace, assetIdentifier, baseDate, expiryTenor, strike, 
                         quote.quote[0].value, discountCurve, forecastCurve, fixingCalendar, rollCalendar);
-                    priceableAssets.Add(priceableOptionASset);
+                    priceableAssets.Add(priceableOptionAsset);
                 }
             }
             priceableAssets = priceableAssets.OrderBy(a => a.GetRiskMaturityDate()).ThenBy(a => a.Id).ToList();
@@ -3740,7 +3740,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         public static List<IPriceableRateAssetController> CreatePriceableRateAssets(ILogger logger, ICoreCache cache, 
@@ -3770,7 +3770,7 @@ namespace Orion.CurveEngine.Factory
                     quotes.Add(priceQuoteUnits[index - 1]);
                 }
                 var priceableAsset = Create(logger, cache, nameSpace, assetIdentifier, baseDate, vals.ToArray(), measures.ToArray(), quotes.ToArray(), fixingCalendar, rollCalendar);
-                //Not efficient, but the spreadfras need to be excluded now they implement the IPriceableRateAssetController interface.
+                //Not efficient, but the spread Fra needs to be excluded now they implement the IPriceableRateAssetController interface.
                 if (priceableAsset is PriceableRateAssetController item && id.AssetType != AssetTypesEnum.SpreadFra)
                 {
                     priceableAssets.Add(item);
@@ -3892,7 +3892,7 @@ namespace Orion.CurveEngine.Factory
         ///// <param name="assetIdentifiers">The asset identifiers.</param>
         ///// <param name="baseDate">The base date.</param>
         ///// <param name="values">The adjusted rates.</param>
-        ///// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        ///// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         ///// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         ///// <returns></returns>
         //public List<IPriceableCreditAssetController> CreatePriceableCreditAssets(ICoreCache cache, string[] assetIdentifiers, DateTime baseDate, Decimal[] values,
@@ -4008,7 +4008,7 @@ namespace Orion.CurveEngine.Factory
         ///// <param name="assetIdentifiers">The asset identifiers.</param>
         ///// <param name="baseDate">The base date.</param>
         ///// <param name="values">The adjusted rates.</param>
-        ///// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        ///// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         ///// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         ///// <returns></returns>
         //public List<IPriceableFxAssetController> CreatePriceableFxAssets(ICoreCache cache, string[] assetIdentifiers, DateTime baseDate, Decimal[] values,
@@ -4103,7 +4103,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         public static List<IPriceableRateSpreadAssetController> CreatePriceableSpreadFraAssets(ILogger logger, ICoreCache cache, 
@@ -4241,7 +4241,7 @@ namespace Orion.CurveEngine.Factory
             }
             decimal spotRate = spotRateAsset.quote[0].value;
             //var forwards = PriceQuoteUnitsEnum.RateSpread
-            //2.    If there are, derive the outrights from the cached spot rate and the forward points.
+            //2.    If there are, derive the outright from the cached spot rate and the forward points.
             foreach (var asset in quotedAssetSet.instrumentSet.Items)
             {
                 var isONAsset = asset.id.EndsWith("ON", StringComparison.InvariantCultureIgnoreCase);
@@ -4257,14 +4257,14 @@ namespace Orion.CurveEngine.Factory
                     }
                     if (isONAsset && tNRateAsset != null)
                     {
-                        var onquote = MarketQuoteHelper.FindQuotationByMeasureType("MarketQuote", tNRateAsset.quote);
-                        if (onquote.quoteUnits.Value == "DecimalSpread")
+                        var onQuote = MarketQuoteHelper.FindQuotationByMeasureType("MarketQuote", tNRateAsset.quote);
+                        if (onQuote.quoteUnits.Value == "DecimalSpread")
                         {
-                            quote.value = spotRate - quote.value - onquote.value;
+                            quote.value = spotRate - quote.value - onQuote.value;
                         }
-                        if (onquote.quoteUnits.Value == "DecimalRate")
+                        if (onQuote.quoteUnits.Value == "DecimalRate")
                         {
-                            quote.value = onquote.value - quote.value;
+                            quote.value = onQuote.value - quote.value;
                         }
                     }
                     else if (!isTNAsset)
@@ -4636,7 +4636,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="baseDate">The base date.</param>
         /// <param name="term">THe term of the cap.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="effectiveDate">The efective Date.</param>
+        /// <param name="effectiveDate">The effective Date.</param>
         /// <param name="paymentFrequency">The cap roll frequency.</param>
         /// <param name="fixingCalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
         /// <param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
@@ -4742,11 +4742,11 @@ namespace Orion.CurveEngine.Factory
         /// <param name="identifier">The swap configuration identifier.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="rolldates">The roll dates.</param>
+        /// <param name="rollDates">The roll dates.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
         public static PriceableIRCap CreateIRCap(ILogger logger, ICoreCache cache, string nameSpace, String identifier, DateTime baseDate, string currency,
-            List<DateTime> rolldates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
+            List<DateTime> rollDates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex, IBusinessCalendar fixingCalendar, NamedValueSet properties)
         {
             var notional = MoneyHelper.GetAmount(notionals[0], currency);
@@ -4762,7 +4762,7 @@ namespace Orion.CurveEngine.Factory
             {
                 fixingCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, resetConvention.businessCenters, nameSpace);
             }
-            return new PriceableIRCap(baseDate, identifier, rolldates, notionals, strikes, resets,
+            return new PriceableIRCap(baseDate, identifier, rollDates, notionals, strikes, resets,
                 resetConvention, paymentDateAdjustments, capCalculation, fixingCalendar);
         }
 

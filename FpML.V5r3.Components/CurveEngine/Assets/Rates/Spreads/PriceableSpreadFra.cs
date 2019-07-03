@@ -124,7 +124,7 @@ namespace Orion.CurveEngine.Assets
         /////<summary>
         /////</summary>
         /////<param name="interpolatedSpace"></param>
-        /////<returns>The spread calculated from the curve provided and the marketquote of the asset.</returns>
+        /////<returns>The spread calculated from the curve provided and the marketQuote of the asset.</returns>
         //public override decimal CalculateSpreadQuote(IInterpolatedSpace interpolatedSpace)
         //{
         //    return Spread.value;
@@ -164,7 +164,7 @@ namespace Orion.CurveEngine.Assets
         //    ModelData = modelData;
         //    AnalyticsModel = new RateSpreadAssetAnalytic();
         //    var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-        //    // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+        //    // Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
         //    var bEvalDiscountFactorAtMaturity = false;
         //    if (metrics.Contains(RateSpreadMetrics.DiscountFactorAtMaturity))
         //    {
@@ -213,7 +213,7 @@ namespace Orion.CurveEngine.Assets
         //    }
         //    if (bEvalDiscountFactorAtMaturity)
         //    {
-        //        //4. Set the anaytic input parameters and Calculate the respective metrics
+        //        //4. Set the analytic input parameters and Calculate the respective metrics
         //        AnalyticResults =
         //            AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
         //                                                                               metricsToEvaluate);
@@ -223,7 +223,7 @@ namespace Orion.CurveEngine.Assets
         //    {
         //        //3. Get the end discount factor
         //        analyticModelParameters.EndDiscountFactor = EndDiscountFactor;
-        //        //4. Set the anaytic input parameters and Calculate the respective metrics
+        //        //4. Set the analytic input parameters and Calculate the respective metrics
         //        AnalyticResults =
         //            AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
         //                                                                               metricsToEvaluate);
@@ -234,7 +234,7 @@ namespace Orion.CurveEngine.Assets
         ///// <summary>
         ///// Calculates the specified metric for the fast bootstrapper.
         ///// </summary>
-        ///// <param name="interpolatedSpace">The intepolated Space.</param>
+        ///// <param name="interpolatedSpace">The interpolated Space.</param>
         ///// <returns></returns>
         //public override decimal CalculateDiscountFactorAtMaturity(IInterpolatedSpace interpolatedSpace)
         //{
@@ -256,7 +256,7 @@ namespace Orion.CurveEngine.Assets
         //        analyticModelParameters.Rate = fixedRate + 
         //                MarketQuoteHelper.NormaliseGeneralPriceUnits(SpreadQuotationType, Spread, "DecimalRate").value;
         //    }
-        //    //4. Set the anaytic input parameters and Calculate the respective metrics
+        //    //4. Set the analytic input parameters and Calculate the respective metrics
         //    AnalyticResults =
         //        AnalyticsModel.Calculate<IRateSpreadAssetResults, RateSpreadAssetResults>(analyticModelParameters,
         //                                                                           new[] { RateSpreadMetrics.DiscountFactorAtMaturity });
@@ -267,7 +267,7 @@ namespace Orion.CurveEngine.Assets
         ///// <summary>
         ///// Calculates the specified metric for the fast bootstrapper.
         ///// </summary>
-        ///// <param name="interpolatedSpace">The intepolated Space.</param>
+        ///// <param name="interpolatedSpace">The interpolated Space.</param>
         ///// <returns></returns>
         //public override decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace)
         //{

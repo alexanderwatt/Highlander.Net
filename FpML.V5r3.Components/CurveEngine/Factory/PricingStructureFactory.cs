@@ -278,9 +278,9 @@ namespace Orion.CurveEngine.Factory
                     var ref1Id = properties.GetValue<String>(BondProp.ReferenceBond, true);
                     var ref1Item = cache.LoadItem<Bond>(nameSpace + '.' + "ReferenceData.FixedIncome." + ref1Id);
                     var ref1Asset = ref1Item.Data as Bond;
-                    string refcurve2Id = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var refcurve2 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, refcurve2Id);
-                    structure = new SecuredRateBasisCurve(logger, cache, nameSpace, ref1Asset, refcurve2, quotedAssetSet, properties, fixingCalendar, rollCalendar);  
+                    string refCurve2Id = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
+                    var refCurve2 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, refCurve2Id);
+                    structure = new SecuredRateBasisCurve(logger, cache, nameSpace, ref1Asset, refCurve2, quotedAssetSet, properties, fixingCalendar, rollCalendar);  
                     break;
                 case PricingStructureTypeEnum.BondDiscountCurve:
                     structure = new BondCurve(logger, cache, nameSpace, properties, quotedAssetSet, fixingCalendar, rollCalendar);
@@ -304,36 +304,36 @@ namespace Orion.CurveEngine.Factory
                     break;
                 case PricingStructureTypeEnum.RateSpreadCurve:
                     string curveId = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    IPricingStructure refcurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, curveId);
-                    structure = new RateSpreadCurve(logger, cache, nameSpace, properties, refcurve, quotedAssetSet, fixingCalendar, rollCalendar);
+                    IPricingStructure refCurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, curveId);
+                    structure = new RateSpreadCurve(logger, cache, nameSpace, properties, refCurve, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.ClearedRateCurve:
-                    string basediscountingcurveId = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var basediscountingcurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, basediscountingcurveId);
-                    structure = new ClearedRateCurve(logger, cache, nameSpace, basediscountingcurve, quotedAssetSet, properties, fixingCalendar, rollCalendar);
+                    string baseDiscountingCurveId = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
+                    var baseDiscountingCurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseDiscountingCurveId);
+                    structure = new ClearedRateCurve(logger, cache, nameSpace, baseDiscountingCurve, quotedAssetSet, properties, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.RateBasisCurve:
                     var refCurveName1 = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var refcurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, refCurveName1);
-                    structure = new RateBasisCurve(logger, cache, nameSpace, refcurve1, quotedAssetSet, properties, fixingCalendar, rollCalendar);
+                    var refCurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, refCurveName1);
+                    structure = new RateBasisCurve(logger, cache, nameSpace, refCurve1, quotedAssetSet, properties, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.RateXccyCurve:
                     string baseCurveName = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var basecurve = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName);
+                    var baseCurve = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName);
                     string fxCurveName = PropertyHelper.ExtractReferenceFxCurveUniqueId(properties);
                     var fxcurve = CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName);
                     string currency2CurveName = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
                     var currency2Curve = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, currency2CurveName);
-                    structure = new RateXccySpreadCurve(logger, cache, nameSpace, properties, basecurve, fxcurve, currency2Curve, quotedAssetSet, fixingCalendar, rollCalendar);
+                    structure = new RateXccySpreadCurve(logger, cache, nameSpace, properties, baseCurve, fxcurve, currency2Curve, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.XccySpreadCurve:
                     string baseCurveName2 = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var basecurve2 = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName2);
+                    var baseCurve2 = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName2);
                     string fxCurveName2 = PropertyHelper.ExtractReferenceFxCurveUniqueId(properties);
                     var fxcurve2 = (FxCurve)CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName2);
                     string currency2CurveName2 = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
                     var currency2Curve2 = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, currency2CurveName2);
-                    structure = new XccySpreadCurve(logger, cache, nameSpace, properties, quotedAssetSet, basecurve2, currency2Curve2, fxcurve2, fixingCalendar, rollCalendar);
+                    structure = new XccySpreadCurve(logger, cache, nameSpace, properties, quotedAssetSet, baseCurve2, currency2Curve2, fxcurve2, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.FxCurve:
                     structure = new FxCurve(logger, cache, nameSpace, properties, (FxRateSet)quotedAssetSet, fixingCalendar, rollCalendar);
@@ -343,8 +343,8 @@ namespace Orion.CurveEngine.Factory
                     break;
                 case PricingStructureTypeEnum.CommoditySpreadCurve:
                     var refCommodityCurveName = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var refcommoditycurve1 = CurveLoader.LoadCommodityCurve(logger, cache, nameSpace, refCommodityCurveName);
-                    structure = new CommoditySpreadCurve2(logger, cache, nameSpace, refcommoditycurve1, (FxRateSet)quotedAssetSet, properties, rollCalendar);
+                    var refCommodityCurve1 = CurveLoader.LoadCommodityCurve(logger, cache, nameSpace, refCommodityCurveName);
+                    structure = new CommoditySpreadCurve2(logger, cache, nameSpace, refCommodityCurve1, (FxRateSet)quotedAssetSet, properties, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.EquityCurve:
                     structure = new EquityCurve(logger, cache, nameSpace, properties, (FxRateSet)quotedAssetSet, fixingCalendar, rollCalendar);
@@ -427,7 +427,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="properties">The properties.</param>
         /// <param name="expiryTerms">An array of expiry tenors..</param>
         /// <param name="strikesOrTenor">An array of strikes or tenors.</param>
-        /// <param name="volatilities">A range of volatiltiies of the correct dimension.</param>
+        /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
         /// <returns></returns>
         public static IPricingStructure CreateVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace,
             NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenor, Double[,] volatilities)
@@ -460,12 +460,12 @@ namespace Orion.CurveEngine.Factory
         }
 
         /// <summary>
-        /// Returns an pricingstructure. <see cref="NamedValueSet"/> class.
+        /// Returns an pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="referenceCurveData">The reference curve data.</param>
-        /// <param name="referenceFxCurveData">The Fx ewfwewncw curve.</param>
+        /// <param name="referenceFxCurveData">The Fx reference curve.</param>
         /// <param name="currency2CurveData">The currency2 data.</param>
         /// <param name="spreadCurveData">The spread curve data.</param>
         /// <param name="nameSpace">The namespace</param>
@@ -498,7 +498,7 @@ namespace Orion.CurveEngine.Factory
         }
 
         /// <summary>
-        /// Returns an pricingstructure. <see cref="NamedValueSet"/> class.
+        /// Returns an pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
@@ -528,15 +528,15 @@ namespace Orion.CurveEngine.Factory
         }
 
         /// <summary>
-        /// Initialises all valid pricingstructures from the FpML.
+        /// Initialises all valid pricing structures from the FpML.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="fpmlData">The FPML data.</param>
         /// <param name="properties">The properties.</param>
         /// <param name="nameSpace">The nameSpace</param>
-        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
-        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
         public static IPricingStructure Create(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, 
             Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties)
@@ -650,8 +650,8 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
-        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
-        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
         /// <param name="properties"></param>
         /// <param name="values">A range object that contains the instruments and quotes.</param>
         /// <returns></returns>
@@ -690,8 +690,8 @@ namespace Orion.CurveEngine.Factory
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
-        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
-        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be rebootstrapped or the pricebale assets are required.</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
         /// <param name="properties">THe properties.</param>
         /// <param name="headers">THe value headers</param>
         /// <param name="values">A range object that contains the instruments and quotes.</param>
@@ -707,11 +707,11 @@ namespace Orion.CurveEngine.Factory
                 for (int i = 0; i < numRows; i++)
                 {
                     //Clears all the added properties.
-                    var newproperties = properties.Clone();
+                    var newProperties = properties.Clone();
                     var baseDate = values[i, 0];
-                    newproperties.Set(CurveProp.BaseDate, baseDate);
-                    newproperties.Set(CurveProp.BuildDateTime, baseDate);
-                    newproperties.Set(CurveProp.MarketDate, baseDate);
+                    newProperties.Set(CurveProp.BaseDate, baseDate);
+                    newProperties.Set(CurveProp.BuildDateTime, baseDate);
+                    newProperties.Set(CurveProp.MarketDate, baseDate);
                     var newValues = new object[headers.Count, 3];
                     //Map to the instruments using the currency property and others.
                     var index = 0;
@@ -723,7 +723,7 @@ namespace Orion.CurveEngine.Factory
                         index++;
                     }
                     var curve = CreatePricingStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar,
-                                                       newproperties, newValues);
+                                                       newProperties, newValues);
                     result.Add(curve);
                 }
                 return result;

@@ -41,7 +41,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
         /// <param name="term">The cap term.</param>
         /// <param name="strike">The strike for each caplet.</param>
         /// <param name="lastResets">A list of reset rates. This may be null.</param>
-        /// <param name="includeStubFlag">A flag: include the first stub periood or not.</param>
+        /// <param name="includeStubFlag">A flag: include the first stub period or not.</param>
         /// <param name="paymentFrequency">The caplet frequency.</param>
         /// <param name="rollBackward">A flag which determines whether to roll 
         /// the dates: Backward or Forward. Currency this is ignored.</param>
@@ -76,7 +76,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
             AdjustedStartDate = effectiveDate;
             AdjustedPeriodDates = adjustedPeriodDates;
             ExpiryDates = GetResetDates(AdjustedPeriodDates, fixingCalendar, resetOffset, true);
-            OptionsExpiryDate = ExpiryDates[adjustedPeriodDates.Count - 1];
+            OptionsExpiryDate = ExpiryDates[ExpiryDates.Count - 1];
             IsCap = true;
             YearFractions = GetYearFractions();
             Strikes = CreateList(strike, YearFractions.Count);
@@ -190,7 +190,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
             analyticModelParameters.Strikes = Strikes;
             ParRate = CalculateImpliedParRate(modelData.ValuationDate);
             analyticModelParameters.Rate = (double)ParRate;
-            //9. Set the anaytic input parameters and Calculate the respective metrics            
+            //9. Set the analytic input parameters and Calculate the respective metrics            
             AnalyticResults =
                 AnalyticsModel.Calculate<IRateOptionAssetResults, RateOptionAssetResults>(analyticModelParameters,
                                                                               metricsToEvaluate);
@@ -204,7 +204,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="discountCurve">The discount curve.</param>
         /// <param name="forecastCurve">The forward curve.</param>
-        /// <param name="volCurve">The volatiltiy surface.        
+        /// <param name="volCurve">The volatility surface.        
         /// and discount curves when called with ForecastRateCurve.</param>
         /// <param name="curveToPerturb">The curve to perturb: the discount curve, the forecast curve or both.</param>
         /// <returns></returns>
@@ -247,7 +247,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
                 GetVolatilties(volCurve, TimesToExpiry, Strikes);
             //8. Get the Strikes
             analyticModelParameters.Strikes = Strikes;
-            //9. Set the anaytic input parameters and Calculate the respective metrics            
+            //9. Set the analytic input parameters and Calculate the respective metrics            
             var analyticResults =
                 AnalyticsModel.Calculate<IRateOptionAssetResults, RateOptionAssetResults>(analyticModelParameters,
                                                                               new[] { RateOptionMetrics.NPV });
@@ -307,7 +307,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
                                    AdjustedPeriodDates.ToArray(),
                                    BaseDate);
 
-            //Set the anaytic input parameters and Calculate the respective metrics
+            //Set the analytic input parameters and Calculate the respective metrics
             //
             return AnalyticsModel.Calculate<IRateOptionAssetResults, RateOptionAssetResults>(parameters, new[] { RateOptionMetrics.NPV });
         }
@@ -323,7 +323,7 @@ namespace Orion.CurveEngine.Assets.Rates.CapsFloors
             parameters.ForecastDiscountFactors = GetDiscountFactors(forecastcurve,
                 AdjustedPeriodDates.ToArray(),
                 BaseDate);
-            //Set the anaytic input parameters and Calculate the respective metrics
+            //Set the analytic input parameters and Calculate the respective metrics
             //
             return AnalyticsModel.Calculate<IRateOptionAssetResults, RateOptionAssetResults>(parameters, new[] { RateOptionMetrics.NPV });
         }

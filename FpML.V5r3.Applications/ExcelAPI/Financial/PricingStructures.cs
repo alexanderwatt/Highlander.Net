@@ -913,9 +913,9 @@ namespace HLV5r3.Financial
         /// <returns>The interpolated value.</returns>
         public object[,] GetExpiryTermStrikeValues(string pricingStructureId, Excel.Range expiryTermsAsArray, Excel.Range strikesAsArray)
         {
-            List<string> unqexpiryTerms = DataRangeHelper.StripRange(expiryTermsAsArray);
-            List<double> unqstrikes = DataRangeHelper.StripDoubleRange(strikesAsArray);
-            var value = Engine.GetExpiryTermStrikeValues(pricingStructureId, unqexpiryTerms, unqstrikes);
+            List<string> unqExpiryTerms = DataRangeHelper.StripRange(expiryTermsAsArray);
+            List<double> unqStrikes = DataRangeHelper.StripDoubleRange(strikesAsArray);
+            var value = Engine.GetExpiryTermStrikeValues(pricingStructureId, unqExpiryTerms, unqStrikes);
             return value;
         }
 
@@ -945,8 +945,8 @@ namespace HLV5r3.Financial
         /// and the new solved curve which was created using the supplied spreads.
         /// </summary>
         /// <param name="baseCurveId">The ID of the base (foreign) zero rate curve the new curve is based on.</param>
-        /// <param name="quoteCurveId">The ID of the quote (local) zero rate curve, used for creating synthetic depos.</param>
-        /// <param name="fxCurveId">The ID of the FX curve, used for creating synthetic depos.</param>
+        /// <param name="quoteCurveId">The ID of the quote (local) zero rate curve, used for creating synthetic deposits.</param>
+        /// <param name="fxCurveId">The ID of the FX curve, used for creating synthetic deposits.</param>
         /// <param name="propertiesRange">The properties of the new curve.</param>
         /// <param name="spreadRange">The adjustments required.</param>
         /// <returns>The ID of the newly created curve.</returns>
@@ -1033,7 +1033,7 @@ namespace HLV5r3.Financial
         /// <para>
         /// NB: Price and bill interest-rate futures have the feature that the margin 
         /// payments/receipts are not exactly the differences in the PV of the positions, 
-        /// being calculated instead according to some naïve formula that takes no account 
+        /// being calculated instead according to some formula that takes no account 
         /// of discounting. This results in the yield of the future contract (100 minus the price) 
         /// not being exactly the same as the equivalent FRA. No account of this is taken by 
         /// the yield curve builder, as apart from anything else, dealing with this correctly 
@@ -1209,7 +1209,7 @@ namespace HLV5r3.Financial
         /// Creates the specified rate spread curve type.
         ///</summary>
         ///<param name="propertiesRange">THe properties. This must include a ReferenceCurveId.</param>
-        ///<param name="instrumentsAsArray">The instruments to transform the refernce curve into.</param>
+        ///<param name="instrumentsAsArray">The instruments to transform the reference curve into.</param>
         ///<param name="spreadsAsArray">THe spreads to apply.</param>
         ///<returns>An identifier that can be uses as a handle.</returns>
         ///<exception cref="NotImplementedException"></exception>

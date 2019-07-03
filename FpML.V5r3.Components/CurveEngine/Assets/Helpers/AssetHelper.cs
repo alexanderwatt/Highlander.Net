@@ -17,20 +17,20 @@ using Orion.CurveEngine.Assets.Rates.CapsFloors;
 namespace Orion.CurveEngine.Assets.Helpers
 {
     /// <summary>
-    /// A usefule asset helper class.
+    /// A useful asset helper class.
     /// </summary>
     public static class AssetHelper
     {
         #region Parsing Functions
 
         /// <summary>
-        /// Creates the specified assets in a quotedassetset.
+        /// Creates the specified assets in a quoted asset set.
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
-        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market wuotes are set as null.</param>
+        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market quotes are set as null.</param>
         /// <returns></returns>
         public static QuotedAssetSet Parse(string[] assetIdentifiers, Decimal[] values,
                                            String[] measureTypes, String[] priceQuoteUnits, bool includeMarketQuoteValues)
@@ -101,9 +101,9 @@ namespace Orion.CurveEngine.Assets.Helpers
                     {
                         objectReference = new AnyAssetReference { href = assetIdentifier }
                     };
-                var addon = adjustments?[index] ?? 0.0m;
+                var addOn = adjustments?[index] ?? 0.0m;
                 var bqs = new List<BasicQuotation>
-                              {BasicQuotationHelper.Create(values[index] + addon, rateQuotationType, "DecimalRate")};
+                              {BasicQuotationHelper.Create(values[index] + addOn, rateQuotationType, "DecimalRate")};
                 bav.quote = bqs.ToArray();
                 quotedAssetSetFactory.AddAssetAndQuotes(Parse(assetIdentifier), bav);
                 index++;
@@ -112,13 +112,13 @@ namespace Orion.CurveEngine.Assets.Helpers
         }
 
         /// <summary>
-        /// Creates the specified assets in a quotedassetset.
+        /// Creates the specified assets in a quoted asset set.
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
-        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market wuotes are set as null.</param>
+        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market quotes are set as null.</param>
         /// <returns></returns>
         public static FxRateSet ParseToFxRateSet(string[] assetIdentifiers, Decimal[] values,
                                            String[] measureTypes, String[] priceQuoteUnits, bool includeMarketQuoteValues)
@@ -163,11 +163,11 @@ namespace Orion.CurveEngine.Assets.Helpers
         }
 
         /// <summary>
-        /// Creates the specified assets in a quotedassetset.
+        /// Creates the specified assets in a quoted asset set.
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         public static QuotedAssetSet Parse(string[] assetIdentifiers, Decimal[] values,
@@ -367,7 +367,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                                                                                              listBasicQuotations.ToArray
                                                                                                  ()));
             }
-            throw new System.Exception("Unequal number of values and pricequoteunits.");
+            throw new System.Exception("Unequal number of values and priceQuoteUnits.");
         }
 
         /// <summary>
@@ -471,14 +471,14 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.BillFra:
                 case AssetTypesEnum.SpreadFra:
                     {
-                        var simplefra = new SimpleFra { id = instrumentId, startTerm = properties.TermTenor };
+                        var simpleFra = new SimpleFra { id = instrumentId, startTerm = properties.TermTenor };
                         if (properties.ForwardIndex == null)
                         {
                             throw new ArgumentException("ForwardIndex must be set in the instrumentId " + instrumentId,
                                 nameof(instrumentId));
                         }
-                        simplefra.endTerm = simplefra.startTerm.Sum(properties.ForwardIndex);
-                        underlyingAsset = simplefra;
+                        simpleFra.endTerm = simpleFra.startTerm.Sum(properties.ForwardIndex);
+                        underlyingAsset = simpleFra;
                         break;
                     }
                 case AssetTypesEnum.IRFloor:
@@ -654,10 +654,10 @@ namespace Orion.CurveEngine.Assets.Helpers
             const string rateQuotationType = PriceableSimpleRateAsset.RateQuotationType;
             const string volatilityQuotationType = PriceableCapRateAsset.VolatilityQuotationType;
             Asset underlyingAsset;
-            decimal addtional = 0.0m;
+            decimal additional = 0.0m;
             if (adjustment != null)
             {
-                addtional = (decimal)adjustment;
+                additional = (decimal)adjustment;
             }
             var listBasicQuotations = new List<BasicQuotation>();
             var properties = new PriceableAssetProperties(instrumentId);
@@ -681,7 +681,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.OIS:
                     {
                         underlyingAsset = new RateIndex { id = instrumentId, term = properties.TermTenor };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.IRSwap:
@@ -694,7 +694,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.ResettableXccyBasisSwap:
                     {
                         underlyingAsset = new SimpleIRSwap { id = instrumentId, term = properties.TermTenor };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.Caplet:
@@ -711,7 +711,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                         listBasicQuotations.Add(BasicQuotationHelper.Create(value, volatilityQuotationType, "LognormalVolatility"));
                         if (adjustment != null)
                         {
-                            listBasicQuotations.Add(BasicQuotationHelper.Create(addtional, "Strike", "DecimalRate"));
+                            listBasicQuotations.Add(BasicQuotationHelper.Create(additional, "Strike", "DecimalRate"));
                         }
                         break;
                     }
@@ -723,7 +723,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.RepoSpread:
                     {
                         underlyingAsset = new Deposit { id = instrumentId, term = properties.TermTenor };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.SimpleFra:
@@ -737,7 +737,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                             startTerm = properties.TermTenor,
                             endTerm = properties.TermTenor.Sum(properties.ForwardIndex)//TODO this restricts the perios to be the same!!!
                         };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.Swaption:
@@ -746,7 +746,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                     listBasicQuotations.Add(BasicQuotationHelper.Create(value, volatilityQuotationType, "LognormalVolatility"));
                     if (adjustment != null)
                     {
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(addtional, "Strike", "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(additional, "Strike", "DecimalRate"));
                     }
                     break;
                 }
@@ -757,7 +757,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                         listBasicQuotations.Add(BasicQuotationHelper.Create(value, volatilityQuotationType, "LognormalVolatility"));
                         if (adjustment != null)
                         {
-                            listBasicQuotations.Add(BasicQuotationHelper.Create(addtional, "Strike", "DecimalRate"));
+                            listBasicQuotations.Add(BasicQuotationHelper.Create(additional, "Strike", "DecimalRate"));
                         }
                         break;
                     }
@@ -769,7 +769,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                         listBasicQuotations.Add(BasicQuotationHelper.Create(value, volatilityQuotationType, "LognormalVolatility"));
                     if (adjustment != null)
                     {
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(addtional, "Strike", "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(additional, "Strike", "DecimalRate"));
                     }
                         break;
                 }
@@ -779,7 +779,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                         listBasicQuotations.Add(BasicQuotationHelper.Create(value, rateQuotationType, "DecimalRate"));
                         if (adjustment != null)
                         {
-                            listBasicQuotations.Add(BasicQuotationHelper.Create(addtional, "Volatility", "LognormalVolatility"));
+                            listBasicQuotations.Add(BasicQuotationHelper.Create(additional, "Volatility", "LognormalVolatility"));
                         }
                         break;
                     }
@@ -793,7 +793,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.CPIndex:
                     {
                         underlyingAsset = new RateIndex { id = instrumentId, term = properties.TermTenor };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.SimpleCPISwap:
@@ -801,21 +801,21 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.ZCCPISwap:
                     {
                         underlyingAsset = new SimpleIRSwap { id = instrumentId, term = properties.TermTenor };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "DecimalRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "DecimalRate"));
                         break;
                     }
                 case AssetTypesEnum.FxSpot:
                 case AssetTypesEnum.FxForward:
                     {
                         underlyingAsset = new FxRateAsset { id = instrumentId };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "FxRate"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "FxRate"));
                         break;
                     }
                 case AssetTypesEnum.Equity:
                 case AssetTypesEnum.EquityForward:
                     {
                         underlyingAsset = new EquityAsset { id = instrumentId };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "Price"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "Price"));
                         break;
                     }
                 case AssetTypesEnum.CommoditySpot:
@@ -824,7 +824,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 case AssetTypesEnum.CommoditySpread:
                     {
                         underlyingAsset = new Commodity { id = instrumentId };
-                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + addtional, rateQuotationType, "Price"));
+                        listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "Price"));
                         break;
                     }
                 case AssetTypesEnum.Bond:
@@ -855,19 +855,19 @@ namespace Orion.CurveEngine.Assets.Helpers
         {
             var quotedAssetSet = new QuotedAssetSet();
             var assets = new Asset[assetPairs.Count];
-            var bavs = new BasicAssetValuation[assetPairs.Count];
+            var basicAssetValuations = new BasicAssetValuation[assetPairs.Count];
             var types = new List<ItemsChoiceType19>();
             var index = 0;
             foreach(var pair in assetPairs)
             {
                 assets[index] = pair.First;
-                bavs[index] = pair.Second;
+                basicAssetValuations[index] = pair.Second;
                 var properties = new PriceableAssetProperties(assets[index].id);
                 var assetTypeFpML = AssetTypeConvertor.ParseEnumStringToFpML(properties.AssetType.ToString());
                 types.Add(assetTypeFpML);
                 index++;
             }
-            quotedAssetSet.assetQuote = bavs;
+            quotedAssetSet.assetQuote = basicAssetValuations;
             var instrumentSet = new InstrumentSet { Items = assets.ToArray(), ItemsElementName = types.ToArray() };
             quotedAssetSet.instrumentSet = instrumentSet;
             return quotedAssetSet;      
@@ -886,10 +886,10 @@ namespace Orion.CurveEngine.Assets.Helpers
         public static Pair<Asset, BasicAssetValuation> ParseBond(string bondTypeId, DateTime maturityDate, decimal coupon, string daycount, string frequency, decimal ytm)
         {
             const string rateQuotationType = "MarketQuote";
-            var bondid = bondTypeId +'-' + coupon + '-' + maturityDate.ToShortDateString();
+            var bondId = bondTypeId +'-' + coupon + '-' + maturityDate.ToShortDateString();
             var underlyingAsset = new Bond
             {
-                id = bondid,
+                id = bondId,
                 maturity = maturityDate,
                 maturitySpecified = true,
                 couponRate = coupon,
@@ -1003,7 +1003,7 @@ namespace Orion.CurveEngine.Assets.Helpers
                 ItemsChoiceType19.bond,//BondSpot,42
                 ItemsChoiceType19.bond,//BondForward,43
                 ItemsChoiceType19.deposit,//Repo,44
-                ItemsChoiceType19.deposit,//Repospread,45
+                ItemsChoiceType19.deposit,//RepoSpread,45
                 ItemsChoiceType19.simpleIrSwap,//ClearedIRSwap,46
                 ItemsChoiceType19.simpleIrSwap,//ResettableXccyBasisSwap,47
                 ItemsChoiceType19.simpleIrSwap,//IRFloor, 48
