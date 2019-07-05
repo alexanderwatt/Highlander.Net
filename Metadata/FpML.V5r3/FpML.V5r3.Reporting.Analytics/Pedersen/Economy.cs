@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -36,7 +36,7 @@ namespace Orion.Analytics.Pedersen
 
         public double ReturnImpliedVolatility(int x, int y)
         {
-            if (x < 0 || y < 0 || x >= Param.UExpiry || y >= Param.UTenor)
+            if (x < 0 || y < 0 || x >= Param.UnderlyingExpiry || y >= Param.UnderlyingTenor)
             {
                 return 0;
             }
@@ -45,7 +45,7 @@ namespace Orion.Analytics.Pedersen
 
         public double ReturnImpliedVolatility(int x)
         {
-            if (x < 0 || x >= Param.Tcplt)
+            if (x < 0 || x >= Param.CapletTenors)
             {
                 return 0;
             }
@@ -274,68 +274,68 @@ namespace Orion.Analytics.Pedersen
         }
 
         #region Initialisations
+
         public void Initialise()
         {
-            Discount = new double[Param.UExpiry + 1][];
+            Discount = new double[Param.UnderlyingExpiry + 1][];
             Discount[0] = CurDiscount;
-            for (int i = 0; i < Param.UExpiry; i++)
+            for (int i = 0; i < Param.UnderlyingExpiry; i++)
             {
-                Discount[i + 1] = new double[Param.UTenor + 1];
+                Discount[i + 1] = new double[Param.UnderlyingTenor + 1];
             }
-            Correlation = new DenseMatrix(Param.NTenor, Param.NTenor);
-            for (int i = 0; i < Param.NTenor; i++)
+            Correlation = new DenseMatrix(Param.NumberOfTenors, Param.NumberOfTenors);
+            for (int i = 0; i < Param.NumberOfTenors; i++)
             {
                 for (int j = 0; j <= i; j++)
                 {
                     Correlation[i, j] = CorrelationData[Param.Tenor[i + 1] - 1, Param.Tenor[j + 1] - 1];
                 }
             }
-            Xi = new Matrix[Param.UExpiry];
-            for (int i = 0; i < Param.UExpiry; i++)
+            Xi = new Matrix[Param.UnderlyingExpiry];
+            for (int i = 0; i < Param.UnderlyingExpiry; i++)
             {
-                Xi[i] = new Matrix(Param.UTenor, Param.NFAC);
+                Xi[i] = new Matrix(Param.UnderlyingTenor, Param.NumberOfFactors);
             }
-            Shift = new double[Param.UTenor + 1];
+            Shift = new double[Param.UnderlyingTenor + 1];
             SetShift(ConstShift);
-            SwapShift = new double[Param.UExpiry + 1][];
-            for (int i = 0; i <= Param.UExpiry; i++)
+            SwapShift = new double[Param.UnderlyingExpiry + 1][];
+            for (int i = 0; i <= Param.UnderlyingExpiry; i++)
             {
-                SwapShift[i] = new double[Param.UTenor - i + 2];
+                SwapShift[i] = new double[Param.UnderlyingTenor - i + 2];
             }
-
-            Ai = new double[Param.UExpiry][][];
-            for (int i = 0; i < Param.UExpiry; i++)
+            Ai = new double[Param.UnderlyingExpiry][][];
+            for (int i = 0; i < Param.UnderlyingExpiry; i++)
             {
-                Ai[i] = new double[Param.UTenor - i][];
-                for (int j = 0; j < Param.UTenor - i; j++)
+                Ai[i] = new double[Param.UnderlyingTenor - i][];
+                for (int j = 0; j < Param.UnderlyingTenor - i; j++)
                 {
                     Ai[i][j] = new double[j + 1];
                 }
             }
             double tempImpliedVolatility;
             SetAi();
-            _swaptionImpliedVolatility = new double[Param.UTenor, Param.UTenor];
+            _swaptionImpliedVolatility = new double[Param.UnderlyingTenor, Param.UnderlyingTenor];
             Param.MinImpliedVolatility = 99999;
             Param.MaxImpliedVolatility = 0;
             Param.AverageSwaptionImpliedVolatility = 0;
-            Param.Nswpn = 0;
-            if (Param.SwpnOn)
+            Param.NumberOfSwaptions = 0;
+            if (Param.SwaptionOn)
             {
-                for (int i = 0; i < Param.SwpnExp.Length; i++)
+                for (int i = 0; i < Param.SwaptionExpiries.Length; i++)
                 {
-                    if (Param.SwpnExp[i] > Param.UExpiry - 1)
+                    if (Param.SwaptionExpiries[i] > Param.UnderlyingExpiry - 1)
                     {
                         break;
                     }
-                    for (int j = 0; j < Param.SwpnTen.Length; j++)
+                    for (int j = 0; j < Param.SwaptionTenors.Length; j++)
                     {
-                        if (Param.SwpnExp[i] + Param.SwpnTen[j] > Param.UTenor - 1)
+                        if (Param.SwaptionExpiries[i] + Param.SwaptionTenors[j] > Param.UnderlyingTenor - 1)
                         {
                             break;
                         }
                         if (RawSwaptionImpliedVolatility[i, j] > 0)
                         {
-                            tempImpliedVolatility = SetSwaptionImpliedVolatility(Param.SwpnExp[i], Param.SwpnTen[j], RawSwaptionImpliedVolatility[i, j]);
+                            tempImpliedVolatility = SetSwaptionImpliedVolatility(Param.SwaptionExpiries[i], Param.SwaptionTenors[j], RawSwaptionImpliedVolatility[i, j]);
                             if (tempImpliedVolatility > Param.MaxImpliedVolatility)
                             {
                                 Param.MaxImpliedVolatility = tempImpliedVolatility;
@@ -345,63 +345,63 @@ namespace Orion.Analytics.Pedersen
                                 Param.MinImpliedVolatility = tempImpliedVolatility;
                             }
                             Param.AverageSwaptionImpliedVolatility += tempImpliedVolatility;
-                            Param.Nswpn++;
-                            _swaptionImpliedVolatility[Param.SwpnExp[i], Param.SwpnTen[j]] = tempImpliedVolatility;
+                            Param.NumberOfSwaptions++;
+                            _swaptionImpliedVolatility[Param.SwaptionExpiries[i], Param.SwaptionTenors[j]] = tempImpliedVolatility;
                         }
                     }
                 }
-                if (Param.Nswpn > 0)
+                if (Param.NumberOfSwaptions > 0)
                 {
-                    Param.AverageSwaptionImpliedVolatility = Param.AverageSwaptionImpliedVolatility / Param.Nswpn;
+                    Param.AverageSwaptionImpliedVolatility = Param.AverageSwaptionImpliedVolatility / Param.NumberOfSwaptions;
                 }
             }
-            Param.Ncplt = 0;
+            Param.NumberOfCaplets = 0;
             Param.AverageCapletImpliedVolatility = 0;
-            Param.Tcplt = 0;
-            if (Param.CpltOn)
+            Param.CapletTenors = 0;
+            if (Param.CapletOn)
             {
-                Param.Tcplt = Math.Min(RawCapletImpliedVolatility.Length, Param.UExpiry);
-                _capletImpliedVolatility = new double[Param.Tcplt];
-                for (int i = 0; i < Param.Tcplt; i++)
+                Param.CapletTenors = Math.Min(RawCapletImpliedVolatility.Length, Param.UnderlyingExpiry);
+                _capletImpliedVolatility = new double[Param.CapletTenors];
+                for (int i = 0; i < Param.CapletTenors; i++)
                 {
                     if (RawCapletImpliedVolatility[i] > 0)
                     {
                         tempImpliedVolatility = SetCapImpliedVolatility(i, RawCapletImpliedVolatility[i]);
                         Param.AverageCapletImpliedVolatility += tempImpliedVolatility;
                         _capletImpliedVolatility[i] = tempImpliedVolatility;
-                        Param.Ncplt++;
+                        Param.NumberOfCaplets++;
                     }
                 }
-                if (Param.Ncplt > 0)
+                if (Param.NumberOfCaplets > 0)
                 {
-                    Param.AverageCapletImpliedVolatility = Param.AverageCapletImpliedVolatility / Param.Ncplt;
+                    Param.AverageCapletImpliedVolatility = Param.AverageCapletImpliedVolatility / Param.NumberOfCaplets;
                 }
             }
         }
 
         private void SetAi()
         {
-            var cash = new double[Param.UTenor];
-            var shiftedCash = new double[Param.UTenor];
-            var forward = new double[Param.UTenor];
-            var accForward = new double[Param.UTenor + 1];
-            var accForwardK = new double[Param.UTenor + 1];
-            var accForwardH = new double[Param.UTenor + 1];
-            var w = new double[Param.UTenor];
-            var h = new double[Param.UTenor];
+            var cash = new double[Param.UnderlyingTenor];
+            var shiftedCash = new double[Param.UnderlyingTenor];
+            var forward = new double[Param.UnderlyingTenor];
+            var accForward = new double[Param.UnderlyingTenor + 1];
+            var accForwardK = new double[Param.UnderlyingTenor + 1];
+            var accForwardH = new double[Param.UnderlyingTenor + 1];
+            var w = new double[Param.UnderlyingTenor];
+            var h = new double[Param.UnderlyingTenor];
             accForward[0] = 0;
             accForwardK[0] = 0;
             accForwardH[0] = 0;
-            for (int i = 0; i < Param.UTenor; i++)
+            for (int i = 0; i < Param.UnderlyingTenor; i++)
             {
                 cash[i] = CashRate(0, i + 1);
                 //Cash[i] = SwapRate(0, i + 1, 1);
                 shiftedCash[i] = cash[i] + Shift[i + 1];
             }
 
-            for (int i = 0; i < Param.UExpiry; i++)
+            for (int i = 0; i < Param.UnderlyingExpiry; i++)
             {
-                for (int j = 0; j < Param.UTenor - i; j++)
+                for (int j = 0; j < Param.UnderlyingTenor - i; j++)
                 {
                     forward[j] = Discount[0][i + j + 2] / Discount[0][j + 1];
                     accForward[j + 1] = accForward[j] + forward[j];
@@ -426,7 +426,7 @@ namespace Orion.Analytics.Pedersen
 
         private void SetShift(double sh)
         {
-            for (int i = 0; i <= Param.UTenor; i++)
+            for (int i = 0; i <= Param.UnderlyingTenor; i++)
             {
                 Shift[i] = sh;
             }
@@ -455,7 +455,7 @@ namespace Orion.Analytics.Pedersen
             Previous.ImpliedVolatilitySquare[exp][ten] = 0;
             for (int i = 0; i <= exp; i++)
             {
-                var tempVector = new DenseVector(Param.NFAC);
+                var tempVector = new DenseVector(Param.NumberOfFactors);
                 for (int j = exp - i; j <= exp - i + ten; j++)
                 {
                     tempVector = tempVector + (Ai[exp][ten][j - exp + i] * Xi[i].RowD(j));
@@ -477,7 +477,7 @@ namespace Orion.Analytics.Pedersen
                 result = Previous.ImpliedVolatilitySquare[exp][ten];
                 for (int i = Param.Expiry[change]; i < Math.Min(Param.Expiry[change + 1], exp + 1); i++)
                 {
-                    var tempVector = new DenseVector(Param.NFAC);
+                    var tempVector = new DenseVector(Param.NumberOfFactors);
                     for (int j = exp - i; j <= exp - i + ten; j++)
                     {
                         tempVector = tempVector + (DenseVector)(Ai[exp][ten][j - exp + i] * gm.Row(j));
@@ -498,17 +498,17 @@ namespace Orion.Analytics.Pedersen
         {
             double sum = 0;
             double temp;
-            if (Param.Nswpn > 0)
+            if (Param.NumberOfSwaptions > 0)
             {
-                foreach (int t1 in Param.SwpnExp)
+                foreach (int t1 in Param.SwaptionExpiries)
                 {
-                    if (t1 > Param.UExpiry - 1)
+                    if (t1 > Param.UnderlyingExpiry - 1)
                     {
                         break;
                     }
-                    foreach (int t in Param.SwpnTen)
+                    foreach (int t in Param.SwaptionTenors)
                     {
-                        if (t1 + t > Param.UTenor - 1)
+                        if (t1 + t > Param.UnderlyingTenor - 1)
                         {
                             break;
                         }
@@ -519,7 +519,7 @@ namespace Orion.Analytics.Pedersen
                         }
                     }
                 }
-                temp = sum / Param.Nswpn;
+                temp = sum / Param.NumberOfSwaptions;
                 Pedersen.Write($"  Average Swaption (SWPN) Abs Error: {temp}\n", "cal");
             }
             else
@@ -527,9 +527,9 @@ namespace Orion.Analytics.Pedersen
                 Pedersen.Write("  Average Swaption (SWPN) Abs Error: N/A\n", "cal");
             }
             sum = 0;
-            if (Param.Ncplt > 0)
+            if (Param.NumberOfCaplets > 0)
             {
-                for (int i = 0; i < Param.Tcplt; i++)
+                for (int i = 0; i < Param.CapletTenors; i++)
                 {
                     if (_capletImpliedVolatility[i] > 0)
                     {
@@ -537,7 +537,7 @@ namespace Orion.Analytics.Pedersen
                         sum += Math.Abs(temp - _capletImpliedVolatility[i]);
                     }
                 }
-                temp = sum / Param.Ncplt;
+                temp = sum / Param.NumberOfCaplets;
                 Pedersen.Write($"  Average Caplet (CPLT) Abs Error: {temp}\n", "cal");
             }
             else

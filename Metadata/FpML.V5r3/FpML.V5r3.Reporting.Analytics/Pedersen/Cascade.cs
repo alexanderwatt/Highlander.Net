@@ -40,16 +40,16 @@ namespace Orion.Analytics.Pedersen
 
         public void Go()
         {
-            _gamma = new double[_param.UExpiry][];
-            _isChanged = new bool[_param.UExpiry][];
-            for (int i = 0; i < _param.UExpiry; i++)
+            _gamma = new double[_param.UnderlyingExpiry][];
+            _isChanged = new bool[_param.UnderlyingExpiry][];
+            for (int i = 0; i < _param.UnderlyingExpiry; i++)
             {
-                _gamma[i] = new double[_param.UTenor - i];
-                _isChanged[i] = new bool[_param.UTenor - i];
+                _gamma[i] = new double[_param.UnderlyingTenor - i];
+                _isChanged[i] = new bool[_param.UnderlyingTenor - i];
             }
-            for (int i = 0; i < _param.UExpiry; i++)
+            for (int i = 0; i < _param.UnderlyingExpiry; i++)
             {
-                for (int j = 0; j < _param.UTenor - i; j++)
+                for (int j = 0; j < _param.UnderlyingTenor - i; j++)
                 {
                     double target;
                     double bound;
@@ -79,8 +79,8 @@ namespace Orion.Analytics.Pedersen
             double c1 = 0;
             double c2 = 0;
             double result;
-            var tempVector1 = new DenseVector(_param.NFAC);
-            var tempVector2 = new DenseVector(_param.NFAC);
+            var tempVector1 = new DenseVector(_param.NumberOfFactors);
+            var tempVector2 = new DenseVector(_param.NumberOfFactors);
             var xi = _economy.Xi;
             double[][][] ai = _economy.Ai;
             for (int i = 0; i <= exp; i++)
@@ -135,7 +135,7 @@ namespace Orion.Analytics.Pedersen
                     {
                         _isChanged[i][j] = true;
                         _gamma[i][j] = newGamma;
-                        for (int k = 0; k < _param.NFAC; k++)
+                        for (int k = 0; k < _param.NumberOfFactors; k++)
                         {
                             xi[i][j, k] = xi[i][j, k] * newGamma;
                         }

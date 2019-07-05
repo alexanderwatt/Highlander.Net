@@ -22,15 +22,15 @@ namespace Orion.Analytics.Pedersen
     {
         #region declarations
 
-        public int NFAC { get; set; }
+        public int NumberOfFactors { get; set; }
 
-        public int NEXPIRY { get; private set; }
+        public int NumberOfExpiries { get; private set; }
 
-        public int NTenor { get; private set; }
+        public int NumberOfTenors { get; private set; }
 
-        public int UExpiry { get; set; }
+        public int UnderlyingExpiry { get; set; }
 
-        public int UTenor { get; set; }
+        public int UnderlyingTenor { get; set; }
 
         public int[] Expiry { get; private set; }
 
@@ -38,19 +38,19 @@ namespace Orion.Analytics.Pedersen
 
         public int[] Timeframe { get; set; }
 
-        public int[] SwpnExp { get; }
+        public int[] SwaptionExpiries { get; }
 
-        public int[] SwpnTen { get; }
+        public int[] SwaptionTenors { get; }
 
-        public int Nswpn { get; set; }
+        public int NumberOfSwaptions { get; set; }
 
-        public int Ncplt { get; set; }
+        public int NumberOfCaplets { get; set; }
 
-        public int Tcplt { get; set; }
+        public int CapletTenors { get; set; }
 
-        public bool CpltOn { get; set; }
+        public bool CapletOn { get; set; }
 
-        public bool SwpnOn { get; set; }
+        public bool SwaptionOn { get; set; }
 
         public double MaxImpliedVolatility { get; set; }
 
@@ -64,28 +64,28 @@ namespace Orion.Analytics.Pedersen
 
         public Parameters()
         {
-            NFAC = 3;
-            //SetExpiry(UEXPIRY);
-            //SetTenor(UTENOR);
-            SwpnExp = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
-            SwpnTen = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
-            for (int i = 0; i < SwpnExp.Length; i++)
-                SwpnExp[i]--;
-            for (int i = 0; i < SwpnTen.Length; i++)
-                SwpnTen[i]--;
+            NumberOfFactors = 3;
+            //SetExpiry(UnderlyingExpiry);
+            //SetTenor(UnderlyingTenor);
+            SwaptionExpiries = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
+            SwaptionTenors = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
+            for (int i = 0; i < SwaptionExpiries.Length; i++)
+                SwaptionExpiries[i]--;
+            for (int i = 0; i < SwaptionTenors.Length; i++)
+                SwaptionTenors[i]--;
         }
 
         public void Initialise()
         {
-            SetExpiry(UExpiry);
-            SetTenor(UTenor);
-            NEXPIRY = Expiry.Length - 1;
-            NTenor = Tenor.Length - 1;
-            if (NFAC > NTenor)
+            SetExpiry(UnderlyingExpiry);
+            SetTenor(UnderlyingTenor);
+            NumberOfExpiries = Expiry.Length - 1;
+            NumberOfTenors = Tenor.Length - 1;
+            if (NumberOfFactors > NumberOfTenors)
             {
-                throw new Exception("To use " + NFAC.ToString(CultureInfo.InvariantCulture) + " factors, tenor must be at least " + Timeframe[NFAC].ToString(CultureInfo.InvariantCulture) + " quarters.");
+                throw new Exception("To use " + NumberOfFactors.ToString(CultureInfo.InvariantCulture) + " factors, tenor must be at least " + Timeframe[NumberOfFactors].ToString(CultureInfo.InvariantCulture) + " quarters.");
             }
-            if (UExpiry > UTenor)
+            if (UnderlyingExpiry > UnderlyingTenor)
             {
                 throw new Exception("Expiry cannot be greater than Tenor.");
             }

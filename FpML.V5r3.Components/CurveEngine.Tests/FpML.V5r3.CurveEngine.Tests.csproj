@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PedersenTests.cs" />
     <Compile Include="FactoryTests.cs" />
     <Compile Include="SABRTests.cs" />
     <Compile Include="CurveEngineTests2.cs" />

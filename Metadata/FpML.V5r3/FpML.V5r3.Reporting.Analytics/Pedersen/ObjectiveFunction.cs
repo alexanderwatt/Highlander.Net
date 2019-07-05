@@ -83,10 +83,10 @@ namespace Orion.Analytics.Pedersen
             Finished = false;
             _evaluateGradient = false;
             _mc = new MyCounter();
-            _hFactor = 1.0 / (_param.NEXPIRY * (_param.NTenor - 1));
-            _vFactor = 1.0 / ((_param.NEXPIRY - 1) * _param.NTenor);
-            _sFactor = 1.0 / _param.Nswpn;
-            _cFactor = 1.0 / _param.Ncplt;
+            _hFactor = 1.0 / (_param.NumberOfExpiries * (_param.NumberOfTenors - 1));
+            _vFactor = 1.0 / ((_param.NumberOfExpiries - 1) * _param.NumberOfTenors);
+            _sFactor = 1.0 / _param.NumberOfSwaptions;
+            _cFactor = 1.0 / _param.NumberOfCaplets;
         }
 
         public void StartOtherThreads()
@@ -110,11 +110,11 @@ namespace Orion.Analytics.Pedersen
             {
                 return temp;
             }
-            if (_param.Ncplt > 0)
+            if (_param.NumberOfCaplets > 0)
             {
                 temp += CWeight * QOFCplt();
             } 
-            if (_param.Nswpn > 0)
+            if (_param.NumberOfSwaptions > 0)
             {
                 temp += SWeight * QOFSwpn();
             }
@@ -134,11 +134,11 @@ namespace Orion.Analytics.Pedersen
             {
                 return temp;
             }
-            if (_param.Ncplt > 0)
+            if (_param.NumberOfCaplets > 0)
             {
                 temp += CWeight * QOFCplt(gm, r);
             }
-            if (_param.Nswpn > 0)
+            if (_param.NumberOfSwaptions > 0)
             {
                 temp += SWeight * QOFSwpn(gm, r);
             }
@@ -179,7 +179,7 @@ namespace Orion.Analytics.Pedersen
                 }
                 var gv = new DenseVector(_xGradient.Count);
                 _xGradient.CopyTo(gv);
-                int r = myTask / _param.NTenor;
+                int r = myTask / _param.NumberOfTenors;
                 gv[myTask] = _xGradient[myTask] + 1e-9;
                 _gradient[myTask] = 1e9 * (ObjFun(gv, r) - FunctionValue);
             }
@@ -230,9 +230,9 @@ namespace Orion.Analytics.Pedersen
         private double SmoothH(Matrix<double> xMatrix)
         {
             double total = 0;
-            for (int i = 0; i < _param.NEXPIRY; i++)
+            for (int i = 0; i < _param.NumberOfExpiries; i++)
             {
-                for (int j = 0; j < _param.NTenor - 1; j++)
+                for (int j = 0; j < _param.NumberOfTenors - 1; j++)
                 {
                     double temp = Math.Log(xMatrix[i, j] / xMatrix[i, j + 1]);
                     total += temp * temp;
@@ -245,9 +245,9 @@ namespace Orion.Analytics.Pedersen
         private double SmoothV(Matrix<double> xMatrix)
         {
             double total = 0;
-            for (int i = 0; i < _param.NEXPIRY - 1; i++)
+            for (int i = 0; i < _param.NumberOfExpiries - 1; i++)
             {
-                for (int j = 0; j < _param.NTenor; j++)
+                for (int j = 0; j < _param.NumberOfTenors; j++)
                 {
                     double temp = Math.Log(xMatrix[i, j] / xMatrix[i + 1, j]);
                     total += temp * temp;
@@ -259,15 +259,15 @@ namespace Orion.Analytics.Pedersen
         private double QOFSwpn()
         {
             double total = 0;
-            foreach (int t in _param.SwpnExp)
+            foreach (int t in _param.SwaptionExpiries)
             {
-                if (t > _param.UExpiry - 1)
+                if (t > _param.UnderlyingExpiry - 1)
                 {
                     break;
                 }
-                foreach (var t1 in _param.SwpnTen)
+                foreach (var t1 in _param.SwaptionTenors)
                 {
-                    if (t + t1 > _param.UTenor - 1)
+                    if (t + t1 > _param.UnderlyingTenor - 1)
                     {
                         break;
                     }
@@ -285,15 +285,15 @@ namespace Orion.Analytics.Pedersen
         private double QOFSwpn(DenseMatrix gm, int change)
         {
             double total = 0;
-            foreach (int t in _param.SwpnExp)
+            foreach (int t in _param.SwaptionExpiries)
             {
-                if (t > _param.UExpiry - 1)
+                if (t > _param.UnderlyingExpiry - 1)
                 {
                     break;
                 }
-                foreach (var t1 in _param.SwpnTen)
+                foreach (var t1 in _param.SwaptionTenors)
                 {
-                    if (t + t1 > _param.UTenor - 1)
+                    if (t + t1 > _param.UnderlyingTenor - 1)
                     {
                         break;
                     }
@@ -313,7 +313,7 @@ namespace Orion.Analytics.Pedersen
         private double QOFCplt()
         {
             double total = 0;
-            for (int i = 0; i < _param.Tcplt; i++)
+            for (int i = 0; i < _param.CapletTenors; i++)
             {
                 double tempImpliedVolatility = _economy.ReturnImpliedVolatility(i);
                 if (tempImpliedVolatility > 0)
@@ -329,7 +329,7 @@ namespace Orion.Analytics.Pedersen
         private double QOFCplt(DenseMatrix gm, int change)
         {
             double total = 0;
-            for (int i = 0; i < _param.Tcplt; i++)
+            for (int i = 0; i < _param.CapletTenors; i++)
             {
                 double tempImpliedVolatility = _economy.ReturnImpliedVolatility(i);
                 if (tempImpliedVolatility > 0)
@@ -348,14 +348,14 @@ namespace Orion.Analytics.Pedersen
 
         private void PopulateXi(Matrix<double> xMatrix)
         {
-            for (int i = 0; i < _param.NEXPIRY; i++)
+            for (int i = 0; i < _param.NumberOfExpiries; i++)
             {
                 var gm = SetXi(i, (DenseVector)xMatrix.Row(i));
                 for (int j = _param.Expiry[i]; j < _param.Expiry[i + 1]; j++)
                 {
-                    for (int k = 0; k < _param.UTenor - j; k++)
+                    for (int k = 0; k < _param.UnderlyingTenor - j; k++)
                     {
-                        for (int l = 0; l < _param.NFAC; l++)
+                        for (int l = 0; l < _param.NumberOfFactors; l++)
                         {
                             _economy.Xi[j][k, l] = gm[k, l];
                         }
@@ -368,8 +368,8 @@ namespace Orion.Analytics.Pedersen
         private DenseMatrix SetXi(int exp, Vector x)
         {
             var cor = _economy.Correlation;
-            var cov = new Matrix(_param.NTenor, _param.NTenor);
-            for (int i = 0; i < _param.NTenor; i++)
+            var cov = new Matrix(_param.NumberOfTenors, _param.NumberOfTenors);
+            for (int i = 0; i < _param.NumberOfTenors; i++)
             {
                 for (int j = 0; j <= i; j++)
                 {
@@ -378,17 +378,17 @@ namespace Orion.Analytics.Pedersen
             }
             var eigenValueDecomposition = new EigenvalueDecomposition(cov);
             var baseVector = eigenValueDecomposition.RealEigenvalues.ToList();
-            var eval = baseVector.GetRange(_param.NTenor - _param.NFAC, _param.NTenor - 1 + _param.NFAC);//Select the sub-vector starting at the index i and with length y 
+            var eval = baseVector.GetRange(_param.NumberOfTenors - _param.NumberOfFactors, _param.NumberOfTenors - 1 + _param.NumberOfFactors);//Select the sub-vector starting at the index i and with length y 
             var baseMatrix = eigenValueDecomposition.EigenVectors;
-            var eigenVectors = baseMatrix.GetMatrix(0, baseMatrix.RowCount - 1, _param.NTenor - _param.NFAC, _param.NTenor - 1);
-            var xiSection = new DenseMatrix(_param.UTenor, _param.NFAC);
-            for (int j = 0; j < _param.NFAC; j++)
+            var eigenVectors = baseMatrix.GetMatrix(0, baseMatrix.RowCount - 1, _param.NumberOfTenors - _param.NumberOfFactors, _param.NumberOfTenors - 1);
+            var xiSection = new DenseMatrix(_param.UnderlyingTenor, _param.NumberOfFactors);
+            for (int j = 0; j < _param.NumberOfFactors; j++)
             {
                 eval[j] = Math.Sqrt(eval[j]);
-                for (int i = 0; i < _param.NTenor; i++)
+                for (int i = 0; i < _param.NumberOfTenors; i++)
                 {
                     var temp = eval[j] * eigenVectors[i, j];
-                    for (int n = _param.Tenor[i]; n < Math.Min(_param.Tenor[i + 1], _param.UTenor - _param.Expiry[exp]); n++)
+                    for (int n = _param.Tenor[i]; n < Math.Min(_param.Tenor[i + 1], _param.UnderlyingTenor - _param.Expiry[exp]); n++)
                     {
                         xiSection[n, j] = temp;
                     }
@@ -405,24 +405,24 @@ namespace Orion.Analytics.Pedersen
 
         public Matrix<double> VecToMat(Vector<double> x)
         {
-            var tempMatrix = new DenseMatrix(_param.NEXPIRY, _param.NTenor);
+            var tempMatrix = new DenseMatrix(_param.NumberOfExpiries, _param.NumberOfTenors);
             if (ExpForm)
             {
-                for (int i = 0; i < _param.NEXPIRY; i++)
+                for (int i = 0; i < _param.NumberOfExpiries; i++)
                 {
-                    for (int j = 0; j < _param.NTenor; j++)
+                    for (int j = 0; j < _param.NumberOfTenors; j++)
                     {
-                        tempMatrix[i, j] = Math.Exp(x[i * _param.NTenor + j] * 20);
+                        tempMatrix[i, j] = Math.Exp(x[i * _param.NumberOfTenors + j] * 20);
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < _param.NEXPIRY; i++)
+                for (int i = 0; i < _param.NumberOfExpiries; i++)
                 {
-                    for (int j = 0; j < _param.NTenor; j++)
+                    for (int j = 0; j < _param.NumberOfTenors; j++)
                     {
-                        tempMatrix[i, j] = x[i * _param.NTenor + j];
+                        tempMatrix[i, j] = x[i * _param.NumberOfTenors + j];
                     }
                 }
             }

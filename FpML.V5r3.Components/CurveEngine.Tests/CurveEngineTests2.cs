@@ -12172,7 +12172,6 @@ namespace Orion.CurveEngine.Tests
         private static void BuildSimpleRateCurve(DateTime baseDate, string[] instruments, string algorithm, string curveName, decimal step)
         {
             decimal[] values = AdjustValues(baseRate, instruments, step);
-
             var curveProperties = new NamedValueSet();
             curveProperties.Set(CurveProp.PricingStructureType, "RateCurve");
             curveProperties.Set("BuildDateTime", baseDate);
@@ -12185,7 +12184,6 @@ namespace Orion.CurveEngine.Tests
             curveProperties.Set("CurveName", curveName);
             curveProperties.Set(CurveProp.Algorithm, algorithm);
             curveProperties.Set(CurveProp.OptimizeBuild, false);
-
             var additional = AdjustValues(0.0m, instruments, 0.0m);
             var ydc = (RateCurve)CurveEngine.CreateCurve(curveProperties, instruments, values, additional, null, null);
             //int index = 0;

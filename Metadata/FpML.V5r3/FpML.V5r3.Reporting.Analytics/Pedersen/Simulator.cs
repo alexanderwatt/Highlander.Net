@@ -126,7 +126,7 @@ namespace Orion.Analytics.Pedersen
                 throw new Exception("Run Calibrator first!");
             }
             _shift = _economy.Shift;
-            SetV(_param.UExpiry, _param.UTenor);
+            SetV(_param.UnderlyingExpiry, _param.UnderlyingTenor);
             if (Derivative == Derivative.Custom)
             {
                 Payoff = new PayoffParser(_economy, PayoffFunction);
@@ -141,7 +141,7 @@ namespace Orion.Analytics.Pedersen
                 {
                     Pedersen.WriteRange($"Iteration # {i}");
                 }
-                Simulate(_param.UExpiry, _param.UTenor);
+                Simulate(_param.UnderlyingExpiry, _param.UnderlyingTenor);
                 double c = FindPayoff(p, k);
                 temp += c;
                 temp2 += c * c;
@@ -198,11 +198,11 @@ namespace Orion.Analytics.Pedersen
             var accumulateSum = new DenseVector[tenor + 1];
             for (int i = 0; i < tenor + 1; i++)
             {
-                accumulateSum[i] = new DenseVector(_param.NFAC);
+                accumulateSum[i] = new DenseVector(_param.NumberOfFactors);
             }
             for (int i = 0; i < expiry; i++)
             {
-                var bm = BrownianMotion.BMStep(0.25, _param.NFAC);
+                var bm = BrownianMotion.BMStep(0.25, _param.NumberOfFactors);
                 accumulateSum[i].Clear();
                 for (int j = i + 1; j < tenor + 1; j++)
                 {

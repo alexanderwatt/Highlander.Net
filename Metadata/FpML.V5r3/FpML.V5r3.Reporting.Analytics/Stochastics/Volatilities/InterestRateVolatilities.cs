@@ -159,7 +159,7 @@ namespace Orion.Analytics.Stochastics.Volatilities
             //principal component analysis
             var eigenValueDecomposition = new EigenvalueDecomposition(covariance);
             var baseVector = eigenValueDecomposition.RealEigenvalues.ToList();
-            var eval = baseVector.GetRange(_timeGrid.TenorCount - _factors, _timeGrid.TenorCount - 1 + _factors);//Select the sub-vector starting at the index i and with length y 
+            var eval = baseVector.GetRange(_timeGrid.TenorCount -1 - _factors, _factors);//Select the sub-vector starting at the index i and with length y 
             var baseMatrix = eigenValueDecomposition.EigenVectors;
             var eigenVectors = baseMatrix.GetMatrix(0, baseMatrix.RowCount - 1, _timeGrid.TenorCount - _factors, _timeGrid.TenorCount - 1);
             var resultVol = new Matrix(_timeGrid.MaxTenor, _factors);

@@ -30,11 +30,11 @@ namespace Orion.Analytics.Pedersen
         #region Declarations
 
         private readonly Economy _usd;
-        private readonly Parameters _param;
-        private readonly Recycle _rec;
+        private readonly Parameters _parameters;
+        private readonly Recycle _recycle;
         private readonly ObjectiveFunction _objective;
         private readonly Calibrator _pedersen;
-        private readonly Cascade _cas;
+        private readonly Cascade _cascade;
         private readonly Simulator _glasserman;
         private static string _calSummaryString = "";
         private static string _simSummaryString = "";
@@ -57,9 +57,9 @@ namespace Orion.Analytics.Pedersen
         public object DebugOutput()
         {
             var res = new object[3, 1];
-            res[0, 0] = _param.Ncplt;
-            res[1, 0] = _param.Tcplt;
-            res[2, 0] = _param.Nswpn;
+            res[0, 0] = _parameters.NumberOfCaplets;
+            res[1, 0] = _parameters.CapletTenors;
+            res[2, 0] = _parameters.NumberOfSwaptions;
             return res;
         }
 
@@ -106,13 +106,13 @@ namespace Orion.Analytics.Pedersen
 
         public Pedersen()
         {
-            _param = new Parameters();
-            _rec = new Recycle(_param);
-            _usd = new Economy(_param, _rec);
-            _objective = new ObjectiveFunction(_usd, _rec, _param);
-            _pedersen = new Calibrator(_objective, _param);
-            _cas = new Cascade(_usd, _param);
-            _glasserman = new Simulator(_usd, _param);
+            _parameters = new Parameters();
+            _recycle = new Recycle(_parameters);
+            _usd = new Economy(_parameters, _recycle);
+            _objective = new ObjectiveFunction(_usd, _recycle, _parameters);
+            _pedersen = new Calibrator(_objective, _parameters);
+            _cascade = new Cascade(_usd, _parameters);
+            _glasserman = new Simulator(_usd, _parameters);
         }
 
         #endregion
@@ -125,16 +125,16 @@ namespace Orion.Analytics.Pedersen
             result[0, 0] = "Correlation Unsuccessfull";
             try
             {
-                var res = new object[_param.NTenor + 1, _param.NTenor + 1];
+                var res = new object[_parameters.NumberOfTenors + 1, _parameters.NumberOfTenors + 1];
                 res[0, 0] = "Correlation";
-                for (int i = 1; i <= _param.NTenor; i++)
+                for (int i = 1; i <= _parameters.NumberOfTenors; i++)
                 {
-                    res[0, i] = _param.Tenor[i];
-                    res[i, 0] = _param.Tenor[i];
+                    res[0, i] = _parameters.Tenor[i];
+                    res[i, 0] = _parameters.Tenor[i];
                 }
-                for (int i = 1; i <= _param.NTenor; i++)
+                for (int i = 1; i <= _parameters.NumberOfTenors; i++)
                 {
-                    for (int j = 1; j <= _param.NTenor; j++)
+                    for (int j = 1; j <= _parameters.NumberOfTenors; j++)
                     {
                         res[i, j] = _usd.Correlation[i - 1, j - 1];
                     }
@@ -356,8 +356,8 @@ namespace Orion.Analytics.Pedersen
                 #region Initialise Objects
 
                 //order is important, Param must be initialised first
-                _param.Initialise();
-                _rec.Initialise();
+                _parameters.Initialise();
+                _recycle.Initialise();
                 _usd.Initialise();
                 _objective.Initialise();
 
@@ -382,12 +382,12 @@ namespace Orion.Analytics.Pedersen
                 var result = new object[2, 1];
                 result[0, 0] = "Running...";
                 result[1, 0] =
-                    $"(Factors: {_param.NFAC}, Shift: {_usd.ConstShift}, ExpForm: {_objective.ExpForm}, Iterate: {_pedersen.Iteration}, Caplet Bound: {_cas.CpltBound}, Swaption Bound: {_cas.SwpnBound}, NSWPN: {_param.Nswpn}, NCPLT: {_param.Ncplt})";
+                    $"(Factors: {_parameters.NumberOfFactors}, Shift: {_usd.ConstShift}, ExpForm: {_objective.ExpForm}, Iterate: {_pedersen.Iteration}, Caplet Bound: {_cascade.CpltBound}, Swaption Bound: {_cascade.SwpnBound}, NSWPN: {_parameters.NumberOfSwaptions}, NCPLT: {_parameters.NumberOfCaplets})";
                 WriteRange(result);
                 Write("Pedersen Calibration:\n", "cal");
                 _pedersen.Go();
                 Write("Cascade Algorithm:\n", "cal");
-                _cas.Go();
+                _cascade.Go();
                 _usd.OutputStatus();
                 WriteRange(1, 1, "Calibration Successful!");
             }
@@ -409,7 +409,7 @@ namespace Orion.Analytics.Pedersen
                         switch (objects[i, j].ToString().ToLower())
                         {
                             case "factors":
-                                _param.NFAC = int.Parse(objects[i, j + 1].ToString());
+                                _parameters.NumberOfFactors = int.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "shift":
                                 _usd.ConstShift = double.Parse(objects[i, j + 1].ToString());
@@ -421,22 +421,22 @@ namespace Orion.Analytics.Pedersen
                                 _pedersen.Iteration = int.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "expiry":
-                                _param.UExpiry = int.Parse(objects[i, j + 1].ToString());
+                                _parameters.UnderlyingExpiry = int.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "tenor":
-                                _param.UTenor = int.Parse(objects[i, j + 1].ToString());
+                                _parameters.UnderlyingTenor = int.Parse(objects[i, j + 1].ToString());
                                 break;
-                            case "cplt bound":
-                                _cas.CpltBound = double.Parse(objects[i, j + 1].ToString());
+                            case "caplet bound":
+                                _cascade.CpltBound = double.Parse(objects[i, j + 1].ToString());
                                 break;
-                            case "swpn bound":
-                                _cas.SwpnBound = double.Parse(objects[i, j + 1].ToString());
+                            case "swaption bound":
+                                _cascade.SwpnBound = double.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "use caplet":
-                                _param.CpltOn = bool.Parse(objects[i, j + 1].ToString());
+                                _parameters.CapletOn = bool.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "use swaption":
-                                _param.SwpnOn = bool.Parse(objects[i, j + 1].ToString());
+                                _parameters.SwaptionOn = bool.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "threads":
                                 _objective.NThreads = int.Parse(objects[i, j + 1].ToString());
@@ -447,45 +447,46 @@ namespace Orion.Analytics.Pedersen
                             case "vertical weight":
                                 _objective.VWeight = double.Parse(objects[i, j + 1].ToString());
                                 break;
-                            case "cplt weight":
+                            case "caplet weight":
                                 _objective.CWeight = double.Parse(objects[i, j + 1].ToString());
                                 break;
-                            case "swpn weight":
+                            case "swaption weight":
                                 _objective.SWeight = double.Parse(objects[i, j + 1].ToString());
                                 break;
                             case "discretisation":
                                 string[] st = objects[i, j + 1].ToString().Split(',');
-                                _param.Timeframe = new int[st.Length];
+                                _parameters.Timeframe = new int[st.Length];
                                 for (int k = 0; k < st.Length; k++)
                                 {
-                                    _param.Timeframe[k] = int.Parse(st[k].Trim());
+                                    _parameters.Timeframe[k] = int.Parse(st[k].Trim());
                                 }
                                 break;
                         }
                     }
-                    catch { }
+                    catch
+                    { }
                 }
             }
         }
 
         private void CalSetDefault()
         {
-            _param.NFAC = 3;
+            _parameters.NumberOfFactors = 3;
             _usd.ConstShift = 0;
             _objective.ExpForm = true;
             _pedersen.Iteration = 50;
-            _param.UExpiry = 60;
-            _param.UTenor = 60;
-            _cas.CpltBound = 1.20;
-            _cas.SwpnBound = 1.10;
-            _param.CpltOn = true;
-            _param.SwpnOn = true;
+            _parameters.UnderlyingExpiry = 60;
+            _parameters.UnderlyingTenor = 60;
+            _cascade.CpltBound = 1.20;
+            _cascade.SwpnBound = 1.10;
+            _parameters.CapletOn = true;
+            _parameters.SwaptionOn = true;
             _objective.NThreads = 2;
             _objective.HWeight = 0.001;
             _objective.VWeight = 0.001;
             _objective.CWeight = 1;
             _objective.SWeight = 1;
-            _param.Timeframe = new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60, 80, 100, 120 };
+            _parameters.Timeframe = new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60, 80, 100, 120 };
         }
 
         /// <summary>
@@ -521,7 +522,7 @@ namespace Orion.Analytics.Pedersen
             object temp;
             try
             {
-                var result = new object[_param.NFAC*(_param.UExpiry + 2) - 1, _param.UTenor + 1];
+                var result = new object[_parameters.NumberOfFactors*(_parameters.UnderlyingExpiry + 2) - 1, _parameters.UnderlyingTenor + 1];
                 for (int i = result.GetLowerBound(0); i < result.GetUpperBound(0); i++)
                 {
                     for (int j = result.GetLowerBound(1); j < result.GetUpperBound(1); j++)
@@ -529,23 +530,23 @@ namespace Orion.Analytics.Pedersen
                         result[i, j] = "";
                     }
                 }
-                for (int j = 0; j < _param.NFAC; j++)
+                for (int j = 0; j < _parameters.NumberOfFactors; j++)
                 {
-                    result[j * (_param.UExpiry + 2), 0] = $"Vol Fac {j + 1}";
-                    for (int i = 0; i < _param.UExpiry; i++)
+                    result[j * (_parameters.UnderlyingExpiry + 2), 0] = $"Vol Fac {j + 1}";
+                    for (int i = 0; i < _parameters.UnderlyingExpiry; i++)
                     {
-                        result[j * (_param.UExpiry + 2) + i + 1, 0] = i + 1;
+                        result[j * (_parameters.UnderlyingExpiry + 2) + i + 1, 0] = i + 1;
                     }
-                    for (int i = 0; i < _param.UTenor; i++)
+                    for (int i = 0; i < _parameters.UnderlyingTenor; i++)
                     {
-                        result[j * (_param.UExpiry + 2), i + 1] = i + 1;
+                        result[j * (_parameters.UnderlyingExpiry + 2), i + 1] = i + 1;
                     }
-                    for (int i = 0; i < _param.UExpiry; i++)
+                    for (int i = 0; i < _parameters.UnderlyingExpiry; i++)
                     {
-                        for (int k = 0; k < _param.UTenor; k++)
+                        for (int k = 0; k < _parameters.UnderlyingTenor; k++)
                         {
                             double vol = _usd.Xi[i][k, j];
-                            result[j * (_param.UExpiry + 2) + i + 1, k + 1] = vol;
+                            result[j * (_parameters.UnderlyingExpiry + 2) + i + 1, k + 1] = vol;
                         }
                     }
                 }
@@ -567,19 +568,19 @@ namespace Orion.Analytics.Pedersen
             object temp;
             try
             {
-                var result = new object[_param.UExpiry + 1, _param.UTenor + 1];
+                var result = new object[_parameters.UnderlyingExpiry + 1, _parameters.UnderlyingTenor + 1];
                 result[0, 0] = "Volatility";
-                for (int i = 0; i < _param.UExpiry; i++)
+                for (int i = 0; i < _parameters.UnderlyingExpiry; i++)
                 {
                     result[i + 1, 0] = i + 1;
                 }
-                for (int i = 0; i < _param.UTenor; i++)
+                for (int i = 0; i < _parameters.UnderlyingTenor; i++)
                 {
                     result[0, i + 1] = i + 1;
                 }
-                for (int i = 0; i < _param.UExpiry; i++)
+                for (int i = 0; i < _parameters.UnderlyingExpiry; i++)
                 {
-                    for (int j = 0; j < _param.UTenor; j++)
+                    for (int j = 0; j < _parameters.UnderlyingTenor; j++)
                     {
                         double vol = _usd.XiNorm(i, j);
                         result[i + 1, j + 1] = vol;

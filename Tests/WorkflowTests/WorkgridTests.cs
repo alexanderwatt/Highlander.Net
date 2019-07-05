@@ -105,7 +105,7 @@ namespace WorkflowTests
                             Assert.IsNotNull(output.Errors);
                             Assert.AreEqual(1, output.Errors.Length);
                             Assert.AreEqual(typeof(FormatException).FullName, output.Errors[0].FullName);
-                            Assert.AreEqual(default(GridData2), output.Result);
+                            Assert.AreEqual(default, output.Result);
                         }
                         // fails in 2nd substep
                         {
@@ -113,7 +113,7 @@ namespace WorkflowTests
                             Assert.IsNotNull(output.Errors);
                             Assert.AreEqual(1, output.Errors.Length);
                             Assert.AreEqual(typeof(DivideByZeroException).FullName, output.Errors[0].FullName);
-                            Assert.AreEqual(default(GridData2), output.Result);
+                            Assert.AreEqual(default, output.Result);
                         }
                         // fails in 3rd substep
                         {
@@ -121,7 +121,7 @@ namespace WorkflowTests
                             Assert.IsNotNull(output.Errors);
                             Assert.AreEqual(1, output.Errors.Length);
                             Assert.AreEqual(typeof(InvalidOperationException).FullName, output.Errors[0].FullName);
-                            Assert.AreEqual(default(GridData2), output.Result);
+                            Assert.AreEqual(default, output.Result);
                         }
                     }
                 }

@@ -36,15 +36,15 @@ namespace Orion.Analytics.Pedersen
 
         public void Initialise()
         {
-            ImpliedVolatility = new double[_param.UExpiry][];
-            ImpliedVolatilitySquare = new double[_param.UExpiry][];
-            ImpliedVolatilitySquareLarge = new double[_param.UExpiry][][];
-            for (int i = 0; i < _param.UExpiry; i++)
+            ImpliedVolatility = new double[_param.UnderlyingExpiry][];
+            ImpliedVolatilitySquare = new double[_param.UnderlyingExpiry][];
+            ImpliedVolatilitySquareLarge = new double[_param.UnderlyingExpiry][][];
+            for (int i = 0; i < _param.UnderlyingExpiry; i++)
             {
-                ImpliedVolatility[i] = new double[_param.UTenor - i];
-                ImpliedVolatilitySquare[i] = new double[_param.UTenor - i];
-                ImpliedVolatilitySquareLarge[i] = new double[_param.UTenor - i][];
-                for (int j = 0; j < _param.UTenor - i; j++)
+                ImpliedVolatility[i] = new double[_param.UnderlyingTenor - i];
+                ImpliedVolatilitySquare[i] = new double[_param.UnderlyingTenor - i];
+                ImpliedVolatilitySquareLarge[i] = new double[_param.UnderlyingTenor - i][];
+                for (int j = 0; j < _param.UnderlyingTenor - i; j++)
                 {
                     ImpliedVolatilitySquareLarge[i][j] = new double[i + 1];
                 }

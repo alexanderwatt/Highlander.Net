@@ -49,7 +49,7 @@ namespace Orion.Analytics.Pedersen
 
         public void Go()
         {
-            _initialGuess = new DenseVector(_p.NEXPIRY * _p.NTenor);
+            _initialGuess = new DenseVector(_p.NumberOfExpiries * _p.NumberOfTenors);
             double initialGuess = _p.AverageSwaptionImpliedVolatility;
             if (initialGuess == 0)
             {

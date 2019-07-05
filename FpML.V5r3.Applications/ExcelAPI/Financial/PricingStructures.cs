@@ -143,10 +143,22 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="range"></param>
         /// <returns></returns>
-        public object PedersenCalibration1(Excel.Range range)
+        public object PedersenCalibration(Excel.Range range)
         {
             var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
             return Engine.Pedersen.Calibration(r1);
+        }
+
+        /// <summary>
+        /// WIP stub. Still using dummy vol and correlation.
+        /// </summary>
+        /// <param name="rateCurveIdentifier">RateCurve Id</param>
+        /// <returns></returns>
+        public object[,] PedersenCalibration1(string rateCurveIdentifier)
+        {
+
+            var result = Engine.PedersenCalibration(rateCurveIdentifier);
+            return result;
         }
 
         /// <summary>
