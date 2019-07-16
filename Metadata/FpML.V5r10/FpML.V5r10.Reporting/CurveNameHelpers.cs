@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using Orion.Constants;
@@ -85,10 +100,22 @@ namespace FpML.V5r10.Reporting
         }
 
         /// <summary>
+        /// Gets a property forward curve.
+        /// </summary>
+        /// <param name="currency">The currency of the property.</param>
+        /// <param name="propertyId">The property Id.</param>
+        /// <returns></returns>
+        public static string GetPropertyCurveName(String currency, String propertyId)
+        {
+            var result = PricingStructureTypeEnum.PropertyCurve + "." + currency.ToUpper()+ propertyId.ToUpper();
+            return result;
+        }
+
+        /// <summary>
         /// Gets a bond forward curve.
         /// </summary>
         /// <param name="currency">The currency of the bond.</param>
-        /// <param name="bondId">THe bond Id.</param>
+        /// <param name="bondId">The bond Id.</param>
         /// <returns></returns>
         public static string GetBondCurveName(String currency, String bondId)
         {
@@ -117,7 +144,7 @@ namespace FpML.V5r10.Reporting
         /// Gets a exchange traded  curve.
         /// </summary>
         /// <param name="currency">The currency of the bond.</param>
-        /// <param name="exchange">THe exc hange code e.g. ASX</param>
+        /// <param name="exchange">THe exchange code e.g. ASX</param>
         /// <param name="exchangeFutureCode">The exchange traded future Id e.g. IR.</param>
         /// <returns></returns>
         public static string GetExchangeTradedCurveName(String currency, String exchange, String exchangeFutureCode)
@@ -130,7 +157,7 @@ namespace FpML.V5r10.Reporting
         /// Gets a exchange traded  curve.
         /// </summary>
         /// <param name="currency">The currency of the bond.</param>
-        /// <param name="exchange">THe exc hange code e.g. ASX</param>
+        /// <param name="exchange">THe exchange code e.g. ASX</param>
         /// <param name="exchangeFutureCode">The exchange traded future Id e.g. IR.</param>
         /// <returns></returns>
         public static string GetExchangeTradedCurveNameSimple(String currency, String exchange, String exchangeFutureCode)
@@ -139,10 +166,13 @@ namespace FpML.V5r10.Reporting
             return result;
         }
 
-        ///<summary>
-        /// Gets all the Discount curve name.
-        ///</summary>
-        ///<returns></returns>
+        /// <summary>
+        ///  Gets all the Discount curve name.
+        /// </summary>
+        ///  <param name="currency">The currency of the bond.</param>
+        ///  <param name="counterparty">THe exchange code e.g. ASX</param>
+        /// <param name="seniority">The seniority</param>
+        /// <returns></returns>
         public static string GetCounterPartyCurveName(string currency, string counterparty, string seniority)
         {
             return PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + counterparty + "-" + seniority;

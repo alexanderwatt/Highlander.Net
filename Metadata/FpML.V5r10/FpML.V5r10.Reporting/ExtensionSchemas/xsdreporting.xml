@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd xmlns='http://microsoft.com/dotnet/tools/xsd/'>
+<generateClasses language='CS' namespace ='FpML.V5r10.Reporting'>
+  <schema>
+    fpml-main-5-10.xsd
+  </schema>
+  <schema>
+    qrscext-instruments.xsd
+  </schema>
+  <schema>
+    xmldsig-core-schema.xsd
+  </schema>
+</generateClasses>
+</xsd>

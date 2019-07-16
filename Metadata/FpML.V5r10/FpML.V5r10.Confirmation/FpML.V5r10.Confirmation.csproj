@@ -66,6 +66,8 @@
     <EmbeddedResource Include="xmldsig-core-schema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="xsdgen.bat" />
+    <None Include="xsdgen.log" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
@@ -86,6 +88,9 @@
     <None Include="qrscext-instruments.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xsdconfirmation.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

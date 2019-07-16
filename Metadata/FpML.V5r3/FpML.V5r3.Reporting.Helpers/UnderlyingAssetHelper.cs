@@ -1,6 +1,19 @@
-#region Using directives
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-using System;
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using directives
 
 #endregion
 
@@ -39,7 +52,8 @@ namespace FpML.V5r3.Reporting.Helpers
                     }
                 default:
                     {
-                        string errorMessage = String.Format("Unable to create UnderlyingAsset from the following marketInstrumentType : '{0}'.", marketInstrumentType);
+                        string errorMessage =
+                            $"Unable to create UnderlyingAsset from the following marketInstrumentType : '{marketInstrumentType}'.";
                         throw new System.Exception(errorMessage);
                     }
             }
@@ -109,8 +123,8 @@ namespace FpML.V5r3.Reporting.Helpers
             string instrumentCurrency = slicedInstrumentId[0];
             //            string instrumentTerm = slicedInstrumentId[2];
 
-            //DateTime adjustedExpirationDate = SfeDatesHelper.GetAdjustedExpirationDate(undajustedExpirationDate);
-            //            future.maturity = undajustedExpirationDate;
+            //DateTime adjustedExpirationDate = SfeDatesHelper.GetAdjustedExpirationDate(unadjustedExpirationDate);
+            //            future.maturity = unadjustedExpirationDate;
             //            future.maturitySpecified = true;
 
             future.currency = new IdentifiedCurrency { Value = instrumentCurrency };

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -28,7 +43,7 @@ namespace Orion.Identifiers
         ///  An id for a bond.
         /// </summary>
         /// <param name="ticker">The bond ticker. </param>
-        /// <param name="pricingSource">The oricing source is required for uniqueness. For example, AU for Australian shares.</param>
+        /// <param name="pricingSource">The pricing source is required for uniqueness. For example, AU for Australian shares.</param>
         public EquityIdentifier(string ticker, string pricingSource)
             : base(BuildUniqueId(ticker, pricingSource))
         {

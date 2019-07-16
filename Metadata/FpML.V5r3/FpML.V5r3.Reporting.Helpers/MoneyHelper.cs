@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +37,17 @@ namespace FpML.V5r3.Reporting.Helpers
         public static Money CopyToMoney(MoneyBase original)
         {
             var cloned = new Money();
-            var money = original as Money;
-            if (money != null)
+            if (original is Money money)
             {
                 cloned.amount = money.amount;
             }
-            else if (original is NonNegativeMoney)
+            else if (original is NonNegativeMoney negativeMoney)
             {
-                cloned.amount = ((NonNegativeMoney)original).amount;
+                cloned.amount = negativeMoney.amount;
             }
-            else if (original is PositiveMoney)
+            else if (original is PositiveMoney positiveMoney)
             {
-                cloned.amount = ((PositiveMoney)original).amount;
+                cloned.amount = positiveMoney.amount;
             }
             if (null != original.currency)
             {
@@ -58,7 +72,7 @@ namespace FpML.V5r3.Reporting.Helpers
         }
 
         /// <summary>
-        /// THis will only clone: Positivemmoney, NonNegativeMoney and Money types.
+        /// THis will only clone: PositiveMoney, NonNegativeMoney and Money types.
         /// </summary>
         /// <param name="original"></param>
         /// <param name="currencyToClone"></param>
@@ -71,18 +85,17 @@ namespace FpML.V5r3.Reporting.Helpers
             {
                 if (original.currency.Value == currencyToClone.Value)
                 {
-                    var money = original as Money;
-                    if (money != null)
+                    if (original is Money money)
                     {
                         amount.amount = money.amount;
                     }
-                    else if (original is NonNegativeMoney)
+                    else if (original is NonNegativeMoney negativeMoney)
                     {
-                        amount.amount = ((NonNegativeMoney)original).amount;
+                        amount.amount = negativeMoney.amount;
                     }
-                    else if (original is PositiveMoney)
+                    else if (original is PositiveMoney positiveMoney)
                     {
-                        amount.amount = ((PositiveMoney)original).amount;
+                        amount.amount = positiveMoney.amount;
                     }
                 }
             }

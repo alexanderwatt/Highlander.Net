@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.fpml.org/FpML-5/reporting" />
+  <xs:element name="InstrumentNode" nillable="true" xmlns:q1="http://www.fpml.org/FpML-5/reporting" type="q1:InstrumentNode" />
+  <xs:element name="FutureNodeStruct" nillable="true" xmlns:q2="http://www.fpml.org/FpML-5/reporting" type="q2:FutureNodeStruct" />
+  <xs:element name="EquityNodeStruct" nillable="true" xmlns:q3="http://www.fpml.org/FpML-5/reporting" type="q3:EquityNodeStruct" />
+  <xs:element name="BondNodeStruct" nillable="true" xmlns:q4="http://www.fpml.org/FpML-5/reporting" type="q4:BondNodeStruct" />
+  <xs:element name="SimpleIRCapNodeStruct" nillable="true" xmlns:q5="http://www.fpml.org/FpML-5/reporting" type="q5:SimpleIRCapNodeStruct" />
+  <xs:element name="SimpleIRSwapNodeStruct" nillable="true" xmlns:q6="http://www.fpml.org/FpML-5/reporting" type="q6:SimpleIRSwapNodeStruct" />
+  <xs:element name="BasisSwapNodeStruct" nillable="true" xmlns:q7="http://www.fpml.org/FpML-5/reporting" type="q7:BasisSwapNodeStruct" />
+  <xs:element name="XccyBasisSwapNodeStruct" nillable="true" xmlns:q8="http://www.fpml.org/FpML-5/reporting" type="q8:XccyBasisSwapNodeStruct" />
+  <xs:element name="RateOptionNodeStruct" nillable="true" xmlns:q9="http://www.fpml.org/FpML-5/reporting" type="q9:RateOptionNodeStruct" />
+  <xs:element name="FutureOptionNodeStruct" nillable="true" xmlns:q10="http://www.fpml.org/FpML-5/reporting" type="q10:FutureOptionNodeStruct" />
+  <xs:element name="IRFutureOptionNodeStruct" nillable="true" xmlns:q11="http://www.fpml.org/FpML-5/reporting" type="q11:IRFutureOptionNodeStruct" />
+  <xs:element name="IRFutureNodeStruct" nillable="true" xmlns:q12="http://www.fpml.org/FpML-5/reporting" type="q12:IRFutureNodeStruct" />
+  <xs:element name="CommodityAverageSwapNodeStruct" nillable="true" xmlns:q13="http://www.fpml.org/FpML-5/reporting" type="q13:CommodityAverageSwapNodeStruct" />
+  <xs:element name="CommodityFutureNodeStruct" nillable="true" xmlns:q14="http://www.fpml.org/FpML-5/reporting" type="q14:CommodityFutureNodeStruct" />
+  <xs:element name="FraNodeStruct" nillable="true" xmlns:q15="http://www.fpml.org/FpML-5/reporting" type="q15:FraNodeStruct" />
+  <xs:element name="SimpleFraNodeStruct" nillable="true" xmlns:q16="http://www.fpml.org/FpML-5/reporting" type="q16:SimpleFraNodeStruct" />
+  <xs:element name="SimpleBillFraNodeStruct" nillable="true" xmlns:q17="http://www.fpml.org/FpML-5/reporting" type="q17:SimpleBillFraNodeStruct" />
+  <xs:element name="BankBillNodeStruct" nillable="true" xmlns:q18="http://www.fpml.org/FpML-5/reporting" type="q18:BankBillNodeStruct" />
+  <xs:element name="RepoNodeStruct" nillable="true" xmlns:q19="http://www.fpml.org/FpML-5/reporting" type="q19:RepoNodeStruct" />
+  <xs:element name="DepositNodeStruct" nillable="true" xmlns:q20="http://www.fpml.org/FpML-5/reporting" type="q20:DepositNodeStruct" />
+  <xs:element name="CommoditySpotNodeStruct" nillable="true" xmlns:q21="http://www.fpml.org/FpML-5/reporting" type="q21:CommoditySpotNodeStruct" />
+  <xs:element name="FxSpotNodeStruct" nillable="true" xmlns:q22="http://www.fpml.org/FpML-5/reporting" type="q22:FxSpotNodeStruct" />
+  <xs:element name="ZeroRateNodeStruct" nillable="true" xmlns:q23="http://www.fpml.org/FpML-5/reporting" type="q23:ZeroRateNodeStruct" />
+  <xs:element name="PropertyNodeStruct" nillable="true" xmlns:q24="http://www.fpml.org/FpML-5/reporting" type="q24:PropertyNodeStruct" />
+  <xs:element name="XiborNodeStruct" nillable="true" xmlns:q25="http://www.fpml.org/FpML-5/reporting" type="q25:XiborNodeStruct" />
+  <xs:element name="ExchangeConfigData" nillable="true" xmlns:q26="http://www.fpml.org/FpML-5/reporting" type="q26:ExchangeConfigData" />
+  <xs:element name="Instrument" nillable="true" xmlns:q27="http://www.fpml.org/FpML-5/reporting" type="q27:Instrument" />
+  <xs:element name="Exchange" nillable="true" xmlns:q28="http://www.fpml.org/FpML-5/reporting" type="q28:Exchange" />
+</xs:schema>

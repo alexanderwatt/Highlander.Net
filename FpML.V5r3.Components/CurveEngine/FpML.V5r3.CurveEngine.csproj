@@ -363,6 +363,7 @@
     <Folder Include="Assets\Credit\CDS\" />
     <Folder Include="Assets\Credit\CorporateBonds\" />
     <Folder Include="Assets\Rates\Swaption\" />
+    <Folder Include="Assets\Securities Financing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using Orion.Util.Helpers;
 using Orion.Util.NamedValues;
@@ -12,7 +27,7 @@ namespace Orion.Identifiers
     public static class PricingStructurePropertyHelper
     {
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         /// <param name="pricingStructureType"></param>
@@ -66,14 +81,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet RateCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (YieldCurveValuation)fpmlData.Second;
             var curve = (YieldCurve)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -100,14 +115,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet DiscountCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (YieldCurveValuation)fpmlData.Second;
             var curve = (YieldCurve)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -134,14 +149,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet InflationCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var yieldCurveValuation = (YieldCurveValuation)fpmlData.Second;
             var curve = (YieldCurve)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             if (string.IsNullOrEmpty(curve.name))
             {
                 curve.name = "AUD-Dummy-SydneySwapDesk";
@@ -161,14 +176,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstructure. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet VolatilityCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -202,14 +217,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet ExpiryStrikeSurface(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -234,14 +249,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet ExpiryTenorSurface(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -267,14 +282,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet RateVolatilityMatrix(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneySwapDesk";
             if (curve.name != null)
@@ -299,14 +314,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet EquityVolatilityMatrix(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneyFxDesk";
             if (curve.name != null)
@@ -331,14 +346,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet FxVolatilityMatrix(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneyFxDesk";
             if (curve.name != null)
@@ -363,14 +378,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet CommodityVolatilityMatrix(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = "AUD-Dummy-SydneyCommodityDesk";
             if (curve.name != null)
@@ -395,14 +410,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet FxCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var valuation = (FxCurveValuation)fpmlData.Second;
             var curve = (FxCurve)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var names = new[] { "Identifier", CurveProp.CurveName, "Algorithm", CurveProp.PricingStructureType, CurveProp.CurrencyPair, "QuoteBasis", "BuildDateTime", "BaseDate", "Currency" };
             var currencyPair = curve.quotedCurrencyPair.currency1.Value + "-" + curve.quotedCurrencyPair.currency2.Value;
             var quoteBasis = curve.quotedCurrencyPair.quoteBasis.ToString();
@@ -425,14 +440,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet CommodityCurve(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (FxCurveValuation)fpmlData.Second;
             var curve = (FxCurve)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var names = new[] { "Identifier", CurveProp.CurveName, "Algorithm", CurveProp.PricingStructureType, "CommodityAsset", 
                                 "BuildDateTime", "BaseDate", "Currency" };
             var commodityAsset = curve.name.Split('-')[1];
@@ -455,14 +470,14 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// Returns properties from the pricingstrucutre. <see cref="NamedValueSet"/> class.
+        /// Returns properties from the pricing structure. <see cref="NamedValueSet"/> class.
         /// </summary>
         /// <param name="fpmlData">The FPML data.</param>
         public static NamedValueSet RateATMVolatilityMatrix(Pair<PricingStructure, PricingStructureValuation> fpmlData)
         {
             var tempFpML = (VolatilityMatrix)fpmlData.Second;
             var curve = (VolatilityRepresentation)fpmlData.First;
-            //Creates the property collection. This should be backward compatable with V1.
+            //Creates the property collection. This should be backward compatible with V1.
             var buildDateTime = tempFpML.buildDateTime;
             var curveName = curve.name;
             var baseDate = tempFpML.baseDate.Value;

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using Orion.Util.Helpers;
 
@@ -52,7 +67,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (period1 == null)
             {
-                throw new ArgumentNullException("period1");
+                throw new ArgumentNullException(nameof(period1));
             }
             return period1.Sum(period2);
         }
@@ -62,7 +77,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (periodToAdd == null)
             {
-                throw new ArgumentNullException("periodToAdd");
+                throw new ArgumentNullException(nameof(periodToAdd));
             }
             return periodToAdd.Add(dateTime);
         }
@@ -72,7 +87,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (periodToSubtract == null)
             {
-                throw new ArgumentNullException("periodToSubtract");
+                throw new ArgumentNullException(nameof(periodToSubtract));
             }
             return periodToSubtract.Negative().Add(dateTime);
         }
@@ -82,7 +97,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (period1 == null)
             {
-                throw new ArgumentNullException("period1");
+                throw new ArgumentNullException(nameof(period1));
             }
             return period1.Subtract(period2);
         }
@@ -92,7 +107,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (periodToNegate == null)
             {
-                throw new ArgumentNullException("periodToNegate");
+                throw new ArgumentNullException(nameof(periodToNegate));
             }
             return periodToNegate.Negative();
         }
@@ -102,7 +117,7 @@ namespace FpML.V5r3.Reporting.Helpers
         {
             if (periodToMultiply == null)
             {
-                throw new ArgumentNullException("periodToMultiply");
+                throw new ArgumentNullException(nameof(periodToMultiply));
             }
             return periodToMultiply.Multiply(multiplier);
         }
@@ -140,7 +155,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// </summary>
         /// <param name="period">The period.</param>
         /// <returns></returns>
-        static private int GetMonthMultiplier(PeriodEnum period)
+        private static int GetMonthMultiplier(PeriodEnum period)
         {
             int multiplier = 1;
 
@@ -152,7 +167,7 @@ namespace FpML.V5r3.Reporting.Helpers
                     multiplier = 12;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("period", "period does not translate to a whole month");
+                    throw new ArgumentOutOfRangeException(nameof(period), "period does not translate to a whole month");
             }
             return multiplier;
         }
@@ -177,7 +192,7 @@ namespace FpML.V5r3.Reporting.Helpers
         #region Magnitude Operators
 
         /// <summary>
-        /// Test intervals to determoine x > y
+        /// Test intervals to determine x > y
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

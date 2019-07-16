@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using Core.Common;
 using Orion.Util.Expressions;
@@ -11,7 +26,6 @@ namespace Orion.V5r3.Configuration
     public static class AlertRulesLoader
     {
         private const string AWatt = "alexawatt@hotmail.com";
-        //private const string SDudley = "simon.dudley@nab.com.au";
 
         private static AlertRule MakeAlertRule(
             string ruleName, bool disabled,

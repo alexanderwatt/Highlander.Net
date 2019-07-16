@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\BuildDef\BuildInfo.cs">
+      <Link>BuildInfo.cs</Link>
+    </Compile>
     <Compile Include="AdjustableOrAdjustedDateHelper.cs" />
     <Compile Include="AmountScheduleHelper.cs" />
     <Compile Include="AssetMeasureTypeHelper.cs" />

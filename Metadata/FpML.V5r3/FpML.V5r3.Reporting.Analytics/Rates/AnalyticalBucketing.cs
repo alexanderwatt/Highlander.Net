@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Orion.Analytics.Dates;
 using Orion.ModelFramework.PricingStructures;
 
 #endregion
@@ -10,58 +11,45 @@ namespace Orion.Analytics.Rates
 {
     public static class AnalyticalBucketing
     {
-        //public static List<DateTime> GetBucketDates(IRateCurve discountCurveName, int BktType, int NumBucketDates)
+        //switch (BktType)
         //{
-        //    FuturesBuckets* pBuckets;
-        //    switch (BktType)
-        //    {
-        //        case FUTURES_BUCKETS:
-        //        default:
-        //            pBuckets = new FuturesBuckets;
-        //            break;
-        //        case SWAP_BUCKETS:
-        //            pBuckets = new SwapBuckets;
-        //            break;
-        //        case ABN_SWAP_BUCKETS:
-        //            pBuckets = new ABNSwapBuckets;
-        //            break;
-        //        case VEGA_RISK_BUCKETS:
-        //            pBuckets = new VegaRiskBuckets;
-        //            break;
-        //        case AAFP_RISK_BUCKETS:
-        //            pBuckets = new AAFPBuckets;
-        //            break;
-        //    }
-        //    ArrayXLOper.xltype = xltypeMulti;
-        //    ArrayXLOper.val.array.lparray = MyXLOpers;
-        //    ArrayXLOper.val.array.rows = 1;
-        //    ArrayXLOper.val.array.columns = NumBucketDates;
-        //    // Find (or create) PVCurve
-        //    var pCurve = GetCurve(CurveFileName); 
-        //    if (!pCurve->IsValid())
-        //        return &ArrayXLOper;
-
-        //    pBuckets->Generate(*pCurve, GetSWIFT_Index(CurveFileName), NumBucketDates);
-
-        //    int NumBktDates = pBuckets->GetNumBucketDates();
-        //    Date BktDate;
-        //    for (int i = 0; i < NumBktDates; i++)
-        //    {
-        //        MyXLOpers[i].xltype = xltypeNum;
-        //        BktDate = pBuckets->GetDate(i);
-        //        MyXLOpers[i].val.num = long(BktDate.GetJulian());
-        //    }
-
-        //    for (var i = NumBktDates; i < NumBucketDates; i++)
-        //    {
-        //        MyXLOpers[i].xltype = xltypeNum;
-        //        MyXLOpers[i].val.num = MyXLOpers[i - 1].val.num;
-        //    }
-        //    if (!pBuckets)
-        //        delete pBuckets;
-
-        //    return &ArrayXLOper;    // return pointer to XLOPER
+        //    case FUTURES_BUCKETS:
+        //    default:
+        //    pBuckets = new FuturesBuckets;
+        //    break;
+        //    case SWAP_BUCKETS:
+        //    pBuckets = new SwapBuckets;
+        //    break;
+        //    case ABN_SWAP_BUCKETS:
+        //    pBuckets = new ABNSwapBuckets;
+        //    break;
+        //    case VEGA_RISK_BUCKETS:
+        //    pBuckets = new VegaRiskBuckets;
+        //    break;
+        //    case AAFP_RISK_BUCKETS:
+        //    pBuckets = new AAFPBuckets;
+        //    break;
         //}
+
+    public static List<DateTime> GetBucketDates(IRateCurve pCurve, FuturesBuckets bucketType, int numberOfBucketDates)
+        {
+            List<DateTime> bucketDates = new List<DateTime>();
+            // Find (or create) PVCurve
+            if (pCurve == null)
+                return null;
+            FuturesBuckets pBuckets = Generate(pCurve, numberOfBucketDates);//Generate all the necessary futures dates
+            int numBktDates = pBuckets->GetNumBucketDates();
+            for (int i = 0; i < numBktDates; i++)
+            {
+                var bucketDate = DateHelper.SFEBillDates(i);
+                bucketDates.Add(bucketDate);//long(BucketDate.GetJulian());
+            }
+            for (var i = numBktDates; i < numberOfBucketDates; i++)
+            {
+                bucketDates.Add(bucketDates[i - 1]);
+            }
+            return bucketDates;
+        }
 
         /// <summary>
         /// Discount rate derivative.
@@ -138,7 +126,7 @@ namespace Orion.Analytics.Rates
         /// <summary>
         /// The derivative with respect to the rate.
         /// </summary>
-        /// <param name="discountFactorFlowDate">The discount factor to the flow wate.</param>
+        /// <param name="discountFactorFlowDate">The discount factor to the flow date.</param>
         /// <param name="flowYearFraction">The year fraction to the flow date.</param>
         /// <param name="discountFactorIndexStartDate">The discount factor to the index start date. The index might be LIBOR or a Swap.</param>
         /// <param name="discountFactorIndexEndDate">The discount factor to the index end date. </param>
@@ -151,90 +139,77 @@ namespace Orion.Analytics.Rates
             Decimal indexYearFraction, Decimal bucketYearFraction, Decimal discountFactorBucketStartDate, Decimal discountFactorBucketEndDate)
         {
             // dD(x,B,r)/dr
-            var derivx = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
+            var derivativeX = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
             // dD(y,B,r)/dr  
-            var derivy = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
-            // Daycount(indexStart, indexEnd, indexDaycount, indexCoupon);
-            var days = indexYearFraction;//TODO Is this days or year fraction?
-            // D(x,B,r)
-            var dfx = discountFactorIndexStartDate;
-            // D(y,B,r) 
-            var dfy = discountFactorIndexEndDate;		                            	
-            return 1 / days * 1 / dfy * derivx - 1 / days * 1 / dfy * dfx / dfy * derivy;
+            var derivativeY = DeltaDiscFacWrtR(flowYearFraction, discountFactorFlowDate, discountFactorBucketStartDate, discountFactorBucketEndDate, bucketYearFraction);
+            return 1 / indexYearFraction * 1 / discountFactorIndexEndDate * derivativeX - 1 / indexYearFraction * 1 / 
+                   discountFactorIndexEndDate * discountFactorIndexStartDate / discountFactorIndexEndDate * derivativeY;
         }
 
-        public static Decimal AnalyticalBucket(DateTime ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
-                                            int IsAnalytic, int GreekType, int Order, ARRAY* Buckets,
-                                            int BktType, int BktCurve, double Bump)
+        public static Decimal AnalyticalBucket(DateTime valueDate, ARRAY* Parameters, ICurve curve,
+                                            int isAnalytic, int greekType, int order, DateTime[] buckets,
+                                            int bucketType, int bucketCurve, double bump)
         {
 
             g_BumpedPaymentCurve = -1;                  // Flag as not in use
             g_BumpedIndexCurve = -1;                    // Flag as not in use
             g_BumpedVolCurve = -1;                  // Flag as not in use
-
-            /* added two new greek types in order to report senstitivities to impled FX volatilities and 
+            /* added two new greek types in order to report sensitivities to implied FX volatilities and 
             implied interest rate/FX Rate Correlations
-
             4 - FX Vega
             5 - Correlation */
-
-            if ((GreekType == 4) || (GreekType == 5))
+            if (greekType == 4 || greekType == 5)
             {
                 /* if the index curve and the discount curve are the same there will be no
                 FX Vol or FX correlation sensitivity */
                 if ((int)Parameters->array[2] == (int)Parameters->array[11])
                     return;
                 // get the input parameter that is going to be shifted -i.e FX correlations or FX volatilities
-                double m_InputToShift;
+                double inputToShift = 0;
                 //zero out first bucket
                 Buckets->array[0] = 0;
-                switch (GreekType)
+                switch (greekType)
                 {
                     case 4: //FX Vega
-                        m_InputToShift = Parameters->array[34];
+                        inputToShift = Parameters->array[34];
                         break;
                     case 5: //FX Correlation
-                        m_InputToShift = Parameters->array[33];
+                        inputToShift = Parameters->array[33];
                     default:
                         break;
                 }
-
                 //value the cashflow using these values
                 ARRAY FXResults;
                 FXResults.rows = 1;
                 FXResults.columns = 2;
-
                 ValueCashFlow(ValueDate, Parameters, CurvePath, &FXResults);
-                double BaseValue = FXResults.array[9];
-
+                double baseValue = FXResults.array[9];
                 //Shift the input value by the amount Bump
-                double ShiftedInput = m_InputToShift + Bump;
-                switch (GreekType)
+                double shiftedInput = inputToShift + bump;
+                switch (greekType)
                 {
                     case 4: //FX Vega
                             // SAJ 3/12/96 Added swaption bumping as well - if a swaption object exists bump FX Volatility
                         if (g_pSwaption)
-                            g_pSwaption->SetFXVolatility(ShiftedInput);
+                            g_pSwaption->SetFXVolatility(shiftedInput);
                         // SAJ 3/12/96 End
-                        Parameters->array[34] = ShiftedInput;
+                        Parameters->array[34] = shiftedInput;
                         break;
                     case 5: //FX Correlation
                             // SAJ 3/12/96 Added swaption bumping as well - if a swaption object exists bump FX Correlation
                         if (g_pSwaption)
-                            g_pSwaption->SetFXCorrelation(ShiftedInput);
+                            g_pSwaption->SetFXCorrelation(shiftedInput);
                         // SAJ 3/12/96 End
-                        Parameters->array[33] = ShiftedInput;
+                        Parameters->array[33] = shiftedInput;
                     default:
                         break;
                 }
                 //revalue the cashflow
                 ValueCashFlow(ValueDate, Parameters, CurvePath, &FXResults);
-                double Greek = FXResults.array[9] - BaseValue;
-                //return this greek in the totals column  of the bucketarray
+                double greek = FXResults.array[9] - baseValue;
+                //return this greek in the totals column  of the bucket array
                 Buckets->array[0] = Greek;
                 return;
-
-
             }
             if (BktType == SHIFT_CURVE)  //shifting the yield curve and the volatility curve for sensitivity analysis
             {
@@ -246,13 +221,12 @@ namespace Orion.Analytics.Rates
             BumpOffsets = new double[Buckets->columns + 1];
 
             BumpOffsets[0] = 0; // totals column
-            for (unsigned int i = 1; i < Buckets->columns; i++)
+            for (var i = 1; i < Buckets->columns; i++)
             {
                 BumpOffsets[i] = Buckets->array[i] + Bump;
                 BumpOffsets[0] += BumpOffsets[i];   // Build total
                 Buckets->array[i] = 0;
             }
-
             // Check if parameters is valid ARRAY or if there is anything to bucket
             if ((Parameters->rows == 0 || Parameters->columns == 0) ||
                     ((int)Parameters->array[2] != BktCurve && Order == 1) ||
@@ -262,16 +236,13 @@ namespace Orion.Analytics.Rates
                 delete[] BumpOffsets;
                 return;
             }
-
-
-
             if (BktType == VEGA_RISK_BUCKETS)   // Numerical vega risk bucketing only
             {
                 if (GreekType == 3 && Order == 0)
                     VegaRiskBucketCashFlow(ValueDate, Parameters, CurvePath, BumpOffsets, Buckets);
                 return;
             }
-            if (!IsAnalytic)    // Call numerical routines
+            if (!isAnalytic)    // Call numerical routines
             {
                 NumericBucketCashFlow(ValueDate, Parameters, CurvePath, GreekType, Order,
                             BktType, BumpOffsets, Buckets);
@@ -323,43 +294,37 @@ namespace Orion.Analytics.Rates
             ARRAY Results;
             Results.rows = 1;
             Results.columns = 18;
-
             ValueCashFlow(ValueDate, Parameters, CurvePath, &Results);
             double Payment_Dayfract = Results.array[1];
-
-            double Greek0, Greek1;
-
-            switch (GreekType)
+            double greek0, greek1;
+            switch (greekType)
             {
                 case 0:     // Delta
                 default:
-                    Greek0 = Results.array[10];
-                    Greek1 = Results.array[7] * 1e-4;   // Future Value delta1 is computed in Delta_DiscFac_wrt_r()
+                    greek0 = Results.array[10];
+                    greek1 = Results.array[7] * 1e-4;   // Future Value delta1 is computed in Delta_DiscFac_wrt_r()
                     break;
                 case 1:     // Gamma
-                    Greek1 = Results.array[13];
-                    Greek0 = Results.array[12];
+                    greek1 = Results.array[13];
+                    greek0 = Results.array[12];
                     break;
                 case 2:     // Theta
-                    Greek0 = Results.array[14];
-                    Greek1 = Results.array[15];
+                    greek0 = Results.array[14];
+                    greek1 = Results.array[15];
                     break;
                 case 3:     // Vega
-                    Greek0 = Results.array[16];
-                    Greek1 = Results.array[17];
+                    greek0 = Results.array[16];
+                    greek1 = Results.array[17];
                     break;
             }
-            if ((Order == 0 && Greek0 == 0) || (Order == 1 && Greek1 == 0) ||
-                 (Order == 3 && Greek0 == 0 && Greek1 == 0))
+            if (order == 0 && greek0 == 0 || order == 1 && greek1 == 0 ||
+                 (order == 3 && greek0 == 0 && greek1 == 0))
             {
                 delete[] BumpOffsets;
                 return;     // No greek to value
             }
-
             /*	Perform bucketing on calculated Greek0 or Greek1 */
-
             CString CurveName, SWIFTCode;
-
             SWIFTCode = GetSWIFT_String(m_IndexCurve);
             CurveName = CurvePath;
             CurveName += "YC_DATA\\PV." + SWIFTCode;
@@ -370,13 +335,11 @@ namespace Orion.Analytics.Rates
             CurveName = CurvePath;
             CurveName += "YC_DATA\\PV." + SWIFTCode;
             pPaymentCurve = GetCurve(CurveName);
-
             if (!pIndexCurve || !pPaymentCurve) // Invalid curves
             {
                 delete[] BumpOffsets;
                 return;
             }
-
             // Check if global bucket dates array is out of date
             if (g_BktType != BktType)
             {
@@ -402,7 +365,6 @@ namespace Orion.Analytics.Rates
             }
             g_BktType = BktType;
             IsAnalytic = g_WasAnalytic;
-
             int NumBkts = g_pBuckets->GetNumBucketDates() - 1;
 
             if (m_Type == CASH)
@@ -417,16 +379,16 @@ namespace Orion.Analytics.Rates
             }
             double TIndex = (m_IndexEnd - m_IndexStart) / 365.0;
 
-            if (GreekType != 0)
+            if (greekType != 0)
             {
-                double Greek = (Order == 0) ? Greek0 : Greek1;
-                double ValueSum = 0;
-                double ParallelSum = 0;
+                double greek = order == 0 ? greek0 : greek1;
+                double valueSum = 0;
+                double parallelSum = 0;
                 for (int Bkt = 0; Bkt < g_pBuckets->GetNumBucketDates(); Bkt++)
                 {
 
-                    Date BktStart = g_pBuckets->GetDate(Bkt);
-                    Date BktEnd = g_pBuckets->GetDate(Bkt + 1);
+                    DateTime BktStart = g_pBuckets->GetDate(Bkt);
+                    DateTime BktEnd = g_pBuckets->GetDate(Bkt + 1);
 
                     if (m_IndexEnd < (long)BktStart.GetJulian() || (long)BktEnd.GetJulian() < m_IndexStart)
                     {
@@ -439,89 +401,80 @@ namespace Orion.Analytics.Rates
                     double Rate = 0;
                     if (m_Type != CASH && m_Type != FXD)
                         Rate = (DF_Start / DF_End - 1) / TIndex;
-                    if (Order != 3)
-                        Buckets->array[Bkt + 1] = BucketValue(m_IndexStart, m_IndexEnd, Greek,
+                    if (order != 3)
+                        Buckets->array[Bkt + 1] = BucketValue(m_IndexStart, m_IndexEnd, greek,
                                             BktStart.GetJulian(), BktEnd.GetJulian(), Rate, TIndex) * BumpOffsets[Bkt + 1];
                     else
                     {
-                        Buckets->array[Bkt + 1] = BucketValue(m_IndexStart, m_IndexEnd, Greek0,
+                        Buckets->array[Bkt + 1] = BucketValue(m_IndexStart, m_IndexEnd, greek0,
                                             BktStart.GetJulian(), BktEnd.GetJulian(), Rate, TIndex) * BumpOffsets[Bkt + 1];
-                        Buckets->array[Bkt + 1] += BucketValue(m_IndexStart, m_IndexEnd, Greek1,
+                        Buckets->array[Bkt + 1] += BucketValue(m_IndexStart, m_IndexEnd, greek1,
                                             BktStart.GetJulian(), BktEnd.GetJulian(), Rate, TIndex) * BumpOffsets[Bkt + 1];
                     }
-                    ValueSum += Buckets->array[Bkt + 1];
-                    if (Order == 3 && GreekType == 1)
+                    valueSum += Buckets->array[Bkt + 1];
+                    if (order == 3 && greekType == 1)
                     {
-                        Buckets->array[Bkt + 1] = ValueSum;
-                        ParallelSum += ValueSum;
+                        Buckets->array[Bkt + 1] = valueSum;
+                        parallelSum += valueSum;
                     }
                 }
                 //Buckets->array[1] = (Greek - ValueSum);	// HACK
-                if (Order == 3 && GreekType == 1)
-                    Buckets->array[0] = ParallelSum;
+                if (order == 3 && greekType == 1)
+                    Buckets->array[0] = parallelSum;
                 else
-                    Buckets->array[0] = ValueSum;   // Total
+                    Buckets->array[0] = valueSum;   // Total
                 delete[] BumpOffsets;
                 return;
             }
-
             /* 	Here, if the tenor of the instrument is greater than the coupon then assume that it is a 
                 coupon bearing index! */
-
-            double Index_Rate = 0;
-            int zerocoupon = FALSE;
-
+            double indexRate = 0;
+            int zeroCoupon = FALSE;
             if (m_IndexTenor > m_IndexCoupon)
             {
                 if (m_Type == CASH || m_Type == FXD)
-                    Index_Rate = 1;
+                    indexRate = 1;
                 else
-                    Index_Rate = _GetIndex(ValueDate, m_IndexSet, m_IndexStart, m_IndexEnd, m_IndexTenor,
+                    indexRate = _GetIndex(ValueDate, m_IndexSet, m_IndexStart, m_IndexEnd, m_IndexTenor,
                                     m_IndexDaycount, m_IndexCoupon, m_IndexCoupon, *pIndexCurve, m_IndexRateSet);
-                zerocoupon = TRUE;
+                zeroCoupon = TRUE;
             }
-
             /************************************************************************************End of zero coupon selection*/
-
-            double BucketTotal = 0;
-            for (int Bkt = 1; Bkt < g_pBuckets->GetNumBucketDates(); Bkt++)
+            double bucketTotal = 0;
+            for (int bucket = 1; bucket < g_pBuckets->GetNumBucketDates(); bucket++)
             {
-                Date Bkt_StartDate = g_pBuckets->GetDate(Bkt - 1);
-                long Bkt_Start = Bkt_StartDate.GetJulian();
-
-                Date Bkt_EndDate = g_pBuckets->GetDate(Bkt);
-                long Bkt_End = Bkt_EndDate.GetJulian();
-                switch (GreekType)
+                DateTime bucketStartDate = g_pBuckets->GetDate(bucket - 1);
+                long bucketStart = bucketStartDate.GetJulian();
+                DateTime bucketEndDate = g_pBuckets->GetDate(bucket);
+                long bucketEnd = bucketEndDate.GetJulian();
+                switch (greekType)
                 {
                     case 0: // Delta
 
-                        if (Order == 0)
+                        if (order == 0)
                         {
-                            if (Greek0 == 0)
+                            if (greek0 == 0)
                                 break;
                             if (m_Type != CASH && m_Type != FXD && Payment_Dayfract > 0 &&
-                                                m_IndexEnd >= Bkt_Start && m_IndexStart <= Bkt_End)
+                                                m_IndexEnd >= bucketStart && m_IndexStart <= bucketEnd)
                             {
-                                if (!zerocoupon)
-                                    Buckets->array[Bkt] += Greek0 * Delta_Index_wrt_r(m_PaymentDate, m_IndexStart, m_IndexEnd, m_IndexDaycount,
-                                                                    m_IndexCoupon, Bkt_Start, Bkt_End, *pIndexCurve, *pPaymentCurve);
+                                if (!zeroCoupon)
+                                    Buckets->array[bucket] += greek0 * DeltaIndexWrtR(m_PaymentDate, m_IndexStart, m_IndexEnd, m_IndexDaycount,
+                                                                    m_IndexCoupon, bucketStart, bucketEnd, *pIndexCurve, *pPaymentCurve);
                                 else
-                                    Buckets->array[Bkt] += Greek0 * Delta_CouponIndex_wrt_r(m_PaymentDate, m_IndexStart, m_IndexEnd, m_IndexDaycount,
-                                                                    m_IndexCoupon, Bkt_Start, Bkt_End, *pIndexCurve, *pPaymentCurve, Index_Rate);
+                                    Buckets->array[bucket] += greek0 * DeltaCouponIndexWrtR(m_PaymentDate, m_IndexStart, m_IndexEnd, m_IndexDaycount,
+                                                                    m_IndexCoupon, bucketStart, bucketEnd, *pIndexCurve, *pPaymentCurve, indexRate);
                             }
                         }
-                        else if (Order == 1)
-                            if (Greek1 != 0 && m_PaymentDate > Bkt_Start)           /*	Delta1 */
-                                Buckets->array[Bkt] += Greek1 * Delta_DiscFac_wrt_r(m_PaymentDate, Bkt_Start, Bkt_End, *pPaymentCurve);
-                        break;
-                    default:
+                        else if (order == 1)
+                            if (greek1 != 0 && m_PaymentDate > bucketStart)           /*	Delta1 */
+                                Buckets->array[bucket] += greek1 * DeltaDiscFacWrtR(m_PaymentDate, bucketStart, bucketEnd, *pPaymentCurve);
                         break;
                 }
-                Buckets->array[Bkt] *= BumpOffsets[Bkt] / g_pBuckets->Deltas[Bkt - 1];
-                BucketTotal += Buckets->array[Bkt];
+                Buckets->array[bucket] *= BumpOffsets[bucket] / g_pBuckets->Deltas[bucket - 1];
+                bucketTotal += Buckets->array[bucket];
             }
-            Buckets->array[0] = BucketTotal;
-
+            Buckets->array[0] = bucketTotal;
             delete[] BumpOffsets;
         }
 
@@ -530,11 +483,7 @@ namespace Orion.Analytics.Rates
         //		NUMERICAL ROUTINES
         //
         ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        DllExport void DECORATE
-
-    NumericBucketCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
+        public static void NumericBucketCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
                                             int GreekType, int Order,
                                             int BktType, double* BumpOffsets, ARRAY* Buckets)
         {
@@ -812,9 +761,7 @@ namespace Orion.Analytics.Rates
 
 
 
-        DllExport void DECORATE
-
-    VegaRiskBucketCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
+        public static void VegaRiskBucketCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
                                             double* BumpOffsets, ARRAY* Buckets)
         {
             int CurveCcyCode = (int)Parameters->array[11];  // Primary index curve
@@ -920,20 +867,17 @@ namespace Orion.Analytics.Rates
 
                 BktCurve:   The curve that is going to be bumped 
                 BktType:	This is always going to be futures buckets 
-                BucketBumps:An array of basispoints that will be used to bump the buckets of the futures curve
+                BucketBumps:An array of basis points that will be used to bump the buckets of the futures curve
                         This can be used to do twists of the yield curve.
                 The changes in value of PValue,Delta,Gamma,Theta and Vega are put in the first 5 buckets of BucketBumps
         -----------------------------------------------------------------------------------------------------------------------*/
 
-        void ShiftCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
+        public static void ShiftCashFlow(long ValueDate, ARRAY* Parameters, LPCSTR CurvePath,
                                                 int BktCurve, int BktType, ARRAY* BucketBumps)
         {
-
-
             /* Check if parameters is valid ARRAY or if there is anything to bucket 
             i.e. neither the index or the payment curve are the same as the bucketing curve
             this bit of logic is slightly different from the logic in BucketCashflow */
-
             if ((Parameters->rows == 0 || Parameters->columns == 0) ||
                     ((int)Parameters->array[2] != BktCurve && (int)Parameters->array[11] != BktCurve))
             {
@@ -944,24 +888,19 @@ namespace Orion.Analytics.Rates
                 }
                 return;
             }
-
-
             // Get Dates for curve
             // The currency code will correspond to either the index curve or the discount curve code
             int CurveCcyCode;
-
             if ((int)Parameters->array[11] == BktCurve)
             {
                 CurveCcyCode = (int)Parameters->array[11];    //Primary Index Curve
                 g_BumpedIndexCurve = CurveCcyCode;            //Flag as in use
             }
-
             if ((int)Parameters->array[2] == BktCurve)
             {
                 CurveCcyCode = (int)Parameters->array[2];  //Discount Curve
                 g_BumpedPaymentCurve = CurveCcyCode;        // Flag as in use
             }
-
             if (g_StdCcyCode != CurveCcyCode)   // Standard curve is out of date
             {
                 CString CurveName, SWIFTCode;
@@ -980,95 +919,67 @@ namespace Orion.Analytics.Rates
                     return;
                 }
             }
-
             // Check if global bucket dates array is out of date
             if (g_BktType != BktType)
             {
                 if (g_pBuckets)
                     delete g_pBuckets;
-
                 // Create a new bucket date array object
                 g_pBuckets = new FuturesBuckets;
                 g_pBuckets->Generate(*g_pStdCurve, GBP, BucketBumps->columns - 1);    // Generate new list of bucket date 
-
             }
-
             if (g_BktType != BktType || g_StdCcyCode != CurveCcyCode)
             {
-
                 if (g_pBaseCurve)
                     delete g_pBaseCurve;
                 g_pBaseCurve = g_pBuckets->GenerateBucketPV(0, g_pStdCurve, 0); // Make a coarse spot curve to use for computing greeks
-
             }
-
             // 	Create the new coarse curve by bumping each of the Future Buckets by the required number of basis points
-
             if (g_NewCurveExist)    // delete the previously bumped curve if it already exists
                 delete g_pNewCurve;
-
             //Create new curve
             g_pNewCurve = g_pBuckets->GenerateBumpedPV(BucketBumps->array, g_pStdCurve);
             g_NewCurveExist = TRUE;
-
             g_StdCcyCode = CurveCcyCode;
             g_BktType = BktType;
-
-
             ARRAY Results;
             Results.rows = 1;
             Results.columns = 18;
-
             g_pBumpedCurve = g_pBaseCurve;
-
             // The unchanged cashflow must be valued with a zero vol margin
             // When it is revalued this field is used for the VolBump
             double m_VolatilityMargin = Parameters->array[9];
             Parameters->array[9] = 0;
-
             //  Value the cashflow with the base (unchanged) curve   	
             ValueCashFlow(ValueDate, Parameters, CurvePath, &Results);
-
-            double BaseValue, BaseDelta, BaseGamma, BaseTheta, BaseVega;
-
-            BaseValue = Results.array[9];
-            BaseDelta = Results.array[10] + Results.array[11];  //delta0 + delta1
-            BaseGamma = Results.array[12] + Results.array[13];  //gamma0 + gamma1
-            BaseTheta = Results.array[14] + Results.array[15];  //theta0 + theta1
-            BaseVega = Results.array[16] + Results.array[17]; //vega0 + vega1
-
-
+            double baseValue = Results.array[9];
+            double baseDelta = Results.array[10] + Results.array[11];
+            double baseGamma = Results.array[12] + Results.array[13];
+            double baseTheta = Results.array[14] + Results.array[15];
+            double baseVega = Results.array[16] + Results.array[17];
             //Revalue with the new bumped curve and shift the volatility surface
             Parameters->array[9] = m_VolatilityMargin;
             g_pBumpedCurve = g_pNewCurve;
-
             ValueCashFlow(ValueDate, Parameters, CurvePath, &Results);
-
-            double BumpValue, BumpDelta, BumpGamma, BumpTheta, BumpVega;
-            BumpValue = Results.array[9];
-            BumpDelta = Results.array[10] + Results.array[11];  //delta0 + delta1
-            BumpGamma = Results.array[12] + Results.array[13];  //gamma0 + gamma1
-            BumpTheta = Results.array[14] + Results.array[15];  //theta0 + theta1
-            BumpVega = Results.array[16] + Results.array[17]; //vega0 + vega1
-
+            double bumpValue = Results.array[9];
+            double bumpDelta = Results.array[10] + Results.array[11];
+            double bumpGamma = Results.array[12] + Results.array[13];
+            double bumpTheta = Results.array[14] + Results.array[15];
+            double bumpVega = Results.array[16] + Results.array[17];
             //  Put the change in values in the first 5 buckets
-
-            BucketBumps->array[0] = BumpValue - BaseValue;
-            BucketBumps->array[1] = BumpDelta - BaseDelta;
-            BucketBumps->array[2] = BumpGamma - BaseGamma;
-            BucketBumps->array[3] = BumpTheta - BaseTheta;
-            BucketBumps->array[4] = BumpVega - BaseVega;
-
+            BucketBumps->array[0] = bumpValue - baseValue;
+            BucketBumps->array[1] = bumpDelta - baseDelta;
+            BucketBumps->array[2] = bumpGamma - baseGamma;
+            BucketBumps->array[3] = bumpTheta - baseTheta;
+            BucketBumps->array[4] = bumpVega - baseVega;
             g_BumpedPaymentCurve = -1;                  // Flag as not in use
             g_BumpedIndexCurve = -1;                    // Flag as not in use
         }
 
-
-
         // SAJ 30/9/96 Added routine for Alex - no interaction inside the DLL
         //LC 15/10/96 Recoded the if statements with a switch as was giving an internal compiler error
 
-        DllExport double DECORATE ValueIndex(long ValueDate, int m_IndexCurve, long m_IndexSet,
+        public static double ValueIndex(long ValueDate, int m_IndexCurve, long m_IndexSet,
                 long m_IndexStart, long m_IndexEnd, int m_IndexDaycount, int m_IndexTenor,
                 int m_IndexCoupon, double m_IndexRateSet, int m_IndexPreset, long m_IndexCities,
                 int m_RollConvention, int m_Toggle, LPCSTR CurvePath)
@@ -1130,7 +1041,6 @@ namespace Orion.Analytics.Rates
                         break;
 
                     }
-
                 case 3:
                     {
                         long DaysToISet;
@@ -1148,14 +1058,15 @@ namespace Orion.Analytics.Rates
                         }
 
                     }
-
                 default:
                     m_pIndex = 0.0;
 
             }
-
-
             return m_pIndex;
         }
+    }
+
+    public class FuturesBuckets
+    {
     }
 }

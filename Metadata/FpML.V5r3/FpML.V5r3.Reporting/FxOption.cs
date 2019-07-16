@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -145,7 +145,7 @@ namespace FpML.V5r3.Reporting
             QuoteBasisEnum quoteBasis = strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate)
                                             : ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate, fxRate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -157,7 +157,7 @@ namespace FpML.V5r3.Reporting
                                     Items1ElementName = new[] { Items1ChoiceType.valueDate },
                                     exchangeRate = exchangeRate,
                                 };
-            return fxforward;
+            return fxForward;
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace FpML.V5r3.Reporting
             QuoteBasisEnum quoteBasis = strike.strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate)
                                             : ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate, strike.rate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
             {
                 //exchangedCurrency1 =
                 //    PaymentHelper.Create(this.putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -183,9 +183,9 @@ namespace FpML.V5r3.Reporting
             };
             if (Item is FxEuropeanExercise exercise && exercise.expiryDateSpecified)
             {
-                fxforward.Items1 = new[] {exercise.expiryDate};
+                fxForward.Items1 = new[] {exercise.expiryDate};
             }
-            return fxforward;
+            return fxForward;
         }
     }
 }

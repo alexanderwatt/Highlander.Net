@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +28,7 @@ namespace FpML.V5r10.Reporting
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public override List<String> GetRequiredPricingStructures() 
+        public override List<string> GetRequiredPricingStructures() 
         {
             var result = new List<String>();
             //var putCurrency = PaymentHelper.Create(buyerPartyReference.href, sellerPartyReference.href, putCurrencyAmount.currency.Value, putCurrencyAmount.amount, valueDate);
@@ -88,7 +103,7 @@ namespace FpML.V5r10.Reporting
         /// <param name="valueDate"></param>
         /// <param name="premia"></param>
         /// <returns></returns>
-        public static FxOption CreateVanillaOption(PartyReference buyerPartyReference,
+        public static FxOption CreateVanillaFXOption(PartyReference buyerPartyReference,
             PartyReference sellerPartyReference, FxEuropeanExercise fxEuropeanExercise,
             PutCallEnum soldAs, FxCashSettlement fxCashSettlement,
             //QuotedAs quotedAs, ExpiryDateTime expiryDate, ExerciseStyleEnum exerciseStyle,
@@ -130,7 +145,7 @@ namespace FpML.V5r10.Reporting
             QuoteBasisEnum quoteBasis = strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate)
                                             : ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate, fxRate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
                                 {
                                     exchangedCurrency1 =
                                         PaymentHelper.Create(putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -138,15 +153,15 @@ namespace FpML.V5r10.Reporting
                                     exchangedCurrency2 =
                                         PaymentHelper.Create(callCurrencyPayPartyReference, putCurrencyPayPartyReference,
                                                              callCurrency, callCurrencyAmount),
-                                    Items1 = new[] { valueDate },
-                                    Items1ElementName = new[] { Items1ChoiceType.valueDate },
+                                    Items = new[] { valueDate },
+                                    ItemsElementName = new[] { ItemsChoiceType31.valueDate },
                                     exchangeRate = exchangeRate,
                                 };
-            return fxforward;
+            return fxForward;
         }
 
         /// <summary>
-        /// Builds an  fx trade from the current vanillar fx option class.
+        /// Builds an  fx trade from the current vanilla fx option class.
         /// </summary>
         /// <param name="hasExpired"></param>
         /// <returns></returns>
@@ -155,7 +170,7 @@ namespace FpML.V5r10.Reporting
             QuoteBasisEnum quoteBasis = strike.strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate)
                                             : ExchangeRate.Create(putCurrencyAmount.currency.Value, putCurrencyAmount.currency.Value, quoteBasis, strike.rate, strike.rate, null);
-            var fxforward = new FxSingleLeg
+            var fxForward = new FxSingleLeg
             {
                 //exchangedCurrency1 =
                 //    PaymentHelper.Create(this.putCurrencyPayPartyReference, callCurrencyPayPartyReference,
@@ -163,16 +178,14 @@ namespace FpML.V5r10.Reporting
                 //exchangedCurrency2 =
                 //    PaymentHelper.Create(callCurrencyPayPartyReference, putCurrencyPayPartyReference,
                 //                         callCurrency, callCurrencyAmount),
-
                 exchangeRate = exchangeRate,
-                Items1ElementName = new[] { Items1ChoiceType.valueDate }
+                ItemsElementName = new[] { ItemsChoiceType31.valueDate }
             };
-            var exercise = Item as FxEuropeanExercise;
-            if (exercise != null && exercise.expiryDateSpecified)
+            if (Item is FxEuropeanExercise exercise && exercise.expiryDateSpecified)
             {
-                fxforward.Items1 = new[] {exercise.expiryDate};
+                fxForward.Items = new[] {exercise.expiryDate};
             }
-            return fxforward;
+            return fxForward;
         }
     }
 }

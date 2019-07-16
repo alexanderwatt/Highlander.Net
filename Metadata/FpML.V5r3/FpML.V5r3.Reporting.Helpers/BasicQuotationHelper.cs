@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using FpML.V5r3.Codes;
@@ -95,9 +110,7 @@ namespace FpML.V5r3.Reporting.Helpers
 
         public static BasicQuotation Create(string measureType, string priceUnits, string sideAsString)
         {
-            QuotationSideEnum side;
-            bool sideSpecified;
-            ParseQuotationSideEnum(sideAsString, out sideSpecified, out side);
+            ParseQuotationSideEnum(sideAsString, out var sideSpecified, out var side);
             return new BasicQuotation
             {
                 valueSpecified = false,
@@ -110,9 +123,7 @@ namespace FpML.V5r3.Reporting.Helpers
 
         public static BasicQuotation Create(AssetMeasureEnum measureType, PriceQuoteUnitsEnum priceUnits, string sideAsString)
         {
-            QuotationSideEnum side;
-            bool sideSpecified;
-            ParseQuotationSideEnum(sideAsString, out sideSpecified, out side);
+            ParseQuotationSideEnum(sideAsString, out var sideSpecified, out var side);
             return new BasicQuotation
             {
                 valueSpecified = false,
@@ -158,9 +169,7 @@ namespace FpML.V5r3.Reporting.Helpers
 
         public static BasicQuotation Create(AssetMeasureType measureType, PriceQuoteUnits priceUnits, string sideAsString)
         {
-            QuotationSideEnum side;
-            bool sideSpecified;
-            ParseQuotationSideEnum(sideAsString, out sideSpecified, out side);
+            ParseQuotationSideEnum(sideAsString, out var sideSpecified, out var side);
             return new BasicQuotation
             {
                 valueSpecified = false,
@@ -257,7 +266,7 @@ namespace FpML.V5r3.Reporting.Helpers
             //        {
             //            if (infoSource.rateSource.Value.Equals(providerIdName, StringComparison.OrdinalIgnoreCase))
             //            {
-            //                // parse rate source page value as a named value set and rteurn the fieldname property
+            //                // parse rate source page value as a named value set and return the field name property
             //                NamedValueSet nvs = new NamedValueSet(infoSource.rateSourcePage.Value);
             //                return nvs.GetValue<string>("FieldName", null);
             //            }

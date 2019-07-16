@@ -1,6 +1,20 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +33,7 @@ namespace FpML.V5r3.Reporting.Helpers
                     return stream;                    
                 }
             }
-            throw new System.Exception(String.Format("No payer stream was found for the specified payer : '{0}'", baseParty));
+            throw new System.Exception($"No payer stream was found for the specified payer : '{baseParty}'");
         }
 
         public static InterestRateStream GetReceiverStream(Swap swap, string baseParty)
@@ -31,7 +45,7 @@ namespace FpML.V5r3.Reporting.Helpers
                     return stream;
                 }
             }
-            throw new System.Exception(String.Format("No receiver stream was found for the specified receiver : '{0}'", baseParty));
+            throw new System.Exception($"No receiver stream was found for the specified receiver : '{baseParty}'");
         }
 
         public static Money GetValueOfAdditionalPayments(Swap swap, string baseParty)
@@ -125,7 +139,7 @@ namespace FpML.V5r3.Reporting.Helpers
             var list = new List<Money>();
             foreach (InterestRateStream stream in swap.swapStream)
             {
-                Money presentValueOfStream = Helpers.CashflowsHelper.GetPresentValue(stream.cashflows);
+                Money presentValueOfStream = CashflowsHelper.GetPresentValue(stream.cashflows);
                 list.AddRange(GetValue(stream.payerPartyReference.href, stream.receiverPartyReference.href, baseParty, presentValueOfStream));
             }
             Money sumPVs = MoneyHelper.Sum(list);
@@ -168,7 +182,7 @@ namespace FpML.V5r3.Reporting.Helpers
             var list = new List<Money>();
             foreach (InterestRateStream stream in swap.swapStream)
             {
-                Money futureValueOfStream = Helpers.CashflowsHelper.GetForecastValue(stream.cashflows);
+                Money futureValueOfStream = CashflowsHelper.GetForecastValue(stream.cashflows);
                 list.AddRange(GetValue(stream.payerPartyReference.href, stream.receiverPartyReference.href, baseParty, futureValueOfStream));
             }
             Money futureValueOfAdditionalPayments = GetValueOfAdditionalPayments(swap, baseParty);

@@ -53,9 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PropertyTransaction.cs" />
     <Compile Include="CurveNameHelpers.cs" />
-    <Compile Include="ExtensionClasses.cs" />
+    <Compile Include="ExtensionSchemas\InstrumentNodeClasses.cs" />
+    <Compile Include="ExtensionSchemas\XsdClasses.cs" />
     <Compile Include="FpMLExtensions.cs" />
+    <Compile Include="FutureTransaction.cs" />
+    <Compile Include="Market.cs" />
     <Compile Include="PaymentHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,9 +124,6 @@
     <Compile Include="QuotedCurrencyPair.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Reporting.cs">
-      <DependentUpon>Reporting.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Swap.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -135,7 +136,6 @@
     <Compile Include="TermDeposit.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Trade.cs" />
     <Compile Include="ValuationReport.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -165,16 +165,70 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ExtensionSchemas\fpml-main-5-10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-collective-investment-vehicles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-equities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-fixed-income.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-futures-and-options.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-interest-rate-derivatives.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-main.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-property.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-repo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-shared.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-trade.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-warrant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\instrumentgen.bat" />
+    <None Include="ExtensionSchemas\instrumentgen.log" />
+    <None Include="ExtensionSchemas\qrscext-instruments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\Reporting.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\xsdgen.bat" />
+    <None Include="ExtensionSchemas\xsdgen.log" />
     <None Include="Key.snk" />
+    <None Include="MergedReportingSchemas\ValidationIssues.docx" />
+    <None Include="MergedReportingSchemas\xsdgen.bat" />
     <None Include="qrscext-instruments.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Reporting.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <EmbeddedResource Include="xmldsig-core-schema.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <None Include="xsdgen.bat" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ExtensionSchemas\repo\repo-ex05-midlifeevents.xml" />
+    <Content Include="ExtensionSchemas\xsdreporting.xml" />
+    <Content Include="ExtensionSchemas\_ReadMe.txt" />
+    <Content Include="MergedReportingSchemas\Readme.txt" />
+    <Content Include="MergedReportingSchemas\xsdreporting.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

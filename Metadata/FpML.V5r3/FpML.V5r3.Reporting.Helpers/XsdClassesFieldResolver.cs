@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Linq;
 
@@ -103,11 +118,7 @@ namespace FpML.V5r3.Reporting.Helpers
 
         public static Boolean QuotedAssetSetIsValid(QuotedAssetSet quotedAssetSet)
         {
-            return quotedAssetSet != null 
-                && quotedAssetSet.assetQuote != null
-                && quotedAssetSet.instrumentSet != null
-                && quotedAssetSet.instrumentSet.Items != null
-                && quotedAssetSet.instrumentSet.Items.Length == quotedAssetSet.assetQuote.Length;
+            return quotedAssetSet?.assetQuote != null && quotedAssetSet.instrumentSet?.Items != null && quotedAssetSet.instrumentSet.Items.Length == quotedAssetSet.assetQuote.Length;
         }
 
         #endregion
@@ -210,13 +221,13 @@ namespace FpML.V5r3.Reporting.Helpers
 //        public object Item1
 
 
-        public static void SetSpreadSchedule(InterestRateStream stream, Schedule spreadShedule)
+        public static void SetSpreadSchedule(InterestRateStream stream, Schedule spreadSchedule)
         {
             Calculation calculation = CalculationPeriodAmountGetCalculation(stream.calculationPeriodAmount);
 
             FloatingRateCalculation floatingRateCalculation = CalculationGetFloatingRateCalculation(calculation);
 
-            var schedule = new SpreadSchedule {initialValue = spreadShedule.initialValue, step = spreadShedule.step};
+            var schedule = new SpreadSchedule {initialValue = spreadSchedule.initialValue, step = spreadSchedule.step};
 
             floatingRateCalculation.spreadSchedule = new[] { schedule };
         }
@@ -257,7 +268,7 @@ namespace FpML.V5r3.Reporting.Helpers
         //TODO this is a hack and needs fixing.
         public static Schedule CalculationGetFixedRateSchedule(Calculation calculation)
         {
-            return (null != calculation.Items) ? (Schedule)calculation.Items[0] : null;
+            return (Schedule) calculation.Items?[0];
         }
 
         public static void CalculationSetFixedRateSchedule(Calculation calculation, Schedule value)

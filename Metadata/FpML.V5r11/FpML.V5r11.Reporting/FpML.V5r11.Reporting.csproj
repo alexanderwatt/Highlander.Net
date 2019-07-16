@@ -199,10 +199,8 @@
     <None Include="MergedReportingSchemas\Reporting.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="MergedReportingSchemas\ValidationIssues.docx" />
     <None Include="MergedReportingSchemas\xmldsig-core-schema.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="qrscext-instruments.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="MergedReportingSchemas\xsdgen.bat" />

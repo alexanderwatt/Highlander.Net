@@ -1,12 +1,31 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
+using System.Xml.Schema;
+using System.Reflection;
 using Metadata.Common;
+
+#endregion
 
 namespace FpML.V5r10.Reporting
 {
@@ -82,12 +101,15 @@ namespace FpML.V5r10.Reporting
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static XmlSchemaSet GetSchemaSet()
         {
             var assembly = Assembly.GetExecutingAssembly();
             var result = new XmlSchemaSet();
-            var resources = assembly.GetManifestResourceNames();
-            foreach (string resourceName in resources)
+            foreach (string resourceName in assembly.GetManifestResourceNames())
             {
                 if (resourceName.EndsWith(".xsd"))
                 {
@@ -103,6 +125,11 @@ namespace FpML.V5r10.Reporting
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="concreteOnly"></param>
+        /// <returns></returns>
         public static IEnumerable<Type> GetFpMLTypes(bool concreteOnly)
         {
             if (concreteOnly)
@@ -110,6 +137,11 @@ namespace FpML.V5r10.Reporting
             return AllFpMLTypes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementName"></param>
+        /// <returns></returns>
         public static Type MapElementToType(string elementName)
         {
             foreach (Type type in GetFpMLTypes(false))
@@ -140,12 +172,22 @@ namespace FpML.V5r10.Reporting
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="streamBytes"></param>
+        /// <returns></returns>
         public static Type AutoDetectType(byte[] streamBytes)
         {
             using (var stream = new MemoryStream(streamBytes, false))
                 return MapFirstElement(stream);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public static Type AutoDetectType(string filename)
         {
             using (Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -165,6 +207,10 @@ namespace FpML.V5r10.Reporting
         //    return result;
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<CustomXmlTransformRule> GetIncomingConversionMap()
         {
             var results = new List<CustomXmlTransformRule>
@@ -179,6 +225,10 @@ namespace FpML.V5r10.Reporting
             return results;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static List<CustomXmlTransformRule> GetOutgoingConversionMap()
         {
             var results = new List<CustomXmlTransformRule>
@@ -192,6 +242,5 @@ namespace FpML.V5r10.Reporting
             //results.Add(new CustomXmlTransformRule(null, "paymentDetail", "paymentRule", typeof(PercentageRule), "paymentRule", null));
             return results;
         }
-
     }
 }

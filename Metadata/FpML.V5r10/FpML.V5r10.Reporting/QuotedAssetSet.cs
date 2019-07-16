@@ -1,15 +1,30 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+//using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using Orion.Util.Serialisation;
-//using System.Diagnostics;
 
 namespace FpML.V5r10.Reporting
 {
     public partial class QuotedAssetSet
     {
         /// <summary>
-        /// Replces a QuotedAssetSet with this. Note that the referential integrity between the assets
+        /// Replaces a QuotedAssetSet with this. Note that the referential integrity between the assets
         /// and valuations is checked and maintained.
         /// </summary>
         /// <param name="additional">The additional QuotedAssetSet.</param>
@@ -38,7 +53,7 @@ namespace FpML.V5r10.Reporting
             var result = new QuotedAssetSet();
             // build unique instrumentSet and valuation quote lists
             var instrumentMap = new Dictionary<string, Asset>();
-            var itemsMap = new Dictionary<string, ItemsChoiceType19>();
+            var itemsMap = new Dictionary<string, ItemsChoiceType47>();
             var valuationMap = new Dictionary<string, BasicAssetValuation>();
             if (instrumentSet?.Items != null && instrumentSet.ItemsElementName != null)
             {
@@ -66,8 +81,7 @@ namespace FpML.V5r10.Reporting
                             throw new ApplicationException($"Cannot find asset '{assetId}' for assetQuote");
                     }
                     // merge the quotes
-                    BasicAssetValuation existingValuation;
-                    if (valuationMap.TryGetValue(assetId.ToLower(), out existingValuation))
+                    if (valuationMap.TryGetValue(assetId.ToLower(), out var existingValuation))
                     {
                         //Trace.WriteLine(String.Format("Merge: Asset: '{0}' updating existing valuation", assetId);
                     }
@@ -82,7 +96,7 @@ namespace FpML.V5r10.Reporting
                         };
                         valuationMap[assetId.ToLower()] = existingValuation;
                     }
-                    // append the assetquotes
+                    // append the asset quotes
                     var quotes = new List<BasicQuotation>(existingValuation.quote);
                     quotes.AddRange(currentValuation.quote.Where(quote => quote.valueSpecified || includeEmptyCurrentQuotes));
                     existingValuation.quote = quotes.ToArray();
@@ -120,8 +134,7 @@ namespace FpML.V5r10.Reporting
                             throw new ApplicationException($"Cannot find asset '{assetId}' for assetQuote");
                     }
                     // merge the quotes
-                    BasicAssetValuation existingValuation;
-                    if (valuationMap.TryGetValue(assetId.ToLower(), out existingValuation))
+                    if (valuationMap.TryGetValue(assetId.ToLower(), out var existingValuation))
                     {
                         //Trace.WriteLine(String.Format("Merge: Asset: '{0}' updating additional valuation", assetId);
                     }
@@ -136,7 +149,7 @@ namespace FpML.V5r10.Reporting
                         valuationMap[assetId.ToLower()] = existingValuation;
                         //Trace.WriteLine(String.Format("Merge: Asset: '{0}' creating additional valuation", assetId);
                     }
-                    // append the assetquotes
+                    // append the asset quotes
                     var quotes = new List<BasicQuotation>(existingValuation.quote);
                     quotes.AddRange(additionalValuation.quote.Where(quote => quote.valueSpecified || includeEmptyAdditionalQuotes));
                     existingValuation.quote = quotes.ToArray();
@@ -148,6 +161,12 @@ namespace FpML.V5r10.Reporting
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="quotedAssetSet"></param>
+        /// <param name="instrumentId"></param>
+        /// <returns></returns>
         public static List<BasicAssetValuation> GetAssetQuote(QuotedAssetSet quotedAssetSet, string instrumentId)
         {
             return quotedAssetSet.assetQuote.Where(basicAssetValuation => basicAssetValuation.objectReference.href == instrumentId).ToList();

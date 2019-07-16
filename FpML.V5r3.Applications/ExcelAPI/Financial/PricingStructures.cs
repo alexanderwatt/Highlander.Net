@@ -1122,12 +1122,12 @@ namespace HLV5r3.Financial
         /// </para>
         /// ln d = lambda * di + (1+lambda) * ln di+1
         /// </remarks>
-        /// <param name="propertiesRange">This range of properties must inlcude:
+        /// <param name="propertiesRange">This range of properties must include:
         /// BaseDate
         /// PricingStructureType
         /// MarketName</param>
         /// <param name="valuesRange">The values range should be made up of 4 columns:
-        /// Column 1 - the instuentId.
+        /// Column 1 - the instrumentId.
         /// Column 2 - the instrument value.
         /// Column 3 - the measure type.
         /// Column 4 - the price quote units.

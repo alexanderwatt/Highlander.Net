@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\BuildDef\BuildInfo.cs">
+      <Link>BuildInfo.cs</Link>
+    </Compile>
     <Compile Include="AssetConfigurationIdentifier.cs" />
     <Compile Include="CommodityCurveIdentifier.cs" />
     <Compile Include="AssetIdentifier.cs" />

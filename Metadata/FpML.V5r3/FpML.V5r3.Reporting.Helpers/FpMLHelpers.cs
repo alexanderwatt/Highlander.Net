@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -13,40 +28,40 @@ namespace FpML.V5r3.Reporting.Helpers
     {
         public static ItemChoiceType15 TradeTypeHelper(Product product)
         {
-            if (product as BondTransaction != null) return ItemChoiceType15.bondTransaction;
-            if (product as EquityTransaction != null) return ItemChoiceType15.equityTransaction;
-            if (product as Swap != null) return ItemChoiceType15.swap;
-            if (product as TermDeposit != null) return ItemChoiceType15.termDeposit;
-            if (product as BulletPayment != null) return ItemChoiceType15.bulletPayment;
-            if (product as BondOption != null) return ItemChoiceType15.bondOption;
-            if (product as BrokerEquityOption != null) return ItemChoiceType15.brokerEquityOption;
-            if (product as CapFloor != null) return ItemChoiceType15.capFloor;
-            if (product as CommodityForward != null) return ItemChoiceType15.commodityForward;
-            if (product as CommodityOption != null) return ItemChoiceType15.commodityOption;
-            if (product as CommoditySwap != null) return ItemChoiceType15.commoditySwap;
-            if (product as CorrelationSwap != null) return ItemChoiceType15.correlationSwap;
-            if (product as CreditDefaultSwap != null) return ItemChoiceType15.creditDefaultSwap;
-            if (product as CreditDefaultSwapOption != null) return ItemChoiceType15.creditDefaultSwapOption;
-            if (product as DividendSwapTransactionSupplement != null)
+            if (product is BondTransaction) return ItemChoiceType15.bondTransaction;
+            if (product is EquityTransaction) return ItemChoiceType15.equityTransaction;
+            if (product is Swap) return ItemChoiceType15.swap;
+            if (product is TermDeposit) return ItemChoiceType15.termDeposit;
+            if (product is BulletPayment) return ItemChoiceType15.bulletPayment;
+            if (product is BondOption) return ItemChoiceType15.bondOption;
+            if (product is BrokerEquityOption) return ItemChoiceType15.brokerEquityOption;
+            if (product is CapFloor) return ItemChoiceType15.capFloor;
+            if (product is CommodityForward) return ItemChoiceType15.commodityForward;
+            if (product is CommodityOption) return ItemChoiceType15.commodityOption;
+            if (product is CommoditySwap) return ItemChoiceType15.commoditySwap;
+            if (product is CorrelationSwap) return ItemChoiceType15.correlationSwap;
+            if (product is CreditDefaultSwap) return ItemChoiceType15.creditDefaultSwap;
+            if (product is CreditDefaultSwapOption) return ItemChoiceType15.creditDefaultSwapOption;
+            if (product is DividendSwapTransactionSupplement)
                 return ItemChoiceType15.dividendSwapTransactionSupplement;
-            if (product as EquityForward != null) return ItemChoiceType15.equityForward;
-            if (product as EquityOption != null) return ItemChoiceType15.equityOption;
-            if (product as EquityOptionTransactionSupplement != null)
+            if (product is EquityForward) return ItemChoiceType15.equityForward;
+            if (product is EquityOption) return ItemChoiceType15.equityOption;
+            if (product is EquityOptionTransactionSupplement)
                 return ItemChoiceType15.equityOptionTransactionSupplement;
-            if (product as ReturnSwap != null) return ItemChoiceType15.returnSwap;
-            if (product as EquitySwapTransactionSupplement != null)
+            if (product is ReturnSwap) return ItemChoiceType15.returnSwap;
+            if (product is EquitySwapTransactionSupplement)
                 return ItemChoiceType15.equitySwapTransactionSupplement;
-            if (product as Fra != null) return ItemChoiceType15.fra;
-            if (product as FxDigitalOption != null) return ItemChoiceType15.fxDigitalOption;
-            if (product as FxOption != null) return ItemChoiceType15.fxOption;
-            if (product as FxSingleLeg != null) return ItemChoiceType15.fxSingleLeg;
-            if (product as FxSwap != null) return ItemChoiceType15.fxSwap;
-            if (product as Strategy != null) return ItemChoiceType15.strategy;
-            if (product as Swaption != null) return ItemChoiceType15.swaption;
-            if (product as VarianceOptionTransactionSupplement != null)
+            if (product is Fra) return ItemChoiceType15.fra;
+            if (product is FxDigitalOption) return ItemChoiceType15.fxDigitalOption;
+            if (product is FxOption) return ItemChoiceType15.fxOption;
+            if (product is FxSingleLeg) return ItemChoiceType15.fxSingleLeg;
+            if (product is FxSwap) return ItemChoiceType15.fxSwap;
+            if (product is Strategy) return ItemChoiceType15.strategy;
+            if (product is Swaption) return ItemChoiceType15.swaption;
+            if (product is VarianceOptionTransactionSupplement)
                 return ItemChoiceType15.varianceOptionTransactionSupplement;
-            if (product as VarianceSwap != null) return ItemChoiceType15.varianceSwap;
-            if (product as VarianceSwapTransactionSupplement != null)
+            if (product is VarianceSwap) return ItemChoiceType15.varianceSwap;
+            if (product is VarianceSwapTransactionSupplement)
                 return ItemChoiceType15.varianceSwapTransactionSupplement;
             return ItemChoiceType15.swap;
         }
@@ -63,8 +78,7 @@ namespace FpML.V5r3.Reporting.Helpers
             if (items == null) return result;
             if (itemsElementName == null)
             {
-                var productType = items[0] as ProductType;
-                if (productType != null) return productType.Value;
+                if (items[0] is ProductType productType) return productType.Value;
             }
             else
             {
@@ -73,8 +87,7 @@ namespace FpML.V5r3.Reporting.Helpers
                 {
                     if (element == ItemsChoiceType2.productType)
                     {
-                        var productType = items[index] as ProductType;
-                        if (productType != null)
+                        if (items[index] is ProductType productType)
                         {
                             return productType.Value;
                         }
@@ -321,7 +334,7 @@ namespace FpML.V5r3.Reporting.Helpers
             return instrument;
         }
 
-        public static SimpleFraNodeStruct CreateSmpleFra(
+        public static SimpleFraNodeStruct CreateSimpleFra(
             string instrumentId,
             string floatingRateIndex,
             string businessDayConvention,
@@ -354,7 +367,7 @@ namespace FpML.V5r3.Reporting.Helpers
             return instrument;
         }
 
-        public static SimpleBillFraNodeStruct CreateSmpleBillFra(
+        public static SimpleBillFraNodeStruct CreateSimpleBillFra(
             string instrumentId,
             string floatingRateIndex,
             string businessDayConvention,
@@ -701,11 +714,11 @@ namespace FpML.V5r3.Reporting.Helpers
             string exDivDayTypeEnum,
             string exDivBusinessDayConvention,
             string exDivBusinessCenters,
-            string exDivdateRelativeTo)
+            string exDividendDateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(settlementDayTypeEnum);
 
-            var exdayType = EnumHelper.Parse<DayTypeEnum>(exDivDayTypeEnum);
+            var exDayType = EnumHelper.Parse<DayTypeEnum>(exDivDayTypeEnum);
 
             var bond = BondHelper.Parse(instrumentId, clearanceSystem, couponType, couponRate, currency, notional, maturity,
                 paymentFrequency, dayCountFraction, creditSeniority, assetId, description, exchangeId, issuerName);
@@ -714,7 +727,7 @@ namespace FpML.V5r3.Reporting.Helpers
             {
                 BusinessDayAdjustments =
                     BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters),
-                ExDivDate = RelativeDateOffsetHelper.Create(exDivDays, exdayType, exDivBusinessDayConvention, exDivBusinessCenters, exDivdateRelativeTo),
+                ExDivDate = RelativeDateOffsetHelper.Create(exDivDays, exDayType, exDivBusinessDayConvention, exDivBusinessCenters, exDividendDateRelativeTo),
                 SettlementDate = RelativeDateOffsetHelper.Create(settlementDays, dayType, settlementBusinessDayConvention, settlementBusinessCenters, dateRelativeTo),
                 Bond = bond
             };
@@ -792,7 +805,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="currency2"></param>
         /// <param name="quoteBasis"></param>
         /// <param name="fixingTime"></param>
-        /// <param name="businessCeneterAsString"></param>
+        /// <param name="businessCenterAsString"></param>
         /// <param name="primaryRateSourceProvider"></param>
         /// <param name="exchangeId"></param>
         /// <returns></returns>
@@ -803,7 +816,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string currency2,
             QuoteBasisEnum quoteBasis,
             DateTime fixingTime,
-            string businessCeneterAsString,
+            string businessCenterAsString,
             string primaryRateSourceProvider,
             string exchangeId)
         {
@@ -815,7 +828,7 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 quotedCurrencyPair =
                     QuotedCurrencyPair.Create(currency1, currency2, quoteBasis),
-                rateSource = FxSpotRateSourceHelper.Parse(businessCeneterAsString,
+                rateSource = FxSpotRateSourceHelper.Parse(businessCenterAsString,
                                                           primaryRateSourceProvider),
                 id = instrumentId
             };
@@ -832,7 +845,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="currency2"></param>
         /// <param name="quoteBasis"></param>
         /// <param name="fixingTime"></param>
-        /// <param name="businessCeneterAsString"></param>
+        /// <param name="businessCenterAsString"></param>
         /// <param name="primaryRateSourceProvider"></param>
         /// <param name="exchangeId"></param>
         /// <returns></returns>
@@ -842,7 +855,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string currency2,
             QuoteBasisEnum quoteBasis,
             DateTime fixingTime,
-            string businessCeneterAsString,
+            string businessCenterAsString,
             string primaryRateSourceProvider,
             string exchangeId)
         {
@@ -854,7 +867,7 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 quotedCurrencyPair =
                     QuotedCurrencyPair.Create(currency1, currency2, quoteBasis),
-                rateSource = FxSpotRateSourceHelper.Parse(businessCeneterAsString,
+                rateSource = FxSpotRateSourceHelper.Parse(businessCenterAsString,
                                                           primaryRateSourceProvider),
                 id = instrumentId
             };
@@ -868,13 +881,13 @@ namespace FpML.V5r3.Reporting.Helpers
     /// </summary>
     public class FxSpotRateSourceHelper
     {
-        public static FxSpotRateSource Parse(DateTime fixingTime, string businessCeneterAsString,
+        public static FxSpotRateSource Parse(DateTime fixingTime, string businessCenterAsString,
             string primaryRateSourceProvider, string primaryRateSourcePage, string primaryRateSource,
             string secondaryRateSourceProvider, string secondaryRateSourcePage, string secondaryRateSource)
         {
             var fxSpotRateSource = new FxSpotRateSource
             {
-                fixingTime = BusinessCenterTimeHelper.Parse(businessCeneterAsString, fixingTime),
+                fixingTime = BusinessCenterTimeHelper.Parse(businessCenterAsString, fixingTime),
                 primaryRateSource = InformationSourceHelper.Create(primaryRateSourceProvider, primaryRateSource, primaryRateSourcePage),
                 secondaryRateSource = InformationSourceHelper.Create(secondaryRateSourceProvider, secondaryRateSourcePage, secondaryRateSource),
             };
@@ -882,12 +895,12 @@ namespace FpML.V5r3.Reporting.Helpers
             return fxSpotRateSource;
         }
 
-        public static FxSpotRateSource Parse(string businessCeneterAsString,
+        public static FxSpotRateSource Parse(string businessCenterAsString,
             string primaryRateSourceProvider)
         {
             var fxSpotRateSource = new FxSpotRateSource
             {
-                fixingTime = BusinessCenterTimeHelper.Parse(businessCeneterAsString),
+                fixingTime = BusinessCenterTimeHelper.Parse(businessCenterAsString),
                 primaryRateSource = InformationSourceHelper.Create(primaryRateSourceProvider),
             };
 

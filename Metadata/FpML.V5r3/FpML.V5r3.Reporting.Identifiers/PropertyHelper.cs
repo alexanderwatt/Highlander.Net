@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,41 +33,41 @@ namespace Orion.Identifiers
         /// <summary>
         /// Adds the message properties.
         /// </summary>
-        /// <param name="basePropeties">The propeties to add.</param>
+        /// <param name="baseProperties">The properties to add.</param>
         /// <param name="name">The name.</param>
         /// <param name="value">the value</param>
-        public static void Update(NamedValueSet basePropeties, string name, object value)
+        public static void Update(NamedValueSet baseProperties, string name, object value)
         {
-            if (basePropeties.ToDictionary().ContainsKey(name))
-                basePropeties.ToDictionary()[name] = value;
+            if (baseProperties.ToDictionary().ContainsKey(name))
+                baseProperties.ToDictionary()[name] = value;
             else
             {
-                basePropeties.Set(name, value);
+                baseProperties.Set(name, value);
             }
         }
 
         /// <summary>
         /// Adds the message properties.
         /// </summary>
-        /// <param name="basePropeties">The propeties to add.</param>
+        /// <param name="baseProperties">The properties to add.</param>
         /// <param name="addProperties">The message properties.</param>
-        public static void Update(NamedValueSet basePropeties, IDictionary<string, object> addProperties)
+        public static void Update(NamedValueSet baseProperties, IDictionary<string, object> addProperties)
         {
             foreach (var keyName in addProperties.Keys)
             {
                 object value;
                 addProperties.TryGetValue(keyName, out value);
-                if (basePropeties.ToDictionary().ContainsKey(keyName))
-                    basePropeties.ToDictionary()[keyName] = value;
+                if (baseProperties.ToDictionary().ContainsKey(keyName))
+                    baseProperties.ToDictionary()[keyName] = value;
                 else
                 {
-                    basePropeties.Set(keyName, value);
+                    baseProperties.Set(keyName, value);
                 }
             }
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -68,7 +83,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -84,7 +99,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -100,7 +115,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -116,7 +131,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -132,7 +147,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="propertyName">THe property name.</param>
         /// <param name="properties">The collection of properties.</param>
@@ -144,7 +159,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractMarketAndDate(NamedValueSet properties)
@@ -165,7 +180,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractAssetIdentifier(NamedValueSet properties)
@@ -176,7 +191,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractAssetType(NamedValueSet properties)
@@ -187,7 +202,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractAssetRef(NamedValueSet properties)
@@ -198,7 +213,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractMarket(NamedValueSet properties)
@@ -212,7 +227,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static DateTime? ExtractMarketDate(NamedValueSet properties)
@@ -221,7 +236,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractSourceSystem(NamedValueSet properties)
@@ -232,7 +247,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractDataType(NamedValueSet properties)
@@ -243,7 +258,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set..
         /// </summary>
         /// <param name="properties">The collection of properties.</param>
         public static string ExtractUniqueCurveIdentifier(NamedValueSet properties)

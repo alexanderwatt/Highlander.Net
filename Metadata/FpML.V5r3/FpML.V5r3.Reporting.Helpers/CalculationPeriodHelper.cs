@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -56,7 +71,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="backPeriods">The back periods.</param>
         /// <param name="forwardPeriods">The forward periods.</param>
         /// <returns></returns>
-        static internal List<CalculationPeriod> MergeCalculationPeriods(List<CalculationPeriod> backPeriods, List<CalculationPeriod> forwardPeriods)
+        internal static List<CalculationPeriod> MergeCalculationPeriods(List<CalculationPeriod> backPeriods, List<CalculationPeriod> forwardPeriods)
         {
             var mergedPeriods = new List<CalculationPeriod>();
             if (backPeriods.Count > 0)
@@ -72,7 +87,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="unadjustedStartDate">The unadjusted start date.</param>
         /// <param name="unadjustedEndDate">The unadjusted end date.</param>
         /// <returns></returns>
-        static public CalculationPeriod CreateUnadjustedCalculationPeriod(DateTime unadjustedStartDate, DateTime unadjustedEndDate)
+        public static CalculationPeriod CreateUnadjustedCalculationPeriod(DateTime unadjustedStartDate, DateTime unadjustedEndDate)
         {
             var calculationPeriod = new CalculationPeriod
                                         {
@@ -89,7 +104,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// </summary>
         /// <param name="calculationPeriodFrequency">The calculation period frequency.</param>
         /// <returns></returns>
-        static public Period CalculationPeriodFrequencyToInterval(CalculationPeriodFrequency calculationPeriodFrequency)
+        public static Period CalculationPeriodFrequencyToInterval(CalculationPeriodFrequency calculationPeriodFrequency)
         {
             var periodInterval = new Period
                                      {
@@ -106,7 +121,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="startDate">The start date.</param>
         /// <param name="stubType">Type of the stub.</param>
         /// <returns></returns>
-        static internal List<CalculationPeriod> SetInitialIrregularStubPeriod(List<CalculationPeriod> regularPeriods, DateTime startDate, StubPeriodTypeEnum? stubType)
+        internal static List<CalculationPeriod> SetInitialIrregularStubPeriod(List<CalculationPeriod> regularPeriods, DateTime startDate, StubPeriodTypeEnum? stubType)
         {
             CalculationPeriod firstRegularPeriod = regularPeriods[0];
             if (firstRegularPeriod.unadjustedStartDate > startDate)
@@ -200,7 +215,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="calculationPeriodFrequency">The calculation period frequency.</param>
         /// <param name="hasIrregularPeriod">if set to <c>true</c> [has irregular period].</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GetForwardRegularPeriods(DateTime startDate, DateTime endDate, CalculationPeriodFrequency calculationPeriodFrequency, out Boolean hasIrregularPeriod)
+        public static List<CalculationPeriod> GetForwardRegularPeriods(DateTime startDate, DateTime endDate, CalculationPeriodFrequency calculationPeriodFrequency, out Boolean hasIrregularPeriod)
         {
             return GetForwardRegularPeriods(startDate, endDate, CalculationPeriodFrequencyToInterval(calculationPeriodFrequency), calculationPeriodFrequency.rollConvention, out hasIrregularPeriod);
         }
@@ -214,7 +229,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="hasIrregularPeriod">if set to <c>true</c> [has irregular period].</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GetForwardRegularPeriods(DateTime startDate, DateTime endDate, Period periodInterval, RollConventionEnum rollConvention, out Boolean hasIrregularPeriod)
+        public static List<CalculationPeriod> GetForwardRegularPeriods(DateTime startDate, DateTime endDate, Period periodInterval, RollConventionEnum rollConvention, out Boolean hasIrregularPeriod)
         {
             DateTime periodStartDate = startDate;
             hasIrregularPeriod = false;
@@ -259,7 +274,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="calculationPeriodFrequency">The calculation period frequency.</param>
         /// <param name="hasIrregularPeriod">if set to <c>true</c> [has irregular period].</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GetBackwardRegularPeriods(DateTime startDate, DateTime endDate, CalculationPeriodFrequency calculationPeriodFrequency, out Boolean hasIrregularPeriod)
+        public static List<CalculationPeriod> GetBackwardRegularPeriods(DateTime startDate, DateTime endDate, CalculationPeriodFrequency calculationPeriodFrequency, out Boolean hasIrregularPeriod)
         {
             return GetBackwardRegularPeriods(startDate, endDate, CalculationPeriodFrequencyToInterval(calculationPeriodFrequency), calculationPeriodFrequency.rollConvention, out hasIrregularPeriod);
         }
@@ -273,7 +288,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="hasIrregularPeriod">if set to <c>true</c> [has irregular period].</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GetBackwardRegularPeriods(DateTime startDate, DateTime endDate, Period periodInterval, RollConventionEnum rollConvention, out Boolean hasIrregularPeriod)
+        public static List<CalculationPeriod> GetBackwardRegularPeriods(DateTime startDate, DateTime endDate, Period periodInterval, RollConventionEnum rollConvention, out Boolean hasIrregularPeriod)
         {
             DateTime periodEndDate = startDate;
             hasIrregularPeriod = false;
@@ -317,10 +332,10 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="endDate">The end date.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static private List<CalculationPeriod> SetFinalIrregularStubPeriod(List<CalculationPeriod> regularPeriods, DateTime endDate, StubPeriodTypeEnum? stubPeriodType)
+        private static List<CalculationPeriod> SetFinalIrregularStubPeriod(List<CalculationPeriod> regularPeriods, DateTime endDate, StubPeriodTypeEnum? stubPeriodType)
         {
             if (stubPeriodType == null)
-                throw new ArgumentNullException("stubPeriodType");
+                throw new ArgumentNullException(nameof(stubPeriodType));
             CalculationPeriod lastRegularPeriod = regularPeriods[regularPeriods.Count - 1];
             if (lastRegularPeriod.unadjustedEndDate < endDate)
             {
@@ -347,7 +362,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <returns>
         /// 	<c>true</c> if [is long stub] [the specified calculation period]; otherwise, <c>false</c>.
         /// </returns>
-        static public Boolean IsLongStub(CalculationPeriod calculationPeriod, Period periodInterval)
+        public static Boolean IsLongStub(CalculationPeriod calculationPeriod, Period periodInterval)
         {
             Boolean retval = false;
             if (calculationPeriod != null)
@@ -366,7 +381,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <returns>
         /// 	<c>true</c> if [is short stub] [the specified calculation period]; otherwise, <c>false</c>.
         /// </returns>
-        static public Boolean IsShortStub(CalculationPeriod calculationPeriod, Period periodInterval)
+        public static Boolean IsShortStub(CalculationPeriod calculationPeriod, Period periodInterval)
         {
             Boolean retval = false;
             if (calculationPeriod != null)
@@ -385,7 +400,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <returns>
         /// 	<c>true</c> if [has initial stub] [the specified calculation periods]; otherwise, <c>false</c>.
         /// </returns>
-        static public Boolean HasInitialStub(List<CalculationPeriod> calculationPeriods, Period periodInterval)
+        public static Boolean HasInitialStub(List<CalculationPeriod> calculationPeriods, Period periodInterval)
         {
             Boolean retval = false;
             if (calculationPeriods != null && calculationPeriods.Count > 0)
@@ -405,7 +420,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <returns>
         /// 	<c>true</c> if [has final stub] [the specified calculation periods]; otherwise, <c>false</c>.
         /// </returns>
-        static public Boolean HasFinalStub(List<CalculationPeriod> calculationPeriods, Period periodInterval)
+        public static Boolean HasFinalStub(List<CalculationPeriod> calculationPeriods, Period periodInterval)
         {
             Boolean retval = false;
             if (calculationPeriods != null && calculationPeriods.Count > 0)
@@ -424,18 +439,15 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="terminationDate">The termination date.</param>
         /// <param name="calculationPeriodDates">The calculation period dates.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, CalculationPeriodDates calculationPeriodDates)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, CalculationPeriodDates calculationPeriodDates)
         {
             DateTime startDate = effectiveDate;
             DateTime endDate = terminationDate;
             var unadjustedDatePeriods = new List<CalculationPeriod>();
             AdjustableDate firstPeriodStartDate = calculationPeriodDates.firstPeriodStartDate;
-            if (firstPeriodStartDate != null)
-            {
-                // Use the firstPeriodStartDate as the start date if it has been specified
-                if ((firstPeriodStartDate.unadjustedDate != null) && (firstPeriodStartDate.unadjustedDate.Value != effectiveDate))
-                    startDate = firstPeriodStartDate.unadjustedDate.Value;
-            }
+            // Use the firstPeriodStartDate as the start date if it has been specified
+            if (firstPeriodStartDate?.unadjustedDate != null && firstPeriodStartDate.unadjustedDate.Value != effectiveDate)
+                startDate = firstPeriodStartDate.unadjustedDate.Value;
             DateTime firstRegularPeriodDate = startDate;
             if (calculationPeriodDates.firstRegularPeriodStartDateSpecified)
             {
@@ -446,8 +458,7 @@ namespace FpML.V5r3.Reporting.Helpers
             if (calculationPeriodDates.firstRegularPeriodStartDateSpecified && calculationPeriodDates.lastRegularPeriodEndDateSpecified)
             {
                 //Dates must converge
-                Boolean bContainsIrregularPeriod;
-                List<CalculationPeriod> periods = GetForwardRegularPeriods(calculationPeriodDates.firstRegularPeriodStartDate, endDate, calculationPeriodDates.calculationPeriodFrequency, out bContainsIrregularPeriod);
+                List<CalculationPeriod> periods = GetForwardRegularPeriods(calculationPeriodDates.firstRegularPeriodStartDate, endDate, calculationPeriodDates.calculationPeriodFrequency, out _);
                 if ((periods.Count > 0) && (periods[periods.Count - 1].unadjustedEndDate != calculationPeriodDates.lastRegularPeriodEndDate))
                 {
                     throw new ArgumentOutOfRangeException("Irregular period found between the first regular period start and last regular period end");
@@ -478,12 +489,11 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, DateTime regularPeriodStartDate, Period periodInterval, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, DateTime regularPeriodStartDate, Period periodInterval, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
         {
             DateTime startDate = effectiveDate;
             DateTime endDate = terminationDate;
-            Boolean bContainsIrregularFinalPeriod;
-            List<CalculationPeriod> forwardRegularPeriods = GetForwardRegularPeriods(regularPeriodStartDate, endDate, periodInterval, rollConvention, out bContainsIrregularFinalPeriod);
+            List<CalculationPeriod> forwardRegularPeriods = GetForwardRegularPeriods(regularPeriodStartDate, endDate, periodInterval, rollConvention, out var bContainsIrregularFinalPeriod);
             if (bContainsIrregularFinalPeriod)
             {
                 if (forwardRegularPeriods.Count == 0)
@@ -500,8 +510,7 @@ namespace FpML.V5r3.Reporting.Helpers
             if (regularPeriodStartDate > startDate)
             {
                 var irregularInitialStubType = StubPeriodTypeEnum.ShortInitial;
-                Boolean bContainsIrregularInitialPeriod;
-                backwardRegularPeriods = GetBackwardRegularPeriods(regularPeriodStartDate, startDate, periodInterval, rollConvention, out bContainsIrregularInitialPeriod);
+                backwardRegularPeriods = GetBackwardRegularPeriods(regularPeriodStartDate, startDate, periodInterval, rollConvention, out var bContainsIrregularInitialPeriod);
                 if ((bContainsIrregularInitialPeriod && stubPeriodType != null) && (stubPeriodType != StubPeriodTypeEnum.ShortInitial && stubPeriodType != StubPeriodTypeEnum.LongInitial))
                 {
                     DateTime normalPeriodStart = AddPeriod(startDate, periodInterval, 1);
@@ -538,7 +547,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="calculationPeriodFrequency">The calculation period frequency.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, DateTime regularPeriodStartDate, CalculationPeriodFrequency calculationPeriodFrequency, StubPeriodTypeEnum? stubPeriodType)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, DateTime regularPeriodStartDate, CalculationPeriodFrequency calculationPeriodFrequency, StubPeriodTypeEnum? stubPeriodType)
         {
             Period periodInterval = CalculationPeriodFrequencyToInterval(calculationPeriodFrequency);
             return GenerateUnadjustedCalculationDates(effectiveDate, terminationDate, regularPeriodStartDate, periodInterval, calculationPeriodFrequency.rollConvention, stubPeriodType);
@@ -549,13 +558,13 @@ namespace FpML.V5r3.Reporting.Helpers
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="periodToTerminationDate">The period to termination date.</param>
-        /// <param name="periodFrequecy">The period frequecy.</param>
+        /// <param name="periodFrequency">The period frequency.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, CalculationPeriodFrequency periodToTerminationDate, CalculationPeriodFrequency periodFrequecy)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, CalculationPeriodFrequency periodToTerminationDate, CalculationPeriodFrequency periodFrequency)
         {
             Period intervalToTerminationDate = CalculationPeriodFrequencyToInterval(periodToTerminationDate);
-            Period periodInterval = CalculationPeriodFrequencyToInterval(periodFrequecy);
-            return GenerateUnadjustedCalculationDates(effectiveDate, intervalToTerminationDate, periodInterval, periodFrequecy.rollConvention);
+            Period periodInterval = CalculationPeriodFrequencyToInterval(periodFrequency);
+            return GenerateUnadjustedCalculationDates(effectiveDate, intervalToTerminationDate, periodInterval, periodFrequency.rollConvention);
         }
 
         /// <summary>
@@ -565,7 +574,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="intervalToTerminationDate">The interval to termination date.</param>
         /// <param name="periodInterval">The period interval.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, Period intervalToTerminationDate, Period periodInterval)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, Period intervalToTerminationDate, Period periodInterval)
         {
             return GenerateUnadjustedCalculationDates(effectiveDate, intervalToTerminationDate, periodInterval, RollConventionEnum.NONE);
         }
@@ -578,7 +587,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="periodInterval">The period interval.</param>
         /// <param name="rollConvention">The roll convention.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, Period intervalToTerminationDate, Period periodInterval, RollConventionEnum rollConvention)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, Period intervalToTerminationDate, Period periodInterval, RollConventionEnum rollConvention)
         {
             DateTime startDate = effectiveDate;
             // Adjust the effective date 
@@ -606,7 +615,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
         {
             DateTime regularPeriodStartDate = GetFirstRegularPeriodStartDate(periodInterval, rollConvention, effectiveDate);
             return GenerateUnadjustedCalculationDates(effectiveDate, terminationDate, regularPeriodStartDate, periodInterval, rollConvention, stubPeriodType);
@@ -622,7 +631,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, Period intervalToFirstRegularPeriodStartDate, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDates(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, Period intervalToFirstRegularPeriodStartDate, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
         {
             DateTime firstRegularPeriodStartDate = GetFirstRegularPeriodStartDate(intervalToFirstRegularPeriodStartDate, rollConvention, effectiveDate);
             return GenerateUnadjustedCalculationDates(effectiveDate, terminationDate, firstRegularPeriodStartDate, periodInterval, rollConvention, stubPeriodType);
@@ -638,14 +647,13 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, DateTime lastRegularPeriodEndDate, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, DateTime lastRegularPeriodEndDate, RollConventionEnum rollConvention, StubPeriodTypeEnum? stubPeriodType)
         {
             var unadjustedPeriodDates = new List<CalculationPeriod>();
             DateTime lastRegularPeriodStartDate = AddPeriod(lastRegularPeriodEndDate, periodInterval, -1);
             if (lastRegularPeriodStartDate > effectiveDate)
             {
-                Boolean bHasIrregularInitial;
-                List<CalculationPeriod> regularPeriods = GetBackwardRegularPeriods(lastRegularPeriodStartDate, effectiveDate, periodInterval, rollConvention, out bHasIrregularInitial);
+                List<CalculationPeriod> regularPeriods = GetBackwardRegularPeriods(lastRegularPeriodStartDate, effectiveDate, periodInterval, rollConvention, out _);
 
                 if (regularPeriods.Count > 0)
                 {
@@ -663,7 +671,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="periodInterval">The period interval.</param>
         /// <param name="noOfCouponPeriods">The no of coupon periods.</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, Period periodInterval, int noOfCouponPeriods)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, Period periodInterval, int noOfCouponPeriods)
         {
             var unadjustedPeriodDates = new List<CalculationPeriod>();
             DateTime unadjustedEndDate = effectiveDate;
@@ -689,7 +697,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="periodInterval">The period interval.</param>
         /// <param name="fullFirstCoupon">if set to <c>true</c> [full first coupon].</param>
         /// <returns></returns>
-        static public List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, Boolean fullFirstCoupon)
+        public static List<CalculationPeriod> GenerateUnadjustedCalculationDatesFromTermDate(DateTime effectiveDate, DateTime terminationDate, Period periodInterval, Boolean fullFirstCoupon)
         {
             Boolean bReachedFirstCoupon = false;
             var unadjustedPeriodDates = new List<CalculationPeriod>();
@@ -729,7 +737,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="periods">The periods.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns></returns>
-        static public List<T> GetCalculationPeriodsProperty<T>(List<CalculationPeriod> periods, string propertyName)
+        public static List<T> GetCalculationPeriodsProperty<T>(List<CalculationPeriod> periods, string propertyName)
         {
             return periods.Select(period => GetCalculationPeriodProperty<T>(period, propertyName)).ToList();
         }
@@ -741,9 +749,9 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="period">The period.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns></returns>
-        static public T GetCalculationPeriodProperty<T>(CalculationPeriod period, string propertyName)
+        public static T GetCalculationPeriodProperty<T>(CalculationPeriod period, string propertyName)
         {
-            T value = default(T);
+            T value = default;
             Type periodType = period.GetType();
             PropertyInfo p = periodType.GetProperty(propertyName);
             if (p != null)

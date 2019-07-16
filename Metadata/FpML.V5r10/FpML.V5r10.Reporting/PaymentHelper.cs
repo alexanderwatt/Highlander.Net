@@ -1,9 +1,32 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 
 namespace FpML.V5r10.Reporting
 {
     internal static class PaymentHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="payerPartyReference"></param>
+        /// <param name="receiverPartyReference"></param>
+        /// <param name="currency"></param>
+        /// <param name="paymentAmount"></param>
+        /// <returns></returns>
         public static Payment Create(String payerPartyReference,
             String receiverPartyReference, String currency, Decimal paymentAmount)
         {
@@ -16,6 +39,15 @@ namespace FpML.V5r10.Reporting
             return payment;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="payerPartyReference"></param>
+        /// <param name="receiverPartyReference"></param>
+        /// <param name="currency"></param>
+        /// <param name="paymentAmount"></param>
+        /// <param name="valueDate"></param>
+        /// <returns></returns>
         public static Payment Create(String payerPartyReference,
             String receiverPartyReference, String currency, Decimal paymentAmount,
             DateTime valueDate)
@@ -30,6 +62,17 @@ namespace FpML.V5r10.Reporting
             return payment;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <param name="pay"></param>
+        /// <param name="paymentAmount"></param>
+        /// <param name="adjustedPaymentDate"></param>
+        /// <param name="paymentType"></param>
+        /// <param name="discountFactor"></param>
+        /// <param name="presentValueAmount"></param>
+        /// <returns></returns>
         public static Payment Create(string identifier, bool pay, NonNegativeMoney paymentAmount,
             DateTime adjustedPaymentDate, PaymentType paymentType,
             decimal discountFactor, Money presentValueAmount)
@@ -48,6 +91,19 @@ namespace FpML.V5r10.Reporting
             return payment;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <param name="payerPartyReference"></param>
+        /// <param name="receiverPartyReference"></param>
+        /// <param name="paymentAmount"></param>
+        /// <param name="adjustablePaymentDate"></param>
+        /// <param name="settlementInformation"></param>
+        /// <param name="paymentType"></param>
+        /// <param name="discountFactor"></param>
+        /// <param name="presentValueAmount"></param>
+        /// <returns></returns>
         public static Payment Create(string identifier, PartyReference payerPartyReference,
             PartyReference receiverPartyReference, NonNegativeMoney paymentAmount,
             AdjustableOrAdjustedDate adjustablePaymentDate, SettlementInformation settlementInformation, PaymentType paymentType,
@@ -82,8 +138,8 @@ namespace FpML.V5r10.Reporting
             var items = new object[1];
             items[0] = identifiedDate;
             date.Items = items;
-            var itemsElementName = new ItemsChoiceType[1];
-            itemsElementName[0] = ItemsChoiceType.adjustedDate;
+            var itemsElementName = new ItemsChoiceType1[1];
+            itemsElementName[0] = ItemsChoiceType1.adjustedDate;
             date.ItemsElementName = itemsElementName;
             return date;
         }

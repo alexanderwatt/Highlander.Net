@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,10 +101,10 @@ namespace FpML.V5r3.Reporting.Helpers
         public static BasicAssetValuation Add(BasicAssetValuation basicAssetValuation1, BasicAssetValuation basicAssetValuation2)
         {
             BasicAssetValuation result = BinarySerializerHelper.Clone(basicAssetValuation1);
-            var proccessedMeasureTypes = new List<string>();
+            var proccessMeasureTypes = new List<string>();
             foreach (BasicQuotation bq1 in result.quote)
             {
-                proccessedMeasureTypes.Add(bq1.measureType.Value);
+                proccessMeasureTypes.Add(bq1.measureType.Value);
                 BasicQuotation bq2 = GetQuotationByMeasureType(basicAssetValuation2, bq1.measureType.Value);              
                 if (null != bq2)
                 {
@@ -99,7 +114,7 @@ namespace FpML.V5r3.Reporting.Helpers
             var bqToAddToList = new List<BasicQuotation>();
             foreach (BasicQuotation bq2 in basicAssetValuation2.quote)
             {
-                if (-1 == proccessedMeasureTypes.IndexOf(bq2.measureType.Value))//if hasn't been processed in the first pass
+                if (-1 == proccessMeasureTypes.IndexOf(bq2.measureType.Value))//if hasn't been processed in the first pass
                 {
                    bqToAddToList.Add(bq2);
                 }

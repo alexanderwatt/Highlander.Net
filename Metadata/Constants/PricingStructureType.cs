@@ -81,6 +81,11 @@ namespace Orion.Constants
         SurvivalProbabilityCurve,
 
         /// <summary>
+        /// PropertyCurve
+        /// </summary>
+        PropertyCurve,
+
+        /// <summary>
         /// CommodityCurve
         /// </summary>
         CommodityCurve,

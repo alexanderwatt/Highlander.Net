@@ -121,7 +121,7 @@ namespace Orion.CurveEngine.Tests
                           0.06188m
                       };
 
-            var baseDate = new DateTime(2010, 2, 22);
+            var baseDate = new DateTime(2019, 2, 22);
             var props
                 = new Dictionary<string, object>
                       {
@@ -135,9 +135,12 @@ namespace Orion.CurveEngine.Tests
                       };
 
             var valueSet = new NamedValueSet(props);
-            var rateCurve = CurveEngine.CreateCurve(valueSet, tempInstruments, rates, new decimal[rates.Length], null, null) as RateCurve;
-            if (rateCurve != null)
-                CurveEngine.PedersenCalibration(rateCurve.GetPricingStructureId().UniqueIdentifier);
+            if (CurveEngine.CreateCurve(valueSet, tempInstruments, rates, new decimal[rates.Length], null, null) is
+                RateCurve curve)
+            {
+                CurveEngine.SaveCurve(curve);
+                CurveEngine.PedersenCalibration(curve.GetPricingStructureId().UniqueIdentifier);
+            }
         }
 
         #endregion
