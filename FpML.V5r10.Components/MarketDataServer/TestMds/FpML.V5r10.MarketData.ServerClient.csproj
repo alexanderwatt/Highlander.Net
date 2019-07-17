@@ -107,10 +107,6 @@
       <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>
       <Name>FpML.V5r10.MarketData.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
-      <Project>{e9d01625-9697-4dec-bcbf-499bbc7c4e79}</Project>
-      <Name>FpML.V5r10.Reporting.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDAS.Provider.Base\FpML.V5r10.MarketData.ProviderBase.csproj">
       <Project>{c60cbe91-0845-462d-ac61-4d64412bf164}</Project>
       <Name>FpML.V5r10.MarketData.ProviderBase</Name>

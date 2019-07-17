@@ -13,7 +13,7 @@ namespace Orion.CalendarEngine.Dates
     public class ThirdWednesday : LastTradingDate
     {
         /// <summary>
-        /// Base consructor, which does not filter for main cycle or not.
+        /// Base constructor, which does not filter for main cycle or not.
         /// </summary>
         public ThirdWednesday()
         {}
@@ -53,7 +53,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="date"></param>
         /// <param name="mainCycle"></param>
         /// <returns>true/false</returns>
-        public override bool isLastTradingDate(DateTime date, bool mainCycle)
+        public override bool IsLastTradingDate(DateTime date, bool mainCycle)
         {
             if (date.DayOfWeek != DayOfWeek.Friday)
                 return false;
@@ -77,7 +77,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns></returns>
-        public override DateTime nextLastTradingDate(DateTime refDate, bool mainCycle) 
+        public override DateTime NextLastTradingDate(DateTime refDate, bool mainCycle) 
         {
             int d = refDate.Day;
             int y = refDate.Year;
@@ -100,7 +100,7 @@ namespace Orion.CalendarEngine.Dates
             }
             DateTime result = GetLastTradingDay(m, y);
             if (result<=refDate)
-                result = nextLastTradingDate(new DateTime(y, m, 24), mainCycle);
+                result = NextLastTradingDate(new DateTime(y, m, 24), mainCycle);
             return result;
         }
 

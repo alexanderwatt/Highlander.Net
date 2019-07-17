@@ -11,7 +11,6 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Metadata.Common;
-using Orion.V5r10.Reporting.Common;
 using Exception = System.Exception;
 
 namespace TestWebMdc

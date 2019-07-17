@@ -173,10 +173,6 @@
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
-      <Project>{e9d01625-9697-4dec-bcbf-499bbc7c4e79}</Project>
-      <Name>FpML.V5r10.Reporting.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDAS.Provider.Base\FpML.V5r10.MarketData.ProviderBase.csproj">
       <Project>{c60cbe91-0845-462d-ac61-4d64412bf164}</Project>
       <Name>FpML.V5r10.MarketData.ProviderBase</Name>

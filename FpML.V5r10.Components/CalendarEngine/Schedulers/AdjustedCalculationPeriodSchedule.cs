@@ -1,9 +1,24 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using Core.Common;
-using FpML.V5r10.Reporting;
 using Orion.CalendarEngine.Helpers;
 using Orion.Analytics.Schedulers;
+using FpML.V5r3.Reporting;
 
 namespace Orion.CalendarEngine.Schedulers
 {
@@ -21,7 +36,7 @@ namespace Orion.CalendarEngine.Schedulers
         /// <param name="periodInterval">The period interval.</param>
         /// <returns></returns>
         /// <param name="businessDayAdjustments">The necessary date adjustment details.</param>
-        /// <param name="nameSpace">The clients namespce</param>
+        /// <param name="nameSpace">The clients namespace</param>
         public List<CalculationPeriod> GetAdjustedCalculationDateSchedule(ICoreCache cache, DateTime effectiveDate,
             Period intervalToTerminationDate, Period periodInterval, 
             BusinessDayAdjustments businessDayAdjustments, string nameSpace)

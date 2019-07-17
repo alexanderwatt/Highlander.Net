@@ -69787,6 +69787,18 @@ namespace FpML.V5r10.Reporting {
         
         /// <remarks/>
         volatilitySwapTransactionSupplement,
+
+        /// <remarks/>
+        futureTransaction,
+
+        /// <remarks/>
+        propertyTransaction,
+
+        /// <remarks/>
+        bondTransaction,
+
+        /// <remarks/>
+        equityTransaction
     }
     
     /// <remarks/>

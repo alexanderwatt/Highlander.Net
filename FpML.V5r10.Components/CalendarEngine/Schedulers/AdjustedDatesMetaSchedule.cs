@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -6,9 +21,12 @@ using System.Linq;
 using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
+using FpML.V5r3.Reporting.Helpers;
 using Orion.Analytics.Helpers;
 using Orion.Analytics.Schedulers;
 using Orion.Util.Helpers;
+using Orion.ModelFramework;
+using FpML.V5r3.Reporting;
 using Orion.CalendarEngine.Helpers;
 
 #endregion
@@ -73,7 +91,7 @@ namespace Orion.CalendarEngine.Schedulers
         /// <summary>
         /// Gets a dates schedule.
         /// </summary>
-        /// <param name="metaScheduleDefinition">This must have 3 columns: interval, interval, rollconventionenum.</param>
+        /// <param name="metaScheduleDefinition">This must have 3 columns: interval, interval, roll convention enum.</param>
         /// <param name="startDate"></param>
         /// <param name="businessCalendar"></param>
         /// <param name="calendarAsString"></param>
@@ -97,7 +115,7 @@ namespace Orion.CalendarEngine.Schedulers
         /// <summary>
         /// Gets a dates schedule.
         /// </summary>
-        /// <param name="metaScheduleDefinitionRange">This must have 3 columns: interval, interval, rollconventionenum.</param>
+        /// <param name="metaScheduleDefinitionRange">This must have 3 columns: interval, interval, roll convention enum.</param>
         /// <param name="startDate"></param>
         /// <param name="businessCalendar"></param>
         /// <param name="calendarAsString"></param>

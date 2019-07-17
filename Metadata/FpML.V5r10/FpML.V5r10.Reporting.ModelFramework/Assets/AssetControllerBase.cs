@@ -1,4 +1,18 @@
-﻿
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +47,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Assets
         public IAssetControllerData ModelData { get; protected set; }
 
         /// <summary>
-        /// The valuations; quotes, vols etc
+        /// The valuations; quotes, volatility etc
         /// </summary>
         public BasicAssetValuation BasicAssetValuation { get; set; }
         
@@ -90,7 +104,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Assets
                     object decimalValue = Convert.ToDecimal(valArray[0]);
                     ObjectLookupHelper.SetPropertyValue(quotation, cValuePropertyName, decimalValue);
                     quotation.informationSource = InformationSourceHelper.CreateArray("Item.0");
-                    //Set the appropriate values. Should really srilaise the object.
+                    //Set the appropriate values. Should really serialize the object.
                     var measureType = quotation.measureType;
                     var quoteUnits = quotation.quoteUnits;//TODO add any other properties or do automatically.
                     //Add all extra quotations.

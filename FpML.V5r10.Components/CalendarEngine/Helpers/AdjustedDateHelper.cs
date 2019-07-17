@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -5,8 +20,11 @@ using Core.Common;
 using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
+using FpML.V5r3.Reporting.Helpers;
 using Orion.Analytics.Helpers;
 using Orion.Analytics.BusinessCenters;
+using Orion.ModelFramework;
+using FpML.V5r3.Reporting;
 using Math = System.Math;
 
 #endregion
@@ -227,7 +245,7 @@ namespace Orion.CalendarEngine.Helpers
             {
                 return referenceDate;
             }
-            //The default daytype.
+            //The default day type.
             if (relativeDateOffset.dayTypeSpecified == false || relativeDateOffset.businessCenters == null)
             {
                 relativeDateOffset.dayType = DayTypeEnum.Calendar;
@@ -253,7 +271,7 @@ namespace Orion.CalendarEngine.Helpers
             {
                 return referenceDate;
             }
-            //The default daytype.
+            //The default day type.
             if (relativeDateOffset.dayTypeSpecified == false || relativeDateOffset.businessCenters == null)
             {
                 relativeDateOffset.dayType = DayTypeEnum.Calendar;
@@ -334,27 +352,24 @@ namespace Orion.CalendarEngine.Helpers
         /// <summary>
         /// Derives the adjusted date if not already provided.
         /// </summary>
-        /// <param name="adjustableOrAdjustedDate">htis may contain the adjustedDate, an unadjustedDate and businessCentres</param>
+        /// <param name="adjustableOrAdjustedDate">this may contain the adjustedDate, an unadjusted Date and business Centre</param>
         /// <param name="businessCalendar">THe business calendar must be provided, no namespace is required and can be null</param>
         /// <returns></returns>
         public static DateTime? GetAdjustedDate(IBusinessCalendar businessCalendar, AdjustableOrAdjustedDate adjustableOrAdjustedDate)
         {
-            object date;
-            var result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.adjustedDate, out date);
+            var result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.adjustedDate, out var date);
             if (result)
             {
                 return ((IdentifiedDate)date).Value;
             }
-            object businessDayAdjustments;
             result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.unadjustedDate, out date);
-            var bda = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.dateAdjustments, out businessDayAdjustments);
+            var bda = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.dateAdjustments, out var businessDayAdjustments);
             if (result && date != null)
             {
                 DateTime unadjustedDate = ((IdentifiedDate)date).Value;
                 if (bda && businessCalendar != null)
                 {
-                    var adjustments = businessDayAdjustments as BusinessDayAdjustments;
-                    if (adjustments != null)
+                    if (businessDayAdjustments is BusinessDayAdjustments adjustments)
                     {
                         
                         return businessCalendar.Roll(unadjustedDate, adjustments.businessDayConvention);
@@ -368,12 +383,12 @@ namespace Orion.CalendarEngine.Helpers
         /// <summary>
         /// Derives the adjusted date if not already provided.
         /// </summary>
-        /// <param name="adjustableDate">htis may contain the adjustedDate, an unadjustedDate and businessCentres</param>
+        /// <param name="adjustableDate">this may contain the adjustedDate, an unadjustedDate and business Centre</param>
         /// <param name="cache">THe cache if the business calendar has not already been calculated.</param>
-        /// <param name="nameSpace">The client nameSpce</param>
+        /// <param name="nameSpace">The client nameSpace</param>
         /// <param name="businessCalendar">THe business calendar must be provided, no namespace is required and can be null</param>
         /// <returns></returns>
-        public static DateTime? GetAdjustedDate(ICoreCache cache, String nameSpace, IBusinessCalendar businessCalendar,
+        public static DateTime? GetAdjustedDate(ICoreCache cache, string nameSpace, IBusinessCalendar businessCalendar,
             AdjustableDate adjustableDate)
         {
             if (adjustableDate.adjustedDate != null)
@@ -391,12 +406,12 @@ namespace Orion.CalendarEngine.Helpers
         /// Derives the adjusted date if not already provided.
         /// </summary>
         /// <param name="baseDate">The base date is settlement is relative.</param>
-        /// <param name="relativeDateOffset">htis may contain the adjustedDate, an unadjustedDate and businessCentres</param>
+        /// <param name="relativeDateOffset">this may contain the adjustedDate, an unadjustedDate and business Centre</param>
         /// <param name="cache">THe cache if the business calendar has not already been calculated.</param>
-        /// <param name="nameSpace">The client nameSpce</param>
+        /// <param name="nameSpace">The client nameSpace</param>
         /// <param name="businessCalendar">THe business calendar must be provided, no namespace is required and can be null</param>
         /// <returns></returns>
-        public static DateTime? GetAdjustedDate(ICoreCache cache, String nameSpace, IBusinessCalendar businessCalendar, 
+        public static DateTime? GetAdjustedDate(ICoreCache cache, string nameSpace, IBusinessCalendar businessCalendar, 
             DateTime? baseDate, RelativeDateOffset relativeDateOffset)
         {
             if (relativeDateOffset.adjustedDate != null)
@@ -415,21 +430,20 @@ namespace Orion.CalendarEngine.Helpers
         /// Derives the adjusted date if not already provided.
         /// </summary>
         /// <param name="baseDate">The base date is settlement is relative.</param>
-        /// <param name="adjustableOrAdjustedDate">htis may contain the adjustedDate, an unadjustedDate and businessCentres</param>
+        /// <param name="adjustableOrAdjustedDate">this may contain the adjustedDate, an unadjustedDate and business Centre</param>
         /// <param name="cache">THe cache if the business calendar has not already been calculated.</param>
-        /// <param name="nameSpace">The client nameSpce</param>
+        /// <param name="nameSpace">The client nameSpace</param>
         /// <param name="businessCalendar">THe business calendar must be provided, no namespace is required and can be null</param>
         /// <returns></returns>
-        public static DateTime? GetAdjustedDate(ICoreCache cache, String nameSpace, IBusinessCalendar businessCalendar, 
+        public static DateTime? GetAdjustedDate(ICoreCache cache, string nameSpace, IBusinessCalendar businessCalendar, 
             DateTime? baseDate, AdjustableOrRelativeDate adjustableOrAdjustedDate)
         {
-            var date = adjustableOrAdjustedDate.Item as AdjustableDate;
-            if (date != null)
+            if (adjustableOrAdjustedDate.Item is AdjustableDate date)
             {
                 return GetAdjustedDate(cache, nameSpace, businessCalendar, date);
             }
-            var relativeDate = adjustableOrAdjustedDate.Item as RelativeDateOffset;
-            if (relativeDate != null && baseDate != null)
+
+            if (adjustableOrAdjustedDate.Item is RelativeDateOffset relativeDate && baseDate != null)
             {
                 return GetAdjustedDate(cache, nameSpace, businessCalendar, baseDate,
                                        relativeDate);

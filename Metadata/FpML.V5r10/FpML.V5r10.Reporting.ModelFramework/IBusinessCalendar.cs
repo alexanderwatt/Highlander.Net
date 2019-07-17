@@ -1,9 +1,23 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
 using System.Globalization;
 using System.Collections.Generic;
-using FpML.V5r10.Reporting;
 
 #endregion
 
@@ -34,7 +48,7 @@ namespace FpML.V5r10.Reporting.ModelFramework
         bool IsHoliday(DateTime date);
 
         /// <summary>
-        /// Holidayses the between.
+        /// Holidays between.
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
@@ -59,7 +73,7 @@ namespace FpML.V5r10.Reporting.ModelFramework
         DateTime Roll(DateTime date, BusinessDayConventionEnum businessDayConvention);
 
         /// <summary>
-        /// A stringified representation of this DayCounter for use with FpML.
+        /// A string representation of this DayCounter for use with FpML.
         /// </summary>
         /// <remarks>
         /// This method is used for interaction with FpML.
@@ -94,9 +108,9 @@ namespace FpML.V5r10.Reporting.ModelFramework
         string NameList { get; }
 
         /// <summary>
-        /// Gets the deduped name list.
+        /// Gets the de-duped name list.
         /// </summary>
-        /// <value>The deduped name list.</value>
+        /// <value>The de-duped name list.</value>
         string DedupedNameList { get; }
     }
 }

@@ -1,4 +1,19 @@
-﻿using System.Collections.Generic;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using Orion.Util.Helpers;
@@ -55,21 +70,24 @@ namespace FpML.V5r10.Reporting.ModelFramework.Helpers
         public static Configuration GetConfiguration(string fullConfigurationFilePath)
         {
             Configuration configuration;
-            if (_configurations != null && _configurations.ContainsKey(fullConfigurationFilePath))
+            lock (_configurations)
             {
-                configuration = _configurations[fullConfigurationFilePath];
-            }
-            else
-            {
-                lock (_configurations)
+                if (_configurations != null && _configurations.ContainsKey(fullConfigurationFilePath))
                 {
-                    ExeConfigurationFileMap map =
-                        new ExeConfigurationFileMap
-                        {
-                            ExeConfigFilename = fullConfigurationFilePath
-                        };
-                    configuration = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
-                    _configurations.Add(fullConfigurationFilePath, configuration);
+                    configuration = _configurations[fullConfigurationFilePath];
+                }
+                else
+                {
+                    lock (_configurations)
+                    {
+                        ExeConfigurationFileMap map =
+                            new ExeConfigurationFileMap
+                            {
+                                ExeConfigFilename = fullConfigurationFilePath
+                            };
+                        configuration = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+                        _configurations.Add(fullConfigurationFilePath, configuration);
+                    }
                 }
             }
             return configuration;
@@ -136,11 +154,11 @@ namespace FpML.V5r10.Reporting.ModelFramework.Helpers
 
         internal static string GetConfigurationKeyVal(string key)
         {
-            string retval = string.Empty;
+            string returnValue = string.Empty;
             string keyVal = key;
             if (ConfigurationManager.AppSettings[keyVal] != null)
-                retval = ConfigurationManager.AppSettings[keyVal];
-            return retval;
+                returnValue = ConfigurationManager.AppSettings[keyVal];
+            return returnValue;
         }
     }
 }

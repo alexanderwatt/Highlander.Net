@@ -138,10 +138,6 @@
       <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>
       <Name>FpML.V5r10.MarketData.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MarketDataServer\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
-      <Project>{E9D01625-9697-4DEC-BCBF-499BBC7C4E79}</Project>
-      <Name>FpML.V5r10.Reporting.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

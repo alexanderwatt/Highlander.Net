@@ -1,4 +1,19 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -50,9 +65,9 @@ namespace FpML.V5r10.Reporting.ModelFramework
         /// <param name="properties">The properties.</param>
         /// <param name="expiryTerms">The expiry terms.</param>
         /// <param name="strikes">The strikes.</param>
-        /// <param name="volatilities">The volatilities.</param>
+        /// <param name="volatility">The volatility.</param>
         /// <returns></returns>
-        IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, double[] strikes, Double[,] volatilities);
+        IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, double[] strikes, Double[,] volatility);
 
         /// <summary>
         /// Creates the volatility surface.
@@ -60,9 +75,9 @@ namespace FpML.V5r10.Reporting.ModelFramework
         /// <param name="properties">The properties.</param>
         /// <param name="expiryTerms">The expiry terms.</param>
         /// <param name="strikesOrTenors">The strikes or tenor.</param>
-        /// <param name="volatilities">The volatilities.</param>
+        /// <param name="volatility">The volatility.</param>
         /// <returns></returns>
-        IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenors, Double[,] volatilities);
+        IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenors, Double[,] volatility);
 
         /// <summary>
         /// Construct a VolatilityCube
@@ -70,8 +85,8 @@ namespace FpML.V5r10.Reporting.ModelFramework
         /// <param name="properties"></param>
         /// <param name="expiryTerms"></param>
         /// <param name="tenors"></param>
-        /// <param name="volatilities"></param>
+        /// <param name="volatility"></param>
         /// <param name="strikes"></param>
-        IPricingStructure CreateVolatilityCube(NamedValueSet properties, String[] expiryTerms, String[] tenors, decimal[,] volatilities, decimal[] strikes);
+        IPricingStructure CreateVolatilityCube(NamedValueSet properties, String[] expiryTerms, String[] tenors, decimal[,] volatility, decimal[] strikes);
     }
 }

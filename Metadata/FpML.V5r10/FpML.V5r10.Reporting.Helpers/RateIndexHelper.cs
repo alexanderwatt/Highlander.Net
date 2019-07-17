@@ -21,7 +21,7 @@ namespace FpML.V5r10.Reporting.Helpers
                                           dayCountFraction = DayCountFractionHelper.Parse(dayCountFraction),
                                           floatingRateIndex = FloatingRateIndexHelper.Parse(floatingRateIndex),
                                           id = instrumentId,
-                                          instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
+                                          instrumentId = ProductTypeHelper.InstrumentIdArrayHelper.Parse(instrumentId),
                                           paymentFrequency = PeriodHelper.Parse(paymentFrequency),
                                           term = PeriodHelper.Parse(term)
                                       };
@@ -43,7 +43,7 @@ namespace FpML.V5r10.Reporting.Helpers
                                           dayCountFraction = DayCountFractionHelper.Parse(dayCountFraction),
                                           floatingRateIndex = FloatingRateIndexHelper.Parse(floatingRateIndex),
                                           id = id,
-                                          instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
+                                          instrumentId = ProductTypeHelper.InstrumentIdArrayHelper.Parse(instrumentId),
                                           paymentFrequency = PeriodHelper.Parse(paymentFrequency),
                                           term = PeriodHelper.Parse(term)
                                       };
@@ -78,7 +78,7 @@ namespace FpML.V5r10.Reporting.Helpers
                     dayCountFraction = dayCountFraction,
                     floatingRateIndex = floatingRateIndex,
                     id = instrumentId,
-                    instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
+                    instrumentId = ProductTypeHelper.InstrumentIdArrayHelper.Parse(instrumentId),
                     paymentFrequency = paymentFrequency,
                     term = term
                 };

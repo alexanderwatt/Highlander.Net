@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -71,17 +86,17 @@ namespace Orion.CalendarEngine.Helpers
             DateTime dtRolledDate = dtBase;
             if ((dr.applyRollSpecified) && (dr.applyRoll))
                 dtRolledDate = RollWeekendDateFwdToMonday(dtBase);
-                // Here we roll to before the weekend (i.e Friday)
+            // Here we roll to before the weekend (i.e Friday)
             else if ((dr.applyRollPriorSpecified) && (dr.applyRollPrior))
             {
                 dtRolledDate = RollWeekendDateBackToFriday(dtBase);
             }
-                // Here we would roll fwd to monday if a Sunday and rollback to Friday if a Saturday
+            // Here we would roll fwd to monday if a Sunday and rollback to Friday if a Saturday
             else if ((dr.rollBeforeAfterWeekendSpecified) && (dr.rollBeforeAfterWeekend))
             {
                 dtRolledDate = RollWeekendDateBeforeAfterWeekend(dtBase);
             }
-                // Here we roll to before the weekend (i.e Friday) ONLY if its a Saturday
+            // Here we roll to before the weekend (i.e Friday) ONLY if its a Saturday
             else if ((dr.RollPriorIfSaturdaySpecified) && (dr.RollPriorIfSaturday))
             {
                 dtRolledDate = RollBeforeWeekendIfSaturday(dtBase);
@@ -326,7 +341,6 @@ namespace Orion.CalendarEngine.Helpers
             if (dim.Month > 0 && dim.Day > 0)
             {
                 dtBase = new DateTime(dtCheckDate.Year, dim.Month, dim.Day);
-
                 ////Those that occur on a specified date but only on certain years
                 //// NOTE**:These attributes don't yet exist but can easily be added to the XSD
                 //if (hr.EveryXYearsSpecified)
@@ -337,7 +351,6 @@ namespace Orion.CalendarEngine.Helpers
                 //    }
                 //}
             }
-
             // Derive and set business holiday (not necessarily the same as the holiday particularly if we are rolling
             // if the date falls on a weekend. 
             // Here we would roll fwd to monday
@@ -370,8 +383,7 @@ namespace Orion.CalendarEngine.Helpers
             }
             else
             {
-                var day = dteval as SignificantDay;
-                if (day != null)
+                if (dteval is SignificantDay day)
                 {
                     sds = new[] { day };
                 }
@@ -408,8 +420,7 @@ namespace Orion.CalendarEngine.Helpers
             }
             else
             {
-                var day = dteval as SignificantDay;
-                if (day != null)
+                if (dteval is SignificantDay day)
                 {
                     sds = new[] { day };
                 }
@@ -468,7 +479,6 @@ namespace Orion.CalendarEngine.Helpers
             int numberOfLeapYear = (y - 2000) / 4 + (y - 2000) / 100 - (y - 2000) / 400;
             //  vernal_equinox_day 
             var day = (int)(exactVernalEquinoxTime + movingAmount - numberOfLeapYear);
-
             return new DateTime(year, month, day);
         }
 
@@ -484,22 +494,19 @@ namespace Orion.CalendarEngine.Helpers
             // This patch calculates astronomical equinox date, which is a good
             // estimate of official equinox date.
             // (by KAWANISHI Tomoya <mailto:tomoya@mm.media.kyoto-u.ac.jp>)
-
             const double exactAutumnalEquinoxTime = 23.09;
             const double diffPerYear = 0.242194;
             const int month = 9;
-
             int y = year;
             double movingAmount = (y - 2000) * diffPerYear;
             int numberOfLeapYear = (y - 2000) / 4 + (y - 2000) / 100 - (y - 2000) / 400;
-
             //  Autumnal Equinox Day 
             var day = (int)(exactAutumnalEquinoxTime + movingAmount - numberOfLeapYear);
             return new DateTime(year, month, day);
         }
 
         /// <summary>
-        /// Dedupes a given set of dates.
+        /// De-dupes a given set of dates.
         /// </summary>
         /// <param name="dates">The dates.</param>
         /// <returns></returns>

@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Reflection;
@@ -7,7 +22,7 @@ using System.Diagnostics;
 namespace FpML.V5r10.Reporting.ModelFramework.Helpers
 {
     /// <summary>
-    /// Factrory for creating an instance of the supplied generic Type
+    /// Factory for creating an instance of the supplied generic Type
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ClassFactory<T>
@@ -192,7 +207,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Helpers
         /// <summary>
         /// Remove a class from the Pricing model Factory
         /// </summary>
-        /// <param name="className">The name of the class to unregiter</param>
+        /// <param name="className">The name of the class to unregister</param>
         public static void UnregisterAssets(string className)
         {
             foreach (string assemblyName in AssemblyAssetRegistry.Keys)

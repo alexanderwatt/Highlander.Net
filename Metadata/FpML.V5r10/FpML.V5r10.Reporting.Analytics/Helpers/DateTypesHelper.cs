@@ -31,7 +31,7 @@ namespace Orion.Analytics.Helpers
         /// <returns></returns>
         public static IdentifiedDate ToUnadjustedIdentifiedDate(DateTime unadjustedDate)
         {
-            var result = new IdentifiedDate {Value = unadjustedDate, id = ItemsChoiceType.unadjustedDate.ToString()};
+            var result = new IdentifiedDate {Value = unadjustedDate, id = ItemsChoiceType1.unadjustedDate.ToString()};
             return result;
         }
 

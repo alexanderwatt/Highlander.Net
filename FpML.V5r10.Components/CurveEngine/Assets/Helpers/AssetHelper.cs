@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using
 
 using System;
@@ -17,20 +32,20 @@ using Orion.CurveEngine.Assets.Rates.CapsFloors;
 namespace Orion.CurveEngine.Assets.Helpers
 {
     /// <summary>
-    /// A usefule asset helper class.
+    /// A useful asset helper class.
     /// </summary>
     public static class AssetHelper
     {
         #region Parsing Functions
 
         /// <summary>
-        /// Creates the specified assets in a quotedassetset.
+        /// Creates the specified assets in a quoted asset set.
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
         /// <param name="values">The adjusted rates.</param>
-        /// <param name="measureTypes">The measure types. Cuurently supports MarketQuote and Volatility.</param>
+        /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
-        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market wuotes are set as null.</param>
+        /// <param name="includeMarketQuoteValues">An include flag. If false, then the market quotes are set as null.</param>
         /// <returns></returns>
         public static QuotedAssetSet Parse(string[] assetIdentifiers, Decimal[] values,
                                            String[] measureTypes, String[] priceQuoteUnits, bool includeMarketQuoteValues)
@@ -886,10 +901,10 @@ namespace Orion.CurveEngine.Assets.Helpers
         public static Pair<Asset, BasicAssetValuation> ParseBond(string bondTypeId, DateTime maturityDate, decimal coupon, string daycount, string frequency, decimal ytm)
         {
             const string rateQuotationType = "MarketQuote";
-            var bondid = bondTypeId + '-' + coupon + '-' + maturityDate.ToShortDateString();
+            var bondId = bondTypeId + '-' + coupon + '-' + maturityDate.ToShortDateString();
             var underlyingAsset = new Bond
             {
-                id = bondid,
+                id = bondId,
                 maturity = maturityDate,
                 maturitySpecified = true,
                 couponRate = coupon,

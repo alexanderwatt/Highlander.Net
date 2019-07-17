@@ -16,14 +16,13 @@ namespace FpML.V5r10.Reporting.Helpers
                                   : null;
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notional),
+                Items = new object[] {NotionalFactory.Create(notional)},
                 compoundingMethod = CompoundingMethodEnum.None,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction,
                 discounting = discounting,
-                Items = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
+                Items1 = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
             };
-
             return calculation;
         }
 
@@ -35,14 +34,13 @@ namespace FpML.V5r10.Reporting.Helpers
                                   : null;
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notionalSchedule),
+                Items = new object[] {NotionalFactory.Create(notionalSchedule)},
                 compoundingMethod = CompoundingMethodEnum.None,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction,
                 discounting = discounting,
-                Items = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
+                Items1 = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
             };
-
             return calculation;
         }
 
@@ -51,16 +49,15 @@ namespace FpML.V5r10.Reporting.Helpers
         {
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notional),
+                Items = new object[] { NotionalFactory.Create(notional) },
                 compoundingMethod = compoundingMethod,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction,
                 discounting =
                                                   DiscountingHelper.Create(discountRate, dayCountFraction,
                                                                            discountingType),
-                Items = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
+                Items1 = new object[] { FixedRateScheduleHelper.Create(fixedRate) }
             };
-
             return calculation;
         }
 
@@ -72,14 +69,13 @@ namespace FpML.V5r10.Reporting.Helpers
                 : null;
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notional),
+                Items = new object[] { NotionalFactory.Create(notional) },
                 compoundingMethod = CompoundingMethodEnum.None,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction,
                 discounting = discounting,
-                Items = new object[] { FloatingRateCalculationHelper.CreateFloating(floatingRateIndex, tenor) }
+                Items1 = new object[] { FloatingRateCalculationHelper.CreateFloating(floatingRateIndex, tenor) }
             };
-
             return calculation;
         }
 
@@ -88,17 +84,15 @@ namespace FpML.V5r10.Reporting.Helpers
             var discounting = discountingType != null
                                   ? DiscountingHelper.Create(null, dayCountFraction, (DiscountingTypeEnum)discountingType)
                                   : null;
-
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notional),
+                Items = new object[] { NotionalFactory.Create(notional) },
                 compoundingMethod = CompoundingMethodEnum.None,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction,
                 discounting = discounting,
-                Items = new object[] { FloatingRateCalculationHelper.CreateFloating(floatingRateIndex, tenor) }
+                Items1 = new object[] { FloatingRateCalculationHelper.CreateFloating(floatingRateIndex, tenor) }
             };
-
             return calculation;
         }
 
@@ -106,21 +100,18 @@ namespace FpML.V5r10.Reporting.Helpers
         {
             var calculation = new Calculation
             {
-                Item = NotionalFactory.Create(notional),
+                Items = new object[] { NotionalFactory.Create(notional) },
                 compoundingMethod = CompoundingMethodEnum.None,
                 compoundingMethodSpecified = true,
                 dayCountFraction = dayCountFraction
             };
-
             var discounting = new Discounting
             {
                 discountingType = discountingType,
                 discountRateDayCountFraction = dayCountFraction
             };
-
             calculation.discounting = discounting;
             calculation.Items = new object[] { FloatingRateCalculationHelper.CreateFloating(floatingRateIndex, tenor) };
-
             return calculation;
         }
     }

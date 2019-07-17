@@ -37,7 +37,7 @@ namespace FpML.V5r10.Reporting.Helpers
             commodity.unit.Value = priceQuoteUnits.ToString();
             if (exchangeId != null)
             {
-                commodity.Item = ExchangeIdHelper.Parse(exchangeId);
+                commodity.Item = ProductTypeHelper.ExchangeIdHelper.Parse(exchangeId);
             }
             else
             {

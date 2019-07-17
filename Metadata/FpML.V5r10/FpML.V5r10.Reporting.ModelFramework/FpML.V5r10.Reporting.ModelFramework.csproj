@@ -247,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
-    <None Include="Migrated rules for National.QRSC.ModelFramework.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Metadata.Common.csproj">

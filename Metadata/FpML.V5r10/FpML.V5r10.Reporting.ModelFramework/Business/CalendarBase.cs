@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 using System.Collections.Generic;
 
@@ -27,9 +42,9 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
         public string NameList => _name;
 
         /// <summary>
-        /// Gets the deduped name list.
+        /// Gets the de-duped name list.
         /// </summary>
-        /// <value>The deduped name list.</value>
+        /// <value>The de-duped name list.</value>
         public string DedupedNameList => NameList.Trim();
 
         #region Constructors
@@ -54,7 +69,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
         protected CalendarBase( String name, CultureInfo culture, Calendar calendar )
         {
             _name = name;
-            _calendar = calendar;
+            Calendar = calendar;
             _culture = culture;
         }
 
@@ -65,7 +80,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
         private readonly String _name;
 
         /// <summary>
-        /// A stringified representation of the Calendar.
+        /// A string representation of the Calendar.
         /// </summary>
         /// <returns>A String representing the object.</returns>
         public override String ToString() 
@@ -77,12 +92,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
         /// <summary>
         /// The underlying <see cref="System.Globalization.Calendar"/>.
         /// </summary>
-        private readonly Calendar _calendar;
-
-        /// <summary>
-        /// The underlying <see cref="System.Globalization.Calendar"/>.
-        /// </summary>
-        public Calendar Calendar => _calendar;
+        public Calendar Calendar { get; }
 
         /// <summary>
         /// The associated <see cref="System.Globalization.CultureInfo"/>.
@@ -122,7 +132,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
 
 
         /// <summary>
-        /// Holidayses the between.
+        /// Holidays between.
         /// </summary>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
@@ -224,7 +234,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
 
             if ((dayType != DayTypeEnum.Business) & (dayType != DayTypeEnum.Calendar))
             {
-                throw new ArgumentOutOfRangeException("dayType", dayType, "Only 'DayTypeEnum.Business' and 'DayTypeEnum.Calendar' day types are currently supported.");
+                throw new ArgumentOutOfRangeException(nameof(dayType), dayType, "Only 'DayTypeEnum.Business' and 'DayTypeEnum.Calendar' day types are currently supported.");
             }
 
             //  We can only use Business dayType for days intervals.
@@ -297,7 +307,7 @@ namespace FpML.V5r10.Reporting.ModelFramework.Business
                         return dateTime.AddDays(7 * periodMultiplierAsInt);
                     }
                 case PeriodEnum.M:
-                    // dito with months resp. Calendar.AddMonths()
+                    // ditto with months resp. Calendar.AddMonths()
                     //
                     {
                         return dateTime.AddMonths(periodMultiplierAsInt);

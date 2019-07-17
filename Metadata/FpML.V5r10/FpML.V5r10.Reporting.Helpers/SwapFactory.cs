@@ -12,14 +12,14 @@ namespace FpML.V5r10.Reporting.Helpers
         /// </summary>
         /// <param name="stream1"></param>
         /// <param name="stream2"></param>
+        /// <param name="productTypeTaxonomy"></param>
         /// <returns></returns>
-        public static Swap Create(InterestRateStream stream1, InterestRateStream stream2)
+        public static Swap Create(InterestRateStream stream1, InterestRateStream stream2, string productTypeTaxonomy)
         {
             var result = new Swap
                 {
                     swapStream = new[] {stream1, stream2},
-                    Items = new object[] {ProductTypeHelper.Create("Swap")},
-                    ItemsElementName = new[] {ItemsChoiceType2.productType}
+                    productType = new[] {ProductTypeHelper.Create(productTypeTaxonomy) },
                 };
             return result;
         }
@@ -28,14 +28,14 @@ namespace FpML.V5r10.Reporting.Helpers
         /// Creates floater (swap with single floating stream of coupons)
         /// </summary>
         /// <param name="singleStream"></param>
+        /// <param name="productTypeTaxonomy"></param>
         /// <returns></returns>
-        public static Swap Create(InterestRateStream singleStream)
+        public static Swap Create(InterestRateStream singleStream, string productTypeTaxonomy)
         {
             var result = new Swap
                 {
                     swapStream = new[] {singleStream},
-                    Items = new object[] {ProductTypeHelper.Create("Floater")},
-                    ItemsElementName = new[] {ItemsChoiceType2.productType}
+                    productType = new[] {ProductTypeHelper.Create(productTypeTaxonomy) },
                 };
             return result;
         }

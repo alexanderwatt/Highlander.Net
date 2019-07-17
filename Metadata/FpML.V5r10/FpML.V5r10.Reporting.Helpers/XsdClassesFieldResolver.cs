@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FpML.V5r10.Reporting.Helpers
@@ -313,34 +314,46 @@ namespace FpML.V5r10.Reporting.Helpers
 
         #region Calculation Get/Set NotionalSchedule
 
-        public static FxLinkedNotionalSchedule CalculationGetFxLinkedNotionalSchedule(Calculation calculation)
+        public static List<FxLinkedNotionalSchedule> CalculationGetFxLinkedNotionalSchedule(Calculation calculation)
         {
-            FxLinkedNotionalSchedule result = null;
-            if (calculation.Item as FxLinkedNotionalSchedule != null)
+            var result = new List<FxLinkedNotionalSchedule>();
+            if (calculation.Items != null)
             {
-                result = (FxLinkedNotionalSchedule)calculation.Item;
+                foreach (var item in calculation.Items)
+                {
+                    if (item is FxLinkedNotionalSchedule schedule)
+                    {
+                        result.Add(schedule);
+                    }
+                }
             }
             return result;
         }
 
         public static void CalculationSetFxLinkedNotionalSchedule(Calculation calculation, FxLinkedNotionalSchedule value)
         {
-            calculation.Item = value;
+            calculation.Items = new object[] {value};
         }
 
-        public static Notional CalculationGetNotionalSchedule(Calculation calculation)
+        public static List<Notional> CalculationGetNotionalSchedule(Calculation calculation)
         {
-            Notional result = null;
-            if (calculation.Item as Notional != null)
+            var result = new List<Notional>();
+            if (calculation.Items != null)
             {
-                result = (Notional)calculation.Item;
+                foreach (var item in calculation.Items)
+                {
+                    if (item is Notional schedule)
+                    {
+                        result.Add(schedule);
+                    }
+                }
             }
             return result;
         }
 
         public static void CalculationSetNotionalSchedule(Calculation calculation, Notional value)
         {
-            calculation.Item = value;
+            calculation.Items = new object[] {value};
         }
 
         #endregion

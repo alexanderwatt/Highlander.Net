@@ -1,10 +1,25 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
-using FpML.V5r10.Reporting.Models.Rates.Futures;
+using Orion.Models.Rates.Futures;
 using Orion.Util.Helpers;
 using Orion.Analytics.Helpers;
 using Orion.Analytics.Dates;
@@ -144,7 +159,7 @@ namespace Orion.CalendarEngine.Dates
             for (int i = 1; i <= 12; i = i + cycle)
             {
                 var dt = new DateTime(year, i, 1);
-                dt = nextLastTradingDate(dt, mainCycle);
+                dt = NextLastTradingDate(dt, mainCycle);
                 dts.Add(dt);
             }
             return dts;
@@ -168,7 +183,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="date"></param>
         /// <param name="mainCycle"></param>
         /// <returns>true/false</returns>
-        public virtual bool isLastTradingDate(DateTime date, bool mainCycle)
+        public virtual bool IsLastTradingDate(DateTime date, bool mainCycle)
         {
             if (date.DayOfWeek != DayOfWeek.Wednesday)
                 return false;
@@ -191,7 +206,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns></returns>
-        public virtual DateTime nextLastTradingDate(DateTime refDate, bool mainCycle)
+        public virtual DateTime NextLastTradingDate(DateTime refDate, bool mainCycle)
         {
             int d = refDate.Day;
             int y = refDate.Year;
@@ -214,7 +229,7 @@ namespace Orion.CalendarEngine.Dates
             }
             DateTime result = GetLastTradingDay(m, y);
             if (result <= refDate)
-                result = nextLastTradingDate(new DateTime(y, m, 22), mainCycle);
+                result = NextLastTradingDate(new DateTime(y, m, 22), mainCycle);
             return result;
         }
 
@@ -427,9 +442,9 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="d"></param>
         /// <param name="mainCycle"></param>
         /// <returns>The futures code string</returns>
-        public string nextFuturesCode(DateTime d, bool mainCycle)
+        public string NextFuturesCode(DateTime d, bool mainCycle)
         {
-            DateTime date = nextLastTradingDate(d, mainCycle);
+            DateTime date = NextLastTradingDate(d, mainCycle);
             return FuturesCode(date);
         }
 
@@ -545,7 +560,7 @@ namespace Orion.CalendarEngine.Dates
         protected string FuturesCode(DateTime date)
         {
             string result = "invalid date.";
-            if (isLastTradingDate(date, false))
+            if (IsLastTradingDate(date, false))
             {
                 int y = date.Year % 10;
 

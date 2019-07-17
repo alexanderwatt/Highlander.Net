@@ -150,9 +150,10 @@ namespace FpML.V5r10.ConfigData
             try
             {
                 var confirmation = XmlSerializerHelper.DeserializeFromString<Confirmation.RequestConfirmation>(resourceAsString);
-                if (confirmation != null)
+                if (confirmation?.Items?[0] is Confirmation.Trade trade)
                 {
-                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, confirmation.trade);
+                    var result =
+                        new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, trade);
                     return result;
                 }
             }
@@ -173,9 +174,9 @@ namespace FpML.V5r10.ConfigData
             try
             {
                 var confirmation = XmlSerializerHelper.DeserializeFromString<Confirmation.ConfirmationAgreed>(resourceAsString);
-                if (confirmation != null)
+                if (confirmation?.Items?[0] is Confirmation.Trade trade)
                 {
-                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, confirmation.trade);
+                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, trade);
                     return result;
                 }
             }
@@ -184,9 +185,9 @@ namespace FpML.V5r10.ConfigData
             try
             {
                 var confirmation = XmlSerializerHelper.DeserializeFromString<Confirmation.ExecutionNotification>(resourceAsString);
-                if (confirmation != null)
+                if (confirmation?.Items?[0] is Confirmation.Trade trade)
                 {
-                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, confirmation.trade);
+                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, trade);
                     return result;
                 }
             }
@@ -195,9 +196,9 @@ namespace FpML.V5r10.ConfigData
             try
             {
                 var confirmation = XmlSerializerHelper.DeserializeFromString<Confirmation.ExecutionRetracted>(resourceAsString);
-                if (confirmation != null)
+                if (confirmation?.Items?[0] is Confirmation.Trade trade)
                 {
-                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, confirmation.trade);
+                    var result = new Pair<Confirmation.Party[], Confirmation.Trade>(confirmation.party, trade);
                     return result;
                 }
             }
@@ -231,12 +232,12 @@ namespace FpML.V5r10.ConfigData
         private static void BuildTrade(ILogger logger, ICoreCache targetClient, string nameSpace, Trade tradeVersion, Party[] party)
         {
             var extraProps = new NamedValueSet();
-            var party1 = party[0].partyId[0].Value;
-            var party2 = party[1].partyId[0].Value;
-            extraProps.Set(TradeProp.Party1, party1);
-            extraProps.Set(TradeProp.Party2, party2);
-            //extraProps.Set(TradeProp.CounterPartyId, party2);//Redundant
-            //extraProps.Set(TradeProp.OriginatingPartyId, party1);//Redundant
+            var party1 = party[0].Items?[0] as PartyId;
+            var party2 = party[1].Items?[0] as PartyId;
+            if (party1 != null) extraProps.Set(TradeProp.Party1, party1.Value);
+            if (party2 != null) extraProps.Set(TradeProp.Party2, party2.Value);
+            //if (party2 != null) extraProps.Set(TradeProp.CounterPartyId, party2.Value); //Redundant
+            //if (party1 != null) extraProps.Set(TradeProp.OriginatingPartyId, party1.Value); //Redundant
             extraProps.Set(TradeProp.TradeDate, tradeVersion.tradeHeader.tradeDate.Value);
             extraProps.Set(TradeProp.TradingBookName, "Test");
             TradeId tradeId;
@@ -276,10 +277,10 @@ namespace FpML.V5r10.ConfigData
         public static void BuildBothTrades(ILogger logger, ICoreCache targetClient, string nameSpace, Confirmation.Trade tradeVersion, Confirmation.Party[] party)
         {
             var extraProps = new NamedValueSet();
-            var party1 = party[0].partyId[0].Value;
-            var party2 = party[1].partyId[0].Value;
-            extraProps.Set(TradeProp.Party1, party1);
-            extraProps.Set(TradeProp.Party2, party2);
+            var party1 = party[0].Items?[0] as PartyId;
+            var party2 = party[1].Items?[0] as PartyId;
+            if (party1 != null) extraProps.Set(TradeProp.Party1, party1.Value);
+            if (party2 != null) extraProps.Set(TradeProp.Party2, party2.Value);
             extraProps.Set(TradeProp.TradeDate, tradeVersion.tradeHeader.tradeDate.Value);
             extraProps.Set(TradeProp.TradingBookName, "Test");
             Confirmation.TradeId tradeId;

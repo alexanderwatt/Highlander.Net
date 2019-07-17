@@ -95,10 +95,6 @@
       <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
       <Name>FpML.V5r10.Reporting.CurveEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
-      <Project>{e9d01625-9697-4dec-bcbf-499bbc7c4e79}</Project>
-      <Name>FpML.V5r10.Reporting.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MDAS.Provider.Base\FpML.V5r10.MarketData.ProviderBase.csproj">
       <Project>{c60cbe91-0845-462d-ac61-4d64412bf164}</Project>
       <Name>FpML.V5r10.MarketData.ProviderBase</Name>

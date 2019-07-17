@@ -77,7 +77,7 @@ namespace FpML.V5r10.Reporting.Helpers
                 }
                 if (baseQuotation.exchangeId!=null)
                 {
-                    quotation.exchangeId = ExchangeIdHelper.Copy(baseQuotation.exchangeId);
+                    quotation.exchangeId = ProductTypeHelper.ExchangeIdHelper.Copy(baseQuotation.exchangeId);
                 }
             }
             return quotation;

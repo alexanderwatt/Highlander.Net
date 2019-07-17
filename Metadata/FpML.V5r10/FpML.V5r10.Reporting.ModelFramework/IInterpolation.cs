@@ -1,3 +1,19 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+
 #region Using directives
 
 using System;
@@ -7,7 +23,7 @@ using System.Collections.Generic;
 
 #endregion
 
-//TODO: make the Interpolation method classes into generec classes 
+//TODO: make the Interpolation method classes into generic classes 
 //(That will improve performance and code readability)
 
 namespace FpML.V5r10.Reporting.ModelFramework
@@ -32,7 +48,7 @@ namespace FpML.V5r10.Reporting.ModelFramework
 		/// </remarks>
         /// <param name="point"><c>IPoint</c> This can be a one or many dimensional point.</param>
 		/// <param name="allowExtrapolation"></param>
-		/// <returns><c>decimal</c> The interpolated value as a decimasl for FpML compatability.</returns>
+		/// <returns><c>decimal</c> The interpolated value as a decimal for FpML compatibility.</returns>
 		/// <exception cref="ArgumentOutOfRangeException">
 		/// Thrown when extrapolation has not been allowed and the passed value
 		/// is outside the allowed range.

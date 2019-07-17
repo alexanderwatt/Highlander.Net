@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 
 namespace Orion.CalendarEngine.Dates
@@ -47,10 +62,10 @@ namespace Orion.CalendarEngine.Dates
         ///// Gets the futures date following the given IMM contract listed in the
         ///// relevant Exchange.
         ///// </summary>
-        ///// <param name="futurescode"></param>
+        ///// <param name="futures code"></param>
         ///// <param name="referenceDate"></param>
         ///// <returns></returns>
-        //DateTime GetLastTradingDay(string futurescode, DateTime referenceDate);
+        //DateTime GetLastTradingDay(string futures code, DateTime referenceDate);
 
         /// <summary>
         /// Gets the last trading day.
@@ -66,7 +81,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="d"></param>
         /// <param name="mainCycle"></param>
         /// <returns></returns>
-        bool isLastTradingDate(DateTime d, bool mainCycle);
+        bool IsLastTradingDate(DateTime d, bool mainCycle);
 
         /// <summary>
         /// next futures date following the given date
@@ -76,7 +91,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="date"></param>
         /// <param name="mainCycle"></param>
         /// <returns>A date.</returns>
-        string nextFuturesCode(DateTime date, bool mainCycle);
+        string NextFuturesCode(DateTime date, bool mainCycle);
 
         /// <summary>
         /// next futures date following the given date
@@ -86,18 +101,18 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns>A date.</returns>
-        DateTime nextLastTradingDate(DateTime refDate, bool mainCycle);
+        DateTime NextLastTradingDate(DateTime refDate, bool mainCycle);
 
         ///// <summary>
         ///// next futures date following the given date
         ///// returns the 1st delivery date for next contract listed in the
         ///// relevant Exchange.
         ///// </summary>
-        ///// <param name="futurescode"></param>
+        ///// <param name="futures code"></param>
         ///// <param name="referenceDate"></param>
         ///// <param name="mainCycle"></param>
         ///// <returns>A date.</returns>
-        //DateTime nextLastTradingDate(string futurescode, bool mainCycle, DateTime referenceDate);
+        //DateTime nextLastTradingDate(string futures code, bool mainCycle, DateTime referenceDate);
 
         ///// <summary>
         ///// Gets the next absolute code for that commodity contract.

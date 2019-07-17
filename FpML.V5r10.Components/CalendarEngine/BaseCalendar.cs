@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Usings
 
 using System;
@@ -90,9 +105,9 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// Gets the deduped name list.
+        /// Gets the de-duped name list.
         /// </summary>
-        /// <value>The deduped name list.</value>
+        /// <value>The de-duped name list.</value>
         public string DedupedNameList
         {
             get
@@ -199,8 +214,8 @@ namespace Orion.CalendarEngine
         public List<DateTime> HolidaysBetweenDates(DateTime startDate, DateTime endDate)
         {
             // Now just return the dates in the range specified by start and end dates
-            var allSignicantDates = GetDatesInRange(startDate, endDate);
-            return allSignicantDates;
+            var allSignificantDates = GetDatesInRange(startDate, endDate);
+            return allSignificantDates;
         }
 
         /// <summary>
@@ -212,19 +227,19 @@ namespace Orion.CalendarEngine
         public List<DateTime> BusinessDaysBetweenDates(DateTime startDate, DateTime endDate)
         {
             const int cIncrementDay = 1;
-            var allSignicantDates = new List<DateTime>();
+            var allSignificantDates = new List<DateTime>();
             List<DateTime> holidays = HolidaysBetweenDates(startDate, endDate);
-            DateTime dtbase = startDate;
-            while(dtbase <= endDate)
+            DateTime dateBase = startDate;
+            while(dateBase <= endDate)
             {
-                if (!RuleHelper.IsWeekend(dtbase))
+                if (!RuleHelper.IsWeekend(dateBase))
                 {
-                    if (!holidays.Contains(dtbase))
-                        allSignicantDates.Add(dtbase);
+                    if (!holidays.Contains(dateBase))
+                        allSignificantDates.Add(dateBase);
                 }
-                dtbase = dtbase.AddDays(cIncrementDay);
+                dateBase = dateBase.AddDays(cIncrementDay);
             }
-            return allSignicantDates;
+            return allSignificantDates;
         }
 
         /// <summary>
@@ -296,7 +311,7 @@ namespace Orion.CalendarEngine
 
             #endregion
 
-            // handling the NONE day conevention
+            // handling the NONE day convention
             if (businessDayConvention == BusinessDayConventionEnum.NONE)
             {
                 // No rolling if multiplier is zero
@@ -371,7 +386,7 @@ namespace Orion.CalendarEngine
                         return dateTime.AddDays(7 * periodMultiplierAsInt);
                     }
                 case PeriodEnum.M:
-                    // dito with months resp. Calendar.AddMonths()
+                    // ditto with months resp. Calendar.AddMonths()
                     //
                     {
                         return dateTime.AddMonths(periodMultiplierAsInt);
@@ -403,7 +418,7 @@ namespace Orion.CalendarEngine
         #region Helpers
 
         /// <summary>
-        /// A stringified representation of the Calendar.
+        /// A string representation of the Calendar.
         /// </summary>
         /// <returns>A String representing the object.</returns>
         public override String ToString()
@@ -412,7 +427,7 @@ namespace Orion.CalendarEngine
         }
 
         /// <summary>
-        /// A stringified representation of this Calendar for use with FpML.
+        /// A string representation of this Calendar for use with FpML.
         /// </summary>
         /// <returns>An FpML String representing the object.</returns>
         /// <remarks>
@@ -431,7 +446,7 @@ namespace Orion.CalendarEngine
         /// <returns></returns>
         public List<DateTime> GetDatesInRange(DateTime startDate, DateTime endDate)
         {
-            var signicantDatesInRange = new List<DateTime>();
+            var significantDatesInRange = new List<DateTime>();
             if (Dates.Count > 0)
             {
                 //Dates.Sort();
@@ -441,15 +456,15 @@ namespace Orion.CalendarEngine
                 if (itemSpan == 0)
                 {
                     if (Dates[startIndex].Date == startDate)
-                        signicantDatesInRange = Dates.GetRange(startIndex, 1);
+                        significantDatesInRange = Dates.GetRange(startIndex, 1);
                 }
                 else
                 {
                     int lastItemIndex = (endIndex < Dates.Count && Dates[endIndex] == endDate) ? itemSpan + 1 : itemSpan;
-                    signicantDatesInRange = Dates.GetRange(startIndex, lastItemIndex);
+                    significantDatesInRange = Dates.GetRange(startIndex, lastItemIndex);
                 }
             }
-            return signicantDatesInRange;
+            return significantDatesInRange;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Build;
-using Orion.V5r10.Reporting.Common;
+using Orion.MDAS.Client;
 
 namespace TestMarketDataClient
 {

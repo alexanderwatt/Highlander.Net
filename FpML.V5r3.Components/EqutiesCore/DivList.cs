@@ -38,9 +38,9 @@ namespace Orion.EquitiesCore
     public double GetD(int idx)
     {
         if (idx < Divpoints)
-      {
-        return _d[idx];
-      }
+        {
+            return _d[idx];
+        }
         return 0.0;
     }
 

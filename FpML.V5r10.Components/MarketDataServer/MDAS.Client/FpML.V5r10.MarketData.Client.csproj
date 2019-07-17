@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMarketDataClient.cs" />
     <Compile Include="MarketDataClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,10 +92,6 @@
     <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MDAS.Common\FpML.V5r10.Reporting.Common.csproj">
-      <Project>{e9d01625-9697-4dec-bcbf-499bbc7c4e79}</Project>
-      <Name>FpML.V5r10.Reporting.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

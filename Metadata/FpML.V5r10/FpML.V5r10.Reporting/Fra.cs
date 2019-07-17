@@ -36,9 +36,9 @@ namespace FpML.V5r10.Reporting
                 result.Add(discountCurve);
             }           
             if (floatingRateIndex != null && indexTenor!=null)
-                {
-                    result.Add(CurveNameHelpers.GetForecastCurveName(floatingRateIndex, indexTenor[0]));
-                }
+            {
+                result.Add(CurveNameHelpers.GetForecastCurveName(floatingRateIndex, indexTenor[0]));
+            }
             return result;
         }
 

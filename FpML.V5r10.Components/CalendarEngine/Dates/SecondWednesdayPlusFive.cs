@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/awatt/highlander
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
@@ -13,7 +28,7 @@ namespace Orion.CalendarEngine.Dates
     public class SecondWednesdayPlusFive : LastTradingDate
     {
         /// <summary>
-        /// Base consructor, which does not filter for main cycle or not.
+        /// Base constructor, which does not filter for main cycle or not.
         /// </summary>
         public SecondWednesdayPlusFive()
         {
@@ -54,7 +69,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="date"></param>
         /// <param name="mainCycle"></param>
         /// <returns>true/false</returns>
-        public override bool isLastTradingDate(DateTime date, bool mainCycle)
+        public override bool IsLastTradingDate(DateTime date, bool mainCycle)
         {
             if (date.DayOfWeek != DayOfWeek.Friday)
                 return false;
@@ -78,7 +93,7 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns></returns>
-        public override DateTime nextLastTradingDate(DateTime refDate, bool mainCycle) 
+        public override DateTime NextLastTradingDate(DateTime refDate, bool mainCycle) 
         {
             int d = refDate.Day;
             int y = refDate.Year;
@@ -101,7 +116,7 @@ namespace Orion.CalendarEngine.Dates
             }
             DateTime result = GetLastTradingDay(m, y);
             if (result<=refDate)
-                result = nextLastTradingDate(new DateTime(y, m, 21), mainCycle);
+                result = NextLastTradingDate(new DateTime(y, m, 21), mainCycle);
             return result;
         }
 
