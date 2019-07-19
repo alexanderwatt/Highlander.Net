@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Common;
+using Metadata.Common;
 using Orion.Util.Logging;
 
 namespace Orion.V5r3.Configuration

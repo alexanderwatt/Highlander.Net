@@ -20,12 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.CurveEngine.Assets.Helpers;
 using Orion.MDAS.Client;
 using Orion.Util.Compression;
 using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion

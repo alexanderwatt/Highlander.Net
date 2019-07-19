@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Common;
+using Metadata.Common;
 using Orion.Util.Expressions;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;

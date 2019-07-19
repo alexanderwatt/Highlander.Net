@@ -21,6 +21,7 @@ using System.Linq;
 using System.Reflection;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Constants;
 using Orion.Contracts;
 using Orion.CurveEngine.Helpers;
@@ -34,7 +35,6 @@ using Orion.ModelFramework;
 using Orion.ModelFramework.Identifiers;
 using Orion.Util.RefCounting;
 using Exception = System.Exception;
-using MDSProviderId = Orion.V5r3.Configuration.MDSProviderId;
 
 #endregion
 

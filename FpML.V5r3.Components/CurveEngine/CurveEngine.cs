@@ -30,6 +30,7 @@ using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
 using MathNet.Numerics.LinearAlgebra.Double;
+using Metadata.Common;
 using Orion.Analytics.DayCounters;
 using Orion.CalendarEngine;
 using Orion.CalendarEngine.Helpers;
@@ -56,7 +57,6 @@ using Orion.Analytics.Processes;
 using Orion.Analytics.Rates;
 using Orion.Analytics.Stochastics.Pedersen;
 using Orion.CurveEngine.Assets.Rates.CapsFloors;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 using FxCurve = Orion.CurveEngine.PricingStructures.Curves.FxCurve;
 

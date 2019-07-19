@@ -27,7 +27,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using FpML.V5r3.Reporting.Helpers;
-using Orion.V5r3.Configuration;
+using Metadata.Common;
 using Exception = System.Exception;
 
 #endregion

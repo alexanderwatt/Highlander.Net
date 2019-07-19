@@ -175,14 +175,14 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="locationsAsArray">The locations range as an array.</param>
         /// <param name="date">The date.</param>
-        /// <param name="dayType">The day type: cakendat or business.</param>
-        /// <param name="periodInteval">The period inteval.</param>
+        /// <param name="dayType">The day type: calendar or business.</param>
+        /// <param name="periodInterval">The period interval.</param>
         /// <param name="businessDayConvention">The business day convention.</param>
         /// <returns>The adjusted date.</returns>
-        public DateTime Advance(Excel.Range locationsAsArray, DateTime date, string dayType, string periodInteval, string businessDayConvention)
+        public DateTime Advance(Excel.Range locationsAsArray, DateTime date, string dayType, string periodInterval, string businessDayConvention)
         {
             List<string> unqVals = DataRangeHelper.StripRange(locationsAsArray);
-            var result = CalendarService.Advance(unqVals.ToArray(), date, dayType, periodInteval, businessDayConvention);
+            var result = CalendarService.Advance(unqVals.ToArray(), date, dayType, periodInterval, businessDayConvention);
             return result;
         }
 
@@ -191,15 +191,15 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="locationsAsArray">The locations range as an array.</param>
         /// <param name="dateRange">The date.</param>
-        /// <param name="dayType">The day type: cakendat or business.</param>
-        /// <param name="periodInteval">The period inteval.</param>
+        /// <param name="dayType">The day type: calendar or business.</param>
+        /// <param name="periodInterval">The period interval.</param>
         /// <param name="businessDayConvention">The business day convention.</param>
         /// <returns>The vertical range of adjusted dates.</returns>
-        public object[,] AdvanceDateRange(Excel.Range locationsAsArray, Excel.Range dateRange, string dayType, string periodInteval, string businessDayConvention)
+        public object[,] AdvanceDateRange(Excel.Range locationsAsArray, Excel.Range dateRange, string dayType, string periodInterval, string businessDayConvention)
         {
             List<string> unqVals = DataRangeHelper.StripRange(locationsAsArray);
             List<DateTime> unqDates = DataRangeHelper.StripDateTimeRange(dateRange);
-            List<DateTime> result = unqDates.Select(element => CalendarService.Advance(unqVals.ToArray(), element, dayType, periodInteval, businessDayConvention)).ToList();
+            List<DateTime> result = unqDates.Select(element => CalendarService.Advance(unqVals.ToArray(), element, dayType, periodInterval, businessDayConvention)).ToList();
             var resVals = new object[result.Count, 1];
             for (int idx = 0; idx < resVals.Length; ++idx)
                 resVals[idx, 0] = result[idx];
@@ -224,7 +224,7 @@ namespace HLV5r3.Financial
         #region Central Bank Date Functions
 
         /// <summary>
-        /// A function to return the list of valid indices, which may or may not have been impletented.
+        /// A function to return the list of valid indices, which may or may not have been implemented.
         /// </summary>
         /// <returns>A range object</returns>
         public object[,] SupportedCentralBanks()
@@ -666,7 +666,7 @@ namespace HLV5r3.Financial
         /// <param name="stubPeriodType">Type of the stub period.</param>
         /// <param name="calendars">The holiday array.</param>
         /// <param name="businessDayConvention">The business day convention.</param>
-        /// <returns>A vertival range of dates.</returns>
+        /// <returns>A vertical range of dates.</returns>
         public object[,] GetAdjustedCalculationPeriodDates(DateTime effectiveDate, DateTime terminationDate,
                                                                     string periodInterval, string rollConvention, DateTime firstRegularPeriodDate, string stubPeriodType,
                                                                     Excel.Range calendars, string businessDayConvention)
@@ -689,7 +689,7 @@ namespace HLV5r3.Financial
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="firstRegularPeriodDate">The first regular period date.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
-        /// <returns>A vertival range of dates.</returns>
+        /// <returns>A vertical range of dates.</returns>
         public object[,] GetUnadjustedCalculationPeriodDates(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, 
             DateTime firstRegularPeriodDate, string stubPeriodType)
         {
@@ -709,7 +709,7 @@ namespace HLV5r3.Financial
         /// <param name="periodInterval">The period interval.</param>
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
-        /// <returns>A vertical arrray of dates.</returns>
+        /// <returns>A vertical array of dates.</returns>
         public object[,] UnadjustedCalculationDatesFromFirstRegularInterval(DateTime effectiveDate, DateTime terminationDate, 
             string intervalToFirstRegularPeriodStart, string periodInterval, string rollConvention, string stubPeriodType)
         {

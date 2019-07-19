@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -116,25 +131,25 @@ namespace FpML.V5r10.Reporting.Identifiers
             {
                 case PricingStructureTypeEnum.RateCurve:
                 case PricingStructureTypeEnum.RateBasisCurve:
-                    ForecastRateIndex = ForecastRateIndexHelper.Parse(Index, IndexTenor);
+                    ForecastRateIndex = ProductTypeHelper.ForecastRateIndexHelper.Parse(Index, IndexTenor);
                     break;
                 case PricingStructureTypeEnum.RateSpreadCurve:
-                    ForecastRateIndex = ForecastRateIndexHelper.Parse(Index, IndexTenor);
+                    ForecastRateIndex = ProductTypeHelper.ForecastRateIndexHelper.Parse(Index, IndexTenor);
                     ReferenceCurveTypeAndName = PropertyHelper.ExtractReferenceCurveName(Properties);
                     ReferenceCurveUniqueId = PropertyHelper.ExtractReferenceCurveUniqueId(Properties);
                     break;
                 case PricingStructureTypeEnum.DiscountCurve:
                     string creditInstrumentId = PropertyHelper.ExtractCreditInstrumentId(Properties);
                     string creditSeniority = PropertyHelper.ExtractCreditSeniority(Properties);
-                    CreditInstrumentId = InstrumentIdHelper.Parse(creditInstrumentId);
-                    CreditSeniority = CreditSeniorityHelper.Parse(creditSeniority);
+                    CreditInstrumentId = ProductTypeHelper.InstrumentIdHelper.Parse(creditInstrumentId);
+                    CreditSeniority = ProductTypeHelper.CreditSeniorityHelper.Parse(creditSeniority);
                     break;
                 case PricingStructureTypeEnum.RateXccyCurve:
                     //ForecastRateIndex = ForecastRateIndexHelper.Parse(Index, IndexTenor);
                     string discountInstrumentId = PropertyHelper.ExtractCreditInstrumentId(Properties);
                     string discountSeniority = PropertyHelper.ExtractCreditSeniority(Properties);
-                    CreditInstrumentId = InstrumentIdHelper.Parse(discountInstrumentId);
-                    CreditSeniority = CreditSeniorityHelper.Parse(discountSeniority);
+                    CreditInstrumentId = ProductTypeHelper.InstrumentIdHelper.Parse(discountInstrumentId);
+                    CreditSeniority = ProductTypeHelper.CreditSeniorityHelper.Parse(discountSeniority);
                     ReferenceCurveTypeAndName = PropertyHelper.ExtractReferenceCurveName(Properties);
                     ReferenceCurveUniqueId = PropertyHelper.ExtractReferenceCurveUniqueId(Properties);
                     ReferenceFxCurveTypeAndName = PropertyHelper.ExtractReferenceFxCurveName(Properties);
@@ -143,7 +158,7 @@ namespace FpML.V5r10.Reporting.Identifiers
                     ReferenceCurrency2CurveId = PropertyHelper.ExtractReferenceCurrency2CurveId(Properties);
                     break;
                 case PricingStructureTypeEnum.InflationCurve:
-                    ForecastRateIndex = ForecastRateIndexHelper.Parse(Index, IndexTenor);
+                    ForecastRateIndex = ProductTypeHelper.ForecastRateIndexHelper.Parse(Index, IndexTenor);
                     var inflationLag = PropertyHelper.ExtractInflationLag(Properties);
                     if (inflationLag != "Unknown")
                     {
@@ -169,7 +184,7 @@ namespace FpML.V5r10.Reporting.Identifiers
                 {
                     indexName = indexName + '-' + rateCurveId[i];
                 }
-                ForecastRateIndex = ForecastRateIndexHelper.Parse(indexName, indexTenor);
+                ForecastRateIndex = ProductTypeHelper.ForecastRateIndexHelper.Parse(indexName, indexTenor);
             }
             if (pricingStructureType == PricingStructureTypeEnum.DiscountCurve ||
                 pricingStructureType == PricingStructureTypeEnum.RateXccyCurve)
@@ -181,8 +196,8 @@ namespace FpML.V5r10.Reporting.Identifiers
                 {
                     indexName = indexName + '-' + rateCurveId[i];
                 }
-                CreditInstrumentId = InstrumentIdHelper.Parse(indexName);
-                CreditSeniority = CreditSeniorityHelper.Parse(subordination);
+                CreditInstrumentId = ProductTypeHelper.InstrumentIdHelper.Parse(indexName);
+                CreditSeniority = ProductTypeHelper.CreditSeniorityHelper.Parse(subordination);
             }
             if (pricingStructureType == PricingStructureTypeEnum.InflationCurve)
             {
@@ -193,7 +208,7 @@ namespace FpML.V5r10.Reporting.Identifiers
                 {
                     indexName = indexName + '-' + rateCurveId[i];
                 }
-                ForecastRateIndex = ForecastRateIndexHelper.Parse(indexName, indexTenor);
+                ForecastRateIndex = ProductTypeHelper.ForecastRateIndexHelper.Parse(indexName, indexTenor);
             }
         }
     }

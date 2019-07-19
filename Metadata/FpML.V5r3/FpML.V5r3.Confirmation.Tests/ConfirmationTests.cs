@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using FpML.V5r3.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Metadata.Common;
 
@@ -282,12 +283,12 @@ namespace FpML.V5r3.Confirmation.Tests
                         new Account()
                         {
                             id = "Account1",
-                            accountId = new AccountId[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" }},
-                            ItemsElementName = new ItemsChoiceType21[] { ItemsChoiceType21.accountBeneficiary },
-                            Items = new PartyReference[] { new PartyReference() { href = "Party1"}},
+                            accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" }},
+                            ItemsElementName = new[] { ItemsChoiceType21.accountBeneficiary },
+                            Items = new[] { new PartyReference() { href = "Party1"}},
                         },
                     },
-                validation = new Validation[]
+                validation = new[]
                     {
                         new Validation() { validationScheme = "scheme/1.0", Value = "Validation0" }
                     },
@@ -295,7 +296,7 @@ namespace FpML.V5r3.Confirmation.Tests
                 {
                     tradeHeader = new TradeHeader()
                     {
-                        partyTradeIdentifier = new PartyTradeIdentifier[] { new PartyTradeIdentifier() { Items = new object[] {
+                        partyTradeIdentifier = new[] { new PartyTradeIdentifier() { Items = new object[] {
                                 new PartyReference() { href="Party0" }, 
                                 new AccountReference() { href="Account0"},
                                 new TradeId() { tradeIdScheme = "scheme/1.0", Value = "Trade1234" },
@@ -334,7 +335,7 @@ namespace FpML.V5r3.Confirmation.Tests
                         {
                             Item = new SingleUnderlyer()
                             {
-                                Item = new EquityAsset() { instrumentId = new InstrumentId[] { new InstrumentId() { instrumentIdScheme = "scheme/1.0", Value = "BHP" } } }
+                                Item = new EquityAsset() { instrumentId = new[] { new InstrumentId() { instrumentIdScheme = "scheme/1.0", Value = "BHP" } } }
                             }
                         },
                         equityExercise = new EquityExerciseValuationSettlement()

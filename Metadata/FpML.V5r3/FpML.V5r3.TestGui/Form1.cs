@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using FpML.V5r3.Confirmation;
+using FpML.V5r3.TestHelpers;
 using Metadata.Common;
 
 namespace FpML.V5r3.TestGui

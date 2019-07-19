@@ -20,11 +20,11 @@ using System.Collections.Generic;
 using Core.Common;
 using FpML.V5r3.Codes;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.MDAS.Client;
 using Orion.Provider;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion

@@ -84,10 +84,6 @@
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
-      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
-      <Name>FpML.V5r3.ConfigTypes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FpML.V5r3.Reporting.ConfigData\FpML.V5r3.ConfigData.csproj">
       <Project>{a99322d4-6d41-499f-be4e-62dab22ff97f}</Project>
       <Name>FpML.V5r3.ConfigData</Name>

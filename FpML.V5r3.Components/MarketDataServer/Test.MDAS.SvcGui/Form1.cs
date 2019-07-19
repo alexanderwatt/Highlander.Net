@@ -20,6 +20,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Core.Common;
 using Core.V34;
+using Metadata.Common;
 using Orion.Build;
 using Orion.MDAS.Client;
 using Orion.MDAS.Server;
@@ -28,7 +29,6 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Util.WinTools;
-using Orion.V5r3.Configuration;
 
 #endregion
 

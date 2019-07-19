@@ -40,8 +40,8 @@ namespace Metadata.Common
     /// </summary>
     public static class RuleConst
     {
-        //public const string HostName = "HostName";
-        //public const string Instance = "Instance";
+        public const string HostName = "HostName";
+        public const string Instance = "Instance";
         public const string RuleName = "RuleName";
         public const string FileName = "FileName";
         public const string RuleStatus = "RuleStatus";

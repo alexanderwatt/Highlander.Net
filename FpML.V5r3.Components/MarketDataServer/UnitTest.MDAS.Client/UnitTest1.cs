@@ -20,6 +20,7 @@ using System.Globalization;
 using Core.Common;
 using Core.V34;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Orion.Constants;
 using Orion.MDAS.Server;
@@ -28,7 +29,6 @@ using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Build;
 using Orion.MDAS.Client;
-using Orion.V5r3.Configuration;
 
 #endregion
 

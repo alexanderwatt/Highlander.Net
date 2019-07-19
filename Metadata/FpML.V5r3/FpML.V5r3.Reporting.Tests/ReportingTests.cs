@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using FpML.V5r3.TestHelpers;
 using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -62,7 +63,7 @@ namespace FpML.V5r3.Reporting.Tests
                 System.Diagnostics.Debug.Print("Type: {0} ...", concreteType.Name);
                 var orig = Activator.CreateInstance(concreteType);
                 // serialise/deserialise as Document and then specific type
-                foreach (var serialiserType in new Type[] {
+                foreach (var serialiserType in new[] {
                     typeof(Document),
                     concreteType,
                 })
@@ -245,7 +246,7 @@ namespace FpML.V5r3.Reporting.Tests
             // validate external
             if (validate)
             {
-                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd";
+                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\" + fpmlViewName + ".xsd";
                 string schemaFullPath = Path.GetFullPath(schemaPath);
                 Assert.IsTrue(File.Exists(schemaFullPath));
                 // validate external xml
@@ -270,54 +271,54 @@ namespace FpML.V5r3.Reporting.Tests
         [TestMethod]
         public void TestReportingRoundtripOutThenInRequestMargin()
         {
-            var orig = new RequestMargin()
+            var orig = new RequestMargin
             {
                 fpmlVersion = "5-3",
-                header = new RequestMessageHeader()
+                header = new RequestMessageHeader
                 {
-                    messageId = new MessageId() { messageIdScheme = "scheme/1.0", Value = "12345678" },
+                    messageId = new MessageId { messageIdScheme = "scheme/1.0", Value = "12345678" },
                     //inReplyTo = new MessageId() { messageIdScheme = "scheme/1.0", Value = "87654321" },
-                    sentBy = new MessageAddress() { messageAddressScheme = "scheme/1.0", Value = "trader@bigbank.com" },
+                    sentBy = new MessageAddress { messageAddressScheme = "scheme/1.0", Value = "trader@bigbank.com" },
                     creationTimestamp = DateTime.Now
                 },
-                correlationId = new CorrelationId() { correlationIdScheme = "scheme/1.0", Value = "12345678" },
+                correlationId = new CorrelationId { correlationIdScheme = "scheme/1.0", Value = "12345678" },
                 party = GetTestFragment_Parties(),
                 account = GetTestFragment_Accounts(2),
                 assets = new Asset[]
                     {
                         new Bond(), // empty
-                        new Bond() { id = "id0" },
-                        new Bond()
+                        new Bond { id = "id0" },
+                        new Bond
                         {
-                            instrumentId = new InstrumentId[]
+                            instrumentId = new[]
                             {
-                                new InstrumentId() {  instrumentIdScheme = "CUSIP", Value = "789012EW0" }
+                                new InstrumentId {  instrumentIdScheme = "CUSIP", Value = "789012EW0" }
                             }
                         },
                         new Loan(), // empty
-                        new Loan() { id = "id1" },
-                        new Loan()
+                        new Loan { id = "id1" },
+                        new Loan
                         {
-                            instrumentId = new InstrumentId[]
+                            instrumentId = new[]
                             {
-                                new InstrumentId() {  instrumentIdScheme = "CUSIP", Value = "789012EW0" }
+                                new InstrumentId {  instrumentIdScheme = "CUSIP", Value = "789012EW0" }
                             }
                         },
                         new Cash(),
-                        new Cash() { id="cash01"},
-                        new Cash() { currency=new Currency() { Value="USD" } },
+                        new Cash { id="cash01"},
+                        new Cash { currency=new Currency { Value="USD" } },
                         new EquityAsset(),
-                        new EquityAsset() { id="equtiy01" },
-                        new EquityAsset()
+                        new EquityAsset { id="equtiy01" },
+                        new EquityAsset
                         {
-                            instrumentId = new InstrumentId[]
+                            instrumentId = new[]
                             {
-                                new InstrumentId() {  instrumentIdScheme = "Bloomberg", Value = "BHP.AX" }
+                                new InstrumentId {  instrumentIdScheme = "Bloomberg", Value = "BHP.AX" }
                             }
                         },
                     },
             };
-            var copy = Roundtrip_OutThenIn<RequestMargin>(orig, true, true);
+            var copy = Roundtrip_OutThenIn(orig, true, true);
             //using (var sr = new StreamReader(internalFullPath))
             //{
             //    string xmlText = sr.ReadToEnd();
@@ -355,11 +356,11 @@ namespace FpML.V5r3.Reporting.Tests
                 correlationId = new CorrelationId() { correlationIdScheme = "scheme/1.0", Value = "12345678" },
                 party = GetTestFragment_Parties(),
                 account = GetTestFragment_Accounts(2),
-                tradeValuationItem = new TradeValuationItem[] {
+                tradeValuationItem = new[] {
                         new TradeValuationItem()
                 },
             };
-            var copy = Roundtrip_OutThenIn<ValuationReport>(orig, true, true);
+            var copy = Roundtrip_OutThenIn(orig, true, true);
         }
 
         [TestMethod]
@@ -369,7 +370,7 @@ namespace FpML.V5r3.Reporting.Tests
             var orig = new PositionReport()
             {
                 fpmlVersion = "5-3",
-                position = new ReportedPosition[]
+                position = new[]
                 {
                     new ReportedPosition()
                     {
@@ -403,7 +404,7 @@ namespace FpML.V5r3.Reporting.Tests
         [TestMethod]
         public void TestReportingRoundtripDateTimes()
         {
-            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\Reporting.xsd"; //@"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd"
+            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\Reporting.xsd"; //@"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd"
             string schemaFullPath = Path.GetFullPath(schemaPath);
             Assert.IsTrue(File.Exists(schemaFullPath));
             string originalFullPath = Path.GetFullPath(@"..\..\testOriginalFragment.xml");
@@ -587,7 +588,7 @@ namespace FpML.V5r3.Reporting.Tests
                 {
                     messageId = new MessageId() { messageIdScheme = "scheme/1.0", Value = "12345678" },
                     sentBy = new MessageAddress() { messageAddressScheme = "scheme/1.0", Value = "trader@bigbank.com" },
-                    sendTo = new MessageAddress[] { new MessageAddress() { messageAddressScheme = "scheme/1.0", Value = "client@company.com" } },
+                    sendTo = new[] { new MessageAddress() { messageAddressScheme = "scheme/1.0", Value = "client@company.com" } },
                     creationTimestamp = DateTime.Now
                 },
                 correlationId = new CorrelationId() { correlationIdScheme = "scheme/1.0", Value = "12345678" },

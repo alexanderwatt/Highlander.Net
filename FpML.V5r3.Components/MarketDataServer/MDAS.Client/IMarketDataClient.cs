@@ -18,9 +18,9 @@
 using System;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Util.NamedValues;
 using Orion.Util.Threading;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion

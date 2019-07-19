@@ -20,12 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.MDAS.Client;
 using Orion.Provider;
 using Orion.Util.Expressions;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
-using Orion.V5r3.Configuration;
 
 #endregion
 

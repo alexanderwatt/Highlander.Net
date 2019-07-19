@@ -24,6 +24,7 @@ using System.ServiceModel;
 using System.Threading;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Build;
 using Orion.Util.Compression;
 using Orion.Util.Helpers;
@@ -32,7 +33,6 @@ using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Util.Serialisation;
 using Orion.Util.Threading;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion
@@ -80,45 +80,44 @@ namespace Orion.MDAS.Client
 
         #region IModuleInfo Members
 
-        public Guid NodeGuid { get { return _clientInfo.NodeGuid; } }
-        public EnvId BuildEnv { get { return CoreHelper.ToEnvId(_clientInfo.BuildEnv); } }
-        public EnvId ConfigEnv { get { return CoreHelper.ToEnvId(_clientInfo.ConfigEnv); } }
-        public string HostName { get { return _clientInfo.HostName; } }
-        public string HostIpV4 { get { return _clientInfo.HostIpV4; } }
-        public string[] NetAddrs { get { return _clientInfo.NetAddrs; } }
-        public string UserName { get { return _clientInfo.UserInfo.UserIdentityName.Split('\\')[1]; } }
-        public string UserWDom { get { return _clientInfo.UserInfo.UserIdentityName.Split('\\')[0]; } }
-        public string ApplName { get { return _clientInfo.ApplInfo.AssmName; } }
-        public string ApplNVer { get { return _clientInfo.ApplInfo.AssmNVer; } }
-        public string ApplFVer { get { return _clientInfo.ApplInfo.AssmFVer; } }
-        public string ApplPTok { get { return _clientInfo.ApplInfo.AssmPTok; } }
-        public int ApplHash { get { return _clientInfo.ApplInfo.AssmHash; } }
-        public string CoreName { get { return _clientInfo.CompInfo.AssmName; } }
-        public string CoreNVer { get { return _clientInfo.CompInfo.AssmNVer; } }
-        public string CoreFVer { get { return _clientInfo.CompInfo.AssmFVer; } }
-        public string CorePTok { get { return _clientInfo.CompInfo.AssmPTok; } }
-        public int CoreHash { get { return _clientInfo.CompInfo.AssmHash; } }
-        public string UserFullName { get { return null; } }
+        public Guid NodeGuid => _clientInfo.NodeGuid;
+        public EnvId BuildEnv => CoreHelper.ToEnvId(_clientInfo.BuildEnv);
+        public EnvId ConfigEnv => CoreHelper.ToEnvId(_clientInfo.ConfigEnv);
+        public string HostName => _clientInfo.HostName;
+        public string HostIpV4 => _clientInfo.HostIpV4;
+        public string[] NetAddrs => _clientInfo.NetAddrs;
+        public string UserName => _clientInfo.UserInfo.UserIdentityName.Split('\\')[1];
+        public string UserWDom => _clientInfo.UserInfo.UserIdentityName.Split('\\')[0];
+        public string ApplName => _clientInfo.ApplInfo.AssmName;
+        public string ApplNVer => _clientInfo.ApplInfo.AssmNVer;
+        public string ApplFVer => _clientInfo.ApplInfo.AssmFVer;
+        public string ApplPTok => _clientInfo.ApplInfo.AssmPTok;
+        public int ApplHash => _clientInfo.ApplInfo.AssmHash;
+        public string CoreName => _clientInfo.CompInfo.AssmName;
+        public string CoreNVer => _clientInfo.CompInfo.AssmNVer;
+        public string CoreFVer => _clientInfo.CompInfo.AssmFVer;
+        public string CorePTok => _clientInfo.CompInfo.AssmPTok;
+        public int CoreHash => _clientInfo.CompInfo.AssmHash;
+        public string UserFullName => null;
 
         #endregion
 
         // IIdentity methods
-        public string Name { get { return _clientInfo.UserInfo.Name; } }
-        public string AuthenticationType { get { throw new NotImplementedException(); } }
-        public bool IsAuthenticated { get { throw new NotImplementedException(); } }
-
+        public string Name => _clientInfo.UserInfo.Name;
+        public string AuthenticationType => throw new NotImplementedException();
+        public bool IsAuthenticated => throw new NotImplementedException();
     }
 
     internal class MarketDataClient : IMarketDataClient
     {
         // readonly state
         private readonly Reference<ILogger> _loggerRef;
-        public ILogger Logger { get { return _loggerRef.Target; } }
+        public ILogger Logger => _loggerRef.Target;
         private readonly AddressBinding _sessCtrlAddressBinding;
         private readonly AddressBinding _transferAddressBinding;
         private readonly V131ClientInfo _clientInfoV131;
-        public IModuleInfo ClientInfo { get; private set; }
-        public EnvId ClientEnv { get { return ClientInfo.ConfigEnv; } }
+        public IModuleInfo ClientInfo { get; }
+        public EnvId ClientEnv => ClientInfo.ConfigEnv;
 
         // managed state
         private Exception _initialExcp;
@@ -130,12 +129,12 @@ namespace Orion.MDAS.Client
         private TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);
         public TimeSpan RequestTimeout
         {
-            get { return _defaultTimeout; }
+            get => _defaultTimeout;
             set
             {
                 if ((value < _minTimeout) || (value > _maxTimeout))
-                    throw new ArgumentOutOfRangeException("RequestTimeout",
-                        String.Format("Must be between {0} and {1}", _minTimeout, _maxTimeout));
+                    throw new ArgumentOutOfRangeException($"RequestTimeout",
+                        $"Must be between {_minTimeout} and {_maxTimeout}");
                 _defaultTimeout = value;
             }
         }
@@ -143,9 +142,9 @@ namespace Orion.MDAS.Client
         public MarketDataClient(Reference<ILogger> loggerRef, string applName, Assembly authorisedClient, string env, string hostList)
         {
             if (env == null)
-                throw new ArgumentNullException("env");
+                throw new ArgumentNullException(nameof(env));
             if (loggerRef == null)
-                throw new ArgumentNullException("loggerRef");
+                throw new ArgumentNullException(nameof(loggerRef));
             _loggerRef = loggerRef.Clone();
             EnvId envId = EnvHelper.CheckEnv(EnvHelper.ParseEnvName(env));
             Guid clientId = Guid.NewGuid();

@@ -23,6 +23,7 @@ using Core.Common;
 using FpML.V5r3.Codes;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Reporting.Helpers;
+using Metadata.Common;
 using Orion.MDAS.Client;
 using Orion.Util.Caching;
 using Orion.Util.Expressions;
@@ -30,7 +31,6 @@ using Orion.Util.Helpers;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.Threading;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion

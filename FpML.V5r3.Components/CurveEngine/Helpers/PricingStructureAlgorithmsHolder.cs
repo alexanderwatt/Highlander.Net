@@ -16,9 +16,9 @@
 using System;
 using System.Linq;
 using Core.Common;
+using Metadata.Common;
 using Orion.Constants;
 using Orion.Util.Logging;
-using Orion.V5r3.Configuration;
 
 namespace Orion.CurveEngine.Helpers
 {

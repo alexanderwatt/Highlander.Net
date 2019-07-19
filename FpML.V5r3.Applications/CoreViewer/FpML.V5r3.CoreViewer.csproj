@@ -112,10 +112,6 @@
       <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
       <Name>FpML.V5r3.Codes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
-      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
-      <Name>FpML.V5r3.ConfigTypes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj">
       <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
       <Name>FpML.V5r3.Confirmation</Name>

@@ -68,13 +68,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Metadata\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
       <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
       <Name>FpML.V5r3.Codes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
-      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
-      <Name>FpML.V5r3.ConfigTypes</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
       <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>

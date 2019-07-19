@@ -44,7 +44,8 @@ namespace Orion.CurveEngine.Tests
 
         #region Calibration Tests
 
-        [TestMethod]
+        [Ignore]
+        //[TestMethod]
         public void TestPedersen()
         {
             var tempInstruments

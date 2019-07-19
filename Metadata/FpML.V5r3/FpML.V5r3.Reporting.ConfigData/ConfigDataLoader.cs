@@ -29,6 +29,7 @@ using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Codes;
+using Metadata.Common;
 
 #endregion
 

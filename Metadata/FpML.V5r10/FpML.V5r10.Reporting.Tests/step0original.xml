@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<terminatingEventsReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="4" xmlns="http://www.fpml.org/FpML-5/reporting">
+<terminatingEventsReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
   <header>
     <messageId messageIdScheme="scheme/1.0">12345678</messageId>
     <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>

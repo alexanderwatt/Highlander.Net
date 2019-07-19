@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Orion.TestHelpers
+﻿namespace FpML.V5r10.TestHelpers
 {
     public partial class TestData
     {

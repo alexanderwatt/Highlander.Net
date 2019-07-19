@@ -15,7 +15,7 @@ namespace FpML.V5r10.Reporting.Models.ForeignExchange
         #region Constructor
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Instantiates a new model.
         /// </summary>
         public FxRateCashflowAnalytic()
         {
@@ -23,7 +23,7 @@ namespace FpML.V5r10.Reporting.Models.ForeignExchange
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Instantiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="paymentDate">The payment date of the cash flow.</param>
@@ -50,7 +50,7 @@ namespace FpML.V5r10.Reporting.Models.ForeignExchange
         /// <param name="valuationDate"></param>
         /// <param name="paymentDate">The payment date. The same rest period is assumed as with the spot date.</param>
         /// <param name="indexCurve">The index curve should be already in the correct form for the fx.</param>
-        /// <param name="currency2">Normaly the foreign rate curve.</param>
+        /// <param name="currency2">Normally the foreign rate curve.</param>
         /// <param name="currency2PerCurrency1">The currency2PerCurrency1 flag. </param>
         /// <param name="currency1">Normally the domestic rate curve. </param>
         /// <param name="currency1Settlement">Does settlement occur in currency1. If not, then it must be currency2. </param>

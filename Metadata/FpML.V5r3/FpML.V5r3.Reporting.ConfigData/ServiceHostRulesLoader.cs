@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Common;
+using Metadata.Common;
 using Orion.Util.Logging;
 
 namespace Orion.V5r3.Configuration
@@ -27,7 +28,7 @@ namespace Orion.V5r3.Configuration
         {
             var assemblyPaths = new List<string>
                 {
-                    String.Format(@"..\..\..\..\..\Services\{0}\bin\{1}", fileName, buildCfg)
+                    $@"..\..\..\..\..\Services\{fileName}\bin\{buildCfg}"
                 };
             return new HostConfigRule
                 {
@@ -48,9 +49,7 @@ namespace Orion.V5r3.Configuration
         {
             var assemblyPaths = new List<string>
                 {
-                    String.Format(
-                        @"..\..\..\..\..\Silverlight\Orion.PortfolioValuer\Orion.PortfolioValuer.Services\bin\{0}",
-                        buildCfg)
+                    $@"..\..\..\..\..\Silverlight\Orion.PortfolioValuer\Orion.PortfolioValuer.Services\bin\{buildCfg}"
                 };
             return new HostConfigRule
                 {
@@ -76,7 +75,7 @@ namespace Orion.V5r3.Configuration
                 serverApplName = "DataExportServer",
                 serverImplType = "Orion.Server.DataExporter.DataExportServer",
                 serverAssmName = "Orion.Server.DataExporter",
-                serverAssmPath = new[] { String.Format(@"..\..\..\..\..\Services\TradeExport\TradeExporter\bin\{0}", buildCfg)},
+                serverAssmPath = new[] {$@"..\..\..\..\..\Services\TradeExport\TradeExporter\bin\{buildCfg}"},
                 serverEnabled = true
             });
             // start a 2-node trade reval grid
@@ -90,7 +89,7 @@ namespace Orion.V5r3.Configuration
                 serverApplName = "TradeValuationServer",
                 serverImplType = "Orion.Server.TradeRevaluer.TradeValuationServer",
                 serverAssmName = "Orion.Server.TradeRevaluer",
-                serverAssmPath = new[] { String.Format(@"..\..\..\..\..\Services\TradeRevaluer\bin\{0}", buildCfg)},
+                serverAssmPath = new[] {$@"..\..\..\..\..\Services\TradeRevaluer\bin\{buildCfg}"},
                 serverEnabled = true,
                 serverInstanceTotalCount = 5,
                 serverInstanceLocalCount = 1,
@@ -106,7 +105,7 @@ namespace Orion.V5r3.Configuration
                 serverApplName = "TradeValuationServer",
                 serverImplType = "Orion.Server.TradeRevaluer.TradeValuationServer",
                 serverAssmName = "Orion.Server.TradeRevaluer",
-                serverAssmPath = new[] { String.Format(@"..\..\..\..\..\Services\TradeRevaluer\bin\{0}", buildCfg)},
+                serverAssmPath = new[] {$@"..\..\..\..\..\Services\TradeRevaluer\bin\{buildCfg}"},
                 serverEnabled = true,
                 serverInstanceTotalCount = 5,
                 serverInstanceLocalCount = 4,
@@ -123,7 +122,7 @@ namespace Orion.V5r3.Configuration
             rule.Priority = 1;
             var assemblyPaths = new List<string>(rule.serverAssmPath)
                 {
-                    String.Format(@"C:\_qrsc\Builds\{0}\Current\{1}", EnvHelper.EnvName(env), buildCfg)
+                    $@"C:\_qrsc\Builds\{EnvHelper.EnvName(env)}\Current\{buildCfg}"
                 };
             rule.serverAssmPath = assemblyPaths.ToArray();
             rule.serverEnabled = enabled;

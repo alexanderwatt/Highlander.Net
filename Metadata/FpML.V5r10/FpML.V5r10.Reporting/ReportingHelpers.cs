@@ -109,7 +109,8 @@ namespace FpML.V5r10.Reporting
         {
             var assembly = Assembly.GetExecutingAssembly();
             var result = new XmlSchemaSet();
-            foreach (string resourceName in assembly.GetManifestResourceNames())
+            var resources = assembly.GetManifestResourceNames();
+            foreach (string resourceName in resources)
             {
                 if (resourceName.EndsWith(".xsd"))
                 {

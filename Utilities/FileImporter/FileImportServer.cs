@@ -20,12 +20,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Core.Common;
+using Metadata.Common;
 using Orion.Util.Caching;
 using Orion.Util.Expressions;
 using Orion.Util.Helpers;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
-using Orion.V5r3.Configuration;
 
 #endregion
 

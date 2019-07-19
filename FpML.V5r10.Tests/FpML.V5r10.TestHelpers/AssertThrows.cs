@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Orion.TestHelpers
+namespace FpML.V5r10.TestHelpers
 {
     public static partial class UnitTestHelper
     {

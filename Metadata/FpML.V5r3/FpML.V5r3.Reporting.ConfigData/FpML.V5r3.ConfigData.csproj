@@ -98,6 +98,10 @@
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Constants\Constants.csproj">
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>
@@ -105,10 +109,6 @@
     <ProjectReference Include="..\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
       <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
       <Name>FpML.V5r3.Codes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
-      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
-      <Name>FpML.V5r3.ConfigTypes</Name>
     </ProjectReference>
     <ProjectReference Include="..\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj">
       <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>

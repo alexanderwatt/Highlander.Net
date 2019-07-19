@@ -80,7 +80,6 @@
     <Compile Include="FpmlEnumVals.cs">
       <DependentUpon>FpmlEnumVals.xsd</DependentUpon>
     </Compile>
-    <Compile Include="FpMLv5r3TestHelpers.cs" />
     <Compile Include="GwmlEnumMaps.cs">
       <DependentUpon>GwmlEnumMaps.xsd</DependentUpon>
     </Compile>

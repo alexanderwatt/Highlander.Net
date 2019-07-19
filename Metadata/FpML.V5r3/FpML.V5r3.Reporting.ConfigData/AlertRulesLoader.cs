@@ -20,6 +20,8 @@ using Orion.Util.Expressions;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using FpML.V5r3.Reporting;
+using AlertRule = Metadata.Common.AlertRule;
+using AlertSignal = Metadata.Common.AlertSignal;
 
 namespace Orion.V5r3.Configuration
 {
@@ -54,7 +56,6 @@ namespace Orion.V5r3.Configuration
                 MonitorPeriod = monitorPeriod.ToString(),
                 PublishPeriod = publishPeriod.ToString(),
                 SignalFormat = signalFormat,
-
                 hostComputer = null,
                 hostUserName = null,
                 DataItemType = typeof(object).FullName
@@ -64,7 +65,6 @@ namespace Orion.V5r3.Configuration
         public static void Load(ILogger logger, ICoreCache targetClient, string nameSpace)
         {
             logger.LogDebug("Loading alert rules...");
-
             // defaults
             // - check constraint: time of day is between 2am and 11pm 7 days a week
             IExpression defaultCheckConstraint = Expr.BoolAND(
@@ -76,15 +76,12 @@ namespace Orion.V5r3.Configuration
             TimeSpan defaultMonitorPeriod = TimeSpan.FromMinutes(1);
             // - publish period: hourly
             TimeSpan defaultPublishPeriod = TimeSpan.FromHours(1);
-
             // build rules
             var alertRules = new List<AlertRule>();
-            
             alertRules.AddRange(CreateDevRules(defaultCheckConstraint, defaultMonitorPeriod, defaultPublishPeriod));
             alertRules.AddRange(CreateSitRules(defaultCheckConstraint, defaultMonitorPeriod, defaultPublishPeriod));
             alertRules.AddRange(CreateStgRules(defaultCheckConstraint, defaultMonitorPeriod, defaultPublishPeriod));
             alertRules.AddRange(CreateLegacyRules(defaultCheckConstraint, defaultMonitorPeriod, defaultPublishPeriod));
-
             // save Import rules
             foreach (AlertRule rule in alertRules)
             {
@@ -139,8 +136,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("QR_LIVE curves ({0}) are out of date!", env)
-                              ),
+                              $"QR_LIVE curves ({env}) are out of date!"
+                          ),
 
                           MakeAlertRule(
                               "CartooEODCurves", false,
@@ -182,9 +179,9 @@ namespace Orion.V5r3.Configuration
                                                         new NamedValue("MailTo", new[] {AWatt})
                                                     }),
                               new TimeSpan(0,0,2), 
-                              new TimeSpan(0,2,0), 
-                              string.Format("Holiday calendars ({0}) have not been downloaded in the past week.", env)
-                              ),
+                              new TimeSpan(0,2,0),
+                              $"Holiday calendars ({env}) have not been downloaded in the past week."
+                          ),
 
                           // Check that a rule has been updated in the past 2 minutes, 
                           // this rule is updated every minute
@@ -305,8 +302,8 @@ namespace Orion.V5r3.Configuration
                               new NamedValueSet(new[] {new NamedValue("BaseDate", new DateTime(2000, 1, 1))}),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("Cartoo EOD curves ({0}) have not been published today.", env)
-                              ),
+                              $"Cartoo EOD curves ({env}) have not been published today."
+                          ),
 
                           MakeAlertRule(
                               "Trader Curves (TraderMid)", false,
@@ -361,8 +358,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("LpmCapFloor curve ({0}) is out of date.", env)
-                              ),
+                              $"LpmCapFloor curve ({env}) is out of date."
+                          ),
 
                           MakeAlertRule(
                               "Trader Curves (LPMSwaption)", false,
@@ -390,8 +387,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("LPMSwaption curve ({0}) is out of date.", env)
-                              ),
+                              $"LPMSwaption curve ({env}) is out of date."
+                          ),
 
                           MakeAlertRule(
                               "Trader Curves (Swaption)", false,
@@ -417,8 +414,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("Swaption ({0}) curve is out of date.", env)
-                              ),
+                              $"Swaption ({env}) curve is out of date."
+                          ),
 
                           MakeAlertRule(
                               "Trader Curves (CapFloor)", false,
@@ -444,8 +441,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("CapFloor ({0}) curve is out of date.", env)
-                              ),
+                              $"CapFloor ({env}) curve is out of date."
+                          ),
 
                           MakeAlertRule(
                               "Calendar", false,
@@ -466,8 +463,8 @@ namespace Orion.V5r3.Configuration
                                                     }),
                               defaultMonitorPeriod,
                               defaultPublishPeriod,
-                              string.Format("Holiday calendars ({0}) have not been downloaded in the past week.", env)
-                              ),
+                              $"Holiday calendars ({env}) have not been downloaded in the past week."
+                          ),
 
                           // Check that a rule has been updated in the past 2 minutes, 
                           // this rule is updated every minute

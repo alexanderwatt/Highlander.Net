@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Xml;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Util.Serialisation;
 using Exception = System.Exception;
 using Market = FpML.V5r3.Reporting.Market;
@@ -156,7 +157,7 @@ namespace Orion.UI
             }
             if (dataType == "Orion.V5r3.Configuration.Algorithm")
             {
-                var quoteSet = XmlSerializerHelper.DeserializeFromString<V5r3.Configuration.Algorithm>(xml);
+                var quoteSet = XmlSerializerHelper.DeserializeFromString<Algorithm>(xml);
                 Client.SaveObject(quoteSet, txtNewXmlName.Text, CoreItem.AppProps);
             }
         }

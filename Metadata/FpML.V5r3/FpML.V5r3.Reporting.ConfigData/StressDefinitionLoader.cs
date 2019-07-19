@@ -16,6 +16,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Common;
+using Metadata.Common;
 using Orion.Constants;
 using Orion.Util.Expressions;
 using Orion.Util.Helpers;
@@ -39,7 +40,7 @@ namespace Orion.V5r3.Configuration
         {
             // currency1 is mandatory, currency2 = USD
             if (currency == null)
-                throw new ArgumentNullException("currency");
+                throw new ArgumentNullException(nameof(currency));
             return new ScenarioRule
                        {
                 ScenarioId = scenarioId,

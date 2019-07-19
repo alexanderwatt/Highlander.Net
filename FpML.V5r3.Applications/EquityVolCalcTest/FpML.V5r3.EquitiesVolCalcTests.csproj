@@ -94,10 +94,6 @@
       <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
       <Name>FpML.V5r3.CurveEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.ConfigTypes\FpML.V5r3.ConfigTypes.csproj">
-      <Project>{60df4e67-2297-410c-acf0-e02afc350550}</Project>
-      <Name>FpML.V5r3.ConfigTypes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
       <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
       <Name>FpML.V5r3.Reporting.Analytics</Name>

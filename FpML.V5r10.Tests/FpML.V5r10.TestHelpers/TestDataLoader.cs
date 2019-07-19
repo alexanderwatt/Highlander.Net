@@ -8,7 +8,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 
-namespace FpML.V5r3.TestHelpers
+namespace FpML.V5r10.TestHelpers
 {
     public static class TestDataLoader
     {
@@ -35,7 +35,7 @@ namespace FpML.V5r3.TestHelpers
                 var curve = XmlSerializerHelper.DeserializeFromString<T>(file.Value);
                 string nvs = ResourceHelper.GetResource(assembly, file.Key.Replace(".xml", ".nvs"));
                 var itemProps = new NamedValueSet(nvs);
-                // strip assempbly prefix
+                // strip assembly prefix
                 string itemName = file.Key.Substring(ResourcePath.Length + 1);
                 // strip file extension
                 itemName = itemName.Substring(0, itemName.Length - 4);
@@ -59,13 +59,12 @@ namespace FpML.V5r3.TestHelpers
         {
             string holidaysXml = ResourceHelper.GetResourceWithPartialName(assembly, filenamePrefix);
 
-            // load daterules from file
+            // load date rules from file
             var calendarYears = XmlSerializerHelper.DeserializeFromString<LocationCalendarYears>(holidaysXml);
 
             foreach (LocationCalendarYear locationCalendarYear in calendarYears.LocationCalendarYear)
             {
-                string name;
-                NamedValueSet itemProps = CreateProperties(locationCalendarYear, out name);
+                NamedValueSet itemProps = CreateProperties(locationCalendarYear, out var name);
                 logger.LogDebug("  {0} ...", name);
                 localCache.SaveObject(locationCalendarYear, name, itemProps, TimeSpan.MaxValue);
             }
@@ -94,6 +93,5 @@ namespace FpML.V5r3.TestHelpers
             name = itemName;
             return itemProps;
         }
-
     }
 }

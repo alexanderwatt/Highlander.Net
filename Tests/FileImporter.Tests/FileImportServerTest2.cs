@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using Core.Common;
 using Core.Server;
 using Core.V34;
+using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Util.Expressions;
 using Orion.Util.Logging;
 using Orion.Util.RefCounting;
-using Orion.V5r3.Configuration;
 using Server.FileImporter;
 
 namespace FileImporter.Tests

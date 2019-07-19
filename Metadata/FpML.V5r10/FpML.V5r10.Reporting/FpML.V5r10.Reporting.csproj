@@ -165,61 +165,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtensionSchemas\fpml-main-5-10.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-collective-investment-vehicles.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-equities.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-fixed-income.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-futures-and-options.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-interest-rate-derivatives.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-main.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-property.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-repo.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-shared.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-trade.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\fpmlext-warrant.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="ExtensionSchemas\instrumentgen.bat" />
     <None Include="ExtensionSchemas\instrumentgen.log" />
-    <None Include="ExtensionSchemas\qrscext-instruments.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\Reporting.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExtensionSchemas\xmldsig-core-schema.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="ExtensionSchemas\xsdgen.bat" />
     <None Include="ExtensionSchemas\xsdgen.log" />
     <None Include="Key.snk" />
-    <None Include="MergedReportingSchemas\ValidationIssues.docx" />
-    <None Include="MergedReportingSchemas\xsdgen.bat" />
-    <None Include="qrscext-instruments.xsd">
+    <EmbeddedResource Include="MergedReportingSchemas\Reporting.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
+    <None Include="MergedReportingSchemas\ValidationIssues.docx" />
+    <EmbeddedResource Include="MergedReportingSchemas\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="MergedReportingSchemas\xsdgen.bat" />
     <None Include="xsdgen.bat" />
   </ItemGroup>
   <ItemGroup />

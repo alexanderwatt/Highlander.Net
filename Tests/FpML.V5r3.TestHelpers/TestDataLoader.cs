@@ -59,7 +59,7 @@ namespace FpML.V5r3.TestHelpers
         {
             string holidaysXml = ResourceHelper.GetResourceWithPartialName(assembly, filenamePrefix);
 
-            // load daterules from file
+            // load date rules from file
             var calendarYears = XmlSerializerHelper.DeserializeFromString<LocationCalendarYears>(holidaysXml);
 
             foreach (LocationCalendarYear locationCalendarYear in calendarYears.LocationCalendarYear)

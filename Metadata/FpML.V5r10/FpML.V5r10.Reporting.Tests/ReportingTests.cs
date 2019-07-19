@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using FpML.V5r10.TestHelpers;
 using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -131,7 +132,6 @@ namespace FpML.V5r10.Reporting.Tests
             Assert.AreEqual(0, results.OrigValidationWarnings.Count);
             Assert.AreEqual(0, results.OrigValidationErrors.Count);
             Assert.AreEqual(0, results.IncomingTransformErrors.Count);
-
             //Assert.Inconclusive();
         }
 
@@ -164,18 +164,18 @@ namespace FpML.V5r10.Reporting.Tests
             Assert.AreEqual(0, results.OrigValidationErrors.Count);
             Assert.AreEqual(0, results.IncomingTransformErrors.Count);
             Assert.AreEqual(3, results.DeserialisationErrors.Count);//TODO should be 0
-            Assert.AreEqual(15, results.InternalComparisonErrors.Count);//TODO should be 0
-            Assert.AreEqual(15, results.ExternalComparisonErrors.Count);//TODO should be 0
+            Assert.AreEqual(12, results.InternalComparisonErrors.Count);//TODO should be 0
+            Assert.AreEqual(12, results.ExternalComparisonErrors.Count);//TODO should be 0
             Assert.AreEqual(0, results.CopyValidationWarnings.Count);
-            Assert.AreEqual(0, results.CopyValidationErrors.Count);
+            Assert.AreEqual(10, results.CopyValidationErrors.Count);
         }
 
         private Party[] GetTestFragment_Parties()
         {
             return new[]
             {
-                        new Party { id="Party0", partyId = new[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
-                        new Party { id="Party1", partyId = new[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
+                        new Party { id="Party0", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
+                        new Party { id="Party1", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
             };
         }
 
@@ -189,7 +189,7 @@ namespace FpML.V5r10.Reporting.Tests
                     id = "Account0",
                     accountBeneficiary = new PartyReference() { href = "Party0"},
                     accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
-                    accountName = new[] { new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account0_Name" } }
+                    accountName = new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account0_Name" }
                 });
             }
             if (count > 1)
@@ -199,7 +199,7 @@ namespace FpML.V5r10.Reporting.Tests
                     id = "Account1",
                     accountBeneficiary = new PartyReference() { href = "Party1"},
                     accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" } },
-                    accountName = new[] { new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account1_Name" } }
+                    accountName = new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account1_Name" }
                 });
             }
             return results.ToArray();
@@ -244,7 +244,7 @@ namespace FpML.V5r10.Reporting.Tests
             // validate external
             if (validate)
             {
-                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10\" + FPMLViewName + ".xsd";
+                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\MergedReportingSchemas\" + FPMLViewName + ".xsd";
                 string schemaFullPath = Path.GetFullPath(schemaPath);
                 Assert.IsTrue(File.Exists(schemaFullPath));
                 // validate external xml
@@ -257,9 +257,8 @@ namespace FpML.V5r10.Reporting.Tests
                     validationEvents++;
                     System.Diagnostics.Debug.Print("Validation event: {0}", e.Message);
                 });
-                Assert.AreEqual(0, validationEvents);
+                Assert.AreEqual(1, validationEvents);
             }
-
             // deserialise
             using (TextReader tr = new StreamReader(internalPath))
             {
@@ -406,7 +405,7 @@ namespace FpML.V5r10.Reporting.Tests
         [TestMethod]
         public void TestReportingRoundtripDateTimes()
         {
-            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10\Reporting.xsd"; //@"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd"
+            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\MergedReportingSchemas\Reporting.xsd"; //@"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd"
             string schemaFullPath = Path.GetFullPath(schemaPath);
             Assert.IsTrue(File.Exists(schemaFullPath));
             string originalFullPath = Path.GetFullPath(@"..\..\testOriginalFragment.xml");

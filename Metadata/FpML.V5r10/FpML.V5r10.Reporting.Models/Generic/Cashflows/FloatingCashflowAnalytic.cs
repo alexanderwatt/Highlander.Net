@@ -396,7 +396,7 @@ namespace FpML.V5r10.Reporting.Models.Generic.Cashflows
         /// <summary>
         /// Gets the derivative with respect to the discount Rate.
         /// </summary>
-        /// <value>The fistorical delta1.</value>
+        /// <value>The historical delta1.</value>
         public decimal LocalCurrencyHistoricalDelta1
         {
             get
@@ -457,7 +457,7 @@ namespace FpML.V5r10.Reporting.Models.Generic.Cashflows
         #region Constructor
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Instantiates a new model.
         /// </summary>
         public FloatingCashflowAnalytic()
         {
@@ -465,7 +465,7 @@ namespace FpML.V5r10.Reporting.Models.Generic.Cashflows
         }
 
         /// <summary>
-        /// Intantiates a new model.
+        /// Instantiates a new model.
         /// </summary>
         /// <param name="valuationDate">The valuation date.</param>
         /// <param name="fixingDate">The fixing date of the index.</param>

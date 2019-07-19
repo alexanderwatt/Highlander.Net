@@ -22,6 +22,7 @@ using System.Linq;
 using System.Security.Principal;
 using Core.Common;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.MDAS.Client;
 using Orion.MDAS.Provider;
 using Orion.Provider;
@@ -30,7 +31,6 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Util.Threading;
-using Orion.V5r3.Configuration;
 using Exception = System.Exception;
 
 #endregion
