@@ -1,14 +1,29 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
 using System.Globalization;
+using Highlander.Numerics.Dates;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Dates;
 using FpML.V5r10.Reporting.ModelFramework.Business;
 
 #endregion
 
-namespace Orion.Analytics.BusinessCenters
+namespace FpML.V5r10.Reporting.Analytics.BusinessCenters
 {
     /// <summary>
     /// Tokyo calendar.
@@ -83,20 +98,22 @@ namespace Orion.Analytics.BusinessCenters
 
         /// <summary>Marriage of Prince Akihito, April 10th 1959.</summary>
         private static readonly DateTime MarriageOfPrinceAkihito;
+
         /// <summary>Rites of Imperial Funeral, February 24th 1989.</summary>
         private static readonly DateTime RitesOfImperialFuneral;
+
         /// <summary>Enthronement Ceremony, November 12th 1990.</summary>
         private static readonly DateTime EnthronementCeremony;
+
         /// <summary>Marriage of Prince Naruhito, June 9th 1993.</summary>
         private static readonly DateTime MarriageOfPrinceNaruhito;
 
         #region FactoryItem pattern
 
-        [ Obsolete() ] // just to ignore the CS0618 warning below
+        [ Obsolete ] // just to ignore the CS0618 warning below
         static Tokyo()
         {
             Instance = new Tokyo();	// CS0618
-
             // supplied by KAWANISHI Tomoya <mailto:tomoya@mm.media.kyoto-u.ac.jp>)
             MarriageOfPrinceAkihito = new DateTime(1959, 4, 10, Instance.Calendar);
             RitesOfImperialFuneral = new DateTime(1989, 2, 24, Instance.Calendar);
@@ -122,12 +139,10 @@ namespace Orion.Analytics.BusinessCenters
             int d = date.Day;
             Month m = (Month)date.Month;
             DayOfWeek w = date.DayOfWeek;
-
             // see generated tables below 
             int y = date.Year;
             int ve = VernalEquinox(y);
             int ae = AutumnalEquinox(y);
-
             if ((w == DayOfWeek.Saturday || w == DayOfWeek.Sunday)
                 // New Year's Day
                 || (d == 1  && m == Month.January)

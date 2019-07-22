@@ -1,19 +1,37 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
+using FpML.V5r10.Reporting.Analytics.Interpolations;
+using FpML.V5r10.Reporting.Analytics.Interpolations.Spaces;
 using FpML.V5r10.Codes;
+using Highlander.Numerics.Helpers;
+using Highlander.Numerics.Options;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Interpolations;
-using Orion.Analytics.Interpolations.Spaces;
-using Orion.Analytics.Rates;
-using Orion.Analytics.Helpers;
-using Orion.Analytics.Interpolations.Points;
-using Orion.Analytics.Options;
+using FpML.V5r10.Reporting.Analytics.Interpolations.Points;
+using FpML.V5r10.Reporting.Analytics.Rates;
 
+#endregion
 
-namespace Orion.Analytics.Equities
+namespace FpML.V5r10.Reporting.Analytics.Equities
 {
     /// <summary>
-    /// Dividend cruve
+    /// Dividend curve
     /// </summary>
     public static class EquityAnalytics 
     {
@@ -21,9 +39,9 @@ namespace Orion.Analytics.Equities
         /// <summary>
         /// Creates the curve.
         /// </summary>
-        /// <param name="ratedays">The ratedays.</param>
-        /// <param name="rateamts">The rateamts.</param>
-        /// <param name="daybasis">The daybasis.</param>
+        /// <param name="ratedays">The rate days.</param>
+        /// <param name="rateamts">The rate amounts.</param>
+        /// <param name="daybasis">The day basis.</param>
         /// <returns></returns>
         public static DiscreteCurve CreateCurve(int[] ratedays, double[] rateamts, int daybasis)
         {
@@ -31,7 +49,7 @@ namespace Orion.Analytics.Equities
             double[] rateyears = new double[n];
             for (int idx=0; idx<n;idx++)
             {
-                rateyears[idx] = Convert.ToDouble(ratedays[idx])/daybasis;
+                rateyears[idx] = System.Convert.ToDouble(ratedays[idx])/daybasis;
             }
             return new DiscreteCurve(rateyears, rateamts);
         }        
@@ -60,7 +78,7 @@ namespace Orion.Analytics.Equities
             List<IPoint> pts = divCurve.GetPointList();
             foreach (IPoint item in pts)
             {
-                if (Equals(item, pt))
+                if (item == pt)
                     return pt.FunctionValue;
             }
             return 0;           
@@ -98,9 +116,12 @@ namespace Orion.Analytics.Equities
         {
             List<IPoint> points = divCurve.GetPointList();
             double sum=0;
+
             var rateCurve = new InterpolatedCurve(new DiscreteCurve(ratetimes, rateamts), InterpolationFactory.Create(im), false);
+
             int t0 = (targetDate - baseDate).Days;
             double maturity = t0 / 365.0;           
+
             foreach (IPoint pt in points)
             {
                 decimal t = Convert.ToDecimal(pt.GetX());
@@ -116,15 +137,13 @@ namespace Orion.Analytics.Equities
         /// <summary>
         /// Anns the yield.
         /// </summary>
-        /// <param name="yearFraction1">The year Fraction1.</param>
-        /// <param name="yearFraction2">The year Fraction2.</param>
-        /// <param name="divdays">The div curve.</param>
-        /// <param name="divamts">The div amts.</param>
-        /// <param name="ratedays"></param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="targetDate">The target date.</param>
+        /// <param name="divCurve">The div curve.</param>
+        /// <param name="ratetimes">The rate times.</param>
         /// <param name="rateamts">The rate amounts.</param>
         /// <param name="im">the im?</param>
         /// <param name="cf">The cf?</param>
-        /// <param name="daybasis"></param>
         /// <returns></returns>
         public static double GetPVDivs(double yearFraction1, double yearFraction2, int[] divdays, double[] divamts, int[] ratedays, double[] rateamts, string im, CompoundingFrequencyEnum cf, int daybasis)
         {
@@ -174,17 +193,17 @@ namespace Orion.Analytics.Equities
         /// <returns></returns>
         public static double GetYieldCCLin365(double spot, double yearFraction1, double yearFraction2, int[] divdays, double[] divamts, int[] ratedays, double[] rateamts)
         {
-            double pvDivs1 = GetPVDivsCCLin365(0, yearFraction1, divdays, divamts, ratedays, rateamts);
-            double pvDivs2 = GetPVDivsCCLin365(0, yearFraction2, divdays, divamts, ratedays, rateamts);
+            double PVDivs1 = GetPVDivsCCLin365(0, yearFraction1, divdays, divamts, ratedays, rateamts);
+            double PVDivs2 = GetPVDivsCCLin365(0, yearFraction2, divdays, divamts, ratedays, rateamts);
             double q1 = 0;
             double q2 = 0;
             if (yearFraction1 > 0)
-                q1 = -1 / yearFraction1 * Math.Log(1 - pvDivs1 / spot);
+                q1 = -1 / yearFraction1 * System.Math.Log(1 - PVDivs1 / spot);
             if (yearFraction2 >0)
-                q2 = -1 / yearFraction2 * Math.Log(1 - pvDivs2 / spot);
+                q2 = -1 / yearFraction2 * System.Math.Log(1 - PVDivs2 / spot);
             if (yearFraction1 != yearFraction2)
                 return (q2 * yearFraction2 - q1 * yearFraction1) / (yearFraction2 - yearFraction1);
-            else return 0;
+            return 0;
         }
 
 
@@ -195,6 +214,7 @@ namespace Orion.Analytics.Equities
         /// <param name="yearFraction2">The year fraction2.</param>
         /// <param name="ratedays">The ratedays.</param>
         /// <param name="rateamts">The rateamts.</param>
+        /// <param name="daybasis">The daybasis.</param>
         /// <returns></returns>
         public static double GetRateCCLin365(double yearFraction1, double yearFraction2, int[] ratedays, double[] rateamts )
         {
@@ -206,8 +226,7 @@ namespace Orion.Analytics.Equities
             double rt2 = rateCurve.Value(pt2);
             if (yearFraction1 != yearFraction2)
                 return (rt2 * yearFraction2 - rt1 * yearFraction1) / (yearFraction2 - yearFraction1);
-            else
-                return 0;
+            return 0;
         }
 
         /// <summary>
@@ -221,21 +240,20 @@ namespace Orion.Analytics.Equities
         public static double GetDFCCLin365(double yearFraction1, double yearFraction2, int[] ratedays, double[] rateamts)
         {
             double r = GetRateCCLin365(yearFraction1, yearFraction2, ratedays, rateamts);
-            decimal df2 = GetDiscountFactor(Convert.ToDecimal(yearFraction2), Convert.ToDecimal(r), CompoundingFrequencyEnum.Continuous);
-            decimal df1 = GetDiscountFactor(Convert.ToDecimal(yearFraction1), Convert.ToDecimal(r), CompoundingFrequencyEnum.Continuous);
-            return Convert.ToDouble(df2) / Convert.ToDouble(df1);
+            decimal df2 = GetDiscountFactor(System.Convert.ToDecimal(yearFraction2), System.Convert.ToDecimal(r), CompoundingFrequencyEnum.Continuous);
+            decimal df1 = GetDiscountFactor(System.Convert.ToDecimal(yearFraction1), System.Convert.ToDecimal(r), CompoundingFrequencyEnum.Continuous);
+            return System.Convert.ToDouble(df2) / System.Convert.ToDouble(df1);
         }
 
 
         /// <summary>
         /// Gets the forward lin365.
         /// </summary>
-        /// <param name="spot"></param>
         /// <param name="yearFraction">The year fraction.</param>
-        /// <param name="divdays">The divdays.</param>
-        /// <param name="divamts">The divamts.</param>
-        /// <param name="ratedays">The ratedays.</param>
-        /// <param name="rateamts">The rateamts.</param>
+        /// <param name="divdays">The div days.</param>
+        /// <param name="divamts">The div amounts.</param>
+        /// <param name="ratedays">The rate days.</param>
+        /// <param name="rateamts">The rate amounts.</param>
         /// <returns></returns>
         public static double GetForwardCCLin365(double spot, double yearFraction, int[] divdays, double[] divamts, int[] ratedays, double[] rateamts)
         {
@@ -244,6 +262,7 @@ namespace Orion.Analytics.Equities
             double df = RateAnalytics.ZeroRateToDiscountFactor(r0, yearFraction, CompoundingFrequencyEnum.Continuous);
             return (spot-pvdivs)/df;
         }
+
 
         public static double GetForwardCCLin365(double spot,
                                                 double yearFraction1,
@@ -261,9 +280,9 @@ namespace Orion.Analytics.Equities
 
 
         /// <summary>
-        /// Gets the Wing volatlity
+        /// Gets the Wing volatility
         /// </summary>
-        /// <param name="xInterp"></param>
+        /// <param name="volSurface">The vol surface.</param>
         /// <param name="time">The time.</param>
         /// <param name="strike">The strike.</param>
         /// <param name="wingParameterList"></param>
@@ -273,20 +292,22 @@ namespace Orion.Analytics.Equities
             double eps = 0.0001;
             IPoint pt1 = new Point2D(time, strike * (1 + eps));
             IPoint pt2 = new Point2D(time, strike * (1 - eps));
-            double[] years = new double[wingParameterList.Count];
+
+            double[] _years = new double[wingParameterList.Count];
+
             for (int idx = 0; idx < wingParameterList.Count; idx++)
             {
-                years[idx] = wingParameterList[idx].TimeToMaturity;
+                _years[idx] = wingParameterList[idx].TimeToMaturity;
             }
             var volArray = new double[wingParameterList.Count];           
             for (int idx = 0; idx < wingParameterList.Count; idx++)
             {
                 volArray[idx] = OrcWingVol.Value(strike, wingParameterList[idx]);
             }
-            double res;
+            double res=0;
             if (volArray.Length > 1)
             {
-                xInterp.Initialize(years, volArray);
+                xInterp.Initialize(_years, volArray);
                 res = xInterp.ValueAt(time, false);
             }
             else

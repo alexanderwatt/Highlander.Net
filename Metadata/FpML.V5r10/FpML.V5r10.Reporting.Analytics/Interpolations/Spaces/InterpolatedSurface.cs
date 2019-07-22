@@ -1,12 +1,27 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
+using Highlander.Numerics.LinearAlgebra;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.LinearAlgebra;
 
 #endregion
 
-namespace Orion.Analytics.Interpolations.Spaces
+namespace FpML.V5r10.Reporting.Analytics.Interpolations.Spaces
 {
     /// <summary>
     /// The interface <c>IPoint</c> is used in 
@@ -33,7 +48,7 @@ namespace Orion.Analytics.Interpolations.Spaces
              IInterpolation yInterpolation, bool allowExtrapolation)
             : base(discreteSurface, interpolation, allowExtrapolation)
         {
-            if(discreteSurface.GetNumDimensions()!=2) throw new Exception("Wrong number of dimensions.");
+            if(discreteSurface.GetNumDimensions()!=2) throw new System.Exception("Wrong number of dimensions.");
             YInterpolation = yInterpolation;
             XInterpolation = interpolation;
         }
@@ -70,7 +85,7 @@ namespace Orion.Analytics.Interpolations.Spaces
         {
             var curve = (DiscreteSpace)GetDiscreteSpace();
             var basePoints = curve.GetClosestValues(point);
-            if (basePoints.Count != 4) throw new Exception("Incorrect number of base points.");
+            if (basePoints.Count != 4) throw new System.Exception("Incorrect number of base points.");
             var x0 = basePoints[0].Coords;
             var y0 = basePoints[1].Coords;//yo
             var x1 = basePoints[2].Coords;//x1

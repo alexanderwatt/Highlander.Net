@@ -1,18 +1,35 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Highlander.Numerics.Interpolations;
+using Highlander.Numerics.Solvers;
+using Highlander.Numerics.Statistics;
+using Highlander.Numerics.Stochastics.SABR;
 using Microsoft.SolverFoundation.Services;
-using Orion.Analytics.Interpolations;
-using Orion.Analytics.Solvers;
-using Orion.Analytics.Statistics;
-using Orion.Analytics.Stochastics.SABR;
+using FpML.V5r10.Reporting.Analytics.Stochastics.SABR;
 using Microsoft.SolverFoundation.Solvers;
+using LinearInterpolation = FpML.V5r10.Reporting.Analytics.Interpolations.LinearInterpolation;
 
 #endregion
 
-namespace Orion.Analytics.PricingEngines
+namespace FpML.V5r10.Reporting.Analytics.PricingEngines
 {
     /// <summary>
     /// Class that encapsulates the functionality to calibrate the SABR model
@@ -77,7 +94,7 @@ namespace Orion.Analytics.PricingEngines
         /// Constructor for the class <see cref="SABRCalibrationEngine"/>.
         /// The purpose of this constructor is to initialise the calibration
         /// engine when a full calibration of the SABR model is required.
-        /// Postcondition: private field _isFullCalibrationPossible is true.
+        /// Post condition: private field _isFullCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         ///  engine object.</param>
@@ -148,7 +165,7 @@ namespace Orion.Analytics.PricingEngines
         /// is required. The SABR parameters beta, nu and rho have been
         /// supplied by the client and the SABR parameter alpha is determined
         /// from the ATM calibration.
-        /// Postcondition: private field _isATMCalibrationPossible is true.
+        /// Post condition: private field _isATMCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         ///  engine object.</param>
@@ -215,7 +232,7 @@ namespace Orion.Analytics.PricingEngines
         /// <see cref="SABRCalibrationEngine"/>.
         /// The purpose of this constructor is to initialise the calibration
         /// engine when a full calibration of the SABR model is required.
-        /// Postcondition: private field _isInterpCalibrationPossible is true.
+        /// Post condition: private field _isInterpCalibrationPossible is true.
         /// </summary>
         /// <param name="handle">Name that identifies the SABR calibration
         /// engine object.</param>
@@ -282,7 +299,7 @@ namespace Orion.Analytics.PricingEngines
             if(!_isFullCalibrationPossible)
             {
                 const string errorMessage = "Full calibration of the SABR model is not available";
-                throw new Exception(errorMessage);
+                throw new System.Exception(errorMessage);
             }
             // Seed the SABR model for calibration.
             SetInitialGuesses();
@@ -299,14 +316,14 @@ namespace Orion.Analytics.PricingEngines
         /// Provides an ATM calibration of the SABR model; only the SABR 
         /// parameter alpha is determined by calibration to market data.
         /// Precondition: private field _isATMCalibrationPossible is true.
-        /// Postcondition: private field _isSABRModelCalibrated is set.
+        /// Post condition: private field _isSABRModelCalibrated is set.
         /// </summary>
         public void CalibrateATMSABRModel()
         {
             if (!_isATMCalibrationPossible)
             {
                 const string errorMessage = "ATM calibration of the SABR model is not available";
-                throw new Exception(errorMessage);
+                throw new System.Exception(errorMessage);
             }
             _isSABRModelCalibrated = UpdateAlpha();
         }
@@ -317,7 +334,7 @@ namespace Orion.Analytics.PricingEngines
         /// of the SABR nu and rho surfaces, and the SABR parameter alpha is
         /// determined by calibration to market data.
         /// Precondition: private field _isInterpCalibrationPossible is true.
-        /// Postcondition: private field _isSABRModelCalibrated is set.
+        /// Post condition: private field _isSABRModelCalibrated is set.
         /// </summary>
         public void CalibrateInterpSABRModel()
         {
@@ -432,7 +449,7 @@ namespace Orion.Analytics.PricingEngines
         /// <summary>
         /// Helper function used to build the expiry (row) and tenor (column)
         /// labels used to index into the SABR Nu and Rho surfaces.
-        /// Postconditions: private fields _expiries and _tenors are set and
+        /// Post conditions: private fields _expiries and _tenors are set and
         /// sorted into ascending numerical order.
         /// </summary>
         /// <param name="engineHandles">Data structure that stores all existing
@@ -475,9 +492,9 @@ namespace Orion.Analytics.PricingEngines
         /// the sentinel "decimal.MinValue" used to designate an unavailable 
         /// SABR Nu and Rho parameter at a particular expiry tenor pair.
         /// Precondition: private field _calibrationSettings has been set.
-        /// Postconditions: private fields _expiries and _tenors are set and
+        /// Post conditions: private fields _expiries and _tenors are set and
         /// sorted into ascending numerical order.
-        /// Postconditions: private fields _countSABRSurfaceEntries, 
+        /// Post conditions: private fields _countSABRSurfaceEntries, 
         /// _sabrNuSurface and _sabrRhoSurface are set.
         /// </summary>
         /// <param name="engineHandles">Data structure that stores all existing
@@ -548,7 +565,7 @@ namespace Orion.Analytics.PricingEngines
             if (!_isInterpCalibrationPossible)
             {
                 const string errorMessage = "Interpolation calibration of the SABR model is not available";
-                throw new Exception(errorMessage);
+                throw new System.Exception(errorMessage);
             }
             if (_countSABRSurfaceEntries != 0)
             {
@@ -556,7 +573,7 @@ namespace Orion.Analytics.PricingEngines
             else
             {
                 const string errorMessage = "No valid engines found by SABR interpolated calibration";
-                throw new Exception(errorMessage);
+                throw new System.Exception(errorMessage);
             }
         }
 
@@ -564,13 +581,13 @@ namespace Orion.Analytics.PricingEngines
         /// Helper function used by the method SetCalibrationSeeds to 
         /// compute the ATM slope of the curve log moneyness against
         /// implied volatility.
-        /// Postcondition: Private fields _atmIndex, _atmSlope and
+        /// Post condition: Private fields _atmIndex, _atmSlope and
         /// _atmVolatility are set.
         /// </summary>
         private void ComputeATMSlope()
         {
             // Compute log moneyness values across the list of strikes.
-            var logMoneyness = _strikes.Select(strike => decimal.ToDouble(strike)/decimal.ToDouble(_assetPrice)).Select(ratio => (Decimal) Math.Log(ratio)).ToList();
+            var logMoneyness = _strikes.Select(strike => decimal.ToDouble(strike)/decimal.ToDouble(_assetPrice)).Select(ratio => (Decimal)System.Math.Log(ratio)).ToList();
             // Set the ATM volatility.
             SetATMIndex(logMoneyness);
             _atmVolatility = _volatilities[_atmIndex];
@@ -678,7 +695,7 @@ namespace Orion.Analytics.PricingEngines
         /// optimization routine.
         /// Precondition: private fields _thetaGuess and _muGuess have been
         /// set.
-        /// Postconditions: private fields _isSABRModelCalibrated and 
+        /// Post conditions: private fields _isSABRModelCalibrated and 
         /// _calibrationError are set.
         /// </summary>
         private void Optimizer()
@@ -720,9 +737,9 @@ namespace Orion.Analytics.PricingEngines
                 // Note: Initial guess is set in the optimization variable
                 // coordinates.
                 _muGuess = 
-                    (decimal) Math.Sqrt(decimal.ToDouble(kvPair.Value.Nu));
+                    (decimal)System.Math.Sqrt(decimal.ToDouble(kvPair.Value.Nu));
                 _thetaGuess = 
-                    (decimal) Math.Acos(decimal.ToDouble(kvPair.Value.Rho));
+                    (decimal)System.Math.Acos(decimal.ToDouble(kvPair.Value.Rho));
                 // Call the optimization routine to perform the calibration.
                 Optimizer();
                 if (_isSABRModelCalibrated)
@@ -736,7 +753,7 @@ namespace Orion.Analytics.PricingEngines
         /// <summary>
         /// Helper function used by PerformEnhancedCalibration to select
         /// the candidates for enhanced calibration.
-        /// Postcondition: private field _bestCandidates is set.
+        /// Post condition: private field _bestCandidates is set.
         /// </summary>
         private void SelectCandidatesForEnhancedCalibration()
         {
@@ -812,7 +829,7 @@ namespace Orion.Analytics.PricingEngines
         /// moneyness value; if there is no zero log moneyness value, then
         /// it is the zero-based position of the element with the minimum
         /// magnitude. 
-        /// Postcondition: Private field _atmIndex is set.
+        /// Post condition: Private field _atmIndex is set.
         /// </summary>
         /// <param name="logMoneyness">List that contains the log moneyness,
         /// where log moneyness is Log(strike/_assetPrice)</param>
@@ -823,14 +840,14 @@ namespace Orion.Analytics.PricingEngines
             // log moneyness value, then find the position of the element
             // with the minimum magnitude.
             _atmIndex = 0;           
-            var minValue = Math.Abs(logMoneyness[0]);
+            var minValue = System.Math.Abs(logMoneyness[0]);
             var pos = 0; // zero based index position
             foreach(var logMoneynessValue in logMoneyness)
             {
-                if(Math.Abs(logMoneynessValue) < minValue)
+                if(System.Math.Abs(logMoneynessValue) < minValue)
                 {
                     // Replace current minimum.
-                    minValue = Math.Abs(logMoneynessValue);
+                    minValue = System.Math.Abs(logMoneynessValue);
                     _atmIndex = pos;
                 }
                 ++pos; // increment position marker
@@ -850,28 +867,28 @@ namespace Orion.Analytics.PricingEngines
         /// Helper function used by the method SetInitialGuesses to set the
         /// guess for the transformed SABR parameter mu.
         /// Preconditions: ComputeATMSlope and SetThetaGuess have been called.
-        /// Postcondition: private field _muGuess is set.
+        /// Post condition: private field _muGuess is set.
         /// </summary>
         private void SetMuGuess()
         {
-            decimal magnitudeATMSlope = Math.Abs(_atmSlope);
+            decimal magnitudeATMSlope = System.Math.Abs(_atmSlope);
             decimal convexity =
                 _rhoGuess*(1.0m - _calibrationSettings.Beta)*_atmVolatility;
 
-            decimal nuGuess = 4.0m * Math.Abs(magnitudeATMSlope + convexity);
-            _muGuess = (decimal) Math.Sqrt(decimal.ToDouble(nuGuess));
+            decimal nuGuess = 4.0m * System.Math.Abs(magnitudeATMSlope + convexity);
+            _muGuess = (decimal)System.Math.Sqrt(decimal.ToDouble(nuGuess));
         }
 
         /// <summary>
         /// Helper function used by the method SetInitialGuesses to set the
         /// guess for the transformed SABR parameter theta.
         /// Precondition: ComputeATMSlope has been called.
-        /// Postcondition: private fields _rhoGuess and _thetaGuess are set.
+        /// Post condition: private fields _rhoGuess and _thetaGuess are set.
         /// </summary>
         private void SetThetaGuess()
         {
-            _rhoGuess = MidRho*Math.Sign(_atmSlope);
-            _thetaGuess = (decimal) Math.Acos(decimal.ToDouble(_rhoGuess));
+            _rhoGuess = MidRho* System.Math.Sign(_atmSlope);
+            _thetaGuess = (decimal)System.Math.Acos(decimal.ToDouble(_rhoGuess));
         }
 
         /// <summary>
@@ -901,7 +918,7 @@ namespace Orion.Analytics.PricingEngines
         {
             var beta = _sabrParameters.Beta;
             var alpha = _atmVolatility *
-                        (decimal) Math.Pow(decimal.ToDouble(_assetPrice),
+                        (decimal)System.Math.Pow(decimal.ToDouble(_assetPrice),
                                            decimal.ToDouble(1.0m - beta));
             var upperBound = AlphaMultiplier*alpha;
             // Instantiate and initialise the equation solver.
@@ -910,11 +927,11 @@ namespace Orion.Analytics.PricingEngines
             try
             {
                 _sabrParameters.Alpha = (decimal)Brent.FindRootExpand(TargetFunction, 
-                    decimal.ToDouble(Math.Min(MinimumAlpha, alpha / AlphaMultiplier)), 
+                    decimal.ToDouble(System.Math.Min(MinimumAlpha, alpha / AlphaMultiplier)), 
                     decimal.ToDouble(upperBound));
                 return true;
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 //double accuracy = 1e-8;
                 //Func<double, double> function = TargetFunction;
@@ -955,13 +972,13 @@ namespace Orion.Analytics.PricingEngines
         private void UpdateRho(IList<double> x)
         {
             // Map the optimization variable x[0] to the SABR parameter rho.
-            _sabrParameters.Rho = (decimal) Math.Cos(x[0]);
-            if(Math.Abs(_sabrParameters.Rho) == 1.0m)
+            _sabrParameters.Rho = (decimal)System.Math.Cos(x[0]);
+            if(System.Math.Abs(_sabrParameters.Rho) == 1.0m)
             {
                 // Perturb the SABR parameter rho away from the
                 // boundary |rho| = 1.0.
                 _sabrParameters.Rho +=
-                    -Math.Sign(_sabrParameters.Rho)*RhoPerturbation;
+                    -System.Math.Sign(_sabrParameters.Rho)*RhoPerturbation;
             }
         }
 
@@ -995,7 +1012,7 @@ namespace Orion.Analytics.PricingEngines
                                                          false);
                 var volDiff =
                     decimal.ToDouble(modelVolatility - _volatilities[index]);
-                residual += (decimal) Math.Pow(volDiff, 2);
+                residual += (decimal)System.Math.Pow(volDiff, 2);
                 // Move to the next market volatility.
                 ++index;
             }
@@ -1011,7 +1028,7 @@ namespace Orion.Analytics.PricingEngines
         /// <param name="x">Vector that contains the optimization variables.
         /// Contents are: x[0] stores the transformed SABR parameter theta;
         /// x[1] stores the transformed SABR parameter mu.</param>
-        /// Postcondition: SABR parameters alpha, nu and rho are updated to
+        /// Post condition: SABR parameters alpha, nu and rho are updated to
         /// their current values based on the status of the optimization
         /// variable.
         /// <returns>Least squares error.</returns>
@@ -1041,19 +1058,19 @@ namespace Orion.Analytics.PricingEngines
             // determines the SABR parameter alpha.
             decimal numerator3 = (1.0m - beta)*(1.0m - beta)*_exerciseTime;
             decimal denominator3 = 24.0m*
-                                   (decimal) Math.Pow(decimal.ToDouble(_assetPrice),
+                                   (decimal)System.Math.Pow(decimal.ToDouble(_assetPrice),
                                                       decimal.ToDouble(2.0m - 2.0m*beta));
             decimal cubicTerm = numerator3/denominator3*
-                                (decimal) Math.Pow(decimal.ToDouble(alpha), 3.0);
+                                (decimal)System.Math.Pow(decimal.ToDouble(alpha), 3.0);
             decimal numerator2 = rho*beta*nu*_exerciseTime;
             decimal denominator2 = 4.0m*
-                                   (decimal) Math.Pow(decimal.ToDouble(_assetPrice),
+                                   (decimal)System.Math.Pow(decimal.ToDouble(_assetPrice),
                                                       decimal.ToDouble(1.0m - beta));
             decimal quadraticTerm = numerator2/denominator2*alpha*alpha;
             decimal linearTerm =
                 (1.0m + nu*nu/24.0m*(2.0m - 3.0m*rho*rho)*_exerciseTime)*alpha;
             decimal constant = -_atmVolatility * 
-                               (decimal) Math.Pow(decimal.ToDouble(_assetPrice),
+                               (decimal)System.Math.Pow(decimal.ToDouble(_assetPrice),
                                                   decimal.ToDouble(1.0m - beta));
             // Construct and return the residual value.
             decimal residual = cubicTerm + quadraticTerm + linearTerm + constant;

@@ -1,11 +1,25 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System.Globalization;
-using FpML.V5r10.Reporting;
 
 #endregion
 
-namespace Orion.Analytics.Interpolations.Points
+namespace FpML.V5r10.Reporting.Analytics.Interpolations.Points
 {
     /// <summary>
     /// A class that will model an FPML coordinate. 
@@ -102,7 +116,7 @@ namespace Orion.Analytics.Interpolations.Points
         public override bool Equals(object obj)
         {
             var match = false;
-            if (obj.GetType() == typeof(PricingDataPoint3D))
+            if (obj != null && obj.GetType() == typeof(PricingDataPoint3D))
             {
                 var coord = ((PricingDataPoint3D)obj).PricingDataPointCoordinate;
 
@@ -113,21 +127,21 @@ namespace Orion.Analytics.Interpolations.Points
                 if (match)
                 {
                     if (PricingDataPointCoordinate.term == null && coord.term == null)
-                        return match;
+                        return true;
                     if (PricingDataPointCoordinate.term != null && coord.term == null)
                         match = false;
                     else if (PricingDataPointCoordinate.term == null && coord.term != null)
                         match = false;
-                    else if (((Period)PricingDataPointCoordinate.term[0].Items[0]).Equals((Period)coord.term[0].Items[0]))
-                        return match;
+                    else if (coord.term != null && (PricingDataPointCoordinate.term != null &&
+                                                    ((Period) PricingDataPointCoordinate.term[0].Items[0]).Equals(
+                                                        (Period) coord.term[0].Items[0])))
+                        return true;
                     else
                         match = false;
                 }
-
                 //strike
             }
-
-            return match;
+            return false;
         }
 
         /// <summary>
@@ -141,6 +155,4 @@ namespace Orion.Analytics.Interpolations.Points
 
         #endregion
     }
-
-
 }

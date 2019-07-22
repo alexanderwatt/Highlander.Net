@@ -1,8 +1,26 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
 using System;
-using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.ModelFramework;
 
-namespace Orion.Analytics.Interpolations.Spaces
+#endregion
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations.Spaces
 {
     /// <summary>
     /// The interface <c>IPoint</c> is used in 
@@ -31,7 +49,7 @@ namespace Orion.Analytics.Interpolations.Spaces
         /// The main ctor.
         /// </summary>
         /// <param name="discreteSpace">The discrete space upon which to apply the interpolating function.</param>
-        /// <param name="interpolation">Interpoaltion type for the x axis.</param>
+        /// <param name="interpolation">Interpolation type for the x axis.</param>
         /// <param name="allowExtrapolation">Boolean flag, currently not implemented.</param>
         protected InterpolatedSpace(IDiscreteSpace discreteSpace, IInterpolation interpolation, bool allowExtrapolation)
         {
@@ -52,7 +70,7 @@ namespace Orion.Analytics.Interpolations.Spaces
         }
 
         /// <summary>
-        /// Gets the nunderlying discrete space that is used for interpolation.
+        /// Gets the underlying discrete space that is used for interpolation.
         /// </summary>
         /// <returns></returns>
         public IDiscreteSpace GetDiscreteSpace()

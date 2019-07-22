@@ -206,6 +206,5 @@ namespace FpML.V5r10.Confirmation
             //
             return results;
         }
-
     }
 }

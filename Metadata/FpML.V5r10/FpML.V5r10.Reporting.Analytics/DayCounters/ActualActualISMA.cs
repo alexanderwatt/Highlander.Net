@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -5,7 +20,7 @@ using FpML.V5r10.Reporting.ModelFramework.Business;
 
 #endregion
 
-namespace Orion.Analytics.DayCounters
+namespace FpML.V5r10.Reporting.Analytics.DayCounters
 {
     /// <summary>
     /// Actual/Actual (ISMA/Bond) day count convention.
@@ -51,29 +66,22 @@ namespace Orion.Analytics.DayCounters
         {
             if( refPeriodStart.Ticks == 0) refPeriodStart = startDate;
             if( refPeriodEnd.Ticks == 0) refPeriodEnd = endDate;
-
             // normalize reference period
             refPeriodStart = refPeriodStart.Date;
             refPeriodEnd = refPeriodEnd.Date;
-
             if( ! ( refPeriodEnd > refPeriodStart && refPeriodEnd > startDate ) )
                 throw new ArgumentException(
-                    String.Format("Invalid reference period: startDate: {0}, endDate: {1}, Reference period Start: {2}, Reference period end: {3}.",
-                                  new object[] { startDate, endDate, refPeriodStart, refPeriodEnd } ) 
-                    );
-
+                    $"Invalid reference period: startDate: {startDate}, endDate: {endDate}, Reference period Start: {refPeriodStart}, Reference period end: {refPeriodEnd}."
+                );
             // Estimate roughly the length in months of a period
             //
             int months = (int)(0.5 + 12 * ActualDays(refPeriodStart, refPeriodEnd) / 365.0);
-
             if( months == 0 )
                 throw new ArgumentException(
                     // TODO: i do not understand this error message
                     // number of months does not divide 12 exactly
                     "Number of months does not divide 12 exactly.");
-
             double period = months / 12.0;
-
             if (endDate <= refPeriodEnd) 
             {
                 // here refPeriodEnd is a future (notional?) payment date
@@ -91,7 +99,6 @@ namespace Orion.Analytics.DayCounters
                 // startDate < refPeriodStart < refPeriodEnd
                 // AND endDate <= refPeriodEnd
                 // this case is long first coupon
-
                 // the last notional payment date
                 DateTime previousRef = refPeriodStart.AddMonths(-months);
                 if (endDate > refPeriodStart)
@@ -108,23 +115,18 @@ namespace Orion.Analytics.DayCounters
                     // TODO: now it is: refPeriodStart <= startDate < refPeriodEnd < endDate
                     // Invalid dates: startDate < refPeriodStart < refPeriodEnd < endDate.
                     "Invalid dates:");
-
             // the part from startDate to refPeriodEnd
             //
             double sum = YearFractionImpl(startDate, refPeriodEnd, refPeriodStart, refPeriodEnd);
-
             // the part from refPeriodEnd to endDate
             // count how many regular periods are in [refPeriodEnd, endDate],
             // then add the remaining time
             int i = 0;
-				
             DateTime newRefStart, newRefEnd;
-				
             do 
             {
                 newRefStart = refPeriodEnd.AddMonths(months * i );
                 newRefEnd   = refPeriodEnd.AddMonths(months * (i+1) );
-
                 if (endDate < newRefEnd) 
                 {
                     break;
@@ -132,11 +134,8 @@ namespace Orion.Analytics.DayCounters
                 sum += period;
                 i++;
             } while (true);
-				
             sum += YearFractionImpl(newRefStart, endDate, newRefStart, newRefEnd);
-
             return sum;
         }
-
     }
 }

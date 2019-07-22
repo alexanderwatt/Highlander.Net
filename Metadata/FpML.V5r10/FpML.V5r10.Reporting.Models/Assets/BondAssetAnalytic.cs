@@ -15,7 +15,7 @@
 
 using System;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Rates;
+using Highlander.Numerics.Rates;
 
 namespace FpML.V5r10.Reporting.Models.Assets
 {

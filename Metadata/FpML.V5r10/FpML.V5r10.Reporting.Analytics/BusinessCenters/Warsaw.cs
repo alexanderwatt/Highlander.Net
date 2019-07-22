@@ -1,13 +1,28 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
 using System.Globalization;
+using Highlander.Numerics.Dates;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Dates;
 
 #endregion
 
-namespace Orion.Analytics.BusinessCenters
+namespace FpML.V5r10.Reporting.Analytics.BusinessCenters
 {
     /// <summary>
     /// Warsaw calendar.
@@ -20,9 +35,9 @@ namespace Orion.Analytics.BusinessCenters
     /// <item><description>New Year's Day, January 1st</description></item>
     /// <item><description>Easter Monday</description></item>
     /// <item><description>Corpus Christi</description></item>
-    /// <item><description>Labour Day, May 1st</description></item>
+    /// <item><description>Labor Day, May 1st</description></item>
     /// <item><description>Constitution Day, May 3rd</description></item>
-    /// <item><description>ssumption of the Blessed Virgin Mary, August 15th</description></item>
+    /// <item><description>Assumption of the Blessed Virgin Mary, August 15th</description></item>
     /// <item><description>All Saints Day, November 1st</description></item>
     /// <item><description>Independence Day, November 11th</description></item>
     /// <item><description>Christmas, December 25th</description></item>
@@ -47,7 +62,7 @@ namespace Orion.Analytics.BusinessCenters
 
         #region FactoryItem pattern
 
-        [ Obsolete() ] // just to ignore the CS0618 warning below
+        [ Obsolete ] // just to ignore the CS0618 warning below
         static Warsaw()
         {
             Instance = new Warsaw();	// CS0618
@@ -83,7 +98,7 @@ namespace Orion.Analytics.BusinessCenters
         /// This property value ranges from zero, indicating Sunday,
         /// to six, indicating Saturday.</param>
         /// <param name="dd">The day of the year, between 1 and 366.</param>
-        /// <param name="em">The day of Easter Monady in the year, between 1 and 366.</param>
+        /// <param name="em">The day of Easter Monday in the year, between 1 and 366.</param>
         /// <returns><c>True</c> when the given day is a business day.</returns>
         protected override bool IsBusinessDay(
             int d, Month m, int y,
@@ -96,7 +111,7 @@ namespace Orion.Analytics.BusinessCenters
                 || (dd == em)
                 // Corpus Christi
                 || (dd == em+59)
-                // Labour Day
+                // Labor Day
                 || (d == 1 && m == Month.May)
                 // Constitution Day
                 || (d == 3  && m == Month.May)

@@ -1,17 +1,30 @@
-﻿#region Using Directives
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Using Directives
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.Helpers;
 using Orion.Util.Helpers;
-using Orion.Analytics.Helpers;
-using Math = System.Math;
+using FpML.V5r10.Reporting.Analytics.Helpers;
 
 #endregion
 
-namespace Orion.Analytics.Schedulers
+namespace FpML.V5r10.Reporting.Analytics.Schedulers
 {
     /// <summary>
     /// Simple Date scheduler for coupon periods
@@ -32,7 +45,7 @@ namespace Orion.Analytics.Schedulers
         {
             Double divisor = IntervalHelper.Div(intervalToTerminationDate, periodInterval);
             // The divisor has to be a whole number (i.e. the period must roll to the term date interval
-            if (Math.Abs(divisor % 1) > Tolerance)
+            if (System.Math.Abs(divisor % 1) > Tolerance)
             {
                 throw new ArithmeticException("The period frequency will not roll to the supplied termination date interval");
             }
@@ -78,7 +91,7 @@ namespace Orion.Analytics.Schedulers
         /// <summary>
         /// Gets a dates schedule.
         /// </summary>
-        /// <param name="metaScheduleDefinitionRange">This must have 3 columns: interval, interval, rollconventionenum.</param>
+        /// <param name="metaScheduleDefinitionRange">This must have 3 columns: interval, interval, roll convention enum.</param>
         /// <param name="startDate"></param>
         /// <param name="businessDayAdjustment"></param>
         /// <returns></returns>
@@ -147,7 +160,7 @@ namespace Orion.Analytics.Schedulers
         ///<param name="rollDayConvention"></param>
         ///<returns></returns>
         ///<exception cref="ArgumentOutOfRangeException"></exception>
-        public static DateTime[] GetUnajustedDates(int directionDateGeneration, DateTime effectiveDate, DateTime terminationDate, Period periodInterval, RollConventionEnum rollDayConvention)
+        public static DateTime[] GetUnadjustedDates(int directionDateGeneration, DateTime effectiveDate, DateTime terminationDate, Period periodInterval, RollConventionEnum rollDayConvention)
         {
             DateTime firstRegularPeriodStartDate;
             DateTime lastRegularPeriodEndDate;
@@ -368,7 +381,7 @@ namespace Orion.Analytics.Schedulers
         }
 
         /// <summary>
-        /// Gets the unadjusted dates from maturity date. This assumes rgular rolling from maturity date.
+        /// Gets the unadjusted dates from maturity date. This assumes regular rolling from maturity date.
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="terminationDate">The termination date.</param>
@@ -411,7 +424,7 @@ namespace Orion.Analytics.Schedulers
         /// <param name="rollConvention">The roll convention.</param>
         /// <param name="firstRegularPeriodDate">The first regular period date.</param>
         /// <param name="stubPeriodType">Type of the stub period.</param>
-        /// <returns>A vertival range of dates.</returns>
+        /// <returns>A vertical range of dates.</returns>
         public static DateTime[] GetUnadjustedCalculationPeriodDates(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, DateTime firstRegularPeriodDate, string stubPeriodType)
         {
             const string dateToReturn = "unadjustedStartDate";

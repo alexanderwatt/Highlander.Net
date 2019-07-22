@@ -1,12 +1,31 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using FpML.V5r10.Reporting.ModelFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Differentiation;
-using Orion.Analytics.Helpers;
-using Orion.Analytics.Utilities;
+using Highlander.Numerics.Differentiation;
+using Highlander.Numerics.Helpers;
+using Highlander.Numerics.Utilities;
 
-namespace Orion.Analytics.Interpolations
+#endregion
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations
 {
     /// <summary>
     /// Class that encapsulates functionality to perform one dimensional
@@ -67,8 +86,8 @@ namespace Orion.Analytics.Interpolations
         /// <summary>
         /// Computes the first derivatives at the knot points that bound the
         /// target of the interpolation.
-        /// Postcondition: private field _m0 is set.
-        /// Postcondition: private field _m1 is set.
+        /// Post condition: private field _m0 is set.
+        /// Post condition: private field _m1 is set.
         /// </summary>
         /// <param name="leftIndex">Zero based index at the left knot point
         /// of the bounding interval.</param>
@@ -87,7 +106,7 @@ namespace Orion.Analytics.Interpolations
                 yArray[i] = DataTable.Values[i];
             }
             var derivObj =
-                new CentredFiniteDifferenceDerivative(xArray,
+                new CenteredFiniteDifferenceDerivative(xArray,
                                                       yArray);
             // Compute derivatives.
             _m0 = derivObj.ComputeFirstDerivative(leftIndex);
@@ -97,10 +116,10 @@ namespace Orion.Analytics.Interpolations
         /// <summary>
         /// Computes the value of the Hermite Spline basis functions at the
         /// normalised target.
-        /// Postcondition: private field _h00 is set.
-        /// Postcondition: private field _h10 is set.
-        /// Postcondition: private field _h01 is set.
-        /// Postcondition: private field _h11 is set.
+        /// Post condition: private field _h00 is set.
+        /// Post condition: private field _h10 is set.
+        /// Post condition: private field _h01 is set.
+        /// Post condition: private field _h11 is set.
         /// </summary>
         /// <param name="t">Normalised target.</param>
         private void ComputeHermiteSplineBasisFunctions(decimal t)
@@ -118,7 +137,7 @@ namespace Orion.Analytics.Interpolations
         /// </summary>
         /// <param name="target">Value at which to compute the
         /// interpolation.</param>
-        /// Postcondition: private field _t is set.
+        /// Post-condition: private field _t is set.
         private void ComputeNormalisedTarget(decimal target)
         {
             decimal xK = DataTable.Keys[LeftIndex];
@@ -164,10 +183,10 @@ namespace Orion.Analytics.Interpolations
         /// <param name="target">Value at which to compute the
         /// interpolation. The target cannot be outside of the interval
         /// that bounds the knot points.</param>
-        /// Postcondition: private field _leftIndex is set.
-        /// Postcondition: private field _rightIndex is set.
-        /// Postcondition: private field _isTargetAtExtremeLeft is set.
-        /// Postcondition: private field _istargetAtExtremeRight is set.
+        /// Post condition: private field _leftIndex is set.
+        /// Post condition: private field _rightIndex is set.
+        /// Post condition: private field _isTargetAtExtremeLeft is set.
+        /// Post condition: private field _isTargetAtExtremeRight is set.
         /// Exception: ArgumentException
         private void FindBoundingInterval(decimal target, bool allowExtrapolation)
         {
@@ -176,7 +195,7 @@ namespace Orion.Analytics.Interpolations
             int maxIndex = DataTable.Keys.Count - 1;
             bool isExtrapolationRequested =
                 target < DataTable.Keys[0] || target > DataTable.Keys[maxIndex];
-            if (isExtrapolationRequested)//!allowExtrapolation && 
+            if (!allowExtrapolation && isExtrapolationRequested)
             {
                 const string errorMessage =
                     "Cubic Hermite Spline does not support extrapolation";
@@ -184,29 +203,29 @@ namespace Orion.Analytics.Interpolations
             }
             //if (allowExtrapolation)
             //{
-            //    if (decimal.Compare(DataTable.Keys[0], target) >= 0)
-            //    {
-            //        // Target is at the extreme left.
-            //        LeftIndex = 0;
-            //        RightIndex = 1;
-            //    }
-            //    else if (decimal.Compare(DataTable.Keys[maxIndex], target) <= 0)
-            //    {
-            //        // Target is at the extreme right.
-            //        RightIndex = maxIndex;
-            //        LeftIndex = maxIndex - 1;
-            //    }
-            //    else
-            //    {
-            //        // Generic case.
-            //        int i = 0;
-            //        while (i <= maxIndex && DataTable.Keys[i] <= target)
-            //        {
-            //            ++i;
-            //        }
-            //        RightIndex = i;
-            //        LeftIndex = i - 1;
-            //    }
+                //if (decimal.Compare(DataTable.Keys[0], target) >= 0)
+                //{
+                //    // Target is at the extreme left.
+                //    LeftIndex = 0;
+                //    RightIndex = 1;
+                //}
+                //else if (decimal.Compare(DataTable.Keys[maxIndex], target) <= 0)
+                //{
+                //    // Target is at the extreme right.
+                //    RightIndex = maxIndex;
+                //    LeftIndex = maxIndex - 1;
+                //}
+                //else
+                //{
+                //    // Generic case.
+                //    int i = 0;
+                //    while (i <= maxIndex && DataTable.Keys[i] <= target)
+                //    {
+                //        ++i;
+                //    }
+                //    RightIndex = i;
+                //    LeftIndex = i - 1;
+                //}
             //}
             //else
             //{
@@ -324,19 +343,12 @@ namespace Orion.Analytics.Interpolations
         ///<exception cref="NotImplementedException"></exception>
         public double ValueAt(double point, bool allowExtrapolation)
         {
-            FindBoundingInterval(Convert.ToDecimal(point), allowExtrapolation);
-            ComputeNormalisedTarget(Convert.ToDecimal(point));
-            ComputeHermiteSplineBasisFunctions(NormalisedTarget);
-            ComputeFirstDerivatives(LeftIndex, RightIndex);
-            // Compute and return the interpolation value.
-            var p0 = DataTable.Values[LeftIndex];
-            var p1 = DataTable.Values[RightIndex];
-            var h =
-                DataTable.Keys[RightIndex] - DataTable.Keys[LeftIndex];
-            var interpolationValue =
-                _h00 * p0 + _h10 * h * _m0 + _h01 * p1 + _h11 * h * _m1;
-            return (double)interpolationValue;
-            //return (double)ValueAt((decimal)point);
+            var left = Convert.ToDouble(DataTable.Keys[0]);
+            int maxIndex = DataTable.Keys.Count - 1;
+            var right = Convert.ToDouble(DataTable.Keys[maxIndex]);
+            if (allowExtrapolation && point < left) return ValueAt(left);
+            if (allowExtrapolation && point > right) return ValueAt(right);
+            return ValueAt(point);
         }
 
         /// <summary>
@@ -349,7 +361,19 @@ namespace Orion.Analytics.Interpolations
         /// </returns>
         public double ValueAt(double point)
         {
-            return ValueAt(point, true);
+            FindBoundingInterval(Convert.ToDecimal(point), true);
+            ComputeNormalisedTarget(Convert.ToDecimal(point));
+            ComputeHermiteSplineBasisFunctions(NormalisedTarget);
+            ComputeFirstDerivatives(LeftIndex, RightIndex);
+            // Compute and return the interpolation value.
+            var p0 = DataTable.Values[LeftIndex];
+            var p1 = DataTable.Values[RightIndex];
+            var h =
+                DataTable.Keys[RightIndex] - DataTable.Keys[LeftIndex];
+            var interpolationValue =
+                _h00 * p0 + _h10 * h * _m0 + _h01 * p1 + _h11 * h * _m1;
+            return (double)interpolationValue;
+            //return ValueAt(point, true);
         }
 
         ///<summary>

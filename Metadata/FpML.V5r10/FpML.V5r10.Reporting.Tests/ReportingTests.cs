@@ -316,9 +316,7 @@ namespace FpML.V5r10.Reporting.Tests
                         },
                     },
             };
-
             var copy = Roundtrip_OutThenIn(orig, true, true);
-
             //using (var sr = new StreamReader(internalFullPath))
             //{
             //    string xmlText = sr.ReadToEnd();
@@ -328,7 +326,6 @@ namespace FpML.V5r10.Reporting.Tests
             //    Assert.IsFalse(xmlText.Contains("<equity"));
             //    Assert.IsTrue(xmlText.Contains("<underlyingAsset"));
             //}
-
             //using (var sr = new StreamReader(externalFullPath))
             //{
             //    string xmlText = sr.ReadToEnd();

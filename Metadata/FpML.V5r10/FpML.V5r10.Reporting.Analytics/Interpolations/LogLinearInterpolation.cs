@@ -1,8 +1,27 @@
-﻿using System;
-using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Utilities;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Interpolations
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
+using Highlander.Numerics.Utilities;
+using FpML.V5r10.Reporting.ModelFramework;
+
+#endregion
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations
 
 {
     /// <summary>
@@ -37,7 +56,7 @@ namespace Orion.Analytics.Interpolations
             {
                 for (int i = a; i < b; i++)
                 {
-                    logy[i] = -Math.Log(y[i]);
+                    logy[i] = -System.Math.Log(y[i]);
                 }
             });
             Y = logy;
@@ -53,7 +72,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Create a piecewise log-linear interpolation from a set of (x,y) value pairs, sorted ascendingly by x.
+        /// Create a piecewise log-linear interpolation from a set of (x,y) value pairs, sorted ascending by x.
         /// </summary>
         public new static LogLinearInterpolation Interpolate(double[] x, double[] y)
         {
@@ -70,7 +89,7 @@ namespace Orion.Analytics.Interpolations
             {
                 for (int i = a; i < b; i++)
                 {
-                    logy[i] = -Math.Log(y[i]);
+                    logy[i] = -System.Math.Log(y[i]);
                 }
             });
             return new LogLinearInterpolation(x, logy);
@@ -97,12 +116,12 @@ namespace Orion.Analytics.Interpolations
                 var extension = axisValue - lastNode;
                 var interval = lastNode - penultimateNode;
                 var height = Rate(lastNode) - Rate(penultimateNode);
-                if (Math.Abs(interval) > 0)
+                if (System.Math.Abs(interval) > 0)
                 {
                     var gradient = height / interval;
                     var lastValue = Rate(lastNode);
                     var extrapolatedValue = lastValue + gradient * extension;
-                    return Math.Exp(-1 * extrapolatedValue * axisValue);
+                    return System.Math.Exp(-1 * extrapolatedValue * axisValue);
                 }
                 return ValueAt(lastNode);
             }
@@ -118,7 +137,7 @@ namespace Orion.Analytics.Interpolations
         public override double ValueAt(double time)
         {
             var value = base.ValueAt(time);
-            return Math.Exp(-1 * value);
+            return System.Math.Exp(-1 * value);
         }
 
         /// <summary>
@@ -131,7 +150,7 @@ namespace Orion.Analytics.Interpolations
         {
             var value = base.ValueAt(time);
             var t = .000001;
-            if (Math.Abs(time) > 0)
+            if (System.Math.Abs(time) > 0)
             {
                 t = time;
             }

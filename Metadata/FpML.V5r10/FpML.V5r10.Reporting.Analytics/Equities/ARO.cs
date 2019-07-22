@@ -1,8 +1,23 @@
-﻿using System;
-using System.Linq;
-using Orion.Analytics.Distributions;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Equities
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using System.Linq;
+using Highlander.Numerics.Distributions;
+
+namespace FpML.V5r10.Reporting.Analytics.Equities
 {
     public class ARO 
     {
@@ -16,11 +31,11 @@ namespace Orion.Analytics.Equities
         /// <param name="tau">The tau.</param>
         /// <param name="vols">The vols.</param>
         /// <param name="resetDays">The reset days.</param>
-        /// <param name="resetAmts">The reset amts.</param>
-        /// <param name="rtdays">The rtdays.</param>
-        /// <param name="rtamts">The rtamts.</param>
-        /// <param name="divdays">The divdays.</param>
-        /// <param name="divamts">The divamts.</param>
+        /// <param name="resetAmts">The reset amounts.</param>
+        /// <param name="rtdays">The rate days.</param>
+        /// <param name="rtamts">The rate amounts.</param>
+        /// <param name="divdays">The dividend days.</param>
+        /// <param name="divamts">The dividend amounts.</param>
         public ARO(bool isCall, double spot, double strike, double tau, double[] vols, int[] resetDays, double[] resetAmts,
                            int[] rtdays, double[] rtamts, int[] divdays, double[] divamts)    
         {
@@ -48,9 +63,9 @@ namespace Orion.Analytics.Equities
         private readonly double[] _divamts;
         private readonly int[] _resetDays;
         private readonly double[] _resetAmts;
-        private const int daybasis = 365;
-        private const double cEpsilon = 0.000001;
-        private readonly NormalDistribution _nd = new NormalDistribution(0, 1);
+        private const int Daybasis = 365;
+        private const double CEpsilon = 0.000001;
+        private NormalDistribution _nd = new NormalDistribution(0, 1);
 
         /// <summary>
         /// Gets the price.
@@ -59,7 +74,7 @@ namespace Orion.Analytics.Equities
         public double GetPrice()
         {
             int numresets = _resetDays.Length;
-            int readings = _resetAmts.Count(delegate(double item) { return (item > 0); });
+            int readings = _resetAmts.Count(item => (item > 0));
             if (readings == numresets)
             {
                 double av = _resetAmts.Average();
@@ -68,17 +83,16 @@ namespace Orion.Analytics.Equities
             }
             double newstrike = TransformStrike(numresets, readings);
             int nleft = numresets - readings;
-            int[] resetDays = new int[nleft];
+            int[] reset_days = new int[nleft];
             double[] vols = new double[nleft];
             for (int idx = 0; idx < nleft; idx++)
             {
-                resetDays[idx] = _resetDays[idx + readings];
+                reset_days[idx] = _resetDays[idx + readings];
                 vols[idx] = _vols[idx + readings];
             }
-            double newprice = GetPrice(newstrike, numresets - readings, resetDays, vols);
+            double newprice = GetPrice(newstrike, numresets - readings, reset_days, vols);
             return newprice * (numresets - readings) / numresets;
         }
-
 
         /// <summary>
         /// Gets the price.
@@ -91,33 +105,32 @@ namespace Orion.Analytics.Equities
         public double GetPrice(double strike, int numResets, int[] resetDays, double[] vols)
         {
             double bond = 0.0;
-            //int numVols = _vols.Length;
+            int numVols = _vols.Length;
+            double[] covxxi;
+            double[] varlogs;
             double[] forwards = new double[numResets];
             double mu = CalcMu(ref forwards, resetDays, vols);
             double sigma = CalcSigma(resetDays, vols);
-            var varlogs = CalcVarLogs(resetDays, vols);
-            var covxxi = CalcCovXXI(varlogs, vols.Length);
+            varlogs = CalcVarLogs(resetDays, vols);
+            covxxi = CalcCovXXI(varlogs, vols.Length);
             if (strike <= 0)
             {
-                bond = Math.Abs(strike);
-                strike = cEpsilon;
+                bond = System.Math.Abs(strike);
+                strike = CEpsilon;
             }
-            double z0 = (mu - Math.Log(strike)) / sigma;
+            double z0 = (mu - System.Math.Log(strike)) / sigma;
             double i1 = 0.0;
             for (int idx = 0; idx < numResets; idx++)
             {
                 double x1 = z0 + (covxxi[idx] / sigma);
                 double n1 = _nd.CumulativeDistribution(x1);
-                i1 += n1 * forwards[idx] / numResets;
+                i1 += n1 * forwards[idx] / (double)numResets;
             }
             double i2 = strike * _nd.CumulativeDistribution(z0);
             double prem = i1 - i2;
             double df = EquityAnalytics.GetDFCCLin365(0, _tau, _rtdays, _rtamts);
             return (prem + bond) * df;
         }
-
-
-
 
 
         /// <summary>
@@ -144,7 +157,7 @@ namespace Orion.Analytics.Equities
         /// Calcs the cov XXI.
         /// </summary>
         /// <param name="varlogs">The varlogs.</param>
-        /// <param name="numVols">The num_vols.</param>
+        /// <param name="numVols">The numvols.</param>
         private double[] CalcCovXXI(double[] varlogs, int numVols)
         {
             double trm1 = 0.0;
@@ -175,12 +188,12 @@ namespace Orion.Analytics.Equities
             int numresets = resetDays.Length;
             for (int idx = 0; idx < numresets; idx++)
             {
-                double dt0 = Convert.ToDouble(resetDays[idx])/daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx])/Daybasis;
                 double r0 = EquityAnalytics.GetRateCCLin365(0, dt0, _rtdays, _rtamts);                
                 double q0 = EquityAnalytics.GetYieldCCLin365(_spot,0, dt0, _divdays, _divamts, _rtdays,_rtamts);             
 
-                musum += Math.Log(_spot) + (r0 - q0) * dt0 - vols[idx] * vols[idx] * dt0 / 2;
-                forwards[idx] = _spot * Math.Exp((r0 - q0) * dt0);
+                musum += System.Math.Log(_spot) + (r0 - q0) * dt0 - vols[idx] * vols[idx] * dt0 / 2;
+                forwards[idx] = _spot * System.Math.Exp((r0 - q0) * dt0);
             }
             return musum / numresets;
         }
@@ -188,7 +201,7 @@ namespace Orion.Analytics.Equities
         /// <summary>
         /// Calcs the sigma.
         /// </summary>
-        /// <param name="resetDays"></param>
+        /// <param name="resetDays">The reset dates.</param>
         /// <param name="vols">The vols.</param>
         /// <returns></returns>
         private double CalcSigma(int[] resetDays, double[] vols)
@@ -198,20 +211,20 @@ namespace Orion.Analytics.Equities
             double cumvar = 0;
             for (int idx = 0; idx < numResets; idx++)
             {               
-                double dt0 = Convert.ToDouble(resetDays[idx]) / daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx]) / Daybasis;
                 double var = vols[idx] * vols[idx] * dt0;
                 cumvar += var;
                 crossterms += (numResets - (idx + 1)) * var;
             }
-            double temp1 = Math.Sqrt(2 * crossterms + cumvar);
-            double res = 1.0 / numResets * temp1;
+            double temp1 = System.Math.Sqrt(2 * crossterms + cumvar);
+            double res = 1.0 / (double)numResets * temp1;
             return res;
         }
 
         /// <summary>
         /// Calcs the var logs.
         /// </summary>
-        /// <param name="resetDays"></param>
+        /// <param name="resetDays">The reset_days.</param>
         /// <param name="vols">The vols.</param>
         /// <returns></returns>
         private double[] CalcVarLogs(int[] resetDays, double[] vols)
@@ -220,7 +233,7 @@ namespace Orion.Analytics.Equities
             double[] res = new double[numresets];
             for (int idx = 0; idx < numresets; idx++)
             {
-                double dt0 = Convert.ToDouble(resetDays[idx]) / daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx]) / Daybasis;
                 double varlogs = vols[idx] * vols[idx] * dt0;
                 res[idx] = varlogs;
             }

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
@@ -5,7 +20,7 @@ using FpML.V5r10.Reporting.ModelFramework.Business;
 
 #endregion
 
-namespace Orion.Analytics.DayCounters
+namespace FpML.V5r10.Reporting.Analytics.DayCounters
 {
     /// <summary>
     /// Actual/Actual (ISDA) day count convention.
@@ -52,7 +67,6 @@ namespace Orion.Analytics.DayCounters
             int y1 = startDate.Year, y2 = endDate.Year;
             double dib1 = (DateTime.IsLeapYear(y1) ? 366.0 : 365.0),
                    dib2 = ( DateTime.IsLeapYear(y2) ? 366.0 : 365.0);
-
             double sum = y2 - y1 - 1;
             sum += ActualDays(startDate, new DateTime(y1+1, 1, 1)) / dib1;
             sum += ActualDays(new DateTime(y2, 1, 1), endDate) / dib2;

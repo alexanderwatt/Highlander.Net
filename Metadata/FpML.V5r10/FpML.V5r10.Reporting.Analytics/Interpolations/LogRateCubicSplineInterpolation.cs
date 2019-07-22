@@ -1,8 +1,28 @@
-﻿using System;
-using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Utilities;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Interpolations
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
+using Highlander.Numerics.Utilities;
+using FpML.V5r10.Reporting.ModelFramework;
+using Math = System.Math;
+
+#endregion
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations
 {
     /// <summary>
     /// Class that encapsulates functionality to perform one dimensional
@@ -25,7 +45,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Create a piecewise log-linear interpolation from a set of (x,y) value pairs, sorted ascendingly by x.
+        /// Create a piecewise log-linear interpolation from a set of (x,y) value pairs, sorted ascending by x.
         /// </summary>
         public static LogRateCubicSplineInterpolation Interpolate(double[] x, double[] dfs)
         {
@@ -42,9 +62,9 @@ namespace Orion.Analytics.Interpolations
             {
                 for (int i = a; i < b; i++)
                 {
-                    if (Math.Abs(x[i]) > 0)
+                    if (System.Math.Abs(x[i]) > 0)
                     {
-                        rates[i] = -Math.Log(dfs[i]) / x[i];
+                        rates[i] = -System.Math.Log(dfs[i]) / x[i];
                     }
                     else
                     {
@@ -64,13 +84,13 @@ namespace Orion.Analytics.Interpolations
         public override double ValueAt(double t, bool extrapolation)
         {
             if (!extrapolation) return ValueAt(t);
-            if (t <= X[0])
+            if (t <= _x[0])
             {
-                return ValueAt(X[0]);
+                return ValueAt(_x[0]);
             }
-            if (t >= X[X.Length - 1])
+            if (t >= _x[_x.Length - 1])
             {
-                return ValueAt(X[X.Length - 1]);
+                return ValueAt(_x[_x.Length - 1]);
             }
             return ValueAt(t);
         }
@@ -89,7 +109,7 @@ namespace Orion.Analytics.Interpolations
         /// </exception>
         public override double ValueAt(double x)
         {
-            return Math.Abs(x) > 0 ? Math.Exp(base.ValueAt(x) * -x) : 1.0;
+            return System.Math.Abs(x) > 0 ? System.Math.Exp(base.ValueAt(x) * -x) : 1.0;
         }
 
         ///<summary>

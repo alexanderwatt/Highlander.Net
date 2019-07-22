@@ -1,8 +1,23 @@
-﻿using System;
-using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Utilities;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Interpolations
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using Highlander.Numerics.Utilities;
+using FpML.V5r10.Reporting.ModelFramework;
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations
 {
     /// <summary>
     /// Left and right boundary conditions.
@@ -36,7 +51,7 @@ namespace Orion.Analytics.Interpolations
     /// <remarks>Supports both differentiation and integration.</remarks>
     public class CubicSplineInterpolation : IInterpolation
     {
-        protected double[] X;
+        protected double[] _x;
         private double[] _c0;
         private double[] _c1;
         private double[] _c2;
@@ -61,7 +76,7 @@ namespace Orion.Analytics.Interpolations
             {
                 throw new ArgumentException(string.Format("ArrayTooSmall"), nameof(x));
             }
-            X = x;
+            _x = x;
             _c0 = c0;
             _c1 = c1;
             _c2 = c2;
@@ -98,7 +113,7 @@ namespace Orion.Analytics.Interpolations
             }
             for (int i = 1; i < weights.Length; i++)
             {
-                weights[i] = Math.Abs(diff[i] - diff[i - 1]);
+                weights[i] = System.Math.Abs(diff[i] - diff[i - 1]);
             }
             /* Prepare Hermite interpolation scheme */
             var dd = new double[x.Length];
@@ -126,7 +141,7 @@ namespace Orion.Analytics.Interpolations
                 c2[i] = (3 * (y[i + 1] - y[i]) / w - 2 * dd[i] - dd[i + 1]) / w;
                 c3[i] = (2 * (y[i] - y[i + 1]) / w + dd[i] + dd[i + 1]) / w2;
             }
-            X = x;
+            _x = x;
             _c0 = c0;
             _c1 = c1;
             _c2 = c2;
@@ -135,7 +150,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Create a hermite cubic spline interpolation from a set of (x,y) value pairs and their slope (first derivative), sorted ascendingly by x.
+        /// Create a hermite cubic spline interpolation from a set of (x,y) value pairs and their slope (first derivative), sorted ascending by x.
         /// </summary>
         public static CubicSplineInterpolation InterpolateHermite(double[] x, double[] y, double[] firstDerivatives)
         {
@@ -164,7 +179,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Create an Akima cubic spline interpolation from a set of (x,y) value pairs, sorted ascendingly by x.
+        /// Create an Akima cubic spline interpolation from a set of (x,y) value pairs, sorted ascending by x.
         /// Akima splines are robust to outliers.
         /// </summary>
         public static CubicSplineInterpolation InterpolateAkima(double[] x, double[] y)
@@ -186,7 +201,7 @@ namespace Orion.Analytics.Interpolations
             }
             for (int i = 1; i < weights.Length; i++)
             {
-                weights[i] = Math.Abs(diff[i] - diff[i - 1]);
+                weights[i] = System.Math.Abs(diff[i] - diff[i - 1]);
             }
             /* Prepare Hermite interpolation scheme */
             var dd = new double[x.Length];
@@ -205,7 +220,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Create a cubic spline interpolation from a set of (x,y) value pairs, sorted ascendingly by x,
+        /// Create a cubic spline interpolation from a set of (x,y) value pairs, sorted ascending by x,
         /// and custom boundary/termination conditions.
         /// </summary>
         public static CubicSplineInterpolation InterpolateBoundaries(double[] x, double[] y,
@@ -299,7 +314,7 @@ namespace Orion.Analytics.Interpolations
                     b[n - 1] = (3 * (y[n - 1] - y[n - 2]) / (x[n - 1] - x[n - 2])) + (0.5 * rightBoundary * (x[n - 1] - x[n - 2]));
                     break;
                 default:
-                    throw new NotSupportedException("IvalidRightBoundaryCondition");
+                    throw new NotSupportedException("InvalidRightBoundaryCondition");
             }
             // Build Spline
             double[] dd = SolveTridiagonal(a1, a2, a3, b);
@@ -308,7 +323,7 @@ namespace Orion.Analytics.Interpolations
 
         /// <summary>
         /// Create a natural cubic spline interpolation from a set of (x,y) value pairs
-        /// and zero second derivatives at the two boundaries, sorted ascendingly by x.
+        /// and zero second derivatives at the two boundaries, sorted ascending by x.
         /// </summary>
         public static CubicSplineInterpolation InterpolateNatural(double[] x, double[] y)
         {
@@ -339,7 +354,7 @@ namespace Orion.Analytics.Interpolations
         }
 
         /// <summary>
-        /// Tridiagonal Solve Helper.
+        /// Tri-diagonal Solve Helper.
         /// </summary>
         /// <param name="a">The a-vector[n].</param>
         /// <param name="b">The b-vector[n], will be modified by this function.</param>
@@ -372,13 +387,13 @@ namespace Orion.Analytics.Interpolations
         public virtual double ValueAt(double t, bool extrapolation)
         {
             if (!extrapolation) return ValueAt(t);
-            if (t <= X[0])
+            if (t <= _x[0])
             {
-                return ValueAt(X[0]);
+                return ValueAt(_x[0]);
             }
-            if (t >= X[X.Length-1])
+            if (t >= _x[_x.Length-1])
             {
-                return ValueAt(X[X.Length - 1]);
+                return ValueAt(_x[_x.Length - 1]);
             }
             return ValueAt(t);
         }
@@ -400,7 +415,7 @@ namespace Orion.Analytics.Interpolations
         public virtual double ValueAt(double t)
         {
             int k = LeftSegmentIndex(t);
-            var x = t - X[k];
+            var x = t - _x[k];
             return _c0[k] + x * (_c1[k] + x * (_c2[k] + x * _c3[k]));
         }
 
@@ -412,7 +427,7 @@ namespace Orion.Analytics.Interpolations
         public double Differentiate(double t)
         {
             int k = LeftSegmentIndex(t);
-            var x = t - X[k];
+            var x = t - _x[k];
             return _c1[k] + x * (2 * _c2[k] + x * 3 * _c3[k]);
         }
 
@@ -424,7 +439,7 @@ namespace Orion.Analytics.Interpolations
         public double Differentiate2(double t)
         {
             int k = LeftSegmentIndex(t);
-            var x = t - X[k];
+            var x = t - _x[k];
             return 2 * _c2[k] + x * 6 * _c3[k];
         }
 
@@ -435,7 +450,7 @@ namespace Orion.Analytics.Interpolations
         public double Integrate(double t)
         {
             int k = LeftSegmentIndex(t);
-            var x = t - X[k];
+            var x = t - _x[k];
             return _indefiniteIntegral.Value[k] + x * (_c0[k] + x * (_c1[k] / 2 + x * (_c2[k] / 3 + x * _c3[k] / 4)));
         }
 
@@ -454,7 +469,7 @@ namespace Orion.Analytics.Interpolations
             var integral = new double[_c1.Length];
             for (int i = 0; i < integral.Length - 1; i++)
             {
-                double w = X[i + 1] - X[i];
+                double w = _x[i + 1] - _x[i];
                 integral[i + 1] = integral[i] + w * (_c0[i] + w * (_c1[i] / 2 + w * (_c2[i] / 3 + w * _c3[i] / 4)));
             }
             return integral;
@@ -466,12 +481,12 @@ namespace Orion.Analytics.Interpolations
         /// </summary>
         int LeftSegmentIndex(double t)
         {
-            int index = Array.BinarySearch(X, t);
+            int index = Array.BinarySearch(_x, t);
             if (index < 0)
             {
                 index = ~index - 1;
             }
-            return Math.Min(Math.Max(index, 0), X.Length - 2);
+            return System.Math.Min(System.Math.Max(index, 0), _x.Length - 2);
         }
     }
 }

@@ -57,6 +57,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FpML.V5r10.Tests\FpML.V5r10.TestHelpers\FpML.V5r10.TestHelpers.csproj">
+      <Project>{ca5aec12-85ef-4c1c-9b64-b0899ecc6c1d}</Project>
+      <Name>FpML.V5r10.TestHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Metadata.Common.csproj">
       <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
       <Name>Metadata.Common</Name>

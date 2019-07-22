@@ -1,7 +1,23 @@
-﻿using System;
-using FpML.V5r10.Reporting.ModelFramework;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Interpolations
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using FpML.V5r10.Reporting.ModelFramework;
+using Math = System.Math;
+
+namespace FpML.V5r10.Reporting.Analytics.Interpolations
 
 {
     /// <summary>
@@ -31,11 +47,11 @@ namespace Orion.Analytics.Interpolations
             var rates = new double[dfs.Length];
             for (int i = 0; i < times.Length; i++)
             {
-                if (Math.Abs(times[i]) > 0)
+                if (System.Math.Abs(times[i]) > 0)
                 {
-                    rates[i] = -Math.Log(dfs[i]) / times[i];
+                    rates[i] = -System.Math.Log(dfs[i]) / times[i];
                 }
-                rates[i] = -Math.Log(dfs[i + 1]) / times[i + 1];               
+                rates[i] = -System.Math.Log(dfs[i + 1]) / times[i + 1];               
             }
             Times = times;
             Rates = rates;
@@ -56,20 +72,20 @@ namespace Orion.Analytics.Interpolations
             var rates = new double[dfs.Length];
             for (int i = 0; i < times.Length; i++)
             {
-                var interval = Math.Abs(times[i]);
+                var interval = System.Math.Abs(times[i]);
                 if (interval > 0)
                 {
-                    rates[i] = -Math.Log(dfs[i]) / times[i];
+                    rates[i] = -System.Math.Log(dfs[i]) / times[i];
                 }
                 else
                 {
                     if (i < times.Length - 1)
                     {
-                        rates[i] = -Math.Log(dfs[i + 1]) / times[i + 1];
+                        rates[i] = -System.Math.Log(dfs[i + 1]) / times[i + 1];
                     }
                     else
                     {
-                        rates[i] = -Math.Log(dfs[i]) / .000001;
+                        rates[i] = -System.Math.Log(dfs[i]) / .000001;
                     }
                 }           
             }
@@ -111,7 +127,7 @@ namespace Orion.Analytics.Interpolations
         public override double ValueAt(double time)
         {
             int k = LeftBracketIndex(time);
-            return Math.Exp(Rates[k] * -time);
+            return System.Math.Exp(Rates[k] * -time);
         }
     }
 }

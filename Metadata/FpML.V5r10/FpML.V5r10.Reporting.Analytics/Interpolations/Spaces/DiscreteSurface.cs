@@ -1,14 +1,29 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
 using System.Collections.Generic;
+using Highlander.Numerics.LinearAlgebra;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.Analytics.Interpolations.Points;
-using Orion.Analytics.LinearAlgebra;
+using FpML.V5r10.Reporting.Analytics.Interpolations.Points;
 
 #endregion
 
-namespace Orion.Analytics.Interpolations.Spaces
+namespace FpML.V5r10.Reporting.Analytics.Interpolations.Spaces
 {
     /// <summary>
     /// The interface <c>IPoint</c> is used in 
@@ -97,78 +112,17 @@ namespace Orion.Analytics.Interpolations.Spaces
         {
             if(pt.Coords.Count!=3) throw new NotImplementedException();
 
-            var xtimes = GetCoordinateArray(1);
-            //var xlength = xtimes.Length - 1;
-            var ytimes = GetCoordinateArray(2);
-            //var ylength = ytimes.Length - 1;
-
-            int[] xIndexes = CalculateIndexes((double)pt.Coords[0], xtimes);
-            int[] yIndexes = CalculateIndexes((double)pt.Coords[1], ytimes);
-
+            var xTimes = GetCoordinateArray(1);
+            var yTimes = GetCoordinateArray(2);
+            int[] xIndexes = CalculateIndexes((double)pt.Coords[0], xTimes);
+            int[] yIndexes = CalculateIndexes((double)pt.Coords[1], yTimes);
             var values = GetMatrixOfValues();
-
-            //var xindex = Array.BinarySearch(xtimes, pt.Coords[0]);
-            //var yindex = Array.BinarySearch(ytimes, pt.Coords[1]);
-
-
-            //int nextxIndex;
-            //int prevxIndex;
-
-            //if (xindex >= 0)
-            //{
-            //    if (xindex < xlength)
-            //    {
-            //        prevxIndex = xindex;
-            //        nextxIndex = xindex + 1;
-            //    }
-            //    else
-            //    {
-            //        prevxIndex = xindex - 1;
-            //        nextxIndex = xindex;
-            //    }
-            //}
-            //else
-            //{
-            //    nextxIndex = ~xindex;
-            //    prevxIndex = nextxIndex - 1;
-            //}
-
-            //int nextyIndex;
-            //int prevyIndex;
-
-            //if (yindex >= 0)
-            //{
-            //    if (yindex < ylength)
-            //    {
-            //        prevyIndex = yindex;
-            //        nextyIndex = yindex + 1;
-            //    }
-            //    else
-            //    {
-            //        prevyIndex = yindex - 1;
-            //        nextyIndex = yindex;
-            //    }
-            //}
-            //else
-            //{
-            //    nextyIndex = ~yindex;
-            //    prevyIndex = nextyIndex - 1;
-            //}
-
-            //var result = new List<IPoint> { 
-            //    new Point2D(xtimes[prevxIndex], ytimes[prevyIndex], values[prevxIndex, prevyIndex]), 
-            //    new Point2D(xtimes[prevxIndex], ytimes[nextyIndex], values[prevxIndex, nextyIndex]),
-            //    new Point2D(xtimes[nextxIndex], ytimes[prevyIndex], values[nextxIndex, prevyIndex]),
-            //    new Point2D(xtimes[nextxIndex], ytimes[nextyIndex], values[nextxIndex, nextyIndex]),
-            //};
-
             var result = new List<IPoint> { 
-                new Point2D(xtimes[xIndexes[0]], ytimes[yIndexes[0]], values[xIndexes[0], yIndexes[0]]), 
-                new Point2D(xtimes[xIndexes[0]], ytimes[yIndexes[1]], values[xIndexes[0], yIndexes[1]]),
-                new Point2D(xtimes[xIndexes[1]], ytimes[yIndexes[0]], values[xIndexes[1], yIndexes[0]]),
-                new Point2D(xtimes[xIndexes[1]], ytimes[yIndexes[1]], values[xIndexes[1], yIndexes[1]]),
+                new Point2D(xTimes[xIndexes[0]], yTimes[yIndexes[0]], values[xIndexes[0], yIndexes[0]]), 
+                new Point2D(xTimes[xIndexes[0]], yTimes[yIndexes[1]], values[xIndexes[0], yIndexes[1]]),
+                new Point2D(xTimes[xIndexes[1]], yTimes[yIndexes[0]], values[xIndexes[1], yIndexes[0]]),
+                new Point2D(xTimes[xIndexes[1]], yTimes[yIndexes[1]], values[xIndexes[1], yIndexes[1]]),
             };
-
             return result;
         }
 
@@ -176,7 +130,6 @@ namespace Orion.Analytics.Interpolations.Spaces
         {
             int index = Array.BinarySearch(items, searchCoordinate);
             int[] indexes = new int[2];
-
             if (index >= 0)
             {
                 // Exact match
@@ -201,7 +154,6 @@ namespace Orion.Analytics.Interpolations.Spaces
                 indexes[0] = ~index - 1;
                 indexes[1] = ~index;
             }
-
             return indexes;
         }
 
@@ -215,16 +167,16 @@ namespace Orion.Analytics.Interpolations.Spaces
             var yArray = new List<double>();
             foreach (var element in points)
             {
-                if (element.GetNumDimensions()!=2) throw new Exception("The dimension is incorrect.");
-                var xval = (double) element.Coords[0];
-                if (!xArray.Contains(xval))
+                if (element.GetNumDimensions()!=2) throw new System.Exception("The dimension is incorrect.");
+                var xVal = (double) element.Coords[0];
+                if (!xArray.Contains(xVal))
                 {
-                    xArray.Add(xval);
+                    xArray.Add(xVal);
                 }
-                var yval = (double)element.Coords[1];
-                if (!yArray.Contains(yval))
+                var yVal = (double)element.Coords[1];
+                if (!yArray.Contains(yVal))
                 {
-                    yArray.Add(yval);
+                    yArray.Add(yVal);
                 }
             }
             xArray.Sort();
@@ -232,7 +184,6 @@ namespace Orion.Analytics.Interpolations.Spaces
             XArray = xArray.ToArray();
             YArray = yArray.ToArray();
             _vMatrix = new Matrix(XArray.Length, YArray.Length);
-
             for (var i = 0; i < XArray.Length; i++)
             {
                 for (var j = 0; j < YArray.Length; j++)
@@ -242,6 +193,5 @@ namespace Orion.Analytics.Interpolations.Spaces
                 }
             }
         }
-
     }
 }

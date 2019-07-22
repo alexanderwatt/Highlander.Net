@@ -1,208 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-7" actualBuild="4" xmlns="http://www.fpml.org/FpML-5/confirmation">
-  <isCorrection>false</isCorrection>
-  <isCancellation>false</isCancellation>
+<dataDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/confirmation">
   <trade>
     <tradeHeader>
       <partyTradeIdentifier>
         <partyReference href="party1" />
-        <tradeId tradeIdScheme="http://www.partyA.com/trade-id">123</tradeId>
+        <tradeId tradeIdScheme="http://www.nab.com/xml/trade-id">1000</tradeId>
       </partyTradeIdentifier>
       <partyTradeIdentifier>
         <partyReference href="party2" />
-        <tradeId tradeIdScheme="http://www.partyB.com/trade-id">123</tradeId>
+        <tradeId tradeIdScheme="http://www.nab.com/xml/trade-id">2000</tradeId>
       </partyTradeIdentifier>
-      <tradeDate>2001-04-29</tradeDate>
+      <tradeDate>2012-05-09</tradeDate>
     </tradeHeader>
     <swap>
       <swapStream>
-        <payerPartyReference href="party1" />
-        <receiverPartyReference href="party2" />
-        <calculationPeriodDates id="CalcPeriodDates0">
+        <payerPartyReference href="party2" />
+        <receiverPartyReference href="party1" />
+        <calculationPeriodDates id="fixedCalcPeriodDates">
           <effectiveDate>
-            <unadjustedDate>2001-08-30</unadjustedDate>
+            <unadjustedDate>2012-06-14</unadjustedDate>
             <dateAdjustments>
               <businessDayConvention>NONE</businessDayConvention>
             </dateAdjustments>
           </effectiveDate>
           <terminationDate>
-            <unadjustedDate>2006-08-30</unadjustedDate>
+            <unadjustedDate>2015-03-16</unadjustedDate>
             <dateAdjustments>
               <businessDayConvention>MODFOLLOWING</businessDayConvention>
-              <businessCenters id="accrualBusinessCenters0">
-                <businessCenter>EUTA</businessCenter>
+              <businessCenters id="primaryBusinessCenters">
+                <businessCenter>SYD</businessCenter>
               </businessCenters>
             </dateAdjustments>
           </terminationDate>
           <calculationPeriodDatesAdjustments>
             <businessDayConvention>MODFOLLOWING</businessDayConvention>
-            <businessCentersReference href="accrualBusinessCenters0" />
+            <businessCentersReference href="primaryBusinessCenters" />
           </calculationPeriodDatesAdjustments>
           <calculationPeriodFrequency>
-            <periodMultiplier>1</periodMultiplier>
-            <period>Y</period>
-            <rollConvention>30</rollConvention>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+            <rollConvention>14</rollConvention>
           </calculationPeriodFrequency>
         </calculationPeriodDates>
         <paymentDates>
-          <calculationPeriodDatesReference href="CalcPeriodDates0" />
+          <calculationPeriodDatesReference href="fixedCalcPeriodDates" />
           <paymentFrequency>
-            <periodMultiplier>1</periodMultiplier>
-            <period>Y</period>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
           </paymentFrequency>
           <payRelativeTo>CalculationPeriodEndDate</payRelativeTo>
           <paymentDatesAdjustments>
             <businessDayConvention>MODFOLLOWING</businessDayConvention>
-            <businessCenters id="paymentBusinessCenters0">
-              <businessCenter>EUTA</businessCenter>
-            </businessCenters>
+            <businessCentersReference href="primaryBusinessCenters" />
           </paymentDatesAdjustments>
         </paymentDates>
         <calculationPeriodAmount>
           <calculation>
             <notionalSchedule>
               <notionalStepSchedule>
-                <initialValue>100000000</initialValue>
-                <currency>EUR</currency>
+                <initialValue>1000000</initialValue>
+                <currency currencyScheme="http://www.fpml.org/ext/iso4217">AUD</currency>
               </notionalStepSchedule>
             </notionalSchedule>
             <fixedRateSchedule>
-              <initialValue>0.05</initialValue>
+              <initialValue>0.03315</initialValue>
             </fixedRateSchedule>
-            <dayCountFraction>30/360</dayCountFraction>
+            <dayCountFraction>Actual365</dayCountFraction>
           </calculation>
         </calculationPeriodAmount>
       </swapStream>
       <swapStream>
-        <payerPartyReference href="party2" />
-        <receiverPartyReference href="party1" />
-        <calculationPeriodDates id="CalcPeriodDates1">
+        <payerPartyReference href="party1" />
+        <receiverPartyReference href="party2" />
+        <calculationPeriodDates id="floatingCalcPeriodDates">
           <effectiveDate>
-            <unadjustedDate>2001-08-30</unadjustedDate>
+            <unadjustedDate>2012-06-14</unadjustedDate>
             <dateAdjustments>
               <businessDayConvention>NONE</businessDayConvention>
             </dateAdjustments>
           </effectiveDate>
           <terminationDate>
-            <unadjustedDate>2006-08-30</unadjustedDate>
+            <unadjustedDate>2015-03-16</unadjustedDate>
             <dateAdjustments>
               <businessDayConvention>MODFOLLOWING</businessDayConvention>
-              <businessCenters id="accrualBusinessCenters1">
-                <businessCenter>EUTA</businessCenter>
-              </businessCenters>
+              <businessCentersReference href="primaryBusinessCenters" />
             </dateAdjustments>
           </terminationDate>
           <calculationPeriodDatesAdjustments>
             <businessDayConvention>MODFOLLOWING</businessDayConvention>
-            <businessCentersReference href="accrualBusinessCenters1" />
+            <businessCentersReference href="primaryBusinessCenters" />
           </calculationPeriodDatesAdjustments>
           <calculationPeriodFrequency>
-            <periodMultiplier>6</periodMultiplier>
+            <periodMultiplier>3</periodMultiplier>
             <period>M</period>
-            <rollConvention>30</rollConvention>
+            <rollConvention>14</rollConvention>
           </calculationPeriodFrequency>
         </calculationPeriodDates>
         <paymentDates>
-          <calculationPeriodDatesReference href="CalcPeriodDates1" />
+          <calculationPeriodDatesReference href="floatingCalcPeriodDates" />
           <paymentFrequency>
-            <periodMultiplier>6</periodMultiplier>
+            <periodMultiplier>3</periodMultiplier>
             <period>M</period>
           </paymentFrequency>
           <payRelativeTo>CalculationPeriodEndDate</payRelativeTo>
           <paymentDatesAdjustments>
             <businessDayConvention>MODFOLLOWING</businessDayConvention>
-            <businessCenters id="paymentBusinessCenters1">
-              <businessCenter>EUTA</businessCenter>
-            </businessCenters>
+            <businessCentersReference href="primaryBusinessCenters" />
           </paymentDatesAdjustments>
         </paymentDates>
-        <resetDates id="resetDates0">
-          <calculationPeriodDatesReference href="CalcPeriodDates1" />
+        <resetDates id="resetDates">
+          <calculationPeriodDatesReference href="floatingCalcPeriodDates" />
           <resetRelativeTo>CalculationPeriodStartDate</resetRelativeTo>
           <fixingDates>
-            <periodMultiplier>-2</periodMultiplier>
+            <periodMultiplier>0</periodMultiplier>
             <period>D</period>
             <dayType>Business</dayType>
             <businessDayConvention>NONE</businessDayConvention>
-            <businessCenters id="fixingBusinessCenters0">
-              <businessCenter>EUTA</businessCenter>
+            <businessCenters>
+              <businessCenter>SYD</businessCenter>
             </businessCenters>
-            <dateRelativeTo href="resetDates0" />
+            <dateRelativeTo href="resetDates" />
           </fixingDates>
           <resetFrequency>
-            <periodMultiplier>6</periodMultiplier>
+            <periodMultiplier>3</periodMultiplier>
             <period>M</period>
           </resetFrequency>
           <resetDatesAdjustments>
             <businessDayConvention>MODFOLLOWING</businessDayConvention>
-            <businessCentersReference href="paymentBusinessCenters1" />
+            <businessCentersReference href="primaryBusinessCenters" />
           </resetDatesAdjustments>
         </resetDates>
         <calculationPeriodAmount>
           <calculation>
             <notionalSchedule>
               <notionalStepSchedule>
-                <initialValue>100000000</initialValue>
-                <currency>EUR</currency>
+                <initialValue>1000000</initialValue>
+                <currency currencyScheme="http://www.fpml.org/ext/iso4217">AUD</currency>
               </notionalStepSchedule>
             </notionalSchedule>
             <floatingRateCalculation>
-              <floatingRateIndex>EUR-EURIBOR-Telerate</floatingRateIndex>
+              <floatingRateIndex />
               <indexTenor>
-                <periodMultiplier>6</periodMultiplier>
+                <periodMultiplier>3</periodMultiplier>
                 <period>M</period>
               </indexTenor>
             </floatingRateCalculation>
-            <dayCountFraction>ACT/360</dayCountFraction>
+            <dayCountFraction>Actual365</dayCountFraction>
           </calculation>
         </calculationPeriodAmount>
       </swapStream>
-      <earlyTerminationProvision>
-        <mandatoryEarlyTermination>
-          <mandatoryEarlyTerminationDate id="mandatoryEarlyTerminationDate0">
-            <unadjustedDate id="mandatoryEarlyTerminationUnadjustedDate0">2001-08-30</unadjustedDate>
-            <dateAdjustments>
-              <businessDayConvention>FOLLOWING</businessDayConvention>
-              <businessCenters>
-                <businessCenter>GBLO</businessCenter>
-                <businessCenter>EUTA</businessCenter>
-              </businessCenters>
-            </dateAdjustments>
-            <adjustedDate id="mandatoryEarlyTerminationAdjustedDate0">2001-08-30</adjustedDate>
-          </mandatoryEarlyTerminationDate>
-          <calculationAgent>
-            <calculationAgentPartyReference href="party1" />
-            <calculationAgentPartyReference href="party2" />
-          </calculationAgent>
-          <cashSettlement id="cashSettlement0">
-            <cashSettlementValuationTime>
-              <hourMinuteTime>11:00:00.0000000+10:00</hourMinuteTime>
-              <businessCenter>BEBR</businessCenter>
-            </cashSettlementValuationTime>
-            <cashSettlementValuationDate>
-              <periodMultiplier>-2</periodMultiplier>
-              <period>D</period>
-              <dayType>Business</dayType>
-              <businessDayConvention>NONE</businessDayConvention>
-              <businessCenters>
-                <businessCenter>GBLO</businessCenter>
-                <businessCenter>EUTA</businessCenter>
-              </businessCenters>
-              <dateRelativeTo href="mandatoryEarlyTerminationAdjustedDate0" />
-            </cashSettlementValuationDate>
-            <cashPriceMethod>
-              <cashSettlementCurrency>EUR</cashSettlementCurrency>
-              <quotationRateType>Mid</quotationRateType>
-            </cashPriceMethod>
-          </cashSettlement>
-        </mandatoryEarlyTermination>
-      </earlyTerminationProvision>
     </swap>
   </trade>
   <party id="party1">
-    <partyId>party A</partyId>
+    <partyId>1</partyId>
+    <partyName>NAB</partyName>
   </party>
   <party id="party2">
-    <partyId>party B</partyId>
+    <partyId>2</partyId>
+    <partyName>BHP</partyName>
   </party>
 </dataDocument>

@@ -1,16 +1,31 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 
 namespace FpML.V5r10.Reporting.Models.Assets
 {
     public interface IBondAssetParameters
     {
         /// <summary>
-        /// Flag that sets whether the quote is yield to maturiy or dirty price - as a decimal
+        /// Flag that sets whether the quote is yield to maturity or dirty price - as a decimal
         /// </summary>
         Boolean IsYTMQuote { get; set; }
 
         /// <summary>
-        /// Flag that sets whether the forst coupon is ex div.
+        /// Flag that sets whether the first coupon is ex div.
         /// </summary>
         Boolean IsExDiv { get; set; }
 
@@ -75,7 +90,7 @@ namespace FpML.V5r10.Reporting.Models.Assets
         Decimal CouponRate { get; set; }
 
         /// <summary>
-        /// Gets or sets the accraul year fractions.
+        /// Gets or sets the accrual year fractions.
         /// </summary>
         /// <value>The accrual year fractions.</value>
         Decimal[] AccrualYearFractions { get; set; }

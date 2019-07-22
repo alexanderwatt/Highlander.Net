@@ -309,6 +309,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Numerics\Highlander.Numerics.csproj">
+      <Project>{8322d592-567a-4186-ae0b-8dd03d3dde48}</Project>
+      <Name>Highlander.Numerics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Constants\Constants.csproj">
       <Project>{2AC94E22-B441-4198-8162-BF1552E67D33}</Project>
       <Name>Constants</Name>
@@ -322,7 +326,7 @@
       <Name>FpML.V5r10.Codes</Name>
     </ProjectReference>
     <ProjectReference Include="..\FpML.V5r10.Reporting.Analytics\FpML.V5r10.Reporting.Analytics.csproj">
-      <Project>{a3cd6d12-e27c-429a-8fd7-0304c0cf9420}</Project>
+      <Project>{0b8798a2-00db-4736-a846-627508ac21b0}</Project>
       <Name>FpML.V5r10.Reporting.Analytics</Name>
     </ProjectReference>
     <ProjectReference Include="..\FpML.V5r10.Reporting.ModelFramework\FpML.V5r10.Reporting.ModelFramework.csproj">

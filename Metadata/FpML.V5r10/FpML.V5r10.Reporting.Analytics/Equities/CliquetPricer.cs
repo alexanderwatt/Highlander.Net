@@ -1,13 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using Orion.Analytics.Distributions;
-using Orion.Analytics.Interpolations;
-using Orion.Analytics.LinearAlgebra.Sparse;
-using Orion.Analytics.Maths.Collections;
-using Orion.Analytics.Statistics;
-using Orion.Analytics.Stochastics.MonteCarlo;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Analytics.Equities
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
+using System.Collections.Generic;
+using Highlander.Numerics.Distributions;
+using Highlander.Numerics.LinearAlgebra.Sparse;
+using Highlander.Numerics.Maths.Collections;
+using Highlander.Numerics.Statistics;
+using Highlander.Numerics.Stochastics.MonteCarlo;
+using FpML.V5r10.Reporting.Analytics.Interpolations;
+
+#endregion
+
+namespace FpML.V5r10.Reporting.Analytics.Equities
 {
     /// <summary>
     /// Asian Hybrid Cliquet - As in the ASX Principal Series 1
@@ -89,7 +108,6 @@ namespace Orion.Analytics.Equities
 
         #endregion
 
-
         /// <summary>
         /// Rates the years.
         /// </summary>
@@ -104,6 +122,7 @@ namespace Orion.Analytics.Equities
             }
             return rateYears;
         }
+
         /// <summary>
         /// Initialises the rate interp.
         /// </summary>
@@ -124,10 +143,10 @@ namespace Orion.Analytics.Equities
         /// </summary>
         /// <returns></returns>
         public double[,] GetPriceAndGreeks()
-        {           
-            int n = _resetAmounts.Length;
-            List<double> tList = new List<double>();
-            List<double> volList = new List<double>();
+        {
+            var n = _resetAmounts.Length;
+            var tList = new List<double>();
+            var volList = new List<double>();
             for (int i = 0; i < n; i++)
             {
                 if (_resetDays[i] > 0)
@@ -137,77 +156,61 @@ namespace Orion.Analytics.Equities
                 }
             }            
             IVector t = new DoubleVector(tList.ToArray());
-            SparseVector times = new SparseVector(t);
+            var times = new SparseVector(t);
 
             // Vols                 
-            double[,] v = new double[n, 1];
+            var v = new double[n, 1];
             int n1 = volList.Count;
             for (int idx = 0; idx < n1; idx++)
             {
                 v[idx, 0] = volList[idx];
             }
-
             //Matrix vols = new Matrix(v);
-            double[] variances = CalcForwardVariance(times.Data, volList.ToArray());
-            double[] sigmas = Sqrt(variances);
-            
-            DoubleVector _vf = new DoubleVector(variances);            
-            SparseVector vf = new SparseVector(_vf, _vf.Length);
-            
+            var variances = CalcForwardVariance(times.Data, volList.ToArray());
+            var sigmas = Sqrt(variances);
+            var _vf = new DoubleVector(variances);            
+            var vf = new SparseVector(_vf, _vf.Length);
             //Drift
-            double[] rates = GetForwardRates(times.Data);
-            double[] yields = GetForwardYields(times.Data);
-            
-            int nrates = times.Length;
-            double[] _drifts = new double[nrates];
-            double[] _logdrifts = new double[nrates];
-
+            var rates = GetForwardRates(times.Data);
+            var yields = GetForwardYields(times.Data);
+            var nrates = times.Length;
+            var _drifts = new double[nrates];
+            var _logdrifts = new double[nrates];
             //IVector driftsVector = new DoubleVector(_drifts);
             //SparseVector drifts = new SparseVector(driftsVector, driftsVector.Length);
-     
             for (int idx = 0; idx < nrates; idx++)
             {
                 _drifts[idx] = rates[idx] - yields[idx];
                 _logdrifts[idx] = _drifts[idx] - _vf[idx] * 0.5;
 
             }
-
-            DoubleVector ld = new DoubleVector(_logdrifts);
-            SparseVector logdrifts = new SparseVector(ld,ld.Length);
-
+            var ld = new DoubleVector(_logdrifts);
+            var logdrifts = new SparseVector(ld,ld.Length);
             // Discount            
-            double df = Math.Exp(-ForwardRate(0, _timeToExpiry)*_timeToExpiry );            
-
+            var df = System.Math.Exp(-ForwardRate(0, _timeToExpiry)*_timeToExpiry );
             // 6 identical paths, price, delta, gamma, vega, theta, rho
-            PathGenerator pathGen = new SinglePathGenerator(Rng(_seed), logdrifts, vf, times);                 
-         
-            MultiVarPathPricer pathPr = new CliquetPathPricer(_payoffFunc, df, _useAntithetic, _spot, _strike, _floor, _cap, _nobsin, _nobsout, _resetDays, _resetAmounts, rates, yields, sigmas);
+            var pathGen = new SinglePathGenerator(Rng(_seed), logdrifts, vf, times);
+            var pathPr = new CliquetPathPricer(_payoffFunc, df, _useAntithetic, _spot, _strike, _floor, _cap, _nobsin, _nobsout, _resetDays, _resetAmounts, rates, yields, sigmas);
             //PathPricer deltaPr = PathFactory.GetPath("Delta", df, true, _spot, _strike, _floor, _cap, _resetDays, _resetAmounts, sigmas, _nobsin, _nobsout);
-
-            
-            List<RiskStatistics> accumulatorList = new List<RiskStatistics>();
+            var accumulatorList = new List<RiskStatistics>();
             for (int i=0; i<6;i++)
                accumulatorList.Add(new RiskStatistics());
-
             // Price path
             MonteCarloModel mcm = new MonteCarloModel(pathGen, pathPr, accumulatorList);                                              
             mcm.AddMultiVarSamples(_numSimulations);
-            double price = accumulatorList[0].Mean;
-            double delta = accumulatorList[1].Mean;
-            double gamma = accumulatorList[2].Mean;
-            double vega = accumulatorList[3].Mean;
-            double theta = accumulatorList[4].Mean;
-            double rho = accumulatorList[5].Mean;
-           
-            double[,] res = new double[,] {     {price, accumulatorList[0].ErrorEstimate}, 
+            var price = accumulatorList[0].Mean;
+            var delta = accumulatorList[1].Mean;
+            var gamma = accumulatorList[2].Mean;
+            var vega = accumulatorList[3].Mean;
+            var theta = accumulatorList[4].Mean;
+            var rho = accumulatorList[5].Mean;
+            var res = new[,] {     {price, accumulatorList[0].ErrorEstimate}, 
                                                 {delta, accumulatorList[1].ErrorEstimate}, 
                                                 {gamma, accumulatorList[2].ErrorEstimate},
                                                 {vega, accumulatorList[3].ErrorEstimate},
                                                 {theta, accumulatorList[4].ErrorEstimate},
                                                 {rho, accumulatorList[5].ErrorEstimate}   };        
             return res;
-
-
         }
 
         /// <summary>
@@ -221,11 +224,10 @@ namespace Orion.Analytics.Equities
             double[] x = new double[n];
             for (int idx = 0; idx < n; idx++)
             {
-                x[idx] = Math.Sqrt(arr[idx]);
+                x[idx] = System.Math.Sqrt(arr[idx]);
             }
             return x;
         }
-
 
         /// <summary>
         /// Gets the forward rates.
@@ -340,14 +342,13 @@ namespace Orion.Analytics.Equities
         /// RNGs this instance.
         /// </summary>
         /// <returns></returns>
-        private IContinousRng Rng(int seed)
+        private IContinuousRng Rng(int seed)
         {
             IBasicRng basRng = new MCG31vsl(seed);
-            //IContinousRng unifRng = new UniformRng(basRng,0,1);
-            BoxMullerGaussianRng lhs = new BoxMullerGaussianRng(basRng, 0, 1);
+            //IContinuousRng unifRng = new UniformRng(basRng,0,1);
+            var lhs = new BoxMullerGaussianRng(basRng, 0, 1);
             return lhs;
         }
-
 
         /// <summary>
         /// Calcs the forward vols.
@@ -363,12 +364,10 @@ namespace Orion.Analytics.Equities
             List<double> quadt0 = new List<double>();
             double[] quadvar1 = new double[n];
             double[] fwdvols = new double[n];
-
             for (int idx=0;idx<n;idx++)
             { 
                 quadvar[idx] = vols[idx]*vols[idx]*times[idx];
             }
-
             //create List quadvar0 of quadratic variations and associated times,
             //dropping negative fwd vols
             int jdx=1;
@@ -393,21 +392,18 @@ namespace Orion.Analytics.Equities
                 quadvar1[idx] = y;
             }       
     
-            //convert back from quadratic variatons to forward vols
+            //convert back from quadratic variations to forward vols
             fwdvols[0] = vols[0]*vols[0];
             for (int idx = 0; idx < n-1; idx++)
             {                
                 double vol0 =quadvar1[idx];
                 double vol1 =quadvar1[idx+1];
-                double fwdvol = Math.Sqrt((vol1 - vol0) / (times[idx + 1] - times[idx]));
+                double fwdvol = System.Math.Sqrt((vol1 - vol0) / (times[idx + 1] - times[idx]));
                 fwdvols[idx+1] = fwdvol*fwdvol;
             }
-                            
             return fwdvols;
         }
-
     }
-
 
     #region Path Pricers
 
@@ -454,7 +450,6 @@ namespace Orion.Analytics.Equities
                              double[] rates, double[] yields, double[] forwardvols)
             : base(discountFactor, useAntitheticVariance)
         {
-
             Strike = strike;
             Floor = floor;
             Cap = cap;
@@ -470,8 +465,6 @@ namespace Orion.Analytics.Equities
             PayoffFunc = payoffFunc;
         }
 
-
-
         /// <summary>
         /// Payoffs the specified path.
         /// </summary>
@@ -483,11 +476,11 @@ namespace Orion.Analytics.Equities
         {
             if (payoffFunc == "AsianHybrid")
                 return AsianHybrid(path, up);
-            else if (payoffFunc == "Vanilla")
+            if (payoffFunc == "Vanilla")
                 return Vanilla(path, up);
-            else if (payoffFunc == "TaurusCliquet")
+            if (payoffFunc == "TaurusCliquet")
                 return TaurusCliquet(path, up);
-            else return 0.0;
+            return 0.0;
         }
 
         /// <summary>
@@ -501,31 +494,26 @@ namespace Orion.Analytics.Equities
             int n = ResetDays.Length;
             int n0 = path[0].Count;
             double logReset = 0;
-
             //double[] spot = new double[n];
-
             //double[] times = path[0].Times.Data;
-
             if (up)
             {
                 for (int idx = n - n0; idx < n; idx++)
                 {
-                    logReset += path[0][idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
-                    Resets[idx] = Math.Exp(logReset);
+                    logReset += path[0][idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
+                    Resets[idx] = System.Math.Exp(logReset);
                 }
 
-                var result1 = Math.Max(Resets[n - 1] - Strike, 0);
+                var result1 = System.Math.Max(Resets[n - 1] - Strike, 0);
                 return result1;
             }
             logReset = 0;
             for (int idx = n - n0; idx < n; idx++)
             {
-                logReset += path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
-                Resets[idx] = Math.Exp(logReset);
+                logReset += path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
+                Resets[idx] = System.Math.Exp(logReset);
             }
-
-            var result2 = Math.Max(Resets[n - 1] - Strike, 0);
-
+            var result2 = System.Math.Max(Resets[n - 1] - Strike, 0);
             return result2;
         }
 
@@ -541,51 +529,42 @@ namespace Orion.Analytics.Equities
             int n0 = path[0].Count;
             double logReset = 0;
             double value;
-
             //double[] spot = new double[n];
-
             double result1 = 0.0;
             double result2 = 0.0;
-
             //double[] times = path[0].Times.Data;
-
             if (up)
             {
                 for (int idx = n - n0; idx < n; idx++)
                 {
-                    var priceUp = path[0].Drift[idx - n + n0] + path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
+                    var priceUp = path[0].Drift[idx - n + n0] + path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
                     logReset += priceUp;
-                    Resets[idx] = Math.Exp(logReset);
+                    Resets[idx] = System.Math.Exp(logReset);
                 }
                 for (int idx = 1; idx < n; idx++)
                 {
-                    result1 += Math.Min(Resets[idx] / Resets[idx - 1] - Strike, Cap);
+                    result1 += System.Math.Min(Resets[idx] / Resets[idx - 1] - Strike, Cap);
                 }
-                value = Math.Max(result1, Floor);
+                value = System.Math.Max(result1, Floor);
                 return value;
             }
-            else
-            {               
-                logReset = 0;
-                for (int idx = n - n0; idx < n; idx++)
-                {
-                    var priceDn = path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
-                    logReset += priceDn;
-                    Resets[idx] = Math.Exp(logReset);
-                }
-                for (int idx = 1; idx < n; idx++)
-                {
-                    result2 += Math.Min(Resets[idx] / Resets[idx - 1] - Strike, Cap);
-                }
-                value = (Math.Max(result2, Floor));
+            logReset = 0;
+            for (int idx = n - n0; idx < n; idx++)
+            {
+                var priceDn = path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
+                logReset += priceDn;
+                Resets[idx] = System.Math.Exp(logReset);
+            }
+            for (int idx = 1; idx < n; idx++)
+            {
+                result2 += System.Math.Min(Resets[idx] / Resets[idx - 1] - Strike, Cap);
+            }
+            value = (System.Math.Max(result2, Floor));
             
-                return value;
-            }
+            return value;
         }
 
-
-
-        /// <summary>
+         /// <summary>
         /// Asians the hybrid.
         /// </summary>
         /// <param name="path">The path.</param>
@@ -598,26 +577,20 @@ namespace Orion.Analytics.Equities
             int n = ResetDays.Length;
             double inSum = 0.0;
             double outSum = 0.0;
-
             if (up)
             {
                 for (int idx = n - n0; idx < n; idx++)
                 {
-                    logReset += path[0].Drift[idx - n + n0] + path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
-                    Resets[idx] = Math.Exp(logReset);
+                    logReset += path[0].Drift[idx - n + n0] + path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
+                    Resets[idx] = System.Math.Exp(logReset);
                 }
-
                 for (int idx = 0; idx < Nobsin; idx++)
                     inSum += Resets[idx];
-
                 inSum /= Nobsin;
-
                 for (int idx = Nobsin; idx < Nobsin + Nobsout; idx++)
                     outSum += Resets[idx];
-
                 outSum /= Nobsout;
-
-                var result1 = Math.Max(outSum / inSum - Strike, 0.0);
+                var result1 = System.Math.Max(outSum / inSum - Strike, 0.0);
                 return result1;
             }
             logReset = 0;
@@ -625,27 +598,21 @@ namespace Orion.Analytics.Equities
             inSum = 0;
             for (int idx = n - n0; idx < n; idx++)
             {
-                logReset += path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? Math.Log(Spot) : 0);
-                Resets[idx] = Math.Exp(logReset);
+                logReset += path[0].Drift[idx - n + n0] - path[0].Diffusion[idx - n + n0] + (idx == n - n0 ? System.Math.Log(Spot) : 0);
+                Resets[idx] = System.Math.Exp(logReset);
             }
-
             for (int idx = 0; idx < Nobsin; idx++)
                 inSum += Resets[idx];
-
             inSum /= Nobsin;
-
             for (int idx = Nobsin; idx < Nobsin + Nobsout; idx++)
                 outSum += Resets[idx];
-
             outSum /= Nobsout;
-
-            var result2 = Math.Max(outSum / inSum - Strike, 0.0);
-
+            var result2 = System.Math.Max(outSum / inSum - Strike, 0.0);
             return result2;
         }
 
         /// <summary>
-        /// Given one or more pathes, the value of an option is returned.
+        /// Given one or more paths, the value of an option is returned.
         /// </summary>
         /// <remarks>
         /// This method must be overriden by derived classes. 
@@ -661,40 +628,35 @@ namespace Orion.Analytics.Equities
         public override double[] Value(Path[] path)
         {            
             double priceUp = Payoff(path, true, PayoffFunc);
-            double sqrtT = Math.Sqrt(path[0].Times[0]);
+            double sqrtT = System.Math.Sqrt(path[0].Times[0]);
             double f = _forwardVols[0] *sqrtT;
             double adj = path[0].Diffusion[0] / (f* f);
             double[] zf = path[0].Diffusion.Data;
             double[] z = new double[zf.Length];
-            z[0] = zf[0] / (_forwardVols[0] * Math.Sqrt(path[0].Times[0]));
+            z[0] = zf[0] / (_forwardVols[0] * System.Math.Sqrt(path[0].Times[0]));
             for (int idx = 1; idx < zf.Length; idx++)
-                z[idx] = zf[idx] / (_forwardVols[idx] * Math.Sqrt(path[0].Times[idx] - path[0].Times[idx-1]));
+                z[idx] = zf[idx] / (_forwardVols[idx] * System.Math.Sqrt(path[0].Times[idx] - path[0].Times[idx-1]));
             double mu = _rates[0] - _yields[0] - 0.5*_forwardVols [0]*_forwardVols [0];
             double sig = _forwardVols[0];
             double texp = path[0].Times[path[0].Times.Length - 1];
             int n = _forwardVols.Length;
-                    
             double price;
             double delta;
             double gamma;
             double theta;
             double vega;
             double rho;
-
             double vup = (z[0] * z[0] - 1.0) / sig - z[0] * sqrtT;
             double vdn = (z[0] * z[0] - 1.0) / sig + z[0] * sqrtT;
             double rup = z[0] * sqrtT / sig;
             double rdn = -z[0] * sqrtT / sig;
-
             for (int jdx = 1; jdx != n; jdx++)
             {
-                vup += (z[jdx] * z[jdx] - 1.0) / _forwardVols[jdx] - z[jdx] * Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]);
-                vdn += (z[jdx] * z[jdx] - 1.0) / _forwardVols[jdx] + z[jdx] * Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]);
-
-                rup += z[jdx] * Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]) / _forwardVols[jdx];
-                rdn += -z[jdx] * Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]) / _forwardVols[jdx];
+                vup += (z[jdx] * z[jdx] - 1.0) / _forwardVols[jdx] - z[jdx] * System.Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]);
+                vdn += (z[jdx] * z[jdx] - 1.0) / _forwardVols[jdx] + z[jdx] * System.Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]);
+                rup += z[jdx] * System.Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]) / _forwardVols[jdx];
+                rdn += -z[jdx] * System.Math.Sqrt(path[0].Times[jdx] - path[0].Times[jdx - 1]) / _forwardVols[jdx];
             }
-
             double af = 1;
             for (int idx = 0; idx < _rates.Length; idx++)
             {
@@ -703,11 +665,9 @@ namespace Orion.Analytics.Equities
                    t1 = path[0].Times[idx];
                 else
                    t1 = path[0].Times[idx] - path[0].Times[idx-1] ;
-                af *= Math.Exp(_rates[idx] * t1);
+                af *= System.Math.Exp(_rates[idx] * t1);
             }
-            double rZero = 1/texp*Math.Log(af);
-
-
+            double rZero = 1/texp* System.Math.Log(af);
             if (UseAntitheticVariance)
             {
                 double priceDn = Payoff(path, false,PayoffFunc);
@@ -730,13 +690,10 @@ namespace Orion.Analytics.Equities
                 theta = DiscountFactor * priceUp*(rZero - adj*mu - 0.5*adj*adj*sig*sig + 0.5/ path[0].Times[0]);
 
             }
-            return new[] { price, delta, gamma, vega*0.01, theta/365.0, rho };        
-            
+            return new[] { price, delta, gamma, vega*0.01, theta/365.0, rho };
         }
 
         #endregion Path Pricers
 
     }
-    
-
 }

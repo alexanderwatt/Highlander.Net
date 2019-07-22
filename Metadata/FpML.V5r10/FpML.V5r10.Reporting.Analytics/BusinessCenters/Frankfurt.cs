@@ -1,13 +1,28 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using directives
 
 using System;
 using System.Globalization;
-using Orion.Analytics.Dates;
+using Highlander.Numerics.Dates;
 using FpML.V5r10.Reporting.ModelFramework;
 
 #endregion
 
-namespace Orion.Analytics.BusinessCenters
+namespace FpML.V5r10.Reporting.Analytics.BusinessCenters
 {
     /// <summary>
     /// Frankfurt calendar.
@@ -58,7 +73,7 @@ namespace Orion.Analytics.BusinessCenters
 
         #region FactoryItem pattern
 
-        [ Obsolete ] // just to ignore the CS0618 warning below
+        [ Obsolete() ] // just to ignore the CS0618 warning below
         static Frankfurt()
         {
             Instance = new Frankfurt();	// CS0618
@@ -86,7 +101,7 @@ namespace Orion.Analytics.BusinessCenters
         /// This property value ranges from zero, indicating Sunday,
         /// to six, indicating Saturday.</param>
         /// <param name="dd">The day of the year, between 1 and 366.</param>
-        /// <param name="em">The day of Easter Monady in the year, between 1 and 366.</param>
+        /// <param name="em">The day of Easter Monday in the year, between 1 and 366.</param>
         /// <returns><c>True</c> when the given day is a business day.</returns>
         protected override bool IsBusinessDay(
             int d, Month m, int y,

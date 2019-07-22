@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<terminatingEventsReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
+<valuationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
   <header>
     <messageId messageIdScheme="scheme/1.0">12345678</messageId>
+    <inReplyTo messageIdScheme="scheme/1.0">87654321</inReplyTo>
     <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
-    <sendTo messageAddressScheme="scheme/1.0">client@company.com</sendTo>
   </header>
   <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
   <party id="Party0">
@@ -17,4 +17,10 @@
     <accountName accountNameScheme="scheme/1.0">Account0_Name</accountName>
     <accountBeneficiary href="Party0" />
   </account>
-</terminatingEventsReport>
+  <account id="Account1">
+    <accountId accountIdScheme="scheme/1.0">Account1_Id</accountId>
+    <accountName accountNameScheme="scheme/1.0">Account1_Name</accountName>
+    <accountBeneficiary href="Party1" />
+  </account>
+  <tradeValuationItem />
+</valuationReport>

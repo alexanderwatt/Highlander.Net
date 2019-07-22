@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using FpML.V5r10.TestHelpers;
 using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -104,7 +105,7 @@ namespace FpML.V5r10.Confirmation.Tests
                 new CustomXmlTransformer(FpMLViewHelpers.GetOutgoingConversionMap()),
                 false, false, false);
             Assert.AreEqual(1493, results.FilesProcessed.Count);
-            Assert.AreEqual(121, results.DeserialisationErrors.Count);//121 errors
+            Assert.AreEqual(107, results.DeserialisationErrors.Count);//121 errors
             Assert.AreEqual(0, results.OrigValidationWarnings.Count);
             Assert.AreEqual(0, results.OrigValidationErrors.Count);
             Assert.AreEqual(0, results.IncomingTransformErrors.Count);
@@ -120,7 +121,7 @@ namespace FpML.V5r10.Confirmation.Tests
                 new CustomXmlTransformer(FpMLViewHelpers.GetOutgoingConversionMap()),
                 true, false, false);
             Assert.AreEqual(1493, results.FilesProcessed.Count);//593
-            Assert.AreEqual(121, results.DeserialisationErrors.Count);//TODO should be 0
+            Assert.AreEqual(107, results.DeserialisationErrors.Count);//TODO should be 0
             Assert.AreEqual(0, results.OrigValidationWarnings.Count);
             Assert.AreEqual(0, results.OrigValidationErrors.Count);
             Assert.AreEqual(0, results.IncomingTransformErrors.Count);
@@ -154,9 +155,9 @@ namespace FpML.V5r10.Confirmation.Tests
             Assert.AreEqual(0, results.OrigValidationErrors.Count);
             Assert.AreEqual(0, results.IncomingTransformErrors.Count);
             Assert.AreEqual(0, results.OutgoingTransformErrors.Count);
-            Assert.AreEqual(121, results.DeserialisationErrors.Count);//TODO should be 0
-            Assert.AreEqual(360, results.InternalComparisonErrors.Count);//TODO should be 0
-            Assert.AreEqual(360, results.ExternalComparisonErrors.Count);//TODO should be 0
+            Assert.AreEqual(107, results.DeserialisationErrors.Count);//TODO should be 0
+            Assert.AreEqual(167, results.InternalComparisonErrors.Count);//TODO should be 0
+            Assert.AreEqual(169, results.ExternalComparisonErrors.Count);//TODO should be 0
             // Note: There are 4 files causing benign validation events. These are all 
             // due to un-necessary emission of the "breakFeeElection" element in the 
             // "equitySwapTransactionSupplement" element. It appears that the schema should
@@ -227,7 +228,7 @@ namespace FpML.V5r10.Confirmation.Tests
             // validate external
             if (validate)
             {
-                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10\" + FPMLViewName + ".xsd";
+                const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.Schemas\" + FPMLViewName + ".xsd";
                 string schemaFullPath = Path.GetFullPath(schemaPath);
                 Assert.IsTrue(File.Exists(schemaFullPath));
 
@@ -260,7 +261,7 @@ namespace FpML.V5r10.Confirmation.Tests
             var xs = new XmlSerializer(typeof(ConfirmationAgreed));
             var orig = new ConfirmationAgreed()
             {
-                fpmlVersion = "5-3",
+                fpmlVersion = "5-10",
                 header = new ResponseMessageHeader
                 {
                     messageId = new MessageId { messageIdScheme = "scheme/1.0", Value = "12345678" },
@@ -270,22 +271,22 @@ namespace FpML.V5r10.Confirmation.Tests
                 },
                 correlationId = new CorrelationId { correlationIdScheme = "scheme/1.0", Value = "12345678" },
                 party = new[] {
-                        new Party { id="Party0", partyId = new[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
-                        new Party { id="Party1", partyId = new[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
+                        new Party { id="Party0", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
+                        new Party { id="Party1", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
                     },
                 account = new[] {
                         new Account
                         {
                             id = "Account0",
                             accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
-                            ItemsElementName = new[] { ItemsChoiceType21.accountBeneficiary }, 
+                            ItemsElementName = new[] { ItemsChoiceType47.accountBeneficiary }, 
                             Items = new[] { new PartyReference() { href = "Party0"}}
                         },
                         new Account
                         {
                             id = "Account1",
                             accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" }},
-                            ItemsElementName = new[] { ItemsChoiceType21.accountBeneficiary },
+                            ItemsElementName = new[] { ItemsChoiceType47.accountBeneficiary },
                             Items = new[] { new PartyReference() { href = "Party1"}},
                         },
                     },
@@ -293,104 +294,106 @@ namespace FpML.V5r10.Confirmation.Tests
                     {
                         new Validation() { validationScheme = "scheme/1.0", Value = "Validation0" }
                     },
-                trade = new Trade()
-                {
-                    tradeHeader = new TradeHeader
+                Items = new object[] 
+                { new Trade()
                     {
-                        partyTradeIdentifier = new[] { new PartyTradeIdentifier() { Items = new object[] {
-                                new PartyReference { href="Party0" }, 
-                                new AccountReference { href="Account0"},
-                                new TradeId() { tradeIdScheme = "scheme/1.0", Value = "Trade1234" },
-                            } } },
-                        tradeDate = new IdentifiedDate { Value = DateTime.Now.Date }
-                    },
-                    Item = new EquityOption()
-                    {
-                        equityPremium = new EquityPremium
+                        tradeHeader = new TradeHeader
                         {
-                            payerPartyReference = new PartyReference { href = "Party0" },
-                            payerAccountReference = new AccountReference { href = "Account0" },
-                            receiverPartyReference = new PartyReference { href = "Party1" },
-                            receiverAccountReference = new AccountReference { href = "Account1" }
+                            partyTradeIdentifier = new[] { new PartyTradeIdentifier() { Items = new object[] {
+                                    new PartyReference { href="Party0" }, 
+                                    new AccountReference { href="Account0"},
+                                    new TradeId() { tradeIdScheme = "scheme/1.0", Value = "Trade1234" },
+                                } } },
+                            tradeDate = new IdentifiedDate { Value = DateTime.Now.Date }
                         },
-                        optionEntitlement = 1.0M,
-                        extraordinaryEvents = new ExtraordinaryEvents
+                        Item = new EquityOption()
                         {
-                            mergerEvents = new EquityCorporateEvents(),
-                            tenderOfferSpecified = true,
-                            tenderOffer = true,
-                            tenderOfferEvents = new EquityCorporateEvents(),
-                            compositionOfCombinedConsiderationSpecified = true,
-                            compositionOfCombinedConsideration = true,
-                            indexAdjustmentEvents = new IndexAdjustmentEvents(),
-                            Item = false // failureToDeliver
-                        },
-                        buyerPartyReference = new PartyReference { href = "Party0" },
-                        buyerAccountReference = new AccountReference { href = "Account0" },
-                        sellerPartyReference = new PartyReference { href = "Party1" },
-                        sellerAccountReference = new AccountReference { href = "Account1" },
-                        optionType = "Forward",
-                        equityEffectiveDateSpecified = true,
-                        equityEffectiveDate = DateTime.Now.Date,
-                        underlyer = new Underlyer
-                        {
-                            Item = new SingleUnderlyer
+                            equityPremium = new EquityPremium
                             {
-                                Item = new EquityAsset { instrumentId = new[] { new InstrumentId { instrumentIdScheme = "scheme/1.0", Value = "BHP" } } }
-                            }
-                        },
-                        equityExercise = new EquityExerciseValuationSettlement
-                        {
-                            settlementDate = new AdjustableOrRelativeDate
+                                payerPartyReference = new PartyReference { href = "Party0" },
+                                payerAccountReference = new AccountReference { href = "Account0" },
+                                receiverPartyReference = new PartyReference { href = "Party1" },
+                                receiverAccountReference = new AccountReference { href = "Account1" }
+                            },
+                            optionEntitlement = 1.0M,
+                            extraordinaryEvents = new ExtraordinaryEvents
                             {
-                                Item = new AdjustableDate
+                                mergerEvents = new EquityCorporateEvents(),
+                                tenderOfferSpecified = true,
+                                tenderOffer = true,
+                                tenderOfferEvents = new EquityCorporateEvents(),
+                                compositionOfCombinedConsiderationSpecified = true,
+                                compositionOfCombinedConsideration = true,
+                                indexAdjustmentEvents = new IndexAdjustmentEvents(),
+                                Item = false // failureToDeliver
+                            },
+                            buyerPartyReference = new PartyReference { href = "Party0" },
+                            buyerAccountReference = new AccountReference { href = "Account0" },
+                            sellerPartyReference = new PartyReference { href = "Party1" },
+                            sellerAccountReference = new AccountReference { href = "Account1" },
+                            optionType = "Forward",
+                            equityEffectiveDateSpecified = true,
+                            equityEffectiveDate = DateTime.Now.Date,
+                            underlyer = new Underlyer
+                            {
+                                Item = new SingleUnderlyer
                                 {
-                                    unadjustedDate = new IdentifiedDate { Value = DateTime.Now.Date },
-                                    dateAdjustments = new BusinessDayAdjustments
-                                    {
-                                        businessDayConvention = BusinessDayConventionEnum.NONE
-                                    }
+                                    Item = new EquityAsset { instrumentId = new[] { new InstrumentId { instrumentIdScheme = "scheme/1.0", Value = "BHP" } } }
                                 }
                             },
-                            settlementCurrency = new Currency() { currencyScheme = "scheme/1.0", Value = "AUD" },
-                            settlementPriceSource = new SettlementPriceSource() { settlementPriceSourceScheme = "scheme/1.0", Value = "Source0" },
-                            settlementType = "Cash",
-                            equityValuation = new EquityValuation(),
-                            Items = new object[] {
-                                    true, // automaticExercise
-                                    new MakeWholeProvisions() { makeWholeDate = DateTime.Now.Date, recallSpread = 1.0M },
-                                },
-                            Item = new EquityBermudaExercise()
+                            equityExercise = new EquityExerciseValuationSettlement
                             {
-                                commencementDate = new AdjustableOrRelativeDate
-                                    {
-                                    Item = new AdjustableDate()
+                                settlementDate = new AdjustableOrRelativeDate
+                                {
+                                    Item = new AdjustableDate
                                     {
                                         unadjustedDate = new IdentifiedDate { Value = DateTime.Now.Date },
                                         dateAdjustments = new BusinessDayAdjustments
-                                            {
+                                        {
                                             businessDayConvention = BusinessDayConventionEnum.NONE
                                         }
                                     }
                                 },
-                                expirationDate = new AdjustableOrRelativeDate
-                                    {
-                                    Item = new AdjustableDate()
-                                    {
-                                        unadjustedDate = new IdentifiedDate() { Value = DateTime.Now.Date },
-                                        dateAdjustments = new BusinessDayAdjustments
-                                            {
-                                            businessDayConvention = BusinessDayConventionEnum.NONE
+                                settlementCurrency = new Currency() { currencyScheme = "scheme/1.0", Value = "AUD" },
+                                settlementPriceSource = new SettlementPriceSource() { settlementPriceSourceScheme = "scheme/1.0", Value = "Source0" },
+                                settlementType = SettlementTypeEnum.Cash,
+                                equityValuation = new EquityValuation(),
+                                Items = new object[] {
+                                        true, // automaticExercise
+                                        new MakeWholeProvisions() { makeWholeDate = DateTime.Now.Date, recallSpread = 1.0M },
+                                    },
+                                Item = new EquityBermudaExercise()
+                                {
+                                    commencementDate = new AdjustableOrRelativeDate
+                                        {
+                                        Item = new AdjustableDate()
+                                        {
+                                            unadjustedDate = new IdentifiedDate { Value = DateTime.Now.Date },
+                                            dateAdjustments = new BusinessDayAdjustments
+                                                {
+                                                businessDayConvention = BusinessDayConventionEnum.NONE
+                                            }
                                         }
-                                    }
+                                    },
+                                    expirationDate = new AdjustableOrRelativeDate
+                                        {
+                                        Item = new AdjustableDate()
+                                        {
+                                            unadjustedDate = new IdentifiedDate() { Value = DateTime.Now.Date },
+                                            dateAdjustments = new BusinessDayAdjustments
+                                                {
+                                                businessDayConvention = BusinessDayConventionEnum.NONE
+                                            }
+                                        }
+                                    },
+                                    bermudaExerciseDates = new[]
+                                        {
+                                            new DateTime(2002, 4, 21),
+                                            new DateTime(2002, 5, 21),
+                                            new DateTime(2002, 6, 21)
+                                        }
                                 },
-                                bermudaExerciseDates = new[]
-                                    {
-                                        new DateTime(2002, 4, 21),
-                                        new DateTime(2002, 5, 21),
-                                        new DateTime(2002, 6, 21)
-                                    }
-                            },
+                            }
                         }
                     }
                 }
@@ -409,10 +412,11 @@ namespace FpML.V5r10.Confirmation.Tests
                 Assert.IsTrue(roundTripXml.Contains("<dateTime>"));
             }
             // tests
-            Assert.IsNotNull(copy.trade);
-            Assert.IsNotNull(copy.trade.Item);
-            Assert.AreEqual(typeof(EquityOption), copy.trade.Item.GetType());
-            var eo = (EquityOption)copy.trade.Item;
+            var result = copy?.Items?[0] as Trade;
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Item);
+            Assert.AreEqual(typeof(EquityOption), result.Item.GetType());
+            var eo = (EquityOption)result.Item;
             Assert.IsNotNull(eo.equityExercise);
             Assert.IsNotNull(eo.equityExercise.Item);
             Assert.AreEqual(typeof(EquityBermudaExercise), eo.equityExercise.Item.GetType());
@@ -448,10 +452,8 @@ namespace FpML.V5r10.Confirmation.Tests
                     }
                 }
             };
-
             Assert.IsFalse(StreamIsNABReceives(swap.swapStream[0]));
             Assert.IsTrue(StreamIsNABReceives(swap.swapStream[1]));
-
         }
     }
 }

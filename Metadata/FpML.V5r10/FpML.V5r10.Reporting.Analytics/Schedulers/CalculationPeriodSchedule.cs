@@ -1,14 +1,28 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.Helpers;
 
 #endregion
 
-namespace Orion.Analytics.Schedulers
+namespace FpML.V5r10.Reporting.Analytics.Schedulers
 {
     /// <summary>
     /// Calculation Period Scheduler
@@ -105,8 +119,8 @@ namespace Orion.Analytics.Schedulers
         {
             CalculationPeriodDates = calculationPeriodDates;
             PeriodInterval = CalculationPeriodHelper.CalculationPeriodFrequencyToInterval(calculationPeriodDates.calculationPeriodFrequency);
-            _effectiveDate = FpML.V5r10.Reporting.XsdClassesFieldResolver.CalculationPeriodDatesGetEffectiveDate(calculationPeriodDates).unadjustedDate.Value;
-            _termDate = FpML.V5r10.Reporting.XsdClassesFieldResolver.CalculationPeriodDatesGetTerminationDate(calculationPeriodDates).unadjustedDate.Value;
+            _effectiveDate = XsdClassesFieldResolver.CalculationPeriodDatesGetEffectiveDate(calculationPeriodDates).unadjustedDate.Value;
+            _termDate = XsdClassesFieldResolver.CalculationPeriodDatesGetTerminationDate(calculationPeriodDates).unadjustedDate.Value;
             RollConvention = calculationPeriodDates.calculationPeriodFrequency.rollConvention;
             _unadjustedDateScheduleList = CalculationPeriodHelper.GenerateUnadjustedCalculationDates(_effectiveDate, _termDate, calculationPeriodDates);
             return _unadjustedDateScheduleList;
@@ -117,16 +131,16 @@ namespace Orion.Analytics.Schedulers
         /// </summary>
         /// <param name="effectiveDate">The effective date.</param>
         /// <param name="periodToTerminationDate">The period to termination date.</param>
-        /// <param name="periodFrequecy">The period frequecy.</param>
+        /// <param name="periodFrequency">The period frequency.</param>
         /// <returns></returns>
-        public List<CalculationPeriod> GetUnadjustedCalculationDateSchedule(DateTime effectiveDate, CalculationPeriodFrequency periodToTerminationDate, CalculationPeriodFrequency periodFrequecy)
+        public List<CalculationPeriod> GetUnadjustedCalculationDateSchedule(DateTime effectiveDate, CalculationPeriodFrequency periodToTerminationDate, CalculationPeriodFrequency periodFrequency)
         {
             CalculationPeriodDates = null;
-            PeriodInterval = CalculationPeriodHelper.CalculationPeriodFrequencyToInterval(periodFrequecy);
+            PeriodInterval = CalculationPeriodHelper.CalculationPeriodFrequencyToInterval(periodFrequency);
             _effectiveDate = effectiveDate;
             _termDate = PeriodInterval.Add(effectiveDate);
-            RollConvention = periodFrequecy.rollConvention;
-            _unadjustedDateScheduleList = CalculationPeriodHelper.GenerateUnadjustedCalculationDates(effectiveDate, periodToTerminationDate, periodFrequecy);
+            RollConvention = periodFrequency.rollConvention;
+            _unadjustedDateScheduleList = CalculationPeriodHelper.GenerateUnadjustedCalculationDates(effectiveDate, periodToTerminationDate, periodFrequency);
             return _unadjustedDateScheduleList;
         }
 

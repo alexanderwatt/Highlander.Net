@@ -1,16 +1,30 @@
+/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
 #region Using Directives
 
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
-using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.Helpers;
 using Orion.Util.Helpers;
 
 #endregion
 
-namespace Orion.Analytics.Schedulers
+namespace FpML.V5r10.Reporting.Analytics.Schedulers
 {
     ///<summary>
     /// A dates meta scheduler.
@@ -82,7 +96,7 @@ namespace Orion.Analytics.Schedulers
             var results = new List<DateTime>();
             if (backwardGeneration)//from end date to start date
             {
-                //  reverse the metaschedule
+                //  reverse the meta schedule
                 //
                 var reversedRollsMetaScheduleParam = new List<MetaScheduleItem>(rollsMetaSchedule);
                 reversedRollsMetaScheduleParam.Reverse();
@@ -142,7 +156,7 @@ namespace Orion.Analytics.Schedulers
         }
 
         /// <summary>
-        /// Removes dulplcate dates.
+        /// Removes duplicate dates.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -215,6 +229,8 @@ namespace Orion.Analytics.Schedulers
                   , Boolean fromStartDate
             )
         {
+            DateTime firstReg;
+            DateTime lastReg;
             var result = new List<DateTime>();
             List<DateTime> additionalDates;
             DateTime fromDate = startDate;
@@ -266,7 +282,7 @@ namespace Orion.Analytics.Schedulers
                     if ((fromStartDate && result[result.Count - 1] < toDate) || (!fromStartDate && result[result.Count - 1] > toDate))
                         if (result[result.Count - 1] < endDate)
                         {
-                            additionalDates = fromStartDate ? new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(result[result.Count - 1], toDate, defaultInterval, defaultRollConvention, out _, out _)) : new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(toDate, result[result.Count - 1], defaultInterval, defaultRollConvention, out _, out _));
+                            additionalDates = fromStartDate ? new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(result[result.Count - 1], toDate, defaultInterval, defaultRollConvention, out firstReg, out lastReg)) : new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(toDate, result[result.Count - 1], defaultInterval, defaultRollConvention, out firstReg, out lastReg));
                             result.AddRange(additionalDates);
                             result.Sort();
                         }
@@ -274,7 +290,7 @@ namespace Orion.Analytics.Schedulers
             }
             else
             {
-                additionalDates = fromStartDate ? new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(startDate, toDate, defaultInterval, defaultRollConvention, out _, out _)) : new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(startDate, toDate, defaultInterval, defaultRollConvention, out _, out _));
+                additionalDates = fromStartDate ? new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(startDate, toDate, defaultInterval, defaultRollConvention, out firstReg, out lastReg)) : new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(startDate, toDate, defaultInterval, defaultRollConvention, out firstReg, out lastReg));
                 result.AddRange(additionalDates);
             }
             result = RemoveDuplicates(result);

@@ -1,19 +1,31 @@
-﻿#region Usings
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 #endregion
 
-
-namespace Orion.Analytics.Equities
+namespace FpML.V5r10.Reporting.Analytics.Equities
 {
     /// <summary>
     /// 
     /// </summary>
-    public class CrankNicolson
+    public class CrankNicholson
     {
         #region Attributes
         //diffusion parameters
@@ -200,7 +212,7 @@ namespace Orion.Analytics.Equities
         #region Public Methods
      
         /// <summary>
-        /// Initializes a new instance of the <see cref="CrankNicolson"/> class.
+        /// Initializes a new instance of the <see cref="CrankNicholson"/> class.
         /// </summary>
         /// <param name="spot">The spot.</param>
         /// <param name="strike">The strike.</param>
@@ -213,29 +225,25 @@ namespace Orion.Analytics.Equities
         /// <param name="divamts">The divamts.</param>
         /// <param name="ratedays">The ratedays.</param>
         /// <param name="rateamts">The rateamts.</param>
-        public CrankNicolson(bool isCall, bool isAmerican,  double spot, double strike, double yearFraction, double vol, int steps, double tStepSize, double far, int[] divdays,
+        public CrankNicholson(bool isCall, bool isAmerican,  double spot, double strike, double yearFraction, double vol, int steps, double tStepSize, double far, int[] divdays,
                              double[] divamts, int[] ratedays, double[] rateamts)
         {
             this.spot = spot;
             this.strike = strike;
-            this.T = yearFraction;
-            this.sig = vol;
+            T = yearFraction;
+            sig = vol;
             this.divdays = divdays;            
             this.divamts = divamts;
             PreValidateDivs();
             this.ratedays = ratedays;
             this.rateamts = rateamts;
-            this.sStyle = isAmerican ? "A" : "E";
-            this.sPay = isCall ? "C" : "P";
-
-            _xl = Math.Log(spot) - far * sig * Math.Sqrt(yearFraction);
-            _xu = Math.Log(spot) + far * sig * Math.Sqrt(yearFraction);
-
+            sStyle = isAmerican ? "A" : "E";
+            sPay = isCall ? "C" : "P";
+            _xl = System.Math.Log(spot) - far * sig * System.Math.Sqrt(yearFraction);
+            _xu = System.Math.Log(spot) + far * sig * System.Math.Sqrt(yearFraction);
             _steps = steps;
-            _nTsteps = Convert.ToInt32(_T / tStepSize); 
-
+            _nTsteps = Convert.ToInt32(_T / tStepSize);
         }
-
 
         private void PreValidateDivs()
         {
@@ -248,33 +256,26 @@ namespace Orion.Analytics.Equities
                     divdayslist.Add(divdays[idx]);
                     divamtslist.Add(divamts[idx]);
                 }
-
             }
             //replace existing members
-            this.divdays = divdayslist.ToArray();
-            this.divamts = divamtslist.ToArray();
+            divdays = divdayslist.ToArray();
+            divamts = divamtslist.ToArray();
         }
 
         public double[] GetPriceAndGreeks()
         {
             double[] greeks = new double[3];
             double[] res = new double[4];
-
             _x = new List<double>();
             _v = new List<double>();
-
             double tTemp = _T;  //real time
             double tau = 0.0; //backward time
-
             double dtnom = _T / (double)_nTsteps;
             double dt = dtnom;
             double tempInt = 0.0;
-
             //start the pricer
-
             CreateGrid();
             TerminalCondition();
-
             while ((tau - _T) < -0.001 * _T)
             {
                 //set the increment
@@ -282,45 +283,32 @@ namespace Orion.Analytics.Equities
                 t1 = (t1 >= 0.0) ? t1 : 0.0;  //make sure t1 >= 0.0
                 double divPay = 0.0;
                 dt = CheckBetweenDiv(t1, tTemp, ref divPay, divdays, divamts);
-
-
                 //compute the real time and backward time tau
                 tTemp -= dt;
                 tau = _T - tTemp;
-
                 //compute the increment forward rate
                 _domR = EquityAnalytics.GetRateCCLin365(tTemp, tTemp + dt, ratedays, rateamts);
                 _forR = 0.0;
-
                 //compute the forward rate from real time tTemp to expiry for the BC'c
                 double domRbc = EquityAnalytics.GetRateCCLin365(tTemp, _T, ratedays, rateamts);
-
                 //compute discounted dividends for the bc's
                 double DiscDiv = ComputeDiscDiv(tTemp, _T, ratedays, rateamts, divdays, divamts);
-
                 //save the value at the spot for use in theta calcuation
-                int nKeyInt = (int)((Math.Log(_spot) - _xl) / _dx);
-                double fracInt = (Math.Log(_spot) - _x[nKeyInt]) / (_x[nKeyInt + 1] - _x[nKeyInt]);
+                int nKeyInt = (int)((System.Math.Log(_spot) - _xl) / _dx);
+                double fracInt = (System.Math.Log(_spot) - _x[nKeyInt]) / (_x[nKeyInt + 1] - _x[nKeyInt]);
                 tempInt = _v[nKeyInt] * (1.0 - fracInt) + _v[nKeyInt + 1] * fracInt;
-
-
                 //get the fwd
-                _lnfwd = Math.Log(GetATMfwd(ratedays, rateamts, divdays, divamts, tTemp));
-
+                _lnfwd = System.Math.Log(GetATMfwd(ratedays, rateamts, divdays, divamts, tTemp));
                 //build the matrix
                 OneStepSetUp(dt, tTemp);
-
                 //compute the q vec
                 MakeQVec();
-
-
                 if (_sStyle.ToUpper().Equals("E"))
                 {
                     // set the exlicit BC
-                    _v[0] = MakeLowerBC(tau, Math.Exp(_x[0]), domRbc, DiscDiv);
-                    _v[_steps - 1] = MakeUpperBC(tau, Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
+                    _v[0] = MakeLowerBC(tau, System.Math.Exp(_x[0]), domRbc, DiscDiv);
+                    _v[_steps - 1] = MakeUpperBC(tau, System.Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
                     SORmethod();
-
                     //subract from q(1) and q(_steps-2) for explicit BC
                     //'_q[1] -= _SubDiagL[0] * _v[0];
                     //'_q[_msteps - 1] -= _SuperDiagL[_steps - 1] * _v[_steps - 1];
@@ -342,55 +330,42 @@ namespace Orion.Analytics.Equities
                 }
                 else
                 {
-                    _v[0] = MakeLowerBC(tau, Math.Exp(_x[0]), domRbc, DiscDiv);
-                    _v[_steps - 1] = MakeUpperBC(tau, Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
+                    _v[0] = MakeLowerBC(tau, System.Math.Exp(_x[0]), domRbc, DiscDiv);
+                    _v[_steps - 1] = MakeUpperBC(tau, System.Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
                     SORmethod();
                 }
-
                 //after having incremented back,  apply a grid shift if needed
                 if (divPay != 0.0)
                 {
                     ApplyGridShift(tau, divPay, domRbc, DiscDiv);
                 }
-
             }
-
-            int nKey = (int)((Math.Log(_spot) - _xl) / _dx);
-            double frac = (Math.Log(_spot) - _x[nKey]) / (_x[nKey + 1] - _x[nKey]);
+            int nKey = (int)((System.Math.Log(_spot) - _xl) / _dx);
+            double frac = (System.Math.Log(_spot) - _x[nKey]) / (_x[nKey + 1] - _x[nKey]);
             double temp = _v[nKey] * (1.0 - frac) + _v[nKey + 1] * frac;
-
-
             double[,] a = new double[4, 4];
             double[] b = new double[4];
-
             a[0, 0] = 1.0;
             a[1, 0] = 1.0;
             a[2, 0] = 1.0;
             a[3, 0] = 1.0;
-
-            a[0, 1] = Math.Exp(_x[nKey - 1]);
-            a[1, 1] = Math.Exp(_x[nKey]);
-            a[2, 1] = Math.Exp(_x[nKey + 1]);
-            a[3, 1] = Math.Exp(_x[nKey + 2]);
-
-            a[0, 2] = Math.Exp(_x[nKey - 1]) * Math.Exp(_x[nKey - 1]);
-            a[1, 2] = Math.Exp(_x[nKey]) * Math.Exp(_x[nKey]);
-            a[2, 2] = Math.Exp(_x[nKey + 1]) * Math.Exp(_x[nKey + 1]);
-            a[3, 2] = Math.Exp(_x[nKey + 2]) * Math.Exp(_x[nKey + 2]);
-
-            a[0, 3] = Math.Exp(_x[nKey - 1]) * Math.Exp(_x[nKey - 1]) * Math.Exp(_x[nKey - 1]);
-            a[1, 3] = Math.Exp(_x[nKey]) * Math.Exp(_x[nKey]) * Math.Exp(_x[nKey]);
-            a[2, 3] = Math.Exp(_x[nKey + 1]) * Math.Exp(_x[nKey + 1]) * Math.Exp(_x[nKey + 1]);
-            a[3, 3] = Math.Exp(_x[nKey + 2]) * Math.Exp(_x[nKey + 2]) * Math.Exp(_x[nKey + 2]);
-
+            a[0, 1] = System.Math.Exp(_x[nKey - 1]);
+            a[1, 1] = System.Math.Exp(_x[nKey]);
+            a[2, 1] = System.Math.Exp(_x[nKey + 1]);
+            a[3, 1] = System.Math.Exp(_x[nKey + 2]);
+            a[0, 2] = System.Math.Exp(_x[nKey - 1]) * System.Math.Exp(_x[nKey - 1]);
+            a[1, 2] = System.Math.Exp(_x[nKey]) * System.Math.Exp(_x[nKey]);
+            a[2, 2] = System.Math.Exp(_x[nKey + 1]) * System.Math.Exp(_x[nKey + 1]);
+            a[3, 2] = System.Math.Exp(_x[nKey + 2]) * System.Math.Exp(_x[nKey + 2]);
+            a[0, 3] = System.Math.Exp(_x[nKey - 1]) * System.Math.Exp(_x[nKey - 1]) * System.Math.Exp(_x[nKey - 1]);
+            a[1, 3] = System.Math.Exp(_x[nKey]) * System.Math.Exp(_x[nKey]) * System.Math.Exp(_x[nKey]);
+            a[2, 3] = System.Math.Exp(_x[nKey + 1]) * System.Math.Exp(_x[nKey + 1]) * System.Math.Exp(_x[nKey + 1]);
+            a[3, 3] = System.Math.Exp(_x[nKey + 2]) * System.Math.Exp(_x[nKey + 2]) * System.Math.Exp(_x[nKey + 2]);
             b[0] = _v[nKey - 1];
             b[1] = _v[nKey];
             b[2] = _v[nKey + 1];
             b[3] = _v[nKey + 2];
-
-
             int info = NewtonGauss(4, ref a, ref b);
-
             greeks[0] = b[1] + 2.0 * b[2] * _spot + 3.0 * b[3] * _spot * _spot;
             greeks[1] = 2.0 * b[2] + 6.0 * b[3] * _spot;
             greeks[2] = (tempInt - temp) / (365.0 * dt);
@@ -412,27 +387,21 @@ namespace Orion.Analytics.Equities
             res[1] = greeks[0];
             res[2] = greeks[1];
             res[3] = greeks[2];
-
             return res;
-
         }
-
-
-    
 
         public double ImpVol(double price)
         {
 
           double[] greeks = new double[4];
-          CrankNicolson clone = this.Clone();
+          CrankNicholson clone = this.Clone();
           double[] temp0 = clone.GetPriceAndGreeks();
           double temp = temp0[0];
-
           for (int idx = 0; idx < 20; idx++)
           {
                 temp0 = clone.GetPriceAndGreeks();
                 temp = temp0[0];
-                if (Math.Abs(temp - price) < 0.0001) break;
+                if (System.Math.Abs(temp - price) < 0.0001) break;
                 double sigold = sig;
                 double dsig = 0.01 * sig;
                 sig += dsig;
@@ -463,7 +432,7 @@ namespace Orion.Analytics.Equities
 
         #region Private Methods
 
-        //Asset grid, creat for this range
+        //Asset grid, create for this range
         private void CreateGrid()
         {
           _msteps = _steps - 1;   //number of upper index for the matrix manipulations
@@ -473,74 +442,58 @@ namespace Orion.Analytics.Equities
           {
             _x.Add(_xl + idx * _dx);
           }
-
-          return;
         }
-
 
         //Payoff condition
         private void TerminalCondition()
         {
           for (int idx = 0; idx < _steps; idx++)
           {
-        
-            switch (_sPay.ToUpper())
+              switch (_sPay.ToUpper())
             {
               case "C":
-                _v.Add(Math.Max(Math.Exp(_x[idx]) - _strike, 0.0));
+                _v.Add(System.Math.Max(System.Math.Exp(_x[idx]) - _strike, 0.0));
                 break;
               case "P":
-                _v.Add(Math.Max(_strike - Math.Exp(_x[idx]), 0.0));
+                _v.Add(System.Math.Max(_strike - System.Math.Exp(_x[idx]), 0.0));
                 break;
               case "A":
-                _v.Add(((Math.Exp(_x[idx]) > _strike) ? 1.0 : 0.0));
+                _v.Add(((System.Math.Exp(_x[idx]) > _strike) ? 1.0 : 0.0));
                 break;
               case "B":
-                _v.Add(((Math.Exp(_x[idx]) > _strike) ? 0.0 : 1.0));
+                _v.Add(((System.Math.Exp(_x[idx]) > _strike) ? 0.0 : 1.0));
                 break;
               case "T":
                 _v.Add(1.0);
                 break;
-              default:
-                break;
             }
           }
-          return;
         }
-
         //for specified 
         private void OneStepSetUp(double dt, double T)
         {
           _dt = dt;
           _n1 = _dt / (_dx * _dx);
           _n2 = _dt / _dx;
-
           //create fresh matrix rows
           MakeNewMatrixRows();
-
           //scroll through rows
           for (int idx = 0; idx < _steps; idx++)
           {
             //set the Asset
-            double S = Math.Exp(_x[idx]);
-
+            double S = System.Math.Exp(_x[idx]);
             double vol = _sig;
-
             //get the common functions
             double _a = a(S, T, vol);
             double _b = b(S, T, vol);
             double _c = c(S, T);
-
             //set up the common coefficients
             double _AR = (1.0 - _theta) * (_n1 * _a - 0.5 * _n2 * _b);
             double _BR = (1.0 - _theta) * (-2.0 * _n1 * _a + _dt * _c);
             double _CR = (1.0 - _theta) * (_n1 * _a + 0.5 * _n2 * _b);
-
             double _AL = _theta * _AR / (1.0 - _theta);
             double _BL = _theta * _BR / (1.0 - _theta);
             double _CL = _theta * _CR / (1.0 - _theta);
-
-
             //load the arrays
             _SubDiagL.Add(-_AL);
             _DiagL.Add(1.0 - _BL);
@@ -548,14 +501,9 @@ namespace Orion.Analytics.Equities
             _SubDiagR.Add(_AR);
             _DiagR.Add(1.0 + _BR);
             _SuperDiagR.Add(_CR);
-
-      
           }
-
-          return;
         }
-
-
+        
         //create new matrix rows
         private void MakeNewMatrixRows()
         {
@@ -565,19 +513,15 @@ namespace Orion.Analytics.Equities
           _SubDiagR = new List<double>();
           _DiagR = new List<double>();
           _SuperDiagR = new List<double>();
-          return;
         }
-
 
         //compute the q vector
         private void MakeQVec()
         {
-          _q = new List<double>();
-          _q.Add(0.0);
-          for (int idx = 1; idx < _msteps; idx++)
-            _q.Add( _SubDiagR[idx] * _v[idx - 1] + _DiagR[idx] * _v[idx] + _SuperDiagR[idx] * _v[idx + 1]);
-          _q.Add(0.0);
-          return;
+            _q = new List<double> {0.0};
+            for (int idx = 1; idx < _msteps; idx++)
+                _q.Add( _SubDiagR[idx] * _v[idx - 1] + _DiagR[idx] * _v[idx] + _SuperDiagR[idx] * _v[idx + 1]);
+            _q.Add(0.0);
         }
 
         //apply the BC
@@ -590,20 +534,17 @@ namespace Orion.Analytics.Equities
             case "C":
               break;
             case "P":
-              temp = (_sStyle.ToUpper().Equals("E")) ? Math.Exp(-domRbc * tau) * _strike - Math.Max(S - DiscDiv, 0.0) :
+              temp = (_sStyle.ToUpper().Equals("E")) ? System.Math.Exp(-domRbc * tau) * _strike - System.Math.Max(S - DiscDiv, 0.0) :
                   _strike - S;
               break;
             case "A":
               break;
             case "B":
-              temp = Math.Exp(-domRbc * tau);
+              temp = System.Math.Exp(-domRbc * tau);
               break;
             case "T":
               break;
-            default:
-              break;
           }
-
           return temp;
         }
 
@@ -614,72 +555,55 @@ namespace Orion.Analytics.Equities
           switch (_sPay.ToUpper())
           {
             case "C":
-              temp = (S - DiscDiv - Math.Exp(-domRbc * tau) * _strike);
-              temp = (_sStyle.ToUpper().Equals("A")) ? Math.Max(temp, S - _strike) : temp;
+              temp = (S - DiscDiv - System.Math.Exp(-domRbc * tau) * _strike);
+              temp = (_sStyle.ToUpper().Equals("A")) ? System.Math.Max(temp, S - _strike) : temp;
               break;
             case "P":
               break;
             case "A":
-              temp = Math.Exp(-domRbc * tau);
+              temp = System.Math.Exp(-domRbc * tau);
               break;
             case "B":       
               break;
             case "T":
               break;
-            default:
-              break;
           }
-
           return temp;
         }
 
 
-        //APPPLY L-U decomposition
+        //APPLY L-U decomposition
         private void LUDecomp()
         {
           _l = new List<double>();
           _d = new List<double>();
           _u = new List<double>();
-
           //pad with zeros
           _d.Add(0.0);
           _d.Add(_DiagL[1]);
-
           _u.Add(0.0);
-
           _l.Add(0.0);
           _l.Add(0.0);
-
           for (int idx = 2; idx < _msteps; idx++)
           {
             _u.Add(_SuperDiagL[idx-1]);
             _l.Add(_SubDiagL[idx]/_d[idx-1]);
             _d.Add(_DiagL[idx] - _l[idx] * _SuperDiagL[idx - 1]);
           }
-          return;
         }
 
         //Apply L-U solution
         private void LUSolution()
         {
           List<double> _w = new List<double>();
-     
           _w.Add(0.0);
           _w.Add(_q[1]);
-
           for (int idx = 2; idx < _msteps; idx++)
            _w.Add(_q[idx] - _l[idx] * _w[idx - 1]);
-      
-
           _v[_msteps - 1] = _w[_msteps - 1] / _d[_msteps - 1];
-
           for (int idx = _msteps - 2; idx > 0; idx--)
             _v[idx] = (_w[idx] - _u[idx] * _v[idx + 1]) / _d[idx];
-
-
-          return;
         }
-
 
         //SOR method
         private void SORmethod()  
@@ -690,18 +614,15 @@ namespace Orion.Analytics.Equities
           //double[] temp = new double[_v.Count];
           double temp = 0.0;
           bool bAm = (_sStyle.ToUpper().Equals("A")) ? true : false;
-
-          while (Math.Sqrt(err) > tol)
+          while (System.Math.Sqrt(err) > tol)
           {
             err = 0.0;
             for (int idx = 1; idx < _msteps; idx++)
             {
                temp = (_q[idx] - _SuperDiagL[idx] * _v[idx + 1] - _SubDiagL[idx] * _v[idx - 1]) / _DiagL[idx];
-
-              temp = bAm ?  Math.Max(temp, AmPay(idx)) : temp;
+               temp = bAm ? System.Math.Max(temp, AmPay(idx)) : temp;
               //if (_sPay.ToUpper().Equals("P"))
               //  temp = bAm ?  Math.Max(temp, AmPay(idx)) : temp;
-
               err += (temp - _v[idx]) * (temp - _v[idx]);
               _v[idx] = temp;
             }
@@ -713,13 +634,10 @@ namespace Orion.Analytics.Equities
           }
         }
 
-    
-
         private double AmPay(int idx)
         {
-          return (_sPay.ToUpper().Equals("C")) ? Math.Exp(_x[idx]) - _strike : _strike - Math.Exp(_x[idx]);
+          return (_sPay.ToUpper().Equals("C")) ? System.Math.Exp(_x[idx]) - _strike : _strike - System.Math.Exp(_x[idx]);
         }
-
 
         //determine if dt needs adjusted because a div occurs in proposed interval
         private double CheckBetweenDiv(double t1, double t2, ref double discDiv, int[] divdays, double[] divamts)   //t1 & t2 are real times
@@ -736,7 +654,6 @@ namespace Orion.Analytics.Equities
                     break;
                 }
           }
-      
           return temp;
         }
 
@@ -748,42 +665,34 @@ namespace Orion.Analytics.Equities
           double temp;
 
           //for lower boundary, assign the lower bc using the immediate exercise
-          temp = MakeLowerBC(tau, Math.Max(Math.Exp(_x[0]) - divPay,0.0), domRbc, DiscDiv);
-          if (_sStyle.ToUpper().Equals("A"))
-            _vn.Add(Math.Max(temp,AmPay(0)));
-          else
-            _vn.Add(temp);
-
+          temp = MakeLowerBC(tau, System.Math.Max(System.Math.Exp(_x[0]) - divPay,0.0), domRbc, DiscDiv);
+          _vn.Add(_sStyle.ToUpper().Equals("A") ? System.Math.Max(temp, AmPay(0)) : temp);
           for (int idx = 1; idx < _steps; idx++)
           {
-            double xshift = Math.Log(Math.Exp(_x[idx]) - divPay);
+            double xshift = System.Math.Log(System.Math.Exp(_x[idx]) - divPay);
             if (xshift >= _xl)
             {
               int idNew = (int) ((xshift - _xl) / _dx);
               double frac = (xshift - _x[idNew]) / (_x[idNew+1] - _x[idNew]);
-
               temp = (1.0 - frac) * _v[idNew] + frac * _v[idNew + 1];
 
               if (_sStyle.ToUpper().Equals("A"))
-               _vn.Add(Math.Max(temp, AmPay(idx))); 
+               _vn.Add(System.Math.Max(temp, AmPay(idx))); 
               else
                _vn.Add(temp); 
             }
             else // the new points are still below the grid
             {
-              temp = MakeLowerBC(tau, Math.Max(Math.Exp(_x[idx]) - divPay,0.0), domRbc, DiscDiv);
+              temp = MakeLowerBC(tau, System.Math.Max(System.Math.Exp(_x[idx]) - divPay,0.0), domRbc, DiscDiv);
               if (_sStyle.ToUpper().Equals("A"))
-                _vn.Add(Math.Max(temp,AmPay(idx)));
+                _vn.Add(System.Math.Max(temp,AmPay(idx)));
               else
                 _vn.Add(temp);
             }
           }
-
           //for upper boundary add the upper
           //_vn.Add(MakeUpperBC(tau, Math.Exp(_x[_steps-1]) - divPay, domRbc, DiscDiv));
-
           _v = _vn;
-
         }
 
         //compute Sstar for the BC's
@@ -802,7 +711,6 @@ namespace Orion.Analytics.Equities
             return EquityAnalytics.GetPVDivsCCLin365(tTemp, T, divdays, divamts, ratedays, rateamts);          
         }
 
-
         //coeffiecients ffor the diffusion equation
         private double a(double S, double T, double vol)
         {
@@ -819,7 +727,6 @@ namespace Orion.Analytics.Equities
           return -_domR;
         }
 
-
         private static int NewtonGauss(int n, ref double[,] am, ref double[] bm)
         {
           int[] ipiv = new int[20];
@@ -827,14 +734,10 @@ namespace Orion.Analytics.Equities
           int[] indxc = new int[20];
           int icol = 0, irow = 0, idx, jdx, kdx, ldx, lldx;
           double big, pivinv, dum;
-
-
           for (idx = 0; idx < n; idx++) { ipiv[idx] = 0; }
-
           for (idx = 0; idx < n; idx++)
           {
             big = 0.0;
-
             for (jdx = 0; jdx < n; jdx++)
             {
               if (ipiv[jdx] != 1)
@@ -843,9 +746,9 @@ namespace Orion.Analytics.Equities
                 {
                   if (ipiv[kdx] == 0.0)
                   {
-                    if (Math.Abs(am[jdx, kdx]) > big)
+                    if (System.Math.Abs(am[jdx, kdx]) > big)
                     {
-                      big = Math.Abs(am[jdx, kdx]); irow = jdx; icol = kdx;
+                      big = System.Math.Abs(am[jdx, kdx]); irow = jdx; icol = kdx;
                     }
                   }
                   else
@@ -858,7 +761,6 @@ namespace Orion.Analytics.Equities
                 } // next k
               }
             } //next j
-
             ipiv[icol] += 1;
             if (irow != icol)
             {
@@ -899,7 +801,6 @@ namespace Orion.Analytics.Equities
           return 2;
         }
 
-
     
         #endregion
 
@@ -907,14 +808,10 @@ namespace Orion.Analytics.Equities
         /// Clones this instance.
         /// </summary>
         /// <returns></returns>
-        private CrankNicolson Clone()
+        private CrankNicholson Clone()
         {
-            return (CrankNicolson)this.MemberwiseClone();
-            //return new CrankNicolson(spot,strike,T,sig,steps,tStepSize,far,divdays,divamts,ratedays,rateamts);
+            return (CrankNicholson)MemberwiseClone();
+            //return new CrankNicholson(spot,strike,T,sig,steps,tStepSize,far,divdays,divamts,ratedays,rateamts);
         }
-
-
     }
-
- 
 }
