@@ -685,7 +685,7 @@ namespace Orion.ValuationEngine
         public string SaveTradeToFile(string uniqueTradeId, string filename)
         {
             var tradeItem = Cache.LoadItem<Trade>(NameSpace + "." + uniqueTradeId);
-            if (tradeItem.Data is Trade trade)
+            if (tradeItem.Data is Trade)
             {
                 //string baseFilename = Path.GetFullPath(filename);
                 string xmlFilename = Path.ChangeExtension(filename, ".xml");
@@ -712,7 +712,7 @@ namespace Orion.ValuationEngine
         public string SaveValuationToFile(string uniqueValuationId, string filename)
         {
             var valItem = Cache.LoadItem<Valuation>(NameSpace + "." + uniqueValuationId);
-            if (valItem.Data is Valuation valuation)
+            if (valItem.Data is Valuation)
             {
                 //string baseFilename = Path.GetFullPath(filename);
                 string xmlFilename = Path.ChangeExtension(filename, ".xml");
@@ -1407,6 +1407,8 @@ namespace Orion.ValuationEngine
 
         #region Create Store Reference Data
 
+        #region Exchange Data
+
         /// <summary>
         /// Loads exchange config to the core.
         /// </summary>
@@ -1526,6 +1528,10 @@ namespace Orion.ValuationEngine
             return result;
         }
 
+        #endregion
+
+        #region Quoted Asset Sets
+
         /// <summary>
         /// Gets the quotedassetset identifiers conforming to the properties provided.
         /// </summary>
@@ -1546,44 +1552,6 @@ namespace Orion.ValuationEngine
                 return result;
             }
             return new List<string> { "No QAS found!" };
-        }
-
-
-        /// <summary>
-        /// Retrieves and saves bonds to a directory.
-        /// </summary>
-        /// <param name="identifiers">The identifier array to retrieve.</param>
-        /// <param name="directoryPath">The path to save the files into.</param>
-        /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: FixedIncome.XXXX.YY.zz-zz-zzzz.
-        /// Otherwise it is of the form ReferenceData.FixedIncome.XXXX.YY.zz-zz-zzzz.</param>
-        /// <returns></returns>
-        public string SaveQas(IEnumerable<string> identifiers, string directoryPath, bool isShortName)
-        {
-            var result = "QAS are not saved!";
-            foreach (var id in identifiers)
-            {
-                var newid = id;
-                if (isShortName)
-                {
-                    newid = NameSpace + "." + id;
-                }
-                var item = Cache.LoadItem<Bond>(newid);
-                // save item
-                string baseFilename = Path.GetFullPath(directoryPath);
-                baseFilename = baseFilename + id;
-                string xmlFilename = baseFilename + ".xml";
-                string nvsFilename = baseFilename + ".nvs";
-                using (var sr = new StreamWriter(xmlFilename))
-                {
-                    sr.Write(item.Text);
-                }
-                using (var sr = new StreamWriter(nvsFilename))
-                {
-                    sr.Write(item.AppProps.Serialise());
-                }
-                result = "QAS are saved!";
-            }
-            return result;
         }
 
         /// <summary>
@@ -1696,6 +1664,10 @@ namespace Orion.ValuationEngine
             return result;
         }
 
+        #endregion
+
+        #region Market Properties
+
         /// <summary>
         /// Publishes the pricing structure configuration.
         /// A set of properties is associated with the cached market and these properties 
@@ -1736,6 +1708,47 @@ namespace Orion.ValuationEngine
             }
             Cache.SaveObject(configuration, NameSpace + "." + uniqueId, properties);
             return uniqueId;
+        }
+
+        #endregion
+
+        #region Fixed Income
+
+        /// <summary>
+        /// Retrieves and saves bonds to a directory.
+        /// </summary>
+        /// <param name="identifiers">The identifier array to retrieve.</param>
+        /// <param name="directoryPath">The path to save the files into.</param>
+        /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: FixedIncome.XXXX.YY.zz-zz-zzzz.
+        /// Otherwise it is of the form ReferenceData.FixedIncome.XXXX.YY.zz-zz-zzzz.</param>
+        /// <returns></returns>
+        public string SaveQas(IEnumerable<string> identifiers, string directoryPath, bool isShortName)
+        {
+            var result = "QAS are not saved!";
+            foreach (var id in identifiers)
+            {
+                var newid = id;
+                if (isShortName)
+                {
+                    newid = NameSpace + "." + id;
+                }
+                var item = Cache.LoadItem<Bond>(newid);
+                // save item
+                string baseFilename = Path.GetFullPath(directoryPath);
+                baseFilename = baseFilename + id;
+                string xmlFilename = baseFilename + ".xml";
+                string nvsFilename = baseFilename + ".nvs";
+                using (var sr = new StreamWriter(xmlFilename))
+                {
+                    sr.Write(item.Text);
+                }
+                using (var sr = new StreamWriter(nvsFilename))
+                {
+                    sr.Write(item.AppProps.Serialise());
+                }
+                result = "QAS are saved!";
+            }
+            return result;
         }
 
         /// <summary>
@@ -1999,6 +2012,10 @@ namespace Orion.ValuationEngine
             return identifier + ": has been updated!";
         }
 
+        #endregion
+
+        #region Equities
+
         /// <summary>
         /// Creates a equity in the data store.
         /// </summary>
@@ -2164,6 +2181,10 @@ namespace Orion.ValuationEngine
             return result;
         }
 
+        #endregion
+
+        #region Property Data
+
         /// <summary>
         /// Creates a property in the data store.
         /// </summary>
@@ -2195,7 +2216,7 @@ namespace Orion.ValuationEngine
         /// </summary>
         /// <param name="cache">THe cache where the data is cached.</param>
         /// <param name="nameSpace">THe namespace.</param>
-        /// <param name="propertyId">The property identfier.</param>
+        /// <param name="propertyIdentifier">The property identifier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
@@ -2211,7 +2232,7 @@ namespace Orion.ValuationEngine
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyId, string propertyType, string streetIdentifier, string streetName,
+        public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyIdentifier, string propertyType, string streetIdentifier, string streetName,
             string suburb, string city, string state, string country, int numBedrooms, int numBathrooms, int numParking, string currency, string description, NamedValueSet properties)
         {
             if (properties != null)
@@ -2225,12 +2246,13 @@ namespace Orion.ValuationEngine
                 properties.Set(EnvironmentProp.NameSpace, nameSpace);
                 properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
                 properties.Set(PropertyProp.Description, description);
-                var property = PropertyAssetHelper.Create(propertyId, propertyType, streetIdentifier, streetName,
+                properties.Set(PropertyProp.PropertyType, propertyType);
+                var property = PropertyAssetHelper.Create(propertyIdentifier, propertyType, streetIdentifier, streetName,
                 suburb, city, state, country, numBedrooms, numBathrooms, numParking, currency, description);
                 var identifier = new PropertyIdentifier(propertyType, city, suburb, streetName, streetIdentifier);
                 properties.Set(PropertyProp.UniqueIdentifier, identifier.UniqueIdentifier);
                 cache.SaveObject(property, nameSpace + "." + identifier.UniqueIdentifier, properties);
-                logger.LogDebug("Created new equity: {0}", identifier.UniqueIdentifier);
+                logger.LogDebug("Created new property: {0}", identifier.UniqueIdentifier);
                 return identifier.Id;
             }
             return "Insufficent information provided to create the property.";
@@ -2238,30 +2260,220 @@ namespace Orion.ValuationEngine
 
         #endregion
 
+        #endregion
+
         #region Create Products
+
+        #region Lease Transaction
+
+        #region Lease Properties
+
+        /// <summary>
+        /// Creates a lease in the data store.
+        /// </summary>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="leaseType">The lease type: retail, commercial, investment etc</param>
+        /// <param name="reviewChange">THe review change as a percentage.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="startGrossPrice">The start gross price.</param>
+        /// <param name="description">The lease description.</param>
+        /// <param name="leaseExpiryDate">The lease expiry date.</param>
+        /// <param name="referencePropertyIdentifier">The property reference identifier.</param>
+        /// <param name="shopNumber">The shop number.</param>
+        /// <param name="nextReviewDate">The next review date.</param>
+        /// <param name="unitsOfArea">The units of area: money per square meter; money per square foot.</param>
+        /// <returns></returns>
+        private NamedValueSet CreateLeaseProperties(string nameSpace, string tenant, string leaseId, string leaseType,
+            string referencePropertyIdentifier, string currency,  string description)
+        {
+            var properties = new NamedValueSet();
+            properties.Set(LeaseProp.Currency, currency);
+            properties.Set(LeaseProp.AsAtDate, DateTime.Today);
+            properties.Set(LeaseProp.Function, FunctionProp.ReferenceData.ToString());
+            properties.Set(LeaseProp.DataGroup, NameSpace + "." + FunctionProp.ReferenceData.ToString());
+            properties.Set(LeaseProp.Domain, FunctionProp.ReferenceData.ToString() + ".Lease");
+            properties.Set(LeaseProp.SourceSystem, "Orion");
+            properties.Set(EnvironmentProp.NameSpace, nameSpace);
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(LeaseProp.Description, description);
+            properties.Set(LeaseProp.LeaseType, leaseType);
+            properties.Set(LeaseProp.LeaseType, tenant);
+            properties.Set(LeaseProp.ReferencePropertyIdentifier, referencePropertyIdentifier);
+            var identifier = new LeaseIdentifier(referencePropertyIdentifier, tenant, leaseType, leaseId);
+            properties.Set(LeaseProp.UniqueIdentifier, identifier.UniqueIdentifier);
+            return properties;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Creates a lease transaction
+        /// </summary>
+        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="isParty1Tenant">Is party1 the tenant. If not then it is the property owner. </param>
+        /// <param name="tradeDate">The trade date.</param>
+        /// <param name="leaseStartDate"></param>
+        /// <param name="upfrontAmount">Any upfront payment amount. If there is no upfront this is zero.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="paymentDate">The payment Date.</param>
+        /// <param name="portfolio">The portfolio.</param>
+        /// <param name="numberOfUnits">The number of untis of area.</param>
+        /// <param name="unitsOfArea"></param>
+        /// <param name="leaseExpiryDate"></param>
+        /// <param name="reviewFrequency">The frequency  of review. Normally 1Y.</param>
+        /// <param name="nextReviewDate">The next review date.</param>
+        /// <param name="reviewChange">The percentage change on the gross amount.</param>
+        /// <param name="startGrossAmount"></param>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="leaseType">The lease type.</param>
+        /// <param name="shopNumber">The shop identifier.</param>
+        /// <param name="referencePropertyIdentifier">The reference property identifier.</param>
+        /// <param name="description">The description.</param>
+        /// <returns></returns>
+        public string CreateLeaseTransactionWithProperties(string tradeId, bool isParty1Tenant, DateTime tradeDate, DateTime leaseStartDate, decimal upfrontAmount, 
+            DateTime paymentDate, string currency, string portfolio, decimal startGrossAmount, string leaseId, string leaseType, string shopNumber, decimal numberOfUnits, string unitsOfArea,
+            DateTime leaseExpiryDate, string reviewFrequency, DateTime nextReviewDate, decimal reviewChange, string referencePropertyIdentifier, string description, NamedValueSet properties)
+        {
+            return CreateLeaseTransactionWithProperties(Logger, Cache, tradeId, isParty1Tenant, tradeDate, leaseStartDate, upfrontAmount, 
+                paymentDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, numberOfUnits, unitsOfArea, leaseExpiryDate, reviewFrequency, nextReviewDate,
+                reviewChange, referencePropertyIdentifier, description, properties);
+        }
+
+        /// <summary>
+        /// Creates a lease transaction
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="isParty1Tenant">Is party1 the tenant. If not then it is the property owner. </param>
+        /// <param name="tradeDate">The trade date.</param>
+        /// <param name="leaseStartDate"></param>
+        /// <param name="upfrontAmount">Any upfront payment amount. If there is no upfront this is zero.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="paymentDate">The payment Date.</param>
+        /// <param name="portfolio">The portfolio.</param>
+        /// <param name="numberOfUnits">The number of untis of area.</param>
+        /// <param name="unitsOfArea"></param>
+        /// <param name="leaseExpiryDate"></param>
+        /// <param name="reviewFrequency">The frequency  of review. Normally annual.</param>
+        /// <param name="nextReviewDate">The next review date.</param>
+        /// <param name="reviewChange">The percentage change on the gross amount.</param>
+        /// <param name="startGrossAmount"></param>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="leaseType">The lease type.</param>
+        /// <param name="shopNumber">The shop identifier.</param>
+        /// <param name="referencePropertyIdentifier">The reference property identifier.</param>
+        /// <param name="description">The description.</param>
+        /// <returns></returns>
+        public string CreateLeaseTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Tenant, DateTime tradeDate, DateTime leaseStartDate,
+            decimal upfrontAmount, DateTime paymentDate, string currency, string portfolio, decimal startGrossAmount, string leaseId, string leaseType, string shopNumber, 
+            decimal numberOfUnits, string unitsOfArea, DateTime leaseExpiryDate, string reviewFrequency, DateTime nextReviewDate, decimal reviewChange, 
+            string referencePropertyIdentifier, string description, NamedValueSet properties)
+        {
+            //Party Information
+            string buyer = "Party1";
+            string seller = "Party2";
+            if (!isParty1Tenant)
+            {
+                buyer = "Party2";
+                seller = "Party1";
+            }
+            var partya = properties.GetValue<string>(TradeProp.Party1, true);
+            var partyb = properties.GetValue<string>(TradeProp.Party2, true);
+            string tenant = partyb;
+            if (isParty1Tenant)
+            {
+                tenant = partya;
+            }
+            var leaseProperties = CreateLeaseProperties(NameSpace, tenant, leaseId, leaseType,
+                referencePropertyIdentifier, currency, description);
+            properties.Set(TradeProp.TradingBookName, portfolio);
+            var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
+            var businessDayAdjustments = properties.GetValue(BondProp.BusinessDayAdjustments, "FOLLOWING");
+            var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
+            properties.GetValue(TradeProp.EffectiveDate, leaseExpiryDate);
+            properties.GetValue(TradeProp.TradeDate, tradeDate);
+            properties.GetValue(TradeProp.PaymentDate, paymentDate);
+            var leaseTradeIdentifier = $"{"Trade"}.{sourceSystem}.{ItemChoiceType15.leaseTransaction}.{tradeId}";
+            properties.Add(leaseProperties);
+            var lease = LeaseAssetHelper.Create(tenant, leaseId, leaseType, leaseExpiryDate, referencePropertyIdentifier, shopNumber,
+                leaseStartDate, reviewFrequency, nextReviewDate, reviewChange, currency, numberOfUnits, unitsOfArea, startGrossAmount, description);
+            //  1) Build and publish the equity transaction
+            //
+            properties.Set(TradeProp.UniqueIdentifier, null);
+            var productType = new object[] { ProductTypeHelper.Create("LeaseTransaction") };
+            var amount = Convert.ToDouble(upfrontAmount);
+            var leaseTransaction = new LeaseTransaction
+            {
+                buyerPartyReference =
+                    PartyReferenceHelper.Parse(buyer),
+                id = leaseTradeIdentifier,
+                Items = productType,
+                ItemsElementName = new[] { ItemsChoiceType2.productType },
+                sellerPartyReference =
+                    PartyReferenceHelper.Parse(seller),
+                lease = lease,
+            };
+            //  2) Create the trade
+            //          
+            var trade = new Trade
+            {
+                Item = leaseTransaction,
+                ItemElementName = ItemChoiceType15.leaseTransaction,
+                tradeHeader = new TradeHeader(), //TODO We need a new type here!
+            };
+            var party1 = PartyTradeIdentifierHelper.Parse(tradeId, "party1");
+            var party2 = PartyTradeIdentifierHelper.Parse(tradeId, "party2");
+            trade.tradeHeader.partyTradeIdentifier = new[] { party1, party2 };
+            trade.tradeHeader.tradeDate = new IdentifiedDate { Value = tradeDate };
+            //TODO there is no lease type to use.
+            var curves = trade.Item.GetRequiredPricingStructures().ToArray();
+            var currencies = trade.Item.GetRequiredCurrencies().ToArray();
+            properties.Set(TradeProp.RequiredPricingStructures, curves);
+            properties.Set(TradeProp.RequiredCurrencies, currencies);
+            properties.Set(TradeProp.TradeSource, sourceSystem);
+            properties.Set(EnvironmentProp.SourceSystem, sourceSystem);
+            properties.Set(EnvironmentProp.Function, FunctionProp.Trade.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(EnvironmentProp.NameSpace, NameSpace);
+            //  3) Save the lease trade
+            //
+            cache.SaveObject(trade, NameSpace + "." + leaseTradeIdentifier, properties);
+            //  4) Log the event
+            //
+            logger.LogDebug("Created new lease transaction: {0}", leaseTradeIdentifier);
+            //
+            //  5) Build and publish the cash transaction
+            // TODO This cash amount does not have the correct payment date or roll conventions. Need to load some configuration.
+            var cashIdentifier = CreateBulletPayment(tradeId, isParty1Tenant, partya, partyb, tradeDate, paymentDate, businessDayCalendar, businessDayAdjustments,
+                currency, amount, sourceSystem);
+            //  7) Log the cash trade.
+            logger.LogDebug("Created new lease transaction: {0}", cashIdentifier);
+            return leaseTradeIdentifier;
+        }
+
+        #endregion
 
         #region Property Transaction
 
         /// <summary>
         /// Creates a property transaction
         /// </summary>
-        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="tradeId">The trade identifier </param>
         /// <param name="isParty1Buyer">Is party1 the bond buyer. If not then it is the seller. </param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="purchaseAmount">The purchase Amount.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="propertyIdentifier">The property identifier. Currently assumed to be of the form:  Orion.ReferenceData.Property.... </param>
+        /// <param name="propertyAssetIdentifier">The property asset identifier. Currently assumed to be of the form:  Orion.ReferenceData.Property.... </param>
         /// <param name="effectiveDate">The date when the bond is paid for.</param>
         /// <param name="paymentDate">The payment Date.</param>
-        /// <param name="tradingBook">The trading book.</param>
-        /// <param name="properties">A bunch of properties</param>
-        /// /// <param name="propertyType">The property type.</param>
+        /// <param name="portfolio">The portfolio.</param>
         /// <returns></returns>
-        public string CreatePropertyTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, DateTime effectiveDate, Decimal purchaseAmount,
-            string propertyType, DateTime paymentDate, String currency, string propertyIdentifier, string tradingBook, NamedValueSet properties)
+        public string CreatePropertyTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount,
+                DateTime paymentDate, string currency, string propertyAssetIdentifier, string portfolio, NamedValueSet properties)
         {
             return CreatePropertyTransactionWithProperties(Logger, Cache, tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
-                propertyType, paymentDate, currency, propertyIdentifier, tradingBook, properties);
+                paymentDate, currency, propertyAssetIdentifier, portfolio, properties);
         }
 
         /// <summary>
@@ -2274,16 +2486,16 @@ namespace Orion.ValuationEngine
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="purchaseAmount">The purchase Amount.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="propertyIdentifier">The property identifier. Currently assumed to be of the form:  Orion.ReferenceData.Property.... </param>
+        /// <param name="propertyAssetIdentifier">The property asset identifier. Currently assumed to be of the form:  Orion.ReferenceData.Property.... </param>
         /// <param name="effectiveDate">The date when the bond is paid for.</param>
         /// <param name="propertyType">The property type.</param>
         /// <param name="paymentDate">The payment Date.</param>
-        /// <param name="tradingBook">The trading book.</param>
+        /// <param name="portfolio">The portfoliok.</param>
         /// <param name="properties">A bunch of properties</param>
         /// <returns></returns>
         public string CreatePropertyTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Buyer, 
-            DateTime tradeDate, DateTime effectiveDate, Decimal purchaseAmount, string propertyType,
-            DateTime paymentDate, String currency, string propertyIdentifier, string tradingBook, NamedValueSet properties)
+            DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount,  DateTime paymentDate, string currency, 
+            string propertyAssetIdentifier, string portfolio, NamedValueSet properties)
         {
             //Party Information
             string buyer = "Party1";
@@ -2293,20 +2505,22 @@ namespace Orion.ValuationEngine
                 buyer = "Party2";
                 seller = "Party1";
             }
-            var partya = properties.GetValue<String>(TradeProp.Party1, true);
-            var partyb = properties.GetValue<String>(TradeProp.Party2, true);
+            var partya = properties.GetValue<string>(TradeProp.Party1, true);
+            var partyb = properties.GetValue<string>(TradeProp.Party2, true);
             var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
             var businessDayAdjustments = properties.GetValue(BondProp.BusinessDayAdjustments, "FOLLOWING");
             var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             properties.GetValue(TradeProp.EffectiveDate, effectiveDate);
             properties.GetValue(TradeProp.TradeDate, tradeDate);
             properties.GetValue(TradeProp.PaymentDate, paymentDate);
-            var propertyTradeIdentifier = String.Format("{0}.{1}.{2}.{3}", "Trade", sourceSystem, ItemChoiceType15.propertyTransaction, tradeId);
-            var item = cache.LoadItem<PropertyAsset>(NameSpace + ".ReferenceData.Property." + propertyType + "." + propertyIdentifier);
-            //properties.Add(item.AppProps);
-            if (item.Data is PropertyAsset property)
+            properties.Set(TradeProp.TradingBookName, portfolio);
+            var propertyTradeIdentifier = $"{FunctionProp.Trade}.{sourceSystem}.{ItemChoiceType15.propertyTransaction}.{tradeId}";
+            var assetIdentifier = NameSpace + "." + FunctionProp.ReferenceData + "." + 
+                                  ReferenceDataProp.Property + "." + propertyAssetIdentifier;
+            var item = cache.LoadItem<PropertyAsset>(assetIdentifier);
+            if (item?.Data is PropertyAsset property)
             {
-                //  1) Build and publish the equity transaction
+                //  1) Build and publish the property transaction
                 //
                 properties.Set(TradeProp.UniqueIdentifier, null);
                 var productType = new object[] { ProductTypeHelper.Create("PropertyTransaction") };
@@ -2334,7 +2548,7 @@ namespace Orion.ValuationEngine
                 var party2 = PartyTradeIdentifierHelper.Parse(tradeId, "party2");
                 trade.tradeHeader.partyTradeIdentifier = new[] { party1, party2 };
                 trade.tradeHeader.tradeDate = new IdentifiedDate { Value = tradeDate };
-                //TODO there is no Bond type to use.
+                //TODO there is no property type to use.
                 var curves = trade.Item.GetRequiredPricingStructures().ToArray();
                 var currencies = trade.Item.GetRequiredCurrencies().ToArray();
                 properties.Set(TradeProp.RequiredPricingStructures, curves);
@@ -2344,7 +2558,7 @@ namespace Orion.ValuationEngine
                 properties.Set(EnvironmentProp.Function, FunctionProp.Trade.ToString());
                 properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
                 properties.Set(EnvironmentProp.NameSpace, NameSpace);
-                //  3) Save the bond trade
+                //  3) Save the property trade
                 //
                 cache.SaveObject(trade, NameSpace + "." + propertyTradeIdentifier, properties);
                 //  4) Log the event
@@ -2356,7 +2570,7 @@ namespace Orion.ValuationEngine
                 var cashIdentifier = CreateBulletPayment(tradeId, isParty1Buyer, partya, partyb, tradeDate, paymentDate, businessDayCalendar, businessDayAdjustments,
                     currency, amount, sourceSystem);
                 //  7) Log the cash trade.
-                logger.LogDebug("Created new payment transaction: {0}", cashIdentifier);
+                logger.LogDebug("Created new cash transaction: {0}", cashIdentifier);
                 return propertyTradeIdentifier;
             }
             return "Property transaction unsuccessful. Check there is data for the reference property.";
@@ -2382,8 +2596,8 @@ namespace Orion.ValuationEngine
         /// This is used to determine the base direction in calculations</param>
         /// <param name="numberOfShares">The number of shares. </param>
         /// <returns></returns>
-        public string CreateEquityTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, Decimal numberOfShares,
-            Decimal unitPrice, String unitPriceCurrency, string equityIdentifier, NamedValueSet properties)
+        public string CreateEquityTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, decimal numberOfShares,
+            decimal unitPrice, string unitPriceCurrency, string equityIdentifier, NamedValueSet properties)
         {
             return CreateEquityTransactionWithProperties(Logger, Cache, tradeId, isParty1Buyer, tradeDate, numberOfShares, unitPrice, unitPriceCurrency, equityIdentifier, properties);
         }
@@ -2505,7 +2719,7 @@ namespace Orion.ValuationEngine
         /// This is used to determine the base direction in calculations</param>
         /// <param name="notional">The notional in the trade currency, which is assumed to be same currency as the coupon. </param>
         /// <returns></returns>
-        public string CreateBondTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, Decimal notional, NamedValueSet priceInformation, string bondIdentifier, NamedValueSet properties)
+        public string CreateBondTransactionWithProperties(string tradeId, bool isParty1Buyer, DateTime tradeDate, decimal notional, NamedValueSet priceInformation, string bondIdentifier, NamedValueSet properties)
         {
             return CreateBondTransactionWithProperties(Logger, Cache, tradeId, isParty1Buyer, tradeDate, notional, priceInformation, bondIdentifier, properties);
         }
@@ -2539,8 +2753,8 @@ namespace Orion.ValuationEngine
                 seller = "Party1";
             }
             //Get the required bond transaction properties.
-            var partya = properties.GetValue<String>(TradeProp.Party1, true);
-            var partyb = properties.GetValue<String>(TradeProp.Party2, true);
+            var partyA = properties.GetValue<string>(TradeProp.Party1, true);
+            var partyB = properties.GetValue<string>(TradeProp.Party2, true);
             var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             var bondSettlemetDate = properties.GetValue(TradeProp.EffectiveDate, tradeDate);
             var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
@@ -2623,7 +2837,7 @@ namespace Orion.ValuationEngine
                 //
                 //  5) Build and publish the cash transaction
                 // TODO Add a reference to the bond trade?
-                var cashIdentifier = CreateBulletPayment(tradeId, isParty1Buyer, partya, partyb, tradeDate, bondSettlemetDate, businessDayCalendar, businessDayAdjustments,
+                var cashIdentifier = CreateBulletPayment(tradeId, isParty1Buyer, partyA, partyB, tradeDate, bondSettlemetDate, businessDayCalendar, businessDayAdjustments,
                     bondTransaction.notionalAmount.currency.Value, amount, sourceSystem);
                 //  7) Log the cash trade.
                 logger.LogDebug("Created new payment transaction: {0}", cashIdentifier);

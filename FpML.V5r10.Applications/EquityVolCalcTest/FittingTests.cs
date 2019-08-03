@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FpML.V5r10.EquityVolatilityCalculator;
+using FpML.V5r10.EquityVolatilityCalculator.Helpers;
+using Highlander.Numerics.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Analytics.Helpers;
 using Orion.EquitiesVolCalc.TestData;
-using Orion.Equity.VolatilityCalculator;
-using Orion.Equity.VolatilityCalculator.Helpers;
-using ForwardExpiry = Orion.Equity.VolatilityCalculator.ForwardExpiry;
-using Stock = Orion.Equity.VolatilityCalculator.Stock;
-using Strike = Orion.Equity.VolatilityCalculator.Strike;
+using ForwardExpiry = FpML.V5r10.EquityVolatilityCalculator.ForwardExpiry;
+using Stock = FpML.V5r10.EquityVolatilityCalculator.Stock;
+using Strike = FpML.V5r10.EquityVolatilityCalculator.Strike;
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     /// <summary>
     /// Summary description for UnitTest1

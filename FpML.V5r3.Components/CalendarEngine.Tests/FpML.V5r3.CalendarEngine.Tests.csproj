@@ -117,6 +117,10 @@
       <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
       <Name>FpML.V5r3.Reporting.Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>FpML.V5r3.Reporting.Identifiers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
       <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
       <Name>FpML.V5r3.Reporting.ModelFramework</Name>

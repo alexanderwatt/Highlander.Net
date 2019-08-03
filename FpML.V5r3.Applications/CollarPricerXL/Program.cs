@@ -47,7 +47,7 @@ namespace Orion.CollarPricer
 
             var ist = new Stock("BHP", "BHP", dList, wc) {Transaction = tr};
 
-            //set up the zerocurve
+            //set up the zero curve
 
           var tDates = new List<DateTime>();
           var tRates = new List<double>();
@@ -117,7 +117,7 @@ namespace Orion.CollarPricer
 
             var ist2 = new Stock("BHP", "BHP", dList2, wc2) {Transaction = tr2};
 
-            //set up the zerocurve
+            //set up the zero curve
 
           var tDates2 = new List<DateTime>();
           var tRates2 = new List<double>();
@@ -166,8 +166,6 @@ namespace Orion.CollarPricer
           //Specify downside strike of 3900:
           // Orc put price @ 3900 744.11
           // Orc call price @ 5379.10 748.30                                    
-
-
         }
     }
 }

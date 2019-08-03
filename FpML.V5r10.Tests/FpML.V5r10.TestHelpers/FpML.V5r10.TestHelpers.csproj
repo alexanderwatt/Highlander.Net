@@ -97,10 +97,6 @@
       <Project>{560374aa-175b-49f5-aed1-813ba1aeb713}</Project>
       <Name>FpML.V5r10.Reporting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
-      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
-      <Name>FpML.V5r3.Reporting.Analytics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
       <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
       <Name>Core.Common</Name>

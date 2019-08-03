@@ -1,11 +1,32 @@
 <?xml version="1.0"?>
-<valuationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
+<requestMargin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
   <header>
     <messageId messageIdScheme="scheme/1.0">12345678</messageId>
-    <inReplyTo messageIdScheme="scheme/1.0">87654321</inReplyTo>
     <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
   </header>
   <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
+  <assets>
+    <underlyingAsset xsi:type="Bond" />
+    <underlyingAsset xsi:type="Bond" id="id0" />
+    <underlyingAsset xsi:type="Bond">
+      <instrumentId instrumentIdScheme="CUSIP">789012EW0</instrumentId>
+    </underlyingAsset>
+    <underlyingAsset xsi:type="Loan" />
+    <underlyingAsset xsi:type="Loan" id="id1" />
+    <underlyingAsset xsi:type="Loan">
+      <instrumentId instrumentIdScheme="CUSIP">789012EW0</instrumentId>
+    </underlyingAsset>
+    <underlyingAsset xsi:type="Cash" />
+    <underlyingAsset xsi:type="Cash" id="cash01" />
+    <underlyingAsset xsi:type="Cash">
+      <currency>USD</currency>
+    </underlyingAsset>
+    <underlyingAsset xsi:type="EquityAsset" />
+    <underlyingAsset xsi:type="EquityAsset" id="equtiy01" />
+    <underlyingAsset xsi:type="EquityAsset">
+      <instrumentId instrumentIdScheme="Bloomberg">BHP.AX</instrumentId>
+    </underlyingAsset>
+  </assets>
   <party id="Party0">
     <partyId partyIdScheme="scheme/1.0">Participant 0</partyId>
   </party>
@@ -22,5 +43,4 @@
     <accountName accountNameScheme="scheme/1.0">Account1_Name</accountName>
     <accountBeneficiary href="Party1" />
   </account>
-  <tradeValuationItem />
-</valuationReport>
+</requestMargin>

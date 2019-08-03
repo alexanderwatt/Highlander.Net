@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using FpML.V5r10.EquityVolatilityCalculator;
+using FpML.V5r10.EquityVolatilityCalculator.Helpers;
+using FpML.V5r10.EquityVolatilityCalculator.Pricing;
+using Highlander.Numerics.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Analytics.Helpers;
 using Orion.EquitiesVolCalc.TestData;
-using Orion.Equity.VolatilityCalculator;
-using Orion.Equity.VolatilityCalculator.Helpers;
-using Orion.Equity.VolatilityCalculator.Pricing;
 //using Orion.Equities.VolCalc.TestData;
-using ForwardExpiry = Orion.Equity.VolatilityCalculator.ForwardExpiry;
-using OptionPosition = Orion.Equity.VolatilityCalculator.OptionPosition;
-using Stock = Orion.Equity.VolatilityCalculator.Stock;
-using Strike = Orion.Equity.VolatilityCalculator.Strike;
-using VolatilityPoint = Orion.Equity.VolatilityCalculator.VolatilityPoint;
-using VolatilitySurface = Orion.Equity.VolatilityCalculator.VolatilitySurface;
+using ForwardExpiry = FpML.V5r10.EquityVolatilityCalculator.ForwardExpiry;
+using OptionPosition = FpML.V5r10.EquityVolatilityCalculator.OptionPosition;
+using Stock = FpML.V5r10.EquityVolatilityCalculator.Stock;
+using Strike = FpML.V5r10.EquityVolatilityCalculator.Strike;
+using VolatilityPoint = FpML.V5r10.EquityVolatilityCalculator.VolatilityPoint;
+using VolatilitySurface = FpML.V5r10.EquityVolatilityCalculator.VolatilitySurface;
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     /// <summary>
     /// Summary description for UnitTest1

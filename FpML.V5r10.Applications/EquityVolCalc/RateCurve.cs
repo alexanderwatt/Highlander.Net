@@ -1,13 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using Orion.Analytics.Interpolations;
-using Orion.Analytics.Interpolations.Points;
-using Orion.Analytics.Interpolations.Spaces;
-using Orion.Analytics.Rates;
-using Orion.Equity.VolatilityCalculator.Exception;
-using Orion.ModelFramework;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
-namespace Orion.Equity.VolatilityCalculator
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using System.Collections.Generic;
+using FpML.V5r10.EquityVolatilityCalculator.Exception;
+using FpML.V5r10.Reporting.Analytics.Interpolations;
+using FpML.V5r10.Reporting.Analytics.Interpolations.Points;
+using FpML.V5r10.Reporting.Analytics.Interpolations.Spaces;
+using FpML.V5r10.Reporting.Analytics.Rates;
+using FpML.V5r10.Reporting.ModelFramework;
+
+namespace FpML.V5r10.EquityVolatilityCalculator
 {
 
     public class RateCurve
@@ -22,7 +37,7 @@ namespace Orion.Equity.VolatilityCalculator
         /// <summary>
         /// 
         /// </summary>
-        public int Ratepoints { get; set; }
+        public int RatePoints { get; set; }
 
         /// <summary>
         /// Base date
@@ -75,14 +90,14 @@ namespace Orion.Equity.VolatilityCalculator
             BaseDate = basedate;
             int n1 = dates.Length;
             int n2 = rates.Length;
-            Ratepoints = n1;
+            RatePoints = n1;
             if (n1 != n2) throw new InvalidValueException("Rate ranges must be of the same length");
-            RateArray = new double[Ratepoints];
-            DaysArray = new int[Ratepoints];
-            DateArray = new DateTime[Ratepoints];
+            RateArray = new double[RatePoints];
+            DaysArray = new int[RatePoints];
+            DateArray = new DateTime[RatePoints];
             dates.CopyTo(DateArray, 0);
             rates.CopyTo(RateArray, 0);
-            for (int idx = 0; idx < Ratepoints; idx++)
+            for (int idx = 0; idx < RatePoints; idx++)
             {
                 DaysArray[idx] = dates[idx].Subtract(basedate).Days;
             }            
@@ -110,12 +125,12 @@ namespace Orion.Equity.VolatilityCalculator
         /// Creates the curve.
         /// </summary>
         /// <returns></returns>
-        internal IDictionary<int, decimal> CreateCurve(int[] times, double[] amts)
+        internal IDictionary<int, decimal> CreateCurve(int[] times, double[] amounts)
         {
             IDictionary<int, decimal> curve = new Dictionary<int, decimal>();
             for (int idx = 0; idx < times.Length; idx++)
             {
-                curve.Add(times[idx], Convert.ToDecimal(amts[idx]));
+                curve.Add(times[idx], Convert.ToDecimal(amounts[idx]));
             }
             return curve;
         }
@@ -139,7 +154,7 @@ namespace Orion.Equity.VolatilityCalculator
         }
 
         /// <summary>
-        /// Getyearsarrays this instance.
+        /// Get years arrays this instance.
         /// </summary>
         /// <returns></returns>
         public double[] GetYearsArray()

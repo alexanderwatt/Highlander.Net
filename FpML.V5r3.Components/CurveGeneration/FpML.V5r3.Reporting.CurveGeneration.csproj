@@ -87,10 +87,6 @@
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CurveEngine\FpML.V5r3.CurveEngine.csproj">
-      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
-      <Name>FpML.V5r3.CurveEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
       <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
       <Name>FpML.V5r3.Codes</Name>
@@ -130,6 +126,10 @@
     <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveEngine\FpML.V5r3.CurveEngine.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>FpML.V5r3.CurveEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\MarketDataServer\MDAS.Client\FpML.V5r3.MDAS.Client.csproj">
       <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Metadata.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Orion.Constants;
+using Orion.Identifiers;
 using Orion.ModelFramework;
 using Orion.UnitTestEnv;
 using Orion.Util.NamedValues;
@@ -29,7 +32,7 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            // load regresssion test data and expected values
+            // load regression test data and expected values
             UTE = new UnitTestEnvironment();
             //Set the calendar engine
             Engine = new CurveEngine.CurveEngine(UTE.Logger, UTE.Cache, UTE.NameSpace);
@@ -47,10 +50,139 @@ namespace Orion.ExcelAPI.Tests.ExcelApi
         #region Tests
 
         [TestMethod]
+        public void GetAlgorithmDiscountCurveCalypsoAlgo4360()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "CalypsoAlgo4_360");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmDiscountCurveCalypsoAlgo4()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "CalypsoAlgo4");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmDiscountCurveDefault()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "Default");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmDiscountCurveFastLinearZero()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "FastLinearZero");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-08);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmDiscountCurveLinearZero()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "LinearZero");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmDiscountCurveFlatForward()
+        {
+            var result = Engine.GetAlgorithm("DiscountCurve", "FlatForward");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveCalypsoAlgo4360()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "CalypsoAlgo4_360");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveCalypsoAlgo4()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "CalypsoAlgo4");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveDefault()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "Default");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveFastLinearZero()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "FastLinearZero");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-08);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveLinearZero()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "LinearZero");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveFlatForward()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "FlatForward");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
+        public void GetAlgorithmRateCurveSimpleGapStep()
+        {
+            var result = Engine.GetAlgorithm("RateCurve", "SimpleGapStep");
+            var property = result?.Properties.Where(a => a.name.Equals("Tolerance", StringComparison.OrdinalIgnoreCase));
+            var properties = property as Property[] ?? property?.ToArray();
+            Assert.IsNotNull(properties?.First());
+            Assert.AreEqual(Convert.ToDouble(properties.First().Value), 1E-10);
+        }
+
+        [TestMethod]
         public void GetExistingAsset()
         {
             object[,] result = Engine.GetAssetConfigurationData("AUD", "FrA", "", "");
-
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[2, 0]);
             Assert.AreEqual("0", result[2, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[3, 0]);

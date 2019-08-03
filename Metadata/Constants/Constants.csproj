@@ -65,7 +65,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="EquityTypes.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="EnvironmentConstants.cs" />
     <Compile Include="CurveConstants.cs">
       <SubType>Code</SubType>

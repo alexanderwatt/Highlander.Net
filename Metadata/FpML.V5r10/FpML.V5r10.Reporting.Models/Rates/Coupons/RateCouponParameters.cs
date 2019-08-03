@@ -98,9 +98,9 @@ namespace FpML.V5r10.Reporting.Models.Rates.Coupons
         public Decimal Premium { get; set; }
 
         /// <summary>
-        /// Gets or sets the iscall flag.
+        /// Gets or sets the is call flag.
         /// </summary>
-        /// <value>The iscall flag.</value>
+        /// <value>The is call flag.</value>
         public bool IsCall { get; set; }
 
         /// <summary>

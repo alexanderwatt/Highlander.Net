@@ -43,212 +43,212 @@ namespace HLV5r3.Financial
     /// </summary>
     public partial class Cache
     {
-        #region Pedersen Calibration
+        //#region Pedersen Calibration
 
-        #region Set the curves with Identifiers
+        //#region Set the curves with Identifiers
 
-        /// <summary>
-        /// Sets the discount factors to use
-        /// </summary>
-        /// <param name="rateCurveId"></param>
-        /// <returns></returns>
-        public string PedersenSetDiscountFactors(String rateCurveId)
-        {
-            return Engine.GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Engine.Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
-        }
+        ///// <summary>
+        ///// Sets the discount factors to use
+        ///// </summary>
+        ///// <param name="rateCurveId"></param>
+        ///// <returns></returns>
+        //public string PedersenSetDiscountFactors(String rateCurveId)
+        //{
+        //    return Engine.GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Engine.Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="strike"></param>
-        /// <param name="volSurfaceIdentifier"></param>
-        /// <returns></returns>
-        public string PedersenSetCapletVolatilities(Double strike, String volSurfaceIdentifier)
-        {
-            return Engine.GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Engine.Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="strike"></param>
+        ///// <param name="volSurfaceIdentifier"></param>
+        ///// <returns></returns>
+        //public string PedersenSetCapletVolatilities(Double strike, String volSurfaceIdentifier)
+        //{
+        //    return Engine.GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Engine.Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="volSurfaceIdentifier"></param>
-        /// <returns></returns>
-        public string PedersenSetSwaptionVolatilities(String volSurfaceIdentifier)
-        {
-            if (Engine.GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
-            {
-                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
-                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
-                return Engine.Pedersen.SetSwaptionImpliedVolatility(volObj);
-            }
-            return null;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="volSurfaceIdentifier"></param>
+        ///// <returns></returns>
+        //public string PedersenSetSwaptionVolatilities(String volSurfaceIdentifier)
+        //{
+        //    if (Engine.GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
+        //    {
+        //        Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
+        //        var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
+        //        return Engine.Pedersen.SetSwaptionImpliedVolatility(volObj);
+        //    }
+        //    return null;
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Set the curves with Ranges
+        //#region Set the curves with Ranges
 
-        /// <summary>
-        /// Setting discount function from a range in the spreadsheet
-        /// * Requires actual data
-        /// </summary>
-        /// <param name="discountFactorArray">THe discount factors by tenor.</param>
-        /// <returns></returns>
-        public string PedersenSetDiscountFactorRange(Excel.Range discountFactorArray)
-        {
-            var r1 = DataRangeHelper.StripDoubleRange(discountFactorArray);
-            return Engine.Pedersen.SetDiscountFactors(r1);
-        }
+        ///// <summary>
+        ///// Setting discount function from a range in the spreadsheet
+        ///// * Requires actual data
+        ///// </summary>
+        ///// <param name="discountFactorArray">THe discount factors by tenor.</param>
+        ///// <returns></returns>
+        //public string PedersenSetDiscountFactorRange(Excel.Range discountFactorArray)
+        //{
+        //    var r1 = DataRangeHelper.StripDoubleRange(discountFactorArray);
+        //    return Engine.Pedersen.SetDiscountFactors(r1);
+        //}
 
-        /// <summary>
-        /// Converts an Excel 2 column range of monthly tenors and volatilities.
-        /// </summary>
-        /// <param name="capletVolArray">the caplet volatilities by tenor.</param>
-        /// <returns></returns>
-        public string PedersenSetCapletRange(Excel.Range capletVolArray)
-        {
-            var r1 = DataRangeHelper.StripDoubleRange(capletVolArray);
-            return Engine.Pedersen.SetCapletImpliedVolatility(r1);
-        }
+        ///// <summary>
+        ///// Converts an Excel 2 column range of monthly tenors and volatilities.
+        ///// </summary>
+        ///// <param name="capletVolArray">the caplet volatilities by tenor.</param>
+        ///// <returns></returns>
+        //public string PedersenSetCapletRange(Excel.Range capletVolArray)
+        //{
+        //    var r1 = DataRangeHelper.StripDoubleRange(capletVolArray);
+        //    return Engine.Pedersen.SetCapletImpliedVolatility(r1);
+        //}
 
-        /// <summary>
-        /// Converts an Excel swaption matrix range of monthly tenors and volatilities.
-        /// </summary>
-        /// <param name="range">The matrix of volatilities and tenors.</param>
-        /// <returns></returns>
-        public string PedersenSetSwaptionRange(Excel.Range range)
-        {
-            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
-            return Engine.Pedersen.SetSwaptionImpliedVolatility(r1);
-        }
+        ///// <summary>
+        ///// Converts an Excel swaption matrix range of monthly tenors and volatilities.
+        ///// </summary>
+        ///// <param name="range">The matrix of volatilities and tenors.</param>
+        ///// <returns></returns>
+        //public string PedersenSetSwaptionRange(Excel.Range range)
+        //{
+        //    var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
+        //    return Engine.Pedersen.SetSwaptionImpliedVolatility(r1);
+        //}
 
-        /// <summary>
-        /// Sets the correlation matrix as a range in Excel.
-        /// </summary>
-        /// <param name="range">The correlation matrix.</param>
-        /// <returns></returns>
-        public object PedersenSetCorrelation(Excel.Range range)
-        {
-            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
-            return Engine.Pedersen.SetCorrelation(r1);
-        }
+        ///// <summary>
+        ///// Sets the correlation matrix as a range in Excel.
+        ///// </summary>
+        ///// <param name="range">The correlation matrix.</param>
+        ///// <returns></returns>
+        //public object PedersenSetCorrelation(Excel.Range range)
+        //{
+        //    var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
+        //    return Engine.Pedersen.SetCorrelation(r1);
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Calibration
+        //#region Calibration
 
-        /// <summary>
-        /// Performs the actual calibration with a setting range.
-        /// All the curves must be set, using the setter functions.
-        /// </summary>
-        /// <param name="range"></param>
-        /// <returns></returns>
-        public object PedersenCalibration(Excel.Range range)
-        {
-            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
-            return Engine.Pedersen.Calibration(r1);
-        }
+        ///// <summary>
+        ///// Performs the actual calibration with a setting range.
+        ///// All the curves must be set, using the setter functions.
+        ///// </summary>
+        ///// <param name="range"></param>
+        ///// <returns></returns>
+        //public object PedersenCalibration(Excel.Range range)
+        //{
+        //    var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
+        //    return Engine.Pedersen.Calibration(r1);
+        //}
 
-        /// <summary>
-        /// WIP stub. Still using dummy vol and correlation.
-        /// </summary>
-        /// <param name="rateCurveIdentifier">RateCurve Id</param>
-        /// <returns></returns>
-        public object[,] PedersenCalibration1(string rateCurveIdentifier)
-        {
+        ///// <summary>
+        ///// WIP stub. Still using dummy vol and correlation.
+        ///// </summary>
+        ///// <param name="rateCurveIdentifier">RateCurve Id</param>
+        ///// <returns></returns>
+        //public object[,] PedersenCalibration1(string rateCurveIdentifier)
+        //{
 
-            var result = Engine.PedersenCalibration(rateCurveIdentifier);
-            return result;
-        }
+        //    var result = Engine.PedersenCalibration(rateCurveIdentifier);
+        //    return result;
+        //}
 
-        /// <summary>
-        /// WIP stub. Still using dummy vol and correlation.
-        /// </summary>
-        /// <param name="rateCurveIdentifier">RateCurve Id</param>
-        /// <param name="capletCurveIdentifier">The caplet volatility curve.</param>
-        /// <param name="strike">The strike of the caplet volatility curve.</param>
-        /// <param name="swaptionVolSurfaceIdentifier">The swaption volatility surface identifier.</param>
-        /// <param name="correlationRange">The correlation matrix as a range.</param>
-        /// <returns></returns>
-        public object[,] PedersenCalibration2(string rateCurveIdentifier, String capletCurveIdentifier, Double strike, 
-            String swaptionVolSurfaceIdentifier, Excel.Range correlationRange)
-        {
-            Engine.PedersenSetDiscountFactors(rateCurveIdentifier);
-            Engine.PedersenSetCapletImpliedVolatility(strike, capletCurveIdentifier);
-            Engine.PedersenSetSwaptionImpliedVolatility(swaptionVolSurfaceIdentifier);
-            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(correlationRange);
-            Engine.Pedersen.SetCorrelation(r1);
-            var result = Engine.PedersenCalibration(rateCurveIdentifier);
-            return result;
-        }
+        ///// <summary>
+        ///// WIP stub. Still using dummy vol and correlation.
+        ///// </summary>
+        ///// <param name="rateCurveIdentifier">RateCurve Id</param>
+        ///// <param name="capletCurveIdentifier">The caplet volatility curve.</param>
+        ///// <param name="strike">The strike of the caplet volatility curve.</param>
+        ///// <param name="swaptionVolSurfaceIdentifier">The swaption volatility surface identifier.</param>
+        ///// <param name="correlationRange">The correlation matrix as a range.</param>
+        ///// <returns></returns>
+        //public object[,] PedersenCalibration2(string rateCurveIdentifier, String capletCurveIdentifier, Double strike, 
+        //    String swaptionVolSurfaceIdentifier, Excel.Range correlationRange)
+        //{
+        //    Engine.PedersenSetDiscountFactors(rateCurveIdentifier);
+        //    Engine.PedersenSetCapletImpliedVolatility(strike, capletCurveIdentifier);
+        //    Engine.PedersenSetSwaptionImpliedVolatility(swaptionVolSurfaceIdentifier);
+        //    var r1 = new Utility.Utilities().ConvertRangeTo2DArray(correlationRange);
+        //    Engine.Pedersen.SetCorrelation(r1);
+        //    var result = Engine.PedersenCalibration(rateCurveIdentifier);
+        //    return result;
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Investigative Functions
+        //#region Investigative Functions
 
-        /// <summary>
-        /// Show the correlation data.
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenShowCorrelation()
-        {
-            return Engine.PedersenShowCorrelation();
-        }
+        ///// <summary>
+        ///// Show the correlation data.
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenShowCorrelation()
+        //{
+        //    return Engine.PedersenShowCorrelation();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration result summary.
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalSummary()
-        {
-            return Engine.Pedersen.CalSummary();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration result summary.
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalSummary()
+        //{
+        //    return Engine.Pedersen.CalSummary();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration vol surface (multi-factored)
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalVol()
-        {
-            return Engine.Pedersen.CalVol();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration vol surface (multi-factored)
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalVol()
+        //{
+        //    return Engine.Pedersen.CalVol();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration vol surface (vol sizes)
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalVolNorm()
-        {
-            return Engine.Pedersen.CalVolNorm();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration vol surface (vol sizes)
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalVolNorm()
+        //{
+        //    return Engine.Pedersen.CalVolNorm();
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Simulation
+        //#region Simulation
 
-        public object PedersenSimulation(Excel.Range range)
-        {
-            var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
-            return Engine.Pedersen.Simulation(r1);
-        }
+        //public object PedersenSimulation(Excel.Range range)
+        //{
+        //    var r1 = new Utility.Utilities().ConvertRangeTo2DArray(range);
+        //    return Engine.Pedersen.Simulation(r1);
+        //}
 
-        public object PedersenSimSummary()
-        {
-            return Engine.Pedersen.SimSummary();
-        }
+        //public object PedersenSimSummary()
+        //{
+        //    return Engine.Pedersen.SimSummary();
+        //}
 
-        /// <summary>
-        /// Gets the debug information
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenDebugOutput()
-        {
-            return Engine.Pedersen.DebugOutput();
-        }
+        ///// <summary>
+        ///// Gets the debug information
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenDebugOutput()
+        //{
+        //    return Engine.Pedersen.DebugOutput();
+        //}
 
-        #endregion
+        //#endregion
 
-        #endregion
+        //#endregion
 
         #region Curve Building and Property Functions
 

@@ -6,7 +6,7 @@ using Orion.EquityVolCalcTestData;
 using Orion.Util.Serialisation;
 using Stock = Orion.EquityVolCalcTestData.Stock;
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     /// <summary>
     /// Summary description for LoadTestData

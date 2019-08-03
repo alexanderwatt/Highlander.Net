@@ -1,19 +1,17 @@
-﻿
-using System.Diagnostics;
-using Orion.Models.Rates.Coupons;
+﻿using System.Diagnostics;
+using FpML.V5r10.Reporting.Models.Rates.Coupons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace Orion.Models.Tests.Models.Cashflows
+namespace FpML.V5r10.Models.Tests.Models.Cashflows
 {
     [TestClass]
     public class TestDiscountCashFlowAnalytic
     {
         [TestMethod]
-        public void FixedRateCouponAnalyicsDiscounted()
+        public void FixedRateCouponAnalyticsDiscounted()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
-                                                                {
+            {
                                                                     Rate = .05m,
                                                                     DiscountType = DiscountType.AFMA,
                                                                     YearFraction = 0.25m,
@@ -44,7 +42,7 @@ namespace Orion.Models.Tests.Models.Cashflows
         }
 
         [TestMethod]
-        public void FixedRateCouponAnalyicsNonDiscounted()
+        public void FixedRateCouponAnalyticsNonDiscounted()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
                                                                 {
@@ -74,6 +72,5 @@ namespace Orion.Models.Tests.Models.Cashflows
             Assert.AreEqual(delta0, 0.0m);
             Assert.AreEqual(expectedValue, 125000m);
         }
-
     }
 }

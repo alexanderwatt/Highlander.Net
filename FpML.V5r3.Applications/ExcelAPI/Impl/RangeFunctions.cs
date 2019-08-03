@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -32,8 +32,7 @@ namespace HLV5r3.Impl
     {
       sbyte[] result;
       object objRange = AsAny(range);
-        var s = objRange as string;
-        if (s != null)
+      if (objRange is string s)
       {
         result = new sbyte[1];
         result[0] = (sbyte)s[0];
@@ -113,18 +112,18 @@ namespace HLV5r3.Impl
     public static int AsInt(object comObj)
     {
       object result = AsAny(comObj);
-      if (result is double)
-        result = (int)(double)result;
+      if (result is double d)
+        result = (int)d;
       return (int) result;
     }
 
     public static double AsDouble(object comObj)
     {
       object result = AsAny(comObj);
-      if (result is int)
-        result = (double)(int)result;
-      else if (result is long)
-        result = (double)(long)result;
+      if (result is int i)
+        result = (double)i;
+      else if (result is long l)
+        result = (double)l;
       return (double)result;
     }
 
@@ -141,12 +140,12 @@ namespace HLV5r3.Impl
     public static bool AsBool(object comObj)
     {
       object result = AsAny(comObj);
-      if (result is int)
-        result = (int)result != 0;
-      else if (result is long)
-        result = (long)result != 0;
-      else if (result is double)
-        result = (double)result != 0;
+      if (result is int i)
+        result = i != 0;
+      else if (result is long l)
+        result = l != 0;
+      else if (result is double d)
+        result = d != 0;
       return (bool) result;
     }
 
@@ -174,7 +173,7 @@ namespace HLV5r3.Impl
 
     public static object AsAny(Range range)
     {
-      object result = range;
+      object result;
       result = range.Value2;
       if (result is double)
       {

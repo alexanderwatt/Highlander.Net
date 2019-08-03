@@ -1,5 +1,5 @@
 ﻿ComVisible is currently turned off. Turn it on.
 The Assembly HLV5r3 must be signed for Office to recognise it as an automation addin.
-Don't forget to switch to the signed version of Math.Net and then updating the various projects whihc reference it.
+Don't forget to switch to the signed version of Math.Net and then updating the various projects which reference it.
 All other assemblies deployed must also therefore be signed as well - every single one of them!!!!!
 Regasm XXXX.dll can be used as an alternative to registering the dll by compiling with Com Visible true.

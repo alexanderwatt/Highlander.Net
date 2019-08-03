@@ -1,15 +1,14 @@
 ﻿using System;
-using Orion.Models.Rates.Coupons;
+using FpML.V5r10.Reporting.Models.Rates.Coupons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Orion.Models.Tests.Models.Rate
+namespace FpML.V5r10.Models.Tests.Models.Rate
 {
     [TestClass]
     public class CouponAnalyticTests
     {
         private DateTime[] _bucketedDates;
         private Decimal[] _bucketedDiscountFactors;
-
 
         [TestInitialize]
         public void Initialisation()
@@ -59,14 +58,10 @@ namespace Orion.Models.Tests.Models.Rate
         [TestMethod]
         public void TestBucketedDelta1()
         {
-            FixedRateCouponAnalytic[] couponAnalytics;
-            IRateCouponParameters[] analyticModelParameters;
-
             DateTime swapStartDate = new DateTime(2008, 7, 22);
-
             int len = _bucketedDates.Length;
-            couponAnalytics = new FixedRateCouponAnalytic[len - 1];
-            analyticModelParameters = new RateCouponParameters[len - 1];
+            var couponAnalytics = new FixedRateCouponAnalytic[len - 1];
+            IRateCouponParameters[] analyticModelParameters = new RateCouponParameters[len - 1];
             int index = 0;
 
             for (int i = 1; i < len; ++i)
@@ -74,9 +69,7 @@ namespace Orion.Models.Tests.Models.Rate
                 IRateCouponParameters cp = new RateCouponParameters();
                 cp.BucketedDates = CreateArray<DateTime>(_bucketedDates, 0, i + 1);
                 cp.BucketedDiscountFactors = CreateArray<Decimal>(_bucketedDiscountFactors, 0, i + 1);
-
                 analyticModelParameters[index] = cp;
-              
                 FixedRateCouponAnalytic am = new FixedRateCouponAnalytic();
                 am.AnalyticParameters = cp;
                 am.AnalyticParameters.YearFraction = (_bucketedDates[index +1] - _bucketedDates[index]).Days/365.0m;
@@ -84,64 +77,51 @@ namespace Orion.Models.Tests.Models.Rate
                 am.AnalyticParameters.EndDiscountFactor = _bucketedDiscountFactors[index + 1];
                 am.AnalyticParameters.NotionalAmount = 1.0m;
                 am.AnalyticParameters.Rate = 0.07431m;
-
                 am.AnalyticParameters.CurveYearFraction = (_bucketedDates[i] - swapStartDate).Days/365;
                 am.AnalyticParameters.PeriodAsTimesPerYear = 0.5m;
-
                 couponAnalytics[index] = am;
                 ++index;
             }
-
             Decimal bucketedDelta = 0.0m;
             for (int i = 0; i < analyticModelParameters.Length; ++i)
             {
                 bucketedDelta += couponAnalytics[i].BucketedDelta1;
             }
         }
+
         #endregion
 
         #region Bucketed Delta 01 (Floating Leg)
         [TestMethod]
         public void TestBucketedDelta2()
         {
-            FloatingRateCouponAnalytic[] couponAnalytics;
-            IRateCouponParameters[] analyticModelParameters;
-
             DateTime swapStartDate = new DateTime(2008, 7, 22);
-
             int len = _bucketedDates.Length;
-            couponAnalytics = new FloatingRateCouponAnalytic[len - 1];
-            analyticModelParameters = new RateCouponParameters[len - 1];
+            var couponAnalytics = new FloatingRateCouponAnalytic[len - 1];
+            IRateCouponParameters[] analyticModelParameters = new RateCouponParameters[len - 1];
             int index = 0;
-
             for (int i = 1; i < len; ++i)
             {
                 IRateCouponParameters cp = new RateCouponParameters();
                 cp.BucketedDates = CreateArray<DateTime>(_bucketedDates, 0, i + 1);
                 cp.BucketedDiscountFactors = CreateArray<Decimal>(_bucketedDiscountFactors, 0, i + 1);
-
                 analyticModelParameters[index] = cp;
-
                 FloatingRateCouponAnalytic am = new FloatingRateCouponAnalytic();
                 am.AnalyticParameters = cp;
                 am.AnalyticParameters.YearFraction = (_bucketedDates[index + 1] - _bucketedDates[index]).Days / 365.0m;
                 am.AnalyticParameters.StartDiscountFactor = _bucketedDiscountFactors[index];
                 am.AnalyticParameters.EndDiscountFactor = _bucketedDiscountFactors[index + 1];
                 am.AnalyticParameters.NotionalAmount = 1.0m;
-
                 am.AnalyticParameters.CurveYearFraction = (_bucketedDates[i] - swapStartDate).Days / 365;
                 am.AnalyticParameters.PeriodAsTimesPerYear = 0.5m;
-
                 am.AnalyticParameters.Rate = 0.08m;
                 //am.GetRate(_bucketedDates[index], _bucketedDates[index + 1], _bucketedDiscountFactors[index + 1]);
-
                 couponAnalytics[index] = am;
                 ++index;
             }
             Decimal bucketedDelta = 0.0m;
             for (int i = 0; i < analyticModelParameters.Length; ++i)
             {
-                
                 bucketedDelta += couponAnalytics[i].BucketedDelta1;
             }
 
@@ -166,48 +146,40 @@ namespace Orion.Models.Tests.Models.Rate
             Decimal[] curveYearFractions = { 0.0m, 0.4958904110m,1.0m,1.495890411m,
                                              2.005479452m,2.495890411m,3.002739726m,3.501369863m,
                                              4.002739726m,4.498630137m,5.002739726m,5.498630137m,
-                                             6.002739726m,6.498630137m}; 
+                                             6.002739726m,6.498630137m};
 
-
-            FixedRateCouponAnalytic[] couponAnalytics;
-            IRateCouponParameters[] analyticModelParameters;
 
             int len = curveYearFractions.Length;
-            analyticModelParameters = new RateCouponParameters[ len ];
-            couponAnalytics = new FixedRateCouponAnalytic[ len ];
-
+            IRateCouponParameters[] analyticModelParameters = new RateCouponParameters[ len ];
+            var couponAnalytics = new FixedRateCouponAnalytic[ len ];
             for (int i = 0; i < len; ++i)
             {
                 IRateCouponParameters cp = new RateCouponParameters();
                 cp.BucketedDiscountFactors = bucketedDFs;
-
                 analyticModelParameters[i] = cp;
                 FixedRateCouponAnalytic am = new FixedRateCouponAnalytic();
                 am.AnalyticParameters = cp;
-
                 am.AnalyticParameters.StartDiscountFactor = bucketedDFs[0];
                 am.AnalyticParameters.EndDiscountFactor = bucketedDFs[len - 1];
-
-                
                 am.AnalyticParameters.NotionalAmount = 10000000.0m;
                 am.AnalyticParameters.Rate = 0.07m;
                 am.AnalyticParameters.YearFraction = 0.495890411m;
                 am.AnalyticParameters.CurveYearFraction = curveYearFractions[i];
                 am.AnalyticParameters.PeriodAsTimesPerYear = 0.252054795m;
-
                 couponAnalytics[i] = am;
             }
-
             Decimal bucketedDelta = 0.0m;
             for (int i = 0; i < analyticModelParameters.Length; ++i)
             {
                 bucketedDelta += couponAnalytics[i].BucketedDelta1;
             }
         } 
+
         #endregion
 
 
         #region Bucketed Delta 01 (Floating Leg) Test 3
+
         public void Test3BucketedDelta1()
         {
             Decimal[] bucketedDFs = { 1.0m, 0.982613396m,0.967914626m,0.951866237m,
@@ -231,36 +203,25 @@ namespace Orion.Models.Tests.Models.Rate
                                         0.06012m,0.060115m};
 
 
-
-            FloatingRateCouponAnalytic[] couponAnalytics;
-            IRateCouponParameters[] analyticModelParameters;
-
             int len = curveYearFractions.Length;
-            analyticModelParameters = new RateCouponParameters[len];
-            couponAnalytics = new FloatingRateCouponAnalytic[len];
-
+            IRateCouponParameters[] analyticModelParameters = new RateCouponParameters[len];
+            var couponAnalytics = new FloatingRateCouponAnalytic[len];
             for (int i = 0; i < len; ++i)
             {
                 IRateCouponParameters cp = new RateCouponParameters();
                 cp.BucketedDiscountFactors = bucketedDFs;
 
                 analyticModelParameters[i] = cp;
-                FloatingRateCouponAnalytic am = new FloatingRateCouponAnalytic();
-                am.AnalyticParameters = cp;
-
+                FloatingRateCouponAnalytic am = new FloatingRateCouponAnalytic {AnalyticParameters = cp};
                 am.AnalyticParameters.StartDiscountFactor = bucketedDFs[0];
                 am.AnalyticParameters.EndDiscountFactor = bucketedDFs[len - 1];
-
-
                 am.AnalyticParameters.NotionalAmount = 10000000.0m;
                 am.AnalyticParameters.Rate = floatingRates[i];
                 am.AnalyticParameters.YearFraction = 0.495890411m;
                 am.AnalyticParameters.CurveYearFraction = curveYearFractions[i];
                 am.AnalyticParameters.PeriodAsTimesPerYear = 0.252054795m;
-
                 couponAnalytics[i] = am;
             }
-
             Decimal bucketedDelta = 0.0m;
             for (int i = 0; i < analyticModelParameters.Length; ++i)
             {
@@ -268,20 +229,20 @@ namespace Orion.Models.Tests.Models.Rate
             }
 
         }
+
         #endregion
 
         [TestMethod]
         public void TestHelperFunction()
         {
-            Decimal[] originialArray = { 1.0m, 2.0m, 3.0m, 4.0m, 5.0m };
-
-            Decimal[] resultArray1 = CreateArray<Decimal>(originialArray, 0, 2);
-            Decimal[] resultArray2 = CreateArray<decimal>(originialArray, 0, 3);
-            Decimal[] resultArray3 = CreateArray<decimal>(originialArray, 0, 4);
+            Decimal[] originalArray = { 1.0m, 2.0m, 3.0m, 4.0m, 5.0m };
+            Decimal[] resultArray1 = CreateArray<Decimal>(originalArray, 0, 2);
+            Decimal[] resultArray2 = CreateArray<decimal>(originalArray, 0, 3);
+            Decimal[] resultArray3 = CreateArray<decimal>(originalArray, 0, 4);
         }
 
-
         #region Helper function
+
         private T[] CreateArray<T>(T[] theArray, int index, int length)
         {
             T[] newArray = new T[length];
@@ -294,6 +255,7 @@ namespace Orion.Models.Tests.Models.Rate
             }
             return newArray;
         }
+
         #endregion
     }
 }

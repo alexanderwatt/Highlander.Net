@@ -88,22 +88,20 @@ namespace Orion.V5r3.Models.Tests.Models.Rate
             Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
         }
 
-        //[TestMethod]
-        //
-        //public void TestBankBillsConvexityModel()
-        //{
-        //    var model = new BankBillsFuturesAssetAnalytic
-        //                    {
-        //                        AnalyticParameters = _analyticModelParameters
-        //                    };
-        //    var result = model.AdjustedRate;
-        //    var convexityAdjustment = model.ConvexityAdjustment;
-        //    Debug.Print(result.ToString());
-        //    Debug.Print(convexityAdjustment.ToString());
-        //    Assert.AreEqual(convexityAdjustment, 0.0004013431450656m);
-        //    var impliedQuote = model.ImpliedQuote;
-        //    Debug.Print(impliedQuote.ToString());
-        //}
-
+        [TestMethod]
+        public void TestBankBillsConvexityModel()
+        {
+            var model = new BankBillsFuturesAssetAnalytic
+            {
+                AnalyticParameters = _analyticModelParameters
+            };
+            var result = model.AdjustedRate;
+            var convexityAdjustment = model.ConvexityAdjustment;
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
+            Assert.AreEqual(convexityAdjustment, 0.0004013431450656m);
+            var impliedQuote = model.ImpliedQuote;
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
+        }
     }
 }

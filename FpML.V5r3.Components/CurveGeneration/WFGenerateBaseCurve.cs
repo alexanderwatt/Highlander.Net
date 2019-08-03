@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -83,7 +83,7 @@ namespace Orion.Workflow.CurveGeneration
                 Context.Logger.LogDebug("Building ordinary curve: {0}.{1}.{2}", inputMarketName, inputCurveType, inputCurveName);
                 string curveUniqueId =
                     $"Configuration.PricingStructures.{inputMarketName}.{inputCurveType}.{inputCurveName}";
-                //TODO This does not work for MArket=Test_EOD because the market date propeerty 
+                //TODO This does not work for Market=Test_EOD because the market date property 
                 //is not included in the identifier and unique identifier!
                 ICoreItem marketItem = LoadAndCheckMarketItem(Context.Cache, nameSpace, curveUniqueId);
                 // check data is not mutated
@@ -136,8 +136,7 @@ namespace Orion.Workflow.CurveGeneration
                         if (quoteInstr.objectReference?.href == null)
                             throw new ApplicationException($"Missing objectReference in BasicAssetValuation[{bavNum}]");
                         string instrId = quoteInstr.objectReference.href;
-                        Asset asset;
-                        if (!instrumentMap.TryGetValue(instrId.ToLower(), out asset))
+                        if (!instrumentMap.TryGetValue(instrId.ToLower(), out _))
                             throw new ApplicationException($"Cannot find instrument '{instrId}' for assetQuote");
                         bavNum++;
                     }
@@ -197,8 +196,7 @@ namespace Orion.Workflow.CurveGeneration
                     // merge MDS results with stored quotes in the curve definition
                     curveDefinition.Replace(marketData);//Merge(marketData, true, false, true);
                     // generate ordinary base curve
-                    var valuation = psv as YieldCurveValuation;
-                    if (valuation != null)
+                    if (psv is YieldCurveValuation valuation)
                     {
                         valuation.inputs = curveDefinition;
                     }
@@ -227,7 +225,7 @@ namespace Orion.Workflow.CurveGeneration
                                                                                                  refCurve.Items1[0], refCurveItem.AppProps);
                                 liveCurveProps.Set(CurveProp.ReferenceCurveUniqueId, refCurveUniqueId);
                                 var spreadCurveFpMLTriplet = new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(ps, psv, liveCurveProps);
-                                //create and set the pricingstructure
+                                //create and set the pricing structure
                                 ips = CurveLoader.LoadInterestRateCurve(Context.Logger, Context.Cache, nameSpace, refCurveFpMLTriplet, spreadCurveFpMLTriplet);
                                 //Creator.Create(refCurveFpMLTriplet, spreadCurveFpMLTriplet);
                             }
@@ -263,7 +261,7 @@ namespace Orion.Workflow.CurveGeneration
                                 liveCurveProps.Set(CurveProp.ReferenceFxCurveUniqueId, fxCurveUniqueId);
                                 liveCurveProps.Set(CurveProp.ReferenceCurrency2CurveId, refCurveUniqueId);
                                 var spreadCurveFpMLTriplet = new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(ps, psv, liveCurveProps);
-                                //create and set the pricingstructure
+                                //create and set the pricing structure
                                 ips = CurveLoader.LoadInterestRateCurve(Context.Logger, Context.Cache, nameSpace, baseCurveFpMLTriplet,
                                         fxCurveFpMLTriplet, refCurveFpMLTriplet, spreadCurveFpMLTriplet);
                                 //Creator.Create(baseCurveFpMLTriplet, fxCurveFpMLTriplet, refCurveFpMLTriplet, spreadCurveFpMLTriplet);

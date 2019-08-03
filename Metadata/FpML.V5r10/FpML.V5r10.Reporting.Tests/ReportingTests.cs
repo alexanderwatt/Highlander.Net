@@ -174,8 +174,8 @@ namespace FpML.V5r10.Reporting.Tests
         {
             return new[]
             {
-                        new Party { id="Party0", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
-                        new Party { id="Party1", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
+                        new Party { id="Party0", Items = new object[] { new PartyId { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
+                        new Party { id="Party1", Items = new object[] { new PartyId { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
             };
         }
 
@@ -184,22 +184,22 @@ namespace FpML.V5r10.Reporting.Tests
             var results = new List<Account>();
             if (count > 0)
             {
-                results.Add(new Account()
+                results.Add(new Account
                 {
                     id = "Account0",
-                    accountBeneficiary = new PartyReference() { href = "Party0"},
-                    accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
-                    accountName = new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account0_Name" }
+                    accountBeneficiary = new PartyReference { href = "Party0"},
+                    accountId = new[] { new AccountId { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
+                    accountName = new AccountName { accountNameScheme = "scheme/1.0", Value = "Account0_Name" }
                 });
             }
             if (count > 1)
             {
-                results.Add(new Account()
+                results.Add(new Account
                 {
                     id = "Account1",
-                    accountBeneficiary = new PartyReference() { href = "Party1"},
-                    accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" } },
-                    accountName = new AccountName() { accountNameScheme = "scheme/1.0", Value = "Account1_Name" }
+                    accountBeneficiary = new PartyReference { href = "Party1"},
+                    accountId = new[] { new AccountId { accountIdScheme = "scheme/1.0", Value="Account1_Id" } },
+                    accountName = new AccountName { accountNameScheme = "scheme/1.0", Value = "Account1_Name" }
                 });
             }
             return results.ToArray();
@@ -272,14 +272,14 @@ namespace FpML.V5r10.Reporting.Tests
             var orig = new RequestMargin
             {
                 fpmlVersion = "5-10",
-                header = new RequestMessageHeader()
+                header = new RequestMessageHeader
                 {
-                    messageId = new MessageId() { messageIdScheme = "scheme/1.0", Value = "12345678" },
+                    messageId = new MessageId { messageIdScheme = "scheme/1.0", Value = "12345678" },
                     //inReplyTo = new MessageId() { messageIdScheme = "scheme/1.0", Value = "87654321" },
-                    sentBy = new MessageAddress() { messageAddressScheme = "scheme/1.0", Value = "trader@bigbank.com" },
+                    sentBy = new MessageAddress { messageAddressScheme = "scheme/1.0", Value = "trader@bigbank.com" },
                     creationTimestamp = DateTime.Now
                 },
-                correlationId = new CorrelationId() { correlationIdScheme = "scheme/1.0", Value = "12345678" },
+                correlationId = new CorrelationId { correlationIdScheme = "scheme/1.0", Value = "12345678" },
                 party = GetTestFragment_Parties(),
                 account = GetTestFragment_Accounts(2),
                 assets = new Asset[]
@@ -304,7 +304,7 @@ namespace FpML.V5r10.Reporting.Tests
                         },
                         new Cash(),
                         new Cash { id="cash01"},
-                        new Cash { currency=new Currency() { Value="USD" } },
+                        new Cash { currency=new Currency { Value="USD" } },
                         new EquityAsset(),
                         new EquityAsset { id="equtiy01" },
                         new EquityAsset
@@ -316,31 +316,13 @@ namespace FpML.V5r10.Reporting.Tests
                         },
                     },
             };
-            var copy = Roundtrip_OutThenIn(orig, true, true);
-            //using (var sr = new StreamReader(internalFullPath))
-            //{
-            //    string xmlText = sr.ReadToEnd();
-            //    Assert.IsFalse(xmlText.Contains("<bond"));
-            //    Assert.IsFalse(xmlText.Contains("<loan"));
-            //    Assert.IsFalse(xmlText.Contains("<cash"));
-            //    Assert.IsFalse(xmlText.Contains("<equity"));
-            //    Assert.IsTrue(xmlText.Contains("<underlyingAsset"));
-            //}
-            //using (var sr = new StreamReader(externalFullPath))
-            //{
-            //    string xmlText = sr.ReadToEnd();
-            //    Assert.IsTrue(xmlText.Contains("<bond"));
-            //    Assert.IsTrue(xmlText.Contains("<loan"));
-            //    Assert.IsTrue(xmlText.Contains("<cash"));
-            //    Assert.IsTrue(xmlText.Contains("<equity"));
-            //    Assert.IsFalse(xmlText.Contains("<underlyingAsset"));
-            //}
+            Roundtrip_OutThenIn(orig, true, true);
         }
 
         [TestMethod]
         public void TestReportingRoundtripOutThenInValuationReport()
         {
-            var orig = new ValuationReport()
+            var orig = new ValuationReport
             {
                 fpmlVersion = "5-10",
                 header = new NotificationMessageHeader
@@ -357,14 +339,14 @@ namespace FpML.V5r10.Reporting.Tests
                         new TradeValuationItem()
                 }
             };
-            var copy = Roundtrip_OutThenIn(orig, true, true);
+            Roundtrip_OutThenIn(orig, true, true);
         }
 
         [TestMethod]
         public void TestReportingRoundtripOutThenInPositionReport()
         {
             // payment rules abstract type issue
-            var orig = new PositionReport()
+            var orig = new PositionReport
             {
                 fpmlVersion = "5-3",
                 position = new[]
@@ -377,7 +359,7 @@ namespace FpML.V5r10.Reporting.Tests
                             {
                                 collateral = new Collateral
                                 {
-                                    independentAmount = new IndependentAmount()
+                                    independentAmount = new IndependentAmount
                                     {
                                         paymentDetail = new[]
                                         {
@@ -390,19 +372,18 @@ namespace FpML.V5r10.Reporting.Tests
                     }
                 }
             };
-
             PositionReport copy = Roundtrip_OutThenIn(orig, true, false);          
             // tests
             Trade trade = (Trade)copy.position[0].constituent.Item;
             PercentageRule rule = (PercentageRule)trade.collateral.independentAmount.paymentDetail[0].paymentRule;
             Assert.IsTrue(rule.paymentPercentSpecified);
-            Assert.AreEqual<Decimal>(5.0M, rule.paymentPercent);
+            Assert.AreEqual(5.0M, rule.paymentPercent);
         }
 
         [TestMethod]
         public void TestReportingRoundtripDateTimes()
         {
-            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\MergedReportingSchemas\Reporting.xsd"; //@"..\..\..\..\..\Metadata\FpML.V5r3\FpML.V5r3\" + fpmlViewName + ".xsd"
+            const string schemaPath = @"..\..\..\..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\MergedReportingSchemas\Reporting.xsd";
             string schemaFullPath = Path.GetFullPath(schemaPath);
             Assert.IsTrue(File.Exists(schemaFullPath));
             string originalFullPath = Path.GetFullPath(@"..\..\testOriginalFragment.xml");
@@ -430,7 +411,7 @@ namespace FpML.V5r10.Reporting.Tests
             DateTime expectedAsOfTime = new DateTime(1, 1, 1, 1, 8, 10);//11 became 12
             {
                 // original FpML.org sample
-                // --- does not parse reliably due to variably local time zone offset of paser ---
+                // --- does not parse reliably due to variably local time zone offset of parser ---
                 // asOfDate has an unspecified time zone
                 // asOfTime has specific time zone (New York)
                 ExposureReport orig;
@@ -441,7 +422,7 @@ namespace FpML.V5r10.Reporting.Tests
                 Assert.AreEqual(DateTimeKind.Unspecified, orig.asOfDate.Value.Kind);
                 Assert.IsTrue(orig.asOfTimeSpecified);
                 Assert.AreEqual(DateTimeKind.Local, orig.asOfTime.Kind);
-                // --- this test does not pass reliably due to variable local time zone offset of paser ---
+                // --- this test does not pass reliably due to variable local time zone offset of parser ---
                 DateTime asOfDate = new DateTime(2010, 9, 27);
                 Assert.AreEqual(asOfDate, orig.asOfDate.Value);
                 DateTime asOfTime = new DateTime(1, 1, 2, 11, 8, 10);//TODO the time changed due to daylight saving??Why?
@@ -449,7 +430,7 @@ namespace FpML.V5r10.Reporting.Tests
             }
             {
                 // modified FpML.org sample
-                // --- this test does not pass reliably due to variable local time zone offset of paser ---
+                // --- this test does not pass reliably due to variable local time zone offset of parser ---
                 // - asOfDate time zone modified to match asOfTime
                 string externalXmlText =
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
@@ -468,7 +449,7 @@ namespace FpML.V5r10.Reporting.Tests
                 Assert.AreEqual(DateTimeKind.Local, orig.asOfDate.Value.Kind);
                 Assert.IsTrue(orig.asOfTimeSpecified);
                 Assert.AreEqual(DateTimeKind.Local, orig.asOfTime.Kind);
-                // --- this test does not pass reliably due to variable local time zone offset of paser ---
+                // --- this test does not pass reliably due to variable local time zone offset of parser ---
                 DateTime asOfDate = new DateTime(2010, 9, 27, 15, 0, 0); // Australia EST is +10:00
                 Assert.AreEqual(asOfDate, orig.asOfDate.Value);
                 DateTime asOfTime = new DateTime(1, 1, 2, 11, 8, 10);//11 became 12
@@ -494,7 +475,7 @@ namespace FpML.V5r10.Reporting.Tests
                 Assert.AreEqual(DateTimeKind.Local, orig.asOfDate.Value.Kind);
                 Assert.IsTrue(orig.asOfTimeSpecified);
                 Assert.AreEqual(DateTimeKind.Utc, orig.asOfTime.Kind);//Local
-                // --- this test does not pass reliably due to variable local time zone offset of paser ---
+                // --- this test does not pass reliably due to variable local time zone offset of parser ---
                 DateTime asOfDate = new DateTime(2010, 9, 27, 10, 0, 0); // Australia EST is +10:00
                 Assert.AreEqual(asOfDate, orig.asOfDate.Value);
                 DateTime asOfTime = new DateTime(1, 1, 1, 20, 8, 10);//6 became 7

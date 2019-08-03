@@ -2413,6 +2413,8 @@ namespace FpML.V5r3.Reporting {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EquityAsset))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Bond))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConvertibleBond))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PropertyAsset))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Lease))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -9326,6 +9328,7 @@ namespace FpML.V5r3.Reporting {
         [System.Xml.Serialization.XmlElementAttribute("fxSwap", typeof(FxSwap))]
         [System.Xml.Serialization.XmlElementAttribute("genericProduct", typeof(GenericProduct))]
         [System.Xml.Serialization.XmlElementAttribute("instrumentTradeDetails", typeof(InstrumentTradeDetails))]
+        [System.Xml.Serialization.XmlElementAttribute("leaseTransaction", typeof(LeaseTransaction))]
         [System.Xml.Serialization.XmlElementAttribute("nonSchemaProduct", typeof(GenericProduct))]
         [System.Xml.Serialization.XmlElementAttribute("returnSwap", typeof(ReturnSwap))]
         [System.Xml.Serialization.XmlElementAttribute("standardProduct", typeof(StandardProduct))]
@@ -45155,7 +45158,10 @@ namespace FpML.V5r3.Reporting {
 
         /// <remarks/>
         propertyTransaction,
-        
+
+        /// <remarks/>
+        leaseTransaction,
+
         /// <remarks/>
         bondOption,
 

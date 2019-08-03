@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -20,6 +20,7 @@ using System.Runtime.InteropServices;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Reporting.Helpers;
 using HLV5r3.Helpers;
+using Microsoft.Win32;
 using Orion.Analytics.DayCounters;
 using Orion.Analytics.Rates;
 using Orion.ModelFramework;
@@ -34,8 +35,34 @@ namespace HLV5r3.Analytics
     /// </summary>
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [Guid("D851C762-AD8F-49A3-9B24-24D315B56AD2")]
-    public class Swaps : UdfBase
+    public class Swaps
     {
+        #region Registration
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        [ComRegisterFunction]
+        public static void RegisterFunction(Type type)
+        {
+            Registry.ClassesRoot.CreateSubKey(ApplicationHelper.GetSubKeyName(type, "Programmable"));
+            var key = Registry.ClassesRoot.OpenSubKey(ApplicationHelper.GetSubKeyName(type, "InprocServer32"), true);
+            key?.SetValue("", System.Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        [ComUnregisterFunction]
+        public static void UnregisterFunction(Type type)
+        {
+            Registry.ClassesRoot.DeleteSubKey(ApplicationHelper.GetSubKeyName(type, "Programmable"), false);
+        }
+
+        #endregion
+
         #region Functions
 
         // ---------------------------------------------------------------------
@@ -47,16 +74,16 @@ namespace HLV5r3.Analytics
         /// Balance Guaranteed Swap", prepared by George Scoufis,
         /// Reference Number GS-02042007/1 is:
         ///        F0*{1 - Phi(d1) - (L/B0)^(1 + 2*alpha/sigma^2)*phi(d2)}.
-        /// Periods in the formulae for F0, d1 and d2 are computed with
+        /// Periods in the formula for F0, d1 and d2 are computed with
         /// ACT/365 day count.</summary>
         /// <param name="lastAmortisationDate">The date of the most recent
         /// realised amortisation.</param>
         /// <param name="amortisationDate">The date to which the convexity
         /// correction is required.</param>
         /// <param name="currentBondFactor">The current Bond Factor.</param>
-        /// <param name="alpha">The paramter alpha in the Bond Factor curve
+        /// <param name="alpha">The parameter alpha in the Bond Factor curve
         /// model.</param>
-        /// <param name="sigma">The paramter sigma in the Bond Factor curve
+        /// <param name="sigma">The parameter sigma in the Bond Factor curve
         /// model.</param>
         /// <param name="cleanUp">The clean up condition. If the current
         /// Bond Factor is less than or equal to the clean up, then the
@@ -99,7 +126,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the npv for a collection of coupons and princiapal exchanges provided.
+        /// Gets the npv for a collection of coupons and principal exchanges provided.
         /// </summary>
         /// <param name="couponPaymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -164,7 +191,7 @@ namespace HLV5r3.Analytics
 
 
         /// <summary>
-        /// Gets the delta0 for a collection of coupon cashlows provided.
+        /// Gets the delta0 for a collection of coupon cashflows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -180,7 +207,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the delta0 for a collection of coupon cashlows provided.
+        /// Gets the delta0 for a collection of coupon cashflows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -202,7 +229,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the delta0 for a collection of coupon cashlows provided.
+        /// Gets the delta0 for a collection of coupon cashflows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="amounts">The amounts</param>
@@ -219,7 +246,7 @@ namespace HLV5r3.Analytics
         }
 
         /// <summary>
-        /// Gets the delta0 for a collection of coupon cashlows provided.
+        /// Gets the delta0 for a collection of coupon cashflows provided.
         /// </summary>
         /// <param name="paymentDiscountFactors">The discount factors.</param>
         /// <param name="yearFractions">The year fractions.</param>
@@ -268,19 +295,19 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the discount rate R.
         /// </summary>
         /// <param name="notionals">The notionals.</param>
-        /// <param name="yearfractions">The day count fractions.</param>
+        /// <param name="yearFractions">The day count fractions.</param>
         /// <param name="rates">The rates.</param>
         /// <param name="paymentDiscountFactors">The payment discount factors.</param>
         /// <param name="periodAsTimesPerYears">The compounding year fractions.</param>
         /// <param name="curveYearFractions">The time to payment year fractions.</param>
         /// <returns></returns>
-        public double Delta1Arrays2(Excel.Range notionals, Excel.Range yearfractions, Excel.Range rates,
+        public double Delta1Arrays2(Excel.Range notionals, Excel.Range yearFractions, Excel.Range rates,
                                            Excel.Range paymentDiscountFactors, Excel.Range curveYearFractions, double periodAsTimesPerYears)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqRates = DataRangeHelper.StripDoubleRange(rates);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
-            var unqYearFractions = DataRangeHelper.StripDoubleRange(yearfractions);
+            var unqYearFractions = DataRangeHelper.StripDoubleRange(yearFractions);
             var unqCurveYearFractions = DataRangeHelper.StripDoubleRange(curveYearFractions);
             return SwapAnalytics.Delta1Arrays(unqNotionals.ToArray(), unqYearFractions.ToArray(), unqRates.ToArray(),
                                               unqCouponPaymentDiscountFactors.ToArray(), unqCurveYearFractions.ToArray(), periodAsTimesPerYears);
@@ -290,16 +317,16 @@ namespace HLV5r3.Analytics
         /// Evaluates the delta wrt the discount rate R.
         /// </summary>
         /// <param name="notional">The notional for that period.</param>
-        /// <param name="yearfraction">the day count fraction for that coupon.</param>
+        /// <param name="yearFraction">the day count fraction for that coupon.</param>
         /// <param name="rate">The rate for that period.</param>
         /// <param name="paymentDiscountFactor">The payment discount factor.</param>
         /// <param name="periodAsTimesPerYear">the compounding year fraction.</param>
         /// <param name="curveYearFraction">The time to payment year fraction.</param>
         /// <returns></returns>
-        public double Delta1ForNotional(double notional, double yearfraction, double rate, double paymentDiscountFactor, 
+        public double Delta1ForNotional(double notional, double yearFraction, double rate, double paymentDiscountFactor, 
                                                 double periodAsTimesPerYear, double curveYearFraction)
         {
-            return SwapAnalytics.Delta1ForNotional(notional, yearfraction, rate, paymentDiscountFactor, 
+            return SwapAnalytics.Delta1ForNotional(notional, yearFraction, rate, paymentDiscountFactor, 
                                                    periodAsTimesPerYear, curveYearFraction);
         }
 

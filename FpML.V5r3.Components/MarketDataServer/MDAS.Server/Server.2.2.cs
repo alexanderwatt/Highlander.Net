@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -49,10 +49,10 @@ namespace Orion.MDAS.Server
             _connectionIndex.Locked(connections =>
             {
                 if (!connections.TryGetValue(header.SessionId, out connection))
-                    throw new ApplicationException("Ignoring request from unkown client!");
+                    throw new ApplicationException("Ignoring request from unknown client!");
             });
 
-            var errors = new List<V221ErrorDetail>();
+            //var errors = new List<V221ErrorDetail>();
             var result = new QuotedAssetSet();
             string step = "GetMarketQuotesV221: unknown";
             try
@@ -85,10 +85,8 @@ namespace Orion.MDAS.Server
                 foreach (BasicAssetValuation valuation in receivedRequest.assetQuote)
                 {
                     string assetId = valuation.objectReference.href;
-                    Asset asset;
-                    if (!instrumentMap.TryGetValue(assetId.ToLower(), out asset))
-                        throw new ApplicationException(String.Format(
-                            "Cannot find asset '{0}' in instrument set", assetId));
+                    if (!instrumentMap.TryGetValue(assetId.ToLower(), out var asset))
+                        throw new ApplicationException($"Cannot find asset '{assetId}' in instrument set");
                     foreach (BasicQuotation quote in valuation.quote)
                     {
                         if (!quote.valueSpecified)
@@ -98,14 +96,13 @@ namespace Orion.MDAS.Server
                             RequestContainer requestContainer = providerRequests[(int)quoteProvider];
                             requestContainer.InstrumentMap[assetId.ToLower()] = asset;
                             // merge the quotes
-                            BasicAssetValuation bav;
-                            if (!requestContainer.ValuationMap.TryGetValue(assetId.ToLower(), out bav))
+                            if (!requestContainer.ValuationMap.TryGetValue(assetId.ToLower(), out var bav))
                             {
                                 // missing - create
                                 bav = new BasicAssetValuation { objectReference = new AnyAssetReference { href = assetId } };
                                 requestContainer.ValuationMap[assetId.ToLower()] = bav;
                             }
-                            // append the assetquotes
+                            // append the asset quotes
                             var quotes = new List<BasicQuotation>();
                             if (bav.quote != null)
                                 quotes.AddRange(bav.quote);
@@ -128,7 +125,7 @@ namespace Orion.MDAS.Server
                         var types = new List<ItemsChoiceType19>();
                         foreach (var asset in requestContainer.InstrumentMap.Values)
                         {
-                            var assetTypeFpML = AssetTypeConvertor.ParseEnumStringToFpML(asset.id);//TODO THe d must contain the asset descriptor.
+                            var assetTypeFpML = AssetTypeConvertor.ParseEnumStringToFpML(asset.id);//TODO The id must contain the asset descriptor.
                             types.Add(assetTypeFpML);
                         }
                         var instrumentSet = new InstrumentSet { Items = requestContainer.InstrumentMap.Values.ToArray(), ItemsElementName = types.ToArray() };
@@ -164,9 +161,9 @@ namespace Orion.MDAS.Server
             _connectionIndex.Locked(connections =>
             {
                 if (!connections.TryGetValue(header.SessionId, out connection))
-                    throw new ApplicationException("Ignoring request from unkown client!");
+                    throw new ApplicationException("Ignoring request from unknown client!");
             });
-            var errors = new List<V221ErrorDetail>();
+            //var errors = new List<V221ErrorDetail>();
             string step = "GetPricingStructureV221: unknown";
             try
             {
@@ -194,12 +191,12 @@ namespace Orion.MDAS.Server
         public V131SessionReply BeginSessionV131(V131SessionHeader header, V131ClientInfo clientInfo)
         {
             // validate new client
-            // - ensure configured client/server envs are the same
+            // - ensure configured client/server environments are the same
             if (CoreHelper.ToEnvId(clientInfo.ConfigEnv) != _serverCfg.ModuleInfo.ConfigEnv)
             {
                 // not valid
-                string msg = String.Format("Client environment ({0}) <> server environment ({1})!",
-                    clientInfo.ConfigEnv, _serverCfg.ModuleInfo.ConfigEnv);
+                string msg =
+                    $"Client environment ({clientInfo.ConfigEnv}) <> server environment ({_serverCfg.ModuleInfo.ConfigEnv})!";
                 Logger.LogWarning(msg);
                 return new V131SessionReply(msg);
             }
@@ -207,12 +204,12 @@ namespace Orion.MDAS.Server
             if (CoreHelper.ToEnvId(clientInfo.BuildEnv) < _serverCfg.ModuleInfo.BuildEnv)
             {
                 // not valid
-                string msg = String.Format("Client build environment ({0}) < server build environment ({1})!",
-                    clientInfo.BuildEnv, _serverCfg.ModuleInfo.BuildEnv);
+                string msg =
+                    $"Client build environment ({clientInfo.BuildEnv}) < server build environment ({_serverCfg.ModuleInfo.BuildEnv})!";
                 Logger.LogWarning(msg);
                 return new V131SessionReply(msg);
             }
-            // - ensure STG/PRD envs servers only accessed by valid clients
+            // - ensure STG/PRD environment servers only accessed by valid clients
             if ((_serverCfg.ModuleInfo.ConfigEnv >= EnvId.Stg_StagingLive) && (clientInfo.CompInfo.AssmPTok != _serverCfg.ModuleInfo.CorePTok))
             {
                 Logger.LogDebug("Client signature ({0}) <> server signature ({1})!",
@@ -223,7 +220,7 @@ namespace Orion.MDAS.Server
             if (!V131Helpers.CheckRequiredFileVersion(Logger, requiredVersion, clientInfo.CompInfo.AssmFVer))
             {
                 // not valid
-                string msg = String.Format("Client version ({0}) < required version ({1})!", clientInfo.CompInfo.AssmFVer, requiredVersion);
+                string msg = $"Client version ({clientInfo.CompInfo.AssmFVer}) < required version ({requiredVersion})!";
                 Logger.LogWarning(msg);
                 return new V131SessionReply(msg);
             }

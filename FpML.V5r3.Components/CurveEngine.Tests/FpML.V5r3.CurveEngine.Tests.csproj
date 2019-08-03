@@ -60,7 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PedersenTests.cs" />
     <Compile Include="FactoryTests.cs" />
     <Compile Include="SABRTests.cs" />
     <Compile Include="CurveEngineTests2.cs" />
@@ -98,6 +97,10 @@
       <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
       <Name>FpML.V5r3.Reporting.Analytics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Contracts\FpML.V5r3.Reporting.Contracts.csproj">
+      <Project>{4559a0ee-c1ab-43b5-8eb5-9e4cd7a75af3}</Project>
+      <Name>FpML.V5r3.Reporting.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Helpers\FpML.V5r3.Reporting.Helpers.csproj">
       <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
       <Name>FpML.V5r3.Reporting.Helpers</Name>
@@ -115,7 +118,7 @@
       <Name>FpML.V5r3.Reporting.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
-      <Project>{3f87e6dc-55f2-4730-8d92-eeb02ed77437}</Project>
+      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
       <Name>FpML.V5r3.Reporting</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Tests\FpML.V5r3.TestHelpers\FpML.V5r3.TestHelpers.csproj">
@@ -125,14 +128,6 @@
     <ProjectReference Include="..\..\Tests\FpML.V5r3.UnitTestEnv\FpML.V5r3.UnitTestEnv.csproj">
       <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
       <Name>FpML.V5r3.UnitTestEnv</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CalendarEngine.Tests\FpML.V5r3.CalendarEngine.Tests.csproj">
-      <Project>{ac6c2ea4-b355-4aa2-b26b-536c153855bc}</Project>
-      <Name>FpML.V5r3.CalendarEngine.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CalendarEngine\FpML.V5r3.CalendarEngine.csproj">
-      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
-      <Name>FpML.V5r3.CalendarEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
       <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
@@ -145,6 +140,10 @@
     <ProjectReference Include="..\..\Utilities\WindowsForms.ChartControl\Orion.WindowsForms.ChartControl.csproj">
       <Project>{862865A0-8730-4E2F-A4FE-2033D7C45081}</Project>
       <Name>Orion.WindowsForms.ChartControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalendarEngine\FpML.V5r3.CalendarEngine.csproj">
+      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
+      <Name>FpML.V5r3.CalendarEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\CurveEngine\FpML.V5r3.CurveEngine.csproj">
       <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>

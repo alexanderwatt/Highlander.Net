@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
@@ -15,6 +32,8 @@ using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Orion.Util.WinTools;
 using Exception = System.Exception;
+
+#endregion
 
 namespace FpML.V5r3.AutoRatePublisher
 {
@@ -55,23 +74,19 @@ namespace FpML.V5r3.AutoRatePublisher
 
         private void ProcessItem(Market market)
         {
-            if (market != null && market.Items1 != null)
+            if (market?.Items1?[0] is YieldCurveValuation psv && psv.inputs != null)
             {
-                var psv = market.Items1[0] as YieldCurveValuation;//TODO Only does yield curves!
-                if (psv != null && psv.inputs != null)
+                int index = 0;
+                foreach (var asset in psv.inputs.instrumentSet.Items)
                 {
-                    int index = 0;
-                    foreach (var asset in psv.inputs.instrumentSet.Items)
+                    var item = new RatesObj(asset, psv.inputs.assetQuote[index]);
+                    _qasBaseView.Add(new RatesObj(item, 0.0m));
+                    _qasDefView.UpdateData(new ViewChangeNotification<RatesObj>
                     {
-                        var item = new RatesObj(asset, psv.inputs.assetQuote[index]);
-                        _qasBaseView.Add(new RatesObj(item, 0.0m));
-                        _qasDefView.UpdateData(new ViewChangeNotification<RatesObj>
-                        {
-                            OldData = item,
-                            NewData = item
-                        });
-                        index++;
-                    }
+                        OldData = item,
+                        NewData = item
+                    });
+                    index++;
                 }
             }
         }
@@ -116,12 +131,12 @@ namespace FpML.V5r3.AutoRatePublisher
             }
         }
 
-        private void UpdateListView(object curveobject)
+        private void UpdateListView(object curveObject)
         {
-            var curvename = curveobject as string;
+            var curveName = curveObject as string;
             lvQASDef.SuspendLayout();
             lvQASDef.Items.Clear();
-            var identifier = EnvironmentProp.DefaultNameSpace + ".Configuration.PricingStructures." + curvename;
+            var identifier = EnvironmentProp.DefaultNameSpace + ".Configuration.PricingStructures." + curveName;
             var items = _cache.LoadItem<Market>(identifier);
             _qasBaseView = new List<RatesObj>();
             if (items != null)
@@ -263,8 +278,7 @@ namespace FpML.V5r3.AutoRatePublisher
                 Publisher = "Alex";
                 Instrument = asset.GetType().Name;
                 var identifier = new PriceableAssetProperties(asset.id);
-                var asset1 = asset as Deposit;
-                if (asset1 != null)
+                if (asset is Deposit asset1)
                 {
                     var deposit = asset1;
                     InstrumentId = deposit.id;
@@ -273,8 +287,7 @@ namespace FpML.V5r3.AutoRatePublisher
                 }
                 else
                 {
-                    var irSwap = asset as SimpleIRSwap;
-                    if (irSwap != null)
+                    if (asset is SimpleIRSwap irSwap)
                     {
                         var swap = irSwap;
                         InstrumentId = swap.id;
@@ -283,8 +296,7 @@ namespace FpML.V5r3.AutoRatePublisher
                     }
                     else
                     {
-                        var future1 = asset as Future;
-                        if (future1 != null)
+                        if (asset is Future future1)
                         {
                             var future = future1;
                             InstrumentId = future.id;
@@ -375,8 +387,7 @@ namespace FpML.V5r3.AutoRatePublisher
 
         internal class QASDefViewHelper : IViewHelper
         {
-            private readonly int _columnCount = Enum.GetValues(typeof(QASDefColEnum)).Length;
-            public int ColumnCount { get { return _columnCount; } }
+            public int ColumnCount { get; } = Enum.GetValues(typeof(QASDefColEnum)).Length;
 
             public string GetColumnTitle(int column)
             {

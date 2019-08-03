@@ -111,6 +111,10 @@
       <Project>{3a8998a6-7e78-4571-85f5-261ee330f7ed}</Project>
       <Name>FpML.V5r3.Reporting.CurveGeneration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Common\Metadata.Common.csproj">
+      <Project>{727df453-56c3-4d34-9424-5993aae4b9e1}</Project>
+      <Name>Metadata.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj">
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>

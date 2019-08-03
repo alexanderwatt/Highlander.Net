@@ -1,4 +1,21 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +37,8 @@ using Orion.Contracts;
 using Orion.PortfolioValuation;
 using Orion.Workflow;
 using Exception = System.Exception;
+
+#endregion
 
 namespace Orion.PortfolioValuer
 {
@@ -133,7 +152,6 @@ namespace Orion.PortfolioValuer
             //
             //debug
             Application.DoEvents();
-            //enddebug
             //
             // setup the all trades view
             _tradeAllViewHelper = new TradeAllViewHelper();
@@ -605,7 +623,7 @@ namespace Orion.PortfolioValuer
         private void BtnAutoValueClick(object sender, EventArgs e)
         {
             _logRef.Target.LogDebug("AutoValue on");
-            // 1. Firstly value each trade to get a starting vlaue.
+            // 1. Firstly value each trade to get a starting value.
             //
             TradeCalcValuations(true);
             // 2. Find the relevant curves required
@@ -616,10 +634,10 @@ namespace Orion.PortfolioValuer
                 if (trade.Curves == null) continue;
                 foreach (var curve in trade.Curves)
                 {
-                    var newcurve = "Market." + CurveConst.QR_LIVE + "." + curve;
-                    if (!curves.Contains(newcurve))
+                    var newCurve = "Market." + CurveConst.QR_LIVE + "." + curve;
+                    if (!curves.Contains(newCurve))
                     {
-                        curves.Add(newcurve);
+                        curves.Add(newCurve);
                     }
                 }
             }
@@ -639,7 +657,7 @@ namespace Orion.PortfolioValuer
             {
                 // note: this is running on a thread pool thread
                 _logRef.Target.LogDebug("SubscribeCallback: Queued calls posted:");
-                _syncContext.Post(ValueTradeSet, item); //chnanged from null
+                _syncContext.Post(ValueTradeSet, item);
             };
             newSubscription.Start();
             _logRef.Target.LogDebug("Subscription started.");
@@ -670,8 +688,7 @@ namespace Orion.PortfolioValuer
             // 1. Get the trades in the selection that are dependent on the curve updated.
             //
             var trades = new List<string>();
-            var updatedCurve = curveItem as ICoreItem;
-            if (updatedCurve != null)
+            if (curveItem is ICoreItem updatedCurve)
             {
                 var identifier = updatedCurve.AppProps.GetValue<string>(CurveProp.UniqueIdentifier);
                 foreach (var trade in _tradeSelView.DataItems)
@@ -679,8 +696,8 @@ namespace Orion.PortfolioValuer
                     if (trade.Curves == null) continue;
                     foreach (var curve in trade.Curves)
                     {
-                        var newcurve = "Market." + CurveConst.QR_LIVE + "." + curve;
-                        if (newcurve != identifier) continue;
+                        var newCurve = "Market." + CurveConst.QR_LIVE + "." + curve;
+                        if (newCurve != identifier) continue;
                         if (!trades.Contains(trade.UniqueId))
                         {
                             trades.Add(trade.UniqueId);
@@ -973,8 +990,7 @@ namespace Orion.PortfolioValuer
                                     if (!metricFound)
                                     {
                                         // try standard
-                                        InstrumentMetrics metricId;
-                                        if (EnumHelper.TryParse(quote.measureType.Value, true, out metricId))
+                                        if (EnumHelper.TryParse(quote.measureType.Value, true, out InstrumentMetrics metricId))
                                         {
                                             Metrics[(int)metricId] = quote.value;
                                             metricFound = true;

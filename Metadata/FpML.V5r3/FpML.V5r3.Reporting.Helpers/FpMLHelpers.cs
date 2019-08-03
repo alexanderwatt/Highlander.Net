@@ -16,6 +16,7 @@
 #region Using directives
 
 using System;
+using System.CodeDom;
 using System.Linq;
 using FpML.V5r3.Codes;
 using Orion.Util.Helpers;
@@ -1342,7 +1343,7 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <summary>
         /// Creates a property in the data store.
         /// </summary>
-        /// <param name="propertyId">The property identfier.</param>
+        /// <param name="propertyId">The property identifier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
@@ -1376,6 +1377,55 @@ namespace FpML.V5r3.Reporting.Helpers
                 propertyTaxonomyType = propertyType
             };
             return property;
+        }
+    }
+
+    public class LeaseAssetHelper
+    {
+        /// <summary>
+        /// Creates a lease in the data store.
+        /// </summary>
+        /// <param name="tenant">The tenant's name.</param>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="leaseType">The lease type: retail, commercial, investment etc</param>
+        /// <param name="reviewChange">THe review change as a percentage.</param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="startGrossPrice">The start gross price.</param>
+        /// <param name="description">The lease description.</param>
+        /// <param name="leaseExpiryDate">The lease expiry date.</param>
+        /// <param name="propertyReference">The property reference identifier.</param>
+        /// <param name="shopNumber">The shop number.</param>
+        /// <param name="leaseStartDate">The lease start date.</param>
+        /// <param name="reviewFrequency">THe lease review frequency. This is normally annual.</param>
+        /// <param name="nextReviewDate">The next review date.</param>
+        /// <param name="numberOfUnits">The number of units specified.</param>
+        /// <param name="units">The units of area: money per square meter; money per square foot.</param>
+        /// <returns></returns>
+        public static Lease Create(string tenant, string leaseId, string leaseType, DateTime leaseExpiryDate, string propertyReference, string shopNumber,
+            DateTime leaseStartDate, string reviewFrequency, DateTime nextReviewDate, decimal reviewChange, string currency, decimal numberOfUnits, 
+            string units, decimal startGrossPrice, string description)
+        {
+            var lease = new Lease
+            {
+                currency = new IdentifiedCurrency {Value = currency},
+                description = description,
+                id = leaseId,
+                propertyReference = propertyReference,
+                shopNumber = shopNumber,
+                leaseType = leaseType,
+                startDate = new IdentifiedDate { id = "LeaseStartDate", Value = leaseStartDate },
+                reviewFrequency = PeriodHelper.Parse(reviewFrequency),
+                nextReviewDate = new IdentifiedDate {id = "NextReviewDate", Value = nextReviewDate},
+                reviewChange = reviewChange,
+                numberOfUnits = numberOfUnits,
+                units = units,
+                startGrossPrice = new Money {amount = startGrossPrice, amountSpecified = true},
+                leaseExpiryDate = new IdentifiedDate {id = "LeaseExpiryDate", Value = leaseExpiryDate},
+                tenant = new Party {partyId = new PartyId[1]},
+                //businessDayAdjustments = 
+            };
+            lease.tenant.partyId[0] = new PartyId{Value = tenant };
+            return lease;
         }
     }
 

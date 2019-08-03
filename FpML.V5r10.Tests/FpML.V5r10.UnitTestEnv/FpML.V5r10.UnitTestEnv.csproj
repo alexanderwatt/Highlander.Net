@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DF4AD835-9839-43A3-B713-0CE94D50FC75}</ProjectGuid>
+    <ProjectGuid>{90DD4032-1D32-4E00-AC57-891BE4F0BF3C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Orion.UnitTestEnv</RootNamespace>
+    <RootNamespace>FpML.V5r10.UnitTestEnv</RootNamespace>
     <AssemblyName>FpML.V5r10.UnitTestEnv</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

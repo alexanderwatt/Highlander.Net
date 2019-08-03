@@ -98,7 +98,7 @@
       <Name>Orion.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\StressGenerator\FpML.V5r3.Server.StressGenerator.csproj">
-      <Project>{3AE0449F-3214-4F3E-8BE5-75D286D32A44}</Project>
+      <Project>{3ae0449f-3214-4f3e-8be5-75d286d32a44}</Project>
       <Name>FpML.V5r3.Server.StressGenerator</Name>
     </ProjectReference>
   </ItemGroup>

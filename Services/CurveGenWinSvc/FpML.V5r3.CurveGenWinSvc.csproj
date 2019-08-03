@@ -108,10 +108,6 @@
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CurveGenServer\FpML.V5r3.Server.CurveGenerator.csproj">
-      <Project>{8c502f52-357b-4be5-9e03-14df9bf2ae77}</Project>
-      <Name>FpML.V5r3.Server.CurveGenerator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
       <Project>{d280d461-4fbe-4b9a-8012-9fe26cb2ef71}</Project>
       <Name>Core.Common</Name>
@@ -123,6 +119,10 @@
     <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
       <Project>{c094fb37-4c14-425e-8977-69079f4f7aa0}</Project>
       <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveGenServer\FpML.V5r3.Server.CurveGenerator.csproj">
+      <Project>{8c502f52-357b-4be5-9e03-14df9bf2ae77}</Project>
+      <Name>FpML.V5r3.Server.CurveGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

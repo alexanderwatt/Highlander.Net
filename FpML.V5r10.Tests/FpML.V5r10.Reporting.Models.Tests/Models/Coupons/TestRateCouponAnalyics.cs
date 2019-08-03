@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
+using FpML.V5r10.Reporting.Models.Rates.Coupons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Models.Rates.Coupons;
 
-namespace Orion.Models.Tests.Models.Coupons
+namespace FpML.V5r10.Models.Tests.Models.Coupons
 {
     [TestClass]
     public class TestRateCouponAnalytics
@@ -42,7 +42,7 @@ namespace Orion.Models.Tests.Models.Coupons
         }
 
         [TestMethod]
-        public void FixedRateCouponAnalyicsNonDiscounted()
+        public void FixedRateCouponAnalyticsNonDiscounted()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
                                                                 {
@@ -76,7 +76,7 @@ namespace Orion.Models.Tests.Models.Coupons
         }
 
         [TestMethod]
-        public void FloatingRateCouponAnalyicsDiscounted()
+        public void FloatingRateCouponAnalyticsDiscounted()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
                                                                 {
@@ -111,7 +111,7 @@ namespace Orion.Models.Tests.Models.Coupons
         }
 
         [TestMethod]
-        public void FloatingRateCouponAnalyicsNonDiscounted()
+        public void FloatingRateCouponAnalyticsNonDiscounted()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
                                                                 {
@@ -145,7 +145,7 @@ namespace Orion.Models.Tests.Models.Coupons
         }
 
         [TestMethod]
-        public void FixedRateCouponAnalyicsDiscountedBuckettedDelta1()
+        public void FixedRateCouponAnalyticsDiscountedBucketedDelta1()
         {
             IRateCouponParameters analyticModelParameters = new RateCouponParameters
                                                                 {

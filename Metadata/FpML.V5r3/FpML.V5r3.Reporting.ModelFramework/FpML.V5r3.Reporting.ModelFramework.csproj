@@ -79,6 +79,7 @@
     <Compile Include="Assets\AssetControllerData.cs" />
     <Compile Include="Assets\IPriceableCommodityFuturesAssetController.cs" />
     <Compile Include="Assets\IPriceableCommodityFuturesOptionAssetController.cs" />
+    <Compile Include="Assets\IPriceableLeaseAssetController.cs" />
     <Compile Include="Assets\IPriceablePropertyRateAssetController.cs" />
     <Compile Include="Assets\IPriceablePropertyAssetController.cs" />
     <Compile Include="Assets\IPriceableCommoditySpreadAssetController.cs" />

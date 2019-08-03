@@ -18,18 +18,15 @@
 using System;
 using Core.Common;
 using FpML.V5r10.Reporting;
+using FpML.V5r10.Reporting.Analytics.BusinessCenters;
+using FpML.V5r10.Reporting.Analytics.Helpers;
 using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
-using FpML.V5r3.Reporting.Helpers;
-using Orion.Analytics.Helpers;
-using Orion.Analytics.BusinessCenters;
-using Orion.ModelFramework;
-using FpML.V5r3.Reporting;
 using Math = System.Math;
 
 #endregion
 
-namespace Orion.CalendarEngine.Helpers
+namespace FpML.V5r10.CalendarEngine.Helpers
 {
     /// <summary>
     /// Useful methods to convert between date types.
@@ -326,7 +323,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             var adjustableDate = new AdjustableDate
                                      {
-                                         unadjustedDate = new IdentifiedDate { Value = unadjustedDate, id = ItemsChoiceType.adjustedDate.ToString() },
+                                         unadjustedDate = new IdentifiedDate { Value = unadjustedDate, id = ItemsChoiceType1.adjustedDate.ToString() },
                                          dateAdjustments = businessDayAdjustments
                                      };
             return ToAdjustedDate(cache, adjustableDate, nameSpace);
@@ -343,7 +340,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             var adjustableDate = new AdjustableDate
             {
-                unadjustedDate = new IdentifiedDate { Value = unadjustedDate, id = ItemsChoiceType.adjustedDate.ToString() },
+                unadjustedDate = new IdentifiedDate { Value = unadjustedDate, id = ItemsChoiceType1.adjustedDate.ToString() },
                 dateAdjustments = businessDayAdjustments
             };
             return ToAdjustedDate(businessCalendar, adjustableDate);
@@ -357,13 +354,13 @@ namespace Orion.CalendarEngine.Helpers
         /// <returns></returns>
         public static DateTime? GetAdjustedDate(IBusinessCalendar businessCalendar, AdjustableOrAdjustedDate adjustableOrAdjustedDate)
         {
-            var result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.adjustedDate, out var date);
+            var result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType1.adjustedDate, out var date);
             if (result)
             {
                 return ((IdentifiedDate)date).Value;
             }
-            result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.unadjustedDate, out date);
-            var bda = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType.dateAdjustments, out var businessDayAdjustments);
+            result = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType1.unadjustedDate, out date);
+            var bda = AdjustableOrAdjustedDateHelper.Contains(adjustableOrAdjustedDate, ItemsChoiceType1.dateAdjustments, out var businessDayAdjustments);
             if (result && date != null)
             {
                 DateTime unadjustedDate = ((IdentifiedDate)date).Value;

@@ -19,18 +19,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
+using FpML.V5r10.CalendarEngine.Rules;
 using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.ModelFramework;
-using FpML.V5r3.Reporting;
-using Orion.CalendarEngine.Rules;
 using Orion.Constants;
 using BusinessCentreDateRulesProp = Orion.Constants.BusinessCentreDateRulesProp;
 //using LocationCalendarYearProp = Orion.Constants.LocationCalendarYearProp;
 
 #endregion
 
-namespace Orion.CalendarEngine.Helpers
+namespace FpML.V5r10.CalendarEngine.Helpers
 {
     /// <summary>
     /// Helper class for Business Centers

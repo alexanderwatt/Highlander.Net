@@ -188,22 +188,6 @@
       <FileName>Assets\Rates\Bonds\PriceableSimpleBond.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Orion.CurveEngine.Assets.CapletBootstrapEngine" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="52.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>FAApCAQQgDCMGCYgAgEADhAIRCAGQQIJAAkIYIGmwAI=</HashCode>
-      <FileName>Assets\Rates\CapFloorLet\CapletBootstrapEngine.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="Orion.CurveEngine.Assets.CapletSmileCalibrationEngine" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="41.75" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAASBADAIYAAACAAAAAEgKQCgRIBAQAAABAC4KA=</HashCode>
-      <FileName>Assets\Rates\CapFloorLet\CapletSmileCalibrationEngine.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Class Name="Orion.CurveEngine.Assets.Rates.CapFloorLet.PriceableCaplet" Collapsed="true">
     <Position X="1" Y="13.5" Width="1.5" />
     <TypeIdentifier>
@@ -506,13 +490,6 @@
       <FileName>Helpers\ArrayIndex.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Orion.CurveEngine.Helpers.CapletBootstrapEngineHelper" Collapsed="true">
-    <Position X="54" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>CQAAgAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Helpers\CapletBootstrapEngineHelper.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Orion.CurveEngine.Helpers.CompoundingHelper" Collapsed="true">
     <Position X="38.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
@@ -671,7 +648,7 @@
       <FileName>PricingStructures\Helpers\VolatilitySurfaceHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Orion.CurveEngine.Helpers.VolatilitySurfaceHelper2" Collapsed="true">
+  <Class Name="Orion.CurveEngine.PricingStructures.Helpers.VolatilitySurfaceHelper2" Collapsed="true">
     <Position X="38.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
@@ -722,7 +699,7 @@
     <Position X="47" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEQACAAAACAAAABAAggAAAAAAAAAoAABAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Commodity\CommodityAssetQuote.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\CommodityAssetQuote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -730,21 +707,21 @@
     <Position X="48.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Commodity\CommodityBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\CommodityBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.CommoditySpreadBootstrapper2" Collapsed="true">
     <Position X="52.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Commodity\CommoditySpreadBootstrapper2.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\CommoditySpreadBootstrapper2.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.CreditAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="40" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAEAAABBAADEAAAAAAQAAAAAAAAAAgAAAEAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Credit\CreditAssetQuote.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\CreditAssetQuote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -752,14 +729,14 @@
     <Position X="41.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Credit\CreditBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\CreditBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.FxAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="45.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAEAAABBAADEAAAAAAQAAAAAAAAAAgAAAEAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Fx\FxAssetQuote.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\FxAssetQuote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -767,21 +744,21 @@
     <Position X="47" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Fx\FxBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\FxBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.NewtonRaphsonSolverFunctions" Collapsed="true">
     <Position X="38.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAABEAAAAAAAAAAAABIAAgQACACgAAAwAAI=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\NewtonRaphsonSolverFunctions.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\NewtonRaphsonSolverFunctions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.RateAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="38.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEQACAAAACAAAABAAggAAAAAAAAAoAABAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateAssetQuote.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateAssetQuote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -789,21 +766,21 @@
     <Position X="40" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.RateBootstrapperNewtonRaphson" Collapsed="true">
     <Position X="41.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateBootstrapperNewtonRaphson.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateBootstrapperNewtonRaphson.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.RateSpreadAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="45.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEQgCRAAACAAAABAAAgAAAAAAAAAoAABAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateSpreadAssetQuote.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateSpreadAssetQuote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -811,14 +788,14 @@
     <Position X="47" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateSpreadBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateSpreadBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Bootstrappers.RateXccySpreadBootstrapper" Collapsed="true">
     <Position X="50.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
-      <FileName>PricingStructures\Bootstrappers\Rate\RateXccySpreadBootstrapper.cs</FileName>
+      <FileName>PricingStructures\Bootstrappers\RateXccySpreadBootstrapper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Cubes.ExpiryTermTenorStrikeVolatilityCube" Collapsed="true">
@@ -839,7 +816,7 @@
   <Class Name="Orion.CurveEngine.PricingStructures.Curves.CommodityCurve" Collapsed="true">
     <Position X="12.25" Y="19" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EBIgAIABIAEGCQAFAIAEIIMAgwBAiAEApEoCAERAAAI=</HashCode>
+      <HashCode>EBIgAIBBIAEGCQAFAIAEIIMAgwBAiAEApEgCAERAAAI=</HashCode>
       <FileName>PricingStructures\Curves\CommodityCurve.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -936,17 +913,10 @@
       <FileName>PricingStructures\Helpers\CapletSmileCalibrationSettings.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Orion.CurveEngine.PricingStructures.Helpers.CapletTenorConversion" Collapsed="true">
-    <Position X="45.25" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIQAAAA4IAAQAAQAEAAAAAABUARASAABCAAiEAAYAA=</HashCode>
-      <FileName>PricingStructures\Helpers\CapletTenorConversion.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Helpers.FraSolver" Collapsed="true">
     <Position X="41.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IQECEgGBAAmi1JBAAQADAgCASAgAADAAgAIQQkASCSg=</HashCode>
+      <HashCode>IQACEgGBAAmilJBAAQADEgCASAgAADAAgAoQQkASCSg=</HashCode>
       <FileName>PricingStructures\Helpers\FraSolver.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -1065,15 +1035,8 @@
   <Class Name="Orion.CurveEngine.PricingStructures.SABR.SABRCapFloorInterface" Collapsed="true">
     <Position X="52.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABEAAABAAAAAAgAAgAQAICAABAAAAACQAAgAIgBAAM=</HashCode>
+      <HashCode>AABEAAABAAAAAAgEAgAQAICAABAAAAACQAAAAIgBAAM=</HashCode>
       <FileName>PricingStructures\SABR\SABRCapFloorInterface.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Orion.CurveEngine.PricingStructures.SABR.SABRDataMatrix" Collapsed="true">
-    <Position X="54" Y="6.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAACAAAAAAA=</HashCode>
-      <FileName>PricingStructures\SABR\SABRDataMatrix.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.SABR.SABRSwaptionInterface" Collapsed="true">
@@ -1252,27 +1215,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Orion.CurveEngine.Sabr.Interface.CapFloor" Collapsed="true">
-    <Position X="48.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EBBEAAgBAAAUASiASgAQgoCGIJEEQAEQxQAEARAFASI=</HashCode>
-      <FileName>Sabr\Interface\CapFloor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Orion.CurveEngine.Sabr.Interface.CapFloorInterface" Collapsed="true">
-    <Position X="50.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAEAIAAAAAIAAAQBAAAAAAAICBAAAABQAAQAAAAAAA=</HashCode>
-      <FileName>Sabr\Interface\CapFloorInterface.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Orion.CurveEngine.Sabr.Interface.Utility" Collapsed="true">
-    <Position X="47" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EgAAIAAIAAAAAEAAAAAAEABEAAQAAAAAAAAAAAEAAAA=</HashCode>
-      <FileName>Sabr\Interface\Utility.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Interface Name="Orion.CurveEngine.Helpers.IPricingStructureTerms" Collapsed="true">
     <Position X="24" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -1308,11 +1250,11 @@
       <FileName>Assets\Rates\CapFloorLet\CapletBootstrapSettings.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Orion.CurveEngine.Helpers.UnderyingCurveTypes" Collapsed="true">
+  <Enum Name="Orion.CurveEngine.Helpers.UnderlyingCurveTypes" Collapsed="true">
     <Position X="45.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAAgBAAQAAAAA=</HashCode>
-      <FileName>Helpers\UnderyingCurveTypes.cs</FileName>
+      <FileName>Helpers\UnderlyingCurveTypes.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Orion.CurveEngine.PricingStructures.Helpers.CubeDimension" Collapsed="true">

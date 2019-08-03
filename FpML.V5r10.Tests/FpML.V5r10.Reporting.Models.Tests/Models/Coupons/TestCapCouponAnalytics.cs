@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using Orion.Models.Rates.Coupons;
+using FpML.V5r10.Reporting.Models.Rates.Coupons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Orion.Models.Tests.Models.Coupons
+namespace FpML.V5r10.Models.Tests.Models.Coupons
 {
     [TestClass]
     public class TestCapCouponAnalytics
@@ -11,7 +11,7 @@ namespace Orion.Models.Tests.Models.Coupons
         private readonly Decimal[] paramRange = {0.0m, 0.25m, 0.5m, 0.75m,1.0m, 2.0m} ;
 
         [TestMethod]
-        public void CapletRateCouponAnalyicsNonDiscounted()
+        public void CapletRateCouponAnalyticsNonDiscounted()
         {
             foreach (var val in paramRange)
             {

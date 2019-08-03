@@ -172,13 +172,25 @@
       <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
       <Name>FpML.V5r3.Reporting.Analytics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Contracts\FpML.V5r3.Reporting.Contracts.csproj">
+      <Project>{4559a0ee-c1ab-43b5-8eb5-9e4cd7a75af3}</Project>
+      <Name>FpML.V5r3.Reporting.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Helpers\FpML.V5r3.Reporting.Helpers.csproj">
       <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
       <Name>FpML.V5r3.Reporting.Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>FpML.V5r3.Reporting.Identifiers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
       <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
       <Name>FpML.V5r3.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Models\FpML.V5r3.Reporting.Models.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>FpML.V5r3.Reporting.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
       <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>

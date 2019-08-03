@@ -18,15 +18,13 @@
 using System;
 using System.Collections.Generic;
 using Core.Common;
+using FpML.V5r10.CalendarEngine.Helpers;
 using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.ModelFramework;
-using FpML.V5r3.Reporting;
-using Orion.ModelFramework;
-using Orion.CalendarEngine.Helpers;
 
 #endregion
 
-namespace Orion.CalendarEngine.Schedulers
+namespace FpML.V5r10.CalendarEngine.Schedulers
 {
     ///<summary>
     ///</summary>

@@ -19,14 +19,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using FpML.V5r10.CalendarEngine.Helpers;
+using FpML.V5r10.CalendarEngine.Rules;
 using FpML.V5r10.Reporting;
 using FpML.V5r10.Reporting.ModelFramework;
-using Orion.CalendarEngine.Helpers;
-using Orion.CalendarEngine.Rules;
 
 #endregion
 
-namespace Orion.CalendarEngine
+namespace FpML.V5r10.CalendarEngine
 {
     /// <summary>
     /// THe base calendar.

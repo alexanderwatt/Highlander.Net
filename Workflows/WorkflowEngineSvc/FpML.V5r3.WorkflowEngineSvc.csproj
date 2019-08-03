@@ -102,7 +102,7 @@
       <Name>Orion.Util</Name>
     </ProjectReference>
     <ProjectReference Include="..\Workflow.Server\FpML.V5r3.Server.Workflow.csproj">
-      <Project>{06D72788-C2F0-459E-9009-D123624B1EA0}</Project>
+      <Project>{06d72788-c2f0-459e-9009-d123624b1ea0}</Project>
       <Name>FpML.V5r3.Server.Workflow</Name>
     </ProjectReference>
   </ItemGroup>

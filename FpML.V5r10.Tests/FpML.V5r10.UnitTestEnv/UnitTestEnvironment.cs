@@ -13,7 +13,7 @@ using Orion.Util.Logging;
 using Orion.Util.RefCounting;
 using Exception = System.Exception;
 
-namespace Orion.UnitTestEnv
+namespace FpML.V5r10.UnitTestEnv
 {
     public class CalendarUnitTestEnvironment
     {
@@ -24,7 +24,7 @@ namespace Orion.UnitTestEnv
         public string NameSpace;
 
         public CalendarUnitTestEnvironment()
-            : this(Constants.EnvironmentProp.LatestNameSpace)
+            : this(Orion.Constants.EnvironmentProp.LatestNameSpace)
         { }
 
         public CalendarUnitTestEnvironment(string nameSpace)
@@ -84,7 +84,7 @@ namespace Orion.UnitTestEnv
         public string NameSpace;
 
         public CurveUnitTestEnvironment()
-            : this(Constants.EnvironmentProp.LatestNameSpace)
+            : this(Orion.Constants.EnvironmentProp.LatestNameSpace)
         { }
 
         public CurveUnitTestEnvironment(string nameSpace)
@@ -144,7 +144,7 @@ namespace Orion.UnitTestEnv
         public string NameSpace;
 
         public UnitTestEnvironment()
-            : this(Constants.EnvironmentProp.LatestNameSpace)
+            : this(Orion.Constants.EnvironmentProp.LatestNameSpace)
         {}
 
         public UnitTestEnvironment(string nameSpace)

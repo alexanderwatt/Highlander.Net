@@ -1,12 +1,12 @@
 ﻿/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -247,7 +247,7 @@ namespace HLV5r3.Financial
         public string GetCurveEngineVersionInfo() => Information.GetVersionInfo();
 
         /// <summary>
-        /// A function to return the list of valid assetmeasures. 
+        /// A function to return the list of valid asset measures. 
         /// Only some have been implemented.
         /// </summary>
         /// <returns>A vertical range object, containing the list of asset measure types.</returns>
@@ -312,7 +312,7 @@ namespace HLV5r3.Financial
         /// Gets the curve names necessary to value the trade.
         /// </summary>
         /// <param name="uniqueTradeId">The unique trade identifier.</param>
-        /// <param name="filename">The fileneame</param>
+        /// <param name="filename">The filename</param>
         /// <returns></returns>
         public string SaveTradeToFile(string uniqueTradeId, string filename)
         {
@@ -323,7 +323,7 @@ namespace HLV5r3.Financial
         /// Gets the curve names necessary to value the trade.
         /// </summary>
         /// <param name="uniqueValuationId">The unique valuation identifier.</param>
-        /// <param name="filename">The fileneame</param>
+        /// <param name="filename">The filename</param>
         /// <returns></returns>
         public string SaveValuationToFile(string uniqueValuationId, string filename)
         {
@@ -963,7 +963,7 @@ namespace HLV5r3.Financial
             properties.Set(TradeProp.AsAtDate, DateTime.Today);
             properties.Set(PropertyProp.ReferenceProperty, propertyIdentifier);
             return ValService.CreatePropertyTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
-                propertyType, paymentDate, currency, propertyIdentifier, tradingBook, properties);
+                paymentDate, currency, propertyIdentifier, tradingBook, properties);
         }
 
         /// <summary>
@@ -1014,7 +1014,89 @@ namespace HLV5r3.Financial
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
             namedValueSet.Set(PropertyProp.ReferenceProperty, propertyIdentifier);
             return ValService.CreatePropertyTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
-                propertyType, paymentDate, currency, propertyIdentifier, tradingBook, namedValueSet);
+                paymentDate, currency, propertyIdentifier, tradingBook, namedValueSet);
+        }
+
+        #endregion
+
+        #region Lease Transaction
+
+        /// <summary>
+        /// Creates a lease transaction
+        /// </summary>
+        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="isParty1Tenant">Is party1 the tenant. If not then it is the property owner. </param>
+        /// <param name="party2">Party 2</param>
+        /// <param name="tradeDate">The trade date.</param>
+        /// <param name="leaseStartDate"></param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="portfolio">The portfolio.</param>
+        /// <param name="leaseExpiryDate"></param>
+        /// <param name="startGrossAmount"></param>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="referencePropertyIdentifier">The reference property identifier.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="party1">Party 1</param>
+        /// <param name="properties2DRange">A trade properties range. This should include the following:
+        /// upfrontAmount as a decimal,
+        /// paymentDate for any upfront amount,
+        /// leaseType,
+        /// shopNumber - could be 1A,
+        /// unitsOfArea: sqm or sqf,
+        /// reviewFrequency as a period e.g. 1Y,
+        /// nextReviewDate if known,
+        /// reviewChange as a percentage.
+        /// </param> 
+        /// <returns></returns>
+        public string CreateLeaseTradeWithProperties(string tradeId, bool isParty1Tenant, string party1, string party2, 
+            DateTime tradeDate, DateTime leaseStartDate, string currency, string portfolio, decimal startGrossAmount, string leaseId, 
+            DateTime leaseExpiryDate, string referencePropertyIdentifier, string description, Range properties2DRange)
+        {
+            // string reviewFrequency, DateTime nextReviewDate, decimal reviewChange,
+            //string leaseType, string shopNumber, string unitsOfArea,
+            //decimal upfrontAmount, DateTime paymentDate, 
+            var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
+            properties = (object[,])DataRangeHelper.TrimNulls(properties);
+            var namedValueSet = properties.ToNamedValueSet();
+            //Get the values required from the range data.
+            var upfrontAmount = namedValueSet.GetValue(PropertyProp.UpfrontAmount, 0.0m);
+            var paymentDate = namedValueSet.GetValue(PropertyProp.PaymentDate, leaseStartDate);
+            var leaseType = namedValueSet.GetValue(PropertyProp.LeaseType, "unspecified");
+            var shopNumber = namedValueSet.GetValue(PropertyProp.ShopNumber, "unspecified");
+            var area = namedValueSet.GetValue(PropertyProp.Area, 0.0m);
+            var unitsOfArea = namedValueSet.GetValue(PropertyProp.UnitsOfArea, "sqm");
+            var reviewFrequency = namedValueSet.GetValue(PropertyProp.ReviewFrequency, "1Y");
+            //TODO Add a default review date
+            var nextReviewDate = namedValueSet.GetValue(PropertyProp.NextReviewDate, leaseStartDate);
+            var reviewChange = namedValueSet.GetValue(PropertyProp.ReviewChange, 0.0m);
+            //Set property values
+            namedValueSet.Set(TradeProp.Party1, party1);
+            namedValueSet.Set(TradeProp.Party2, party2);
+            if (isParty1Tenant)
+            {
+                namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party1);
+                namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party2);
+            }
+            else
+            {
+                namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party2);
+                namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party1);
+            }
+            //Set the pricing information
+            namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
+            //Set other properties
+            namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.EquityTransaction.ToString());
+            namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.equityTransaction.ToString());
+            namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Equity_OrdinaryShares));
+            namedValueSet.Set(TradeProp.TradeDate, tradeDate);
+            namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
+            namedValueSet.Set(TradeProp.MaturityDate, leaseExpiryDate);
+            namedValueSet.Set(TradeProp.TradeId, tradeId);
+            namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
+            namedValueSet.Set(PropertyProp.ReferenceProperty, referencePropertyIdentifier);
+            return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
+                upfrontAmount, paymentDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
+                leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);
         }
 
         #endregion
@@ -2046,7 +2128,7 @@ namespace HLV5r3.Financial
         /// <para>BaseParty:	NAB</para>
         /// <para>ValuationDate:	13/03/2010</para>
         /// </param>
-        ///<param name="notionalValueItems">An array of datetimes and values.
+        ///<param name="notionalValueItems">An array of date times and values.
         /// <para>System.DateTime DateTime</para>
         /// <para>double Value</para>
         ///</param>

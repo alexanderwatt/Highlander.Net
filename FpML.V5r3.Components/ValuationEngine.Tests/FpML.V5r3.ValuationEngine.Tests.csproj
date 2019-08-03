@@ -85,10 +85,6 @@
       <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
       <Name>FpML.V5r3.Codes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Confirmation\FpML.V5r3.Confirmation.csproj">
-      <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
-      <Name>FpML.V5r3.Confirmation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
       <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
       <Name>FpML.V5r3.Reporting.Analytics</Name>

@@ -1,15 +1,17 @@
 ﻿using System.Diagnostics;
-using Orion.Models.Rates.Futures;
+using System.Globalization;
+using FpML.V5r10.Reporting.Models.Futures;
+using FpML.V5r10.Reporting.Models.Rates.Futures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Orion.Models.Tests.Models.Rate
+namespace FpML.V5r10.Models.Tests.Models.Rate
 {
     [TestClass]
     public class TestFuturesConvexityModel
     {
-        private readonly IFuturesAssetParameters analyticModelParameters
-            = new FuturesAssetParameters
-                  {
+        private readonly IRateFuturesAssetParameters _analyticModelParameters
+            = new RateFuturesAssetParameters
+            {
                       Rate = .05m,
                       Volatility = .2m,
                       TimeToExpiry = 3.0m,
@@ -23,19 +25,19 @@ namespace Orion.Models.Tests.Models.Rate
         {
             var model = new EuroDollarFuturesAssetAnalytic
                             {
-                                AnalyticParameters = analyticModelParameters
+                                AnalyticParameters = _analyticModelParameters
                             };
             var result = model.AdjustedRate;
             var convexityAdjustment = model.ConvexityAdjustment;
-            Debug.Print(result.ToString());
-            Debug.Print(convexityAdjustment.ToString());
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(convexityAdjustment, 0.0004786305830711m);
-            Debug.Print(model.DiscountFactorAtMaturity.ToString());
+            Debug.Print(model.DiscountFactorAtMaturity.ToString(CultureInfo.InvariantCulture));
             model.AnalyticParameters.EndDiscountFactor = model.DiscountFactorAtMaturity;
             var impliedQuote = (double)model.ImpliedQuote;
-            Debug.Print(impliedQuote.ToString());
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
             var rate = result + convexityAdjustment;
-            Debug.Print(rate.ToString());
+            Debug.Print(rate.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual((double)rate, impliedQuote, 0.0000001);
         }
 
@@ -44,15 +46,15 @@ namespace Orion.Models.Tests.Models.Rate
         {
             var model = new EuroYenFuturesAssetAnalytic
                             {
-                                AnalyticParameters = analyticModelParameters
+                                AnalyticParameters = _analyticModelParameters
                             };
             var result = model.AdjustedRate;
             var convexityAdjustment = model.ConvexityAdjustment;
-            Debug.Print(result.ToString());
-            Debug.Print(convexityAdjustment.ToString());
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(convexityAdjustment, 0.0004786305830711m);
             var impliedQuote = model.ImpliedQuote;
-            Debug.Print(impliedQuote.ToString());
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
         }
 
         [TestMethod]
@@ -60,15 +62,15 @@ namespace Orion.Models.Tests.Models.Rate
         {
             var model = new EuroFuturesAssetAnalytic
                             {
-                                AnalyticParameters = analyticModelParameters
+                                AnalyticParameters = _analyticModelParameters
                             };
             var result = model.AdjustedRate;
             var convexityAdjustment = model.ConvexityAdjustment;
-            Debug.Print(result.ToString());
-            Debug.Print(convexityAdjustment.ToString());
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(convexityAdjustment, 0.0004786305830711m);
             var impliedQuote = model.ImpliedQuote;
-            Debug.Print(impliedQuote.ToString());
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
         }
 
         [TestMethod]
@@ -76,33 +78,31 @@ namespace Orion.Models.Tests.Models.Rate
         {
             var model = new EuroSterlingFuturesAssetAnalytic
                             {
-                                AnalyticParameters = analyticModelParameters
+                                AnalyticParameters = _analyticModelParameters
                             };
             var result = model.AdjustedRate;
             var convexityAdjustment = model.ConvexityAdjustment;
-            Debug.Print(result.ToString());
-            Debug.Print(convexityAdjustment.ToString());
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
             Assert.AreEqual(convexityAdjustment, 0.0004786305830711m);
             var impliedQuote = model.ImpliedQuote;
-            Debug.Print(impliedQuote.ToString());
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
         }
 
-        //[TestMethod]
-        //
-        //public void TestBankBillsConvexityModel()
-        //{
-        //    var model = new BankBillsFuturesAssetAnalytic
-        //                    {
-        //                        AnalyticParameters = _analyticModelParameters
-        //                    };
-        //    var result = model.AdjustedRate;
-        //    var convexityAdjustment = model.ConvexityAdjustment;
-        //    Debug.Print(result.ToString());
-        //    Debug.Print(convexityAdjustment.ToString());
-        //    Assert.AreEqual(convexityAdjustment, 0.0004013431450656m);
-        //    var impliedQuote = model.ImpliedQuote;
-        //    Debug.Print(impliedQuote.ToString());
-        //}
-
+        [TestMethod]
+        public void TestBankBillsConvexityModel()
+        {
+            var model = new BankBillsFuturesAssetAnalytic
+            {
+                AnalyticParameters = _analyticModelParameters
+            };
+            var result = model.AdjustedRate;
+            var convexityAdjustment = model.ConvexityAdjustment;
+            Debug.Print(result.ToString(CultureInfo.InvariantCulture));
+            Debug.Print(convexityAdjustment.ToString(CultureInfo.InvariantCulture));
+            Assert.AreEqual(convexityAdjustment, 0.0004013431450656m);
+            var impliedQuote = model.ImpliedQuote;
+            Debug.Print(impliedQuote.ToString(CultureInfo.InvariantCulture));
+        }
     }
 }

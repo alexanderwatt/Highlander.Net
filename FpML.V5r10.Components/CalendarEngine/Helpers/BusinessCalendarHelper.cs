@@ -18,15 +18,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FpML.V5r10.Reporting;
+using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
-using FpML.V5r3.Reporting.Helpers;
 using Orion.Util.NamedValues;
-using FpML.V5r3.Reporting;
-using Orion.ModelFramework;
 
 #endregion
 
-namespace Orion.CalendarEngine.Helpers
+namespace FpML.V5r10.CalendarEngine.Helpers
 {
     /// <summary>
     /// Business Calendar Wrapper helper class

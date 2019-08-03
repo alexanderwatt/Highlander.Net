@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
+
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +22,7 @@ using System.Windows.Forms;
 using Core.Common;
 using Core.V34;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Constants;
 using Orion.Contracts;
 using Orion.CurveEngine;
@@ -62,6 +78,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                 var client = factory.Create();
                 _clientRef = Reference<ICoreClient>.Create(client);
                 _cache = _clientRef.Target.CreateCache();
+                //_cache.SubscribeInfoOnly<Algorithm>(Expr.ALL);
                 // init controls
                 // - form title
                 var env = _clientRef.Target.ClientInfo.ConfigEnv;
@@ -104,8 +121,7 @@ namespace FpML.V5r3.AutoCurveBuilder
         {
             // note: this runs on the foreground thread
             var item = notUsed as ICoreItem;
-            var qas = item?.Data as QuotedAssetSet;
-            if (qas == null) return;
+            if (!(item?.Data is QuotedAssetSet qas)) return;
             // 1. Get the property values that uniquely identify the curves to refresh.
             // This is the process for the workflow request. Alternatively, a direct build of the curve can occur.
             //
@@ -120,7 +136,7 @@ namespace FpML.V5r3.AutoCurveBuilder
             //
             if (chkBoxDependentCurves.Checked)
             {
-                //Find all the QAS's where the ReferenceCurveName is equal to the curveType.curveName!
+                //Find all the QuotesAssetSet's where the ReferenceCurveName is equal to the curveType.curveName!
                 var requestProperties = new NamedValueSet();
                 requestProperties.Set(EnvironmentProp.NameSpace, NameSpace);
                 requestProperties.Set(CurveProp.Market, market);
@@ -143,8 +159,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                 {
                     foreach (var dataItem in items)
                     {
-                        var spreadCurve = dataItem.Data as Market;
-                        if (spreadCurve == null) continue;
+                        if (!(dataItem.Data is Market spreadCurve)) continue;
                         //var bootstrap = dataItem.AppProps.GetValue<bool>(CurveProp.BootStrap, false);
                         //if (!bootstrap) { dataItem.AppProps.Set(CurveProp.BootStrap, true); }
                         try
@@ -208,7 +223,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                                 CurveName = curveName
                             }
                     };
-                // 6.Include all other dependent curvenames i.e. spread curves.
+                // 6.Include all other dependent curve names i.e. spread curves.
                 //
                 if (items != null)
                 {
@@ -290,7 +305,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                     //
                     if (chkBoxDependentCurves.Checked)
                     {
-                        //Find all the QAS's where the ReferenceCurveName is equal to the curveType.curveName!
+                        //Find all the QuotedAssetSet's where the ReferenceCurveName is equal to the curveType.curveName!
                         var requestProperties = new NamedValueSet();
                         requestProperties.Set(EnvironmentProp.NameSpace, NameSpace);
                         requestProperties.Set(CurveProp.Market, market);
@@ -378,7 +393,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                                         CurveName = curveName
                                     }
                             };
-                        // 6.Include all other dependent curvenames i.e. spread curves.
+                        // 6.Include all other dependent curve names i.e. spread curves.
                         //
                         if (items!=null)
                         {
@@ -466,7 +481,7 @@ namespace FpML.V5r3.AutoCurveBuilder
                 int count = Interlocked.Increment(ref _queuedCalls);
                 //if (count % 10000 == 0)
                 _loggerRef.Target.LogDebug("SubscribeCallback: Queued calls posted: {0}", count);
-                _syncContext.Post(ReceiveNewItem, item); //chnanged from null
+                _syncContext.Post(ReceiveNewItem, item); //changed from null
             };
             newSubscription.Start();
             _loggerRef.Target.LogDebug("Subscription started.");

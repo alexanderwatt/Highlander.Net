@@ -101,6 +101,7 @@
     <Compile Include="Assets\Inflation\Swaps\PriceableSimpleZeroCouponInflationSwap.cs" />
     <Compile Include="Assets\Options\PriceableOptionAssetController.cs" />
     <Compile Include="Assets\Options\PriceableSimpleOptionAsset.cs" />
+    <Compile Include="Assets\Property\PriceableLeaseAssetController.cs" />
     <Compile Include="Assets\Property\PriceablePropertyAssetController.cs" />
     <Compile Include="Assets\Rates\Bonds\PriceableBondSpot.cs" />
     <Compile Include="Assets\Rates\Bonds\PriceableBondForward.cs" />

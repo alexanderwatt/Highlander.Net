@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FpML.V5r3.Reporting.Models.Tests")]
+[assembly: AssemblyTitle("FpML.V5r10.Models.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FpML.V5r3.Reporting.Models.Tests")]
+[assembly: AssemblyProduct("FpML.V5r10.Models.Tests")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a3da6f26-7942-47ad-af06-b3e5f7da3b87")]
+[assembly: Guid("05B487E4-A675-4E7A-B824-D67E4EC77465")]
 
 // Version information for an assembly consists of the following four values:
 //

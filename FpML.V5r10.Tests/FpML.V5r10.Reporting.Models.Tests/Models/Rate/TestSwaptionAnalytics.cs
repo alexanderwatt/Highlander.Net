@@ -1,12 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
-using Orion.Models.Rates.Swaption;
+using FpML.V5r10.Reporting.Models.Rates.Swaption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Models.Rates.Coupons;
 
-
-namespace Orion.Models.Tests.Models.Rate
+namespace FpML.V5r10.Models.Tests.Models.Rate
 {
     [TestClass]
     public class TestSwaptionAnalytics

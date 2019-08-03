@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3439766B-2029-42BF-938A-514F98633245}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FpML.V5r10.EquityVolatilityCalculator</RootNamespace>
+    <AssemblyName>FpML.V5r10.EquityVolatilityCalculator</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dividend.cs">
+    </Compile>
+    <Compile Include="Exception\DuplicateNotAllowedException.cs" />
+    <Compile Include="Exception\ExtrapolationFailureException.cs" />
+    <Compile Include="Exception\IncompleteInputDataException.cs" />
+    <Compile Include="Exception\IncompleteLeadSurfaceException.cs" />
+    <Compile Include="Exception\InvalidValueException.cs" />
+    <Compile Include="ForwardExpiry.cs">
+    </Compile>
+    <Compile Include="Helpers\DividendHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\ExtrapolationHelper.cs" />
+    <Compile Include="Helpers\ForwardExpiryHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\InputValidator.cs">
+    </Compile>
+    <Compile Include="Helpers\OptionHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\StockHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\StrikeHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\ValuationHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\VolatilitySurfaceHelper.cs">
+    </Compile>
+    <Compile Include="Helpers\XmlHelper.cs">
+    </Compile>
+    <Compile Include="IStock.cs">
+    </Compile>
+    <Compile Include="IVolatiliityPoint.cs">
+    </Compile>
+    <Compile Include="IVolatilitySurface.cs">
+    </Compile>
+    <Compile Include="LeadStock.cs">
+    </Compile>
+    <Compile Include="OptionPosition.cs">
+    </Compile>
+    <Compile Include="Pricing\ITree.cs">
+    </Compile>
+    <Compile Include="Pricing\PriceTree.cs">
+    </Compile>
+    <Compile Include="Pricing\PropAssetTree.cs">
+    </Compile>
+    <Compile Include="Pricing\AmOptionAnalytics.cs">
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SABRInterp.cs" />
+    <Compile Include="Stock.cs">
+    </Compile>
+    <Compile Include="Strike.cs">
+    </Compile>
+    <Compile Include="Valuation.cs">
+    </Compile>
+    <Compile Include="VolatilityPoint.cs">
+    </Compile>
+    <Compile Include="VolatilityState.cs">
+    </Compile>
+    <Compile Include="VolatilitySurface.cs">
+    </Compile>
+    <Compile Include="WingInterp.cs">
+    </Compile>
+    <Compile Include="RateCurve.cs">
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+    <None Include="Documents\WingModelFittingMethodology.doc">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\Numerics\Highlander.Numerics.csproj">
+      <Project>{8322d592-567a-4186-ae0b-8dd03d3dde48}</Project>
+      <Name>Highlander.Numerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r10\FpML.V5r10.Codes\FpML.V5r10.Codes.csproj">
+      <Project>{9003b832-35d4-45b7-9b85-6d23a1984523}</Project>
+      <Name>FpML.V5r10.Codes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting.Analytics\FpML.V5r10.Reporting.Analytics.csproj">
+      <Project>{0b8798a2-00db-4736-a846-627508ac21b0}</Project>
+      <Name>FpML.V5r10.Reporting.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting.ModelFramework\FpML.V5r10.Reporting.ModelFramework.csproj">
+      <Project>{551358af-6bc4-44ca-b524-d669519f1868}</Project>
+      <Name>FpML.V5r10.Reporting.ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting.Models\FpML.V5r10.Reporting.Models.csproj">
+      <Project>{c52163ce-2180-406f-bd1f-58c286e8f47d}</Project>
+      <Name>FpML.V5r10.Reporting.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r10\FpML.V5r10.Reporting\FpML.V5r10.Reporting.csproj">
+      <Project>{560374aa-175b-49f5-aed1-813ba1aeb713}</Project>
+      <Name>FpML.V5r10.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

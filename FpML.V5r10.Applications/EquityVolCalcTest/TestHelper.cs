@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
-using Orion.Equity.VolatilityCalculator;
+using FpML.V5r10.EquityVolatilityCalculator;
 using Orion.EquityVolCalcTestData;
-using Stock = Orion.Equity.VolatilityCalculator.Stock;
+using Stock = FpML.V5r10.EquityVolatilityCalculator.Stock;
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     public class TestHelper
     {
-        public static Stock CreateStock(EquityVolCalcTestData.Stock stock)
+        public static Stock CreateStock(Orion.EquityVolCalcTestData.Stock stock)
         {
             DateTime today = XmlGetDate(stock.Date);
             decimal spot = Convert.ToDecimal(stock.Spot);

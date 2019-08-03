@@ -1,11 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
-using Orion.Models.Rates.Options;
+using FpML.V5r10.Reporting.Models.Rates.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace Orion.Models.Tests.Models.Rate
+namespace FpML.V5r10.Models.Tests.Models.Rate
 {
     [TestClass]
     public class TestSimpleOptionAnalytics
@@ -19,11 +17,11 @@ namespace Orion.Models.Tests.Models.Rate
             {
                 ISimpleOptionAssetParameters analyticModelParameters = new SimpleRateOptionAssetParameters
                                                                            {
-                                                                               isVolatiltiyQuote = true,
+                                                                               IsVolatilityQuote = true,
                                                                                NotionalAmount = 10000000.0m,
                                                                                Rate = .05m,
-                                                                               isDiscounted = false,
-                                                                               isPut = true,
+                                                                               IsDiscounted = false,
+                                                                               IsPut = true,
                                                                                Volatility = val,
                                                                                Strike = .05m,
                                                                                PremiumPaymentDiscountFactor = 1.0m,
@@ -34,10 +32,8 @@ namespace Orion.Models.Tests.Models.Rate
                                 {
                                     AnalyticParameters = analyticModelParameters
                                 };
-
                 var result = model.NPV;
                 var delta0 = model.Delta0;
-                
                 Debug.Print("ExpectedValue1 : {0} Delta0 : {1} CurveYearFraction : {2} ", result, delta0, 
                             analyticModelParameters.TimeToExpiry);
                 analyticModelParameters.Premium = result;
@@ -56,8 +52,8 @@ namespace Orion.Models.Tests.Models.Rate
                                                                            {
                                                                                NotionalAmount = 10000000.0m,
                                                                                Rate = .05m,
-                                                                               isDiscounted = false,
-                                                                               isPut = true,
+                                                                               IsDiscounted = false,
+                                                                               IsPut = true,
                                                                                Strike = .05m,
                                                                                Premium = 0.001m,
                                                                                PremiumPaymentDiscountFactor = 1.0m,
@@ -68,9 +64,7 @@ namespace Orion.Models.Tests.Models.Rate
                                 {
                                     AnalyticParameters = analyticModelParameters
                                 };
-
                 var result = model.VolatilityAtExpiry;
-
                 Debug.Print("VolatilityAtExpiry : {0}", result);
                 analyticModelParameters.Volatility = result;
                 var vol = model.NPV;

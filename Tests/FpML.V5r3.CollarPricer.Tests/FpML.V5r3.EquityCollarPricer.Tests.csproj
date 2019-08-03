@@ -77,16 +77,6 @@
     <Compile Include="ZeroRateCurveTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FpML.V5r3.Applications\CollarPricer\FpML.V5r3.EquityCollarPricer.csproj">
-      <Project>{0b7b1cad-8bed-4ae6-92a9-6459da4660a9}</Project>
-      <Name>FpML.V5r3.EquityCollarPricer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
-      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
-      <Name>FpML.V5r3.Reporting.Analytics</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -105,6 +95,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FpML.V5r3.Applications\CollarPricer\FpML.V5r3.EquityCollarPricer.csproj">
+      <Project>{0b7b1cad-8bed-4ae6-92a9-6459da4660a9}</Project>
+      <Name>FpML.V5r3.EquityCollarPricer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>FpML.V5r3.Reporting.Analytics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

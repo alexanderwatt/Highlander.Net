@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Hghlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Hghlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -16,18 +16,18 @@
 #region Using Directives
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Collections.Generic;
-using Orion.Models.Rates.Futures;
+using FpML.V5r10.CalendarEngine.Helpers;
+using FpML.V5r10.Reporting.Models.Rates.Futures;
+using Highlander.Numerics.Dates;
+using Highlander.Numerics.Helpers;
 using Orion.Util.Helpers;
-using Orion.Analytics.Helpers;
-using Orion.Analytics.Dates;
-using Orion.CalendarEngine.Helpers;
 
 #endregion
 
-namespace Orion.CalendarEngine.Dates
+namespace FpML.V5r10.CalendarEngine.Dates
 {
     /// <summary>
     /// Evaluates Last Trading Days
@@ -327,7 +327,7 @@ namespace Orion.CalendarEngine.Dates
         {
             //Get the next valid code.
             string futuresCode = GetNextAbsoluteMainCycleCode(referenceDate);
-            //Iterate throuigh the codes.
+            //Iterate through the codes.
             for (int i = 1; i < iteration; i++)
             {
                 futuresCode = GetFollowingMainCycleCode(futuresCode);

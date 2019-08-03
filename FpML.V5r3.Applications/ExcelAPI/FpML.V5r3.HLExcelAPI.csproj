@@ -85,7 +85,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Financial\Pricers.cs" />
-    <Compile Include="HLAutomation.cs" />
     <Compile Include="ExcelApiResource.Designer.cs" />
     <Compile Include="Extensions\ExcelApiExtensions.cs" />
     <Compile Include="Extensions\ResourceLoader.cs" />

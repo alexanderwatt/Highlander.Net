@@ -37,7 +37,7 @@ namespace Orion.V5r3.PublisherWebService
             {
                 //var stopwatch = new Stopwatch();
                 //stopwatch.Start();
-                CoreClientFactory factory = new CoreClientFactory(LoggerRef)
+                var factory = new CoreClientFactory(LoggerRef)
                     .SetEnv("DEV")
                     .SetApplication(Assembly.GetExecutingAssembly())
                     .SetProtocols(WcfConst.AllProtocolsStr);

@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FpML.V5r3.Reporting.CalendarEngine")]
+[assembly: AssemblyTitle("FpML.V5r10.CalendarEngine")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FpML.V5r3.Reporting.CalendarEngine")]
+[assembly: AssemblyProduct("FpML.V5r10.CalendarEngine")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("DF2FB546-5306-4CDB-9935-5727A98AA65E")]
+[assembly: Guid("50F70260-59C5-49D6-A27D-3A51E6A27CC2")]
 
 // Version information for an assembly consists of the following four values:
 //

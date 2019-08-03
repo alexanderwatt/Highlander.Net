@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Orion.EquitiesVolCalc.TestData;
-using ForwardExpiry = Orion.Equity.VolatilityCalculator.ForwardExpiry;
+using ForwardExpiry = FpML.V5r10.EquityVolatilityCalculator.ForwardExpiry;
 
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     /// <summary>
     /// Summary description for UnitTest1

@@ -20,7 +20,7 @@ namespace Orion.EquityCollarPricer.Tests
             DividendListTest.CreateDividendList();
         }
 
-        static public DividendList CreateDividendList()
+        public static DividendList CreateDividendList()
         {
             Dividend div1 = DividendTest.CreateDividend(cExDivDate, cExDivDate.AddDays(10), cPayAmt, cCcy);
             Dividend div2 = DividendTest.CreateDividend(cExDivDate.AddDays(10), cExDivDate.AddDays(20), cPayAmt + 10, cCcy);
@@ -39,7 +39,7 @@ namespace Orion.EquityCollarPricer.Tests
         /// <param name="paymentAmt">The payment amt.</param>
         /// <param name="currencyCode">The currency code.</param>
         /// <returns></returns>
-        static public DividendList CreateDividendList(List<Dividend> dividends)
+        public static DividendList CreateDividendList(List<Dividend> dividends)
         {
             DividendList dividendList = new DividendList();
             foreach (Dividend div in dividends)

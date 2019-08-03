@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
+using System.Security.Policy;
 using Core.Common;
 using FpML.V5r3.Reporting.Helpers;
 using Orion.Constants;
@@ -88,7 +89,7 @@ namespace Orion.CurveEngine
 
         internal const string DefaultTenor = "3M";
 
-        public Pedersen Pedersen { get; }
+        //public Pedersen Pedersen { get; }
 
         #endregion
 
@@ -115,7 +116,7 @@ namespace Orion.CurveEngine
             Cache = cache;
             Logger = logger;
             NameSpace = nameSpace;
-            Pedersen = new Pedersen();
+            //Pedersen = new Pedersen();
             ////1. Load up relevant data. If the data is not available then the engine will not run.
             //If there is no cache then resource files can be loaded!
             try
@@ -3569,282 +3570,297 @@ namespace Orion.CurveEngine
 
         #region Pedersen Calibration
 
-        #region Set the curves
+        //#region Set the curves
 
-        /// <summary>
-        /// Sets the discount factors to use
-        /// </summary>
-        /// <param name="rateCurveId"></param>
-        /// <returns></returns>
-        public string PedersenSetDiscountFactors(String rateCurveId)
-        {
-            return GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
-        }
+        ///// <summary>
+        ///// Sets the discount factors to use
+        ///// </summary>
+        ///// <param name="rateCurveId"></param>
+        ///// <returns></returns>
+        //public string PedersenSetDiscountFactors(String rateCurveId)
+        //{
+        //    return GetCurve(rateCurveId, false) is IRateCurve rateCurve ? Pedersen.SetDiscountFactors(rateCurve) : String.Format("Discount factors were not set.");
+        //}
 
-        public string PedersenSetCapletImpliedVolatility(Double strike, String volSurfaceIdentifier)
-        {
-            return GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
-        }
+        //public string PedersenSetCapletImpliedVolatility(Double strike, String volSurfaceIdentifier)
+        //{
+        //    return GetCurve(volSurfaceIdentifier, false) is IStrikeVolatilitySurface volSurface ? Pedersen.SetCapletImpliedVolatility(strike, volSurface) : null;
+        //}
 
-        public string PedersenSetSwaptionImpliedVolatility(String volSurfaceIdentifier)
-        {
-            if (GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
-            {
-                Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
-                var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
-                return Pedersen.SetSwaptionImpliedVolatility(volObj);
-            }
-            return null;
-        }
+        //public string PedersenSetSwaptionImpliedVolatility(String volSurfaceIdentifier)
+        //{
+        //    if (GetCurve(volSurfaceIdentifier, false) is IVolatilitySurface volSurface)
+        //    {
+        //        Pair<PricingStructure, PricingStructureValuation> fpMLPair = volSurface.GetFpMLData();
+        //        var volObj = PricingStructureHelper.FpMLPairTo2DArray(fpMLPair);
+        //        return Pedersen.SetSwaptionImpliedVolatility(volObj);
+        //    }
+        //    return null;
+        //}
 
-        #endregion
+        //#endregion
 
-        /// <summary>
-        /// WIP stub. Still using dummy vol and correlation.
-        /// </summary>
-        /// <param name="curveId">RateCurve Id</param>
-        /// <returns></returns>
-        public object[,] PedersenCalibration(string curveId)
-        {
-            var discounts = CreateQuarterlyDiscount(curveId);
+        ///// <summary>
+        ///// WIP stub. Still using dummy vol and correlation.
+        ///// </summary>
+        ///// <param name="curveId">RateCurve Id</param>
+        ///// <returns></returns>
+        //public object[,] PedersenCalibration(string curveId)
+        //{
+        //    var discounts = CreateQuarterlyDiscount(curveId);
 
-            #region Correlation
+        //    #region Correlation
 
-            var correlation = new DenseMatrix(16, 16, new[] {
-                                                                                   1.000000000000000,0.755977958030068,0.390753301173931,0.141216505072534,-0.104876511208397,-0.210627197463773,-0.261885066327489,-0.283855022953850,-0.278785040189639,-0.217616581561314,-0.131679872097756,-0.047119056221972,0.035536790425668,0.035012148706578,-0.056755438761266,-0.147067841427471,
-                                                                                   0.755977958030068,1.000000000000000,0.897859194192688,0.754250412789863,0.568584771816748,0.471717652445483,0.414331524248440,0.376892759651739,0.325307014928591,0.295739233811822,0.262631528920056,0.258819816282469,0.223110623543883,0.224277418597115,0.197179794618843,0.214946385346135,
-                                                                                   0.390753301173931,0.897859194192688,1.000000000000000,0.966206548235119,0.871487281927208,0.807411735395667,0.762317308365949,0.725676219350727,0.652204548346068,0.571439499258483,0.467957645337466,0.405073258382088,0.296785508080043,0.295698168204210,0.315008587168980,0.399744811477594,
-                                                                                   0.141216505072534,0.754250412789863,0.966206548235119,1.000000000000000,0.968097165525376,0.930197657405308,0.897664527480700,0.866199451465545,0.789464234299992,0.688558329945124,0.554848012298554,0.462969701618092,0.320322999574078,0.315132123632584,0.355543542028662,0.470322650948144,
-                                                                                   -0.104876511208397,0.568584771816748,0.871487281927208,0.968097165525376,1.000000000000000,0.991870609745447,0.976144403192061,0.954694443933486,0.886260319324773,0.778379798672846,0.628107300555259,0.514474740129681,0.344648740689955,0.329912317723686,0.378645793200518,0.511589751077290,
-                                                                                   -0.210627197463773,0.471717652445483,0.807411735395667,0.930197657405308,0.991870609745447,1.000000000000000,0.995420463837200,0.982645964956045,0.927529471279287,0.826459103514222,0.677480265864820,0.557530885234864,0.376387183783690,0.351182092624649,0.391830263736922,0.525549743054232,
-                                                                                   -0.261885066327489,0.414331524248440,0.762317308365949,0.897664527480700,0.976144403192061,0.995420463837200,1.000000000000000,0.995653842253138,0.956423399222447,0.868102357495867,0.727656184223354,0.607494148494469,0.420864536558254,0.384765297686029,0.410542083201468,0.538065091248112,
-                                                                                   -0.283855022953850,0.376892759651739,0.725676219350727,0.866199451465545,0.954694443933486,0.982645964956045,0.995653842253138,1.000000000000000,0.978998288038717,0.907731550317703,0.780823302873087,0.664381765576934,0.476000948658687,0.428541137695596,0.434866141266280,0.551343586803336,
-                                                                                   -0.278785040189639,0.325307014928591,0.652204548346068,0.789464234299992,0.886260319324773,0.927529471279287,0.956423399222447,0.978998288038717,1.000000000000000,0.973112904777601,0.886257099989342,0.788017307311586,0.608878175546937,0.540668413612633,0.501605787039908,0.584142099062795,
-                                                                                   -0.217616581561314,0.295739233811822,0.571439499258483,0.688558329945124,0.778379798672846,0.826459103514222,0.868102357495867,0.907731550317703,0.973112904777601,1.000000000000000,0.968305181763602,0.903436609813577,0.755190977445885,0.674824032661566,0.590245774772147,0.624331666978794,
-                                                                                   -0.131679872097756,0.262631528920056,0.467957645337466,0.554848012298554,0.628107300555259,0.677480265864820,0.727656184223354,0.780823302873087,0.886257099989342,0.968305181763602,1.000000000000000,0.980402212079355,0.884840913945599,0.806372358629370,0.688651955757898,0.667641768862761,
-                                                                                   -0.047119056221972,0.258819816282469,0.405073258382088,0.462969701618092,0.514474740129681,0.557530885234864,0.607494148494469,0.664381765576934,0.788017307311586,0.903436609813577,0.980402212079355,1.000000000000000,0.957995763948430,0.896533849250595,0.773428357979744,0.713936269134348,
-                                                                                   0.035536790425668,0.223110623543883,0.296785508080043,0.320322999574078,0.344648740689955,0.376387183783690,0.420864536558254,0.476000948658687,0.608878175546937,0.755190977445885,0.884840913945599,0.957995763948430,1.000000000000000,0.979255559959103,0.877721716091762,0.776614810578805,
-                                                                                   0.035012148706578,0.224277418597115,0.295698168204210,0.315132123632584,0.329912317723686,0.351182092624649,0.384765297686029,0.428541137695596,0.540668413612633,0.674824032661566,0.806372358629370,0.896533849250595,0.979255559959103,1.000000000000000,0.951797469031466,0.859107491550573,
-                                                                                   -0.056755438761266,0.197179794618843,0.315008587168980,0.355543542028662,0.378645793200518,0.391830263736922,0.410542083201468,0.434866141266280,0.501605787039908,0.590245774772147,0.688651955757898,0.773428357979744,0.877721716091762,0.951797469031466,1.000000000000000,0.961857372722260,
-                                                                                   -0.147067841427471,0.214946385346135,0.399744811477594,0.470322650948144,0.511589751077290,0.525549743054232,0.538065091248112,0.551343586803336,0.584142099062795,0.624331666978794,0.667641768862761,0.713936269134348,0.776614810578805,0.859107491550573,0.961857372722260,1.000000000000000
-                                                                               });
-            #endregion
+        //    var correlation = new DenseMatrix(16, 16, new[] {
+        //                                                                           1.000000000000000,0.755977958030068,0.390753301173931,0.141216505072534,-0.104876511208397,-0.210627197463773,-0.261885066327489,-0.283855022953850,-0.278785040189639,-0.217616581561314,-0.131679872097756,-0.047119056221972,0.035536790425668,0.035012148706578,-0.056755438761266,-0.147067841427471,
+        //                                                                           0.755977958030068,1.000000000000000,0.897859194192688,0.754250412789863,0.568584771816748,0.471717652445483,0.414331524248440,0.376892759651739,0.325307014928591,0.295739233811822,0.262631528920056,0.258819816282469,0.223110623543883,0.224277418597115,0.197179794618843,0.214946385346135,
+        //                                                                           0.390753301173931,0.897859194192688,1.000000000000000,0.966206548235119,0.871487281927208,0.807411735395667,0.762317308365949,0.725676219350727,0.652204548346068,0.571439499258483,0.467957645337466,0.405073258382088,0.296785508080043,0.295698168204210,0.315008587168980,0.399744811477594,
+        //                                                                           0.141216505072534,0.754250412789863,0.966206548235119,1.000000000000000,0.968097165525376,0.930197657405308,0.897664527480700,0.866199451465545,0.789464234299992,0.688558329945124,0.554848012298554,0.462969701618092,0.320322999574078,0.315132123632584,0.355543542028662,0.470322650948144,
+        //                                                                           -0.104876511208397,0.568584771816748,0.871487281927208,0.968097165525376,1.000000000000000,0.991870609745447,0.976144403192061,0.954694443933486,0.886260319324773,0.778379798672846,0.628107300555259,0.514474740129681,0.344648740689955,0.329912317723686,0.378645793200518,0.511589751077290,
+        //                                                                           -0.210627197463773,0.471717652445483,0.807411735395667,0.930197657405308,0.991870609745447,1.000000000000000,0.995420463837200,0.982645964956045,0.927529471279287,0.826459103514222,0.677480265864820,0.557530885234864,0.376387183783690,0.351182092624649,0.391830263736922,0.525549743054232,
+        //                                                                           -0.261885066327489,0.414331524248440,0.762317308365949,0.897664527480700,0.976144403192061,0.995420463837200,1.000000000000000,0.995653842253138,0.956423399222447,0.868102357495867,0.727656184223354,0.607494148494469,0.420864536558254,0.384765297686029,0.410542083201468,0.538065091248112,
+        //                                                                           -0.283855022953850,0.376892759651739,0.725676219350727,0.866199451465545,0.954694443933486,0.982645964956045,0.995653842253138,1.000000000000000,0.978998288038717,0.907731550317703,0.780823302873087,0.664381765576934,0.476000948658687,0.428541137695596,0.434866141266280,0.551343586803336,
+        //                                                                           -0.278785040189639,0.325307014928591,0.652204548346068,0.789464234299992,0.886260319324773,0.927529471279287,0.956423399222447,0.978998288038717,1.000000000000000,0.973112904777601,0.886257099989342,0.788017307311586,0.608878175546937,0.540668413612633,0.501605787039908,0.584142099062795,
+        //                                                                           -0.217616581561314,0.295739233811822,0.571439499258483,0.688558329945124,0.778379798672846,0.826459103514222,0.868102357495867,0.907731550317703,0.973112904777601,1.000000000000000,0.968305181763602,0.903436609813577,0.755190977445885,0.674824032661566,0.590245774772147,0.624331666978794,
+        //                                                                           -0.131679872097756,0.262631528920056,0.467957645337466,0.554848012298554,0.628107300555259,0.677480265864820,0.727656184223354,0.780823302873087,0.886257099989342,0.968305181763602,1.000000000000000,0.980402212079355,0.884840913945599,0.806372358629370,0.688651955757898,0.667641768862761,
+        //                                                                           -0.047119056221972,0.258819816282469,0.405073258382088,0.462969701618092,0.514474740129681,0.557530885234864,0.607494148494469,0.664381765576934,0.788017307311586,0.903436609813577,0.980402212079355,1.000000000000000,0.957995763948430,0.896533849250595,0.773428357979744,0.713936269134348,
+        //                                                                           0.035536790425668,0.223110623543883,0.296785508080043,0.320322999574078,0.344648740689955,0.376387183783690,0.420864536558254,0.476000948658687,0.608878175546937,0.755190977445885,0.884840913945599,0.957995763948430,1.000000000000000,0.979255559959103,0.877721716091762,0.776614810578805,
+        //                                                                           0.035012148706578,0.224277418597115,0.295698168204210,0.315132123632584,0.329912317723686,0.351182092624649,0.384765297686029,0.428541137695596,0.540668413612633,0.674824032661566,0.806372358629370,0.896533849250595,0.979255559959103,1.000000000000000,0.951797469031466,0.859107491550573,
+        //                                                                           -0.056755438761266,0.197179794618843,0.315008587168980,0.355543542028662,0.378645793200518,0.391830263736922,0.410542083201468,0.434866141266280,0.501605787039908,0.590245774772147,0.688651955757898,0.773428357979744,0.877721716091762,0.951797469031466,1.000000000000000,0.961857372722260,
+        //                                                                           -0.147067841427471,0.214946385346135,0.399744811477594,0.470322650948144,0.511589751077290,0.525549743054232,0.538065091248112,0.551343586803336,0.584142099062795,0.624331666978794,0.667641768862761,0.713936269134348,0.776614810578805,0.859107491550573,0.961857372722260,1.000000000000000
+        //                                                                       });
+        //    #endregion
 
-            var timeGrid = new PedersenTimeGrid(
-                new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 },
-                new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 }
-                );
+        //    var timeGrid = new PedersenTimeGrid(
+        //        new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 },
+        //        new[] { 0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 28, 34, 40, 50, 60 }
+        //        );
 
-            #region Swaptions
+        //    #region Swaptions
 
-            var swaptionDataRaw = new[,]
-            {
-                {0.1290,0.1540,0.1550,0.1545,0.1535,0.1495,0.1465,0.1430,0.1400,0.1385,0.1340,0.1320,0.1305,0.1275},
-                {0.1465,0.1630,0.1630,0.1615,0.1595,0.1560,0.1530,0.1495,0.1460,0.1440,0.1390,0.1360,0.1340,0.1330},
-                {0.1755,0.1770,0.1740,0.1710,0.1680,0.1650,0.1615,0.1590,0.1560,0.1540,0.1480,0.1440,0.1425,0.1410},
-                {0.1875,0.1855,0.1820,0.1790,0.1750,0.1730,0.1700,0.1670,0.1645,0.1625,0.1555,0.1510,0.1475,0.1470},
-                {0.1895,0.1860,0.1840,0.1805,0.1780,0.1750,0.1730,0.1700,0.1680,0.1660,0.1580,0.1530,0.1505,0.1490},
-                {0.1880,0.1860,0.1830,0.1805,0.1775,0.1745,0.1725,0.1705,0.1680,0.1660,0.1575,0.1520,0.1500,0.1480},
-                {0.1830,0.1810,0.1790,0.1760,0.1735,0.1705,0.1685,0.1660,0.1640,0.1620,0.1525,0.1480,0.1455,0.1435},
-                {0.1795,0.1760,0.1730,0.1710,0.1685,0.1660,0.1635,0.1610,0.1590,0.1570,0.1470,0.1420,0.1395,0.1375},
-                {0.1670,0.1640,0.1615,0.1585,0.1570,0.1545,0.1525,0.1510,0.1490,0.1470,0.1355,0.1305,0.1285,0.1265},
-                {0.1505,0.1480,0.1460,0.1445,0.1425,0.1410,0.1395,0.1380,0.1360,0.1350,0.1250,0.1195,0.1175,0.1160},
-                {0.1380,0.1355,0.1340,0.1315,0.1305,0.1300,0.1290,0.1275,0.1260,0.1250,0.1170,0.1110,0.1090,0.1060},
-                {0.1290,0.1270,0.1245,0.1215,0.1200,0.1195,0.1180,0.1175,0.1160,0.1150,0.1080,0.1025,0.1005,0.0985},
-                {0.1195,0.1185,0.1165,0.1135,0.1135,0.1125,0.1110,0.1095,0.1085,0.1070,0.1005,0.0960,0.0935,0.0920}
-            };
-            var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
-            var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
-            var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
-            for (int i = 0; i < swaptionExpiry.Length; i++)
-            {
-                for (int j = 0; j < swaptionTenor.Length; j++)
-                {
-                    int index = i * swaptionTenor.Length + j;
-                    swaptionData[index, 0] = swaptionExpiry[i];
-                    swaptionData[index, 1] = swaptionTenor[j];
-                    swaptionData[index, 2] = swaptionDataRaw[i, j];
-                }
-            }
+        //    var swaptionDataRaw = new[,]
+        //    {
+        //        {0.1290,0.1540,0.1550,0.1545,0.1535,0.1495,0.1465,0.1430,0.1400,0.1385,0.1340,0.1320,0.1305,0.1275},
+        //        {0.1465,0.1630,0.1630,0.1615,0.1595,0.1560,0.1530,0.1495,0.1460,0.1440,0.1390,0.1360,0.1340,0.1330},
+        //        {0.1755,0.1770,0.1740,0.1710,0.1680,0.1650,0.1615,0.1590,0.1560,0.1540,0.1480,0.1440,0.1425,0.1410},
+        //        {0.1875,0.1855,0.1820,0.1790,0.1750,0.1730,0.1700,0.1670,0.1645,0.1625,0.1555,0.1510,0.1475,0.1470},
+        //        {0.1895,0.1860,0.1840,0.1805,0.1780,0.1750,0.1730,0.1700,0.1680,0.1660,0.1580,0.1530,0.1505,0.1490},
+        //        {0.1880,0.1860,0.1830,0.1805,0.1775,0.1745,0.1725,0.1705,0.1680,0.1660,0.1575,0.1520,0.1500,0.1480},
+        //        {0.1830,0.1810,0.1790,0.1760,0.1735,0.1705,0.1685,0.1660,0.1640,0.1620,0.1525,0.1480,0.1455,0.1435},
+        //        {0.1795,0.1760,0.1730,0.1710,0.1685,0.1660,0.1635,0.1610,0.1590,0.1570,0.1470,0.1420,0.1395,0.1375},
+        //        {0.1670,0.1640,0.1615,0.1585,0.1570,0.1545,0.1525,0.1510,0.1490,0.1470,0.1355,0.1305,0.1285,0.1265},
+        //        {0.1505,0.1480,0.1460,0.1445,0.1425,0.1410,0.1395,0.1380,0.1360,0.1350,0.1250,0.1195,0.1175,0.1160},
+        //        {0.1380,0.1355,0.1340,0.1315,0.1305,0.1300,0.1290,0.1275,0.1260,0.1250,0.1170,0.1110,0.1090,0.1060},
+        //        {0.1290,0.1270,0.1245,0.1215,0.1200,0.1195,0.1180,0.1175,0.1160,0.1150,0.1080,0.1025,0.1005,0.0985},
+        //        {0.1195,0.1185,0.1165,0.1135,0.1135,0.1125,0.1110,0.1095,0.1085,0.1070,0.1005,0.0960,0.0935,0.0920}
+        //    };
+        //    var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
+        //    var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
+        //    var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
+        //    for (int i = 0; i < swaptionExpiry.Length; i++)
+        //    {
+        //        for (int j = 0; j < swaptionTenor.Length; j++)
+        //        {
+        //            int index = i * swaptionTenor.Length + j;
+        //            swaptionData[index, 0] = swaptionExpiry[i];
+        //            swaptionData[index, 1] = swaptionTenor[j];
+        //            swaptionData[index, 2] = swaptionDataRaw[i, j];
+        //        }
+        //    }
 
-            #endregion
+        //    #endregion
 
-            #region Caplets
+        //    #region Caplets
 
-            var capletDataRaw = new[]
-            {
-                0.11906,0.11967,0.12298,0.12287,0.14967,0.17235,0.19190,0.19664,0.19211,0.18947,
-                0.18688,0.19040,0.19305,0.18922,0.18837,0.18918,0.18956,0.18647,0.18588,0.18702,
-                0.18840,0.18758,0.18789,0.18336,0.18731,0.18205,0.17772,0.18107,0.18185,0.18163,
-                0.18125,0.17984,0.17829,0.17664,0.17450,0.17447,0.17354,0.17144,0.17014,0.17049,
-                0.17071,0.16730,0.16657,0.16679,0.16687,0.16312,0.16309,0.15872,0.16374,0.15930,
-                0.15564,0.15711,0.15583,0.15489,0.15341,0.15328,0.15306,0.15132,0.15106,0.15130,
-                0.15118,0.14823,0.14690,0.14670,0.14636,0.14373,0.14281,0.14286,0.14251,0.14202,
-                0.13941,0.14167,0.14173,0.14197,0.14286,0.14363,0.14460,0.14581,0.14651,0.14845
-            };
-            var capletData = new double[capletDataRaw.Length, 2];
-            for (int i = 0; i < capletDataRaw.Length; i++)
-            {
-                capletData[i, 0] = i + 1;
-                capletData[i, 1] = capletDataRaw[i];
-            }
+        //    var capletDataRaw = new[]
+        //    {
+        //        0.11906,0.11967,0.12298,0.12287,0.14967,0.17235,0.19190,0.19664,0.19211,0.18947,
+        //        0.18688,0.19040,0.19305,0.18922,0.18837,0.18918,0.18956,0.18647,0.18588,0.18702,
+        //        0.18840,0.18758,0.18789,0.18336,0.18731,0.18205,0.17772,0.18107,0.18185,0.18163,
+        //        0.18125,0.17984,0.17829,0.17664,0.17450,0.17447,0.17354,0.17144,0.17014,0.17049,
+        //        0.17071,0.16730,0.16657,0.16679,0.16687,0.16312,0.16309,0.15872,0.16374,0.15930,
+        //        0.15564,0.15711,0.15583,0.15489,0.15341,0.15328,0.15306,0.15132,0.15106,0.15130,
+        //        0.15118,0.14823,0.14690,0.14670,0.14636,0.14373,0.14281,0.14286,0.14251,0.14202,
+        //        0.13941,0.14167,0.14173,0.14197,0.14286,0.14363,0.14460,0.14581,0.14651,0.14845
+        //    };
+        //    var capletData = new double[capletDataRaw.Length, 2];
+        //    for (int i = 0; i < capletDataRaw.Length; i++)
+        //    {
+        //        capletData[i, 0] = i + 1;
+        //        capletData[i, 1] = capletDataRaw[i];
+        //    }
 
-            #endregion
+        //    #endregion
 
-            var targets = new CalibrationTargets(timeGrid, capletData, swaptionData);
-            var shifts = new QuarterlyShifts(0);
-            var settings = new CalibrationSettings();
-            string outputString = "";
-            var vol = Analytics.Stochastics.Pedersen.PedersenCalibration.Calibrate(timeGrid, discounts, shifts, correlation, targets, settings, 3, true, ref outputString);
-            var result = new object[1, 1];
-            for (int i = 0; i < 60; i++)
-            {
-                for (int j = 0; j < 60 - i; j++)
-                {
-                    result[i + 1, j] = vol.VolNorm(i + 1, j + 1);
-                }
-            }
-            return result;
-        }
+        //    var targets = new CalibrationTargets(timeGrid, capletData, swaptionData);
+        //    var shifts = new QuarterlyShifts(0);
+        //    var settings = new CalibrationSettings();
+        //    string outputString = "";
+        //    var vol = Analytics.Stochastics.Pedersen.PedersenCalibration.Calibrate(timeGrid, discounts, shifts, correlation, targets, settings, 3, true, ref outputString);
+        //    var result = new object[1, 1];
+        //    for (int i = 0; i < 60; i++)
+        //    {
+        //        for (int j = 0; j < 60 - i; j++)
+        //        {
+        //            result[i + 1, j] = vol.VolNorm(i + 1, j + 1);
+        //        }
+        //    }
+        //    return result;
+        //}
 
-        /// <summary>
-        /// Retrieves quarterly discounter factors from curveId
-        /// </summary>
-        /// <param name="curveId"></param>
-        /// <returns></returns>
-        private QuarterlyDiscounts CreateQuarterlyDiscount(string curveId)
-        {
-            DateTime current = DateTime.Today;
-            var discountFactors = new double[121];
-            for (int i = 0; i <= 120; i++)
-            {
-                discountFactors[i] = GetValue(curveId, current);
-                current = current.AddMonths(3);
-            }
-            return new QuarterlyDiscounts(discountFactors);
-        }
+        ///// <summary>
+        ///// Retrieves quarterly discounter factors from curveId
+        ///// </summary>
+        ///// <param name="curveId"></param>
+        ///// <returns></returns>
+        //private QuarterlyDiscounts CreateQuarterlyDiscount(string curveId)
+        //{
+        //    DateTime current = DateTime.Today;
+        //    var discountFactors = new double[121];
+        //    for (int i = 0; i <= 120; i++)
+        //    {
+        //        discountFactors[i] = GetValue(curveId, current);
+        //        current = current.AddMonths(3);
+        //    }
+        //    return new QuarterlyDiscounts(discountFactors);
+        //}
 
-        /// <summary>
-        /// Builds Calibration targets from implied volatility data
-        /// </summary>
-        /// <param name="timeGrid"></param>
-        /// <param name="curveIdCaplet"></param>
-        /// <param name="curveIdSwaption"></param>
-        /// <returns></returns>
-        private CalibrationTargets CreateTargetImpliedVolatilities(PedersenTimeGrid timeGrid, string curveIdCaplet, string curveIdSwaption)
-        {
-            DateTime current = DateTime.Today;
-            var capletData = new double[80, 2];
-            for (int i = 0; i < 80; i++)
-            {
-                capletData[i, 0] = i + 1;
-                capletData[i, 1] = GetExpiryDateStrikeValue(curveIdCaplet, current, current.AddMonths((i + 1) * 3), 0);
-            }
-            var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
-            var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
-            var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
-            for (int i = 0; i < swaptionExpiry.Length; i++)
-            {
-                for (int j = 0; j < swaptionTenor.Length; j++)
-                {
-                    int index = i * swaptionTenor.Length + j;
-                    swaptionData[index, 0] = swaptionExpiry[i];
-                    swaptionData[index, 1] = swaptionTenor[j];
-                    string term = (swaptionTenor[j] * 3).ToString(CultureInfo.InvariantCulture) + "M";
-                    swaptionData[index, 2] = GetExpiryDateTenorValue(curveIdSwaption, current, current.AddMonths(swaptionExpiry[i] * 3), term);
-                }
-            }
-            return new CalibrationTargets(timeGrid, capletData, swaptionData);
-        }
+        ///// <summary>
+        ///// Builds Calibration targets from implied volatility data
+        ///// </summary>
+        ///// <param name="timeGrid"></param>
+        ///// <param name="curveIdCaplet"></param>
+        ///// <param name="curveIdSwaption"></param>
+        ///// <returns></returns>
+        //private CalibrationTargets CreateTargetImpliedVolatilities(PedersenTimeGrid timeGrid, string curveIdCaplet, string curveIdSwaption)
+        //{
+        //    DateTime current = DateTime.Today;
+        //    var capletData = new double[80, 2];
+        //    for (int i = 0; i < 80; i++)
+        //    {
+        //        capletData[i, 0] = i + 1;
+        //        capletData[i, 1] = GetExpiryDateStrikeValue(curveIdCaplet, current, current.AddMonths((i + 1) * 3), 0);
+        //    }
+        //    var swaptionExpiry = new[] { 1, 2, 4, 8, 12, 16, 20, 28, 40, 60, 80, 100, 120 };
+        //    var swaptionTenor = new[] { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 60, 80, 100, 120 };
+        //    var swaptionData = new double[swaptionExpiry.Length * swaptionTenor.Length, 3];
+        //    for (int i = 0; i < swaptionExpiry.Length; i++)
+        //    {
+        //        for (int j = 0; j < swaptionTenor.Length; j++)
+        //        {
+        //            int index = i * swaptionTenor.Length + j;
+        //            swaptionData[index, 0] = swaptionExpiry[i];
+        //            swaptionData[index, 1] = swaptionTenor[j];
+        //            string term = (swaptionTenor[j] * 3).ToString(CultureInfo.InvariantCulture) + "M";
+        //            swaptionData[index, 2] = GetExpiryDateTenorValue(curveIdSwaption, current, current.AddMonths(swaptionExpiry[i] * 3), term);
+        //        }
+        //    }
+        //    return new CalibrationTargets(timeGrid, capletData, swaptionData);
+        //}
 
-        #region Pedersen Algorithm
+        //#region Pedersen Algorithm
 
-        #endregion
+        //#endregion
 
-        #region Investigation Functions
+        //#region Investigation Functions
 
-        /// <summary>
-        /// Show the correlation data.
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenShowCorrelation()
-        {
-            return Pedersen.ShowCorrelation();
-        }
+        ///// <summary>
+        ///// Show the correlation data.
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenShowCorrelation()
+        //{
+        //    return Pedersen.ShowCorrelation();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration result summary.
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalSummary()
-        {
-            return Pedersen.CalSummary();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration result summary.
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalSummary()
+        //{
+        //    return Pedersen.CalSummary();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration vol surface (multi-factored)
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalVol()
-        {
-            return Pedersen.CalVol();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration vol surface (multi-factored)
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalVol()
+        //{
+        //    return Pedersen.CalVol();
+        //}
 
-        /// <summary>
-        /// Displays post-Calibration vol surface (vol sizes)
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenCalVolNorm()
-        {
-            return Pedersen.CalVolNorm();
-        }
+        ///// <summary>
+        ///// Displays post-Calibration vol surface (vol sizes)
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenCalVolNorm()
+        //{
+        //    return Pedersen.CalVolNorm();
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Simulation
+        //#region Simulation
 
-        /// <summary>
-        /// Settings range.
-        /// </summary>
-        /// <param name="r1"></param>
-        /// <returns></returns>
-        public object PedersenSimulation(object[,] r1)
-        {
-            return Pedersen.Simulation(r1);
-        }
+        ///// <summary>
+        ///// Settings range.
+        ///// </summary>
+        ///// <param name="r1"></param>
+        ///// <returns></returns>
+        //public object PedersenSimulation(object[,] r1)
+        //{
+        //    return Pedersen.Simulation(r1);
+        //}
 
-        /// <summary>
-        /// Returns details about the simulation.
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenSimSummary()
-        {
-            return Pedersen.SimSummary();
-        }
+        ///// <summary>
+        ///// Returns details about the simulation.
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenSimSummary()
+        //{
+        //    return Pedersen.SimSummary();
+        //}
 
-        /// <summary>
-        /// Gets the debug information 
-        /// </summary>
-        /// <param name="s"></param>
-        public void PedersenDebug(string s)
-        {
-            Pedersen.Debug(s);
-        }
+        ///// <summary>
+        ///// Gets the debug information 
+        ///// </summary>
+        ///// <param name="s"></param>
+        //public void PedersenDebug(string s)
+        //{
+        //    Pedersen.Debug(s);
+        //}
 
-        /// <summary>
-        /// Gets the debug information
-        /// </summary>
-        /// <returns></returns>
-        public object PedersenDebugOutput()
-        {
-            return Pedersen.DebugOutput();
-        }
+        ///// <summary>
+        ///// Gets the debug information
+        ///// </summary>
+        ///// <returns></returns>
+        //public object PedersenDebugOutput()
+        //{
+        //    return Pedersen.DebugOutput();
+        //}
 
-        #endregion
+        //#endregion
 
         #endregion
 
         #region Utility Functions
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pricingStructureType"></param>
+        /// <param name="algorithmName"></param>
+        /// <returns></returns>
+        public Algorithm GetAlgorithm(String pricingStructureType, String algorithmName)
+        {
+            var uniqueName = NameSpace + "." + AlgorithmsProp.GenericName + "." + pricingStructureType + "." +
+                             algorithmName;
+            var item = Cache.LoadItem<Algorithm>(uniqueName);
+            var deserializedAlgorithm = (Algorithm) item?.Data;
+            return deserializedAlgorithm;
+        }
 
         private static  NamedValueSet AddPricingStructureProperties(IPricingStructure pricingStructure, NamedValueSet properties)
         {

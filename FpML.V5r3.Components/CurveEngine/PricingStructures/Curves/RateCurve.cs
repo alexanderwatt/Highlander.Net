@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -519,7 +519,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
-        /// <param name="buildAssets">This is a flag which allows no assets to be built. Mainly for dervived rate curve from fx curve. </param>
+        /// <param name="buildAssets">This is a flag which allows no assets to be built. Mainly for derived rate curve from fx curve. </param>
         public RateCurve(ILogger logger, ICoreCache cache, string nameSpace,
             Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, bool buildAssets)

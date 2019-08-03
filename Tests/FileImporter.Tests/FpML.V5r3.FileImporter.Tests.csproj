@@ -64,10 +64,6 @@
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
-      <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>
-      <Name>FpML.V5r3.Reporting</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj">
       <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
       <Name>Core.Common</Name>
@@ -76,6 +72,10 @@
       <Project>{a96292e1-00dd-434d-a3f9-fc04cbfd75a7}</Project>
       <Name>Core.V34</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\FileImporter\FpML.V5r3.Server.FileImporter.csproj">
+      <Project>{888c6b6a-d4cf-4edc-a7dd-09c14fa22201}</Project>
+      <Name>FpML.V5r3.Server.FileImporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj">
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
@@ -83,10 +83,6 @@
     <ProjectReference Include="..\..\Utilities\Core.Server\Core.Server.csproj">
       <Project>{D54031AD-5D51-4204-9509-2381F462E2C1}</Project>
       <Name>Core.Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Utilities\FileImporter\FpML.V5r3.Server.FileImporter.csproj">
-      <Project>{888C6B6A-D4CF-4EDC-A7DD-09C14FA22201}</Project>
-      <Name>FpML.V5r3.Server.FileImporter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

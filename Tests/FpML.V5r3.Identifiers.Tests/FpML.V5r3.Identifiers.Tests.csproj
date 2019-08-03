@@ -67,17 +67,9 @@
       <Project>{2ac94e22-b441-4198-8162-bf1552e67d33}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Codes\FpML.V5r3.Codes.csproj">
-      <Project>{3966b7d1-6968-4022-8c6f-a1e28580efde}</Project>
-      <Name>FpML.V5r3.Codes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj">
       <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
       <Name>FpML.V5r3.Reporting.Identifiers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj">
-      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
-      <Name>FpML.V5r3.Reporting.ModelFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj">
       <Project>{60a9d3b8-34a8-4779-817f-9d87cbbcbfc1}</Project>

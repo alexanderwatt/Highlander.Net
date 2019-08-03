@@ -17,15 +17,14 @@
 
 using System;
 using System.Collections.Generic;
+using FpML.V5r10.Reporting;
+using FpML.V5r10.Reporting.Analytics.BusinessCenters;
+using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
-using FpML.V5r3.Reporting;
-using FpML.V5r3.Reporting.Helpers;
-using Orion.ModelFramework;
-using Orion.Analytics.BusinessCenters;
 
 #endregion
 
-namespace Orion.CalendarEngine.Helpers
+namespace FpML.V5r10.CalendarEngine.Helpers
 {
     /// <summary>
     /// Helper class for financial dates

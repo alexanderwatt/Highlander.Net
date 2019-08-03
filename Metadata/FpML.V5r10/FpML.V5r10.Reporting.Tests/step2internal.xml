@@ -1,11 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<valuationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
+<requestMargin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-10" actualBuild="5" xmlns="http://www.fpml.org/FpML-5/reporting">
   <header>
     <messageId messageIdScheme="scheme/1.0">12345678</messageId>
-    <inReplyTo messageIdScheme="scheme/1.0">87654321</inReplyTo>
     <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
   </header>
   <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
+  <assets>
+    <bond />
+    <bond id="id0" />
+    <bond>
+      <instrumentId instrumentIdScheme="CUSIP">789012EW0</instrumentId>
+    </bond>
+    <loan />
+    <loan id="id1" />
+    <loan>
+      <instrumentId instrumentIdScheme="CUSIP">789012EW0</instrumentId>
+    </loan>
+    <cash />
+    <cash id="cash01" />
+    <cash>
+      <currency>USD</currency>
+    </cash>
+    <equity />
+    <equity id="equtiy01" />
+    <equity>
+      <instrumentId instrumentIdScheme="Bloomberg">BHP.AX</instrumentId>
+    </equity>
+  </assets>
   <party id="Party0">
     <partyId partyIdScheme="scheme/1.0">Participant 0</partyId>
   </party>
@@ -22,5 +43,4 @@
     <accountName accountNameScheme="scheme/1.0">Account1_Name</accountName>
     <accountBeneficiary href="Party1" />
   </account>
-  <tradeValuationItem />
-</valuationReport>
+</requestMargin>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using FpML.V5r10.EquityVolatilityCalculator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Equity.VolatilityCalculator;
 
-namespace Orion.EquitiesVolCalc.Tests
+namespace FpML.V5r10.EquitiesVolCalcTests
 {
     /// <summary>
     /// Summary description for UnitTest1

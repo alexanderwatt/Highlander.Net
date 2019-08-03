@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace National.QRSC.QRLib
+namespace Orion.ExcelAPI.Tests.Products
 {
     
-    [TestClass()]
+    [TestClass]
     public class FraSolverWrapperTests
     {
 
@@ -13,49 +13,37 @@ namespace National.QRSC.QRLib
          public void GetObjectsTest()
          {
              object[,] data = new object[3,3];
-
              data[0, 0] = "Instrument";
              data[0, 1] = "Rate";
              data[0, 2] = "Guess";
-
              data[1, 0] = "USD-Deposit-1D";
              data[1, 1] = 0.0529;
              data[1, 2] = null;
-
              data[2, 0] = "USD-Deposit-TD";
              data[2, 1] = 0.0529;
              data[2, 2] = 3;
-
-
              List<double> res = FraSolverWrapper.GetObjects<double>(data, 1);
              List<object> guess = FraSolverWrapper.GetObjects<object>(data, 2);
-
-        }
+         }
 
          [TestMethod()]
          public void GetFraGuessesTest()
          {
              List<object> fraGuesses = new List<object>();
-
              fraGuesses.Add("");
              fraGuesses.Add(3.2);
              fraGuesses.Add(4.5);
              fraGuesses.Add("");
-
              List<decimal> res = new List<decimal>();
              List<int> indecies = new List<int>();
-
              FraSolverWrapper.GetFraGuesses(fraGuesses, ref res, ref indecies);
-
          }
 
 
         [TestMethod()]
-         public void GetFraEquviavlentRatesTest()
+         public void GetFraEquivalentRatesTest()
         {
-
-            object[,] properties = new object[,]
-                                       {
+            object[,] properties = {
                                            {"MarketName", "Barra"},
                                            {"PricingStructureType", "RateCurve"},
                                            {"Currency", "USD"},
@@ -68,9 +56,7 @@ namespace National.QRSC.QRLib
                                            {"BaseDate", new DateTime(2009, 10, 7)}
                                        };
 
-
-            object[] instruments = new string[]
-                                       {   "Instrument",
+            object[] instruments = {   "Instrument",
                                            "USD-Deposit-1D",
                                            "USD-Deposit-TN",
                                            "USD-Deposit-1M",
@@ -83,9 +69,7 @@ namespace National.QRSC.QRLib
                                            "USD-IRFuture-ED-U0"
                                        };
 
-
-            object[] rates = new object[]
-                                  {
+            object[] rates = {
                                       "rate",
                                        0.0023500,
                                        0.0023500,
@@ -99,15 +83,12 @@ namespace National.QRSC.QRLib
                                        0.0170081
                                   };
 
-            object[] guesses = new object[]{   "Guess",
+            object[] guesses = {   "Guess",
                                    "", "", 0.00458, 0.00536, "", "",
                                    "", "", "", "", ""
                                };
 
-            
-
             object[,] dataTable = new object[11,3];
-
 
             for(int i= 0; i < 11; ++i)
             {
@@ -115,20 +96,13 @@ namespace National.QRSC.QRLib
                 {
                     if (j % 3 == 0)
                         dataTable[i, j] = instruments[i];
-
                     if (j % 3 == 1)
                         dataTable[i, j] = rates[i];
-
                     if( j % 3 == 2)
                         dataTable[i, j] = guesses[i];
                 }
             }
-
-
             double[] fraRates = FraSolverWrapper.CalculateFraEquivalents(properties, dataTable);
-
-
         }
-
     }
 }

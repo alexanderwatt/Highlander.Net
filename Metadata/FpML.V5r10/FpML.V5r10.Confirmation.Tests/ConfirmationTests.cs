@@ -259,7 +259,7 @@ namespace FpML.V5r10.Confirmation.Tests
             string internalPath = Path.GetFullPath(@"..\..\step1external.xml");
             string externalPath = Path.GetFullPath(@"..\..\step2internal.xml");
             var xs = new XmlSerializer(typeof(ConfirmationAgreed));
-            var orig = new ConfirmationAgreed()
+            var orig = new ConfirmationAgreed
             {
                 fpmlVersion = "5-10",
                 header = new ResponseMessageHeader
@@ -271,31 +271,31 @@ namespace FpML.V5r10.Confirmation.Tests
                 },
                 correlationId = new CorrelationId { correlationIdScheme = "scheme/1.0", Value = "12345678" },
                 party = new[] {
-                        new Party { id="Party0", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
-                        new Party { id="Party1", Items = new object[] { new PartyId() { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
+                        new Party { id="Party0", Items = new object[] { new PartyId { partyIdScheme = "scheme/1.0", Value="Participant 0" } } },
+                        new Party { id="Party1", Items = new object[] { new PartyId { partyIdScheme = "scheme/1.0", Value="Participant 1" } } },
                     },
                 account = new[] {
                         new Account
                         {
                             id = "Account0",
-                            accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
+                            accountId = new[] { new AccountId { accountIdScheme = "scheme/1.0", Value="Account0_Id" } },
                             ItemsElementName = new[] { ItemsChoiceType47.accountBeneficiary }, 
-                            Items = new[] { new PartyReference() { href = "Party0"}}
+                            Items = new[] { new PartyReference { href = "Party0"}}
                         },
                         new Account
                         {
                             id = "Account1",
-                            accountId = new[] { new AccountId() { accountIdScheme = "scheme/1.0", Value="Account1_Id" }},
+                            accountId = new[] { new AccountId { accountIdScheme = "scheme/1.0", Value="Account1_Id" }},
                             ItemsElementName = new[] { ItemsChoiceType47.accountBeneficiary },
-                            Items = new[] { new PartyReference() { href = "Party1"}},
+                            Items = new[] { new PartyReference { href = "Party1"}},
                         },
                     },
                 validation = new[]
                     {
-                        new Validation() { validationScheme = "scheme/1.0", Value = "Validation0" }
+                        new Validation { validationScheme = "scheme/1.0", Value = "Validation0" }
                     },
                 Items = new object[] 
-                { new Trade()
+                { new Trade
                     {
                         tradeHeader = new TradeHeader
                         {
@@ -306,7 +306,7 @@ namespace FpML.V5r10.Confirmation.Tests
                                 } } },
                             tradeDate = new IdentifiedDate { Value = DateTime.Now.Date }
                         },
-                        Item = new EquityOption()
+                        Item = new EquityOption
                         {
                             equityPremium = new EquityPremium
                             {
@@ -354,15 +354,15 @@ namespace FpML.V5r10.Confirmation.Tests
                                         }
                                     }
                                 },
-                                settlementCurrency = new Currency() { currencyScheme = "scheme/1.0", Value = "AUD" },
-                                settlementPriceSource = new SettlementPriceSource() { settlementPriceSourceScheme = "scheme/1.0", Value = "Source0" },
+                                settlementCurrency = new Currency { currencyScheme = "scheme/1.0", Value = "AUD" },
+                                settlementPriceSource = new SettlementPriceSource { settlementPriceSourceScheme = "scheme/1.0", Value = "Source0" },
                                 settlementType = SettlementTypeEnum.Cash,
                                 equityValuation = new EquityValuation(),
                                 Items = new object[] {
                                         true, // automaticExercise
-                                        new MakeWholeProvisions() { makeWholeDate = DateTime.Now.Date, recallSpread = 1.0M },
+                                        new MakeWholeProvisions { makeWholeDate = DateTime.Now.Date, recallSpread = 1.0M },
                                     },
-                                Item = new EquityBermudaExercise()
+                                Item = new EquityBermudaExercise
                                 {
                                     commencementDate = new AdjustableOrRelativeDate
                                         {

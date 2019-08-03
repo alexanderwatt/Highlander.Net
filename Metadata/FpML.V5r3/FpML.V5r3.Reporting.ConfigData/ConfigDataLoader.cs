@@ -92,7 +92,8 @@ namespace Orion.V5r3.Configuration
             itemProps.Set(EnvironmentProp.Type, "LocationCalendarYear");
             itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
             itemProps.Set(EnvironmentProp.NameSpace, nameSpace);
-            var identifier = string.Format("ReferenceData.RDMHolidays.{0}.{1}", locationCalendarYear.BusinessCenter, locationCalendarYear.Year);
+            var identifier =
+                $"ReferenceData.RDMHolidays.{locationCalendarYear.BusinessCenter}.{locationCalendarYear.Year}";
             string itemName = nameSpace + "." + identifier;
             itemProps.Set(CurveProp.UniqueIdentifier, identifier);
             return new ItemInfo { ItemName = itemName, ItemProps = itemProps };
@@ -110,7 +111,7 @@ namespace Orion.V5r3.Configuration
             itemProps.Set(EnvironmentProp.Type, "BusinessCenterHolidays");
             itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
             itemProps.Set(EnvironmentProp.NameSpace, nameSpace);
-            string identifier = string.Format("ReferenceData.BusinessCenterHolidays.{0}", locationCalendarYear.BusinessCenter);
+            string identifier = $"ReferenceData.BusinessCenterHolidays.{locationCalendarYear.BusinessCenter}";
             string itemName = nameSpace + "." + identifier;
             itemProps.Set(CurveProp.UniqueIdentifier, identifier);
             return new ItemInfo { ItemName = itemName, ItemProps = itemProps };
@@ -132,10 +133,10 @@ namespace Orion.V5r3.Configuration
             //logger.LogDebug("Loaded pricing structure types.");
             foreach (var pst in pricingStructureTypes.PricingStructureType)
             {
-                foreach (var algo in pst.Algorithms)
+                foreach (var algorithm in pst.Algorithms)
                 {
-                    var itemInfo = StandardConfigProps("Algorithm", pst.id + "." + algo.id, nameSpace);
-                    targetClient.SaveObject(algo, itemInfo.ItemName, itemInfo.ItemProps);
+                    var itemInfo = StandardConfigProps("Algorithm", pst.id + "." + algorithm.id, nameSpace);
+                    targetClient.SaveObject(algorithm, itemInfo.ItemName, itemInfo.ItemProps);
                     logger.LogDebug("Loaded Algorithm: {0}", itemInfo.ItemName);
                 }
             }
@@ -158,7 +159,7 @@ namespace Orion.V5r3.Configuration
             if (chosenFiles.Count == 0) throw new InvalidOperationException("Missing Date Rules");
             foreach (KeyValuePair<string, string> file in chosenFiles)
             {
-                // load daterules from file
+                // load date rules from file
                 var calendarYears = XmlSerializerHelper.DeserializeFromString<LocationCalendarYears>(file.Value);
                 foreach (LocationCalendarYear locationCalendarYear in calendarYears.LocationCalendarYear)
                 {
@@ -177,13 +178,12 @@ namespace Orion.V5r3.Configuration
             if (chosenFiles.Count == 0) throw new InvalidOperationException("Missing Date Rules");
             foreach (KeyValuePair<string, string> file in chosenFiles)
             {
-                // load daterules from file
+                // load date rules from file
                 var calendarYears = XmlSerializerHelper.DeserializeFromString<LocationCalendarYears>(file.Value);
                 var businessCenterList = new Dictionary<string, BusinessCenterCalendar>();                
                 foreach (LocationCalendarYear locationCalendarYear in calendarYears.LocationCalendarYear)
                 {
-                    BusinessCenterCalendar result;
-                    var contains = businessCenterList.TryGetValue(locationCalendarYear.BusinessCenter, out result);
+                    var contains = businessCenterList.TryGetValue(locationCalendarYear.BusinessCenter, out var result);
                     if (!contains)
                     {
                         var bc = new BusinessCenterCalendar
@@ -228,7 +228,7 @@ namespace Orion.V5r3.Configuration
 
             foreach (KeyValuePair<string, string> file in chosenFiles)
             {
-                // load daterules from file
+                // load date rules from file
                 var dateRules = XmlSerializerHelper.DeserializeFromString<DateRules>(file.Value);
                 string key = file.Key.Replace(".xml", "").Split('.').Last();
                 ItemInfo itemInfo = StandardConfigProps("DateRules", key, nameSpace);
@@ -312,8 +312,7 @@ namespace Orion.V5r3.Configuration
         {
             if (!schemeName.EndsWith("Scheme"))
                 throw new ApplicationException(
-                    String.Format("Cannot derive class def name from '{0}'.", schemeName));
-
+                    $"Cannot derive class def name from '{schemeName}'.");
             string result = schemeName.Substring(0, (schemeName.Length - 6));
             result = result[0].ToString(CultureInfo.InvariantCulture).ToUpper() + result.Substring(1);
             return result;

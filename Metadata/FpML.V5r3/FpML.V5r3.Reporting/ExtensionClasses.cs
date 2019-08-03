@@ -182,6 +182,101 @@ namespace FpML.V5r3.Reporting
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
+    public class PropertyNodeStruct : InstrumentNode
+    {
+
+        private RelativeDateOffset settlementDateField;
+
+        private PropertyAsset propertyField;
+
+        private Loan[] loanField;
+
+        /// <remarks/>
+        public RelativeDateOffset SettlementDate
+        {
+            get
+            {
+                return this.settlementDateField;
+            }
+            set
+            {
+                this.settlementDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public PropertyAsset Property
+        {
+            get
+            {
+                return this.propertyField;
+            }
+            set
+            {
+                this.propertyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Loan[] Loans
+        {
+            get
+            {
+                return this.loanField;
+            }
+            set
+            {
+                this.loanField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
+    public class LeaseNodeStruct : InstrumentNode
+    {
+
+        private RelativeDateOffset settlementDateField;
+
+        private Lease leaseField;
+
+        /// <remarks/>
+        public RelativeDateOffset SettlementDate
+        {
+            get
+            {
+                return this.settlementDateField;
+            }
+            set
+            {
+                this.settlementDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Lease Lease
+        {
+            get
+            {
+                return this.leaseField;
+            }
+            set
+            {
+                this.leaseField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
     public class BondNodeStruct : InstrumentNode
     {
 
@@ -2431,8 +2526,6 @@ namespace FpML.V5r3.Reporting
 
         private IdentifiedDate lastTradedDateField;
 
-        private PropertyAsset propertyField;
-
         private BusinessDayAdjustments businessDayAdjustmentsField;
 
         /// <remarks/>
@@ -2644,19 +2737,6 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
-        public PropertyAsset property
-        {
-            get
-            {
-                return this.propertyField;
-            }
-            set
-            {
-                this.propertyField = value;
-            }
-        }
-
-        /// <remarks/>
         public BusinessDayAdjustments businessDayAdjustments
         {
             get
@@ -2722,6 +2802,297 @@ namespace FpML.V5r3.Reporting
             set
             {
                 this.propertyField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
+    [System.Xml.Serialization.XmlRootAttribute("property", Namespace = "http://www.fpml.org/FpML-5/reporting", IsNullable = false)]
+    public partial class Lease : UnderlyingAsset
+    {
+        private string leaseIdentifierField;
+
+        private string contractReferenceField;
+
+        private string propertyReferenceField;
+
+        private Party tenantField;
+
+        private string shopNumberField;
+
+        private string leaseTypeField;
+
+        private IdentifiedDate startDateField;
+
+        private Period reviewFrequencyField;
+
+        private IdentifiedDate nextReviewDateField;
+
+        private decimal reviewChangeField;
+
+        private decimal numberOfUnitsField;
+
+        private string unitsField;
+
+        private Money startGrossPriceField;
+
+        private IdentifiedDate leaseExpiryDateField;
+
+        private BusinessDayAdjustments businessDayAdjustmentsField;
+
+        /// <remarks/>
+        public string leaseIdentifier
+        {
+            get
+            {
+                return this.leaseIdentifierField;
+            }
+            set
+            {
+                this.leaseIdentifierField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string contractReference
+        {
+            get
+            {
+                return this.contractReferenceField;
+            }
+            set
+            {
+                this.contractReferenceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Party tenant
+        {
+            get
+            {
+                return this.tenantField;
+            }
+            set
+            {
+                this.tenantField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string propertyReference
+        {
+            get
+            {
+                return this.propertyReferenceField;
+            }
+            set
+            {
+                this.propertyReferenceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string shopNumber
+        {
+            get
+            {
+                return this.shopNumberField;
+            }
+            set
+            {
+                this.shopNumberField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string leaseType
+        {
+            get
+            {
+                return this.leaseTypeField;
+            }
+            set
+            {
+                this.leaseTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public IdentifiedDate startDate
+        {
+            get
+            {
+                return this.startDateField;
+            }
+            set
+            {
+                this.startDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Period reviewFrequency
+        {
+            get
+            {
+                return this.reviewFrequencyField;
+            }
+            set
+            {
+                this.reviewFrequencyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public IdentifiedDate nextReviewDate
+        {
+            get
+            {
+                return this.nextReviewDateField;
+            }
+            set
+            {
+                this.nextReviewDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public decimal reviewChange
+        {
+            get
+            {
+                return this.reviewChangeField;
+            }
+            set
+            {
+                this.reviewChangeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public decimal numberOfUnits
+        {
+            get
+            {
+                return this.numberOfUnitsField;
+            }
+            set
+            {
+                this.numberOfUnitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string units
+        {
+            get
+            {
+                return this.unitsField;
+            }
+            set
+            {
+                this.unitsField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Money startGrossPrice
+        {
+            get
+            {
+                return this.startGrossPriceField;
+            }
+            set
+            {
+                this.startGrossPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public IdentifiedDate leaseExpiryDate
+        {
+            get
+            {
+                return this.leaseExpiryDateField;
+            }
+            set
+            {
+                this.leaseExpiryDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public BusinessDayAdjustments businessDayAdjustments
+        {
+            get
+            {
+                return this.businessDayAdjustmentsField;
+            }
+            set
+            {
+                this.businessDayAdjustmentsField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting/ext")]
+    [System.Xml.Serialization.XmlRootAttribute("bondTransaction", Namespace = "http://www.fpml.org/FpML-5/reporting/ext", IsNullable = false)]
+    public partial class LeaseTransaction : AbstractNotionalTransaction
+    {
+
+        private string leaseTypeField;
+
+        private Money currentGrossPriceField;
+
+        private Lease leaseField;
+
+        /// <remarks/>
+        public string leaseType
+        {
+            get
+            {
+                return this.leaseTypeField;
+            }
+            set
+            {
+                this.leaseTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Money currentGrossPrice
+        {
+            get
+            {
+                return this.currentGrossPriceField;
+            }
+            set
+            {
+                this.currentGrossPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Lease lease
+        {
+            get
+            {
+                return this.leaseField;
+            }
+            set
+            {
+                this.leaseField = value;
             }
         }
     }

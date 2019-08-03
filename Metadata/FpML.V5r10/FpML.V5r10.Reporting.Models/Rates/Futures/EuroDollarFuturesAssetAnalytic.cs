@@ -87,7 +87,7 @@ namespace FpML.V5r10.Reporting.Models.Rates.Futures
         public decimal PandL => 0.0m;
 
         /// <summary>
-        /// Gets the intial margin.
+        /// Gets the initial margin.
         /// </summary>
         /// <value>The inital margin.</value>
         public decimal InitialMargin => 0.0m;

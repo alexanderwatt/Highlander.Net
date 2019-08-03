@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -43,7 +43,7 @@ namespace HLV5r3.Analytics
         {
             Registry.ClassesRoot.CreateSubKey(ApplicationHelper.GetSubKeyName(type, "Programmable"));
             RegistryKey key = Registry.ClassesRoot.OpenSubKey(ApplicationHelper.GetSubKeyName(type, "InprocServer32"), true);
-            key.SetValue("", System.Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
+            key?.SetValue("", Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace HLV5r3.Analytics
         }
 
         #endregion
-                
+
         #region Constructor
 
         #endregion
@@ -230,7 +230,7 @@ namespace HLV5r3.Analytics
         /// <param name="accrualYearFraction">The first accrual coupon year fraction.</param>
         /// <param name="finalAccrualYearFraction">The final coupon year fraction. If regular this is zero.</param>
         /// <param name="numberOfFullCoupons">The number of full coupon periods remaining until redemption. 
-        /// The numer of remaining coupon periods is therefore n+1;</param>
+        /// The number of remaining coupon periods is therefore n+1;</param>
         /// <param name="nextCoupon">The next coupon payment. This may be partial or zero if the bond is trading ex div.</param>
         /// <param name="next2Coupon">The next 2 coupon.</param>
         /// <param name="annualCoupon">The annual coupon payment for 100 unit of face value.</param>
@@ -250,10 +250,10 @@ namespace HLV5r3.Analytics
         ///<summary>
         /// Calculated the bond yield to maturity.
         ///</summary>
-        ///<param name="maturityDate">redemtion date</param>
+        ///<param name="maturityDate">redemption date</param>
         ///<param name="lastCouponDate">last coupon date</param>
         ///<param name="couponRate">coupon rate</param>
-        ///<param name="couponFrequency">coupons per year,1 for annual, 2 for semi, 4 for quoterly</param>
+        ///<param name="couponFrequency">coupons per year,1 for annual, 2 for semi, 4 for quarterly</param>
         ///<param name="faceValue">The bond face value.</param>
         ///<param name="dirtyPrice">dirty price</param>
         ///<returns>The yield to maturity.</returns>
@@ -269,13 +269,13 @@ namespace HLV5r3.Analytics
         /// <param name="accrualYearFraction">The first accrual coupon year fraction.</param>
         /// <param name="finalAccrualYearFraction">The final coupon year fraction. If regular this is zero.</param>
         /// <param name="numberOfFullCoupons">The number of full coupon periods remaining until redemption. 
-        /// The numer of remaining coupon periods is therefore n+1;</param>
+        /// The number of remaining coupon periods is therefore n+1;</param>
         /// <param name="nextCoupon">The next coupon payment. This may be partial or zero if the bond is trading ex div.</param>
         /// <param name="next2Coupon">The next 2 coupon.</param>
         /// <param name="annualCoupon">The annual coupon payment for 100 unit of face value.</param>
         /// <param name="finalCoupon">The final coupon with an odd final period. This is zero for all other bonds.</param>
         /// <param name="couponsPerYear">The number of coupon periods in a year.</param>
-        /// <param name="periodDiscountFactor">The disoount factor for one period, 1/(1+y/h)</param>
+        /// <param name="periodDiscountFactor">The discount factor for one period, 1/(1+y/h)</param>
         /// <param name="annualYield">The required annual nominal redemption yield expressed as a decimal.</param>
         /// <returns>The ISMA dirty price.</returns>
         public double ISMADP(double accrualYearFraction, double finalAccrualYearFraction, int numberOfFullCoupons,

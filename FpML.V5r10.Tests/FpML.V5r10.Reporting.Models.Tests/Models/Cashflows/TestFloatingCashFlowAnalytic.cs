@@ -1,16 +1,14 @@
-﻿
-using System.Diagnostics;
-using Orion.Models.Generic.Cashflows;
+﻿using System.Diagnostics;
+using FpML.V5r10.Reporting.Models.Generic.Cashflows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
-namespace Orion.Models.Tests.Models.Cashflows
+namespace FpML.V5r10.Models.Tests.Models.Cashflows
 {
     [TestClass]
     public class TestFloatingCashFlowAnalytic
     {
         [TestMethod]
-        public void FloatingCashflowAnalyics()
+        public void FloatingCashflowAnalytics()
         {
             IFloatingCashflowParameters analyticModelParameters = new FloatingCashflowParameters
                                                                 {

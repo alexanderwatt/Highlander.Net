@@ -51,7 +51,7 @@ namespace FpML.V5r10.Reporting.Models.Rates.Futures
         Decimal Volatility { get; set; }
 
         /// <summary>
-        /// The time to exiry of the future.
+        /// The time to expiry of the future.
         /// </summary>
         /// <value>The time to expiry of the future.</value>
         Decimal TimeToExpiry { get; set; }

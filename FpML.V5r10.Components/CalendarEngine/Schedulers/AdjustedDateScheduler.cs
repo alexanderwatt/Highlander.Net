@@ -18,18 +18,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FpML.V5r10.CalendarEngine.Helpers;
 using FpML.V5r10.Reporting;
+using FpML.V5r10.Reporting.Analytics.Schedulers;
 using FpML.V5r10.Reporting.Helpers;
 using FpML.V5r10.Reporting.ModelFramework;
-using FpML.V5r3.Reporting.Helpers;
-using Orion.Analytics.Schedulers;
-using Orion.ModelFramework;
-using FpML.V5r3.Reporting;
-using Orion.CalendarEngine.Helpers;
 
 #endregion
 
-namespace Orion.CalendarEngine.Schedulers
+namespace FpML.V5r10.CalendarEngine.Schedulers
 {
     /// <summary>
     /// Simple Date scheduler for coupon periods

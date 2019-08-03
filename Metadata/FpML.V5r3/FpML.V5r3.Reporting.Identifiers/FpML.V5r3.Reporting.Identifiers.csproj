@@ -68,6 +68,7 @@
     <Compile Include="CommodityCurveIdentifier.cs" />
     <Compile Include="AssetIdentifier.cs" />
     <Compile Include="BondCurveIdentifier.cs" />
+    <Compile Include="LeaseIdentifier.cs" />
     <Compile Include="PropertyIdentifier.cs" />
     <Compile Include="EquityCurveIdentifier.cs" />
     <Compile Include="EquityIdentifier.cs" />

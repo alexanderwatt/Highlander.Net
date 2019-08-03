@@ -144,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
-    <None Include="VolCalc.cd" />
     <None Include="Documents\WingModelFittingMethodology.doc">
     </None>
   </ItemGroup>

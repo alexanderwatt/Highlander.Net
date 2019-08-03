@@ -90,10 +90,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FpML.V5r3.Components\CurveEngine\FpML.V5r3.CurveEngine.csproj">
-      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
-      <Name>FpML.V5r3.CurveEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj">
       <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
       <Name>FpML.V5r3.Reporting.Analytics</Name>
@@ -106,9 +102,9 @@
       <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
       <Name>Orion.Util</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EquityVolCalcTestData\FpML.V5r3.EquitiesVolCalc.TestData.csproj">
+    <ProjectReference Include="..\EquityVolCalcTestData\EquitiesVolCalc.TestData.csproj">
       <Project>{6b4904c9-b3fb-49e2-bade-a1f6283e4782}</Project>
-      <Name>FpML.V5r3.EquitiesVolCalc.TestData</Name>
+      <Name>EquitiesVolCalc.TestData</Name>
     </ProjectReference>
     <ProjectReference Include="..\EquityVolCalc\FpML.V5r3.EquityVolatilityCalculator.csproj">
       <Project>{749e9215-ce61-479a-84e1-d2296d65d8c0}</Project>
