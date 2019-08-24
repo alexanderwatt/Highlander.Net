@@ -31,10 +31,15 @@ namespace Orion.CurveEngine.Assets
         /// </summary>
         public Offset RollOffset { get; protected set; }
 
+        /// <summary>
+        /// The exchange code for the contract.
+        /// </summary>
+        public string Code { get; protected set; }
+
         //The units are in barrels
         public PriceQuoteUnitsEnum PriceQuoteUnits{ get; protected set; }
 
-        //The number of untis for this particular contract
+        //The number of units for this particular contract
         public int Amount { get; protected set; }
 
         ///<summary>
@@ -126,7 +131,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        protected Decimal ForwardIndex = 0.9m;
+        protected decimal ForwardIndex = 0.9m;
 
         /// <summary>
         /// Gets the discount factor at maturity.
@@ -255,7 +260,7 @@ namespace Orion.CurveEngine.Assets
             AnalyticsModel = new CommodityFuturesAssetAnalytic();
                 //DependencyCreator.Resolve<IModelAnalytic<ICommodityFuturesAssetParameters, CommodityMetrics>>(_modelIdentifier);
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
             var bEvalIndexAtMaturity = false;
             if (metrics.Contains(CommodityMetrics.IndexAtMaturity))
             {
@@ -297,7 +302,7 @@ namespace Orion.CurveEngine.Assets
             analyticModelParameters.Index = CommodityValue.value;
             if (bEvalIndexAtMaturity)
             {
-                //5. Set the anaytic input parameters and Calculate the respective metrics
+                //5. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<ICommodityAssetResults, CommodityAssetResults>(analyticModelParameters,
                                                                                              metricsToEvaluate);
@@ -312,7 +317,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.TimeToExpiry = GetTimeToExpiry();
                 //6. Get the position
                 analyticModelParameters.Position = Position;
-                //7. Set the anaytic input parameters and Calculate the respective metrics
+                //7. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<ICommodityAssetResults, CommodityAssetResults>(analyticModelParameters,
                                                                                              metricsToEvaluate);

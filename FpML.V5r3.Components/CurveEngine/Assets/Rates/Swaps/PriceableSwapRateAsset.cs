@@ -206,7 +206,7 @@ namespace Orion.CurveEngine.Assets
                     break;
             }
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
             var bEvalDiscountFactorAtMaturity = false;
             if (metrics.Contains(RateMetrics.DiscountFactorAtMaturity))
             {

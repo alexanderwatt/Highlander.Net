@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Components\Numerics\Highlander.Numerics.csproj" />
+    <ProjectReference Include="..\..\FpML.V5r3.Components\CurveEngine\FpML.V5r3.CurveEngine.csproj" />
+    <ProjectReference Include="..\..\FpML.V5r3.Components\ValuationEngine\FpML.V5r3.ValuationEngine.csproj" />
+    <ProjectReference Include="..\..\Metadata\Constants\Constants.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Analytics\FpML.V5r3.Reporting.Analytics.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Contracts\FpML.V5r3.Reporting.Contracts.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.Identifiers\FpML.V5r3.Reporting.Identifiers.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting.ModelFramework\FpML.V5r3.Reporting.ModelFramework.csproj" />
+    <ProjectReference Include="..\..\Metadata\FpML.V5r3\FpML.V5r3.Reporting\FpML.V5r3.Reporting.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.Common\Core.Common.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.Server\Core.Server.csproj" />
+    <ProjectReference Include="..\..\Utilities\Core.V34\Core.V34.csproj" />
+    <ProjectReference Include="..\..\Utilities\Util\Orion.Util.csproj" />
+  </ItemGroup>
+
+</Project>

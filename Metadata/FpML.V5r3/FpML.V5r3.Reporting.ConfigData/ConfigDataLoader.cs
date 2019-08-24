@@ -65,17 +65,21 @@ namespace Orion.V5r3.Configuration
             foreach (Instrument instrument in assetSet.Instruments)
             {
                 string id = instrument.Currency.Value;
-                var assetId = id + '-' + instrument.AssetType;
-                if (instrument.ExtraItem != null)
-                    id = id + "." + instrument.ExtraItem;
-                ItemInfo itemInfo = StandardConfigProps("Instrument", instrument.AssetType + '.' + id, nameSpace);//id
-                itemInfo.ItemProps.Set(CurveProp.Currency1, instrument.Currency.Value);
-                itemInfo.ItemProps.Set("AssetType", instrument.AssetType);
-                itemInfo.ItemProps.Set("AssetId", assetId);
-                itemInfo.ItemProps.Set("Schema", "FpML.V5r3");
-                if (instrument.ExtraItem != null)
-                    itemInfo.ItemProps.Set("ExtraItem", instrument.ExtraItem);
-                targetClient.SaveObject(instrument, itemInfo.ItemName, itemInfo.ItemProps);
+                //if (instrument.AssetType == "IRFuture")
+                //{
+                    var assetId = id + '-' + instrument.AssetType;
+                    if (instrument.ExtraItem != null)
+                        id = id + "." + instrument.ExtraItem;
+                    ItemInfo itemInfo =
+                        StandardConfigProps("Instrument", instrument.AssetType + '.' + id, nameSpace); //id
+                    itemInfo.ItemProps.Set(CurveProp.Currency1, instrument.Currency.Value);
+                    itemInfo.ItemProps.Set("AssetType", instrument.AssetType);
+                    itemInfo.ItemProps.Set("AssetId", assetId);
+                    itemInfo.ItemProps.Set("Schema", "FpML.V5r3");
+                    if (instrument.ExtraItem != null)
+                        itemInfo.ItemProps.Set("ExtraItem", instrument.ExtraItem);
+                    targetClient.SaveObject(instrument, itemInfo.ItemName, itemInfo.ItemProps);
+                //}
             }
             logger.LogDebug("Loaded instrument configs.");
         }
@@ -128,9 +132,6 @@ namespace Orion.V5r3.Configuration
         {
             string xml = GetXml("Orion.V5r3.Configuration.Config.PricingStructureAlgorithms.xml");
             var pricingStructureTypes = XmlSerializerHelper.DeserializeFromString<PricingStructureTypes>(xml);
-            //ItemInfo itemInfo = StandardConfigProps("PricingStructureAlgorithms", null);
-            //targetClient.SaveObject<PricingStructureTypes>(pricingStructureTypes, itemInfo.ItemName, itemInfo.ItemProps);
-            //logger.LogDebug("Loaded pricing structure types.");
             foreach (var pst in pricingStructureTypes.PricingStructureType)
             {
                 foreach (var algorithm in pst.Algorithms)

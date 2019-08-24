@@ -928,8 +928,8 @@ namespace HLV5r3.Financial
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="tradingBook">The trading book.</param>
         /// <returns></returns>
-        public string CreatePropertyTrade(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, Decimal purchaseAmount,
-            DateTime paymentDate, String propertyType, String currency, string propertyIdentifier, string tradingBook)
+        public string CreatePropertyTrade(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount,
+            DateTime paymentDate, string propertyType, string currency, string propertyIdentifier, string tradingBook)
         {
             var properties = new NamedValueSet();
             properties.Set(TradeProp.Party1, party1);
@@ -961,7 +961,8 @@ namespace HLV5r3.Financial
             properties.Set(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             properties.Set(TradeProp.TradeId, tradeId);
             properties.Set(TradeProp.AsAtDate, DateTime.Today);
-            properties.Set(PropertyProp.ReferenceProperty, propertyIdentifier);
+            properties.Set(PropertyProp.PropertyIdentifier, propertyIdentifier);
+            properties.Set(PropertyProp.PropertyType, propertyType);
             return ValService.CreatePropertyTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
                 paymentDate, currency, propertyIdentifier, tradingBook, properties);
         }
@@ -1012,7 +1013,8 @@ namespace HLV5r3.Financial
             namedValueSet.Set(TradeProp.MaturityDate, effectiveDate);
             namedValueSet.Set(TradeProp.TradeId, tradeId);
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
-            namedValueSet.Set(PropertyProp.ReferenceProperty, propertyIdentifier);
+            namedValueSet.Set(PropertyProp.PropertyIdentifier, propertyIdentifier);
+            namedValueSet.Set(PropertyProp.PropertyType, propertyType);
             return ValService.CreatePropertyTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
                 paymentDate, currency, propertyIdentifier, tradingBook, namedValueSet);
         }
@@ -1059,16 +1061,16 @@ namespace HLV5r3.Financial
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
             //Get the values required from the range data.
-            var upfrontAmount = namedValueSet.GetValue(PropertyProp.UpfrontAmount, 0.0m);
-            var paymentDate = namedValueSet.GetValue(PropertyProp.PaymentDate, leaseStartDate);
-            var leaseType = namedValueSet.GetValue(PropertyProp.LeaseType, "unspecified");
-            var shopNumber = namedValueSet.GetValue(PropertyProp.ShopNumber, "unspecified");
-            var area = namedValueSet.GetValue(PropertyProp.Area, 0.0m);
-            var unitsOfArea = namedValueSet.GetValue(PropertyProp.UnitsOfArea, "sqm");
-            var reviewFrequency = namedValueSet.GetValue(PropertyProp.ReviewFrequency, "1Y");
+            var upfrontAmount = namedValueSet.GetValue(LeaseProp.UpfrontAmount, 0.0m);
+            var paymentDate = namedValueSet.GetValue(LeaseProp.PaymentDate, leaseStartDate);
+            var leaseType = namedValueSet.GetValue(LeaseProp.LeaseType, "unspecified");
+            var shopNumber = namedValueSet.GetValue(LeaseProp.ShopNumber, "unspecified");
+            var area = namedValueSet.GetValue(LeaseProp.Area, 0.0m);
+            var unitsOfArea = namedValueSet.GetValue(LeaseProp.UnitsOfArea, "sqm");
+            var reviewFrequency = namedValueSet.GetValue(LeaseProp.ReviewFrequency, "1Y");
             //TODO Add a default review date
-            var nextReviewDate = namedValueSet.GetValue(PropertyProp.NextReviewDate, leaseStartDate);
-            var reviewChange = namedValueSet.GetValue(PropertyProp.ReviewChange, 0.0m);
+            var nextReviewDate = namedValueSet.GetValue(LeaseProp.NextReviewDate, leaseStartDate);
+            var reviewChange = namedValueSet.GetValue(LeaseProp.ReviewChange, 0.0m);
             //Set property values
             namedValueSet.Set(TradeProp.Party1, party1);
             namedValueSet.Set(TradeProp.Party2, party2);
@@ -1093,7 +1095,7 @@ namespace HLV5r3.Financial
             namedValueSet.Set(TradeProp.MaturityDate, leaseExpiryDate);
             namedValueSet.Set(TradeProp.TradeId, tradeId);
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
-            namedValueSet.Set(PropertyProp.ReferenceProperty, referencePropertyIdentifier);
+            namedValueSet.Set(LeaseProp.ReferenceProperty, referencePropertyIdentifier);
             return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
                 upfrontAmount, paymentDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
                 leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);

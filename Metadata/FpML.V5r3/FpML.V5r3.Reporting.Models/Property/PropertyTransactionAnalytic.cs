@@ -24,49 +24,34 @@ namespace Orion.Models.Property
 {
     public class PropertyTransactionAnalytic : ModelAnalyticBase<IPropertyAssetParameters, PropertyMetrics>, IPropertyAssetResults
     {
-        #region IEquityAssetResults Members
+        #region IPropertyAssetResults Members
 
         /// <summary>
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal ImpliedQuote
-        {
-            get { return AnalyticParameters.Quote; }
-        }
+        public Decimal ImpliedQuote => AnalyticParameters.Quote;
 
         /// <summary>
         /// Gets the npv.
         /// </summary>
-        public Decimal NPV
-        {
-            get { return EvaluateNPV(); }
-        }
+        public Decimal NPV => EvaluateNPV();
 
         /// <summary>
         /// Gets the profit based on the actual purchase price.
         /// </summary>
-        public Decimal PandL
-        {
-            get { return EvaluatePandL(); }
-        }
+        public Decimal PandL => EvaluatePandL();
 
         /// <summary>
         /// Gets the index
         /// </summary>
-        public decimal IndexAtMaturity
-        {
-            get { return AnalyticParameters.Quote; }
-        }
+        public decimal IndexAtMaturity => AnalyticParameters.Quote;
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        public Decimal MarketQuote
-        {
-            get { return AnalyticParameters.Quote; }
-        }
+        public Decimal MarketQuote => AnalyticParameters.Quote;
 
         /// <summary>
         /// Evaluates the npv.

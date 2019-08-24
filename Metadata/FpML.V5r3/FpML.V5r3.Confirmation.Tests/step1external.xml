@@ -4,7 +4,7 @@
     <messageId messageIdScheme="scheme/1.0">12345678</messageId>
     <inReplyTo messageIdScheme="scheme/1.0">87654321</inReplyTo>
     <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
-    <creationTimestamp>2019-07-29T07:00:04.2770000+10:00</creationTimestamp>
+    <creationTimestamp>2019-08-24T18:19:06.6000000+10:00</creationTimestamp>
   </header>
   <validation validationScheme="scheme/1.0">Validation0</validation>
   <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
@@ -15,7 +15,7 @@
         <accountReference href="Account0" />
         <tradeId tradeIdScheme="scheme/1.0">Trade1234</tradeId>
       </partyTradeIdentifier>
-      <tradeDate>2019-07-29</tradeDate>
+      <tradeDate>2019-08-24</tradeDate>
     </tradeHeader>
     <equityOption>
       <buyerPartyReference href="Party0" />
@@ -23,7 +23,7 @@
       <sellerPartyReference href="Party1" />
       <sellerAccountReference href="Account1" />
       <optionType>Forward</optionType>
-      <equityEffectiveDate>2019-07-29</equityEffectiveDate>
+      <equityEffectiveDate>2019-08-24</equityEffectiveDate>
       <underlyer>
         <singleUnderlyer>
           <equity>
@@ -35,7 +35,7 @@
         <equityBermudaExercise>
           <commencementDate>
             <adjustableDate>
-              <unadjustedDate>2019-07-29</unadjustedDate>
+              <unadjustedDate>2019-08-24</unadjustedDate>
               <dateAdjustments>
                 <businessDayConvention>NONE</businessDayConvention>
               </dateAdjustments>
@@ -43,7 +43,7 @@
           </commencementDate>
           <expirationDate>
             <adjustableDate>
-              <unadjustedDate>2019-07-29</unadjustedDate>
+              <unadjustedDate>2019-08-24</unadjustedDate>
               <dateAdjustments>
                 <businessDayConvention>NONE</businessDayConvention>
               </dateAdjustments>
@@ -58,13 +58,13 @@
         </equityBermudaExercise>
         <automaticExercise>true</automaticExercise>
         <makeWholeProvisions>
-          <makeWholeDate>2019-07-29</makeWholeDate>
+          <makeWholeDate>2019-08-24</makeWholeDate>
           <recallSpread>1.0</recallSpread>
         </makeWholeProvisions>
         <equityValuation />
         <settlementDate>
           <adjustableDate>
-            <unadjustedDate>2019-07-29</unadjustedDate>
+            <unadjustedDate>2019-08-24</unadjustedDate>
             <dateAdjustments>
               <businessDayConvention>NONE</businessDayConvention>
             </dateAdjustments>

@@ -20,7 +20,6 @@ using System.Globalization;
 using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
-using System.Security.Policy;
 using Core.Common;
 using FpML.V5r3.Reporting.Helpers;
 using Orion.Constants;
@@ -30,7 +29,6 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
-using MathNet.Numerics.LinearAlgebra.Double;
 using Metadata.Common;
 using Orion.Analytics.DayCounters;
 using Orion.CalendarEngine;
@@ -53,10 +51,6 @@ using Orion.ModelFramework.MarketEnvironments;
 using Orion.CurveEngine.PricingStructures.Curves;
 using Orion.CurveEngine.PricingStructures.Cubes;
 using Orion.Analytics.Interpolations.Points;
-using Orion.Analytics.Pedersen;
-using Orion.Analytics.Processes;
-using Orion.Analytics.Rates;
-using Orion.Analytics.Stochastics.Pedersen;
 using Orion.CurveEngine.Assets.Rates.CapsFloors;
 using Exception = System.Exception;
 using FxCurve = Orion.CurveEngine.PricingStructures.Curves.FxCurve;
@@ -151,23 +145,23 @@ namespace Orion.CurveEngine
             return result;
         }
 
-        /// <summary>
-        /// This interface provides a single point of entry to bootstrap all curves, 
-        /// including spread curves and cross currency spread curves.
-        /// In the case of spread curves, the reference curve may also need to be bootstrapped. 
-        /// </summary>
-        /// <param name="dependentCurves">For a simple rate curve, there would be only a single ICoreItem.
-        /// The type of the ICoreItem is always a Market with only a single PricingStructure and PricingStructureValuation. 
-        /// The QuotedAssetSet must be populated with market data.
-        /// Also, there must be properties that define the algorithm.
-        /// If no market data is provided, then the internal market data will be used.</param>
-        /// <param name="calendars">Each curve requires a calendar. In the event of no calendar provided,
-        /// the internal system calendars will be used.</param>
-        /// <returns></returns>
-        public ICoreItem BootstrapPricingStructure(List<ICoreItem> dependentCurves, List<BusinessCenterCalendar> calendars)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// This interface provides a single point of entry to bootstrap all curves, 
+        ///// including spread curves and cross currency spread curves.
+        ///// In the case of spread curves, the reference curve may also need to be bootstrapped. 
+        ///// </summary>
+        ///// <param name="dependentCurves">For a simple rate curve, there would be only a single ICoreItem.
+        ///// The type of the ICoreItem is always a Market with only a single PricingStructure and PricingStructureValuation. 
+        ///// The QuotedAssetSet must be populated with market data.
+        ///// Also, there must be properties that define the algorithm.
+        ///// If no market data is provided, then the internal market data will be used.</param>
+        ///// <param name="calendars">Each curve requires a calendar. In the event of no calendar provided,
+        ///// the internal system calendars will be used.</param>
+        ///// <returns></returns>
+        //public ICoreItem BootstrapPricingStructure(List<ICoreItem> dependentCurves, List<BusinessCenterCalendar> calendars)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         #endregion
 
@@ -1953,7 +1947,7 @@ namespace Orion.CurveEngine
             var clonedNvs = new NamedValueSet(properties.ToDictionary());
             //Build the priceable asset.
             var priceableAsset = PriceableAssetFactory.BuildPriceableAsset(Logger, Cache, NameSpace, values.ToArray(), measureType.ToArray(), priceQuoteUnits.ToArray(),
-                                         clonedNvs, null, null, out string message);
+                                         clonedNvs, null, null, out _);
             return priceableAsset;
         }
         /// <summary>
@@ -2606,7 +2600,7 @@ namespace Orion.CurveEngine
 
         #endregion
 
-        #region Load Configuration Data
+        #region Load General Configuration Data
 
         /// <summary>
         /// Caches the instruments from the database.
@@ -2774,6 +2768,19 @@ namespace Orion.CurveEngine
         public IPricingStructure CreatePricingStructure(NamedValueSet properties, object[,] values)
         {
             var structure = PricingStructureFactory.CreatePricingStructure(Logger, Cache, NameSpace, null, null, properties, values);
+            return structure;
+        }
+
+        /// <summary>
+        /// Create a pricing structure
+        /// </summary>
+        /// <param name="properties">The curve properties.</param>
+        /// <param name="values">The instrument values.</param>
+        /// <param name="algorithm">THe algorithm to use.</param>
+        /// <returns></returns>
+        public IPricingStructure CreatePricingStructure(NamedValueSet properties, object[,] values, Algorithm algorithm )
+        {
+            var structure = PricingStructureFactory.CreatePricingStructure(Logger, Cache, NameSpace, null, null, properties, values, algorithm);
             return structure;
         }
 
@@ -3265,7 +3272,7 @@ namespace Orion.CurveEngine
 
         #endregion
 
-        #region Values
+        #region Metrics
 
         /// <summary>
         /// 
@@ -3846,6 +3853,48 @@ namespace Orion.CurveEngine
         #endregion
 
         #region Utility Functions
+
+        ///  <summary>
+        ///  Examples of values are:
+        /// <Property name = "Tolerance" > 1E-10</Property >
+        /// < Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+        /// <Property name = "BootstrapperInterpolation" > LinearRateInterpolation</Property >
+        /// < Property name="CurveInterpolation">LinearInterpolation</Property>
+        /// <Property name = "UnderlyingCurve" > ZeroCurve</Property >
+        /// < Property name="CompoundingFrequency">Continuous</Property>
+        /// <Property name = "ExtrapolationPermitted" > true</Property >
+        /// < Property name="DayCounter">ACT/365.FIXED</Property>
+        ///  </summary>
+        ///  <param name="algorithmName">The name of the algorithm E.g Cubic</param>
+        ///  <param name="pricingStructureType">RateCurve, RateSpreadCurve etc.</param>
+        ///  <param name="tolerance">A decimal value.</param>
+        ///  <param name="bootstrapper">E.g. FastBootstrapper</param>
+        ///  <param name="bootstrapperInterpolation">LogLinearInterpolation</param>
+        ///  <param name="curveInterpolation">LogLinearInterpolation</param>
+        ///  <param name="underlyingCurve">DiscountFactorCurve or ZeroCurve</param>
+        ///  <param name="compoundingFrequency">Continuous</param>
+        ///  <param name="extrapolation">true</param>
+        ///  <param name="dayCounter">Typically ACT/365.FIXED</param>
+        ///  <returns></returns>
+        public string CreateAlgorithm(string algorithmName, string pricingStructureType, string tolerance,
+            string bootstrapper, string bootstrapperInterpolation, string curveInterpolation,
+            string underlyingCurve, string compoundingFrequency, string extrapolation, string dayCounter)
+        {
+            var name = AlgorithmsProp.GenericName + "." + pricingStructureType + "." +
+                       algorithmName;
+            var uniqueName = NameSpace + "." + name;
+            var itemProps = new NamedValueSet();
+            itemProps.Set(EnvironmentProp.DataGroup, "Orion.V5r3.Reporting.Configuration.Algorithm.");
+            itemProps.Set(EnvironmentProp.SourceSystem, "Orion");
+            itemProps.Set(EnvironmentProp.Function, FunctionProp.Configuration.ToString());
+            itemProps.Set(EnvironmentProp.Type, "Algorithm");
+            itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
+            itemProps.Set(EnvironmentProp.NameSpace, NameSpace);
+            var algorithm = AlgorithmHelper.CreateAlgorithm(tolerance, bootstrapper, bootstrapperInterpolation, 
+                curveInterpolation, underlyingCurve, compoundingFrequency, extrapolation, dayCounter);
+            Cache.SaveObject(algorithm, uniqueName, itemProps);
+            return name;
+        }
 
         /// <summary>
         /// 

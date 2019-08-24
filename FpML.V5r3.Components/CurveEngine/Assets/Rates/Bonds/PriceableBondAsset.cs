@@ -41,7 +41,7 @@ namespace Orion.CurveEngine.Assets
     /// </summary>
     public abstract class PriceableBondAsset : PriceableBondAssetController
     {
-        private const Decimal CDefaultWeightingValue = 1.0m;
+        private const decimal CDefaultWeightingValue = 1.0m;
 
         /// <summary>
         /// 
@@ -70,17 +70,17 @@ namespace Orion.CurveEngine.Assets
         public decimal? ParValue { get; set; }
 
         /// <summary>
-        /// THe asset swap valuation curve.
+        /// The asset swap valuation curve.
         /// </summary>
         public string SwapForecastCurveName { get; set; }
 
         /// <summary>
-        /// THe asset swap valuation curve.
+        /// The asset swap valuation curve.
         /// </summary>
         public string SwapDiscountCurveName { get; set; }
 
         /// <summary>
-        /// THe bond valuation curve.
+        /// The bond valuation curve.
         /// </summary>
         public string BondCurveName { get; set; }
 
@@ -137,25 +137,25 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        protected Decimal[] Weightings = {1.0m};
+        protected decimal[] Weightings = {1.0m};
 
         /// <summary>
         /// Gets the year fraction.
         /// </summary>
         /// <value>The year fraction.</value>
-        public Decimal[] YearFractions { get; protected set; }
+        public decimal[] YearFractions { get; protected set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableBondAsset"/> class.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
-        /// <param name="exDivDateOffset">The exdiv offsets.</param>
+        /// <param name="exDivDateOffset">The ex-dividend offsets.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
         /// <param name="marketQuote">The market quote.</param>
         /// <param name="amount">The notional amount.</param>
         /// <param name="currency">THe currency of the bond.</param>
         /// <param name="settlementDateOffset">The details to calculate the settlement date.</param>
-        protected PriceableBondAsset(DateTime baseDate, Decimal amount, Currency currency, RelativeDateOffset settlementDateOffset,
+        protected PriceableBondAsset(DateTime baseDate, decimal amount, Currency currency, RelativeDateOffset settlementDateOffset,
                                      RelativeDateOffset exDivDateOffset, BusinessDayAdjustments businessDayAdjustments,
                                      BasicQuotation marketQuote)
             : this(baseDate, amount, currency, settlementDateOffset, exDivDateOffset, businessDayAdjustments, marketQuote, BondPriceEnum.YieldToMaturity)
@@ -166,14 +166,14 @@ namespace Orion.CurveEngine.Assets
         /// Initializes a new instance of the <see cref="PriceableBondAsset"/> class.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
-        /// <param name="exDivDateOffset">The exdiv offsets.</param>
+        /// <param name="exDivDateOffset">The ex-dividend offsets.</param>
         /// <param name="businessDayAdjustments">The business day adjustments.</param>
         /// <param name="marketQuote">The market quote.</param>
         /// <param name="amount">The notional amount.</param>
         /// <param name="currency">THe currency of the bond.</param>
         /// <param name="settlementDateOffset">The details to calculate the settlement date.</param>
         /// <param name="quoteType">THe market quote type</param>
-        protected PriceableBondAsset(DateTime baseDate, Decimal amount, Currency currency, RelativeDateOffset settlementDateOffset, 
+        protected PriceableBondAsset(DateTime baseDate, decimal amount, Currency currency, RelativeDateOffset settlementDateOffset, 
             RelativeDateOffset exDivDateOffset, BusinessDayAdjustments businessDayAdjustments, BasicQuotation marketQuote, BondPriceEnum quoteType)
         {
             Multiplier = 1.0m;
@@ -199,14 +199,14 @@ namespace Orion.CurveEngine.Assets
             ModelData = modelData;
             AnalyticsModel = new BondAssetAnalytic();
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that's all we evaluate - every other metric is ignored
             var metricsToEvaluate = metrics.ToArray();
-            IBondAssetParameters analyticModelParameters = new BondAssetParameters();
+            var analyticModelParameters = new BondAssetParameters();
             CalculationResults = new BondAssetResults();
             var marketEnvironment = modelData.MarketEnvironment;
-            //IRateCurve rateforecastcurve = null;
-            IRateCurve ratediscountcurve = null;
-            //0. Set the valuation date and recalclate the settlement date. This could mean regenerating all the coupon dates as well
+            //IRateCurve rate forecast curve = null;
+            IRateCurve rateDiscountCurve = null;
+            //0. Set the valuation date and recalculate the settlement date. This could mean regenerating all the coupon dates as well
             //Alternatively the bond can be recreated with a different base date = valuation date.
             //TODO Check that the dates are correct and that the last coupon date is used.
             //Set the purchase price.
@@ -214,43 +214,41 @@ namespace Orion.CurveEngine.Assets
             //1. instantiate curve
             if (marketEnvironment.GetType() == typeof(SimpleMarketEnvironment))
             {
-                ratediscountcurve = (IRateCurve)((ISimpleMarketEnvironment)marketEnvironment).GetPricingStructure();
-                SwapDiscountCurveName = ratediscountcurve.GetPricingStructureId().UniqueIdentifier;
+                rateDiscountCurve = (IRateCurve)((ISimpleMarketEnvironment)marketEnvironment).GetPricingStructure();
+                SwapDiscountCurveName = rateDiscountCurve.GetPricingStructureId().UniqueIdentifier;
             }
             if (marketEnvironment.GetType() == typeof(SimpleRateMarketEnvironment))
             {
-                ratediscountcurve = ((ISimpleRateMarketEnvironment)marketEnvironment).GetRateCurve();
-                SwapDiscountCurveName = ratediscountcurve.GetPricingStructureId().UniqueIdentifier;
+                rateDiscountCurve = ((ISimpleRateMarketEnvironment)marketEnvironment).GetRateCurve();
+                SwapDiscountCurveName = rateDiscountCurve.GetPricingStructureId().UniqueIdentifier;
             }
             if (marketEnvironment.GetType() == typeof(SwapLegEnvironment))
             {
-                //rateforecastcurve = ((ISwapLegEnvironment)marketEnvironment).GetForecastRateCurve();
-                ratediscountcurve = ((ISwapLegEnvironment)marketEnvironment).GetDiscountRateCurve();
-                SwapDiscountCurveName = ratediscountcurve.GetPricingStructureId().UniqueIdentifier;
-                //SwapForecastCurveName = rateforecastcurve.GetPricingStructureId().UniqueIdentifier;
+                rateDiscountCurve = ((ISwapLegEnvironment)marketEnvironment).GetDiscountRateCurve();
+                SwapDiscountCurveName = rateDiscountCurve.GetPricingStructureId().UniqueIdentifier;
             }
             if (marketEnvironment.GetType() == typeof(MarketEnvironment))
             {
-                var bondcurve = (IBondCurve)modelData.MarketEnvironment.GetPricingStructure(BondCurveName);
-                if (bondcurve != null)
+                var bondCurve = (IBondCurve)modelData.MarketEnvironment.GetPricingStructure(BondCurveName);
+                if (bondCurve != null)
                 {
                     var marketDataType =
-                        bondcurve.GetPricingStructureId().Properties.GetValue<string>(AssetMeasureEnum.MarketQuote.ToString(), false);
+                        bondCurve.GetPricingStructureId().Properties.GetValue<string>(AssetMeasureEnum.MarketQuote.ToString(), false);
                     if (marketDataType != null && marketDataType == BondPriceEnum.YieldToMaturity.ToString())
                     {
                         IsYTMQuote = true;                       
                     }
                     //TODO handle the other cases like: AssetSwapSpread; DirtyPrice and ZSpread.
-                    var mq = (Decimal)bondcurve.GetYieldToMaturity(modelData.ValuationDate, SettlementDate);
+                    var mq = (decimal)bondCurve.GetYieldToMaturity(modelData.ValuationDate, SettlementDate);
                     Quote = BasicQuotationHelper.Create(mq, AssetMeasureEnum.MarketQuote.ToString(),
                                                         PriceQuoteUnitsEnum.DecimalRate.ToString());
                 }
-                //rateforecastcurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(SwapForecastCurveName);
-                ratediscountcurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(SwapDiscountCurveName);
+                //The forecast rate curve will need to be set if it is a floating rate note.
+                rateDiscountCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(SwapDiscountCurveName);
             } 
             //2. Set the rate and the Multiplier
             analyticModelParameters.Multiplier = Multiplier;
-            analyticModelParameters.Quote = QuoteValue; // MarketQuoteHelper.NormalisePriceUnits(Quote, "DecimalRate").value;
+            analyticModelParameters.Quote = QuoteValue;
             analyticModelParameters.CouponRate = GetCouponRate();
             analyticModelParameters.NotionalAmount = Notional;
             analyticModelParameters.Frequency = Frequency;
@@ -259,12 +257,13 @@ namespace Orion.CurveEngine.Assets
             analyticModelParameters.RemainingAccruedFactor = GetRemainingAccruedFactor();           
             //3. Get the discount factors
             analyticModelParameters.PaymentDiscountFactors =
-                GetDiscountFactors(ratediscountcurve, AdjustedPeriodDates, modelData.ValuationDate);
+                GetDiscountFactors(rateDiscountCurve, AdjustedPeriodDates, modelData.ValuationDate);
             //4. Get the respective year fractions
             analyticModelParameters.AccrualYearFractions = GetYearFractions();
             //5. Get the Weightings
-            analyticModelParameters.Weightings =
+            Weightings =
                 CreateWeightings(CDefaultWeightingValue, analyticModelParameters.PaymentDiscountFactors.Length);
+            analyticModelParameters.Weightings = Weightings;
             //6. Set the analytic input parameters and Calculate the respective metrics 
             AnalyticModelParameters = analyticModelParameters;
             CalculationResults =
@@ -280,7 +279,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="curve">The curve.</param>
         /// <param name="valuationDate">The valuation date.</param>
         /// <returns></returns>
-        public Decimal CalculateAssetSwap(IRateCurve curve, DateTime valuationDate)
+        public decimal CalculateAssetSwap(IRateCurve curve, DateTime valuationDate)
         {
             AnalyticsModel = new BondAssetAnalytic();
             IBondAssetParameters analyticModelParameters = new BondAssetParameters();
@@ -300,8 +299,9 @@ namespace Orion.CurveEngine.Assets
             //3. Get the respective year fractions
             analyticModelParameters.AccrualYearFractions = GetYearFractions();
             //4. Get the Weightings
-            analyticModelParameters.Weightings =
+            Weightings =
                 CreateWeightings(CDefaultWeightingValue, analyticModelParameters.PaymentDiscountFactors.Length);
+            analyticModelParameters.Weightings = Weightings;
             //5. Set the analytic input parameters and Calculate the respective metrics  
             AnalyticModelParameters = analyticModelParameters;
             CalculationResults =
@@ -345,7 +345,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="marketQuote">The marketQuote.</param>
         private void SetQuote(BasicQuotation marketQuote)
         {
-            if (String.Compare(marketQuote.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(marketQuote.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 Quote = marketQuote;
             }
@@ -361,7 +361,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="weightingValue">The weighting value.</param>
         /// <param name="noOfInstances">The no of instances.</param>
         /// <returns></returns>
-        private static Decimal[] CreateWeightings(Decimal weightingValue, int noOfInstances)
+        private static decimal[] CreateWeightings(decimal weightingValue, int noOfInstances)
         {
             var weights = new List<decimal>();
             for (var index = 0; index < noOfInstances; index++)
@@ -437,8 +437,8 @@ namespace Orion.CurveEngine.Assets
                 couponType = CouponTypeHelper.Parse(CouponType.ToString()),
                 currency = new IdentifiedCurrency { Value = Currency.Value, id = "CouponCurrency" },
                 dayCountFraction = CouponDayCount,
-                definition = null,//TODO not currrently handled
-                description = Description,//TODO not currrently handled
+                definition = null,//TODO not currently handled
+                description = Description,//TODO not currently handled
                 faceAmount = Notional,
                 faceAmountSpecified = true,
                 id = Id,
@@ -473,7 +473,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<returns></returns>
-        public DateTime GetNextCouponDate()
+        public override DateTime GetNextCouponDate()
         {
             return NextCouponDate;
         }
@@ -481,7 +481,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<returns></returns>
-        public DateTime GetLastCouponDate()
+        public override DateTime GetLastCouponDate()
         {
             return LastCouponDate;
         }
@@ -497,7 +497,7 @@ namespace Orion.CurveEngine.Assets
 
         ///<summary>
         ///</summary>
-        public Decimal GetCouponRate()
+        public override decimal GetCouponRate()
         {
             return CouponRate;
         }
@@ -506,7 +506,7 @@ namespace Orion.CurveEngine.Assets
         ///</summary>
         ///<param name="valuationDate"></param>
         ///<returns></returns>
-        public int GetAccrualDays(DateTime valuationDate)
+        public override int GetAccrualDays(DateTime valuationDate)
         {
             if (SettlementDate <= FirstAccrualDate) return 0;
             var pcd = IsXD ? NextCouponDate : LastCouponDate;
@@ -516,7 +516,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<returns></returns>
-        public Boolean IsExDiv()
+        public override bool IsExDiv()
         {
             bool result = SettlementDate >= NextExDivDate;
             return result;
@@ -525,7 +525,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<returns></returns>
-        public decimal GetAccruedFactor()
+        public override decimal GetAccruedFactor()
         {
             return Convert.ToDecimal(DayCounterHelper.Parse(CouponDayCount.Value).YearFraction(LastCouponDate, SettlementDate));
         }
@@ -533,7 +533,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<returns></returns>
-        public decimal GetRemainingAccruedFactor()
+        public override decimal GetRemainingAccruedFactor()
         {
             var period = Convert.ToDecimal(DayCounterHelper.Parse(CouponDayCount.Value).DayCount(LastCouponDate, NextCouponDate));
             var remaining = DayCounterHelper.Parse(CouponDayCount.Value).DayCount(SettlementDate, NextCouponDate);

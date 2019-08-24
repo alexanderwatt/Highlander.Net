@@ -81,6 +81,18 @@ namespace Orion.Analytics.Dates
             return new DateTime(y, m, 1 + dayOfWeek - (int)first + skip * 7);
         }
 
+        /// <summary>
+        /// Gets the last trading day.
+        /// </summary>
+        /// <param name="month">The month.</param>
+        /// <param name="year">The year.</param>
+        /// <returns></returns>
+        public static DateTime LastDayOfMonth(int month, int year)
+        {
+            DateTime significantDate = new DateTime(year, month, 1).AddMonths(1).AddDays(-1);
+            return significantDate;
+        }
+
         public static DateTime NextCouponDate(DateTime settlement, DateTime maturity, int couponFreq)
         {
             DateTime nextCouponDate = maturity;
@@ -148,7 +160,7 @@ namespace Orion.Analytics.Dates
             return endDate;
         }
 
-        public static Boolean HolCheck(DateTime date, object[,] holidays)
+        public static bool HolCheck(DateTime date, object[,] holidays)
         {
             return holidays.Cast<DateTime>().Any(hol => date == hol);
         }
@@ -158,11 +170,9 @@ namespace Orion.Analytics.Dates
             var dates = new DateTime[3];
             dates[0] = new DateTime(expiryMonthYear.Year, expiryMonthYear.Month, 1);
             int count = 0;
-            int i = 0;
             if (dates[0].DayOfWeek == DayOfWeek.Friday) count++;
             while (count < 2)
             {
-                i++;
                 dates[0] = dates[0].AddDays(1);
                 if (dates[0].DayOfWeek == DayOfWeek.Friday) count++;
             }
@@ -186,11 +196,9 @@ namespace Orion.Analytics.Dates
             var dates = new DateTime[3];
             dates[0] = new DateTime(expiryMonthYear.Year, expiryMonthYear.Month, 1);
             int count = 0;
-            int i = 0;
             if (dates[0].DayOfWeek == DayOfWeek.Wednesday) count++;
             while (count < 3)
             {
-                i++;
                 dates[0] = dates[0].AddDays(1);
                 if (dates[0].DayOfWeek == DayOfWeek.Wednesday) count++;
             }
@@ -204,11 +212,9 @@ namespace Orion.Analytics.Dates
             var dates = new DateTime[3];
             dates[0] = new DateTime(expiryMonthYear.Year, expiryMonthYear.Month, 9);
             int count = 0;
-            int i = 0;
             if (dates[0].DayOfWeek == DayOfWeek.Wednesday) count++;
             while (count < 1)
             {
-                i++;
                 dates[0] = dates[0].AddDays(1);
                 if (dates[0].DayOfWeek == DayOfWeek.Wednesday) count++;
             }

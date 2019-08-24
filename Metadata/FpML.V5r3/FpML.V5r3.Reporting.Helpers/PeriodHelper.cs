@@ -68,7 +68,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 period = EnumHelper.Parse<PeriodEnum>(alphaMatches[0].Value.Substring(0, 1), true),
                 periodSpecified = true
             };
-
             return result;
         }
 

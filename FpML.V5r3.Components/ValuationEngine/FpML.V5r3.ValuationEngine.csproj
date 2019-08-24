@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Instruments\PriceableCommoditySwapLeg.cs" />
+    <Compile Include="Instruments\PriceableBondCouponRateStream.cs" />
     <Compile Include="Instruments\PriceableVanillaFxOption.cs" />
     <Compile Include="Instruments\PriceableFxRateCashflow.cs" />
     <Compile Include="Reports\FutureTransactionReporter.cs" />

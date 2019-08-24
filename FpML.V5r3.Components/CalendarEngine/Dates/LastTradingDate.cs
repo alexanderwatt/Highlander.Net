@@ -42,7 +42,11 @@ namespace Orion.CalendarEngine.Dates
         /// <summary>
         /// 
         /// </summary>
-        protected static string[] FutureCodesPrefixes = new[] { "ED", "ER", "RA", "BAX", "L", "ES", "EY", "HR", "IR", "IB", "W", "ICE_B" };
+        protected static string[] FutureCodesPrefixes = { "ED", "ER", "RA", "BAX", "L", "ES", "EY", "HR", "IR", "IB", "W", "ICE_B" };
+
+        protected static string[] FuturesExpiryCodes = {"F", "G", "H", "J", "K", "M", "N", "Q", "U", "V", "X", "Z"};
+
+        protected static string[] FuturesMainCycleCodes = { "H", "H", "H", "M", "M", "M", "U", "U", "U", "Z", "Z", "Z" };
 
         /// <summary>
         /// 
@@ -53,14 +57,17 @@ namespace Orion.CalendarEngine.Dates
             /// 
             /// </summary>
             public RateFutureAssetAnalyticModelIdentifier FuturesPrefix;
+
             /// <summary>
             /// 
             /// </summary>
             public readonly string ImmMonthCode;
+
             /// <summary>
             /// 
             /// </summary>
             public readonly int Year;
+
             /// <summary>
             /// 
             /// </summary>
@@ -77,23 +84,7 @@ namespace Orion.CalendarEngine.Dates
                 }
                 catch { throw new Exception("This is not a valid futures code!"); }
             }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="futuresPrefix"></param>
-            public FuturesPrefixImmMonthCodeAndYear(RateFutureAssetAnalyticModelIdentifier futuresPrefix)
-            {
-                FuturesPrefix = futuresPrefix;
-                ImmMonthCode = null;
-                Year = 0;
-            }
         }
-
-        ///// <summary>
-        ///// The exchange date
-        ///// </summary>
-        //public DateTime Date {get; protected set;}
 
         /// <summary>
         /// The valid futures.
@@ -190,9 +181,7 @@ namespace Orion.CalendarEngine.Dates
             int d = date.Day;
             if (d < 15 || d > 21)
                 return false;
-
             if (!mainCycle) return true;
-
             int m = date.Month;
             return (m == 3 || m == 6 || m == 9 || m == 12);
         }
@@ -211,7 +200,6 @@ namespace Orion.CalendarEngine.Dates
             int d = refDate.Day;
             int y = refDate.Year;
             int m = refDate.Month;
-
             int offset = mainCycle ? 3 : 1;
             int skipMonths = offset - (m % offset);
             if (skipMonths != offset || d > 21)
@@ -246,11 +234,9 @@ namespace Orion.CalendarEngine.Dates
         /// </param>
         public virtual DateTime GetLastTradingDay(DateTime referenceDate)
         {
-            //FuturesPrefixImmMonthCodeAndYear futuresPrefixImmMonthCodeAndYear = BreakCodeIntoPrefixAndYear(futuresCode);
             var month = (int)LastTradingDayHelper.ParseToCode(CodeAndExpiryMonth.ImmMonthCode);
             //  Expiration - 2nd (2) Friday (4) of month.
             //
-            //DateTime unadjustedExpirationDate = DateHelper.nthWeekday(2, 5, month, referenceYear + futuresPrefixImmMonthCodeAndYear.Year);
             DateTime unadjustedExpirationDate;
             if (CodeAndExpiryMonth.Year < referenceDate.Year % 10)
             {
@@ -273,28 +259,52 @@ namespace Orion.CalendarEngine.Dates
         /// 
         /// </summary>
         /// <param name="referenceDate"></param>
+        /// <param name="mainCycle">Is it a main cycle contract?</param>
+        /// <returns>e.g "Z8"</returns>
+        public string GetNextFuturesCode(DateTime referenceDate, bool mainCycle)
+        {
+            return mainCycle ? GetNextCode(referenceDate) : GetNextAbsoluteMainCycleCode(referenceDate);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
+        /// <returns>e.g "Z8"</returns>
+        public virtual string GetNextCode(DateTime referenceDate)
+        {
+            int referenceYear = referenceDate.Year;
+            int referenceMonth = referenceDate.Month;
+            string absoluteMonthCode = FuturesExpiryCodes[referenceMonth - 1];
+            //  check if adjustment required (if it is already e.g. 20th of the March - the March futures has already expired)
+            //
+            DateTime unadjustedExpirationDate = DateHelper.NthWeekday(3, 3, referenceMonth, referenceYear);
+            if (referenceDate >= unadjustedExpirationDate)//if option expires today - move to next code
+            {
+                if (referenceMonth == 12)
+                {
+                    referenceMonth = 1;
+                    ++referenceYear;
+                }
+                else
+                {
+                    ++referenceMonth;
+                }
+                absoluteMonthCode = FuturesExpiryCodes[referenceMonth];
+            }
+            return $"{absoluteMonthCode}{referenceYear % YearsInDecade}";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
         /// <returns>e.g "Z8"</returns>
         public virtual string GetNextAbsoluteMainCycleCode(DateTime referenceDate)
         {
             int referenceYear = referenceDate.Year;
-            var table = new Dictionary<int, string>
-                            {
-                                {1, "H"},
-                                {2, "H"},
-                                {3, "H"},
-                                {4, "M"},
-                                {5, "M"},
-                                {6, "M"},
-                                {7, "U"},
-                                {8, "U"},
-                                {9, "U"},
-                                {10, "Z"},
-                                {11, "Z"},
-                                {12, "Z"}
-                            };
-
             int referenceMonth = referenceDate.Month;
-            string absoluteMonthCode = table[referenceMonth];
+            string absoluteMonthCode = FuturesMainCycleCodes[referenceMonth - 1];
             //  check if adjustment required (if it is already e.g. 20th of the March - the March futures has already expired)
             //
             if (referenceMonth % 3 == 0)//check if need to advance to next code
@@ -311,10 +321,55 @@ namespace Orion.CalendarEngine.Dates
                     {
                         ++referenceMonth;
                     }
-                    absoluteMonthCode = table[referenceMonth];
+                    absoluteMonthCode = FuturesMainCycleCodes[referenceMonth];
                 }
             }
             return $"{absoluteMonthCode}{referenceYear % YearsInDecade}";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
+        /// <param name="iteration">e.g. 3 for the third next from the reference date.</param>
+        /// <returns>e.g. H9</returns>
+        public string GetNthCode(DateTime referenceDate, int iteration)
+        {
+            //Get the next valid code.
+            string futuresCode = GetNextCode(referenceDate);
+            //Iterate through the codes.
+            for (int i = 1; i < iteration; i++)
+            {
+                futuresCode = GetFollowingCode(futuresCode);
+            }
+            return futuresCode;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="absoluteCode">e.g. Z8</param>
+        /// <returns>e.g. H9</returns>
+        public static string GetFollowingCode(string absoluteCode)
+        {
+            if (2 != absoluteCode.Length)
+            {
+                string message =
+                    $"{absoluteCode} is not recognised as absolute futures code. Examples are: 'H8', 'Z9', etc";
+                throw new Exception(message);
+            }
+            string monthCode = absoluteCode[0].ToString(CultureInfo.InvariantCulture);
+            int yearCode = int.Parse(absoluteCode[1].ToString(CultureInfo.InvariantCulture));
+            if (FuturesExpiryCodes.Length - 1 == Array.IndexOf(FuturesExpiryCodes, monthCode))
+            {
+                ++yearCode;
+                monthCode = FuturesExpiryCodes[0];
+            }
+            else
+            {
+                monthCode = FuturesExpiryCodes[Array.IndexOf(FuturesExpiryCodes, monthCode) + 1];
+            }
+            return $"{monthCode}{yearCode % YearsInDecade}";
         }
 
         /// <summary>
@@ -327,7 +382,7 @@ namespace Orion.CalendarEngine.Dates
         {
             //Get the next valid code.
             string futuresCode = GetNextAbsoluteMainCycleCode(referenceDate);
-            //Iterate throuigh the codes.
+            //Iterate through the codes.
             for (int i = 1; i < iteration; i++)
             {
                 futuresCode = GetFollowingMainCycleCode(futuresCode);
@@ -350,6 +405,7 @@ namespace Orion.CalendarEngine.Dates
             }
             string monthCode = absoluteCode[0].ToString(CultureInfo.InvariantCulture);
             int yearCode = int.Parse(absoluteCode[1].ToString(CultureInfo.InvariantCulture));
+            //TODO get rid of this.
             var codesArray = new[] { "H", "M", "U", "Z" };
             if (codesArray.Length - 1 == Array.IndexOf(codesArray, monthCode))
             {
@@ -376,10 +432,8 @@ namespace Orion.CalendarEngine.Dates
         {
             if (!IsFuturesCode(absoluteFuturesCode, false))
                 throw new ArgumentException("Invalid absolute IMMCode supplied.");
-
             string immPrefix = absoluteFuturesCode.Substring(0, 1);
             var immMonth = (FuturesCodesEnum)Enum.Parse(typeof(FuturesCodesEnum), immPrefix, true);
-
             return (int)immMonth;
         }
 
@@ -402,7 +456,7 @@ namespace Orion.CalendarEngine.Dates
         /// <returns>
         /// 	<c>true</c> if [is decade start year] [the specified year]; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsDecadeStartYear(int year)
+        public static bool IsDecadeStartYear(int year)
         {
             return year / YearsInDecade * YearsInDecade == year;
         }
@@ -434,20 +488,6 @@ namespace Orion.CalendarEngine.Dates
         {
             return significantDates.Single(a => a.Month == month && a.Year == year);
         }
-
-        /// <summary>
-        /// returns the IMM code for next contract listed in the
-        /// relevant Exchange.
-        /// </summary>
-        /// <param name="d"></param>
-        /// <param name="mainCycle"></param>
-        /// <returns>The futures code string</returns>
-        public string NextFuturesCode(DateTime d, bool mainCycle)
-        {
-            DateTime date = NextLastTradingDate(d, mainCycle);
-            return FuturesCode(date);
-        }
-
 
         ///<summary>
         ///</summary>
@@ -488,7 +528,7 @@ namespace Orion.CalendarEngine.Dates
             {
                 nextAbsoluteCode = GetFollowingMainCycleCode(nextAbsoluteCode);
             }
-            return CodeAndExpiryMonth.FuturesPrefix.ToString() + nextAbsoluteCode;
+            return CodeAndExpiryMonth.FuturesPrefix + nextAbsoluteCode;
         }
 
         /// <summary>
@@ -504,8 +544,6 @@ namespace Orion.CalendarEngine.Dates
             string str1 = mainCycle ? "hmzuHMZU" : "fghjkmnquvxzFGHJKMNQUVXZ";
             if (expiryCode.Length == 2)
                 result = (str1.Contains(expiryCode.Substring(0, 1))) && (str2.Contains(expiryCode.Substring(1, 1)));
-            //            else if (expiryCode.Length == 3)
-            //                result = (str1.Contains(expiryCode.Substring(0,1)))&& (str2.Contains(expiryCode.Substring(1,1)))&& (str2.Contains(expiryCode.Substring(2,1)));
             return result;
         }
 
@@ -546,65 +584,6 @@ namespace Orion.CalendarEngine.Dates
                 }
             }
             throw new Exception("Futures code prefix has not been identified as such.");
-        }
-
-
-        /// <summary>
-        /// returns the IMM code for the given date
-        ///(e.g. H3 for March 20th, 2013).
-        ///\warning It raises an exception if the input
-        ///date is not an IMM date
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        protected string FuturesCode(DateTime date)
-        {
-            string result = "invalid date.";
-            if (IsLastTradingDate(date, false))
-            {
-                int y = date.Year % 10;
-
-                switch (date.Month)
-                {
-                    case 1:
-                        result = "F" + y;
-                        break;
-                    case 2:
-                        result = "G" + y;
-                        break;
-                    case 3:
-                        result = "H" + y;
-                        break;
-                    case 4:
-                        result = "J" + y;
-                        break;
-                    case 5:
-                        result = "K" + y;
-                        break;
-                    case 6:
-                        result = "M" + y;
-                        break;
-                    case 7:
-                        result = "N" + y;
-                        break;
-                    case 8:
-                        result = "Q" + y;
-                        break;
-                    case 9:
-                        result = "U" + y;
-                        break;
-                    case 10:
-                        result = "V" + y;
-                        break;
-                    case 11:
-                        result = "X" + y;
-                        break;
-                    case 12:
-                        result = "Z" + y;
-                        break;
-                }
-            }
-            return result;
         }
 
         #endregion

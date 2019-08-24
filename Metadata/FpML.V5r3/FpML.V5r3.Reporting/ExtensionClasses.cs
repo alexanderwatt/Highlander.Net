@@ -59,6 +59,10 @@ namespace FpML.V5r3.Reporting
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
     public partial class FutureNodeStruct : InstrumentNode
     {
+        private bool mainCycleField;
+
+        private bool isBackwardLookingField;
+
         private RelativeDateOffset spotDateField;
 
         private BusinessDayAdjustments businessDayAdjustmentsField;
@@ -66,6 +70,32 @@ namespace FpML.V5r3.Reporting
         private Future futureField;
 
         private Exchange exchangeField;
+
+        /// <remarks/>
+        public bool MainCycle
+        {
+            get
+            {
+                return this.mainCycleField;
+            }
+            set
+            {
+                this.mainCycleField = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool IsBackwardLooking
+        {
+            get
+            {
+                return this.isBackwardLookingField;
+            }
+            set
+            {
+                this.isBackwardLookingField = value;
+            }
+        }
 
         /// <remarks/>
         public RelativeDateOffset SpotDate
@@ -2492,33 +2522,106 @@ namespace FpML.V5r3.Reporting
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
     [System.Xml.Serialization.XmlRootAttribute("property", Namespace = "http://www.fpml.org/FpML-5/reporting", IsNullable = false)]
+    public partial class GeoLocation : Address
+    {
+        private string geoLocationTypeField;
+
+        private string spatialLocationIdentifierField;
+
+        private string spatialLocationIdentifierDescriptionField;
+
+        private string latitudeField;
+
+        private string longitudeField;
+
+        /// <remarks/>
+        public string geoLocationType
+        {
+            get
+            {
+                return this.geoLocationTypeField;
+            }
+            set
+            {
+                this.geoLocationTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string spatialLocationIdentifier
+        {
+            get
+            {
+                return this.spatialLocationIdentifierField;
+            }
+            set
+            {
+                this.spatialLocationIdentifierField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string spatialLocationIdentifierDescription
+        {
+            get
+            {
+                return this.spatialLocationIdentifierDescriptionField;
+            }
+            set
+            {
+                this.spatialLocationIdentifierDescriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string latitude
+        {
+            get
+            {
+                return this.latitudeField;
+            }
+            set
+            {
+                this.latitudeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public string longitude
+        {
+            get
+            {
+                return this.longitudeField;
+            }
+            set
+            {
+                this.longitudeField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.fpml.org/FpML-5/reporting")]
+    [System.Xml.Serialization.XmlRootAttribute("property", Namespace = "http://www.fpml.org/FpML-5/reporting", IsNullable = false)]
     public partial class PropertyAsset : UnderlyingAsset
     {
-        private string propertyAddressField;
+        private Address propertyAddressField;
 
-        private string contractReferenceField;
+        private ContractId contractReferenceField;
 
-        private string locationReferenceField;
+        private GeoLocation locationReferenceField;
 
         private AdjustableOrRelativeDate purchaseDateField;
 
-        private string streetIdentifierField;
+        private string bedroomsField;
 
-        private string streetField;
+        private string bathroomsField;
 
-        private string suburbField;
-
-        private string cityField;
-
-        private string stateField;
-
-        private string countryField;
-
-        private int bedroomsField;
-
-        private int bathroomsField;
-
-        private int parkingField;
+        private string parkingField;
 
         private string propertyTaxonomyTypeField;
 
@@ -2529,7 +2632,7 @@ namespace FpML.V5r3.Reporting
         private BusinessDayAdjustments businessDayAdjustmentsField;
 
         /// <remarks/>
-        public string propertyAddress
+        public Address propertyAddress
         {
             get
             {
@@ -2542,7 +2645,7 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
-        public string contractReference
+        public ContractId contractReference
         {
             get
             {
@@ -2555,7 +2658,7 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
-        public string locationReference
+        public GeoLocation locationReference
         {
             get
             {
@@ -2580,86 +2683,9 @@ namespace FpML.V5r3.Reporting
             }
         }
 
-        /// <remarks/>
-        public string streetIdentifier
-        {
-            get
-            {
-                return this.streetIdentifierField;
-            }
-            set
-            {
-                this.streetIdentifierField = value;
-            }
-        }
 
         /// <remarks/>
-        public string street
-        {
-            get
-            {
-                return this.streetField;
-            }
-            set
-            {
-                this.streetField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string suburb
-        {
-            get
-            {
-                return this.suburbField;
-            }
-            set
-            {
-                this.suburbField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string city
-        {
-            get
-            {
-                return this.cityField;
-            }
-            set
-            {
-                this.cityField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string state
-        {
-            get
-            {
-                return this.stateField;
-            }
-            set
-            {
-                this.stateField = value;
-            }
-        }
-
-        /// <remarks/>
-        public string country
-        {
-            get
-            {
-                return this.countryField;
-            }
-            set
-            {
-                this.countryField = value;
-            }
-        }
-
-        /// <remarks/>
-        public int bedrooms
+        public string bedrooms
         {
             get
             {
@@ -2672,7 +2698,7 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
-        public int bathrooms
+        public string bathrooms
         {
             get
             {
@@ -2685,7 +2711,7 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
-        public int parking
+        public string parking
         {
             get
             {
@@ -2841,7 +2867,11 @@ namespace FpML.V5r3.Reporting
 
         private Money startGrossPriceField;
 
+        private Period paymentFrequencyField;
+
         private IdentifiedDate leaseExpiryDateField;
+
+        private RollConventionEnum rollConventionField;
 
         private BusinessDayAdjustments businessDayAdjustmentsField;
 
@@ -3015,6 +3045,19 @@ namespace FpML.V5r3.Reporting
         }
 
         /// <remarks/>
+        public Period paymentFrequency
+        {
+            get
+            {
+                return this.paymentFrequencyField;
+            }
+            set
+            {
+                this.paymentFrequencyField = value;
+            }
+        }
+
+        /// <remarks/>
         public IdentifiedDate leaseExpiryDate
         {
             get
@@ -3024,6 +3067,19 @@ namespace FpML.V5r3.Reporting
             set
             {
                 this.leaseExpiryDateField = value;
+            }
+        }
+
+        /// <remarks/>
+        public RollConventionEnum rollConvention
+        {
+            get
+            {
+                return this.rollConventionField;
+            }
+            set
+            {
+                this.rollConventionField = value;
             }
         }
 
@@ -3055,6 +3111,8 @@ namespace FpML.V5r3.Reporting
 
         private Money currentGrossPriceField;
 
+        private Payment[] grossPaymentsField;
+
         private Lease leaseField;
 
         /// <remarks/>
@@ -3080,6 +3138,19 @@ namespace FpML.V5r3.Reporting
             set
             {
                 this.currentGrossPriceField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Payment[] grossPayments
+        {
+            get
+            {
+                return this.grossPaymentsField;
+            }
+            set
+            {
+                this.grossPaymentsField = value;
             }
         }
 

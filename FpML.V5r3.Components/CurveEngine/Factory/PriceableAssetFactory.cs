@@ -861,10 +861,10 @@ namespace Orion.CurveEngine.Factory
                         break;
                     }
                 case AssetTypesEnum.IRFloor:
-                {
-                    priceableAsset = CreateIRFloor(logger, cache, nameSpace, cloneInstrument, bav, properties, fixingcalendar, paymentCalendar);
-                    break;
-                }
+                    {
+                        priceableAsset = CreateIRFloor(logger, cache, nameSpace, cloneInstrument, bav, properties, fixingcalendar, paymentCalendar);
+                        break;
+                    }
                 case AssetTypesEnum.IRCap:
                     {
                         priceableAsset = CreateIRCap(logger, cache, nameSpace, cloneInstrument, bav, properties, fixingcalendar, paymentCalendar);
@@ -911,25 +911,25 @@ namespace Orion.CurveEngine.Factory
                         break;
                     }
                 case AssetTypesEnum.IRFuture:
-                {
-                    priceableAsset = CreateIRFuture(logger, cache, nameSpace, cloneInstrument, bav, properties, paymentCalendar);
-                    break;
-                }
+                    {
+                        priceableAsset = CreateIRFuture(logger, cache, nameSpace, cloneInstrument, bav, properties, paymentCalendar);
+                        break;
+                    }
                 case AssetTypesEnum.IRFutureOption:
                     {
                         priceableAsset = CreateIRFutureOption(logger, cache, nameSpace, cloneInstrument, true, bav, properties, paymentCalendar);
                         break;
                     }
                 case AssetTypesEnum.IRPutFutureOption:
-                {
-                    priceableAsset = CreateIRFutureOption(logger, cache, nameSpace, cloneInstrument, true, bav, properties, paymentCalendar);
-                    break;
-                }
+                    {
+                        priceableAsset = CreateIRFutureOption(logger, cache, nameSpace, cloneInstrument, true, bav, properties, paymentCalendar);
+                        break;
+                    }
                 case AssetTypesEnum.IRCallFutureOption:
-                {
-                    priceableAsset = CreateIRFutureOption(logger, cache, nameSpace, cloneInstrument, false, bav, properties, paymentCalendar);
-                    break;
-                }
+                    {
+                        priceableAsset = CreateIRFutureOption(logger, cache, nameSpace, cloneInstrument, false, bav, properties, paymentCalendar);
+                        break;
+                    }
                 case AssetTypesEnum.FxSpot:
                     {
                         priceableAsset = CreateFxSpotRate(logger, cache, nameSpace, cloneInstrument, bav, properties, fixingcalendar, paymentCalendar);

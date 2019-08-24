@@ -249,7 +249,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateImpliedQuoteWithSpread(IInterpolatedSpace interpolatedSpace)
         {
@@ -283,7 +283,7 @@ namespace Orion.CurveEngine.Assets
             analyticModelParameters.Weightings =
                 CreateWeightings(CDefaultWeightingValue, analyticModelParameters.DiscountFactors.Length - 1);
             AnalyticResults = new RateAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             if (AnalyticsModel != null)
                 AnalyticResults = AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters, new[] { RateMetrics.ImpliedQuote });

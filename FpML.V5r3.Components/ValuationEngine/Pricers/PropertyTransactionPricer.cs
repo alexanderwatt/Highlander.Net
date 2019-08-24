@@ -51,8 +51,6 @@ namespace Orion.ValuationEngine.Pricers
         public decimal PreviousSettlementValue { get; set; }
         public decimal CurrentSettlementValue { get; set; }
         public decimal TradePrice { get; set; }
-        //Add the type of futures underlyer.
-        public IPriceableFuturesAssetController UnderlyingFuture { get; set; }
 
         /// <summary>
         /// The buyer reference
@@ -194,7 +192,7 @@ namespace Orion.ValuationEngine.Pricers
                 //Pre processes the data for the priceable asset.
                 PropertyInfo = XmlSerializerHelper.Clone(propertyTypeInfo);
                 //This is done because the config data is not stored in the correct way. Need to add a price quote units.
-                //TODO Set other relevant bond information
+                //TODO Set other relevant property information
                 //PropertyTypeInfo.Property.faceAmount = NotionalAmount.amount;
                 if (!PaymentCurrencies.Contains(propertyFpML.purchasePrice.currency.Value))
                 {

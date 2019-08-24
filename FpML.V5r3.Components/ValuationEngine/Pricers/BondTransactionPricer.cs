@@ -19,21 +19,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Common;
+using FpML.V5r3.Codes;
 using FpML.V5r3.Reporting.Helpers;
 using Orion.CalendarEngine.Helpers;
 using Orion.Constants;
 using Orion.Analytics.Schedulers;
-using Orion.CurveEngine.Assets;
-using Orion.CurveEngine.Factory;
 using Orion.CurveEngine.Helpers;
 using Orion.ModelFramework.Assets;
 using Orion.Models.Rates.Bonds;
 using Orion.Util.Helpers;
 using Orion.Util.Logging;
 using FpML.V5r3.Reporting;
+using Orion.Analytics.Interpolations.Points;
+using Orion.CurveEngine.Assets;
 using Orion.ModelFramework;
 using Orion.ModelFramework.Instruments;
 using Orion.ModelFramework.Instruments.InterestRates;
+using Orion.ModelFramework.MarketEnvironments;
+using Orion.ModelFramework.PricingStructures;
 using Orion.Models.Assets;
 using Orion.Util.Serialisation;
 using Orion.ValuationEngine.Factory;
@@ -43,9 +46,17 @@ using Orion.ValuationEngine.Instruments;
 
 namespace Orion.ValuationEngine.Pricers
 {
-    public class BondTransactionPricer : InstrumentControllerBase, IPriceableBondTransaction<IBondAssetParameters, IBondAssetResults>, IPriceableInstrumentController<BondTransaction>
+    public class BondTransactionPricer : InstrumentControllerBase, IPriceableBondTransaction<IBondTransactionParameters, IBondTransactionResults>, IPriceableInstrumentController<BondTransaction>
     {
         #region Properties
+
+        private const decimal CDefaultWeightingValue = 1.0m;
+
+        /// <summary>
+        /// Gets the market quote.
+        /// </summary>
+        /// <value>The market quote.</value>
+        public BasicQuotation MarketQuote { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether [base party buyer].
@@ -54,6 +65,11 @@ namespace Orion.ValuationEngine.Pricers
         /// 	<c>true</c> if [base party buyer]; otherwise, <c>false</c>.
         /// </value>
         public bool BasePartyBuyer { get; set; }
+
+        /// <summary>
+        /// The bond valuation curve.
+        /// </summary>
+        public string BondCurveName { get; set; }
 
         /// <summary>
         /// The base date from the trade pricer.
@@ -85,11 +101,6 @@ namespace Orion.ValuationEngine.Pricers
         /// </summary>
         public BondPriceEnum QuoteType { get; set; }
 
-        /// <summary>
-        /// THe purchase price
-        /// </summary>
-        public BasicQuotation Quote { get; set; }
-
         ///<summary>
         ///</summary>
         public const string RateQuotationType = "MarketQuote";
@@ -108,15 +119,38 @@ namespace Orion.ValuationEngine.Pricers
         public Money NotionalAmount { get; set; }
 
         /// <summary>
-        /// THe bond price information
+        /// The bond price information
         /// </summary>
         public BondPrice BondPrice { get; set; }
 
         /// <summary>
-        /// The bond information.
+        /// The settlement day convention.
         /// </summary>
-        public BondNodeStruct BondTypeInfo { get; set; }
-        
+        public  RelativeDateOffset SettlementDateConvention { get; set; }
+
+        /// <summary>
+        /// The ex-dividend date convention.
+        /// </summary>
+        public RelativeDateOffset ExDivDateConvention { get; set; }
+
+        /// <summary>
+        /// The business day adjustments for bond coupon and final exchange payments
+        /// </summary>
+        public BusinessDayAdjustments BusinessDayAdjustments { get; set; }
+
+        ///<summary>
+        ///</summary>
+        public bool IsYTMQuote { get; set; }
+
+        ///<summary>
+        ///</summary>
+        public decimal QuoteValue { get; set; }
+
+        /// <summary>
+        /// The bond details.
+        /// </summary>
+        public Bond Bond { get; set; }
+
         /// <summary>
         /// Gets the settlement date.
         /// </summary>
@@ -143,6 +177,11 @@ namespace Orion.ValuationEngine.Pricers
         public bool AdjustCalculationDatesIndicator { get; set; }
 
         /// <summary>
+        /// The final redemption amount
+        /// </summary>
+        public PriceablePayment FinalRedemption { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         public List<PriceablePayment> AdditionalPayments { get; protected set; }
@@ -150,14 +189,14 @@ namespace Orion.ValuationEngine.Pricers
         /// <summary>
         /// 
         /// </summary>
-        public IModelAnalytic<IBondAssetParameters, BondMetrics> AnalyticsModel { get; set; }
+        public IModelAnalytic<IBondTransactionParameters, BondMetrics> AnalyticsModel { get; set; }
 
         /// <summary>
         /// Flag where: ForwardEndDate = forecastRateInterpolation ? 
         /// AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), 
         /// AccrualBusinessDayAdjustments);  
         /// </summary>
-        public Boolean ForecastRateInterpolation { get; set; }
+        public bool ForecastRateInterpolation { get; set; }
 
         protected const string CModelIdentifier = "Bond";
         //protected const string CDefaultBucketingInterval = "3M";
@@ -173,33 +212,16 @@ namespace Orion.ValuationEngine.Pricers
         /// Gets the analytic model parameters.
         /// </summary>
         /// <value>The analytic model parameters.</value>
-        public IBondAssetParameters AnalyticModelParameters { get; protected set; }
-
-        #endregion
-
-        #region Constructors
-
-        protected BondTransactionPricer()
-        {}
+        public IBondTransactionParameters AnalyticModelParameters { get; protected set; }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="cache"></param>
-        /// <param name="nameSpace"></param>
-        /// <param name="tradeDate"></param>
-        /// <param name="settlementDate">The payment settlement date.</param>
-        /// <param name="settlementCalendar"></param>
-        /// <param name="paymentCalendar"></param>
-        /// <param name="bondFpML"></param>
-        /// <param name="basePartyReference"></param>
-        /// <param name="bondType"></param>
-        public BondTransactionPricer(ILogger logger, ICoreCache cache, string nameSpace, DateTime tradeDate,
-            DateTime settlementDate, IBusinessCalendar settlementCalendar, IBusinessCalendar paymentCalendar,
-            BondTransaction bondFpML, string basePartyReference, string bondType)
-            : this(logger, cache, nameSpace, tradeDate, settlementDate, settlementCalendar, paymentCalendar, bondFpML, basePartyReference, bondType, false)
-        {}
+        public PriceableBondCouponRateStream Coupons = new PriceableBondCouponRateStream();
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
         /// 
@@ -217,7 +239,7 @@ namespace Orion.ValuationEngine.Pricers
         /// <param name="forecastRateInterpolation"></param>
         public BondTransactionPricer(ILogger logger, ICoreCache cache, string nameSpace, DateTime tradeDate,
             DateTime settlementDate, IBusinessCalendar settlementCalendar, IBusinessCalendar paymentCalendar,
-            BondTransaction bondFpML, string basePartyReference, string bondType, Boolean forecastRateInterpolation)
+            BondTransaction bondFpML, string basePartyReference, string bondType, bool forecastRateInterpolation)
         {
             Multiplier = 1.0m;
             TradeDate = tradeDate;
@@ -262,12 +284,17 @@ namespace Orion.ValuationEngine.Pricers
             //Get the instrument configuration information.
             var assetIdentifier = bondFpML.bond.currency.Value + "-Bond-" + BondType;
             BondNodeStruct bondTypeInfo = null;
+            //Set the curve to use for valuations.
+            BondCurveName = CurveNameHelpers.GetBondCurveName(Bond.currency.Value, Bond.id);
+            //TODO Set the swap curves for asset swap valuation.
+            //
+            //Gets the template bond type
             var instrument = InstrumentDataHelper.GetInstrumentConfigurationData(cache, nameSpace, assetIdentifier);
             if (instrument != null)
             {
                 bondTypeInfo = instrument.InstrumentNodeItem as BondNodeStruct;
             }
-            if (bondFpML.bond != null &&bondTypeInfo != null)
+            if (bondFpML.bond != null && bondTypeInfo != null)
             {
                 if (SettlementCalendar == null)
                 {
@@ -279,18 +306,27 @@ namespace Orion.ValuationEngine.Pricers
                 }
                 //Pre-processes the data for the priceable asset.
                 var bond = XmlSerializerHelper.Clone(bondFpML.bond);
-                BondTypeInfo = XmlSerializerHelper.Clone(bondTypeInfo);
-                BondTypeInfo.Bond = bond;
+                Bond = bond;
+                if (bond.maturitySpecified)
+                {
+                    MaturityDate = bond.maturity;
+                }
+                SettlementDateConvention = bondTypeInfo.SettlementDate;
+                BusinessDayAdjustments = bondTypeInfo.BusinessDayAdjustments;
+                ExDivDateConvention = bondTypeInfo.ExDivDate;
                 //This is done because the config data is not stored in the correct way. Need to add a price quote units.
                 if (bond.couponRateSpecified)
                 {
                     var coupon = bond.couponRate;
-                    BondTypeInfo.Bond.couponRate = coupon;
+                    Bond.couponRate = coupon;
                 }
-                BondTypeInfo.Bond.faceAmount = NotionalAmount.amount;
-                if (BondTypeInfo.Bond.maturitySpecified)
+
+                bondTypeInfo.Bond.faceAmount = NotionalAmount.amount;
+                bondTypeInfo.Bond.faceAmountSpecified = true;
+                Bond.faceAmount = NotionalAmount.amount;
+                if (Bond.maturitySpecified)
                 {
-                    RiskMaturityDate = BondTypeInfo.Bond.maturity;
+                    RiskMaturityDate = Bond.maturity;
                 }
                 SettlementDate = settlementDate;
                 if (!PaymentCurrencies.Contains(bondFpML.bond.currency.Value))
@@ -303,11 +339,24 @@ namespace Orion.ValuationEngine.Pricers
             {
                 logger.LogInfo("Bond type data not available.");
             }
+            //Set the underlying bond
+            UnderlyingBond = new PriceableSimpleBond(tradeDate, bondTypeInfo, SettlementCalendar, PaymentCalendar, Quote, QuoteType);
+            //Set the coupons
+            var bondId = Bond.id;//Could use one of the instrumentIds
+            //bondStream is an interest Rate Stream but needs to be converted to a bond stream.
+            Coupons = new PriceableBondCouponRateStream(logger, cache, nameSpace, bondId, tradeDate,
+                bondFpML.notionalAmount.amount, CouponStreamType.GenericFixedRate, Bond,
+                BusinessDayAdjustments, ForecastRateInterpolation, null, PaymentCalendar);
             //Add payments like the settlement price
             if (!BondPrice.dirtyPriceSpecified) return;
             var amount = BondPrice.dirtyPrice * NotionalAmount.amount / 100;
             var settlementPayment = PaymentHelper.Create("BondSettlementAmount", BuyerReference, SellerReference, amount, SettlementDate);
             AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, SettlementCalendar);
+            //
+            var finalPayment = PaymentHelper.Create("FinalRedemption", BuyerReference, SellerReference, NotionalAmount.amount, RiskMaturityDate);
+            FinalRedemption =
+                PriceableInstrumentsFactory.CreatePriceablePayment(basePartyReference, finalPayment, PaymentCalendar);
+            AdditionalPayments.Add(FinalRedemption);
             if (!PaymentCurrencies.Contains(settlementPayment.paymentAmount.currency.Value))
             {
                 PaymentCurrencies.Add(settlementPayment.paymentAmount.currency.Value);
@@ -324,7 +373,7 @@ namespace Orion.ValuationEngine.Pricers
         /// <returns></returns>
         public BondTransaction Build()
         {
-            var bond = BondTypeInfo.Bond;
+            var bond = Bond;
             var buyerPartyReference = PartyReferenceHelper.Parse(BuyerReference);
             var sellerPartyReference = PartyReferenceHelper.Parse(SellerReference);
             var productType = new object[] {ProductTypeHelper.Create("BondTransaction")};
@@ -352,33 +401,160 @@ namespace Orion.ValuationEngine.Pricers
         {
             ModelData = modelData;
             AnalyticModelParameters = null;
-            AnalyticsModel = new BondTransactionAnalytic();
-            //1. Create the bond
-            UnderlyingBond = new PriceableSimpleBond(modelData.ValuationDate, BondTypeInfo, SettlementCalendar, PaymentCalendar, Quote, QuoteType);
-            if (BondPrice.dirtyPriceSpecified)
+            // 1. First derive the analytics to be evaluated via the stream controller model 
+            // NOTE: These take precedence of the child model metrics
+            if (AnalyticsModel == null)
             {
-                UnderlyingBond.PurchasePrice = BondPrice.dirtyPrice / 100; //PriceQuoteUnits
+                AnalyticsModel = new BondTransactionAnalytic();
             }
-            //Setting other relevant information          
-            MaturityDate = UnderlyingBond.MaturityDate;
-            var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
-            var metricsAsString = metrics.Select(metric => metric.ToString()).ToList();
-            var controllerData = PriceableAssetFactory.CreateAssetControllerData(metricsAsString.ToArray(), modelData.ValuationDate, modelData.MarketEnvironment);
-            UnderlyingBond.Multiplier = Multiplier;
-            UnderlyingBond.Calculate(controllerData);
+            var bondControllerMetrics = ResolveModelMetrics(AnalyticsModel.Metrics);
+            AssetValuation bondValuation;
+            var quotes = ModelData.AssetValuation.quote.ToList();
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.AccrualFactor.ToString()) == null)
+            {
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.AccrualFactor.ToString(), "DecimalValue");
+                quotes.Add(quote);
+            }
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.FloatingNPV.ToString()) == null)
+            {
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.FloatingNPV.ToString(), "DecimalValue");
+                quotes.Add(quote);
+            }
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.NPV.ToString()) == null)
+            {
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.NPV.ToString(), "DecimalValue");
+                quotes.Add(quote);
+            }
+            ModelData.AssetValuation.quote = quotes.ToArray();
+            var marketEnvironment = modelData.MarketEnvironment;
+            IRateCurve rateDiscountCurve = null;
+            //2. Sets the evolution type for coupon and payment calculations.
+            Coupons.PricingStructureEvolutionType = PricingStructureEvolutionType;
+            Coupons.BucketedDates = BucketedDates;
+            Coupons.Multiplier = Multiplier;
+            if (AdditionalPayments != null)
+            {
+                foreach (var payment in AdditionalPayments)
+                {
+                    payment.PricingStructureEvolutionType = PricingStructureEvolutionType;
+                    payment.BucketedDates = BucketedDates;
+                    payment.Multiplier = Multiplier;
+                }
+            }
+            //3. Aggregate the child metrics.
+            List<AssetValuation> childValuations = new List<AssetValuation> {Coupons?.Calculate(modelData)};
+            if (GetAdditionalPayments() != null)
+            {
+                var paymentControllers = new List<InstrumentControllerBase>(GetAdditionalPayments());
+                childValuations.AddRange(paymentControllers.Select(payment => payment.Calculate(modelData)));
+            }
+            var childControllerValuations = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
+            childControllerValuations.id = Id + ".BondCouponRateStreams";
+            //4. Now do the bond calculations.
+            if (bondControllerMetrics.Count > 0)
+            {
+                CalculationResults = new BondTransactionResults();
+                if (marketEnvironment.GetType() == typeof(MarketEnvironment))
+                {
+                    var bondCurve = (IBondCurve)modelData.MarketEnvironment.GetPricingStructure(BondCurveName);
+                    if (bondCurve != null)
+                    {
+                        var marketDataType =
+                            bondCurve.GetPricingStructureId().Properties.GetValue<string>(AssetMeasureEnum.MarketQuote.ToString(), false);
+                        if (marketDataType != null && marketDataType == BondPriceEnum.YieldToMaturity.ToString())
+                        {
+                            IsYTMQuote = true;
+                        }
+                        //TODO handle the other cases like: AssetSwapSpread; DirtyPrice and ZSpread.
+                        var mq = (decimal)bondCurve.GetYieldToMaturity(modelData.ValuationDate, SettlementDate);
+                        Quote = BasicQuotationHelper.Create(mq, AssetMeasureEnum.MarketQuote.ToString(),
+                                                            PriceQuoteUnitsEnum.DecimalRate.ToString());
+                    }
+                    rateDiscountCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(BondCurveName);//SwapCurve
+                }
+                //Generate the vectors
+                //var accrualFactorArray = GetCouponAccrualFactors();
+                const bool isBuyerInd = true;
+                var analyticModelParameters = new BondTransactionParameters
+                {
+                    IsBuyerInd = isBuyerInd,
+                    AccrualYearFractions = GetCouponAccrualFactors(),
+                    Multiplier = Multiplier,
+                    Quote = QuoteValue,
+                    CouponRate = UnderlyingBond.GetCouponRate(),
+                    NotionalAmount = UnderlyingBond.Notional,
+                    Frequency = UnderlyingBond.Frequency,
+                    IsYTMQuote = IsYTMQuote,
+                    AccruedFactor = UnderlyingBond.GetAccruedFactor(),
+                    RemainingAccruedFactor = UnderlyingBond.GetRemainingAccruedFactor(),
+                    PaymentDiscountFactors =
+                        GetDiscountFactors(rateDiscountCurve, Coupons.StreamPaymentDates.ToArray(), modelData.ValuationDate),
+                };
+                //5. Get the Weightings
+                analyticModelParameters.Weightings =
+                    CreateWeightings(CDefaultWeightingValue, analyticModelParameters.PaymentDiscountFactors.Length);
+                //6. Set the analytic input parameters and Calculate the respective metrics 
+                AnalyticModelParameters = analyticModelParameters;
+                CalculationResults = AnalyticsModel.Calculate<IBondTransactionResults, BondTransactionResults>(analyticModelParameters, bondControllerMetrics.ToArray());
+                // Now merge back into the overall stream valuation
+                var bondControllerValuation = GetValue(CalculationResults, modelData.ValuationDate);
+                bondValuation = AssetValuationHelper.UpdateValuation(bondControllerValuation,
+                                                                     childControllerValuations, ConvertMetrics(bondControllerMetrics), new List<string>(Metrics));
+            }
+            else
+            {
+                bondValuation = childControllerValuations;
+            }
             // store inputs and results from this run
-            AnalyticModelParameters = ((PriceableBondAssetController)UnderlyingBond).AnalyticModelParameters;
-            AnalyticsModel = ((PriceableBondAssetController)UnderlyingBond).AnalyticsModel;
-            CalculationResults = ((PriceableBondAssetController)UnderlyingBond).CalculationResults;
             CalculationPerformedIndicator = true;
-            return GetValue(CalculationResults, modelData.ValuationDate);
+            bondValuation.id = Id;
+            return bondValuation;
+        }
+
+        //public override AssetValuation Calculate(IInstrumentControllerData modelData)
+        //{
+        //    ModelData = modelData;
+        //    AnalyticModelParameters = null;
+        //    AnalyticsModel = new BondTransactionAnalytic();
+        //    //1. Create the bond
+        //    var bondTypeInfo = new BondNodeStruct
+        //    {
+        //        Bond = Bond,
+        //        SettlementDate = SettlementDateConvention,
+        //        BusinessDayAdjustments = BusinessDayAdjustments,
+        //        ExDivDate = ExDivDateConvention
+        //    };
+        //    UnderlyingBond = new PriceableSimpleBond(modelData.ValuationDate, bondTypeInfo, SettlementCalendar, PaymentCalendar, Quote, QuoteType);
+        //    if (BondPrice.dirtyPriceSpecified)
+        //    {
+        //        UnderlyingBond.PurchasePrice = BondPrice.dirtyPrice / 100; //PriceQuoteUnits
+        //    }
+        //    //Setting other relevant information          
+        //    MaturityDate = UnderlyingBond.MaturityDate;
+        //    var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
+        //    var metricsAsString = metrics.Select(metric => metric.ToString()).ToList();
+        //    var controllerData = PriceableAssetFactory.CreateAssetControllerData(metricsAsString.ToArray(), modelData.ValuationDate, modelData.MarketEnvironment);
+        //    UnderlyingBond.Multiplier = Multiplier;
+        //    UnderlyingBond.Calculate(controllerData);
+        //    // store inputs and results from this run
+        //    AnalyticModelParameters = ((PriceableBondAssetController)UnderlyingBond).AnalyticModelParameters;
+        //    AnalyticsModel = ((PriceableBondAssetController)UnderlyingBond).AnalyticsModel;
+        //    CalculationResults = ((PriceableBondAssetController)UnderlyingBond).CalculationResults;
+        //    CalculationPerformedIndicator = true;
+        //    return GetValue(CalculationResults, modelData.ValuationDate);
+        //}
+
+        private decimal[] GetCouponAccrualFactors()
+        {
+            var result = Coupons.GetCouponAccrualFactors();
+            return result.ToArray();
         }
 
         /// <summary>
         /// Gets the last calculation results.
         /// </summary>
         /// <value>The last results.</value>
-        public IBondAssetResults CalculationResults { get; protected set; }
+        public IBondTransactionResults CalculationResults { get; protected set; }
 
         #endregion
 
@@ -405,6 +581,120 @@ namespace Orion.ValuationEngine.Pricers
         #endregion
 
         #region Static Helpers
+
+        /// <summary>
+        /// Gets the discount factors.
+        /// </summary>
+        /// <param name="discountFactorCurve">The discount factor curve.</param>
+        /// <param name="periodDates">The period dates.</param>
+        /// <param name="valuationDate">The valuation date.</param>
+        /// <returns></returns>
+        public static decimal[] GetDiscountFactors(IRateCurve discountFactorCurve, DateTime[] periodDates,
+                                            DateTime valuationDate)
+        {
+            return periodDates.Select(periodDate => GetDiscountFactor(discountFactorCurve, periodDate, valuationDate)).ToArray();
+        }
+
+        /// <summary>
+        /// Gets the discount factor.
+        /// </summary>
+        /// <param name="discountFactorCurve">The discount factor curve.</param>
+        /// <param name="targetDate">The target date.</param>
+        /// <param name="valuationDate">The valuation date.</param>
+        /// <returns></returns>
+        public static decimal GetDiscountFactor(IRateCurve discountFactorCurve, DateTime targetDate,
+                                         DateTime valuationDate)
+        {
+            IPoint point = new DateTimePoint1D(valuationDate, targetDate);
+            var discountFactor = (decimal)discountFactorCurve.Value(point);
+            return discountFactor;
+        }
+
+        /// <summary>
+        /// Sets the marketQuote.
+        /// </summary>
+        /// <param name="marketQuote">The marketQuote.</param>
+        private void SetQuote(BasicQuotation marketQuote)
+        {
+            if (string.Compare(marketQuote.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                Quote = marketQuote;
+            }
+            else
+            {
+                throw new ArgumentException("Quotation must be of type {0}", RateQuotationType);
+            }
+        }
+
+        /// <summary>
+        /// Creates the weightings.
+        /// </summary>
+        /// <param name="weightingValue">The weighting value.</param>
+        /// <param name="noOfInstances">The no of instances.</param>
+        /// <returns></returns>
+        private static decimal[] CreateWeightings(Decimal weightingValue, int noOfInstances)
+        {
+            var weights = new List<decimal>();
+            for (var index = 0; index < noOfInstances; index++)
+            {
+                weights.Add(weightingValue);
+            }
+            return weights.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the market quote.
+        /// </summary>
+        /// <value>The market quote.</value>
+        public BasicQuotation Quote
+        {
+            get => MarketQuote;
+            set
+            {
+                MarketQuote = value;
+                if (value.quoteUnits.Value == "DecimalRate")
+                {
+                    IsYTMQuote = true;
+                    QuoteValue = value.value;
+                }
+                if (value.quoteUnits.Value == "Rate")
+                {
+                    IsYTMQuote = true;
+                    QuoteValue = value.value / 100.0m;
+                }
+                if (value.quoteUnits.Value == "DirtyPrice")
+                {
+                    IsYTMQuote = false;
+                    QuoteValue = value.value / 100.0m;
+                }
+                if (value.quoteUnits.Value == "CleanPrice")
+                {
+                    IsYTMQuote = false;
+                    QuoteValue = value.value / 100.0m;
+                }
+            }
+        }
+
+        ///<summary>
+        ///</summary>
+        public DateTime GetMaturityDate()
+        {
+            return MaturityDate;
+        }
+
+        ///<summary>
+        ///</summary>
+        public DateTime GetSettlementDate(DateTime baseDate, IBusinessCalendar settlementCalendar, RelativeDateOffset settlementDateOffset)
+        {
+            try
+            {
+                return settlementCalendar.Advance(baseDate, settlementDateOffset, settlementDateOffset.businessDayConvention);
+            }
+            catch (System.Exception)
+            {
+                throw new System.Exception("No settlement calendar set.");
+            }
+        }
 
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {

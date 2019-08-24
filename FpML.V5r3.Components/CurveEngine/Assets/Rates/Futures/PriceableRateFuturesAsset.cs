@@ -29,6 +29,23 @@ namespace Orion.CurveEngine.Assets
         public delegate TR DelegateToCalculateMethod<out TR>();
 
         /// <summary>
+        /// Do the futures expiries roll to the main cycle or not.
+        /// </summary>
+        public bool MainCycle { get; protected set; }
+
+        /// <summary>
+        /// Is the last trading date the risk maturity OR
+        /// is the last trading date the beginning of a forward period
+        /// and the rick maturity date is at the end of this interval.
+        /// </summary>
+        public bool IsBackwardLooking { get; protected set; }
+
+        /// <summary>
+        /// The exchange code for the contract.
+        /// </summary>
+        public string Code { get; protected set; }
+
+        /// <summary>
         /// 
         /// </summary>
         public DateTime LastTradeDate { get; set; }
@@ -59,7 +76,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Gets the current value.
         /// </summary>
-        /// <value>The current valuee.</value>
+        /// <value>The current value.</value>
         public decimal IndexAtMaturity => MarketQuote.value;
 
 
@@ -206,7 +223,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        public Decimal Strike { get; protected set; }
+        public decimal Strike { get; protected set; }
 
         /// <summary>
         /// 
@@ -219,17 +236,19 @@ namespace Orion.CurveEngine.Assets
         /// <param name="baseDate">The base date.</param>
         /// <param name="position">The number of contracts.</param>
         /// <param name="nodeStruct"></param>
-        /// <param name="rollCalendar">The payment Calendare.</param>
+        /// <param name="rollCalendar">The payment calender.</param>
         /// <param name="marketQuote">In the case of a future, this is a rate.</param>
         /// <param name="extraQuote">In the case of a future, this is the futures convexity volatility.</param>
         public PriceableRateFuturesAsset(DateTime baseDate, int position, FutureNodeStruct nodeStruct, IBusinessCalendar rollCalendar,
-                                         BasicQuotation marketQuote, Decimal extraQuote)
+                                         BasicQuotation marketQuote, decimal extraQuote)
         {
+            MainCycle = nodeStruct.MainCycle;
+            IsBackwardLooking = nodeStruct.IsBackwardLooking;
             Id = nodeStruct.Future.id;
             Position = position;
             BaseDate = baseDate;
             SetQuote(marketQuote);
-            //This handles the case where the underlying index is pat of an IRfuturenode type.
+            //This handles the case where the underlying index is pat of an IR future node type.
             if (nodeStruct is IRFutureNodeStruct isIRFuture)
             {
                 UnderlyingRateIndex = isIRFuture.RateIndex;
@@ -242,21 +261,33 @@ namespace Orion.CurveEngine.Assets
             var idParts = Id.Split('-');
             var exchangeCommodityName = idParts[2];
             Enum.TryParse(exchangeCommodityName, out ModelIdentifier);
-            var immCode = idParts[3];
+            Code = idParts[3];
             //Catch the relative rolls.
-            if (int.TryParse(immCode, out int intResult))
+            if (int.TryParse(Code, out int intResult))
             {
                 var tempTradingDate = LastTradingDayHelper.ParseCode(exchangeCommodityName);
-                immCode = tempTradingDate.GetNthMainCycleCode(baseDate, intResult);
+                Code = MainCycle ? tempTradingDate.GetNthMainCycleCode(baseDate, intResult) : tempTradingDate.GetNthCode(baseDate, intResult);
             }
             BusinessDayConventionEnum convention = BusinessDayAdjustments.businessDayConvention;
-            LastTradeDate = LastTradingDayHelper.GetLastTradingDay(baseDate, exchangeCommodityName, immCode);
-            AdjustedStartDate = ((BaseCalendar)rollCalendar).Advance(LastTradeDate, FuturesLag, convention);
+            LastTradeDate = LastTradingDayHelper.GetLastTradingDay(baseDate, exchangeCommodityName, Code);
             DayCounter = DayCounterHelper.Parse(UnderlyingRateIndex.dayCountFraction.Value);
-            TimeToExpiry = (decimal)DayCounter.YearFraction(BaseDate, LastTradeDate);
             Offset offset = OffsetHelper.FromInterval(UnderlyingRateIndex.term, DayTypeEnum.Calendar);
-            RiskMaturityDate = rollCalendar.Advance(AdjustedStartDate, offset, convention);
-            YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
+            //For backward looking contracts like the IB and Fed funds and other SFR based contracts
+            if (IsBackwardLooking)
+            {
+                //Use baseDate rather than the start of the contract date to avoid the reset issue.
+                AdjustedStartDate = BaseDate;
+                TimeToExpiry = (decimal)DayCounter.YearFraction(BaseDate, LastTradeDate);
+                RiskMaturityDate = rollCalendar.Advance(LastTradeDate, FuturesLag, convention);
+                YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
+            }
+            else
+            {
+                AdjustedStartDate = ((BaseCalendar)rollCalendar).Advance(LastTradeDate, FuturesLag, convention);
+                TimeToExpiry = (decimal)DayCounter.YearFraction(BaseDate, LastTradeDate);
+                RiskMaturityDate = rollCalendar.Advance(AdjustedStartDate, offset, convention);
+                YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
+            }
             CurveName = CurveNameHelpers.GetExchangeTradedCurveName(idParts[0], exchange, exchangeCommodityName);
         }
 
@@ -266,7 +297,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="marketQuote">The fixed rate.</param>
         private void SetQuote(BasicQuotation marketQuote)
         {
-            if (String.Compare(marketQuote.measureType.Value, PriceableSimpleRateAsset.RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(marketQuote.measureType.Value, PriceableSimpleRateAsset.RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 marketQuote.measureType.Value = PriceableSimpleRateAsset.RateQuotationType;
             }
@@ -297,7 +328,7 @@ namespace Orion.CurveEngine.Assets
         {
             ModelData = modelData;
             var metrics = MetricsHelper.GetMetricsToEvaluate(Metrics, AnalyticsModel.Metrics);
-            // Determine if DFAM has been requested - if so thats all we evaluate - every other metric is ignored
+            // Determine if DFAM has been requested - if so that is all we evaluate - every other metric is ignored
             var bEvalDiscountFactorAtMaturity = false;
             if (metrics.Contains(RateMetrics.DiscountFactorAtMaturity))
             {
@@ -343,7 +374,7 @@ namespace Orion.CurveEngine.Assets
             analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             if (bEvalDiscountFactorAtMaturity)
             {
-                //5. Set the anaytic input parameters and Calculate the respective metrics
+                //5. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters,
                                                                                    metricsToEvaluate);
@@ -358,7 +389,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.TimeToExpiry = GetTimeToExpiry();
                 //6. Get the position
                 analyticModelParameters.Position = Position;
-                //7. Set the anaytic input parameters and Calculate the respective metrics
+                //7. Set the analytic input parameters and Calculate the respective metrics
                 AnalyticResults =
                     AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters,
                                                                                    metricsToEvaluate);
@@ -369,7 +400,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateDiscountFactorAtMaturity(IInterpolatedSpace interpolatedSpace)
         {
@@ -390,7 +421,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             }
             AnalyticResults = new RateAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults = AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters, new[] { RateMetrics.DiscountFactorAtMaturity });
             return AnalyticResults.DiscountFactorAtMaturity;
@@ -399,7 +430,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateImpliedQuoteWithSpread(IInterpolatedSpace interpolatedSpace)
         {
@@ -422,7 +453,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             }
             AnalyticResults = new RateAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults = AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters, new[] { RateMetrics.ImpliedQuote });
             return AnalyticResults.ImpliedQuote + Spread.value;
@@ -431,7 +462,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
         /// <returns></returns>
         public override decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace)
         {
@@ -454,7 +485,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             }
             AnalyticResults = new RateAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults = AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters, new[] { RateMetrics.ImpliedQuote });
             return AnalyticResults.ImpliedQuote;
@@ -465,10 +496,10 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// Calculates the specified metric for the fast bootstrapper.
         /// </summary>
-        /// <param name="interpolatedSpace">The intepolated Space.</param>
-        /// <param name="discountedSpace">The OIS Space. Not used for margined futures.</param>
+        /// <param name="interpolatedSpace">The interpolated Space.</param>
+        /// <param name="discountedSpace">The OIS Space. Not used for margin futures.</param>
         /// <returns></returns>
-        public virtual Decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace, IInterpolatedSpace discountedSpace)
+        public virtual decimal CalculateImpliedQuote(IInterpolatedSpace interpolatedSpace, IInterpolatedSpace discountedSpace)
         {
             var analyticModelParameters = new RateFuturesAssetParameters
             {
@@ -489,7 +520,7 @@ namespace Orion.CurveEngine.Assets
                 analyticModelParameters.Rate = MarketQuoteHelper.NormalisePriceUnits(FixedRate, "DecimalRate").value;
             }
             AnalyticResults = new RateAssetResults();
-            //4. Set the anaytic input parameters and Calculate the respective metrics
+            //4. Set the analytic input parameters and Calculate the respective metrics
             //
             AnalyticResults = AnalyticsModel.Calculate<IRateAssetResults, RateAssetResults>(analyticModelParameters, new[] { RateMetrics.ImpliedQuote });
             return AnalyticResults.ImpliedQuote;
@@ -522,7 +553,7 @@ namespace Orion.CurveEngine.Assets
         ///<summary>
         ///</summary>
         ///<param name="interpolatedSpace"></param>
-        ///<returns>The spread calculated from the curve provided and the marketquote of the asset.</returns>
+        ///<returns>The spread calculated from the curve provided and the market quote of the asset.</returns>
         public override decimal CalculateSpreadQuote(IInterpolatedSpace interpolatedSpace)
         {
             return MarketQuote.value - CalculateImpliedQuote(interpolatedSpace);

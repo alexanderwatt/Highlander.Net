@@ -21,6 +21,7 @@ using System.Linq;
 using FpML.V5r3.Reporting;
 using HLV5r3.Helpers;
 using HLV5r3.Impl;
+using Metadata.Common;
 using Orion.Analytics.Helpers;
 using Orion.Analytics.Rates;
 using Orion.Constants;
@@ -371,6 +372,37 @@ namespace HLV5r3.Financial
             return result;
         }
 
+        ///  <summary>
+        ///  Examples of values are:
+        ///  <Property name = "Tolerance" > 1E-10</Property >
+        ///  <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+        ///  <Property name = "BootstrapperInterpolation" > LinearRateInterpolation</Property >
+        ///  <Property name="CurveInterpolation">LinearInterpolation</Property>
+        ///  <Property name = "UnderlyingCurve" > ZeroCurve</Property >
+        ///  <Property name="CompoundingFrequency">Continuous</Property>
+        ///  <Property name = "ExtrapolationPermitted" >true</Property >
+        ///  <Property name="DayCounter">ACT/365.FIXED</Property>
+        ///  </summary>
+        ///  <param name="algorithmName">The name of the algorithm E.g Cubic</param>
+        ///  <param name="pricingStructureType">RateCurve, RateSpreadCurve etc.</param>
+        ///  <param name="tolerance">A decimal value.</param>
+        ///  <param name="bootstrapper">E.g. FastBootstrapper</param>
+        ///  <param name="bootstrapperInterpolation">LogLinearInterpolation</param>
+        ///  <param name="curveInterpolation">LogLinearInterpolation</param>
+        ///  <param name="underlyingCurve">DiscountFactorCurve or ZeroCurve</param>
+        ///  <param name="compoundingFrequency">Continuous, Quarterly etc</param>
+        ///  <param name="extrapolation">true</param>
+        ///  <param name="dayCounter">Typically ACT/365.FIXED</param>
+        ///  <returns></returns>
+        public string CreateAlgorithm(string algorithmName, string pricingStructureType, string tolerance,
+            string bootstrapper, string bootstrapperInterpolation, string curveInterpolation,
+            string underlyingCurve, string compoundingFrequency, string extrapolation, string dayCounter)
+        {
+            var result = Engine.CreateAlgorithm(algorithmName, pricingStructureType, tolerance, bootstrapper, 
+                bootstrapperInterpolation, curveInterpolation,  underlyingCurve, compoundingFrequency, extrapolation, dayCounter);
+            return result;
+        }
+
         /// <summary>
         /// Publishes the QuotedAssetSet.
         /// A quoted asset set is used for storing market data, to be consumed by a curve.
@@ -579,6 +611,30 @@ namespace HLV5r3.Financial
             var curve = Engine.CreateFincadRateCurve(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqDiscountFactorDates.ToArray(), unqDiscountFactors.ToArray());
             Engine.SaveCurve(curve);
             return curve.GetPricingStructureId().UniqueIdentifier;
+        }
+
+        /// <summary>
+        /// Creates the rate curve with algorithm inputs.
+        /// </summary>
+        /// <param name="propertiesRange">The properties as a 2D range.</param>
+        /// <param name="valuesRange">A vertical range of instruments and values.</param>
+        /// <param name="algorithmPropertiesRange">The algorithm properties to build with.</param>
+        /// <returns>The curve identifier as a handle.</returns>
+        public string CreateTestCurve(Excel.Range propertiesRange, Excel.Range valuesRange, Excel.Range algorithmPropertiesRange)
+        {
+            var properties = propertiesRange.Value[System.Reflection.Missing.Value] as object[,];
+            NamedValueSet structureProperties = properties.ToNamedValueSet();
+            var algorithmProperties = algorithmPropertiesRange.Value[System.Reflection.Missing.Value] as object[,];
+            NamedValueSet algorithm = algorithmProperties.ToNamedValueSet();
+            //Algorithm helper function.
+            var temp = AlgorithmHelper.CreateAlgorithm(algorithm);
+            structureProperties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.Spreadsheet.ToString());
+            var values = DataRangeHelper.ToMatrix(valuesRange);
+            values = (object[,])DataRangeHelper.TrimNulls(values);
+            IPricingStructure pricingStructure = Engine.CreatePricingStructure(structureProperties, values, temp);
+            string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
+            Engine.SaveCurve(pricingStructure);
+            return structureId;
         }
 
         /// <summary>
@@ -1154,10 +1210,10 @@ namespace HLV5r3.Financial
         /// Creates a collection of curves, where the instrument array is the same for each curve.
         /// </summary>
         /// <param name="propertiesRange">The curve properties. The base date and build date time will be updated for each curve.</param>
-        /// <param name="headersRange">A horizontal N array or intruments to use in curve construction.</param>
+        /// <param name="headersRange">A horizontal N array or instruments to use in curve construction.</param>
         /// <param name="valuesRange">An N X M matrix od instrument values: M curves and N instruments</param>
         /// <returns></returns>
-        public String CreateCurves(Excel.Range propertiesRange, Excel.Range headersRange, Excel.Range valuesRange)
+        public string CreateCurves(Excel.Range propertiesRange, Excel.Range headersRange, Excel.Range valuesRange)
         {
             var properties = propertiesRange.Value[System.Reflection.Missing.Value] as object[,];
             NamedValueSet structureProperties = properties.ToNamedValueSet();

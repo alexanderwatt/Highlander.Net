@@ -74,7 +74,7 @@ namespace Orion.ValuationEngine
         /// <param name="trade"></param>
         /// <param name="tradeProps"></param>
         /// <param name="forecastRateInterpolation"></param>
-        public TradePricer(ILogger logger, ICoreCache cache, String nameSpace,
+        public TradePricer(ILogger logger, ICoreCache cache, string nameSpace,
             List<Pair<IBusinessCalendar, IBusinessCalendar>> legCalendars,
             Trade trade, NamedValueSet tradeProps, bool forecastRateInterpolation)
         {
@@ -85,15 +85,14 @@ namespace Orion.ValuationEngine
             var tradeIdentifier = new Identifiers.TradeIdentifier(tradeProps);
             TradeIdentifier = tradeIdentifier;
             TradeHeader = trade.tradeHeader;
-            //Get the baseParty, which in GWML is the originating party.
             BaseParty = tradeProps.GetValue<string>(TradeProp.BaseParty, false) ?? TradeProp.Party1;
             var party1 = tradeProps.GetValue<string>(TradeProp.Party1, true);
             var party2 = tradeProps.GetValue<string>(TradeProp.Party2, true);
             Parties = new List<Party> { new Party { partyName = new PartyName { Value = party1 } }, new Party { partyName = new PartyName { Value = party2 } } };
             TradeType = trade.ItemElementName;
             //TODO These are for whether the derivative is covered by a collateral agreement or not.
-            var collateral = trade.collateral;
-            var documentation = trade.documentation;
+            //var collateral = trade.collateral;
+            //var documentation = trade.documentation;
             //Determine the product type, so that the appropriate productPricer can be instantiated.
             //Set the product type
             var productType = tradeIdentifier.ProductType;
@@ -129,6 +128,22 @@ namespace Orion.ValuationEngine
                     //        //ProductReporter = new CommodityForwardReporter();
                     //    }
                     //    break;
+                    case ProductTypeSimpleEnum.LeaseTransaction:
+                    {
+                        IBusinessCalendar settlementCalendar = null;
+                        if (firstCalendarPair != null)
+                        {
+                            settlementCalendar = firstCalendarPair.First;
+                        }
+                        var property = (LeaseTransaction)trade.Item;
+                        var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
+                        var referenceProperty = tradeProps.GetValue<string>(LeaseProp.LeaseIdentifier, false);
+                        //Get the instrument configuration data.
+                        //Modify the pricer to include this data.
+                        //PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation);
+                        //ProductReporter = new LeaseTransactionReporter();
+                    }
+                        break;
                     case ProductTypeSimpleEnum.PropertyTransaction:
                         {
                             IBusinessCalendar settlementCalendar = null;
@@ -138,10 +153,13 @@ namespace Orion.ValuationEngine
                             }
                             var property = (PropertyTransaction)trade.Item;
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                            var referenceProperty = tradeProps.GetValue<String>(PropertyProp.ReferenceProperty, false);
+                            var referenceProperty = tradeProps.GetValue<String>(PropertyProp.PropertyIdentifier, false);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
-                            PriceableProduct = new PropertyTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new PropertyTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new PropertyTransactionReporter();
                         }
                         break;
@@ -155,10 +173,13 @@ namespace Orion.ValuationEngine
                             var equity = (EquityTransaction)trade.Item;
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate,true);
                             var effectiveDate = tradeProps.GetValue<DateTime>(TradeProp.EffectiveDate, true);
-                            var referenceEquity = tradeProps.GetValue<String>(EquityProp.ReferenceEquity, false);
+                            var referenceEquity = tradeProps.GetValue<string>(EquityProp.ReferenceEquity, false);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
-                            PriceableProduct = new EquityTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, referenceEquity, settlementCalendar, equity, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new EquityTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, referenceEquity, settlementCalendar, equity, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new EquityTransactionReporter();
                         }
                         break;
@@ -175,7 +196,10 @@ namespace Orion.ValuationEngine
                             var bondType = tradeProps.GetValue<string>(BondProp.BondType, false);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
-                            PriceableProduct = new BondTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, settlementCalendar, settlementCalendar, bond, BaseParty, bondType, forecastRateInterpolation);
+                            PriceableProduct = new BondTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, settlementCalendar, settlementCalendar, bond, BaseParty, bondType, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new BondTransactionReporter();
                         }
                         break;
@@ -192,14 +216,20 @@ namespace Orion.ValuationEngine
                             var futureType = EnumHelper.Parse<ExchangeContractTypeEnum>(type);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
-                            PriceableProduct = new FutureTransactionPricer(logger, cache, nameSpace, tradeDate, futureType, settlementCalendar, future, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new FutureTransactionPricer(logger, cache, nameSpace, tradeDate, futureType, settlementCalendar, future, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FutureTransactionReporter();
                         }
                         break;
                     case ProductTypeSimpleEnum.InterestRateSwap:
                         {
                             var swap = (Swap)trade.Item;
-                            PriceableProduct = new InterestRateSwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new InterestRateSwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwapReporter();
                         }
                         break;
@@ -207,7 +237,10 @@ namespace Orion.ValuationEngine
                         {
                             var swap = (Swap)trade.Item;
                             //TODO set for the payer. This needs to be modified for the base counterparty.
-                            PriceableProduct = new AssetSwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, new Bond(), forecastRateInterpolation);
+                            PriceableProduct = new AssetSwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, new Bond(), forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwapReporter();
                         }
                         break;
@@ -215,7 +248,10 @@ namespace Orion.ValuationEngine
                         {
                             var swap = (Swap)trade.Item;
                             //TODO set for the payer. This needs to be modified for the base counterparty.
-                            PriceableProduct = new CrossCurrencySwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new CrossCurrencySwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwapReporter();
                         }
                         break;
@@ -231,6 +267,7 @@ namespace Orion.ValuationEngine
                             }
                             PriceableProduct = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, BaseParty, nameSpace)
                             {
+                                ProductIdentifier = tradeIdentifier,
                                 ForecastRateInterpolation = forecastRateInterpolation
                             };
                             ProductReporter = new ForwardRateAgreementReporter();
@@ -254,21 +291,30 @@ namespace Orion.ValuationEngine
                                 fixingCalendar = firstCalendarPair.First;
                                 paymentCalendar = firstCalendarPair.Second;
                             }
-                            PriceableProduct = new CapFloorPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, capFloor, BaseParty);
+                            PriceableProduct = new CapFloorPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, capFloor, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new CapFloorReporter();
                         }
                         break;
                     case ProductTypeSimpleEnum.FxSpot:
                         {
                             var fxForward = (FxSingleLeg)trade.Item;
-                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductTypeSimpleEnum.FxSpot);
+                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductTypeSimpleEnum.FxSpot)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxSingleLegReporter();
                         }
                         break;
                     case ProductTypeSimpleEnum.FxForward:
                         {
                             var fxForward = (FxSingleLeg)trade.Item;
-                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductTypeSimpleEnum.FxForward);
+                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductTypeSimpleEnum.FxForward)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxSingleLegReporter();
                         }
                         break;
@@ -294,7 +340,10 @@ namespace Orion.ValuationEngine
                                         }
                                     }
                                 }
-                                PriceableProduct = new BulletPaymentPricer(bullet, BaseParty, paymentCalendar);
+                                PriceableProduct = new BulletPaymentPricer(bullet, BaseParty, paymentCalendar)
+                                {
+                                    ProductIdentifier = tradeIdentifier
+                                };
                                 ProductReporter = new BulletPaymentReporter();
                             }
                         }
@@ -302,7 +351,10 @@ namespace Orion.ValuationEngine
                     case ProductTypeSimpleEnum.FxSwap:
                         {
                             var fxSwap = (FxSwap)trade.Item;
-                            PriceableProduct = new FxSwapPricer(fxSwap, BaseParty);
+                            PriceableProduct = new FxSwapPricer(fxSwap, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxSwapReporter();
                         }
                         break;
@@ -320,7 +372,10 @@ namespace Orion.ValuationEngine
                                 paymentCalendar = firstCalendarPair.Second;
                             }
                             var fxOption = (FxOption)trade.Item;
-                            PriceableProduct = new VanillaEuropeanFxOptionPricer( logger, cache, nameSpace, fixingCalendar, paymentCalendar, fxOption, BaseParty);
+                            PriceableProduct = new VanillaEuropeanFxOptionPricer( logger, cache, nameSpace, fixingCalendar, paymentCalendar, fxOption, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxOptionLegReporter();
                         }
                         break;
@@ -341,7 +396,10 @@ namespace Orion.ValuationEngine
                     case ProductTypeSimpleEnum.InterestRateSwaption:
                         {
                             var interestRateSwaption = (Swaption)trade.Item;
-                            PriceableProduct = new InterestRateSwaptionPricer(logger, cache, nameSpace, interestRateSwaption, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new InterestRateSwaptionPricer(logger, cache, nameSpace, interestRateSwaption, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwaptionReporter();
                         }
                         break;
@@ -351,7 +409,11 @@ namespace Orion.ValuationEngine
                             //var party2 = tradeProps.GetValue<string>(TradeProp.Party2, true);
                             //var reportingParty = baseParty == party1 ? "Party1" : "Party2"; // TODO this is for backward compatibility.
                             var deposit = (TermDeposit)trade.Item;
-                            PriceableProduct = new TermDepositPricer(logger, cache, deposit, TradeProp.Party1);//The payment date must be correct before calling this!
+                            PriceableProduct = new TermDepositPricer(logger, cache, deposit, TradeProp.Party1)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
+                            //The payment date must be correct before calling this!
                             ProductReporter = new TermDepositReporter();
                         }
                         break;
@@ -371,17 +433,34 @@ namespace Orion.ValuationEngine
             {
                 switch (TradeType)
                 {
+                    case ItemChoiceType15.leaseTransaction:
+                    {
+                        var lease = (LeaseTransaction)trade.Item;
+                        IBusinessCalendar settlementCalendar = null;
+                        if (firstCalendarPair != null)
+                        {
+                            settlementCalendar = firstCalendarPair.First;
+                        }
+                        var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
+                        var referenceProperty = tradeProps.GetValue<String>(LeaseProp.LeaseIdentifier, false);
+                        //PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, lease, BaseParty, forecastRateInterpolation);
+                        //ProductReporter = new LeaseTransactionReporter();
+                    }
+                        break;
                     case ItemChoiceType15.propertyTransaction:
                         {
-                            var equity = (PropertyTransaction)trade.Item;
+                            var property = (PropertyTransaction)trade.Item;
                             IBusinessCalendar settlementCalendar = null;
                             if (firstCalendarPair != null)
                             {
                                 settlementCalendar = firstCalendarPair.First;
                             }
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                            var referenceProperty = tradeProps.GetValue<String>(PropertyProp.ReferenceProperty, false);
-                            PriceableProduct = new PropertyTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, equity, BaseParty, forecastRateInterpolation);
+                            var referenceProperty = tradeProps.GetValue<String>(PropertyProp.PropertyIdentifier, false);
+                            PriceableProduct = new PropertyTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new PropertyTransactionReporter();
                         }
                         break;
@@ -396,7 +475,10 @@ namespace Orion.ValuationEngine
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
                             var effectiveDate = tradeProps.GetValue<DateTime>(TradeProp.EffectiveDate, true);
                             var referenceEquity = tradeProps.GetValue<String>(EquityProp.ReferenceEquity, false);
-                            PriceableProduct = new EquityTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, referenceEquity, settlementCalendar, equity, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new EquityTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, referenceEquity, settlementCalendar, equity, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new EquityTransactionReporter();
                         }
                         break;
@@ -413,7 +495,10 @@ namespace Orion.ValuationEngine
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, true);
                             var effectiveDate = tradeProps.GetValue<DateTime>(TradeProp.EffectiveDate, true);
                             var bondType = tradeProps.GetValue<string>(BondProp.BondType, false);
-                            PriceableProduct = new BondTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, settlementCalendar, paymentCalendar, bond, BaseParty, bondType, forecastRateInterpolation);
+                            PriceableProduct = new BondTransactionPricer(logger, cache, nameSpace, tradeDate, effectiveDate, settlementCalendar, paymentCalendar, bond, BaseParty, bondType, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new BondTransactionReporter();
                         }
                         break;
@@ -430,7 +515,10 @@ namespace Orion.ValuationEngine
                             var futureType = EnumHelper.Parse<ExchangeContractTypeEnum>(type);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
-                            PriceableProduct = new FutureTransactionPricer(logger, cache, nameSpace, tradeDate, futureType, settlementCalendar, future, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new FutureTransactionPricer(logger, cache, nameSpace, tradeDate, futureType, settlementCalendar, future, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FutureTransactionReporter();
                         }
                         break;
@@ -439,7 +527,10 @@ namespace Orion.ValuationEngine
                             var swap = (Swap)trade.Item;
                             //TODO this needs to be enhanced
                             ProductType = ProductTypeSimpleEnum.InterestRateSwap;
-                            PriceableProduct = new CrossCurrencySwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new CrossCurrencySwapPricer(logger, cache, nameSpace, legCalendars, swap, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwapReporter();
                             //var report =
                         }
@@ -457,6 +548,7 @@ namespace Orion.ValuationEngine
                             ProductType = ProductTypeSimpleEnum.FRA;
                             PriceableProduct = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, BaseParty)
                             {
+                                ProductIdentifier = tradeIdentifier,
                                 ForecastRateInterpolation = forecastRateInterpolation
                             };
                             ProductReporter = new ForwardRateAgreementReporter();
@@ -473,7 +565,10 @@ namespace Orion.ValuationEngine
                                 paymentCalendar = firstCalendarPair.Second;
                             }
                             ProductType = ProductTypeSimpleEnum.CapFloor;
-                            PriceableProduct = new CapFloorPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, capFloor, BaseParty);
+                            PriceableProduct = new CapFloorPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, capFloor, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new CapFloorReporter();
                         }
                         break;
@@ -481,7 +576,10 @@ namespace Orion.ValuationEngine
                         {
                             var fxForward = (FxSingleLeg)trade.Item;
                             ProductType = ProductTypeSimpleEnum.FxSpot;
-                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductType);
+                            PriceableProduct = new FxSingleLegPricer(fxForward, BaseParty, ProductType)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxSingleLegReporter();
                         }
                         break;
@@ -489,7 +587,10 @@ namespace Orion.ValuationEngine
                         {
                             var fxSwap = (FxSwap)trade.Item;
                             ProductType = ProductTypeSimpleEnum.FxSwap;
-                            PriceableProduct = new FxSwapPricer(fxSwap, BaseParty);
+                            PriceableProduct = new FxSwapPricer(fxSwap, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxSwapReporter();
                         }
                         break;
@@ -516,7 +617,10 @@ namespace Orion.ValuationEngine
                                     }
                                 }
                                 ProductType = ProductTypeSimpleEnum.BulletPayment;
-                                PriceableProduct = new BulletPaymentPricer(bullet, BaseParty, paymentCalendar);
+                                PriceableProduct = new BulletPaymentPricer(bullet, BaseParty, paymentCalendar)
+                                {
+                                    ProductIdentifier = tradeIdentifier
+                                };
                                 ProductReporter = new BulletPaymentReporter();
                             }
                         }
@@ -525,7 +629,11 @@ namespace Orion.ValuationEngine
                         {
                             var deposit = (TermDeposit)trade.Item;
                             ProductType = ProductTypeSimpleEnum.TermDeposit;
-                            PriceableProduct = new TermDepositPricer(logger, cache, deposit, TradeProp.Party1);//The payment date must be correct before calling this!
+                            PriceableProduct = new TermDepositPricer(logger, cache, deposit, TradeProp.Party1)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
+                            //The payment date must be correct before calling this!
                             ProductReporter = new TermDepositReporter();
                         }
                         break;
@@ -533,7 +641,10 @@ namespace Orion.ValuationEngine
                         {
                             var interestRateSwaption = (Swaption)trade.Item;
                             ProductType = ProductTypeSimpleEnum.InterestRateSwaption;
-                            PriceableProduct = new InterestRateSwaptionPricer(logger, cache, nameSpace, interestRateSwaption, BaseParty, forecastRateInterpolation);
+                            PriceableProduct = new InterestRateSwaptionPricer(logger, cache, nameSpace, interestRateSwaption, BaseParty, forecastRateInterpolation)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new InterestRateSwaptionReporter();
                         }
                         break;
@@ -548,7 +659,10 @@ namespace Orion.ValuationEngine
                             }
                             var fxOption = (FxOption)trade.Item;
                             ProductType = ProductTypeSimpleEnum.FxOption;
-                            PriceableProduct = new VanillaEuropeanFxOptionPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fxOption, BaseParty);
+                            PriceableProduct = new VanillaEuropeanFxOptionPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fxOption, BaseParty)
+                            {
+                                ProductIdentifier = tradeIdentifier
+                            };
                             ProductReporter = new FxOptionLegReporter();
                         }
                         break;

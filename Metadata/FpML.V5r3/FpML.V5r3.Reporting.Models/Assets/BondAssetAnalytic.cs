@@ -33,7 +33,7 @@ namespace Orion.Models.Assets
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal ImpliedQuote => EvaluateImpliedQuote();
+        public decimal ImpliedQuote => EvaluateImpliedQuote();
 
         /// <summary>
         /// Gets the accrued coupon.

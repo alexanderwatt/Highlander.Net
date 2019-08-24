@@ -58,24 +58,14 @@ namespace Orion.Constants
         public const string SourceSystem = "SourceSystem";
         public const string Currency = "Currency";
         public const string PropertyType = "PropertyType";
-        public const string PropertySector = "PropertySector";//Govt, Corp, Mtge
+        public const string PropertyIdentifier = "PropertyIdentifier";
+        public const string PropertySector = "PropertySector";
         public const string Description = "Description";
         public const string UniqueIdentifier = "UniqueIdentifier";
         public const string AsAtDate = "AsAtDate";
         public const string PropertyIndex = "PropertyIndex";
         public const string SchemaType = "SchemaType";
         public const string SchemaVersion = "SchemaVersion";
-        public const string Exchange = "Exchange";
-        public const string ReferenceProperty = "ReferenceProperty";
-        public const string UpfrontAmount = "UpfrontAmount";
-        public const string NextReviewDate = "NextReviewDate";
-        public const string PaymentDate = "PaymentDate";
-        public const string ReviewChange = "ReviewChange";
-        public const string ShopNumber = "ShopNumber";
-        public const string UnitsOfArea = "UnitsOfArea";
-        public const string ReviewFrequency = "ReviewFrequency";
-        public const string LeaseType = "LeaseType";
-        public const string Area = "Area";
     }
 
     public static class LeaseProp
@@ -90,14 +80,28 @@ namespace Orion.Constants
         public const string Domain = "Domain";
         public const string SourceSystem = "SourceSystem";
         public const string Currency = "Currency";
-        public const string LeaseType = "LeaseType";
         public const string Description = "Description";
         public const string UniqueIdentifier = "UniqueIdentifier";
         public const string AsAtDate = "AsAtDate";
         public const string SchemaType = "SchemaType";
         public const string SchemaVersion = "SchemaVersion";
-        public const string Exchange = "Exchange";
         public const string Tenant = "Tenant";
+        public const string ReferenceProperty = "ReferenceProperty";
+        public const string UpfrontAmount = "UpfrontAmount";
+        public const string NextReviewDate = "NextReviewDate";
+        public const string GrossAmount = "GrossAmount";
+        public const string PaymentFrequency = "PaymentFrequency";
+        public const string PaymentDate = "PaymentDate";
+        public const string ReviewChange = "ReviewChange";
+        public const string ShopNumber = "ShopNumber";
+        public const string UnitsOfArea = "UnitsOfArea";
+        public const string ReviewFrequency = "ReviewFrequency";
+        public const string LeaseType = "LeaseType";
+        public const string LeaseIdentifier = "LeaseIdentifier";
+        public const string Area = "Area";
         public const string ReferencePropertyIdentifier = "ReferencePropertyIdentifier";
+        public const string BusinessDayCalendar = "BusinessDayCalendar";
+        public const string BusinessDayAdjustments = "BusinessDayAdjustments";
+        public const string RollConvention = "RollConvention";
     }
 }

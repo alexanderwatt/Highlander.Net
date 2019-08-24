@@ -23,22 +23,27 @@ namespace Orion.ModelFramework.Assets
     public interface IPriceableFuturesAssetController : IPriceableAssetController
     {
         /// <summary>
+        /// The exchange code for the contract.
+        /// </summary>
+        string Code { get; }
+
+        /// <summary>
         /// Gets the exchange initial margin.
         /// </summary>
         /// <value>The exchange initial margin.</value>
-        Decimal InitialMargin { get; }
+        decimal InitialMargin { get; }
 
         /// <summary>
         /// Gets the last settled value.
         /// </summary>
         /// <value>The last settled value.</value>
-        Decimal LastSettledValue { get; }
+        decimal LastSettledValue { get; }
 
         /// <summary>
         /// Gets the current value.
         /// </summary>
         /// <value>The current value.</value>
-        Decimal IndexAtMaturity { get; }
+        decimal IndexAtMaturity { get; }
 
         /// <summary>
         /// Gets the last trading date.

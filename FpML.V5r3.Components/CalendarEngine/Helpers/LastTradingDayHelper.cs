@@ -42,6 +42,7 @@ namespace Orion.CalendarEngine.Helpers
             var code = EnumHelper.Parse<RateFutureAssetAnalyticModelIdentifier>(futuresCode);
             return Parse(code);
         }
+
         /// <summary>
         /// Gets the appropriate exchange calendar class for the contract defined.
         /// </summary>
@@ -168,7 +169,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             var code = EnumHelper.Parse<RateFutureAssetAnalyticModelIdentifier>(futuresCode);
             var exchangeCal = Parse(code);
-            var result = exchangeCal.NextFuturesCode(date, mainCycle);
+            var result = exchangeCal.GetNextFuturesCode(date, mainCycle);
             return result;
         }
 

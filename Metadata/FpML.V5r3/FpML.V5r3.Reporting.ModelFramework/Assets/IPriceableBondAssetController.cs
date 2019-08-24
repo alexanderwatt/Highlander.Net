@@ -122,7 +122,7 @@ namespace Orion.ModelFramework.Assets
         /// <summary>
         /// The purchase price as a dirty price.
         /// </summary>
-        Decimal PurchasePrice { get; set; }
+        decimal PurchasePrice { get; set; }
 
         ///<summary>
         ///</summary>
@@ -134,10 +134,45 @@ namespace Orion.ModelFramework.Assets
         /// <returns></returns>
         decimal[] GetYearFractions();
 
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        decimal GetAccruedFactor();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        decimal GetRemainingAccruedFactor();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        bool IsExDiv();
+
+        ///<summary>
+        ///</summary>
+        decimal GetCouponRate();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        DateTime GetLastCouponDate();
+
+        ///<summary>
+        ///</summary>
+        ///<param name="valuationDate"></param>
+        ///<returns></returns>
+        int GetAccrualDays(DateTime valuationDate);
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        DateTime GetNextCouponDate();
+
         /// <summary>
         /// Gets or sets the multiplier.
         /// </summary>
         ///  <value>The multiplier.</value>
-        Decimal Multiplier { get; set; }
+        decimal Multiplier { get; set; }
     }
 }

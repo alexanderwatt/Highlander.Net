@@ -16,8 +16,6 @@
 #region Using Directives
 
 using System;
-using System.Collections.Generic;
-using Orion.Analytics.Dates;
 using Orion.CalendarEngine.Helpers;
 
 #endregion
@@ -39,7 +37,7 @@ namespace Orion.CalendarEngine.Dates
         /// Initializes a new instance of the <see cref="SecondFriday"/> class.
         /// </summary>
         /// <param name="exchangeCommodityCode">Name of the exchange commodity.</param>
-        ///  <param name="expiryMonthAndYear">Name of the expiryMonthAndYeary.</param>
+        ///  <param name="expiryMonthAndYear">Name of the expiry Month And Year.</param>
         public LastDayOfTheMonth(string exchangeCommodityCode, string expiryMonthAndYear)
             : base(exchangeCommodityCode, expiryMonthAndYear)
         {}
@@ -47,7 +45,7 @@ namespace Orion.CalendarEngine.Dates
         /// <summary>
         /// Initializes a new instance of the <see cref="SecondFriday"/> class.
         /// </summary>
-        /// <param name="exchangeCommodityName">Name of the exchange commodity e.g. EDZ8.</param>
+        /// <param name="exchangeCommodityName">Name of the exchange commodity e.g. IBZ8.</param>
         public LastDayOfTheMonth(string exchangeCommodityName)
             : base(exchangeCommodityName)
         {}
@@ -60,7 +58,7 @@ namespace Orion.CalendarEngine.Dates
         /// <returns></returns>
         public override DateTime GetLastTradingDay(int month, int year)
         {
-            DateTime significantDate = new DateTime(year, month, 1).AddDays(-1);
+            DateTime significantDate = RuleHelper.LastWeekdayDayInMonth(1, month, year);
             return significantDate;
         }
 
@@ -72,33 +70,34 @@ namespace Orion.CalendarEngine.Dates
         /// <returns>true/false</returns>
         public override bool IsLastTradingDate(DateTime date, bool mainCycle)
         {
-            //if (date.DayOfWeek != DayOfWeek.Friday)
-            //    return false;
-            int d = date.Day;
-            if (d<20)
-                return false;
-            if (!mainCycle) return true;
-            int m = date.Month;
-            return (m == 3 || m == 6 || m == 9 || m == 12);
+            if (!mainCycle)
+            {
+                var lastDay = GetLastTradingDay(date.Month, date.Year);
+                return date < lastDay;
+            }
+            var nextDate = NextLastTradingDate(date, true);
+            return date < nextDate;
         }
 
         /// <summary>
-        /// next IMM date following the given date
-        /// returns the 1st delivery date for next contract listed in the
-        /// International Money Market section of the Chicago Mercantile
-        /// Exchange.
+        /// next expiry date following the given date
+        /// returns the 1st delivery date for next contract listed.
         /// </summary>
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns></returns>
         public override DateTime NextLastTradingDate(DateTime refDate, bool mainCycle) 
         {
-            int d = refDate.Day;
+            //int d = refDate.Day;
             int y = refDate.Year;
             int m = refDate.Month;
-            int offset = mainCycle ? 3 : 1;
-            int skipMonths = offset-(m%offset);
-            if (skipMonths != offset || d > 14) 
+            if (!mainCycle)
+            {
+                return GetLastTradingDay(m, y);
+            }
+            int offset = 3;
+            int skipMonths = offset-m%offset;
+            if (skipMonths != offset) 
             {
                 skipMonths += m;
                 if (skipMonths<=12) 
@@ -111,9 +110,7 @@ namespace Orion.CalendarEngine.Dates
                     y += 1;
                 }
             }
-            DateTime result = GetLastTradingDay(m, y);
-            if (result<=refDate)
-                result = NextLastTradingDate(new DateTime(y, m, 15), mainCycle);
+            var result = GetLastTradingDay(new DateTime(y, m, 15));
             return result;
         }
 
@@ -129,20 +126,16 @@ namespace Orion.CalendarEngine.Dates
         /// </param>
         public override DateTime GetLastTradingDay(DateTime referenceDate)
         {
-            //FuturesPrefixImmMonthCodeAndYear futuresPrefixImmMonthCodeAndYear = BreakCodeIntoPrefixAndYear(futuresCode);
             var month = (int)LastTradingDayHelper.ParseToCode(CodeAndExpiryMonth.ImmMonthCode);
-            //  Expiration - 2nd (2) Friday (4) of month.
-            //
-            //DateTime unadjustedExpirationDate = DateHelper.nthWeekday(2, 5, month, referenceYear + futuresPrefixImmMonthCodeAndYear.Year);
             DateTime unadjustedExpirationDate;
             if (CodeAndExpiryMonth.Year < referenceDate.Year % 10)
             {
-                int realYear = referenceDate.Year - (referenceDate.Year % 10) + CodeAndExpiryMonth.Year + 10;
+                int realYear = referenceDate.Year - referenceDate.Year % 10 + CodeAndExpiryMonth.Year + 10;
                 unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, month, realYear);
             }
             else
             {
-                int realYear = referenceDate.Year - (referenceDate.Year % 10) + CodeAndExpiryMonth.Year;
+                int realYear = referenceDate.Year - referenceDate.Year % 10 + CodeAndExpiryMonth.Year;
                 unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, month, realYear);
             }
             return unadjustedExpirationDate;
@@ -156,29 +149,12 @@ namespace Orion.CalendarEngine.Dates
         public override string GetNextAbsoluteMainCycleCode(DateTime referenceDate)
         {
             int referenceYear = referenceDate.Year;
-            var table = new Dictionary<int, string>
-                            {
-                                {1, "H"},
-                                {2, "H"},
-                                {3, "H"},
-                                {4, "M"},
-                                {5, "M"},
-                                {6, "M"},
-                                {7, "U"},
-                                {8, "U"},
-                                {9, "U"},
-                                {10, "Z"},
-                                {11, "Z"},
-                                {12, "Z"}
-                            };
-
             int referenceMonth = referenceDate.Month;
-            string absoluteMonthCode = table[referenceMonth];
-            //  check if adjustment required (if it is already e.g. 20th of the March - the March futures has already expired)
-            //
+            string absoluteMonthCode = FuturesMainCycleCodes[referenceMonth - 1];
+            //  check if adjustment required
             if (referenceMonth % 3 == 0)//check if need to advance to next code
             {
-                DateTime unadjustedExpirationDate = DateHelper.NthWeekday(2, 5, referenceMonth, referenceYear);
+                DateTime unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, referenceMonth, referenceYear);
                 if (referenceDate >= unadjustedExpirationDate)//if option expires today - move to next code
                 {
                     if (referenceMonth == 12)
@@ -190,10 +166,9 @@ namespace Orion.CalendarEngine.Dates
                     {
                         ++referenceMonth;
                     }
-                    absoluteMonthCode = table[referenceMonth];
+                    absoluteMonthCode = FuturesMainCycleCodes[referenceMonth - 1];
                 }
             }
-
             return $"{absoluteMonthCode}{referenceYear % 10}";
         }
     }

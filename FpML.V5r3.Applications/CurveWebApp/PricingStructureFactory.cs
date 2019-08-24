@@ -64,7 +64,7 @@ namespace Highlander.CurveWebApp
         }
 
         ///<summary>
-        /// Gets the disctinct expisiries, which maust be in the first column.
+        /// Gets the distinct expiries, which must be in the first column.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<returns></returns>
@@ -80,7 +80,7 @@ namespace Highlander.CurveWebApp
         }
 
         ///<summary>
-        /// Gets the disctinct expisiries, which maust be in the first column.
+        /// Gets the distinct expiries, which must be in the first column.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<returns></returns>
@@ -199,7 +199,7 @@ namespace Highlander.CurveWebApp
                 inputSwapRates.Add((double)additional[row][1]);
                 inputBlackVolRates.Add((double)additional[row][2]);
             }
-            //retrun RateATMVolatilitySurface
+            //return RateATMVolatilitySurface
             return new RateVolatilitySurface(logger, cache, nameSpace, properties, expiries.ToArray(), vols.ToArray(), inputInstruments.ToArray(),
                 inputSwapRates.ToArray(), inputBlackVolRates.ToArray());
         }

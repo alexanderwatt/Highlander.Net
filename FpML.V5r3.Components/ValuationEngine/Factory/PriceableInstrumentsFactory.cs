@@ -24,8 +24,12 @@ using Core.Common;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Reporting.Helpers;
 using Orion.Analytics.DayCounters;
+using Orion.Analytics.Schedulers;
 using Orion.CalendarEngine.Helpers;
+using Orion.CalendarEngine.Schedulers;
+using Orion.CurveEngine.Helpers;
 using Orion.ModelFramework;
+using Orion.ModelFramework.Instruments.InterestRates;
 using Orion.ValuationEngine.Instruments;
 using XsdClassesFieldResolver = FpML.V5r3.Reporting.XsdClassesFieldResolver;
 
@@ -185,6 +189,173 @@ namespace Orion.ValuationEngine.Factory
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="baseDate"></param>
+        /// <param name="bondAsset"></param>
+        /// <param name="notionalAmount"></param>
+        /// <param name="bondCouponType"></param>
+        /// <param name="paymentConvention"></param>
+        /// <param name="fOCalculationMethod"></param>
+        /// <param name="fixingCalendar"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <returns></returns>
+        public static List<PriceableRateCoupon> CreatePriceableBondCoupons(DateTime baseDate, Bond bondAsset, decimal notionalAmount, CouponStreamType bondCouponType,
+            BusinessDayAdjustments paymentConvention, bool fOCalculationMethod, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+        {
+            List < PriceableRateCoupon > result = new List<PriceableRateCoupon>();
+            //This handles the case of a bond forward used in curve building.
+            if (bondAsset.maturity > baseDate)
+            {
+                var rollConvention =
+                    RollConventionEnumHelper.Parse(bondAsset.maturity.Day.ToString(CultureInfo.InvariantCulture));
+                //var frequency = FrequencyHelper.ToFrequency(bondAsset.paymentFrequency);
+                var unAdjustedPeriodDates = DateScheduler.GetUnadjustedCouponDatesFromMaturityDate(baseDate,
+                    bondAsset.maturity,
+                    bondAsset.paymentFrequency,
+                    rollConvention,
+                    out _,
+                    out _);
+                var adjustedPeriodDates =
+                    AdjustedDateScheduler.GetAdjustedDateSchedule(unAdjustedPeriodDates,
+                        paymentConvention.businessDayConvention,
+                        paymentCalendar).ToArray();
+                var length = unAdjustedPeriodDates.Length;
+                for (int i = 0; i < length - 1; i++)
+                {
+                    var id = "Coupon" + "_" + i;
+                    var startDate = unAdjustedPeriodDates[i];
+                    var endDate = unAdjustedPeriodDates[i+1];
+                    var paymentDate = adjustedPeriodDates[i + 1];
+                    var coupon = CreatePriceableBondCoupon(id, bondAsset, notionalAmount, bondCouponType, startDate, endDate, paymentDate, paymentCalendar);
+                    result.Add(coupon);
+                }
+                return result;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="couponId"></param>
+        /// <param name="bondAsset"></param>
+        /// <param name="notionalAmount"></param>
+        /// <param name="bondCouponType"></param>
+        /// <param name="paymentDate"></param>
+        /// <param name="unadjustedStartDate"></param>
+        /// <param name="unadjustedEndDate"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <returns></returns>
+        public static PriceableRateCoupon CreatePriceableBondCoupon(string couponId, Bond bondAsset, decimal notionalAmount, CouponStreamType bondCouponType, DateTime unadjustedStartDate,
+            DateTime unadjustedEndDate, DateTime paymentDate, IBusinessCalendar paymentCalendar)//bool fOCalculationMethod, IBusinessCalendar fixingCalendar, 
+        {
+            var currency = bondAsset.currency;
+            var dayCountFraction = bondAsset.dayCountFraction;
+            var money = MoneyHelper.GetAmount(notionalAmount, currency);
+            //  If has a fixed rate (fixed rate coupon)
+                if (bondCouponType == CouponStreamType.GenericFixedRate)
+                {
+                    PriceableRateCoupon rateCoupon = new PriceableFixedRateCoupon(couponId, false, unadjustedStartDate, unadjustedEndDate,
+                        dayCountFraction, bondAsset.couponRate, money, null, paymentDate, null, null,
+                        null, paymentCalendar);
+                    return rateCoupon;
+                }
+                //if (XsdClassesFieldResolver.CalculationPeriodHasFloatingRateDefinition(calculationPeriod))
+                //{
+                //    //The floating rate definition.
+                //    FloatingRateDefinition floatingRateDefinition = XsdClassesFieldResolver.CalculationPeriodGetFloatingRateDefinition(calculationPeriod);
+                //    //The floating rate Calculation.
+                //    //The forecast rate index.
+                //    var floatingRateIndex = floatingRateCalculation.floatingRateIndex;
+                //    var indexTenor = floatingRateCalculation.indexTenor.ToString();
+                //    var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex.Value, indexTenor);
+                //    //The rate observation
+                //    // Apply spread from schedule if it hasn't been specified yet.
+                //    var margin = 0m;
+                //    if (floatingRateDefinition.spreadSpecified)
+                //    {
+                //        margin = floatingRateDefinition.spread;
+                //    }
+                //    //The observed rate.
+                //    Decimal? observedRate = null;
+                //    Decimal? capStrike = null;
+                //    Decimal? floorStrike = null;
+                //    if (floatingRateDefinition.capRate != null)
+                //    {
+                //        capStrike = floatingRateDefinition.capRate[0].strikeRate;
+                //    }
+                //    if (floatingRateDefinition.floorRate != null)
+                //    {
+                //        floorStrike = floatingRateDefinition.floorRate[0].strikeRate;
+                //    }
+                //    if (floatingRateDefinition.rateObservation != null)//TODO This is a big problem. Need to handle the case of no fixing date!
+                //    {
+                //        var rateObservation = floatingRateDefinition.rateObservation[0];
+                //        if (rateObservation.observedRateSpecified)
+                //        {
+                //            observedRate = rateObservation.observedRate;
+                //        }
+                //        ////Removed because Igor's old code populates these fields when the trade is created. This means the coupon is not recalculated!
+                //        ////Now the coupon will ignore any previous calculations and only treat as a fixed coupon if the observed rate has been specified.
+                //        //if (isThereDiscounting)
+                //        //{
+                //        //    var discounting = XsdClassesFieldResolver.CalculationGetDiscounting(calculation);
+                //        //    if (capStrike != null || floorStrike != null)
+                //        //    {
+                //        //        rateCoupon = new PriceableCapFloorCoupon(coupon.id, !payerIsBase,
+                //        //                                                 capStrike, floorStrike, accrualStartDate, accrualEndDate,
+                //        //                                                 rateObservation.adjustedFixingDate, dayCountFraction,
+                //        //                                                 margin, observedRate, money, paymentDate,
+                //        //                                                 forecastRate, discounting.discountingType,
+                //        //                                                 observedRate, null, fixingCalendar, paymentCalendar);
+                //        //    }
+                //        //    else
+                //        //    {
+                //        //        rateCoupon = new PriceableFloatingRateCoupon(coupon.id, !payerIsBase, accrualStartDate, accrualEndDate,
+                //        //                                                     rateObservation.adjustedFixingDate, dayCountFraction,
+                //        //                                                     margin, observedRate, money, paymentDate,
+                //        //                                                     forecastRate, discounting.discountingType,
+                //        //                                                     observedRate, null, fixingCalendar, paymentCalendar);
+                //        //    }
+                //        //}
+                //        //else
+                //        //{
+                //            //if (capStrike != null || floorStrike != null)
+                //            //{
+                //                rateCoupon = new PriceableCapFloorCoupon(coupon.id, !payerIsBase, capStrike, floorStrike,
+                //                                                     accrualStartDate, accrualEndDate,
+                //                                                     rateObservation.adjustedFixingDate, dayCountFraction,
+                //                                                     margin, observedRate, money, paymentDate,
+                //                                                     forecastRate, null, null, null,
+                //                                                     fixingCalendar, paymentCalendar);
+                //            //}
+                //            //else
+                //            //{
+                //            //    rateCoupon = new PriceableFloatingRateCoupon(coupon.id, payerIsBase, accrualStartDate, accrualEndDate,
+                //            //                                                 rateObservation.adjustedFixingDate, dayCountFraction,
+                //            //                                                 margin, observedRate, money, paymentDate,
+                //            //                                                 forecastRate, null, null, null,
+                //            //                                                 fixingCalendar, paymentCalendar);
+                //            //}
+                //        //}
+                //        if (fOCalculationMethod)
+                //        {
+                //            ((PriceableFloatingRateCoupon)rateCoupon).ForecastRateInterpolation = true;
+                //        }
+                //        if (discountFactorSpecified)
+                //        {
+                //            rateCoupon.PaymentDiscountFactor = coupon.discountFactor;
+                //        }
+                //        return rateCoupon;
+                //    }
+                //    throw new NotImplementedException("Need to return a rate coupon, Alex!");
+                //}
+                throw new System.Exception("CalculationPeriod has neither fixedRate nor floatingRateDefinition.");
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="payerIsBase"></param>
         /// <param name="coupons"></param>
         /// <param name="calculation"></param>
@@ -220,6 +391,29 @@ namespace Orion.ValuationEngine.Factory
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="redemption"></param>
+        /// <param name="currency"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <returns></returns>
+        public static PriceablePrincipalExchange CreatePriceableBondRedemption(PrincipalExchange redemption,
+            string currency, IBusinessCalendar paymentCalendar)
+        {
+            var multiplier = 1;
+            if (redemption != null)
+            {
+                var adjustedPaymentDate = redemption.adjustedPrincipalExchangeDate;
+                var amount = multiplier * redemption.principalExchangeAmount;
+                var exchange = new PriceablePrincipalExchange("FinalRedemption", false, amount, currency,
+                    adjustedPaymentDate, paymentCalendar);
+                return exchange;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="payerIsBase"></param>
         /// <param name="exchanges"></param>
         /// <param name="currency"></param>
@@ -245,7 +439,6 @@ namespace Orion.ValuationEngine.Factory
             }
             return priceableCashflows;
         }
-
 
         /// <summary>
         /// 

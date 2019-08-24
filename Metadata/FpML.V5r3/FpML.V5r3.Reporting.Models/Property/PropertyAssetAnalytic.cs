@@ -69,7 +69,6 @@ namespace Orion.Models.Property
             return AnalyticParameters.Multiplier * pl;
         }
 
-        #endregion      
-
+        #endregion
     }
 }

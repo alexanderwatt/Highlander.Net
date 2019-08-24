@@ -182,7 +182,7 @@ namespace Orion.ValuationEngine.Pricers
             CalculationResults = null;
             UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
-            // NOTE: These take precendence of the child model metrics
+            // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
                 AnalyticsModel = new SimpleIRSwapInstrumentAnalytic();//TODO this model only handles in arrears swaps wrt the implied quote.
@@ -288,7 +288,7 @@ namespace Orion.ValuationEngine.Pricers
                 }
                 childValuations = EvaluateChildMetrics(legControllers, modelData, Metrics);
             }
-            var childControllerValuations = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
+            var childControllerValuations = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
             childControllerValuations.id = Id + ".InterestRateStreams";
             // Child metrics have now been calculated so we can now evaluate the stream model metrics
             if (swapControllerMetrics.Count > 0)

@@ -35,20 +35,6 @@ namespace Orion.CalendarEngine.Dates
         /// </param>
         DateTime GetLastTradingDay(DateTime referenceDate);
 
-        //// <summary>
-        ///// Gets the last trading day.
-        ///// </summary>
-        ///// <param name="mainCycle">if set to <c>true</c> [main cycle].</param>
-        ///// <returns></returns>
-        //DateTime GetLastTradingDay(bool mainCycle);
-
-        ///// <summary>
-        ///// Gets the futures date following the given contract listed in the
-        ///// relevant Exchange.
-        ///// </summary>
-        ///// <param name="referenceDate"></param>
-        ///// <returns></returns>
-        //DateTime GetLastTradingDay(DateTime referenceDate);
 
         /// <summary>
         /// Gets the last trading day.
@@ -57,15 +43,6 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="year">The year.</param>
         /// <returns></returns>
         DateTime GetLastTradingDay(int month, int year);
-
-        ///// <summary>
-        ///// Gets the futures date following the given IMM contract listed in the
-        ///// relevant Exchange.
-        ///// </summary>
-        ///// <param name="futures code"></param>
-        ///// <param name="referenceDate"></param>
-        ///// <returns></returns>
-        //DateTime GetLastTradingDay(string futures code, DateTime referenceDate);
 
         /// <summary>
         /// Gets the last trading day.
@@ -88,38 +65,18 @@ namespace Orion.CalendarEngine.Dates
         /// returns the 1st delivery date for next contract listed in the
         /// relevant Exchange.
         /// </summary>
-        /// <param name="date"></param>
-        /// <param name="mainCycle"></param>
-        /// <returns>A date.</returns>
-        string NextFuturesCode(DateTime date, bool mainCycle);
-
-        /// <summary>
-        /// next futures date following the given date
-        /// returns the 1st delivery date for next contract listed in the
-        /// relevant Exchange.
-        /// </summary>
         /// <param name="refDate"></param>
         /// <param name="mainCycle"></param>
         /// <returns>A date.</returns>
         DateTime NextLastTradingDate(DateTime refDate, bool mainCycle);
 
-        ///// <summary>
-        ///// next futures date following the given date
-        ///// returns the 1st delivery date for next contract listed in the
-        ///// relevant Exchange.
-        ///// </summary>
-        ///// <param name="futures code"></param>
-        ///// <param name="referenceDate"></param>
-        ///// <param name="mainCycle"></param>
-        ///// <returns>A date.</returns>
-        //DateTime nextLastTradingDate(string futures code, bool mainCycle, DateTime referenceDate);
-
-        ///// <summary>
-        ///// Gets the next absolute code for that commodity contract.
-        ///// </summary>
-        ///// <param name="referenceDate"></param>
-        ///// <returns>e.g "Z8"</returns>
-        //string GetNextAbsoluteCode(DateTime referenceDate);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
+        /// <param name="iteration">e.g. 3 for the third next from the reference date.</param>
+        /// <returns>e.g. H9</returns>
+        string GetNthCode(DateTime referenceDate, int iteration);
 
         /// <summary>
         /// 
@@ -135,5 +92,13 @@ namespace Orion.CalendarEngine.Dates
         /// <param name="referenceDate"></param>
         /// <returns>e.g "Z8"</returns>
         string GetNextAbsoluteMainCycleCode(DateTime referenceDate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
+        /// <param name="mainCycle">Is it a main cycle contract?</param>
+        /// <returns>e.g "Z8"</returns>
+        string GetNextFuturesCode(DateTime referenceDate, bool mainCycle);
     }
 }

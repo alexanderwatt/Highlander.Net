@@ -32,12 +32,21 @@ namespace Orion.CurveEngine.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="algorithm"></param>
+        public PricingStructureAlgorithmsHolder(Algorithm algorithm)
+        {
+            _pricingStructureAlgorithm = algorithm;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
         /// <param name="pricingStructureType"></param>
         /// <param name="algorithmName"></param>
-        public PricingStructureAlgorithmsHolder(ILogger logger, ICoreCache cache, String nameSpace, PricingStructureTypeEnum pricingStructureType, string algorithmName)
+        public PricingStructureAlgorithmsHolder(ILogger logger, ICoreCache cache, string nameSpace, PricingStructureTypeEnum pricingStructureType, string algorithmName)
         {
             if (cache != null)
             {
@@ -66,7 +75,7 @@ namespace Orion.CurveEngine.Helpers
         /// <param name="logger"></param>
         /// <param name="cache">The value</param>
         /// <returns>Whether the property existed or not</returns>
-        public Algorithm GetAlgorithm(ILogger logger, ICoreCache cache, String nameSpace, PricingStructureTypeEnum pricingStructureType, string algorithmName)
+        public Algorithm GetAlgorithm(ILogger logger, ICoreCache cache, string nameSpace, PricingStructureTypeEnum pricingStructureType, string algorithmName)
         {
             Algorithm algorithm = null;
             if (cache != null)
@@ -98,7 +107,7 @@ namespace Orion.CurveEngine.Helpers
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
-        public GenericRateCurveAlgorithmHolder(ILogger logger, ICoreCache cache, String nameSpace)
+        public GenericRateCurveAlgorithmHolder(ILogger logger, ICoreCache cache, string nameSpace)
             : base(logger, cache, nameSpace, PricingStructureTypeEnum.RateCurve, "FastLinearZero")
         { }
     }

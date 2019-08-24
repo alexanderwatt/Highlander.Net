@@ -5858,6 +5858,7 @@ namespace FpML.V5r3.Codes
         PropertyTransaction, // (30) "PropertyTransaction"
         FutureTransaction, // (31) "FutureTransaction"
         CommodityForward, // (32) "CommodityForward"
+        LeaseTransaction, // (33) "LeaseTransaction"
         _LAST_
     }
     public partial class ProductTypeSimpleValue : IFpMLCodeValue

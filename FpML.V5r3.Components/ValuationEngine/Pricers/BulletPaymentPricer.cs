@@ -22,6 +22,7 @@ using Orion.Analytics.Helpers;
 using Orion.ValuationEngine.Instruments;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Codes;
+using Orion.Identifiers;
 using Orion.ModelFramework;
 using Orion.ModelFramework.Instruments;
 using Orion.ValuationEngine.Helpers;
@@ -36,7 +37,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PriceablePrincipalExchange"/> class.
+        /// Initializes a new instance of the <see cref="BulletPaymentPricer"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="payerIsBase">The payerIsBase flag.</param>
@@ -44,16 +45,19 @@ namespace Orion.ValuationEngine.Pricers
         /// <param name="paymentDate">The payment date.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public BulletPaymentPricer
-            (
+        (
             string id
             , bool payerIsBase
             , Money amount
             , AdjustableOrAdjustedDate paymentDate
             , IBusinessCalendar paymentCalendar) :
-                base(id, "DiscountedCashflow", payerIsBase, amount, paymentDate,
-            PaymentTypeHelper.Create("Certain"), CashflowTypeHelper.Create(CashflowTypeEnum.PrincipalExchange.ToString()), 
-            false, paymentCalendar)
-        {}
+            base(id, "DiscountedCashflow", payerIsBase, amount, paymentDate,
+                PaymentTypeHelper.Create("Certain"),
+                CashflowTypeHelper.Create(CashflowTypeEnum.PrincipalExchange.ToString()),
+                false, paymentCalendar)
+        {
+            ProductType = ProductTypeSimpleEnum.BulletPayment;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletPaymentPricer"/> class.
@@ -202,7 +206,7 @@ namespace Orion.ValuationEngine.Pricers
         ///<returns></returns>
         public override IList<InstrumentControllerBase> GetChildren()
         {
-            return null;
+            return new List<InstrumentControllerBase> {this};
         }
 
         private static Money AdjustAmount(string basePartyReference, BulletPayment payment)

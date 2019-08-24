@@ -26,73 +26,72 @@ namespace Orion.Models.Rates.Bonds
         /// Gets the npv.
         /// </summary>
         /// <value>The implied quote.</value>
-        Decimal NPV { get; }
+        decimal NPV { get; }
 
         /// <summary>
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        Decimal ImpliedQuote { get; }
+        decimal ImpliedQuote { get; }
 
         /// <summary>
         /// Gets the accrued coupon.
         /// </summary>
         /// <value>The delta wrt the fixed rate.</value>
-        Decimal AccruedInterest { get; }
+        decimal AccruedInterest { get; }
 
         /// <summary>
         /// Gets the dirty price.
         /// </summary>
         /// <value>The dirty price.</value>
-        Decimal DirtyPrice { get; }
+        decimal DirtyPrice { get; }
 
         /// <summary>
         /// Gets the clean price.
         /// </summary>
         /// <value>The clean price.</value>
-        Decimal CleanPrice { get; }
+        decimal CleanPrice { get; }
 
         /// <summary>
         /// Gets the derivative of the price with respect to the Rate.
         /// </summary>
         /// <value>The delta wrt the fixed rate.</value>
-        Decimal DeltaR { get; }
+        decimal DeltaR { get; }
 
         /// <summary>
         /// Gets the derivative of the price with respect to the Rate.
         /// </summary>
         /// <value>The delta wrt the fixed rate.</value>
-        Decimal DV01 { get; }
+        decimal DV01 { get; }
 
         /// <summary>
         /// Gets the convexity.
         /// </summary>
         /// <value>The convexity.</value>
-        Decimal Convexity { get; }
+        decimal Convexity { get; }
 
         /// <summary>
         /// Gets the asset swap spread.
         /// </summary>
         /// <value>The asset swap spread.</value>
-        Decimal AssetSwapSpread { get; }
+        decimal AssetSwapSpread { get; }
 
         /// <summary>
         /// Gets the zero coupon bond swap spread.
         /// </summary>
         /// <value>The zero coupon bond swap spread.</value>
-        Decimal ZSpread { get; }
+        decimal ZSpread { get; }
 
         /// <summary>
         /// Gets the yield to maturity.
         /// </summary>
         /// <value>The yield to maturity.</value>
-        Decimal YieldToMaturity { get; }
+        decimal YieldToMaturity { get; }
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        Decimal MarketQuote { get; }
-  
+        decimal MarketQuote { get; }
     }
 }

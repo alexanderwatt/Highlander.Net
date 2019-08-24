@@ -29,6 +29,7 @@ using Orion.Util.Helpers;
 using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.Identifiers;
 using Orion.ModelFramework;
 using Orion.Constants;
@@ -198,7 +199,7 @@ namespace Orion.CurveEngine.Factory
         /// <param name="rollCalendar">The rollCalendar.</param>
         /// <returns></returns>
         public static IPricingStructure CreateCurve(ILogger logger, ICoreCache cache, string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
-            NamedValueSet properties, string[] instruments, Decimal[] adjustedRates, Decimal[] additional)
+            NamedValueSet properties, string[] instruments, decimal[] adjustedRates, decimal[] additional)
         {
             //  Pricing structure type
             var pricingStructureType = PropertyHelper.ExtractPricingStructureType(properties);
@@ -239,6 +240,76 @@ namespace Orion.CurveEngine.Factory
             var structure = CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, quotedAssetSet);
             return structure;
         }
+
+        /// <summary>
+        /// Creates the rate curve.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="properties">The properties.</param>
+        /// <param name="instruments">The instruments.</param>
+        /// <param name="adjustedRates">The adjusted rates.</param>
+        /// <param name="additional">The additional.</param>
+        /// <param name="nameSpace">The client namespace</param>
+        /// <param name="fixingCalendar">The fixingCalendar.</param>
+        /// <param name="rollCalendar">The rollCalendar.</param>
+        /// <param name="algorithmProperties">THe curve algorithm properties.</param>
+        /// <returns></returns>
+        public static IPricingStructure CreateRateCurve(ILogger logger, ICoreCache cache, string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
+            NamedValueSet properties, string[] instruments, decimal[] adjustedRates, decimal[] additional, Algorithm algorithmProperties)
+        {
+            //  Pricing structure type
+            var pricingStructureType = PropertyHelper.ExtractPricingStructureType(properties);
+            QuotedAssetSet quotedAssetSet;
+            switch (pricingStructureType)
+            {
+                case PricingStructureTypeEnum.RateCurve:
+                case PricingStructureTypeEnum.DiscountCurve:
+                    quotedAssetSet = AssetHelper.Parse(instruments, adjustedRates, additional);
+                    break;
+                default:
+                    string message =
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                    throw new ApplicationException(message);
+            }
+            var structure = CreateRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, quotedAssetSet, algorithmProperties);
+            return structure;
+        }
+
+        /// <summary>
+        /// Creates the curve.
+        /// </summary>
+        /// <param name="cache">The cache.</param>
+        /// <param name="logger">The logger.</param>
+        /// <param name="nameSpace">the nameSpace</param>
+        /// <param name="fixingCalendar">The fixingCalendar.</param>
+        /// <param name="rollCalendar">The rollCalendar.</param>
+        /// <param name="properties">The properties.</param>
+        /// <param name="quotedAssetSet">The QuotedAssetSet.</param>
+        /// <param name="algorithmProperties">The curve algorithm.</param>
+        /// <returns></returns>
+        public static IPricingStructure CreateRateCurve(ILogger logger, ICoreCache cache, string nameSpace, IBusinessCalendar fixingCalendar,
+            IBusinessCalendar rollCalendar, NamedValueSet properties, QuotedAssetSet quotedAssetSet, Algorithm algorithmProperties)
+        {
+            //  Pricing structure type
+            properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            var pricingStructureType = PropertyHelper.ExtractPricingStructureType(properties);
+            IPricingStructure structure;
+            switch (pricingStructureType)
+            {
+                case PricingStructureTypeEnum.RateCurve:
+                case PricingStructureTypeEnum.DiscountCurve:
+                    structure = new RateCurve(logger, cache, nameSpace, properties, quotedAssetSet, algorithmProperties, fixingCalendar, rollCalendar);
+                    break;
+                default:
+                    var message =
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                    throw new ApplicationException(message);
+            }
+            return structure;
+        }
+
 
         /// <summary>
         /// Creates the curve.
@@ -645,17 +716,17 @@ namespace Orion.CurveEngine.Factory
         }
 
         /// <summary>
-        /// Create a pricing structure
+        /// Create a pricing structure!
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
         /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
-        /// <param name="properties"></param>
+        /// <param name="properties">The curve properties</param>
         /// <param name="values">A range object that contains the instruments and quotes.</param>
         /// <returns></returns>
-        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, String nameSpace,
+        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, object[,] values)
         {
             properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
@@ -684,6 +755,35 @@ namespace Orion.CurveEngine.Factory
             return CreateVolatilitySurface(logger, cache, nameSpace, properties, expiries, strikes, volatilities);
         }
 
+
+        /// <summary>
+        /// Create a pricing structure!
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="nameSpace">The nameSpace</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="properties">The curve properties</param>
+        /// <param name="values">A range object that contains the instruments and quotes.</param>
+        /// <param name="algorithm">The algorithm properties. They had better be correct fot the pricing structure or else!!</param>
+        /// <returns></returns>
+        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, string nameSpace,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, object[,] values, Algorithm algorithm)
+        {
+            properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(EnvironmentProp.NameSpace, nameSpace);
+            string suppliedPricingStructureType = properties.GetString(CurveProp.PricingStructureType, true);
+            EnumHelper.TryParse(suppliedPricingStructureType, true, out PricingStructureTypeEnum psType);
+            if (PricingStructureHelper.CurveTypes.Contains(psType))
+            {
+                //TODO Only does rate curves.
+                return CreateRateCurveStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, values, algorithm);
+            }
+            return null;
+        }
+
         /// <summary>
         /// Create a pricing structure
         /// </summary>
@@ -696,8 +796,8 @@ namespace Orion.CurveEngine.Factory
         /// <param name="headers">THe value headers</param>
         /// <param name="values">A range object that contains the instruments and quotes.</param>
         /// <returns></returns>
-        public static List<IPricingStructure> CreatePricingStructures(ILogger logger, ICoreCache cache, String nameSpace,
-            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, IList<String> headers, object[,] values)
+        public static List<IPricingStructure> CreatePricingStructures(ILogger logger, ICoreCache cache, string nameSpace,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, IList<string> headers, object[,] values)
         {
             var result = new List<IPricingStructure>();
             var numRows = values.GetLength(0);
@@ -788,6 +888,31 @@ namespace Orion.CurveEngine.Factory
                 }
             }
             var structure = (CurveBase)CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments, rates, additional);
+            return structure;
+        }
+
+        private static CurveBase CreateRateCurveStructure(ILogger logger, ICoreCache cache,
+            string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
+            NamedValueSet properties, object[,] values, Algorithm algorithmProperties)
+        {
+            var instruments = new string[values.GetLength(0)];
+            var rates = new decimal[values.GetLength(0)];
+            var additional = new decimal[values.GetLength(0)];
+            int lby = values.GetLowerBound(0);
+            int uby = values.GetUpperBound(0);
+            int lbx = values.GetLowerBound(1);
+            int ubx = values.GetUpperBound(1);
+            for (var i = lby; i <= uby; ++i)
+            {
+                instruments[i - lby] = Convert.ToString(values[i, lbx]);
+                rates[i - lby] = Convert.ToDecimal(values[i, lbx + 1]);
+                if (ubx < lbx + 2) continue;
+                if (null != values[i, lbx + 2])
+                {
+                    additional[i - lby] = Convert.ToDecimal(values[i, lbx + 2]);
+                }
+            }
+            var structure = (CurveBase)CreateRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments, rates, additional, algorithmProperties);
             return structure;
         }
 

@@ -1861,17 +1861,15 @@ namespace Orion.CurveEngine.Tests
         static public void ProcessAssetControllerResults(IPriceableAssetController assetController, string[] metrics, DateTime baseDate)
         {
             Assert.IsNotNull(assetController);
-
-            Double[] times = { 0, 1, 5 };
-            Double[] dfs = { 1, 0.9, 0.3 };
-
+            double[] times = { 0, 1, 5 };
+            double[] dfs = { 1, 0.9, 0.3 };
             ISimpleRateMarketEnvironment market = CreateSimpleRateMarketEnvironment(baseDate, times, dfs);
             IAssetControllerData controllerData = CreateModelData(metrics, baseDate, market);
             Assert.IsNotNull(controllerData);
             Assert.AreEqual(controllerData.BasicAssetValuation.quote.Length, metrics.Length);
             Assert.AreEqual(controllerData.BasicAssetValuation.quote[0].measureType.Value, metrics[0]);
             BasicAssetValuation results = assetController.Calculate(controllerData);
-            Debug.Print("Id : {0}", assetController.Id);
+            Debug.Print("Id : {0} Risk Maturity Date : {1}", assetController.Id, assetController.GetRiskMaturityDate());
             foreach (var metric in results.quote)
             {
                 Debug.Print("Id : {0} Metric Name : {1} Metric Value : {2}", assetController.Id, metric.measureType.Value, metric.value);
@@ -2054,15 +2052,15 @@ namespace Orion.CurveEngine.Tests
         /// Creates the deposit.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<IPriceableRateAssetController> CreateEDFuture(string curveName, DateTime date, BasicQuotation[] quotations, BasicQuotation[] volatilities, string[] identifiers)
+        private IEnumerable<IPriceableFuturesAssetController> CreateEDFuture(string curveName, DateTime date, BasicQuotation[] quotations, BasicQuotation[] volatilities, string[] identifiers)
         {
-            var  controllers = new List<IPriceableRateAssetController>();
+            var  controllers = new List<IPriceableFuturesAssetController>();
             var index = 0;
             foreach (var identifier in identifiers)
             {
                 var properties = PriceableAssetFactory.BuildPropertiesForAssets(UTE.NameSpace, identifier, date);
                 var bav = BasicAssetValuationHelper.Create(new[] { quotations[index], volatilities[index] });
-                var priceableAsset = (IPriceableRateAssetController)CreatePriceableAsset(bav, properties);
+                var priceableAsset = (IPriceableFuturesAssetController)CreatePriceableAsset(bav, properties);
                 controllers.Add(priceableAsset);
                 index++;
             }
@@ -5352,6 +5350,30 @@ namespace Orion.CurveEngine.Tests
         #region IR Futures Tests
 
         [TestMethod]
+        public void TestEDFutureRolls()
+        {
+            string[] instruments = new string[] { "USD-IRFuture-ED-1", "USD-IRFuture-ED-2",
+                "USD-IRFuture-ED-3", "USD-IRFuture-ED-4" };
+            BasicQuotation[] bq = { BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate") };
+            BasicQuotation[] vols = { BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
+            const string curveName = "DiscountCurve";
+            var priceableControllers = CreateEDFuture(curveName, baseDate, bq, vols, instruments);
+            foreach (var priceableController in priceableControllers)
+            {
+                var maturityDate = priceableController.GetRiskMaturityDate();
+                var lastDate = priceableController.LastTradeDate;
+                var code = priceableController.Code;
+                Debug.Print("Id : {0} Risk Maturity Date : {1} Last Trade Date : {2} Exchange Code : {3}", priceableController.Id, maturityDate, lastDate, code);
+            }
+        }
+
+        [TestMethod]
         public void TestCreateEDFuture()
         {
             string[] instruments = new string[] { "USD-IRFuture-ED-Z8", "USD-IRFuture-ED-H9", 
@@ -5365,9 +5387,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
-            IEnumerable<IPriceableRateAssetController> priceableControllers = CreateEDFuture(curveName, baseDate, bq, vols, instruments);
-
+            var priceableControllers = CreateEDFuture(curveName, baseDate, bq, vols, instruments);
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5375,7 +5395,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5394,7 +5413,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             IEnumerable<IPriceableRateAssetController> priceableControllers = CreateEDFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5402,7 +5420,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5419,9 +5436,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             string curveName = "DiscountCurve";
-
             IEnumerable<IPriceableRateAssetController> priceableControllers = CreateERFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5429,7 +5444,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5446,9 +5460,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
             IEnumerable<IPriceableRateAssetController> priceableControllers = CreateESFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5456,7 +5468,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5475,7 +5486,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             List<IPriceableRateAssetController> priceableControllers = CreateESFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5483,7 +5493,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5500,9 +5509,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateEYFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5510,7 +5517,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5529,7 +5535,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             List<IPriceableRateAssetController> priceableControllers = CreateEYFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5537,7 +5542,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5554,9 +5558,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateHRFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5564,7 +5566,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5583,7 +5584,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             List<IPriceableRateAssetController> priceableControllers = CreateHRFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5591,7 +5591,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5608,9 +5607,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatiltiy"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatiltiy")};
             string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateIBFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5618,7 +5615,54 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
+        }
 
+        [TestMethod]
+        public void TestIBFutureRolls()
+        {
+            string[] instruments = new string[] { "AUD-IRFuture-IB-1", "AUD-IRFuture-IB-2",
+                "AUD-IRFuture-IB-3", "AUD-IRFuture-IB-4" };
+            BasicQuotation[] bq = { BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate") };
+            BasicQuotation[] vols = { BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
+            const string curveName = "DiscountCurve";
+            var priceableControllers = CreateEDFuture(curveName, baseDate, bq, vols, instruments);
+            foreach (var priceableController in priceableControllers)
+            {
+                var maturityDate = priceableController.GetRiskMaturityDate();
+                var lastDate = priceableController.LastTradeDate;
+                var code = priceableController.Code;
+                Debug.Print("Id : {0} Risk Maturity Date : {1} Last Trade Date : {2} Exchange Code : {3}", priceableController.Id, maturityDate, lastDate, code);
+            }
+        }
+
+        [TestMethod]
+        public void TestIRFutureRolls()
+        {
+            string[] instruments = new string[] { "AUD-IRFuture-IR-1", "AUD-IRFuture-IR-2",
+                "AUD-IRFuture-IR-3", "AUD-IRFuture-IR-4" };
+            BasicQuotation[] bq = { BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate"),
+                BasicQuotationHelper.Create(.07m, "MarketQuote", "DecimalRate") };
+            BasicQuotation[] vols = { BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"),
+                BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
+            const string curveName = "DiscountCurve";
+            var priceableControllers = CreateEDFuture(curveName, baseDate, bq, vols, instruments);
+            foreach (var priceableController in priceableControllers)
+            {
+                var maturityDate = priceableController.GetRiskMaturityDate();
+                var lastDate = priceableController.LastTradeDate;
+                var code = priceableController.Code;
+                Debug.Print("Id : {0} Risk Maturity Date : {1} Last Trade Date : {2} Exchange Code : {3}", priceableController.Id, maturityDate, lastDate, code);
+            }
         }
 
         [TestMethod]
@@ -5634,9 +5678,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateIRFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5644,7 +5686,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5660,9 +5701,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateIRFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5670,7 +5709,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5686,9 +5724,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
-
             List<IPriceableRateAssetController> priceableControllers = CreateEDFuture(baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5696,7 +5732,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5713,9 +5748,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateRAFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5723,7 +5756,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5742,7 +5774,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             List<IPriceableRateAssetController> priceableControllers = CreateRAFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5750,7 +5781,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         [TestMethod]
@@ -5767,9 +5797,7 @@ namespace Orion.CurveEngine.Tests
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility"), 
                                         BasicQuotationHelper.Create(.2m, "Volatility", "LogNormalVolatility")};
             const string curveName = "DiscountCurve";
-
             List<IPriceableRateAssetController> priceableControllers = CreateZBFuture(curveName, baseDate, bq, vols, instruments);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5796,7 +5824,6 @@ namespace Orion.CurveEngine.Tests
             const string curveName = "DiscountCurve";
             var position = new[] { 100.0m, 100.0m, 100.0m, 100.0m };
             List<IPriceableRateAssetController> priceableControllers = CreateZBFutureWithPosition(curveName, baseDate, bq, vols, instruments, position);
-
             foreach (IPriceableRateAssetController priceableController in priceableControllers)
             {
                 var metrics = new[] { "DiscountFactorAtMaturity" };
@@ -5804,7 +5831,6 @@ namespace Orion.CurveEngine.Tests
                 metrics = new[] { "ImpliedQuote", "DeltaR", "NPV" };
                 ProcessAssetControllerResults(priceableController, metrics, baseDate);
             }
-
         }
 
         #endregion

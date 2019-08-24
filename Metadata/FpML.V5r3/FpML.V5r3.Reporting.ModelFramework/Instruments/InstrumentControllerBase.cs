@@ -429,14 +429,14 @@ namespace Orion.ModelFramework.Instruments
         ///// <summary>
         ///// Updates the parent valuation.
         ///// </summary>
-        ///// <typeparam name="ParentMetricEnumT">The type of the arent metric enum T.</typeparam>
-        ///// <typeparam name="ChildMetricEnumT">The type of the hild metric enum T.</typeparam>
-        ///// <typeparam name="RequestMetricT">The type of the equest metric T.</typeparam>
+        ///// <typeparam name="ParentMetricEnumT">The type of the aren't metric enum T.</typeparam>
+        ///// <typeparam name="ChildMetricEnumT">The type of the metric enum T.</typeparam>
+        ///// <typeparam name="RequestMetricT">The type of the requested metric T.</typeparam>
         ///// <param name="parentValuation">The parent valuation.</param>
         ///// <param name="childValuations">The child valuations.</param>
         ///// <param name="parentMetrics">The parent metrics.</param>
         ///// <param name="childMetricsList">The child metrics list.</param>
-        ///// <param name="agregateResultInd">if set to <c>true</c> [agregate result ind].</param>
+        ///// <param name="aggregateResultInd">if set to <c>true</c> [aggregate result ind].</param>
         //protected void UpdateParentValuation<ParentMetricEnumT, ChildMetricEnumT, RequestMetricT>(AssetValuation parentValuation, List<AssetValuation> childValuations, List<ParentMetricEnumT> parentMetrics, List<RequestMetricT> childMetricsList, Boolean agregateResultInd)
         //{
         //    if (childMetricsList != null && childMetricsList.Count > 0)
@@ -488,7 +488,7 @@ namespace Orion.ModelFramework.Instruments
         //                if (IsVector)
         //                {
         //                    SensitivitySet[] sensitivitySet = BuildSensitivitySet(childMetric.ToString(), aggregatedItems.ToArray());
-        //                    if (agregateResultInd)
+        //                    if (aggregateResultInd)
         //                    {
         //                        AggregateMetricResult(parentValuation, childMetric, SumDecimals(aggregatedItems.ToArray()), sensitivitySet);
         //                    }
@@ -499,7 +499,7 @@ namespace Orion.ModelFramework.Instruments
         //                }
         //                else
         //                {
-        //                    if (agregateResultInd)
+        //                    if (aggregateResultInd)
         //                    {
         //                        AggregateMetricResult(parentValuation, childMetric, SumDecimals(aggregatedItems.ToArray()));
         //                    }

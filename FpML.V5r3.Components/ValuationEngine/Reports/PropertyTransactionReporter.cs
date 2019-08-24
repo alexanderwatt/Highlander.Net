@@ -35,10 +35,10 @@ namespace Orion.ValuationEngine.Reports
     {
         public override object DoReport(InstrumentControllerBase priceable)
         {
-            if (priceable is PropertyTransactionPricer equity)
+            if (priceable is PropertyTransactionPricer property)
             {
-                Debug.Print("Equity {0} dividends", equity.GetChildren().Count);
-                foreach (var cashflow in equity.GetChildren())
+                Debug.Print("Property {0} dividends", property.GetChildren().Count);
+                foreach (var cashflow in property.GetChildren())
                 {
                     var flow = (PriceableCashflow)cashflow;
                     var forecast = flow.ForecastAmount ?? new Money();
@@ -51,11 +51,11 @@ namespace Orion.ValuationEngine.Reports
 
         public override object[,] DoXLReport(InstrumentControllerBase pricer)
         {
-            if (pricer is PropertyTransactionPricer bond)
+            if (pricer is PropertyTransactionPricer property)
             {
-                var result = new object[bond.GetChildren().Count, 5];
+                var result = new object[property.GetChildren().Count, 5];
                 var index = 0;
-                foreach (var cashflow in bond.GetChildren())
+                foreach (var cashflow in property.GetChildren())
                 {
                     var flow = (PriceableCashflow)cashflow;
                     result[index, 0] = flow.CashflowType.Value;

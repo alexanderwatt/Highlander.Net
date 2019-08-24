@@ -791,7 +791,7 @@ namespace Orion.ValuationEngine
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="market">The market.</param>
         ///  <returns></returns>
-        public List<object[]> ViewExpectedCashFlows(ILogger logger, ICoreCache cache, String nameSpace,
+        public List<object[]> ViewExpectedCashFlows(ILogger logger, ICoreCache cache, string nameSpace,
             string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency, string market,
             DateTime valuationDate)
         {
@@ -799,9 +799,6 @@ namespace Orion.ValuationEngine
             if (tradeItem != null)
             {
                 var properties = tradeItem.AppProps;
-                //var party1 = properties.GetValue<string>(TradeProp.Party1, true);
-                //var party2 = properties.GetValue<string>(TradeProp.Party2, true);
-                //var baseParty = reportingParty == party1 ? "Party1" : "Party2";
                 if (tradeItem.Data is Trade trade)
                 {
                     var product = trade.Item;
@@ -2191,6 +2188,7 @@ namespace Orion.ValuationEngine
         /// <param name="propertyId">The property identfier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
+        /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="suburb">The suburb</param>
         /// <param name="propertyType">THe property type: residential, commercial, investment etc</param>
         /// <param name="numParking">The number of car parking spots.</param>
@@ -2204,11 +2202,11 @@ namespace Orion.ValuationEngine
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
         public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName,
-            string suburb, string city, string state, string country, int numBedrooms, int numBathrooms, int numParking,
+            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
             return CreateProperty(Logger, Cache, NameSpace, propertyId, propertyType, streetIdentifier, streetName, suburb,
-                city, state, country, numBedrooms, numBathrooms, numParking, currency, description, properties); 
+                city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, properties); 
         }
 
         /// <summary>
@@ -2225,6 +2223,7 @@ namespace Orion.ValuationEngine
         /// <param name="currency">The currency.</param>
         /// <param name="description">The issuer description.</param>
         /// <param name="properties">The properties. </param>
+        /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="city">The city</param>
         /// <param name="state">The state</param>
         /// <param name="country">The country</param>
@@ -2233,7 +2232,7 @@ namespace Orion.ValuationEngine
         /// <param name="logger"></param>
         /// <returns></returns>
         public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyIdentifier, string propertyType, string streetIdentifier, string streetName,
-            string suburb, string city, string state, string country, int numBedrooms, int numBathrooms, int numParking, string currency, string description, NamedValueSet properties)
+            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, string description, NamedValueSet properties)
         {
             if (properties != null)
             {
@@ -2248,7 +2247,7 @@ namespace Orion.ValuationEngine
                 properties.Set(PropertyProp.Description, description);
                 properties.Set(PropertyProp.PropertyType, propertyType);
                 var property = PropertyAssetHelper.Create(propertyIdentifier, propertyType, streetIdentifier, streetName,
-                suburb, city, state, country, numBedrooms, numBathrooms, numParking, currency, description);
+                suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
                 var identifier = new PropertyIdentifier(propertyType, city, suburb, streetName, streetIdentifier);
                 properties.Set(PropertyProp.UniqueIdentifier, identifier.UniqueIdentifier);
                 cache.SaveObject(property, nameSpace + "." + identifier.UniqueIdentifier, properties);
@@ -2380,6 +2379,15 @@ namespace Orion.ValuationEngine
             }
             var partya = properties.GetValue<string>(TradeProp.Party1, true);
             var partyb = properties.GetValue<string>(TradeProp.Party2, true);
+            //Currently only takeds a single calendar.
+            //TODO extend to multiple calendars.
+            var businessDayCalendar = properties.GetValue(LeaseProp.BusinessDayCalendar, "AUSY");
+            var businessDayAdjustments = properties.GetValue(LeaseProp.BusinessDayAdjustments, "FOLLOWING");
+            var defaultRollConvention = leaseStartDate.Day;
+            var rollConvention = RollConventionEnumHelper.Parse(properties.GetValue(LeaseProp.RollConvention, defaultRollConvention.ToString()));
+            var businessDayConvention = BusinessDayConventionHelper.Parse(businessDayAdjustments);
+            var businessCenters = BusinessCentersHelper.Parse(businessDayCalendar);
+            var paymentFrequency = properties.GetValue(LeaseProp.BusinessDayAdjustments, "1M");
             string tenant = partyb;
             if (isParty1Tenant)
             {
@@ -2388,8 +2396,6 @@ namespace Orion.ValuationEngine
             var leaseProperties = CreateLeaseProperties(NameSpace, tenant, leaseId, leaseType,
                 referencePropertyIdentifier, currency, description);
             properties.Set(TradeProp.TradingBookName, portfolio);
-            var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
-            var businessDayAdjustments = properties.GetValue(BondProp.BusinessDayAdjustments, "FOLLOWING");
             var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             properties.GetValue(TradeProp.EffectiveDate, leaseExpiryDate);
             properties.GetValue(TradeProp.TradeDate, tradeDate);
@@ -2397,7 +2403,8 @@ namespace Orion.ValuationEngine
             var leaseTradeIdentifier = $"{"Trade"}.{sourceSystem}.{ItemChoiceType15.leaseTransaction}.{tradeId}";
             properties.Add(leaseProperties);
             var lease = LeaseAssetHelper.Create(tenant, leaseId, leaseType, leaseExpiryDate, referencePropertyIdentifier, shopNumber,
-                leaseStartDate, reviewFrequency, nextReviewDate, reviewChange, currency, numberOfUnits, unitsOfArea, startGrossAmount, description);
+                leaseStartDate, reviewFrequency, nextReviewDate, reviewChange, currency, numberOfUnits, unitsOfArea, startGrossAmount, 
+                paymentFrequency, rollConvention, businessDayConvention, businessCenters, description);
             //  1) Build and publish the equity transaction
             //
             properties.Set(TradeProp.UniqueIdentifier, null);
@@ -2741,7 +2748,7 @@ namespace Orion.ValuationEngine
         /// This is used to determine the base direction in calculations</param>
         /// <param name="notional">The notional in the trade currency, which is assumed to be same currency as the coupon. </param>
         /// <returns></returns>
-        public string CreateBondTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Buyer, DateTime tradeDate, Decimal notional, 
+        public string CreateBondTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Buyer, DateTime tradeDate, decimal notional, 
             NamedValueSet priceInformation, string bondIdentifier, NamedValueSet properties)
         {
             //Party Information

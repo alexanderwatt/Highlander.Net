@@ -36,7 +36,7 @@ namespace Orion.CalendarEngine.Helpers
         {
             DateTime dtStart = dr.startDate;
             DateTime dtEnd = dr.endDate;
-            Boolean bIsValidRulePeriod = true;
+            bool bIsValidRulePeriod = true;
             if (dtStart > DateTime.MinValue && dtEnd > DateTime.MinValue)
             {
                 if (dtCheckDate.Year < dtStart.Year || dtCheckDate.Year > dtEnd.Year)
@@ -194,7 +194,7 @@ namespace Orion.CalendarEngine.Helpers
         /// <param name="dayOfWeek">The day of week.</param>
         /// <param name="bDayOfWeekFound">if set to <c>true</c> [b day of week found].</param>
         /// <returns></returns>
-        public static DateTime FirstDayOfWeekBetween(DateTime dtFrom, DateTime dtTo, DayOfWeek dayOfWeek, ref Boolean bDayOfWeekFound)
+        public static DateTime FirstDayOfWeekBetween(DateTime dtFrom, DateTime dtTo, DayOfWeek dayOfWeek, ref bool bDayOfWeekFound)
         {
             DateTime dtWorkDate = dtFrom;
             DateTime dtEndDate = dtTo;
@@ -221,7 +221,7 @@ namespace Orion.CalendarEngine.Helpers
         /// <param name="dtTo">The dt to.</param>
         /// <param name="bWeekdayFound">if set to <c>true</c> [b weekday found].</param>
         /// <returns></returns>
-        public static DateTime FirstWeekdayBetween(DateTime dtFrom, DateTime dtTo, ref Boolean bWeekdayFound)
+        public static DateTime FirstWeekdayBetween(DateTime dtFrom, DateTime dtTo, ref bool bWeekdayFound)
         {
             DateTime dtWorkDate = dtFrom;
             DateTime dtEndDate = dtTo;
@@ -334,8 +334,8 @@ namespace Orion.CalendarEngine.Helpers
         /// <param name="dim">The dim.</param>
         /// <param name="dtCheckDate">The dt check date.</param>
         /// <param name="dtBase">The dt base.</param>
-        /// <param name="dtObservedDayDate">The dt observed day date.</param>
-        internal static void ApplyDayInMonthRule(DateRule dr, DayInMonth dim, DateTime dtCheckDate, ref DateTime dtBase, ref DateTime dtObservedDayDate)
+        /// <param name="observedDayDate">The dt observed day date.</param>
+        internal static void ApplyDayInMonthRule(DateRule dr, DayInMonth dim, DateTime dtCheckDate, ref DateTime dtBase, ref DateTime observedDayDate)
         {
             // if we have a base holiday where the month and day have been specified
             if (dim.Month > 0 && dim.Day > 0)
@@ -354,11 +354,11 @@ namespace Orion.CalendarEngine.Helpers
             // Derive and set business holiday (not necessarily the same as the holiday particularly if we are rolling
             // if the date falls on a weekend. 
             // Here we would roll fwd to monday
-            dtObservedDayDate = ApplyDateRuleRollConvention(dr, dtBase);
+            observedDayDate = ApplyDateRuleRollConvention(dr, dtBase);
         }
 
         /// <summary>
-        /// Evals the static method.
+        /// Evaluates the static method.
         /// </summary>
         /// <param name="nameSpace">The name space.</param>
         /// <param name="className">Name of the class.</param>
@@ -374,22 +374,22 @@ namespace Orion.CalendarEngine.Helpers
             {
                 throw new InvalidOperationException($"Class {nameSpace}.{className} could not be loaded.");
             }
-            object dteval = myClass.InvokeMember(staticMethodName, BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, null, parameterObject);
+            object dateValue = myClass.InvokeMember(staticMethodName, BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, null, parameterObject);
             var sd = new SignificantDay();
-            if (dteval is DateTime)
+            if (dateValue is DateTime time)
             {
-                sd.Date = (DateTime)dteval;
+                sd.Date = time;
                 sds = new[] { sd };
             }
             else
             {
-                if (dteval is SignificantDay day)
+                if (dateValue is SignificantDay day)
                 {
                     sds = new[] { day };
                 }
                 else
                 {
-                    sds = (SignificantDay[])dteval;
+                    sds = (SignificantDay[])dateValue;
                 }
             }
             return sds;

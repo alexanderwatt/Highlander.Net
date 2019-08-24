@@ -13,7 +13,7 @@ namespace Highlander.CurveWebApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Highlander description page.";
+            ViewData["Message"] = "Highlander CurveWebApp description page.";
 
             return View();
         }

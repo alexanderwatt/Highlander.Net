@@ -41,7 +41,7 @@ namespace Orion.CurveEngine.Assets
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableSimpleFra"/> class.
-        /// This is a special case for use with the factry for bootstrapping, as it
+        /// This is a special case for use with the factory for bootstrapping, as it
         /// uses no calendar logic. This is done by the factory.
         /// </summary>
         /// <param name="baseDate">The base date.</param>
@@ -49,7 +49,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="fixingCalendar">The fixing calendar.</param>
         /// <param name="paymentCalendar">The payment calendar.></param>
         /// <param name="notional">The notional. The default value is 1.00m.</param>
-        /// <param name="normalisedRate">Thhhe fixed rate as a decimal contained in a basic quotation.</param>
+        /// <param name="normalisedRate">The fixed rate as a decimal contained in a basic quotation.</param>
         public PriceableSimpleFra(DateTime baseDate, SimpleFraNodeStruct nodeStruct, IBusinessCalendar fixingCalendar,
             IBusinessCalendar paymentCalendar, Decimal notional, BasicQuotation normalisedRate)
             : base(nodeStruct.SimpleFra.id, baseDate, notional, nodeStruct.BusinessDayAdjustments, normalisedRate)

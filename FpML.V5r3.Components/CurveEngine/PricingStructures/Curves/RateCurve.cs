@@ -38,6 +38,7 @@ using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Codes;
+using Metadata.Common;
 using Orion.Analytics.Solvers;
 using Orion.Identifiers;
 using Orion.ModelFramework;
@@ -293,7 +294,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="curveIdentifier">The curveIdentifier.</param>
-        protected RateCurve(ILogger logger, ICoreCache cache, String nameSpace, PricingStructureIdentifier curveIdentifier)
+        protected RateCurve(ILogger logger, ICoreCache cache, string nameSpace, PricingStructureIdentifier curveIdentifier)
             : base(logger, cache, nameSpace, curveIdentifier)
         {
             var properties = curveIdentifier.GetProperties();
@@ -303,6 +304,29 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             CompoundingFrequency = compoundingFrequency != null
                                        ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
                                        : GetDefaultCompounding(Holder);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RateCurve"/> class.
+        /// </summary>
+        ///  <param name="nameSpace">The client namespace</param>
+        /// <param name="algorithm">The curve algorithm.</param>
+        /// <param name="curveIdentifier">The curveIdentifier.</param>
+        /// <param name="fixingCalendar">The fixingCalendar.</param>
+        /// <param name="rollCalendar">The rollCalendar.</param>
+        public RateCurve(string nameSpace, Algorithm algorithm, RateCurveIdentifier curveIdentifier, 
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
+            : base(nameSpace, curveIdentifier, algorithm)
+        {
+            var properties = curveIdentifier.GetProperties();
+            PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties);
+            Tolerance = PropertyHelper.ExtractDoubleProperty("Tolerance", properties) ?? GetDefaultTolerance(Holder);
+            var compoundingFrequency = properties.GetString("CompoundingFrequency", null);
+            CompoundingFrequency = compoundingFrequency != null
+                ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
+                : GetDefaultCompounding(Holder);
+            FixingCalendar = fixingCalendar;
+            PaymentCalendar = rollCalendar;
         }
 
         /// <summary>
@@ -370,6 +394,37 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var termCurve = SetConfigurationData();
             Period tenor = null;
             if(curveId.ForecastRateIndex != null)
+            {
+                tenor = curveId.ForecastRateIndex.indexTenor;
+            }
+            PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, tenor, instrumentData, curveId.BaseDate, fixingCalendar, rollCalendar);
+            PriceableSpreadAssets = PriceableAssetFactory.CreatePriceableSpreadFraAssets(logger, cache, nameSpace, curveId.BaseDate, instrumentData, fixingCalendar, rollCalendar);
+            termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate, termCurve.extrapolationPermitted, termCurve.interpolationMethod, Tolerance);
+            CreatePricingStructure(curveId, termCurve, instrumentData);
+            // Interpolate the DiscountFactor curve based on the respective curve interpolation 
+            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RateCurve"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="nameSpace">The client namespace</param>
+        /// <param name="properties">The properties.</param>
+        /// <param name="instrumentData">The instrument data.</param>
+        /// <param name="algorithm">The curve algorithm properties.</param>
+        /// <param name="fixingCalendar">The fixingCalendar.</param>
+        /// <param name="rollCalendar">The rollCalendar.</param>
+        public RateCurve(ILogger logger, ICoreCache cache, string nameSpace,
+            NamedValueSet properties, QuotedAssetSet instrumentData, Algorithm algorithm,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
+            : this(nameSpace, algorithm, new RateCurveIdentifier(properties), fixingCalendar, rollCalendar)
+        {
+            var curveId = GetRateCurveId();
+            var termCurve = SetConfigurationData();
+            Period tenor = null;
+            if (curveId.ForecastRateIndex != null)
             {
                 tenor = curveId.ForecastRateIndex.indexTenor;
             }

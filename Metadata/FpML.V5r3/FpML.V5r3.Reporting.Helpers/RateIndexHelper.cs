@@ -58,11 +58,20 @@ namespace FpML.V5r3.Reporting.Helpers
                                           dayCountFraction = DayCountFractionHelper.Parse(dayCountFraction),
                                           floatingRateIndex = FloatingRateIndexHelper.Parse(floatingRateIndex),
                                           id = id,
-                                          instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
-                                          paymentFrequency = PeriodHelper.Parse(paymentFrequency),
-                                          term = PeriodHelper.Parse(term)
+                                          instrumentId = InstrumentIdArrayHelper.Parse(instrumentId)
                                       };
-
+            Period frequency = null;
+            if (paymentFrequency != null)
+            {
+                frequency = PeriodHelper.Parse(paymentFrequency);
+            }
+            rateIndex.paymentFrequency = frequency;
+            Period period = null;
+            if (term != null)
+            {
+                period = PeriodHelper.Parse(term);
+            }
+            rateIndex.term = period;
             return rateIndex;
         }
 
@@ -76,7 +85,25 @@ namespace FpML.V5r3.Reporting.Helpers
                 dayCountFraction = DayCountFractionHelper.Parse(dayCountFraction),
                 floatingRateIndex = FloatingRateIndexHelper.Parse(floatingRateIndex),
             };
+            return rateIndex;
+        }
 
+        public static RateIndex Parse(string floatingRateIndex,
+            string currency,
+            string dayCountFraction, string term)
+        {
+            var rateIndex = new RateIndex
+            {
+                currency = new IdentifiedCurrency { Value = currency },
+                dayCountFraction = DayCountFractionHelper.Parse(dayCountFraction),
+                floatingRateIndex = FloatingRateIndexHelper.Parse(floatingRateIndex),
+            };
+            Period period = null;
+            if (term != null)
+            {
+                period = PeriodHelper.Parse(term);
+            }
+            rateIndex.term = period;
             return rateIndex;
         }
 
@@ -97,9 +124,7 @@ namespace FpML.V5r3.Reporting.Helpers
                     paymentFrequency = paymentFrequency,
                     term = term
                 };
-
             return rateIndex;
         }
     }
-
 }

@@ -27,6 +27,7 @@ using Orion.Util.Logging;
 using Orion.Util.NamedValues;
 using Orion.Util.Serialisation;
 using FpML.V5r3.Reporting;
+using Metadata.Common;
 using Orion.ModelFramework;
 using Orion.ModelFramework.PricingStructures;
 using PricingStructure=FpML.V5r3.Reporting.PricingStructure;
@@ -45,7 +46,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// The namespace
         /// </summary>
-        public String NameSpace { get; set; }
+        public string NameSpace { get; set; }
 
         /// <summary>
         /// Holds the algorithm  information.
@@ -64,7 +65,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="curveIdentifier">The curveIdentifier.</param>
-        protected CurveBase(ILogger logger, ICoreCache cache, String nameSpace, PricingStructureIdentifier curveIdentifier)
+        protected CurveBase(ILogger logger, ICoreCache cache, string nameSpace, PricingStructureIdentifier curveIdentifier)
         {
             PricingStructureIdentifier = curveIdentifier;
             NameSpace = nameSpace;
@@ -82,7 +83,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="curveIdentifier">The curveIdentifier.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="pricingStructure"></param>
-        protected CurveBase(ILogger logger, ICoreCache cache, String nameSpace, Pair<PricingStructure, PricingStructureValuation> pricingStructure, PricingStructureIdentifier curveIdentifier)
+        protected CurveBase(ILogger logger, ICoreCache cache, string nameSpace, Pair<PricingStructure, PricingStructureValuation> pricingStructure, PricingStructureIdentifier curveIdentifier)
             : base(pricingStructure)
         {
             PricingStructureIdentifier = curveIdentifier;
@@ -91,6 +92,19 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             {
                 Holder = new PricingStructureAlgorithmsHolder(logger, cache, nameSpace, curveIdentifier.PricingStructureType, curveIdentifier.Algorithm);
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CurveBase"/> class.
+        /// </summary>
+        /// <param name="curveIdentifier">The curveIdentifier.</param>
+        /// <param name="nameSpace">The nameSpace</param>
+        /// <param name="curveAlgorithm">The curve algorithm.</param>
+        protected CurveBase(string nameSpace, PricingStructureIdentifier curveIdentifier, Algorithm curveAlgorithm)
+        {
+            PricingStructureIdentifier = curveIdentifier;
+            NameSpace = nameSpace;
+            Holder = new PricingStructureAlgorithmsHolder(curveAlgorithm);
         }
 
         /// <summary>
@@ -114,7 +128,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="values">The value to update to.</param>
         /// <param name="measureType">The measureType of the quotation required.</param>
         /// <returns></returns>
-        public abstract Boolean PerturbCurve(ILogger logger, ICoreCache cache, string nameSpace, Decimal[] values, String measureType);
+        public abstract Boolean PerturbCurve(ILogger logger, ICoreCache cache, string nameSpace, decimal[] values, string measureType);
 
         /// <summary>
         /// Creates the basic rate curve risk set.

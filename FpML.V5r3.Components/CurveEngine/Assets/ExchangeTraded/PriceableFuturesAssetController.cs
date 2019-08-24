@@ -27,6 +27,11 @@ namespace Orion.CurveEngine.Assets.ExchangeTraded
         public Future Future { get; protected set; }
 
         /// <summary>
+        /// The exchange code for the contract.
+        /// </summary>
+        public string Code { get; protected set; }
+
+        /// <summary>
         /// AdjustedStartDate
         /// </summary>
         public DateTime AdjustedStartDate { get; protected set; }
@@ -115,7 +120,7 @@ namespace Orion.CurveEngine.Assets.ExchangeTraded
         /// <summary>
         /// Gets the current value.
         /// </summary>
-        /// <value>The current valuee.</value>
+        /// <value>The current value.</value>
         public decimal IndexAtMaturity { get; protected set; }
 
         /// <summary>
@@ -145,7 +150,7 @@ namespace Orion.CurveEngine.Assets.ExchangeTraded
             Position = position;
             BaseDate = baseDate;
             SetQuote(marketQuote);
-            //This handles the case where the underlying index is pat of an IRfuturenode type.
+            //This handles the case where the underlying index is pat of an IR future node type.
             Volatility = extraQuote;
             BusinessDayAdjustments = nodeStruct.BusinessDayAdjustments;
             FuturesLag = nodeStruct.SpotDate;

@@ -462,7 +462,7 @@ namespace HLV5r3.Financial
             //Map the ranges.
             var rollDates = DataRangeHelper.StripDateTimeRange(datesAsArray);
             var weights = DataRangeHelper.StripDecimalRange(notionalWeightsArray);
-            //Create the BussinessDayConvention.
+            //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                                                                              businessCentersAsString);
             //create the swap.
@@ -1438,13 +1438,14 @@ namespace HLV5r3.Financial
         /// <param name="propertyHeaders">An array property headers.</param>
         /// <param name="propertyValues">An array of property values. All strings. </param>
         /// <param name="city">The city</param>
+        /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="state">The state</param>
         /// <param name="country">The country</param>
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
         public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName, 
-            string suburb, string city, string state, string country, int numBedrooms, int numBathrooms, int numParking,
+            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, Excel.Range propertyHeaders, Excel.Range propertyValues)
         {
             var headers = DataRangeHelper.StripRange(propertyHeaders);
@@ -1457,7 +1458,7 @@ namespace HLV5r3.Financial
                 properties.Set(header, values[index]);
                 index++;
             }
-            var result = ValService.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city, state, country,
+            var result = ValService.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;
         }

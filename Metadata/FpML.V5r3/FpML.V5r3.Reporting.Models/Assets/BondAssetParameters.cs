@@ -13,8 +13,6 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
 namespace Orion.Models.Assets
 {
     public class BondAssetParameters : IBondAssetParameters
@@ -37,7 +35,7 @@ namespace Orion.Models.Assets
         /// Gets or sets the multiplier.
         /// </summary>
         ///  <value>The multiplier.</value>
-        public Decimal Multiplier { get; set; }
+        public decimal Multiplier { get; set; }
 
         /// <summary>
         /// Gets or sets the quote.
@@ -85,7 +83,7 @@ namespace Orion.Models.Assets
         /// Gets or sets the weightings.
         /// </summary>
         /// <value>The weightings.</value>
-        public Decimal[] Weightings { get; set; }
+        public decimal[] Weightings { get; set; }
 
         /// <summary>
         /// Gets or sets the coupon rate.

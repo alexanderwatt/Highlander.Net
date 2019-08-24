@@ -279,7 +279,7 @@ namespace Orion.ValuationEngine
         public void PriceAndPublish(
             ILogger logger, ICoreCache cache,            
             HandlerResponse response,
-            List<string> curvenamesList,
+            List<string> curveNamesList,
             List<string> currenciesList,
             IList<string> tradeItemNames,
             ValuationRequest request,
@@ -327,7 +327,7 @@ namespace Orion.ValuationEngine
                     marketEnvironment.AddPricingStructure(curveTypeAndName, curve);
                 }
                 // Load IR Curves
-                foreach (var irItem in curvenamesList)
+                foreach (var irItem in curveNamesList)
                 {
                     MarketEnvironmentHelper.ResolveRateCurveIdentifier(irItem, out var curveName);
                     string curveSignature = CurveLoader.IrCurveSignature(market, irItem, null);
@@ -463,7 +463,7 @@ namespace Orion.ValuationEngine
         public static void Parse(IEnumerable<Pair<Trade, NamedValueSet>> trades, NamedValueSet portfolioProps,
             out List<String> uniquePricingStructures, out List<String> uniqueCurrencies, out List<Pair<Trade, NamedValueSet>> validTrades)
         {
-            //Initalise the out parameters.
+            //Initialise the out parameters.
             validTrades = new List<Pair<Trade, NamedValueSet>>();
             var resultValuationReports = new List<ValuationReport>();
             var pricingStructures = new List<string>();

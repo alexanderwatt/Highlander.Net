@@ -17,7 +17,7 @@ namespace Orion.Models.Property
 {
     public class PropertyAssetResults : IPropertyAssetResults
     {
-        #region Implementation of IEquityAssetResults
+        #region Implementation of IPropertyAssetResults
 
         /// <summary>
         /// Gets the npv.

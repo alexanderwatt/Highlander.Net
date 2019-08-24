@@ -32,11 +32,16 @@ namespace Orion.CurveEngine.Assets
     {
         public abstract Bond GetBond();
 
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        public abstract DateTime GetNextCouponDate();
+
         /// <summary>
         /// Gets or sets the multiplier.
         /// </summary>
         ///  <value>The multiplier.</value>
-        public Decimal Multiplier { get; set; }
+        public decimal Multiplier { get; set; }
 
         ///<summary>
         ///</summary>
@@ -57,11 +62,11 @@ namespace Orion.CurveEngine.Assets
 
         ///<summary>
         ///</summary>
-        public Boolean IsYTMQuote { get; set; }
+        public bool IsYTMQuote { get; set; }
 
         ///<summary>
         ///</summary>
-        public Decimal QuoteValue { get; set; }
+        public decimal QuoteValue { get; set; }
 
         ///<summary>
         ///</summary>
@@ -133,7 +138,7 @@ namespace Orion.CurveEngine.Assets
 
         ///<summary>
         ///</summary>
-        public Decimal Notional { get; set; }
+        public decimal Notional { get; set; }
 
         ///<summary>
         ///</summary>
@@ -146,7 +151,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// The purchase price as a dirty price.
         /// </summary>
-        public Decimal PurchasePrice { get; set; }
+        public decimal PurchasePrice { get; set; }
 
         ///<summary>
         ///</summary>
@@ -157,5 +162,35 @@ namespace Orion.CurveEngine.Assets
         /// </summary>
         /// <returns></returns>
         public abstract decimal[] GetYearFractions();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        public abstract decimal GetAccruedFactor();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        public abstract decimal GetRemainingAccruedFactor();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        public abstract bool IsExDiv();
+
+        ///<summary>
+        ///</summary>
+        public abstract decimal GetCouponRate();
+
+        ///<summary>
+        ///</summary>
+        ///<returns></returns>
+        public abstract DateTime GetLastCouponDate();
+
+        ///<summary>
+        ///</summary>
+        ///<param name="valuationDate"></param>
+        ///<returns></returns>
+        public abstract int GetAccrualDays(DateTime valuationDate);
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="BoundaryRiderMappingVals.cs">
       <DependentUpon>BoundaryRiderMappingVals.xsd</DependentUpon>
     </Compile>
+    <Compile Include="AlgorithmHelper.cs" />
     <Compile Include="ConfigRuleFormat.cs">
       <DependentUpon>ConfigRuleFormat.xsd</DependentUpon>
     </Compile>

@@ -369,13 +369,13 @@ namespace Highlander.CurveWebApp.Models
             {
                 properties.Set("Bootstrap", true);
             }
-            //Handle ratebasiscurves that are dependent on another ratecurve.
+            //Handle rate basis curves that are dependent on another ratecurve.
             //TODO This functionality needs to be extended for calibrations (bootstrapping),
             //TODO where there is AccountReference dependency on one or more pricing structures.
             var pst = PropertyHelper.ExtractPricingStructureType(properties);
             if (pst == PricingStructureTypeEnum.RateBasisCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = Cache.LoadItem<Market>(refCurveId);
@@ -390,19 +390,19 @@ namespace Highlander.CurveWebApp.Models
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0],
                                                                                             properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = Orion.CurveEngine.Factory.PricingStructureFactory.Create(Logger.Target, Cache, NameSpace, null, null, refCurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
             }
             if (pst == PricingStructureTypeEnum.RateXccyCurve)
             {
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refCurveId = properties.GetValue<string>(CurveProp.ReferenceCurveUniqueId, true);
                 //Load the data.
                 var refItem = Cache.LoadItem<Market>(refCurveId);
                 var deserializedRefCurveMarket = (Market)refItem.Data;
                 var refCurveProperties = refItem.AppProps;
-                //Get the referrence curve identifier.
+                //Get the reference curve identifier.
                 var refFxCurveId = properties.GetValue<string>(CurveProp.ReferenceFxCurveUniqueId, true);
                 //Load the data.
                 var refFxItem = Cache.LoadItem<Market>(refFxCurveId);
@@ -411,9 +411,9 @@ namespace Highlander.CurveWebApp.Models
                 //Get the currency2 curve identifier.
                 var currency2CurveId = properties.GetValue<string>(CurveProp.ReferenceCurrency2CurveId, true);
                 //Load the data.
-                var currrecny2Item = Cache.LoadItem<Market>(currency2CurveId);
-                var deserializedCurrecny2CurveMarket = (Market)currrecny2Item.Data;
-                var refCurrecnyCurveProperties = currrecny2Item.AppProps;
+                var currency2Item = Cache.LoadItem<Market>(currency2CurveId);
+                var deserializedCurrency2CurveMarket = (Market)currency2Item.Data;
+                var refCurrencyCurveProperties = currency2Item.AppProps;
                 //Format the ref curve data and call the pricing structure helper.
                 var refCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
@@ -425,12 +425,12 @@ namespace Highlander.CurveWebApp.Models
                         deserializedRefFxCurveMarket.Items1[0], refFxCurveProperties);
                 var currency2CurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
-                        deserializedCurrecny2CurveMarket.Items[0],
-                        deserializedCurrecny2CurveMarket.Items1[0], refCurrecnyCurveProperties);
+                        deserializedCurrency2CurveMarket.Items[0],
+                        deserializedCurrency2CurveMarket.Items1[0], refCurrencyCurveProperties);
                 var spreadCurveFpmlTriplet =
                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(deserializedMarket.Items[0],
                                                                                             deserializedMarket.Items1[0], properties);
-                //create and set the pricingstructure
+                //create and set the pricing structure
                 var psBasis = Orion.CurveEngine.Factory.PricingStructureFactory.Create(Logger.Target, Cache, NameSpace, null, null, refCurveFpmlTriplet, refFxCurveFpmlTriplet,
                                                                     currency2CurveFpmlTriplet, spreadCurveFpmlTriplet);
                 return psBasis;
@@ -439,7 +439,7 @@ namespace Highlander.CurveWebApp.Models
             //
             var fpmlPair = new Pair<PricingStructure, PricingStructureValuation>(deserializedMarket.Items[0],
                                                                                  deserializedMarket.Items1[0]);
-            //create and set the pricingstructure
+            //create and set the pricing structure
             var ps = Orion.CurveEngine.Factory.PricingStructureFactory.Create(Logger.Target, Cache, NameSpace, null, null, fpmlPair, properties);
             return ps;
         }

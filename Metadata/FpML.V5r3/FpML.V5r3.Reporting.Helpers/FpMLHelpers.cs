@@ -29,6 +29,9 @@ namespace FpML.V5r3.Reporting.Helpers
     {
         public static ItemChoiceType15 TradeTypeHelper(Product product)
         {
+            if (product is PropertyTransaction) return ItemChoiceType15.propertyTransaction;
+            if (product is FutureTransaction) return ItemChoiceType15.futureTransaction;
+            if (product is LeaseTransaction) return ItemChoiceType15.leaseTransaction;
             if (product is BondTransaction) return ItemChoiceType15.bondTransaction;
             if (product is EquityTransaction) return ItemChoiceType15.equityTransaction;
             if (product is Swap) return ItemChoiceType15.swap;
@@ -73,7 +76,7 @@ namespace FpML.V5r3.Reporting.Helpers
             return result;
         }
 
-        public static String GetProductType(object[] items, ItemsChoiceType2[] itemsElementName)
+        public static string GetProductType(object[] items, ItemsChoiceType2[] itemsElementName)
         {
             var result = ProductTypeSimpleEnum.Undefined.ToString();
             if (items == null) return result;
@@ -188,12 +191,10 @@ namespace FpML.V5r3.Reporting.Helpers
                     BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters),
                 RateIndex =
                     RateIndexHelper.Parse(floatingRateIndex, currency,
-                                          dayCountFraction)
+                                          dayCountFraction, term)
             };
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             instrument.SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo);
-
             return instrument;
         }
     }
@@ -221,11 +222,9 @@ namespace FpML.V5r3.Reporting.Helpers
                     BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters),
                 RateIndex =
                     RateIndexHelper.Parse(floatingRateIndex, currency,
-                                          dayCountFraction),
+                                          dayCountFraction, term),
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo)
             };
-
-
             return instrument;
         }
 
@@ -244,9 +243,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var deposit = DepositHelper.Parse(instrumentId, currency, dayCountFraction, term);
-
             var instrument = new DepositNodeStruct
             {
                 Deposit = deposit,
@@ -257,8 +254,6 @@ namespace FpML.V5r3.Reporting.Helpers
                                           dayCountFraction),
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo)
             };
-
-
             return instrument;
         }
 
@@ -306,15 +301,12 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var quoteBasis = EnumHelper.Parse<QuoteBasisEnum>(quotationBasis);
-
             var instrument = new FxSpotNodeStruct
             {
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo),
                 QuotedCurrencyPair = QuotedCurrencyPair.Create(currency1, currency2, quoteBasis)
             };
-
             return instrument;
         }
 
@@ -326,12 +318,10 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var instrument = new FxSpotNodeStruct
             {
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo)
             };
-
             return instrument;
         }
 
@@ -351,9 +341,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var fra = SimpleFraHelper.Parse(instrumentId, currency, dayCountFraction, startTerm, endTerm);
-
             var instrument = new SimpleFraNodeStruct
             {
                 BusinessDayAdjustments =
@@ -364,7 +352,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo),
                 SimpleFra = fra
             };
-
             return instrument;
         }
 
@@ -384,9 +371,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var fra = SimpleFraHelper.Parse(instrumentId, currency, dayCountFraction, startTerm, endTerm);
-
             var instrument = new SimpleBillFraNodeStruct
             {
                 BusinessDayAdjustments =
@@ -397,7 +382,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 SpotDate = RelativeDateOffsetHelper.Create(spotDays, dayType, spotBusinessDayConvention, spotBusinessCenters, dateRelativeTo),
                 SimpleFra = fra
             };
-
             return instrument;
         }
 
@@ -423,9 +407,7 @@ namespace FpML.V5r3.Reporting.Helpers
             string fraDiscounting)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(fixingDayTypeEnum);
-
             var discountingType = EnumHelper.Parse<FraDiscountingEnum>(fraDiscounting);
-
             var fra = new Fra
             {
                 adjustedTerminationDate = adjustedTerminationDate,
@@ -439,16 +421,13 @@ namespace FpML.V5r3.Reporting.Helpers
                 fraDiscounting = discountingType,
                 indexTenor = new Period[1]
             };
-
             fra.indexTenor[0] = PeriodHelper.Parse(indexTenor);
             fra.notional = MoneyHelper.GetAmount(notional, currency);
-
             fra.adjustedEffectiveDate = new RequiredIdentifierDate
             {
                 Value = adjustedEffectiveDate,
                 id = "EffectiveDate"
             };
-
             fra.paymentDate = new AdjustableDate
             {
                 unadjustedDate = IdentifiedDateHelper.Create("PaymentDate", paymentDate),
@@ -456,12 +435,10 @@ namespace FpML.V5r3.Reporting.Helpers
                     BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                         paymentBusinessCenters)
             };
-
             var instrument = new FraNodeStruct
             {
                 Fra = fra
             };
-
             return instrument;
         }
 
@@ -481,7 +458,6 @@ namespace FpML.V5r3.Reporting.Helpers
                     DayCountFractionHelper.Parse(dayCountFraction),
                 CompoundingFrequency = CompoundingFrequency.Parse(frequency)
             };
-
             return instrument;
         }
 
@@ -499,20 +475,17 @@ namespace FpML.V5r3.Reporting.Helpers
                 clearanceSystem = ClearanceSystemHelper.Parse(clearanceSystem),
                 exchangeId = ExchangeIdHelper.Parse(exchangeId)
             };
-
             if (expiry != null)
             {
                 future.maturity = (DateTime)expiry;
                 future.maturitySpecified = true;
             }
-
             var instrument = new CommodityFutureNodeStruct
             {
                 Future = future,
                 BusinessDayAdjustments =
                     BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters)
             };
-
             return instrument;
         }
 
@@ -534,13 +507,11 @@ namespace FpML.V5r3.Reporting.Helpers
                 clearanceSystem = ClearanceSystemHelper.Parse(clearanceSystem),
                 exchangeId = ExchangeIdHelper.Parse(exchangeId)
             };
-
             if (expiry != null)
             {
                 future.maturity = (DateTime)expiry;
                 future.maturitySpecified = true;
             }
-
             var instrument = new IRFutureNodeStruct
             {
                 RateIndex =
@@ -550,7 +521,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 BusinessDayAdjustments =
                     BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters)
             };
-
             return instrument;
         }
 
@@ -575,11 +545,8 @@ namespace FpML.V5r3.Reporting.Helpers
             string resetDateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var resetDayType = EnumHelper.Parse<DayTypeEnum>(resetDayTypeEnum);
-
             var rateOption = SimpleFraHelper.Parse(instrumentId, currency, dayCountFraction, startTerm, endTerm);
-
             var instrument = new RateOptionNodeStruct
             {
                 BusinessDayAdjustments =
@@ -591,7 +558,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 ResetDateAdjustment = RelativeDateOffsetHelper.Create(resetDays, resetDayType, resetBusinessDayConvention, resetBusinessCenters, resetDateRelativeTo),
                 SimpleRateOption = rateOption
             };
-
             return instrument;
         }
 
@@ -615,15 +581,10 @@ namespace FpML.V5r3.Reporting.Helpers
             string dateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var discountType = EnumHelper.Parse<DiscountingTypeEnum>(discountingType);
-
             var money = MoneyHelper.GetAmount(notional, currency);
-
             var dayCount = DayCountFractionHelper.Parse(dayCountFraction);
-
             var irswap = SimpleIrsHelper.Parse(instrumentId, currency, dayCountFraction, term, paymentFrequency, assetId);
-
             var instrument = new SimpleIRSwapNodeStruct
             {
                 DateAdjustments =
@@ -635,7 +596,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 Calculation = CalculationFactory.CreateFixed(fixedRate, money, dayCount, discountType),
                 SimpleIRSwap = irswap
             };
-
             return instrument;
         }
 
@@ -661,17 +621,11 @@ namespace FpML.V5r3.Reporting.Helpers
             Boolean includeFirstCaplet)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(spotDayTypeEnum);
-
             var discountType = EnumHelper.Parse<DiscountingTypeEnum>(discountingType);
-
             var money = MoneyHelper.GetAmount(notional, currency);
-
             var dayCount = DayCountFractionHelper.Parse(dayCountFraction);
-
             var ircap = SimpleIrsHelper.Parse(instrumentId, currency, dayCountFraction, term, paymentFrequency, assetId);
-
             var assetRef = new AssetReference { href = assetReference };
-
             var instrument = new SimpleIRCapNodeStruct
             {
                 DateAdjustments =
@@ -685,7 +639,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 IncludeFirstCaplet = includeFirstCaplet,
                 AssetReference = assetRef
             };
-
             return instrument;
         }
 
@@ -718,12 +671,9 @@ namespace FpML.V5r3.Reporting.Helpers
             string exDividendDateRelativeTo)
         {
             var dayType = EnumHelper.Parse<DayTypeEnum>(settlementDayTypeEnum);
-
             var exDayType = EnumHelper.Parse<DayTypeEnum>(exDivDayTypeEnum);
-
             var bond = BondHelper.Parse(instrumentId, clearanceSystem, couponType, couponRate, currency, notional, maturity,
                 paymentFrequency, dayCountFraction, creditSeniority, assetId, description, exchangeId, issuerName);
-
             var instrument = new BondNodeStruct
             {
                 BusinessDayAdjustments =
@@ -732,7 +682,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 SettlementDate = RelativeDateOffsetHelper.Create(settlementDays, dayType, settlementBusinessDayConvention, settlementBusinessCenters, dateRelativeTo),
                 Bond = bond
             };
-
             return instrument;
         }
     }
@@ -745,7 +694,6 @@ namespace FpML.V5r3.Reporting.Helpers
             XiborNodeStruct xibor)
         {
             var instrument = new Instrument { AssetType = assetId, Currency = CurrencyHelper.Parse(currency), InstrumentNodeItem = xibor };
-
             return instrument;
         }
 
@@ -762,7 +710,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 ExtraItem = extraItem,
                 InstrumentNodeItem = xibor
             };
-
             return instrument;
         }
 
@@ -772,7 +719,6 @@ namespace FpML.V5r3.Reporting.Helpers
             InstrumentNode asset)
         {
             var instrument = new Instrument { AssetType = assetId, Currency = CurrencyHelper.Parse(currency), InstrumentNodeItem = asset };
-
             return instrument;
         }
 
@@ -789,7 +735,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 ExtraItem = extraItem,
                 InstrumentNodeItem = instrumentNode
             };
-
             return instrument;
         }
     }
@@ -833,7 +778,6 @@ namespace FpML.V5r3.Reporting.Helpers
                                                           primaryRateSourceProvider),
                 id = instrumentId
             };
-
             return fxRateAsset;
         }
 
@@ -872,7 +816,6 @@ namespace FpML.V5r3.Reporting.Helpers
                                                           primaryRateSourceProvider),
                 id = instrumentId
             };
-
             return fxRateAsset;
         }
     }
@@ -892,7 +835,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 primaryRateSource = InformationSourceHelper.Create(primaryRateSourceProvider, primaryRateSource, primaryRateSourcePage),
                 secondaryRateSource = InformationSourceHelper.Create(secondaryRateSourceProvider, secondaryRateSourcePage, secondaryRateSource),
             };
-
             return fxSpotRateSource;
         }
 
@@ -904,7 +846,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 fixingTime = BusinessCenterTimeHelper.Parse(businessCenterAsString),
                 primaryRateSource = InformationSourceHelper.Create(primaryRateSourceProvider),
             };
-
             return fxSpotRateSource;
         }
     }
@@ -923,7 +864,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 resetDate = adjustedFixingDate,
                 resetDateSpecified = true
             };
-
             return result;
         }
 
@@ -947,7 +887,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 resetDate = adjustedFixingDate,
                 resetDateSpecified = true
             };
-
             return result;
         }
     }
@@ -976,7 +915,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 startTerm = PeriodHelper.Parse(startTerm),
                 exchangeId = ExchangeIdHelper.Parse(exchangeId)
             };
-
             return simpleFra;
         }
 
@@ -995,7 +933,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 startTerm = PeriodHelper.Parse(startTerm)
             };
-
             return simpleFra;
         }
     }
@@ -1043,7 +980,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 paymentFrequency = PeriodHelper.Parse(paymentFrequency),
             };
-
             return simpleIRSwap;
         }
     }
@@ -1085,7 +1021,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 paymentFrequency = PeriodHelper.Parse(paymentFrequency),
                 exchangeId = ExchangeIdHelper.Parse(exchangeId)
             };
-
             return deposit;
         }
 
@@ -1104,7 +1039,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 paymentFrequency = PeriodHelper.Parse(paymentFrequency)
             };
-
             return deposit;
         }
 
@@ -1122,7 +1056,6 @@ namespace FpML.V5r3.Reporting.Helpers
                 instrumentId = InstrumentIdArrayHelper.Parse(instrumentId),
                 paymentFrequency = PeriodHelper.Parse(term)
             };
-
             return deposit;
         }
     }
@@ -1352,25 +1285,29 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="currency">The currency.</param>
         /// <param name="description">The issuer description.</param>
         /// <param name="city">The city</param>
+        /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="state">The state</param>
         /// <param name="country">The country</param>
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
         public static PropertyAsset Create(string propertyId, string propertyType, string streetIdentifier, string streetName,
-            string suburb, string city, string state, string country, int numBedrooms, int numBathrooms, int numParking, string currency, string description)
+            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, string description)
         {
+            var address = new Address
+            {
+                streetAddress = new[] {streetIdentifier + "-" + streetName + "-" + suburb},
+                city = city,
+                country = new CountryCode {Value = country},
+                postalCode = postalCode,
+                state = state
+            };
             var property = new PropertyAsset
             {
                 currency = new IdentifiedCurrency { Value = currency },
                 description = description,
                 id = propertyId, 
-                streetIdentifier = streetIdentifier,
-                street = streetName,
-                suburb = suburb,
-                city = city,
-                state = state,
-                country = country,
+                propertyAddress = address,
                 bedrooms = numBedrooms,
                 bathrooms = numBathrooms,
                 parking = numParking,
@@ -1391,6 +1328,8 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="reviewChange">THe review change as a percentage.</param>
         /// <param name="currency">The currency.</param>
         /// <param name="startGrossPrice">The start gross price.</param>
+        /// <param name="paymentFrequency">Payment frequency of the lease.</param>
+        /// <param name="businessCenters">THe relevant business centers.</param>
         /// <param name="description">The lease description.</param>
         /// <param name="leaseExpiryDate">The lease expiry date.</param>
         /// <param name="propertyReference">The property reference identifier.</param>
@@ -1400,10 +1339,12 @@ namespace FpML.V5r3.Reporting.Helpers
         /// <param name="nextReviewDate">The next review date.</param>
         /// <param name="numberOfUnits">The number of units specified.</param>
         /// <param name="units">The units of area: money per square meter; money per square foot.</param>
+        /// <param name="rollConvention">The roll convention.</param>
+        /// <param name="businessDayConvention">Business day convention.</param>
         /// <returns></returns>
         public static Lease Create(string tenant, string leaseId, string leaseType, DateTime leaseExpiryDate, string propertyReference, string shopNumber,
             DateTime leaseStartDate, string reviewFrequency, DateTime nextReviewDate, decimal reviewChange, string currency, decimal numberOfUnits, 
-            string units, decimal startGrossPrice, string description)
+            string units, decimal startGrossPrice, string paymentFrequency, RollConventionEnum rollConvention, BusinessDayConventionEnum businessDayConvention, BusinessCenters businessCenters, string description)
         {
             var lease = new Lease
             {
@@ -1422,7 +1363,9 @@ namespace FpML.V5r3.Reporting.Helpers
                 startGrossPrice = new Money {amount = startGrossPrice, amountSpecified = true},
                 leaseExpiryDate = new IdentifiedDate {id = "LeaseExpiryDate", Value = leaseExpiryDate},
                 tenant = new Party {partyId = new PartyId[1]},
-                //businessDayAdjustments = 
+                paymentFrequency = PeriodHelper.Parse(paymentFrequency),
+                businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCenters),
+                rollConvention = rollConvention
             };
             lease.tenant.partyId[0] = new PartyId{Value = tenant };
             return lease;
