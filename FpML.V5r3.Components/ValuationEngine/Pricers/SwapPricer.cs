@@ -85,7 +85,7 @@ namespace Orion.ValuationEngine.Pricers
         /// <summary>
         /// Flag where: ForwardEndDate = forecastRateInterpolation ? AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);  
         /// </summary>
-        public Boolean ForecastRateInterpolation { get; set; }
+        public bool ForecastRateInterpolation { get; set; }
 
         protected const string CModelIdentifier = "Swap";
         //protected const string CDefaultBucketingInterval = "3M";

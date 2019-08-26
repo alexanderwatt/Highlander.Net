@@ -87,6 +87,12 @@
         public decimal MarketQuote { get; set; }
 
         /// <summary>
+        /// Gets the PandL.
+        /// </summary>
+        /// <value>The market quote.</value>
+        public decimal PandL { get; set; }
+
+        /// <summary>
         /// Gets the PCE.
         /// </summary>
         /// <value>The PCE.</value>

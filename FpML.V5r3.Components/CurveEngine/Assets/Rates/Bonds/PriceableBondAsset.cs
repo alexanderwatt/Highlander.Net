@@ -90,11 +90,6 @@ namespace Orion.CurveEngine.Assets
         public decimal CouponRate { get; set; }
 
         /// <summary>
-        /// The issuer.
-        /// </summary>
-        public string Issuer { get; set; }
-
-        /// <summary>
         /// The instrument identifiers.
         /// </summary>
         public List<InstrumentId> InstrumentIds { get; set; }

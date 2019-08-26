@@ -259,96 +259,6 @@ namespace Orion.ValuationEngine.Factory
                         null, paymentCalendar);
                     return rateCoupon;
                 }
-                //if (XsdClassesFieldResolver.CalculationPeriodHasFloatingRateDefinition(calculationPeriod))
-                //{
-                //    //The floating rate definition.
-                //    FloatingRateDefinition floatingRateDefinition = XsdClassesFieldResolver.CalculationPeriodGetFloatingRateDefinition(calculationPeriod);
-                //    //The floating rate Calculation.
-                //    //The forecast rate index.
-                //    var floatingRateIndex = floatingRateCalculation.floatingRateIndex;
-                //    var indexTenor = floatingRateCalculation.indexTenor.ToString();
-                //    var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex.Value, indexTenor);
-                //    //The rate observation
-                //    // Apply spread from schedule if it hasn't been specified yet.
-                //    var margin = 0m;
-                //    if (floatingRateDefinition.spreadSpecified)
-                //    {
-                //        margin = floatingRateDefinition.spread;
-                //    }
-                //    //The observed rate.
-                //    Decimal? observedRate = null;
-                //    Decimal? capStrike = null;
-                //    Decimal? floorStrike = null;
-                //    if (floatingRateDefinition.capRate != null)
-                //    {
-                //        capStrike = floatingRateDefinition.capRate[0].strikeRate;
-                //    }
-                //    if (floatingRateDefinition.floorRate != null)
-                //    {
-                //        floorStrike = floatingRateDefinition.floorRate[0].strikeRate;
-                //    }
-                //    if (floatingRateDefinition.rateObservation != null)//TODO This is a big problem. Need to handle the case of no fixing date!
-                //    {
-                //        var rateObservation = floatingRateDefinition.rateObservation[0];
-                //        if (rateObservation.observedRateSpecified)
-                //        {
-                //            observedRate = rateObservation.observedRate;
-                //        }
-                //        ////Removed because Igor's old code populates these fields when the trade is created. This means the coupon is not recalculated!
-                //        ////Now the coupon will ignore any previous calculations and only treat as a fixed coupon if the observed rate has been specified.
-                //        //if (isThereDiscounting)
-                //        //{
-                //        //    var discounting = XsdClassesFieldResolver.CalculationGetDiscounting(calculation);
-                //        //    if (capStrike != null || floorStrike != null)
-                //        //    {
-                //        //        rateCoupon = new PriceableCapFloorCoupon(coupon.id, !payerIsBase,
-                //        //                                                 capStrike, floorStrike, accrualStartDate, accrualEndDate,
-                //        //                                                 rateObservation.adjustedFixingDate, dayCountFraction,
-                //        //                                                 margin, observedRate, money, paymentDate,
-                //        //                                                 forecastRate, discounting.discountingType,
-                //        //                                                 observedRate, null, fixingCalendar, paymentCalendar);
-                //        //    }
-                //        //    else
-                //        //    {
-                //        //        rateCoupon = new PriceableFloatingRateCoupon(coupon.id, !payerIsBase, accrualStartDate, accrualEndDate,
-                //        //                                                     rateObservation.adjustedFixingDate, dayCountFraction,
-                //        //                                                     margin, observedRate, money, paymentDate,
-                //        //                                                     forecastRate, discounting.discountingType,
-                //        //                                                     observedRate, null, fixingCalendar, paymentCalendar);
-                //        //    }
-                //        //}
-                //        //else
-                //        //{
-                //            //if (capStrike != null || floorStrike != null)
-                //            //{
-                //                rateCoupon = new PriceableCapFloorCoupon(coupon.id, !payerIsBase, capStrike, floorStrike,
-                //                                                     accrualStartDate, accrualEndDate,
-                //                                                     rateObservation.adjustedFixingDate, dayCountFraction,
-                //                                                     margin, observedRate, money, paymentDate,
-                //                                                     forecastRate, null, null, null,
-                //                                                     fixingCalendar, paymentCalendar);
-                //            //}
-                //            //else
-                //            //{
-                //            //    rateCoupon = new PriceableFloatingRateCoupon(coupon.id, payerIsBase, accrualStartDate, accrualEndDate,
-                //            //                                                 rateObservation.adjustedFixingDate, dayCountFraction,
-                //            //                                                 margin, observedRate, money, paymentDate,
-                //            //                                                 forecastRate, null, null, null,
-                //            //                                                 fixingCalendar, paymentCalendar);
-                //            //}
-                //        //}
-                //        if (fOCalculationMethod)
-                //        {
-                //            ((PriceableFloatingRateCoupon)rateCoupon).ForecastRateInterpolation = true;
-                //        }
-                //        if (discountFactorSpecified)
-                //        {
-                //            rateCoupon.PaymentDiscountFactor = coupon.discountFactor;
-                //        }
-                //        return rateCoupon;
-                //    }
-                //    throw new NotImplementedException("Need to return a rate coupon, Alex!");
-                //}
                 throw new System.Exception("CalculationPeriod has neither fixedRate nor floatingRateDefinition.");
         }
 
@@ -367,7 +277,6 @@ namespace Orion.ValuationEngine.Factory
             Calculation calculation, bool fOCalculationMethod
             , IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
-            //result = coupons.Select(cashflow => CreatePriceableCoupon(payerIsBase, calculation, cashflow, fOCalculationMethod, fixingCalendar, paymentCalendar)).ToList();
             return coupons?.Select(coupon => CreatePriceableCoupon(payerIsBase, calculation, coupon, fOCalculationMethod, fixingCalendar, paymentCalendar)).Where(rateCoupon => rateCoupon != null).ToList();
         }
 

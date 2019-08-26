@@ -158,6 +158,13 @@ namespace Orion.CurveEngine.Tests
                                                      "AUD-IRSwap-5Y", "AUD-IRSwap-7Y", "AUD-IRSwap-10Y"
                                                     };
 
+        private readonly string[] AUDIBFuture = { "AUD-OIS-1D", "AUD-OIS-1W", "AUD-OIS-1M",
+            "AUD-IRFuture-IB-2", "AUD-IRFuture-IB-3", "AUD-IRFuture-IB-4", "AUD-IRFuture-IB-5",
+            "AUD-IRFuture-IB-6", "AUD-IRFuture-IB-7", "AUD-IRFuture-IB-8", "AUD-IRFuture-IB-9",
+            "AUD-IRFuture-IB-10", "AUD-IRFuture-IB-11", "AUD-IRFuture-IB-12", "AUD-IRFuture-IB-13",
+            "AUD-OISSwap-3Y", "AUD-OISSwap-5Y", "AUD-OISSwap-7Y", "AUD-OISSwap-10Y"
+        };
+
         private readonly string[] AUDIRFuture = { "AUD-Deposit-1D", "AUD-Deposit-1W", "AUD-Deposit-1M", 
                                                   "AUD-IRFuture-IR-H8", "AUD-IRFuture-IR-M8", "AUD-IRFuture-IR-U8", "AUD-IRFuture-IR-Z8", 
                                                   "AUD-IRFuture-IR-H9", "AUD-IRFuture-IR-M9", "AUD-IRFuture-IR-U9", "AUD-IRFuture-IR-Z9",
@@ -166,17 +173,20 @@ namespace Orion.CurveEngine.Tests
         private readonly string[] AUDMixedRates = { "AUD-Deposit-1D", "AUD-Deposit-1W", "AUD-Xibor-1M", "AUD-Xibor-2M", "AUD-Xibor-3M",
                                                     "AUD-IRFuture-IR-H8", "AUD-IRFuture-IR-M8", "AUD-IRFuture-IR-U8", "AUD-IRFuture-IR-Z8", 
                                                     "AUD-IRFuture-IR-H9", "AUD-IRFuture-IR-M9", "AUD-IRFuture-IR-U9", "AUD-IRFuture-IR-Z9",
-                                                    "AUD-IRSwap-3Y", "AUD-IRSwap-5Y", "AUD-IRSwap-7Y", "AUD-IRSwap-10Y", };
+                                                    "AUD-IRSwap-3Y", "AUD-IRSwap-5Y", "AUD-IRSwap-7Y", "AUD-IRSwap-10Y"};
 
-        private readonly string[] GBPdeposits = { "GBP-Deposit-1D", "GBP-Deposit-2D", "GBP-Deposit-1M", "GBP-Deposit-2M", "GBP-Deposit-3M", "GBP-Deposit-6M", "GBP-Deposit-9M", "GBP-Deposit-12M", "GBP-Deposit-24M" };
+        private readonly string[] GBPdeposits = { "GBP-Deposit-1D", "GBP-Deposit-2D", "GBP-Deposit-1M", "GBP-Deposit-2M", "GBP-Deposit-3M",
+            "GBP-Deposit-6M", "GBP-Deposit-9M", "GBP-Deposit-12M", "GBP-Deposit-24M" };
 
-        private readonly string[] GBPbbsw = { "GBP-Deposit-1D", "GBP-Deposit-1W", "GBP-Xibor-1M", "GBP-Xibor-2M", "GBP-Xibor-3M", "GBP-Xibor-6M", "GBP-Xibor-9M", "GBP-Xibor-12M", "GBP-Xibor-24M" };
+        private readonly string[] GBPbbsw = { "GBP-Deposit-1D", "GBP-Deposit-1W", "GBP-Xibor-1M", "GBP-Xibor-2M", "GBP-Xibor-3M",
+            "GBP-Xibor-6M", "GBP-Xibor-9M", "GBP-Xibor-12M", "GBP-Xibor-24M" };
 
         private readonly string[] GBPFra = {"GBP-Deposit-1D", "GBP-Deposit-2D", "GBP-Deposit-1M",
                                             "GBP-Fra-1M-3M", "GBP-Fra-3M-3M", "GBP-Fra-6M-3M", 
                                             "GBP-Fra-9M-3M", "GBP-Fra-12M-3M", "GBP-Fra-15M-3M", 
                                             "GBP-Fra-18M-3M", "GBP-Fra-21M-3M" };
-        private readonly string[] GBPZeroRates = { "GBP-ZeroRate-1D", "GBP-ZeroRate-2D", "GBP-ZeroRate-1M", "GBP-ZeroRate-2M", "GBP-ZeroRate-3M", "GBP-ZeroRate-6M", "GBP-ZeroRate-9M", "GBP-ZeroRate-12M", "GBP-ZeroRate-24M" };
+        private readonly string[] GBPZeroRates = { "GBP-ZeroRate-1D", "GBP-ZeroRate-2D", "GBP-ZeroRate-1M", "GBP-ZeroRate-2M",
+            "GBP-ZeroRate-3M", "GBP-ZeroRate-6M", "GBP-ZeroRate-9M", "GBP-ZeroRate-12M", "GBP-ZeroRate-24M" };
 
 
         private readonly string[] GBPSimpleIRSwap = {"GBP-Deposit-1D", "GBP-Deposit-1M", "GBP-Deposit-3M", "GBP-Deposit-6M", 
@@ -10901,6 +10911,16 @@ namespace Orion.CurveEngine.Tests
         #region Tests
 
         [TestMethod]
+        public void AudOISCurveTestsCreateOnly()
+        {
+            var baseDate = new DateTime(2008, 3, 3);
+            foreach (var algo in algoNames)
+            {
+                BuildOisCurve(baseDate, AUDIBFuture, algo, _AUDOisIndexName, 0.001m);
+            }
+        }
+
+        [TestMethod]
         public void BillFraRateCurveTestsCreateOnly()
         {
             var baseDate = new DateTime(2008, 3, 3);
@@ -12172,6 +12192,29 @@ namespace Orion.CurveEngine.Tests
             GetCurveValues(baseDate, ydc);
         }
 
+        public void BuildOisCurve(DateTime baseDate, string[] insts, string algorithm, string curveName, decimal step)
+        {
+            decimal[] vals = AdjustValues(.01m, insts, step);
+            var sw = new Stopwatch();
+            sw.Start();
+            var curveProperties = new NamedValueSet();
+            curveProperties.Set(CurveProp.PricingStructureType, "RateCurve");
+            curveProperties.Set("BuildDateTime", baseDate);
+            curveProperties.Set(CurveProp.BaseDate, baseDate);
+            curveProperties.Set(CurveProp.Market, "LIVE");
+            curveProperties.Set("Identifier", "RateCurve." + curveName + "." + baseDate);
+            curveProperties.Set(CurveProp.Currency1, "AUD");
+            curveProperties.Set(CurveProp.IndexName, curveName);
+            curveProperties.Set(CurveProp.IndexTenor, "3M");
+            curveProperties.Set("CurveName", curveName);
+            curveProperties.Set(CurveProp.Algorithm, algorithm);
+            var curve = CurveEngine.CreateCurve(curveProperties, insts, vals, insts.Select(instrument => instrument.IndexOf("-IRFuture-", 0, StringComparison.Ordinal) > 0 ? 0.2m : 0.0m).ToArray(), null, null);
+            var market = XmlSerializerHelper.SerializeToString(curve.GetMarket());
+            Debug.Print("The Market: {0}", market);
+            sw.Stop();
+            Debug.Print("RateCurve creation time: '{0}' msec.", sw.ElapsedMilliseconds);
+        }
+
         public void BuildRateCurveCreateOnly(DateTime baseDate, string[] insts, string algorithm, string curveName, decimal step)
         {
             decimal[] vals = AdjustValues(baseRate, insts, step);
@@ -12522,6 +12565,7 @@ namespace Orion.CurveEngine.Tests
         #region Data
 
         private const string _AUDliborIndexName = "AUD-LIBOR-BBA-3M";
+        private const string _AUDOisIndexName = "AUD-AONIA-OIS-COMPOUND";
         private const string _AUDliborIndexName2 = "AUD-LIBOR-BBA-6M";
         private const decimal _perturb = 0.001m;
         private readonly string[] AUDInstruments = { "AUD-Deposit-1D", 

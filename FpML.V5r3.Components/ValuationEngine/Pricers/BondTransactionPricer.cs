@@ -32,6 +32,7 @@ using Orion.Util.Logging;
 using FpML.V5r3.Reporting;
 using Orion.Analytics.Interpolations.Points;
 using Orion.CurveEngine.Assets;
+using Orion.CurveEngine.Factory;
 using Orion.ModelFramework;
 using Orion.ModelFramework.Instruments;
 using Orion.ModelFramework.Instruments.InterestRates;
@@ -67,9 +68,24 @@ namespace Orion.ValuationEngine.Pricers
         public bool BasePartyBuyer { get; set; }
 
         /// <summary>
+        /// The bond issuer code
+        /// </summary>
+        public string BondIssuer { get; set; }
+
+        /// <summary>
         /// The bond valuation curve.
         /// </summary>
         public string BondCurveName { get; set; }
+
+        /// <summary>
+        /// The payment currency.
+        /// </summary>
+        public Currency PaymentCurrency { get; set; }
+
+        /// <summary>
+        /// The coupon currency.
+        /// </summary>
+        public Currency CouponCurrency { get; set; }
 
         /// <summary>
         /// The base date from the trade pricer.
@@ -271,6 +287,9 @@ namespace Orion.ValuationEngine.Pricers
             }
             BondPrice.cleanOfAccruedInterest = bondFpML.price.cleanOfAccruedInterest;
             BondPrice.cleanPrice = bondFpML.price.cleanPrice;
+            //Set the currencies
+            CouponCurrency = bondFpML.notionalAmount.currency;
+            PaymentCurrency = bondFpML.notionalAmount.currency;//This could be another currency!
             //Set the notional information
             NotionalAmount = MoneyHelper.GetAmount(bondFpML.notionalAmount.amount, bondFpML.notionalAmount.currency.Value);
             //Determines the quotation and units
@@ -284,8 +303,6 @@ namespace Orion.ValuationEngine.Pricers
             //Get the instrument configuration information.
             var assetIdentifier = bondFpML.bond.currency.Value + "-Bond-" + BondType;
             BondNodeStruct bondTypeInfo = null;
-            //Set the curve to use for valuations.
-            BondCurveName = CurveNameHelpers.GetBondCurveName(Bond.currency.Value, Bond.id);
             //TODO Set the swap curves for asset swap valuation.
             //
             //Gets the template bond type
@@ -307,6 +324,11 @@ namespace Orion.ValuationEngine.Pricers
                 //Pre-processes the data for the priceable asset.
                 var bond = XmlSerializerHelper.Clone(bondFpML.bond);
                 Bond = bond;
+                bondTypeInfo.Bond = Bond;
+                //Set the curves to use for valuations.
+                BondCurveName = CurveNameHelpers.GetBondCurveName(Bond.currency.Value, Bond.id);
+                //THe discount curve is only for credit calculations.
+                DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Bond.currency.Value, true);
                 if (bond.maturitySpecified)
                 {
                     MaturityDate = bond.maturity;
@@ -320,7 +342,6 @@ namespace Orion.ValuationEngine.Pricers
                     var coupon = bond.couponRate;
                     Bond.couponRate = coupon;
                 }
-
                 bondTypeInfo.Bond.faceAmount = NotionalAmount.amount;
                 bondTypeInfo.Bond.faceAmountSpecified = true;
                 Bond.faceAmount = NotionalAmount.amount;
@@ -341,19 +362,25 @@ namespace Orion.ValuationEngine.Pricers
             }
             //Set the underlying bond
             UnderlyingBond = new PriceableSimpleBond(tradeDate, bondTypeInfo, SettlementCalendar, PaymentCalendar, Quote, QuoteType);
+            BondIssuer = UnderlyingBond.Issuer;
+            if (BondPrice.dirtyPriceSpecified)
+            {
+                UnderlyingBond.PurchasePrice = BondPrice.dirtyPrice / 100; //PriceQuoteUnits
+            }
             //Set the coupons
             var bondId = Bond.id;//Could use one of the instrumentIds
             //bondStream is an interest Rate Stream but needs to be converted to a bond stream.
+            //It automatically contains the coupon currency.
             Coupons = new PriceableBondCouponRateStream(logger, cache, nameSpace, bondId, tradeDate,
                 bondFpML.notionalAmount.amount, CouponStreamType.GenericFixedRate, Bond,
                 BusinessDayAdjustments, ForecastRateInterpolation, null, PaymentCalendar);
             //Add payments like the settlement price
             if (!BondPrice.dirtyPriceSpecified) return;
             var amount = BondPrice.dirtyPrice * NotionalAmount.amount / 100;
-            var settlementPayment = PaymentHelper.Create("BondSettlementAmount", BuyerReference, SellerReference, amount, SettlementDate);
+            var settlementPayment = PaymentHelper.Create(BuyerReference, SellerReference, PaymentCurrency.Value, amount, SettlementDate);
             AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, SettlementCalendar);
             //
-            var finalPayment = PaymentHelper.Create("FinalRedemption", BuyerReference, SellerReference, NotionalAmount.amount, RiskMaturityDate);
+            var finalPayment = PaymentHelper.Create(BondIssuer, BuyerReference, CouponCurrency.Value, NotionalAmount.amount, RiskMaturityDate);
             FinalRedemption =
                 PriceableInstrumentsFactory.CreatePriceablePayment(basePartyReference, finalPayment, PaymentCalendar);
             AdditionalPayments.Add(FinalRedemption);
@@ -450,7 +477,13 @@ namespace Orion.ValuationEngine.Pricers
             }
             var childControllerValuations = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
             childControllerValuations.id = Id + ".BondCouponRateStreams";
-            //4. Now do the bond calculations.
+            //4. Calc the asset as a little extra
+            var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
+            var metricsAsString = metrics.Select(metric => metric.ToString()).ToList();
+            var controllerData = PriceableAssetFactory.CreateAssetControllerData(metricsAsString.ToArray(), modelData.ValuationDate, modelData.MarketEnvironment);
+            UnderlyingBond.Multiplier = Multiplier;
+            UnderlyingBond.Calculate(controllerData);
+            //5. Now do the bond calculations.
             if (bondControllerMetrics.Count > 0)
             {
                 CalculationResults = new BondTransactionResults();
@@ -470,10 +503,9 @@ namespace Orion.ValuationEngine.Pricers
                         Quote = BasicQuotationHelper.Create(mq, AssetMeasureEnum.MarketQuote.ToString(),
                                                             PriceQuoteUnitsEnum.DecimalRate.ToString());
                     }
-                    rateDiscountCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(BondCurveName);//SwapCurve
+                    rateDiscountCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(DiscountCurveName);
                 }
                 //Generate the vectors
-                //var accrualFactorArray = GetCouponAccrualFactors();
                 const bool isBuyerInd = true;
                 var analyticModelParameters = new BondTransactionParameters
                 {
@@ -495,7 +527,7 @@ namespace Orion.ValuationEngine.Pricers
                     CreateWeightings(CDefaultWeightingValue, analyticModelParameters.PaymentDiscountFactors.Length);
                 //6. Set the analytic input parameters and Calculate the respective metrics 
                 AnalyticModelParameters = analyticModelParameters;
-                CalculationResults = AnalyticsModel.Calculate<IBondTransactionResults, BondTransactionResults>(analyticModelParameters, bondControllerMetrics.ToArray());
+                CalculationResults = AnalyticsModel.Calculate<IBondTransactionResults, BondTransactionResults>(analyticModelParameters, metrics.ToArray());
                 // Now merge back into the overall stream valuation
                 var bondControllerValuation = GetValue(CalculationResults, modelData.ValuationDate);
                 bondValuation = AssetValuationHelper.UpdateValuation(bondControllerValuation,
@@ -575,7 +607,19 @@ namespace Orion.ValuationEngine.Pricers
         ///<returns></returns>
         public override IList<InstrumentControllerBase> GetChildren()
         {
-            return GetAdditionalPayments();
+            var result = new List<InstrumentControllerBase>();
+            result.AddRange(GetAdditionalPayments());
+            result.AddRange(GetCoupons());
+            return result;
+        }
+
+        ///<summary>
+        /// Gets all the child controllers.
+        ///</summary>
+        ///<returns></returns>
+        private IList<InstrumentControllerBase> GetCoupons()
+        {
+            return Coupons?.GetChildren();
         }
 
         #endregion

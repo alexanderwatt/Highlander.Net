@@ -72,7 +72,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// Is the payer the base party?
         /// </summary>
-        public Boolean PayerIsBaseParty { get; set; }
+        public bool PayerIsBaseParty { get; set; }
 
         /// <summary>
         /// Gets the calculation results.
@@ -98,7 +98,7 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// The payment discount factor.
         /// </summary>
-        public Decimal PaymentDiscountFactor { get; set; }
+        public decimal PaymentDiscountFactor { get; set; }
 
         /// <summary>
         /// Gets boolean flag indicating if the cash flow is realised.
@@ -134,13 +134,13 @@ namespace Orion.ValuationEngine.Instruments
         /// Gets the year fraction to coupon end.
         /// </summary>
         /// <value>The year fraction to coupon end.</value>
-        public Decimal YearFractionToCashFlowPayment { get; set; }
+        public decimal YearFractionToCashFlowPayment { get; set; }
 
         /// <summary>
         /// Gets the name of the discount curve.
         /// </summary>
         /// <value>The name of the discount curve.</value>
-        public string DiscountCurveName { get; protected set; }
+        public string DiscountCurveName { get; set; }
 
         #endregion
 

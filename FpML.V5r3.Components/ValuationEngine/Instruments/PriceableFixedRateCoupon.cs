@@ -110,15 +110,15 @@ namespace Orion.ValuationEngine.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustCalculationDatesIndicator
+            , bool adjustCalculationDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
             , DayCountFraction dayCountFraction
-            , Decimal fixedRate
+            , decimal fixedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
             : base(cashflowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate, adjustCalculationDatesIndicator,
@@ -149,7 +149,7 @@ namespace Orion.ValuationEngine.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustCalculationDatesIndicator
+            , bool adjustCalculationDatesIndicator
             , BusinessDayAdjustments accrualDayAdjustments
             , AdjustableOrAdjustedDate paymentDate
             , Calculation calculation

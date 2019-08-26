@@ -49,8 +49,18 @@ namespace Orion.ValuationEngine.Instruments
         protected const string CModelIdentifier = "BondCouponRateStream";
         //protected const string CDefaultBucketingInterval = "3M";
 
-        public string DiscountCurveName { get; set; }
+        /// <summary>
+        /// The bond identifier for discounting.
+        /// </summary>
+        public string BondId { get; set; }
+        /// <summary>
+        /// THe bond curve to use for valuation.
+        /// </summary>
+        public string BondCurveName { get; set; }
 
+        /// <summary>
+        /// The forecast curve for floating rate note valuation.
+        /// </summary>
         public string ForecastCurveName { get; set; }
 
         // Requirements for pricing
@@ -220,6 +230,7 @@ namespace Orion.ValuationEngine.Instruments
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar)
         {
+            BondId = bondId;
             Multiplier = 1.0m;
             PaymentCurrencies = new List<string>();
             AnalyticsModel = new BondStreamAnalytic();
@@ -238,7 +249,7 @@ namespace Orion.ValuationEngine.Instruments
                 paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, paymentConvention.businessCenters, nameSpace);
             }
             //Set the default discount curve name.
-            DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(bond.currency.Value, true);
+            BondCurveName = CurveNameHelpers.GetBondCurveName(Currency, bondId);
             //Set the forecast curve name.//TODO extend this to the other types.
             //if (BondCouponStreamType != CouponStreamType.GenericFixedRate)
             //{
@@ -257,6 +268,7 @@ namespace Orion.ValuationEngine.Instruments
             //Build the coupons and principal exchanges.
             Coupons = PriceableInstrumentsFactory.CreatePriceableBondCoupons(tradeDate, bond, notionalAmount,  BondCouponStreamType,
                 paymentConvention, ForecastRateInterpolation, fixingCalendar, paymentCalendar);//TODO add the stub calculation.
+            UpdateCouponDiscountCurveNames();
             UpdateCouponIds();
             //RiskMaturityDate = ;
             logger.LogInfo("Bond Coupon Stream built");
@@ -430,7 +442,7 @@ namespace Orion.ValuationEngine.Instruments
             var childControllers = new List<InstrumentControllerBase>(Coupons.ToArray());
             //Now the stream analytics can be completed.
             var childValuations = EvaluateChildMetrics(childControllers, modelData, Metrics);
-            var couponValuation = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
+            var couponValuation = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
             var childControllerValuations = new List<AssetValuation> {couponValuation};
             // Child metrics have now been calculated so we can now evaluate the stream model metrics
             if (streamControllerMetrics.Count > 0)
@@ -459,7 +471,7 @@ namespace Orion.ValuationEngine.Instruments
                 // Now merge back into the overall stream valuation
                 var streamControllerValuation = GetValue(CalculationResults, modelData.ValuationDate);
                 streamValuation = AssetValuationHelper.UpdateValuation(streamControllerValuation,
-                                                                       childControllerValuations, ConvertMetrics(streamControllerMetrics), new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
+                                                                       childControllerValuations, ConvertMetrics(streamControllerMetrics), new List<string>(Metrics), PaymentCurrencies);
                 AnalyticModelParameters = analyticModelParameters;
             }
             else
@@ -506,7 +518,7 @@ namespace Orion.ValuationEngine.Instruments
             {
                 coupon.UpdateDiscountCurveName(newCurveName);
             }
-            DiscountCurveName = newCurveName;
+            BondCurveName = newCurveName;
         }
 
         #endregion
@@ -561,6 +573,13 @@ namespace Orion.ValuationEngine.Instruments
 
         #region Static Helpers
 
+        protected void UpdateCouponDiscountCurveNames()
+        {
+            foreach (var coupon in Coupons)
+            {
+                coupon.DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Currency, true);
+            }
+        }
         protected void  UpdateCouponIds()
         {
             var index = 1;

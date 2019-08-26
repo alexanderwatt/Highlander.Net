@@ -133,15 +133,15 @@ namespace Orion.ValuationEngine.Pricers
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
-        /// <param name="nameSapce"></param>
+        /// <param name="nameSpace"></param>
         /// <param name="legCalendars"></param>
         /// <param name="swapFpML"></param>
         /// <param name="basePartyReference"></param>
         /// <param name="forecastRateInterpolation"></param>
-        public InterestRateSwapPricer(ILogger logger, ICoreCache cache, String nameSapce,
+        public InterestRateSwapPricer(ILogger logger, ICoreCache cache, String nameSpace,
             List<Pair<IBusinessCalendar, IBusinessCalendar>> legCalendars,
             Swap swapFpML, string basePartyReference, Boolean forecastRateInterpolation)
-            : base(logger, cache, nameSapce, legCalendars, 
+            : base(logger, cache, nameSpace, legCalendars, 
             swapFpML, basePartyReference, ProductTypeSimpleEnum.InterestRateSwap, forecastRateInterpolation)
         {
             AnalyticsModel = new SimpleIRSwapInstrumentAnalytic();
@@ -361,7 +361,7 @@ namespace Orion.ValuationEngine.Pricers
         #region Implementation of IObjectiveFunction
 
         /// <summary>
-        /// Definiton of the objective function.
+        /// Definition of the objective function.
         /// </summary>
         /// <param name="fixedRate">Argument to the objective function.</param>
         /// <returns>The value of the objective function, <i>f(x)</i>.</returns>

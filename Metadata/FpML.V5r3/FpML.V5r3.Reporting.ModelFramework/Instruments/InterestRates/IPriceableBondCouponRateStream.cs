@@ -38,6 +38,11 @@ namespace Orion.ModelFramework.Instruments.InterestRates
         string Buyer { get; }
 
         /// <summary>
+        /// The bond identifier for discounting.
+        /// </summary>
+        string BondId { get; set; }
+
+        /// <summary>
         /// Gets the coupon steam type.
         /// </summary>
         /// <value>The coupon stream type.</value>

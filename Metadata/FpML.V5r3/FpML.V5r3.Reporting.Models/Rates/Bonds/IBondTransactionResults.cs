@@ -1,25 +1,5 @@
-﻿using System;
-
-namespace Orion.Models.Rates.Bonds
+﻿namespace Orion.Models.Rates.Bonds
 {
-    public enum BondTransactionMetrics
-    {
-        MarketQuote
-        , BreakEvenRate
-        , BreakEvenSpread 
-        , ImpliedQuote
-        , DirtyPrice 
-        , CleanPrice 
-        , NPV 
-        , AccruedInterest  
-        , Convexity 
-        , DeltaR 
-        , DV01 
-        , AssetSwapSpread 
-        , ZSpread 
-        , YieldToMaturity
-    }
-
     public interface IBondTransactionResults
     {
         /// <summary>
@@ -93,5 +73,11 @@ namespace Orion.Models.Rates.Bonds
         /// </summary>
         /// <value>The market quote.</value>
         decimal MarketQuote { get; }
+
+        /// <summary>
+        /// Gets the PandL.
+        /// </summary>
+        /// <value>The market quote.</value>
+        decimal PandL { get; }
     }
 }

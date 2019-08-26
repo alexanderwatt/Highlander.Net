@@ -68,6 +68,11 @@ namespace Orion.CurveEngine.Assets
         ///</summary>
         public decimal QuoteValue { get; set; }
 
+        /// <summary>
+        /// The issuer name.
+        /// </summary>
+        public string Issuer { get; set; }
+
         ///<summary>
         ///</summary>
         public DateTime SettlementDate { get; set; }

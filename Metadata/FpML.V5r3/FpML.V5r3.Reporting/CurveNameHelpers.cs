@@ -15,7 +15,6 @@
 
 #region Usings
 
-using System;
 using Orion.Constants;
 
 #endregion
@@ -83,7 +82,7 @@ namespace FpML.V5r3.Reporting
         /// Gets all the Discount curve name.
         ///</summary>
         ///<returns></returns>
-        public static string GetDiscountCurveName(Currency currency, Boolean isSimple)
+        public static string GetDiscountCurveName(Currency currency, bool isSimple)
         {
             var result = GetDiscountCurveName(currency.Value, isSimple);
             return result;
@@ -93,7 +92,7 @@ namespace FpML.V5r3.Reporting
         /// Gets all the Discount curve name.
         ///</summary>
         ///<returns></returns>
-        public static string GetEquityCurveName(String currency, String ticker)
+        public static string GetEquityCurveName(string currency, string ticker)
         {
             var result = PricingStructureTypeEnum.EquityCurve + "." + currency.ToUpper() + "-" + ticker.ToUpper();
             return result;
@@ -105,7 +104,7 @@ namespace FpML.V5r3.Reporting
         /// <param name="currency">The currency of the bond.</param>
         /// <param name="bondId">THe bond Id.</param>
         /// <returns></returns>
-        public static string GetBondCurveName(String currency, String bondId)
+        public static string GetBondCurveName(string currency, string bondId)
         {
             var result = PricingStructureTypeEnum.BondCurve + "." + GetBondCurveNameSimple(currency, bondId);
             return result;
@@ -117,7 +116,7 @@ namespace FpML.V5r3.Reporting
         /// <param name="currency">The currency of the bond.</param>
         /// <param name="bondId">THe bond Id.</param>
         /// <returns></returns>
-        public static string GetBondCurveNameSimple(String currency, String bondId)
+        public static string GetBondCurveNameSimple(string currency, string bondId)
         {
             var parts = bondId.Split('.');
             if (parts.Length > 4)
@@ -135,7 +134,7 @@ namespace FpML.V5r3.Reporting
         /// <param name="exchange">THe exchange code e.g. ASX</param>
         /// <param name="exchangeFutureCode">The exchange traded future Id e.g. IR.</param>
         /// <returns></returns>
-        public static string GetExchangeTradedCurveName(String currency, String exchange, String exchangeFutureCode)
+        public static string GetExchangeTradedCurveName(string currency, string exchange, string exchangeFutureCode)
         {
             var result = PricingStructureTypeEnum.ExchangeTradedCurve + "." + GetExchangeTradedCurveNameSimple(currency, exchange, exchangeFutureCode);
             return result;
@@ -148,7 +147,7 @@ namespace FpML.V5r3.Reporting
         /// <param name="exchange">THe exchange code e.g. ASX</param>
         /// <param name="exchangeFutureCode">The exchange traded future Id e.g. IR.</param>
         /// <returns></returns>
-        public static string GetExchangeTradedCurveNameSimple(String currency, String exchange, String exchangeFutureCode)
+        public static string GetExchangeTradedCurveNameSimple(string currency, string exchange, string exchangeFutureCode)
         {
             var result = currency.ToUpper() + "-" + exchange + "-" + exchangeFutureCode;
             return result;
@@ -170,7 +169,7 @@ namespace FpML.V5r3.Reporting
         /// Gets all the Discount curve name.
         ///</summary>
         ///<returns></returns>
-        public static string GetDiscountCurveName(string currency, Boolean isSimple)
+        public static string GetDiscountCurveName(string currency, bool isSimple)
         {
             var result = PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + "OIS-SECURED";
             if (isSimple)

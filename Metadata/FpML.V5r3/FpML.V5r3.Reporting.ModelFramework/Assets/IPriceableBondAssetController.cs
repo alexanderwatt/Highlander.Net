@@ -23,6 +23,11 @@ namespace Orion.ModelFramework.Assets
     /// </summary>
     public interface IPriceableBondAssetController : IPriceableAssetController
     {
+        /// <summary>
+        /// The issuer name.
+        /// </summary>
+        string Issuer { get; set; }
+
         ///<summary>
         ///</summary>
         Bond GetBond();
@@ -33,7 +38,7 @@ namespace Orion.ModelFramework.Assets
 
         ///<summary>
         ///</summary>
-        Boolean IsYTMQuote { get; set; }
+        bool IsYTMQuote { get; set; }
 
         ///<summary>
         ///</summary>
@@ -109,7 +114,7 @@ namespace Orion.ModelFramework.Assets
 
         ///<summary>
         ///</summary>
-        Decimal Notional { get; set; }
+        decimal Notional { get; set; }
 
         ///<summary>
         ///</summary>
