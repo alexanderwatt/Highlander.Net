@@ -32,6 +32,11 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
     public class TermCurveInterpolator : InterpolatedCurve
     {
         /// <summary>
+        /// The term curve.
+        /// </summary>
+        public TermCurve TermCurve { get; protected set; }
+
+        /// <summary>
         /// The main ctor.
         /// </summary>
         /// <param name="termCurve"></param>
@@ -40,6 +45,7 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
         public TermCurveInterpolator(TermCurve termCurve, DateTime baseDate, IDayCounter dayCounter)
             :base(Converter(termCurve, baseDate, dayCounter), InterpolationHelper(termCurve), IsExtrapolationPermitted(termCurve))
         {
+            TermCurve = termCurve;
         }
 
         private enum InterpolationType
@@ -70,7 +76,6 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
             InterpolationType interpolation = termCurve.interpolationMethod == null 
                 ? InterpolationType.LogLinearInterpolation
                 : EnumHelper.Parse<InterpolationType>(termCurve.interpolationMethod.Value, true);
-
             switch (interpolation)
             {
                 case InterpolationType.ClampedCubicSplineInterpolation:

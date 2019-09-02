@@ -33,16 +33,6 @@ namespace Orion.ValuationEngine.Instruments
     public class PriceableFxOptionPremium : PriceableCashflow, IPriceableInstrumentController<FxOptionPremium>
     {
         /// <summary>
-        /// PayerPartyReference
-        /// </summary>
-        public PartyReference PayerPartyReference { get; set; }
-        
-        /// <summary>
-        /// ReceiverPartyReference
-        /// </summary>
-        public PartyReference ReceiverPartyReference { get; set;}
-        
-        /// <summary>
         /// 
         /// </summary>
         public IdentifiedDate SettlementDate => IdentifiedDateHelper.Create("adjustedDate", PaymentDate);
@@ -123,7 +113,7 @@ namespace Orion.ValuationEngine.Instruments
             , string payerPartyReference
             , string receiverPartyReference
             , bool payerIsBase
-            , Decimal amount
+            , decimal amount
             , string currency
             , DateTime settlementDate
             , PremiumQuote premiumQuote

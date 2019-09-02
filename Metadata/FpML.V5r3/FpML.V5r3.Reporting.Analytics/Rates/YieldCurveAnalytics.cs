@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using FpML.V5r3.Reporting;
 using FpML.V5r3.Codes;
 using FpML.V5r3.Reporting.Helpers;
+using Orion.Analytics.Interpolations.Points;
+using Orion.Analytics.Interpolations.Spaces;
 using Orion.ModelFramework;
 using XsdClassesFieldResolver = FpML.V5r3.Reporting.XsdClassesFieldResolver;
 
@@ -29,7 +31,7 @@ namespace Orion.Analytics.Rates
 {
     ///<summary>
     ///</summary>
-    public static class YieldCurveAnalytics //TODO convert this to an analytical model.
+    public static class YieldCurveAnalytics
     {
         //  need a based date? 
         //
@@ -66,6 +68,47 @@ namespace Orion.Analytics.Rates
             if (result.point[0].mid == 0)
             {
                 result.point[0].mid = result.point[1].mid;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="discountCurve"></param>
+        /// <param name="tenor"></param>
+        /// <param name="baseDate"></param>
+        /// <param name="interpolatedCurve"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <param name="dayCounter"></param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception"></exception>
+        public static TermCurve ToForwardCurve(TermCurve discountCurve, Period tenor, DateTime baseDate,
+            InterpolatedCurve interpolatedCurve, IBusinessCalendar paymentCalendar, IDayCounter dayCounter)
+        {
+            TermCurve result = TermCurve.Create(new List<TermPoint>());
+            var length = discountCurve.point.Length;
+            var offset = new Offset
+            {
+                dayType = DayTypeEnum.Calendar,
+                dayTypeSpecified = true,
+                period = tenor.period,
+                periodMultiplier = tenor.periodMultiplier,
+                periodSpecified = true
+            };
+            if (paymentCalendar == null) return result;
+            for (int i = 0; i < length - 1; i++) //This will only go to the penultimate point. Extrapolation required for more.
+            {
+                var pointStart = discountCurve.point[i];
+                DateTime startDate = XsdClassesFieldResolver.TimeDimensionGetDate(pointStart.term);
+                var endDate = paymentCalendar.Advance(startDate, offset, BusinessDayConventionEnum.FOLLOWING);
+                var endPoint = new DateTimePoint1D(baseDate, endDate);
+                var endDF = interpolatedCurve.Value(endPoint);
+                double time = dayCounter.YearFraction(startDate, endDate);
+                var forwardRateDouble =
+                    RateAnalytics.DiscountFactorsToForwardRate((double) pointStart.mid, endDF, time);
+                TermPoint forwardPoint = TermPointFactory.Create(Convert.ToDecimal(forwardRateDouble), startDate);
+                forwardPoint.id = tenor.id;
+                result.Add(forwardPoint);
             }
             return result;
         }

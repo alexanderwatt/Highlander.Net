@@ -45,7 +45,7 @@ namespace Orion.ValuationEngine.Instruments
     {
         #region Member Fields
 
-        private const string Cpaymenttypestring = "Certain";
+        private const string CPaymentTypeString = "Certain";
 
         #endregion Member Fields
 
@@ -60,7 +60,7 @@ namespace Orion.ValuationEngine.Instruments
 
         public bool IsDiscounted => DiscountType != DiscountType.None;
 
-        public Boolean AdjustCalculationDatesIndicator { get; protected set; }
+        public bool AdjustCalculationDatesIndicator { get; protected set; }
 
         // payment
         //public PaymentCalculationPeriod PaymentCalculationPeriod {get; set;}
@@ -79,13 +79,13 @@ namespace Orion.ValuationEngine.Instruments
         /// Gets the margin.
         /// </summary>
         /// <value>The margin.</value>
-        public Decimal Margin { get; set; }
+        public decimal Margin { get; set; }
 
         //the rate.
-        public Decimal? Rate { get; set; }
+        public decimal? Rate { get; set; }
 
         //the rate.
-        public Decimal? DiscountRate { get; set; }
+        public decimal? DiscountRate { get; set; }
 
         //the day count fraction.
         public DayCountFraction DayCountFraction { get; set; }
@@ -100,7 +100,7 @@ namespace Orion.ValuationEngine.Instruments
         /// Gets the notional.
         /// </summary>
         /// <value>The notional.</value>
-        public Decimal Notional
+        public decimal Notional
         {
             get => NotionalAmount.amount;
             set => NotionalAmount.amount = value;
@@ -147,14 +147,7 @@ namespace Orion.ValuationEngine.Instruments
 
         ///<summary>
         ///</summary>
-        public decimal AccruedInterest
-        {
-            get
-            {
-                if (Rate != null) return GetPVAmount((decimal)Rate);
-                return 0m;
-            }
-        }
+        public decimal AccruedInterest => Rate != null ? GetPVAmount((decimal)Rate) : 0m;
 
         ///<summary>
         ///</summary>
@@ -285,7 +278,7 @@ namespace Orion.ValuationEngine.Instruments
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
                 , paymentDate
-                , PaymentTypeHelper.Create(Cpaymenttypestring)
+                , PaymentTypeHelper.Create(CPaymentTypeString)
                 , CashflowTypeHelper.Create(CashflowTypeEnum.Coupon.ToString())
                 , false
                 , paymentCalendar)
@@ -358,7 +351,7 @@ namespace Orion.ValuationEngine.Instruments
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
                 , DateTypesHelper.ToAdjustableOrAdjustedDate(adjustedPaymentDate)
-                , PaymentTypeHelper.Create(Cpaymenttypestring)
+                , PaymentTypeHelper.Create(CPaymentTypeString)
                 , CashflowTypeHelper.Create(CashflowTypeEnum.Coupon.ToString())
                 , false
                 , paymentCalendar)
@@ -416,7 +409,7 @@ namespace Orion.ValuationEngine.Instruments
                 , payerIsBase
                 , MoneyHelper.GetAmount(0.0, notionalAmount.currency.Value)
                 , unadjustedPaymentDate
-                , PaymentTypeHelper.Create(Cpaymenttypestring)
+                , PaymentTypeHelper.Create(CPaymentTypeString)
                 , CashflowTypeHelper.Create(CashflowTypeEnum.Coupon.ToString())
                 , false
                 , paymentCalendar)

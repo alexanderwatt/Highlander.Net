@@ -58,7 +58,9 @@ namespace Orion.CalendarEngine.Dates
         /// <returns></returns>
         public override DateTime GetLastTradingDay(int month, int year)
         {
-            DateTime significantDate = RuleHelper.LastWeekdayDayInMonth(1, month, year);
+            //Rather than the last weekday, this use the last day for IB contracts
+            //since the RBA dates are very close to the beginning of the month.
+            DateTime significantDate = RuleHelper.LastDayInMonth(month, year);//LastWeekdayDayInMonth
             return significantDate;
         }
 
@@ -110,7 +112,7 @@ namespace Orion.CalendarEngine.Dates
                     y += 1;
                 }
             }
-            var result = GetLastTradingDay(new DateTime(y, m, 15));
+            var result = GetLastTradingDay(m, y);
             return result;
         }
 
@@ -131,12 +133,12 @@ namespace Orion.CalendarEngine.Dates
             if (CodeAndExpiryMonth.Year < referenceDate.Year % 10)
             {
                 int realYear = referenceDate.Year - referenceDate.Year % 10 + CodeAndExpiryMonth.Year + 10;
-                unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, month, realYear);
+                unadjustedExpirationDate = RuleHelper.LastDayInMonth(month, realYear);
             }
             else
             {
                 int realYear = referenceDate.Year - referenceDate.Year % 10 + CodeAndExpiryMonth.Year;
-                unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, month, realYear);
+                unadjustedExpirationDate = RuleHelper.LastDayInMonth(month, realYear);
             }
             return unadjustedExpirationDate;
         }
@@ -154,7 +156,7 @@ namespace Orion.CalendarEngine.Dates
             //  check if adjustment required
             if (referenceMonth % 3 == 0)//check if need to advance to next code
             {
-                DateTime unadjustedExpirationDate = RuleHelper.LastWeekdayDayInMonth(1, referenceMonth, referenceYear);
+                DateTime unadjustedExpirationDate = RuleHelper.LastDayInMonth(referenceMonth, referenceYear);
                 if (referenceDate >= unadjustedExpirationDate)//if option expires today - move to next code
                 {
                     if (referenceMonth == 12)
@@ -170,6 +172,35 @@ namespace Orion.CalendarEngine.Dates
                 }
             }
             return $"{absoluteMonthCode}{referenceYear % 10}";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="referenceDate"></param>
+        /// <returns>e.g "Z8"</returns>
+        public override string GetNextCode(DateTime referenceDate)
+        {
+            int referenceYear = referenceDate.Year;
+            int referenceMonth = referenceDate.Month;
+            string absoluteMonthCode = FuturesExpiryCodes[referenceMonth - 1];
+            //  check if adjustment required (if it is already e.g. 20th of the March - the March futures has already expired)
+            //
+            var unadjustedExpirationDate = RuleHelper.LastDayInMonth(referenceMonth, referenceYear);
+            if (referenceDate >= unadjustedExpirationDate)//if option expires today - move to next code
+            {
+                if (referenceMonth == 12)
+                {
+                    referenceMonth = 1;
+                    ++referenceYear;
+                }
+                else
+                {
+                    ++referenceMonth;
+                }
+                absoluteMonthCode = FuturesExpiryCodes[referenceMonth];
+            }
+            return $"{absoluteMonthCode}{referenceYear % YearsInDecade}";
         }
     }
 }

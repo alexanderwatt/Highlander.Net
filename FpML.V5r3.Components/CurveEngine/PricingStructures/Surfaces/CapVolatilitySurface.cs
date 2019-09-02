@@ -66,7 +66,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         #region Properties
 
         /// <summary>
-        /// The asset referenced by the cap volaility curve.
+        /// The asset referenced by the cap volatility curve.
         /// </summary>
         public AnyAssetReference Asset { get; set; }
 
@@ -81,7 +81,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         public IBusinessCalendar PaymentCalendar { get; set; }
 
         /// <summary>
-        /// The underlying vurve to use for interpolation.
+        /// The underlying curve to use for interpolation.
         /// </summary>
         public string UnderlyingInterpolatedCurve = "VolatilityCurve";
 
@@ -98,7 +98,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <summary>
         /// The bootstrapper name.
         /// </summary>
-        public String BootstrapperName = "CapFloorBootstrapper";
+        public string BootstrapperName = "CapFloorBootstrapper";
 
         /// <summary>
         /// 
@@ -143,7 +143,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? Strike { get; protected set; }
+        public decimal? Strike { get; protected set; }
 
         /// <summary>
         /// 
@@ -219,12 +219,12 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         public string Handle { get; set; }
 
         /// <summary>
-        /// The daycounter
+        /// The day counter
         /// </summary>
         public IDayCounter DayCounter { get; set; }
 
         /// <summary>
-        /// The underlying numeraire of the volaitility curve.
+        /// The underlying numeraire of the volatility curve.
         /// This would normally be a Xibor type instrument for a cap volatility curve.
         /// </summary>
         public Tuple<Asset, BasicAssetValuation> UnderlyingAssetDetails { get; set; }
@@ -257,7 +257,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <param name="surfaceId"></param>
         /// <param name="logger"></param>
         /// <param name="cache">The cache.</param>
-        public CapVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace, String[] expiryTenors, Double[] strikes, Double[,] volSurface, VolatilitySurfaceIdentifier surfaceId)
+        public CapVolatilitySurface(ILogger logger, ICoreCache cache, string nameSpace, string[] expiryTenors, double[] strikes, double[,] volSurface, VolatilitySurfaceIdentifier surfaceId)
         {
             PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates);
             Algorithm = surfaceId.Algorithm;
@@ -289,11 +289,11 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fpmlData">The data.</param>
         /// <param name="properties">The properties.</param>
-        protected CapVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace, Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties)
+        protected CapVolatilitySurface(ILogger logger, ICoreCache cache, string nameSpace, Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties)
         {
             var data = (VolatilityMatrix)fpmlData.Second;
-            Algorithm = "Linear";//Add as a propert in the id.
-            //Creates the property collection. This should be backward compatable with V1.
+            Algorithm = "Linear";//Add as a property in the id.
+            //Creates the property collection. This should be backward compatible with V1.
             var surfaceId = new VolatilitySurfaceIdentifier(properties);
             PricingStructureIdentifier = surfaceId;
             var holder = new PricingStructureAlgorithmsHolder(logger, cache, nameSpace, surfaceId.PricingStructureType, surfaceId.Algorithm);
@@ -319,7 +319,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
                 CompoundingFrequency = compoundingFrequency != null
                     ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
                     : GetDefaultCompounding(algorithmHolder);
-                //If there is an input propoert for extrapolation and interpolation then this overrides the algorithm configuration.
+                //If there is an input property for extrapolation and interpolation then this overrides the algorithm configuration.
                 var extrapolation = properties.GetString("ExtrapolationPermitted", null);
                 ExtrapolationPermittedInput = extrapolation != null ? bool.Parse(extrapolation) : GetDefaultExtrapolationFlag(algorithmHolder);
                 var interpolation = properties.GetString("BootstrapperInterpolation", null) ?? GetDefaultInterpolationMethod(algorithmHolder);
@@ -344,7 +344,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fpmlData">The FPML data.</param>
-        /// <param name="properties">The properties for the pricing strucuture.</param>
+        /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
         public CapVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace,
@@ -353,7 +353,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             : base(logger, cache, nameSpace, fpmlData, new VolatilitySurfaceIdentifier(properties ?? PricingStructurePropertyHelper.VolatilityCurve(fpmlData)))
         {
             PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties);
-            var curveId = GetCurveId();
+            //var curveId = GetCurveId();
             Initialize(properties, Holder);
             //Set the underlying asset information.
             if (properties != null)
@@ -375,7 +375,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             }
             // the curve is already built, so don't rebuild
             //Process the matrix
-            SetInterpolator(((VolatilityMatrix)PricingStructureValuation).dataPoints, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(((VolatilityMatrix)PricingStructureValuation).dataPoints);
             SetFpMLData(fpmlData, false);
         }
 
@@ -444,7 +444,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             return pricingStructureValuation;
         }
 
-        protected void SetInterpolator(IList<Tuple<double, double>> timesAndVolatilities, string algorithm, PricingStructureTypeEnum psType)
+        protected void SetInterpolator(IList<Tuple<double, double>> timesAndVolatilities)
         {
             // The underlying curve and associated compounding frequency (compounding frequency required when underlying curve is a ZeroCurve)
             var underlyingInterpolatedCurve = Holder?.GetValue("UnderlyingCurve");
@@ -462,7 +462,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             }
         }
 
-        protected void SetInterpolator(MultiDimensionalPricingData dataPoints, string algorithm, PricingStructureTypeEnum psType)
+        protected void SetInterpolator(MultiDimensionalPricingData dataPoints)
         {
             var interpolationMethod = InterpolationMethodInput ?? InterpolationMethod;
             var extrapolationPermitted = ExtrapolationPermittedInput ?? ExtrapolationPermitted;
@@ -546,7 +546,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         }
 
         /// <summary>
-        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measuretype to determine which one.
+        /// Updates a basic quotation value and then perturbs and rebuilds the curve. Uses the measure type to determine which one.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
@@ -746,8 +746,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
                         column = 0;
                     }
                 }
-                var expiry = points[idx].coordinate[0].expiration[0].Items[0] as Period;
-                if (expiry != null)
+                if (points[idx].coordinate[0].expiration[0].Items[0] is Period expiry)
                 {
                     //var expiry = (Period)points[idx].coordinate[0].expiration[0].Items[0];
                     //_matrixIndexHelper.Add(new ExpiryTermStrikeVolatilitySurface.ExpiryTenorStrikeKey(expiry, null, strike), idx);

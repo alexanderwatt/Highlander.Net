@@ -70,7 +70,7 @@ namespace Orion.ModelFramework.Business
         protected CalendarBase( String name, CultureInfo culture, Calendar calendar )
         {
             NameList = name;
-            _calendar = calendar;
+            Calendar = calendar;
             _culture = culture;
         }
 
@@ -82,21 +82,15 @@ namespace Orion.ModelFramework.Business
         /// A string representation of the Calendar.
         /// </summary>
         /// <returns>A String representing the object.</returns>
-        public override String ToString() 
+        public override string ToString() 
         { 
             return NameList; 
         }
 
-
         /// <summary>
         /// The underlying <see cref="System.Globalization.Calendar"/>.
         /// </summary>
-        private readonly Calendar _calendar;
-
-        /// <summary>
-        /// The underlying <see cref="System.Globalization.Calendar"/>.
-        /// </summary>
-        public Calendar Calendar => _calendar;
+        public Calendar Calendar { get; }
 
         /// <summary>
         /// The associated <see cref="System.Globalization.CultureInfo"/>.

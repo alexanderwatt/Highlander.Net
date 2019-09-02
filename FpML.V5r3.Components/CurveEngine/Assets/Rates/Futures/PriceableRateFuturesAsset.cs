@@ -11,6 +11,7 @@ using Orion.ModelFramework.MarketEnvironments;
 using DayCounterHelper=Orion.Analytics.DayCounters.DayCounterHelper;
 using Orion.CurveEngine.Helpers;
 using Orion.CalendarEngine;
+using Orion.CalendarEngine.Dates;
 using Orion.CalendarEngine.Helpers;
 using Orion.CurveEngine.Markets;
 using Orion.Models.Assets;
@@ -269,23 +270,33 @@ namespace Orion.CurveEngine.Assets
                 Code = MainCycle ? tempTradingDate.GetNthMainCycleCode(baseDate, intResult) : tempTradingDate.GetNthCode(baseDate, intResult);
             }
             BusinessDayConventionEnum convention = BusinessDayAdjustments.businessDayConvention;
-            LastTradeDate = LastTradingDayHelper.GetLastTradingDay(baseDate, exchangeCommodityName, Code);
+            var lastDayOfTheMonth = LastTradingDayHelper.GetLastTradingDay(baseDate, exchangeCommodityName, Code);
+            LastTradeDate = ((BaseCalendar)rollCalendar).Advance(lastDayOfTheMonth, FuturesLag, convention);
             DayCounter = DayCounterHelper.Parse(UnderlyingRateIndex.dayCountFraction.Value);
             Offset offset = OffsetHelper.FromInterval(UnderlyingRateIndex.term, DayTypeEnum.Calendar);
             //For backward looking contracts like the IB and Fed funds and other SFR based contracts
-            if (IsBackwardLooking)
-            {
-                //Use baseDate rather than the start of the contract date to avoid the reset issue.
-                AdjustedStartDate = BaseDate;
-                TimeToExpiry = (decimal)DayCounter.YearFraction(BaseDate, LastTradeDate);
-                RiskMaturityDate = rollCalendar.Advance(LastTradeDate, FuturesLag, convention);
-                YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
-            }
-            else
+            if (!IsBackwardLooking)
             {
                 AdjustedStartDate = ((BaseCalendar)rollCalendar).Advance(LastTradeDate, FuturesLag, convention);
                 TimeToExpiry = (decimal)DayCounter.YearFraction(BaseDate, LastTradeDate);
                 RiskMaturityDate = rollCalendar.Advance(AdjustedStartDate, offset, convention);
+                YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
+            }
+            else
+            {
+                RiskMaturityDate = lastDayOfTheMonth;//((BaseCalendar)rollCalendar).Advance(LastTradeDate, FuturesLag);
+                //The accrual start and end dates for these contracts can be non-business day.
+                var interval = int.Parse(offset.periodMultiplier);
+                offset.periodMultiplier = (-1 * interval).ToString();
+                //This way gets us back to the end of month and so hopefully no gaps are in the time intervals between contracts.
+                //AdjustedStartDate = new LastDayOfTheMonth().GetLastTradingDay()
+                AdjustedStartDate = ((BaseCalendar)rollCalendar).Advance(lastDayOfTheMonth, offset, BusinessDayConventionEnum.NONE);
+                //Use baseDate rather than the start of the contract date to avoid the reset issue.
+                if (AdjustedStartDate < BaseDate)
+                {
+                    AdjustedStartDate = BaseDate;
+                }
+                TimeToExpiry = (decimal)DayCounter.YearFraction(AdjustedStartDate, LastTradeDate);
                 YearFraction = (decimal)DayCounter.YearFraction(AdjustedStartDate, RiskMaturityDate);
             }
             CurveName = CurveNameHelpers.GetExchangeTradedCurveName(idParts[0], exchange, exchangeCommodityName);

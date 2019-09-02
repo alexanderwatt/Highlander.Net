@@ -42,7 +42,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         #region Private Fields
 
         /// <summary>
-        /// An auxilliary structure used to track indexes within the volatility surface.
+        /// An auxiliary structure used to track indexes within the volatility surface.
         /// This should make lookups faster than the default linear search.
         /// </summary>
         private readonly SortedList<ExpiryTenorStrikeKey, int> _matrixIndexHelper;
@@ -52,7 +52,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         private readonly IInterpolation _interpolation;
 
         /// <summary>
-        /// Auxilliary counts of the inputs
+        /// Auxiliary counts of the inputs
         /// </summary>
         private int _matrixRowCount;
         private int _matrixColumnCount;
@@ -103,8 +103,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
             var zeroedRawSurface = rawSurface.GetLowerBound(0) == 1 ? RedimensionRawSurface(rawSurface) : rawSurface;
             _algorithm = "Linear";
             // An ugly trick to find out if this is a cube or a surface
-            double d;
-            bool isCube = !double.TryParse(zeroedRawSurface[1, 1].ToString(), out d);
+            bool isCube = !double.TryParse(zeroedRawSurface[1, 1].ToString(), out _);
             // Extract the strikes/tenors/expiries and build the surface
             var expiry = ExtractExpiryFromRawSurface(zeroedRawSurface);
             var term = ExtractTenorFromRawSurface(zeroedRawSurface, isCube);
@@ -808,7 +807,7 @@ namespace Orion.CurveEngine.PricingStructures.Surfaces
         /// A class to model an expiry/term key pair.
         /// If a surface has only an expiry dimension then the term (tenor) will
         /// default to null.
-        /// The class implements the IComparer&lt;ExpiryTenorpairKey&gt;.Compare() method
+        /// The class implements the IComparer&lt;ExpiryTenorPairKey&gt;.Compare() method
         /// to keep track of indexes and their keys.
         /// </summary>
         private class ExpiryTenorStrikeKey : IComparer<ExpiryTenorStrikeKey>

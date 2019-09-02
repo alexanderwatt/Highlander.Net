@@ -29,6 +29,8 @@ namespace Orion.Analytics.Rates
     /// </summary>
     public static class RateAnalytics
     {
+        private const double Tolerance = 0.000001;
+
         private static double GetCompoundingPeriod(CompoundingFrequencyEnum compoundingFrequencyEnum)
         {
             double frequency;
@@ -344,6 +346,24 @@ namespace Orion.Analytics.Rates
             {
                 double power = -compoundingPeriod / yearFraction;
                 result = (Math.Pow(discountFactor, power) - 1.0) / compoundingPeriod;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Converts a discount factor to a compounding zero rate.
+        /// </summary>
+        ///<param name="startDiscountFactor"></param>
+        ///<param name="yearFraction"></param>
+        ///<param name="endDiscountFactor"></param>
+        ///<returns></returns>
+        public static double DiscountFactorsToForwardRate(double startDiscountFactor, double endDiscountFactor,
+            double yearFraction)
+        {
+            double result = 0;
+            if (Math.Abs(yearFraction) > Tolerance)
+            {
+                result = (startDiscountFactor / endDiscountFactor - 1) / yearFraction;
             }
             return result;
         }

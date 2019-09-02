@@ -19,6 +19,20 @@ namespace FpML.V5r3.Reporting.Helpers
 {
     public static class TermPointFactory
     {
+        public static TermPoint Create(string reference, decimal mid, DateTime term)
+        {
+            var termPoint = new TermPoint
+            {
+                mid = mid,
+                midSpecified = true
+            };
+            var timeDimension = new TimeDimension();
+            XsdClassesFieldResolver.TimeDimensionSetDate(timeDimension, term);
+            termPoint.term = timeDimension;
+            termPoint.id = reference;
+            return termPoint;
+        }
+
         public static TermPoint Create(decimal mid, DateTime term)
         {
             var termPoint = new TermPoint

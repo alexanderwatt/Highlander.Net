@@ -101,7 +101,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
         public XccySpreadCurve(ILogger logger, ICoreCache cache, 
-            String nameSpace, NamedValueSet properties, 
+            string nameSpace, NamedValueSet properties, 
             XccySpreadCurve baseCurve, decimal[] perturbations, 
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
             : base(logger, cache, nameSpace, new RateCurveIdentifier(properties))
@@ -252,7 +252,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 TermCurve discountCurve = ((YieldCurveValuation)basisAdjustedDiscountCurve.PricingStructureValuation).discountFactorCurve;
                 CreateYieldCurve();
                 GetYieldCurveValuation().discountFactorCurve = discountCurve;
-                SetInterpolator(discountCurve, curveId.Algorithm, PricingStructureTypeEnum.RateSpreadCurve);
+                SetInterpolator(discountCurve);
                 // Put FX curve into inputs
                 var assetQuotes = new List<BasicAssetValuation>();
                 BasicAssetValuation[] fxAssetQuotes = ((FxCurveValuation)fxCurve.GetFpMLData().Second).spotRate.assetQuote;
@@ -306,7 +306,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             {
                 CreateYieldCurve();
             }
-            var curveId = (RateCurveIdentifier)PricingStructureIdentifier;
+            //var curveId = (RateCurveIdentifier)PricingStructureIdentifier;
             // Add extra input points for BaseCurve - if they exist
             List<BasicAssetValuation> assetQuotes = ((YieldCurveValuation)PricingStructureValuation).inputs.assetQuote.ToList();
             AddBaseCurveInputs(assetQuotes);
@@ -314,7 +314,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             AddQuoteCurveInputs(assetQuotes);
             ((YieldCurveValuation)PricingStructureValuation).inputs.assetQuote = assetQuotes.ToArray();
             TermCurve discountCurve = ((YieldCurveValuation)PricingStructureValuation).discountFactorCurve;
-            SetInterpolator(discountCurve, curveId.Algorithm, PricingStructureTypeEnum.RateSpreadCurve);
+            SetInterpolator(discountCurve);
         }
 
         private void AddQuoteCurveInputs(List<BasicAssetValuation> assetQuotes)

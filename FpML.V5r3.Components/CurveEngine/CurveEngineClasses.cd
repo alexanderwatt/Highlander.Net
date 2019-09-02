@@ -24,7 +24,7 @@
   <Class Name="Orion.CurveEngine.Assets.PriceableCommodityFuturesAsset" Collapsed="true">
     <Position X="16.5" Y="23" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAMiAAAgACAAAAgAgFAACjAgqJAAAMAYEEEACEQAQA=</HashCode>
+      <HashCode>AEAMiAAAgACAAAAgAgFgACjAgqJAAAMAYEEEACEQAQA=</HashCode>
       <FileName>Assets\Commodities\Futures\PriceableCommodityFuturesAsset.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -51,13 +51,6 @@
       <FileName>Assets\Commodities\PriceableCommodityAssetController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Orion.CurveEngine.Assets.PriceableCommoditySpread" Collapsed="true">
-    <Position X="19.75" Y="25.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>QAAhAAAAAAAAAAAAAACAAABAAAAAAAABAAAEACAAAAA=</HashCode>
-      <FileName>Assets\Commodities\Spreads\PriceableCommoditySpread.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.Assets.PriceableCommoditySpreadAssetController" Collapsed="true">
     <Position X="19.75" Y="23" Width="1.5" />
@@ -177,7 +170,7 @@
   <Class Name="Orion.CurveEngine.Assets.PriceableBondAsset" Collapsed="true">
     <Position X="1.75" Y="22" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IIEAAlgAAQBwBgggAggAEAA8gDAICAAAABAUAABxgEw=</HashCode>
+      <HashCode>IIAAAlgAAQBwBgggAggAEAA8gDAICAAAABAUAABxgEw=</HashCode>
       <FileName>Assets\Rates\Bonds\PriceableBondAsset.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -254,7 +247,7 @@
   <Class Name="Orion.CurveEngine.Assets.PriceableRateFuturesAsset" Collapsed="true">
     <Position X="8.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAApiAQAgBCABAAgAgDAAShAAjBKAAIAIAAkACEBAQE=</HashCode>
+      <HashCode>QAApiAQAgBCABAAgAgDgAShAAjBKAAIAKAAkACEBARE=</HashCode>
       <FileName>Assets\Rates\Futures\PriceableRateFuturesAsset.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -283,7 +276,7 @@
   <Class Name="Orion.CurveEngine.Assets.PriceableBondAssetController" Collapsed="true">
     <Position X="1.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>KIAGAAAAgkAAQAgAAgRBAAhAC4AIlAAABQAABABAQQA=</HashCode>
+      <HashCode>KIEGAAAAgkAQRggAAgRBAAhAC5AInAAABRAABABBQQA=</HashCode>
       <FileName>Assets\Rates\PriceableBondAssetController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -393,7 +386,7 @@
   <Class Name="Orion.CurveEngine.CurveEngine" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="43.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>guRBMlQjOCIBiAxCQIO4BAnHFCX4EUgCEkEFYVTCCkI=</HashCode>
+      <HashCode>guRBMhQjOCIBiAxCQIO4BAnHFCX4EUgCEkEFYVTCCkI=</HashCode>
       <FileName>CurveEngine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -479,7 +472,7 @@
   <Class Name="Orion.CurveEngine.Factory.PricingStructureFactory" Collapsed="true">
     <Position X="48.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAACAAKBEAgAYAEAAACACAEEAEDAAgAAAAAAAAI=</HashCode>
+      <HashCode>AAAgCAACAAKBEAgAYAEAAACACAEEAEDAAgAgAAAAAAI=</HashCode>
       <FileName>Factory\PricingStructureFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -872,7 +865,7 @@
   <Class Name="Orion.CurveEngine.PricingStructures.Curves.RateCurve" Collapsed="true">
     <Position X="7.75" Y="19" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAJkKgUQYgGODQgAQECEBAcQggBCi4EAoEAiQEBCoBI=</HashCode>
+      <HashCode>EAJkKgUQagGODQgAQECEBAcQggBCi4EAoEAiQEBCoBI=</HashCode>
       <FileName>PricingStructures\Curves\RateCurve.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -972,7 +965,7 @@
   <Class Name="Orion.CurveEngine.PricingStructures.Interpolators.GapStepInterpolator" Collapsed="true">
     <Position X="18.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAgAAAQAgACIAAEAAAIIAAAABAAAIAAAAAAAIAABQ=</HashCode>
+      <HashCode>AAAAAAAAQAgAAAAAAAAAAIAAAABQAIAAAAIAAAAAABQ=</HashCode>
       <FileName>PricingStructures\Interpolators\GapStepInterpolator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -1000,14 +993,14 @@
   <Class Name="Orion.CurveEngine.PricingStructures.Interpolators.TermCurveInterpolator" Collapsed="true">
     <Position X="21" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>PricingStructures\Interpolators\TermCurveInterpolator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Orion.CurveEngine.PricingStructures.Interpolators.TurnInterpolator" Collapsed="true">
     <Position X="23.25" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAgAAEAAABCIAAAAAAIIAAAABAAAIAAAAAAAAAABA=</HashCode>
+      <HashCode>AAIAgAAEAAABCAAAAAAAIIAAAABAAAIAAAAAAAAAABA=</HashCode>
       <FileName>PricingStructures\Interpolators\TurnInterpolator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -1243,13 +1236,6 @@
       <FileName>Helpers\PricingStructureTerms.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="Orion.CurveEngine.Assets.ParVolatilityInterpolationType" Collapsed="true">
-    <Position X="43.5" Y="10.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\Rates\CapFloorLet\CapletBootstrapSettings.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="Orion.CurveEngine.Helpers.UnderlyingCurveTypes" Collapsed="true">
     <Position X="45.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>

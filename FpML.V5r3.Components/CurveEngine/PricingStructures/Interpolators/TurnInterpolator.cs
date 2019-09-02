@@ -53,11 +53,6 @@ namespace Orion.CurveEngine.PricingStructures.Interpolators
             TermCurve = InterpolateTurnPoints(termCurve, turnDates, baseDate, dayCounter);
         }
 
-        /// <summary>
-        /// The term curve.
-        /// </summary>
-        public TermCurve TermCurve { get; }
-
         private static TermCurve ConvertTermCurve(TermCurve termCurve, DateTime baseDate, DateTime[] turnDates, IDayCounter dayCounter)
         {
             var interpolationMethod = new InterpolationMethod

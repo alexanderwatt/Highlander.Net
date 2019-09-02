@@ -53,7 +53,7 @@ namespace Orion.ValuationEngine.Reports
         {
             if (pricer is BondTransactionPricer bond)
             {
-                var result = new object[bond.GetChildren().Count, 5];
+                var result = new object[bond.GetChildren().Count, 8];
                 var index = 0;
                 foreach (var cashflow in bond.GetChildren())
                 {
@@ -70,7 +70,9 @@ namespace Orion.ValuationEngine.Reports
                         result[index, 3] = flow.PaymentAmount.amount;
                     }
                     result[index, 4] = flow.ProductType.ToString();
-                    //result[index, 5] = flow.;
+                    result[index, 5] = flow.PayerIsBaseParty;
+                    result[index, 6] = flow.ReceiverPartyReference?.href;
+                    result[index, 7] = flow.PayerPartyReference?.href;
                     index++;
                 }
                 return result;

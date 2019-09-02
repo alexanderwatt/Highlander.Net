@@ -86,7 +86,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// The bootstrapper name.
         /// </summary>
-        public String BootstrapperName = "VolatilityCurveBootstrapper";
+        public string BootstrapperName = "VolatilityCurveBootstrapper";
 
         /// <summary>
         /// 
@@ -131,7 +131,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? Strike { get; protected set; }
+        public decimal? Strike { get; protected set; }
 
         /// <summary>
         /// The date array.
@@ -175,7 +175,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// </summary>
         /// <value>Array of decimals that contains the discount factor
         /// values.</value>
-        public Decimal[] VolatilityValues { get; private set; }
+        public decimal[] VolatilityValues { get; private set; }
 
         /// <summary>
         /// Accessor method for the field that indicates if the instantiated
@@ -353,12 +353,12 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             }            
             var curveId = GetCurveId();
             Initialize(properties, Holder);
-            //Set the underlying asset information.
-            if (properties != null)
-            {
-                var instrument = properties.GetString(CurveProp.Instrument, false);
-                Asset = new AnyAssetReference { href = instrument };
-            }
+            ////Set the underlying asset information.
+            //if (properties != null)
+            //{
+            //    var instrument = properties.GetString(CurveProp.Instrument, false);
+            //    Asset = new AnyAssetReference { href = instrument };
+            //}
             if (fpmlData == null) return;
             FixingCalendar = fixingCalendar;
             PaymentCalendar = rollCalendar;

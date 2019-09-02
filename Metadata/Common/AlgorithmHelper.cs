@@ -67,7 +67,7 @@ namespace Metadata.Common
                 new Property {name = "CurveInterpolation", Value = curveInterpolation},
                 new Property {name = "UnderlyingCurve", Value = underlyingCurve},
                 new Property {name = "CompoundingFrequency", Value = compoundingFrequency},
-                new Property {name = "Extrapolation", Value = extrapolation},
+                new Property {name = "ExtrapolationPermitted", Value = extrapolation},
                 new Property {name = "DayCounter", Value = dayCounter}
             };
             var algorithm = new Algorithm { Properties = properties.ToArray() };

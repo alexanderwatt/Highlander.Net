@@ -62,6 +62,14 @@ namespace Orion.CurveEngine.PricingStructures.Curves
     {
         #region Properties
 
+        ///The curve index
+        public ForecastRateIndex ForecastRateIndex { get; set; }
+
+        /// <summary>
+        /// The asset referenced by the cap volatility curve.
+        /// </summary>
+        public AnyAssetReference Asset { get; set; }
+
         /// <summary>
         /// The fixing calendar.
         /// </summary>
@@ -90,7 +98,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <summary>
         /// The bootstrapper name.
         /// </summary>
-        public String BootstrapperName = "FastBootstrapper";
+        public string BootstrapperName = "FastBootstrapper";
 
         /// <summary>
         /// 
@@ -158,7 +166,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="baseDate">The base date.</param>
         /// <param name="compounding">The compounding.</param>
         /// <returns></returns>
-        public IDictionary<int, Double> GetDaysAndZeroRates(DateTime baseDate, string compounding)
+        public IDictionary<int, double> GetDaysAndZeroRates(DateTime baseDate, string compounding)
         {
             if (string.IsNullOrEmpty(compounding))
             {
@@ -174,9 +182,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="startDate">The date the results start from.</param>
         /// <param name="compounding">The compounding.</param>
         /// <returns></returns>
-        public IDictionary<int, Double> GetDaysAndZeroRates(DateTime startDate, CompoundingFrequencyEnum compounding)
+        public IDictionary<int, double> GetDaysAndZeroRates(DateTime startDate, CompoundingFrequencyEnum compounding)
         {
-            IDictionary<int, Double> points = new Dictionary<int, Double>();
+            IDictionary<int, double> points = new Dictionary<int, Double>();
             TermPoint[] curve = GetYieldCurveValuation().discountFactorCurve.point;
             //if (UnderlyingInterpolatedCurve == "ZeroCurve" && GetYieldCurveValuation().zeroCurve != null)
             //{
@@ -304,7 +312,11 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             CompoundingFrequency = compoundingFrequency != null
                                        ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
                                        : GetDefaultCompounding(Holder);
-        }
+            var instrument = properties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
+            var businessCenters = BusinessCentersHelper.Parse(properties.GetString("PaymentCalendar", "AUSY"));
+            PaymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessCenters, nameSpace);
+         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RateCurve"/> class.
@@ -325,6 +337,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             CompoundingFrequency = compoundingFrequency != null
                 ? EnumHelper.Parse<CompoundingFrequencyEnum>(compoundingFrequency)
                 : GetDefaultCompounding(Holder);
+            //Set the underlying asset information.
+            var instrument = properties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             FixingCalendar = fixingCalendar;
             PaymentCalendar = rollCalendar;
         }
@@ -343,6 +358,11 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             : this(logger, cache, nameSpace, curveIdentifier)
         {
             FixingCalendar = fixingCalendar;
+            if (rollCalendar is null)
+            {
+                var businessCenters = BusinessCentersHelper.Parse(curveIdentifier.GetProperties().GetString("PaymentCalendar", "AUSY"));
+                rollCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessCenters, nameSpace);
+            }
             PaymentCalendar = rollCalendar;
         }
 
@@ -371,7 +391,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                                                                 termCurve.interpolationMethod, Tolerance);
             CreatePricingStructure(curveIdentifier, termCurve, instrumentData);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveIdentifier.Algorithm, curveIdentifier.PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>
@@ -391,18 +411,20 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             : this(logger, cache, nameSpace, new RateCurveIdentifier(properties), fixingCalendar, rollCalendar)
         {
             var curveId = GetRateCurveId();
+            DateTime baseDate = curveId.BaseDate;
             var termCurve = SetConfigurationData();
-            Period tenor = null;
-            if(curveId.ForecastRateIndex != null)
+            ForecastRateIndex = curveId.ForecastRateIndex;
+            Period indexTenor = null;
+            if (ForecastRateIndex?.indexTenor != null)
             {
-                tenor = curveId.ForecastRateIndex.indexTenor;
+                indexTenor = ForecastRateIndex?.indexTenor;
             }
-            PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, tenor, instrumentData, curveId.BaseDate, fixingCalendar, rollCalendar);
+            PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, instrumentData, baseDate, fixingCalendar, rollCalendar);
             PriceableSpreadAssets = PriceableAssetFactory.CreatePriceableSpreadFraAssets(logger, cache, nameSpace, curveId.BaseDate, instrumentData, fixingCalendar, rollCalendar);
             termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate, termCurve.extrapolationPermitted, termCurve.interpolationMethod, Tolerance);
             CreatePricingStructure(curveId, termCurve, instrumentData);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>
@@ -422,18 +444,26 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             : this(nameSpace, algorithm, new RateCurveIdentifier(properties), fixingCalendar, rollCalendar)
         {
             var curveId = GetRateCurveId();
+            DateTime baseDate = curveId.BaseDate;
             var termCurve = SetConfigurationData();
-            Period tenor = null;
-            if (curveId.ForecastRateIndex != null)
+            if (rollCalendar is null)
             {
-                tenor = curveId.ForecastRateIndex.indexTenor;
+                var businessCenters = BusinessCentersHelper.Parse(curveId.GetProperties().GetString("PaymentCalendar", "AUSY"));
+                rollCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessCenters, nameSpace);
             }
-            PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, tenor, instrumentData, curveId.BaseDate, fixingCalendar, rollCalendar);
+            PaymentCalendar = rollCalendar;
+            ForecastRateIndex = curveId.ForecastRateIndex;
+            Period indexTenor = null;
+            if (ForecastRateIndex?.indexTenor != null)
+            {
+                indexTenor = ForecastRateIndex?.indexTenor;
+            }
+            PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, instrumentData, baseDate, fixingCalendar, rollCalendar);
             PriceableSpreadAssets = PriceableAssetFactory.CreatePriceableSpreadFraAssets(logger, cache, nameSpace, curveId.BaseDate, instrumentData, fixingCalendar, rollCalendar);
             termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate, termCurve.extrapolationPermitted, termCurve.interpolationMethod, Tolerance);
             CreatePricingStructure(curveId, termCurve, instrumentData);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>
@@ -450,12 +480,13 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var curveId = GetRateCurveId();
             var termCurve = SetConfigurationData();
             PriceableRateAssets = priceableRateAssets;
-            //PriceableRateAssets.Sort();
+            var instrument = curveProperties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate, termCurve.extrapolationPermitted,
                                                                 termCurve.interpolationMethod, Tolerance);
             CreatePricingStructure(curveId, termCurve, PriceableRateAssets, null);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>
@@ -471,7 +502,9 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             IList<string> instrumentNames, IList<decimal> instrumentRates,
             IList<DateTime> dates, IList<decimal> discountFactors)
             : this(properties, pricingStructureAlgorithmsHolder)
-        {            
+        {
+            var instrument = properties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             var additional = new decimal[instrumentNames.Count];
             var qas = new QuotedAssetSet();
             if (instrumentNames.Count == instrumentRates.Count)
@@ -490,7 +523,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 = new Pair<PricingStructure, PricingStructureValuation>(yieldCurve, yieldCurveValuation);
             SetFpMLData(fpmlData, false);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(yieldCurveValuation.discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(yieldCurveValuation.discountFactorCurve);
         }
 
         /// <summary>
@@ -503,6 +536,8 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             Dictionary<DateTime, Pair<string, decimal>> discountFactors)
             : this(properties, pricingStructureAlgorithmsHolder)
         {
+            var instrument = properties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             var point = TermPointsFactory.Create(discountFactors);
             Initialize(point);
         }
@@ -518,6 +553,8 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             IList<DateTime> dates, IList<decimal> discountFactors)
             : this(properties, pricingStructureAlgorithmsHolder)
         {
+            var instrument = properties.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             var point = TermPointsFactory.Create(dates, discountFactors);
             Initialize(point);
         }
@@ -532,7 +569,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var fpmlData = new Pair<PricingStructure, PricingStructureValuation>(yieldCurve, yieldCurveValuation);
             SetFpMLData(fpmlData, false);
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(yieldCurveValuation.discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(yieldCurveValuation.discountFactorCurve);
         }
 
         #endregion
@@ -548,20 +585,21 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="properties">The properties for the pricing structure.</param>
         /// <param name="fixingCalendar">The fixingCalendar. If the curve is already bootstrapped, then this can be null.</param>
         /// <param name="rollCalendar">The rollCalendar. If the curve is already bootstrapped, then this can be null.</param>
-        public RateCurve(String nameSpace, PricingStructureAlgorithmsHolder pricingStructureAlgorithmsHolder, 
+        public RateCurve(string nameSpace, PricingStructureAlgorithmsHolder pricingStructureAlgorithmsHolder, 
             Pair<PricingStructure, PricingStructureValuation> fpmlData, NamedValueSet properties,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
             : base(null, null, nameSpace, fpmlData, new RateCurveIdentifier(properties ?? PricingStructurePropertyHelper.RateCurve(fpmlData)))
         {
-            PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties); 
-            var curveId = GetRateCurveId();
+            PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties);
             Initialize(properties, pricingStructureAlgorithmsHolder);
             if (fpmlData == null) return;
+            var instrument = properties?.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             FixingCalendar = fixingCalendar;
             PaymentCalendar = rollCalendar;
             // the discount curve is already built, so don't rebuild
             SetFpMLData(fpmlData, false);
-            SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve);
         }
 
         /// <summary>
@@ -582,9 +620,17 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         {
             PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties);
             var curveId = GetRateCurveId();
+            DateTime baseDate = curveId.BaseDate;
             Initialize(properties, Holder);
             if (fpmlData == null) return;
+            var instrument = properties?.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
             FixingCalendar = fixingCalendar;
+            if (rollCalendar is null)
+            {
+                var businessCenters = BusinessCentersHelper.Parse(curveId.GetProperties().GetString("PaymentCalendar", "AUSY"));
+                rollCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessCenters, nameSpace);
+            }
             PaymentCalendar = rollCalendar;
             //Override properties.
             //var optimize = PropertyHelper.ExtractOptimizeBuildFlag(properties);//TODO removed optimisation as it means that partial hedges can not be undertaken.
@@ -603,30 +649,35 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             //This ensures only building if the asset flag is true.
             bootstrap = bootstrap && buildAssets;
             bool validAssets = XsdClassesFieldResolver.QuotedAssetSetIsValid(qas);
-            var indexTenor = curveId.ForecastRateIndex?.indexTenor;
+            ForecastRateIndex = curveId.ForecastRateIndex;
+            Period indexTenor = null;
+            if (ForecastRateIndex?.indexTenor != null)
+            {
+                indexTenor = ForecastRateIndex?.indexTenor;
+            }
             //Test to see if a bootstrap is required.
             if (bootstrap || discountsAbsent)
             {
                 //There must be a valid quoted asset set in order to bootstrap.
                 if (!validAssets) return;
-                PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
+                PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, baseDate, fixingCalendar, rollCalendar);
                 PriceableRateAssets.Sort();
                 termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate,
                                                              termCurve.extrapolationPermitted,
                                                              termCurve.interpolationMethod,
                                                              Tolerance);
                 CreatePricingStructure(curveId, termCurve, qas);
-                SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(termCurve);
             }
             else
             {
                 // the discount curve is already built, so don't rebuild
                 SetFpMLData(fpmlData, false);
-                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve);
                 //Set the priceable assets.
                 if (validAssets && buildAssets)//!optimize && 
                 {
-                    PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
+                    PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, ForecastRateIndex.indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
                 }
             }
         }
@@ -648,12 +699,21 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         {
             PricingStructureData = new PricingStructureData(CurveType.Parent, AssetClass.Rates, properties); 
             var curveId = GetRateCurveId();
+            var instrument = properties?.GetString("Instrument", false);
+            Asset = new AnyAssetReference { href = instrument };
+            DateTime baseDate = curveId.BaseDate;
             Initialize(properties, Holder);
             if (fpmlData == null) return;
             FixingCalendar = fixingCalendar;
+            if (rollCalendar is null)
+            {
+                var businessCenters = BusinessCentersHelper.Parse(curveId.GetProperties().GetString("PaymentCalendar", "AUSY"));
+                rollCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, businessCenters, nameSpace);
+            }
             PaymentCalendar = rollCalendar;
             //Override properties.
-            //var optimize = PropertyHelper.ExtractOptimizeBuildFlag(properties);//TODO removed optimisation as it means that partial hedges can not be undertaken.
+            //TODO removed optimisation as it means that partial hedges can not be undertaken.
+            //var optimize = PropertyHelper.ExtractOptimizeBuildFlag(properties);
             var bootstrap = PropertyHelper.ExtractBootStrapOverrideFlag(properties);           
             var tempFpml = (YieldCurveValuation)fpmlData.Second;          
             var termCurve = SetConfigurationData();
@@ -667,26 +727,31 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 bootstrap = false;
             }
             bool validAssets = XsdClassesFieldResolver.QuotedAssetSetIsValid(qas);
-            var indexTenor = curveId.ForecastRateIndex?.indexTenor;
+            ForecastRateIndex = curveId.ForecastRateIndex;
+            Period indexTenor = null;
+            if (ForecastRateIndex?.indexTenor != null)
+            {
+                indexTenor = ForecastRateIndex?.indexTenor;
+            }
             //Test to see if a bootstrap is required.
             if (bootstrap || discountsAbsent)
             {
                 //There must be a valid quoted asset set in order to bootstrap.
                 if (!validAssets) return;
-                PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, curveId.BaseDate, fixingCalendar, rollCalendar);
+                PriceableRateAssets = PriceableAssetFactory.CreatePriceableRateAssetsWithBasisSwaps(logger, cache, nameSpace, indexTenor, qas, baseDate, fixingCalendar, rollCalendar);
                 PriceableRateAssets.Sort();
                 termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, curveId.BaseDate,
                                                              termCurve.extrapolationPermitted,
                                                              termCurve.interpolationMethod,
                                                              Tolerance);
                 CreatePricingStructure(curveId, termCurve, qas);
-                SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(termCurve);
             }
             else
             {
                 // the discount curve is already built, so don't rebuild
                 SetFpMLData(fpmlData, false);
-                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve);
                 //Set the priceable assets.
                 if (validAssets)//!optimize && 
                 {
@@ -728,7 +793,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 extrapolationPermitted =
                     ExtrapolationPermitted,
                 extrapolationPermittedSpecified = true,
-                interpolationMethod =InterpolationMethod
+                interpolationMethod = InterpolationMethod
             };
             return termCurve;
         }
@@ -751,20 +816,16 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         {
             get
             {
-                if (_dayCounter == null)
-                {
-                    _dayCounter = DayCounterHelper.Parse("ACT/365.FIXED");
-                    if (Holder != null)
-                    {
-                        string dayCountBasis = Holder.GetValue("DayCounter");
-                        _dayCounter = DayCounterHelper.Parse(dayCountBasis);
-                    }
-                }
+                if (_dayCounter != null) return _dayCounter;
+                _dayCounter = DayCounterHelper.Parse("ACT/365.FIXED");
+                if (Holder == null) return _dayCounter;
+                string dayCountBasis = Holder.GetValue("DayCounter");
+                _dayCounter = DayCounterHelper.Parse(dayCountBasis);
                 return _dayCounter;
             }
         }
 
-        protected void SetInterpolator(TermCurve discountFactorCurve, string algorithm, PricingStructureTypeEnum psType)
+        protected void SetInterpolator(TermCurve discountFactorCurve)
         {
             var curveId = (RateCurveIdentifier)PricingStructureIdentifier;
             // The underlying curve and associated compounding frequency (compounding frequency required when underlying curve is a ZeroCurve)
@@ -776,14 +837,14 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             var underlyingCurve = ParseUnderlyingCurve(UnderlyingInterpolatedCurve);
             IDayCounter interpolateDayCounter = Actual365.Instance; 
             // interpolate the DiscountFactor curve based on the respective curve interpolation 
-            if (underlyingCurve != UnderlyingCurveTypes.ZeroCurve)
+            if (underlyingCurve == UnderlyingCurveTypes.DiscountFactorCurve)
             {
                 Interpolator = new TermCurveInterpolator(discountFactorCurve, GetBaseDate(), interpolateDayCounter);
             }
             // otherwise interpolate our underlying curve will be a zero curve
-            else
+            YieldCurveValuation yieldCurveValuation = GetYieldCurveValuation();
+            if (underlyingCurve == UnderlyingCurveTypes.ZeroCurve || underlyingCurve == UnderlyingCurveTypes.ZeroSpreadCurve)
             {
-                YieldCurveValuation yieldCurveValuation = GetYieldCurveValuation();
                 if (yieldCurveValuation.zeroCurve?.rateCurve == null)
                 {
                     TermCurve curve = YieldCurveAnalytics.ToZeroCurve(discountFactorCurve, GetBaseDate(), CompoundingFrequency, DayCounter);
@@ -800,18 +861,42 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 {
                     string currency = ((RateCurveIdentifier)PricingStructureIdentifier).Currency.Value;
                     CentralBanks centralBank = CentralBanksHelper.GetCentralBank(currency);
-                    if (Holder != null)
-                    {
-                        int dateRule = Convert.ToInt32(Holder.GetValue("DateGenerationRule"));
-                        Interpolator = new GapStepInterpolator(yieldCurveValuation.zeroCurve.rateCurve, GetBaseDate(), dateRule,
-                                                               centralBank, interpolateDayCounter);
-                    }
+                    if (Holder == null) return;
+                    int dateRule = Convert.ToInt32(Holder.GetValue("DateGenerationRule"));
+                    var termCurve = yieldCurveValuation.zeroCurve.rateCurve;
+                    var lastDate = (DateTime)termCurve.point[termCurve.point.Length - 1].term.Items[0];
+                    var centralBankDays = CentralBanksHelper.GetCentralBankDays(GetBaseDate(), centralBank, dateRule, lastDate);
+                    Interpolator = new GapStepInterpolator(yieldCurveValuation.zeroCurve.rateCurve, GetBaseDate(), dateRule, centralBankDays,
+                        centralBank, interpolateDayCounter);
                 }
                 else
                 {
                     Interpolator =
                         new TermCurveInterpolator(yieldCurveValuation.zeroCurve.rateCurve, GetBaseDate(), interpolateDayCounter);
                 }
+            }
+            if (underlyingCurve == UnderlyingCurveTypes.ForwardCurve)// && Asset != null
+            {
+                //TODO Use the Asset reference to create a Xibor instrument that contains all the configuration information required and then deprecate PaymentCalendar stuff.
+                var forwardCurves = new List<ForwardRateCurve>();
+                if (yieldCurveValuation.forwardCurve== null)
+                {
+                    var interpolator = new TermCurveInterpolator(discountFactorCurve, GetBaseDate(), interpolateDayCounter);
+                    TermCurve forwardCurve = YieldCurveAnalytics.ToForwardCurve(discountFactorCurve, ForecastRateIndex.indexTenor,
+                        GetBaseDate(), interpolator, PaymentCalendar, DayCounter);//The DayCounter should be the forecast rate day counter.
+                    if (Holder != null)
+                        forwardCurve.interpolationMethod = InterpolationMethodHelper.Parse(Holder.GetValue("CurveInterpolation"));
+                    var fwdCurve = new ForwardRateCurve
+                    {
+                        rateCurve = forwardCurve,
+                        assetReference = new AssetReference()
+                    };
+                    fwdCurve.assetReference.href = ForecastRateIndex?.floatingRateIndex.Value;
+                    forwardCurves.Add(fwdCurve);
+                    yieldCurveValuation.forwardCurve = forwardCurves.ToArray();
+                }
+                Interpolator =
+                        new TermCurveInterpolator(yieldCurveValuation.forwardCurve[0].rateCurve, GetBaseDate(), interpolateDayCounter);
             }
         }
 
@@ -1126,7 +1211,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
         /// <param name="item">The item to return. Must be zero based</param>
         /// <param name="measureType">The measureType of the quotation required.</param>
         /// <returns></returns>
-        public Decimal GetAssetQuotation(int item, String measureType)
+        public decimal GetAssetQuotation(int item, String measureType)
         {
             var numQuotes = GetQuotedAssetSet().assetQuote.Length;
             var result = 0m;
@@ -1351,7 +1436,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             DateTime baseDate = GetYieldCurveValuation().baseDate.Value;
             termCurve.point = RateBootstrapper.Bootstrap(PriceableRateAssets, baseDate, termCurve.extrapolationPermitted, termCurve.interpolationMethod, Tolerance);
             SetFpMLData(new Pair<PricingStructure, PricingStructureValuation>(PricingStructure, PricingStructureValuation), false);
-            SetInterpolator(termCurve, ((RateCurveIdentifier)PricingStructureIdentifier).Algorithm, ((RateCurveIdentifier)PricingStructureIdentifier).PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>

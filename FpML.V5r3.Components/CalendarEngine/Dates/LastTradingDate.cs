@@ -36,8 +36,8 @@ namespace Orion.CalendarEngine.Dates
     {
         #region Properties
 
-        const int YearsInDecade = 10;
-        const int TradeMainCycleInterval =3;
+        protected const int YearsInDecade = 10;
+        protected const int TradeMainCycleInterval =3;
 
         /// <summary>
         /// 

@@ -32,7 +32,7 @@ namespace Orion.CalendarEngine.Helpers
         /// <returns>
         /// 	<c>true</c> if [is rule effective] [the specified dr]; otherwise, <c>false</c>.
         /// </returns>
-        internal static Boolean IsRuleEffective(DateRule dr, DateTime dtCheckDate)
+        internal static bool IsRuleEffective(DateRule dr, DateTime dtCheckDate)
         {
             DateTime dtStart = dr.startDate;
             DateTime dtEnd = dr.endDate;
@@ -169,7 +169,28 @@ namespace Orion.CalendarEngine.Helpers
         }
 
         /// <summary>
-        /// Lasts the weekday day in month.
+        /// Last the weekday day in month.
+        /// </summary>
+        /// <param name="month">The month.</param>
+        /// <param name="year">The year.</param>
+        /// <returns></returns>
+        internal static DateTime LastWeekdayDayInMonth(int month, int year)
+        {
+            var dtLastDayInMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            var dtLastWeekdayDayInMonth = dtLastDayInMonth;
+            if (dtLastWeekdayDayInMonth.DayOfWeek is DayOfWeek.Sunday)
+            {
+                dtLastWeekdayDayInMonth = dtLastWeekdayDayInMonth.AddDays(-1);
+            }
+            if (dtLastWeekdayDayInMonth.DayOfWeek is DayOfWeek.Saturday)
+            {
+                dtLastWeekdayDayInMonth = dtLastWeekdayDayInMonth.AddDays(-1);
+            }
+            return dtLastWeekdayDayInMonth;
+        }
+
+        /// <summary>
+        /// Last the weekday day in month.
         /// </summary>
         /// <param name="dayOfWeek">The day of week.</param>
         /// <param name="month">The month.</param>
@@ -184,6 +205,18 @@ namespace Orion.CalendarEngine.Helpers
                 dtLastWeekdayDayInMonth = dtLastWeekdayDayInMonth.AddDays(-1);
             }
             return dtLastWeekdayDayInMonth;
+        }
+
+        /// <summary>
+        /// Last the weekday day in month.
+        /// </summary>
+        /// <param name="month">The month.</param>
+        /// <param name="year">The year.</param>
+        /// <returns></returns>
+        internal static DateTime LastDayInMonth(int month, int year)
+        {
+            var dtLastDayInMonth = new DateTime(year, month, DateTime.DaysInMonth(year, month));
+            return dtLastDayInMonth;
         }
 
         /// <summary>
@@ -246,7 +279,7 @@ namespace Orion.CalendarEngine.Helpers
         /// <returns>
         /// 	<c>true</c> if the specified date is weekend; otherwise, <c>false</c>.
         /// </returns>
-        public static Boolean IsWeekend(DateTime date)
+        public static bool IsWeekend(DateTime date)
         {
             return (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday);
         }

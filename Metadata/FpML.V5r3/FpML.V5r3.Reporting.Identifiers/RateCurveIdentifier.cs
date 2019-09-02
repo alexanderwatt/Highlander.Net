@@ -43,32 +43,32 @@ namespace Orion.Identifiers
         ///<summary>
         /// The reference curve type and name e.g RateCurve.AUD-BBR-BBSW-1M
         ///</summary>
-        public String ReferenceCurveTypeAndName { get; set; }
+        public string ReferenceCurveTypeAndName { get; set; }
 
         ///<summary>
         /// The reference curve unique id e.g Orion.Market.QR_LIVE.RateCurve.AUD-BBR-BBSW-1M
         ///</summary>
-        public String ReferenceCurveUniqueId { get; set; }
+        public string ReferenceCurveUniqueId { get; set; }
 
         ///<summary>
         /// The reference curve type and name e.g FxCurve.AUD-USD
         ///</summary>
-        public String ReferenceFxCurveTypeAndName { get; set; }
+        public string ReferenceFxCurveTypeAndName { get; set; }
 
         ///<summary>
         /// The reference curve unique id e.g Orion.Market.QR_LIVE.FxCurve.AUD-USD
         ///</summary>
-        public String ReferenceFxCurveUniqueId { get; set; }
+        public string ReferenceFxCurveUniqueId { get; set; }
 
         ///<summary>
         /// The reference curve type and name e.g RateCurve.AUD-BBR-BBSW-1M
         ///</summary>
-        public String ReferenceCurrency2CurveTypeAndName { get; set; }
+        public string ReferenceCurrency2CurveTypeAndName { get; set; }
 
         ///<summary>
         /// The reference curve unique id e.g Orion.Market.QR_LIVE.RateCurve.AUD-BBR-BBSW-1M
         ///</summary>
-        public String ReferenceCurrency2CurveId { get; set; }
+        public string ReferenceCurrency2CurveId { get; set; }
 
         /// <summary>
         /// The CreditSeniority.
@@ -94,7 +94,7 @@ namespace Orion.Identifiers
         ///<summary>
         /// An id for a ratecurve.
         ///</summary>
-        ///<param name="pricingStructureType">The pricing strucutre type.</param>
+        ///<param name="pricingStructureType">The pricing structure type.</param>
         ///<param name="curveName">The curve name.</param>
         ///<param name="buildDateTime">The build date time.</param>
         ///<param name="algorithm">The algorithm.</param>

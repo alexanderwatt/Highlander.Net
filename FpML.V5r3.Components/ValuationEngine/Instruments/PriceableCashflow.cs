@@ -50,6 +50,19 @@ namespace Orion.ValuationEngine.Instruments
 
         #region Public Fields
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public PartyReference PayerPartyReference { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PartyReference ReceiverPartyReference { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string ModelIdentifier { get; set; }
 
         // Based on when the last metrics that were evaluated

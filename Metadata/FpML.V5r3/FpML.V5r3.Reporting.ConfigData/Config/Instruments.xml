@@ -8248,10 +8248,10 @@
       <MainCycle>true</MainCycle>
       <IsBackwardLooking>false</IsBackwardLooking>
       <SpotDate>
-        <periodMultiplier>0</periodMultiplier>
+        <periodMultiplier>1</periodMultiplier>
         <period>D</period>
-        <dayType>Calendar</dayType>
-        <businessDayConvention>NONE</businessDayConvention>
+        <dayType>Business</dayType>
+        <businessDayConvention>MODFOLLOWING</businessDayConvention>
         <businessCenters>
           <businessCenter>AUSY</businessCenter>
         </businessCenters>
@@ -8294,10 +8294,10 @@
       <MainCycle>false</MainCycle>
       <IsBackwardLooking>true</IsBackwardLooking>
       <SpotDate>
-        <periodMultiplier>0</periodMultiplier>
+        <periodMultiplier>1</periodMultiplier>
         <period>D</period>
-        <dayType>Calendar</dayType>
-        <businessDayConvention>NONE</businessDayConvention>
+        <dayType>Business</dayType>
+        <businessDayConvention>FOLLOWING</businessDayConvention>
         <businessCenters>
           <businessCenter>AUSY</businessCenter>
         </businessCenters>
@@ -8306,8 +8306,8 @@
         <floatingRateIndex>AUD-BBR-BBSW</floatingRateIndex>
         <dayCountFraction>ACT/365.FIXED</dayCountFraction>
         <term>
-          <periodMultiplier>30</periodMultiplier>
-          <period>D</period>
+          <periodMultiplier>1</periodMultiplier>
+          <period>M</period>
         </term>
       </RateIndex>
       <Future>
@@ -8315,10 +8315,10 @@
         <currency>AUD</currency>
         <exchangeId>ASXT</exchangeId>
         <clearanceSystem>ASXT</clearanceSystem>
-        <multiplier>500000</multiplier>
+        <multiplier>3000000</multiplier>
       </Future>
       <BusinessDayAdjustments>
-        <businessDayConvention>MODFOLLOWING</businessDayConvention>
+        <businessDayConvention>MODPRECEDING</businessDayConvention>
         <businessCenters>
           <businessCenter>AUSY</businessCenter>
         </businessCenters>

@@ -34,16 +34,6 @@ namespace Orion.ValuationEngine.Instruments
         /// <summary>
         /// 
         /// </summary>
-        public PartyReference PayerPartyReference { get; set;}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public PartyReference ReceiverPartyReference { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
         public IdentifiedDate AdjustedPaymentDate => IdentifiedDateHelper.Create(ItemsChoiceType.adjustedDate.ToString(), PaymentDate);
 
         /// <summary>

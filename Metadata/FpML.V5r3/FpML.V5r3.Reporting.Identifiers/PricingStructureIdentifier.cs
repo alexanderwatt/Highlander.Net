@@ -36,7 +36,7 @@ namespace Orion.Identifiers
         /// <summary>
         /// CurveName
         /// </summary>
-        public String CurveName { get; protected set; }
+        public string CurveName { get; protected set; }
 
         /// <summary>
         /// Currency
@@ -61,32 +61,32 @@ namespace Orion.Identifiers
         /// <summary>
         /// Domain
         /// </summary>
-        public String Domain { get; protected set; }
+        public string Domain { get; protected set; }
 
         /// <summary>
         /// SourceSystem
         /// </summary>
-        public String SourceSystem { get; protected set; }
+        public string SourceSystem { get; protected set; }
 
         /// <summary>
         /// MarketName
         /// </summary>
-        public String MarketAndDate { get; protected set; }
+        public string MarketAndDate { get; protected set; }
 
         /// <summary>
         /// Stress
         /// </summary>
-        public String StressName { get; protected set; }
+        public string StressName { get; protected set; }
 
         /// <summary>
         /// Market
         /// </summary>
-        public String Market { get; protected set; }
+        public string Market { get; protected set; }
 
         /// <summary>
         /// DataType
         /// </summary>
-        public String DataType { get; protected set; }
+        public string DataType { get; protected set; }
 
         /// <summary>
         /// MarketDate

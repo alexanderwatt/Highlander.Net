@@ -41,25 +41,37 @@ namespace Orion.ValuationEngine.Helpers
         {
             if (expectedCashflow != null)
             {
-                var result = new object[11];
+                var result = new object[14];
                 result[0] = identifier;
                 result[1] = expectedCashflow.CashflowType.Value;
                 result[2] = expectedCashflow.PaymentDate;
                 result[3] = expectedCashflow.PaymentAmount.currency.Value;
+                result[4] = 0.0;
                 if (expectedCashflow.ForecastAmount != null)
                 {
                     result[4] = expectedCashflow.ForecastAmount.amount;
                 }
-                else
+                result[5] = 0.0;
+                if (expectedCashflow.ForecastAmount != null)
                 {
-                    result[4] = expectedCashflow.PaymentAmount.amount;
+                    result[5] = expectedCashflow.PaymentAmount.amount;
                 }
-                result[5] = expectedCashflow.ModelIdentifier;
-                result[6] = expectedCashflow.PaymentDiscountFactor;
-                result[7] = expectedCashflow.NPV.amount;
-                result[8] = expectedCashflow.YearFractionToCashFlowPayment;
-                result[9] = expectedCashflow.IsCollateralised;
-                result[10] = expectedCashflow.PayerIsBaseParty;
+                result[6] = expectedCashflow.ModelIdentifier;
+                result[7] = expectedCashflow.PaymentDiscountFactor;
+                result[8] = expectedCashflow.NPV.amount;
+                result[9] = expectedCashflow.YearFractionToCashFlowPayment;
+                result[10] = expectedCashflow.IsCollateralised;
+                result[11] = expectedCashflow.PayerIsBaseParty;
+                result[12] = "Not specified";
+                if (expectedCashflow.PayerPartyReference != null)
+                {
+                    result[12] = expectedCashflow.PayerPartyReference.href;
+                }
+                result[13] = "Not specified";
+                if (expectedCashflow.ReceiverPartyReference != null)
+                {
+                    result[13] = expectedCashflow.ReceiverPartyReference.href;
+                }
                 return result;
             }
             return null;

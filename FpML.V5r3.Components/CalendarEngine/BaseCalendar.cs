@@ -172,7 +172,6 @@ namespace Orion.CalendarEngine
         /// <returns>Returns the resulting <see cref="DateTime"/>.</returns>
         public DateTime Roll(DateTime date, BusinessDayConventionEnum businessDayConvention) 
         {
-            // QL_REQUIRE(d!=Date(), "Calendar::roll : null date");
             DateTime rolledDate = date;
             if (businessDayConvention == BusinessDayConventionEnum.FOLLOWING || businessDayConvention == BusinessDayConventionEnum.MODFOLLOWING) 
             {
@@ -301,7 +300,6 @@ namespace Orion.CalendarEngine
             {
                 throw new ArgumentOutOfRangeException(nameof(dayType), dayType, "Only 'DayTypeEnum.Business' and 'DayTypeEnum.Calendar' day types are currently supported.");
             }
-
             //  We can only use Business dayType for days intervals.
             //
             if ((dayType == DayTypeEnum.Business) & (period != PeriodEnum.D))
@@ -322,7 +320,6 @@ namespace Orion.CalendarEngine
                 BusinessDayConventionEnum advConvention = periodMultiplier > 0? BusinessDayConventionEnum.FOLLOWING: BusinessDayConventionEnum.PRECEDING;
                 return Advance(date, periodMultiplier, period, dayType, advConvention);
             }
-            
             if (periodMultiplier == 0)
             {
                 return Roll(date, businessDayConvention);
@@ -354,7 +351,6 @@ namespace Orion.CalendarEngine
                         periodMultiplier++;
                     }
                 }
-
                 return returnValue;
             }
             var interval = new Period {period = period, periodMultiplier = periodMultiplier.ToString(CultureInfo.InvariantCulture)};
@@ -386,7 +382,7 @@ namespace Orion.CalendarEngine
                         return dateTime.AddDays(7 * periodMultiplierAsInt);
                     }
                 case PeriodEnum.M:
-                    // dito with months resp. Calendar.AddMonths()
+                    // ditto with months resp. Calendar.AddMonths()
                     //
                     {
                         return dateTime.AddMonths(periodMultiplierAsInt);

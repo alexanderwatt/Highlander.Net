@@ -89,7 +89,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             CreatePricingStructure(curveId, termCurve, instrumentData);
             // CreatePricingStructure(curveId, termCurve, PriceableAssetFactory.Parse(PriceableClearedRateAssets));
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);                  
+            SetInterpolator(termCurve);                  
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
             CreatePricingStructure(curveId, termCurve, clearedRateAssets);
             // CreatePricingStructure(curveId, termCurve, PriceableAssetFactory.Parse(PriceableClearedRateAssets));
             // Interpolate the DiscountFactor curve based on the respective curve interpolation 
-            SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+            SetInterpolator(termCurve);
         }
 
         /// <summary>
@@ -174,13 +174,13 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                     termCurve.interpolationMethod,
                     Tolerance);
                 CreatePricingStructure(curveId, termCurve, qas);
-                SetInterpolator(termCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(termCurve);
             }
             else
             {
                 // the discount curve is already built, so don't rebuild
                 SetFpMLData(fpmlData, false);
-                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve, curveId.Algorithm, curveId.PricingStructureType);
+                SetInterpolator(((YieldCurveValuation)PricingStructureValuation).discountFactorCurve);
                 //Set the priceable assets.
                 if (validAssets)//!optimize && 
                 {
@@ -238,7 +238,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 DateTime baseDate = GetYieldCurveValuation().baseDate.Value;
                 termCurve.point = ClearedRateBootstrapper.Bootstrap(PriceableClearedRateAssets, BaseDiscountingCurve, baseDate, termCurve.extrapolationPermitted, termCurve.interpolationMethod, Tolerance);
                 SetFpMLData(new Pair<PricingStructure, PricingStructureValuation>(PricingStructure, PricingStructureValuation), false);
-                SetInterpolator(termCurve, ((RateCurveIdentifier)PricingStructureIdentifier).Algorithm, ((RateCurveIdentifier)PricingStructureIdentifier).PricingStructureType);
+                SetInterpolator(termCurve);
             }
             else
             {
@@ -248,7 +248,7 @@ namespace Orion.CurveEngine.PricingStructures.Curves
                 PriceableClearedRateAssets = PriceableClearedRateAssets.OrderBy(a => a.GetRiskMaturityDate()).ToList();
                 CreatePricingStructure(pricingStructureId, tempFpml.discountFactorCurve, spreadAssets);
                 // CreatePricingStructure(pricingStructureId, tempFpml.discountFactorCurve, PriceableAssetFactory.Parse(PriceableClearedRateAssets));
-                SetInterpolator(GetYieldCurveValuation().discountFactorCurve, pricingStructureId.Algorithm, pricingStructureId.PricingStructureType);
+                SetInterpolator(GetYieldCurveValuation().discountFactorCurve);
             }
         }
 
