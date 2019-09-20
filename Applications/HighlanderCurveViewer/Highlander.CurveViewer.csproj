@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>Highlander.CurveViewer</AssemblyName>
+    <RootNamespace>Highlander.CurveViewer</RootNamespace>
   </PropertyGroup>
 
 

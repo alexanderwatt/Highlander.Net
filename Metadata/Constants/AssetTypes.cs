@@ -76,7 +76,9 @@ namespace Orion.Constants
         IRPutFutureOption,
         IRCallFutureOption,
         Swaption,
-        Period
+        Period,
+        Property,
+        Lease
     }
 
     public class AssetTypesValue
@@ -86,7 +88,7 @@ namespace Orion.Constants
             // note: we cannot use Enum.Parse() here, hence the loop...
             foreach (AssetTypesEnum tempId in Enum.GetValues(typeof (AssetTypesEnum)))
             {
-                if (String.Compare(assetIdString, tempId.ToString(),
+                if (string.Compare(assetIdString, tempId.ToString(),
                                    StringComparison.OrdinalIgnoreCase) != 0) continue;
                 id = tempId;
                 return true;
@@ -97,8 +99,7 @@ namespace Orion.Constants
 
         public static AssetTypesEnum ParseEnumString(string idString)
         {
-            AssetTypesEnum result;
-            if (!TryParseEnumString(idString, out result))
+            if (!TryParseEnumString(idString, out var result))
                 throw new ArgumentException($"Cannot convert '{idString}' to AssetTypesEnum");
             return result;
         }

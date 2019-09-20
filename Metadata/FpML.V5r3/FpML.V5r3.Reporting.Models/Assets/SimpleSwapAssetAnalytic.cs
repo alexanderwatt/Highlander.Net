@@ -23,7 +23,7 @@ namespace Orion.Models.Assets
     /// </summary>
     public class SimpleSwapAssetAnalytic : ModelAnalyticBase<ISwapAssetParameters, RateMetrics>, IRateAssetResults
     {
-        protected const Decimal CNegativeMultiplier = -1.0m;
+        protected const decimal CNegativeMultiplier = -1.0m;
         protected const int COne = 1;
         protected const int CBasisPoint = 10000;
 
@@ -33,46 +33,46 @@ namespace Orion.Models.Assets
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal ImpliedQuote => EvaluateImpliedQuote();
+        public decimal ImpliedQuote => EvaluateImpliedQuote();
 
         /// <summary>
         /// Gets the npv.
         /// </summary>
         /// <value>The npv.</value>
-        public Decimal NPV => EvaluateNPV();
+        public decimal NPV => EvaluateNPV();
 
         /// <summary>
         /// Gets the npv change form a base NPV.
         /// </summary>
         /// <value>The npv change.</value>
-        public Decimal NPVChange => EvaluateNPVChange();
+        public decimal NPVChange => EvaluateNPVChange();
 
         /// <summary>
         /// Gets the accrual factor.
         /// </summary>
-        public Decimal AccrualFactor => EvaluateAccrualFactor();
+        public decimal AccrualFactor => EvaluateAccrualFactor();
 
         /// <summary>
         /// Gets the delta wrt the fixed rate R.
         /// </summary>
-        public Decimal DeltaR => EvaluateDeltaR();
+        public decimal DeltaR => EvaluateDeltaR();
 
         /// <summary>
         /// Gets the convexity adjustment. This is zero.
         /// </summary>
-        public Decimal ConvexityAdjustment => 0.0m;
+        public decimal ConvexityAdjustment => 0.0m;
 
         /// <summary>
         /// Gets the discount factor at maturity.
         /// </summary>
         /// <value>The discount factor at maturity.</value>
-        public Decimal DiscountFactorAtMaturity => EvaluateDiscountFactorAtMaturity();
+        public decimal DiscountFactorAtMaturity => EvaluateDiscountFactorAtMaturity();
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        public Decimal MarketQuote => AnalyticParameters.Rate;
+        public decimal MarketQuote => AnalyticParameters.Rate;
 
         #endregion
 
@@ -80,7 +80,7 @@ namespace Orion.Models.Assets
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateAccrualFactor()
+        protected virtual decimal EvaluateAccrualFactor()
         {
             var totalDfsCount = AnalyticParameters.DiscountFactors.Length;
             var accrualFactorTotal = 0.0m;
@@ -110,7 +110,7 @@ namespace Orion.Models.Assets
         /// is repaid at the maturity date of the swap.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluatePrincipalValues()
+        protected virtual decimal EvaluatePrincipalValues()
         {
             var totalDfsCount = AnalyticParameters.DiscountFactors.Length;
             var initialPrincipal = AnalyticParameters.Weightings[0] * AnalyticParameters.DiscountFactors[0];
@@ -129,7 +129,7 @@ namespace Orion.Models.Assets
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateImpliedQuote()
+        protected virtual decimal EvaluateImpliedQuote()
         {
             var numerator = EvaluatePrincipalValues();
             var denominator = EvaluateAccrualFactor();
@@ -141,7 +141,7 @@ namespace Orion.Models.Assets
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateDiscountFactorAtMaturity()
+        public virtual decimal EvaluateDiscountFactorAtMaturity()
         {
             var yearFractionTotal = 0.0m;
             var totalYFCount = AnalyticParameters.YearFractions.Length;
@@ -158,7 +158,7 @@ namespace Orion.Models.Assets
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateNPV()
+        protected virtual decimal EvaluateNPV()
         {
             //This is the basis point value times the number of basis points in the rate
             var npv = (AnalyticParameters.Rate - EvaluateImpliedQuote()) * EvaluateDeltaR();
@@ -169,7 +169,7 @@ namespace Orion.Models.Assets
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateNPVChange()
+        protected virtual decimal EvaluateNPVChange()
         {
             return EvaluateNPV() - AnalyticParameters.BaseNPV;
         }
@@ -178,7 +178,7 @@ namespace Orion.Models.Assets
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDeltaR()
+        protected virtual decimal EvaluateDeltaR()
         {
             var deltaR = EvaluateAccrualFactor() * AnalyticParameters.NotionalAmount;
             return deltaR / CBasisPoint;

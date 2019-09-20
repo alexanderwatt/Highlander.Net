@@ -40,6 +40,7 @@ using Orion.CalendarEngine.Helpers;
 using Orion.CurveEngine.Assets.Inflation.Index;
 using Orion.CurveEngine.Assets.Inflation.Swaps;
 using Orion.CurveEngine.Assets.Options;
+using Orion.CurveEngine.Assets.Property.Lease;
 using Orion.CurveEngine.Assets.Rates.CapFloorLet;
 using Orion.CurveEngine.Assets.Rates.CapsFloors;
 using Orion.CurveEngine.Assets.Rates.Futures;
@@ -541,12 +542,48 @@ namespace Orion.CurveEngine.Factory
         ///  converts data to properties.
         /// </summary>
         /// <param name="nameSpace">The namespace</param>
+        /// <param name="assetIdentifier">The asset identifier.</param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="grossAmount">The gross amount.</param>
+        /// <param name="stepUp">The step up.</param>
+        /// <returns></returns>
+        public static NamedValueSet BuildPropertiesForLeaseAssets(string nameSpace, string assetIdentifier, DateTime baseDate,
+            double grossAmount, double stepUp)
+        {
+            var namedValueSet = new NamedValueSet();
+            string[] results = assetIdentifier.Split('-');
+            string ccy = results[0];
+            string type = results[1];
+            string tenor = results[2];
+            if (results.Length > 3)
+            {
+                namedValueSet.Set(LeaseProp.PaymentFrequency, results[3]);
+            }
+            namedValueSet.Set(CurveProp.AssetType, type);
+            namedValueSet.Set(CurveProp.Currency1, ccy);
+            namedValueSet.Set(CurveProp.AssetId, assetIdentifier);
+            namedValueSet.Set(CurveProp.BaseDate, baseDate);
+            //namedValueSet.Set("ExtraItem", tenor);
+            var maturityTenor = PeriodHelper.Parse(tenor);
+            var maturityDate = maturityTenor.Add(baseDate);
+            namedValueSet.Set(LeaseProp.Maturity, maturityDate);
+            namedValueSet.Set(LeaseProp.LeaseTenor, tenor);
+            namedValueSet.Set(LeaseProp.GrossAmount, Convert.ToDecimal(grossAmount));
+            namedValueSet.Set(LeaseProp.StepUp, Convert.ToDecimal(stepUp));
+            namedValueSet.Set(EnvironmentProp.NameSpace, nameSpace);
+            return namedValueSet;
+        }
+
+        /// <summary>
+        ///  converts data to properties.
+        /// </summary>
+        /// <param name="nameSpace">The namespace</param>
         /// <param name="assetIdentifier">The valid asset identifier4.</param>
         /// <param name="baseDate">The Base date.</param>
         /// <param name="coupon">The bond coupon.</param>
         /// <param name="maturity">The bond maturity.</param>
         /// <returns></returns>
-        public static NamedValueSet BuildPropertiesForBondAssets(String nameSpace, String assetIdentifier, DateTime baseDate, Decimal coupon, DateTime maturity)
+        public static NamedValueSet BuildPropertiesForBondAssets(string nameSpace, string assetIdentifier, DateTime baseDate, decimal coupon, DateTime maturity)
         {
             var namedValueSet = new NamedValueSet();
             string[] results = assetIdentifier.Split('-');
@@ -1010,6 +1047,11 @@ namespace Orion.CurveEngine.Factory
                         priceableAsset = CreateClearedIRSwap(logger, cache, nameSpace, cloneInstrument, bav, properties, fixingcalendar, paymentCalendar);
                         break;
                     }
+                case AssetTypesEnum.Lease:
+                {
+                    priceableAsset = CreateLease(logger, cache, nameSpace, cloneInstrument, bav, properties, paymentCalendar);
+                    break;
+                }
                 default:
                     throw new NotSupportedException($"Asset type {assetType} is not supported");
             }
@@ -3084,6 +3126,65 @@ namespace Orion.CurveEngine.Factory
                             paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, nodeStruct.DateAdjustments.businessCenters, nameSpace);
                         }
                         return new PriceableIRSwap(baseDate, nodeStruct, fixingCalendar, paymentCalendar, normalisedRate);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    logger.Log(ex);
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateLease"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        ///  <param name="nameSpace">The client namespace</param>
+        /// <param name="instrument">The instrument class.</param>
+        /// <param name="bav">A basic asset valuation.</param>
+        /// <param name="properties">A property bag.</param>
+        /// <param name="paymentCalendar">The payment calendar.</param>
+        private static IPriceableAssetController CreateLease(ILogger logger, ICoreCache cache, string nameSpace,
+            Instrument instrument, BasicAssetValuation bav, NamedValueSet properties, IBusinessCalendar paymentCalendar)
+        {
+            if (instrument != null)
+            {
+                try
+                {
+                    var term = properties.GetValue<string>(LeaseProp.LeaseTenor, true);
+                    var assetId = properties.GetValue<string>("AssetId", true);
+                    var baseDate = properties.GetValue<DateTime>("BaseDate", true);
+                    var startGrossPrice = properties.GetValue<decimal>(LeaseProp.GrossAmount, 1);
+                    var stepUp = properties.GetValue(LeaseProp.StepUp, .01m);
+                    var maturityDate = properties.GetValue<DateTime>(LeaseProp.Maturity, true);
+                    var reviewPeriod = properties.GetValue(LeaseProp.ReviewFrequency, "1Y");
+                    //TODO The above overrides the default value and needs to be enhanced.
+                    var quotes = new List<BasicQuotation>(bav.quote);
+                    //Get the market quote, add the spread and normalise i.e. the fixed rate.
+                    BasicQuotation normalisedRate = MarketQuoteHelper.GetMarketQuoteAddSpreadAndNormalise(quotes);
+                    if (instrument.InstrumentNodeItem is LeaseNodeStruct nodeStruct)
+                    {
+                        if (nodeStruct.Lease.reviewFrequency is null)
+                        {
+                            nodeStruct.Lease.reviewFrequency = PeriodHelper.Parse(reviewPeriod);
+                        }
+                        nodeStruct.Lease.startGrossPrice = MoneyHelper.GetAmount(startGrossPrice, nodeStruct.Lease?.currency?.Value);
+                        nodeStruct.Lease.leaseTenor = PeriodHelper.Parse(term);
+                        nodeStruct.Lease.id = assetId;
+                        nodeStruct.Lease.leaseExpiryDate = new IdentifiedDate{id = "MaturityDate", Value = maturityDate};
+                        nodeStruct.Lease.nextReviewDate = new IdentifiedDate { id = "NextReviewDate", Value = nodeStruct.Lease.reviewFrequency.Add(baseDate)};
+                        nodeStruct.Lease.numberOfUnits = 100;
+                        nodeStruct.Lease.reviewChange = stepUp;
+                        nodeStruct.Lease.startDate = new IdentifiedDate { id = "StartDate", Value = baseDate };
+                        //This allows optimisation around calendar creation, so that one calendar can be instantiated for many assets.
+                        //Otherwise a calendar is created.
+                        if (paymentCalendar == null)
+                        {
+                            paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, nodeStruct.Lease.businessDayAdjustments.businessCenters, nameSpace);
+                        }
+                        return new PriceableLeaseAsset(baseDate, nodeStruct.Lease, paymentCalendar, normalisedRate);
                     }
                 }
                 catch (System.Exception ex)

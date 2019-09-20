@@ -19,6 +19,7 @@ namespace Orion.Constants
     {
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";
+        public const string DataType = "DataType";
         public const string SourceSystem = "SourceSystem";
         public const string Type = "Type";
         public const string Schema = "Schema";

@@ -10896,8 +10896,9 @@ namespace Orion.CurveEngine.Tests
         {
             IDayCounter dayCounter = Actual365.Instance;
             var termCurve = BuildGapStepRateCurve(_baseDate, _AUDdeposits, "SimpleGapStep", IndexName, 0.0m);
-
-            var gapstep = new GapStepInterpolator(termCurve, _baseDate, 12, CentralBanks.RBA, dayCounter);
+            var lastDate = (DateTime)termCurve.point[termCurve.point.Length - 1].term.Items[0];
+            var centralBankDays = CentralBanksHelper.GetCentralBankDays(_baseDate, CentralBanks.RBA, 12, lastDate);
+            var gapstep = new GapStepInterpolator(termCurve, _baseDate, 12, centralBankDays, CentralBanks.RBA, dayCounter);
             PrintRBADays(gapstep);
             PrintResults(_baseDate, gapstep.TermCurve);
         }

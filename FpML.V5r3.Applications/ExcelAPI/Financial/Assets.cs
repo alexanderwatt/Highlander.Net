@@ -40,6 +40,8 @@ using Orion.Models.Commodities;
 using Orion.Models.Equity;
 using Orion.Models.ForeignExchange;
 using Orion.Models.Futures;
+using Orion.Models.Property;
+using Orion.Models.Property.Lease;
 using Orion.Models.Rates.Options;
 using Orion.Util.Helpers;
 using Orion.Util.Logging;
@@ -366,6 +368,28 @@ namespace HLV5r3.Financial
         /// A function to return the list of implemented metrics.
         /// </summary>
         /// <returns>A range object</returns>
+        public object[,] SupportedPropertyMetrics()
+        {
+            var names = Enum.GetNames(typeof(PropertyMetrics));
+            var result = RangeHelper.ConvertArrayToRange(names);
+            return result;
+        }
+
+        /// <summary>
+        /// A function to return the list of implemented metrics.
+        /// </summary>
+        /// <returns>A range object</returns>
+        public object[,] SupportedLeaseMetrics()
+        {
+            var names = Enum.GetNames(typeof(LeaseMetrics));
+            var result = RangeHelper.ConvertArrayToRange(names);
+            return result;
+        }
+
+        /// <summary>
+        /// A function to return the list of implemented metrics.
+        /// </summary>
+        /// <returns>A range object</returns>
         public object[,] SupportedFuturesMetrics()
         {
             var names = Enum.GetNames(typeof(FuturesMetrics));
@@ -530,8 +554,8 @@ namespace HLV5r3.Financial
         ///<param name="metric">The metric.</param>
         ///<param name="datesAsArray">The dates.</param>
         ///<returns></returns>
-        public Decimal GetStructuredSwapMetric(String curveId, String currency, DateTime baseDate,
-            Decimal notional, Excel.Range datesAsArray, Excel.Range notionalWeightsAsArray, String fixedLegDayCount, Decimal fixedRate,
+        public decimal GetStructuredSwapMetric(string curveId, string currency, DateTime baseDate,
+            decimal notional, Excel.Range datesAsArray, Excel.Range notionalWeightsAsArray, string fixedLegDayCount, decimal fixedRate,
             string businessDayConvention, string businessCentersAsString, string metric)
         {
             //Map the ranges.
@@ -566,11 +590,11 @@ namespace HLV5r3.Financial
         ///<param name="cashFlowDetail">A detail cashflow flag - mainly for debugging.</param>
         /// <param name="propertiesRange">Contains all the required properties.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Object[,] GetIRCapFloorMetrics(
-            DateTime effectiveDate, Double notional, double strike, Excel.Range lastResetsAsArray, Boolean includeStubFlag, 
-            Boolean rollBackward, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
+        public object[,] GetIRCapFloorMetrics(
+            DateTime effectiveDate, double notional, double strike, Excel.Range lastResetsAsArray, bool includeStubFlag, 
+            bool rollBackward, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString,
-            string resetPeriod, Excel.Range metricsAsArray, Boolean cashFlowDetail, Excel.Range propertiesRange)
+            string resetPeriod, Excel.Range metricsAsArray, bool cashFlowDetail, Excel.Range propertiesRange)
         {
             if (paymentBusinessDayConvention == null) throw new ArgumentNullException(nameof(paymentBusinessDayConvention));
             if (propertiesRange == null) throw new ArgumentNullException(nameof(propertiesRange));
@@ -675,7 +699,7 @@ namespace HLV5r3.Financial
         /// <param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="propertiesRange">Contains all the required properties.</param>
         /// <returns>The value of the metric requested.</returns>
-        public Object[,] GetIRCapFloorMetric(Excel.Range rollAndMaturityDatesAsArray, Excel.Range notionalsAsArray,
+        public object[,] GetIRCapFloorMetric(Excel.Range rollAndMaturityDatesAsArray, Excel.Range notionalsAsArray,
             Excel.Range strikesAsArray, Excel.Range resetsAsArray, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString, string resetPeriod, string metric, Excel.Range propertiesRange)
         {
@@ -773,7 +797,7 @@ namespace HLV5r3.Financial
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="propertiesRange">Contains all the required properties.</param>
         ///<returns>The rate curve pdh.</returns>
-        public Object[,] GetIRCapFloorPDH(Excel.Range rollAndMaturityDatesAsArray, Excel.Range notionalsAsArray,
+        public object[,] GetIRCapFloorPDH(Excel.Range rollAndMaturityDatesAsArray, Excel.Range notionalsAsArray,
             Excel.Range strikesAsArray, Excel.Range resetsAsArray, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString, string resetPeriod, Excel.Range propertiesRange)
         {
@@ -850,7 +874,7 @@ namespace HLV5r3.Financial
         ///<param name="floatingResetRatesAsArray">The floating leg rest rate array.</param>
         ///<param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Decimal GetIRSwapMetric(Excel.Range fixedRollDatesAsArray, Excel.Range fixedNotionalsAsArray, 
+        public decimal GetIRSwapMetric(Excel.Range fixedRollDatesAsArray, Excel.Range fixedNotionalsAsArray, 
             Excel.Range floatingRollDatesAsArray, Excel.Range floatingNotionalsAsArray, 
             Excel.Range floatingResetRatesAsArray, string metric, Excel.Range propertiesRange)
         {
@@ -924,8 +948,8 @@ namespace HLV5r3.Financial
         ///<param name="floatingRollDatesAsArray">The floating dates.</param>
         ///<param name="floatingNotionalsAsArray">The floating leg notionals.</param>
         ///<param name="floatingResetRatesAsArray">The floating rest rates array.</param>
-        ///<param name="floatingLegDayCount">The floatiAsArrayng leg daycount.</param>
-        ///<param name="propertiesRange">The properties asociated with the asset.</param>
+        ///<param name="floatingLegDayCount">The floating leg daycount.</param>
+        ///<param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The metrics requested.</returns>
         public object[,] GetIRSwapMetrics( Excel.Range fixedRollDatesAsArray, Excel.Range fixedNotionalsAsArray,
             Decimal fixedRate, Excel.Range floatingRollDatesAsArray, Excel.Range floatingNotionalsAsArray, 
@@ -1057,8 +1081,8 @@ namespace HLV5r3.Financial
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="propertiesRange">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Object[,] GetIRSwapMetrics2(DateTime effectiveDate, Double notional, Excel.Range floatingResetRatesAsArray,
-            Boolean includeStubFlag, Boolean rollBackward, string paymentBusinessDayConvention,
+        public object[,] GetIRSwapMetrics2(DateTime effectiveDate, double notional, Excel.Range floatingResetRatesAsArray,
+            bool includeStubFlag, bool rollBackward, string paymentBusinessDayConvention,
             string paymentBusinessCentersAsString, string resetBusinessDayConvention, string resetBusinessCentersAsString,
             string resetPeriod, Excel.Range metricsAsArray, Excel.Range propertiesRange)
         {
@@ -1190,11 +1214,64 @@ namespace HLV5r3.Financial
         ///<param name="paymentFrequency">The payment frequency.</param>
         ///<param name="rollConvention">The roll convention. This can include EOM, but is normally the roll day.</param>
         ///<returns></returns>
-        public Decimal GetSwapImpliedQuote(String curveId, String currency, DateTime baseDate, DateTime spotDate, String fixedLegDayCount,
+        public decimal GetSwapImpliedQuote(string curveId, string currency, DateTime baseDate, DateTime spotDate, string fixedLegDayCount,
             string term, string paymentFrequency, string rollConvention)
         {
             var impliedQuote = Engine.GetSwapImpliedQuote(curveId, currency, baseDate, spotDate, fixedLegDayCount, term, paymentFrequency, rollConvention);
             return impliedQuote;
+        }
+
+
+        /// <summary>
+        /// Creates the lease asset.
+        /// </summary>
+        /// <param name="assetIdentifier">The asset identifier.</param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="grossAmount">The gross amount.</param>
+        /// <param name="stepUp">The step up.</param>
+        /// <returns></returns>
+        public string CreateSimpleLease(string assetIdentifier, DateTime baseDate, double grossAmount, double stepUp)
+        {
+            NamedValueSet namedValueSet = PriceableAssetFactory.BuildPropertiesForLeaseAssets(NameSpace, assetIdentifier, baseDate, grossAmount, stepUp);
+            return Engine.CreateLocalAsset(Convert.ToDecimal(grossAmount), 0.0m, namedValueSet);
+        }
+
+        /// <summary>
+        /// Creates the lease asset.
+        /// </summary>
+        /// <param name="assetIdentifier">The asset identifier.</param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="grossAmount">The gross amount.</param>
+        /// <param name="stepUp">The step up.</param>
+        /// <param name="properties">The properties.</param>
+        /// <returns></returns>
+        public string CreateSimpleLeaseWithProperties(string assetIdentifier, DateTime baseDate, double grossAmount, double stepUp, object[,] properties)
+        {
+            NamedValueSet nvs = PriceableAssetFactory.BuildPropertiesForLeaseAssets(NameSpace, assetIdentifier, baseDate, grossAmount, stepUp);
+            if (properties == null) throw new ArgumentNullException(nameof(properties));
+            var namedValueSet = new NamedValueSet(properties);
+            namedValueSet = CurveHelper.CombinePropertySetsClone(namedValueSet, nvs);
+            return Engine.CreateLocalAsset(Convert.ToDecimal(grossAmount), 0.0m, namedValueSet);
+        }
+
+        /// <summary>
+        /// Creates the assets.
+        /// </summary>
+        /// <param name="assetIdentifiersAsArray">The asset identifiers.</param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="grossAmountsAsArray">The gross amounts.</param>
+        /// <param name="stepUpsAsArray">The coupons.</param>
+        /// <returns></returns>
+        public object[,] CreateSimpleLeases(Excel.Range assetIdentifiersAsArray, DateTime baseDate, Excel.Range grossAmountsAsArray,
+            Excel.Range stepUpsAsArray)
+        {
+            //Map the ranges.
+            var amounts = DataRangeHelper.StripDoubleRange(grossAmountsAsArray);
+            var stepUps = DataRangeHelper.StripDoubleRange(stepUpsAsArray);
+            var assetIdentifiers = DataRangeHelper.StripRange(assetIdentifiersAsArray);
+            var rateAssets = Engine.CreateLocalLeases(assetIdentifiers, baseDate, amounts, stepUps);
+            var result = RangeHelper.ConvertArrayToRange(rateAssets);
+            return result;
         }
 
         /// <summary>
@@ -1206,7 +1283,7 @@ namespace HLV5r3.Financial
         /// <param name="coupon">The coupon.</param>
         /// <param name="ytm">The yield to maturity.</param>
         /// <returns></returns>
-        public string CreateSimpleBond(string assetIdentifier, DateTime baseDate, DateTime maturityDate, Decimal coupon, Decimal ytm)
+        public string CreateSimpleBond(string assetIdentifier, DateTime baseDate, DateTime maturityDate, decimal coupon, decimal ytm)
         {
             NamedValueSet namedValueSet = PriceableAssetFactory.BuildPropertiesForBondAssets(NameSpace, assetIdentifier, baseDate, coupon, maturityDate);
             return Engine.CreateLocalAsset(ytm, 0.0m, namedValueSet);
@@ -1222,7 +1299,7 @@ namespace HLV5r3.Financial
         /// <param name="ytm">The yield to maturity.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public string CreateSimpleBondWithProperties(string assetIdentifier, DateTime baseDate, DateTime maturityDate, Decimal coupon, Decimal ytm, object[,] properties)
+        public string CreateSimpleBondWithProperties(string assetIdentifier, DateTime baseDate, DateTime maturityDate, decimal coupon, decimal ytm, object[,] properties)
         {
             NamedValueSet nvs = PriceableAssetFactory.BuildPropertiesForBondAssets(NameSpace, assetIdentifier, baseDate, coupon, maturityDate);
             if (properties == null) throw new ArgumentNullException(nameof(properties));
@@ -1684,7 +1761,7 @@ namespace HLV5r3.Financial
         /// <param name="curveId">The curve id.</param>
         /// <param name="assetReferenceKey">The asset reference key.</param>
         /// <returns></returns>
-        public Decimal GetImpliedQuote(string curveId, string assetReferenceKey)
+        public decimal GetImpliedQuote(string curveId, string assetReferenceKey)
         {
             var asset = Engine.GetLocalAsset(assetReferenceKey);
             var ratecurve = (IRateCurve)Engine.GetCurve(curveId, false);
@@ -1700,8 +1777,8 @@ namespace HLV5r3.Financial
         /// <param name="baseDate">The base date.</param>
         /// <param name="rate">The rate.</param>
         /// <returns>A decimal value - the break even rate.</returns>
-        public Decimal GetAssetImpliedQuote(string curveId, string assetId,
-            Decimal rate, Decimal additional, DateTime baseDate)
+        public decimal GetAssetImpliedQuote(string curveId, string assetId,
+            decimal rate, decimal additional, DateTime baseDate)
         {
             //Create the properties.
             var properties = PriceableAssetFactory.BuildPropertiesForAssets(NameSpace, assetId, baseDate);

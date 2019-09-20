@@ -206,7 +206,7 @@ namespace Orion.Constants
         GenericVolatilityCurve,
 
         /// <summary>
-        /// A SABR surface: ExpiryTermStrikeVolatilityCurface
+        /// A SABR surface: ExpiryTermStrikeVolatilitySurface
         /// </summary>
         SABRSurface
     }

@@ -15,6 +15,7 @@
 #region Using directives
 
 using System;
+using Orion.Constants;
 using Orion.ModelFramework.MarketEnvironments;
 
 #endregion
@@ -55,17 +56,17 @@ namespace Orion.Identifiers
         {
             Market = market;
             Date = marketDate;           
-            Properties.Set("Market", market);
+            Properties.Set(MarketsProp.Market, market);
             if (Date != null)
             {
                 UniqueIdentifier = market + "." + (DateTime)Date;
-                Properties.Set("MarketDate", (DateTime)Date);
+                Properties.Set(MarketsProp.MarketDate, (DateTime)Date);
             }
             else
             {
                 UniqueIdentifier = market;
             }
-            Properties.Set("UniqueIdentifier", UniqueIdentifier);
+            Properties.Set(IdentifiersProp.UniqueIdentifier, UniqueIdentifier);
         }
     }
 }

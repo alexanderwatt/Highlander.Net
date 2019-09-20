@@ -74,17 +74,17 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        public Decimal[] FloatingLegYearFractions = { 0.25m };
+        public decimal[] FloatingLegYearFractions = { 0.25m };
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal[] FloatingLegWeightings = { 1.0m };
+        public decimal[] FloatingLegWeightings = { 1.0m };
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal[] ForwardRates { get; set; }
+        public decimal[] ForwardRates { get; set; }
 
         /// <summary>
         /// 
@@ -104,7 +104,7 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// The forecast curve, normally LIBOR
         /// </summary>
-        public String ForecastCurveName { get; set; }
+        public string ForecastCurveName { get; set; }
 
         #endregion
 

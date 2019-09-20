@@ -47,27 +47,27 @@ namespace Orion.Identifiers
         /// <summary>
         /// UniqueIdentifier
         /// </summary>
-        public String UniqueIdentifier { get; set; }
+        public string UniqueIdentifier { get; set; }
 
         /// <summary>
         /// SourceSystem
         /// </summary>
-        public String SourceSystem { get; }
+        public string SourceSystem { get; }
 
         /// <summary>
         /// Id
         /// </summary>
-        public String Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Domain
         /// </summary>
-        public String Domain { get; }
+        public string Domain { get; }
 
         /// <summary>
         /// DataType
         /// </summary>
-        public String DataType { get; }
+        public string DataType { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IIdentifier"/> class.
@@ -90,7 +90,7 @@ namespace Orion.Identifiers
             }
             catch (Exception)
             {               
-                throw new Exception("Invalid pricingstrucutre property name.");
+                throw new Exception("Invalid pricing structure property name.");
             }
 
         }

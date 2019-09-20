@@ -6,6 +6,7 @@ using System.Reflection;
 using Core.Common;
 using Core.V34;
 using FpML.V5r3.Reporting;
+using HighlanderCurveViewer;
 using Orion.Analytics.Stochastics.Volatilities;
 using Orion.Build;
 using Orion.Constants;
@@ -22,7 +23,7 @@ using Orion.Util.NamedValues;
 using Orion.Util.RefCounting;
 using Exception = System.Exception;
 
-namespace HighlanderCurveViewer
+namespace Highlander.CurveViewer
 {
     public class PricingStructureCache
     {

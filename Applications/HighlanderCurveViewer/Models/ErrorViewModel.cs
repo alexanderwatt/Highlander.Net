@@ -1,6 +1,4 @@
-using System;
-
-namespace HighlanderCurveViewer.Models
+namespace Highlander.CurveViewer.Models
 {
     public class ErrorViewModel
     {

@@ -13,6 +13,9 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+using System;
+using System.Collections.Generic;
+
 namespace Orion.Models.Property.Lease
 {
     public class LeaseAssetParameters : ILeaseAssetParameters
@@ -23,11 +26,6 @@ namespace Orion.Models.Property.Lease
 
         public decimal Quote { get; set; }
 
-        /// <summary>
-        /// Gets or sets the equity price.
-        /// </summary>
-        /// <value>The equity price.</value>
-        public decimal CurrentPrice { get; set; }
 
         /// <summary>
         /// The multiplier which must be set.
@@ -38,7 +36,31 @@ namespace Orion.Models.Property.Lease
         /// Gets or sets the amount.
         /// </summary>
         /// <value>The amount.</value>
-        public decimal PurchaseAmount { get; set; }
+        public decimal GrossAmount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the step up amount.
+        /// </summary>
+        /// <value>The amount.</value>
+        public decimal StepUp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the step up amount.
+        /// </summary>
+        /// <value>The amount.</value>
+        public decimal[] Weightings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the dates.
+        /// </summary>
+        /// <value>The dates.</value>
+        public List<DateTime> PaymentDates { get; set; }
+
+        /// <summary>
+        /// Gets or sets the discount factors to use.
+        /// </summary>
+        /// <value>The dfs.</value>
+        public decimal[] PaymentDiscountFactors { get; set; }
 
 
         #endregion

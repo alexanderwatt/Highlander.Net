@@ -15,11 +15,8 @@
 
 #region Using directives
 
-using System;
-using FpML.V5r3.Reporting.Helpers;
 using Orion.Constants;
 using Orion.Util.NamedValues;
-using FpML.V5r3.Reporting;
 
 #endregion
 
@@ -33,12 +30,12 @@ namespace Orion.Identifiers
         /// <summary>
         /// The CreditSeniority.
         /// </summary>
-        public CreditSeniority CreditSeniority { get; private set; }
+        public string CreditSeniority { get; private set; }
 
         /// <summary>
         /// The CreditInstrumentId.
         /// </summary>
-        public InstrumentId CreditInstrumentId { get; private set; }
+        public string CreditInstrumentId { get; private set; }
 
         ///<summary>
         /// An id for a ratecurve.
@@ -51,40 +48,40 @@ namespace Orion.Identifiers
             SetProperties();
         }
 
-        ///<summary>
-        /// An id for a ratecurve.
-        ///</summary>
-        ///<param name="pricingStructureType">The pricing structure type.</param>
-        ///<param name="curveName">The curve name.</param>
-        ///<param name="buildDateTime">The build date time.</param>
-        ///<param name="algorithm">The algorithm.</param>
-        public BondCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime, string algorithm)
-            : base(pricingStructureType, curveName, buildDateTime, algorithm)
-        {
-            SetProperties(PricingStructureType);
-        }
+        /////<summary>
+        ///// An id for a ratecurve.
+        /////</summary>
+        /////<param name="pricingStructureType">The pricing structure type.</param>
+        /////<param name="curveName">The curve name.</param>
+        /////<param name="buildDateTime">The build date time.</param>
+        /////<param name="algorithm">The algorithm.</param>
+        //public BondCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime, string algorithm)
+        //    : base(pricingStructureType, curveName, buildDateTime, algorithm)
+        //{
+        //    SetProperties(PricingStructureType);
+        //}
 
-        ///<summary>
-        /// An id for a ratecurve.
-        ///</summary>
-        ///<param name="pricingStructureType"></param>
-        ///<param name="curveName"></param>
-        ///<param name="buildDateTime"></param>
-        public BondCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
-            : this(pricingStructureType, curveName, buildDateTime, "Default")
-        {}
+        /////<summary>
+        ///// An id for a ratecurve.
+        /////</summary>
+        /////<param name="pricingStructureType"></param>
+        /////<param name="curveName"></param>
+        /////<param name="buildDateTime"></param>
+        //public BondCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
+        //    : this(pricingStructureType, curveName, buildDateTime, "Default")
+        //{}
 
-        /// <summary>
-        /// An id for a ratecurve.
-        /// </summary>
-        /// <param name="curveId"></param>
-        /// <param name="baseDate"></param>
-        public BondCurveIdentifier(string curveId, DateTime baseDate) 
-            : base(curveId)
-        {
-            BaseDate = baseDate;
-            SetProperties(PricingStructureType);
-        }
+        ///// <summary>
+        ///// An id for a ratecurve.
+        ///// </summary>
+        ///// <param name="curveId"></param>
+        ///// <param name="baseDate"></param>
+        //public BondCurveIdentifier(string curveId, DateTime baseDate) 
+        //    : base(curveId)
+        //{
+        //    BaseDate = baseDate;
+        //    SetProperties(PricingStructureType);
+        //}
 
         private void SetProperties()
         {
@@ -94,38 +91,38 @@ namespace Orion.Identifiers
                 case PricingStructureTypeEnum.BondCurve:
                     string creditInstrumentId = PropertyHelper.ExtractCreditInstrumentId(Properties);
                     string creditSeniority = PropertyHelper.ExtractCreditSeniority(Properties);
-                    CreditInstrumentId = InstrumentIdHelper.Parse(creditInstrumentId);
-                    CreditSeniority = CreditSeniorityHelper.Parse(creditSeniority);
+                    CreditInstrumentId = creditInstrumentId;
+                    CreditSeniority = creditSeniority;
                     break;
             }
         }
 
-        private void SetProperties(PricingStructureTypeEnum pricingStructureType)
-        {
-            if (pricingStructureType == PricingStructureTypeEnum.BondDiscountCurve)
-            {
-                var rateCurveId = CurveName.Split('-');
-                var subordination = rateCurveId[rateCurveId.Length - 1];
-                var indexName = rateCurveId[0];
-                for (var i = 1; i < rateCurveId.Length - 1; i++)
-                {
-                    indexName = indexName + '-' + rateCurveId[i];
-                }
-                CreditInstrumentId = InstrumentIdHelper.Parse(indexName);
-                CreditSeniority = CreditSeniorityHelper.Parse(subordination);
-            }
-            if (pricingStructureType == PricingStructureTypeEnum.BondCurve)
-            {
-                var rateCurveId = CurveName.Split('-');
-                var subordination = rateCurveId[rateCurveId.Length - 1];
-                var indexName = rateCurveId[0];
-                for (var i = 1; i < rateCurveId.Length - 1; i++)
-                {
-                    indexName = indexName + '-' + rateCurveId[i];
-                }
-                CreditInstrumentId = InstrumentIdHelper.Parse(indexName);
-                CreditSeniority = CreditSeniorityHelper.Parse(subordination);
-            }
-        }
+        //private void SetProperties(PricingStructureTypeEnum pricingStructureType)
+        //{
+        //    if (pricingStructureType == PricingStructureTypeEnum.BondDiscountCurve)
+        //    {
+        //        var rateCurveId = CurveName.Split('-');
+        //        var subordination = rateCurveId[rateCurveId.Length - 1];
+        //        var indexName = rateCurveId[0];
+        //        for (var i = 1; i < rateCurveId.Length - 1; i++)
+        //        {
+        //            indexName = indexName + '-' + rateCurveId[i];
+        //        }
+        //        CreditInstrumentId = InstrumentIdHelper.Parse(indexName);
+        //        CreditSeniority = CreditSeniorityHelper.Parse(subordination);
+        //    }
+        //    if (pricingStructureType == PricingStructureTypeEnum.BondCurve)
+        //    {
+        //        var rateCurveId = CurveName.Split('-');
+        //        var subordination = rateCurveId[rateCurveId.Length - 1];
+        //        var indexName = rateCurveId[0];
+        //        for (var i = 1; i < rateCurveId.Length - 1; i++)
+        //        {
+        //            indexName = indexName + '-' + rateCurveId[i];
+        //        }
+        //        CreditInstrumentId = InstrumentIdHelper.Parse(indexName);
+        //        CreditSeniority = CreditSeniorityHelper.Parse(subordination);
+        //    }
+        //}
     }
 }

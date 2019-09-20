@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Lifetime;
 using FpML.V5r3.Reporting.Helpers;
 using Orion.CurveEngine.Helpers;
 using Orion.Util.Helpers;
@@ -835,6 +836,12 @@ namespace Orion.CurveEngine.Assets.Helpers
                         listBasicQuotations.Add(BasicQuotationHelper.Create(value, rateQuotationType, "DecimalRate"));//Changed from DirtyPrice.
                         break;
                     }
+                case AssetTypesEnum.Lease:
+                {
+                    underlyingAsset = new Lease { id = instrumentId };
+                    listBasicQuotations.Add(BasicQuotationHelper.Create(value + additional, rateQuotationType, "Price"));
+                    break;
+                }
                 default:
                     throw new NotSupportedException($"Asset type {properties.AssetType} is not supported");
             }

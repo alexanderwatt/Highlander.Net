@@ -14,6 +14,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace Orion.Models.Property.Lease
 {
@@ -23,18 +24,42 @@ namespace Orion.Models.Property.Lease
         /// Gets or sets the quote.
         /// </summary>
         /// <value>The quote.</value>
-        Decimal Quote { get; set; }
+        decimal Quote { get; set; }
 
         /// <summary>
         /// Gets or sets the amount.
         /// </summary>
         /// <value>The amount.</value>
-        Decimal PurchaseAmount { get; set; }
+        decimal GrossAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the multiplier.
         /// </summary>
         ///  <value>The multiplier.</value>
-        Decimal Multiplier { get; set; }
+        decimal Multiplier { get; set; }
+
+        /// <summary>
+        /// Gets or sets the step up amount.
+        /// </summary>
+        /// <value>The amount.</value>
+        decimal StepUp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the dates.
+        /// </summary>
+        /// <value>The dates.</value>
+        List<DateTime> PaymentDates { get; set; }
+
+        /// <summary>
+        /// Gets or sets the weightings.
+        /// </summary>
+        /// <value>The weightings.</value>
+        decimal[] Weightings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the discount factors to use.
+        /// </summary>
+        /// <value>The dfs.</value>
+        decimal[] PaymentDiscountFactors { get; set; }
     }
 }

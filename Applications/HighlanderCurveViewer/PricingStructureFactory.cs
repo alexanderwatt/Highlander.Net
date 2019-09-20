@@ -8,7 +8,7 @@ using Orion.ModelFramework;
 using Orion.Util.Helpers;
 using Orion.Util.Logging;
 
-namespace HighlanderCurveViewer
+namespace Highlander.CurveViewer
 {
     internal static class PricingStructureFactory
     {

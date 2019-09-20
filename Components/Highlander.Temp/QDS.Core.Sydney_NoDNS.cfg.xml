@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnvConfigRuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/EnvConfigRuleFormat.xsd">
+  <setName>QDS_Core</setName>
+  <!-- NO DNS overrides for settings in Default.cfg.xml -->
+  <v2Rules>
+    <Priority>2</Priority>
+    <Env>DEV</Env>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=10.16.16.51</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <Env>SIT</Env>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=10.16.16.52</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <Env>STG</Env>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=10.16.16.79</Settings>
+  </v2Rules>
+</EnvConfigRuleSet>

@@ -46,7 +46,7 @@ namespace Orion.Identifiers
         /// Gets the strike.
         /// </summary>
         /// <value>The strike.</value>
-        public Decimal? Strike { get; set; }
+        public decimal? Strike { get; set; }
 
         /// <summary>
         /// Gets the ExpiryTime.
@@ -132,7 +132,7 @@ namespace Orion.Identifiers
             Currency = CurrencyHelper.Parse(volCurveId[0]);
             Instrument = volCurveId[volCurveId.Length - 2];
             UnderlyingAssetReference = new AssetReference { href = Instrument };
-            StrikeQuoteUnits = new PriceQuoteUnits { Value = "Absolute" };//DecimalRate
+            StrikeQuoteUnits = new PriceQuoteUnits { Value = PriceQuoteProp.Absolute };//DecimalRate
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Orion.Identifiers
             var volCurveId = surfaceId.Split('-');
             Instrument = volCurveId[volCurveId.Length - 2];
             UnderlyingAssetReference = new AssetReference { href = Instrument };
-            StrikeQuoteUnits = new PriceQuoteUnits { Value = "Absolute" };//DecimalRate
+            StrikeQuoteUnits = new PriceQuoteUnits { Value = PriceQuoteProp.Absolute };//DecimalRate
         }
 
         ///<summary>

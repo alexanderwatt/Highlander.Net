@@ -73,6 +73,7 @@
     <Compile Include="CashflowsHelper.cs" />
     <Compile Include="CashflowTypeHelper.cs" />
     <Compile Include="CommodityHelper.cs" />
+    <Compile Include="LeaseHelper.cs" />
     <Compile Include="QueryHelper.cs" />
     <Compile Include="ExchangeHelper.cs" />
     <Compile Include="CurrencyHelper.cs" />

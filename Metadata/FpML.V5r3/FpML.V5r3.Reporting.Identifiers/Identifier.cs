@@ -53,7 +53,7 @@ namespace Orion.Identifiers
         public string UniqueIdentifier { get; set; }
 
         /// <summary>
-        /// REturns the properties relevant to this identifier.
+        /// Returns the properties relevant to this identifier.
         /// </summary>
         /// <returns></returns>
         public NamedValueSet GetProperties()

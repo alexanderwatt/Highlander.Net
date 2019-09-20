@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnvConfigRuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/EnvConfigRuleFormat.xsd">
+  <setName>QDS_Core</setName>
+  <!-- Overrides settings in Default.cfg.xml -->
+  <!-- All servers redirect to localhost - useful for web servers -->
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>QDS_Core</ApplName>
+    <Settings>PrimaryServers/String=localhost</Settings>
+  </v2Rules>
+</EnvConfigRuleSet>

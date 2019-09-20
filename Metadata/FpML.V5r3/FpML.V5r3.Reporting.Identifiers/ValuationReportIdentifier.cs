@@ -32,12 +32,12 @@ namespace Orion.Identifiers
         /// <summary>
         /// Domain
         /// </summary>
-        public String Domain { get; private set; }
+        public string Domain { get; private set; }
 
         /// <summary>
         /// DataType
         /// </summary>
-        public String DataType { get; private set; }
+        public string DataType { get; private set; }
 
         /// <summary>
         /// CalculationDateTime
@@ -67,12 +67,12 @@ namespace Orion.Identifiers
         /// <summary>
         /// Market
         /// </summary>
-        public String Market { get; set; }
+        public string Market { get; set; }
 
         /// <summary>
-        /// Market
+        /// Market for backward compatibility
         /// </summary>
-        public String MarketName { get; set; }//For backward compatibility
+        public string MarketName { get; set; }
 
         /// <summary>
         /// Market
@@ -82,7 +82,7 @@ namespace Orion.Identifiers
         /// <summary>
         /// Market
         /// </summary>
-        public String MarketAndDate { get; set; }
+        public string MarketAndDate { get; set; }
        
 
         ///<summary>
@@ -93,17 +93,17 @@ namespace Orion.Identifiers
         /// <summary>
         /// TradeId
         /// </summary>
-        public String TradeId { get; set; }
+        public string TradeId { get; set; }
 
         /// <summary>
         /// TradeType
         /// </summary>
-        public String TradeType { get; set; }
+        public string TradeType { get; set; }
 
         /// <summary>
         /// PortfolioId
         /// </summary>
-        public String PortfolioId { get; set; }
+        public string PortfolioId { get; set; }
 
         ///<summary>
         /// An id for a trade.

@@ -372,6 +372,23 @@ namespace HLV5r3.Financial
             return result;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currency"></param>
+        /// <param name="paymentFrequency"></param>
+        /// <param name="businessDayConvention"></param>
+        /// <param name="businessCentersAsString"></param>
+        /// <returns></returns>
+        public string CreateLeaseConfiguration(string id, string currency, string paymentFrequency, string businessDayConvention, string businessCentersAsString)
+        {
+            var result = Engine.CreateLeaseConfiguration(id, currency, paymentFrequency, businessDayConvention,
+                businessCentersAsString);
+            return result;
+        }
+
         ///  <summary>
         ///  Examples of values are:
         ///  <Property name = "Tolerance" > 1E-10</Property >
@@ -807,7 +824,7 @@ namespace HLV5r3.Financial
         /// <param name="pricingStructureId">The pricing structure identifier.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetValue(string pricingStructureId, DateTime targetDate)
+        public double GetValue(string pricingStructureId, DateTime targetDate)
         {
             return Engine.GetValue(pricingStructureId, targetDate);
         }
@@ -833,7 +850,7 @@ namespace HLV5r3.Financial
         /// <param name="baseDate">The base date.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetValueFromBase(string pricingStructureId, DateTime baseDate,
+        public double GetValueFromBase(string pricingStructureId, DateTime baseDate,
                                       DateTime targetDate)
         {
             return Engine.GetValue(pricingStructureId, baseDate,
@@ -862,7 +879,7 @@ namespace HLV5r3.Financial
         /// <param name="valuationDate">The valuation date. This can be different to the base date of the pricing structure.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetHorizonValue(string pricingStructureId, DateTime valuationDate, DateTime targetDate)
+        public double GetHorizonValue(string pricingStructureId, DateTime valuationDate, DateTime targetDate)
         {
             return Engine.GetHorizonValue(pricingStructureId, valuationDate, targetDate);
         }
@@ -874,7 +891,7 @@ namespace HLV5r3.Financial
         /// <param name="date">The base date.</param>
         /// <param name="strike">The strike.</param>
         /// <returns></returns>
-        public Double GetSurfaceValue(string curveId, DateTime date, Double strike)
+        public double GetSurfaceValue(string curveId, DateTime date, Double strike)
         {
             return GetTenorStrikeValue(curveId, date, strike);
         }
@@ -898,7 +915,7 @@ namespace HLV5r3.Financial
         /// <param name="strike">The strike.</param>
         /// <param name="tenor">The tenor.</param>
         /// <returns></returns>
-        public Double GetCubeValue(string curveId, string expiryTerm, Double strike, string tenor)
+        public double GetCubeValue(string curveId, string expiryTerm, Double strike, string tenor)
         {
             var value = Engine.GetCubeValue(curveId, expiryTerm, strike, tenor);
             return value;
@@ -911,7 +928,7 @@ namespace HLV5r3.Financial
         /// <param name="targetDate">The target date.</param>
         /// <param name="strike">The strike value required.</param>
         /// <returns></returns>
-        public Double GetTenorStrikeValue(string pricingStructureId, DateTime targetDate, Double strike)
+        public double GetTenorStrikeValue(string pricingStructureId, DateTime targetDate, Double strike)
         {
             var value = Engine.GetTenorStrikeValue(pricingStructureId, targetDate, strike);
             return value;
@@ -926,7 +943,7 @@ namespace HLV5r3.Financial
         /// <param name="term">The term of the underlying required.</param>
         /// <returns>The interpolated value.</returns>
 
-        public Double GetExpiryDateTenorValue(string pricingStructureId, DateTime baseDate, DateTime targetDate, String term)
+        public double GetExpiryDateTenorValue(string pricingStructureId, DateTime baseDate, DateTime targetDate, String term)
         {
             var value = Engine.GetExpiryDateTenorValue(pricingStructureId, baseDate, targetDate, term);
             return value;
@@ -939,7 +956,7 @@ namespace HLV5r3.Financial
         /// <param name="expiryTerm">The expiry Term.</param>
         /// <param name="tenorTerm">The term of the underlying required.</param>
         /// <returns>The interpolated value.</returns>
-        public Double GetExpiryTermTenorValue(string pricingStructureId, String expiryTerm, String tenorTerm)
+        public double GetExpiryTermTenorValue(string pricingStructureId, String expiryTerm, String tenorTerm)
         {
             var value = Engine.GetExpiryTermTenorValue(pricingStructureId, expiryTerm, tenorTerm);
             return value;
@@ -953,7 +970,7 @@ namespace HLV5r3.Financial
         /// <param name="expirydate">The expiry date.</param>
         /// <param name="strike">The strike.</param>
         /// <returns>The interpolated value.</returns>
-        public Double GetExpiryDateStrikeValue(string pricingStructureId, DateTime baseDate, DateTime expirydate, Double strike)
+        public double GetExpiryDateStrikeValue(string pricingStructureId, DateTime baseDate, DateTime expirydate, Double strike)
         {
             var value = Engine.GetExpiryDateStrikeValue(pricingStructureId, baseDate, expirydate, strike);
             return value;
@@ -966,7 +983,7 @@ namespace HLV5r3.Financial
         /// <param name="expiryTerm">The expiry term.</param>
         /// <param name="strike">The strike.</param>
         /// <returns>The interpolated value.</returns>
-        public Double GetExpiryTermStrikeValue(string pricingStructureId, String expiryTerm, Double strike)
+        public double GetExpiryTermStrikeValue(string pricingStructureId, String expiryTerm, Double strike)
         {
             var value = Engine.GetExpiryTermStrikeValue(pricingStructureId, expiryTerm, strike);
             return value;
@@ -1369,10 +1386,10 @@ namespace HLV5r3.Financial
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
             namedValueSet.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.Spreadsheet.ToString());
-            List<string> unqinstruments = DataRangeHelper.StripRange(instrumentsAsArray);
-            List<decimal> unqvalues = DataRangeHelper.StripDecimalRange(valuesAsArray);
-            List<decimal> unqadditional = DataRangeHelper.StripDecimalRange(additionalAsArray);
-            var pricingStructure = Engine.CreateCurve(namedValueSet, unqinstruments.ToArray(), unqvalues.ToArray(), unqadditional.ToArray(), null, null);
+            List<string> unqInstruments = DataRangeHelper.StripRange(instrumentsAsArray);
+            List<decimal> unqValues = DataRangeHelper.StripDecimalRange(valuesAsArray);
+            List<decimal> unqAdditional = DataRangeHelper.StripDecimalRange(additionalAsArray);
+            var pricingStructure = Engine.CreateCurve(namedValueSet, unqInstruments.ToArray(), unqValues.ToArray(), unqAdditional.ToArray(), null, null);
             string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
             Engine.SaveCurve(pricingStructure);
             return structureId;

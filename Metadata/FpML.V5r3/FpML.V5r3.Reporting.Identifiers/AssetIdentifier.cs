@@ -44,22 +44,22 @@ namespace Orion.Identifiers
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? Coupon { get; set; }
+        public decimal? Coupon { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? MarketQuote { get; set; }
+        public decimal? MarketQuote { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? Other { get; set; }
+        public decimal? Other { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal? Strike { get; set; }
+        public decimal? Strike { get; set; }
 
         /// <summary>
         ///  An id for a trade.
@@ -68,7 +68,7 @@ namespace Orion.Identifiers
         /// <param name="properties">The properties. These need to include:
         ///  SourceSystem, Id and Trade date.</param>
         /// <param name="marketQuote">The market quote. This could be a rate or a volatility.</param>
-        public AssetIdentifier(Decimal? marketQuote, Decimal? other, NamedValueSet properties)
+        public AssetIdentifier(decimal? marketQuote, decimal? other, NamedValueSet properties)
             : base(properties)
         {
             MarketQuote = marketQuote;

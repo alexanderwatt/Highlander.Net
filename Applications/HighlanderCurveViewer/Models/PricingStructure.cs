@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HighlanderCurveViewer.Models
+namespace Highlander.CurveViewer.Models
 {
     public class PricingStructure
     {

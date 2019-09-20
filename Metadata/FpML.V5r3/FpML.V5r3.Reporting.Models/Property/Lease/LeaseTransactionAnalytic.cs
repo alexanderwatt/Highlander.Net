@@ -15,7 +15,7 @@
 
 #region Usings
 
-using System;
+using System.Collections.Generic;
 using Orion.ModelFramework;
 
 #endregion
@@ -24,52 +24,103 @@ namespace Orion.Models.Property.Lease
 {
     public class LeaseTransactionAnalytic : ModelAnalyticBase<ILeaseAssetParameters, LeaseMetrics>, ILeaseAssetResults
     {
-        #region IEquityAssetResults Members
+        #region ILeaseAssetResults Members
 
         /// <summary>
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal ImpliedQuote => AnalyticParameters.Quote;
+        public decimal ImpliedQuote => AnalyticParameters.Quote;
 
         /// <summary>
         /// Gets the npv.
         /// </summary>
-        public Decimal NPV => EvaluateNPV();
+        public decimal NPV => EvaluateNPV();
 
         /// <summary>
         /// Gets the profit based on the actual purchase price.
         /// </summary>
-        public Decimal PandL => EvaluatePandL();
-
-        /// <summary>
-        /// Gets the index
-        /// </summary>
-        public decimal IndexAtMaturity => AnalyticParameters.Quote;
+        public decimal PandL => EvaluatePandL();
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        public Decimal MarketQuote => AnalyticParameters.Quote;
+        public decimal MarketQuote => AnalyticParameters.Quote;
+
+        /// <summary>
+        /// Gets the expected cashflows.
+        /// </summary>
+        /// <value>The expected cashflows.</value>
+        public decimal[] ExpectedCashflows => EvaluateExpectedCashflows();
+
+        /// <summary>
+        /// Gets the pv pf the cashflows.
+        /// </summary>
+        /// <value>The pv of the cashflows.</value>
+        public decimal[] CashflowPVs => EvaluateCashflowPVs();
 
         /// <summary>
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateNPV()
+        private decimal EvaluateNPV()
         {
-            var dp = AnalyticParameters.PurchaseAmount * AnalyticParameters.Quote;
+            var dp = 0.0m;
+            var i = 0;
+            if (AnalyticParameters.PaymentDiscountFactors.Length != AnalyticParameters.Weightings.Length)
+                return AnalyticParameters.Multiplier * dp;
+            foreach (var flow in AnalyticParameters.Weightings)
+            {
+                dp = dp + AnalyticParameters.GrossAmount * flow * AnalyticParameters.PaymentDiscountFactors[i];
+                i++;
+            }
             return AnalyticParameters.Multiplier * dp;
         }
 
-        private Decimal EvaluatePandL()
+        /// <summary>
+        /// Evaluates the expected cashflows.
+        /// </summary>
+        /// <returns></returns>
+        private decimal[] EvaluateExpectedCashflows()
         {
-            //This does not discount the profit.
-            var pl = AnalyticParameters.PurchaseAmount * (AnalyticParameters.Quote - AnalyticParameters.Quote);
-            return AnalyticParameters.Multiplier * pl;
+            var dp = new List<decimal>();
+            if (AnalyticParameters.PaymentDiscountFactors.Length == AnalyticParameters.Weightings.Length)
+            {
+                foreach (var flow in AnalyticParameters.Weightings)
+                {
+                    dp.Add(AnalyticParameters.Multiplier * AnalyticParameters.GrossAmount * flow);
+                }
+            }
+            return dp.ToArray();
         }
 
-        #endregion    
+        /// <summary>
+        /// Evaluates the pv of all cashflows.
+        /// </summary>
+        /// <returns></returns>
+        private decimal[] EvaluateCashflowPVs()
+        {
+            var dp = new List<decimal>();
+            var i = 0;
+            if (AnalyticParameters.PaymentDiscountFactors.Length == AnalyticParameters.Weightings.Length)
+            {
+                foreach (var flow in AnalyticParameters.Weightings)
+                {
+                    dp.Add(AnalyticParameters.Multiplier * AnalyticParameters.GrossAmount * flow * AnalyticParameters.PaymentDiscountFactors[i]);
+                    i++;
+                }
+            }
+            return dp.ToArray();
+        }
+
+        private decimal EvaluatePandL()
+        {
+            //This does not discount the profit.
+            var pl = AnalyticParameters.Multiplier * AnalyticParameters.Quote - EvaluateNPV();
+            return pl;
+        }
+
+        #endregion
     }
 }

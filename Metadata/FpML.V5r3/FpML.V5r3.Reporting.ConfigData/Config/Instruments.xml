@@ -19791,23 +19791,6 @@
       </BusinessDayAdjustments>
     </InstrumentNodeItem>
   </Instruments>
-  
-  <!--<Instruments>
-    <AssetType>Equity</AssetType>
-    <Currency>AUD</Currency>
-    <ExtraItem>XASX</ExtraItem>
-    <InstrumentNodeItem xsi:type="EquityNodeStruct">
-      <SettlementDate>
-        <periodMultiplier>3</periodMultiplier>
-        <period>D</period>
-        <dayType>Business</dayType>
-        <businessDayConvention>FOLLOWING</businessDayConvention>
-        <businessCenters>
-          <businessCenter>AUSY</businessCenter>
-        </businessCenters>
-      </SettlementDate>
-    </InstrumentNodeItem>
-  </Instruments>-->
 
   <!--AUD EquityForward-->
   <Instruments>
@@ -19842,6 +19825,31 @@
           <businessCenter>AUSY</businessCenter>
         </businessCenters>
       </SettlementDate>
+    </InstrumentNodeItem>
+  </Instruments>
+
+  <!--AUD Lease-->
+  <Instruments>
+    <AssetType>Lease</AssetType>
+    <Currency>AUD</Currency>
+    <InstrumentNodeItem xsi:type="LeaseNodeStruct">
+      <Lease>
+        <currency id="PaymentCurrency">AUD</currency>
+        <leaseIdentifier>AUD-Lease</leaseIdentifier>
+        <leaseType>Standard</leaseType>
+        <reviewChange>0</reviewChange>
+        <numberOfUnits>0</numberOfUnits>
+        <paymentFrequency>
+          <periodMultiplier>1</periodMultiplier>
+          <period>M</period>
+        </paymentFrequency>
+        <rollConvention>EOM</rollConvention>
+        <businessDayAdjustments>
+          <businessCenters>
+            <businessCenter>AUSY</businessCenter>
+          </businessCenters>
+        </businessDayAdjustments>
+      </Lease>
     </InstrumentNodeItem>
   </Instruments>
 

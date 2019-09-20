@@ -32,22 +32,22 @@ namespace Orion.Identifiers
         ///<summary>
         /// The reference curve type and name e.g FxCurve.AUD-USD
         ///</summary>
-        public String ReferenceFxCurveTypeAndName { get; set; }
+        public string ReferenceFxCurveTypeAndName { get; set; }
 
         ///<summary>
         /// The reference curve unique id e.g Orion.Market.QR_LIVE.FxCurve.AUD-USD
         ///</summary>
-        public String ReferenceFxCurveUniqueId { get; set; }
+        public string ReferenceFxCurveUniqueId { get; set; }
 
         ///<summary>
         /// The reference curve type and name e.g FxCurve.GBP-USD
         ///</summary>
-        public String ReferenceFxCurve2TypeAndName { get; set; }
+        public string ReferenceFxCurve2TypeAndName { get; set; }
 
         ///<summary>
         /// The reference curve unique id e.g Orion.Market.QR_LIVE.FxCurve.GBP-USD
         ///</summary>
-        public String ReferenceFxCurve2UniqueId { get; set; }
+        public string ReferenceFxCurve2UniqueId { get; set; }
 
         /// <summary>
         /// The QuotedCurrencyPair.
@@ -117,7 +117,7 @@ namespace Orion.Identifiers
 
         private void SetProperties()
         {
-            //Check if the quotebasis was provided.
+            //Check if the quote basis was provided.
             var quoteBasis = PropertyHelper.ExtractQuoteBasis(Properties);
             SetProperties(quoteBasis);
             switch (PricingStructureType)

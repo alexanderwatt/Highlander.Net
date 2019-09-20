@@ -111,7 +111,7 @@ namespace Orion.Identifiers
         public PricingStructureIdentifier(NamedValueSet properties)
             : base(properties)
         {
-            DataType = "Market";
+            DataType = MarketsProp.Market;
             SetProperties();
             UpdateProperties();
         }
@@ -154,9 +154,9 @@ namespace Orion.Identifiers
         /// <param name="buildDateTime">The build date time.</param>
         /// <param name="algorithm">The algorithm.</param>
         public PricingStructureIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, 
-            DateTime buildDateTime, String algorithm)
+            DateTime buildDateTime, string algorithm)
         {
-            DataType = "Market";
+            DataType = MarketsProp.Market;
             SourceSystem = "Orion";
             Domain = SourceSystem + '.' + DataType;
             PricingStructureType = pricingStructureType;
@@ -165,7 +165,7 @@ namespace Orion.Identifiers
             BaseDate = buildDateTime.Date;
             Algorithm = algorithm;
             Properties = new NamedValueSet();
-            Properties.Set("DataType", "Market");
+            Properties.Set(EnvironmentProp.DataType, MarketsProp.Market);
             Properties.Set(CurveProp.SourceSystem, "Orion");
             Properties.Set(CurveProp.PricingStructureType, PricingStructureType.ToString());
             Properties.Set(CurveProp.BuildDateTime, BuildDateTime);
@@ -183,7 +183,7 @@ namespace Orion.Identifiers
         /// <param name="curveName">Name of the index.</param>
         /// <param name="buildDateTime">The build date time.</param>
         public PricingStructureIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime)
-            : this(pricingStructureType, curveName, buildDateTime, "Default")
+            : this(pricingStructureType, curveName, buildDateTime, AlgorithmsProp.Default)
         {}
 
         /// <summary>
@@ -193,18 +193,18 @@ namespace Orion.Identifiers
         public PricingStructureIdentifier(string curveId)
         {
             Properties = new NamedValueSet();
-            DataType = "Market";
+            DataType = MarketsProp.Market;
             SourceSystem = "Orion";
             Domain = SourceSystem + '.' + DataType;
             BuildDateTime = DateTime.Now;
             Properties.Set(CurveProp.BuildDateTime, BuildDateTime);
-            Algorithm = "Default";
+            Algorithm = AlgorithmsProp.Default;
             Id = curveId;
-            Properties.Set("Identifier", Id);
+            Properties.Set(IdentifiersProp.Identifier, Id);
             Properties.Set(CurveProp.Algorithm, Algorithm);
-            Properties.Set("DataType", "Market");
+            Properties.Set(EnvironmentProp.DataType, FunctionProp.Market.ToString());
             Properties.Set(CurveProp.SourceSystem, "Orion");
-            Properties.Set("Domain", SourceSystem + '.' + DataType);
+            Properties.Set(EnvironmentProp.Domain, SourceSystem + '.' + DataType);
             string[] idParts = curveId.Split('.');
             if (idParts.Length>=2)
             {
@@ -242,10 +242,10 @@ namespace Orion.Identifiers
         /// <returns></returns>
         protected string BuildId() //TODO Should the algorithm be included?
         {
-            string id = Properties.GetString("Identifier", false);
+            string id = Properties.GetString(IdentifiersProp.Identifier, false);
             if (string.IsNullOrEmpty(id))
             {
-                string suffix = Properties.GetString("Usage", false);
+                string suffix = Properties.GetString(IdentifiersProp.Usage, false);
                 if (string.IsNullOrEmpty(suffix))
                 {
                     suffix = Properties.GetString(CurveProp.StressName, false);

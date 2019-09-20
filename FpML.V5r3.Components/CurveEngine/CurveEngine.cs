@@ -1005,7 +1005,7 @@ namespace Orion.CurveEngine
         /// <param name="additional">The additional. For a future this is the volatility. For a bond this is the coupon.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public string CreateLocalAsset(Decimal rate, Decimal additional, NamedValueSet properties)
+        public string CreateLocalAsset(decimal rate, decimal additional, NamedValueSet properties)
         {
             //sets the default.
             const string result = "Asset not built-";
@@ -1041,7 +1041,7 @@ namespace Orion.CurveEngine
         /// <param name="priceQuoteUnits">The units of measure.</param>
         /// <param name="properties">the properties.</param>
         /// <returns>The string id.</returns>
-        public string CreateLocalAsset(List<Decimal> values, List<string> measureType, List<string> priceQuoteUnits,
+        public string CreateLocalAsset(List<decimal> values, List<string> measureType, List<string> priceQuoteUnits,
                                          NamedValueSet properties)
         {
             var clonedNvs = new NamedValueSet(properties.ToDictionary());
@@ -1069,7 +1069,7 @@ namespace Orion.CurveEngine
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         /// <param name="properties"></param>
-        public List<string> CreateLocalAssets(List<string> assetIdentifiers, List<Decimal> values,
+        public List<string> CreateLocalAssets(List<string> assetIdentifiers, List<decimal> values,
                                             List<string> measureTypes, List<string> priceQuoteUnits, NamedValueSet properties)
         {
             if (assetIdentifiers.Count != values.Count && assetIdentifiers.Count != priceQuoteUnits.Count && assetIdentifiers.Count != measureTypes.Count)
@@ -1239,6 +1239,31 @@ namespace Orion.CurveEngine
             var priceableAsset = new PriceableSimpleBond(baseDate, nodeStruct, settlementCalendar, paymentCalendar, normalisedRate, BondPriceEnum.YieldToMaturity);
             SetLocalAsset(uniqueId, priceableAsset, properties);
             return uniqueId;
+        }
+
+        /// <summary>
+        /// Creates the specified asset.
+        /// </summary>
+        /// <param name="assetIdentifiers"></param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="grossAmounts">The gross amounts.</param>
+        /// <param name="stepUps">The step up percentages.</param>
+        /// <returns>The string id.</returns>
+        public List<string> CreateLocalLeases(List<string> assetIdentifiers, DateTime baseDate, List<double> grossAmounts, List<double> stepUps)
+        {
+            if (assetIdentifiers.Count != grossAmounts.Count && assetIdentifiers.Count != stepUps.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(grossAmounts), "the rates do not match the number of assets");
+            }
+            var index = 0;
+            var priceableAssets = new List<string>();
+            foreach (var assetIdentifier in assetIdentifiers)
+            {
+                var properties = PriceableAssetFactory.BuildPropertiesForLeaseAssets("Local", assetIdentifier, baseDate, grossAmounts[index], stepUps[index]);
+                priceableAssets.Add(CreateLocalAsset(Convert.ToDecimal(grossAmounts[index]), 0.0m, properties));
+                index++;
+            }
+            return priceableAssets;
         }
 
         /// <summary>
@@ -3854,6 +3879,35 @@ namespace Orion.CurveEngine
 
         #region Utility Functions
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currency"></param>
+        /// <param name="paymentFrequency"></param>
+        /// <param name="businessDayConvention"></param>
+        /// <param name="businessCentersAsString"></param>
+        /// <returns></returns>
+        public string CreateLeaseConfiguration(string id, string currency, string paymentFrequency, string businessDayConvention, string businessCentersAsString)
+        {
+            var name = FunctionProp.Configuration + ".Instrument.Lease." + currency;
+            var uniqueName = NameSpace + "." + name;
+            var itemProps = new NamedValueSet();
+            itemProps.Set(EnvironmentProp.DataGroup, "Orion.V5r3.Reporting.Configuration.Instrument");
+            itemProps.Set(EnvironmentProp.SourceSystem, "Highlander");
+            itemProps.Set(EnvironmentProp.Function, FunctionProp.Configuration.ToString());
+            itemProps.Set(EnvironmentProp.Type, "Instrument");
+            itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
+            itemProps.Set(EnvironmentProp.NameSpace, NameSpace);
+            itemProps.Set(LeaseProp.UniqueIdentifier, name);
+            itemProps.Set(LeaseProp.Currency, currency);
+            itemProps.Set("AssetType", "Lease");
+            itemProps.Set("AssetId", id);
+            var lease = LeaseHelper.CreateConfiguration(id, currency, paymentFrequency, businessDayConvention, businessCentersAsString);
+            Cache.SaveObject(lease, uniqueName, itemProps);
+            return name;
+        }
+
         ///  <summary>
         ///  Examples of values are:
         /// <Property name = "Tolerance" > 1E-10</Property >
@@ -3884,8 +3938,8 @@ namespace Orion.CurveEngine
                        algorithmName;
             var uniqueName = NameSpace + "." + name;
             var itemProps = new NamedValueSet();
-            itemProps.Set(EnvironmentProp.DataGroup, "Orion.V5r3.Reporting.Configuration.Algorithm.");
-            itemProps.Set(EnvironmentProp.SourceSystem, "Orion");
+            itemProps.Set(EnvironmentProp.DataGroup, "Orion.V5r3.Reporting.Configuration.Algorithm");
+            itemProps.Set(EnvironmentProp.SourceSystem, "Highlander");
             itemProps.Set(EnvironmentProp.Function, FunctionProp.Configuration.ToString());
             itemProps.Set(EnvironmentProp.Type, "Algorithm");
             itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");

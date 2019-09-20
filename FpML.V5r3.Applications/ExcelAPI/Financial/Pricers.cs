@@ -1039,6 +1039,31 @@ namespace HLV5r3.Financial
         /// <param name="referencePropertyIdentifier">The reference property identifier.</param>
         /// <param name="description">The description.</param>
         /// <param name="party1">Party 1</param>
+        /// <returns></returns>
+        public string CreateLeaseTrade(string tradeId, bool isParty1Tenant, string party1, string party2,
+            DateTime tradeDate, DateTime leaseStartDate, string currency, string portfolio, decimal startGrossAmount, string leaseId,
+            DateTime leaseExpiryDate, string referencePropertyIdentifier, string description)
+        {
+            return CreateLeaseTradeWithProperties(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
+                currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description, null);
+        }
+
+        /// <summary>
+        /// Creates a lease transaction
+        /// </summary>
+        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="isParty1Tenant">Is party1 the tenant. If not then it is the property owner. </param>
+        /// <param name="party2">Party 2</param>
+        /// <param name="tradeDate">The trade date.</param>
+        /// <param name="leaseStartDate"></param>
+        /// <param name="currency">The currency.</param>
+        /// <param name="portfolio">The portfolio.</param>
+        /// <param name="leaseExpiryDate"></param>
+        /// <param name="startGrossAmount"></param>
+        /// <param name="leaseId">The lease identifier.</param>
+        /// <param name="referencePropertyIdentifier">The reference property identifier.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="party1">Party 1</param>
         /// <param name="properties2DRange">A trade properties range. This should include the following:
         /// upfrontAmount as a decimal,
         /// paymentDate for any upfront amount,
@@ -1057,19 +1082,21 @@ namespace HLV5r3.Financial
             // string reviewFrequency, DateTime nextReviewDate, decimal reviewChange,
             //string leaseType, string shopNumber, string unitsOfArea,
             //decimal upfrontAmount, DateTime paymentDate, 
-            var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
-            properties = (object[,])DataRangeHelper.TrimNulls(properties);
-            var namedValueSet = properties.ToNamedValueSet();
+            var properties = properties2DRange?.Value[System.Reflection.Missing.Value] as object[,];
+            var namedValueSet = new NamedValueSet();
+            if (properties != null)
+            {
+                properties = (object[,]) DataRangeHelper.TrimNulls(properties);
+                namedValueSet = properties.ToNamedValueSet();
+            }
             //Get the values required from the range data.
             var upfrontAmount = namedValueSet.GetValue(LeaseProp.UpfrontAmount, 0.0m);
-            var paymentDate = namedValueSet.GetValue(LeaseProp.PaymentDate, leaseStartDate);
             var leaseType = namedValueSet.GetValue(LeaseProp.LeaseType, "unspecified");
             var shopNumber = namedValueSet.GetValue(LeaseProp.ShopNumber, "unspecified");
             var area = namedValueSet.GetValue(LeaseProp.Area, 0.0m);
             var unitsOfArea = namedValueSet.GetValue(LeaseProp.UnitsOfArea, "sqm");
             var reviewFrequency = namedValueSet.GetValue(LeaseProp.ReviewFrequency, "1Y");
-            //TODO Add a default review date
-            var nextReviewDate = namedValueSet.GetValue(LeaseProp.NextReviewDate, leaseStartDate);
+            var nextReviewDate = namedValueSet.GetValue(LeaseProp.NextReviewDate, leaseStartDate.AddYears(1));
             var reviewChange = namedValueSet.GetValue(LeaseProp.ReviewChange, 0.0m);
             //Set property values
             namedValueSet.Set(TradeProp.Party1, party1);
@@ -1097,7 +1124,7 @@ namespace HLV5r3.Financial
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
             namedValueSet.Set(LeaseProp.ReferenceProperty, referencePropertyIdentifier);
             return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
-                upfrontAmount, paymentDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
+                upfrontAmount, leaseStartDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
                 leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);
         }
 

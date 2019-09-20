@@ -70,6 +70,7 @@ namespace Orion.Constants
         public const string CompoundingFrequency = "CompoundingFrequency";
         public const string ExtrapolationPermitted = "ExtrapolationPermitted";
         public const string BootstrapperInterpolation = "BootstrapperInterpolation";
+        public const string BaseCurve = "BaseCurve";
     }
 
     public static class CurveConst
@@ -116,7 +117,7 @@ namespace Orion.Constants
         /// <summary>
         /// Both
         /// </summary>
-        Hybid
+        Hybrid
     }
 
     ///<summary>
@@ -175,5 +176,4 @@ namespace Orion.Constants
         ///</summary>
         Energy
     }
-
 }

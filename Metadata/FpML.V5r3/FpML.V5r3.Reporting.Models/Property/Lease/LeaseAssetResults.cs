@@ -17,7 +17,7 @@ namespace Orion.Models.Property.Lease
 {
     public class LeaseAssetResults : ILeaseAssetResults
     {
-        #region Implementation of IEquityAssetResults
+        #region Implementation of ILeaseAssetResults
 
         /// <summary>
         /// Gets the npv.
@@ -41,6 +41,18 @@ namespace Orion.Models.Property.Lease
         /// Gets the profit based on the actual purchase price.
         /// </summary>
         public decimal PandL { get; set; }
+
+        /// <summary>
+        /// Gets the expected cashflows.
+        /// </summary>
+        /// <value>The expected cashflows.</value>
+        public decimal[] ExpectedCashflows { get; set; }
+
+        /// <summary>
+        /// Gets the pv pf the cashflows.
+        /// </summary>
+        /// <value>The pv of the cashflows.</value>
+        public decimal[] CashflowPVs { get; set; }
 
         #endregion
     }

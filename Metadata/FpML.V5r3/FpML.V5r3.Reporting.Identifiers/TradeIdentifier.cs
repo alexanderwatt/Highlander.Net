@@ -36,12 +36,12 @@ namespace Orion.Identifiers
         /// <summary>
         /// Domain
         /// </summary>
-        public String Domain { get; private set; }
+        public string Domain { get; private set; }
 
         /// <summary>
         /// DataType
         /// </summary>
-        public String DataType { get; private set; }
+        public string DataType { get; private set; }
 
         /// <summary>
         /// TradeType
@@ -117,7 +117,7 @@ namespace Orion.Identifiers
         {
             try
             {
-                DataType = "Trade";
+                DataType = FunctionProp.Trade.ToString();
                 SourceSystem = PropertyHelper.ExtractSourceSystem(properties);
                 var tradeId = properties.GetValue<string>(TradeProp.TradeId);
                 Id = tradeId;
@@ -135,7 +135,7 @@ namespace Orion.Identifiers
                     UniqueIdentifier = properties.GetValue<string>(CurveProp.UniqueIdentifier);
                 }
                 PropertyHelper.Update(Properties, CurveProp.UniqueIdentifier, UniqueIdentifier);
-                PropertyHelper.Update(Properties, "Domain", Domain);
+                PropertyHelper.Update(Properties, EnvironmentProp.Domain, Domain);
             }
             catch
             {
@@ -147,7 +147,7 @@ namespace Orion.Identifiers
         {
             try
             {
-                DataType = "Trade";
+                DataType = TradeProp.Trade;
                 SourceSystem = sourceSystem;
                 Domain = SourceSystem + '.' + DataType;
                 TradeDate = tradeDate;
@@ -156,10 +156,10 @@ namespace Orion.Identifiers
                 Id = tradeId;
                 UniqueIdentifier = BuildUniqueId(tradeId);
                 Properties = new NamedValueSet();
-                Properties.Set("DataType", "Trade");
-                Properties.Set("SourceSystem", "Orion");
-                Properties.Set("Domain", SourceSystem + '.' + DataType);
-                Properties.Set("Identifier", Id);
+                Properties.Set(EnvironmentProp.DataType, FunctionProp.Trade.ToString());
+                Properties.Set(EnvironmentProp.SourceSystem, "Orion");
+                Properties.Set(EnvironmentProp.Domain, SourceSystem + '.' + DataType);
+                Properties.Set(TradeProp.Identifier, Id);
                 Properties.Set(CurveProp.UniqueIdentifier, UniqueIdentifier);
                 Properties.Set(TradeProp.TradeDate, tradeDate);
             }
@@ -173,7 +173,7 @@ namespace Orion.Identifiers
         {
             try
             {
-                DataType = "Trade";
+                DataType = FunctionProp.Trade.ToString();
                 SourceSystem = "Orion";
                 Domain = SourceSystem + '.' + DataType;
                 TradeType = tradeType;
@@ -181,10 +181,10 @@ namespace Orion.Identifiers
                 Id = tradeId;
                 UniqueIdentifier = BuildUniqueId(tradeId);
                 Properties = new NamedValueSet();
-                Properties.Set("DataType", "Trade");
-                Properties.Set("SourceSystem", "Orion");
-                Properties.Set("Domain", SourceSystem + '.' + DataType);
-                Properties.Set("Identifier", Id);
+                Properties.Set(EnvironmentProp.DataType, FunctionProp.Trade.ToString());
+                Properties.Set(EnvironmentProp.SourceSystem, "Orion");
+                Properties.Set(EnvironmentProp.Domain, SourceSystem + '.' + DataType);
+                Properties.Set(TradeProp.Identifier, Id);
                 Properties.Set(CurveProp.UniqueIdentifier, UniqueIdentifier);
                 //Properties.Set(TradeProp.TradeDate, tradeDate);
             }

@@ -49,7 +49,9 @@ namespace Orion.ValuationEngine.Pricers
         public bool BasePartyBuyer { get; set; }
 
         public decimal PreviousSettlementValue { get; set; }
+
         public decimal CurrentSettlementValue { get; set; }
+
         public decimal TradePrice { get; set; }
 
         /// <summary>
@@ -77,9 +79,9 @@ namespace Orion.ValuationEngine.Pricers
         public Money PurchasePrice { get; set; }
 
         /// <summary>
-        /// The reference future in the format: AUD-IRFuture-ED1
+        /// The reference contract
         /// </summary>
-        public String ReferenceContract { get; set; }
+        public string ReferenceContract { get; set; }
 
         /// <summary>
         /// THe purchase as a quote
@@ -147,7 +149,7 @@ namespace Orion.ValuationEngine.Pricers
         {}
 
         public PropertyTransactionPricer(ILogger logger, ICoreCache cache, string nameSpace, DateTime paymentDate,
-            String referenceContract, IBusinessCalendar settlementCalendar, PropertyTransaction propertyFpML, string basePartyReference)
+            string referenceContract, IBusinessCalendar settlementCalendar, PropertyTransaction propertyFpML, string basePartyReference)
             : this(logger, cache, nameSpace, paymentDate, referenceContract, settlementCalendar, propertyFpML, basePartyReference, false)
         {}
 

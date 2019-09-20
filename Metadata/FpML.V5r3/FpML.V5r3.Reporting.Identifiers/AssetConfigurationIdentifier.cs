@@ -28,22 +28,22 @@ namespace Orion.Identifiers
         /// <summary>
         /// AssetRef
         /// </summary>
-        public String AssetRef { get; set; }
+        public string AssetRef { get; set; }
 
         /// <summary>
         /// SourceSystem
         /// </summary>
-        public String SourceSystem { get; }
+        public string SourceSystem { get; }
 
         /// <summary>
         /// Domain
         /// </summary>
-        public String Domain { get; }
+        public string Domain { get; }
 
         /// <summary>
         /// DataType
         /// </summary>
-        public String DataType { get; }
+        public string DataType { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IIdentifier"/> class.

@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
+using Highlander.CurveViewer.Models;
 using Microsoft.AspNetCore.Mvc;
-using HighlanderCurveViewer.Models;
 
-namespace HighlanderCurveViewer.Controllers
+namespace Highlander.CurveViewer.Controllers
 {
     public class HomeController : Controller
     {

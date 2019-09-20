@@ -15,7 +15,6 @@
 
 #region Using directives
 
-using System;
 using Orion.Constants;
 using Orion.ModelFramework.Identifiers;
 
@@ -58,7 +57,7 @@ namespace Orion.Identifiers
 
         public static string BuildId(string ticker, string pricingSource)
         {
-            return MarketSectorEnum.Equity.ToString() + "." + ticker + "." + pricingSource;
+            return MarketSectorEnum.Equity + "." + ticker + "." + pricingSource;
         }
     }
 }

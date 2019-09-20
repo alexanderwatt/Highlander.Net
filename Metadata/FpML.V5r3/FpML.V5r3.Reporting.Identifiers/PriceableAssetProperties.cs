@@ -210,6 +210,12 @@ namespace Orion.Identifiers
                             $"Instrument name '{instrumentId}' is invalid, it must be in the format 'a-b-c-d' where 'd' is the tenor");
                     }
                     break;
+                case AssetTypesEnum.Lease:
+                    if (parts.Length > 3)
+                    {
+                        ForwardIndex = PeriodHelper.Parse(parts[3]);
+                    }
+                    break;
             }
         }
 

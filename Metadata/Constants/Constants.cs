@@ -27,6 +27,27 @@ namespace Orion.Constants
         public const string CompoundingFrequency = "CompoundingFrequency";
         public const string ExtrapolationPermitted = "ExtrapolationPermitted";
         public const string DayCounter = "DayCounter";
+        public const string Default = "Default";
+    }
+
+    public static class IdentifiersProp
+    {
+        public const string UniqueIdentifier = "UniqueIdentifier";
+        public const string Exchange = "Exchange";
+        public const string ContractCode = "ContractCode";
+        public const string Identifier = "Identifier";
+        public const string Usage = "Usage";
+    }
+
+    public static class MarketsProp
+    {
+        public const string Market = "Market";
+        public const string MarketDate = "MarketDate";
+    }
+
+    public static class PriceQuoteProp
+    {
+        public const string Absolute = "Absolute";
     }
 
     //public static class LocationCalendarYearProp//In the process of being deprecated.

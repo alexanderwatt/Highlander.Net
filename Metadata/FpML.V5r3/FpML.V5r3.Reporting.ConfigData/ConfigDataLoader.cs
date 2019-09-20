@@ -65,8 +65,8 @@ namespace Orion.V5r3.Configuration
             foreach (Instrument instrument in assetSet.Instruments)
             {
                 string id = instrument.Currency.Value;
-                //if (instrument.AssetType == "IRFuture")
-                //{
+                if (instrument.AssetType == "Lease")
+                {
                     var assetId = id + '-' + instrument.AssetType;
                     if (instrument.ExtraItem != null)
                         id = id + "." + instrument.ExtraItem;
@@ -79,7 +79,7 @@ namespace Orion.V5r3.Configuration
                     if (instrument.ExtraItem != null)
                         itemInfo.ItemProps.Set("ExtraItem", instrument.ExtraItem);
                     targetClient.SaveObject(instrument, itemInfo.ItemName, itemInfo.ItemProps);
-                //}
+                }
             }
             logger.LogDebug("Loaded instrument configs.");
         }

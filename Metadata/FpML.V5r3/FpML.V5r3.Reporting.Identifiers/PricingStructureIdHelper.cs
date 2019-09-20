@@ -27,7 +27,7 @@ namespace Orion.Identifiers
     public class PricingStructureIdHelper
     {
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static DateTime? ExtractExpiryTime(NamedValueSet propertyCollection)
@@ -42,7 +42,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static DateTime? ExtractTime(NamedValueSet propertyCollection)
@@ -57,7 +57,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static DateTime? ExtractValuationDate(NamedValueSet propertyCollection)
@@ -72,7 +72,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static QuoteTiming ExtractQuoteTiming(NamedValueSet propertyCollection)
@@ -88,7 +88,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static AssetMeasureType ExtractMeasureType(NamedValueSet propertyCollection)
@@ -104,7 +104,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static PriceQuoteUnits ExtractQuoteUnits(NamedValueSet propertyCollection)
@@ -120,7 +120,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static PriceQuoteUnits ExtractStrikeQuoteUnits(NamedValueSet propertyCollection)
@@ -136,7 +136,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static CashflowType ExtractCashflowType(NamedValueSet propertyCollection)
@@ -152,7 +152,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static QuotationSideEnum? ExtractSide(NamedValueSet propertyCollection)
@@ -168,7 +168,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static InformationSource[] ExtractInformationSources(NamedValueSet propertyCollection)
@@ -185,7 +185,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static BusinessCenters ExtractBusinessCenters(NamedValueSet propertyCollection)
@@ -201,7 +201,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static BusinessCenter ExtractBusinessCenter(NamedValueSet propertyCollection)
@@ -217,7 +217,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static BusinessDayConventionEnum ExtractBusinessDayConvention(NamedValueSet propertyCollection)
@@ -234,7 +234,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static BusinessDayAdjustments ExtractBusinessDayAdjustments(NamedValueSet propertyCollection)
@@ -251,7 +251,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractCommodityAsset(NamedValueSet propertyCollection)
@@ -275,15 +275,13 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static QuotedCurrencyPair ExtractQuotedCurrencyPair(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-            
             string currencyPair = "AUD-USD";
-
             if (dictionaryKeys.ContainsKey(CurveProp.CurrencyPair))
             {
                 currencyPair = propertyCollection.Get(CurveProp.CurrencyPair).AsValue<string>();
@@ -307,14 +305,12 @@ namespace Orion.Identifiers
                 }
             }
             var pair = currencyPair.Split('-');
-
             var quoteBasis = ExtractQuoteBasis(propertyCollection);
-
             return QuotedCurrencyPair.Create(pair[0], pair[1], quoteBasis);
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static QuoteBasisEnum ExtractQuoteBasis(NamedValueSet propertyCollection)
@@ -329,42 +325,38 @@ namespace Orion.Identifiers
             }
             return quoteBasis;
         }
-       
+
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractCurveName(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-            
             if (dictionaryKeys.ContainsKey(CurveProp.CurveName))
             {
                 return propertyCollection.Get(CurveProp.CurveName).AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'CurveName' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static PricingStructureTypeEnum ExtractPricingStructureType(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey(CurveProp.PricingStructureType))
             {
                 var pricingStructureTypeAsString = propertyCollection.Get(CurveProp.PricingStructureType).AsValue<string>();
                 return (PricingStructureTypeEnum)Enum.Parse(typeof(PricingStructureTypeEnum), pricingStructureTypeAsString, true);
             }
-
             throw new System.Exception("Mandatory 'PricingStructureType' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static DateTime ExtractBuildDateTime(NamedValueSet propertyCollection)
@@ -387,71 +379,63 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractIdentifier(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("Identifier"))
             {
                 return propertyCollection.Get("Identifier").AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'Identifier' property has not been specified. Please specify.");
         }
-        
+
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractAlgorithm(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("Algorithm"))
             {
                 return propertyCollection.Get("Algorithm").AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'Algorithm' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractSource(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("Source"))
             {
                 return propertyCollection.Get("Source").AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'Source' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractInstrument(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-            
             if (dictionaryKeys.ContainsKey("Instrument"))
             {
                 return propertyCollection.Get("Instrument").AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'Instrument' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractCurrency(NamedValueSet propertyCollection)
@@ -466,84 +450,74 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static Boolean ExtractLPMCopy(NamedValueSet propertyCollection)
         {
             var lpmCopy = false;
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("LPMCopy"))
             {
                 lpmCopy = propertyCollection.Get("LPMCopy").AsValue<Boolean>();
             }
-
             return lpmCopy;
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractMarketEnvironment(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("MarketEnvironment"))
             {
                 return propertyCollection.Get("MarketEnvironment").AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'MarketEnvironment' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractIndexName(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey(CurveProp.IndexName))
             {
                 return propertyCollection.Get(CurveProp.IndexName).AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'IndexName' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractIndexTenor(NamedValueSet propertyCollection)
         {
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey(CurveProp.IndexTenor))
             {
                 return propertyCollection.Get(CurveProp.IndexTenor).AsValue<string>();
             }
-
             throw new System.Exception("Mandatory 'IndexTenor' property has not been specified. Please specify.");
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractCreditSeniority(NamedValueSet propertyCollection)
         {
             var creditSeniority = "Unknown";
             var dictionaryKeys = propertyCollection.ToDictionary();
-
             if (dictionaryKeys.ContainsKey("CreditSeniority"))
             {
                 creditSeniority = propertyCollection.Get("CreditSeniority").AsValue<string>();
             }
-
             var pst = ExtractPricingStructureType(propertyCollection).ToString();
             if(pst=="DiscountCurve")
             {
@@ -554,7 +528,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractCreditInstrumentId(NamedValueSet propertyCollection)
@@ -575,7 +549,7 @@ namespace Orion.Identifiers
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static string ExtractInflationLag(NamedValueSet propertyCollection)
@@ -586,13 +560,12 @@ namespace Orion.Identifiers
             {
                 return propertyCollection.Get("InflationLag").AsValue<string>();
             }
-
             //throw new Exception("Mandatory 'InflationLag' property has not been specified. Please specify.");
             return "Unknown";
         }
 
         /// <summary>
-        /// A helper to extract properties from a namedvalueset..
+        /// A helper to extract properties from a named value set.
         /// </summary>
         /// <param name="propertyCollection">The collection of properties.</param>
         public static DateTime ExtractBaseDate(NamedValueSet propertyCollection)

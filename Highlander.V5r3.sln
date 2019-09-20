@@ -242,9 +242,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generic Test Data", "Generi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Backup", "Utilities\Core.Backup\Core.Backup.csproj", "{F3407CF9-61AA-4104-9B46-12004EA4ED68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighlanderCurveViewer", "Applications\HighlanderCurveViewer\HighlanderCurveViewer.csproj", "{A3346D33-29EC-4F95-92C2-8F876EE758FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.CurveViewer", "Applications\HighlanderCurveViewer\Highlander.CurveViewer.csproj", "{A3346D33-29EC-4F95-92C2-8F876EE758FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwaggerHighlanderAPI", "API\SwaggerHighlanderAPI\SwaggerHighlanderAPI.csproj", "{EF14BF44-06E9-448F-9049-6C3A549F91CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwaggerHighlanderAPI", "API\SwaggerHighlanderAPI\SwaggerHighlanderAPI.csproj", "{EF14BF44-06E9-448F-9049-6C3A549F91CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

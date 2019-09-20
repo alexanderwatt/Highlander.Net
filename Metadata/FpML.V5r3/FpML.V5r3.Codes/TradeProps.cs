@@ -52,7 +52,9 @@ namespace FpML.V5r3.Codes
     /// </summary>
     public class TradeProp
     {
+        public const string Trade = "Trade";
         public const string DataGroup = "DataGroup";
+        public const string Identifier = "Identifier";
         public const string TradeType = "TradeType";
         public const string IsParty1Base = "IsParty1Base";
         public const string IsXccySwap = "isXccySwap";

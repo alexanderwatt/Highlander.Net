@@ -65,7 +65,7 @@ namespace Orion.Constants
     }
 
     /// <summary>
-    /// Which bond price variable was last given
+    /// Which futures price variable was last given
     /// </summary>
     public enum FuturesPriceEnum
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Orion.Util.NamedValues;
 
-namespace HighlanderCurveViewer
+namespace Highlander.CurveViewer
 {
     internal static class ArrayExtension
     {

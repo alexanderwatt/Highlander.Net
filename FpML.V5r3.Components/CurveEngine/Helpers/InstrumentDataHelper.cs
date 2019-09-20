@@ -210,9 +210,7 @@ namespace Orion.CurveEngine.Helpers
                 }
                 loadedItem = cache.LoadItem<Instrument>(uniqueName);
             }
-            if (loadedItem == null)
-                throw MissingKey(uniqueName);
-            instrument = loadedItem.Data as Instrument;
+            instrument = loadedItem?.Data as Instrument;
             return instrument;
         }
 
@@ -246,7 +244,6 @@ namespace Orion.CurveEngine.Helpers
                 {
                     uniqueName = CreateKey(nameSpace, parts[1], currency2 + currency1);
                     loadedItem = cache.LoadItem<Instrument>(uniqueName);
-                    //throw MissingKey(uniqueName);
                 }
             }
             var instrument = loadedItem?.Data as Instrument;

@@ -20,6 +20,7 @@ namespace FpML.V5r3.Reporting
     using System.Xml.Serialization;
 
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeaseNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BondNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FutureNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RepoNodeStruct))]
@@ -270,22 +271,7 @@ namespace FpML.V5r3.Reporting
     public class LeaseNodeStruct : InstrumentNode
     {
 
-        private RelativeDateOffset settlementDateField;
-
         private Lease leaseField;
-
-        /// <remarks/>
-        public RelativeDateOffset SettlementDate
-        {
-            get
-            {
-                return this.settlementDateField;
-            }
-            set
-            {
-                this.settlementDateField = value;
-            }
-        }
 
         /// <remarks/>
         public Lease Lease
@@ -2857,6 +2843,8 @@ namespace FpML.V5r3.Reporting
 
         private Period reviewFrequencyField;
 
+        private Period leaseTenorField;
+
         private IdentifiedDate nextReviewDateField;
 
         private decimal reviewChangeField;
@@ -2976,6 +2964,19 @@ namespace FpML.V5r3.Reporting
             set
             {
                 this.reviewFrequencyField = value;
+            }
+        }
+
+        /// <remarks/>
+        public Period leaseTenor
+        {
+            get
+            {
+                return this.leaseTenorField;
+            }
+            set
+            {
+                this.leaseTenorField = value;
             }
         }
 

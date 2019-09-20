@@ -32,12 +32,12 @@ namespace Orion.Identifiers
         ///<summary>
         /// Used for inflation curves.
         ///</summary>
-        public String Exchange { get; set; }
+        public string Exchange { get; set; }
 
         ///<summary>
         /// The reference curve type and name e.g RateCurve.AUD-BBR-BBSW-1M
         ///</summary>
-        public String Code { get; set; }
+        public string Code { get; set; }
 
         ///<summary>
         /// An id for a ratecurve.
@@ -50,28 +50,28 @@ namespace Orion.Identifiers
             SetProperties();
         }
 
-        ///<summary>
-        /// An id for a ratecurve.
-        ///</summary>
-        ///<param name="pricingStructureType">The pricing structure type.</param>
-        ///<param name="curveName">The curve name.</param>
-        ///<param name="buildDateTime">The build date time.</param>
-        ///<param name="algorithm">The algorithm.</param>
-        public ExchangeCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime, string algorithm)
-            : base(pricingStructureType, curveName, buildDateTime, algorithm)
-        {
-            SetProperties(PricingStructureType, CurveName);
-        }
+        /////<summary>
+        ///// An id for a ratecurve.
+        /////</summary>
+        /////<param name="pricingStructureType">The pricing structure type.</param>
+        /////<param name="curveName">The curve name.</param>
+        /////<param name="buildDateTime">The build date time.</param>
+        /////<param name="algorithm">The algorithm.</param>
+        //public ExchangeCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime, string algorithm)
+        //    : base(pricingStructureType, curveName, buildDateTime, algorithm)
+        //{
+        //    SetProperties(PricingStructureType, CurveName);
+        //}
 
-        ///<summary>
-        /// An id for a ratecurve.
-        ///</summary>
-        ///<param name="pricingStructureType"></param>
-        ///<param name="curveName"></param>
-        ///<param name="buildDateTime"></param>
-        public ExchangeCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
-            : this(pricingStructureType, curveName, buildDateTime, "Default")
-        {}
+        /////<summary>
+        ///// An id for a ratecurve.
+        /////</summary>
+        /////<param name="pricingStructureType"></param>
+        /////<param name="curveName"></param>
+        /////<param name="buildDateTime"></param>
+        //public ExchangeCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
+        //    : this(pricingStructureType, curveName, buildDateTime, "Default")
+        //{}
 
         /// <summary>
         /// An id for a ratecurve.
@@ -89,8 +89,8 @@ namespace Orion.Identifiers
         {
             if (Properties != null)
             {
-                Exchange = Properties.GetString("Exchange", true);
-                Code = Properties.GetString("ContractCode", true);
+                Exchange = Properties.GetString(IdentifiersProp.Exchange, true);
+                Code = Properties.GetString(IdentifiersProp.ContractCode, true);
             }
         }
 

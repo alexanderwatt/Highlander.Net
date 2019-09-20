@@ -28,6 +28,7 @@ namespace Core.Common
         {
             // no managed or unmanaged resources to clean up
         }
+
         public void Dispose()
         {
             try

@@ -13,8 +13,6 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
 namespace Orion.Models.Assets
 {
     /// <summary>
@@ -27,19 +25,19 @@ namespace Orion.Models.Assets
         /// <summary>
         /// Gets the fixed leg npv.
         /// </summary>
-        public Decimal FixedLegNPV => EvaluateFixedLegNPV();
+        public decimal FixedLegNPV => EvaluateFixedLegNPV();
 
         /// <summary>
         /// Gets the floating leg accrual factor.
         /// </summary>
         /// <value>The floating leg accrual factor.</value>
-        public Decimal FloatLegAccrualFactor => EvaluateFloatingLegAccrualFactor();
+        public decimal FloatLegAccrualFactor => EvaluateFloatingLegAccrualFactor();
 
         /// <summary>
         /// Gets the floating leg coupon npv.
         /// </summary>
         /// <value>The floating leg coupon npv.</value>
-        public Decimal FloatLegNPV => EvaluateFloatingLegNPV();
+        public decimal FloatLegNPV => EvaluateFloatingLegNPV();
 
         /// <summary>
         /// Gets the floating leg principal repayment npv.
@@ -48,43 +46,43 @@ namespace Orion.Models.Assets
         /// based on the weighing vector supplied.
         /// </summary>
         /// <value>The floating leg principal repayment npv.</value>
-        public Decimal FloatLegPrincipalNPV => EvaluateFloatingLegPrincipalValues();
+        public decimal FloatLegPrincipalNPV => EvaluateFloatingLegPrincipalValues();
 
         /// <summary>
         /// Gets the floating leg coupon npv.
         /// </summary>
         /// <value>The floating leg coupon npv.</value>
-        public Decimal FloatLegCouponNPV => EvaluateFloatingCouponNPV();
+        public decimal FloatLegCouponNPV => EvaluateFloatingCouponNPV();
 
         /// <summary>
         /// Gets the floating leg spread npv.
         /// </summary>
         /// <value>The floating leg spread npv.</value>
-        public Decimal FloatLegCouponSpreadNPV => EvaluateFloatingLegCouponSpreadNPV();
+        public decimal FloatLegCouponSpreadNPV => EvaluateFloatingLegCouponSpreadNPV();
 
         /// <summary>
         /// Gets the floating leg delta.
         /// </summary>
         /// <value>The floating leg delta.</value>
-        public Decimal FloatLegAccrualDeltaR => EvaluateFloatingDeltaR();
+        public decimal FloatLegAccrualDeltaR => EvaluateFloatingDeltaR();
 
         /// <summary>
         /// Gets the floating leg implied quote.
         /// </summary>
         /// <value>The floating leg implied quote.</value>
-        public Decimal FloatLegImpliedQuote => EvaluateFloatingLegImpliedQuote();
+        public decimal FloatLegImpliedQuote => EvaluateFloatingLegImpliedQuote();
 
         /// <summary>
         /// Gets the fixed leg implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal FixedLegImpliedQuote => EvaluateFixedLegImpliedQuote();
+        public decimal FixedLegImpliedQuote => EvaluateFixedLegImpliedQuote();
 
         /// <summary>
         /// Gets the fixed leg implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        public Decimal BaseLegImpliedSpreadQuote => EvaluateFixedLegImpliedQuote();
+        public decimal BaseLegImpliedSpreadQuote => EvaluateFixedLegImpliedQuote();
 
         #endregion
 
@@ -92,7 +90,7 @@ namespace Orion.Models.Assets
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateMarginLegImpliedSpreadQuote() //TODO check that the weightings are correct.
+        protected decimal EvaluateMarginLegImpliedSpreadQuote() //TODO check that the weightings are correct.
         {
             var fixedPrincipals = EvaluatePrincipalValues();
             var denominator = EvaluateAccrualFactor();
@@ -104,7 +102,7 @@ namespace Orion.Models.Assets
         /// Evaluates the floating leg principals.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingLegPrincipalValues()
+        protected virtual decimal EvaluateFloatingLegPrincipalValues()
         {
             var result = 0.0m;
             if (AnalyticParameters.FloatingLegDiscountFactors == null ||
@@ -127,7 +125,7 @@ namespace Orion.Models.Assets
         /// Evaluates the floating leg accrual factor.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingLegAccrualFactor()
+        protected virtual decimal EvaluateFloatingLegAccrualFactor()
         {
             var accrualFactorTotal = 0.0m;
             if (AnalyticParameters.FloatingLegDiscountFactors == null ||
@@ -150,7 +148,7 @@ namespace Orion.Models.Assets
         /// The assumption is that repayments all net out. 
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingLegNPV()
+        protected virtual decimal EvaluateFloatingLegNPV()
         {
             var fixedLegCouponNPV = EvaluateFloatingCouponNPV();
             var fixedLegCouponSpreadNPV = EvaluateFloatingLegCouponSpreadNPV();
@@ -162,7 +160,7 @@ namespace Orion.Models.Assets
         /// Evaluates the floating leg NPV.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingCouponNPV()
+        protected virtual decimal EvaluateFloatingCouponNPV()
         {
             var floatingLeg = 0.0m;
             if (AnalyticParameters.FloatingLegDiscountFactors == null ||
@@ -174,7 +172,7 @@ namespace Orion.Models.Assets
             {
                 //The floor is in place to handle the case when there are discount factors that are 0
                 //in the solver.
-                Decimal df = 1/1000000m;
+                decimal df = 1/1000000m;
                 if (AnalyticParameters.FloatingLegForecastDiscountFactors[index] > 0)
                 {
                     df = AnalyticParameters.FloatingLegForecastDiscountFactors[index];
@@ -191,7 +189,7 @@ namespace Orion.Models.Assets
         /// Evaluates the floating leg coupon spread NPV.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingLegCouponSpreadNPV()
+        protected virtual decimal EvaluateFloatingLegCouponSpreadNPV()
         {
             if (AnalyticParameters.FloatingLegSpread == 0)
                 return 0.0m;
@@ -215,7 +213,7 @@ namespace Orion.Models.Assets
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected override Decimal EvaluateImpliedQuote()
+        protected override decimal EvaluateImpliedQuote()
         {
             var impliedQuote = 0.0m;
             var fixedLegDelta = EvaluateDeltaR();
@@ -231,7 +229,7 @@ namespace Orion.Models.Assets
         /// Evaluates the floating leg implied quote.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateFloatingLegImpliedQuote()
+        protected decimal EvaluateFloatingLegImpliedQuote()
         {
             var floatPrincipals = EvaluateFloatingLegPrincipalValues();
             var floatingLegAccrualFactor = EvaluateFloatingLegAccrualFactor();
@@ -243,7 +241,7 @@ namespace Orion.Models.Assets
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFixedLegImpliedQuote()
+        protected virtual decimal EvaluateFixedLegImpliedQuote()
         {
             var fixedPrincipals = EvaluatePrincipalValues();
             var denominator = EvaluateAccrualFactor();
@@ -256,7 +254,7 @@ namespace Orion.Models.Assets
         /// movements net out to zero at every payment date.
         /// </summary>
         /// <returns></returns>
-        protected override Decimal EvaluateNPV()
+        protected override decimal EvaluateNPV()
         {
             var fixedLegNPV = EvaluateFixedLegNPV();
             var floatingLegNPV = EvaluateFloatingLegNPV();
@@ -268,7 +266,7 @@ namespace Orion.Models.Assets
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateFloatingDeltaR()
+        protected virtual decimal EvaluateFloatingDeltaR()
         {
             return EvaluateFloatingLegAccrualFactor() * AnalyticParameters.NotionalAmount / CBasisPoint;
         }

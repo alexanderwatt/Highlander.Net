@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Orion.Util.Helpers;
 using Orion.Util.NamedValues;
 
-namespace HighlanderCurveViewer
+namespace Highlander.CurveViewer
 {
     /// <summary>
     /// Extension methods for object[,]

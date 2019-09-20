@@ -13,8 +13,6 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
 namespace Orion.Models.Property.Lease
 {
     public enum LeaseMetrics
@@ -22,7 +20,9 @@ namespace Orion.Models.Property.Lease
         NPV,  
         ImpliedQuote, 
         MarketQuote,
-        PandL
+        PandL,
+        ExpectedCashflows,
+        CashflowPVs
     }
 
     public interface ILeaseAssetResults
@@ -31,24 +31,36 @@ namespace Orion.Models.Property.Lease
         /// Gets the npv.
         /// </summary>
         /// <value>The implied quote.</value>
-        Decimal NPV { get; }
+        decimal NPV { get; }
 
         /// <summary>
         /// Gets the implied quote.
         /// </summary>
         /// <value>The implied quote.</value>
-        Decimal ImpliedQuote { get; }
+        decimal ImpliedQuote { get; }
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        Decimal MarketQuote { get; }
+        decimal MarketQuote { get; }
 
         /// <summary>
         /// Gets the PandL.
         /// </summary>
         /// <value>The market quote.</value>
-        Decimal PandL { get; }
+        decimal PandL { get; }
+
+        /// <summary>
+        /// Gets the expected cashflows.
+        /// </summary>
+        /// <value>The expected cashflows.</value>
+        decimal[] ExpectedCashflows { get; }
+
+        /// <summary>
+        /// Gets the pv pf the cashflows.
+        /// </summary>
+        /// <value>The pv of the cashflows.</value>
+        decimal[] CashflowPVs { get; }
     }
 }

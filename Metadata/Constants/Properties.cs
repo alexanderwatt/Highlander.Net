@@ -17,10 +17,6 @@ namespace Orion.Constants
 {
     public static class EquityProp
     {
-        public static string DefaultDomain = "Orion.ReferenceData";
-        public static string DefaultFunction = "ReferenceData";
-        public static string DefaultDataGroup = "Orion.ReferenceData.Equity";
-        public static string DefaultSourceSystem = "Orion";
         public static string DefaultType = "Equity";
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";
@@ -47,10 +43,6 @@ namespace Orion.Constants
 
     public static class PropertyProp
     {
-        public static string DefaultDomain = "Orion.ReferenceData";
-        public static string DefaultFunction = "ReferenceData";
-        public static string DefaultDataGroup = "Orion.ReferenceData.Property";
-        public static string DefaultSourceSystem = "Orion";
         public static string DefaultType = "Property";
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";
@@ -70,10 +62,6 @@ namespace Orion.Constants
 
     public static class LeaseProp
     {
-        public static string DefaultDomain = "Orion.ReferenceData";
-        public static string DefaultFunction = "ReferenceData";
-        public static string DefaultDataGroup = "Orion.ReferenceData.Lease";
-        public static string DefaultSourceSystem = "Orion";
         public static string DefaultType = "Property";
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";
@@ -97,8 +85,11 @@ namespace Orion.Constants
         public const string UnitsOfArea = "UnitsOfArea";
         public const string ReviewFrequency = "ReviewFrequency";
         public const string LeaseType = "LeaseType";
+        public const string LeaseTenor = "LeaseTenor";
+        public const string Maturity = "Maturity";
         public const string LeaseIdentifier = "LeaseIdentifier";
         public const string Area = "Area";
+        public const string StepUp = "StepUp";
         public const string ReferencePropertyIdentifier = "ReferencePropertyIdentifier";
         public const string BusinessDayCalendar = "BusinessDayCalendar";
         public const string BusinessDayAdjustments = "BusinessDayAdjustments";

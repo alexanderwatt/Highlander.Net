@@ -15,9 +15,6 @@
 
 #region Using directives
 
-using System;
-using FpML.V5r3.Reporting.Helpers;
-using Orion.Constants;
 using Orion.Util.NamedValues;
 
 #endregion
@@ -25,7 +22,7 @@ using Orion.Util.NamedValues;
 namespace Orion.Identifiers
 {
     /// <summary>
-    /// The CommodityCurveIdentifier.
+    /// The Equity Curve Identifier.
     /// </summary>
     public class EquityCurveIdentifier : PricingStructureIdentifier
     {
@@ -45,34 +42,34 @@ namespace Orion.Identifiers
             SetProperties();
         }
 
-        /// <summary>
-        /// The CommodityCurveIdentifier.
-        /// </summary>
-        /// <param name="pricingStructureType"></param>
-        /// <param name="curveName"></param>
-        /// <param name="buildDateTime"></param>
-        public EquityCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
-            : base(pricingStructureType, curveName, buildDateTime)
-        {
-            var components = CurveName.Split('-');
-            EquityAsset = components[1];
-            Currency = CurrencyHelper.Parse(components[0]);
-        }
+        ///// <summary>
+        ///// The CommodityCurveIdentifier.
+        ///// </summary>
+        ///// <param name="pricingStructureType"></param>
+        ///// <param name="curveName"></param>
+        ///// <param name="buildDateTime"></param>
+        //public EquityCurveIdentifier(PricingStructureTypeEnum pricingStructureType, string curveName, DateTime buildDateTime) 
+        //    : base(pricingStructureType, curveName, buildDateTime)
+        //{
+        //    var components = CurveName.Split('-');
+        //    EquityAsset = components[1];
+        //    Currency = CurrencyHelper.Parse(components[0]);
+        //}
 
-        /// <summary>
-        /// The CommodityCurveIdentifier.
-        /// </summary>
-        /// <param name="curveId"></param>
-        public EquityCurveIdentifier(string curveId)
-            : base(curveId)
-        {
-            var comcurveId = CurveName.Split('-');
-            if (comcurveId.Length == 2)
-            {
-                EquityAsset = comcurveId[1];
-                Currency = CurrencyHelper.Parse(comcurveId[0]);
-            }
-        }
+        ///// <summary>
+        ///// The CommodityCurveIdentifier.
+        ///// </summary>
+        ///// <param name="curveId"></param>
+        //public EquityCurveIdentifier(string curveId)
+        //    : base(curveId)
+        //{
+        //    var equityCurveId = CurveName.Split('-');
+        //    if (equityCurveId.Length == 2)
+        //    {
+        //        EquityAsset = equityCurveId[1];
+        //        Currency = CurrencyHelper.Parse(equityCurveId[0]);
+        //    }
+        //}
 
         private void SetProperties()
         {

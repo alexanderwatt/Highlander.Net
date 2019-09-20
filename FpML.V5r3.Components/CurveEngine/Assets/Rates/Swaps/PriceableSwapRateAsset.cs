@@ -44,12 +44,12 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        protected const Decimal CDefaultWeightingValue = 1.0m;
+        protected const decimal CDefaultWeightingValue = 1.0m;
 
         /// <summary>
         /// 
         /// </summary>
-        protected const Decimal CDefaultNotional = 1000000.0m;
+        protected const decimal CDefaultNotional = 1000000.0m;
 
         ///<summary>
         ///</summary>
@@ -103,17 +103,17 @@ namespace Orion.CurveEngine.Assets
         /// <summary>
         /// 
         /// </summary>
-        public Decimal[] YearFractions = { 0.25m };
+        public decimal[] YearFractions = { 0.25m };
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal[] Weightings = { 1.0m };
+        public decimal[] Weightings = { 1.0m };
 
         /// <summary>
         /// 
         /// </summary>
-        public Decimal EndDiscountFactor { get; set; }
+        public decimal EndDiscountFactor { get; set; }
 
         /// <summary>
         /// 
@@ -522,7 +522,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="fixedRate">The fixed rate.</param>
         private void SetRate(BasicQuotation fixedRate)
         {
-            if (String.Compare(fixedRate.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(fixedRate.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 fixedRate.measureType.Value = RateQuotationType;
             }
@@ -539,7 +539,7 @@ namespace Orion.CurveEngine.Assets
         /// <param name="weightingValue">The weighting value.</param>
         /// <param name="noOfInstances">The no of instances.</param>
         /// <returns></returns>
-        protected static Decimal[] CreateWeightings(Decimal weightingValue, int noOfInstances)
+        protected static decimal[] CreateWeightings(Decimal weightingValue, int noOfInstances)
         {
             var weights = new List<decimal>();
             for (var index = 0; index < noOfInstances; index++)
