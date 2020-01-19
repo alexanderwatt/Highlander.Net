@@ -16,7 +16,7 @@
 using System;
 using System.Threading;
 
-namespace Orion.Util.RefCounting
+namespace Highlander.Utilities.RefCounting
 {
     public class Reference<T> : IDisposable where T : class
     {
@@ -51,7 +51,7 @@ namespace Orion.Util.RefCounting
             {
                 Release();
             }
-            catch (Exception) { }
+            catch (System.Exception) { }
         }
         public Reference<T> Clone()
         {

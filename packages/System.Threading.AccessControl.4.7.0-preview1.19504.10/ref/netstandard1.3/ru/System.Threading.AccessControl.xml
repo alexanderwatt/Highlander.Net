@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Threading.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAccessRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, разрешенных или запрещенных пользователю или группе.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, определяющий пользователя или группу, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, определяющий имя пользователя или группы, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAccessRule.EventWaitHandleRights">
+      <summary>[SECURITY CRITICAL] Получает права, разрешаемые или запрещаемые правилом доступа.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее права, которые разрешаются или запрещаются правилом доступа.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAuditRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, подлежащих аудиту для пользователя или группы.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> с указанием пользователя или группы для аудита, прав для аудита и подлежащих аудиту операций (успешных попыток доступа, неудачных попыток доступа или всех попыток доступа).</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее подлежащие аудиту права доступа.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAuditRule.EventWaitHandleRights">
+      <summary>[SECURITY CRITICAL] Получает права доступа, на которые распространяется действие этого правила аудита.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее права, на которые распространяется действие этого правила аудита.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleRights">
+      <summary>[SECURITY CRITICAL] Определяет права доступа, которые можно применять к объектам именованных системных событий.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions">
+      <summary>Право изменять правила безопасности и аудита, связанные с именованным событием.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Delete">
+      <summary>Право на удаление именованного события.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.FullControl">
+      <summary>Право на полный контроль над именованным событием, а также на изменение правил доступа и аудита.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Modify">
+      <summary>Право устанавливать или сбрасывать сигнальное состояние именованного события.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions">
+      <summary>Право открывать и копировать правила доступа и аудита, связанные с именованным событием.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize">
+      <summary>Право ожидания именованного события.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.TakeOwnership">
+      <summary>Право изменять владельца именованного события.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleSecurity">
+      <summary>[SECURITY CRITICAL] Представляет функции безопасности управления доступом Windows для именованного системного дескриптора ожидания.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.#ctor">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> значениями по умолчанию.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRightType">
+      <summary>[SECURITY CRITICAL] Получает значение перечисления, используемое классом <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> для обозначения прав доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий перечисление <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Создает новое правило управления доступом для указанного пользователя с указанными правами, типом управления доступом и флагами.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, представляющий указанные права для указанного пользователя.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее разрешаемые или запрещаемые права доступа, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> для обозначения правил доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Выполняет поиск подходящего правила управления доступом, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило управления доступом.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило аудита.Поиск ведется по имени пользователя, указанному в этом правиле.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Создает новое правило аудита, в котором указывается пользователь, к которому относится правило, правила доступа для аудита, а также событие, вызывающее срабатывание правила аудита.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />, представляющий указанное правило аудита для указанного пользователя.Метод возвращает объект базового класса (<see cref="T:System.Security.AccessControl.AuditRule" />), но возвращаемое значение можно безопасно привести к производному классу.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />, определяющее права доступа для аудита, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> для обозначения правил аудита.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом с тем же именем пользователя и значением <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если правило найдено, содержащиеся в указанном правиле доступа права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, определяющий пользователя и тип <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleAll(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск всех правил управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, определяющий пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита с тем же именем пользователя, что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если совместимое правило найдено, содержащиеся в указанном правиле права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />, определяющий пользователя для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleAll(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SECURITY CRITICAL] Производит поиск всех правил аудита с тем же пользователем, что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />, определяющий пользователя для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.ResetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AccessControlType" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.Имя пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> определяют правила, которые необходимо удалить перед добавлением этого правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила аудита с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AuditFlags" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAccessRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, разрешенных или запрещенных пользователю или группе.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.MutexAccessRule" />, определяющий пользователя или группу, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.String,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.MutexAccessRule" />, определяющий имя пользователя или группы, на которые распространяется действие правила, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAccessRule.MutexRights">
+      <summary>[SECURITY CRITICAL] Получает права, разрешаемые или запрещаемые правилом доступа.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее права, которые разрешаются или запрещаются правилом доступа.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAuditRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, подлежащих аудиту для пользователя или группы.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.MutexAuditRule" /> с указанием пользователя или группы для аудита, прав для аудита и подлежащих аудиту операций (успешных попыток доступа, неудачных попыток доступа или всех попыток доступа).</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее подлежащие аудиту права доступа.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAuditRule.MutexRights">
+      <summary>[SECURITY CRITICAL] Получает права доступа, на которые распространяется действие этого правила аудита.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее права, на которые распространяется действие этого правила аудита.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexRights">
+      <summary>[SECURITY CRITICAL] Определяет права доступа, которые можно применять к объектам именованных системных мьютексов.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ChangePermissions">
+      <summary>Право изменять правила безопасности и аудита, связанные с именованным мьютексом.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Delete">
+      <summary>Право на удаление именованного мьютекса.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.FullControl">
+      <summary>Право на полный контроль над именованным мьютексом, а также на изменение правил доступа и аудита.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Modify">
+      <summary>Право на высвобождение именованного мьютекса.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ReadPermissions">
+      <summary>Право открывать и копировать правила доступа и аудита, связанные с именованным мьютексом.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Synchronize">
+      <summary>Право ожидания именованного мьютекса.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.TakeOwnership">
+      <summary>Право изменять владельца именованного мьютекса.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexSecurity">
+      <summary>[SECURITY CRITICAL] Представляет систему безопасности управления доступом Windows для именованного мьютекса.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.MutexSecurity" /> значениями по умолчанию.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.MutexSecurity" /> с указанными разделами правил безопасности управления доступом из системного мьютекса с указанным именем.</summary>
+      <param name="name">Имя системного мьютекса, у которого запрашиваются правила безопасности управления доступом.</param>
+      <param name="includeSections">Сочетание флагов <see cref="T:System.Security.AccessControl.AccessControlSections" />, которое определяет получаемые разделы.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRightType">
+      <summary>[SECURITY CRITICAL] Получает значение перечисления, используемое классом <see cref="T:System.Security.AccessControl.MutexSecurity" /> для обозначения прав доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий перечисление <see cref="T:System.Security.AccessControl.MutexRights" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Создает новое правило управления доступом для указанного пользователя с указанными правами, типом управления доступом и флагами.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />, представляющий указанные права для указанного пользователя.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее разрешаемые или запрещаемые права доступа, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных мьютексов, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных мьютексов, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных мьютексов, так как у них отсутствует иерархия.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.MutexSecurity" /> для обозначения правил доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.MutexAccessRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Выполняет поиск подходящего правила управления доступом, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило управления доступом.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило аудита.Поиск ведется по имени пользователя, указанному в этом правиле.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Создает новое правило аудита, в котором указывается пользователь, к которому относится правило, правила доступа для аудита, а также событие, вызывающее срабатывание правила аудита.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.MutexAuditRule" />, представляющий указанное правило аудита для указанного пользователя.Метод возвращает объект базового класса (<see cref="T:System.Security.AccessControl.AuditRule" />), но возвращаемое значение можно безопасно привести к производному классу.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.MutexRights" />, определяющее права доступа для аудита, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AuditRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.MutexSecurity" /> для обозначения правил аудита.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.MutexAuditRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом с тем же именем пользователя и значением <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и указанного правила, а также с совместимыми флагами наследования и распространения; если правило найдено, содержащиеся в указанном правиле доступа права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />, определяющий пользователя и тип <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск всех правил управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />, определяющий пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления аудитом с тем же именем пользователя, что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если совместимое правило найдено, содержащиеся в указанном правиле права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.MutexAuditRule" />, определяющий пользователя для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SECURITY CRITICAL] Производит поиск всех правил аудита с тем же пользователем, что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.MutexAuditRule" />, определяющий пользователя для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.MutexAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.ResetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AccessControlType" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.MutexAccessRule" />.Имя пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> определяют правила, которые необходимо удалить перед добавлением этого правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила аудита с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AuditFlags" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.MutexAuditRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAccessRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, разрешенных или запрещенных пользователю или группе.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, определяющий пользователя или группу, к которым применяется правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.String,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, определяющий имя пользователя или группы, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAccessRule.SemaphoreRights">
+      <summary>[SECURITY CRITICAL] Получает права, разрешаемые или запрещаемые правилом доступа.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее права, которые разрешаются или запрещаются правилом доступа.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAuditRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, подлежащих аудиту для пользователя или группы.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> с указанием пользователя или группы для аудита, прав для аудита и подлежащих аудиту операций (успешных попыток доступа, неудачных попыток доступа или всех попыток доступа).</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="eventRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее подлежащие аудиту права доступа.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAuditRule.SemaphoreRights">
+      <summary>[SECURITY CRITICAL] Получает права доступа, на которые распространяется действие этого правила аудита.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее права, на которые распространяется действие этого правила аудита.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreRights">
+      <summary>[SECURITY CRITICAL] Определяет права доступа, которые можно применять к объектам именованных системных семафоров.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions">
+      <summary>Право изменять правила безопасности и аудита, связанные с именованным семафором.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Delete">
+      <summary>Право на удаление именованного семафора.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.FullControl">
+      <summary>Право на полный контроль над именованным семафором, а также на изменение правил доступа и аудита.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Modify">
+      <summary>Право на высвобождение именованного семафора.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions">
+      <summary>Право открывать и копировать правила доступа и аудита, связанные с именованным семафором.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Synchronize">
+      <summary>Право на ожидание именованного семафора.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.TakeOwnership">
+      <summary>Право изменять владельца именованного семафора.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreSecurity">
+      <summary>[SECURITY CRITICAL] Обеспечивает безопасность управления доступом Windows для именованного семафора.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> значениями по умолчанию.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> с указанными разделами правил безопасности управления доступом из системного семафора с указанным именем.</summary>
+      <param name="name">Имя системного семафора, у которого запрашиваются правила безопасности управления доступом.</param>
+      <param name="includeSections">Сочетание флагов <see cref="T:System.Security.AccessControl.AccessControlSections" />, которое определяет получаемые разделы.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRightType">
+      <summary>[SECURITY CRITICAL] Получает значение перечисления, используемое классом <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> для обозначения прав доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий перечисление <see cref="T:System.Security.AccessControl.SemaphoreRights" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Создает новое правило управления доступом для указанного пользователя с указанными правами, типом управления доступом и флагами.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, представляющий указанные права для указанного пользователя.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее разрешаемые или запрещаемые права доступа, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных семафоров, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных семафоров, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных семафоров, так как у них отсутствует иерархия.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> для обозначения правил доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск подходящего правила, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило управления доступом.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило аудита.Поиск ведется по имени пользователя, указанному в этом правиле.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Создает новое правило аудита, в котором указывается пользователь, к которому относится правило, правила доступа для аудита, а также событие, вызывающее срабатывание правила аудита.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />, представляющий указанное правило аудита для указанного пользователя.Метод возвращает объект базового класса (<see cref="T:System.Security.AccessControl.AuditRule" />), но возвращаемое значение можно безопасно привести к производному классу.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.SemaphoreRights" />, определяющее права доступа для аудита, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="inheritanceFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="propagationFlags">Нет смысла использовать для именованных дескрипторов ожидания, так как у них отсутствует иерархия.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AuditRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> для обозначения правил аудита.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом с тем же именем пользователя и значением <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и указанного правила, а также с совместимыми флагами наследования и распространения; если правило найдено, содержащиеся в указанном правиле доступа права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, определяющий пользователя и тип <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск всех правил управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, определяющий пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления аудитом с тем же именем пользователя, что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если совместимое правило найдено, содержащиеся в указанном правиле права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />, определяющий пользователя для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SECURITY CRITICAL] Производит поиск всех правил аудита с тем же пользователем, что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />, определяющий пользователя для поиска.Все указанные в данном правиле права игнорируются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AccessControlType" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.Имя пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> определяют правила, которые необходимо удалить перед добавлением этого правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила аудита с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AuditFlags" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="T:System.Threading.ThreadingAclExtensions"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.EventWaitHandle)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Mutex)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Semaphore)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.EventWaitHandle,System.Security.AccessControl.EventWaitHandleSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Mutex,System.Security.AccessControl.MutexSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Semaphore,System.Security.AccessControl.SemaphoreSecurity)"></member>
+  </members>
+</doc>

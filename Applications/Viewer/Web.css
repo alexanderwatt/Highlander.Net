@@ -1,0 +1,63 @@
+﻿td
+{
+	white-space:nowrap;
+}
+
+th, .th
+{
+	background-color: #857363;
+	color: White;
+	font-weight: bold;	
+}
+
+.RowStyle
+{
+	background-color: white;
+	vertical-align: middle;
+}
+
+.RowStyleAlternate
+{
+	background-color: #EAE7DB;
+	vertical-align: middle;
+}
+
+.ListGrid .RowStyle:hover, .ListGrid .RowStyleAlternate:hover
+{
+	color: #D52B1E;
+	text-decoration: underline;
+    cursor: pointer;
+}
+.RowSelected
+{
+	background-color: #981E32;
+	color: white;
+}
+.headerControls
+{
+    background-color: #DAD7CB;
+}
+a
+{ 
+	color: #D52B1E;
+	text-decoration: none;
+}
+a:hover
+{ 
+	color: #D52B1E;
+	text-decoration: underline;
+}
+.calendar
+{
+	float:left;
+	border:solid 1px;
+	border-color:Black;
+}
+
+.calendarDays
+{
+	background-color: White;
+}
+
+
+

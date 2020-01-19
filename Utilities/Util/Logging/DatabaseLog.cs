@@ -18,7 +18,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Orion.Util.Logging
+namespace Highlander.Utilities.Logging
 {
     /// <summary>
     /// Caches updates to a table and then periodically flushes it to the database
@@ -231,7 +231,7 @@ namespace Orion.Util.Logging
                         _adapter.InsertCommand.Transaction.Commit();
                         _activeTable.Clear();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         System.Diagnostics.Trace.WriteLine(e.Message);
                         _adapter.InsertCommand.Transaction.Rollback();
@@ -242,7 +242,7 @@ namespace Orion.Util.Logging
                     }
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 System.Diagnostics.Trace.WriteLine(e.Message);
             }

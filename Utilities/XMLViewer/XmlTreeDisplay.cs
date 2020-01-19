@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 
-namespace Orion.XmlViewer
+namespace Highlander.XmlViewer
 {
     public partial class XmlTreeDisplay : Form
     {
@@ -12,17 +12,16 @@ namespace Orion.XmlViewer
             InitializeComponent();
         }
 
-        private void XmlTreeDisplay_Load(object sender, EventArgs e)
+        private void XmlTreeDisplayLoad(object sender, EventArgs e)
         {
             txtXmlFile.Text = Path.Combine(Application.StartupPath,
                @"..\..\ProductCatalog.xml");
         }
 
-        private void cmdLoad_Click(object sender, EventArgs e)
+        private void CmdLoadClick(object sender, EventArgs e)
         {
             // Clear the tree.
             treeXml.Nodes.Clear();
-
             var fileOpen = new OpenFileDialog
                                {
                                    InitialDirectory = ".\\",
@@ -36,7 +35,6 @@ namespace Orion.XmlViewer
                 return;
             }
             txtXmlFile.Text = fileOpen.FileName;
-
             // Load the XML Document
             var doc = new XmlDocument();
             try
@@ -48,10 +46,8 @@ namespace Orion.XmlViewer
                 MessageBox.Show(err.Message);
                 return;
             }
-
             // Populate the TreeView.
             ConvertXmlNodeToTreeNode(doc, treeXml.Nodes);
-
             // Expand all nodes.
             treeXml.Nodes[0].ExpandAll();
         }
@@ -60,7 +56,6 @@ namespace Orion.XmlViewer
         {
             // Add a TreeNode node that represents this XmlNode.
             TreeNode newTreeNode = treeNodes.Add(xmlNode.Name);
-
             // Customize the TreeNode text based on the XmlNode
             // type and content.
             switch (xmlNode.NodeType)
@@ -83,7 +78,6 @@ namespace Orion.XmlViewer
                     newTreeNode.Text = "<!--" + xmlNode.Value + "-->";
                     break;
             }
-
             // Call this routine recursively for each attribute.
             // (XmlAttribute is a subclass of XmlNode.)
             if (xmlNode.Attributes != null)
@@ -93,7 +87,6 @@ namespace Orion.XmlViewer
                     ConvertXmlNodeToTreeNode(attribute, newTreeNode.Nodes);
                 }
             }
-
             // Call this routine recursively for each child node.
             // Typically, this child node represents a nested element,
             // or element content.
@@ -102,6 +95,5 @@ namespace Orion.XmlViewer
                 ConvertXmlNodeToTreeNode(childNode, newTreeNode.Nodes);
             }
         }
-
     }
 }

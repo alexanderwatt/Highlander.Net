@@ -1,10 +1,25 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading;
-using Orion.Util.Threading;
+﻿/*
+ Copyright (C) 2019 Alex Watt and Simon Dudley (alexwatt@hotmail.com)
 
-namespace Util.Tests.Threading
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using System.Diagnostics;
+using System.Threading;
+using Highlander.Utilities.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Highlander.Utilities.Tests.Threading
 {
     /// <summary>
     /// Summary description for LockPerfTests
@@ -19,23 +34,11 @@ namespace Util.Tests.Threading
             //
         }
 
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //

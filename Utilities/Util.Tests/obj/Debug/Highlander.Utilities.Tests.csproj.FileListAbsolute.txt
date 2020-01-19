@@ -1,0 +1,11 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\bin\Debug\Highlander.Utilities.Tests.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\bin\Debug\Highlander.Utilities.Tests.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.Helpers.ResourceTest.resources
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.csproj.GenerateResource.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.Tests\obj\Debug\Highlander.Utilities.Tests.pdb

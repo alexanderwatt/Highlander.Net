@@ -18,11 +18,11 @@
 using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using Core.Common;
+using Highlander.Core.Common;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
     // V221 contracts
 

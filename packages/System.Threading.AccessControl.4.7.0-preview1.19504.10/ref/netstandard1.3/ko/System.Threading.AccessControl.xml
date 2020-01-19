@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Threading.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAccessRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 허용 또는 거부된 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹의 이름, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAccessRule.EventWaitHandleRights">
+      <summary>[보안 중요] 액세스 규칙에 의해 허용 또는 거부된 권한을 가져옵니다.</summary>
+      <returns>액세스 규칙에 의해 허용되거나 거부된 거부된 권한을 나타내는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAuditRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 감사할 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> 클래스의 새 인스턴스를 초기화하여 감사할 사용자 또는 그룹, 감사 권한 그리고 성공, 실패 또는 두 가지 모두에 대한 감사 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">감사할 액세스 종류를 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAuditRule.EventWaitHandleRights">
+      <summary>[보안 중요] 감사 규칙의 영향을 받는 액세스 권한을 가져옵니다.</summary>
+      <returns>감사 규칙의 영향을 받는 권한을 나타내는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleRights">
+      <summary>[보안 중요] 명명된 시스템 이벤트 개체에 적용할 수 있는 액세스 제어 권한을 지정합니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions">
+      <summary>명명된 이벤트와 관련된 보안 및 감사 규칙을 변경할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Delete">
+      <summary>명명된 이벤트를 삭제할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.FullControl">
+      <summary>명명된 이벤트에 대한 모든 권한을 실행하고 해당 액세스 규칙 및 감사 규칙을 수정할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Modify">
+      <summary>명명된 이벤트의 신호 전송 상태를 설정하거나 재설정할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions">
+      <summary>명명된 이벤트에 대한 액세스 규칙 및 감사 규칙을 열고 복사할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize">
+      <summary>명명된 이벤트를 대기할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.TakeOwnership">
+      <summary>명명된 이벤트의 소유자를 변경할 권한입니다.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleSecurity">
+      <summary>[보안 중요] 명명된 시스템 대기 핸들에 적용된 Windows 액세스 제어 보안을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.#ctor">
+      <summary>[보안 중요] 기본값으로 <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRightType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> 클래스에서 액세스 권한을 나타내는 데 사용하는 열거형 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 열거형을 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] 지정된 액세스 권한, 액세스 제어 및 플래그로 지정한 사용자의 새 액세스 제어 규칙을 만듭니다.</summary>
+      <returns>지정한 사용자의 지정한 권한을 나타내는 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> 개체입니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 허용하거나 거부할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> 클래스가 액세스 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 일치하는 액세스 제어 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 액세스 제어 규칙입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 감사 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 감사 규칙입니다.이 규칙에서 지정하는 사용자가 검색을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] 새 감사 규칙을 만들어 규칙을 적용할 사용자, 감사할 액세스 권한 및 감사 규칙을 트리거할 결과를 지정합니다.</summary>
+      <returns>지정한 사용자의 지정한 감사 규칙을 나타내는 <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> 개체입니다.메서드의 반환 형식은 기본 클래스 <see cref="T:System.Security.AccessControl.AuditRule" />이지만 반환 값은 파생 클래스로 안전하게 캐스팅할 수 있습니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 감사할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> 클래스가 감사 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] 지정한 액세스 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같고 상속 및 전파 플래그가 호환되는 액세스 제어 규칙을 검색합니다. 그러한 규칙이 있으면 지정한 액세스 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 비롯하여 일치하는 규칙(있다면)과 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleAll(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자가 같고 상속 및 전파 플래그가 호환되는 감사 규칙을 검색합니다. 호환되는 규칙이 있으면 지정한 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 일치하는 규칙(있다면)이 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleAll(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 같은 사용자를 가진 모든 감사 규칙을 검색하고 해당 규칙이 있을 경우 제거합니다.</summary>
+      <param name="rule">검색할 사용자를 지정하는 <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 감사 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.ResetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AccessControlType" />과 상관없이 지정한 규칙과 사용자가 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[보안 중요] 지정된 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />입니다.이 규칙의 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />은 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AuditFlags" /> 과 상관없이 지정한 규칙과 사용자가 같은 모든 감사 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAccessRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 허용 또는 거부된 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.MutexAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.String,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.MutexAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹의 이름, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAccessRule.MutexRights">
+      <summary>[보안 중요] 액세스 규칙에 의해 허용 또는 거부된 권한을 가져옵니다.</summary>
+      <returns>액세스 규칙에 의해 허용되거나 거부된 권한을 나타내는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAuditRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 감사할 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] 감사할 사용자나 그룹, 감사할 권한 및 성공을 감사할지, 실패를 감사할지 아니면 둘 다 감사할지 지정하여 <see cref="T:System.Security.AccessControl.MutexAuditRule" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">감사할 액세스 종류를 지정하는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAuditRule.MutexRights">
+      <summary>[보안 중요] 감사 규칙의 영향을 받는 액세스 권한을 가져옵니다.</summary>
+      <returns>감사 규칙의 영향을 받는 권한을 나타내는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexRights">
+      <summary>[보안 중요] 명명된 시스템 뮤텍스 개체에 적용할 수 있는 액세스 제어 권한을 지정합니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ChangePermissions">
+      <summary>명명된 뮤텍스와 관련된 보안 및 감사 규칙을 변경할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Delete">
+      <summary>명명된 뮤텍스를 삭제할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.FullControl">
+      <summary>명명된 뮤텍스를 완전히 제어하고 해당 액세스 규칙 및 감사 규칙을 수정할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Modify">
+      <summary>명명된 뮤텍스를 해제할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ReadPermissions">
+      <summary>명명된 뮤텍스의 액세스 규칙 및 감사 규칙을 열고 복사할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Synchronize">
+      <summary>명명된 뮤텍스를 대기할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.TakeOwnership">
+      <summary>명명된 뮤텍스의 소유자를 변경할 권한입니다.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexSecurity">
+      <summary>[보안 중요] 명명된 뮤텍스의 Windows 액세스 제어 보안을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor">
+      <summary>[보안 중요] 기본값으로 <see cref="T:System.Security.AccessControl.MutexSecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[보안 중요] 지정한 이름의 시스템 뮤텍스에서 지정한 액세스 제어 보안 규칙 섹션으로 <see cref="T:System.Security.AccessControl.MutexSecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="name">액세스 제어 보안 규칙을 검색할 시스템 뮤텍스의 이름입니다.</param>
+      <param name="includeSections">검색할 섹션을 지정하는 <see cref="T:System.Security.AccessControl.AccessControlSections" /> 플래그의 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRightType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.MutexSecurity" /> 클래스가 액세스 권한을 나타내는 데 사용하는 열거형을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexRights" /> 열거형을 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] 지정된 액세스 권한, 액세스 제어 및 플래그로 지정한 사용자의 새 액세스 제어 규칙을 만듭니다.</summary>
+      <returns>지정한 사용자의 지정한 권한을 나타내는 <see cref="T:System.Security.AccessControl.MutexAccessRule" /> 개체입니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 허용하거나 거부할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 뮤텍스에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 뮤텍스에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 뮤텍스에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.MutexSecurity" /> 클래스가 액세스 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexAccessRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 일치하는 액세스 제어 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 액세스 제어 규칙입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 감사 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 감사 규칙입니다.이 규칙에서 지정하는 사용자가 검색을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] 새 감사 규칙을 만들어 규칙을 적용할 사용자, 감사할 액세스 권한 및 감사 규칙을 트리거할 결과를 지정합니다.</summary>
+      <returns>지정한 사용자의 지정한 감사 규칙을 나타내는 <see cref="T:System.Security.AccessControl.MutexAuditRule" /> 개체입니다.메서드의 반환 형식은 기본 클래스 <see cref="T:System.Security.AccessControl.AuditRule" />이지만 반환 값은 파생 클래스로 안전하게 캐스팅할 수 있습니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 감사할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.MutexRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="flags">성공 또는 실패한 액세스를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AuditRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.MutexSecurity" /> 클래스에서 감사 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexAuditRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같고 상속 및 전파 플래그가 호환되는 액세스 제어 규칙을 검색합니다. 그러한 규칙이 있으면 지정한 액세스 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 비롯하여 일치하는 규칙(있다면)과 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.MutexAccessRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 지정하는 <see cref="T:System.Security.AccessControl.MutexAccessRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.MutexAccessRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자가 같고 상속 및 전파 플래그가 호환되는 감사 제어 규칙을 검색합니다. 호환되는 규칙이 있으면 지정한 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 일치하는 규칙(있다면)이 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.MutexAuditRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 같은 사용자를 가진 모든 감사 규칙을 검색하고 해당 규칙이 있을 경우 제거합니다.</summary>
+      <param name="rule">검색할 사용자를 지정하는 <see cref="T:System.Security.AccessControl.MutexAuditRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 감사 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.MutexAuditRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.ResetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AccessControlType" />과 상관없이 지정한 규칙과 사용자가 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.MutexAccessRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[보안 중요] 지정된 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.MutexAccessRule" />입니다.이 규칙의 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />은 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AuditFlags" /> 과 상관없이 지정한 규칙과 사용자가 같은 모든 감사 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.MutexAuditRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAccessRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 허용 또는 거부된 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.String,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹의 이름, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="eventRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAccessRule.SemaphoreRights">
+      <summary>[보안 중요] 액세스 규칙에 의해 허용 또는 거부된 권한을 가져옵니다.</summary>
+      <returns>액세스 규칙에 의해 허용되거나 거부된 권한을 나타내는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAuditRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 감사할 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> 클래스의 새 인스턴스를 초기화하여 감사할 사용자 또는 그룹, 감사 권한 그리고 성공, 실패 또는 두 가지 모두에 대한 감사 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="eventRights">감사할 액세스 종류를 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAuditRule.SemaphoreRights">
+      <summary>[보안 중요] 감사 규칙의 영향을 받는 액세스 권한을 가져옵니다.</summary>
+      <returns>감사 규칙의 영향을 받는 권한을 나타내는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreRights">
+      <summary>[보안 중요] 명명된 시스템 세마포 개체에 적용할 수 있는 액세스 제어 권한을 지정합니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions">
+      <summary>명명된 세마포와 관련된 보안 및 감사 규칙을 변경할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Delete">
+      <summary>명명된 세마포를 삭제할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.FullControl">
+      <summary>명명된 세마포를 완전히 제어하고 해당 액세스 규칙 및 감사 규칙을 수정할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Modify">
+      <summary>명명된 세마포를 해제할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions">
+      <summary>명명된 세마포의 액세스 규칙 및 감사 규칙을 열고 복사할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Synchronize">
+      <summary>명명된 세마포를 대기할 권한입니다.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.TakeOwnership">
+      <summary>명명된 세마포의 소유자를 변경할 권한입니다.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreSecurity">
+      <summary>[보안 중요] 명명된 세마포의 Windows 액세스 제어 보안을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor">
+      <summary>[보안 중요] 기본값으로 <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[보안 중요] 지정한 이름의 시스템 세마포에서 지정한 액세스 제어 보안 규칙 섹션으로 <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="name">액세스 제어 보안 규칙을 검색할 시스템 세마포의 이름입니다.</param>
+      <param name="includeSections">검색할 섹션을 지정하는 <see cref="T:System.Security.AccessControl.AccessControlSections" /> 플래그의 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRightType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> 클래스가 액세스 권한을 나타내는 데 사용하는 열거형을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 열거형을 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] 지정된 액세스 권한, 액세스 제어 및 플래그로 지정한 사용자의 새 액세스 제어 규칙을 만듭니다.</summary>
+      <returns>지정한 사용자의 지정한 권한을 나타내는 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> 개체입니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 허용하거나 거부할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 세마포에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 세마포에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 세마포에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> 클래스가 액세스 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 일치하는 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 액세스 제어 규칙입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 감사 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 감사 규칙입니다.이 규칙에서 지정하는 사용자가 검색을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] 새 감사 규칙을 만들어 규칙을 적용할 사용자, 감사할 액세스 권한 및 감사 규칙을 트리거할 결과를 지정합니다.</summary>
+      <returns>지정한 사용자의 지정한 감사 규칙을 나타내는 <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> 개체입니다.메서드의 반환 형식은 기본 클래스 <see cref="T:System.Security.AccessControl.AuditRule" />이지만 반환 값은 파생 클래스로 안전하게 캐스팅할 수 있습니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 감사할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="inheritanceFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="propagationFlags">명명된 대기 핸들에는 계층이 없으므로 의미가 없습니다.</param>
+      <param name="flags">성공 또는 실패한 액세스를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AuditRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> 클래스가 감사 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같고 상속 및 전파 플래그가 호환되는 액세스 제어 규칙을 검색합니다. 그러한 규칙이 있으면 지정한 액세스 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 비롯하여 일치하는 규칙(있다면)과 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자가 같고 상속 및 전파 플래그가 호환되는 감사 제어 규칙을 검색합니다. 호환되는 규칙이 있으면 지정한 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 일치하는 규칙(있다면)이 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 같은 사용자를 가진 모든 감사 규칙을 검색하고 해당 규칙이 있을 경우 제거합니다.</summary>
+      <param name="rule">검색할 사용자를 지정하는 <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />입니다.이 규칙에서 지정한 모든 권한은 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 감사 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AccessControlType" />과 상관없이 지정한 규칙과 사용자가 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[보안 중요] 지정된 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />입니다.이 규칙의 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />은 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AuditFlags" /> 과 상관없이 지정한 규칙과 사용자가 같은 모든 감사 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="T:System.Threading.ThreadingAclExtensions"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.EventWaitHandle)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Mutex)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Semaphore)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.EventWaitHandle,System.Security.AccessControl.EventWaitHandleSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Mutex,System.Security.AccessControl.MutexSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Semaphore,System.Security.AccessControl.SemaphoreSecurity)"></member>
+  </members>
+</doc>

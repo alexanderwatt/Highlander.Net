@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B4904C9-B3FB-49E2-BADE-A1F6283E4782}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.EquitiesCalculator.TestData.V5r3</RootNamespace>
+    <AssemblyName>Highlander.EquitiesCalculator.TestData.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mocks.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StockFormat.cs">
+      <DependentUpon>StockFormat.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TestDataSDVols.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data_ASXImplied\AGK_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AIO_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ALL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AMC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AMP_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ANN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ANZ_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AOE_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ASX_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AWC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AWE_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\AXA_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BBG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BEN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BHP_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BLD_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BLY_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BSL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\BXB_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CBA_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CCL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CGF_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\COH_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CPU_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CSL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CSR_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\CWN_AsxImplied_20090909.xml" />
+    <Content Include="Data_SDVols\AGK_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\ANZ_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\BHP_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\BXB_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\CBA_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\CPU_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\CSL_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\MIG_20091211.xml" />
+    <Content Include="Data_SDVols\NWS_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\ORG_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\RIO_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\SHL_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\TAH_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\TLS_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\WBC_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\WDC_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\WES_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\WOW_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\WPL_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_SDVols\XJO_SD_Vol_20090909.xml">
+    </Content>
+    <Content Include="Data_ASXImplied\DJS_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\EHL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ERA_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ERC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\FGL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\FMG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\FXJ_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\GFF_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\GNS_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\GPT_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\HGG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\HVN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\IAG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\IFL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\IFN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ILU_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\IPL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\JBH_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\JHX_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\LEI_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\LGL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\LLC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\MAP_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\MIG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\MQG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\NAB_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\NCM_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\NUF_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\NWS_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ORG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\ORI_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\OSH_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\OST_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\OZL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\PBG_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\PDN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\PPX_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\QAN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\QBE_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\RIO_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\SEV_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\SGP_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\SHL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\STO_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\SUN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TAH_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TCL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TEN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TLS_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TOL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\TTS_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\VBA_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WAN_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WBC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WDC_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WES_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WOR_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WOW_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\WPL_AsxImplied_20090909.xml" />
+    <Content Include="Data_ASXImplied\XJO_AsxImplied_20090909.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StockFormat.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

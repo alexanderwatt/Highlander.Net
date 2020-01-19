@@ -24,7 +24,7 @@ using System.Xml.Serialization;
 
 #endregion
 
-namespace Orion.Util.Helpers
+namespace Highlander.Utilities.Helpers
 {
     /// <summary>
     /// Parses enums
@@ -53,7 +53,7 @@ namespace Orion.Util.Helpers
         /// <returns></returns>
         public static bool TryParse<T>(string s, bool ignoreCase, out T result) where T : struct
         {
-            result = default(T);
+            result = default;
             if (s == null)
                 return false;
             try

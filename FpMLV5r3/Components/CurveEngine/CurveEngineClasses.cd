@@ -1,0 +1,1261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCommodityForward" Collapsed="true">
+    <Position X="10.75" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAECAwAAAAAAAAAAgJIBEgQAiAAAAABJAAAAiAQACA=</HashCode>
+      <FileName>Assets\Commodities\Cash\PriceableCommodityForward.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCommoditySpot" Collapsed="true">
+    <Position X="13" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAECAwAAAAAAAAAAgJIBEgQAiAAAAABJIAAAiAQACA=</HashCode>
+      <FileName>Assets\Commodities\Cash\PriceableCommoditySpot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCER" Collapsed="true">
+    <Position X="15.25" Y="24.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Commodities\Futures\PriceableCER.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCommodityFuturesAsset" Collapsed="true">
+    <Position X="16.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAMiAAAgACAAAAgAgFgACjAgqJAAAMAYEEEACEQAQA=</HashCode>
+      <FileName>Assets\Commodities\Futures\PriceableCommodityFuturesAsset.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableWheatFuture" Collapsed="true">
+    <Position X="17.5" Y="24.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Commodities\Futures\PriceableWheatFuture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCEROption" Collapsed="true">
+    <Position X="15.25" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAEQBAAAAgAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Commodities\FuturesOptions\PriceableCEROption.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCommodityAssetController" Collapsed="true">
+    <Position X="15.25" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAIAAEAAAEAAA=</HashCode>
+      <FileName>Assets\Commodities\PriceableCommodityAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCommoditySpreadAssetController" Collapsed="true">
+    <Position X="19.75" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAAAAABAAAAACAAAAAAAAAAIAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Commodities\Spreads\PriceableCommoditySpreadAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleCommoditySpreadAsset" Collapsed="true">
+    <Position X="19.75" Y="24.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAQAgAAQBAAAAgBABAgAAiAAAAIAJAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Commodities\Spreads\PriceableSimpleCommoditySpreadAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCreditAssetController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Credit\PriceableCreditAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFxForwardRate" Collapsed="true">
+    <Position X="18" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhCAwAAgQABAQAEgDIBEgQAjAAQAIBBAAgAiAQECA=</HashCode>
+      <FileName>Assets\FX\Cash\PriceableFxForwardRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFxONRate" Collapsed="true">
+    <Position X="15.75" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\FX\Cash\PriceableFxONRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFxSpotRate" Collapsed="true">
+    <Position X="18" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAQACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\FX\Cash\PriceableFxSpotRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFxTNRate" Collapsed="true">
+    <Position X="20.25" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\FX\Cash\PriceableFxTNRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.FX.FXOptions.PriceableSimpleFxOptionAsset" Collapsed="true">
+    <Position X="16.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAEAAAIgEMAAAQgQgBNAAgQgiBCgAIiBAAEAAAABEE=</HashCode>
+      <FileName>Assets\FX\FXOptions\PriceableSimpleFxOptionAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFxAssetController" Collapsed="true">
+    <Position X="18" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\FX\PriceableFxAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Index.PriceableInflationIndex" Collapsed="true">
+    <Position X="4.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAACAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Inflation\Index\PriceableInflationIndex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Index.PriceableInflationXibor" Collapsed="true">
+    <Position X="4.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAEAAAACAAAAA=</HashCode>
+      <FileName>Assets\Inflation\Index\PriceableInflationXibor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Swaps.PriceableInflationSwapAsset" Collapsed="true">
+    <Position X="2" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgQAgBAAAAAAAABABAg4AjAIAAIAAAAAAAAwAQA=</HashCode>
+      <FileName>Assets\Inflation\Swaps\PriceableInflationSwapAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Swaps.PriceableSimpleInflationAsset" Collapsed="true">
+    <Position X="5.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAQAgBAAAAAAAABBBAgQAjAIAAIAAAAAAAAQAAU=</HashCode>
+      <FileName>Assets\Inflation\Swaps\PriceableSimpleInflationAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Swaps.PriceableSimpleRevenueInflationSwap" Collapsed="true">
+    <Position X="2" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAACAAAAEAAAIAQAAAEAIAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Inflation\Swaps\PriceableSimpleRevenueInflationSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Inflation.Swaps.PriceableSimpleZeroCouponInflationSwap" Collapsed="true">
+    <Position X="6.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAACAAAAEAAAIAQAAAEAIAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Inflation\Swaps\PriceableSimpleZeroCouponInflationSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableBond" Collapsed="true">
+    <Position X="0.5" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAiCQBAQCFQAAAAAAAIASAwQAQgACABBQggWAADQA=</HashCode>
+      <FileName>Assets\Rates\Bonds\PriceableBond.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableBondAsset" Collapsed="true">
+    <Position X="1.75" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAAAlgAAQBwBgggAggAEAA8gDAICAAAABAUAABxgEw=</HashCode>
+      <FileName>Assets\Rates\Bonds\PriceableBondAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleBond" Collapsed="true">
+    <Position X="2.75" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Rates\Bonds\PriceableSimpleBond.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Rates.CapFloorLet.PriceableCaplet" Collapsed="true">
+    <Position X="1" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Rates\CapFloorLet\PriceableCapLet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableFloorlet" Collapsed="true">
+    <Position X="7.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\CapFloorLet\PriceableFloorlet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Rates.CapFloorLet.PriceableSimpleRateOptionAsset" Collapsed="true">
+    <Position X="4.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAIkkUBAAQgQgBNAAhQAiBCgAICBAgEAAAABEE=</HashCode>
+      <FileName>Assets\Rates\CapFloorLet\PriceableSimpleRateOptionAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableBankBill" Collapsed="true">
+    <Position X="26.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Cash\PriceableBankBill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableCash" Collapsed="true">
+    <Position X="29" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Cash\PriceableCash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableDeposit" Collapsed="true">
+    <Position X="31.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Rates\Cash\PriceableDeposit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableZeroRate" Collapsed="true">
+    <Position X="17.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAABAAAAgAAAAAAAgAgCAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Cash\PriceableZeroRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleDiscountFra" Collapsed="true">
+    <Position X="20" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Fra\PriceableSimpleDiscountFra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleFra" Collapsed="true">
+    <Position X="20" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAQBAAAAIEAAAAAAEAGAAAAA=</HashCode>
+      <FileName>Assets\Rates\Fra\PriceableSimpleFra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableRateFuturesAsset" Collapsed="true">
+    <Position X="8.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAApiAQAgBCABAAgAgDgAShAAjBKAAIAKAAkACEBARE=</HashCode>
+      <FileName>Assets\Rates\Futures\PriceableRateFuturesAsset.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableOis" Collapsed="true">
+    <Position X="22.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Index\PriceableOis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableRateIndex" Collapsed="true">
+    <Position X="23.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Index\PriceableRateIndex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableXibor" Collapsed="true">
+    <Position X="24.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Index\PriceableXibor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableBondAssetController" Collapsed="true">
+    <Position X="1.75" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KIEGAAAAgkAQRggAAgRBAAhAC5AInAAABRAABABBQQA=</HashCode>
+      <FileName>Assets\Rates\PriceableBondAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableRateAssetController" Collapsed="true">
+    <Position X="19" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAQAAAAAAAAQAAAIAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\PriceableRateAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleRateAsset" Collapsed="true">
+    <Position X="24.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhCAQAgBAABAAAAgCBBAgQAjAIAAIABAAgACAQAAE=</HashCode>
+      <FileName>Assets\Rates\PriceableSimpleRateAsset.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableBasisSwap" Collapsed="true">
+    <Position X="15.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAABAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableBasisSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableRateSpreadAssetController" Collapsed="true">
+    <Position X="22.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAAAAAABAAAAACAAAAAAAAAAIAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableRateSpreadAssetController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleRateSpreadAsset" Collapsed="true">
+    <Position X="34.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAQAghAQBCAAQgDAAEhAAjAIAAIABAAgAAAAAAE=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableSimpleRateSpreadAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSpreadDeposit" Collapsed="true">
+    <Position X="35.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAEAAAAAAAAAAAIEAAAAAAEACAAAAI=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableSpreadDeposit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSpreadFra" Collapsed="true">
+    <Position X="33.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAEAAAAAQAAAAAIEAAAEAAkAGAAAAA=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableSpreadFra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableXccyBasisSwap" Collapsed="true">
+    <Position X="15.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Spreads\PriceableXccyBasisSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableIRSwap" Collapsed="true">
+    <Position X="11" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECAAACQEAAAIAAAAAIIBEAAAACAABAACAAIAAAABAIA=</HashCode>
+      <FileName>Assets\Rates\Swaps\PriceableIRSwap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSimpleIRSwap" Collapsed="true">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Rates\Swaps\PriceableSimpleIRSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.PriceableSwapRateAsset" Collapsed="true">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhChQAgBAABAAAAgDBBAg4gnAIEAICAAIgBCAyAQA=</HashCode>
+      <FileName>Assets\Rates\Swaps\PriceableSwapRateAsset.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Helpers.AssetHelper" Collapsed="true">
+    <Position X="40" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAgAAAAAAAAABIAACAAIAAAAIAAAEAAAAAAIAIAAEA=</HashCode>
+      <FileName>Assets\Helpers\AssetHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Helpers.AssetTypeConvertor" Collapsed="true">
+    <Position X="41.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAACAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Helpers\AssetHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Assets.Helpers.BondHelper" Collapsed="true">
+    <Position X="43.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Helpers\BondHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.CurveEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>guRBMhQjOCIBiAxCQIO4BAnHFCX4EUgCEkEFYVTCCkI=</HashCode>
+      <FileName>CurveEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Information" Collapsed="true">
+    <Position X="40" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Information.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.CachedScenarioRule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAIAAAAAQEAAAAAAAAAAAAAAAAAAAAAEAAAgE=</HashCode>
+      <FileName>ScenarioRule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.CachedSummary" Collapsed="true">
+    <Position X="47" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAA=</HashCode>
+      <FileName>ScenarioRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Extensions.DictionaryExtension" Collapsed="true">
+    <Position X="48.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\DictionaryExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Extensions.ExceptionExtension" Collapsed="true">
+    <Position X="52.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Extensions\ExceptionExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Extensions.RangeExtension" Collapsed="true">
+    <Position X="54" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFQAQAAAAQAAAAAAAAAQACAAwAAAAAACAAgAAABAAgQ=</HashCode>
+      <FileName>Extensions\RangeExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.CurveLoader" Collapsed="true">
+    <Position X="47" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAIAAAAABDECQAAAAAAAAABAAQAgAAoAAAQQAAIAA=</HashCode>
+      <FileName>Factory\CurveLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.MarketFactory" Collapsed="true">
+    <Position X="48.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAACAAA=</HashCode>
+      <FileName>Factory\MarketFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.MarketHelper" Collapsed="true">
+    <Position X="50.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAEAABAAAAAAIAAA=</HashCode>
+      <FileName>Factory\MarketFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.FxMarketFactory" Collapsed="true">
+    <Position X="54" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAkQAAAAAAAAAAAA=</HashCode>
+      <FileName>Factory\MarketFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.PriceableAssetFactory" Collapsed="true">
+    <Position X="45.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAIoDADIkBQIAJCAQUCECQBc0OVgE0JAKQFAIBQIAuU=</HashCode>
+      <FileName>Factory\PriceableAssetFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Factory.PricingStructureFactory" Collapsed="true">
+    <Position X="48.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAACAAKBEAgAYAEAAACACAEEAEDAAgAgAAAAAAI=</HashCode>
+      <FileName>Factory\PricingStructureFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.ArrayIndex" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAEAAAEAAAAgAAAAAAMAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\ArrayIndex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.CompoundingHelper" Collapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\CompoundingHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.CurveHelper" Collapsed="true">
+    <Position X="45.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Helpers\CurveHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.FrequencyHelper" Collapsed="true">
+    <Position X="43.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\FrequencyHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.InstrumentDataHelper" Collapsed="true">
+    <Position X="41.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAoAAAAAAAAAAAACABAAAAAIAAAAAAIAAAAAAAAAEA=</HashCode>
+      <FileName>Helpers\InstrumentDataHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.MarketEnvironmentHelper" Collapsed="true">
+    <Position X="47" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAKAAgQAAAAAAAAAEAAAAAAACAAAQEAAEBAAAAAAAAA=</HashCode>
+      <FileName>Helpers\MarketEnvironmentHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.MarketQuoteHelper" Collapsed="true">
+    <Position X="52.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAABCAQQAAIAAAAAAAgIAAAAAAQACAgAAAEAA=</HashCode>
+      <FileName>Helpers\MarketQuoteHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.MetricsHelper" Collapsed="true">
+    <Position X="54" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAACAAACAAA=</HashCode>
+      <FileName>Helpers\MetricsHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.ObjectToArrayOfPropertiesConverter" Collapsed="true">
+    <Position X="40" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAAAAAAAAAAIAgAAQBAAAAAAAAAAgACAAAAACAAAAA=</HashCode>
+      <FileName>Helpers\ObjectToArrayOfPropertiesConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.ParameterFormatter" Collapsed="true">
+    <Position X="41.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Helpers\ParameterFormatter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.PDHHelper" Collapsed="true">
+    <Position X="43.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAACAAAEA=</HashCode>
+      <FileName>Helpers\PDHHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.PricingStructureAlgorithmsHolder" Collapsed="true">
+    <Position X="3.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureAlgorithmsHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.GenericRateCurveAlgorithmHolder" Collapsed="true">
+    <Position X="3.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureAlgorithmsHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.PricingStructureHelper" Collapsed="true">
+    <Position X="50.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAkBAAggAAAAAAGBAAAIACAAABAgEAAQAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.RateCurveTerms" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAAAAAAQAACgAAAAABAIAAAAAAAIA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.FXCurveTerms" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAAAAAAQAACAAAAAAAAIAAAAAAAIA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.VolatilitySurfaceTerms" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAAAAAAQAACgAAAAAAAIAAAAAAAIA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.QuotedAssetSetFactory" Collapsed="true">
+    <Position X="52.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIgCAAAAAAAAAAAAAAAAAAAAACAAEAAABAAAAABAAA=</HashCode>
+      <FileName>Helpers\QuotedAssetSetFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.SABRHelper" Collapsed="true">
+    <Position X="40" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAEUAAAAAIAAAABoAEAAAAGgAADAAACgAQIAQCCoAg=</HashCode>
+      <FileName>Helpers\SABRHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.TermCurveExtension" Collapsed="true">
+    <Position X="41.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\TermCurveExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.Helpers.V5r3.TermPointsFactory" Collapsed="true">
+    <Position X="43.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\TermPointsFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.TimeDimensionEqualityComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\VolatilitySurfaceHelper.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper" Collapsed="true">
+    <Position X="54" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMABMCAAIAAAAEAAAAgAUAAQAAAAAAAAQAAMAAAAIAE=</HashCode>
+      <FileName>PricingStructures\Helpers\VolatilitySurfaceHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper2" Collapsed="true">
+    <Position X="38.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\VolatilitySurfaceHelper2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Markets.FxLegEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAJAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Markets\FxLegEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Markets.SimpleCommodityMarketEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGBAAQAAEAABAACAIAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Markets\SimpleCommodityMarketEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Markets.SimpleFxMarketEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAQAAAgABAAGAICAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Markets\SimpleFxMarketEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Markets.SimpleRateMarketEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAgAAAAAA=</HashCode>
+      <FileName>Markets\SimpleRateMarketEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.Markets.SwapLegEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="54" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGBAASAAAAABIACAIAAAQIAAAgAAAAAAACAA=</HashCode>
+      <FileName>Markets\SwapLegEnvironment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.CommodityAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQACAAAACAAAABAAggAAAAAAAAAoAABAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\CommodityAssetQuote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.CommodityBootstrapper" Collapsed="true">
+    <Position X="48.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\CommodityBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.CommoditySpreadBootstrapper2" Collapsed="true">
+    <Position X="52.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\CommoditySpreadBootstrapper2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.CreditAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAEAAABBAADEAAAAAAQAAAAAAAAAAgAAAEAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\CreditAssetQuote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.CreditBootstrapper" Collapsed="true">
+    <Position X="41.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\CreditBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.FxAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAEAAABBAADEAAAAAAQAAAAAAAAAAgAAAEAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\FxAssetQuote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.FxBootstrapper" Collapsed="true">
+    <Position X="47" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\FxBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.NewtonRaphsonSolverFunctions" Collapsed="true">
+    <Position X="38.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAABEAAAAAAAAAAAABIAAgQACACgAAAwAAI=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\NewtonRaphsonSolverFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQACAAAACAAAABAAggAAAAAAAAAoAABAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateAssetQuote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateBootstrapper" Collapsed="true">
+    <Position X="40" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateBootstrapperNewtonRaphson" Collapsed="true">
+    <Position X="41.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateBootstrapperNewtonRaphson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateSpreadAssetQuote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQgCRAAACAAAABAAAgAAAAAAAAAoAABAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateSpreadAssetQuote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateSpreadBootstrapper" Collapsed="true">
+    <Position X="47" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateSpreadBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Bootstrappers.RateXccySpreadBootstrapper" Collapsed="true">
+    <Position X="50.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Bootstrappers\RateXccySpreadBootstrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Cubes.ExpiryTermTenorStrikeVolatilityCube" Collapsed="true">
+    <Position X="54" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAgAAAAICAAAAgAACAAAAAAgAEQAAAA=</HashCode>
+      <FileName>PricingStructures\Cubes\ExpiryTermTenorStrikeVolatilityCube.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Cubes.VolatilityCube" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="48.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAABIAAAIAgAAAAAEEAAAEAACAAAAACgAEAAAAA=</HashCode>
+      <FileName>PricingStructures\Cubes\VolatilityCube.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.CommodityCurve" Collapsed="true">
+    <Position X="12.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBIgAIBBIAEGCQAFAIAEIIMAgwBAiAEApEgCAERAAAI=</HashCode>
+      <FileName>PricingStructures\Curves\CommodityCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.CommoditySpreadCurve2" Collapsed="true">
+    <Position X="12.25" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEAAAAAAwAAAAEAAAAAAIACAAQgAAAAAAgIgAAAAA=</HashCode>
+      <FileName>PricingStructures\Curves\CommoditySpreadCurve2.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.CurveBase" Collapsed="true">
+    <Position X="6.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAgAAAgIAAAAAAACACAAAIIAAAAgBAAgAACAEAACAA=</HashCode>
+      <FileName>PricingStructures\Curves\CurveBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.DiscountCurveSolver" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAAACEIAAMAAAAAAAAAAAZAQACAQAAAAgIQAEKAA=</HashCode>
+      <FileName>PricingStructures\Curves\DiscountCurveSolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.FxCurve" Collapsed="true">
+    <Position X="1" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>URIgAAQAIACCAQAEAAAMMAOAggBQiEIgpEgiBERAABI=</HashCode>
+      <FileName>PricingStructures\Curves\FxCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.FxDerivedCurve" Collapsed="true">
+    <Position X="3.25" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAgAAACIBAAAAAEAAAAIAIACABAiAAAgAAiAEAAABA=</HashCode>
+      <FileName>PricingStructures\Curves\FxDerivedCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.InflationCurve" Collapsed="true">
+    <Position X="5.5" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>PricingStructures\Curves\InflationCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateCurve" Collapsed="true">
+    <Position X="7.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAJkKgUQagGODQgAQECEBAcQggBCi4EAoEAiQEBCoBI=</HashCode>
+      <FileName>PricingStructures\Curves\RateCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateSpreadCurve" Collapsed="true">
+    <Position X="7.75" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAwAAAAEAAAAAAIEAAAQAAAAAAAAIgAAAAA=</HashCode>
+      <FileName>PricingStructures\Curves\RateSpreadCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateXccySpreadCurve" Collapsed="true">
+    <Position X="7.75" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAgCAAAAAAAAAAAAAAAAAAAAAgAAAAAA0ABAAAAA=</HashCode>
+      <FileName>PricingStructures\Curves\RateXccySpreadCurve.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Curves.XccySpreadCurve" Collapsed="true">
+    <Position X="10" Y="20.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkEAAAgAAhAAQAAAAAAAAAAAIAA0AAAgAAEAgAAAAQ=</HashCode>
+      <FileName>PricingStructures\Curves\XccySpreadCurve.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.CapletExpiryInterpolatedVolatility" Collapsed="true">
+    <Position X="40" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAACBAAAACAAAAAgAAAAABAQAAAAAAEAAAgAA=</HashCode>
+      <FileName>PricingStructures\Helpers\CapletExpiryInterpolatedVolatility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.CapletSmileCalibrationSettings" Collapsed="true">
+    <Position X="43.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAQAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\CapletSmileCalibrationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.FraSolver" Collapsed="true">
+    <Position X="41.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQACEgGBAAmilJBAAQADEgCASAgAADAAgAoQQkASCSg=</HashCode>
+      <FileName>PricingStructures\Helpers\FraSolver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.SpreadSplicer" Collapsed="true">
+    <Position X="52.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\SpreadSplicer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.SwapRate" Collapsed="true">
+    <Position X="38.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAIAAgAAAACAQAAggAACAAxAAFAAAAAEAAAoAA=</HashCode>
+      <FileName>PricingStructures\Helpers\SwapRate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.YieldCurveConverter" Collapsed="true">
+    <Position X="43.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\YieldCurveConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.CommodityCurveInterpolator" Collapsed="true">
+    <Position X="50.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\CommodityCurveInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.CommoditySpreadInterpolator2" Collapsed="true">
+    <Position X="54" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\CommoditySpreadInterpolator2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.ExtendedVolatilitySurfaceInterpolator" Collapsed="true">
+    <Position X="38.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\ExtendedVolatilitySurfaceInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.FxCurveInterpolator" Collapsed="true">
+    <Position X="48.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\FxCurveInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.GapStepInterpolator" Collapsed="true">
+    <Position X="18.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAgAAAAAAAAAAIAAAABQAIAAAAIAAAAAABQ=</HashCode>
+      <FileName>PricingStructures\Interpolators\GapStepInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.InflationCurveInterpolator" Collapsed="true">
+    <Position X="38.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\InflationCurveInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.RateSpreadInterpolator" Collapsed="true">
+    <Position X="48.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\RateSpreadInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.SpreadInterpolator" Collapsed="true">
+    <Position X="21" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\SpreadInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.TermCurveInterpolator" Collapsed="true">
+    <Position X="21" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\TermCurveInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.TurnInterpolator" Collapsed="true">
+    <Position X="23.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAEAAABCAAAAAAAIIAAAABAAAIAAAAAAAAAABA=</HashCode>
+      <FileName>PricingStructures\Interpolators\TurnInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Interpolators.VolSurfaceInterpolator" Collapsed="true">
+    <Position X="41.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Interpolators\VolSurfaceInterpolator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.LPM.LPMCapFloorCurve" Collapsed="true">
+    <Position X="43.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAABAAAAAAAICAAAgREAAACAIAAjABAAIAAAAA=</HashCode>
+      <FileName>PricingStructures\LPM\LPMCapFloorCurve.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.LPM.LPMSwaptionCurve" Collapsed="true">
+    <Position X="45.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAQAAAAAAAACAAAAAAAAAAAAAACEAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\LPM\LPMSwaptionCurve.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SABR.SABRCapFloorInterface" Collapsed="true">
+    <Position X="52.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABEAAABAAAAAAgEAgAQAICAABAAAAACQAAAAIgBAAM=</HashCode>
+      <FileName>PricingStructures\SABR\SABRCapFloorInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SABR.SABRSwaptionInterface" Collapsed="true">
+    <Position X="41.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEACEQAABACAAAoACABABEAACEAEAAQkEAACAAQCg=</HashCode>
+      <FileName>PricingStructures\SABR\SABRSwaptionInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleBaseCurve" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAiAKAAYAABQAAkAAAACAAAAgBACAAAgAACAAAAAAA=</HashCode>
+      <FileName>PricingStructures\SimpleBaseCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleCommodityCurve" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACABAAAAAAAAAAAAJAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\SimpleCommodityCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleDFToZeroRateCurve" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAQAQAAAAAAACABAIQAAAACIAAAAAgAAAAABA=</HashCode>
+      <FileName>PricingStructures\SimpleDFToZeroRateCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleDiscountFactorCurve" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAQAAAAAAAAACABAIQAABACIAAAAAAAAAQABA=</HashCode>
+      <FileName>PricingStructures\SimpleDiscountFactorCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleFxCurve" Collapsed="true">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAAAAEABAAJAAAAABACAAAAAAAAAAAABA=</HashCode>
+      <FileName>PricingStructures\SimpleFxCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleInflationCurve" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAKAAQAAAAAAAAACABAIQAAAACIAAAAAAAAAQABA=</HashCode>
+      <FileName>PricingStructures\SimpleInflationCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleRateCurve" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="47" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACACEAIAABQCAkAAAACAAQQgBACEAAAAAgCQAQAIg=</HashCode>
+      <FileName>PricingStructures\SimpleRateCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleSpreadDiscountFactorCurve" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAQAAAAAAAAACABAIQEABACIAAAAAAAAAQABA=</HashCode>
+      <FileName>PricingStructures\SimpleSpreadDiscountFactorCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleVolatilitySurface" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAIAABQAAkAAAADAAAQABACAAAAAQAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\SimpleVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleZeroInflationRateCurve" Collapsed="true">
+    <Position X="17" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAQAAAAAAAAACABAIQAAAACIAAAAAAAAAQABA=</HashCode>
+      <FileName>PricingStructures\SimpleZeroInflationRateCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.SimpleZeroRateCurve" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAAQAAAAAAAAACABAIQAAAACIAAAAAAAAAAABA=</HashCode>
+      <FileName>PricingStructures\SimpleZeroRateCurve.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.CommodityVolatilitySurface" Collapsed="true">
+    <Position X="12.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\CommodityVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.EquityVolatilitySurface" Collapsed="true">
+    <Position X="15" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\EquityVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.ExpiryTermStrikeVolatilitySurface" Collapsed="true">
+    <Position X="16" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAFIAAAAAgAAAAIKEAAABAAKAIAAAQgAEQAAAQ=</HashCode>
+      <FileName>PricingStructures\Surfaces\ExpiryTermStrikeVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.ExpiryTermTenorATMVolatilitySurface" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAABIAAAAAiAAAAICEAAAgAAKAAAAAQgAEQAAAQ=</HashCode>
+      <FileName>PricingStructures\Surfaces\ExpiryTermTenorATMVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.ExtendedEquityVolatilitySurface" Collapsed="true">
+    <Position X="0.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\ExtendedEquityVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.ExtendedExpiryTermStrikeVolatilitySurface" Collapsed="true">
+    <Position X="0.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAFIAAAAAgAAAAICEIAAhAAKAAAAAQgAEQAAAQ=</HashCode>
+      <FileName>PricingStructures\Surfaces\ExtendedExpiryTermStrikeVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.FxVolatilitySurface" Collapsed="true">
+    <Position X="17.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\FxVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.RateATMVolatilitySurface" Collapsed="true">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\RateATMVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.RateVolatilitySurface" Collapsed="true">
+    <Position X="19.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\RateVolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.VolatilitySurface" Collapsed="true">
+    <Position X="50.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAIAAQBIAAAIAgAAAAIGEBEAkAAKAAAAACgAEARAAQ=</HashCode>
+      <FileName>PricingStructures\Surfaces\VolatilitySurface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Highlander.CurveEngine.V5r3.PricingStructures.Surfaces.VolatilitySurface2" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAIAAAAAAAAAAAAQAAAAAACAAAAAQAAEAAAAA=</HashCode>
+      <FileName>PricingStructures\Surfaces\VolatilitySurface2.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Highlander.CurveEngine.Helpers.V5r3.IPricingStructureTerms" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAAAAAAAAAAQAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Highlander.CurveEngine.Helpers.V5r3.IVolatilitySurfaceTerms" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Highlander.CurveEngine.Helpers.V5r3.IRateCurveTerms" Collapsed="true">
+    <Position X="24" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAACgAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Highlander.CurveEngine.Helpers.V5r3.IFXCurveTerms" Collapsed="true">
+    <Position X="26.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\PricingStructureTerms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Highlander.CurveEngine.Helpers.V5r3.UnderlyingCurveTypes" Collapsed="true">
+    <Position X="45.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAIAAAAAAAAAgBAAQAAAAA=</HashCode>
+      <FileName>Helpers\UnderlyingCurveTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.CubeDimension" Collapsed="true">
+    <Position X="40" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\VolatilitySurfaceHelper.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Highlander.CurveEngine.V5r3.PricingStructures.Helpers.ExpiryInterpolationType" Collapsed="true">
+    <Position X="41.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PricingStructures\Helpers\CapletExpiryInterpolatedVolatility.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

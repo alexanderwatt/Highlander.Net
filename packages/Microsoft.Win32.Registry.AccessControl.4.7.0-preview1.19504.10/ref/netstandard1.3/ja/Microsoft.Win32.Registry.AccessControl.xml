@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループに許可されたアクセス権セットまたは拒否されたアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループ、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.RegistryAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="registryRights">許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを表す <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループ、アクセス権、継承フラグ、反映フラグ、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.RegistryAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="registryRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="inheritanceFlags">他のオブジェクトからアクセス権を継承する方法を指定する <see cref="T:System.Security.AccessControl.InheritanceFlags" /> フラグのビットごとの組み合わせ。</param>
+      <param name="propagationFlags">他のオブジェクトにアクセス権を反映させる方法を指定する <see cref="T:System.Security.AccessControl.PropagationFlags" /> フラグのビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループの名前、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.RegistryAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="registryRights">許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを表す <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループの名前、アクセス権、継承フラグ、反映フラグ、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.RegistryAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="registryRights">許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="inheritanceFlags">他のオブジェクトからアクセス権を継承する方法を指定する <see cref="T:System.Security.AccessControl.InheritanceFlags" /> フラグのビットごとの組み合わせ。</param>
+      <param name="propagationFlags">他のオブジェクトにアクセス権を反映させる方法を指定する <see cref="T:System.Security.AccessControl.PropagationFlags" /> フラグのビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[セキュリティ クリティカル] アクセス規則で許可されたアクセス権または拒否されたアクセス権を取得します。</summary>
+      <returns>アクセス規則で許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループについて監査するアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 監査するユーザーまたはグループ、監査する権限、継承を考慮するかどうか、成功、失敗、またはその両方のいずれを監査するかを指定して、<see cref="T:System.Security.AccessControl.RegistryAuditRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="registryRights">監査するアクセスの種類を指定する <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="inheritanceFlags">監査規則を現在のキーのサブキーに適用するかどうかを指定する <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 値のビットごとの組み合わせ。</param>
+      <param name="propagationFlags">継承された監査規則を現在のキーのサブ キーに反映させる方法に影響する <see cref="T:System.Security.AccessControl.PropagationFlags" /> 値のビットごとの組み合わせ。</param>
+      <param name="flags">成功、失敗、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 監査するユーザーまたはグループの名前、監査する権限、継承を考慮するかどうか、成功、失敗、またはその両方のいずれを監査するかを指定して、<see cref="T:System.Security.AccessControl.RegistryAuditRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="registryRights">監査するアクセスの種類を指定する <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="inheritanceFlags">監査規則を現在のキーのサブキーに適用するかどうかを指定する <see cref="T:System.Security.AccessControl.InheritanceFlags" /> フラグの組み合わせ。</param>
+      <param name="propagationFlags">継承された監査規則を現在のキーのサブ キーに反映させる方法に影響する <see cref="T:System.Security.AccessControl.PropagationFlags" /> フラグの組み合わせ。</param>
+      <param name="flags">成功、失敗、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[セキュリティ クリティカル] 監査規則の影響を受けるアクセス権を取得します。</summary>
+      <returns>監査規則の影響を受ける権限を示す <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[セキュリティ クリティカル] レジストリ キーの Windows アクセス制御セキュリティを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> クラスの新しいインスタンスを既定値で初期化します。</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> クラスでアクセス権を表すために使用する列挙型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 列挙体を表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] アクセス権、アクセス制御、およびフラグを指定して、指定したユーザーに対して新しいアクセス制御規則を作成します。</summary>
+      <returns>指定したユーザーの指定した権限を表す <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> オブジェクト。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">許可または拒否するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">規則が継承されるかどうかを示すブール値。</param>
+      <param name="inheritanceFlags">サブキーによって規則を継承する方法を示す <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 値のビットごとの組み合わせ。</param>
+      <param name="propagationFlags">サブキーによって規則を継承する方法を変更する <see cref="T:System.Security.AccessControl.PropagationFlags" /> 値のビットごとの組み合わせ。<paramref name="inheritanceFlags" /> の値が <see cref="F:System.Security.AccessControl.InheritanceFlags.None" /> の場合、無効です。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> クラスでアクセス規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる、一致するアクセス制御を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加するアクセス制御規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる監査規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加する監査規則。この規則に指定されているユーザーに基づいて検索されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 規則の適用対象となるユーザー、監査するアクセス権、規則の継承と反映、および規則を発生させる結果を指定して、新しい監査規則を作成します。</summary>
+      <returns>指定したユーザーに対する、指定した監査規則と指定したフラグを表す <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> オブジェクト。メソッドの戻り値は基本クラス <see cref="T:System.Security.AccessControl.AuditRule" /> です。ただし、この戻り値を派生クラスに安全にキャストできます。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">監査するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.RegistryRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">規則が継承されるかどうかを示すブール値。</param>
+      <param name="inheritanceFlags">サブキーによって規則を継承する方法を示す <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 値のビットごとの組み合わせ。</param>
+      <param name="propagationFlags">サブキーによって規則を継承する方法を変更する <see cref="T:System.Security.AccessControl.PropagationFlags" /> 値のビットごとの組み合わせ。<paramref name="inheritanceFlags" /> の値が <see cref="F:System.Security.AccessControl.InheritanceFlags.None" /> の場合、無効です。</param>
+      <param name="flags">成功したアクセス、失敗したアクセス、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> クラスで監査規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定したアクセス規則と同じユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否)、および互換性がある継承フラグと反映フラグが指定されたアクセス制御規則が検索されます。このような規則が見つかると、指定したアクセス規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" />、および一致する規則が見つかった場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたアクセス制御規則をすべて検索し、一致する規則が見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> を指定する <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。この規則で指定する権限、継承フラグ、または反映フラグは、無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致するアクセス制御規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザー、および互換性のある継承フラグと反映フラグが指定された監査制御規則が検索されます。互換性のある規則が見つかると、指定した規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザー、および一致する規則がある場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーが設定されているすべての監査規則を検索し、見つかった場合はそれらの規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーを指定する <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。この規則で指定する権限、継承フラグ、または反映フラグは、無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致する監査規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AccessControlType" /> に関係なく、指定した規則と同じユーザーが指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。この規則のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> によって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AuditFlags" /> 値に関係なく、指定した規則と同じユーザーが指定されたすべての監査規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 허용 또는 거부된 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="registryRights">허용 또는 거부 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 나타내는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] 규칙을 적용할 사용자 또는 그룹, 액세스 권한, 상속 플래그, 전파 플래그 및 지정된 액세스 권한의 허용 여부를 지정하여 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="registryRights">허용 또는 거부 권한을 지정하는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="inheritanceFlags">액세스 권한이 다른 개체에서 상속되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 플래그의 비트 조합입니다.</param>
+      <param name="propagationFlags">액세스 권한이 다른 개체로 전파되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 플래그의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹의 이름, 액세스 권한 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="registryRights">허용 또는 거부 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 나타내는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 클래스의 새 인스턴스를 초기화하여 규칙을 적용할 사용자 또는 그룹의 이름, 액세스 권한, 상속 플래그, 전파 플래그 및 지정된 액세스 권한의 허용 또는 거부 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="registryRights">허용 또는 거부 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="inheritanceFlags">액세스 권한이 다른 개체에서 상속되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 플래그의 비트 조합입니다.</param>
+      <param name="propagationFlags">액세스 권한이 다른 개체로 전파되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 플래그의 비트 조합입니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[보안 중요] 액세스 규칙에 의해 허용 또는 거부된 권한을 가져옵니다.</summary>
+      <returns>액세스 규칙에 의해 허용되거나 거부된 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[보안 중요] 사용자 또는 그룹에 대해 감사할 액세스 권한 집합을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 클래스의 새 인스턴스를 초기화하여 감사할 사용자 또는 그룹, 감사 권한, 상속 고려 여부 및 성공, 실패 또는 두 가지 모두에 대한 감사 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹입니다.이 값은 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식이거나 <see cref="T:System.Security.Principal.NTAccount" />와 같이 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 형식으로 변환할 수 있는 형식이어야 합니다.</param>
+      <param name="registryRights">감사할 액세스 종류를 지정하는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="inheritanceFlags">현재 키의 하위 키에 감사 규칙을 적용할지 여부를 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 값의 비트 조합입니다.</param>
+      <param name="propagationFlags">현재 키의 하위 키에 상속된 감사 규칙을 전파하는 방법에 영향을 주는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 값의 비트 조합입니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 클래스의 새 인스턴스를 초기화하여 감사할 사용자 또는 그룹의 이름, 감사 권한, 상속 고려 여부 및 성공, 실패 또는 두 가지 모두에 대한 감사 여부를 지정합니다.</summary>
+      <param name="identity">규칙을 적용할 사용자나 그룹의 이름입니다.</param>
+      <param name="registryRights">감사할 액세스 종류를 지정하는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="inheritanceFlags">현재 키의 하위 키에 감사 규칙을 적용할지 여부를 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 플래그의 조합입니다.</param>
+      <param name="propagationFlags">현재 키의 하위 키에 상속된 감사 규칙을 전파하는 방법에 영향을 주는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 플래그의 조합입니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[보안 중요] 감사 규칙의 영향을 받는 액세스 권한을 가져옵니다.</summary>
+      <returns>감사 규칙의 영향을 받는 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[보안 중요] 레지스트리 키에 대한 Windows 액세스 제어 보안을 나타냅니다.이 클래스는 상속될 수 없습니다.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[보안 중요] 기본값으로 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 클래스가 액세스 권한을 나타내는 데 사용하는 열거형을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 열거형을 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[보안 중요] 지정된 액세스 권한, 액세스 제어 및 플래그로 지정한 사용자의 새 액세스 제어 규칙을 만듭니다.</summary>
+      <returns>지정한 사용자의 지정한 권한을 나타내는 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 개체입니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 허용하거나 거부할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">규칙의 상속 여부를 지정하는 부울 값입니다.</param>
+      <param name="inheritanceFlags">규칙이 하위 키에 상속되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 값의 비트 조합입니다.</param>
+      <param name="propagationFlags">규칙이 하위 키에 상속되는 방식을 수정하는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 값의 비트 조합입니다.<paramref name="inheritanceFlags" />의 값이 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />이면 의미가 없습니다.</param>
+      <param name="type">권한 허용 여부를 지정하는 <see cref="T:System.Security.AccessControl.AccessControlType" /> 값 중 하나입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 클래스가 액세스 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 일치하는 액세스 제어를 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 액세스 제어 규칙입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[보안 중요] 새 규칙을 병합할 수 있는 감사 규칙을 검색합니다.아무 것도 발견되지 않으면 새 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 감사 규칙입니다.이 규칙에서 지정하는 사용자가 검색을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[보안 중요] 새 감사 규칙을 만들어 규칙을 적용할 사용자, 감사할 액세스 권한, 규칙의 상속과 전파 및 감사 규칙을 트리거할 결과를 지정합니다.</summary>
+      <returns>지정한 플래그를 사용하여 지정한 사용자의 지정한 감사 규칙을 나타내는 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 개체입니다.메서드의 반환 형식은 기본 클래스 <see cref="T:System.Security.AccessControl.AuditRule" />이지만 반환 값은 파생 클래스로 안전하게 캐스팅할 수 있습니다.</returns>
+      <param name="identityReference">규칙을 적용할 사용자 또는 그룹을 식별하는 <see cref="T:System.Security.Principal.IdentityReference" />입니다.</param>
+      <param name="accessMask">정수로 캐스팅된 감사할 액세스 권한을 지정하는 <see cref="T:System.Security.AccessControl.RegistryRights" /> 값의 비트 조합입니다.</param>
+      <param name="isInherited">규칙의 상속 여부를 지정하는 부울 값입니다.</param>
+      <param name="inheritanceFlags">규칙이 하위 키에 상속되는 방식을 지정하는 <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 값의 비트 조합입니다.</param>
+      <param name="propagationFlags">규칙이 하위 키에 상속되는 방식을 수정하는 <see cref="T:System.Security.AccessControl.PropagationFlags" /> 값의 비트 조합입니다.<paramref name="inheritanceFlags" />의 값이 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />이면 의미가 없습니다.</param>
+      <param name="flags">성공 또는 실패를 감사할지 아니면 둘 다 감사할지를 지정하는 <see cref="T:System.Security.AccessControl.AuditFlags" /> 값의 비트 조합입니다.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 클래스가 감사 규칙을 나타내는 데 사용하는 형식을 가져옵니다.</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 클래스를 나타내는 <see cref="T:System.Type" /> 개체입니다.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] 지정한 액세스 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같고 상속 및 전파 플래그가 호환되는 액세스 제어 규칙을 검색합니다. 그러한 규칙이 있으면 지정한 액세스 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 비롯하여 일치하는 규칙(있다면)과 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">검색할 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />을 지정하는 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />입니다.이 규칙에서 지정한 모든 권한, 상속 플래그 또는 전파 플래그는 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 액세스 제어 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 사용자가 같고 상속 및 전파 플래그가 호환되는 감사 제어 규칙을 검색합니다. 호환되는 규칙이 있으면 지정한 규칙에 포함된 권한이 규칙에서 제거됩니다.</summary>
+      <returns>호환 가능한 규칙이 있으면 true이고, 그렇지 않으면 false입니다.</returns>
+      <param name="rule">검색할 사용자 및 일치하는 규칙(있다면)이 호환되어야 하는 상속 및 전파 플래그 집합을 지정하는 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />입니다.발견된 경우 호환되는 규칙에서 제거할 권한을 지정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 같은 사용자를 가진 모든 감사 규칙을 검색하고 해당 규칙이 있을 경우 제거합니다.</summary>
+      <param name="rule">검색할 사용자를 지정하는 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />입니다.이 규칙에서 지정한 모든 권한, 상속 플래그 또는 전파 플래그는 무시됩니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[보안 중요] 지정한 규칙과 정확히 일치하는 감사 규칙을 검색하여 제거합니다.</summary>
+      <param name="rule">제거할 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />입니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AccessControlType" />과 상관없이 지정한 규칙과 사용자가 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[보안 중요] 지정된 규칙과 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />(허용 또는 거부)이 같은 모든 액세스 제어 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />입니다.이 규칙의 사용자 및 <see cref="T:System.Security.AccessControl.AccessControlType" />은 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[보안 중요] <see cref="T:System.Security.AccessControl.AuditFlags" /> 과 상관없이 지정한 규칙과 사용자가 같은 모든 감사 규칙을 제거한 다음 지정한 규칙을 추가합니다.</summary>
+      <param name="rule">추가할 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />입니다.이 규칙에서 지정하는 사용자가 이 규칙이 추가되기 전에 제거할 규칙을 결정합니다.</param>
+    </member>
+  </members>
+</doc>

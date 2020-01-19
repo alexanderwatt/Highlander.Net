@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ECCD0B1B-2F6B-436B-9F30-D511766ED2E7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Analytics.Tests.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Analytics.Tests.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>0618</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.Signed.4.9.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BGSAnalytics\BGSConvexityCorrectionUnitTests.cs" />
+    <Compile Include="Bonds\BondTests.cs" />
+    <Compile Include="CapFloorAnalytics\BlackCapletFlooretTests.cs" />
+    <Compile Include="CapFloorAnalytics\CapletBootstrapResultsTests.cs" />
+    <Compile Include="CapFloorAnalytics\CapVolatilityDataElementTests.cs" />
+    <Compile Include="Convexity\FuturesConvexityTests.cs" />
+    <Compile Include="Curves\CurvesTests.cs" />
+    <Compile Include="Dates\CalculationPeriodScheduleTests.cs" />
+    <Compile Include="Dates\DatesMetaSchedulerTests.cs" />
+    <Compile Include="Dates\DatesScheduleGeneratorTests.cs" />
+    <Compile Include="Dates\DateSchedulerTest.cs" />
+    <Compile Include="Dates\DayCounterHelperTest.cs" />
+    <Compile Include="Dates\FinancialUnitTest.cs" />
+    <Compile Include="Dates\NotionalScheduleGeneratorTests.cs" />
+    <Compile Include="Dates\SpreadScheduleGeneratorTests.cs" />
+    <Compile Include="Dates\StrikeScheduleGeneratorTests.cs" />
+    <Compile Include="Distributions\CumulativeNormalUnitTests.cs" />
+    <Compile Include="Distributions\GaussianRandomNumbersTests.cs" />
+    <Compile Include="Equities\EquitiesTests.cs" />
+    <Compile Include="Equities\EquityPCETests.cs" />
+    <Compile Include="Helpers\ResourcesHelper.cs" />
+    <Compile Include="Helpers\TestArrayUtilities.cs" />
+    <Compile Include="Interpolations\CubicHermiteSplineInterpolationTests.cs" />
+    <Compile Include="Interpolations\CubicSplineTests.cs" />
+    <Compile Include="Interpolations\PiecewiseLinearInterpolatorTest.cs" />
+    <Compile Include="Interpolations\TestInterpolations.cs" />
+    <Compile Include="Interpolators\BilinearInterpolatorTest.cs" />
+    <Compile Include="Interpolators\LinearInterpolatorTest.cs" />
+    <Compile Include="Interpolators\PiecewiseLinearInterpolatorTest.cs" />
+    <Compile Include="Interpolators\TestInterpolations.cs" />
+    <Compile Include="Numerics\BlasTests.cs" />
+    <Compile Include="Numerics\ConcatCollectionTests.cs" />
+    <Compile Include="Numerics\CumulativeNormalDistributionTests.cs" />
+    <Compile Include="Numerics\IntDoubleParseTests.cs" />
+    <Compile Include="Numerics\InvCumulativeNormalDistributionTests.cs" />
+    <Compile Include="Numerics\LinalgTests.cs" />
+    <Compile Include="Numerics\NormalDistributionTests.cs" />
+    <Compile Include="Numerics\NumericalDerivativesTests.cs" />
+    <Compile Include="Numerics\RiskStatisticsTests.cs" />
+    <Compile Include="Numerics\SegmentIntegralTests.cs" />
+    <Compile Include="Numerics\HaltonTests.cs" />
+    <Compile Include="Numerics\Solvers1DTests.cs" />
+    <Compile Include="Numerics\TesterUtilities.cs" />
+    <Compile Include="Options\BlackScholesMertonModelTest.cs" />
+    <Compile Include="Points\CoordinateTest.cs" />
+    <Compile Include="Points\PricingDataPointTest.cs" />
+    <Compile Include="Polynomial\PolynomialTests.cs" />
+    <Compile Include="Options\OptionTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rates\CashForward.cs" />
+    <Compile Include="Rates\CashflowAnalyticTests.cs" />
+    <Compile Include="Rates\CrossCurrencySwapTests.cs" />
+    <Compile Include="Rates\SwapAnalyticTests.cs" />
+    <Compile Include="Rates\RatesTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\AnnuityFactorTests.cs" />
+    <Compile Include="SABRModel\BlackVanillaSwaptionTests.cs" />
+    <Compile Include="SABRModel\ImpliedVolatilityParametersUnitTests.cs" />
+    <Compile Include="SABRModel\SABRCalibrationEngineUnitTests.cs" />
+    <Compile Include="SABRModel\SABRCalibrationSettingsUnitTests.cs" />
+    <Compile Include="SABRModel\SABRImpliedVolatilityUnitTests.cs" />
+    <Compile Include="SABRModel\SABRInterpolationTest.cs" />
+    <Compile Include="SABRModel\SABRParametersUnitTests.cs" />
+    <Compile Include="Interpolators\TrilinearInterpolatorTest.cs" />
+    <Compile Include="Interpolators\BilinearInterpolationUnitTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Spaces\InterpolatedSurfaceTest.cs" />
+    <Compile Include="Spaces\TestSpaces.cs" />
+    <Compile Include="Spaces\TestSurfaces.cs" />
+    <Compile Include="Utilities\DayCountUnitTests.cs" />
+    <Compile Include="Interpolators\LinearInterpolationUnitTests.cs" />
+    <Compile Include="Utilities\TwoDimensionalKeyTests.cs" />
+    <Compile Include="Volatilities\CapFloorATMMatrixTest.cs" />
+    <Compile Include="Volatilities\CapFloorVolatilityMatrixTest.cs" />
+    <Compile Include="Rates\ForwardRatesTest.cs" />
+    <Compile Include="Volatilities\SABRKeyTest.cs" />
+    <Compile Include="Volatilities\SABRPPDGridTest.cs" />
+    <Compile Include="Volatilities\SwaptionDataMatrixTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FpML\CapFloorVolsTest.xml" />
+    <EmbeddedResource Include="FpML\MarketTest.xml" />
+    <EmbeddedResource Include="FpML\RateCurveFpMLFromPSS.xml" />
+    <EmbeddedResource Include="FpML\RateCurve_CurveGen.xml" />
+    <EmbeddedResource Include="FpML\VolGridTest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Analytics\Highlander.Reporting.Analytics.V5r3.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>Highlander.Reporting.Analytics.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting.Helpers\Highlander.Reporting.Helpers.V5r3.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>Highlander.Reporting.Helpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>Highlander.Reporting.Identifiers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Models\Highlander.Reporting.Models.V5r3.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>Highlander.Reporting.Models.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestHelpers\Highlander.TestHelpers.V5r3.csproj">
+      <Project>{320d2e83-2352-4a7b-ab1a-c5cabe9ffe93}</Project>
+      <Name>Highlander.TestHelpers.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,32 @@
+﻿
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe assembly's progress.
+The file is located at C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.InstallLog.
+
+An exception occurred during the Install phase.
+System.InvalidOperationException: Cannot open Service Control Manager on computer '.'. This operation might require other privileges.
+The inner exception System.ComponentModel.Win32Exception was thrown with the following error message: Access is denied.
+
+The Rollback phase of the installation is beginning.
+See the contents of the log file for the C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe assembly's progress.
+The file is located at C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.InstallLog.
+
+The Rollback phase completed successfully.
+
+The transacted install has completed.
+
+Running a transacted installation.
+
+Beginning the Install phase of the installation.
+See the contents of the log file for the C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe assembly's progress.
+The file is located at C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.InstallLog.
+
+The Install phase completed successfully, and the Commit phase is beginning.
+See the contents of the log file for the C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe assembly's progress.
+The file is located at C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.InstallLog.
+
+The Commit phase completed successfully.
+
+The transacted install has completed.

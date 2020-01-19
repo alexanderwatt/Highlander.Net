@@ -1,0 +1,740 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
+        "projectName": "Highlander.CurveViewer",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Server\\Highlander.Core.Server.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Server\\Highlander.Core.Server.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\ValuationEngine\\Highlander.ValuationEngine.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\ValuationEngine\\Highlander.ValuationEngine.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.0-preview2.19553.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj",
+        "projectName": "Highlander.Core.Common",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Server\\Highlander.Core.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Server\\Highlander.Core.Server.csproj",
+        "projectName": "Highlander.Core.Server",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Server\\Highlander.Core.Server.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj",
+        "projectName": "Highlander.Core.V34",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj",
+        "projectName": "Highlander.CalendarEngine.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj",
+        "projectName": "Highlander.CurveEngine.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\EqutiesCore\\Highlander.Equties.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\EqutiesCore\\Highlander.Equties.csproj",
+        "projectName": "Highlander.Equties",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\EqutiesCore\\Highlander.Equties.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\ValuationEngine\\Highlander.ValuationEngine.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\ValuationEngine\\Highlander.ValuationEngine.V5r3.csproj",
+        "projectName": "Highlander.ValuationEngine.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\ValuationEngine\\Highlander.ValuationEngine.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.V34\\Highlander.Core.V34.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CalendarEngine\\Highlander.CalendarEngine.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\CurveEngine\\Highlander.CurveEngine.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ConfigData\\Highlander.Configuration.Data.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ConfigData\\Highlander.Configuration.Data.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj",
+        "projectName": "Highlander.Reporting.Analytics.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\EqutiesCore\\Highlander.Equties.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Components\\EqutiesCore\\Highlander.Equties.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj",
+        "projectName": "Highlander.Codes.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ConfigData\\Highlander.Configuration.Data.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ConfigData\\Highlander.Configuration.Data.V5r3.csproj",
+        "projectName": "Highlander.Configuration.Data.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ConfigData\\Highlander.Configuration.Data.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj",
+        "projectName": "Highlander.Confirmation.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Confirmation\\Highlander.Confirmation.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj",
+        "projectName": "Highlander.Reporting.Contracts.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Contracts\\Highlander.Reporting.Contracts.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj",
+        "projectName": "Highlander.Reporting.Identifiers.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Identifiers\\Highlander.Reporting.Identifiers.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj",
+        "projectName": "Highlander.Reporting.ModelFramework.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj",
+        "projectName": "Highlander.Reporting.Models.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Models\\Highlander.Reporting.Models.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Analytics\\Highlander.Reporting.Analytics.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\ModelFramework\\Highlander.Reporting.ModelFramework.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj",
+        "projectName": "Highlander.Reporting.Helpers.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting.Helpers\\Highlander.Reporting.Helpers.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj",
+        "projectName": "Highlander.Reporting.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Reporting\\Highlander.Reporting.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj",
+        "projectName": "Highlander.Metadata.Common",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Common\\Highlander.Metadata.Common.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj",
+        "projectName": "Highlander.Constants",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Metadata\\Constants\\Highlander.Constants.csproj"
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj",
+        "projectName": "Highlander.Utilities",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    }
+  }
+}

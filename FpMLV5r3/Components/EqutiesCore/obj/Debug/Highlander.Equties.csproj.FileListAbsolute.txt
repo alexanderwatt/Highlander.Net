@@ -1,0 +1,9 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\bin\Debug\Highlander.Equities.xml
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\bin\Debug\Highlander.Equities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\bin\Debug\Highlander.Equities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equties.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equties.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equities.pdb

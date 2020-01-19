@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Orion.Util.WinTools")]
+[assembly: AssemblyTitle("Highlander.WinTools")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCulture("")]
 
@@ -14,4 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("87d156ca-98fb-4d86-a8d9-0ebcd3df7cce")]
+[assembly: Guid("8E7EC7E5-BFA3-4979-BBD3-3E6804939CCE")]

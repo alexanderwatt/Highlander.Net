@@ -1,0 +1,13 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.Client.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.Client.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.AsyncSockets.exe
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.Messages.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.Messages.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.AsyncSockets.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\bin\Debug\Highlander.Orc.AsyncSockets.exe.config
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.pdb

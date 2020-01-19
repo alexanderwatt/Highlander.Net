@@ -16,12 +16,12 @@
 #region Usings
 
 using System;
-using Core.Common;
-using Orion.Util.Logging;
+using Highlander.Core.Common;
+using Highlander.Utilities.Logging;
 
 #endregion
 
-namespace Orion.Workflow
+namespace Highlander.Workflow
 {
     public interface IRequestHandler<R, S> : IDisposable
     {

@@ -21,15 +21,15 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Threading;
-using Core.Common;
-using Orion.Util.Helpers;
-using Orion.Util.Logging;
-using Orion.Util.Threading;
+using Highlander.Core.Common;
+using Highlander.Utilities.Helpers;
+using Highlander.Utilities.Logging;
+using Highlander.Utilities.Threading;
 
 #endregion
 
 
-namespace Orion.Workflow
+namespace Highlander.Workflow
 {
     /// <summary>
     /// 

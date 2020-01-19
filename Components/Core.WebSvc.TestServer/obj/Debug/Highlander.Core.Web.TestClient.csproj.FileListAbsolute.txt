@@ -1,0 +1,15 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.WebClient.exe.config
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.WebClient.exe
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.WebClient.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.V34.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.WebServer.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.V34.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\bin\Debug\Highlander.Core.WebServer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.Web.TestClient.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.Web.TestClient.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.WebClient.exe
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.WebClient.pdb

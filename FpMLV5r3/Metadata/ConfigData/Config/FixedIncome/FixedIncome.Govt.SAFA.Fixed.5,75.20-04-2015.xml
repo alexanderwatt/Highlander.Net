@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="SAFA 5 3/4 04/20/15" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU3SG0000094 Corp Isin</instrumentId>
+  <description>SAFA 5 3/4 04/20/15</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>SAFA</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Fixed</couponType>
+  <couponRate>0.0575</couponRate>
+  <maturity>2015-04-20</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>6</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+</bond>

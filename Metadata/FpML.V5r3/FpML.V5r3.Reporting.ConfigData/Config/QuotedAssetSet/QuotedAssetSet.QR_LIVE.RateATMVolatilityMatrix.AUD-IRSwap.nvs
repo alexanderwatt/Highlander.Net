@@ -1,1 +1,0 @@
-BuildDateTime/DateTime=2013-10-24T00%3a00%3a00|PricingStructureType/String=RateATMVolatilityMatrix|UniqueIdentifier/String=QuotedAssetSet.QR_LIVE.RateATMVolatilityMatrix.AUD-IRSwap|MarketName/String=QR_LIVE|SourceSystem/String=Orion|DataGroup/String=Orion.QuotedAssetSet|Function/String=QuotedAssetSet|CurveName/String=AUD-IRSwap|TimeToLive/Double=720|NameSpace/String=Orion.V5r3

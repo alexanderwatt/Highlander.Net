@@ -16,11 +16,11 @@
 #region Usings
 
 using System;
-using Orion.Util.NamedValues;
+using Highlander.Utilities.NamedValues;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
     public partial class ConfigRule : IRuleObject
     {
@@ -132,7 +132,7 @@ namespace Metadata.Common
         /// <summary>
         /// 
         /// </summary>
-        public string BuildConfig => buildConfigField;
+        public string BuildConfig { get; set; }
 
         protected override NamedValueSet OnGetAppProperties()
         {
@@ -141,7 +141,7 @@ namespace Metadata.Common
 
         protected override string OnGetPrivateKey()
         {
-            return $"{buildConfigField ?? "(all-cfgs)"}.{serverApplNameField}";
+            return $"{BuildConfig ?? "(all-cfgs)"}.{serverApplNameField}";
         }
     }
 
@@ -170,22 +170,22 @@ namespace Metadata.Common
         /// <summary>
         /// 
         /// </summary>
-        public string EnvName => hostEnvNameField;
+        public string EnvName { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string HostName => hostComputerField;
+        public string HostName { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Instance => hostInstanceField;
+        public string Instance { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string UserName => hostUserNameField;
+        public string UserName { get; private set; }
 
         /// <summary>
         /// 
@@ -220,7 +220,7 @@ namespace Metadata.Common
         {
             get
             {
-                NamedValueSet result = RuleHelper.MakeRuleProps(this);
+                var result = RuleHelper.MakeRuleProps(this);
                 result.Set("ApplName", serverApplNameField);
                 return result;
             }
@@ -229,7 +229,7 @@ namespace Metadata.Common
         /// <summary>
         /// 
         /// </summary>
-        public string NetworkKey => String.Format(NameSpace + ".Status.{0}.{1}", GetType().Name, PrivateKey);
+        public string NetworkKey => string.Format(NameSpace + ".Status.{0}.{1}", GetType().Name, PrivateKey);
 
         /// <summary>
         /// 

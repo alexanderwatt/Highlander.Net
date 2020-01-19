@@ -1,0 +1,11 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\bin\Debug\NamedValueSet.DebuggerVisualizer.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\bin\Debug\NamedValueSet.DebuggerVisualizer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\bin\Debug\Microsoft.VisualStudio.DebuggerVisualizers.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NVS.DebuggerVisualizer.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NamedValueSet.DebuggerVisualizer.NamedValueSetVisualizerForm.resources
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NVS.DebuggerVisualizer.csproj.GenerateResource.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NVS.DebuggerVisualizer.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\NamedValueSet.DebuggerVisualizer.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\NamedValueSet.DebuggerVisualizer.pdb

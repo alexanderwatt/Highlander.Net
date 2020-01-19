@@ -13,12 +13,12 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     public static class AlgorithmsProp
     {
         public const string GenericName = "Configuration.Algorithm";
-        public const string RulePath = "Orion.Configuration.Algorithm";
+        public const string RulePath = "Highlander.Configuration.Algorithm";
         public const string Tolerance = "Tolerance";
         public const string Bootstrapper = "Bootstrapper";
         public const string BootstrapperInterpolation = "BootstrapperInterpolation";
@@ -52,39 +52,39 @@ namespace Orion.Constants
 
     //public static class LocationCalendarYearProp//In the process of being deprecated.
     //{
-    //    public const string RulePath = "Orion.ReferenceData.RDMHolidays";
+    //    public const string RulePath = "Highlander.ReferenceData.RDMHolidays";
     //    public const string BusinessCenter = "BusinessCenter";
     //    public const string Year = "Year";
     //}
 
     public static class BusinessCenterCalendarProp
     {
-        public const string RulePath = "Orion.ReferenceData.BusinessCenterHolidays";
+        public const string RulePath = "Highlander.ReferenceData.BusinessCenterHolidays";
         public const string GenericName = "ReferenceData.BusinessCenterHolidays";
         public const string BusinessCenter = "BusinessCenter";
     }
 
     public static class BusinessCentreDateRulesProp
     {
-        public const string RulePath = "Orion.Configuration.DateRules.BusinessCenterDateRules";
+        public const string RulePath = "Highlander.Configuration.DateRules.BusinessCenterDateRules";
         public const string GenericName = "Configuration.DateRules.BusinessCenterDateRules";
     }
 
     public static class CentralBankDateRulesProp
     {
-        public const string RulePath = "Orion.Configuration.DateRules.CentralBankDateRules";
+        public const string RulePath = "Highlander.Configuration.DateRules.CentralBankDateRules";
         public const string GenericName = "Configuration.DateRules.CentralBankDateRules";
     }
 
     public static class LastTradingDayDateRulesProp
     {
-        public const string RulePath = "Orion.Configuration.DateRules.LastTradingDayDateRules";
+        public const string RulePath = "Highlander.Configuration.DateRules.LastTradingDayDateRules";
         public const string GenericName = "Configuration.DateRules.LastTradingDayDateRules";
     }
 
     public static class InstrumentConfigData
     {
-        public const string RulePath = "Orion.Configuration.Instrument";
+        public const string RulePath = "Highlander.Configuration.Instrument";
         public const string GenericName = "Configuration.Instrument";
     }
 

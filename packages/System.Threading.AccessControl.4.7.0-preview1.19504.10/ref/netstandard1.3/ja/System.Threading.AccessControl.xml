@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Threading.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAccessRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループに許可されたアクセス権セットまたは拒否されたアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループ、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループの名前、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAccessRule.EventWaitHandleRights">
+      <summary>[セキュリティ クリティカル] アクセス規則で許可されたアクセス権または拒否されたアクセス権を取得します。</summary>
+      <returns>アクセス規則で許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAuditRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループについて監査するアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 監査するユーザーまたはグループ、監査する権限、成功、失敗、またはその両方のいずれを監査するかを指定して、<see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">監査するアクセスの種類を示す <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="flags">成功、失敗、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAuditRule.EventWaitHandleRights">
+      <summary>[セキュリティ クリティカル] 監査規則の影響を受けるアクセス権を取得します。</summary>
+      <returns>監査規則の影響を受ける権限を示す <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleRights">
+      <summary>[セキュリティ クリティカル] 名前付きシステム イベント オブジェクトに適用できるアクセス制御権を指定します。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions">
+      <summary>名前付きイベントに関連付けられたセキュリティと監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Delete">
+      <summary>名前付きイベントを削除する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.FullControl">
+      <summary>名前付きイベントを完全に制御し、そのアクセス規則と監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Modify">
+      <summary>名前付きイベントのシグナル状態を設定またはリセットする権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions">
+      <summary>名前付きイベントのアクセス規則と監査規則を開いてコピーする権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize">
+      <summary>名前付きイベントを待機する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.TakeOwnership">
+      <summary>名前付きイベントの所有者を変更する権限。</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleSecurity">
+      <summary>[セキュリティ クリティカル] 名前付きシステム待機ハンドルに適用する Windows アクセス制御セキュリティを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.#ctor">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> クラスの新しいインスタンスを既定値で初期化します。</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRightType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> クラスでアクセス権を表すために使用する列挙型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 列挙体を表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] アクセス権、アクセス制御、およびフラグを指定して、指定したユーザーに対して新しいアクセス制御規則を作成します。</summary>
+      <returns>指定したユーザーの指定した権限を表す <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> オブジェクト。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">許可または拒否するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> クラスでアクセス規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる、一致するアクセス制御規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加するアクセス制御規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる監査規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加する監査規則。この規則に指定されているユーザーに基づいて検索されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 規則の適用対象となるユーザー、監査するアクセス権、および監査規則を発生させる結果を指定して、新しい監査規則を作成します。</summary>
+      <returns>指定したユーザーの指定した監査規則を表す <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />。メソッドの戻り値は基本クラス <see cref="T:System.Security.AccessControl.AuditRule" /> です。ただし、この戻り値を派生クラスに安全にキャストできます。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">監査するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.EventWaitHandleRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="flags">成功したアクセス、失敗したアクセス、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" /> クラスで監査規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定したアクセス規則と同じユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否)、および互換性がある継承フラグと反映フラグが指定されたアクセス制御規則が検索されます。このような規則が見つかると、指定したアクセス規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" />、および一致する規則が見つかった場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleAll(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたアクセス制御規則をすべて検索し、一致する規則が見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> を指定する <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致するアクセス制御規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザー、および互換性のある継承フラグと反映フラグが指定された監査規則が検索されます。互換性のある規則が見つかると、指定した規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザー、および一致する規則がある場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleAll(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーが設定されているすべての監査規則を検索し、見つかった場合はそれらの規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーを指定する <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致する監査規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.ResetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AccessControlType" /> に関係なく、指定した規則と同じユーザーが指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />。この規則のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> によって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AuditFlags" /> 値に関係なく、指定した規則と同じユーザーが指定されたすべての監査規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAccessRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループに許可されたアクセス権セットまたは拒否されたアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループ、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.MutexAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.String,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループの名前、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.MutexAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAccessRule.MutexRights">
+      <summary>[セキュリティ クリティカル] アクセス規則で許可されたアクセス権または拒否されたアクセス権を取得します。</summary>
+      <returns>アクセス規則で許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAuditRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループについて監査するアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 監査するユーザーまたはグループ、監査する権限、監査対象が成功、失敗、またはその両方のいずれであるかを指定して、<see cref="T:System.Security.AccessControl.MutexAuditRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">監査するアクセスの種類を示す <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="flags">成功、失敗、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAuditRule.MutexRights">
+      <summary>[セキュリティ クリティカル] 監査規則の影響を受けるアクセス権を取得します。</summary>
+      <returns>監査規則の影響を受ける権限を示す <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexRights">
+      <summary>[セキュリティ クリティカル] 名前付きシステム ミューテックス オブジェクトに適用できるアクセス制御権を指定します。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ChangePermissions">
+      <summary>名前付きミューテックスに関連付けられたセキュリティと監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Delete">
+      <summary>名前付きミューテックスを削除する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.FullControl">
+      <summary>名前付きミューテックスに対するフル コントロール、およびそのアクセス規則と監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Modify">
+      <summary>名前付きミューテックスを解放する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ReadPermissions">
+      <summary>名前付きミューテックスのアクセス規則と監査規則を開いてコピーする権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Synchronize">
+      <summary>名前付きミューテックスが解放されるまで待機する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.TakeOwnership">
+      <summary>名前付きミューテックスの所有者を変更する権限。</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexSecurity">
+      <summary>[セキュリティ クリティカル] 名前付きミューテックスの Windows アクセス制御セキュリティを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.MutexSecurity" /> クラスの新しいインスタンスを既定値で初期化します。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[セキュリティ クリティカル] 指定した名前を持つシステム ミューテックスのアクセス制御セキュリティ規則のセクションを指定して、<see cref="T:System.Security.AccessControl.MutexSecurity" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="name">アクセス制御セキュリティ規則の取得元となるシステム ミューテックスの名前。</param>
+      <param name="includeSections">取得するセクションを指定する <see cref="T:System.Security.AccessControl.AccessControlSections" /> フラグの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRightType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.MutexSecurity" /> クラスでアクセス権を表すために使用する列挙体を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexRights" /> 列挙体を表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] アクセス権、アクセス制御、およびフラグを指定して、指定したユーザーに対して新しいアクセス制御規則を作成します。</summary>
+      <returns>指定したユーザーの指定した権限を表す <see cref="T:System.Security.AccessControl.MutexAccessRule" /> オブジェクト。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">許可または拒否するアクセス権を指定し、整数にキャストされる <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付きミューテックスには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付きミューテックスには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付きミューテックスには階層構造がないため何の効果もありません。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.MutexSecurity" /> クラスでアクセス規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexAccessRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる、一致するアクセス制御規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加するアクセス制御規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる監査規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加する監査規則。この規則に指定されているユーザーに基づいて検索されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 規則の適用対象となるユーザー、監査するアクセス権、および監査規則を発生させる結果を指定して、新しい監査規則を作成します。</summary>
+      <returns>指定したユーザーの指定した監査規則を表す <see cref="T:System.Security.AccessControl.MutexAuditRule" /> オブジェクト。メソッドの戻り値は基本クラス <see cref="T:System.Security.AccessControl.AuditRule" /> です。ただし、この戻り値を派生クラスに安全にキャストできます。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">監査するアクセス権を指定し、整数にキャストされる <see cref="T:System.Security.AccessControl.MutexRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="flags">成功したアクセス、失敗したアクセス、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AuditRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.MutexSecurity" /> クラスで監査規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.MutexAuditRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否)、および互換性のある継承フラグと反映フラグが指定されたアクセス制御規則が検索されます。このような規則が見つかると、指定したアクセス規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" />、および一致する規則が見つかった場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.MutexAccessRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたアクセス制御規則をすべて検索し、一致する規則が見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> を指定する <see cref="T:System.Security.AccessControl.MutexAccessRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致するアクセス制御規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.MutexAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザー、および互換性のある継承フラグと反映フラグが指定された監査制御規則が検索されます。互換性のある規則が見つかると、指定した規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザー、および一致する規則がある場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.MutexAuditRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーが設定されているすべての監査規則を検索し、見つかった場合はそれらの規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーを指定する <see cref="T:System.Security.AccessControl.MutexAuditRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致する監査規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.MutexAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.ResetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AccessControlType" /> に関係なく、指定した規則と同じユーザーが指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.MutexAccessRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.MutexAccessRule" />。この規則のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> によって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AuditFlags" /> 値に関係なく、指定した規則と同じユーザーが指定されたすべての監査規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.MutexAuditRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAccessRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループに許可されたアクセス権セットまたは拒否されたアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループ、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.String,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] 規則を適用するユーザーまたはグループの名前、アクセス権、および指定したアクセス権を許可するかどうかを指定して、<see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザー名またはグループ名。</param>
+      <param name="eventRights">許可されたアクセス権または拒否されたアクセス権を指定する <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAccessRule.SemaphoreRights">
+      <summary>[セキュリティ クリティカル] アクセス規則で許可されたアクセス権または拒否されたアクセス権を取得します。</summary>
+      <returns>アクセス規則で許可されたアクセス権または拒否されたアクセス権を表す <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAuditRule">
+      <summary>[セキュリティ クリティカル] ユーザーまたはグループについて監査するアクセス権セットを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 監査するユーザーまたはグループ、監査する権限、成功、失敗、またはその両方のいずれを監査するかを指定して、<see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="identity">規則の適用対象となるユーザーまたはグループ。<see cref="T:System.Security.Principal.SecurityIdentifier" /> 型にするか、または <see cref="T:System.Security.Principal.SecurityIdentifier" /> 型に変換できる <see cref="T:System.Security.Principal.NTAccount" /> などの型にする必要があります。</param>
+      <param name="eventRights">監査するアクセスの種類を指定する <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="flags">成功、失敗、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAuditRule.SemaphoreRights">
+      <summary>[セキュリティ クリティカル] 監査規則の影響を受けるアクセス権を取得します。</summary>
+      <returns>監査規則の影響を受ける権限を示す <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreRights">
+      <summary>[セキュリティ クリティカル] 名前付きシステム セマフォ オブジェクトに適用できるアクセス制御権を指定します。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions">
+      <summary>名前付きセマフォに関連付けられたセキュリティと監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Delete">
+      <summary>名前付きセマフォを削除する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.FullControl">
+      <summary>名前付きセマフォに対するフル コントロール、およびそのアクセス規則と監査規則を変更する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Modify">
+      <summary>名前付きセマフォを解放する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions">
+      <summary>名前付きセマフォのアクセス規則と監査規則を開いてコピーする権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Synchronize">
+      <summary>名前付きセマフォを待機する権限。</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.TakeOwnership">
+      <summary>名前付きセマフォの所有者を変更する権限。</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreSecurity">
+      <summary>[セキュリティ クリティカル] 名前付きセマフォの Windows アクセス制御セキュリティを表します。このクラスは継承できません。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> クラスの新しいインスタンスを既定値で初期化します。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[セキュリティ クリティカル] 指定した名前を持つシステム セマフォのアクセス制御セキュリティ規則のセクションを指定して、<see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="name">アクセス制御セキュリティ規則の取得元となるシステム セマフォの名前。</param>
+      <param name="includeSections">取得するセクションを指定する <see cref="T:System.Security.AccessControl.AccessControlSections" /> フラグの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRightType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> クラスでアクセス権を表すために使用する列挙体を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 列挙体を表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[セキュリティ クリティカル] アクセス権、アクセス制御、およびフラグを指定して、指定したユーザーに対して新しいアクセス制御規則を作成します。</summary>
+      <returns>指定したユーザーの指定した権限を表す <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> オブジェクト。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">許可または拒否するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付きセマフォには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付きセマフォには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付きセマフォには階層構造がないため何の効果もありません。</param>
+      <param name="type">アクセス権が許可されているかどうかを指定する <see cref="T:System.Security.AccessControl.AccessControlType" /> 値の 1 つ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> クラスでアクセス規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる、一致する規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加するアクセス制御規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[セキュリティ クリティカル] 新しい規則をマージできる監査規則を検索します。見つからない場合は、新しい規則を追加します。</summary>
+      <param name="rule">追加する監査規則。この規則に指定されているユーザーに基づいて検索されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[セキュリティ クリティカル] 規則の適用対象となるユーザー、監査するアクセス権、および監査規則を発生させる結果を指定して、新しい監査規則を作成します。</summary>
+      <returns>指定したユーザーの指定した監査規則を表す <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />。メソッドの戻り値は基本クラス <see cref="T:System.Security.AccessControl.AuditRule" /> です。ただし、この戻り値を派生クラスに安全にキャストできます。</returns>
+      <param name="identityReference">規則の適用対象となるユーザーまたはグループを識別する <see cref="T:System.Security.Principal.IdentityReference" />。</param>
+      <param name="accessMask">監査するアクセス権を示し、整数にキャストされる <see cref="T:System.Security.AccessControl.SemaphoreRights" /> 値のビットごとの組み合わせ。</param>
+      <param name="isInherited">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="inheritanceFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="propagationFlags">名前付き待機ハンドルには階層構造がないため何の効果もありません。</param>
+      <param name="flags">成功したアクセス、失敗したアクセス、またはその両方のいずれを監査するかを示す <see cref="T:System.Security.AccessControl.AuditFlags" /> 値のビットごとの組み合わせ。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AuditRuleType">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.SemaphoreSecurity" /> クラスで監査規則を表すために使用する型を取得します。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" /> クラスを表す <see cref="T:System.Type" /> オブジェクト。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否)、および互換性のある継承フラグと反映フラグが指定されたアクセス制御規則が検索されます。このような規則が見つかると、指定したアクセス規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" />、および一致する規則が見つかった場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたアクセス制御規則をすべて検索し、一致する規則が見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> を指定する <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致するアクセス制御規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザー、および互換性のある継承フラグと反映フラグが指定された監査制御規則が検索されます。互換性のある規則が見つかると、指定した規則に含まれる権限がその規則から削除されます。</summary>
+      <returns>互換性のある規則が見つかった場合は true。それ以外の場合は false。</returns>
+      <param name="rule">検索対象のユーザー、および一致する規則がある場合にその規則と互換性のある継承フラグと反映フラグのセットを指定する <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />。互換性のある規則が見つかった場合にその規則から削除する権限を指定します。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーが設定されているすべての監査規則を検索し、見つかった場合はそれらの規則を削除します。</summary>
+      <param name="rule">検索対象のユーザーを指定する <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />。この規則によって指定された権限はすべて無視されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則に正確に一致する監査規則を検索し、見つかった場合は、その規則を削除します。</summary>
+      <param name="rule">削除する <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AccessControlType" /> に関係なく、指定した規則と同じユーザーが指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[セキュリティ クリティカル] 指定した規則と同じユーザーおよび同じ <see cref="T:System.Security.AccessControl.AccessControlType" /> (許可または拒否) が指定されたすべてのアクセス制御規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />。この規則のユーザーと <see cref="T:System.Security.AccessControl.AccessControlType" /> によって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[セキュリティ クリティカル] <see cref="T:System.Security.AccessControl.AuditFlags" /> 値に関係なく、指定した規則と同じユーザーが指定されたすべての監査規則を削除し、指定した規則を追加します。</summary>
+      <param name="rule">追加する <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />。この規則で指定されたユーザーによって、この規則を追加する前に削除する規則が判断されます。</param>
+    </member>
+    <member name="T:System.Threading.ThreadingAclExtensions"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.EventWaitHandle)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Mutex)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Semaphore)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.EventWaitHandle,System.Security.AccessControl.EventWaitHandleSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Mutex,System.Security.AccessControl.MutexSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Semaphore,System.Security.AccessControl.SemaphoreSecurity)"></member>
+  </members>
+</doc>

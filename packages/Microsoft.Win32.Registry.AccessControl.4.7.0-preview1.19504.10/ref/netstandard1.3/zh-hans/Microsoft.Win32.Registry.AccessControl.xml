@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[SECURITY CRITICAL] 表示一组允许或拒绝用户或组进行访问的权限。此类不能被继承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 类的新实例，指定此规则应用到的用户或组、访问权限以及是否允许或拒绝指定的访问权限。</summary>
+      <param name="identity">此规则应用到的用户或组。必须为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型，或可以转换为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型的类型，如 <see cref="T:System.Security.Principal.NTAccount" />。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指示允许或拒绝的权限。</param>
+      <param name="type">
+        <see cref="T:System.Security.AccessControl.AccessControlType" /> 值之一，用于指示是允许还是拒绝相应权限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 类的新实例，指定此规则应用到的用户或组、访问权限、传播标志以及是否允许或拒绝指定的访问权限。</summary>
+      <param name="identity">此规则应用到的用户或组。必须为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型，或可以转换为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型的类型，如 <see cref="T:System.Security.Principal.NTAccount" />。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指定允许或拒绝的权限。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 标志的按位组合，指定如何从其他对象继承访问权限。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 标志的按位组合，指定如何将访问权限传播到其他对象。</param>
+      <param name="type">
+        <see cref="T:System.Security.AccessControl.AccessControlType" /> 值之一，用于指定是允许还是拒绝相应权限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 类的新实例，指定应用此规则的用户或组的名称、访问权限以及是否允许或拒绝指定的访问权限。</summary>
+      <param name="identity">应用此规则的用户或组的名称。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指示允许或拒绝的权限。</param>
+      <param name="type">
+        <see cref="T:System.Security.AccessControl.AccessControlType" /> 值之一，用于指示是允许还是拒绝相应权限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 类的新实例，指定应用此规则的用户或组的名称、访问权限、传播标志以及是否允许或拒绝指定的访问权限。</summary>
+      <param name="identity">应用此规则的用户或组的名称。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指示允许或拒绝的权限。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 标志的按位组合，指定如何从其他对象继承访问权限。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 标志的按位组合，指定如何将访问权限传播到其他对象。</param>
+      <param name="type">
+        <see cref="T:System.Security.AccessControl.AccessControlType" /> 值之一，用于指定是允许还是拒绝相应权限。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[SECURITY CRITICAL] 获取访问规则允许或拒绝的权限。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指示访问规则允许或拒绝的权限。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[SECURITY CRITICAL] 表示要为用户或组审核的一组访问权限。此类不能被继承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 类的新实例，指定要审核的用户或组，要审核的权限，是否考虑继承以及是否审核成功和（或）失败。</summary>
+      <param name="identity">此规则应用到的用户或组。必须为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型，或可以转换为 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 类型的类型，如 <see cref="T:System.Security.Principal.NTAccount" />。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指定要审核的访问类型。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的按位组合，它指定审核规则是否应用于当前注册表项的子项。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的按位组合，它将影响将继承的审核规则传播到当前注册表项的子项的方式。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的按位组合，它指定审核是成功、失败还是包括这两种情况。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] 初始化 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 类的新实例，指定要审核的用户或组的名称，要审核的权限，是否考虑继承以及是否审核成功和（或）失败。</summary>
+      <param name="identity">应用此规则的用户或组的名称。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指定要审核的访问类型。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 标志的按位组合，它指定审核规则是否应用于当前注册表项的子项。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 标志的按位组合，它将影响将继承的审核规则传播到当前注册表项的子项的方式。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的按位组合，它指定审核是成功、失败还是包括这两种情况。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[SECURITY CRITICAL] 获取受此审核规则影响的访问权限。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，它指示受此审核规则影响的权限。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[SECURITY CRITICAL] 表示注册表项的 Windows 访问控制安全性。此类不能被继承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[SECURITY CRITICAL] 使用默认值初始化 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 类的新实例。</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[SECURITY CRITICAL] 获取 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 类用于表示访问权限的枚举类型。</summary>
+      <returns>一个 <see cref="T:System.Type" /> 对象，表示 <see cref="T:System.Security.AccessControl.RegistryRights" /> 枚举。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] 使用指定的访问权限、访问控制和标志为指定用户创建新的访问控制规则。</summary>
+      <returns>一个 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 对象，表示指定用户的指定权限。</returns>
+      <param name="identityReference">一个 <see cref="T:System.Security.Principal.IdentityReference" />，用于标识此规则应用到的用户或组。</param>
+      <param name="accessMask">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，用于指定允许或拒绝的访问权限，将被强制转换为整数。</param>
+      <param name="isInherited">一个布尔值，指定规则是否为继承的规则。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的按位组合，指定子项如何继承规则。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的按位组合，用于修改子项继承规则的方式。如果 <paramref name="inheritanceFlags" /> 的值为 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />，则它没有意义。</param>
+      <param name="type">
+        <see cref="T:System.Security.AccessControl.AccessControlType" /> 值之一，用于指定是允许还是拒绝相应权限。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[SECURITY CRITICAL] 获取 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 类用于表示访问规则的类型。</summary>
+      <returns>一个 <see cref="T:System.Type" /> 对象，表示 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 类。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 搜索匹配的访问控制，新规则将与之进行合并。如果未找到符合条件的规则，则添加新规则。</summary>
+      <param name="rule">要添加的访问控制规则。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] 搜索可以将新规则与之合并的审核规则。如果未找到符合条件的规则，则添加新规则。</summary>
+      <param name="rule">要添加的审核规则。由此规则指定的用户来确定搜索。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] 新建审核规则，指定此规则应用到的用户、要审核的访问权限、规则的继承和传播以及触发此规则的结果。</summary>
+      <returns>一个 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 对象，表示指定用户的指定审核规则，带有指定标志。该方法的返回类型是基类 <see cref="T:System.Security.AccessControl.AuditRule" />，但可以安全地将返回值强制转换为派生类。</returns>
+      <param name="identityReference">一个 <see cref="T:System.Security.Principal.IdentityReference" />，用于标识此规则应用到的用户或组。</param>
+      <param name="accessMask">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的按位组合，用于指定要审核的访问权限，将被强制转换为整数。</param>
+      <param name="isInherited">一个布尔值，指定规则是否为继承的规则。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的按位组合，指定子项如何继承规则。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的按位组合，用于修改子项继承规则的方式。如果 <paramref name="inheritanceFlags" /> 的值为 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />，则它没有意义。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的按位组合，它指定是审核成功的访问、失败的访问还是对这两种情况都进行审核。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[SECURITY CRITICAL] 获取 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 类用于表示审核规则的类型。</summary>
+      <returns>一个 <see cref="T:System.Type" /> 对象，表示 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 类。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 搜索如下的访问控制规则：与指定的访问规则具有相同的用户和 <see cref="T:System.Security.AccessControl.AccessControlType" />（允许或拒绝），并具有兼容的继承和传播标志；如果找到，则从中移除指定访问规则中包含的权限。</summary>
+      <returns>如果找到一个兼容规则，则为 true；否则为 false。</returns>
+      <param name="rule">指定要搜索的用户和 <see cref="T:System.Security.AccessControl.AccessControlType" /> 的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />，以及匹配规则（如果找到）必须兼容的一组继承和传播标志。指定要从兼容规则移除的权限（如果找到）。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 搜索与指定的规则具有相同用户和 <see cref="T:System.Security.AccessControl.AccessControlType" />（允许或拒绝）的所有访问控制规则，如果找到则将其移除。</summary>
+      <param name="rule">一个 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />，指定要搜索的用户和 <see cref="T:System.Security.AccessControl.AccessControlType" />。忽略此规则指定的任何权限、继承标志或传播标志。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 搜索与指定的规则完全匹配的访问控制规则，如果找到则将其移除。</summary>
+      <param name="rule">要移除的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] 搜索以下的审核控制规则：与指定的规则具有相同的用户，并具有兼容的继承和传播标志；如果找到兼容规则，则从中移除指定的规则中包含的权限。</summary>
+      <returns>如果找到一个兼容规则，则为 true；否则为 false。</returns>
+      <param name="rule">一个 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />，指定要搜索的用户以及匹配规则（如果找到）必须兼容的一组继承和传播标志。指定要从兼容规则移除的权限（如果找到）。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] 搜索所有使用相同用户作为指定规则的审核规则，如果找到符合条件的规则，则移除它们。</summary>
+      <param name="rule">指定要搜索的用户的 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。忽略此规则指定的任何权限、继承标志或传播标志。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] 搜索与指定的规则完全匹配的审核规则；如果找到，则移除这些规则。</summary>
+      <param name="rule">要移除的 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 不论 <see cref="T:System.Security.AccessControl.AccessControlType" /> 如何，移除与指定的规则具有相同用户的所有访问控制规则，然后添加指定的规则。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。由此规则指定的用户确定在添加此规则之前要移除的规则。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] 移除与指定的规则具有相同用户和 <see cref="T:System.Security.AccessControl.AccessControlType" />（允许或拒绝）的所有控制规则，然后添加指定的规则。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。由此规则的用户和 <see cref="T:System.Security.AccessControl.AccessControlType" /> 确定在添加此规则之前要移除的规则。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] 不论 <see cref="T:System.Security.AccessControl.AuditFlags" /> 的值如何，移除与指定的规则具有相同用户的所有审核规则，然后添加指定的规则。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。由此规则指定的用户确定在添加此规则之前要移除的规则。</param>
+    </member>
+  </members>
+</doc>

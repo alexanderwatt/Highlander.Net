@@ -13,11 +13,11 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Forms;
 
-namespace Orion.Util.WinTools
+namespace Highlander.WinTools
 {
     public static class WinFormHelper
     {
@@ -45,7 +45,7 @@ namespace Orion.Util.WinTools
             {
                 // entry assembly is unmanaged - get Win32 details
                 ProcessModule pm = Process.GetCurrentProcess().MainModule;
-                applFileVersion = pm.FileVersionInfo.FileVersion;
+                if (pm != null) applFileVersion = pm.FileVersionInfo.FileVersion;
             }
             form.Text = envName != null ? $"{_initFormText} V{applFileVersion} ({envName})" : $"{_initFormText} V{applFileVersion}";
         }

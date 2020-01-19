@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2E1B6968-028D-410F-8024-40E9AC44FC39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Reporting.Analytics.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Reporting.Analytics.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <CodeAnalysisRuleSet>..\..\..\Solutions\Standard Minimum.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.9.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.Signed.4.9.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Solver.Foundation, Version=3.0.2.10889, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Solver.Foundation.3.1.0\lib\Microsoft.Solver.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessCenters\Budapest.cs" />
+    <Compile Include="BusinessCenters\Frankfurt.cs" />
+    <Compile Include="BusinessCenters\Hell.cs" />
+    <Compile Include="BusinessCenters\Helsinki.cs" />
+    <Compile Include="BusinessCenters\Johannesburg.cs" />
+    <Compile Include="BusinessCenters\London.cs" />
+    <Compile Include="BusinessCenters\Milan.cs" />
+    <Compile Include="BusinessCenters\NewYork.cs" />
+    <Compile Include="BusinessCenters\Oslo.cs" />
+    <Compile Include="BusinessCenters\Stockholm.cs" />
+    <Compile Include="BusinessCenters\Sydney.cs" />
+    <Compile Include="BusinessCenters\Target.cs" />
+    <Compile Include="BusinessCenters\Tokyo.cs" />
+    <Compile Include="BusinessCenters\Toronto.cs" />
+    <Compile Include="BusinessCenters\Warsaw.cs" />
+    <Compile Include="BusinessCenters\Wellington.cs" />
+    <Compile Include="BusinessCenters\WesternCalendarBase.cs" />
+    <Compile Include="BusinessCenters\Zurich.cs" />
+    <Compile Include="Equities\CollarPricer.cs" />
+    <Compile Include="Counterparty\DateMonths.cs" />
+    <Compile Include="Counterparty\EquityPCEAnalytics.cs" />
+    <Compile Include="Differentiation\CentredFiniteDifferenceDerivative.cs" />
+    <Compile Include="Differentiation\IFiniteDifferenceDerivative.cs" />
+    <Compile Include="Distributions\BasicRng.cs" />
+    <Compile Include="Distributions\BoxMullerGaussianRng.cs" />
+    <Compile Include="Distributions\CachedContinousRng.cs" />
+    <Compile Include="Distributions\ContinuousDistribution.cs" />
+    <Compile Include="Distributions\ContinuousUniformDistribution.cs" />
+    <Compile Include="Distributions\CumulativeNormalDistribution.cs" />
+    <Compile Include="Distributions\GaussianRandomNumbers.cs" />
+    <Compile Include="Distributions\IBasicRng.cs" />
+    <Compile Include="Distributions\IContinousRng.cs" />
+    <Compile Include="Distributions\IContinuousProbabilityDistribution.cs" />
+    <Compile Include="Distributions\InvCumulativeNormalDistribution.cs" />
+    <Compile Include="Distributions\LognormalDistribution.cs" />
+    <Compile Include="Distributions\MCG.cs" />
+    <Compile Include="Distributions\MCG31vsl.cs" />
+    <Compile Include="Distributions\NormalDistribution.cs" />
+    <Compile Include="Distributions\StandardDistribution.cs" />
+    <Compile Include="Equities\AmOptionAnalytics.cs" />
+    <Compile Include="Equities\BinomialTreePricer.cs" />
+    <Compile Include="Equities\BinaryEuro.cs" />
+    <Compile Include="Equities\BlackScholes.cs" />
+    <Compile Include="Equities\ARO.cs" />
+    <Compile Include="Equities\Collar.cs" />
+    <Compile Include="Equities\CrankNicolson.cs" />
+    <Compile Include="Equities\CliquetPricer.cs" />
+    <Compile Include="Equities\Greeks.cs" />
+    <Compile Include="Equities\Grid.cs" />
+    <Compile Include="Equities\IStock.cs" />
+    <Compile Include="Equities\LeadStock.cs" />
+    <Compile Include="Equities\MathFunction.cs" />
+    <Compile Include="Equities\Pricer.cs" />
+    <Compile Include="Equities\PriceTree.cs" />
+    <Compile Include="Equities\PropAssetTree.cs" />
+    <Compile Include="Equities\Stock.cs" />
+    <Compile Include="Equities\Tree.cs" />
+    <Compile Include="Equities\CollarWrapper.cs" />
+    <Compile Include="Helpers\DividendHelper.cs" />
+    <Compile Include="Helpers\Exchanges.cs" />
+    <Compile Include="Counterparty\PCEAnalytics.cs" />
+    <Compile Include="Counterparty\RAROCAnalytics.cs" />
+    <Compile Include="Counterparty\RiskCapitalAnalytics.cs" />
+    <Compile Include="Counterparty\ROEAnalytics.cs" />
+    <Compile Include="Counterparty\ROREAnalytics.cs" />
+    <Compile Include="Helpers\ExtrapolationHelper.cs" />
+    <Compile Include="Helpers\ForwardExpiryHelper.cs" />
+    <Compile Include="Helpers\HermiteSplineBasisFunctions.cs" />
+    <Compile Include="Helpers\InterpolationHelper.cs" />
+    <Compile Include="Helpers\Misc.cs" />
+    <Compile Include="Helpers\OptionGreeks.cs" />
+    <Compile Include="Helpers\OptionHelper.cs" />
+    <Compile Include="Helpers\OrcWingParameters.cs" />
+    <Compile Include="Helpers\RangeExtension.cs" />
+    <Compile Include="Helpers\RangeHelper.cs" />
+    <Compile Include="Helpers\StockHelper.cs" />
+    <Compile Include="Helpers\StrikeHelper.cs" />
+    <Compile Include="Helpers\ValuationHelper.cs" />
+    <Compile Include="Helpers\VolatilitySurfaceHelper.cs" />
+    <Compile Include="Integration\IntegrationHelpers.cs" />
+    <Compile Include="Integration\SegmentIntegral.cs" />
+    <Compile Include="Integration\SimpsonsRuleIntegration.cs" />
+    <Compile Include="Interpolations\BilinearInterpolation.cs" />
+    <Compile Include="Interpolations\CommodityBasisSpreadInterpolation.cs" />
+    <Compile Include="Interpolations\CommodityBasisSpreadInterpolation2.cs" />
+    <Compile Include="Interpolations\FlatInterpolation.cs" />
+    <Compile Include="Interpolations\CubicSplineInterpolation.cs" />
+    <Compile Include="Interpolations\SABRModelInterpolation.cs" />
+    <Compile Include="Interpolations\ITwoDimensionalInterpolation.cs" />
+    <Compile Include="Interpolations\LinearInterpolation.cs" />
+    <Compile Include="Interpolations\LogLinearInterpolation.cs" />
+    <Compile Include="Interpolations\LinearRateInterpolation.cs" />
+    <Compile Include="Interpolations\LogRateCubicSplineInterpolation.cs" />
+    <Compile Include="Interpolations\WingModelInterpolation.cs" />
+    <Compile Include="Interpolations\PiecewiseConstantInterpolation.cs" />
+    <Compile Include="Interpolations\PiecewiseConstantRateInterpolation.cs" />
+    <Compile Include="Interpolations\PiecewiseConstantZeroRateInterpolation.cs" />
+    <Compile Include="Interpolations\CubicHermiteSplineInterpolation.cs" />
+    <Compile Include="Interpolations\RateBasisSpreadInterpolation.cs" />
+    <Compile Include="Interpolations\Points\DateTimePoint1D.cs" />
+    <Compile Include="Interpolations\Points\DateTimePoint2D.cs" />
+    <Compile Include="Dates\BondSettlementDate.cs" />
+    <Compile Include="Helpers\DateTypesHelper.cs" />
+    <Compile Include="Dates\DateHelper.cs" />
+    <Compile Include="Dates\ExDivDate.cs" />
+    <Compile Include="DayCounters\Actual360.cs" />
+    <Compile Include="DayCounters\Actual365.cs" />
+    <Compile Include="DayCounters\ActualActualAFB.cs" />
+    <Compile Include="DayCounters\ActualActualISDA.cs" />
+    <Compile Include="DayCounters\ActualActualISMA.cs" />
+    <Compile Include="DayCounters\ActualMY.cs" />
+    <Compile Include="DayCounters\ActualQuarters.cs" />
+    <Compile Include="DayCounters\Business252.cs" />
+    <Compile Include="DayCounters\DayCounterHelper.cs" />
+    <Compile Include="DayCounters\OneOne.cs" />
+    <Compile Include="DayCounters\Thirty360EU.cs" />
+    <Compile Include="DayCounters\Thirty360Italian.cs" />
+    <Compile Include="DayCounters\Thirty360US.cs" />
+    <Compile Include="Equities\EquityAnalytics.cs" />
+    <Compile Include="ForeignExchange\FxForwardAnalytics.cs" />
+    <Compile Include="Helpers\RangeClasses.cs" />
+    <Compile Include="Interpolations\Spaces\ExtendedInterpolatedSurface.cs" />
+    <Compile Include="Interpolations\SpreadInterpolation.cs" />
+    <Compile Include="Lattices\BinomialTree.cs" />
+    <Compile Include="Lattices\BlackScholesLattice.cs" />
+    <Compile Include="Lattices\CoxRossRubinstein.cs" />
+    <Compile Include="Lattices\EquityBinomialTree.cs" />
+    <Compile Include="Lattices\EquityDiscreteDivTree.cs" />
+    <Compile Include="Lattices\EquityPropDivTree.cs" />
+    <Compile Include="Lattices\JarrowRudd.cs" />
+    <Compile Include="Lattices\Lattice.cs" />
+    <Compile Include="Lattices\Lattice2D.cs" />
+    <Compile Include="Lattices\StandardBinomialTree.cs" />
+    <Compile Include="Lattices\Tree.cs" />
+    <Compile Include="Lattices\TrinomialTree.cs" />
+    <Compile Include="LinearAlgebra\CholeskyDecomposition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinearAlgebra\EigenvalueDecomposition.cs" />
+    <Compile Include="LinearAlgebra\LUDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Matrix.cs" />
+    <Compile Include="LinearAlgebra\QRDecomposition.cs" />
+    <Compile Include="LinearAlgebra\SingularValueDecomposition.cs" />
+    <Compile Include="LinearAlgebra\Sparse\AbstractBLAS.cs" />
+    <Compile Include="LinearAlgebra\Sparse\AbstractMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\AbstractVector.cs" />
+    <Compile Include="LinearAlgebra\Sparse\CoordinateMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\DenseVector.cs" />
+    <Compile Include="LinearAlgebra\Sparse\Factory.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IBLAS.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IntDoubleVectorPair.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IntIntDoubleVectorTriple.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IShellMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\IVector.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SequentialBLAS.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SparseColumnMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SparseColumnRowMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SparseRowColumnMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SparseRowMatrix.cs" />
+    <Compile Include="LinearAlgebra\Sparse\SparseVector.cs" />
+    <Compile Include="LinearAlgebra\SymmetricSchurDecomposition.cs" />
+    <Compile Include="Maths\BasicMath.cs" />
+    <Compile Include="Maths\Collections\Comparable.cs" />
+    <Compile Include="Maths\Collections\DoubleVector.cs" />
+    <Compile Include="Maths\Collections\IntVector.cs" />
+    <Compile Include="Maths\Collections\Vector.cs" />
+    <Compile Include="Maths\Constants.cs" />
+    <Compile Include="Maths\Number.cs" />
+    <Compile Include="Maths\SpecialFunctions.cs" />
+    <Compile Include="Options\BlackModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Options\VolCurveBootstrapResults.cs" />
+    <Compile Include="Options\Option.cs" />
+    <Compile Include="Options\OptionCodes.cs" />
+    <Compile Include="Options\OrcWingVol.cs" />
+    <Compile Include="Pedersen\BrownianMotion.cs" />
+    <Compile Include="Rates\RateCurve.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationObjective.cs" />
+    <Compile Include="Pedersen\Calibrator.cs" />
+    <Compile Include="Pedersen\Cascade.cs" />
+    <Compile Include="Pedersen\Economy.cs" />
+    <Compile Include="Pedersen\Node.cs" />
+    <Compile Include="Pedersen\ObjectiveFunction.cs" />
+    <Compile Include="Pedersen\Operations.cs" />
+    <Compile Include="Pedersen\Parameters.cs" />
+    <Compile Include="Pedersen\ParseHelper.cs" />
+    <Compile Include="Pedersen\PayoffParser.cs" />
+    <Compile Include="Pedersen\Pedersen.cs" />
+    <Compile Include="Stochastics\Pedersen\PedersenCalibration.cs" />
+    <Compile Include="Pedersen\Recycle.cs" />
+    <Compile Include="Pedersen\Simulator.cs" />
+    <Compile Include="Processes\BlackScholesProcess.cs" />
+    <Compile Include="Processes\DiffusionProcess.cs" />
+    <Compile Include="Processes\DiscretizedAsset.cs" />
+    <Compile Include="Processes\DiscretizedDiscountBond.cs" />
+    <Compile Include="Processes\IDiffusionProcess.cs" />
+    <Compile Include="Processes\IDiscretizedAsset.cs" />
+    <Compile Include="Processes\INumericalMethod.cs" />
+    <Compile Include="Processes\ITimeGrid.cs" />
+    <Compile Include="Processes\NumericalMethod.cs" />
+    <Compile Include="Processes\OrnsteinUhlenbeckProcess.cs" />
+    <Compile Include="Processes\PedersenTimeGrid.cs" />
+    <Compile Include="Processes\SquareRootProcess.cs" />
+    <Compile Include="Processes\TimeGrid.cs" />
+    <Compile Include="Rates\BasicRateAnalytics.cs" />
+    <Compile Include="Rates\BGSConvexityCorrection.cs" />
+    <Compile Include="Rates\BondAnalytics.cs" />
+    <Compile Include="Rates\CashForward.cs" />
+    <Compile Include="Rates\CashflowAnalytics.cs" />
+    <Compile Include="Rates\CurveAnalytics.cs" />
+    <Compile Include="Rates\FraAnalytics.cs" />
+    <Compile Include="Interpolations\InterpolationFunctions.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationSettings.cs" />
+    <Compile Include="Stochastics\Pedersen\CalibrationTargets.cs" />
+    <Compile Include="Stochastics\Pedersen\CascadeAlgorithm.cs" />
+    <Compile Include="Stochastics\Pedersen\CascadeParameters.cs" />
+    <Compile Include="Stochastics\Volatilities\EquityStrike.cs" />
+    <Compile Include="Stochastics\Volatilities\ForwardExpiry.cs" />
+    <Compile Include="Stochastics\Volatilities\InterestRateVolatilities.cs" />
+    <Compile Include="Rates\OisAnalytics.cs" />
+    <Compile Include="Rates\QuarterlyDiscounts.cs" />
+    <Compile Include="Rates\QuarterlyShifts.cs" />
+    <Compile Include="Rates\SwaptionWeights.cs" />
+    <Compile Include="Rates\ZeroCurve.cs" />
+    <Compile Include="Schedulers\DatesMetaSchedule.cs" />
+    <Compile Include="Rates\YieldCurveAnalytics.cs" />
+    <Compile Include="Schedulers\CalculationPeriodSchedule.cs" />
+    <Compile Include="Schedulers\CreditFoncierSchedule.cs" />
+    <Compile Include="Schedulers\DateScheduler.cs" />
+    <Compile Include="Schedulers\ICalculationDateSchedule.cs" />
+    <Compile Include="Schedulers\NotionalScheduleGenerator.cs" />
+    <Compile Include="Schedulers\SpreadScheduleGenerator.cs" />
+    <Compile Include="Schedulers\StrikeScheduleGenerator.cs" />
+    <Compile Include="Solvers\Bisection.cs" />
+    <Compile Include="Solvers\Brent.cs" />
+    <Compile Include="Solvers\Functional.cs" />
+    <Compile Include="Solvers\IRealFunction.cs" />
+    <Compile Include="Solvers\ISolver1D.cs" />
+    <Compile Include="Solvers\Newton.cs" />
+    <Compile Include="Solvers\NewtonSafe.cs" />
+    <Compile Include="Solvers\Polynomial.cs" />
+    <Compile Include="Solvers\Solver1D.cs" />
+    <Compile Include="Solvers\WingModelFitter.cs" />
+    <Compile Include="Statistics\Accumulator.cs" />
+    <Compile Include="Statistics\HaltonSequence.cs" />
+    <Compile Include="Statistics\Histogram.cs" />
+    <Compile Include="Statistics\RiskStatistics.cs" />
+    <Compile Include="Statistics\Sample.cs" />
+    <Compile Include="Statistics\Statistics.cs" />
+    <Compile Include="Stochastics\MonteCarlo\ArithmeticApoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\ArithmeticAsoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\BasketPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\EuropeanPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\EverestPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\GeometricApoPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\GeometricAsoPathPricer.cs" />
+    <Compile Include="PricingEngines\SABRCalibrationEngine.cs" />
+    <Compile Include="Rates\CrossCurrencyIRSwap.cs" />
+    <Compile Include="Rates\FixedPaymentStream.cs" />
+    <Compile Include="Rates\FloatingPaymentStream.cs" />
+    <Compile Include="Rates\PaymentStream.cs" />
+    <Compile Include="Interpolators\BilinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\Interpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\LinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolators\SABRInterpolationInterface.cs" />
+    <Compile Include="Interpolators\TrilinearInterpolator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Options\BlackCapletFlooret.cs" />
+    <Compile Include="Options\BlackScholesMertonModel.cs" />
+    <Compile Include="Rates\FuturesAnalytics.cs" />
+    <Compile Include="Options\OptionAnalytics.cs" />
+    <Compile Include="Interpolations\Points\Point1D.cs" />
+    <Compile Include="Interpolations\Points\GeneralPoint.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPoint2D.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPoint3D.cs" />
+    <Compile Include="Interpolations\Points\TimeDimensionFactory.cs" />
+    <Compile Include="Interpolations\Points\PricingDataPointCoordinateFactory.cs" />
+    <Compile Include="Interpolations\Points\Coordinate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rates\ForwardRatesMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Rates\RateAnalytics.cs" />
+    <Compile Include="Rates\SwapAnalytics.cs" />
+    <Compile Include="Options\BlackVanillaSwaption.cs" />
+    <Compile Include="Stochastics\MonteCarlo\MaxBasketPathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\MonteCarloModel.cs" />
+    <Compile Include="Stochastics\MonteCarlo\MultiPathGenerator.cs" />
+    <Compile Include="Stochastics\MonteCarlo\Path.cs" />
+    <Compile Include="Stochastics\MonteCarlo\PathGenerator.cs" />
+    <Compile Include="Stochastics\MonteCarlo\PathPricer.cs" />
+    <Compile Include="Stochastics\MonteCarlo\RandomArrayGenerator.cs" />
+    <Compile Include="Stochastics\MonteCarlo\SinglePathGenerator.cs" />
+    <Compile Include="Stochastics\SABR\SABRCalibrationSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRDataMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRImpliedVolatility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRKey.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\SABR\SABRParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interpolations\Spaces\DiscreteCube.cs" />
+    <Compile Include="Stochastics\Volatilities\IVolatilitySurface.cs" />
+    <Compile Include="Stochastics\Volatilities\VolatilitySurface.cs" />
+    <Compile Include="Utilities\Aggregator.cs" />
+    <Compile Include="Utilities\ArrayUtilities.cs" />
+    <Compile Include="Utilities\Collection.cs" />
+    <Compile Include="Utilities\CommonParallel.cs" />
+    <Compile Include="Utilities\DataQualityValidator.cs" />
+    <Compile Include="Utilities\InstrumentType.cs" />
+    <Compile Include="Utilities\Precision.cs" />
+    <Compile Include="Utilities\StopWatch.cs" />
+    <Compile Include="Utilities\ToQuarters.cs" />
+    <Compile Include="Utilities\TwoDimensionalKey.cs" />
+    <Compile Include="Utilities\TwoDimensionalKeyEqualityComparer.cs" />
+    <Compile Include="Interpolations\InterpolationFactory.cs" />
+    <Compile Include="Interpolations\Points\Point.cs" />
+    <Compile Include="Interpolations\Points\Point2D.cs" />
+    <Compile Include="Interpolations\Points\Point3D.cs" />
+    <Compile Include="Interpolations\Points\PointHelpers.cs" />
+    <Compile Include="Interpolations\Points\ValueBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteCurve.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteSpace.cs" />
+    <Compile Include="Interpolations\Spaces\DiscreteSurface.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedCurve.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedSpace.cs" />
+    <Compile Include="Interpolations\Spaces\InterpolatedSurface.cs" />
+    <Compile Include="Stochastics\Volatilities\CapFloorATMMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\CapFloorVolatilityMatrix.cs" />
+    <Compile Include="Stochastics\Volatilities\CapVolatilityDataElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\CapVolatilityDataElementComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\ImpliedVolatilityParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\PPDGrid.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionDataMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionPPDGrid.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Stochastics\Volatilities\SwaptionVolatilityMatrix.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Valuation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\EqutiesCore\Highlander.Equties.csproj">
+      <Project>{9640dc0f-10ea-4a54-a29a-34ad06dc8433}</Project>
+      <Name>Highlander.Equties</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting.Helpers\Highlander.Reporting.Helpers.V5r3.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>Highlander.Reporting.Helpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

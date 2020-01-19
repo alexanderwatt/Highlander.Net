@@ -19,10 +19,10 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Orion.Util.Caching;
-using Orion.Util.Logging;
+using Highlander.Utilities.Caching;
+using Highlander.Utilities.Logging;
 
-namespace Orion.Util.WinTools
+namespace Highlander.WinTools
 {
     /// <summary>
     /// 

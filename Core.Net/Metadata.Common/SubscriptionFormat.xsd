@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SubscriptionFormat"
+    targetNamespace="http://tempuri.org/SubscriptionFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/SubscriptionFormat.xsd"
+    xmlns:mstns="http://tempuri.org/SubscriptionFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="ClientSubscriptionState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ConnectionId" type="xs:string" />
+        <xs:element name="SubscriptionId" type="xs:string" />
+        <xs:element name="ExpiryTime" type="xs:string" />
+        <xs:element name="DataTypeName" type="xs:string" />
+        <xs:element name="ItemKind" type="xs:int" />
+        <xs:element name="Expression" type="xs:string" />
+        <xs:element name="AppScopes" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="MinimumUSN" type="xs:long" />
+        <xs:element name="ExcludeExisting" type="xs:boolean" />
+        <xs:element name="IncludeDeleted" type="xs:boolean" />
+        <xs:element name="AsAtTime" type="xs:string" />
+        <xs:element name="ExcludeDataBody" type="xs:boolean" />
+        <xs:element name="DebugRequest" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

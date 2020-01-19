@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Gruppe von Zugriffsrechten dar, die einem Benutzer oder einer Gruppe gewährt oder verweigert werden.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Klasse und gibt den Benutzer oder die Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die gewährten oder verweigerten Rechte angibt.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, der angibt, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Klasse und gibt den Benutzer oder die Gruppe an, für den bzw. die die Regel gilt, sowie die Zugriffsrechte, die Vererbungsflags und die Weitergabeflags. Außerdem wird angegeben, ob die angegebenen Zugriffsrechte gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="inheritanceFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Flags, die angibt, auf welche Weise Zugriffsrechte von anderen Objekten geerbt werden.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Flags, die angibt, wie Zugriffsrechte an andere Objekte weitergegeben werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Klasse und gibt den Namen des Benutzers oder der Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die gewährten oder verweigerten Rechte angibt.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, der angibt, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Klasse und gibt den Namen des Benutzers oder der Gruppe an, für den bzw. die die Regel gilt, sowie die Zugriffsrechte, die Vererbungsflags und die Weitergabeflags. Außerdem wird angegeben, ob die angegebenen Zugriffsrechte gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die gewährten oder verweigerten Rechte angibt.</param>
+      <param name="inheritanceFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Flags, die angibt, auf welche Weise Zugriffsrechte von anderen Objekten geerbt werden.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Flags, die angibt, wie Zugriffsrechte an andere Objekte weitergegeben werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Zugriffsregel gewährten oder verweigerten Rechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, mit denen die in der Zugriffsregel gewährten oder verweigerten Rechte angegeben werden.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Reihe von Zugriffsrechten eines Benutzers oder einer Gruppe dar, die überwacht werden soll.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAuditRule" />-Klasse. Dabei wird der Benutzer bzw. die Gruppe angegeben, der bzw. die überwacht werden soll sowie die Rechte, die überwacht werden sollen. Außerdem wird angegeben, ob Vererbung berücksichtigt werden soll und ob Erfolge, Fehler oder beides überwacht werden sollen.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die Art der zu überwachenden Zugriffe angibt.</param>
+      <param name="inheritanceFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Werten, die angeben, ob die Überwachungsregel für Unterschlüssel des aktuellen Schlüssels gilt.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Werten, die Auswirkungen auf die Weitergabe einer geerbten Überwachungsregel an Unterschlüssel des aktuellen Schlüssels hat.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob Erfolgs- oder Fehlerüberwachung oder beides stattfinden soll.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistryAuditRule" />-Klasse. Dabei wird der Name des Benutzers bzw. der Gruppe angegeben, der bzw. die überwacht werden soll. Außerdem wird angegeben, ob Vererbung berücksichtigt werden soll und ob Erfolge, Fehler oder beides überwacht werden sollen.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="registryRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die Art der zu überwachenden Zugriffe angibt.</param>
+      <param name="inheritanceFlags">Eine Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Flags, die angibt, ob die Überwachungsregel für Unterschlüssel des aktuellen Schlüssels gilt.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Flags, die angibt, ob die Überwachungsregel an Unterschlüssel des aktuellen Schlüssels weitergegeben wird.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob Erfolgs- oder Fehlerüberwachung oder beides stattfinden soll.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Überwachungsregel betroffenen Zugriffsrechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die von der Überwachungsregel betroffenen Rechte angibt.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[SICHERHEITSRELEVANT] Stellt die Windows-Zugriffssteuerungssicherheit für einen Registrierungsschlüssel dar.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.RegistrySecurity" />-Klasse mit Standardwerten.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Enumerationstyp ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.RegistrySecurity" />-Klasse Zugriffsrechte darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.RegistryRights" />-Enumeration darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Zugriffssteuerungsregel für den angegebenen Benutzer mit den angegebenen Zugriffsrechten und Flags sowie der angegebenen Zugriffssteuerung.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Objekt, das die angegebenen Rechte für den angegebenen Benutzer darstellt.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die zu verweigernden oder zu gewährenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Ein boolescher Wert, der angibt, ob die Regel geerbt ist.</param>
+      <param name="inheritanceFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Werten, die angibt, wie die Regel von Unterschlüsseln geerbt wird.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Werten, die die Art der Vererbung der Regel für die Unterschlüssel ändert.Irrelevant, wenn der Wert von <paramref name="inheritanceFlags" /><see cref="F:System.Security.AccessControl.InheritanceFlags.None" /> ist.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.RegistrySecurity" />-Klasse die Zugriffsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.RegistryAccessRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer übereinstimmenden Zugriffssteuerung, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Zugriffssteuerungsregel.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Überwachungsregel.Der von dieser Regel angegebene Benutzer bestimmt die Suche.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Überwachungsregel, die den Benutzer angibt, auf den diese Regel angewendet wird, sowie die zu überwachenden Zugriffsrechte, die Vererbung und Weitergabe der Regel und das Ergebnis, das die Überwachungsregel auslöst.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.RegistryAuditRule" />-Objekt, das die angegebene Überwachungsregel für den angegebenen Benutzer mit den angegebenen Flags darstellt.Der Rückgabetyp der Methode entspricht der Basisklasse <see cref="T:System.Security.AccessControl.AuditRule" />, er kann jedoch problemlos in die abgeleitete Klasse umgewandelt werden.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.RegistryRights" />-Werten, die die zu überwachenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Ein boolescher Wert, der angibt, ob die Regel geerbt ist.</param>
+      <param name="inheritanceFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.InheritanceFlags" />-Werten, die angibt, wie die Regel von Unterschlüsseln geerbt wird.</param>
+      <param name="propagationFlags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.PropagationFlags" />-Werten, die die Art der Vererbung der Regel für die Unterschlüssel ändert.Irrelevant, wenn der Wert von <paramref name="inheritanceFlags" /><see cref="F:System.Security.AccessControl.InheritanceFlags.None" /> ist.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob erfolgreiche Zugriffsversuche und/oder fehlgeschlagene Zugriffsversuche überwacht werden sollen.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.RegistrySecurity" />-Klasse Überwachungsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.RegistryAuditRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Zugriffsregel sowie mit kompatiblen Vererbungs- und Weitergabeflags. Wenn eine solche Regel gefunden wird, werden die in der angegebenen Zugriffsregel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach allen Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll.Alle in dieser Regel angegebenen Rechte, Vererbungsflags oder Weitergabeflags werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungssteuerungsregel mit demselben Benutzer wie die angegebene Regel und mit kompatiblen Vererbungs- und Weitergabeflags; wenn eine solche Regel gefunden wird, werden die in der angegebenen Regel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, die den zu suchenden Benutzer angibt, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht alle Überwachungsregeln, die denselben Benutzer wie die angegebene Regel aufweisen, und entfernt sie, sofern sie gefunden wurden.</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, die den zu suchenden Benutzer angibt.Alle in dieser Regel angegebenen Rechte, Vererbungsflags oder Weitergabeflags werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, die entfernt werden soll.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig von <see cref="T:System.Security.AccessControl.AccessControlType" />, und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.Der Benutzer und der <see cref="T:System.Security.AccessControl.AccessControlType" /> dieser Regel bestimmen die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Überwachungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig vom <see cref="T:System.Security.AccessControl.AuditFlags" />-Wert, und fügt danach die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.RegistryAuditRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+  </members>
+</doc>

@@ -14,9 +14,9 @@
 */
 
 using System;
-using Orion.Util.RefCounting;
+using Highlander.Utilities.RefCounting;
 
-namespace Orion.Util.Logging
+namespace Highlander.Utilities.Logging
 {
     public class FilterLogger : ILogger
     {
@@ -119,7 +119,7 @@ namespace Orion.Util.Logging
         /// 
         /// </summary>
         /// <param name="e"></param>
-        public void Log(Exception e)
+        public void Log(System.Exception e)
         {
             Log(LogSeverity.Error, "EXCEPTION: " + e);
         }
@@ -233,7 +233,7 @@ namespace Orion.Util.Logging
             Log(LogSeverity.Error, String.Format(format, args));
         }
 
-        public void LogError(Exception ex)
+        public void LogError(System.Exception ex)
         {
             Log(LogSeverity.Error, ex.ToString());
         }
@@ -263,7 +263,7 @@ namespace Orion.Util.Logging
             Log(LogSeverity.Fatal, String.Format(format, args));
         }
 
-        public void LogFatal(Exception ex)
+        public void LogFatal(System.Exception ex)
         {
             Log(LogSeverity.Fatal, ex.ToString());
         }

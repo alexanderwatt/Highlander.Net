@@ -1,4 +1,4 @@
-﻿namespace Orion.Build
+﻿namespace Highlander.Build
 {
     public partial class BuildConst
     {

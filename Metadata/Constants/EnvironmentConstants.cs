@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     public static class EnvironmentProp
     {
@@ -25,9 +25,10 @@ namespace Orion.Constants
         public const string Schema = "Schema";
         public const string NameSpace = "NameSpace";
         public const string Domain = "Domain";
-        public const string DefaultNameSpace = "Orion.V5r3";
-        public const string OldNameSpace = "Orion.V5r3";
-        public const string LatestNameSpace = "Orion.V5r10";
+        public const string DefaultNameSpace = "Highlander.V5r3";
+        public const string OldNameSpace = "Highlander.V5r3";
+        public const string LatestNameSpace = "Highlander.V5r10";
+        public const string ClientName = "ClientName";
     }
 
     ///<summary>
@@ -85,6 +86,6 @@ namespace Orion.Constants
         Murex,
         WallStreet,
         Spreadsheet,
-        Orion
+        Highlander
     }
 }

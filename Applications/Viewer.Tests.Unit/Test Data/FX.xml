@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="FxCurve.AUD-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="FxCurve.AUD-USD">
+    <name>AUD-USD</name>
+    <currency>AUD</currency>
+    <quotedCurrencyPair>
+      <currency1>AUD</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="FxCurve.AUD-USD">
+    <baseDate>2010-03-16</baseDate>
+    <spotDate id="SpotDate">2010-03-18</spotDate>
+    <buildDateTime>2010-03-16T00:00:00</buildDateTime>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-15Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-10Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-1Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-21M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-5Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-7Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-1D" />
+        <underlyingAsset xsi:type="FxRateAsset" id="AUDUSD-FxForward-2D" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxSpot-SP" />
+        <quote>
+          <value>0.91505</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-15Y" />
+        <quote>
+          <value>0.6737795</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-10Y" />
+        <quote>
+          <value>0.7037375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-15M" />
+        <quote>
+          <value>0.8662705</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-18M" />
+        <quote>
+          <value>0.857331</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-1M" />
+        <quote>
+          <value>0.912085</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-1W" />
+        <quote>
+          <value>0.914411</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-1Y" />
+        <quote>
+          <value>0.87655</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-21M" />
+        <quote>
+          <value>0.848991</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-2M" />
+        <quote>
+          <value>0.9090545</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-2W" />
+        <quote>
+          <value>0.9137475</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-2Y" />
+        <quote>
+          <value>0.8412725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-3M" />
+        <quote>
+          <value>0.9058645</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-3W" />
+        <quote>
+          <value>0.91308</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-3Y" />
+        <quote>
+          <value>0.8152305</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-4M" />
+        <quote>
+          <value>0.9026875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-4Y" />
+        <quote>
+          <value>0.791725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-5M" />
+        <quote>
+          <value>0.89942</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-5Y" />
+        <quote>
+          <value>0.773239</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-6M" />
+        <quote>
+          <value>0.89595</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-7Y" />
+        <quote>
+          <value>0.7410805</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-9M" />
+        <quote>
+          <value>0.8857</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-1D" />
+        <quote>
+          <value>0.914964</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUDUSD-FxForward-2D" />
+        <quote>
+          <value>0.9149635</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>FxRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="AUDUSD-FxSpot-SP">
+        <term>
+          <date>2010-03-18</date>
+        </term>
+        <mid>0.91505</mid>
+      </point>
+      <point id="AUDUSD-FxForward-1D">
+        <term>
+          <date>2010-03-19</date>
+        </term>
+        <mid>0.914964</mid>
+      </point>
+      <point id="AUDUSD-FxForward-2D">
+        <term>
+          <date>2010-03-22</date>
+        </term>
+        <mid>0.9149635</mid>
+      </point>
+      <point id="AUDUSD-FxForward-1W">
+        <term>
+          <date>2010-03-25</date>
+        </term>
+        <mid>0.914411</mid>
+      </point>
+      <point id="AUDUSD-FxForward-2W">
+        <term>
+          <date>2010-04-01</date>
+        </term>
+        <mid>0.9137475</mid>
+      </point>
+      <point id="AUDUSD-FxForward-3W">
+        <term>
+          <date>2010-04-08</date>
+        </term>
+        <mid>0.91308</mid>
+      </point>
+      <point id="AUDUSD-FxForward-1M">
+        <term>
+          <date>2010-04-19</date>
+        </term>
+        <mid>0.912085</mid>
+      </point>
+      <point id="AUDUSD-FxForward-2M">
+        <term>
+          <date>2010-05-18</date>
+        </term>
+        <mid>0.9090545</mid>
+      </point>
+      <point id="AUDUSD-FxForward-3M">
+        <term>
+          <date>2010-06-18</date>
+        </term>
+        <mid>0.9058645</mid>
+      </point>
+      <point id="AUDUSD-FxForward-4M">
+        <term>
+          <date>2010-07-19</date>
+        </term>
+        <mid>0.9026875</mid>
+      </point>
+      <point id="AUDUSD-FxForward-5M">
+        <term>
+          <date>2010-08-18</date>
+        </term>
+        <mid>0.89942</mid>
+      </point>
+      <point id="AUDUSD-FxForward-6M">
+        <term>
+          <date>2010-09-20</date>
+        </term>
+        <mid>0.89595</mid>
+      </point>
+      <point id="AUDUSD-FxForward-9M">
+        <term>
+          <date>2010-12-20</date>
+        </term>
+        <mid>0.8857</mid>
+      </point>
+      <point id="AUDUSD-FxForward-1Y">
+        <term>
+          <date>2011-03-18</date>
+        </term>
+        <mid>0.87655</mid>
+      </point>
+      <point id="AUDUSD-FxForward-15M">
+        <term>
+          <date>2011-06-20</date>
+        </term>
+        <mid>0.8662705</mid>
+      </point>
+      <point id="AUDUSD-FxForward-18M">
+        <term>
+          <date>2011-09-19</date>
+        </term>
+        <mid>0.857331</mid>
+      </point>
+      <point id="AUDUSD-FxForward-21M">
+        <term>
+          <date>2011-12-19</date>
+        </term>
+        <mid>0.848991</mid>
+      </point>
+      <point id="AUDUSD-FxForward-2Y">
+        <term>
+          <date>2012-03-19</date>
+        </term>
+        <mid>0.8412725</mid>
+      </point>
+      <point id="AUDUSD-FxForward-3Y">
+        <term>
+          <date>2013-03-18</date>
+        </term>
+        <mid>0.8152305</mid>
+      </point>
+      <point id="AUDUSD-FxForward-4Y">
+        <term>
+          <date>2014-03-18</date>
+        </term>
+        <mid>0.791725</mid>
+      </point>
+      <point id="AUDUSD-FxForward-5Y">
+        <term>
+          <date>2015-03-18</date>
+        </term>
+        <mid>0.773239</mid>
+      </point>
+      <point id="AUDUSD-FxForward-7Y">
+        <term>
+          <date>2017-03-20</date>
+        </term>
+        <mid>0.7410805</mid>
+      </point>
+      <point id="AUDUSD-FxForward-10Y">
+        <term>
+          <date>2020-03-18</date>
+        </term>
+        <mid>0.7037375</mid>
+      </point>
+      <point id="AUDUSD-FxForward-15Y">
+        <term>
+          <date>2025-03-18</date>
+        </term>
+        <mid>0.6737795</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="BQDAU 0 10/22/12" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU3FN0008629 Corp Isin</instrumentId>
+  <description>BQDAU 0 10/22/12</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>BQDAU</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Float</couponType>
+  <couponRate>0.0481</couponRate>
+  <maturity>2012-10-22</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>3</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+</bond>

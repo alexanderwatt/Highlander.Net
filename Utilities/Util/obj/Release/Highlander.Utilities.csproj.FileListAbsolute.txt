@@ -1,0 +1,5 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\bin\Release\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\bin\Release\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Release\Highlander.Utilities.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Release\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Release\Highlander.Utilities.pdb

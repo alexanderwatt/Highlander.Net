@@ -24,7 +24,7 @@ using System.Resources;
 
 #endregion
 
-namespace Orion.Util.Helpers
+namespace Highlander.Utilities.Helpers
 {
     /// <summary>
     /// Retrieves resources
@@ -48,7 +48,7 @@ namespace Orion.Util.Helpers
                 var resourceManager = new ResourceManager(resourceFile, Assembly.GetExecutingAssembly());
                 resourceValue = resourceManager.GetString(key);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 resourceValue = string.Empty;

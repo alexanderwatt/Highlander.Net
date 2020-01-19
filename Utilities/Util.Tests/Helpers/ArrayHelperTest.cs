@@ -1,9 +1,24 @@
-﻿using System;
-using Orion.Util.Helpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+﻿/*
+ Copyright (C) 2019 Alex Watt and Simon Dudley (alexwatt@hotmail.com)
 
-namespace Util.Tests.Helpers
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System;
+using System.Collections.Generic;
+using Highlander.Utilities.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Highlander.Utilities.Tests.Helpers
 {
     /// <summary>
     ///This is a test class for ArrayHelperTest and is intended
@@ -40,15 +55,14 @@ namespace Util.Tests.Helpers
         public void RangeToMatrixTestOneBased()
         {
             object[,] range0
-                = new object[,]
-                      {
+                = {
                           {"Item0", "Value0"},
                           {"Item1", "Value1"},
                           {"Item2", "Value2"},
                           {"Item3", "Value3"}
                       };
 
-            object[,] range1 = (object[,])Array.CreateInstance(typeof(object), new int[] { 4, 2 }, new int[] { 1, 1 });
+            object[,] range1 = (object[,])Array.CreateInstance(typeof(object), new[] { 4, 2 }, new int[] { 1, 1 });
             for (int i = 0; i <= range0.GetUpperBound(0); i++)
             {
                 range1[i + 1, 1] = range0[i, 0];
@@ -69,8 +83,7 @@ namespace Util.Tests.Helpers
         public void MatrixToArrayTestColumn()
         {
             object[,] range0
-                = new object[,]
-                      {
+                = {
                           {"Item0"},
                           {"Item1"},
                           {"Item2"},
@@ -89,8 +102,7 @@ namespace Util.Tests.Helpers
         public void MatrixToArrayTestRow()
         {
             object[,] range0
-                = new object[,]
-                      {
+                = {
                           {"Item0", "Item1", "Item2", "Item3"}
                       };
 
@@ -105,7 +117,7 @@ namespace Util.Tests.Helpers
         [TestMethod]
         public void ArrayToVerticalMatrixTest()
         {
-            double[] array = new double[]{1,2,3};
+            double[] array = {1,2,3};
 
             double[,] matrix = ArrayHelper.ArrayToVerticalMatrix(array);
             Assert.AreEqual(array[1], matrix[1, 0]);
@@ -119,7 +131,7 @@ namespace Util.Tests.Helpers
         [TestMethod]
         public void ArrayToHorizontalMatrixTest()
         {
-            double[] array = new double[] { 1, 2, 3 };
+            double[] array = { 1, 2, 3 };
 
             double[,] matrix = ArrayHelper.ArrayToHorizontalMatrix(array);
             Assert.AreEqual(array[1], matrix[0, 1]);

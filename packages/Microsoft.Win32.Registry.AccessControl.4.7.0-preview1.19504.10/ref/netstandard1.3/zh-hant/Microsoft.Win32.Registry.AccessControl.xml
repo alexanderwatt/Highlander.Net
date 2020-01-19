@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[安全性關鍵] 表示允許或拒絕使用者或群組的一組存取權限。此類別無法被繼承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 類別的新執行個體，指定套用此規則的使用者或群組、存取權限，以及允許還是拒絕指定的存取權限。</summary>
+      <param name="identity">適用這項規則的使用者或群組。必須是型別 <see cref="T:System.Security.Principal.SecurityIdentifier" />，或是像是可以轉換成型別 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 的 <see cref="T:System.Security.Principal.NTAccount" /> 的型別。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，表示允許或拒絕的權限。</param>
+      <param name="type">其中一個 <see cref="T:System.Security.AccessControl.AccessControlType" /> 值，表示允許還是拒絕權限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 類別的新執行個體，指定套用此規則的使用者或群組、存取權限、繼承旗標、傳用旗標，以及允許還是拒絕指定的存取權限。</summary>
+      <param name="identity">適用這項規則的使用者或群組。必須是型別 <see cref="T:System.Security.Principal.SecurityIdentifier" />，或是像是可以轉換成型別 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 的 <see cref="T:System.Security.Principal.NTAccount" /> 的型別。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，指定允許或拒絕的權限。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 旗標的位元組合，指定如何從其他物件繼承存取權限。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 旗標的位元組合，指定如何將存取權限傳用至其他物件。</param>
+      <param name="type">其中一個 <see cref="T:System.Security.AccessControl.AccessControlType" /> 值，指定允許還是拒絕權限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 類別的新執行個體，指定套用此規則的使用者或群組名稱、存取權限，以及允許還是拒絕指定的存取權限。</summary>
+      <param name="identity">套用這個規則的使用者或群組名稱。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，表示允許或拒絕的權限。</param>
+      <param name="type">其中一個 <see cref="T:System.Security.AccessControl.AccessControlType" /> 值，表示允許還是拒絕權限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 類別的新執行個體，指定套用此規則的使用者或群組名稱、存取權限、繼承旗標、傳用旗標，以及允許還是拒絕指定的存取權限。</summary>
+      <param name="identity">套用這個規則的使用者或群組名稱。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，表示允許或拒絕的權限。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 旗標的位元組合，指定如何從其他物件繼承存取權限。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 旗標的位元組合，指定如何將存取權限傳用至其他物件。</param>
+      <param name="type">其中一個 <see cref="T:System.Security.AccessControl.AccessControlType" /> 值，指定允許還是拒絕權限。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[安全性關鍵] 取得存取規則所允許或拒絕的權限。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，表示存取規則所允許或拒絕的權限。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[安全性關鍵] 表示要針對使用者或群組稽核的一組存取權限。此類別無法被繼承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 類別的新執行個體，指定要稽核的使用者或群組、要稽核的權限、是否考慮繼承 (Inheritance)，以及是要稽核成功、失敗或兩者皆稽核。</summary>
+      <param name="identity">適用這項規則的使用者或群組。必須是型別 <see cref="T:System.Security.Principal.SecurityIdentifier" />，或是像是可以轉換成型別 <see cref="T:System.Security.Principal.SecurityIdentifier" /> 的 <see cref="T:System.Security.Principal.NTAccount" /> 的型別。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，指定要稽核的存取類型。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的位元組合，指定稽核規則是否套用至目前機碼的子機碼 (Subkey)。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的位元組合，這些值會影響繼承之稽核規則傳用至目前機碼的子機碼的方式。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的位元組合，指定是否要稽核成功、失敗或兩者皆稽核。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[安全性關鍵] 初始化 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 類別的新執行個體，指定要稽核的使用者或群組名稱、要稽核的權限、是否考慮繼承，以及是要稽核成功、失敗或兩者皆稽核。</summary>
+      <param name="identity">套用這個規則的使用者或群組名稱。</param>
+      <param name="registryRights">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，指定要稽核的存取類型。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 旗標的組合，指定稽核規則是否要套用至目前機碼的子機碼。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 旗標的組合，這些旗標會影響繼承之稽核規則傳用至目前機碼的子機碼的方式。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的位元組合，指定是否要稽核成功、失敗或兩者皆稽核。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[安全性關鍵] 取得受稽核規則影響的存取權限。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，表示受稽核規則所影響的權限。</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[安全性關鍵] 表示登錄機碼的 Windows 存取控制 (Access Control) 安全性。此類別無法被繼承。</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[安全性關鍵] 使用預設值，初始化 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 類別的新執行個體。</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[安全性關鍵] 取得 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 類別用來表示存取權限的列舉型別。</summary>
+      <returns>
+        <see cref="T:System.Type" /> 物件，表示 <see cref="T:System.Security.AccessControl.RegistryRights" /> 列舉型別。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[安全性關鍵] 以指定的存取權限、存取控制和旗標，為指定的使用者建立新的存取控制規則。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 物件，表示指定之使用者的指定權限。</returns>
+      <param name="identityReference">
+        <see cref="T:System.Security.Principal.IdentityReference" />，可識別套用這個規則的使用者或群組。</param>
+      <param name="accessMask">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，指定允許或拒絕的存取權限 (轉型成整數)。</param>
+      <param name="isInherited">布林值，指定規則是否是繼承的。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的位元組合，指定子機碼如何繼承規則。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的位元組合，這些值會修改子機碼繼承規則的方式。如果 <paramref name="inheritanceFlags" /> 的值為 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />，則沒有意義。</param>
+      <param name="type">其中一個 <see cref="T:System.Security.AccessControl.AccessControlType" /> 值，指定允許還是拒絕權限。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[安全性關鍵] 取得 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 類別用來表示存取規則的型別。</summary>
+      <returns>
+        <see cref="T:System.Type" /> 物件，表示 <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> 類別。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 搜尋可合併新規則的相符存取控制。如果找不到，就加入新規則。</summary>
+      <param name="rule">要加入的存取控制規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[安全性關鍵] 搜尋可合併新規則的稽核規則。如果找不到，就加入新規則。</summary>
+      <param name="rule">要加入的稽核規則。這個規則指定的使用者會決定搜尋方式。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[安全性關鍵] 建立新的稽核規則，指定套用該規則的使用者、要稽核的存取權限、規則的繼承和傳用，以及觸發規則的結果。</summary>
+      <returns>
+        <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 物件，表示指定之使用者的指定稽核規則，而且具有指定的旗標。此方法的傳回型別為基底類別 <see cref="T:System.Security.AccessControl.AuditRule" />，但是傳回值可以安全地轉型為衍生類別。</returns>
+      <param name="identityReference">
+        <see cref="T:System.Security.Principal.IdentityReference" />，可識別套用這個規則的使用者或群組。</param>
+      <param name="accessMask">
+        <see cref="T:System.Security.AccessControl.RegistryRights" /> 值的位元組合，指定要稽核的存取權限 (轉型成整數)。</param>
+      <param name="isInherited">布林值，指定規則是否是繼承的。</param>
+      <param name="inheritanceFlags">
+        <see cref="T:System.Security.AccessControl.InheritanceFlags" /> 值的位元組合，指定子機碼如何繼承規則。</param>
+      <param name="propagationFlags">
+        <see cref="T:System.Security.AccessControl.PropagationFlags" /> 值的位元組合，這些值會修改子機碼繼承規則的方式。如果 <paramref name="inheritanceFlags" /> 的值為 <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />，則沒有意義。</param>
+      <param name="flags">
+        <see cref="T:System.Security.AccessControl.AuditFlags" /> 值的位元組合，指定是否要稽核成功存取、失敗存取或兩者皆稽核。</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[安全性關鍵] 取得 <see cref="T:System.Security.AccessControl.RegistrySecurity" /> 類別用來表示稽核規則的型別。</summary>
+      <returns>
+        <see cref="T:System.Type" /> 物件，表示 <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> 類別。</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 搜尋具有與指定之存取規則相同的使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" /> (允許或拒絕) 以及具有相容的繼承和傳用旗標的存取控制規則。如果找到這樣的規則，則會移除指定之存取規則中所包含的權限。</summary>
+      <returns>如果找到相容的規則，則為 true，否則為 false。</returns>
+      <param name="rule">
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" />，其會指定要搜尋的使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" />，以及必須與相符的規則 (如果找到的話) 相容的繼承和傳用旗標集合。如果找到的話，指定從相容的規則中移除此權限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 搜尋與指定規則具有相同使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" /> (允許或拒絕) 的所有存取控制規則，如果找到的話，便加以移除。</summary>
+      <param name="rule">
+        <see cref="T:System.Security.AccessControl.RegistryAccessRule" />，指定要搜尋的使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" />。這個規則所指定的任何權限、繼承旗標或傳用旗標都會被忽略。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 搜尋與指定規則完全相符的存取控制規則，如果找到的話，便加以移除。</summary>
+      <param name="rule">要移除的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[安全性關鍵] 搜尋具有與指定之規則相同的使用者以及具有相容的繼承和傳用旗標的稽核控制規則。如果找到了相容的規則，則會移除指定之規則中所包含的權限。</summary>
+      <returns>如果找到相容的規則，則為 true，否則為 false。</returns>
+      <param name="rule">
+        <see cref="T:System.Security.AccessControl.RegistryAuditRule" />，其會指定要搜尋的使用者，以及必須與相符的規則 (如果找到的話) 相容的繼承和傳用旗標集合。如果找到的話，指定從相容的規則中移除此權限。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[安全性關鍵] 搜尋與所指定規則有相同使用者的所有稽核規則，找到以後將其移除。</summary>
+      <param name="rule">
+        <see cref="T:System.Security.AccessControl.RegistryAuditRule" />，指定要搜尋的使用者。這個規則所指定的任何權限、繼承旗標或傳用旗標都會被忽略。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[安全性關鍵] 搜尋與指定規則完全相符的稽核規則，如果找到的話，便加以移除。</summary>
+      <param name="rule">要移除的 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 移除與指定規則具有相同使用者的所有存取控制規則 (不論 <see cref="T:System.Security.AccessControl.AccessControlType" /> 為何)，然後加入指定規則。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。這個規則指定的使用者會決定在加入這項規則之前要移除的規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[安全性關鍵] 移除與指定規則具有相同使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" /> (允許或拒絕) 的所有存取控制規則，然後加入指定規則。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAccessRule" />。這個規則的使用者和 <see cref="T:System.Security.AccessControl.AccessControlType" /> 會決定在加入這項規則之前要移除的規則。</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[安全性關鍵] 移除與指定規則具有相同使用者的所有稽核規則 (不論 <see cref="T:System.Security.AccessControl.AuditFlags" /> 值為何)，然後加入指定規則。</summary>
+      <param name="rule">要相加的 <see cref="T:System.Security.AccessControl.RegistryAuditRule" />。這個規則指定的使用者會決定在加入這項規則之前要移除的規則。</param>
+    </member>
+  </members>
+</doc>

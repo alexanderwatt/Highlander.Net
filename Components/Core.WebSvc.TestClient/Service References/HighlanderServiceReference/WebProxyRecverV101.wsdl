@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WebProxyRecverV101" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8222/Highlander_Prxy_IWebProxyV101?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8222/Highlander_Prxy_IWebProxyV101?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8222/Highlander_Prxy_IWebProxyV101?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Highlander.Core.WebService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWebProxyV101_V101LoadObjectByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:V101LoadObjectByName" />
+  </wsdl:message>
+  <wsdl:message name="IWebProxyV101_V101LoadObjectByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:V101LoadObjectByNameResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWebProxyV101">
+    <wsdl:operation name="V101LoadObjectByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWebProxyV101/V101LoadObjectByName" message="tns:IWebProxyV101_V101LoadObjectByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWebProxyV101/V101LoadObjectByNameResponse" message="tns:IWebProxyV101_V101LoadObjectByName_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWebProxyV101" type="tns:IWebProxyV101">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="V101LoadObjectByName">
+      <soap:operation soapAction="http://tempuri.org/IWebProxyV101/V101LoadObjectByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebProxyRecverV101">
+    <wsdl:port name="BasicHttpBinding_IWebProxyV101" binding="tns:BasicHttpBinding_IWebProxyV101">
+      <soap:address location="http://localhost:8222/Highlander_Prxy_IWebProxyV101" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

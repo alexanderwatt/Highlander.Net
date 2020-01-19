@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{22B79BC7-9789-4DD7-8CE4-38FC5E42ADD7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Reporting.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Reporting.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\BuildDef\BuildInfo.cs">
+      <Link>BuildInfo.cs</Link>
+    </Compile>
+    <Compile Include="ExtensionClasses.cs" />
+    <Compile Include="Period.cs" />
+    <Compile Include="CurveNameHelpers.cs" />
+    <Compile Include="PaymentHelper.cs" />
+    <Compile Include="Asset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BondTransaction.cs" />
+    <Compile Include="BulletPayment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CapFloor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CompoundingFrequency.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FutureTransaction.cs" />
+    <Compile Include="EquityTransaction.cs" />
+    <Compile Include="FxSwapLeg.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="DayCountFraction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExchangeRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fra.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxSingleLeg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxOption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxOptionPremium.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FxSwap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InterestRateStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PaymentCalculationPeriod.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrincipalExchange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Market.cs" />
+    <Compile Include="Product.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QuotedAssetSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QuotedCurrencyPair.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Swap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Swaption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TermCurve.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TermDeposit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Trade.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ValuationReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VolatilityMatrix.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportingHelpers.cs" />
+    <Compile Include="Reporting.cs" />
+    <Compile Include="XsdClassesFieldResolver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ExtensionSchemas\xsdgen.bat" />
+    <None Include="Key.snk" />
+    <None Include="xsdgen.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Common\Highlander.Metadata.Common.csproj">
+      <Project>{214104c5-e2f7-4007-9a60-26d20d3cc80f}</Project>
+      <Name>Highlander.Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

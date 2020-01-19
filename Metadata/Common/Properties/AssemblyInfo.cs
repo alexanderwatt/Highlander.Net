@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Metadata.Common")]
+[assembly: AssemblyTitle("Highlander.Metadata.Common")]
 [assembly: AssemblyDescription("Highlander")]
 [assembly: AssemblyCulture("")]
 
@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2f1a9273-2d02-1a17-9819-f928703affdc")]
+[assembly: Guid("33A34D7F-CD62-42DF-ACE6-303B912A5228")]
 
 // Version information for an assembly consists of the following four values:
 //

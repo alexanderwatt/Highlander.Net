@@ -16,7 +16,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Orion.Util.Helpers
+namespace Highlander.Utilities.Helpers
 {
     public static class DisposeHelper
     {
@@ -31,7 +31,7 @@ namespace Orion.Util.Helpers
             {
                 target?.Dispose();
             }
-            catch(Exception excp)
+            catch(System.Exception excp)
             {
                 Debug.WriteLine($"DisposeHelper.SafeDispose<{typeof(T).Name}>: {excp.GetType().Name}");
             }

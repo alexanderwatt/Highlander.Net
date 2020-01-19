@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService\bin\Release\PublishOutput</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Core.Common.dll">
+      <publishTime>04/28/2018 13:15:09</publishTime>
+    </File>
+    <File Include="bin/Core.Common.pdb">
+      <publishTime>04/28/2018 13:15:09</publishTime>
+    </File>
+    <File Include="bin/Core.Server.dll">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/Core.Server.pdb">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/Core.V34.dll">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/Core.V34.pdb">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Analytics.dll">
+      <publishTime>04/28/2018 13:15:12</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Analytics.pdb">
+      <publishTime>04/28/2018 13:15:12</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.CalendarEngine.dll">
+      <publishTime>04/28/2018 13:15:19</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.CalendarEngine.pdb">
+      <publishTime>04/28/2018 13:15:19</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Codes.dll">
+      <publishTime>04/28/2018 13:15:09</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Codes.pdb">
+      <publishTime>04/28/2018 13:15:09</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.ConfigTypes.dll">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.ConfigTypes.pdb">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.CurveEngine.dll">
+      <publishTime>04/28/2018 13:15:20</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.CurveEngine.pdb">
+      <publishTime>04/28/2018 13:15:20</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Helpers.dll">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Helpers.pdb">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.PublisherWebService.dll">
+      <publishTime>04/28/2018 13:15:20</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.PublisherWebService.pdb">
+      <publishTime>04/28/2018 13:15:20</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.dll">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Helpers.dll">
+      <publishTime>04/28/2018 13:15:11</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Helpers.pdb">
+      <publishTime>04/28/2018 13:15:11</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Identifiers.dll">
+      <publishTime>04/28/2018 13:15:12</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Identifiers.pdb">
+      <publishTime>04/28/2018 13:15:12</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.ModelFramework.dll">
+      <publishTime>04/28/2018 13:15:11</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.ModelFramework.pdb">
+      <publishTime>04/28/2018 13:15:11</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Models.dll">
+      <publishTime>04/28/2018 13:15:18</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.Models.pdb">
+      <publishTime>04/28/2018 13:15:18</publishTime>
+    </File>
+    <File Include="bin/FpML.V5r3.Reporting.pdb">
+      <publishTime>04/28/2018 13:15:10</publishTime>
+    </File>
+    <File Include="bin/Highlander.CalendarEngine.V5r3.dll">
+      <publishTime>11/10/2019 15:47:32</publishTime>
+    </File>
+    <File Include="bin/Highlander.CalendarEngine.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:32</publishTime>
+    </File>
+    <File Include="bin/Highlander.Codes.V5r3.dll">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.Codes.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.Constants.dll">
+      <publishTime>11/10/2019 15:47:23</publishTime>
+    </File>
+    <File Include="bin/Highlander.Constants.pdb">
+      <publishTime>11/10/2019 15:47:23</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Common.dll">
+      <publishTime>11/10/2019 15:47:24</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Common.pdb">
+      <publishTime>11/10/2019 15:47:24</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Server.dll">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Server.pdb">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.V34.dll">
+      <publishTime>11/10/2019 15:47:26</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.V34.pdb">
+      <publishTime>11/10/2019 15:47:26</publishTime>
+    </File>
+    <File Include="bin/Highlander.CurveEngine.V5r3.dll">
+      <publishTime>11/10/2019 15:47:34</publishTime>
+    </File>
+    <File Include="bin/Highlander.CurveEngine.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:34</publishTime>
+    </File>
+    <File Include="bin/Highlander.Equities.dll">
+      <publishTime>11/10/2019 15:47:24</publishTime>
+    </File>
+    <File Include="bin/Highlander.Equities.pdb">
+      <publishTime>11/10/2019 15:47:24</publishTime>
+    </File>
+    <File Include="bin/Highlander.Metadata.Common.dll">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.Metadata.Common.pdb">
+      <publishTime>11/10/2019 15:47:25</publishTime>
+    </File>
+    <File Include="bin/Highlander.PublisherWebService.V5r3.dll">
+      <publishTime>11/10/2019 15:47:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.PublisherWebService.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Analytics.V5r3.dll">
+      <publishTime>11/10/2019 15:47:30</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Analytics.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:30</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Helpers.V5r3.dll">
+      <publishTime>11/10/2019 15:47:28</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Helpers.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:28</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Identifiers.V5r3.dll">
+      <publishTime>11/10/2019 15:47:30</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Identifiers.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:30</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.dll">
+      <publishTime>11/10/2019 15:47:28</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:28</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Models.V5r3.dll">
+      <publishTime>11/10/2019 15:47:31</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Models.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:31</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.V5r3.dll">
+      <publishTime>11/10/2019 15:47:27</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.V5r3.pdb">
+      <publishTime>11/10/2019 15:47:27</publishTime>
+    </File>
+    <File Include="bin/Highlander.Utilities.dll">
+      <publishTime>11/10/2019 15:47:23</publishTime>
+    </File>
+    <File Include="bin/Highlander.Utilities.pdb">
+      <publishTime>11/10/2019 15:47:23</publishTime>
+    </File>
+    <File Include="bin/MathNet.Numerics.dll">
+      <publishTime>10/13/2019 13:43:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Solver.Foundation.dll">
+      <publishTime>01/19/2017 16:31:08</publishTime>
+    </File>
+    <File Include="bin/Orion.Constants.dll">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="bin/Orion.Constants.pdb">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="bin/Orion.Util.dll">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="bin/Orion.Util.pdb">
+      <publishTime>04/28/2018 13:15:08</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/08/2019 10:41:42</publishTime>
+    </File>
+    <File Include="Key.snk">
+      <publishTime>04/28/2018 13:12:43</publishTime>
+    </File>
+    <File Include="PricingStructures.asmx">
+      <publishTime>11/08/2019 10:42:05</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/08/2019 10:39:40</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

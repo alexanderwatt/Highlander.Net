@@ -1,0 +1,3 @@
+C:\Development\OrionVS12\Applications\Web\PublisherWebService.Tests\obj\Debug\PublisherWebService.Tests.csprojResolveAssemblyReference.cache
+C:\Development\OrionVS12\Applications\Web\PublisherWebService.Tests\obj\Debug\PublisherWebService.Tests.Properties.Resources.resources
+C:\Development\OrionVS12\Applications\Web\PublisherWebService.Tests\obj\Debug\PublisherWebService.Tests.csproj.GenerateResource.Cache

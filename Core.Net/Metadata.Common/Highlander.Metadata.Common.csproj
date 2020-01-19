@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="xsdgen.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\BuildEnv\Build.cs" Link="Build.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Highlander.Core.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

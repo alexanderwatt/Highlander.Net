@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AlertFormat"
+    targetNamespace="http://tempuri.org/CoreObjects.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/CoreObjects.xsd"
+    xmlns:mstns="http://tempuri.org/CoreObjects.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="CoreObject">
+    <xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UserDetail">
+    <xs:complexContent>
+      <xs:extension base="CoreObject">
+        <xs:sequence>
+          <xs:element name="Disabled" type="xs:boolean" />
+          <xs:element name="UserName" type="xs:string" />
+          <xs:element name="FullName" type="xs:string" />
+          <xs:element name="WindowsLoginId" type="xs:string" />
+          <xs:element name="WindowsDomain" type="xs:string" />
+          <xs:element name="EmailAddress" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UserGroup">
+    <xs:complexContent>
+      <xs:extension base="CoreObject">
+        <xs:sequence>
+          <xs:element name="Disabled" type="xs:boolean" />
+          <xs:element name="GroupName" type="xs:string" />
+          <xs:element name="FullName" type="xs:string" />
+          <xs:element name="MemberUsers" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="MemberGroups" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserGroup" type="UserGroup" />
+
+  <xs:complexType name="RuleObject">
+    <xs:complexContent>
+      <xs:extension base="CoreObject">
+        <xs:sequence>
+          <!--standard rule object properties-->
+          <xs:element name="Priority" type="xs:int" />
+          <xs:element name="Disabled" type="xs:boolean" />
+          <xs:element name="HostEnvAbbr" type="xs:string" />
+          <xs:element name="HostComputer" type="xs:string" />
+          <xs:element name="HostInstance" type="xs:string" />
+          <xs:element name="HostUserName" type="xs:string" />
+          <xs:element name="RuleUniqueId" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AlertRule">
+    <xs:complexContent>
+      <xs:extension base="RuleObject">
+        <xs:sequence>
+          <xs:element name="DataItemKind" type="xs:string" />
+          <xs:element name="DataTypeName" type="xs:string" />
+          <xs:element name="DataSubsExpr" type="xs:string" />
+          <xs:element name="Constraint" type="xs:string" />
+          <xs:element name="Condition" type="xs:string" />
+          <xs:element name="AlertProperties" type="xs:string" />
+          <xs:element name="MonitorPeriod" type="xs:string" />
+          <xs:element name="PublishPeriod" type="xs:string" />
+          <xs:element name="SignalFormat" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlertRule" type="AlertRule" />
+
+  <xs:complexType name="AlertSignal">
+    <xs:complexContent>
+      <xs:extension base="CoreObject">
+        <xs:sequence>
+          <xs:element name="RuleUniqueId" type="xs:string" />
+          <xs:element name="AlertServer" type="xs:string" />
+          <xs:element name="Status" type="xs:string" />
+          <xs:element name="SignalMessage" type="xs:string" />
+          <xs:element name="LastMonitored" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlertSignal" type="AlertSignal" />
+
+</xs:schema>

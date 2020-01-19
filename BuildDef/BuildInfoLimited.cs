@@ -2,7 +2,6 @@ using System.Reflection;
 
 // global attributes for Core assemblies
 [assembly: AssemblyCompany("Highlander")]
-[assembly: AssemblyProduct("Higlander Core Applications")]
 [assembly: AssemblyCopyright("Copyright © Alex Watt 2019")]
 [assembly: AssemblyTrademark("Highlander")]
 

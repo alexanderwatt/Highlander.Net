@@ -20,13 +20,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using Orion.Util.Helpers;
-using Orion.Util.NamedValues;
-using Orion.Util.Serialisation;
+using Highlander.Utilities.Helpers;
+using Highlander.Utilities.NamedValues;
+using Highlander.Utilities.Serialisation;
 
 #endregion
 
-namespace Orion.Util.Expressions
+namespace Highlander.Utilities.Expressions
 {
     /// <summary>
     /// 
@@ -197,7 +197,7 @@ namespace Orion.Util.Expressions
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static IExpression Error(Exception value)
+        public static IExpression Error(System.Exception value)
         {
             // create a constant query node
             return new Expr(QueryNodeType.ERROR, null, value);
@@ -598,7 +598,7 @@ namespace Orion.Util.Expressions
         /// Builds a EndsWith expression from a property name and a string search value.
         /// When evaluated, the expression returns: ((String)Get(propName)).EndsWith(value)
         /// </summary>
-        /// <param name="propName">Name of the propery.</param>
+        /// <param name="propName">Name of the property.</param>
         /// <param name="value">The search string.</param>
         /// <returns>An expression</returns>
         public static IExpression EndsWith(string propName, string value)
@@ -608,7 +608,7 @@ namespace Orion.Util.Expressions
 
         /// <summary>
         /// Builds a Contains expression from 2 string arguments.
-        /// When evaluated, the expression returns: (String)arg1.Constains((String)arg2)
+        /// When evaluated, the expression returns: (String)arg1.Contains((String)arg2)
         /// </summary>
         /// <param name="arg1">A string expression</param>
         /// <param name="arg2">An expression string expression</param>
@@ -621,7 +621,7 @@ namespace Orion.Util.Expressions
         /// Builds a Contains expression from a property name and a string search value.
         /// When evaluated, the expression returns: ((String)Get(propName)).Contains(value)
         /// </summary>
-        /// <param name="propName">Name of the propery.</param>
+        /// <param name="propName">Name of the property.</param>
         /// <param name="value">The search string.</param>
         /// <returns>An expression</returns>
         public static IExpression Contains(string propName, string value)
@@ -747,7 +747,7 @@ namespace Orion.Util.Expressions
             return expr?.Serialise();
         }
 
-        public static bool TryDeserialise(string text, out IExpression result, out Exception failReason)
+        public static bool TryDeserialise(string text, out IExpression result, out System.Exception failReason)
         {
             bool success = false;
             result = null;
@@ -757,7 +757,7 @@ namespace Orion.Util.Expressions
                 result = Create(text);
                 success = true;
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 failReason = excp;
             }
@@ -767,7 +767,7 @@ namespace Orion.Util.Expressions
         public static IExpression Deserialise(string text)
         {
             IExpression result;
-            Exception excp;
+            System.Exception excp;
             TryDeserialise(text, out result, out excp);
             return result;
         }
@@ -776,14 +776,14 @@ namespace Orion.Util.Expressions
         {
             if (value == null)
                 return defaultValue;
-            if (value is T)
-                return (T)value;
+            if (value is T value1)
+                return value1;
             // not exact type - attempt cast
             try
             {
                 return (T)Convert.ChangeType(value, typeof(T));
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Trace.WriteLine($"Expr.CastTo<{typeof(T).Name}>() failed: {excp}");
                 return defaultValue;
@@ -794,7 +794,7 @@ namespace Orion.Util.Expressions
         
         #region Private Constructors
 
-        private Expr(Exception excp)
+        private Expr(System.Exception excp)
         {
             // construct an exception constant
             // - used for trapping query deserialisation errors
@@ -842,7 +842,7 @@ namespace Orion.Util.Expressions
                             {
                                 _operands[i] = new Expr(queryExpr.args[i]);
                             }
-                            catch (Exception excp)
+                            catch (System.Exception excp)
                             {
                                 _operands[i] = new Expr(excp);
                             }
@@ -855,7 +855,7 @@ namespace Orion.Util.Expressions
                         break;
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 // exception creating expression node
                 // - convert node to exception constant
@@ -1698,7 +1698,7 @@ namespace Orion.Util.Expressions
             switch (_nodeType)
             {
                 case QueryNodeType.CONST:
-                    return (_constValue is Exception);
+                    return (_constValue is System.Exception);
                 case QueryNodeType.ERROR:
                     return true;
                 case QueryNodeType.FIELD:
@@ -1781,7 +1781,7 @@ namespace Orion.Util.Expressions
         private int CalcHash()
         {
             // hash is calculated from operator and operands
-            // - determinsitic operators
+            // - deterministic operators
             int result = _operator.GetHashCode();
             for (int i = 0; i < _operands.Length; i++)
             {
@@ -1789,7 +1789,7 @@ namespace Orion.Util.Expressions
                     throw new ArgumentNullException("Argument[" + i + "]");
                 result ^= _operands[i].GetHashCode();
             }
-            // - special case non-determinsitic operators (eg. time-dependent scalar methods)
+            // - special case non-deterministic operators (eg. time-dependent scalar methods)
             switch (_operator)
             {
                 case QueryOpCode.NOW:

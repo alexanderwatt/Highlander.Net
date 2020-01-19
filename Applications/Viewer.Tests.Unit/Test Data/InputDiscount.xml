@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Highlander.Market.Live.18/12/2009.RateCurve.AUD-LIBOR-BBA-1D" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-LIBOR-BBA-1D">
+    <name>AUD-LIBOR-BBA-1D</name>
+    <currency>AUD</currency>
+    <algorithm>FlatForward</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>AUD-LIBOR-BBA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>1</periodMultiplier>
+        <period>D</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-LIBOR-BBA-1D">
+    <baseDate>2009-12-18</baseDate>
+    <buildDateTime>2009-12-18T00:00:00+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-Deposit-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-Deposit-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-Deposit-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-U1" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-M1" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-H2" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-U2" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-M2" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-H0" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-Z9" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-M0" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-H1" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-U0" />
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-6Y">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-8Y">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-9Y">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-IRSwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-Deposit-1D" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-Deposit-1M" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-Deposit-2M" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-Deposit-3M" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-U1" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-M1" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-H2" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-U2" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-M2" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-H0" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-Z9" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-M0" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-H1" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-U0" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-3Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-4Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-5Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-6Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-7Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-8Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-9Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-10Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-15Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-20Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-25Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRSwap-30Y" />
+        <quote>
+          <value>0.05</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <discountFactorCurve>
+      <interpolationMethod>LogLinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2009-12-18</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point>
+        <term>
+          <date>2009-12-21</date>
+        </term>
+        <mid>0.999589209913734</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-01-21</date>
+        </term>
+        <mid>0.995362328791469</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-02-22</date>
+        </term>
+        <mid>0.991036429766435</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-03-22</date>
+        </term>
+        <mid>0.987281995991105</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-06-10</date>
+        </term>
+        <mid>0.976581538459893</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-09-09</date>
+        </term>
+        <mid>0.964558212399069</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-12-09</date>
+        </term>
+        <mid>0.952684885635001</mid>
+      </point>
+      <point>
+        <term>
+          <date>2011-06-09</date>
+        </term>
+        <mid>0.929386728637206</mid>
+      </point>
+      <point>
+        <term>
+          <date>2011-09-08</date>
+        </term>
+        <mid>0.917956079748832</mid>
+      </point>
+      <point>
+        <term>
+          <date>2011-12-08</date>
+        </term>
+        <mid>0.906670539532298</mid>
+      </point>
+      <point>
+        <term>
+          <date>2012-06-07</date>
+        </term>
+        <mid>0.884535368912683</mid>
+      </point>
+      <point>
+        <term>
+          <date>2012-09-06</date>
+        </term>
+        <mid>0.873677313445712</mid>
+      </point>
+      <point>
+        <term>
+          <date>2012-12-13</date>
+        </term>
+        <mid>0.862140748035557</mid>
+      </point>
+      <point>
+        <term>
+          <date>2012-12-21</date>
+        </term>
+        <mid>0.86103355248559</mid>
+      </point>
+      <point>
+        <term>
+          <date>2013-12-23</date>
+        </term>
+        <mid>0.82015590050003</mid>
+      </point>
+      <point>
+        <term>
+          <date>2014-12-22</date>
+        </term>
+        <mid>0.780740323899069</mid>
+      </point>
+      <point>
+        <term>
+          <date>2015-12-21</date>
+        </term>
+        <mid>0.743219363462227</mid>
+      </point>
+      <point>
+        <term>
+          <date>2016-12-21</date>
+        </term>
+        <mid>0.707312373283972</mid>
+      </point>
+      <point>
+        <term>
+          <date>2017-12-21</date>
+        </term>
+        <mid>0.673230081386589</mid>
+      </point>
+      <point>
+        <term>
+          <date>2018-12-21</date>
+        </term>
+        <mid>0.64079006945707</mid>
+      </point>
+      <point>
+        <term>
+          <date>2019-12-23</date>
+        </term>
+        <mid>0.609750206910945</mid>
+      </point>
+      <point>
+        <term>
+          <date>2020-03-12</date>
+        </term>
+        <mid>0.603418214472472</mid>
+      </point>
+      <point>
+        <term>
+          <date>2024-12-23</date>
+        </term>
+        <mid>0.476186111806378</mid>
+      </point>
+      <point>
+        <term>
+          <date>2029-12-21</date>
+        </term>
+        <mid>0.372045417894646</mid>
+      </point>
+      <point>
+        <term>
+          <date>2034-12-21</date>
+        </term>
+        <mid>0.290602506577608</mid>
+      </point>
+      <point>
+        <term>
+          <date>2039-12-21</date>
+        </term>
+        <mid>0.226987931837903</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

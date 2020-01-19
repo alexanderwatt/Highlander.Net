@@ -15,7 +15,7 @@
 
 using System;
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     public class WFPropName
     {

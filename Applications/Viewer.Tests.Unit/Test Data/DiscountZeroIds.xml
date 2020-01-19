@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="RateCurve.AUD-XCCY-BASIS-3M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-XCCY-BASIS-3M">
+    <name>AUD-XCCY-BASIS-3M</name>
+    <currency>AUD</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>AUD-XCCY-BASIS</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-XCCY-BASIS-3M">
+    <baseDate>2010-03-16</baseDate>
+    <buildDateTime>2010-03-17T05:01:29.7614022+11:00</buildDateTime>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-03-16</date>
+          </term>
+          <mid>0.0387130745974709</mid>
+        </point>
+        <point id="AUD-DEPOSIT-1D">
+          <term>
+            <date>2010-03-17</date>
+          </term>
+          <mid>0.0387130745974709</mid>
+        </point>
+        <point>
+          <term>
+            <date>2010-03-18</date>
+          </term>
+          <mid>0.0377015290043605</mid>
+        </point>
+        <point id="AUD-XccySwap-1M">
+          <term>
+            <date>2010-04-19</date>
+          </term>
+          <mid>0.0394257070739492</mid>
+        </point>
+        <point id="AUD-DEPOSIT-2M">
+          <term>
+            <date>2010-05-17</date>
+          </term>
+          <mid>0.0417804778224484</mid>
+        </point>
+        <point id="AUD-XccySwap-2M">
+          <term>
+            <date>2010-05-18</date>
+          </term>
+          <mid>0.0418789556869923</mid>
+        </point>
+        <point id="AUD-DEPOSIT-3M">
+          <term>
+            <date>2010-06-17</date>
+          </term>
+          <mid>0.042752989890487</mid>
+        </point>
+        <point id="AUD-XccySwap-3M">
+          <term>
+            <date>2010-06-18</date>
+          </term>
+          <mid>0.0427562468597413</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-M0">
+          <term>
+            <date>2010-09-09</date>
+          </term>
+          <mid>0.0446015979245393</mid>
+        </point>
+        <point id="AUD-XccySwap-6M">
+          <term>
+            <date>2010-09-20</date>
+          </term>
+          <mid>0.0448751130361895</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-U0">
+          <term>
+            <date>2010-12-09</date>
+          </term>
+          <mid>0.047054318502016</mid>
+        </point>
+        <point id="AUD-XccySwap-9M">
+          <term>
+            <date>2010-12-20</date>
+          </term>
+          <mid>0.047322645480949</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-Z0">
+          <term>
+            <date>2011-03-10</date>
+          </term>
+          <mid>0.0488754931830124</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-1Y">
+          <term>
+            <date>2011-03-18</date>
+          </term>
+          <mid>0.0490040215963363</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-H1">
+          <term>
+            <date>2011-06-09</date>
+          </term>
+          <mid>0.0503820666596768</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-M1">
+          <term>
+            <date>2011-09-08</date>
+          </term>
+          <mid>0.0516394108482823</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-U1">
+          <term>
+            <date>2011-12-08</date>
+          </term>
+          <mid>0.0526937384824855</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-Z1">
+          <term>
+            <date>2012-03-08</date>
+          </term>
+          <mid>0.0535951100477474</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-2Y">
+          <term>
+            <date>2012-03-19</date>
+          </term>
+          <mid>0.0536875462891677</mid>
+        </point>
+        <point id="AUD-IRFUTURE-IR-H2">
+          <term>
+            <date>2012-06-07</date>
+          </term>
+          <mid>0.0543631824733062</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-3Y">
+          <term>
+            <date>2013-03-18</date>
+          </term>
+          <mid>0.0563898003228767</mid>
+        </point>
+        <point id="AUD-IRSWAP-4Y">
+          <term>
+            <date>2014-03-17</date>
+          </term>
+          <mid>0.0591605590904844</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-4Y">
+          <term>
+            <date>2014-03-18</date>
+          </term>
+          <mid>0.0591654962021497</mid>
+        </point>
+        <point id="AUD-IRSWAP-5Y">
+          <term>
+            <date>2015-03-17</date>
+          </term>
+          <mid>0.0609167150199026</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-5Y">
+          <term>
+            <date>2015-03-18</date>
+          </term>
+          <mid>0.0609213741478314</mid>
+        </point>
+        <point id="AUD-IRSWAP-6Y">
+          <term>
+            <date>2016-03-17</date>
+          </term>
+          <mid>0.0623220248025538</mid>
+        </point>
+        <point id="AUD-IRSWAP-7Y">
+          <term>
+            <date>2017-03-17</date>
+          </term>
+          <mid>0.0635840104765419</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-7Y">
+          <term>
+            <date>2017-03-20</date>
+          </term>
+          <mid>0.0635919665212858</mid>
+        </point>
+        <point id="AUD-IRSWAP-8Y">
+          <term>
+            <date>2018-03-19</date>
+          </term>
+          <mid>0.0643883709795343</mid>
+        </point>
+        <point id="AUD-IRSWAP-9Y">
+          <term>
+            <date>2019-03-18</date>
+          </term>
+          <mid>0.0649233761106345</mid>
+        </point>
+        <point id="AUD-IRSWAP-10Y">
+          <term>
+            <date>2020-03-17</date>
+          </term>
+          <mid>0.0653329629431658</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-10Y">
+          <term>
+            <date>2020-03-18</date>
+          </term>
+          <mid>0.0653340397372899</mid>
+        </point>
+        <point id="AUD-IRSWAP-12Y">
+          <term>
+            <date>2022-03-17</date>
+          </term>
+          <mid>0.0653256885280431</mid>
+        </point>
+        <point id="AUD-IRSWAP-15Y">
+          <term>
+            <date>2025-03-17</date>
+          </term>
+          <mid>0.0649502485638003</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-15Y">
+          <term>
+            <date>2025-03-18</date>
+          </term>
+          <mid>0.0649490209116372</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-20Y">
+          <term>
+            <date>2030-03-18</date>
+          </term>
+          <mid>0.0619318648779883</mid>
+        </point>
+        <point id="AUD-IRSWAP-25Y">
+          <term>
+            <date>2035-03-19</date>
+          </term>
+          <mid>0.0573034339984986</mid>
+        </point>
+        <point id="AUD-XCCYSWAP-30Y">
+          <term>
+            <date>2040-03-19</date>
+          </term>
+          <mid>0.0522940264497054</mid>
+        </point>
+        <point id="AUD-IRSWAP-40Y">
+          <term>
+            <date>2050-03-17</date>
+          </term>
+          <mid>0.0478805280010599</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-03-16</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="AUD-DEPOSIT-1D">
+        <term>
+          <date>2010-03-17</date>
+        </term>
+        <mid>0.999894452318878</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-03-18</date>
+        </term>
+        <mid>0.999794404907701</mid>
+      </point>
+      <point id="AUD-XccySwap-1M">
+        <term>
+          <date>2010-04-19</date>
+        </term>
+        <mid>0.996352119088925</mid>
+      </point>
+      <point id="AUD-DEPOSIT-2M">
+        <term>
+          <date>2010-05-17</date>
+        </term>
+        <mid>0.992964714627983</mid>
+      </point>
+      <point id="AUD-XccySwap-2M">
+        <term>
+          <date>2010-05-18</date>
+        </term>
+        <mid>0.99283494756483</mid>
+      </point>
+      <point id="AUD-DEPOSIT-3M">
+        <term>
+          <date>2010-06-17</date>
+        </term>
+        <mid>0.989223067441137</mid>
+      </point>
+      <point id="AUD-XccySwap-3M">
+        <term>
+          <date>2010-06-18</date>
+        </term>
+        <mid>0.98910699896525</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-M0">
+        <term>
+          <date>2010-09-09</date>
+        </term>
+        <mid>0.978720644865736</mid>
+      </point>
+      <point id="AUD-XccySwap-6M">
+        <term>
+          <date>2010-09-20</date>
+        </term>
+        <mid>0.977277079868987</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-U0">
+        <term>
+          <date>2010-12-09</date>
+        </term>
+        <mid>0.966235351621597</mid>
+      </point>
+      <point id="AUD-XccySwap-9M">
+        <term>
+          <date>2010-12-20</date>
+        </term>
+        <mid>0.964678540401271</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-Z0">
+        <term>
+          <date>2011-03-10</date>
+        </term>
+        <mid>0.953342796107626</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-1Y">
+        <term>
+          <date>2011-03-18</date>
+        </term>
+        <mid>0.952206686245744</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-H1">
+        <term>
+          <date>2011-06-09</date>
+        </term>
+        <mid>0.940139560349879</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-M1">
+        <term>
+          <date>2011-09-08</date>
+        </term>
+        <mid>0.926770177553683</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-U1">
+        <term>
+          <date>2011-12-08</date>
+        </term>
+        <mid>0.913342961867486</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-Z1">
+        <term>
+          <date>2012-03-08</date>
+        </term>
+        <mid>0.899912776334701</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-2Y">
+        <term>
+          <date>2012-03-19</date>
+        </term>
+        <mid>0.898305263650858</mid>
+      </point>
+      <point id="AUD-IRFUTURE-IR-H2">
+        <term>
+          <date>2012-06-07</date>
+        </term>
+        <mid>0.886547230626567</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-3Y">
+        <term>
+          <date>2013-03-18</date>
+        </term>
+        <mid>0.844974944728229</mid>
+      </point>
+      <point id="AUD-IRSWAP-4Y">
+        <term>
+          <date>2014-03-17</date>
+        </term>
+        <mid>0.790388161968032</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-4Y">
+        <term>
+          <date>2014-03-18</date>
+        </term>
+        <mid>0.790245590867362</mid>
+      </point>
+      <point id="AUD-IRSWAP-5Y">
+        <term>
+          <date>2015-03-17</date>
+        </term>
+        <mid>0.738880665797528</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-5Y">
+        <term>
+          <date>2015-03-18</date>
+        </term>
+        <mid>0.738741310587072</mid>
+      </point>
+      <point id="AUD-IRSWAP-6Y">
+        <term>
+          <date>2016-03-17</date>
+        </term>
+        <mid>0.689659475159582</mid>
+      </point>
+      <point id="AUD-IRSWAP-7Y">
+        <term>
+          <date>2017-03-17</date>
+        </term>
+        <mid>0.642681470173007</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-7Y">
+        <term>
+          <date>2017-03-20</date>
+        </term>
+        <mid>0.642313031626395</mid>
+      </point>
+      <point id="AUD-IRSWAP-8Y">
+        <term>
+          <date>2018-03-19</date>
+        </term>
+        <mid>0.599367662837135</mid>
+      </point>
+      <point id="AUD-IRSWAP-9Y">
+        <term>
+          <date>2019-03-18</date>
+        </term>
+        <mid>0.559716468299828</mid>
+      </point>
+      <point id="AUD-IRSWAP-10Y">
+        <term>
+          <date>2020-03-17</date>
+        </term>
+        <mid>0.522692614647915</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-10Y">
+        <term>
+          <date>2020-03-18</date>
+        </term>
+        <mid>0.522594275223826</mid>
+      </point>
+      <point id="AUD-IRSWAP-12Y">
+        <term>
+          <date>2022-03-17</date>
+        </term>
+        <mid>0.459192365487431</mid>
+      </point>
+      <point id="AUD-IRSWAP-15Y">
+        <term>
+          <date>2025-03-17</date>
+        </term>
+        <mid>0.380103706016143</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-15Y">
+        <term>
+          <date>2025-03-18</date>
+        </term>
+        <mid>0.380043511393297</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-20Y">
+        <term>
+          <date>2030-03-18</date>
+        </term>
+        <mid>0.292197632433126</mid>
+      </point>
+      <point id="AUD-IRSWAP-25Y">
+        <term>
+          <date>2035-03-19</date>
+        </term>
+        <mid>0.240791410420208</mid>
+      </point>
+      <point id="AUD-XCCYSWAP-30Y">
+        <term>
+          <date>2040-03-19</date>
+        </term>
+        <mid>0.210089829062132</mid>
+      </point>
+      <point id="AUD-IRSWAP-40Y">
+        <term>
+          <date>2050-03-17</date>
+        </term>
+        <mid>0.148780463009453</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

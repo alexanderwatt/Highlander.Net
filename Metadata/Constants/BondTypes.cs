@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     /// <summary>
     /// Which bond time variable was last given
@@ -201,10 +201,10 @@ namespace Orion.Constants
 
     public static class BondProp
     {
-        public static string DefaultDomain = "Orion.ReferenceData";
+        public static string DefaultDomain = "Highlander.ReferenceData";
         public static string DefaultFunction = "ReferenceData";
-        public static string DefaultDataGroup = "Orion.ReferenceData.FixedIncome";
-        public static string DefaultSourceSystem = "Orion";
+        public static string DefaultDataGroup = "Highlander.ReferenceData.FixedIncome";
+        public static string DefaultSourceSystem = "Highlander";
         public static string DefaultType = "Bond";
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";

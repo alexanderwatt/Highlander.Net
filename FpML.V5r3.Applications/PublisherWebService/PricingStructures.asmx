@@ -1,1 +1,0 @@
-﻿<%@ WebService Language="C#" CodeBehind="PricingStructures.asmx.cs" Class="Orion.V5r3.PublisherWebService.PricingStructures" %>

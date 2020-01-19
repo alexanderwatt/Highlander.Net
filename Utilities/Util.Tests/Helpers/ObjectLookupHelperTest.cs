@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Orion.Util.Helpers;
+using Highlander.Utilities.Helpers;
 
-namespace Util.Tests.Helpers
+namespace Highlander.Utilities.Tests.Helpers
 {
     /// <summary>
     ///This is a test class for ObjectLookupHelperTest and is intended
@@ -35,9 +35,9 @@ namespace Util.Tests.Helpers
         public void SetPropertyValueTest()
         {
             TestClass theObject = new TestClass { PropertyInt = 7, PropertyString = "Test"};
-            const int Expected = 6;
-            ObjectLookupHelper.SetPropertyValue(theObject, "PropertyInt", Expected);
-            Assert.AreEqual(theObject.PropertyInt, Expected);
+            const int expected = 6;
+            ObjectLookupHelper.SetPropertyValue(theObject, "PropertyInt", expected);
+            Assert.AreEqual(theObject.PropertyInt, expected);
         }
 
         /// <summary>

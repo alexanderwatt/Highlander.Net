@@ -1,0 +1,16 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe.config
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.exe
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Service.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Server.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\bin\Debug\Highlander.Core.Server.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.HighlanderCoreInstaller.resources
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.HighlanderCoreWindowsService.resources
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.csproj.GenerateResource.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.exe
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WinSvc\obj\Debug\Highlander.Core.Service.pdb

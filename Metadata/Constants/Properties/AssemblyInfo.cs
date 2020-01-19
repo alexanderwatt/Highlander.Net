@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Orion.Constants")]
+[assembly: AssemblyTitle("Highlander.Constants")]
 [assembly: AssemblyDescription("Contains generic constants")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Highlander")]
-[assembly: AssemblyProduct("Orion.Constants")]
+[assembly: AssemblyProduct("Highlander.Constants")]
 [assembly: AssemblyCopyright("Copyright © Alex Watt and Simon Dudley")]
 [assembly: AssemblyTrademark("Highlander")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6184dd63-5761-4640-9e56-15ff9300db43")]
+[assembly: Guid("021D6434-CFB2-4C15-BDD7-3E0E77D6807A")]
 
 // Version information for an assembly consists of the following four values:
 //

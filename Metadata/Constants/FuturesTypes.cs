@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     public enum ExchangeContractTypeEnum
     {
@@ -40,10 +40,10 @@ namespace Orion.Constants
 
     public static class FuturesProp
     {
-        public static string DefaultDomain = "Orion.Configuration";
+        public static string DefaultDomain = "Highlander.Configuration";
         public static string DefaultFunction = "Configuration";
-        public static string DefaultDataGroup = "Orion.Configuration.Instruments";
-        public static string DefaultSourceSystem = "Orion";
+        public static string DefaultDataGroup = "Highlander.Configuration.Instruments";
+        public static string DefaultSourceSystem = "Highlander";
         public static string DefaultType = "Future";
         public const string Function = "Function";
         public const string DataGroup = "DataGroup";

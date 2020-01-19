@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2D4E2DA-81C3-47FC-8DCE-5B42ADBC18B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PublisherWebService.Tests</RootNamespace>
+    <AssemblyName>PublisherWebService.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="General.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CurveCalQTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RuntimeMock.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\CurveEngine\CurveEngine.csproj">
+      <Project>{3C547EE6-2040-4DFD-935B-B38845C138EF}</Project>
+      <Name>CurveEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\ModelFramework\ModelFramework.csproj">
+      <Project>{617CFB80-AD3A-41F8-AE7C-BFEF514FCA93}</Project>
+      <Name>ModelFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Constants\Constants.csproj">
+      <Project>{2AC94E22-B441-4198-8162-BF1552E67D33}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\FpML.V47\Lib\FpML.V47.csproj">
+      <Project>{31A1B93E-97B1-4D51-A3A3-28D50845F207}</Project>
+      <Name>FpML.V47</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Tests\TestHelpers\TestHelpers.csproj">
+      <Project>{051BC058-128D-42E6-99AC-F09444493985}</Project>
+      <Name>TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Tests\UnitTestEnv\UnitTestEnv.csproj">
+      <Project>{BF3AF848-2BD4-4599-9EB6-FC17DB999A2D}</Project>
+      <Name>UnitTestEnv</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Core.Common\Core.Common.csproj">
+      <Project>{D280D461-4FBE-4B9A-8012-9FE26CB2EF71}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Orion.Util.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Orion.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PublisherWebService\PublisherWebService.csproj">
+      <Project>{E86C4A24-C639-4DB7-B54C-0489CCA08054}</Project>
+      <Name>PublisherWebService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay.Input.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay.Output.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Expected_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Expected_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Fpml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudSwap6m_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudSwap6m_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesPay_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesPay_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesReceive_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesReceive_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateSwaption_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateSwaption_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PublishCapFloor_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PublishSwaptionVol_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Data_Release.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

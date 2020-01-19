@@ -18,7 +18,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Orion.Util.Logging
+namespace Highlander.Utilities.Logging
 {
     public class TextBoxLogger : BaseLogger
     {
@@ -62,7 +62,7 @@ namespace Orion.Util.Logging
                     }
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Trace.WriteLine($"TextBoxLogger.AsyncHandler: Unhandled exception: {excp}");
             }

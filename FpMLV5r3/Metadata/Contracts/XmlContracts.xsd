@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XmlContracts"
+    targetNamespace="http://tempuri.org/XmlContracts.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XmlContracts.xsd"
+    xmlns:mstns="http://tempuri.org/XmlContracts.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:simpleType name="RequestStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Received" />
+      <xs:enumeration value="Assigned" />
+      <xs:enumeration value="Enqueued" />
+      <xs:enumeration value="Launched" />
+      <xs:enumeration value="Commencing" />
+      <xs:enumeration value="InProgress" />
+      <xs:enumeration value="Completing" />
+      <xs:enumeration value="Completed" />
+      <xs:enumeration value="Cancelled" />
+      <xs:enumeration value="Faulted" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="UserIdentity">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+      <xs:element name="DisplayName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ExceptionDetail">
+    <xs:sequence>
+      <xs:element name="FullName" type="xs:string" />
+      <xs:element name="Message" type="xs:string" />
+      <xs:element name="Source" type="xs:string" />
+      <xs:element name="StackTrace" type="xs:string" />
+      <xs:element name="InnerError" type="ExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CurveSelection">
+    <xs:sequence>
+      <xs:element name="NameSpace" type="xs:string" />
+      <xs:element name="MarketName" type="xs:string" />
+      <xs:element name="MarketDate" type="xs:date" nillable="true" />
+      <xs:element name="CurveType" type="xs:string" />
+      <xs:element name="CurveName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CurveGenRequest" >
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="BaseDate" type="xs:date" />
+          <xs:element name="CurveSelector" type="CurveSelection" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="OrdinaryCurveGenRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="CurveGenRequest">
+          <xs:sequence>
+            <xs:element name="SaveMarketData" type="xs:boolean" />
+            <xs:element name="UseSavedMarketData" type="xs:boolean" />
+            <xs:element name="ForceGenerateEODCurves" type="xs:boolean" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="StressedCurveGenRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="CurveGenRequest">
+          <xs:sequence>
+            <xs:element name ="StressNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="CartooCurveImportRequest" >
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="ImportFromDate" type="xs:string" />
+          <xs:element name="SubmitStressGenRequests" type="xs:boolean" />
+          <xs:element name="CopyFiles" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LegacyCurveImportRequest" >
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="ServerAddress" type="xs:string" />
+          <xs:element name="MarketName" type="xs:string" />
+          <xs:element name="MarketDate" type="xs:string" />
+          <xs:element name="OtherFilter" type="xs:string" />
+          <xs:element name="SubmitStressGenRequests" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="TradeImportRequest" >
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="ImportDateTime" type="xs:string" />
+          <xs:element name="SourceSystem" type="xs:string" />
+          <xs:element name="SourceLocation" type="xs:string" />
+          <xs:element name="TargetLocation" type="xs:string" />
+          <xs:element name="RemoveOldTargetFiles" type="xs:boolean" />
+          <xs:element name="OnlyCopyUpdatedFiles" type="xs:boolean" />
+          <xs:element name="CopyFilePatterns" type="xs:string" />
+          <xs:element name="FileContentType" type="xs:string" />
+          <xs:element name="RevalueTrades" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PortfolioSubquery">
+    <xs:sequence>
+      <xs:element name ="SequenceOrder" type="xs:int" />
+      <!--<xs:element name ="TradeQuery" type="xs:string" minOccurs="0" maxOccurs="1" />-->
+      <xs:element name ="CounterpartyId" type="xs:string" />
+      <xs:element name ="TradingBookId" type="xs:string" />
+      <xs:element name="ExcludeItems" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="PortfolioSpecification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name ="NameSpace" type="xs:string" />
+        <xs:element name ="PortfolioId" type="xs:string" />
+        <xs:element name ="Description" type="xs:string" />
+        <xs:element name ="OwnerId" type="UserIdentity" />
+        <xs:element name ="PortfolioSubqueries" type="PortfolioSubquery" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name ="ExcludedTradeItemNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name ="IncludedTradeItemNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="ExcludeOverridesInclude" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="RequestBase">
+    <xs:complexContent>
+      <xs:extension base="WorkflowObject">
+        <xs:sequence>
+          <xs:element name ="RequestId" type="xs:string" />
+          <xs:element name ="RequesterId" type="UserIdentity" />
+          <xs:element name ="Retention" type="xs:duration" />
+          <xs:element name ="SubmitTime" type="xs:string" />
+          <xs:element name ="RequestDescription" type="xs:string" />
+          <xs:element name ="DebugEnabled" type="xs:boolean" />
+          <xs:element name ="RunAsUsername" type="xs:string" />
+          <xs:element name ="RunAsPassword" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CancellationRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="CancelReason" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AssignedWorkflowRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name ="WorkerHostComputer" type="xs:string" />
+          <xs:element name ="WorkerHostInstance" type="xs:string" />
+          <xs:element name ="RequestDataType" type="xs:string" />
+          <xs:element name ="RequestItemName" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UnassignedWorkflowRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name ="RequestDataType" type="xs:string" />
+          <xs:element name ="RequestItemName" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ValuationRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="NameSpace" type="xs:string" />
+          <xs:element name="BaseParty" type="xs:string" />
+          <xs:element name="BaseDate" type="xs:date" />
+          <xs:element name="MarketName" type="xs:string" />
+          <xs:element name="MarketDate" type="xs:date" nillable="true" />
+          <xs:element name ="IRScenarioNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name ="FXScenarioNames" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name ="DateScenarios" type="xs:date" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="ReportingCurrency" type="xs:string" />
+          <xs:element name="RealTimePricing" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="TradeValuationRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ValuationRequest">
+          <xs:sequence>
+            <xs:element name ="TradeSource" type="xs:string" />
+            <xs:element name ="TradeId" type="xs:string" />
+            <xs:element name ="TradeItemName" type="xs:string" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="PurgeValuationRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="RequestBase">
+          <xs:sequence>
+            <xs:element name ="Requester" type="xs:string" />
+            <xs:element name ="FromTime" type="xs:dateTime" />
+            <xs:element name ="ToTime" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="PortfolioValuationRequest">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ValuationRequest">
+          <xs:sequence>
+            <xs:element name ="PortfolioId" type="xs:string" />
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="PingHandlerRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="DelayPeriod" type="xs:string" />
+          <xs:element name="FaultMessage" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PingWorkerRequest">
+    <xs:complexContent>
+      <xs:extension base="RequestBase">
+        <xs:sequence>
+          <xs:element name="NotUsed" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="WorkflowObject">
+    <xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResponseBase">
+    <xs:complexContent>
+      <xs:extension base="WorkflowObject">
+        <xs:sequence>
+          <xs:element name ="RequestId" type="xs:string" />
+          <xs:element name ="RequesterId" type="UserIdentity" />
+          <xs:element name ="Retention" type="xs:duration" />
+          <xs:element name="Status" type="RequestStatusEnum" />
+          <xs:element name ="CancelReason" type="xs:string" />
+          <xs:element name ="FaultDetail" type="ExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="HandlerResponse">
+    <xs:complexContent>
+      <xs:extension base="ResponseBase">
+        <xs:sequence>
+          <xs:element name ="CommenceTime" type="xs:string" />
+          <xs:element name ="CompleteTime" type="xs:string" />
+          <!--optional data for progress calculations-->
+          <xs:element name="ItemCount" type="xs:int" nillable="true" />
+          <xs:element name="ItemsPassed" type="xs:int" nillable="true" />
+          <xs:element name="ItemsFailed" type="xs:int" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HandlerResponse" type="HandlerResponse" />
+
+  <xs:complexType name="WorkerResponse">
+    <xs:complexContent>
+      <xs:extension base="ResponseBase">
+        <xs:sequence>
+          <xs:element name="WorkerHostComputer" type="xs:string" />
+          <xs:element name="WorkerHostInstance" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkerResponse" type="WorkerResponse" />
+
+  <xs:complexType name="ManagerResponse">
+    <xs:complexContent>
+      <xs:extension base="ResponseBase">
+        <xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ManagerResponse" type="ManagerResponse" />
+
+  <xs:complexType name="WorkerAvailability">
+    <xs:complexContent>
+      <xs:extension base="WorkflowObject">
+        <xs:sequence>
+          <xs:element name ="WorkerHostComputer" type="xs:string" />
+          <xs:element name ="WorkerHostInstance" type="xs:string" />
+          <xs:element name ="AvailableNodeCount" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkerAvailability" type="WorkerAvailability" />
+
+</xs:schema>

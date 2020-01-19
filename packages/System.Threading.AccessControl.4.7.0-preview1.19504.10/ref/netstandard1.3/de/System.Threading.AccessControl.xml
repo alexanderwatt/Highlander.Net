@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Threading.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAccessRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Gruppe von Zugriffsrechten dar, die einem Benutzer oder einer Gruppe gewährt oder verweigert werden.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />-Klasse und gibt den Benutzer oder die Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />-Klasse und gibt den Namen des Benutzers oder der Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAccessRule.EventWaitHandleRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Zugriffsregel gewährten oder verweigerten Rechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, mit denen die in der Zugriffsregel gewährten oder verweigerten Rechte angegeben werden.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleAuditRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Reihe von Zugriffsrechten eines Benutzers oder einer Gruppe dar, die überwacht werden soll.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />-Klasse. Dabei werden der Benutzer bzw. die Gruppe angegeben sowie die Rechte, die überwacht werden sollen. Außerdem wird angegeben, ob Erfolge, Fehler oder beides überwacht werden sollen.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, die die Art des zu überwachenden Zugriffs angibt.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob Erfolgs- oder Fehlerüberwachung oder beides stattfinden soll.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleAuditRule.EventWaitHandleRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Überwachungsregel betroffenen Zugriffsrechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, die die von der Überwachungsregel betroffenen Rechte angibt.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleRights">
+      <summary>[SICHERHEITSRELEVANT] Gibt die Zugriffssteuerungsrechte an, die auf benannte Systemereignisobjekte angewendet werden können.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions">
+      <summary>Das Recht, die dem benannten Ereignis zugeordneten Sicherheits- und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Delete">
+      <summary>Das Recht, ein benanntes Ereignis zu löschen.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.FullControl">
+      <summary>Das Recht, die vollständige Kontrolle über ein benanntes Ereignis auszuüben und seine Zugriffsregeln und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Modify">
+      <summary>Das Recht, den signalisierten Zustand eines benannten Ereignisses festzulegen oder zurückzusetzen.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions">
+      <summary>Das Recht, die Zugriffsregeln und die Überwachungsregeln eines benannten Ereignisses zu öffnen und zu kopieren.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize">
+      <summary>Das Recht, auf ein benanntes Ereignis zu warten.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.EventWaitHandleRights.TakeOwnership">
+      <summary>Das Recht, den Besitzer eines benannten Ereignisses zu ändern.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.EventWaitHandleSecurity">
+      <summary>[SICHERHEITSRELEVANT] Stellt die für ein benanntes System-WaitHandle übernommene Windows-Zugriffssteuerungssicherheit dar.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.#ctor">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />-Klasse mit Standardwerten.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRightType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Enumerationstyp ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />-Klasse Zugriffsrechte darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Enumeration darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Zugriffssteuerungsregel für den angegebenen Benutzer mit den angegebenen Zugriffsrechten und Flags sowie der angegebenen Zugriffssteuerung.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />-Objekt, das die angegebenen Rechte für den angegebenen Benutzer darstellt.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, die die zu verweigernden oder zu gewährenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />-Klasse die Zugriffsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer übereinstimmenden Zugriffssteuerungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Zugriffssteuerungsregel.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Überwachungsregel.Der von dieser Regel angegebene Benutzer bestimmt die Suche.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Überwachungsregel, die den Benutzer angibt, auf den diese Regel angewendet wird, sowie die zu überwachenden Zugriffsrechte und das Ergebnis, das die Überwachungsregel auslöst.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />-Objekt, das die angegebene Überwachungsregel für den angegebenen Benutzer darstellt.Der Rückgabetyp der Methode entspricht der Basisklasse <see cref="T:System.Security.AccessControl.AuditRule" />, er kann jedoch problemlos in die abgeleitete Klasse umgewandelt werden.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />-Werten, die die zu überwachenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob erfolgreiche Zugriffsversuche und/oder fehlgeschlagene Zugriffsversuche überwacht werden sollen.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />-Klasse Überwachungsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Zugriffsregel sowie mit kompatiblen Vererbungs- und Weitergabeflags. Wenn eine solche Regel gefunden wird, werden die in der angegebenen Zugriffsregel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleAll(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach allen Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel mit demselben Benutzer wie die angegebene Regel und mit kompatiblen Vererbungs- und Weitergabeflags; wenn eine solche Regel gefunden wird, werden die in der angegebenen Regel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />, die den zu suchenden Benutzer angibt, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleAll(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht alle Überwachungsregeln, die denselben Benutzer wie die angegebene Regel aufweisen, und entfernt sie, sofern sie gefunden wurden.</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />, die den zu suchenden Benutzer angibt.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.ResetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig von <see cref="T:System.Security.AccessControl.AccessControlType" />, und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />.Der Benutzer und der <see cref="T:System.Security.AccessControl.AccessControlType" /> dieser Regel bestimmen die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Überwachungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig vom <see cref="T:System.Security.AccessControl.AuditFlags" />-Wert, und fügt danach die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAccessRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Gruppe von Zugriffsrechten dar, die einem Benutzer oder einer Gruppe gewährt oder verweigert werden.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.MutexAccessRule" />-Klasse und gibt den Benutzer oder die Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.String,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.MutexAccessRule" />-Klasse und gibt den Namen des Benutzers oder der Gruppe an, für den bzw. die die Regel gilt, sowie die Zugriffsrechte. Außerdem wird angegeben, ob die angegebenen Zugriffsrechte gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAccessRule.MutexRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Zugriffsregel gewährten oder verweigerten Rechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, mit denen die in der Zugriffsregel gewährten oder verweigerten Rechte angegeben werden.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexAuditRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Reihe von Zugriffsrechten eines Benutzers oder einer Gruppe dar, die überwacht werden soll.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.MutexAuditRule" />-Klasse. Dabei werden der Benutzer bzw. die Gruppe angegeben sowie die Rechte, die überwacht werden sollen. Außerdem wird angegeben, ob Erfolge, Fehler oder beides überwacht werden sollen.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, die die Art der zu überwachenden Zugriffe angibt.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob Erfolgs- oder Fehlerüberwachung oder beides stattfinden soll.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexAuditRule.MutexRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Überwachungsregel betroffenen Zugriffsrechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, die die von der Überwachungsregel betroffenen Rechte angibt.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexRights">
+      <summary>[SICHERHEITSRELEVANT] Gibt die Zugriffssteuerungsrechte an, die auf benannte Systemmutexobjekte angewendet werden können.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ChangePermissions">
+      <summary>Das Recht, die dem benannten Mutex zugeordneten Sicherheits- und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Delete">
+      <summary>Das Recht, einen benannten Mutex zu löschen.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.FullControl">
+      <summary>Das Recht, die vollständige Kontrolle über einen benannten Mutex auszuüben und seine Zugriffsregeln und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Modify">
+      <summary>Das Recht, einen benannten Mutex freizugeben.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.ReadPermissions">
+      <summary>Das Recht, die Zugriffsregeln und die Überwachungsregeln eines benannten Mutex zu öffnen und zu kopieren.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.Synchronize">
+      <summary>Das Recht, auf einen benannten Mutex zu warten.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.MutexRights.TakeOwnership">
+      <summary>Das Recht, den Besitzer eines benannten Mutex zu ändern.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.MutexSecurity">
+      <summary>[SICHERHEITSRELEVANT] Stellt die Windows-Zugriffsteuerungssicherheit für einen benannten Mutex dar.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.MutexSecurity" />-Klasse mit Standardwerten.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.MutexSecurity" />-Klasse mit den angegebenen Abschnitten der Regeln für die Zugriffssteuerungssicherheit aus dem Systemmutex mit dem angegebenen Namen.</summary>
+      <param name="name">Der Name des Systemmutex, dessen Regeln für die Zugriffssteuerungssicherheit abgerufen werden sollten.</param>
+      <param name="includeSections">Eine Kombination von <see cref="T:System.Security.AccessControl.AccessControlSections" />-Flags, die die abzurufenden Abschnitte angeben.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRightType">
+      <summary>[SICHERHEITSRELEVANT] Ruft die Enumeration ab, mit deren Hilfe die <see cref="T:System.Security.AccessControl.MutexSecurity" />-Klasse Zugriffsrechte darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.MutexRights" />-Enumeration darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Zugriffssteuerungsregel für den angegebenen Benutzer mit den angegebenen Zugriffsrechten und Flags sowie der angegebenen Zugriffssteuerung.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.MutexAccessRule" />-Objekt, das die angegebenen Rechte für den angegebenen Benutzer darstellt.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, die die zu verweigernden oder zu gewährenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte Mutexe, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte Mutexe, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte Mutexe, da diese über keine Hierarchie verfügen.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AccessRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.MutexSecurity" />-Klasse die Zugriffsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.MutexAccessRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer übereinstimmenden Zugriffssteuerungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Zugriffssteuerungsregel.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AddAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Überwachungsregel.Der von dieser Regel angegebene Benutzer bestimmt die Suche.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Überwachungsregel, die den Benutzer angibt, auf den diese Regel angewendet wird, sowie die zu überwachenden Zugriffsrechte und das Ergebnis, das die Überwachungsregel auslöst.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.MutexAuditRule" />-Objekt, das die angegebene Überwachungsregel für den angegebenen Benutzer darstellt.Der Rückgabetyp der Methode entspricht der Basisklasse <see cref="T:System.Security.AccessControl.AuditRule" />, er kann jedoch problemlos in die abgeleitete Klasse umgewandelt werden.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.MutexRights" />-Werten, die die zu überwachenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angeben, ob erfolgreiche Zugriffsversuche und/oder fehlgeschlagene Zugriffsversuche überwacht werden sollen.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.MutexSecurity.AuditRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.MutexSecurity" />-Klasse Überwachungsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.MutexAuditRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel sowie mit kompatiblen Vererbungs- und Weitergabeflags. Wenn eine solche Regel gefunden wird, werden die in der angegebenen Zugriffsregel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.MutexAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach allen Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.MutexAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.MutexAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungssteuerungsregel mit demselben Benutzer wie die angegebene Regel und mit kompatiblen Vererbungs- und Weitergabeflags; wenn eine solche Regel gefunden wird, werden die in der angegebenen Regel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.MutexAuditRule" />, die den zu suchenden Benutzer angibt, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht alle Überwachungsregeln, die denselben Benutzer wie die angegebene Regel aufweisen, und entfernt sie, sofern sie gefunden wurden.</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.MutexAuditRule" />, die den zu suchenden Benutzer angibt.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die <see cref="T:System.Security.AccessControl.MutexAuditRule" />, die entfernt werden soll.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.ResetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig von <see cref="T:System.Security.AccessControl.AccessControlType" />, und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.MutexAccessRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAccessRule(System.Security.AccessControl.MutexAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.MutexAccessRule" />.Der Benutzer und der <see cref="T:System.Security.AccessControl.AccessControlType" /> dieser Regel bestimmen die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.MutexSecurity.SetAuditRule(System.Security.AccessControl.MutexAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Überwachungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig vom <see cref="T:System.Security.AccessControl.AuditFlags" />-Wert, und fügt danach die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.MutexAuditRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAccessRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Gruppe von Zugriffsrechten dar, die einem Benutzer oder einer Gruppe gewährt oder verweigert werden.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />-Klasse und gibt den Benutzer oder die Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.String,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />-Klasse und gibt den Namen des Benutzers oder der Gruppe an, für den bzw. die die Regel gilt. Außerdem werden die Zugriffsrechte angegeben und ob diese gewährt oder verweigert werden.</summary>
+      <param name="identity">Der Name des Benutzers oder der Gruppe, für den bzw. die die Regel gilt.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, mit der angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAccessRule.SemaphoreRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Zugriffsregel gewährten oder verweigerten Rechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, mit denen die in der Zugriffsregel gewährten oder verweigerten Rechte angegeben werden.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreAuditRule">
+      <summary>[SICHERHEITSRELEVANT] Stellt eine Reihe von Zugriffsrechten eines Benutzers oder einer Gruppe dar, die überwacht werden soll.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />-Klasse. Dabei werden der Benutzer bzw. die Gruppe angegeben sowie die Rechte, die überwacht werden sollen. Außerdem wird angegeben, ob Erfolge, Fehler oder beides überwacht werden sollen.</summary>
+      <param name="identity">Der Benutzer oder die Gruppe, für den bzw. die die Regel gilt.Muss vom Typ <see cref="T:System.Security.Principal.SecurityIdentifier" /> oder einem Typ wie etwa<see cref="T:System.Security.Principal.NTAccount" /> sein, der in den <see cref="T:System.Security.Principal.SecurityIdentifier" />-Typ konvertiert werden kann.</param>
+      <param name="eventRights">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, die die Art der zu überwachenden Zugriffe angibt.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angibt, ob Erfolgs- oder Fehlerüberwachung oder beides stattfinden soll.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreAuditRule.SemaphoreRights">
+      <summary>[SICHERHEITSRELEVANT] Ruft die von der Überwachungsregel betroffenen Zugriffsrechte ab.</summary>
+      <returns>Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, die die von der Überwachungsregel betroffenen Rechte angibt.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreRights">
+      <summary>[SICHERHEITSRELEVANT] Gibt die Zugriffssteuerungsrechte an, die auf benannte Systemsemaphorobjekte angewendet werden können.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions">
+      <summary>Das Recht, die dem benannten Semaphor zugeordneten Sicherheits- und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Delete">
+      <summary>Das Recht, einen benannten Semaphor zu löschen.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.FullControl">
+      <summary>Das Recht, die vollständige Kontrolle über einen benannten Semaphor auszuüben und seine Zugriffsregeln und Überwachungsregeln zu ändern.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Modify">
+      <summary>Das Recht, einen benannten Semaphor freizugeben.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions">
+      <summary>Das Recht, die Zugriffsregeln und die Überwachungsregeln eines benannten Semaphors zu öffnen und zu kopieren.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.Synchronize">
+      <summary>Das Recht, auf einen benannten Semaphor zu warten.</summary>
+    </member>
+    <member name="F:System.Security.AccessControl.SemaphoreRights.TakeOwnership">
+      <summary>Das Recht, den Besitzer eines benannten Semaphors zu ändern.</summary>
+    </member>
+    <member name="T:System.Security.AccessControl.SemaphoreSecurity">
+      <summary>[SICHERHEITSRELEVANT] Stellt die Windows-Zugriffssteuerungssicherheit für ein benanntes Semaphor dar.Diese Klasse kann nicht vererbt werden.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />-Klasse mit Standardwerten.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)">
+      <summary>[SICHERHEITSRELEVANT] Initialisiert eine neue Instanz der <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />-Klasse mit den angegebenen Abschnitten der Regeln für die Zugriffssteuerungssicherheit aus dem Systemsemaphor mit dem angegebenen Namen.</summary>
+      <param name="name">Der Name des Systemsemaphors, dessen Regeln für die Zugriffssteuerungssicherheit abgerufen werden sollen.</param>
+      <param name="includeSections">Eine Kombination von <see cref="T:System.Security.AccessControl.AccessControlSections" />-Flags, die die abzurufenden Abschnitte angeben.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRightType">
+      <summary>[SICHERHEITSRELEVANT] Ruft die Enumeration ab, mit deren Hilfe die <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />-Klasse Zugriffsrechte darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Enumeration darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Zugriffssteuerungsregel für den angegebenen Benutzer mit den angegebenen Zugriffsrechten und Flags sowie der angegebenen Zugriffssteuerung.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />-Objekt, das die angegebenen Rechte für den angegebenen Benutzer darstellt.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, die die zu verweigernden oder zu gewährenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte Semaphore, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte Semaphore, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte Semaphore, da diese über keine Hierarchie verfügen.</param>
+      <param name="type">Einer der <see cref="T:System.Security.AccessControl.AccessControlType" />-Werte, mit denen angegeben wird, ob die Rechte gewährt oder verweigert werden.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AccessRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />-Klasse die Zugriffsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer übereinstimmenden Regel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Zugriffssteuerungsregel.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, mit der die neue Regel zusammengeführt werden kann.Wenn keine Regel gefunden wurde, wird die neue Regel hinzugefügt.</summary>
+      <param name="rule">Die hinzuzufügende Überwachungsregel.Der von dieser Regel angegebene Benutzer bestimmt die Suche.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SICHERHEITSRELEVANT] Erstellt eine neue Überwachungsregel, die den Benutzer angibt, auf den diese Regel angewendet wird, sowie die zu überwachenden Zugriffsrechte und das Ergebnis, das die Überwachungsregel auslöst.</summary>
+      <returns>Ein <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />-Objekt, das die angegebene Überwachungsregel für den angegebenen Benutzer darstellt.Der Rückgabetyp der Methode entspricht der Basisklasse <see cref="T:System.Security.AccessControl.AuditRule" />, er kann jedoch problemlos in die abgeleitete Klasse umgewandelt werden.</returns>
+      <param name="identityReference">Eine <see cref="T:System.Security.Principal.IdentityReference" />, mit deren Hilfe der Benutzer oder die Gruppe angegeben wird, für den bzw. die die Regel gilt.</param>
+      <param name="accessMask">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.SemaphoreRights" />-Werten, die die zu überwachenden Zugriffsrechte angibt (in eine ganze Zahl umgewandelt).</param>
+      <param name="isInherited">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="inheritanceFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="propagationFlags">Besitzt keine Bedeutung für benannte WaitHandles, da diese über keine Hierarchie verfügen.</param>
+      <param name="flags">Eine bitweise Kombination von <see cref="T:System.Security.AccessControl.AuditFlags" />-Werten, die angeben, ob erfolgreiche Zugriffsversuche und/oder fehlgeschlagene Zugriffsversuche überwacht werden sollen.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.SemaphoreSecurity.AuditRuleType">
+      <summary>[SICHERHEITSRELEVANT] Ruft den Typ ab, mit dessen Hilfe die <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />-Klasse Überwachungsregeln darstellt.</summary>
+      <returns>Ein <see cref="T:System.Type" />-Objekt, das die <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />-Klasse darstellt.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel sowie mit kompatiblen Vererbungs- und Weitergabeflags. Wenn eine solche Regel gefunden wird, werden die in der angegebenen Zugriffsregel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach allen Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />, die den Benutzer und den <see cref="T:System.Security.AccessControl.AccessControlType" /> angibt, nach denen gesucht werden soll.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Zugriffssteuerungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungssteuerungsregel mit demselben Benutzer wie die angegebene Regel und mit kompatiblen Vererbungs- und Weitergabeflags; wenn eine solche Regel gefunden wird, werden die in der angegebenen Regel enthaltenen Rechte daraus entfernt.</summary>
+      <returns>true, wenn eine kompatible Regel gefunden wurde, andernfalls false.</returns>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />, die den zu suchenden Benutzer angibt, sowie eine Reihe von Vererbungs- und Weitergabeflags, mit denen eine übereinstimmende Regel (falls vorhanden) kompatibel sein muss.Gibt die Rechte an, die aus der kompatiblen Regel entfernt werden sollen (falls vorhanden).</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht alle Überwachungsregeln, die denselben Benutzer wie die angegebene Regel aufweisen, und entfernt sie, sofern sie gefunden wurden.</summary>
+      <param name="rule">Eine <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />, die den zu suchenden Benutzer angibt.Alle von dieser Regel angegebenen Rechte werden ignoriert.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Sucht nach einer Überwachungsregel, die genau mit der angegebenen Regel übereinstimmt, und entfernt diese (falls vorhanden).</summary>
+      <param name="rule">Die zu entfernende <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig von <see cref="T:System.Security.AccessControl.AccessControlType" />, und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Zugriffssteuerungsregeln mit demselben Benutzer und demselben <see cref="T:System.Security.AccessControl.AccessControlType" /> (gewähren oder verweigern) wie die angegebene Regel und fügt anschließend die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />.Der Benutzer und der <see cref="T:System.Security.AccessControl.AccessControlType" /> dieser Regel bestimmen die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.SemaphoreSecurity.SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule)">
+      <summary>[SICHERHEITSRELEVANT] Entfernt alle Überwachungsregeln mit demselben Benutzer wie in der angegebenen Regel, unabhängig vom <see cref="T:System.Security.AccessControl.AuditFlags" />-Wert, und fügt danach die angegebene Regel hinzu.</summary>
+      <param name="rule">Die zu addierende <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />.Der von dieser Regel angegebene Benutzer bestimmt die Regeln, die vor dem Hinzufügen dieser Regel entfernt werden sollen.</param>
+    </member>
+    <member name="T:System.Threading.ThreadingAclExtensions"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.EventWaitHandle)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Mutex)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Semaphore)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.EventWaitHandle,System.Security.AccessControl.EventWaitHandleSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Mutex,System.Security.AccessControl.MutexSecurity)"></member>
+    <member name="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Semaphore,System.Security.AccessControl.SemaphoreSecurity)"></member>
+  </members>
+</doc>

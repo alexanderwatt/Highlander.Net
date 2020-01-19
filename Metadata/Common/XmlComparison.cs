@@ -23,7 +23,7 @@ using System.Xml;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
     /// <summary>
     /// 
@@ -290,10 +290,8 @@ namespace Metadata.Common
         }
         private static bool CompareDateTimes(DateTimeStyles dateTimeStyle, string valueA, string valueB)
         {
-            DateTime tempA;
-            DateTime.TryParse(valueA, null, dateTimeStyle, out tempA);
-            DateTime tempB;
-            DateTime.TryParse(valueB, null, dateTimeStyle, out tempB);
+            DateTime.TryParse(valueA, null, dateTimeStyle, out var tempA);
+            DateTime.TryParse(valueB, null, dateTimeStyle, out var tempB);
             if (tempA == tempB)
                 return true;
             return false;

@@ -16,11 +16,11 @@
 #region Usings
 
 using System;
-using Orion.Util.NamedValues;
+using Highlander.Utilities.NamedValues;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
     /// <summary>
     /// 

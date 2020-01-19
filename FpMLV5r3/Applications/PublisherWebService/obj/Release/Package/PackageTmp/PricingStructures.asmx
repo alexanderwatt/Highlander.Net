@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="PricingStructures.asmx.cs" Class="Highlander.PublisherWebService.V5r3.PricingStructures" %>

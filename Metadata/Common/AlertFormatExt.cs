@@ -16,52 +16,52 @@
 #region Usings
 
 using System;
-using Orion.Util.NamedValues;
+using Highlander.Utilities.NamedValues;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
-    public enum AlertStatus
-    {
-        Undefined,
-        Disabled,
-        Inactive,
-        AllClear,
-        Alerted
-    }
+    //public enum AlertStatus
+    //{
+    //    Undefined,
+    //    Disabled,
+    //    Inactive,
+    //    AllClear,
+    //    Alerted
+    //}
 
     /// <summary>
     /// 
     /// </summary>
     public partial class AlertRule : IRuleObject
     {
-        public string EnvName => hostEnvNameField;
+        public string EnvName { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string HostName => hostComputerField;
+        public string HostName { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Instance => hostInstanceField;
+        public string Instance { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string UserName => hostUserNameField;
+        public string UserName { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int RulePriority => priorityField;
+        public int RulePriority { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool RuleDisabled => disabledField;
+        public bool RuleDisabled { get; set; }
 
         /// <summary>
         /// 
@@ -95,7 +95,7 @@ namespace Metadata.Common
         /// <summary>
         /// 
         /// </summary>
-        public string NetworkKey => String.Format(NameSpace + ".Configuration.{0}.{1}", GetType().Name, PrivateKey);
+        public string NetworkKey => string.Format(NameSpace + ".Configuration.{0}.{1}", GetType().Name, PrivateKey);
 
         /// <summary>
         /// 
@@ -131,7 +131,7 @@ namespace Metadata.Common
                 return result;
 
             // ascending AlertServer
-            result = String.Compare(AlertServer, signal.AlertServer, StringComparison.OrdinalIgnoreCase); // A -> Z
+            result = string.Compare(AlertServer, signal.AlertServer, StringComparison.OrdinalIgnoreCase); // A -> Z
             return result;
         }
 
@@ -139,7 +139,7 @@ namespace Metadata.Common
         /// 
         /// </summary>
         public string ItemName =>
-            $"Orion.Status.AlertSignal.{(ruleNameField ?? "(unknown)").Replace('.', '_')}.{(alertServerField ?? "(unknown)").Replace('.', '_')}";
+            $"Highlander.Status.AlertSignal.{(ruleNameField ?? "(unknown)").Replace('.', '_')}.{(alertServerField ?? "(unknown)").Replace('.', '_')}";
 
         /// <summary>
         /// 

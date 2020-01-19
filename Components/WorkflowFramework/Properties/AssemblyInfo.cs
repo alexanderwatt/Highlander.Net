@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WorkflowFramework")]
+[assembly: AssemblyTitle("Highlander.Workflow")]
 [assembly: AssemblyDescription("Highlander")]
 [assembly: AssemblyCulture("")]
 
@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b3a93e3-f4e4-4511-86e9-dee59b70f1cd")]
+[assembly: Guid("55515E76-9A3B-4A8F-BB75-C006ACC1F4D6")]
 
 // Version information for an assembly consists of the following four values:
 //

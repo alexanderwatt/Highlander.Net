@@ -17,13 +17,13 @@
 
 using System;
 using System.Collections.Generic;
-using Core.Common;
-using Orion.Util.Expressions;
-using Orion.Util.NamedValues;
+using Highlander.Core.Common;
+using Highlander.Utilities.Expressions;
+using Highlander.Utilities.NamedValues;
 
 #endregion
 
-namespace Metadata.Common
+namespace Highlander.Metadata.Common
 {
     // rule interface
     /// <summary>
@@ -105,7 +105,7 @@ namespace Metadata.Common
         public static string FormatRuleScope(IRuleObject rule)
         {
             return
-                $"{rule.EnvName ?? "(all-envs)"}.{rule.HostName ?? "(all-host)"}.{rule.Instance ?? "(all-inst)"}.{rule.UserName ?? "(all-user)"}.{rule.NameSpace ?? "(all-name)"}";
+                $"{rule.EnvName ?? "(all-envs)"}.{rule.HostName ?? "(all-host)"}.{rule.Instance ?? "(all-inst)"}.{rule.UserName ?? "(all-user)"}";//.{rule.NameSpace ?? "(all-name)"}
         }
     }
 }

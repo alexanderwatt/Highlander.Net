@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     public enum StrikeQuoteUnitsEnum
     {

@@ -1,3 +1,0 @@
-﻿SmtpServer/String=sydwatqur01:2525
-MailFrom/String=noreply-qr@nab.com.au
-MailTo/String=mark.nash@nab.com.au,simon.dudley@nab.com.au

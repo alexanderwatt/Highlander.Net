@@ -1,8 +1,23 @@
-﻿using Orion.Util.Helpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
+﻿/*
+ Copyright (C) 2019 Alex Watt and Simon Dudley (alexwatt@hotmail.com)
 
-namespace Util.Tests.Helpers
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
+
+ Highlander is free software: you can redistribute it and/or modify it
+ under the terms of the Highlander license.  You should have received a
+ copy of the license along with this program; if not, license is
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
+
+using System.Reflection;
+using Highlander.Utilities.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Highlander.Utilities.Tests.Helpers
 {
     /// <summary>
     ///This is a test class for ResourceHelperTest and is intended
@@ -18,7 +33,7 @@ namespace Util.Tests.Helpers
         [Ignore] // Doesn't work
         public void ReadResourceValueTest()
         {
-            string actual = ResourceHelper.ReadResourceValue("Util.Tests.Helpers.ResourceTest", "Name1");
+            string actual = ResourceHelper.ReadResourceValue("Highlander.Utilities.Tests.Helpers.ResourceTest", "Name1");
             Assert.AreEqual("value1", actual);
         }
 
@@ -43,7 +58,7 @@ namespace Util.Tests.Helpers
         public void GetResourceTest()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            const string resourceName = "Util.Tests.Helpers.ResourceTest.txt";
+            const string resourceName = "Highlander.Utilities.Tests.Helpers.ResourceTest.txt";
             string actual = ResourceHelper.GetResource(assembly, resourceName);
             Assert.AreEqual("Resource Test", actual);
         }

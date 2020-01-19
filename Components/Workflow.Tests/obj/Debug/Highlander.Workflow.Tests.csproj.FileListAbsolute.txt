@@ -1,0 +1,13 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Workflow.Tests.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Workflow.Tests.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Core.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Workflow.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Workflow.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Core.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\bin\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\obj\Debug\Highlander.Workflow.Tests.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\obj\Debug\Highlander.Workflow.Tests.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\obj\Debug\Highlander.Workflow.Tests.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Workflow.Tests\obj\Debug\Highlander.Workflow.Tests.pdb

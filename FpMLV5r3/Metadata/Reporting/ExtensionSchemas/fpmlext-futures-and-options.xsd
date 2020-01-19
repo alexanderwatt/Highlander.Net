@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+== Copyright (c) 2002-2007. All rights reserved. 
+== Financial Products Markup Language is subject to the FpML public license. 
+== A copy of this license is available at http://www.fpml.org/documents/license.html
+-->
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" 
+	targetNamespace="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified">
+	
+	<xsd:include schemaLocation="fpmlext-shared.xsd"/>
+	
+	<xsd:import namespace="http://www.fpml.org/2009/FpML-4-7" schemaLocation="fpml-main-4-7.xsd"/>
+	
+	<!-- TODO correctness of fpml base types -->
+	<xsd:complexType name="Future">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Extension of an identified Future to provide definition information
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Future">
+				<xsd:sequence>
+					<xsd:element name="settlementType" type="fpml:SettlementTypeEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								How the future will be settled
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FutureTransaction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				A Future Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractUnitTransaction">
+				<xsd:sequence>
+					<xsd:element name="deliveryPrice" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Delivery price of the Future Transaction
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="future" type="fpml:Future">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Identification of a Future. In cases where you require access to additional definition information you may use type substitution to access the Future complex type in the extension namespace
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="OptionTransaction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				An Option Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="AbstractUnitTransaction">
+				<xsd:sequence>
+					<xsd:element name="strikePrice" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Strike Price. Where a strike series is specified, it is often the case that the same instrument symbol is used, so the Strike Price has been made available on the Option Transaction
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="optionPremium" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Option Premium
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="option" type="fpml:ExchangeTradedContract">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">
+								Identification of an Option. In cases where you require access to additional definition information you may use type substitution to access the ExchangeTradedOption complex type in the extension namespace
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="optionTransaction" type="OptionTransaction" substitutionGroup="fpml:product">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Global element representing an Option Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="futureTransaction" type="FutureTransaction" substitutionGroup="fpml:product">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Global element representing a Future Transaction
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+</xsd:schema>

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[SecurityCritical] Rappresenta un insieme di diritti di accesso concessi o negati per un utente o gruppo.La classe non può essere ereditata.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> specificando l'utente o il gruppo a cui la regola viene applicata, i diritti di accesso e se i diritti di accesso specificati sono concessi o negati.</summary>
+      <param name="identity">Utente o gruppo a cui viene applicata la regola.Deve essere di tipo <see cref="T:System.Security.Principal.SecurityIdentifier" /> o di un tipo quale <see cref="T:System.Security.Principal.NTAccount" /> che può essere convertito nel tipo <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che indicano i diritti concessi o negati.</param>
+      <param name="type">Uno dei valori <see cref="T:System.Security.AccessControl.AccessControlType" /> che indica se i diritti sono concessi o negati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> specificando l'utente o il gruppo a cui la regola viene applicata, i diritti di accesso, i flag di ereditarietà, i flag di propagazione e se i diritti di accesso specificati sono concessi o negati.</summary>
+      <param name="identity">Utente o gruppo a cui viene applicata la regola.Deve essere di tipo <see cref="T:System.Security.Principal.SecurityIdentifier" /> o di un tipo quale <see cref="T:System.Security.Principal.NTAccount" /> che può essere convertito nel tipo <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che specificano i diritti concessi o negati.</param>
+      <param name="inheritanceFlags">Combinazione bit per bit di flag <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specificano come i diritti di accesso sono ereditati da altri oggetti.</param>
+      <param name="propagationFlags">Combinazione bit per bit di flag <see cref="T:System.Security.AccessControl.PropagationFlags" /> che specificano come i diritti di accesso sono propagati ad altri oggetti.</param>
+      <param name="type">Uno dei valori di <see cref="T:System.Security.AccessControl.AccessControlType" /> che specificano se i diritti sono concessi o negati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> specificando il nome dell'utente o del gruppo a cui la regola viene applicata, i diritti di accesso e se i diritti di accesso specificati sono concessi o negati.</summary>
+      <param name="identity">Nome dell'utente o del gruppo a cui la regola viene applicata.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che indicano i diritti concessi o negati.</param>
+      <param name="type">Uno dei valori <see cref="T:System.Security.AccessControl.AccessControlType" /> che indica se i diritti sono concessi o negati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> specificando il nome dell'utente o del gruppo a cui la regola viene applicata, i diritti di accesso, i flag di ereditarietà, i flag di propagazione e se i diritti di accesso specificati sono concessi o negati.</summary>
+      <param name="identity">Nome dell'utente o del gruppo a cui la regola viene applicata.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che indicano i diritti concessi o negati.</param>
+      <param name="inheritanceFlags">Combinazione bit per bit di flag <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specificano come i diritti di accesso sono ereditati da altri oggetti.</param>
+      <param name="propagationFlags">Combinazione bit per bit di flag <see cref="T:System.Security.AccessControl.PropagationFlags" /> che specificano come i diritti di accesso sono propagati ad altri oggetti.</param>
+      <param name="type">Uno dei valori di <see cref="T:System.Security.AccessControl.AccessControlType" /> che specificano se i diritti sono concessi o negati.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[SecurityCritical] Ottiene i diritti concessi o negati dalla regola di accesso.</summary>
+      <returns>Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che indicano i diritti concessi o negati dalla regola di accesso.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[SecurityCritical] Rappresenta un insieme di diritti di accesso da controllare per un utente o gruppo.La classe non può essere ereditata.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, specificando l'utente o il gruppo da controllare, i diritti da controllare, se prendere in considerazione l'ereditarietà e se controllare l'esito positivo, negativo o entrambi.</summary>
+      <param name="identity">Utente o gruppo a cui viene applicata la regola.Deve essere di tipo <see cref="T:System.Security.Principal.SecurityIdentifier" /> o di un tipo quale <see cref="T:System.Security.Principal.NTAccount" /> che può essere convertito nel tipo <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che specificano i tipi di accesso da controllare.</param>
+      <param name="inheritanceFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specificano se la regola di controllo viene applicata alle sottochiavi della chiave corrente.</param>
+      <param name="propagationFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.PropagationFlags" /> che hanno effetto sul modo in cui una regola di controllo ereditata viene propagata alle sottochiavi della chiave corrente.</param>
+      <param name="flags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.AuditFlags" /> che specifica se controllare gli accessi riusciti, gli accessi non riusciti o entrambi i tipi di accesso.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, specificando il nome dell'utente o del gruppo da controllare, i diritti da controllare, se prendere in considerazione l'ereditarietà e se controllare l'esito positivo, negativo o entrambi.</summary>
+      <param name="identity">Nome dell'utente o del gruppo a cui la regola viene applicata.</param>
+      <param name="registryRights">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che specificano i tipi di accesso da controllare.</param>
+      <param name="inheritanceFlags">Combinazione di flag <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specifica se la regola di controllo viene applicata alle sottochiavi della chiave corrente.</param>
+      <param name="propagationFlags">Combinazione di flag <see cref="T:System.Security.AccessControl.PropagationFlags" /> che hanno effetto sul modo in cui una regola di controllo ereditata viene propagata alle sottochiavi della chiave corrente.</param>
+      <param name="flags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.AuditFlags" /> che specifica se controllare gli accessi riusciti, gli accessi non riusciti o entrambi i tipi di accesso.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[SecurityCritical] Ottiene i diritti di accesso interessati dalla regola di controllo.</summary>
+      <returns>Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che indica i diritti influenzati dalla regola di controllo.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[SecurityCritical] Rappresenta la sicurezza del controllo di accesso di Windows per una chiave del Registro di sistema.La classe non può essere ereditata.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[SecurityCritical] Inizializza una nuova istanza della classe <see cref="T:System.Security.AccessControl.RegistrySecurity" /> con valori predefiniti.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[SecurityCritical] Ottiene il tipo di enumerazione utilizzato dalla classe <see cref="T:System.Security.AccessControl.RegistrySecurity" /> per rappresentare i diritti di accesso.</summary>
+      <returns>Oggetto <see cref="T:System.Type" /> che rappresenta l'enumerazione <see cref="T:System.Security.AccessControl.RegistryRights" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SecurityCritical] Crea una nuova regola di controllo di accesso per l'utente specificato, con i diritti di accesso, il controllo di accesso e i flag specificati.</summary>
+      <returns>Oggetto <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> che rappresenta i diritti specificati per l'utente specificato.</returns>
+      <param name="identityReference">Classe <see cref="T:System.Security.Principal.IdentityReference" /> che identifica l'utente o il gruppo a cui viene applicata la regola.</param>
+      <param name="accessMask">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che specificano i diritti di accesso da concedere o negare, per effettuare il cast in un intero.</param>
+      <param name="isInherited">Valore Boolean che specifica se la regola è ereditata.</param>
+      <param name="inheritanceFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specificano come la regola viene ereditata dalle sottochiavi.</param>
+      <param name="propagationFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.PropagationFlags" /> che modificano il modo in cui la regola viene ereditata dalle sottochiavi.Non è significativa se il valore di <paramref name="inheritanceFlags" /> è <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+      <param name="type">Uno dei valori di <see cref="T:System.Security.AccessControl.AccessControlType" /> che specificano se i diritti sono concessi o negati.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[SecurityCritical] Ottiene il tipo utilizzato dalla classe <see cref="T:System.Security.AccessControl.RegistrySecurity" /> per rappresentare le regole di accesso.</summary>
+      <returns>Oggetto <see cref="T:System.Type" /> che rappresenta la classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Cerca un controllo di accesso corrispondente al quale è possibile unire la nuova regola.Se non viene trovata alcuna regola, viene aggiunta la nuova regola.</summary>
+      <param name="rule">Regola di controllo di accesso da aggiungere.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SecurityCritical] Cerca una regola di controllo a cui è possibile unire la nuova regola.Se non viene trovata alcuna regola, viene aggiunta la nuova regola.</summary>
+      <param name="rule">Regola di controllo da aggiungere.L'utente specificato dalla regola determina la ricerca.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SecurityCritical] Crea una nuova regola di controllo che specifica l'utente a cui viene applicata la regola, i diritti di accesso da controllare, l'ereditarietà e la propagazione della regola e il risultato che attiva la regola.</summary>
+      <returns>Oggetto <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> che rappresenta la regola di controllo specificata per l'utente specificato, con i flag indicati.Il tipo restituito del metodo è la classe base, <see cref="T:System.Security.AccessControl.AuditRule" />, ma è possibile effettuare in maniera sicura il cast del valore restituito nella classe derivata.</returns>
+      <param name="identityReference">Classe <see cref="T:System.Security.Principal.IdentityReference" /> che identifica l'utente o il gruppo a cui viene applicata la regola.</param>
+      <param name="accessMask">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.RegistryRights" /> che specificano i diritti di accesso da controllare, per effettuare il cast in un intero.</param>
+      <param name="isInherited">Valore Boolean che specifica se la regola è ereditata.</param>
+      <param name="inheritanceFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.InheritanceFlags" /> che specificano come la regola viene ereditata dalle sottochiavi.</param>
+      <param name="propagationFlags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.PropagationFlags" /> che modificano il modo in cui la regola viene ereditata dalle sottochiavi.Non è significativa se il valore di <paramref name="inheritanceFlags" /> è <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+      <param name="flags">Combinazione bit per bit di valori <see cref="T:System.Security.AccessControl.AuditFlags" /> che specificano se controllare l'accesso riuscito, l'accesso non riuscito o entrambi.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[SecurityCritical] Ottiene il tipo utilizzato dalla classe <see cref="T:System.Security.AccessControl.RegistrySecurity" /> per rappresentare le regole di controllo.</summary>
+      <returns>Oggetto <see cref="T:System.Type" /> che rappresenta la classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Cerca una regola di controllo di accesso con lo stesso utente e la stessa classe <see cref="T:System.Security.AccessControl.AccessControlType" /> (consenso o negazione) della regola di accesso specificata e con i flag di ereditarietà e propagazione compatibili. Se viene trovata una regola simile, i diritti contenuti nella regola di accesso specificata vengono rimossi da essa.</summary>
+      <returns>true se viene trovata una regola compatibile; in caso contrario, false.</returns>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> che specifica l'utente e la classe <see cref="T:System.Security.AccessControl.AccessControlType" /> da ricercare, nonché un insieme di flag di ereditarietà e propagazione con cui deve essere compatibile una regola corrispondente, se trovata.Specifica i diritti da rimuovere dalla regola compatibile, se trovati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Cerca tutte le regole di controllo di accesso con lo stesso utente e la stessa classe <see cref="T:System.Security.AccessControl.AccessControlType" /> (consenso o negazione) della regola specificata e, se trovate, le rimuove.</summary>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> che specifica l'utente e la classe <see cref="T:System.Security.AccessControl.AccessControlType" /> da ricercare.Tutti i diritti, i flag di ereditarietà o di propagazione specificati da questa regola verranno ignorati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Cerca una regola di controllo di accesso che corrisponde esattamente alla regola specificata e, se trovata, la rimuove.</summary>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> da rimuovere.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SecurityCritical] Cerca una regola di controllo con lo stesso utente della regola specificata e con i flag di ereditarietà e propagazione compatibili. Se viene trovata una regola simile, i diritti contenuti nella regola specificata vengono rimossi da essa.</summary>
+      <returns>true se viene trovata una regola compatibile; in caso contrario, false.</returns>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> che specifica l'utente da ricercare e un insieme di flag di ereditarietà e propagazione con cui deve essere compatibile una regola corrispondente, se trovata.Specifica i diritti da rimuovere dalla regola compatibile, se trovati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SecurityCritical] Cerca tutte le regole di controllo in cui l'utente sia identico a quello della regola specificata e rimuove le regole trovate.</summary>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> che specifica l'utente da ricercare.Tutti i diritti, i flag di ereditarietà o di propagazione specificati da questa regola verranno ignorati.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SecurityCritical] Cerca una regola di controllo che corrisponde esattamente alla regola specificata e, se trovata, la rimuove.</summary>
+      <param name="rule">Classe <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> da rimuovere.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Rimuove tutte le regole di controllo di accesso con lo stesso utente della regola specificata, a prescindere dalla classe <see cref="T:System.Security.AccessControl.AccessControlType" />, quindi aggiunge la regola specificata.</summary>
+      <param name="rule">Oggetto <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> da aggiungere.L'utente specificato dalla regola determina le regole da rimuovere prima di aggiungere questa regola.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SecurityCritical] Rimuove tutte le regole di controllo di accesso con lo stesso utente e la stessa classe <see cref="T:System.Security.AccessControl.AccessControlType" /> (consenso o negazione) della regola specificata, quindi aggiunge la regola specificata.</summary>
+      <param name="rule">Oggetto <see cref="T:System.Security.AccessControl.RegistryAccessRule" /> da aggiungere.L'utente e la classe <see cref="T:System.Security.AccessControl.AccessControlType" /> della regola determinano le regole da rimuovere prima di aggiungere questa regola.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SecurityCritical] Rimuove tutte le regole di controllo con lo stesso utente della regola specificata, a prescindere dal valore di <see cref="T:System.Security.AccessControl.AuditFlags" />, quindi aggiunge la regola specificata.</summary>
+      <param name="rule">Oggetto <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> da aggiungere.L'utente specificato dalla regola determina le regole da rimuovere prima di aggiungere questa regola.</param>
+    </member>
+  </members>
+</doc>

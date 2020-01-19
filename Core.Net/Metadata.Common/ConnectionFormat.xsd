@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConnectionFormat"
+    targetNamespace="http://tempuri.org/ConnectionFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/ConnectionFormat.xsd"
+    xmlns:mstns="http://tempuri.org/ConnectionFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="ClientConnectionState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SourceId" type="xs:string" />
+        <xs:element name="Contract" type="xs:string" />
+        <xs:element name="ReplyAddress" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

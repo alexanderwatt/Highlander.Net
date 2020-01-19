@@ -1,4 +1,4 @@
-namespace Orion.XmlViewer
+namespace Highlander.XmlViewer
 {
     partial class XmlTreeDisplay
     {
@@ -50,7 +50,7 @@ namespace Orion.XmlViewer
             this.cmdLoad.Size = new System.Drawing.Size(56, 24);
             this.cmdLoad.TabIndex = 6;
             this.cmdLoad.Text = "Load";
-            this.cmdLoad.Click += new System.EventHandler(this.cmdLoad_Click);
+            this.cmdLoad.Click += new System.EventHandler(this.CmdLoadClick);
             // 
             // txtXmlFile
             // 
@@ -83,7 +83,7 @@ namespace Orion.XmlViewer
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "XmlTreeDisplay";
             this.Text = "XmlTreeDisplay";
-            this.Load += new System.EventHandler(this.XmlTreeDisplay_Load);
+            this.Load += new System.EventHandler(this.XmlTreeDisplayLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

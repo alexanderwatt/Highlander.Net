@@ -19,7 +19,7 @@ using System;
 
 #endregion
 
-namespace Orion.Constants
+namespace Highlander.Constants
 {
     ///<summary>
     ///</summary>

@@ -16,15 +16,15 @@
 using System;
 using System.Collections.Generic;
 
-namespace Orion.Util.Logging
+namespace Highlander.Utilities.Logging
 {
     public class MultiLogger : ILogger
     {
-        private readonly IEnumerable<ILogger> loggers;
+        private readonly IEnumerable<ILogger> _loggers;
 
         public MultiLogger(IEnumerable<ILogger> loggers)
         {
-            this.loggers = loggers ?? throw new ArgumentNullException(nameof(loggers));
+            _loggers = loggers ?? throw new ArgumentNullException(nameof(loggers));
         }
 
         // factories
@@ -41,7 +41,7 @@ namespace Orion.Util.Logging
 
         public void Clear()
         {
-            foreach (var logger in loggers)
+            foreach (var logger in _loggers)
             {
                 logger?.Clear();
             }
@@ -49,13 +49,13 @@ namespace Orion.Util.Logging
 
         public void Flush()
         {
-            foreach (var logger in loggers)
+            foreach (var logger in _loggers)
             {
                 logger?.Flush();
             }
         }
 
-        public void Log(Exception e)
+        public void Log(System.Exception e)
         {
             Log(LogSeverity.Error, "EXCEPTION: " + e);
         }
@@ -67,22 +67,22 @@ namespace Orion.Util.Logging
 
         public void LogDebug(string format, object arg0)
         {
-            Log(LogSeverity.Debug, String.Format(format, arg0));
+            Log(LogSeverity.Debug, string.Format(format, arg0));
         }
 
         public void LogDebug(string format, object arg0, object arg1)
         {
-            Log(LogSeverity.Debug, String.Format(format, arg0, arg1));
+            Log(LogSeverity.Debug, string.Format(format, arg0, arg1));
         }
 
         public void LogDebug(string format, object arg0, object arg1, object arg2)
         {
-            Log(LogSeverity.Debug, String.Format(format, arg0, arg1, arg2));
+            Log(LogSeverity.Debug, string.Format(format, arg0, arg1, arg2));
         }
 
         public void LogDebug(string format, params object[] args)
         {
-            Log(LogSeverity.Debug, String.Format(format, args));
+            Log(LogSeverity.Debug, string.Format(format, args));
         }
 
         public void LogInfo(string msg)
@@ -97,17 +97,17 @@ namespace Orion.Util.Logging
 
         public void LogInfo(string format, object arg0, object arg1)
         {
-            Log(LogSeverity.Info, String.Format(format, arg0, arg1));
+            Log(LogSeverity.Info, string.Format(format, arg0, arg1));
         }
 
         public void LogInfo(string format, object arg0, object arg1, object arg2)
         {
-            Log(LogSeverity.Info, String.Format(format, arg0, arg1, arg2));
+            Log(LogSeverity.Info, string.Format(format, arg0, arg1, arg2));
         }
 
         public void LogInfo(string format, params object[] args)
         {
-            Log(LogSeverity.Info, String.Format(format, args));
+            Log(LogSeverity.Info, string.Format(format, args));
         }
 
         public void LogWarning(string msg)
@@ -117,22 +117,22 @@ namespace Orion.Util.Logging
 
         public void LogWarning(string format, object arg0)
         {
-            Log(LogSeverity.Warning, String.Format(format, arg0));
+            Log(LogSeverity.Warning, string.Format(format, arg0));
         }
 
         public void LogWarning(string format, object arg0, object arg1)
         {
-            Log(LogSeverity.Warning, String.Format(format, arg0, arg1));
+            Log(LogSeverity.Warning, string.Format(format, arg0, arg1));
         }
 
         public void LogWarning(string format, object arg0, object arg1, object arg2)
         {
-            Log(LogSeverity.Warning, String.Format(format, arg0, arg1, arg2));
+            Log(LogSeverity.Warning, string.Format(format, arg0, arg1, arg2));
         }
 
         public void LogWarning(string format, params object[] args)
         {
-            Log(LogSeverity.Warning, String.Format(format, args));
+            Log(LogSeverity.Warning, string.Format(format, args));
         }
 
         public void LogError(string msg)
@@ -142,25 +142,25 @@ namespace Orion.Util.Logging
 
         public void LogError(string format, object arg0)
         {
-            Log(LogSeverity.Error, String.Format(format, arg0));
+            Log(LogSeverity.Error, string.Format(format, arg0));
         }
 
         public void LogError(string format, object arg0, object arg1)
         {
-            Log(LogSeverity.Error, String.Format(format, arg0, arg1));
+            Log(LogSeverity.Error, string.Format(format, arg0, arg1));
         }
 
         public void LogError(string format, object arg0, object arg1, object arg2)
         {
-            Log(LogSeverity.Error, String.Format(format, arg0, arg1, arg2));
+            Log(LogSeverity.Error, string.Format(format, arg0, arg1, arg2));
         }
 
         public void LogError(string format, params object[] args)
         {
-            Log(LogSeverity.Error, String.Format(format, args));
+            Log(LogSeverity.Error, string.Format(format, args));
         }
 
-        public void LogError(Exception ex)
+        public void LogError(System.Exception ex)
         {
             Log(LogSeverity.Error, ex.ToString());
         }
@@ -172,25 +172,25 @@ namespace Orion.Util.Logging
 
         public void LogFatal(string format, object arg0)
         {
-            Log(LogSeverity.Fatal, String.Format(format, arg0));
+            Log(LogSeverity.Fatal, string.Format(format, arg0));
         }
 
         public void LogFatal(string format, object arg0, object arg1)
         {
-            Log(LogSeverity.Fatal, String.Format(format, arg0, arg1));
+            Log(LogSeverity.Fatal, string.Format(format, arg0, arg1));
         }
 
         public void LogFatal(string format, object arg0, object arg1, object arg2)
         {
-            Log(LogSeverity.Fatal, String.Format(format, arg0, arg1, arg2));
+            Log(LogSeverity.Fatal, string.Format(format, arg0, arg1, arg2));
         }
 
         public void LogFatal(string format, params object[] args)
         {
-            Log(LogSeverity.Fatal, String.Format(format, args));
+            Log(LogSeverity.Fatal, string.Format(format, args));
         }
 
-        public void LogFatal(Exception ex)
+        public void LogFatal(System.Exception ex)
         {
             Log(LogSeverity.Fatal, ex.ToString());
         }
@@ -202,10 +202,9 @@ namespace Orion.Util.Logging
 
         public void Log(int severity, string indent, string msg)
         {
-            foreach (var logger in loggers)
+            foreach (var logger in _loggers)
             {
-                if (logger != null)
-                    logger.Log(severity, indent, msg);
+                logger?.Log(severity, indent, msg);
             }
         }
     }

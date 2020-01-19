@@ -1,0 +1,10 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Core.V34.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Core.V34.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Core.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Core.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\bin\Release\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\obj\Release\Highlander.Core.V34.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\obj\Release\Highlander.Core.V34.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\obj\Release\Highlander.Core.V34.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.V34\obj\Release\Highlander.Core.V34.pdb

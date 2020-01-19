@@ -17,60 +17,60 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace Orion.Util.Threading
+namespace Highlander.Utilities.Threading
 {
     public class AsyncEventThrottle<T> : IDisposable
     {
-        private readonly AsyncQueueCallback<T> _Callback;
+        private readonly AsyncQueueCallback<T> _callback;
 
         // the state
-        private T _CallbackData;
-        private bool _CallbackDone;
+        private T _callbackData;
+        private bool _callbackDone;
 
         // closing flag used only during shutdown
-        private bool _Closed;
+        private bool _closed;
         // the state spinlock
-        private int _Lock;
+        private int _lock;
         // other dynamic state
-        private long _EnqueueThreads;
-        private long _DequeueThreads;
+        private long _enqueueThreads;
+        private long _dequeueThreads;
 
         private void AcquireLock()
         {
             // acquire spinlock
-            int locked = Interlocked.Increment(ref _Lock);
+            int locked = Interlocked.Increment(ref _lock);
             while (locked != 1)
             {
-                Interlocked.Decrement(ref _Lock);
-                locked = Interlocked.Increment(ref _Lock);
+                Interlocked.Decrement(ref _lock);
+                locked = Interlocked.Increment(ref _lock);
             }
             // spinlock acquired
         }
         private void ReleaseLock()
         {
             // release spinlock
-            Interlocked.Decrement(ref _Lock);
+            Interlocked.Decrement(ref _lock);
         }
 
         public void Dispose()
         {
-            _Closed = true;
+            _closed = true;
         }
 
         public AsyncEventThrottle(AsyncQueueCallback<T> callback)
         {
-            _Callback = callback ?? throw new ArgumentNullException(nameof(callback));
+            _callback = callback ?? throw new ArgumentNullException(nameof(callback));
         }
 
         public void Dispatch(T data)
         {
-            if (_Closed)
+            if (_closed)
                 return;
             AcquireLock();
             try
             {
-                _CallbackData = data;
-                _CallbackDone = false;
+                _callbackData = data;
+                _callbackDone = false;
             }
             finally
             {
@@ -78,13 +78,13 @@ namespace Orion.Util.Threading
             }
 
             // dispatch a dequeue thread
-            Interlocked.Increment(ref _EnqueueThreads);
+            Interlocked.Increment(ref _enqueueThreads);
             ThreadPool.QueueUserWorkItem(DequeueItems);
         }
 
         private void DequeueItems(object notUsed)
         {
-            if (Interlocked.Decrement(ref _EnqueueThreads) > 0)
+            if (Interlocked.Decrement(ref _enqueueThreads) > 0)
             {
                 // another thread following - exit
                 return;
@@ -95,7 +95,7 @@ namespace Orion.Util.Threading
             do
             {
                 checkDone = false;
-                threadCount = Interlocked.Increment(ref _DequeueThreads);
+                threadCount = Interlocked.Increment(ref _dequeueThreads);
                 try
                 {
                     if (threadCount == 1)
@@ -106,20 +106,20 @@ namespace Orion.Util.Threading
                         AcquireLock();
                         try
                         {
-                            while (!_CallbackDone)
+                            while (!_callbackDone)
                             {
-                                T callbackData = _CallbackData;
-                                _CallbackDone = true;
+                                T callbackData = _callbackData;
+                                _callbackDone = true;
                                 ReleaseLock();
                                 try
                                 {
-                                    if (!_Closed)
+                                    if (!_closed)
                                     {
                                         try
                                         {
-                                            _Callback(callbackData);
+                                            _callback(callbackData);
                                         }
-                                        catch (Exception e)
+                                        catch (System.Exception e)
                                         {
                                             Debug.WriteLine("AsyncEventThrottle: " + e);
                                         }
@@ -140,7 +140,7 @@ namespace Orion.Util.Threading
                 }
                 finally
                 {
-                    threadCount = Interlocked.Decrement(ref _DequeueThreads);
+                    threadCount = Interlocked.Decrement(ref _dequeueThreads);
                 }
             } while ((threadCount == 0) && (!checkDone));
         }

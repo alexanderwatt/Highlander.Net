@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Win32.Registry.AccessControl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Win32.RegistryAclExtensions"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.GetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.AccessControlSections)"></member>
+    <member name="M:Microsoft.Win32.RegistryAclExtensions.SetAccessControl(Microsoft.Win32.RegistryKey,System.Security.AccessControl.RegistrySecurity)"></member>
+    <member name="T:System.Security.AccessControl.RegistryAccessRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, разрешенных или запрещенных пользователю или группе.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий пользователя или группу, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий имя пользователя или группы, на которые распространяется действие правила, права доступа, флаги наследования, флаги распространения, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="inheritanceFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.InheritanceFlags" />, которое определяет порядок наследования прав доступа у других объектов.</param>
+      <param name="propagationFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.PropagationFlags" />, которое определяет порядок распространения прав доступа на другие объекты.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий имя пользователя или группы, к которым применяются правило, права доступа, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAccessRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий имя пользователя или группы, на которые распространяется действие правила, права доступа, флаги наследования, флаги распространения, а также тип правила ("разрешить" или "запретить").</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, которые разрешаются или запрещаются.</param>
+      <param name="inheritanceFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.InheritanceFlags" />, которое определяет порядок наследования прав доступа у других объектов.</param>
+      <param name="propagationFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.PropagationFlags" />, которое определяет порядок распространения прав доступа на другие объекты.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAccessRule.RegistryRights">
+      <summary>[SECURITY CRITICAL] Получает права, разрешаемые или запрещаемые правилом доступа.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, которые разрешаются или запрещаются правилом доступа.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistryAuditRule">
+      <summary>[SECURITY CRITICAL] Представляет набор прав доступа, подлежащих аудиту для пользователя или группы.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> с указанием пользователя или группы для аудита, прав для аудита, необходимости учитывать наследование и подлежащих аудиту операций (успешных попыток доступа, неудачных попыток доступа или всех попыток доступа).</summary>
+      <param name="identity">Пользователь или группа, к которым относится данное правило.Должен обладать типом <see cref="T:System.Security.Principal.SecurityIdentifier" /> или таким типом, как <see cref="T:System.Security.Principal.NTAccount" />, чтобы его можно было преобразовать в тип <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее подлежащие аудиту права доступа.</param>
+      <param name="inheritanceFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.InheritanceFlags" />, которое определяет, должно ли правило аудита применяться к подразделам текущего раздела.</param>
+      <param name="propagationFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.PropagationFlags" />, влияющее на способ распространения наследования правила аудита на подразделы текущего раздела.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.String,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistryAuditRule" /> с указанием имени пользователя или группы для аудита, прав для аудита, необходимости учитывать наследование, и подлежащих аудиту операций (успешных попыток доступа, неудачных попыток доступа или всех попыток доступа).</summary>
+      <param name="identity">Имя пользователя или группы, к которым относится данное правило.</param>
+      <param name="registryRights">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее подлежащие аудиту права доступа.</param>
+      <param name="inheritanceFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.InheritanceFlags" />, которое определяет, должно ли правило аудита применяться к подразделам текущего раздела.</param>
+      <param name="propagationFlags">Побитовое сочетание флагов <see cref="T:System.Security.AccessControl.PropagationFlags" />, влияющее на способ распространения наследования правила аудита на подразделы текущего раздела.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistryAuditRule.RegistryRights">
+      <summary>[SECURITY CRITICAL] Получает права доступа, на которые распространяется действие этого правила аудита.</summary>
+      <returns>Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права, на которые распространяется действие этого правила аудита.</returns>
+    </member>
+    <member name="T:System.Security.AccessControl.RegistrySecurity">
+      <summary>[SECURITY CRITICAL] Обеспечивает безопасность управления доступом Windows для раздела реестра.Этот класс не наследуется.</summary>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.#ctor">
+      <summary>[SECURITY CRITICAL] Инициализирует новый экземпляр класса <see cref="T:System.Security.AccessControl.RegistrySecurity" /> значениями по умолчанию.</summary>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRightType">
+      <summary>[SECURITY CRITICAL] Получает значение перечисления, используемое классом <see cref="T:System.Security.AccessControl.RegistrySecurity" /> для обозначения прав доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий перечисление <see cref="T:System.Security.AccessControl.RegistryRights" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)">
+      <summary>[SECURITY CRITICAL] Создает новое правило управления доступом для указанного пользователя с указанными правами, типом управления доступом и флагами.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, представляющий указанные права для указанного пользователя.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее разрешаемые или запрещаемые права доступа, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Логическое значение, которое определяет, наследуется ли правило.</param>
+      <param name="inheritanceFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.InheritanceFlags" />, определяющее порядок наследования правила подразделами.</param>
+      <param name="propagationFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.PropagationFlags" />, изменяющее порядок наследования правила подразделами.Не имеет смысла, если свойство <paramref name="inheritanceFlags" /> имеет значение <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+      <param name="type">Одно из значений <see cref="T:System.Security.AccessControl.AccessControlType" />, определяющее тип правила ("разрешить" или "запретить").</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AccessRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.RegistrySecurity" /> для обозначения правил доступа.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Выполняет поиск подходящего элемента управления доступом, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило управления доступом.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AddAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, с которым можно объединить новое правило.Если поиск не дал результатов, добавляется новое правило.</summary>
+      <param name="rule">Добавляемое правило аудита.Поиск ведется по имени пользователя, указанному в этом правиле.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)">
+      <summary>[SECURITY CRITICAL] Создает новое правило аудита, в котором указывается пользователь, к которому относится правило, права доступа для аудита, параметры наследования и распространения правила, а также событие, вызывающее срабатывание правила.</summary>
+      <returns>Объект <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, представляющий указанное правило аудита для заданного пользователя с заданными флагами.Метод возвращает объект базового класса (<see cref="T:System.Security.AccessControl.AuditRule" />), но возвращаемое значение можно безопасно привести к производному классу.</returns>
+      <param name="identityReference">Объект <see cref="T:System.Security.Principal.IdentityReference" />, идентифицирующий пользователя или группу, к которым относится данное правило.</param>
+      <param name="accessMask">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.RegistryRights" />, определяющее права доступа для аудита, приведенное к целочисленному типу.</param>
+      <param name="isInherited">Логическое значение, которое определяет, наследуется ли правило.</param>
+      <param name="inheritanceFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.InheritanceFlags" />, определяющее порядок наследования правила подразделами.</param>
+      <param name="propagationFlags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.PropagationFlags" />, изменяющее порядок наследования правила подразделами.Не имеет смысла, если свойство <paramref name="inheritanceFlags" /> имеет значение <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+      <param name="flags">Побитовое сочетание значений <see cref="T:System.Security.AccessControl.AuditFlags" />, определяющее предмет аудита — успешные попытки доступа, неудачные попытки доступа или все попытки доступа.</param>
+    </member>
+    <member name="P:System.Security.AccessControl.RegistrySecurity.AuditRuleType">
+      <summary>[SECURITY CRITICAL] Получает тип, используемый классом <see cref="T:System.Security.AccessControl.RegistrySecurity" /> для обозначения правил аудита.</summary>
+      <returns>Объект <see cref="T:System.Type" />, представляющий класс <see cref="T:System.Security.AccessControl.RegistryAuditRule" />.</returns>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом с тем же именем пользователя и значением <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если правило найдено, содержащиеся в указанном правиле доступа права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий пользователя и тип <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск всех правил управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />, определяющий пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> для поиска.Никакие указанные в этом правиле права, флаги наследования и распространения не учитываются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления доступом, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила управления аудитом с тем же именем пользователя, что и указанного правила доступа, а также с совместимыми флагами наследования и распространения; если совместимое правило найдено, содержащиеся в указанном правиле права удаляются.</summary>
+      <returns>Значение true, если совместимое правило найдено; в противном случае — значение false.</returns>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, определяющий пользователя для поиска, а также набор флагов наследования и распространения, с которыми должно быть совместимо найденное правило.Задает права, которые требуется удалить из совместимого правила, если оно будет найдено.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleAll(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] Производит поиск всех правил аудита с тем же пользователем, что и у указанного правила, и удаляет найденные правила.</summary>
+      <param name="rule">Объект <see cref="T:System.Security.AccessControl.RegistryAuditRule" />, определяющий пользователя для поиска.Никакие указанные в этом правиле права, флаги наследования и распространения не учитываются.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] Осуществляет поиск правила аудита, в точности соответствующего указанному правилу, и удаляет найденное правило.</summary>
+      <param name="rule">Удаляемый объект <see cref="T:System.Security.AccessControl.RegistryAuditRule" />.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.ResetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AccessControlType" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAccessRule(System.Security.AccessControl.RegistryAccessRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила управления доступом с тем же именем пользователя и значением свойства <see cref="T:System.Security.AccessControl.AccessControlType" /> ("разрешить" или "запретить"), что и у указанного правила, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.RegistryAccessRule" />.Имя пользователя и значение <see cref="T:System.Security.AccessControl.AccessControlType" /> определяют правила, которые необходимо удалить перед добавлением этого правила.</param>
+    </member>
+    <member name="M:System.Security.AccessControl.RegistrySecurity.SetAuditRule(System.Security.AccessControl.RegistryAuditRule)">
+      <summary>[SECURITY CRITICAL] Удаляет все правила аудита с тем же именем пользователя, что и у указанного правила, вне зависимости от значения свойства <see cref="T:System.Security.AccessControl.AuditFlags" />, после чего добавляет указанное правило.</summary>
+      <param name="rule">Добавляемый объект <see cref="T:System.Security.AccessControl.RegistryAuditRule" />.Имя пользователя, заданное в этом правиле, определяет правила, которые необходимо удалить перед добавлением данного правила.</param>
+    </member>
+  </members>
+</doc>

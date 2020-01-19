@@ -16,7 +16,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace Orion.XmlViewer
+namespace Highlander.XmlViewer
 {
 	static class Program
 	{

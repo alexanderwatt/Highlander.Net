@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("XmlViewer")]
+[assembly: AssemblyTitle("Highlander.XmlViewer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("XmlViewer")]
+[assembly: AssemblyProduct("Highlander.XmlViewer")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
@@ -59,3 +59,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyKeyName("")]
 [assembly: AssemblyFileVersionAttribute("1.0.0.1")]
 [assembly: ComVisibleAttribute(false)]
+[assembly: Guid("0DE280AD-9237-4F1B-A499-787C655C51E4")]

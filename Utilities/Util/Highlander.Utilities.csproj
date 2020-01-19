@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEAA39DD-56F2-459B-B05C-2B58E3B1C890}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Utilities</RootNamespace>
+    <AssemblyName>Highlander.Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRules>
+    </CodeAnalysisRules>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\BuildDef\BuildInfo.cs">
+      <Link>BuildInfo.cs</Link>
+    </Compile>
+    <Compile Include="Caching\CacheBase.cs" />
+    <Compile Include="Compression\Compression.cs" />
+    <Compile Include="DateTimeManager.cs" />
+    <Compile Include="Diagnostics\AssemblyInfo.cs" />
+    <Compile Include="Exception\DuplicateNotAllowedException.cs" />
+    <Compile Include="Exception\CustomException.cs" />
+    <Compile Include="Exception\ExtrapolationFailureException.cs" />
+    <Compile Include="Exception\IncompleteInputDataException.cs" />
+    <Compile Include="Exception\IncompleteLeadSurfaceException.cs" />
+    <Compile Include="Exception\InvalidValueException.cs" />
+    <Compile Include="Expressions\Expressions.cs" />
+    <Compile Include="Expressions\ExprFormat.cs">
+      <DependentUpon>ExprFormat.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Helpers\ArrayHelper.cs" />
+    <Compile Include="Helpers\AssemblyFileInfo.cs" />
+    <Compile Include="Helpers\DisposeHelper.cs" />
+    <Compile Include="Helpers\InputValidator.cs" />
+    <Compile Include="Helpers\PropertyHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Helpers\Triplet.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="Logging\BaseLogger.cs" />
+    <Compile Include="Logging\ConsoleLogger.cs" />
+    <Compile Include="Logging\IdentityHelper.cs" />
+    <Compile Include="Logging\MemoryLogger.cs" />
+    <Compile Include="Logging\DatabaseLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logging\DatabaseLogger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logging\FileLogger.cs" />
+    <Compile Include="Logging\FilterLogger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logging.cs" />
+    <Compile Include="Logging\MultiLogger.cs" />
+    <Compile Include="Logging\ServiceLogger.cs" />
+    <Compile Include="Logging\StreamLogger.cs" />
+    <Compile Include="Logging\TextBoxLogger.cs" />
+    <Compile Include="Logging\TraceLogger.cs" />
+    <Compile Include="NamedValues\IValueTypeHelper.cs" />
+    <Compile Include="NamedValues\NameConst.cs" />
+    <Compile Include="NamedValues\NamedValue.cs" />
+    <Compile Include="NamedValues\NamedValueSetHelper.cs" />
+    <Compile Include="NamedValues\NamedValueSets.cs" />
+    <Compile Include="NamedValues\ValueTypeHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Helpers\ObjectLookupHelper.cs" />
+    <Compile Include="Helpers\ReflectionHelper.cs" />
+    <Compile Include="RefCounting\RefCounted.cs" />
+    <Compile Include="Serialisation\BinarySerializerHelper.cs" />
+    <Compile Include="Serialisation\JsonSerializerHelper.cs" />
+    <Compile Include="Serialisation\SoapSerializerHelper.cs" />
+    <Compile Include="Serialisation\XmlSerializerHelper.cs" />
+    <Compile Include="Servers\Servers.cs" />
+    <Compile Include="Threading\AsyncEventThrottle.cs" />
+    <Compile Include="Threading\AsyncQueueBase.cs" />
+    <Compile Include="Threading\AsyncPriorityQueue.cs" />
+    <Compile Include="Threading\AsyncPriorityStack.cs" />
+    <Compile Include="Threading\AsyncThreadQueue.cs" />
+    <Compile Include="Threading\Dispatcher.cs" />
+    <Compile Include="Threading\Guarded.cs" />
+    <Compile Include="Threading\Locks.cs" />
+    <Compile Include="Threading\LoggedCounter.cs" />
+    <Compile Include="Threading\Threading.cs" />
+    <Compile Include="Helpers\EnumParser.cs" />
+    <Compile Include="Helpers\Pair.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Expressions\ExprFormat.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Expressions\PreBuild.bat" />
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

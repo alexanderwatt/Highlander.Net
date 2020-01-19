@@ -23,7 +23,7 @@ using System.Threading;
 
 #endregion
 
-namespace Orion.Util.Threading
+namespace Highlander.Utilities.Threading
 {
     /// <summary>
     /// Delegate method for use with Guarded<T/>.Locked() method.
@@ -40,22 +40,29 @@ namespace Orion.Util.Threading
         private static readonly bool _IsSingleCore = (Environment.ProcessorCount == 1);
         // debug
         private static long _debugSleepCount;
+
         private class LocalCounter
         {
             private long _counter;
+
             public long Value => Interlocked.Add(ref _counter, 0);
+
             public long Increment() { return Interlocked.Add(ref _counter, 1); }
+
             public long Decrement() { return Interlocked.Add(ref _counter, -1); }
         }
+
         private static readonly Dictionary<int, LocalCounter> DebugThreadLockCounter = new Dictionary<int, LocalCounter>();
         // end debug
 
         private bool _disposed;
         private T _target;
+
         public Guarded(T target)
         {
-            _target = target ?? throw new ArgumentNullException("target");
+            _target = target ?? throw new ArgumentNullException(nameof(target));
         }
+
         private T Enter()
         {
             // check if disposed
@@ -110,7 +117,7 @@ namespace Orion.Util.Threading
                         {
                             // if you see this debug message, but not the message above, it is likely there
                             // is another thread locking the target object for very long periods.
-                            Debug.WriteLine(String.Format("Guarded<{0}>.Enter: SleepCount={1}", typeof(T).Name, sleepCount));
+                            Debug.WriteLine($"Guarded<{typeof(T).Name}>.Enter: SleepCount={sleepCount}");
                         }
                         // end debug
                         Thread.Sleep(0);
@@ -177,7 +184,7 @@ namespace Orion.Util.Threading
                 if (lockedObject is IDisposable disposable)
                     disposable.Dispose();
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Debug.WriteLine($"Guarded<{typeof(T).Name}>.Dispose: {excp.GetType().Name}");
             }
@@ -265,11 +272,10 @@ namespace Orion.Util.Threading
         public TValue Get(TKey key)
         {
             // return current value (if any)
-            TValue oldValue = default(TValue);
+            TValue oldValue = default;
             _dictionary.Locked(dict =>
             {
-                TValue tempValue = default(TValue);
-                dict.TryGetValue(key, out tempValue);
+                dict.TryGetValue(key, out var tempValue);
                 oldValue = tempValue;
             });
             return oldValue;
@@ -284,11 +290,10 @@ namespace Orion.Util.Threading
         public TValue Set(TKey key, TValue newValue)
         {
             // set new value, return old value (if any)
-            TValue oldValue = default(TValue);
+            TValue oldValue = default;
             _dictionary.Locked(dict =>
             {
-                TValue tempValue = default(TValue);
-                dict.TryGetValue(key, out tempValue);
+                dict.TryGetValue(key, out var tempValue);
                 dict[key] = newValue;
                 oldValue = tempValue;
             });
@@ -302,11 +307,10 @@ namespace Orion.Util.Threading
         /// <returns></returns>
         public TValue Remove(TKey key)
         {
-            TValue oldValue = default(TValue);
+            TValue oldValue = default;
             _dictionary.Locked(dict =>
             {
-                TValue tempValue = default(TValue);
-                if (dict.TryGetValue(key, out tempValue))
+                if (dict.TryGetValue(key, out var tempValue))
                 {
                     dict.Remove(key);
                 }
@@ -324,7 +328,7 @@ namespace Orion.Util.Threading
         public bool TryGet(TKey key, out TValue result)
         {
             bool found = false;
-            TValue tempResult = default(TValue);
+            TValue tempResult = default;
             _dictionary.Locked(dict =>
             {
                 found = dict.TryGetValue(key, out var tempValue);
@@ -348,7 +352,7 @@ namespace Orion.Util.Threading
         /// <returns></returns>
         public TValue GetOrSet(TKey key, LazyCreate constructor)
         {
-            TValue result = default(TValue);
+            TValue result = default;
             _dictionary.Locked(dict =>
             {
                 if (!dict.TryGetValue(key, out var tempValue))

@@ -1,0 +1,2329 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Highlander.Equities</name>
+    </assembly>
+    <members>
+        <member name="T:Highlander.Equities.Collar">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Collar.FindPrice(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList,System.Double[],System.Double,System.Double,System.Double,System.String,System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+            <param name="orcParams"></param>
+            <param name="t"></param>
+            <param name="strike"></param>
+            <param name="spot"></param>
+            <param name="style"></param>
+            <param name="payStyle"></param>
+            <param name="gridSteps"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Collar.GetATMfwd(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDivList"></param>
+            <param name="spot"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Collar.GetATMfwd(Highlander.Equities.ZeroCurve,System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="q"></param>
+            <param name="spot"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Collar.FindZeroCostCall(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList,System.Double[],System.Double,System.Double,System.Double,System.String,System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+            <param name="orcParams"></param>
+            <param name="t"></param>
+            <param name="strike"></param>
+            <param name="spot"></param>
+            <param name="style"></param>
+            <param name="paystyle"></param>
+            <param name="gridsteps"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Collar.FindZeroCostPut(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList,System.Double[],System.Double,System.Double,System.Double,System.String,System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+            <param name="orcParams"></param>
+            <param name="t"></param>
+            <param name="strike"></param>
+            <param name="spot"></param>
+            <param name="style"></param>
+            <param name="payStyle"></param>
+            <param name="gridSteps"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.Units">
+            <summary>
+            Cents or index points
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.Units.Cents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.Units.Dollars">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.Units.Points">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.Dividend">
+            <summary>
+            Represents a Dividend
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.ExDate">
+            <summary>
+            Gets or sets the ex date.
+            </summary>
+            <value>The ex date.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>The amount.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.PriceUnits">
+            <summary>
+            [ERROR: Unknown property access] the price units.
+            </summary>
+            <value>The price units.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.ExDivDate">
+            <summary>
+            Gets or sets the ex div date.
+            </summary>
+            <value>The ex div date.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.PaymentDate">
+            <summary>
+            Gets or sets the pay date.
+            </summary>
+            <value>The pay date.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.PaymentAmountInCents">
+            <summary>
+            Gets or sets the payment amount.
+            </summary>
+            <value>The payment amount.</value>
+        </member>
+        <member name="P:Highlander.Equities.Dividend.CurrencyCode">
+            <summary>
+            Gets or sets the currency code.
+            </summary>
+            <value>The currency code.</value>
+        </member>
+        <member name="M:Highlander.Equities.Dividend.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Dividend"/> class.
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Dividend.#ctor(System.DateTime,System.Decimal,Highlander.Equities.Units)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Dividend"/> class.
+            </summary>
+            <param name="exDate">The ex date.</param>
+            <param name="amt">The amt.</param>
+            <param name="units"></param>
+        </member>
+        <member name="M:Highlander.Equities.Dividend.#ctor(System.DateTime,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Dividend"/> class.
+            </summary>
+            <param name="exDate">The ex date.</param>
+            <param name="amt">The amt.</param>
+        </member>
+        <member name="M:Highlander.Equities.Dividend.#ctor(System.DateTime,System.DateTime,System.Double,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Dividend"/> class.
+            </summary>
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Dividend"/> class.
+            </summary>
+            <param name="exDivDate">The ex div date.</param>
+            <param name="paymentDate">The payment date.</param>
+            <param name="paymentInCents">The payment in cents.</param>
+            <param name="currencyCode">The currency code.</param>
+        </member>
+        <member name="T:Highlander.Equities.DividendList">
+            <summary>
+            Represents a list of dividends
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.DividendList.Dividends">
+            <summary>
+            Gets the dividends.
+            </summary>
+            <value>The dividends.</value>
+        </member>
+        <member name="P:Highlander.Equities.DividendList.ExDivDates">
+            <summary>
+            Gets the ex div dates.
+            </summary>
+            <value>The ex div dates.</value>
+        </member>
+        <member name="P:Highlander.Equities.DividendList.PaymentDates">
+            <summary>
+            Gets the payment dates.
+            </summary>
+            <value>The payment dates.</value>
+        </member>
+        <member name="P:Highlander.Equities.DividendList.PaymentAmountsInCents">
+            <summary>
+            Gets the payment amounts in cents.
+            </summary>
+            <value>The payment amounts in cents.</value>
+        </member>
+        <member name="M:Highlander.Equities.DividendList.Add(Highlander.Equities.Dividend)">
+            <summary>
+            Adds the specified dividend.
+            </summary>
+            <param name="dividend">The dividend.</param>
+        </member>
+        <member name="M:Highlander.Equities.DividendList.Remove(Highlander.Equities.Dividend)">
+            <summary>
+            Removes the specified dividend.
+            </summary>
+            <param name="dividend">The dividend.</param>
+        </member>
+        <member name="M:Highlander.Equities.DividendList.AddDividend(Highlander.Equities.Dividend)">
+            <summary>
+            Adds the dividend.
+            </summary>
+            <param name="dividend">The dividend.</param>
+        </member>
+        <member name="T:Highlander.Equities.DivList">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.DivList.DivPoints">
+            <summary>
+            set the number of div points
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DivList.GetD(System.Int32)">
+            <summary>
+            get rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DivList.GetT(System.Int32)">
+            <summary>
+            get time item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DivList.SetD(System.Int32,System.Double,System.Double)">
+            <summary>
+            set the  dividend and time 
+            </summary>
+            <param name="idx"></param>
+            <param name="d"></param>
+            <param name="t"></param>
+        </member>
+        <member name="M:Highlander.Equities.DivList.MakeArrays">
+            <summary>
+            make the arrays
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DivList.EmptyArrays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.Helpers.DividendHelper">
+            <summary>
+            Helper class for working with Dividends
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Helpers.DividendHelper.FindDividend(Highlander.Equities.Dividend,Highlander.Equities.DividendList)">
+            <summary>
+            Finds the dividend.
+            </summary>
+            <param name="dividend">The dividend.</param>
+            <param name="dividends">The dividends.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Helpers.DividendHelper.GetDividendsProperty``1(System.Collections.Generic.List{Highlander.Equities.Dividend},System.String)">
+            <summary>
+            Gets the dividends property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dividends">The dividends.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Helpers.DividendHelper.GetDividendProperty``1(Highlander.Equities.Dividend,System.String)">
+            <summary>
+            Gets the calculation period property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dividend">The dividend.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.ICollarPricer">
+            <summary>
+            A pricer for collars interface
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ICollarPricer.FindPrice(Highlander.Equities.SimpleStock,Highlander.Equities.ZeroAUDCurve)">
+            <summary>
+            Finds the price.
+            </summary>
+            <param name="stock">The stock.</param>
+            <param name="zeroRateCurve">The zero rate curve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ICollarPricer.FindZeroCostCallStrike(Highlander.Equities.SimpleStock,Highlander.Equities.ZeroAUDCurve)">
+            <summary>
+            Finds the zero cost call strike.
+            </summary>
+            <param name="stock">The stock.</param>
+            <param name="zeroRateCurve">The zero rate curve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ICollarPricer.FindZeroCostPutStrike(Highlander.Equities.SimpleStock,Highlander.Equities.ZeroAUDCurve)">
+            <summary>
+            Finds the zero cost put strike.
+            </summary>
+            <param name="stock">The stock.</param>
+            <param name="zeroRateCurve">The zero rate curve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ICollarPricer.FindZeroCostStrike(Highlander.Equities.OptionType,Highlander.Equities.SimpleStock,Highlander.Equities.ZeroAUDCurve)">
+            <summary>
+            Finds the zero cost strike.
+            </summary>
+            <param name="optionType">Type of the option.</param>
+            <param name="stock">The stock.</param>
+            <param name="zeroRateCurve">The zero rate curve.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.IVolatilityPoint">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.IVolatilityPoint.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:Highlander.Equities.IVolatilityPoint.State">
+            <summary>
+            Gets the state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="M:Highlander.Equities.IVolatilityPoint.SetVolatility(System.Decimal,Highlander.Equities.VolatilityState)">
+            <summary>
+            Sets the volatility.
+            </summary>
+            <param name="volatility">The volatility.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:Highlander.Equities.IVolatilityPoint.SetVolatilityFailure(System.Exception)">
+            <summary>
+            Sets the volatility failure.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="T:Highlander.Equities.PositionType">
+            <summary>
+            Represents the different position types
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.PositionType.NotSpecified">
+            <summary>Unknown (Not Specified)</summary>
+        </member>
+        <member name="F:Highlander.Equities.PositionType.Call">
+            <summary>Call Position</summary>
+        </member>
+        <member name="F:Highlander.Equities.PositionType.Put">
+            <summary>Put Position</summary>
+        </member>
+        <member name="T:Highlander.Equities.OptionPosition">
+            <summary>
+            Defines a given position 
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.OptionPosition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.OptionPosition"/> class.
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OptionPosition.Type">
+            <summary>
+            Gets the type.
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:Highlander.Equities.OptionPosition.ContractPrice">
+            <summary>
+            Gets or sets the contract price.
+            </summary>
+            <value>The contract price.</value>
+        </member>
+        <member name="P:Highlander.Equities.OptionPosition.ContractId">
+            <summary>
+            Gets or sets the contract id.
+            </summary>
+            <value>The contract id.</value>
+        </member>
+        <member name="P:Highlander.Equities.OptionPosition.Volatility">
+            <summary>
+            Gets the volatility.
+            </summary>
+            <value>The volatility.</value>
+        </member>
+        <member name="M:Highlander.Equities.OptionPosition.#ctor(System.String,System.Double,Highlander.Equities.PositionType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.OptionPosition"/> class.
+            </summary>
+            <param name="contractId">The contract id.</param>
+            <param name="contractPrice">The contract price.</param>
+            <param name="positionType">Type of the position.</param>
+            <example>
+                <code>
+                // Creates an Call option instance
+                OptionPosition option = new OptionPosition("123", 456, PositionType.Call);
+                </code>
+            </example>
+        </member>
+        <member name="M:Highlander.Equities.OptionPosition.SetVolatility(Highlander.Equities.IVolatilityPoint)">
+            <summary>
+            Sets the volatility.
+            </summary>
+            <param name="volatility">The volatility.</param>
+        </member>
+        <member name="T:Highlander.Equities.PropTree">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.#ctor(System.Double,System.Double,System.Double,System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="t"></param>
+            <param name="vol"></param>
+            <param name="spot"></param>
+            <param name="steps"></param>
+            <param name="flag"></param>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.GridSteps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.Sig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.Spot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.Tau">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetR(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.SetR(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.SetDiv(System.Int32,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+            <param name="t"></param>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetDiv(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetRatio(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetDivTime(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetUp(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.SetUp(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetDn(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.SetDn(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.FlatRate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.PropTree.FlatFlag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.GetSpotMatrix(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.SetSpotMatrix(System.Int32,System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.MakeGrid(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDivList"></param>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.MakeGrid">
+            <summary>
+            Makes the grid.
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.PropTree.Clone">
+            <summary>Creates a new object that is a copy of the current instance.</summary>
+            <returns>A new object that is a copy of this instance.</returns>
+        </member>
+        <member name="T:Highlander.Equities.Greeks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.DT">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.GridSteps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Tau">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Sig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Spot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Delta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Gamma">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Vega">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Theta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Style">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Payoff">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Strike">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Greeks.Smoothing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Greeks.MakeDeltaGamma(Highlander.Equities.ITree,Highlander.Equities.Pricer,Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="spotT"></param>
+            <param name="priceT"></param>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+        </member>
+        <member name="M:Highlander.Equities.Greeks.MakeVega(Highlander.Equities.ITree,Highlander.Equities.Pricer,Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="spotT"></param>
+            <param name="priceT"></param>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+        </member>
+        <member name="M:Highlander.Equities.Greeks.MakeTheta(Highlander.Equities.ITree,Highlander.Equities.Pricer,Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="spotT"></param>
+            <param name="priceT"></param>
+            <param name="myZero"></param>
+            <param name="myDiv"></param>
+        </member>
+        <member name="T:Highlander.Equities.EquitiesLibrary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BinomialPricer(System.String,System.Double,System.Double,System.Double,System.DateTime,System.DateTime,System.String,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.Double,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="style"></param>
+            <param name="spot"></param>
+            <param name="strike"></param>
+            <param name="vol"></param>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="payStyle"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="divDates"></param>
+            <param name="divAms"></param>
+            <param name="gridSteps"></param>
+            <param name="smoo"></param>
+            <param name="flatFlag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BinomialRelativePricer(System.String,System.Double,System.Double,System.Double,System.DateTime,System.DateTime,System.String,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.Double,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="style"></param>
+            <param name="spot"></param>
+            <param name="strike"></param>
+            <param name="vol"></param>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="paystyle"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="divDates"></param>
+            <param name="divAms"></param>
+            <param name="gridsteps"></param>
+            <param name="smoo"></param>
+            <param name="flatFlag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BlackScholesPricer(System.Double,System.Double,System.Double,System.String,System.DateTime,System.DateTime,System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="spot"></param>
+            <param name="strike"></param>
+            <param name="vol"></param>
+            <param name="paystyle"></param>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="divDates"></param>
+            <param name="divAms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BlackScholesPricerContDiv(System.Double,System.Double,System.Double,System.String,System.DateTime,System.DateTime,System.DateTime[],System.Double[],System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="spot"></param>
+            <param name="strike"></param>
+            <param name="vol"></param>
+            <param name="paystyle"></param>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="q"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BinomialImpVol(System.Double,System.String,System.Double,System.Double,System.Double,System.DateTime,System.DateTime,System.String,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.Double,System.Double,System.Double,System.String,System.Boolean)">
+            <summary>
+            Gets the implied vol, using the discrete dividend pricer;
+            </summary>
+            <param name="price">The price.</param>
+            <param name="style">The style.</param>
+            <param name="spot">The spot.</param>
+            <param name="strike">The strike.</param>
+            <param name="vol0">The vol0.</param>
+            <param name="expiry"></param>
+            <param name="paystyle">The paystyle.</param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates">The zero curve.</param>
+            <param name="divDates"></param>
+            <param name="divAms">The div curve.</param>
+            <param name="tol">The TOL.</param>
+            <param name="step">The STEP.</param>
+            <param name="gridsteps">The gridsteps.</param>
+            <param name="smoo">The smoo.</param>
+            <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
+            <param name="today"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BinomialGetGreeks(System.String,System.Double,System.Double,System.Double,System.DateTime,System.DateTime,System.String,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.Double,System.String,System.Boolean)">
+            <summary>
+            Gets the Greeks.
+            </summary>
+            <param name="style">The style.</param>
+            <param name="spot">The spot.</param>
+            <param name="strike">The strike.</param>
+            <param name="vol">The vol.</param>
+            <param name="expiry"></param>
+            <param name="paystyle">The paystyle.</param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates">The zero curve.</param>
+            <param name="divDates"></param>
+            <param name="divAms">The div curve.</param>
+            <param name="gridsteps">The gridsteps.</param>
+            <param name="smoo">The smoo.</param>
+            <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
+            <param name="today"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.BinomialRelativeGetGreeks(System.String,System.Double,System.Double,System.Double,System.DateTime,System.DateTime,System.String,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.Double,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="style"></param>
+            <param name="spot"></param>
+            <param name="strike"></param>
+            <param name="vol"></param>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="paystyle"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="divDates"></param>
+            <param name="divAms"></param>
+            <param name="gridsteps"></param>
+            <param name="smoo"></param>
+            <param name="flatFlag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.GetWingVol(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Gets the orc vol.
+            </summary>
+            <param name="k">The k.</param>
+            <param name="timeToMaturity">The time to maturity.</param>
+            <param name="atm">The atm.</param>
+            <param name="currentVol">The current vol.</param>
+            <param name="slopeRef">The slope ref.</param>
+            <param name="putCurve">The put curve.</param>
+            <param name="callCurve">The call curve.</param>
+            <param name="dnCutOff">The dn cut off.</param>
+            <param name="upCutOff">Up cut off.</param>
+            <param name="vcr">The VCR.</param>
+            <param name="scr">The SCR.</param>
+            <param name="ssr">The SSR.</param>
+            <param name="dsr">The DSR.</param>
+            <param name="usr">The usr.</param>
+            <param name="refFwd">The ref FWD.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.GetForward(System.DateTime,System.DateTime,System.Double,System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            Gets the ATM forward.
+            </summary>
+            <param name="zeroDates"></param>
+            <param name="zeroRates">The zero curve.</param>
+            <param name="divDates"></param>
+            <param name="divAms">The div curve.</param>
+            <param name="expiry"></param>
+            <param name="spot">The spot.</param>
+            <param name="today"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.InterpolateOnDates(System.DateTime,System.DateTime[],System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="valueDate"></param>
+            <param name="dates"></param>
+            <param name="amounts"></param>
+            <param name="interpolationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.InterpolateOnValues(System.Double,System.Double[],System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="xValue"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="interpolationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.PVofPaymentStream(System.DateTime,System.DateTime,System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            Returns the PV (as at the valueDate) of the payment stream.
+            Only payments occuring on or between valueDate and finalDate are included in the sum.
+            All other payments are ignored.
+            </summary>
+            <param name="valueDate">The date at which the PV is taken.</param>
+            <param name="paymentDates">The dates on which payments are made, in ascending order.</param>
+            <param name="paymentAmounts">The amounts of payments.</param>
+            <param name="zeroDates">The dates corresponding to the ZCB discount curve, in ascending order.</param>
+            <param name="zeroRates">The rates corresponding to the ZCB discount curve.</param>
+            <param name="finalDate">The final date on which payments are to be included.</param>
+            <returns>A double representing the PV.</returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.ConvToContinuousRate(System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rate"></param>
+            <param name="compoundingFrequency"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.EquitiesLibrary.DivYield(System.Double,System.DateTime,System.DateTime[],System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="baseAmount"></param>
+            <param name="valueDate"></param>
+            <param name="finalDate"></param>
+            <param name="paymentDates"></param>
+            <param name="paymentAmounts"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.MathFunction">
+            <summary>
+            Summary description for MathFunction.
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.MathFunction.SQRT_PI">
+            The is NOT THE square root of PI 
+        </member>
+        <member name="F:Highlander.Equities.MathFunction.SQRT_2">
+            The square root of 2 
+        </member>
+        <member name="M:Highlander.Equities.MathFunction.AINT(System.Double)">
+            The AINT(A) Fortran 77 function.
+            Returns A with the fractional portion of its magnitude truncated and its
+            sign preserved. (Also called "truncation towards zero".)
+        </member>
+        <member name="M:Highlander.Equities.MathFunction.CND(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.MathFunction.CBND(System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="rho"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.OrcWingVol">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.CurrentVol">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.SlopeRef">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.PutCurve">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.CallCurve">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.DnCutoff">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.UpCutoff">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.RefFwd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.RefVol">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Vcr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Scr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Ssr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Dsr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Usr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.TimeToMaturity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Dsc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.OrcWingVol.Usc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.OrcWingVol.Orcvol(System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="atFwd"></param>
+            <param name="k"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.Pricer">
+            <summary>
+            The equities pricer
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.#ctor(System.Double,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="strike"></param>
+            <param name="pay"></param>
+            <param name="smoothing"></param>
+            <param name="sty"></param>
+        </member>
+        <member name="P:Highlander.Equities.Pricer.Style">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Pricer.Gridsteps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Pricer.Payoff">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Pricer.Strike">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Pricer.Smoothing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.GetR(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.SetR(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.GetP(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.SetP(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.SetPriceMatrix(System.Int32,System.Int32,System.Double)">
+            <summary>
+            set SpotMatrix item
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.GetPriceMatrix(System.Int32,System.Int32)">
+            <summary>
+            get SpotMatrix item
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.BlackScholesPrice(System.Double,System.Double,System.Double,System.Double,System.Double,System.String)">
+            <summary>
+            The equities black scholes model
+            </summary>
+            <param name="fwd"></param>
+            <param name="tau1"></param>
+            <param name="strike1"></param>
+            <param name="rate1"></param>
+            <param name="sigma1"></param>
+            <param name="payoff"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.MakeGrid(Highlander.Equities.ITree)">
+            <summary>
+            Make grid passing in a tree object.
+            Iterate backward through tree to price American or Euro calls or puts.
+            </summary>
+            <param name="spotTree"></param>
+        </member>
+        <member name="M:Highlander.Equities.Pricer.Price">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.ZeroCurveRange">
+            <summary>
+            Zero Curve
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.ZeroCurveRange.RateDate">
+            <summary>
+            rate date
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.ZeroCurveRange.Rate">
+            <summary>
+            Rate in %
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.DividendRange">
+            <summary>
+            Dividend Range
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.DividendRange.DivDate">
+            <summary>
+            Dividend date
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.DividendRange.DivAmt">
+            <summary>
+            Dividend amount
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.WingParamsRange">
+            <summary>
+            Wing Curve Parameters
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.CurrentVolatility">
+            <summary>
+            Current vol
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.SlopeReference">
+            <summary>
+            Slope reference
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.PutCurvature">
+            <summary>
+            Put curvature
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.CallCurvature">
+            <summary>
+            Call curvature
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.DownCutOff">
+            <summary>
+            Down cut off
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.UpCutOff">
+            <summary>
+            Up cut off
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.VolChangeRate">
+            <summary>
+            Volatility change rate
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.SlopeChangeRate">
+            <summary>
+            Slope change rate
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.SkewSwimmingnessRate">
+            <summary>
+            Swimmingness
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.DownSmoothingRange">
+            <summary>
+            Down smoothing range
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.UpSmoothingRange">
+            <summary>
+            Up smoothing range
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingParamsRange.ReferenceForward">
+            <summary>
+            Ref forward
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.DiscreteTree">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.#ctor(System.Double,System.Double,System.Double,System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="t"></param>
+            <param name="vol"></param>
+            <param name="spot"></param>
+            <param name="steps"></param>
+            <param name="flag"></param>
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.GridSteps">
+            <summary>
+            set the step size
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.Sig">
+            set the volatility
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.Spot">
+            <summary>
+            set the spot
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.Tau">
+            <summary>
+            set the time step size
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetR(System.Int32)">
+            <summary>
+            get forward rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.SetR(System.Int32,System.Double)">
+            <summary>
+            set the forward rate
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.SetDiv(System.Int32,System.Double,System.Double)">
+            <summary>
+            set the div rate
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+            <param name="t"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetDiv(System.Int32)">
+            <summary>
+            get div rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetDivTime(System.Int32)">
+            <summary>
+            get div rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetUp(System.Int32)">
+            <summary>
+            get up item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.SetUp(System.Int32,System.Double)">
+            <summary>
+            set the up itm
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetDn(System.Int32)">
+            <summary>
+            get dn item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.SetDn(System.Int32,System.Double)">
+            <summary>
+            set the dn itm
+            </summary>
+            <param name="idx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.FlatRate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.DiscreteTree.FlatFlag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.GetSpotMatrix(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.SetSpotMatrix(System.Int32,System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.MakeGrid(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDivList"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.FillUpDown(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="sig"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.MakeDivArray(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            
+            </summary>
+            <param name="myZero"></param>
+            <param name="myDivList"></param>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.MakeGrid">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Highlander.Equities.DiscreteTree.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Highlander.Equities.ITree">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ITree.GridSteps">
+            <summary>
+            set the step size
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ITree.Sig">
+            <summary>
+            set the volatility
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ITree.Spot">
+            <summary>
+            set the spot
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ITree.Tau">
+            <summary>
+            set the time step size
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetR(System.Int32)">
+            <summary>
+            get forward rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetDiv(System.Int32)">
+            <summary>
+            get div rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetDivTime(System.Int32)">
+            <summary>
+            get div rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetUp(System.Int32)">
+            <summary>
+            get up item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetDn(System.Int32)">
+            <summary>
+            get dn item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Highlander.Equities.ITree.FlatRate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ITree.FlatFlag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ITree.GetSpotMatrix(System.Int32,System.Int32)">
+            <summary>
+            get SpotMatrix item
+            </summary>
+            <param name="idx"></param>
+            <param name="jdx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ITree.MakeGrid(Highlander.Equities.ZeroCurve,Highlander.Equities.DivList)">
+            <summary>
+            Makes the grid.
+            </summary>
+            <param name="myZero">My zero.</param>
+            <param name="myDivList">My div list.</param>
+        </member>
+        <member name="M:Highlander.Equities.ITree.MakeGrid">
+            <summary>
+            Makes the grid.
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.SimpleStock">
+            <summary>
+            Represents an Stock
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.SimpleStock.Id">
+            <summary>
+            Gets the id.
+            </summary>
+            <value>The id.</value>
+        </member>
+        <member name="P:Highlander.Equities.SimpleStock.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:Highlander.Equities.SimpleStock.Dividends">
+            <summary>
+            Gets the dividends.
+            </summary>
+            <value>The dividends.</value>
+        </member>
+        <member name="P:Highlander.Equities.SimpleStock.Transaction">
+            <summary>
+            Gets or sets the transaction.
+            </summary>
+            <value>The transaction.</value>
+        </member>
+        <member name="P:Highlander.Equities.SimpleStock.WingCurvature">
+            <summary>
+            Gets the wing curvature.
+            </summary>
+            <value>The wing curvature.</value>
+        </member>
+        <member name="M:Highlander.Equities.SimpleStock.#ctor(System.String,System.String,Highlander.Equities.DividendList,Highlander.Equities.WingCurvature[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.SimpleStock"/> class.
+            </summary>
+            <param name="stockId">The stock id.</param>
+            <param name="name">The name.</param>
+            <param name="dividends">The dividends.</param>
+            <param name="wingCurvature">The wing curvature.</param>
+        </member>
+        <member name="M:Highlander.Equities.SimpleStock.ValidateInput(System.String,System.String,System.Collections.Generic.List{Highlander.Equities.Dividend},System.Collections.Generic.IEnumerable{Highlander.Equities.WingCurvature})">
+            <summary>
+            Validates the input.
+            </summary>
+            <param name="stockId">The stock id.</param>
+            <param name="name">The name.</param>
+            <param name="dividends">The dividends.</param>
+            <param name="wingCurvature">The wing curvature.</param>
+        </member>
+        <member name="T:Highlander.Equities.OptionType">
+            <summary>
+            Option Type
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.OptionType.NotSpecified">
+            <summary>Unknown (Not Specified)</summary>
+        </member>
+        <member name="F:Highlander.Equities.OptionType.Call">
+            <summary>Call</summary>
+        </member>
+        <member name="F:Highlander.Equities.OptionType.Put">
+            <summary>Put</summary>
+        </member>
+        <member name="T:Highlander.Equities.Strike">
+            <summary>
+            Defines a strike (i.e. a pairs call and put position)
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.Strike.Style">
+            <summary>
+            Gets or sets the style.
+            </summary>
+            <value>The style.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.NodalPoint">
+            <summary>
+            Gets or sets a value indicating whether [nodal point].
+            </summary>
+            <value><c>true</c> if [nodal point]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.VolatilityHasBeenSet">
+            <summary>
+            Gets a value indicating whether [volatility has been set].
+            </summary>
+            <value>
+            	<c>true</c> if [volatility has been set]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.StrikePrice">
+            <summary>
+            Gets the strike price.
+            </summary>
+            <value>The strike price.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.Volatility">
+            <summary>
+            Gets the volatility.
+            </summary>
+            <value>The volatility.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.Call">
+            <summary>
+            Gets the call.
+            </summary>
+            <value>The call.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.Put">
+            <summary>
+            Gets the put.
+            </summary>
+            <value>The put.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.Moneyness">
+            <summary>
+            [ERROR: Unknown property access] the moneyness.
+            </summary>
+            <value>The moneyness.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.PriceUnits">
+            <summary>
+            [ERROR: Unknown property access] the price units.
+            </summary>
+            <value>The price units.</value>
+        </member>
+        <member name="P:Highlander.Equities.Strike.DefaultVolatility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Strike.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Strike"/> class.
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Strike.#ctor(Highlander.Equities.OptionType,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Strike"/> class.
+            </summary>
+            <param name="style">The style.</param>
+            <param name="strikePrice">The strike price.</param>
+        </member>
+        <member name="M:Highlander.Equities.Strike.#ctor(System.Double,Highlander.Equities.OptionPosition,Highlander.Equities.OptionPosition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Strike"/> class.
+            </summary>
+            <param name="strikePrice">The strike price.</param>
+            <param name="callPosition">The call position.</param>
+            <param name="putPosition">The put position.</param>
+            <example>
+                <code>
+                // Creates a Strike instance
+                OptionPosition callOption = new OptionPosition("123", 456, PositionType.Call);
+                OptionPosition putOption = new OptionPosition("123", 789, PositionType.Put);
+                Strike strike = new Strike(123, callOption, putOption);
+                </code>
+            </example>
+        </member>
+        <member name="M:Highlander.Equities.Strike.#ctor(System.Double,Highlander.Equities.OptionPosition,Highlander.Equities.OptionPosition,Highlander.Equities.Units)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Strike"/> class.
+            </summary>
+            <param name="strikePrice">The strike price.</param>
+            <param name="callPosition">The call position.</param>
+            <param name="putPosition">The put position.</param>
+            <param name="units">The units.</param>
+        </member>
+        <member name="M:Highlander.Equities.Strike.#ctor(System.Double,System.Double,Highlander.Equities.OptionPosition,Highlander.Equities.OptionPosition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.Strike"/> class.
+            </summary>
+            <param name="moneyness">The moneyness.</param>
+            <param name="fwdPrice">The FWD price.</param>
+            <param name="callPosition">The call position.</param>
+            <param name="putPosition">The put position.</param>
+        </member>
+        <member name="M:Highlander.Equities.Strike.SetVolatility(Highlander.Equities.IVolatilityPoint)">
+            <summary>
+            Sets the volatility.
+            </summary>
+            <param name="volatility">The volatility.</param>
+            <example>
+                <code>
+                // Adding volatility to a strike with a default value
+                IVolatilityPoint point = new VolatilityPoint();
+                point.SetVolatility(volatility, VolatilityState.Default());
+                Strike strike = new Strike(..);
+                strike.SetVolatility(point);
+                </code>
+            </example>
+        </member>
+        <member name="T:Highlander.Equities.PayStyleType">
+            <summary>
+            Pay Styles
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.PayStyleType.NotSpecified">
+            <summary>Unknown (Not Specified)</summary>
+        </member>
+        <member name="F:Highlander.Equities.PayStyleType.American">
+            <summary>Call</summary>
+        </member>
+        <member name="F:Highlander.Equities.PayStyleType.European">
+            <summary>Put</summary>
+        </member>
+        <member name="T:Highlander.Equities.TransactionDetail">
+            <summary>
+            Defines a transaction
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.StockId">
+            <summary>
+            Gets the stock id.
+            </summary>
+            <value>The stock id.</value>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.CurrentSpot">
+            <summary>
+            Gets or sets the current spot.
+            </summary>
+            <value>The current spot.</value>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.TradeDate">
+            <summary>
+            Gets or sets the trade date.
+            </summary>
+            <value>The trade date.</value>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.ExpiryDate">
+            <summary>
+            Gets or sets the expiry date.
+            </summary>
+            <value>The expiry date.</value>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.PayStyle">
+            <summary>
+            Gets or sets the pay style.
+            </summary>
+            <value>The pay style.</value>
+        </member>
+        <member name="P:Highlander.Equities.TransactionDetail.Strike">
+            <summary>
+            Gets the strike.
+            </summary>
+            <value>The strike.</value>
+        </member>
+        <member name="M:Highlander.Equities.TransactionDetail.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.TransactionDetail"/> class.
+            </summary>
+            <param name="stockId">The stock id.</param>
+        </member>
+        <member name="M:Highlander.Equities.TransactionDetail.SetStrike(Highlander.Equities.OptionType,System.Double)">
+            <summary>
+            Sets the strike.
+            </summary>
+            <param name="style">The style.</param>
+            <param name="strikePrice">The strike price.</param>
+        </member>
+        <member name="M:Highlander.Equities.TransactionDetail.SetStrike(Highlander.Equities.Strike)">
+            <summary>
+            Sets the strike.
+            </summary>
+            <param name="strike">The strike.</param>
+        </member>
+        <member name="M:Highlander.Equities.TransactionDetail.TransactionComplete(Highlander.Equities.TransactionDetail)">
+            <summary>
+            Transactions the complete.
+            </summary>
+            <param name="transaction">The transaction.</param>
+        </member>
+        <member name="T:Highlander.Equities.CompoundingFrequency">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.CompoundingFrequency.Annual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.CompoundingFrequency.Quarterly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.CompoundingFrequency.SemiAnnual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.CompoundingFrequency.Monthly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.CompoundingFrequency.Continuous">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.Utilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.Interpolate(System.DateTime,System.DateTime[],System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="valueDate"></param>
+            <param name="dates"></param>
+            <param name="amounts"></param>
+            <param name="interpType"></param>
+            <returns></returns>
+            <exception cref="T:Highlander.Utilities.Exception.UnequalArrayLengthsException"></exception>
+            <exception cref="T:Highlander.Utilities.Exception.UnsortedDatesException"></exception>
+            <exception cref="T:Highlander.Utilities.Exception.DateToLargeException"></exception>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.InterpolateDates(System.DateTime,System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="valueDate"></param>
+            <param name="dates"></param>
+            <param name="amounts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.InterpolateValues(System.Double,System.Double[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="xvalue"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.Interpolate(System.Double,System.Double[],System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="xvalue"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="interpType"></param>
+            <returns></returns>
+            <exception cref="T:Highlander.Utilities.Exception.UnequalArrayLengthsException"></exception>
+            <exception cref="T:Highlander.Utilities.Exception.UnsortedDatesException"></exception>
+            <exception cref="T:Highlander.Utilities.Exception.DateToLargeException"></exception>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.PVofPaymentStream(System.DateTime,System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="valueDate"></param>
+            <param name="paymentDates"></param>
+            <param name="paymentAmounts"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <returns></returns>
+            <exception cref="T:Highlander.Utilities.Exception.UnequalArrayLengthsException"></exception>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.PVofPaymentStream(System.DateTime,System.DateTime[],System.Double[],System.DateTime[],System.Double[],System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="valueDate"></param>
+            <param name="paymentDates"></param>
+            <param name="paymentAmounts"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <param name="finalDate"></param>
+            <returns></returns>
+            <exception cref="T:Highlander.Utilities.Exception.UnequalArrayLengthsException"></exception>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.ConvToContinuousRate(System.Double[],Highlander.Equities.CompoundingFrequency)">
+            <summary>
+            
+            </summary>
+            <param name="rate"></param>
+            <param name="freq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.ConvToContinuousRate(System.Double,Highlander.Equities.CompoundingFrequency)">
+            <summary>
+            
+            </summary>
+            <param name="rate"></param>
+            <param name="freq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.ConvToContinuousRate(System.Double,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rate"></param>
+            <param name="strFreq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.ConvToContinuousRate(System.Double[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rate"></param>
+            <param name="strFreq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.EquivalentYield(System.Double,System.DateTime,System.DateTime,System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="baseAmount"></param>
+            <param name="valueDate"></param>
+            <param name="finalDate"></param>
+            <param name="paymentDates"></param>
+            <param name="paymentAmounts"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.Utilities.EquivalentYield(System.Double,System.DateTime,System.DateTime[],System.DateTime[],System.Double[],System.DateTime[],System.Double[])">
+            <summary>
+            
+            </summary>
+            <param name="baseAmount"></param>
+            <param name="valueDate"></param>
+            <param name="finalDate"></param>
+            <param name="paymentDates"></param>
+            <param name="paymentAmounts"></param>
+            <param name="zeroDates"></param>
+            <param name="zeroRates"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.VolatilityPoint">
+            <summary>
+            A point on a volatility surface
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.VolatilityPoint.Value">
+            <summary>
+            Gets the volatility.
+            </summary>
+            <value>The volatility.</value>
+        </member>
+        <member name="P:Highlander.Equities.VolatilityPoint.State">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityPoint.SetVolatility(System.Decimal,Highlander.Equities.VolatilityState)">
+            <summary>
+            Sets the volatility.
+            </summary>
+            <param name="volatility">The volatility.</param>
+            <param name="state">The state.</param>
+            <example>
+                <code>
+                // Setting or initialising a volatility point with a default value
+                IVolatilityPoint point = new VolatilityPoint();
+                point.SetVolatility(volatility, VolatilityState.Default());
+            
+                // Setting a volatility point with a failure value
+                IVolatilityPoint point = new VolatilityPoint();
+                point.SetVolatility(volatility, VolatilityState.Failure(someException));
+            
+                // Setting a volatility point with a good value
+                IVolatilityPoint point = new VolatilityPoint();
+                point.SetVolatility(volatility, VolatilityState.Success());
+                </code>
+            </example>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityPoint.SetVolatilityFailure(System.Exception)">
+            <summary>
+            Sets the volatility failure.
+            </summary>
+            <param name="exception">The exception.</param>
+            <example>
+                <code>
+                // Mark a volatility with a failed state
+                IVolatilityPoint point = new VolatilityPoint();
+                point.SetVolatilityFailure(someException);
+                </code>
+            </example>
+            <seealso cref="M:Highlander.Equities.VolatilityPoint.SetVolatility(System.Decimal,Highlander.Equities.VolatilityState)"/>
+        </member>
+        <member name="T:Highlander.Equities.VolatilityStateType">
+            <summary>
+            States of a Volatility point extrapolation
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.VolatilityStateType.Unspecified">
+            <summary>Not Set</summary>
+        </member>
+        <member name="F:Highlander.Equities.VolatilityStateType.Default">
+            <summary>Default</summary>
+        </member>
+        <member name="F:Highlander.Equities.VolatilityStateType.Success">
+            <summary>Successfully extrapolated</summary>
+        </member>
+        <member name="F:Highlander.Equities.VolatilityStateType.Failure">
+            <summary>Failed to extrapolate</summary>
+        </member>
+        <member name="F:Highlander.Equities.VolatilityStateType.ExceedsThreshold">
+            <summary>Exceeds Threshold</summary>
+        </member>
+        <member name="T:Highlander.Equities.VolatilityState">
+            <summary>
+            Defines the state of a give volatility point
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.VolatilityState.FailureException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.VolatilityState"/> class.
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityState.#ctor(Highlander.Equities.VolatilityStateType,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.VolatilityState"/> class.
+            </summary>
+            <param name="stateType">Type of the state.</param>
+            <param name="reason">The reason.</param>
+            <example>
+                <code>
+                // Create a default volatility state
+                VolatilityState state = new VolatilityState(VolatilityStateType.Default, string.Empty);
+            
+                // Create a failure volatility state
+                VolatilityState state = new VolatilityState(VolatilityStateType.Failure, "Unable to extrapolate");
+            
+                // Create a Success volatility state
+                VolatilityState state = new VolatilityState(VolatilityStateType.Success, string.Empty);
+                </code>
+            </example>
+        </member>
+        <member name="P:Highlander.Equities.VolatilityState.Status">
+            <summary>
+            Gets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="P:Highlander.Equities.VolatilityState.Reason">
+            <summary>
+            Gets the reason.
+            </summary>
+            <value>The reason.</value>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityState.Default">
+            <summary>
+            Defaults this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityState.Failure(System.Exception)">
+            <summary>
+            Failures the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.VolatilityState.Success">
+            <summary>
+            Successes this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.WingCurvature">
+            <summary>
+            A Wing curvature specification
+            </summary>
+        </member>
+        <member name="T:Highlander.Equities.WingCurvature.WingCurvatureProperty">
+            <summary>
+            Wing curvature properties
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.CurrentVolatility">
+            <summary>Current Volatility</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.SlopeReference">
+            <summary>Slope Reference</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.PutCurvature">
+            <summary>Put Curvature</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.CallCurvature">
+            <summary>Call Curvature</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.DownCutOff">
+            <summary>Down CutOff</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.UpCutOff">
+            <summary>UpCutOff</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.ReferenceForward">
+            <summary>Reference Forward</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.VolChangeRate">
+            <summary>Vol Change Rate</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.SlopeChangeRate">
+            <summary>Slope Change Rate</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.SkewSwimmingnessRate">
+            <summary>Skew Swimmingness Rate</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.DownSmoothingRange">
+            <summary>Down Smoothing Range</summary>
+        </member>
+        <member name="F:Highlander.Equities.WingCurvature.WingCurvatureProperty.UpSmoothingRange">
+            <summary>Up Smoothing Range</summary>
+        </member>
+        <member name="P:Highlander.Equities.WingCurvature.Item(Highlander.Equities.WingCurvature.WingCurvatureProperty)">
+            <summary>
+            Gets or sets the <see cref="T:System.Double"/> with the specified curvature property.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Highlander.Equities.WingCurvature.EtoDate">
+            <summary>
+            Gets or sets the eto date.
+            </summary>
+            <value>The eto date.</value>
+        </member>
+        <member name="P:Highlander.Equities.WingCurvature.IsComplete">
+            <summary>
+            Gets a value indicating whether this instance is complete.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is complete; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Highlander.Equities.WingCurvature.SetProperty(Highlander.Equities.WingCurvature.WingCurvatureProperty,System.Double)">
+            <summary>
+            Sets the parameter.
+            </summary>
+            <param name="curvatureProperty">Type of the parameter.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Highlander.Equities.Wrapper">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.Wrapper.UnpackZero(System.DateTime,System.DateTime[],System.Double[])">
+            <summary>
+            </summary>
+            <param name="today"></param>
+            <param name="dates"></param>
+            <param name="amounts"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Highlander.Equities.Wrapper.UnpackDiv(System.DateTime,System.DateTime,System.DateTime[],System.Double[])">
+            <summary>
+            </summary>
+            <param name="today"></param>
+            <param name="expiry"></param>
+            <param name="dates"></param>
+            <param name="amounts"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="T:Highlander.Equities.ZeroAUDCurve">
+            <summary>
+            Represents an Zero AUD Curve
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ZeroAUDCurve.#ctor(System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.ZeroAUDCurve"/> class.
+            </summary>
+            <param name="curveDate">The curve date.</param>
+            <param name="tenorDates">The tenor dates.</param>
+            <param name="zeroRates">The zero rates.</param>
+        </member>
+        <member name="T:Highlander.Equities.ZeroCurve">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurve.RatePoints">
+            <summary>
+            set the number of div points
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.GetR(System.Int32)">
+            <summary>
+            get rate item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.GetT(System.Int32)">
+            <summary>
+            get time item
+            </summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.SetR(System.Int32,System.Double,System.Double)">
+            <summary>
+            set the  rate and time 
+            </summary>
+            <param name="idx"></param>
+            <param name="r"></param>
+            <param name="t"></param>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.MakeArrays">
+            <summary>
+            make the arrays
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.EmptyArrays">
+            <summary>
+            empty the arrays
+            </summary>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.LinInterp(System.Double)">
+            <summary>
+            Linear interpolation
+            </summary>
+            <param name="x"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurve.ForwardRate(System.Double,System.Double)">
+            <summary>
+            compute the forward rate between t1 and t2
+            </summary>
+            <param name="t1"></param>
+            <param name="t2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.ZeroCurveBase">
+            <summary>
+            Base Zero rate Curve
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.ZeroCurveBase.DTCurveDate">
+            <summary>
+            The curve date
+            </summary>
+        </member>
+        <member name="F:Highlander.Equities.ZeroCurveBase._currencyCode">
+            <summary>
+            The Curve Currency
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurveBase.ZeroRates">
+            <summary>
+            Gets the zero rates.
+            </summary>
+            <value>The zero rates.</value>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurveBase.Tenors">
+            <summary>
+            Gets the tenors.
+            </summary>
+            <value>The tenors.</value>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurveBase.Rates">
+            <summary>
+            Gets the rates.
+            </summary>
+            <value>The rates.</value>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurveBase.CurveDate">
+            <summary>
+            Gets or sets the curve date.
+            </summary>
+            <value>The curve date.</value>
+        </member>
+        <member name="P:Highlander.Equities.ZeroCurveBase.CurrencyCode">
+            <summary>
+            Gets or sets the currency code.
+            </summary>
+            <value>The currency code.</value>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurveBase.#ctor(System.Collections.Generic.IEnumerable{System.DateTime},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.ZeroCurveBase"/> class.
+            </summary>
+            <param name="tenorDates">The tenor dates.</param>
+            <param name="zeroRates">The zero rates.</param>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurveBase.#ctor(System.DateTime,System.Collections.Generic.IEnumerable{System.DateTime},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.ZeroCurveBase"/> class.
+            </summary>
+            <param name="curveDate">The curve date.</param>
+            <param name="tenorDates">The tenor dates.</param>
+            <param name="zeroRates">The zero rates.</param>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurveBase.#ctor(System.DateTime,System.String,System.Collections.Generic.IEnumerable{System.DateTime},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.ZeroCurveBase"/> class.
+            </summary>
+            <param name="curveDate">The curve date.</param>
+            <param name="curveCurrencyCode">The curve currency code.</param>
+            <param name="tenorDates">The tenor dates.</param>
+            <param name="zeroRates">The zero rates.</param>
+        </member>
+        <member name="M:Highlander.Equities.ZeroCurveBase.CreateZeroRates(System.Collections.Generic.IEnumerable{System.DateTime},System.Collections.Generic.List{System.Double})">
+            <summary>
+            Creates the zero rates.
+            </summary>
+            <param name="tenorDates">The tenor dates.</param>
+            <param name="zeroRates">The zero rates.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.Equities.ZeroRate">
+            <summary>
+            A Zero Rate
+            </summary>
+        </member>
+        <member name="P:Highlander.Equities.ZeroRate.TenorDate">
+            <summary>
+            Gets the tenor date.
+            </summary>
+            <value>The tenor date.</value>
+        </member>
+        <member name="P:Highlander.Equities.ZeroRate.Rate">
+            <summary>
+            Gets the rate.
+            </summary>
+            <value>The rate.</value>
+        </member>
+        <member name="M:Highlander.Equities.ZeroRate.#ctor(System.DateTime,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Highlander.Equities.ZeroRate"/> class.
+            </summary>
+            <param name="tenorDate">The tenor date.</param>
+            <param name="rate">The rate.</param>
+        </member>
+    </members>
+</doc>

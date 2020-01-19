@@ -17,15 +17,15 @@
 
 using System;
 using System.Configuration;
-using Orion.Util.Helpers;
-using Orion.Util.Logging;
-using Orion.Util.NamedValues;
-using Orion.Util.RefCounting;
-using Orion.Util.Threading;
+using Highlander.Utilities.RefCounting;
+using Highlander.Utilities.Helpers;
+using Highlander.Utilities.Logging;
+using Highlander.Utilities.NamedValues;
+using Highlander.Utilities.Threading;
 
 #endregion
 
-namespace Orion.Util.Servers
+namespace Highlander.Utilities.Servers
 {
     /// <summary>
     /// 
@@ -46,27 +46,43 @@ namespace Orion.Util.Servers
     public interface IBasicServer : IDisposable
     {
         Reference<ILogger> LoggerRef { get; set; }
+
         ILogger Logger { get; }
+
         NamedValueSet OtherSettings { get; set; }
         void Start();
+
         void Stop();
+
         BasicServerState GetState();
+
         bool IsRunning { get; }
+
         bool HasStarted { get; }
+
         bool HasStopped { get; }
+
         bool HasFaulted { get; }
+
         bool FirstCallDone { get; }
+
         bool CloseCallDone { get; }
+
         bool FinalCallDone { get; }
+
         long QueueLength { get; }
+
         bool IsIdle { get; }
     }
 
     internal class InternalState
     {
         public bool FirstCallDone;
+
         public bool CloseCallDone;
+
         public bool FinalCallDone;
+
         public BasicServerState State = BasicServerState.Initial;
     }
 
@@ -82,9 +98,11 @@ namespace Orion.Util.Servers
     public class BasicServer : IBasicServer
     {
         protected AsyncThreadQueue MainThreadQueue;
+
         private readonly Guarded<InternalState> _serverState = new Guarded<InternalState>(new InternalState());
 
         private Reference<ILogger> _loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+
         public ILogger Logger => _loggerRef.Target;
 
         /// <summary>
@@ -133,7 +151,7 @@ namespace Orion.Util.Servers
             {
                 Stop();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -204,7 +222,6 @@ namespace Orion.Util.Servers
             _serverState.Locked(serverState =>
             {
                 BasicServerState oldState = serverState.State;
-
                 // if the state is faulted, and we are stopping then just return, else fail
                 if (oldState == BasicServerState.Faulted)
                 {
@@ -215,7 +232,6 @@ namespace Orion.Util.Servers
                     }
                     throw new InvalidOperationException("Server faulted!");
                 }
-
                 //proceed
                 switch (newState)
                 {
@@ -327,7 +343,7 @@ namespace Orion.Util.Servers
             {
                 OnBasicSyncStart();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
                 SetState(BasicServerState.Faulted);
@@ -358,7 +374,7 @@ namespace Orion.Util.Servers
             {
                 OnFirstCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -393,7 +409,7 @@ namespace Orion.Util.Servers
             {
                 OnBasicSyncStop();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -424,7 +440,7 @@ namespace Orion.Util.Servers
             {
                 OnCloseCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -438,7 +454,7 @@ namespace Orion.Util.Servers
             {
                 OnFinalCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
