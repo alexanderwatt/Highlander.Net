@@ -340,9 +340,7 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
         {
             if (baseRequest == null)
                 throw new ArgumentNullException(nameof(baseRequest));
-
-            var request = baseRequest as OrdinaryCurveGenRequest;
-            if (request == null)
+            if (!(baseRequest is OrdinaryCurveGenRequest request))
                 throw new ArgumentNullException(nameof(baseRequest));
             // publish 'initial' status
             var response = new HandlerResponse

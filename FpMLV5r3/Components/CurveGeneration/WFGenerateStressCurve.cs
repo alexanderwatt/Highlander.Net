@@ -55,8 +55,7 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
         {
             if (baseRequest == null)
                 throw new ArgumentNullException(nameof(baseRequest));
-            var request = baseRequest as StressedCurveGenRequest;
-            if (request == null)
+            if (!(baseRequest is StressedCurveGenRequest request))
                 throw new InvalidCastException(
                     $"{typeof(RequestBase).Name} is not a {typeof(StressedCurveGenRequest).Name}");
             // check for workflow cancellation
@@ -183,7 +182,7 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
                     // apply the stress rule
                     //_Context.Logger.LogDebug("Applying stress '{0}' (rule {1}) to base curve '{2}'", stressRule.StressId, stressRule.RuleId, baseCurveUniqueId);
                     var stressDefProps = new NamedValueSet(baseCurveItem.AppProps, curveGenProps);
-                    stressDefProps.Set("Identifier", null);//THis is done for backward compatability eith the old ratecurves.
+                    stressDefProps.Set("Identifier", null);//THis is done for backward compatibility with the old rate curves.
                     stressDefProps.Set(CurveProp.BaseCurveType, baseCurveType);
                     IPricingStructureIdentifier stressCurveId = PricingStructureIdentifier.CreateMarketCurveIdentifier(
                         stressDefProps, inputMarketName, null, baseCurveType.ToString(), inputCurveName, stressRule.StressId);
@@ -217,7 +216,7 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
                                 var basisCurveFpmlTriplet =
                                     new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
                                         ps, psv, stressCurveProps);
-                                //create and set the pricingstructure
+                                //create and set the pricing structure
                                 ips = CurveLoader.LoadInterestRateCurve(Context.Logger, Context.Cache, nameSpace, refCurveFpmlTriplet, basisCurveFpmlTriplet);
                                 //Creator.Create(refCurveFpmlTriplet, basisCurveFpmlTriplet);
                                 break;
@@ -240,7 +239,7 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
                                     = new Triplet<PricingStructure, PricingStructureValuation, NamedValueSet>(
                                         quoteMarket.Items[0],
                                         psvRef, quoteProperties);
-                                //create and set the pricingstructure
+                                //create and set the pricing structure
                                 ips = CurveLoader.LoadInterestRateCurve(Context.Logger, Context.Cache, nameSpace, refCurveFpmlTriplet, fxCurveFpmlTriplet, quoteCurveFpmlTriplet,
                                                          xccyCurveFpmlTriplet);
                                 //Creator.Create(refCurveFpmlTriplet, fxCurveFpmlTriplet, quoteCurveFpmlTriplet, xccyCurveFpmlTriplet);
@@ -273,7 +272,6 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
                 } // foreach stress rule
 
             } // foreach base curve
-
             // success
             response.Status = RequestStatusEnum.Completed;
         }
@@ -356,7 +354,6 @@ namespace Highlander.Workflow.CurveGeneration.V5r3
             string marketQuote = AssetMeasureScheme.GetEnumString(AssetMeasureEnum.MarketQuote);
             string decimalRate = PriceQuoteUnitsScheme.GetEnumString(PriceQuoteUnitsEnum.DecimalRate);
             var psv = BinarySerializerHelper.Clone(psvInput);
-
             // extract the market quotes from the cloned base curve
             QuotedAssetSet curveDefinition;
             if (psv is YieldCurveValuation yieldCurveValuation)
