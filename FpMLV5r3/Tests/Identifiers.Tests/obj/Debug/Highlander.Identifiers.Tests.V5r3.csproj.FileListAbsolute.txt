@@ -23,3 +23,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Test
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Tests\Identifiers.Tests\obj\Debug\Highlander.Identifiers.Tests.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Tests\Identifiers.Tests\obj\Debug\Highlander.Identifiers.Tests.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Tests\Identifiers.Tests\obj\Debug\Highlander.Identifiers.Tests.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Tests\Identifiers.Tests\obj\Debug\Highlander.Identifiers.Tests.V5r3.csproj.CoreCompileInputs.cache

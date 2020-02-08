@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts.3.4.cs" />
+    <Compile Remove="CustomClientBase.cs" />
+    <Compile Remove="CustomServiceHost.cs" />
+    <Compile Remove="Discover.1.1.cs" />
+    <Compile Remove="ServiceModelEx.cs" />
+    <Compile Remove="Session.1.3.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\BuildEnv\Build.cs" Link="Build.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Highlander.Core.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

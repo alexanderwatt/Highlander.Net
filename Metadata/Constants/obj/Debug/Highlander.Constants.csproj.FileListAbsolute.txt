@@ -3,3 +3,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Cons
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Debug\Highlander.Constants.csprojAssemblyReference.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Debug\Highlander.Constants.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Debug\Highlander.Constants.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Debug\Highlander.Constants.csproj.CoreCompileInputs.cache

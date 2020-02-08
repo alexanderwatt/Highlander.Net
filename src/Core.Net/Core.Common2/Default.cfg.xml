@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EnvConfigRuleSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/EnvConfigRuleFormat.xsd">
+  <setName>HL_Core</setName>
+  <!--global defaults-->
+  <v2Rules>
+    <Priority>0</Priority>
+    <Disabled>false</Disabled>
+    <ApplName>HL_Core</ApplName>
+    <Settings>DbServer/String=localhost\sqlexpress|DbPrefix/String=Core|NodeType/Int32=2</Settings>
+  </v2Rules>
+  <!--HL_MDAG-->
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>DEV</Env>
+    <ApplName>HL_MDAG</ApplName>
+    <Settings>PrimaryServers/String=localhost</Settings> <!--;sydwadqds01-->
+  </v2Rules>
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>SIT</Env>
+    <ApplName>HL_MDAG</ApplName>
+    <Settings>PrimaryServers/String=sydwadqds01</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>STG</Env>
+    <ApplName>HL_MDAG</ApplName>
+    <Settings>PrimaryServers/String=sydwadbrl01</Settings>
+  </v2Rules>
+  <!--environment defaults-->
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>UTT</Env>
+    <ApplName>HL_Core</ApplName>
+    <Settings>PrimaryServers/String=localhost</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>DEV</Env>
+    <ApplName>HL_Core</ApplName>
+    <Settings>PrimaryServers/String=localhost</Settings> <!--;sydwadqds01|FallbackServers/String=lonbqrdl2j-->
+  </v2Rules>
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>SIT</Env>
+    <ApplName>HL_Core</ApplName>
+    <Settings>PrimaryServers/String=sydwadqds01</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>1</Priority>
+    <Env>STG</Env>
+    <ApplName>HL_Core</ApplName>
+    <Settings>PrimaryServers/String=sydwadbrl01|FallbackServers/String=melwadbrl01</Settings>
+  </v2Rules>
+  <!--server machine settings-->
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>sydwadqds01</HostName>
+    <Settings>DbServer/String=sydwadqds01|NodeType/Int32=1</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>sydwadqds01</HostName>
+    <Settings>DbServer/String=sydwddqur02|NodeType/Int32=1</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>sydwadbrl01</HostName>
+    <Settings>DbServer/String=localhost|NodeType/Int32=1</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>melwadbrl01</HostName>
+    <Settings>DbServer/String=localhost|NodeType/Int32=1</Settings>
+  </v2Rules>
+  <!--developer machine settings-->
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>alex-laptop</HostName>
+    <Settings>DbServer/String=localhost\sqlexpress</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>alex-pc</HostName>
+    <Settings>DbServer/String=localhost</Settings>
+  </v2Rules>
+  <v2Rules>
+    <Priority>2</Priority>
+    <ApplName>HL_Core</ApplName>
+    <HostName>alexmobile-pc</HostName>
+    <Settings>DbServer/String=localhost</Settings>
+  </v2Rules>
+  <!--special test overrides-->
+  <v2Rules>
+    <Priority>3</Priority>
+    <Env>UTT</Env>
+    <ApplName>HL_Core</ApplName>
+    <HostName>sydwcndb12s</HostName>
+    <Settings>NodeType/Int32=1</Settings>
+  </v2Rules>
+</EnvConfigRuleSet>

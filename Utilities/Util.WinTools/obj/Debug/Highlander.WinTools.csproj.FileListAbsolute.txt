@@ -6,3 +6,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Uti
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.WinTools\obj\Debug\Highlander.WinTools.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.WinTools\obj\Debug\Highlander.WinTools.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.WinTools\obj\Debug\Highlander.WinTools.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util.WinTools\obj\Debug\Highlander.WinTools.csproj.CoreCompileInputs.cache

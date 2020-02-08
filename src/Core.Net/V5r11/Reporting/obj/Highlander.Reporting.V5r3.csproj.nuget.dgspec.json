@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.V5r3\\Reporting\\Highlander.Reporting.V5r3.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.V5r3\\Reporting\\Highlander.Reporting.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.V5r3\\Reporting\\Highlander.Reporting.V5r3.csproj",
+        "projectName": "Highlander.Reporting.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.V5r3\\Reporting\\Highlander.Reporting.V5r3.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.V5r3\\Reporting\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

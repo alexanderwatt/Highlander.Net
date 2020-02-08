@@ -11,3 +11,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Or
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Client\obj\Debug\Highlander.Orc.Client.csproj.CoreCompileInputs.cache

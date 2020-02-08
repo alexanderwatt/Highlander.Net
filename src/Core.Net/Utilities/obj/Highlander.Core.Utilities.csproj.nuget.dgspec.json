@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Utilities\\Highlander.Core.Utilities.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Utilities\\Highlander.Core.Utilities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Utilities\\Highlander.Core.Utilities.csproj",
+        "projectName": "Highlander.Core.Utilities",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Utilities\\Highlander.Core.Utilities.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Utilities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[4.7.0-preview2.19523.17, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.0-preview2.19523.17, )"
+            },
+            "System.Diagnostics.EventLog": {
+              "target": "Package",
+              "version": "[4.7.0-preview2.19523.17, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

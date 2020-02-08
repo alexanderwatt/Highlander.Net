@@ -13,3 +13,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Se
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\SetAppCfg\obj\Debug\Highlander.Core.SetAppCfg.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\SetAppCfg\obj\Debug\Highlander.Core.SetAppCfg.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\SetAppCfg\obj\Debug\Highlander.Core.SetAppCfg.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\SetAppCfg\obj\Debug\Highlander.Core.SetAppCfg.csproj.CoreCompileInputs.cache

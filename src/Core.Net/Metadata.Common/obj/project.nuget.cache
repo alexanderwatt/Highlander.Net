@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "/e/xbHaYQZSXzNAB1+hT5N46o88q+GS4NqR9/PiuN7J0FHvMS4Vb6/X1lZ5iA2d0oGkCFC7+AKmuoaVgc3lqUw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Core.Net\\Metadata.Common\\Highlander.Metadata.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0-preview2.19523.17\\microsoft.netcore.platforms.3.1.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.win32.registry\\4.7.0-preview2.19523.17\\microsoft.win32.registry.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0-preview2.19523.17\\microsoft.win32.systemevents.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0-preview2.19523.17\\runtime.native.system.data.sqlclient.sni.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0-preview2.19523.17\\system.configuration.configurationmanager.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.data.sqlclient\\4.8.0-preview2.19523.17\\system.data.sqlclient.4.8.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.0-preview2.19523.17\\system.diagnostics.diagnosticsource.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.diagnostics.eventlog\\4.7.0-preview2.19523.17\\system.diagnostics.eventlog.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.drawing.common\\4.7.0-preview2.19523.17\\system.drawing.common.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.0-preview2.19523.17\\system.runtime.compilerservices.unsafe.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.security.accesscontrol\\4.7.0-preview2.19523.17\\system.security.accesscontrol.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0-preview2.19523.17\\system.security.cryptography.protecteddata.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.security.permissions\\4.7.0-preview2.19523.17\\system.security.permissions.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.security.principal.windows\\4.7.0-preview2.19523.17\\system.security.principal.windows.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0-preview2.19523.17\\system.text.encoding.codepages.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\system.windows.extensions\\4.7.0-preview2.19523.17\\system.windows.extensions.4.7.0-preview2.19523.17.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

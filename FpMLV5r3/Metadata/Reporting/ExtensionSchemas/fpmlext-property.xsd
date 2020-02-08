@@ -51,10 +51,17 @@
     <xsd:complexContent>
       <xsd:extension base="fpml:UnderlyingAsset">
         <xsd:sequence>
-          <xsd:element name="address" type="xsd:string" minOccurs="0"/>
-          <xsd:element name="contract" type="xsd:string" minOccurs="0"/>
-          <xsd:element name="location" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="propertyAddress" type="fpml:Address" minOccurs="0"/>
+          <xsd:element name="contractReference" type="fpml:ContractId" minOccurs="0"/>
+          <xsd:element name="locationReference" type="fpml:GeoLocation" minOccurs="0"/>
+          <xsd:element name="purchaseDate" type="fpml:AdjustableOrRelativeDate" minOccurs="0"/>
+          <xsd:element name="bedrooms" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="bathrooms" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="parking" type="xsd:string" minOccurs="0"/>
           <xsd:element name="propertyTaxonomyType" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="lastTradedPrice" type="fpml:Money" minOccurs="0"/>
+          <xsd:element name="lastTradedDate" type="fpml:IdentifiedDate" minOccurs="0"/>
+          <xsd:element name="businessDayAdjustments" type="fpml:BusinessDayAdjustments" minOccurs="0"/>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>

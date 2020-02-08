@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "SedYJVaxWv3J+WkVBAIVnQKt3YvKlmANzupCt8wSsxm2Ak8cXaocisEpUkDCiR5q0Owyx/xYD0xw4niidICsmw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\src\\Blazor.Core.Server\\Blazor.Core.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.9.5\\microsoft.visualstudio.azure.containers.tools.targets.1.9.5.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.netcore.app.host.win-x86\\3.0.2\\microsoft.netcore.app.host.win-x86.3.0.2.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

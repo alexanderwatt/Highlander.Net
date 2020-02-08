@@ -19,3 +19,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Meta
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\TestGui\obj\x86\Debug\Highlander.TestGui.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\TestGui\obj\x86\Debug\Highlander.TestGui.V5r3.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\TestGui\obj\x86\Debug\Highlander.TestGui.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\TestGui\obj\x86\Debug\Highlander.TestGui.V5r3.csproj.CoreCompileInputs.cache

@@ -14,3 +14,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Backup\obj\Debug\Highlander.Core.Backup.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Backup\obj\Debug\Highlander.Core.Backup.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Backup\obj\Debug\Highlander.Core.Backup.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Backup\obj\Debug\Highlander.Core.Backup.csproj.CoreCompileInputs.cache

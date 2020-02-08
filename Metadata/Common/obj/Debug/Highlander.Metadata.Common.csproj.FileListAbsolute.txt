@@ -8,3 +8,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Comm
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Common\obj\Debug\Highlander.Metadata.Common.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Common\obj\Debug\Highlander.Metadata.Common.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Common\obj\Debug\Highlander.Metadata.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Common\obj\Debug\Highlander.Metadata.Common.csproj.CoreCompileInputs.cache

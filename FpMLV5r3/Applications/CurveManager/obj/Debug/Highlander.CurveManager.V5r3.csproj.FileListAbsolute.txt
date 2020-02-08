@@ -57,3 +57,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Appl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\CurveManager\obj\Debug\Highlander.CurveManager.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\CurveManager\obj\Debug\Highlander.CurveManager.V5r3.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\CurveManager\obj\Debug\Highlander.CurveManager.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\CurveManager\obj\Debug\Highlander.CurveManager.V5r3.csproj.CoreCompileInputs.cache

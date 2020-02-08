@@ -9,3 +9,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Na
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NVS.DebuggerVisualizer.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\NamedValueSet.DebuggerVisualizer.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\NamedValueSet.DebuggerVisualizer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\NamedValueSetVisualizer\obj\Debug\Highlander.NVS.DebuggerVisualizer.csproj.CoreCompileInputs.cache

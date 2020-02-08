@@ -15,3 +15,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Alert.WinSvc\obj\x86\Debug\Highlander.Core.AlertService.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Alert.WinSvc\obj\x86\Debug\Highlander.Core.AlertService.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Alert.WinSvc\obj\x86\Debug\Highlander.Core.AlertService.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Alert.WinSvc\obj\x86\Debug\Highlander.Core.AlertService.csproj.CoreCompileInputs.cache

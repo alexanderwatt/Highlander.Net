@@ -8,3 +8,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Bridge\obj\Debug\Highlander.Core.Bridge.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Bridge\obj\Debug\Highlander.Core.Bridge.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Bridge\obj\Debug\Highlander.Core.Bridge.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.Bridge\obj\Debug\Highlander.Core.Bridge.csproj.CoreCompileInputs.cache

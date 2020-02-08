@@ -12,3 +12,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\UI\
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\UI\obj\Debug\Highlander.Forms.csproj.GenerateResource.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\UI\obj\Debug\Highlander.Forms.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\UI\obj\Debug\Highlander.Forms.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\UI\obj\Debug\Highlander.Forms.csproj.CoreCompileInputs.cache

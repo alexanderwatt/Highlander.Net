@@ -16,3 +16,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.NetMon\obj\Debug\Highlander.Core.NetMon.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.NetMon\obj\Debug\Highlander.Core.NetMon.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.NetMon\obj\Debug\Highlander.Core.NetMon.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.NetMon\obj\Debug\Highlander.Core.NetMon.csproj.CoreCompileInputs.cache

@@ -7,3 +7,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Comp
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equties.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equities.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\EqutiesCore\obj\Debug\Highlander.Equties.csproj.CoreCompileInputs.cache

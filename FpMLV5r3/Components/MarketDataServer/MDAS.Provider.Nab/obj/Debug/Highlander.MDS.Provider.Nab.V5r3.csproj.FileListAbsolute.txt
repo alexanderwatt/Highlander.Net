@@ -22,3 +22,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Comp
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\MDAS.Provider.Nab\obj\Debug\Highlander.MDS.Provider.Nab.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\MDAS.Provider.Nab\obj\Debug\Highlander.MDS.Provider.Nab.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\MDAS.Provider.Nab\obj\Debug\Highlander.MDS.Provider.Nab.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\MDAS.Provider.Nab\obj\Debug\Highlander.MDS.Provider.Nab.V5r3.csproj.CoreCompileInputs.cache

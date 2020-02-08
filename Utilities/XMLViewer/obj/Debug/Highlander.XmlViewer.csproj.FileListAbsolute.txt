@@ -6,3 +6,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XML
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.csproj.GenerateResource.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.csproj.CoreCompileInputs.cache

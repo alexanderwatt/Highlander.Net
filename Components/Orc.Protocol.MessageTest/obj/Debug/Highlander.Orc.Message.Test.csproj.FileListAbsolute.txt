@@ -17,3 +17,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Or
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.MessageTest\obj\Debug\Highlander.Orc.Message.Test.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.MessageTest\obj\Debug\Highlander.Orc.Message.Test.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.MessageTest\obj\Debug\Highlander.Orc.Message.Test.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.MessageTest\obj\Debug\Highlander.Orc.Message.Test.csproj.CoreCompileInputs.cache

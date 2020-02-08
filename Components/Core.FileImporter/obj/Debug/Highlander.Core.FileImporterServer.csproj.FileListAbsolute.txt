@@ -14,3 +14,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.FileImporter\obj\Debug\Highlander.Core.FileImporterServer.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.FileImporter\obj\Debug\Highlander.Core.FileImporterServer.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.FileImporter\obj\Debug\Highlander.Core.FileImporterServer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.FileImporter\obj\Debug\Highlander.Core.FileImporterServer.csproj.CoreCompileInputs.cache

@@ -18,3 +18,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.SvcGui\obj\Debug\Highlander.Core.SvcGui.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.SvcGui\obj\Debug\Highlander.Core.SvcGui.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.SvcGui\obj\Debug\Highlander.Core.SvcGui.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.SvcGui\obj\Debug\Highlander.Core.SvcGui.csproj.CoreCompileInputs.cache

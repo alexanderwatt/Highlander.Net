@@ -8,3 +8,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Wo
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\WorkflowFramework\obj\Debug\Highlander.Workflow.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\WorkflowFramework\obj\Debug\Highlander.Workflow.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\WorkflowFramework\obj\Debug\Highlander.Workflow.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\WorkflowFramework\obj\Debug\Highlander.Workflow.csproj.CoreCompileInputs.cache

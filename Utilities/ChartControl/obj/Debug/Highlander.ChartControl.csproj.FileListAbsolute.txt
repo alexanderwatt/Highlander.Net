@@ -5,3 +5,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Cha
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\ChartControl\obj\Debug\Highlander.ChartControl.csproj.GenerateResource.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\ChartControl\obj\Debug\Highlander.ChartControl.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\ChartControl\obj\Debug\Highlander.ChartControl.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\ChartControl\obj\Debug\Highlander.ChartControl.csproj.CoreCompileInputs.cache

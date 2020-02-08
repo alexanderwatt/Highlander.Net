@@ -5,3 +5,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Uti
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Debug\Highlander.Utilities.csprojAssemblyReference.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Debug\Highlander.Utilities.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Debug\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\Util\obj\Debug\Highlander.Utilities.csproj.CoreCompileInputs.cache

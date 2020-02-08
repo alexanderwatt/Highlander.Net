@@ -155,6 +155,48 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ExtensionSchemas\fpml-main-5-3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-collective-investment-vehicles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-equities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-fixed-income.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-futures-and-options.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-interest-rate-derivatives.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-lease.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-property.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-repo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-shared.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-trade.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\fpmlext-warrant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\qrscext-instruments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExtensionSchemas\xmldsig-core-schema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ExtensionSchemas\xsdgen.bat" />
     <None Include="Key.snk" />
     <None Include="xsdgen.bat" />

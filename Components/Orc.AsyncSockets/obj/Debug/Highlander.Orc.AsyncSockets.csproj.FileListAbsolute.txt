@@ -7,3 +7,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Or
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.AsyncSockets\obj\Debug\Highlander.Orc.AsyncSockets.csproj.GenerateResource.cache
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.AsyncSockets\obj\Debug\Highlander.Orc.AsyncSockets.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.AsyncSockets\obj\Debug\Highlander.Orc.AsyncSockets.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.AsyncSockets\obj\Debug\Highlander.Orc.AsyncSockets.csproj.CoreCompileInputs.cache

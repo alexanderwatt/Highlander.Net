@@ -13,3 +13,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.Web.TestClient.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.WebClient.exe
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.WebClient.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.TestServer\obj\Debug\Highlander.Core.Web.TestClient.csproj.CoreCompileInputs.cache

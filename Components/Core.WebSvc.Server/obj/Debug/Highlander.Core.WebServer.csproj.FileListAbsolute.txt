@@ -10,3 +10,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Co
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.Server\obj\Debug\Highlander.Core.WebServer.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.Server\obj\Debug\Highlander.Core.WebServer.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.Server\obj\Debug\Highlander.Core.WebServer.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Core.WebSvc.Server\obj\Debug\Highlander.Core.WebServer.csproj.CoreCompileInputs.cache

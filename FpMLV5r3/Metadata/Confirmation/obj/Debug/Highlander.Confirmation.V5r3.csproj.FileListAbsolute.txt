@@ -12,3 +12,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Meta
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\Confirmation\obj\Debug\Highlander.Confirmation.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\Confirmation\obj\Debug\Highlander.Confirmation.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\Confirmation\obj\Debug\Highlander.Confirmation.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Metadata\Confirmation\obj\Debug\Highlander.Confirmation.V5r3.csproj.CoreCompileInputs.cache
