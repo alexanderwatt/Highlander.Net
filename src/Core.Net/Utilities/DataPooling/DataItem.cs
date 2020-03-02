@@ -33,12 +33,11 @@ namespace Highlander.Utilities.DataPooling
         // static behaviour
         // DefaultIsEmpty causes the "empty" value to be returned when value == default(T)
         // e.g. Guid.Empty becomes the "empty" singleton value, not an actual value.
-        private static readonly bool _defaultIsEmpty = DefaultIsEmptyInitialiser();
-        
+
         /// <summary>
         /// 
         /// </summary>
-        public static bool DefaultIsEmpty => _defaultIsEmpty;
+        public static bool DefaultIsEmpty { get; } = DefaultIsEmptyInitialiser();
 
         private static bool DefaultIsEmptyInitialiser()
         {
@@ -60,7 +59,7 @@ namespace Highlander.Utilities.DataPooling
         /// <returns></returns>
         public static List<DataItem<T>> NewList(IEnumerable<T> values)
         {
-            return values?.Select(value => new DataItem<T>(value, _defaultIsEmpty, false)).ToList();
+            return values?.Select(value => new DataItem<T>(value, DefaultIsEmpty, false)).ToList();
         }
 
         /// <summary>
@@ -70,9 +69,7 @@ namespace Highlander.Utilities.DataPooling
         /// <returns></returns>
         public static DataItem<T>[] NewArray(IEnumerable<T> values)
         {
-            if (values == null)
-                return null;
-            return NewList(values).ToArray();
+            return values == null ? null : NewList(values).ToArray();
         }
 
         /// <summary>
@@ -90,25 +87,24 @@ namespace Highlander.Utilities.DataPooling
         public static DateTimeOffset PoolLastCleared => PoolValue<T>.PoolLastCleared;
 
         // instance behaviour
-        private PoolValue<T> _value;
 
         /// <summary>
         /// 
         /// </summary>
-        public PoolValue<T> PoolValue => _value;
+        public PoolValue<T> PoolValue { get; private set; }
 
         /// <summary>
         /// Gets the value for this instance.
         /// </summary>
         /// <value>The value.</value>
-        public T Value => _value.Value;
+        public T Value => PoolValue.Value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataItem&lt;T&gt;"/> class with the "empty" value.
         /// </summary>
         public DataItem()
         {
-            _value = PoolValue<T>.Empty;
+            PoolValue = PoolValue<T>.Empty;
         }
 
         /// <summary>
@@ -117,7 +113,7 @@ namespace Highlander.Utilities.DataPooling
         /// <param name="value">The value.</param>
         public DataItem(T value)
         {
-            _value = PoolValue<T>.NewValue(value, _defaultIsEmpty, false);
+            PoolValue = PoolValue<T>.NewValue(value, DefaultIsEmpty, false);
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="DataItem&lt;T&gt;"/> class,
@@ -128,7 +124,7 @@ namespace Highlander.Utilities.DataPooling
         /// <param name="doNotPool">if set to <c>true</c> [do not pool].</param>
         public DataItem(T value, bool defaultIsEmpty, bool doNotPool)
         {
-            _value = PoolValue<T>.NewValue(value, defaultIsEmpty, doNotPool);
+            PoolValue = PoolValue<T>.NewValue(value, defaultIsEmpty, doNotPool);
         }
 
         /// <summary>
@@ -136,20 +132,20 @@ namespace Highlander.Utilities.DataPooling
         /// </summary>
         public void Repool()
         {
-            _value = PoolValue<T>.NewValue(_value.Value);
+            PoolValue = PoolValue<T>.NewValue(PoolValue.Value);
         }
 
         /// <summary>
         /// Gets a value indicating whether this instance is set to Empty (meaning it has no value).
         /// </summary>
         /// <value><c>true</c> if this instance is empty; otherwise, <c>false</c>.</value>
-        public bool IsEmpty => _value.IsEmpty;
+        public bool IsEmpty => PoolValue.IsEmpty;
 
         /// <summary>
         /// Gets a value indicating whether this instance contains a value.
         /// </summary>
         /// <value><c>true</c> if this instance is not empty; otherwise, <c>false</c>.</value>
-        public bool HasValue => _value.HasValue;
+        public bool HasValue => PoolValue.HasValue;
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -177,7 +173,7 @@ namespace Highlander.Utilities.DataPooling
         /// </returns>
         public bool Equals(DataItem<T> other)
         {
-            return _value.Equals(other?.PoolValue);
+            return PoolValue.Equals(other?.PoolValue);
         }
 
         /// <summary>
@@ -186,10 +182,7 @@ namespace Highlander.Utilities.DataPooling
         /// <returns>
         /// A hash code for the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override int GetHashCode()
-        {
-            return _value.GetHashCode();
-        }
+        public override int GetHashCode() => PoolValue.GetHashCode();
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -199,7 +192,7 @@ namespace Highlander.Utilities.DataPooling
         /// </returns>
         public override string ToString()
         {
-            return _value.ToString();
+            return PoolValue.ToString();
         }
     }
 
@@ -245,13 +238,13 @@ namespace Highlander.Utilities.DataPooling
         /// Gets a value indicating whether this instance is set to Empty (meaning it has no value).
         /// </summary>
         /// <value><c>true</c> if this instance is empty; otherwise, <c>false</c>.</value>
-        public bool IsEmpty => (this == _Empty);
+        public bool IsEmpty => Equals(_Empty);
 
         /// <summary>
         /// Gets a value indicating whether this instance contains a value.
         /// </summary>
         /// <value><c>true</c> if this instance is not empty; otherwise, <c>false</c>.</value>
-        public bool HasValue => (this != _Empty);
+        public bool HasValue => (!Equals(_Empty));
 
         /// <summary>
         /// Gets the value for this instance.
@@ -307,9 +300,7 @@ namespace Highlander.Utilities.DataPooling
         /// </returns>
         public override string ToString()
         {
-            if (this == _Empty)
-                return null;
-            return _value.ToString();
+            return Equals(_Empty) ? null : _value.ToString();
         }
 
         /// <summary>
@@ -320,9 +311,7 @@ namespace Highlander.Utilities.DataPooling
         /// </returns>
         public override int GetHashCode()
         {
-            if (this == _Empty)
-                return 0;
-            return EqualityComparer<T>.Default.GetHashCode(_value);
+            return Equals(_Empty) ? 0 : EqualityComparer<T>.Default.GetHashCode(_value);
         }
 
         /// <summary>

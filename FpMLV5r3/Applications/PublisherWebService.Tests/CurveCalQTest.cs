@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using Highlander.Constants;
 using Highlander.PublisherWebService.Tests.V5r3.Properties;
-using Highlander.PublisherWebService.V5r3;
 using Highlander.Reporting.V5r3;
 using Highlander.UnitTestEnv.V5r3;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Serialisation;
+using Highlander.WebAPI.V5r3;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Exception = System.Exception;
 

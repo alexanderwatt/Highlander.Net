@@ -74,3 +74,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Comp
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\UnitTest.MDAS.Client\bin\Debug\bbfieldsj.tbl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\UnitTest.MDAS.Client\bin\Debug\ccylist.tbl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\UnitTest.MDAS.Client\obj\Debug\Highlander.MDS.Client.Test.V5r3.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\MarketDataServer\UnitTest.MDAS.Client\bin\Debug\xsdgen.bat

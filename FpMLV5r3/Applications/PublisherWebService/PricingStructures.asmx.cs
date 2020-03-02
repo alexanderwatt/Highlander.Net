@@ -1,12 +1,12 @@
 ﻿/*
- Copyright (C) 2019 Alex Watt and Simon Dudley (alexwatt@hotmail.com)
+ Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
- This file is part of Highlander Project https://github.com/awatt/highlander
+ This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
 
  Highlander is free software: you can redistribute it and/or modify it
  under the terms of the Highlander license.  You should have received a
  copy of the license along with this program; if not, license is
- available at <https://github.com/awatt/highlander/blob/develop/LICENSE>.
+ available at <https://github.com/alexanderwatt/Highlander.Net/blob/develop/LICENSE>.
 
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -75,7 +75,7 @@ namespace Highlander.PublisherWebService.V5r3
         {
             Logger = Reference<ILogger>.Create(new TraceLogger(true));
             NameSpace = EnvironmentProp.DefaultNameSpace;
-            CoreClientFactory factory = new CoreClientFactory(Logger)
+            var factory = new CoreClientFactory(Logger)
                 .SetEnv(BuildEnv.ToString())
                 .SetApplication(Assembly.GetExecutingAssembly())
                 .SetProtocols(WcfConst.AllProtocolsStr)
@@ -109,7 +109,7 @@ namespace Highlander.PublisherWebService.V5r3
             {
                 try
                 {
-                    CoreClientFactory factory = new CoreClientFactory(Logger)
+                    var factory = new CoreClientFactory(Logger)
                         .SetEnv(BuildEnv.ToString())
                         .SetApplication(Assembly.GetExecutingAssembly())
                         .SetProtocols(WcfConst.AllProtocolsStr)
@@ -369,7 +369,7 @@ namespace Highlander.PublisherWebService.V5r3
 
         private static TimeSpan GetLifetime(NamedValueSet publishProperties)
         {
-            int expiryInterval = publishProperties.GetValue("ExpiryIntervalInMins", 60);
+            int expiryInterval = publishProperties.GetValue("ExpiryIntervalInMinutes", 60);
             var lifetime = new TimeSpan(0, expiryInterval, 0);
             return lifetime;
         }

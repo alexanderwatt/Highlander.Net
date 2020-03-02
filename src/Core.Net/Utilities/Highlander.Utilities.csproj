@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CommonItem.cs" />
+    <Compile Remove="Logging\TextBoxLogger.cs" />
+    <Compile Remove="RuntimeHelper.cs" />
+    <Compile Remove="Serialisation\SoapSerializerHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Expressions\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="NamedValues\" />
+    <Folder Include="Serialisation\" />
+    <Folder Include="Threading\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
+    <PackageReference Include="System.Diagnostics.EventLog" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Expressions\ExprFormat.cs">
+      <DependentUpon>ExprFormat.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Expressions\ExprFormat.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\bin\Debug\netcoreapp3.1\Highlander.Metadata.Common.deps.json
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\bin\Debug\netcoreapp3.1\Highlander.Metadata.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\bin\Debug\netcoreapp3.1\Highlander.Metadata.Common.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\bin\Debug\netcoreapp3.1\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\bin\Debug\netcoreapp3.1\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.AssemblyInfoInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.AssemblyInfo.cs
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.csproj.CopyComplete
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Metadata.Common\obj\Debug\netcoreapp3.1\Highlander.Metadata.Common.pdb

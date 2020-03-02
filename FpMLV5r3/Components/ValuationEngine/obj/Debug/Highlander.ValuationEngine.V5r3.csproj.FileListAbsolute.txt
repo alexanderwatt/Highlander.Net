@@ -46,3 +46,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Comp
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\ValuationEngine\obj\Debug\Highlander.ValuationEngine.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\ValuationEngine\obj\Debug\Highlander.ValuationEngine.V5r3.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\ValuationEngine\obj\Debug\Highlander.ValuationEngine.V5r3.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\ValuationEngine\bin\Debug\xsdgen.bat

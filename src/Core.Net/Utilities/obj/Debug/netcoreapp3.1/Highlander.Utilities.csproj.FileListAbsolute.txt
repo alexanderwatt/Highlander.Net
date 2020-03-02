@@ -1,0 +1,9 @@
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\bin\Debug\netcoreapp3.1\Highlander.Utilities.deps.json
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\bin\Debug\netcoreapp3.1\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\bin\Debug\netcoreapp3.1\Highlander.Utilities.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.csprojAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.AssemblyInfoInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.AssemblyInfo.cs
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\src\Core.Net\Utilities\obj\Debug\netcoreapp3.1\Highlander.Utilities.pdb

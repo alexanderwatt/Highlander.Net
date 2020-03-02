@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.0": {
+    ".NETCoreApp,Version=v3.1": {
       "Microsoft.AspNetCore.Razor.Design/2.2.0": {
         "type": "package",
         "build": {
@@ -1867,6 +1867,19 @@
           "bin/placeholder/Highlander.CalendarEngine.V5r3.dll": {}
         }
       },
+      "Highlander.CodeListTool.V5r3/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Highlander.Codes.V5r3": "1.0.0",
+          "Highlander.Utilities": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Highlander.CodeListTool.V5r3.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Highlander.CodeListTool.V5r3.dll": {}
+        }
+      },
       "Highlander.Codes.V5r3/1.0.0": {
         "type": "project",
         "dependencies": {
@@ -1882,6 +1895,7 @@
       "Highlander.Configuration.Data.V5r3/1.0.0": {
         "type": "project",
         "dependencies": {
+          "Highlander.CodeListTool.V5r3": "1.0.0",
           "Highlander.Codes.V5r3": "1.0.0",
           "Highlander.Confirmation.V5r3": "1.0.0",
           "Highlander.Constants": "1.0.0",
@@ -6598,6 +6612,11 @@
       "path": "../../FpMLV5r3/Components/CalendarEngine/Highlander.CalendarEngine.V5r3.csproj",
       "msbuildProject": "../../FpMLV5r3/Components/CalendarEngine/Highlander.CalendarEngine.V5r3.csproj"
     },
+    "Highlander.CodeListTool.V5r3/1.0.0": {
+      "type": "project",
+      "path": "../../FpMLV5r3/Metadata/CodeListTool/Highlander.CodeListTool.V5r3.csproj",
+      "msbuildProject": "../../FpMLV5r3/Metadata/CodeListTool/Highlander.CodeListTool.V5r3.csproj"
+    },
     "Highlander.Codes.V5r3/1.0.0": {
       "type": "project",
       "path": "../../FpMLV5r3/Metadata/Codes/Highlander.Codes.V5r3.csproj",
@@ -6695,7 +6714,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.0": [
+    ".NETCoreApp,Version=v3.1": [
       "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj",
       "Highlander.Constants >= 1.0.0",
       "Highlander.Core.Common >= 1.0.0",
@@ -6723,11 +6742,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
-      "projectName": "Highlander.CurveViewer",
-      "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
+      "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.V5r3.csproj",
+      "projectName": "Highlander.CurveViewer.V5r3",
+      "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.V5r3.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\obj\\",
+      "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -6738,14 +6757,14 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp3.1": {
           "projectReferences": {
             "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
               "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
@@ -6805,7 +6824,7 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.0": {
+      "netcoreapp3.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",
@@ -6835,18 +6854,18 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
     {
-      "code": "NU1105",
+      "code": "NU1104",
       "level": "Error",
-      "message": "Unable to find project information for 'C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so please run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "message": "Unable to find project 'C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj'. Check that the project reference is valid and that the project file exists.",
       "libraryId": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Numerics\\Highlander.Numerics.csproj",
       "targetGraphs": [
-        ".NETCoreApp,Version=v3.0"
+        ".NETCoreApp,Version=v3.1"
       ]
     }
   ]

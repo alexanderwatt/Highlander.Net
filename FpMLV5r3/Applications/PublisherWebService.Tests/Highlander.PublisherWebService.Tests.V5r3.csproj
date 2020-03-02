@@ -102,9 +102,9 @@
       <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
       <Name>Highlander.UnitTestEnv.V5r3</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PublisherWebService\Highlander.PublisherWebService.V5r3.csproj">
-      <Project>{6e8b1f14-124d-47ff-94d1-336f5bbba926}</Project>
-      <Name>Highlander.PublisherWebService.V5r3</Name>
+    <ProjectReference Include="..\WebApplication1\Highlander.WebAPI.V5r3.csproj">
+      <Project>{6b91d5ab-57a1-42d1-a77f-ec2fefac72fe}</Project>
+      <Name>Highlander.WebAPI.V5r3</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\BondFuturesPay.Input.xml" />
   </ItemGroup>
@@ -216,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AUDSwap6M_Output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

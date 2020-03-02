@@ -13,10 +13,10 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using Highlander.PublisherWebService.V5r3;
 using Highlander.UnitTestEnv.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
+using Highlander.WebAPI.V5r3;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.PublisherWebService.Tests.V5r3

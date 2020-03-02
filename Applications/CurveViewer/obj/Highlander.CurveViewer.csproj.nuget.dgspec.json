@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj": {}
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj": {
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.csproj",
         "projectName": "Highlander.CurveViewer",
-        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\Highlander.CurveViewer.csproj",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\Highlander.CurveViewer.csproj",
         "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\HighlanderCurveViewer\\obj\\",
+        "outputPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Applications\\CurveViewer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -22,14 +22,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.0": {
+          "netcoreapp3.1": {
             "projectReferences": {
               "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
                 "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
@@ -89,7 +89,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp3.1": {
           "dependencies": {
             "Microsoft.AspNetCore.Razor.Design": {
               "suppressParent": "All",
@@ -98,7 +98,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.0-preview2.19553.1, )"
+              "version": "[2.2.3, )"
             }
           },
           "imports": [
@@ -119,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -412,6 +412,29 @@
         "net48": {}
       }
     },
+    "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\CodeListTool\\Highlander.CodeListTool.V5r3.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\CodeListTool\\Highlander.CodeListTool.V5r3.csproj",
+        "projectName": "Highlander.CodeListTool.V5r3",
+        "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\CodeListTool\\Highlander.CodeListTool.V5r3.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Utilities\\Util\\Highlander.Utilities.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
     "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -443,6 +466,9 @@
             "projectReferences": {
               "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj": {
                 "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\Components\\Core.Common\\Highlander.Core.Common.csproj"
+              },
+              "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\CodeListTool\\Highlander.CodeListTool.V5r3.csproj": {
+                "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\CodeListTool\\Highlander.CodeListTool.V5r3.csproj"
               },
               "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj": {
                 "projectPath": "C:\\Users\\Alex\\Documents\\Visual Studio 2019\\Projects\\Highlander.Net\\FpMLV5r3\\Metadata\\Codes\\Highlander.Codes.V5r3.csproj"

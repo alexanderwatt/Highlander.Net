@@ -48,3 +48,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Comp
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\CurveGeneration\obj\Debug\Highlander.Workflow.CurveGeneration.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\CurveGeneration\obj\Debug\Highlander.Workflow.CurveGeneration.V5r3.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\CurveGeneration\obj\Debug\Highlander.Workflow.CurveGeneration.V5r3.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Components\CurveGeneration\bin\Debug\xsdgen.bat

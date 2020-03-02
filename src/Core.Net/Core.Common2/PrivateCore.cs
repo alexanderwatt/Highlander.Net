@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Highlander.Core.Common.Encryption;
+using Highlander.Utilities.Encryption;
 using Highlander.Build;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
@@ -30,13 +30,17 @@ namespace Highlander.Core.Common
     public class PrivateCore : ICoreClient
     {
         private readonly TimeSpan _cDebugMsgLifetime = TimeSpan.FromDays(1);
+
         private readonly IModuleInfo _clientInfo = new ModuleInfo(BuildConst.BuildEnv, Guid.NewGuid(), "localhost\\user", null, null, null);
+        
         public IModuleInfo ClientInfo => _clientInfo;
+
         public ServiceAddress ServerAddress => null;
 
         public ILogger Logger { get; }
 
         private PrivateEngine _cacheEngine;
+
         public ICoreClient Proxy => throw new InvalidOperationException();
 
         public PrivateCore(ILogger logger)
@@ -60,6 +64,7 @@ namespace Highlander.Core.Common
 
         // default object lifetime
         private TimeSpan _defaultLifetime = TimeSpan.MaxValue;
+
         public TimeSpan DefaultLifetime
         {
             get => _defaultLifetime; set
@@ -83,19 +88,23 @@ namespace Highlander.Core.Common
                     _defaultAppScopes = new[] { AppScopeNames.Legacy };
             }
         }
+
         // simple client (synchronous) methods
         public ICoreItem LoadItem(Type dataType, string name, bool includeDeleted)
         {
             return _cacheEngine.SelectItem(Guid.Empty, null, name, ItemKind.Object, dataType.FullName, includeDeleted, DateTimeOffset.Now, DebugRequests);
         }
+
         public ICoreItem LoadItem(Type dataType, string name)
         {
             return _cacheEngine.SelectItem(Guid.Empty, null, name, ItemKind.Object, dataType.FullName, false, DateTimeOffset.Now, DebugRequests);
         }
+
         public ICoreItem LoadItem(string name)
         {
             return LoadItem(name, ItemKind.Object);
         }
+
         private ICoreItem LoadItem(string name, ItemKind itemKind)
         {
             return _cacheEngine.SelectItem(Guid.Empty, null, name, itemKind, null, false, DateTimeOffset.Now, DebugRequests);
@@ -104,18 +113,22 @@ namespace Highlander.Core.Common
         {
             return LoadItem<T>(name, ItemKind.Object);
         }
+
         private ICoreItem LoadItem<T>(string name, ItemKind itemKind)
         {
             return _cacheEngine.SelectItem(Guid.Empty, null, name, itemKind, typeof(T).FullName, false, DateTimeOffset.Now, DebugRequests);
         }
+
         public ICoreItem LoadItem(Type dataType, Guid id)
         {
             return _cacheEngine.SelectItem(id, null, null, ItemKind.Object, dataType.FullName, false, DateTimeOffset.Now, DebugRequests);
         }
+
         public ICoreItem LoadItem<T>(Guid id)
         {
             return _cacheEngine.SelectItem(id, null, null, ItemKind.Object, typeof(T).FullName, false, DateTimeOffset.Now, DebugRequests);
         }
+
         public ICoreItem LoadItem(Guid id)
         {
             return _cacheEngine.SelectItem(id, null, null, ItemKind.Object, null, false, DateTimeOffset.Now, DebugRequests);
@@ -123,7 +136,7 @@ namespace Highlander.Core.Common
 
         public T LoadObject<T>(string name)
         {
-            T result = default(T);
+            T result = default;
             PrivateItem item = _cacheEngine.SelectItem(Guid.Empty, null, name, ItemKind.Object, typeof(T).FullName, false, DateTimeOffset.Now, DebugRequests);
             if (item != null)
             {
@@ -131,9 +144,10 @@ namespace Highlander.Core.Common
             }
             return result;
         }
+
         public T LoadObject<T>(Guid id)
         {
-            T result = default(T);
+            T result = default;
             PrivateItem item = _cacheEngine.SelectItem(id, null, null, ItemKind.Object, typeof(T).FullName, false, DateTimeOffset.Now, DebugRequests);
             if (item != null)
             {
@@ -143,16 +157,19 @@ namespace Highlander.Core.Common
             }
             return result;
         }
+
         public Guid DeleteItem(ICoreItem item)
         {
             PrivateItem item2 = MakePrivateItem(item.ItemKind, item.DataType, null, item.Name, item.AppProps, TimeSpan.Zero, item.Transient);
             _cacheEngine.UpdateItem(item2);
             return item2.Id;
         }
+
         public ICoreItem MakeItemFromText(string dataTypeName, string text, string name, NamedValueSet props)
         {
             throw new NotSupportedException();
         }
+
         private static PrivateItem MakePrivateItem(ItemKind itemKind, Type dataType, object data, string name, NamedValueSet props, TimeSpan lifetime, bool transient)
         {
             // note: data == null implies a deleted object
@@ -162,10 +179,12 @@ namespace Highlander.Core.Common
                 throw new ArgumentException("Cannot be an interface type!", nameof(dataType));
             return new PrivateItem(itemKind, transient, null, name, props, data, dataType, lifetime);
         }
+
         public ICoreItem MakeTypedItem(Type dataType, object data, string name, NamedValueSet props, bool transient)
         {
             return MakePrivateItem(ItemKind.Object, dataType, data, name, props, (data != null) ? _defaultLifetime : TimeSpan.Zero, transient);
         }
+
         public ICoreItem MakeItem<T>(T data, string name, NamedValueSet props, bool transient, DateTimeOffset expires)
         {
             ICoreItem item = MakePrivateItem(ItemKind.Object, typeof(T), data, name, props, _defaultLifetime, transient);
@@ -412,11 +431,9 @@ namespace Highlander.Core.Common
                 if (rules.Count > 0)
                 {
                     rules.Sort();
-                    foreach (var rule in rules)
+                    foreach (var rule in rules.Where(rule => !rule.Disabled))
                     {
-                        // config values are cumulative
-                        if (!rule.Disabled)
-                            oldSettings.Add(new NamedValueSet(rule.Settings));
+                        oldSettings.Add(new NamedValueSet(rule.Settings));
                     }
                 }
             }
@@ -443,10 +460,12 @@ namespace Highlander.Core.Common
             appCfg.Priority = priority;
             SaveObject(appCfg, appCfg.ItemName, appCfg.ItemProps, TimeSpan.MaxValue);
         }
+
         public void SaveAppSettings(NamedValueSet settings)
         {
             SaveAppSettings(settings, _clientInfo.ApplName, _clientInfo.UserName, _clientInfo.HostName, false);
         }
+
         public void SaveAppSettings(NamedValueSet settings, string applName)
         {
             SaveAppSettings(settings, applName, _clientInfo.UserName, _clientInfo.HostName, false);
@@ -466,7 +485,6 @@ namespace Highlander.Core.Common
             //if (DebugRequests)
             //    _Logger.LogDebug("LoadAppSettings: Query={0}", query.DisplayString());
             List<AppCfgRuleV2> rules = LoadObjects<AppCfgRuleV2>(query);
-
             if (rules.Count > 0)
             {
                 rules.Sort();
@@ -491,10 +509,12 @@ namespace Highlander.Core.Common
             });
             return result;
         }
+
         public NamedValueSet LoadAppSettings(string applName)
         {
             return LoadAppSettings(applName, null, null);
         }
+
         public NamedValueSet LoadAppSettings()
         {
             return LoadAppSettings(null, null, null);
@@ -509,7 +529,7 @@ namespace Highlander.Core.Common
             get => _defaultTimeout;
             set
             {
-                if ((value < _minTimeout) || (value > _maxTimeout))
+                if (value < _minTimeout || value > _maxTimeout)
                     throw new ArgumentOutOfRangeException($"RequestTimeout",
                         $"Must be between {_minTimeout} and {_maxTimeout}");
                 _defaultTimeout = value;
@@ -538,28 +558,25 @@ namespace Highlander.Core.Common
             }
             return results;
         }
+
         public List<ICoreItem> LoadItems(Type dataType, IEnumerable<Guid> itemIds)
         {
-            List<ICoreItem> results = new List<ICoreItem>();
-            foreach (Guid itemId in itemIds)
-            {
-                PrivateItem item = _cacheEngine.SelectItem(itemId, null, null, ItemKind.Object, dataType.FullName, false, DateTimeOffset.Now, DebugRequests);
-                if (item != null)
-                    results.Add(item);
-            }
-            return results;
+            return itemIds.Select(itemId => _cacheEngine.SelectItem(itemId, null, null, ItemKind.Object, dataType.FullName, false, DateTimeOffset.Now, DebugRequests)).Where(item => item != null).Cast<ICoreItem>().ToList();
         }
         public List<ICoreItem> LoadItems<T>(IEnumerable<string> itemNames)
         {
             return LoadItems(typeof(T), itemNames);
         }
+
         public List<ICoreItem> LoadItems<T>(IEnumerable<Guid> itemIds)
         {
             return LoadItems(typeof(T), itemIds);
         }
 
         public ICoreItemInfo LoadItemInfo<T>(string name) { return LoadItem(typeof(T), name); }
+
         public ICoreItemInfo LoadItemInfo(Type dataType, string name) { return LoadItem(dataType, name); }
+
         public List<ICoreItemInfo> LoadItemInfos(Type dataType, IExpression whereExpr)
         {
             List<ICoreItemInfo> results = new List<ICoreItemInfo>();
@@ -568,6 +585,7 @@ namespace Highlander.Core.Common
                 results.Add(item);
             return results;
         }
+
         public List<ICoreItemInfo> LoadItemInfos<T>(IExpression whereExpr)
         {
             return LoadItemInfos(typeof(T), whereExpr);
@@ -590,10 +608,7 @@ namespace Highlander.Core.Common
         public List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUSN, bool includeDeleted)
         {
             List<PrivateItem> items = _cacheEngine.SelectItems(null, itemKind, dataType.FullName, whereExpr, minimumUSN, includeDeleted, DateTimeOffset.Now, DebugRequests);
-            List<ICoreItem> results = new List<ICoreItem>();
-            foreach (PrivateItem item in items)
-                results.Add(item);
-            return results;
+            return items.Cast<ICoreItem>().ToList();
         }
 
         public IAsyncResult SaveObjectBegin<T>(T data, string name, NamedValueSet props, bool transient, DateTimeOffset expires) where T : class
@@ -660,14 +675,17 @@ namespace Highlander.Core.Common
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult LoadItemBegin(AsyncCallback callback, Type dataType, string name, bool includeDeleted)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult LoadObjectBegin<T>(AsyncCallback callback, string name)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult LoadItemBegin<T>(AsyncCallback callback, Guid id)
         {
             throw new NotSupportedException();
@@ -676,109 +694,139 @@ namespace Highlander.Core.Common
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult LoadObjectsBegin(AsyncCallback callback, IExpression whereExpr, string dataTypeName)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult LoadObjectsBegin<T>(AsyncCallback callback, IExpression whereExpr)
         {
             throw new NotSupportedException();
         }
+
         public List<ICoreItem> LoadItemsEnd(IAsyncResult ar)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveTypedObjectBegin(Type dataType, object data, string name, NamedValueSet props)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveObjectBegin<T>(T data, string name, NamedValueSet props, bool transient, TimeSpan lifetime) where T : class
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveObjectBegin<T>(T data, bool transient, TimeSpan lifetime) where T : ICoreObject
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveObjectBegin<T>(T data, bool transient, DateTimeOffset expires) where T : ICoreObject
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveItemBegin(ICoreItem item)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveItemsBegin(IEnumerable<ICoreItem> item)
         {
             throw new NotSupportedException();
         }
+
         public IAsyncResult SaveRawItemBegin(RawItem storeItem)
         {
             throw new NotSupportedException();
         }
+
         public void SaveRawItemEnd(IAsyncResult ar)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription CreateSubscription<T>(IExpression whereExpr) //, SubscriptionCallback userCallback)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription CreateTypedSubscription(Type dataType, IExpression whereExpr) //, SubscriptionCallback userCallback)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription CreateUntypedSubscription(string dataTypeName, IExpression whereExpr)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription Subscribe<T>(IExpression whereExpr, SubscriptionCallback userCallback, object userContext)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription Subscribe(Type dataType, IExpression whereExpr, SubscriptionCallback userCallback, object userContext)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription Subscribe<T>(IExpression filter)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription SubscribeNoWait<T>(IExpression filter, SubscriptionCallback userCallback, object userContext)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription SubscribeNewOnly<T>(IExpression filter, SubscriptionCallback userCallback, object userContext)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription SubscribeInfoOnly<T>(IExpression filter)
         {
             throw new NotSupportedException();
         }
+
         public ISubscription StartUntypedSubscription(string dataTypeName, IExpression whereExpr, SubscriptionCallback userCallback, object userContext)
         {
             throw new NotSupportedException();
         }
+
         public void Unsubscribe(Guid subscriptionId)
         {
             // ignored
         }
+
         public void UnsubscribeAll()
         {
             // ignored
         }
 
         public void Clear() { throw new NotSupportedException(); }
+
         public List<ISubscription> Subscriptions => throw new NotSupportedException();
+
         public List<ICoreItem> Items => throw new NotSupportedException();
+
         public int ItemCount => throw new NotSupportedException();
+
         public int CreateCount => throw new NotSupportedException();
+
         public int UpdateCount => throw new NotSupportedException();
+
         public int DeleteCount => throw new NotSupportedException();
 
         // connection mode notifications
         public event CoreStateHandler OnStateChange;
+
         private void UserCallbackStateChange(CoreStateChange update)
         {
             try
@@ -790,7 +838,9 @@ namespace Highlander.Core.Common
                 Logger.Log(e);
             }
         }
+
         public CoreModeEnum CoreMode => CoreModeEnum.Standard;
+
         public CoreStateEnum CoreState => CoreStateEnum.Connected;
 
         #endregion
@@ -830,8 +880,7 @@ namespace Highlander.Core.Common
                 _itemNameIndex.Locked((nameIndex) =>
                 {
                     // update the item name index
-                    PrivateItem oldItem;
-                    if (nameIndex.TryGetValue(uniqueItemName, out oldItem))
+                    if (nameIndex.TryGetValue(uniqueItemName, out var oldItem))
                     {
                         if (item.Created >= oldItem.Created)
                             nameIndex[uniqueItemName] = item;
@@ -865,7 +914,7 @@ namespace Highlander.Core.Common
             if (debugRequests)
             {
                 _logger.LogDebug("Local: Selecting...");
-                _logger.LogDebug("Local:   AppScopes: {0}", appScopes == null ? "*" : String.Join(",", appScopes));
+                _logger.LogDebug("Local:   AppScopes: {0}", appScopes == null ? "*" : string.Join(",", appScopes));
                 _logger.LogDebug("Local:   ItemKind : {0}", itemKind == ItemKind.Undefined ? "(any)" : itemKind.ToString());
                 _logger.LogDebug("Local:   DataType : {0}", dataType ?? "(any)");
                 if (minimumUSN > 0)
@@ -895,7 +944,7 @@ namespace Highlander.Core.Common
                 matched = false;
                 foreach (string appScope in appScopes)
                 {
-                    if (appScope == null || String.Compare(item.AppScope, appScope, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (appScope == null || string.Compare(item.AppScope, appScope, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         matched = true;
                         break;
@@ -946,14 +995,12 @@ namespace Highlander.Core.Common
             if (appScope == null)
                 appScope = _appScopeManager.DefaultAppScope;
             string uniqueItemName = CoreHelper.MakeUniqueName(itemKind, appScope, itemName);
-
             PrivateItem result = null;
             _itemNameIndex.Locked(nameIndex =>
             {
-                PrivateItem item;
-                if (nameIndex.TryGetValue(uniqueItemName, out item))
+                if (nameIndex.TryGetValue(uniqueItemName, out var item))
                 {
-                    if (dataTypeName == null || item.DataTypeName == dataTypeName.ToString())
+                    if (dataTypeName == null || item.DataTypeName == dataTypeName)
                     {
                         if (includeDeleted || item.IsCurrent(asAtTime))
                         {
@@ -991,84 +1038,88 @@ namespace Highlander.Core.Common
     internal class PrivateItem : ICoreItem
     {
         // managed state
-        private bool _frozen;
         // immutable state
-        protected readonly ItemKind _ItemKind;
-        public ItemKind ItemKind => _ItemKind;
-        protected readonly bool _Transient;
-        public bool Transient => _Transient;
-        protected readonly Guid ItemId;
-        public Guid Id => ItemId;
-        protected readonly string ItemName;
-        public string Name => ItemName;
-        protected readonly string _AppScope = AppScopeNames.Legacy;
+
+        public ItemKind ItemKind { get; }
+
+        public bool Transient { get; }
+
+        public Guid Id { get; }
+
+        public string Name { get; }
+
         private string _uniqueName;
-        public string UniqueName => _uniqueName ?? (_uniqueName = CoreHelper.MakeUniqueName(_ItemKind, _AppScope, ItemName));
+
+        public string UniqueName => _uniqueName ??= CoreHelper.MakeUniqueName(ItemKind, AppScope, Name);
 
         // mutable until frozen (committed)
-        private object _data;
         private Type _dataTypeType;
+
         protected DateTimeOffset _Created;
+
         public DateTimeOffset Created => _Created;
+
         private bool _useExpiry;
+
         private TimeSpan _lifetime;
+
         private DateTimeOffset _expires;
-        protected readonly NamedValueSet _AppProps = new NamedValueSet();
-        public NamedValueSet AppProps => _AppProps;
-        protected readonly NamedValueSet _SysProps = new NamedValueSet();
-        public NamedValueSet SysProps => _SysProps;
-        protected string _NetScope;
-        protected string _DataTypeName;
-        public string DataTypeName => _DataTypeName;
-        protected Int64 _StoreUSN;
-        public Int64 StoreUSN { get => _StoreUSN;
-            set => _StoreUSN = value;
-        }
+
+        public NamedValueSet AppProps { get; } = new NamedValueSet();
+
+        public NamedValueSet SysProps { get; } = new NamedValueSet();
+
+        public string DataTypeName { get; protected set; }
+
+        public Int64 StoreUSN { get; set; }
 
         // constructors
         public PrivateItem(ItemKind itemKind, bool transient, string appScope, string itemName, NamedValueSet props, object data, Type dataType, TimeSpan lifetime)
         {
-            _ItemKind = itemKind;
-            _Transient = transient;
-            ItemId = Guid.NewGuid();
-            _AppScope = appScope ?? AppScopeNames.Legacy;
-            ItemName = itemName;
-            _AppProps.Add(props);
+            ItemKind = itemKind;
+            Transient = transient;
+            Id = Guid.NewGuid();
+            AppScope = appScope ?? AppScopeNames.Legacy;
+            Name = itemName;
+            AppProps.Add(props);
             _dataTypeType = dataType;
-            _DataTypeName = dataType.FullName;
-            _data = data;
+            DataTypeName = dataType.FullName;
+            Data = data;
             _lifetime = lifetime;
         }
 
-        public string AppScope => _AppScope;
-        public string NetScope => _NetScope;
+        public string AppScope { get; }
+
+        public string NetScope { get; protected set; }
 
         public void SetNetScope(string netScope)
         {
-            _NetScope = netScope;
+            NetScope = netScope;
         }
+
         public bool IsCurrent(DateTimeOffset asAtTime)
         {
-            DateTimeOffset expires = _frozen ? _expires : (_useExpiry ? _expires : (DateTimeOffset.Now + _lifetime));
+            DateTimeOffset expires = Frozen ? _expires : _useExpiry ? _expires : DateTimeOffset.Now + _lifetime;
             return (asAtTime < expires);
         }
+
         public bool IsCurrent()
         {
             return IsCurrent(DateTimeOffset.Now);
         }
 
-        public bool Frozen => _frozen;
+        public bool Frozen { get; private set; }
 
         protected void CheckNotFrozen()
         {
-            if (_frozen)
+            if (Frozen)
                 throw new ApplicationException("Item already frozen/saved!");
         }
         public void Freeze()
         {
-            if (_frozen)
+            if (Frozen)
                 return;
-            if (ItemName == null)
+            if (Name == null)
                 throw new ApplicationException("Item name not set!");
             TimeSpan maxLifetime = DateTimeOffset.MaxValue - DateTimeOffset.Now - TimeSpan.FromDays(1);
             _Created = DateTimeOffset.Now;
@@ -1085,34 +1136,38 @@ namespace Highlander.Core.Common
                     _lifetime = TimeSpan.Zero;
                 _expires = _Created.Add(_lifetime);
             }
-            if (_DataTypeName == null)
-                _DataTypeName = "";
+            if (DataTypeName == null)
+                DataTypeName = "";
             // done
-            _frozen = true;
+            Frozen = true;
         }
         // mutable props
         public bool IsSigned => false;
 
         public bool IsSecret => false;
+
         public string Text => null;
-        public object Data => _data;
+
+        public object Data { get; private set; }
 
         public object GetData(Type dataType, bool binaryClone)
         {
-            return binaryClone ? BinarySerializerHelper.Clone(_data) : _data;
+            return binaryClone ? BinarySerializerHelper.Clone(Data) : Data;
         }
+
         public T GetData<T>(bool binaryClone) where T : class
         {
             return (T)GetData(typeof(T), binaryClone);
         }
+
         public Type DataType => _dataTypeType;
 
         public void SetData(Type dataType, object data)
         {
             CheckNotFrozen();
-            _data = data;
+            Data = data;
             _dataTypeType = dataType;
-            _DataTypeName = dataType.FullName;
+            DataTypeName = dataType.FullName;
         }
         public void SetData<T>(T data) where T : class
         {
@@ -1131,14 +1186,16 @@ namespace Highlander.Core.Common
             throw new NotSupportedException();
         }
         public byte[] YData => throw new NotSupportedException();
+
         public Guid YDataHash => throw new NotSupportedException();
+
         public byte[] YSign => throw new NotSupportedException();
 
         public DateTimeOffset Expires
         {
             get
             {
-                if (_frozen || _useExpiry)
+                if (Frozen || _useExpiry)
                     return _expires;
                 return (DateTimeOffset.Now + _lifetime);
             }
@@ -1153,7 +1210,7 @@ namespace Highlander.Core.Common
         {
             get
             {
-                if (_frozen || _useExpiry)
+                if (Frozen || _useExpiry)
                     return (_expires - DateTimeOffset.Now);
                 return _lifetime;
             }
@@ -1166,18 +1223,18 @@ namespace Highlander.Core.Common
         }
         public string TranspKeyId
         {
-            get => _SysProps.GetValue<string>(SysPropName.XTKI, null);
-            set { CheckNotFrozen(); _SysProps.Set(SysPropName.XTKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.XTKI, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.XTKI, value); }
         }
         public string SenderKeyId
         {
-            get => _SysProps.GetValue<string>(SysPropName.YSKI, null);
-            set { CheckNotFrozen(); _SysProps.Set(SysPropName.YSKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.YSKI, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.YSKI, value); }
         }
         public string RecverKeyId
         {
-            get => _SysProps.GetValue<string>(SysPropName.YRKI, null);
-            set { CheckNotFrozen(); _SysProps.Set(SysPropName.YRKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.YRKI, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.YRKI, value); }
         }
         public SerialFormat SerialFormat
         {

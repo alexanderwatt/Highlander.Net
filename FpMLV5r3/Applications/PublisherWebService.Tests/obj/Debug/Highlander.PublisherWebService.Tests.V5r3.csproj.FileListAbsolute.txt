@@ -33,7 +33,6 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Appl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.TestHelpers.V5r3.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.UnitTestEnv.V5r3.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.PublisherWebService.V5r3.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.PublisherWebService.V5r3.xml
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.PublisherWebService.V5r3.dll.config
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\MathNet.Numerics.xml
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\Highlander.Reporting.Identifiers.V5r3.pdb
@@ -57,3 +56,4 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Appl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\obj\Debug\Highlander.PublisherWebService.Tests.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\obj\Debug\Highlander.PublisherWebService.Tests.V5r3.pdb
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\obj\Debug\Highlander.PublisherWebService.Tests.V5r3.csproj.CoreCompileInputs.cache
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\PublisherWebService.Tests\bin\Debug\xsdgen.bat
