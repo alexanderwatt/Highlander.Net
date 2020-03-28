@@ -33,7 +33,7 @@ using Highlander.Utilities.NamedValues;
 
 #endregion
 
-namespace Highlander.Core.Interface.V5r3.Financial
+namespace Highlander.Core.Interface.V5r3
 {
     /// <summary>
     /// A general calendar class.

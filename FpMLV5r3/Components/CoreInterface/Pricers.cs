@@ -43,7 +43,7 @@ using XsdClassesFieldResolver = Highlander.Reporting.V5r3.XsdClassesFieldResolve
 
 #endregion
 
-namespace Highlander.Core.Interface.V5r3.Financial
+namespace Highlander.Core.Interface.V5r3
 {
     public partial class PricingCache
     {      

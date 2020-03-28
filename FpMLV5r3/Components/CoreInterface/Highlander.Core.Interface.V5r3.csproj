@@ -44,10 +44,10 @@
     <Compile Include="..\..\..\BuildDef\BuildInfoLimited.cs">
       <Link>BuildInfoLimited.cs</Link>
     </Compile>
-    <Compile Include="Financial\Assets.cs" />
-    <Compile Include="Financial\Dates.cs" />
-    <Compile Include="Financial\Pricers.cs" />
-    <Compile Include="Financial\PricingStructures.cs" />
+    <Compile Include="Assets.cs" />
+    <Compile Include="Dates.cs" />
+    <Compile Include="Pricers.cs" />
+    <Compile Include="PricingStructures.cs" />
     <Compile Include="Helpers\DataRangeHelper.cs" />
     <Compile Include="Helpers\ProductResultsHelper.cs" />
     <Compile Include="Impl\ExcelApiException.cs" />

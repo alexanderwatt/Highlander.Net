@@ -16,12 +16,12 @@
 #region Usings
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using Highlander.Build;
 using Highlander.Constants;
 using Highlander.Core.Common;
-using Highlander.Core.Server;
 using Highlander.Core.V34;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Expressions;
@@ -34,33 +34,37 @@ using Highlander.Utilities.RefCounting;
 namespace Highlander.Core.Interface.V5r3
 {
     ///<summary>
-    /// Contains functions called by ExcelApi on StartUp and CleanUp
+    /// Contains functions called by the Api on StartUp and CleanUp
     ///</summary>
     public class RuntimeEnvironment
     {
         #region Properties
 
-        public Reference<ILogger> LogRef; // { get; } //set; }
-        private CoreServer _server;
+        public Reference<ILogger> LogRef;
+        //private CoreServer _server;
         private ICoreClient _client;
-        public readonly string NameSpace ;
+        public readonly string NameSpace;
+        public readonly string ApplicationName;
 
         public RuntimeEnvironment(string nameSpace)
         {
             NameSpace = nameSpace;
-            string fullAppName = $"Highlander.Core.API-{ApplicationHelper.Diagnostics("FileVersion")}";
+            ApplicationName = $"Highlander.Core.API-{ApplicationHelper.Diagnostics("FileVersion")}";
             try
             {
-                //var stopwatch = new Stopwatch();
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                Log(LogRef.Target, "Starting...", ApplicationName, "StartUp");
                 LogRef = Reference<ILogger>.Create(new TraceLogger(true));
-                //stopwatch.Start();
                 CoreClientFactory factory = new CoreClientFactory(LogRef)
                     .SetEnv(BuildConst.BuildEnv)
                     .SetApplication(Assembly.GetExecutingAssembly())
                     .SetProtocols(WcfConst.AllProtocolsStr);
                 _client = factory.SetServers("localhost").Create();
                 Cache = _client.CreateCache();
-                Log(LogRef.Target, "Starting...", fullAppName, "StartUp");
+                var time = stopwatch.ElapsedMilliseconds;
+                stopwatch.Stop();
+                Log(LogRef.Target, "The application :" + ApplicationName + "took " + time + " to start.", ApplicationName, "RuntimeEnvironment");
             }
             catch (System.Exception excp)
             {
@@ -73,8 +77,9 @@ namespace Highlander.Core.Interface.V5r3
 
         public void Dispose()
         {
+            Log(LogRef.Target, "Closing...", ApplicationName, "Closed");
             DisposeHelper.SafeDispose(ref _client);
-            DisposeHelper.SafeDispose(ref _server);
+//            DisposeHelper.SafeDispose(ref _server);
         }
 
         public void TidyUpMarkets(IEnumerable<string> uniqueIds)

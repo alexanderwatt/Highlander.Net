@@ -48,7 +48,7 @@ using Highlander.ValuationEngine.V5r3;
 
 #endregion
 
-namespace Highlander.Core.Interface.V5r3.Financial
+namespace Highlander.Core.Interface.V5r3
 {
     /// <summary>
     /// Creates and manages all pricing functionality.
@@ -67,10 +67,9 @@ namespace Highlander.Core.Interface.V5r3.Financial
 
         #region Constructor
 
-        public PricingCache()
+        public PricingCache(string nameSpace)
         {
-            //Be careful of using the default namespace.
-            NameSpace = EnvironmentProp.DefaultNameSpace;
+            NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
             Environment = new RuntimeEnvironment(NameSpace);
             Engine = new CurveEngine.V5r3.CurveEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
             ValService = new ValuationService(Environment.LogRef.Target, Environment.Cache, NameSpace);

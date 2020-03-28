@@ -34,7 +34,7 @@ using RateCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateCurve
 
 #endregion
 
-namespace Highlander.Core.Interface.V5r3.Financial
+namespace Highlander.Core.Interface.V5r3
 {
     /// <summary>
     /// Caches all the curves created.
