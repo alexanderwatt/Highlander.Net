@@ -28,7 +28,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="xyData"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static double LinearInterp(object[,] xyData, double x)
+        public static double LinearInterpolation(object[,] xyData, double x)
         {
             int size=xyData.GetUpperBound(0);
             int start = 0;
@@ -49,7 +49,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="xyData"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static double PiecewiseLinearInterp(object[,] xyData, double x)
+        public static double PiecewiseLinearInterpolation(object[,] xyData, double x)
         {
             int size = xyData.GetUpperBound(0);
             int start = 0;
@@ -69,7 +69,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="xyData"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static double LogLinearInterp(object[,] xyData, double x)
+        public static double LogLinearInterpolation(object[,] xyData, double x)
         {
             int size = xyData.GetUpperBound(0);
             int start = 0;
@@ -93,7 +93,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="xyData"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static double HSplineInterp(object[,] xyData, double x)
+        public static double HSplineInterpolation(object[,] xyData, double x)
         {
             int size = xyData.GetUpperBound(0);
             int start = 0;
@@ -146,38 +146,30 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static double BiLinearInterp(object[,] xyzData, double x, double y)
+        public static double BiLinearInterpolation(object[,] xyzData, double x, double y)
         {
             int sizeX = xyzData.GetUpperBound(0);
             int sizeY = xyzData.GetUpperBound(1);
-
             int startX = 0;
             int startY = 0;
-
             for (int i = 1; i < sizeX; i++)
             {
                 if (x > (double)xyzData[i, 0] && x <= (double)xyzData[i + 1, 0]) startX = i;
             }
-
             if (x <= (double)xyzData[1, 0]) startX = 1;
             if (x >= (double)xyzData[sizeX, 0]) startX = sizeX-1;
-
             for (int i = 1; i < sizeY; i++)
             {
                 if (y > (double)xyzData[0, i] && y <= (double)xyzData[0,i + 1]) startY = i;
             }
-
             if (y <= (double)xyzData[0, 1]) startY = 1;
             if (y >= (double)xyzData[0, sizeY]) startY = sizeY-1;
-
             double weightX = (x - (double)xyzData[startX, 0]) / ((double)xyzData[startX + 1, 0] - (double)xyzData[startX, 0]);
             double weightY = (y - (double)xyzData[0, startY]) / ((double)xyzData[0, startY + 1] - (double)xyzData[0, startY]);
-
             double output = (double)xyzData[startX, startY] * (1 - weightX) * (1 - weightY)
                             + (double)xyzData[startX + 1, startY] * weightX * (1 - weightY)
                             + (double)xyzData[startX, startY + 1] * (1 - weightX) * weightY
                             + (double)xyzData[startX + 1, startY + 1] * weightX * weightY;
-
             return output;
         }
 
@@ -188,49 +180,37 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static double BiLinearInterp2(object[,] xyzData, double x, double y)
+        public static double BiLinearInterpolation2(object[,] xyzData, double x, double y)
         {
             int sizeX = xyzData.GetUpperBound(0);
             int sizeY = xyzData.GetUpperBound(1);
-
             int startX = 0;
             int startY = 0;
-
             for (int i = 1; i < sizeX; i++)
             {
                 if (x > (double)xyzData[i, 0] && x <= (double)xyzData[i + 1, 0]) startX = i;
             }
-
             if (x <= (double)xyzData[1, 0]) startX = 1;
             if (x >= (double)xyzData[sizeX, 0]) startX = sizeX - 1;
-
             for (int i = 1; i < sizeY; i++)
             {
                 if (y > (double)xyzData[0, i] && y <= (double)xyzData[0, i + 1]) startY = i;
             }
-
             if (y <= (double)xyzData[0, 1]) startY = 1;
             if (y >= (double)xyzData[0, sizeY]) startY = sizeY - 1;
-
             var xPillars = new object[2, 2];
             var yPillars = new object[2, 2];
-
             yPillars[0, 0] = xyzData[0, startY];
             yPillars[1, 0] = xyzData[0, startY + 1];
             yPillars[0, 1] = xyzData[startX, startY];
             yPillars[1, 1] = xyzData[startX, startY + 1];
-
             xPillars[0, 0] = xyzData[startX, 0];
-            xPillars[0, 1] = LinearInterp(yPillars, y);
-
+            xPillars[0, 1] = LinearInterpolation(yPillars, y);
             yPillars[0, 1] = xyzData[startX + 1, startY];
             yPillars[1, 1] = xyzData[startX + 1, startY + 1];
-
             xPillars[1, 0] = xyzData[startX + 1, 0];
-            xPillars[1, 1] = LinearInterp(yPillars, y);
-
-            double output = LinearInterp(xPillars, x);
-
+            xPillars[1, 1] = LinearInterpolation(yPillars, y);
+            double output = LinearInterpolation(xPillars, x);
             return output;
         }
 
@@ -243,11 +223,10 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="zeroCompFreq"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        public static double GeneralZeroInterp(object[,] zeroNodes, double interpX, string interpSpace, double zeroCompFreq, string method)
+        public static double GeneralZeroInterpolation(object[,] zeroNodes, double interpX, string interpSpace, double zeroCompFreq, string method)
         {
             int size = zeroNodes.GetUpperBound(0);
             var fwdNodes = new object[size + 1];
-
             int start = 0;
             for (int i = 0; i < size; i++)
             {
@@ -256,35 +235,27 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
                                 / Zero2DF((double)zeroNodes[i, 1], zeroCompFreq, (double)zeroNodes[i, 0] / 365)
                                     , zeroCompFreq, ((double)zeroNodes[i + 1, 0] - (double)zeroNodes[i, 0]) / 365);
             }
-
             fwdNodes[size] = (double)zeroNodes[size, 1];
-
-
             double y1 = 0;
             double y2 = 0;
             double output = 0;
-
             var x1 = (double)zeroNodes[start, 0];
             var x2 = (double)zeroNodes[start + 1, 0];
-            
             if (interpSpace == "ZERO")
             {
                 y1 = (double)zeroNodes[start, 1];
                 y2 = (double)zeroNodes[start + 1, 1];
             }
-
             if (interpSpace == "DF")
             {
                 y1 = Zero2DF((double)zeroNodes[start, 1], zeroCompFreq, x1 / 365);
                 y2 = Zero2DF((double)zeroNodes[start + 1, 1], zeroCompFreq, x2 / 365);
             }
-
             if (interpSpace == "FWD")
             {
                 y1 = (double)fwdNodes[start];
                 y2 = (double)fwdNodes[start];
             }
-
             if (method == "LINEAR")
             {
                 output = y1 + (interpX - x1) * (y2 - y1) / (x2 - x1);
@@ -295,17 +266,14 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
                 output = Math.Exp(Math.Log(y1) + (interpX - x1) * (Math.Log(y2) - Math.Log(y1)) / (x2 - x1));
                 if (interpSpace=="DF") output = DF2Zero(output, zeroCompFreq, interpX / 365);
             }
-
             if (interpSpace == "FWD")
             {
                 double interpDF = Zero2DF(output, zeroCompFreq, (interpX - x1) / 365);
                 double startDF = Zero2DF((double)zeroNodes[start, 1], zeroCompFreq, x1 / 365);
                 output = DF2Zero(interpDF * startDF, zeroCompFreq, interpX / 365);
-            }   
-            
+            }
             if (interpX <= (double)zeroNodes[0, 0]) output = (double)zeroNodes[0, 1];
             if (interpX >= (double)zeroNodes[size, 0]) output = (double)zeroNodes[size, 1];
-
             return output;
         }
 
@@ -351,8 +319,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <returns></returns>
         public static double FWDfromCurve(double startTime, double matTime, object[,] curve, string interpSpace, double zeroCompFreq, string method)
         {
-            double startZero = GeneralZeroInterp(curve, startTime, interpSpace, zeroCompFreq, method);
-            double matZero = GeneralZeroInterp(curve, matTime, interpSpace, zeroCompFreq, method);
+            double startZero = GeneralZeroInterpolation(curve, startTime, interpSpace, zeroCompFreq, method);
+            double matZero = GeneralZeroInterpolation(curve, matTime, interpSpace, zeroCompFreq, method);
             return DF2Zero(Zero2DF(matZero, zeroCompFreq, matTime) / Zero2DF(startZero, zeroCompFreq, startTime),zeroCompFreq,matTime-startTime);
         }
         
@@ -425,32 +393,30 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations
         /// <param name="cf"></param>
         /// <param name="curve"></param>
         /// <param name="instrumentNumber"></param>
-        /// <param name="interpSpace"></param>
+        /// <param name="interpolatedSpace"></param>
         /// <param name="zeroCompFreq"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        public static double PVFromCurve(object[,] cfDays, object[,] cf, object[,] curve, int instrumentNumber, string interpSpace, double zeroCompFreq, string method)
+        public static double PVFromCurve(object[,] cfDays, object[,] cf, object[,] curve, int instrumentNumber, string interpolatedSpace, double zeroCompFreq, string method)
         {
             int numCashflows = cf.GetUpperBound(1);
             var df = new object[numCashflows + 1];
-
             double pvTmp = 0.0;
             int i = instrumentNumber;
-            
             for (int j = 0; j <= numCashflows; j++)
             {
                 //Map the valid days.
                 double cfDaysTmp;
                 object o = cfDays[i, j];
-                if ((o == null) || (o.ToString() == String.Empty)) { cfDaysTmp = 0.0; }
+                if (o == null || string.IsNullOrEmpty(o.ToString())) { cfDaysTmp = 0.0; }
                 else { cfDaysTmp = Convert.ToDouble(cfDays[i, j]); }
                 //MAp the valid cash flows.
                 double cfTmp;
                 o = cf[i, j];
-                if ((o == null) || (o.ToString() == String.Empty)) { cfTmp = 0.0; } 
+                if (o == null || string.IsNullOrEmpty(o.ToString())) { cfTmp = 0.0; } 
                 else { cfTmp = Convert.ToDouble(cf[i, j]); }
                 //InterpOut = LinearInterp(Curve, CF_Days_Tmp);
-                double interpOut = GeneralZeroInterp(curve,cfDaysTmp,interpSpace,zeroCompFreq,method);
+                double interpOut = GeneralZeroInterpolation(curve,cfDaysTmp, interpolatedSpace, zeroCompFreq,method);
                 if (zeroCompFreq != 0) { df[j] = Math.Pow((1 + interpOut / zeroCompFreq), -zeroCompFreq * cfDaysTmp / 365); }
                 if (zeroCompFreq == 0) { df[j] = Math.Exp(-interpOut * cfDaysTmp / 365); }
                 var dfTmp = (double)df[j];

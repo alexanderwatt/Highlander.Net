@@ -134,13 +134,6 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.SABR
         ///                    A hash code for the specified object.
         ///                
         ///</returns>
-        ///
-        ///<param name="obj">
-        ///                    The <see cref="T:System.Object" /> for which a hash code is to be returned.
-        ///                </param>
-        ///<exception cref="T:System.ArgumentNullException">
-        ///                    The type of <paramref name="obj" /> is a reference type and <paramref name="obj" /> is null.
-        ///                </exception>
         public int GetHashCode(SABRKey obj)
         {
             return base.GetHashCode();
@@ -188,22 +181,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.SABR
         #region Object Overrides
 
         ///<summary>
-        ///
-        ///                    Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
-        ///                
         ///</summary>
-        ///
-        ///<returns>
-        ///true if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.
-        ///                
-        ///</returns>
-        ///
-        ///<param name="obj">
-        ///                    The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />. 
-        ///                </param>
-        ///<exception cref="T:System.NullReferenceException">
-        ///                    The <paramref name="obj" /> parameter is null.
-        ///                </exception><filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
             try
@@ -213,7 +191,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.SABR
                 if (match && (Tenor == DefaultTenor || y.Tenor == DefaultTenor))
                     return true;
 
-                match = (match && (Tenor == y.Tenor));
+                match = match && Tenor == y.Tenor;
                 return match;
             }
             catch (System.Exception)
@@ -227,12 +205,6 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.SABR
         ///                    Serves as a hash function for a particular type. 
         ///                
         ///</summary>
-        ///
-        ///<returns>
-        ///
-        ///                    A hash code for the current <see cref="T:System.Object" />.
-        ///                
-        ///</returns>
         ///<filterpriority>2</filterpriority>
         public override int GetHashCode() => base.GetHashCode();
 
@@ -249,11 +221,10 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.SABR
         /// <returns></returns>
         private static decimal ConversionFactor(string period)
         {
-            if (period == "ATM" || period == "") return 0.0m;
-            var mult = (decimal)PeriodHelper.Parse(period).ToYearFraction();
-            return mult;
+            if (period == "ATM" || string.IsNullOrEmpty(period)) return 0.0m;
+            return (decimal)PeriodHelper.Parse(period).ToYearFraction();
         }
-
+        
         #endregion
     }
 }

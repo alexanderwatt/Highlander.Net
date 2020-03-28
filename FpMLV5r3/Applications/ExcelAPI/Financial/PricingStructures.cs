@@ -34,6 +34,7 @@ using HLV5r3.Impl;
 using FxCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.FxCurve;
 using RateCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateCurve;
 using Excel = Microsoft.Office.Interop.Excel;
+using RangeFunctions = HLV5r3.Impl.RangeFunctions;
 
 #endregion
 
@@ -1741,7 +1742,7 @@ namespace HLV5r3.Financial
         /// EffectiveDate: The effective date of the swap.
         /// TerminationDate: The termination date of the swap.
         /// InterpolationMethod>The interpolation to use.
-        /// MargineAboveFloatingRate>The margin on the floating leg.
+        /// MarginAboveFloatingRate>The margin on the floating leg.
         /// ResetRate: The rest rate for the last reset.
         /// DirectionDateGenerationPayLeg: The date generation logic: Forward or Backward.
         /// CashFlowFrequencyPayLeg: The frequency of pay leg payment.
@@ -1773,7 +1774,7 @@ namespace HLV5r3.Financial
                 swapInputRange.EffectiveDate,
                 swapInputRange.TerminationDate,
                 swapInputRange.InterpolationMethod,
-                swapInputRange.MargineAboveFloatingRate,
+                swapInputRange.MarginAboveFloatingRate,
                 swapInputRange.ResetRate,
                 swapInputRange.DirectionDateGenerationPayLeg,
                 swapInputRange.CashFlowFrequencyPayLeg,
@@ -1794,7 +1795,7 @@ namespace HLV5r3.Financial
         ///<param name="effectiveDate">The effective date of the swap.</param>
         ///<param name="terminationDate">The termination date of the swap.</param>
         ///<param name="interpolationMethod">The interpolation to use.</param>
-        ///<param name="margineAboveFloatingRate">The margin on the floating leg.</param>
+        ///<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
         ///<param name="resetRate">The rest rate for the last reset.</param>
         ///<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
         ///<param name="cashFlowFrequencyPayLeg">The frequency of pay leg payment.</param>
@@ -1814,7 +1815,7 @@ namespace HLV5r3.Financial
             DateTime effectiveDate,
             DateTime terminationDate,
             string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-            double margineAboveFloatingRate,// use 0 initially
+            double marginAboveFloatingRate,// use 0 initially
             double resetRate,
             int directionDateGenerationPayLeg,
             string cashFlowFrequencyPayLeg,
@@ -1834,7 +1835,7 @@ namespace HLV5r3.Financial
             return result.GetSwapParRate(Engine.Logger, Engine.Cache, NameSpace,
                 valueDate, effectiveDate, terminationDate,
                 interpolationMethod,
-                margineAboveFloatingRate, resetRate,
+                marginAboveFloatingRate, resetRate,
                 directionDateGenerationPayLeg,
                 cashFlowFrequencyPayLeg,
                 accrualMethodPayLeg,
@@ -1854,7 +1855,7 @@ namespace HLV5r3.Financial
         ///<param name="effectiveDate">The effective date of the swap.</param>
         ///<param name="terminationDate">The termination date of the swap.</param>
         ///<param name="interpolationMethod">The interpolation to use.</param>
-        ///<param name="margineAboveFloatingRate">The margin on the floating leg.</param>
+        ///<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
         ///<param name="resetRate">The rest rate for the last reset.</param>
         ///<param name="notional">The notional of the swap.</param>
         ///<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
@@ -1875,7 +1876,7 @@ namespace HLV5r3.Financial
             DateTime effectiveDate,
             DateTime terminationDate,
             string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-            double margineAboveFloatingRate,// use 0 initially
+            double marginAboveFloatingRate,// use 0 initially
             double resetRate,
             decimal notional,
             int directionDateGenerationPayLeg,
@@ -1897,7 +1898,7 @@ namespace HLV5r3.Financial
             return result.GetSwapCashflows(Engine.Logger, Engine.Cache, NameSpace,
                 valueDate, effectiveDate, terminationDate,
                 interpolationMethod,
-                margineAboveFloatingRate, resetRate,
+                marginAboveFloatingRate, resetRate,
                 notional,
                 directionDateGenerationPayLeg,
                 cashFlowFrequencyPayLeg,
@@ -1920,7 +1921,7 @@ namespace HLV5r3.Financial
         ///<param name="effectiveDate">The effective date of the swap.</param>
         ///<param name="terminationDate">The termination date of the swap.</param>
         ///<param name="interpolationMethod">The interpolation to use.</param>
-        ///<param name="margineAboveFloatingRate">The margin on the floating leg.</param>
+        ///<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
         ///<param name="resetRate">The rest rate for the last reset.</param>
         ///<param name="notional">The notional of the swap.</param>
         ///<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
@@ -1941,7 +1942,7 @@ namespace HLV5r3.Financial
             DateTime effectiveDate,
             DateTime terminationDate,
             string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-            double margineAboveFloatingRate,// use 0 initially
+            double marginAboveFloatingRate,// use 0 initially
             double resetRate,
             decimal notional,
             int directionDateGenerationPayLeg,
@@ -1963,7 +1964,7 @@ namespace HLV5r3.Financial
             return result.GetSwapCashflowsWithoutCurves(Engine.Logger, Engine.Cache, NameSpace,
                 valueDate, effectiveDate, terminationDate,
                 interpolationMethod,
-                margineAboveFloatingRate, resetRate,
+                marginAboveFloatingRate, resetRate,
                 notional,
                 directionDateGenerationPayLeg,
                 cashFlowFrequencyPayLeg,

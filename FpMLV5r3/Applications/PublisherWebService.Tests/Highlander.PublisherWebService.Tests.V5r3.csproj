@@ -102,7 +102,7 @@
       <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
       <Name>Highlander.UnitTestEnv.V5r3</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebApplication1\Highlander.WebAPI.V5r3.csproj">
+    <ProjectReference Include="..\WebAPI\Highlander.WebAPI.V5r3.csproj">
       <Project>{6b91d5ab-57a1-42d1-a77f-ec2fefac72fe}</Project>
       <Name>Highlander.WebAPI.V5r3</Name>
     </ProjectReference>

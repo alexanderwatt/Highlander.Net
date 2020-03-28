@@ -7,7 +7,7 @@
     <IsComplete>false</IsComplete>
     <Expiries>
       <ForwardExpiry>
-        <ExpiryDate>2/12/2019</ExpiryDate>
+        <ExpiryDate>28/03/2020</ExpiryDate>
       </ForwardExpiry>
     </Expiries>
   </VolatilitySurface>

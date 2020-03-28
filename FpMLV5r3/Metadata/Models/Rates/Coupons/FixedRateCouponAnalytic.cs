@@ -1032,7 +1032,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        internal Decimal EvaluateExpectedFloatingValue()//TODO - What about the margin? What about BasisPoint
+        internal decimal EvaluateExpectedFloatingValue()//TODO - What about the margin? What about BasisPoint
         {
             decimal result;
             if (AnalyticParameters.DiscountType == DiscountType.None)
@@ -1050,12 +1050,12 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateExpectedValue()
+        protected virtual decimal EvaluateExpectedValue()
         {
             decimal result = 0;
             if (AnalyticParameters.ExpectedAmount != null)
             {
-                result = (Decimal)AnalyticParameters.ExpectedAmount;
+                result = (decimal)AnalyticParameters.ExpectedAmount;
             }
             else
             {
@@ -1083,12 +1083,12 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluates the expected value2.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateExpectedValue2()
+        protected virtual decimal EvaluateExpectedValue2()
         {
             decimal result = 0;
             if (AnalyticParameters.ExpectedAmount != null)
             {
-                result = (Decimal)AnalyticParameters.ExpectedAmount;
+                result = (decimal)AnalyticParameters.ExpectedAmount;
             }
             else
             {
@@ -1117,7 +1117,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// </summary>
         /// <param name="x">The given rate</param>
         /// <returns></returns>
-        protected virtual Decimal BucketedDeltaTargetFunction(Decimal x)
+        protected virtual decimal BucketedDeltaTargetFunction(decimal x)
         {
             const decimal multiplier = 1.0m;
             var bucketedRates = EvaluatedBucketedRates();
@@ -1126,7 +1126,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
             var index = len;
             while (index > 0)
             {
-                var coeffs = new Decimal[2];
+                var coeffs = new decimal[2];
                 coeffs[0] = 1.0m;
                 coeffs[1] = AnalyticParameters.PeriodAsTimesPerYear;
                 var thePoly = new Polynomial(coeffs, 1);
@@ -1140,13 +1140,13 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluating Bucketed Delta
         /// </summary>
         /// <returns>The bucketed delta</returns>
-        protected virtual Decimal EvaluateBucketedDelta1()
+        protected virtual decimal EvaluateBucketedDelta1()
         {
             Func<double, double> f = BucketedDeltaTargetFunction;
             var df = new NumericalDerivative();
             var rate = AnalyticParameters.Rate;
-            var dRate = Decimal.ToDouble(rate);
-            var delta = (Decimal)df.EvaluateDerivative(f, dRate, 1);
+            var dRate = decimal.ToDouble(rate);
+            var delta = (decimal)df.EvaluateDerivative(f, dRate, 1);
             return delta / BasisPoint;
         }
 
@@ -1154,7 +1154,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluating NPV
         /// </summary>
         /// <returns>The floating npv</returns>
-        protected Decimal EvaluateFloatingNPV()
+        protected decimal EvaluateFloatingNPV()
         {
             return EvaluateExpectedFloatingValue() * GetPaymentDiscountFactor();
         }
@@ -1164,10 +1164,10 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// </summary>
         /// <param name="x">current value</param>
         /// <returns></returns>
-        protected Double BucketedDeltaTargetFunction(Double x)
+        protected double BucketedDeltaTargetFunction(double x)
         {
-            var dx = (Decimal)x;
-            return Decimal.ToDouble(BucketedDeltaTargetFunction(dx));
+            var dx = (decimal)x;
+            return decimal.ToDouble(BucketedDeltaTargetFunction(dx));
 
         }
 
@@ -1175,13 +1175,13 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluating the vector of Bucketed Delta
         /// </summary>
         /// <returns>The vector of bucketed delta</returns>
-        protected virtual Decimal[] EvaluateBucketedDeltaVector()
+        protected virtual decimal[] EvaluateBucketedDeltaVector()
         {
             var bucketedRates = EvaluatedBucketedRates();
             var len = bucketedRates.Length;
-            var bucketedDeltaVector = new Decimal[len];
-            const Decimal cDefault = 0.0m;
-            Decimal result;
+            var bucketedDeltaVector = new decimal[len];
+            const decimal cDefault = 0.0m;
+            decimal result;
             if (len == 1 && bucketedRates[0] == cDefault)
             {
                 result = cDefault;
@@ -1201,12 +1201,12 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluates the rate.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateMarketQuote()
+        protected decimal EvaluateMarketQuote()
         {
             return AnalyticParameters.Rate;
         }
 
-        protected virtual Decimal EvaluateOptionStrike()
+        protected virtual decimal EvaluateOptionStrike()
         {
             return 0.0m;
         }
@@ -1215,7 +1215,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluating the fx rate.
         /// </summary>
         /// <returns>The fx rate</returns>
-        protected decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
+        protected static decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
         {
             var result = 1.0m;
             if (fxCurve != null)
@@ -1229,7 +1229,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Evaluating the discount factor rate.
         /// </summary>
         /// <returns>The discount factor</returns>
-        protected decimal EvaluateDiscountFactor(DateTime valuationDate, DateTime date, IRateCurve discountCurve)
+        protected static decimal EvaluateDiscountFactor(DateTime valuationDate, DateTime date, IRateCurve discountCurve)
         {
             var result = 1.0m;
             if (discountCurve != null)
@@ -1240,7 +1240,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
             return result;
         }
 
-        public decimal EvaluateDiscountRate(DateTime valuationDate, DateTime startDate, DateTime endDate, decimal? rate, decimal yearFraction, IRateCurve forecastCurve)
+        public static decimal EvaluateDiscountRate(DateTime valuationDate, DateTime startDate, DateTime endDate, decimal? rate, decimal yearFraction, IRateCurve forecastCurve)
         {
             decimal discountRate;
             if (rate != null)
@@ -1254,7 +1254,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
             return discountRate;
         }
 
-        public decimal? EvaluateDiscountRate(DateTime valuationDate, DateTime startDate, DateTime endDate, DiscountType discountType, decimal? rate, decimal yearFraction, IRateCurve forecastCurve)
+        public static decimal? EvaluateDiscountRate(DateTime valuationDate, DateTime startDate, DateTime endDate, DiscountType discountType, decimal? rate, decimal yearFraction, IRateCurve forecastCurve)
         {
             if (discountType == DiscountType.AFMA)
             {
@@ -1272,7 +1272,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Coupons
         /// Gets the forward rate.
         /// </summary>
         /// <returns></returns>
-        public decimal EvaluateForwardRate(DateTime valuationDate, DateTime startDate, DateTime forwardDate, decimal yearFraction, IRateCurve forecastCurve)
+        public static decimal EvaluateForwardRate(DateTime valuationDate, DateTime startDate, DateTime forwardDate, decimal yearFraction, IRateCurve forecastCurve)
         {
             var forwardRate = 0.0d;
             if (forecastCurve != null)

@@ -43,7 +43,7 @@ namespace Highlander.Core.Common
                     if (i == 0 && (ch == '.' || ch >= '0' && ch <= '9'))
                         throw new ArgumentException("ItemName has invalid 1st char: '" + ch + "'");
                     // 1st char cannot be '.'
-                    if ((i == (name.Length - 1)) && (ch == '.'))
+                    if (i == name.Length - 1 && ch == '.')
                         throw new ArgumentException("ItemName has invalid last char: '" + ch + "'");
                 }
                 else
@@ -100,8 +100,7 @@ namespace Highlander.Core.Common
             string key = DomainItem.CheckName(name);
             _dict.Locked(dict =>
             {
-                DomainItem item;
-                if (!dict.TryGetValue(key, out item))
+                if (!dict.TryGetValue(key, out _))
                 {
                     dict[key] = new DomainItem();
                 }
@@ -117,8 +116,7 @@ namespace Highlander.Core.Common
                 foreach (string name in names)
                 {
                     string key = DomainItem.CheckName(name);
-                    DomainItem item;
-                    if (!dict.TryGetValue(key, out item))
+                    if (!dict.TryGetValue(key, out _))
                     {
                         dict[key] = new DomainItem();
                     }

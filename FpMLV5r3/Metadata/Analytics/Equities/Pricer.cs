@@ -278,7 +278,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         return PriceMatrix[idx, jdx];
       }
 
-    public double BSprice(double fwd, double tau1, double strike1, double rate1,
+    public static double BSprice(double fwd, double tau1, double strike1, double rate1,
             double sigma1, string payoff)
     {
         int s1 = 0;

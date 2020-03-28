@@ -109,74 +109,69 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
         }
 
         /// <summary>
-        /// Test Linear Innterpolation
+        /// Test Linear Interpolation
         /// Check when xArrays are null/zero length
         /// </summary>
         [TestMethod]
         public void Test01LinearInterpolateTest()
         {
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.LinearInterpolate(null, _linYArray, 0);
+            double actual = SABRInterpolationInterface.LinearInterpolate(null, _linYArray, 0);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Linear Innterpolation
+        /// Test Linear Interpolation
         /// Check when yArrays are null/zero length
         /// </summary>
         [TestMethod]
         public void Test02LinearInterpolateTest()
         {
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.LinearInterpolate(_linXArray, null, 0);
+            double actual = SABRInterpolationInterface.LinearInterpolate(_linXArray, null, 0);
             Assert.AreEqual(0d, actual);
         }
 
         /// <summary>
-        /// Test Linear Innterpolation
+        /// Test Linear Interpolation
         /// Test a range of values
         /// </summary>
         [TestMethod]
         public void Test03LinearInterpolateTest()
         {
             double[] target = ArrayUtilities.DecimalArrayToDouble(_linInterpTarget);
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
             for (int i = 0; i < target.Length; i++)
             {
-                double actual = siif.LinearInterpolate(_linXArray, _linYArray, target[i]);
+                double actual = SABRInterpolationInterface.LinearInterpolate(_linXArray, _linYArray, target[i]);
                 Assert.AreEqual(_linExpected[i], (decimal)Math.Round(actual, 4));
             }
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Check when xArrays are null/zero length
         /// </summary>
         [TestMethod]
         public void Test04CubicHermiteSplineInterpolateTest()
         {
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.CubicHermiteSplineInterpolate(null, _chsYArray, 0);
+            double actual = SABRInterpolationInterface.CubicHermiteSplineInterpolate(null, _chsYArray, 0);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Check when yArrays are null/zero length
         /// </summary>
         [TestMethod]
         public void Test05CubicHermiteSplineInterpolateTest()
         {
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.CubicHermiteSplineInterpolate(_chsXArray, null, 0);
+            double actual = SABRInterpolationInterface.CubicHermiteSplineInterpolate(_chsXArray, null, 0);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Check when the target is too large
         /// </summary>
         [TestMethod]
@@ -187,8 +182,7 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
             string expectedFail = "Cubic Hermite Spline now supports extrapolation";
             try
             {
-                SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-                double actual = siif.CubicHermiteSplineInterpolate(_chsXArray, _chsYArray, target);
+                double actual = SABRInterpolationInterface.CubicHermiteSplineInterpolate(_chsXArray, _chsYArray, target);
                 Assert.AreEqual(expected, actual);
             }
             catch (Exception ex)
@@ -198,23 +192,22 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Test a range of values
         /// </summary>
         [TestMethod]
         public void Test07CubicHermiteSplineInterpolateTest()
         {
             double[] target = ArrayUtilities.DecimalArrayToDouble(_chsTarget);
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
             for (int i = 0; i < target.Length; i++)
             {
-                double actual = siif.CubicHermiteSplineInterpolate(_chsXArray, _chsYArray, target[i]);
+                double actual = SABRInterpolationInterface.CubicHermiteSplineInterpolate(_chsXArray, _chsYArray, target[i]);
                 Assert.AreEqual(_chsExpected[i], (decimal)Math.Round(actual, 2));
             }
         }
 
         /// <summary>
-        /// Test Bilinear Innterpolation
+        /// Test Bi-linear Interpolation
         /// Check when column arrays are null/zero length
         /// </summary>
         [TestMethod]
@@ -224,14 +217,13 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
             double columnTarget = 0;
             double rowTarget = 0;
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.BilinearInterpolate(columnArray, _bilinRows,
+            double actual = SABRInterpolationInterface.BilinearInterpolate(columnArray, _bilinRows,
                 _bilinData, columnTarget, rowTarget);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Check when yArrays are null/zero length
         /// </summary>
         [TestMethod]
@@ -241,14 +233,13 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
             double columnTarget = 0;
             double rowTarget = 0;
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.BilinearInterpolate(_bilinColumns,
+            double actual = SABRInterpolationInterface.BilinearInterpolate(_bilinColumns,
                     rowArray, _bilinData, columnTarget, rowTarget);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Check when the data is null/zero length
         /// </summary>
         [TestMethod]
@@ -258,14 +249,13 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
             double columnTarget = 0;
             double rowTarget = 0;
             double expected = 0;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            double actual = siif.BilinearInterpolate(_bilinColumns,
+            double actual = SABRInterpolationInterface.BilinearInterpolate(_bilinColumns,
                 _bilinRows, dataArray, columnTarget, rowTarget);
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Test Cubic Hermite Spline Innterpolation
+        /// Test Cubic Hermite Spline Interpolation
         /// Test a range of values
         /// </summary>
         [TestMethod]
@@ -274,10 +264,9 @@ namespace Highlander.Analytics.Tests.V5r3.SABRModel
             double[] columnTarget = _bilinColumnTarget;
             double[] rowTarget = _bilinRowTarget;
             double[] expected = _bilinExpected;
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
             for (int i = 0; i < rowTarget.Length; i++)
             {
-                double actual = siif.BilinearInterpolate(_bilinColumns,
+                double actual = SABRInterpolationInterface.BilinearInterpolate(_bilinColumns,
                     _bilinRows, _bilinData, 
                     columnTarget[i], rowTarget[i]);
                 Assert.AreEqual(expected[i], Math.Round(actual, 4));

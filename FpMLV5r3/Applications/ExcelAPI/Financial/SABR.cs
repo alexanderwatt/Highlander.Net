@@ -321,8 +321,7 @@ namespace HLV5r3.Financial
             List<double> rows = DataRangeHelper.StripDoubleRange(rowLabels);
             var values = dataTable.Value[System.Reflection.Missing.Value] as object[,];
             var valuesAsDoubles = RangeHelper.RangeToDoubleMatrix(values);
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            return siif.BilinearInterpolate(columns.ToArray(), rows.ToArray(), valuesAsDoubles, columnTarget, rowTarget);
+            return SABRInterpolationInterface.BilinearInterpolate(columns.ToArray(), rows.ToArray(), valuesAsDoubles, columnTarget, rowTarget);
         }
 
         /// <summary>
@@ -336,8 +335,7 @@ namespace HLV5r3.Financial
         {
             List<double> x = DataRangeHelper.StripDoubleRange(xArray);
             List<double> y = DataRangeHelper.StripDoubleRange(yArray);
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            return siif.LinearInterpolate(x.ToArray(), y.ToArray(), target);
+            return SABRInterpolationInterface.LinearInterpolate(x.ToArray(), y.ToArray(), target);
         }
 
         /// <summary>
@@ -352,8 +350,7 @@ namespace HLV5r3.Financial
         {
             List<double> x = DataRangeHelper.StripDoubleRange(xArray);
             List<double> y = DataRangeHelper.StripDoubleRange(yArray);
-            SABRInterpolationInterface siif = SABRInterpolationInterface.Instance();
-            return siif.CubicHermiteSplineInterpolate(x.ToArray(), y.ToArray(), target);
+            return SABRInterpolationInterface.CubicHermiteSplineInterpolate(x.ToArray(), y.ToArray(), target);
         }
 
         #endregion

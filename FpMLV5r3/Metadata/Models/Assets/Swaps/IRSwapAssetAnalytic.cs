@@ -34,7 +34,7 @@ namespace Highlander.Reporting.Models.V5r3.Assets.Swaps
         /// Gets the npv change form a base NPV.
         /// </summary>
         /// <value>The npv change.</value>
-        public Decimal NPVChange => throw new NotImplementedException();
+        public static decimal NPVChange => throw new NotImplementedException();
 
         /// <summary>
         /// Gets the implied quote.

@@ -83,19 +83,19 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
         /// Gets the PCE.
         /// </summary>
         /// <value>The PCE.</value>
-        public Decimal[] PCE => new decimal[] { };
+        public decimal[] PCE => Array.Empty<decimal>();
 
         /// <summary>
         /// Gets the PCE term.
         /// </summary>
         /// <value>The PCE term.</value>
-        public Decimal[] PCETerm => new Decimal[] { };
+        public decimal[] PCETerm => Array.Empty<decimal>();
 
         /// <summary>
         /// Gets the value.
         /// </summary>
         /// <value>The value.</value>
-        public Decimal NPV
+        public decimal NPV
         {
             get 
             {
@@ -115,7 +115,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
         /// Gets the delta.
         /// </summary>
         /// <value>The delta.</value>
-        public Decimal Delta
+        public decimal Delta
         {
             get
             {
@@ -128,7 +128,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
         /// Gets the strike delta.
         /// </summary>
         /// <value>The strike delta.</value>
-        public Decimal StrikeDelta
+        public decimal StrikeDelta
         {
             get
             {
@@ -141,7 +141,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
         /// Gets the fixed leg accrual factor of a fixed/float swap.
         /// </summary>
         /// <value>The fixed leg accrual factor of a fixed/float swap.</value>
-        public Decimal FixedLegAccrualFactor => AnalyticParameters.SwapAccrualFactor;
+        public decimal FixedLegAccrualFactor => AnalyticParameters.SwapAccrualFactor;
 
         #endregion
 
@@ -179,22 +179,22 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
 
         #region Methods
 
-        protected Decimal EvaluateOptionPremium()
+        protected decimal EvaluateOptionPremium()
         {
             return CalculateOptionValue();
         }
 
-        protected Decimal EvaluateOptionStrike()
+        protected decimal EvaluateOptionStrike()
         {
             return CalculateOptionStrike();
         }
 
-        protected Decimal EvaluateOptionDelta()
+        protected decimal EvaluateOptionDelta()
         {
             return CalculateOptionDelta();
         }
 
-        protected Decimal EvaluateStrikeDelta()
+        protected decimal EvaluateStrikeDelta()
         {
             return CalculateStrikeDelta();
         }
@@ -203,7 +203,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
         /// Evaluating the fx rate.
         /// </summary>
         /// <returns>The fx rate</returns>
-        protected decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
+        protected static decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
         {
             var result = 1.0m;
             if (fxCurve != null)
@@ -213,14 +213,14 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
             return result;
         }
 
-        protected Decimal CalculateOptionValue()
+        protected decimal CalculateOptionValue()
         {
             var result = OptionAnalytics.Opt(AnalyticParameters.IsCall, (double)AnalyticParameters.SwapBreakEvenRate, (double)AnalyticParameters.Strike,
                                              (double)Volatility, (double)AnalyticParameters.TimeToExpiry);
             return (decimal)result;
         }
 
-        protected Decimal CalculateOptionStrike()
+        protected decimal CalculateOptionStrike()
         {
             //if (AnalyticParameters.OtherNPV != null)
             //{
@@ -231,28 +231,28 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swaption
             return result;
         }
 
-        protected Decimal CalculateOptionDelta()
+        protected decimal CalculateOptionDelta()
         {
             var result = OptionAnalytics.OptWithGreeks(AnalyticParameters.IsCall, (double)AnalyticParameters.SwapBreakEvenRate, (double)AnalyticParameters.Strike,
                                                        (double)Volatility, (double)AnalyticParameters.TimeToExpiry)[1];
             return (decimal)result;
         }
 
-        protected Decimal CalculateStrikeDelta()
+        protected decimal CalculateStrikeDelta()
         {
             var result = OptionAnalytics.OptWithGreeks(AnalyticParameters.IsCall, (double)AnalyticParameters.SwapBreakEvenRate, (double)AnalyticParameters.Strike,
                                                        (double)Volatility, (double)AnalyticParameters.TimeToExpiry)[6];
             return (decimal)result;
         }
 
-        public static Decimal CalculateOptionDelta(bool isCall, decimal swapBreakEvenRate, decimal strike, double timeToExpiry, double timeToIndex, IVolatilitySurface indexVolSurface)
+        public static decimal CalculateOptionDelta(bool isCall, decimal swapBreakEvenRate, decimal strike, double timeToExpiry, double timeToIndex, IVolatilitySurface indexVolSurface)
         {
             var volatility = (decimal)indexVolSurface.GetValue(timeToIndex, (double)strike);
             var result = OptionAnalytics.OptWithGreeks(isCall, (double)swapBreakEvenRate, (double)strike, (double)volatility, timeToExpiry)[1];
             return (decimal)result;
         }
 
-        public static Decimal CalculateStrikeDelta(bool isCall, decimal swapBreakEvenRate, decimal strike, double timeToExpiry, double timeToIndex, IVolatilitySurface indexVolSurface)
+        public static decimal CalculateStrikeDelta(bool isCall, decimal swapBreakEvenRate, decimal strike, double timeToExpiry, double timeToIndex, IVolatilitySurface indexVolSurface)
         {
             var volatility = (decimal)indexVolSurface.GetValue(timeToIndex, (double)strike);
             var result = OptionAnalytics.OptWithGreeks(isCall, (double)swapBreakEvenRate, (double)strike, (double)volatility, timeToExpiry)[6];

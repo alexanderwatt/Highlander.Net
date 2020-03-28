@@ -60,18 +60,16 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
         {
             // Instantiate the object that will provide access to the BGS 
             // convexity correction functionality.
-            var convexityObj = new BGSConvexityCorrection();
-            Assert.AreNotEqual(convexityObj, null);
             IDayCounter dayCountObj = Actual365.Instance;
             // Test the case: B0 < L.
             _amortisationDate = DateTime.Parse("2011-01-18");
-            _currentBondFactor = 19/100;
+            _currentBondFactor = 19/100.0;
             _alpha = -0.4532;
             _sigma = 2.17/100;
-            _cleanUp = 20/100;
+            _cleanUp = 20/100.0;
             _expected = 0.0;
             double tenor = dayCountObj.YearFraction(_lastAmortisationDate, _amortisationDate);
-            _actual = convexityObj.ComputeBGSConvexityCorrection(tenor,
+            _actual = BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                                  _currentBondFactor,
                                                                  _alpha,
                                                                  _sigma,
@@ -86,7 +84,7 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
             _cleanUp = 0.0;
             _expected = 0.6334102389;
             tenor = dayCountObj.YearFraction(_lastAmortisationDate, _amortisationDate);
-            _actual = convexityObj.ComputeBGSConvexityCorrection(tenor,
+            _actual = BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                                  _currentBondFactor,
                                                                  _alpha,
                                                                  _sigma,
@@ -94,7 +92,7 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
             const double tolerance2 = 1.0E-6;
             Assert.AreEqual(_expected, _actual, tolerance2);
 
-            // Test the linmiting case: sigma = 0.
+            // Test the limiting case: sigma = 0.
             _amortisationDate = DateTime.Parse("2007-07-16");
             _currentBondFactor = 61.82/100;
             _alpha = -0.3051;
@@ -102,7 +100,7 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
             _cleanUp = 10.0/100;
             _expected = 0.5314066262;
             tenor = dayCountObj.YearFraction(_lastAmortisationDate, _amortisationDate);
-            _actual = convexityObj.ComputeBGSConvexityCorrection(tenor,
+            _actual = BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                                  _currentBondFactor,
                                                                  _alpha,
                                                                  _sigma,
@@ -120,7 +118,7 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
             _cleanUp = 10.0/100;
             _expected = 0.5421666386;
             tenor = dayCountObj.YearFraction(_lastAmortisationDate, _amortisationDate);
-            _actual = convexityObj.ComputeBGSConvexityCorrection(tenor,
+            _actual = BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                                  _currentBondFactor,
                                                                  _alpha,
                                                                  _sigma,
@@ -136,7 +134,7 @@ namespace Highlander.Analytics.Tests.V5r3.BGSAnalytics
             _cleanUp = 10.0/100;
             _expected = 0.1312047820;
             tenor = dayCountObj.YearFraction(_lastAmortisationDate, _amortisationDate);
-            _actual = convexityObj.ComputeBGSConvexityCorrection(tenor,
+            _actual = BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                                  _currentBondFactor,
                                                                  _alpha,
                                                                  _sigma,

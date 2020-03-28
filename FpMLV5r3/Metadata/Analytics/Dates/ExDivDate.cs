@@ -79,7 +79,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
         /// <param name="nextCoupDate">The next coup date.</param>
         /// <param name="calendar">The calendar.</param>
         /// <returns></returns>
-        public DateTime CalcDate(ExDividendEnum xdt, DateTime nextCoupDate, IBusinessCalendar calendar)
+        public static DateTime CalcDate(ExDividendEnum xdt, DateTime nextCoupDate, IBusinessCalendar calendar)
         {
             switch (xdt)
             {
@@ -146,25 +146,19 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
         /// <summary>
         /// The date.
         /// </summary>
-        public DateTime Date
-        {
-            get { return _exDivDate; }
-        }
+        public DateTime Date => _exDivDate;
 
         /// <summary>
         /// Converts to FpML.
         /// </summary>
-        public DateTime ToFpML
-        {
-            get { return _exDivDate; }
-        }
+        public DateTime ToFpML => _exDivDate;
 
         /// <summary>
         /// Formats the ex div type.
         /// </summary>
         /// <param name="XDT"></param>
         /// <returns></returns>
-        public string FormatExDiv(ExDividendEnum XDT)
+        public static string FormatExDiv(ExDividendEnum XDT)
         {
             switch (XDT)
             {

@@ -34,7 +34,7 @@ namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxOptionLeg
         /// Gets or sets the forward fx rate.
         /// </summary>
         /// <value>The forward fx rate.</value>
-        public Decimal ForwardFxRate { get; protected set; }
+        public decimal ForwardFxRate { get; protected set; }
 
         /// <summary>
         /// Gets or sets the FxOptionType.
@@ -46,25 +46,25 @@ namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxOptionLeg
         /// Gets or sets the strike.
         /// </summary>
         /// <value>The strike.</value>
-        public List<Decimal> Strikes { get; protected set; }
+        public List<decimal> Strikes { get; protected set; }
 
         /// <summary>
         /// Gets or sets the discount factor.
         /// </summary>
         /// <value>The discount factor.</value>
-        public List<Decimal> Volatilities { get; protected set; }
+        public List<decimal> Volatilities { get; protected set; }
 
         /// <summary>
         /// Gets or sets the Time To Index.
         /// </summary>
         /// <value>The Time To Index.</value>
-        public List<Decimal> TimeToIndices { get; protected set; }
+        public List<decimal> TimeToIndices { get; protected set; }
 
         /// <summary>
         /// Gets or sets the Time To expiry.
         /// </summary>
         /// <value>The Time To expiry.</value>
-        public List<Decimal> ExpiryTimes { get; protected set; }
+        public List<decimal> ExpiryTimes { get; protected set; }
 
         public bool GetIsCall()
         {
@@ -141,28 +141,28 @@ namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxOptionLeg
 
         #region Methods
 
-        protected virtual Decimal CalculateOptionValue(decimal forwardRate)
+        protected virtual decimal CalculateOptionValue(decimal forwardRate)
         {
             var result = OptionAnalytics.Opt(GetIsCall(), (double)forwardRate, (double)GetStrike(),
                                              (double)GetVolatility(), (double)GetExpiry());
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionValue()
+        protected virtual decimal CalculateOptionValue()
         {
             var result = OptionAnalytics.Opt(GetIsCall(), (double)ForwardFxRate, (double)GetStrike(),
                                              (double)GetVolatility(), (double)GetExpiry());
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionValue2()
+        protected virtual decimal CalculateOptionValue2()
         {
             var result = OptionAnalytics.Opt(GetIsCall(), (double)ForwardFxRate - 0.0001, (double)GetStrike(),
                                              (double)GetVolatility(), (double)GetExpiry());
             return (decimal)result;
         }
 
-        protected Decimal CalculateOptionStrike()
+        protected static decimal CalculateOptionStrike()
         {
             var result = 0.0m;
             //if (AnalyticParameters.Premium != null)
@@ -174,7 +174,7 @@ namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxOptionLeg
             return result;
         }
 
-        protected virtual Decimal CalculateOptionDelta()
+        protected virtual decimal CalculateOptionDelta()
         {
             var result = OptionAnalytics.OptWithGreeks(GetIsCall(), (double)ForwardFxRate, (double)GetStrike(),
                                                        (double)GetVolatility(), (double)GetExpiry())[1];

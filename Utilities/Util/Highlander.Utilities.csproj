@@ -93,6 +93,7 @@
     <Compile Include="Compression\Compression.cs" />
     <Compile Include="DateTimeManager.cs" />
     <Compile Include="Diagnostics\AssemblyInfo.cs" />
+    <Compile Include="Extensions\DoubleExtension.cs" />
     <Compile Include="Exception\DuplicateNotAllowedException.cs" />
     <Compile Include="Exception\CustomException.cs" />
     <Compile Include="Exception\ExtrapolationFailureException.cs" />
@@ -104,14 +105,23 @@
       <DependentUpon>ExprFormat.xsd</DependentUpon>
     </Compile>
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Helpers\ArrayHelper.cs" />
     <Compile Include="Helpers\AssemblyFileInfo.cs" />
+    <Compile Include="Helpers\AssemblyInfo.cs" />
     <Compile Include="Helpers\DisposeHelper.cs" />
+    <Compile Include="Helpers\CharHelpers.cs" />
+    <Compile Include="Helpers\Information.cs" />
     <Compile Include="Helpers\InputValidator.cs" />
+    <Compile Include="Helpers\MethodError.cs" />
     <Compile Include="Helpers\PropertyHelper.cs" />
+    <Compile Include="Helpers\RangeFunctions.cs" />
+    <Compile Include="Helpers\RangeTermsHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Triplet.cs" />
+    <Compile Include="Helpers\Utilities.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="Extensions\ListExtension.cs" />
     <Compile Include="Logging\BaseLogger.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Logging\IdentityHelper.cs" />
@@ -183,6 +193,20 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\error.htm" />
+    <Content Include="Resources\errorHeader.htm" />
+    <Content Include="Resources\errorLog.htm" />
+    <Content Include="Resources\errorNoStack.htm" />
+    <Content Include="Resources\hline.htm" />
+    <Content Include="Resources\method.htm" />
+    <Content Include="Resources\methodLink.htm" />
+    <Content Include="Resources\methodLinks.htm" />
+    <Content Include="Resources\methods.htm" />
+    <Content Include="Resources\param.htm" />
+    <Content Include="Resources\topOfDoc.htm" />
+    <Content Include="Resources\warning.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

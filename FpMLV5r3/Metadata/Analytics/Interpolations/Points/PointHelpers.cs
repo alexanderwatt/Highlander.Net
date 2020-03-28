@@ -81,11 +81,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="termStrike">The term or strike of the underlying.</param>
         /// <param name="generic">A generic dimension</param>
         /// <param name="strikeFlag">the flag which identifies which: term or strike.</param>
-        public static double[] Create2DArray(string expiry, string termStrike, string generic, Boolean strikeFlag)
+        public static double[] Create2DArray(string expiry, string termStrike, string generic, bool strikeFlag)
         {
             return Create2DArray(expiry, termStrike, generic, strikeFlag, 0.0);
         }
@@ -94,12 +94,12 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="termStrike">The term or strike of the underlying.</param>
         /// <param name="generic">A generic dimension</param>
         /// <param name="strikeFlag">the flag which identifies which: term or strike.</param>
         /// <param name="value">the value for that coordinate.</param>
-        public static double[] Create2DArray(string expiry, string termStrike, string generic, Boolean strikeFlag, double value)
+        public static double[] Create2DArray(string expiry, string termStrike, string generic, bool strikeFlag, double value)
         {
             var result = new double[3];
             var coords = CreatePoint(expiry, termStrike, generic, strikeFlag).Coords;
@@ -113,7 +113,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="term">The term or strike of the underlying.</param>
         /// <param name="generic">A generic dimension</param>
         /// <param name="strike">the flag which identifies which: term or strike.</param>
@@ -121,7 +121,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         public static double[] Create3DArray(string expiry, string term, string strike, string generic, double value)
         {
             var result = new double[4];
-            var coords = CreatePoint(expiry, term, strike).Coords;//TODSO add generic.
+            var coords = CreatePoint(expiry, term, strike).Coords;//TODO add generic.
             result[0] = (double)coords[0];
             result[1] = (double)coords[1];
             result[2] = (double)coords[2];
@@ -133,11 +133,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="termStrike">The term or strike of the underlying.</param>
         /// <param name="generic">A generic dimension</param>
         /// <param name="strikeFlag">the flag which identifies which: term or strike.</param>
-        public static IPoint CreatePoint(string expiry, string termStrike, string generic, Boolean strikeFlag)
+        public static IPoint CreatePoint(string expiry, string termStrike, string generic, bool strikeFlag)
         {
             if (expiry == null || termStrike == null)
             {
@@ -152,7 +152,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="term">The term of the underlying.</param>
         /// <param name="strike">The strike.</param>
         public static GeneralPoint CreatePoint(string expiry, string term, double strike)
@@ -174,7 +174,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// This method assumes simple time periods.
         /// </summary>
-        /// <param name="expiry">the expiry of the underlyer.</param>
+        /// <param name="expiry">the expiry of the underlying.</param>
         /// <param name="term">The term of the underlying.</param>
         /// <param name="strike">The strike.</param>
         public static GeneralPoint CreatePoint(string expiry, string term, string strike)
@@ -195,7 +195,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// <summary>
         /// Maps from double arrays to an IPoint list. The number of values is equal to the multiplication of xCoords and yCoords.
         /// </summary>
-        /// <param name="expiryYearFraction">the expiry of the underlyer.</param>
+        /// <param name="expiryYearFraction">the expiry of the underlying.</param>
         /// <param name="termYearFraction">The term of the underlying.</param>
         /// <param name="strike">the strike.</param>
         public static Point3D CreatePoint3D(double expiryYearFraction, double termYearFraction, decimal strike)
@@ -215,29 +215,34 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
             {
                 return null;
             }
-            var point = new double[] { };
+            var point = Array.Empty<double>();
             var expiry = pt.expiration[0].Items[0] as Period;
             const double value = 0.0;
-            var expiryTime = expiry.ToYearFraction();
-            if (pt.strike != null)
+            if (expiry != null)
             {
-                point = new[]
-                            {
-                                expiryTime,
-                                (double)pt.strike[0],
-                                value
-                            };
-            }
-            if (pt.term != null)
-            {
-                var term = pt.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new[]
-                            {
-                                expiryTime,
-                                termTime,
-                                value
-                            };
+                var expiryTime = expiry.ToYearFraction();
+                if (pt.strike != null)
+                {
+                    point = new[]
+                    {
+                        expiryTime,
+                        (double)pt.strike[0],
+                        value
+                    };
+                }
+                if (pt.term != null)
+                {
+                    if (pt.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new[]
+                        {
+                            expiryTime,
+                            termTime,
+                            value
+                        };
+                    }
+                }
             }
             return point;
         }
@@ -258,45 +263,53 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
                 return null;
             }
             const double value = 0.0;
-            var expiry = pt.expiration[0].Items[0] as Period;
-            var expiryTime = expiry.ToYearFraction();
-            var point = new double[] {};
+            if (pt.expiration[0].Items[0] is Period expiry)
+            {
+                var expiryTime = expiry.ToYearFraction();
+                var point = Array.Empty<double>();
 
-            if (pt.term != null && pt.strike != null)
-            {
-                var strike = (double)pt.strike[0];
-                var term = pt.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new[]
-                            {
-                                expiryTime,
-                                termTime,
-                                strike,
-                                value,
-                            };
+                if (pt.term != null && pt.strike != null)
+                {
+                    var strike = (double)pt.strike[0];
+                    if (pt.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new[]
+                        {
+                            expiryTime,
+                            termTime,
+                            strike,
+                            value,
+                        };
+                    }
+                }
+                if (pt.term == null && pt.strike != null)
+                {
+                    var strike = (double)pt.strike[0];
+                    point = new[]
+                    {
+                        expiryTime,
+                        strike,
+                        value
+                    };
+                }
+                if (pt.term != null && pt.strike == null)
+                {
+                    if (pt.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new[]
+                        {
+                            expiryTime,
+                            termTime,
+                            value
+                        };
+                    }
+                }
+                return point;
             }
-            if (pt.term == null && pt.strike != null)
-            {
-                var strike = (double)pt.strike[0];
-                point = new[]
-                            {
-                                expiryTime,
-                                strike,
-                                value
-                            };
-            }
-            if (pt.term != null && pt.strike == null)
-            {
-                var term = pt.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new[]
-                            {
-                                expiryTime,
-                                termTime,
-                                value
-                            };
-            }
-            return point;
+
+            return Array.Empty<double>();
         }
 
         /// <summary>
@@ -361,20 +374,26 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
             const double value = 0.0;
             var expiry = pt.expiration[0].Items[0] as Period;
             var strike = (double)pt.strike[0];
-            var point = new double[] { };
-            var expiryTime = expiry.ToYearFraction();
-            if (pt.term != null)
+            var point = Array.Empty<double>();
+            if (expiry != null)
             {
-                var term = pt.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new[]
-                            {
-                                expiryTime,
-                                termTime,
-                                strike,
-                                value,
-                            };
+                var expiryTime = expiry.ToYearFraction();
+                if (pt.term != null)
+                {
+                    if (pt.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new[]
+                        {
+                            expiryTime,
+                            termTime,
+                            strike,
+                            value,
+                        };
+                    }
+                }
             }
+
             return point;
         }
 
@@ -393,19 +412,24 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
             var expiry = coordinate.expiration[0].Items[0] as Period;
             var strike = (double)coordinate.strike[0];
             var value = Convert.ToDouble(pt.value);
-            var point = new double[] {};
-            var expiryTime = expiry.ToYearFraction();
-            if (coordinate.term != null)
+            var point = Array.Empty<double>();
+            if (expiry != null)
             {
-                var term = coordinate.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new[]
-                            {
-                                expiryTime,
-                                termTime,
-                                strike,
-                                value
-                            };
+                var expiryTime = expiry.ToYearFraction();
+                if (coordinate.term != null)
+                {
+                    if (coordinate.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new[]
+                        {
+                            expiryTime,
+                            termTime,
+                            strike,
+                            value
+                        };
+                    }
+                }
             }
             return point;
         }
@@ -426,13 +450,16 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
             var strike = (double)coordinate.strike[0];
             var value = Convert.ToDouble(pt.value);
             Point3D point = null;
-            var expiryTime = expiry.ToYearFraction();
-            if (coordinate.term != null)
+            if (expiry != null)
             {
-                var term = coordinate.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new Point3D(expiryTime, termTime, strike, value);
+                var expiryTime = expiry.ToYearFraction();
+                if (coordinate.term?[0].Items[0] is Period term)
+                {
+                    var termTime = term.ToYearFraction();
+                    point = new Point3D(expiryTime, termTime, strike, value);
+                }
             }
+
             return point;
         }
 
@@ -451,17 +478,22 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
             var expiry = coordinate.expiration[0].Items[0] as Period;
             var strike = (double)coordinate.strike[0];           
             var value = Convert.ToDouble(pt.value);           
-            Point point;
-            var expiryTime = expiry.ToYearFraction();
-            if (coordinate.term != null)
+            Point point = null;
+            if (expiry != null)
             {
-                var term = coordinate.term[0].Items[0] as Period;
-                var termTime = term.ToYearFraction();
-                point = new Point3D(expiryTime, termTime, strike, value);
-            }
-            else
-            {
-                point = new Point2D(expiryTime, strike, value);
+                var expiryTime = expiry.ToYearFraction();
+                if (coordinate.term != null)
+                {
+                    if (coordinate.term[0].Items[0] is Period term)
+                    {
+                        var termTime = term.ToYearFraction();
+                        point = new Point3D(expiryTime, termTime, strike, value);
+                    }
+                }
+                else
+                {
+                    point = new Point2D(expiryTime, strike, value);
+                }
             }
             return point;
         }
@@ -470,7 +502,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
 
         /// <summary>
         /// Convert a VolatilityValue into a <see cref="Point2D"/>
-        /// that represents the year fraction expiry and a sPoint2Dtrike
+        /// that represents the year fraction expiry and a sPoint2DStrike
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
@@ -515,13 +547,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolations.Points
         /// Convert a VolatilityValue into a <see cref="Point3D"/>
         /// that represent year fractions expiry and tenor, and a strike
         /// </summary>
-        /// <param name="coord"></param>
+        /// <param name="coordinates"></param>
         /// <returns></returns>
-        public static Point3D ToDoublePoint3D(IPoint coord)
+        public static Point3D ToDoublePoint3D(IPoint coordinates)
         {
-            var expiry = (Period)((Coordinate)coord).PricingDataCoordinate.expiration[0].Items[0];
-            var tenor = (Period)((Coordinate)coord).PricingDataCoordinate.term[0].Items[0];
-            var strike = ((Coordinate)coord).PricingDataCoordinate.strike[0];
+            var expiry = (Period)((Coordinate)coordinates).PricingDataCoordinate.expiration[0].Items[0];
+            var tenor = (Period)((Coordinate)coordinates).PricingDataCoordinate.term[0].Items[0];
+            var strike = ((Coordinate)coordinates).PricingDataCoordinate.strike[0];
             const double value = 0;
             return new Point3D((double)strike, tenor.ToYearFraction(), expiry.ToYearFraction(), value);
         }

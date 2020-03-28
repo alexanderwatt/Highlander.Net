@@ -17,19 +17,19 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 {
     ///<summary>
     ///</summary>
-    public enum NORMS
+    public enum MatrixNorm
     {
         /// <summary>1-norm, for matrices and vectors.</summary>
-        NORM1,
+        Norm1,
 
         /// <summary>2-norm, for vectors.</summary>
-        NORM2,
+        Norm2,
 
         /// <summary>Frobenius norm, for matrices.</summary>
-        NORMF,
+        Normf,
 
         /// <summary>Infinity norm, for matrices and vectors.</summary>
-        NORMINF
+        Norminf
     };
 
     /// <summary> Basic linear algebra subroutines. The methods present here are
@@ -55,7 +55,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 		/// <summary> Computes the specified norm of the matrix.</summary>
 		/// <param name="A"></param>
 		/// <param name="normtype">Any of NORM1, NORMF or NORMINF.</param>
-		double Norm(IMatrix A, NORMS normtype);
+		double Norm(IMatrix A, MatrixNorm normtype);
 
 		/// <summary> <c>A = alpha*A</c>.</summary>
 		/// <returns> A </returns>
@@ -225,7 +225,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 		/// <summary> Computes the specified norm of the vector.</summary>
 		/// <param name="x"></param>
 		/// <param name="normtype">One of NORM1, NORM2 or NORMINF.</param>
-		double Norm(IVector x, NORMS normtype);
+		double Norm(IVector x, MatrixNorm normtype);
 
 		/// <summary> <c>y = alpha*x</c>.</summary>
 		/// <returns> y </returns>

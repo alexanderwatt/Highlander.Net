@@ -32,8 +32,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
     /// <p>The <i>CND</i> is related to the <i>erf</i> with the formula
     /// <i>CND(x)=(erf(x/sqrt(2))+1)/2</i>.</p>
     /// <p>For more details about the cumulative normal distribution, look at
-    /// the <a href="http://en.wikipedia.org/wiki/Erf">WikiPedia</a>.</p>
-    /// <p>See <a href="http://www.library.cornell.edu/nr/">Numerical recipees in C</a> 
+    /// the <a href="http://en.wikipedia.org/wiki/Erf">Wikipedia</a>.</p>
+    /// <p>See <a href="http://www.library.cornell.edu/nr/">Numerical recipes in C</a> 
     /// (chapter 6) for the detail of the algorithm.</p>
     /// </remarks>
     public class CumulativeNormalDistribution : ContinuousDistribution, IUnaryFunction //, IRealFunction
@@ -405,7 +405,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
         ///<param name="f"></param>
         ///<param name="h"></param>
         ///<returns></returns>
-        public double Norm(DoubleVector f, double h)
+        public static double Norm(DoubleVector f, double h)
         {
             double sum = 0.0;
             foreach (double d in f)

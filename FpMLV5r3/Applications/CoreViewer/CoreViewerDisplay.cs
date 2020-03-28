@@ -254,7 +254,7 @@ namespace Highlander.Core.Viewer.V5r3
           while (top <= bottom)
           {
             int middle = (top + bottom) >> 1;
-            int comp = String.CompareOrdinal(nodes[middle].Name, nodeName) * sign;
+            int comp = string.CompareOrdinal(nodes[middle].Name, nodeName) * sign;
             if (0 == comp)
             {
               index = middle;

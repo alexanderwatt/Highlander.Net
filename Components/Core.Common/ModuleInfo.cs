@@ -76,31 +76,30 @@ namespace Highlander.Core.Common
         public string[] NetAddrs { get; }
 
         // UserIdentity
-        private readonly string _userIdentityName;
-        public string UserIdentityName => _userIdentityName;
+        public string UserIdentityName { get; }
 
         public string UserName
         {
             get
             {
-                if (_userIdentityName == null)
+                if (UserIdentityName == null)
                     return null;
-                string[] parts = _userIdentityName.Split('\\');
+                string[] parts = UserIdentityName.Split('\\');
                 if (parts.Length > 1)
                     return parts[1];
-                return _userIdentityName;
+                return UserIdentityName;
             }
         }
         public string UserWDom
         {
             get
             {
-                if (_userIdentityName == null)
+                if (UserIdentityName == null)
                     return null;
-                string[] parts = _userIdentityName.Split('\\');
+                string[] parts = UserIdentityName.Split('\\');
                 if (parts.Length > 1)
                     return parts[0];
-                return _userIdentityName;
+                return UserIdentityName;
             }
         }
 
@@ -138,7 +137,7 @@ namespace Highlander.Core.Common
         public int CoreHash { get; set; }
 
         // IIdentity methods
-        public string Name => _userIdentityName;
+        public string Name => UserIdentityName;
 
         public string AuthenticationType => throw new NotImplementedException();
         public bool IsAuthenticated => throw new NotImplementedException();
@@ -164,7 +163,7 @@ namespace Highlander.Core.Common
                 if (hostIPs[i].AddressFamily == AddressFamily.InterNetwork)
                     HostIpV4 = hostIPs[i].ToString();
             }
-            _userIdentityName = userIdentityName;
+            UserIdentityName = userIdentityName;
             UserFullName = userFullName;
             // get calling application details
             {
@@ -209,5 +208,4 @@ namespace Highlander.Core.Common
             }
         }
     }
-
 }

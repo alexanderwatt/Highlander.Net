@@ -49,6 +49,7 @@ using Highlander.Utilities.NamedValues;
 using Highlander.ValuationEngine.V5r3;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 using RuntimeEnvironment = HLV5r3.Runtime.RuntimeEnvironment;
 
@@ -1582,8 +1583,7 @@ namespace HLV5r3.Financial
             var strikes = DataRangeHelper.StripDecimalRange(strikesAsArray);
             var assetIdentifiers = DataRangeHelper.StripRange(assetIdentifiersAsArray);
             var volatility = volatilityRange.Value[System.Reflection.Missing.Value] as object[,];
-            volatility = DataRangeHelper.RangeToMatrix(volatility);
-            var result = Engine.CreateLocalSurfaceAssets(assetIdentifiers, baseDate, volatility, strikes, namedValueSet);
+            var result = Engine.CreateLocalSurfaceAssets(assetIdentifiers, baseDate, DataRangeHelper.RangeToMatrix<decimal>(volatility), strikes, namedValueSet);
             return ArrayHelper.RangeToMatrix<object>(result);
         }
 

@@ -1764,18 +1764,18 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             }
             if (interpMethod == "L")
             {
-                return InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry);
+                return InterpolationFunctions.LinearInterpolation(sabrVolAtStrike, expiry);
             }
             if (interpMethod == "H")
             {
-                return InterpolationFunctions.HSplineInterp(sabrVolAtStrike, expiry);
+                return InterpolationFunctions.HSplineInterpolation(sabrVolAtStrike, expiry);
             }
             if (interpMethod == "V")
             {
                 for (int i = 0; i <= size; i++) { sabrVolAtStrike[i, 1] = Math.Pow((double)sabrVolAtStrike[i, 1], 2); }
-                return Math.Pow(InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry), 0.5);
+                return Math.Pow(InterpolationFunctions.LinearInterpolation(sabrVolAtStrike, expiry), 0.5);
             }
-            return InterpolationFunctions.LinearInterp(sabrVolAtStrike, expiry);
+            return InterpolationFunctions.LinearInterpolation(sabrVolAtStrike, expiry);
         }
     }
 }

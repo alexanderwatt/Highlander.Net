@@ -39,7 +39,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
     public class FxSwapPricer : InstrumentControllerBase, IPriceableFxSwap<IFxSwapParameters, IFxSwapInstrumentResults>, IPriceableInstrumentController<FxSwap>
     {
         // Analytics
-        public IModelAnalytic<IFxSwapParameters, FxSwapInstrumentMetrics> AnalyticsModel { get; set; }
+        public IModelAnalytic<IFxSwapParameters, FxSwapInstrumentMetric> AnalyticsModel { get; set; }
 
         protected const string CModelIdentifier = "FxSwap";
         //protected const string CDefaultBucketingInterval = "3M";

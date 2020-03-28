@@ -13,11 +13,9 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
 namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxSwap
 {
-    public enum FxSwapInstrumentMetrics
+    public enum FxSwapInstrumentMetric
     {
         //NPV, 
         BaseCurrencyNPV
@@ -36,13 +34,12 @@ namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxSwap
         /// Gets the base currency NPV.
         /// </summary>
         /// <value>The base currency NPV.</value>
-        Decimal BaseCurrencyNPV { get; }
+        decimal BaseCurrencyNPV { get; }
 
         /// <summary>
         /// Gets the foreign currency NPV.
         /// </summary>
         /// <value>The foreign currency NPV.</value>
-        Decimal ForeignCurrencyNPV { get; }
-
+        decimal ForeignCurrencyNPV { get; }
     }
 }

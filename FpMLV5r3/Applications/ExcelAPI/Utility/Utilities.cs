@@ -25,6 +25,7 @@ using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using HLV5r3.Properties;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion

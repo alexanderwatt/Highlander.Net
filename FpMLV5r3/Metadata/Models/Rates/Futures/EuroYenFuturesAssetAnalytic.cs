@@ -26,19 +26,19 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Gets the NPV.
         /// </summary>
         /// <value>The NPV.</value>
-        public Decimal NPV => EvaluateNPV();
+        public decimal NPV => EvaluateNPV();
 
         /// <summary>
         /// Gets the npv change form a base NPV.
         /// </summary>
         /// <value>The npv change.</value>
-        public Decimal NPVChange => EvaluateNPVChange();
+        public decimal NPVChange => EvaluateNPVChange();
 
         /// <summary>
         /// Gets the implied quote.
         /// </summary>
         /// <value>The quote.</value>
-        public Decimal ImpliedQuote => EvaluateImpliedQuote();
+        public decimal ImpliedQuote => EvaluateImpliedQuote();
 
         /// <summary>
         /// Gets the delta wrt the fixed rate R.
@@ -48,30 +48,30 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// <summary>
         /// Gets the convexity adjustment.
         /// </summary>
-        public Decimal AccrualFactor => EvaluateAccrualFactor();
+        public decimal AccrualFactor => EvaluateAccrualFactor();
 
         /// <summary>
         /// Gets the convexity adjustment.
         /// </summary>
-        public Decimal ConvexityAdjustment => EvaluateConvexityAdjustment(AnalyticParameters.Rate);
+        public decimal ConvexityAdjustment => EvaluateConvexityAdjustment(AnalyticParameters.Rate);
 
         /// <summary>
         /// Gets the adjusted rate.
         /// </summary>
         /// <value>The rate.</value>
-        public Decimal AdjustedRate => EvaluateAdjustedRate();
+        public decimal AdjustedRate => EvaluateAdjustedRate();
 
         /// <summary>
         /// Gets the discount factor at maturity.
         /// </summary>
         /// <value>The discount factor at maturity.</value>
-        public Decimal DiscountFactorAtMaturity => EvaluateDiscountFactorAtMaturity();
+        public decimal DiscountFactorAtMaturity => EvaluateDiscountFactorAtMaturity();
 
         /// <summary>
         /// Gets the market quote.
         /// </summary>
         /// <value>The market quote.</value>
-        public Decimal MarketQuote => EvaluateMarketRate();
+        public decimal MarketQuote => EvaluateMarketRate();
 
         /// <summary>
         /// Gets the Index At Maturity.
@@ -82,25 +82,25 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Gets the PandL.
         /// </summary>
         /// <value>The market quote.</value>
-        public decimal PandL => 0.0m;
+        public static decimal PandL => 0.0m;
 
         /// <summary>
         /// Gets the initial margin.
         /// </summary>
-        /// <value>The inital margin.</value>
-        public decimal InitialMargin => 0.0m;
+        /// <value>The initial margin.</value>
+        public static decimal InitialMargin => 0.0m;
 
         /// <summary>
         /// Gets the variation margin.
         /// </summary>
         /// <value>The variation margin.</value>
-        public decimal VariationMargin => 0.0m;
+        public static decimal VariationMargin => 0.0m;
 
         /// <summary>
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateNPVChange()
+        protected virtual decimal EvaluateNPVChange()
         {
             return EvaluateNPV() - AnalyticParameters.BaseNPV;
         }
@@ -109,7 +109,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateImpliedQuote()
+        private decimal EvaluateImpliedQuote()
         {
             decimal impliedRate = EvaluateImpliedRate();
             var result = FuturesAnalytics.FuturesImpliedQuoteFromMarginAdjustedWithArrears(impliedRate,
@@ -123,7 +123,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateConvexityAdjustment(Decimal rate)
+        private decimal EvaluateConvexityAdjustment(decimal rate)
         {
             return FuturesAnalytics.FuturesMarginWithArrearsConvexityAdjustment(rate,
                                                                                 (double)AnalyticParameters.YearFraction,
@@ -135,7 +135,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateDiscountFactorAtMaturity()
+        public virtual decimal EvaluateDiscountFactorAtMaturity()
         {
             return AnalyticParameters.StartDiscountFactor / (1 + AnalyticParameters.YearFraction * (AnalyticParameters.Rate - EvaluateConvexityAdjustment(AnalyticParameters.Rate)));
         }
@@ -144,7 +144,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateNPV()
+        private decimal EvaluateNPV()
         {
             return AnalyticParameters.NumberOfContracts * (AnalyticParameters.Rate - ImpliedQuote) * 25000000m;
         }
@@ -153,7 +153,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateAdjustedRate()
+        private decimal EvaluateAdjustedRate()
         {
             return EvaluateMarketRate() - EvaluateConvexityAdjustment(AnalyticParameters.Rate);
         }
@@ -162,7 +162,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateDeltaR()//TODO this is not correct.
+        private decimal EvaluateDeltaR()//TODO this is not correct.
         {
             return AnalyticParameters.NumberOfContracts * 2500m;
         }
@@ -171,7 +171,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateMarketRate()//TODO this is not correct.
+        private decimal EvaluateMarketRate()//TODO this is not correct.
         {
             return AnalyticParameters.Rate;
         }
@@ -180,7 +180,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the accrual factor
         /// </summary>
         /// <returns></returns>
-        public Decimal EvaluateAccrualFactor()
+        public static decimal EvaluateAccrualFactor()
         {
             return 0.25m;
         }
@@ -189,7 +189,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public Decimal EvaluateImpliedRate()
+        public decimal EvaluateImpliedRate()
         {
             var rate = (AnalyticParameters.StartDiscountFactor / AnalyticParameters.EndDiscountFactor - 1) / AnalyticParameters.YearFraction;
             return rate;

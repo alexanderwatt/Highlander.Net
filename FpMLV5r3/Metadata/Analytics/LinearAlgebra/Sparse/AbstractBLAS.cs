@@ -48,17 +48,17 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 		        throw new ArgumentException("x == z");
 		}
 
-	    public virtual double Norm(IMatrix A, NORMS normtype)
+	    public virtual double Norm(IMatrix A, MatrixNorm normtype)
 		{
 			switch (normtype)
 			{
-				case NORMS.NORM1:
+				case MatrixNorm.Norm1:
 					return Norm1(A);
 
-				case NORMS.NORMF:
+				case MatrixNorm.Normf:
 					return NormF(A);
 
-				case NORMS.NORMINF:
+				case MatrixNorm.Norminf:
 					return NormInf(A);
 			}
 
@@ -380,17 +380,17 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 				throw new IndexOutOfRangeException("x.size() != y.size()");
 		}
 
-		public virtual double Norm(IVector x, NORMS normtype)
+		public virtual double Norm(IVector x, MatrixNorm normtype)
 		{
 			switch (normtype)
 			{
-				case NORMS.NORM1:
+				case MatrixNorm.Norm1:
 					return Norm1(x);
 
-				case NORMS.NORM2:
+				case MatrixNorm.Norm2:
 					return Norm2(x);
 
-				case NORMS.NORMINF:
+				case MatrixNorm.Norminf:
 					return NormInf(x);
 			}
 

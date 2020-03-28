@@ -106,13 +106,12 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			return B;
 		}
 
-		protected internal void CopyI(ICoordinateAccessMatrix A, 
+		protected internal static void CopyI(ICoordinateAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			int[] row = A.RowIndices, column = A.ColumnIndices;
 			double[] Data = A.Data;
-
-			for (int i = 0; i < Data.Length; ++i)
+            for (int i = 0; i < Data.Length; ++i)
 				if (row[i] >= startRow && row[i] < stopRow 
 					&& column[i] >= startColumn && column[i] < stopColumn)
 						B.SetValue(row[i] - startRow, column[i] - startColumn, Data[i]);
@@ -128,7 +127,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 						B.SetValue(i - startRow, Amat.Major[j] - startColumn, Amat.Data[j]);
 		}
 
-		protected internal void CopyI(ISparseRowAccessMatrix A, 
+		protected internal static void CopyI(ISparseRowAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			for (int i = startRow; i < stopRow; ++i)
@@ -162,7 +161,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			}
 		}
 
-		protected internal void CopyI(IDenseRowColumnAccessMatrix A, 
+		protected internal static void CopyI(IDenseRowColumnAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			IntDoubleVectorPair Amat = A.Matrix;
@@ -184,7 +183,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			}
 		}
 
-		protected internal void CopyI(IDenseColumnRowAccessMatrix A, 
+		protected internal static void CopyI(IDenseColumnRowAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			IntDoubleVectorPair Amat = A.Matrix;
@@ -194,7 +193,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 						B.SetValue(j - Amat.Indices[j] - startRow, i - startColumn, Amat.Data[j]);
 		}
 
-		protected internal void CopyI(IDenseColumnAccessMatrix A, 
+		protected internal static void CopyI(IDenseColumnAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			for (int i = startColumn; i < stopColumn; ++i)
@@ -206,7 +205,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			}
 		}
 
-		protected internal void CopyI(IElementalAccessMatrix A, 
+		protected internal static void CopyI(IElementalAccessMatrix A, 
 			IElementalAccessMatrix B, int startRow, int stopRow, int startColumn, int stopColumn)
 		{
 			for (int i = startRow; i < stopRow; ++i)
@@ -267,7 +266,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			return B;
 		}
 
-		protected internal void CopyI(ICoordinateAccessMatrix A, IElementalAccessMatrix B)
+		protected internal static void CopyI(ICoordinateAccessMatrix A, IElementalAccessMatrix B)
 		{
 			int[] row = A.RowIndices, column = A.ColumnIndices;
 			double[] Data = A.Data;
@@ -276,7 +275,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 				B.SetValue(row[i], column[i], Data[i]);
 		}
 
-		protected internal void CopyI(ISparseRowColumnAccessMatrix A, ISparseRowColumnAccessMatrix B)
+		protected internal static void CopyI(ISparseRowColumnAccessMatrix A, ISparseRowColumnAccessMatrix B)
 		{
 			B.Matrix = A.Matrix.Clone();
 		}
@@ -335,7 +334,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			}
 		}
 
-		protected internal void CopyI(IDenseRowColumnAccessMatrix A, IDenseRowColumnAccessMatrix B)
+		protected internal static void CopyI(IDenseRowColumnAccessMatrix A, IDenseRowColumnAccessMatrix B)
 		{
 			B.Matrix = A.Matrix.Clone();
 		}
@@ -437,7 +436,7 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 			y.Vector = yData;
 		}
 
-		protected internal void CopyI(IDenseAccessVector x, IElementalAccessVector y, int start, int stop)
+		protected internal static void CopyI(IDenseAccessVector x, IElementalAccessVector y, int start, int stop)
 		{
 			double[] xData = x.Vector;
 			for (int i = start; i < stop; ++i)
@@ -1055,14 +1054,14 @@ namespace Highlander.Reporting.Analytics.V5r3.LinearAlgebra.Sparse
 				throw new NotSupportedException();
 		}
 
-		protected internal IVector SetI(double alpha, IDenseAccessVector x)
+		protected internal static IVector SetI(double alpha, IDenseAccessVector x)
 		{
 			double[] xData = x.Vector;
 			ArraySupport.Fill(xData, alpha);
 			return x;
 		}
 
-		protected internal IVector SetI(double alpha, IElementalAccessVector x)
+		protected internal static IVector SetI(double alpha, IElementalAccessVector x)
 		{
 			for (int i = 0; i < x.Length; ++i)
 				x.SetValue(i, alpha);

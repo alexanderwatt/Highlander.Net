@@ -30,7 +30,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
 {
     public class CashflowAnalytic : ModelAnalyticBase<ICashflowParameters, InstrumentMetrics>, IRateInstrumentResults
     {
-        protected const Decimal BasisPoint = 10000.0m;
+        protected const decimal BasisPoint = 10000.0m;
 
         #region Properties
 
@@ -38,39 +38,39 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Gets or sets the continuous rate.
         /// </summary>
         /// <value>The continuous rate.</value>
-        public Decimal ContinuousRate { get; protected set; }
+        public decimal ContinuousRate { get; protected set; }
 
         /// <summary>
         /// Gets or sets the valuation fx rate from the payment currency to the reporting currency.
         /// </summary>
         /// <value>The valuation fx rate from the payment currency to the reporting currency.</value>
-        public Decimal ToReportingCurrencyRate { get; protected set; }
+        public decimal ToReportingCurrencyRate { get; protected set; }
 
         /// <summary>
         /// Gets or sets the discount factor.
         /// </summary>
         /// <value>The discount factor.</value>
-        public Decimal PaymentDiscountFactor { get; protected set; } 
+        public decimal PaymentDiscountFactor { get; protected set; } 
 
         /// <summary>
         /// Gets the Bucketed Delta
         /// </summary>
         /// <value>The Bucketed Delta</value>
-        public Decimal LocalCurrencyBucketedDelta1 => EvaluateBucketedDelta1();
+        public decimal LocalCurrencyBucketedDelta1 => EvaluateBucketedDelta1();
 
         /// <summary>
         /// Gets the vector of Bucketed Delta
         /// </summary>
         /// <value>The vector of Bucketed Delta</value>
-        public Decimal[] LocalCurrencyBucketedDeltaVector => EvaluateBucketDelta12();
+        public decimal[] LocalCurrencyBucketedDeltaVector => EvaluateBucketDelta12();
 
-        public Decimal[] LocalCurrencyBucketedDeltaVector2 => EvaluateBucketDelta12();
+        public decimal[] LocalCurrencyBucketedDeltaVector2 => EvaluateBucketDelta12();
 
         /// <summary>
         /// Gets the NPV.
         /// </summary>
         /// <value>The NPV.</value>
-        public Decimal LocalCurrencyNPV
+        public decimal LocalCurrencyNPV
         {
             get
             {
@@ -93,7 +93,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Gets the NPV.
         /// </summary>
         /// <value>The NPV.</value>
-        public Decimal LocalCurrencyFloatingNPV => EvaluateFloatingNPV();
+        public decimal LocalCurrencyFloatingNPV => EvaluateFloatingNPV();
 
         /// <summary>
         /// Gets the market quote.
@@ -108,10 +108,10 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         public decimal HistoricalDelta0 => 0.0m;
 
         /// <summary>
-        /// Gets the Net Future Valuie of realised cash flows.
+        /// Gets the Net Future Value of realised cash flows.
         /// </summary>
         /// <value>The NFV.</value>
-        public Decimal LocalCurrencyNFV
+        public decimal LocalCurrencyNFV
         {
             get
             {
@@ -547,7 +547,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateNPV()
+        protected decimal EvaluateNPV()
         {
             return EvaluateExpectedValue() * GetPaymentDiscountFactor();
         }
@@ -556,7 +556,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateNPV(double paymentDF)
+        protected decimal EvaluateNPV(double paymentDF)
         {
             return EvaluateExpectedValue() * (decimal)paymentDF;
         }
@@ -565,7 +565,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateExpectedValue()
+        protected virtual decimal EvaluateExpectedValue()
         {
             return AnalyticParameters.NotionalAmount * GetMultiplier();
         }
@@ -574,9 +574,9 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the vector of bucketed delta
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal[] EvaluateBucketedDeltaVector()
+        protected virtual decimal[] EvaluateBucketedDeltaVector()
         {
-            Decimal[] temp = { 0.0m };
+            decimal[] temp = { 0.0m };
             return temp;
         }
 
@@ -584,7 +584,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the break even rate.
         /// </summary>
         /// <returns>The break even rate</returns>
-        protected virtual Decimal EvaluateBreakEvenRate()
+        protected virtual decimal EvaluateBreakEvenRate()
         {
             return 0.0m;
         }
@@ -593,7 +593,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the accrual factor.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateAccrualFactor()
+        protected virtual decimal EvaluateAccrualFactor()
         {     
             return 0.0m;
         }
@@ -602,7 +602,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDeltaR()
+        protected virtual decimal EvaluateDeltaR()
         {
             return 0.0m;
         }
@@ -611,7 +611,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateAnalyticalDelta()
+        protected virtual decimal EvaluateAnalyticalDelta()
         {
             return EvaluateDelta1();
         }
@@ -620,7 +620,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDelta0()
+        protected virtual decimal EvaluateDelta0()
         {
             return 0.0m;
         }
@@ -629,7 +629,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the cash flow.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDelta1()
+        protected virtual decimal EvaluateDelta1()
         {
             var temp = AnalyticParameters.PeriodAsTimesPerYear * ContinuousRate;
             return EvaluateNPV() * AnalyticParameters.CurveYearFraction / (1 + temp) / BasisPoint;
@@ -639,7 +639,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateAnalyticalGamma()
+        protected virtual decimal EvaluateAnalyticalGamma()
         {
             return EvaluateGamma1();
         }
@@ -648,7 +648,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the gamma1 wrt the cash flow.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateGamma0()
+        protected virtual decimal EvaluateGamma0()
         {
             return 0.0m;
         }
@@ -657,7 +657,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the cross gamma for the cash flow.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDelta0Delta1()
+        protected virtual decimal EvaluateDelta0Delta1()
         {
             return 0.0m;
         }
@@ -666,7 +666,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the gamma1 wrt the cash flow.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateGamma1()
+        protected virtual decimal EvaluateGamma1()
         {
             var temp = AnalyticParameters.PeriodAsTimesPerYear * ContinuousRate;
             return EvaluateDelta1() * AnalyticParameters.CurveYearFraction / (1 + temp) / BasisPoint;
@@ -676,7 +676,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the rate.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateMarketQuote()
+        protected virtual decimal EvaluateMarketQuote()
         {
             return 0.0m;
         }
@@ -685,7 +685,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the break even spread.
         /// </summary>
         /// <returns>The break even spread</returns>
-        protected virtual Decimal EvaluateBreakEvenSpread()
+        protected virtual decimal EvaluateBreakEvenSpread()
         {
             return 0.0m;
         }
@@ -694,7 +694,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDiscountFactorAtMaturity()
+        protected virtual decimal EvaluateDiscountFactorAtMaturity()
         {
             return GetPaymentDiscountFactor();
         }
@@ -756,7 +756,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal[] EvaluateBucketDelta12()
+        protected virtual decimal[] EvaluateBucketDelta12()
         {
             var temp = AnalyticParameters.PeriodAsTimesPerYear * ContinuousRate;
             var time = (AnalyticParameters.CurveYearFraction / AnalyticParameters.PeriodAsTimesPerYear);
@@ -776,7 +776,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluating Bucketed Delta
         /// </summary>
         /// <returns>The bucketed delta</returns>
-        protected virtual Decimal EvaluateBucketedDelta1()
+        protected virtual decimal EvaluateBucketedDelta1()
         {
             return EvaluateDelta1();
         }
@@ -785,7 +785,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluating the floating NPV.
         /// </summary>
         /// <returns>The NPV</returns>
-        protected virtual Decimal EvaluateFloatingNPV()
+        protected virtual decimal EvaluateFloatingNPV()
         {
             return 0m;
         }
@@ -794,7 +794,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluating the fx rate.
         /// </summary>
         /// <returns>The fx rate</returns>
-        protected decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
+        protected static decimal EvaluateReportingCurrencyFxRate(DateTime valuationDate, IFxCurve fxCurve)
         {
             var result = 1.0m;
             if (fxCurve != null)
@@ -808,7 +808,7 @@ namespace Highlander.Reporting.Models.V5r3.Generic.Cashflows
         /// Evaluating the discount factor rate.
         /// </summary>
         /// <returns>The discount factor</returns>
-        protected decimal EvaluateDiscountFactor(DateTime valuationDate, DateTime date, IRateCurve discountCurve)
+        protected static decimal EvaluateDiscountFactor(DateTime valuationDate, DateTime date, IRateCurve discountCurve)
         {
             var result = 1.0m;
             if (discountCurve != null)

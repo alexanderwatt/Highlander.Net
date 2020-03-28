@@ -30,7 +30,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Rates
     public class BGSConvexityCorrection
     {
         /// <summary>
-        /// Arbitray Max value for infinity checking for the isLimitingCase when
+        /// Arbitrary Max value for infinity checking for the isLimitingCase when
         /// computing the convexity correction value
         /// </summary>
         private const double CleanupDifference = 0.02;
@@ -49,30 +49,30 @@ namespace Highlander.Reporting.Analytics.V5r3.Rates
         /// <param name="tenor">The year fraction between the date of the most recent
         /// realised amortisation and  date to which the convexity  correction is required.</param>
         /// <param name="currentBondFactor">The current Bond Factor.</param>
-        /// <param name="alpha">The paramter alpha in the Bond Factor curve
+        /// <param name="alpha">The parameter alpha in the Bond Factor curve
         /// model.</param>
-        /// <param name="sigma">The paramter sigma in the Bond Factor curve
+        /// <param name="sigma">The parameter sigma in the Bond Factor curve
         /// model.</param>
         /// <param name="cleanUp">The clean up condition. If the current
         /// Bond Factor is less than or equal to the clean up, then the
         /// convexity correction is 0.0.</param>
         /// <returns>Convexity correction. Logic has been added to cater for
         /// the limiting cases: 1) sigma->0; 2) clean up ->0.</returns>
-        public double ComputeBGSConvexityCorrection(double tenor,
+        public static double ComputeBGSConvexityCorrection(double tenor,
                                                     double currentBondFactor,
                                                     double alpha,
                                                     double sigma,
                                                     double cleanUp)
         {
             // Declare and initialise the return variable.
-            // The initialisation value has been chosen to correspond to the
-            // case in which the clean up condition has been trigerred.
+            // The initialized value has been chosen to correspond to the
+            // case in which the clean up condition has been triggered.
             double convexityCorrection = 0.0;
 
             // Compute the convexity correction.
             if (currentBondFactor > cleanUp)
             {
-                // Clean up condition has not been trigerred.
+                // Clean up condition has not been triggered.
                 // Compute F0, the expected value of the Bond Factor.
                 double f0 = ComputeF0(currentBondFactor, alpha, tenor);
 

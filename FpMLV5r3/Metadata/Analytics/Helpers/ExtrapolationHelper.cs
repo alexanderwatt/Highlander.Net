@@ -38,7 +38,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="asxChild">The ASX child.</param>
         /// <param name="sdParent">The SD parent.</param>
         /// <param name="child">The child.</param>
-        public void DoExtrapolation(IStock asxParent, IStock asxChild, IStock sdParent, IVolatilitySurface child)
+        public static void DoExtrapolation(IStock asxParent, IStock asxChild, IStock sdParent, IVolatilitySurface child)
         {
            //foreach expiry in child, interpolate ratio at ASX parent, child and interpolate SD Parent and apply to SD Parent. 
             foreach (ForwardExpiry exp in child.NodalExpiry)
@@ -65,7 +65,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="asxChild">The ASX child.</param>
         /// <param name="expiry">The expiry.</param>
         /// <returns></returns>
-        public double CalcExtrapolationFactor(IStock asxParent, 
+        public static double CalcExtrapolationFactor(IStock asxParent, 
                                        IStock asxChild,                                         
                                        DateTime expiry)                                                       
         {
@@ -83,7 +83,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="expiry">The expiry.</param>
         /// <param name="moneyness">The moneyness.</param>
         /// <returns></returns>
-        public double GetVolAt(IStock stock, DateTime expiry, double moneyness)
+        public static double GetVolAt(IStock stock, DateTime expiry, double moneyness)
         {
             DateTime date0 = ((Stock)stock).Date;
             double fwd = ((Stock)stock).GetForward(date0,expiry);
@@ -103,7 +103,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// </summary>
         /// <param name="stock">The stock.</param>
         /// <returns></returns>
-        private bool AreNoETOs(IStock stock)
+        private static bool AreNoETOs(IStock stock)
         {
             foreach (ForwardExpiry expiry in stock.VolatilitySurface.Expiry)
             {
@@ -122,7 +122,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="leadStock">The lead stock.</param>
         /// <param name="childStock">The child stock.</param>
         /// <returns></returns>
-        public decimal GetHistoricalScaleFactor(IStock leadStock, IStock childStock)
+        public static decimal GetHistoricalScaleFactor(IStock leadStock, IStock childStock)
         {
             decimal x = 0.0M;
             if (AreNoETOs(childStock))
@@ -141,7 +141,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="leadStock">The lead stock.</param>
         /// <param name="childStock">The child stock.</param>
         /// <param name="child">The child.</param>
-        public void PopulateHistoricalVols(IStock leadStock, IStock childStock, IVolatilitySurface child)
+        public static void PopulateHistoricalVols(IStock leadStock, IStock childStock, IVolatilitySurface child)
         {
             decimal scalingFactor = GetHistoricalScaleFactor(leadStock, childStock);
             foreach (ForwardExpiry exp in child.NodalExpiry)
@@ -165,7 +165,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// </summary>
         /// <param name="stock">The stock.</param>
         /// <returns></returns>
-        public decimal DoHistVolCalc(IStock stock)
+        public static decimal DoHistVolCalc(IStock stock)
         {
             double sumSq = 0.0;
             double sum = 0.0;

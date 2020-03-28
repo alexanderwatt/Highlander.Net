@@ -52,7 +52,7 @@ namespace Highlander.Core.WebSvc.TestClient
                 //binding.ReaderQuotas.MaxArrayLength = 16384;
                 //binding.ReaderQuotas.MaxBytesPerRead = 4096;
                 //binding.ReaderQuotas.MaxNameTableCharCount = 16384;
-                const string url = "http://localhost:8222/Highlander_Prxy_IWebProxyV101";
+                const string url = "http://localhost:9222/Highlander_Prxy_IWebProxyV101";
                 using (var client = new WebProxyV101Client(binding, new EndpointAddress(url)))
                 {
                     V101ResultSet result = client.V101LoadObjectByName("test");

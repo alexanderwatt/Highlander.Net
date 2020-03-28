@@ -139,7 +139,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Solvers
         /// greater than zero
         /// </summary>
         /// <param name="degree">degree of polynomial</param>
-        public void ValidateDegree(int degree)
+        public static void ValidateDegree(int degree)
         {          
             if (degree < 0)
             {

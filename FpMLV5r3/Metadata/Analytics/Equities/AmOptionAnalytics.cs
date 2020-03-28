@@ -24,9 +24,9 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
     public class AmOptionAnalytics : ICloneable, IObjectiveFunction
     {
         const double Eps = 1e-4;
-        const int Maxits = 40;
+        private const int Maxits = 40;
 
-        private double _premium;
+        private readonly double _premium;
         private readonly ITree _propAssetTree;
         private PriceTree _priceTree;
 
@@ -118,12 +118,12 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="spot"></param>
         /// <param name="strike"></param>
         /// <param name="vol"></param>
-        /// <param name="paystyle"></param>
+        /// <param name="payStyle"></param>
         /// <param name="payoff"></param>
         /// <param name="rateCurve"></param>
         /// <param name="divCurve"></param>
         /// <param name="gridSteps"></param>
-        public AmOptionAnalytics(DateTime today, DateTime expiry, double spot, double strike, double vol,  string paystyle, string payoff, RateCurve rateCurve, List<Dividend> divCurve, int gridSteps)
+        public AmOptionAnalytics(DateTime today, DateTime expiry, double spot, double strike, double vol,  string payStyle, string payoff, RateCurve rateCurve, List<Dividend> divCurve, int gridSteps)
         {
             Spot = spot;
             Strike = strike;
@@ -131,7 +131,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             Today = today;
             Expiry = expiry;
             Payoff = payoff;
-            Style = paystyle;
+            Style = payStyle;
             RateCurve = rateCurve;
             DivCurve = divCurve;
             GridSteps = gridSteps;
@@ -158,11 +158,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// 
         /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
         public new string ToString()
         {
             return "PriceWrt";
@@ -332,14 +329,14 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             {
                 mid = (right + left) / 2;
                 priceClone.Sig = left;
-                double fleft = priceClone.Price() - premium;              
+                double fLeft = priceClone.Price() - premium;              
                 priceClone.Sig = right;
-                double fright = priceClone.Price() - premium;
+                double fRight = priceClone.Price() - premium;
                 priceClone.Sig = mid;
-                double fmid = priceClone.Price() - premium;
-                if (fleft * fmid < 0)
+                double fMid = priceClone.Price() - premium;
+                if (fLeft * fMid < 0)
                     right = mid;
-                else if (fright * fmid < 0)
+                else if (fRight * fMid < 0)
                     left = mid;
             } while (Math.Abs(right - left) > 2 * Eps);
             return mid;                
