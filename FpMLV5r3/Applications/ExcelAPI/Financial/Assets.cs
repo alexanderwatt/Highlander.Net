@@ -49,6 +49,7 @@ using Highlander.Utilities.NamedValues;
 using Highlander.ValuationEngine.V5r3;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 using RuntimeEnvironment = HLV5r3.Runtime.RuntimeEnvironment;
 
@@ -69,7 +70,7 @@ namespace HLV5r3.Financial
         public CurveEngine Engine;
         public ValuationService ValService;
         public readonly RuntimeEnvironment Environment;
-        public String NameSpace;
+        public string NameSpace;
 
         #endregion
 
@@ -89,7 +90,7 @@ namespace HLV5r3.Financial
             : this(logger, cache, EnvironmentProp.DefaultNameSpace)
         {}
 
-        public Cache(ILogger logger, ICoreCache cache, String nameSpace)
+        public Cache(ILogger logger, ICoreCache cache, string nameSpace)
         {
             Engine = new CurveEngine(logger, cache, nameSpace);
             ValService = new ValuationService(logger, cache, nameSpace);
@@ -471,13 +472,13 @@ namespace HLV5r3.Financial
         ///<param name="fixedRate">THe fixed rate.</param>
         ///<param name="businessDayConvention">The businessDayConvention.</param>
         ///<param name="notionalWeightsArray">The notional weights.</param>
-        ///<param name="fixedLegDayCount">The daycount.</param>
+        ///<param name="fixedLegDayCount">The dayCount.</param>
         ///<param name="notional">The notional.</param>
         ///<param name="datesAsArray">The roll dates.</param>
         ///<param name="businessCentersAsString">Te business centers.</param>
         ///<returns>The PDH array.</returns>
-        public object[,] GetSwapPDH(String curveId, String currency, DateTime baseDate,
-            Decimal notional, Excel.Range datesAsArray, Excel.Range notionalWeightsArray, String fixedLegDayCount, Decimal fixedRate,
+        public object[,] GetSwapPDH(string curveId, string currency, DateTime baseDate,
+            decimal notional, Excel.Range datesAsArray, Excel.Range notionalWeightsArray, string fixedLegDayCount, decimal fixedRate,
             string businessDayConvention, string businessCentersAsString)
         {
             var result = new List<decimal>();
@@ -495,9 +496,9 @@ namespace HLV5r3.Financial
             var swap = (PriceableSwapRateAsset)PriceableAssetFactory.CreateInterestRateSwap("Local", baseDate, MoneyHelper.GetAmount(notional, currency), rollDates.ToArray(),
                                                                     weights.ToArray(), fixedLegDayCount, businessDayAdjustments, bav);
             //Get the curve.
-            var ratecurve = (CurveBase)Engine.GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
+            var rateCurve = (CurveBase)Engine.GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
             //Create the interpolator and get the pdh.
-            var valuation = swap.CalculatePDH(Engine.Logger, Engine.Cache, ratecurve, null, null);
+            var valuation = swap.CalculatePDH(Engine.Logger, Engine.Cache, rateCurve, null, null);
             if (valuation != null)
             {
                 result.AddRange(valuation);
@@ -519,18 +520,18 @@ namespace HLV5r3.Financial
         /// <param name="businessCenters">The business centers.</param>
         /// <param name="ytm">The yield to maturity.</param>
         /// <param name="curveId">The curve to use for calculation</param>
-        /// <param name="daycount">The daycount convention.</param>
+        /// <param name="dayCount">The dayCount convention.</param>
         /// <param name="settlementDate">The settlement date.</param>
         /// <param name="rollConvention">The roll convention.</param>
         /// <returns>The asset swap level.</returns>
-        public Decimal GetBondAssetSwapSpread(string identifier, DateTime baseDate, DateTime settlementDate, DateTime exDivDate, DateTime maturityDate,
-            Decimal amount, Decimal coupon, String daycount, String frequency, String issuerName, String rollConvention, String businessCenters, Decimal ytm, String curveId)
+        public decimal GetBondAssetSwapSpread(string identifier, DateTime baseDate, DateTime settlementDate, DateTime exDivDate, DateTime maturityDate,
+            decimal amount, decimal coupon, string dayCount, string frequency, string issuerName, string rollConvention, string businessCenters, decimal ytm, string curveId)
         {
             //Get the curve.
-            var ratecurve = (IRateCurve)Engine.GetCurve(curveId, false);
+            var rateCurve = (IRateCurve)Engine.GetCurve(curveId, false);
             //Calculate the asset swap level.
             var asw = Engine.GetBondAssetSwapSpread(identifier, baseDate, settlementDate, exDivDate, MoneyHelper.GetAmount(amount)
-                , coupon, maturityDate, daycount, frequency, issuerName, rollConvention, businessCenters, ratecurve, ytm, null);
+                , coupon, maturityDate, dayCount, frequency, issuerName, rollConvention, businessCenters, rateCurve, ytm, null);
             return asw;
         }
 
@@ -886,8 +887,8 @@ namespace HLV5r3.Financial
             var namedValueSet = properties.ToNamedValueSet();
             var forecastCurveId = namedValueSet.GetString("ForecastCurve", true);
             var discountCurveId = namedValueSet.GetString("DiscountCurve", true);
-            var fixedRate = namedValueSet.GetValue<Decimal>("Rate", true);
-            var floatingSpread = namedValueSet.GetValue<Decimal>("Spread", true);
+            var fixedRate = namedValueSet.GetValue<decimal>("Rate", true);
+            var floatingSpread = namedValueSet.GetValue<decimal>("Spread", true);
             var baseDate = namedValueSet.GetValue<DateTime>("BaseDate", true);
             var businessDayConvention = namedValueSet.GetString("BusinessDayConvention", true);
             var businessCentersAsString = namedValueSet.GetString("BusinessCentersAsString", true);
@@ -896,13 +897,13 @@ namespace HLV5r3.Financial
             var rollDates = DataRangeHelper.StripDateTimeRange(fixedRollDatesAsArray);
             var weights = DataRangeHelper.StripDecimalRange(fixedNotionalsAsArray);
             var floatingDates = DataRangeHelper.StripDateTimeRange(floatingRollDatesAsArray);
-            var floatingweights = DataRangeHelper.StripDecimalRange(floatingNotionalsAsArray);
+            var floatingWeights = DataRangeHelper.StripDecimalRange(floatingNotionalsAsArray);
             var floatingResets = DataRangeHelper.StripDecimalRange(floatingResetRatesAsArray);
             //Create a dummy rate.
             var bav = new BasicAssetValuation();
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
-            var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
-            bav.quote = new[] { quote, spreadquote };
+            var spreadQuote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
+            bav.quote = new[] { quote, spreadQuote };
             //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                                                                              businessCentersAsString);
@@ -910,7 +911,7 @@ namespace HLV5r3.Financial
             var swap = PriceableAssetFactory.CreateIRSwap(rollDates,
                                                                     weights,
                                                                     floatingDates,
-                                                                    floatingweights,
+                                                                    floatingWeights,
                                                                     floatingResets,
                                                                     businessDayAdjustments, bav, namedValueSet);
             //Get the AssetControllerData.
@@ -919,10 +920,10 @@ namespace HLV5r3.Financial
             var quoteMetric = BasicQuotationHelper.Create(0.0m, metric);
             bavMetric.quote = new[] { quoteMetric };
             //Get the curve.
-            var discountcurve = (IRateCurve)Engine.GetCurve(discountCurveId, false);
-            var forecastcurve = (IRateCurve)Engine.GetCurve(forecastCurveId, false);
-            market.AddPricingStructure("DiscountCurve", discountcurve);
-            market.AddPricingStructure("ForecastCurve", forecastcurve);
+            var discountCurve = (IRateCurve)Engine.GetCurve(discountCurveId, false);
+            var forecastCurve = (IRateCurve)Engine.GetCurve(forecastCurveId, false);
+            market.AddPricingStructure("DiscountCurve", discountCurve);
+            market.AddPricingStructure("ForecastCurve", forecastCurve);
             var assetControllerData = new AssetControllerData(bavMetric, baseDate, market);
             //Create the interpolator and get the implied quote.
             var valuation = swap.Calculate(assetControllerData);
@@ -1040,14 +1041,14 @@ namespace HLV5r3.Financial
             var properties = propertiesRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
             var namedValueSet = properties.ToNamedValueSet();
-            var fixedRate = namedValueSet.GetValue<Decimal>("Rate", true);
-            var floatingSpread = namedValueSet.GetValue<Decimal>("Spread", true);
+            var fixedRate = namedValueSet.GetValue<decimal>("Rate", true);
+            var floatingSpread = namedValueSet.GetValue<decimal>("Spread", true);
             var businessDayConvention = namedValueSet.GetString("BusinessDayConvention", true);
             var businessCentersAsString = namedValueSet.GetString("BusinessCentersAsString", true);
             var floatingResets = DataRangeHelper.StripDecimalRange(floatingResetRatesAsArray);
             //Create the quotations
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
-            var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
+            var spreadQuote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
             //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention,
                 businessCentersAsString);
@@ -1056,7 +1057,7 @@ namespace HLV5r3.Financial
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
             //create the swap.
             var irSwap = PriceableAssetFactory.CreateIRSwap(Engine.Logger, Engine.Cache, NameSpace, effectiveDate, notional,
-                businessDayAdjustments, resetOffset, floatingResets, null, null, quote, spreadquote, namedValueSet);
+                businessDayAdjustments, resetOffset, floatingResets, null, null, quote, spreadQuote, namedValueSet);
             var id = Engine.SetIRSwap(irSwap, namedValueSet);
             return id;
         }
@@ -1097,10 +1098,10 @@ namespace HLV5r3.Financial
             var resets = DataRangeHelper.StripDecimalRange(floatingResetRatesAsArray);
             var metrics = DataRangeHelper.StripRange(metricsAsArray);
             //Create the quotations
-            var fixedRate = namedValueSet.GetValue<Decimal>("Rate", true);
-            var floatingSpread = namedValueSet.GetValue<Decimal>("Spread", true);
+            var fixedRate = namedValueSet.GetValue<decimal>("Rate", true);
+            var floatingSpread = namedValueSet.GetValue<decimal>("Spread", true);
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
-            var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
+            var spreadQuote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
             //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(paymentBusinessDayConvention,
                                                                              paymentBusinessCentersAsString);
@@ -1109,7 +1110,7 @@ namespace HLV5r3.Financial
                                                               resetBusinessDayConvention, resetBusinessCentersAsString, "StartDate");
             //create the swap.
             var irSwap = PriceableAssetFactory.CreateIRSwap(Engine.Logger, Engine.Cache, NameSpace, effectiveDate, notional,
-                businessDayAdjustments, resetOffset, resets, null, null, quote, spreadquote, namedValueSet);
+                businessDayAdjustments, resetOffset, resets, null, null, quote, spreadQuote, namedValueSet);
             //Get the AssetControllerData.
             var market = new SwapLegEnvironment();
             var bavMetric = new BasicAssetValuation
@@ -1122,14 +1123,14 @@ namespace HLV5r3.Financial
             //Get the curve.
             var curveId = namedValueSet.GetString("DiscountCurve", true);
             var forecastCurveId = namedValueSet.GetString("ForecastCurve", false);
-            var ratecurve = (IRateCurve)Engine.GetCurve(curveId, false);
-            market.AddPricingStructure("DiscountCurve", ratecurve);
+            var rateCurve = (IRateCurve)Engine.GetCurve(curveId, false);
+            market.AddPricingStructure("DiscountCurve", rateCurve);
             if (forecastCurveId != null)
             {
-                market.AddPricingStructure("DiscountCurve", ratecurve);
+                market.AddPricingStructure("DiscountCurve", rateCurve);
             }
-            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastCurve.ToString(), ratecurve);
-            market.AddPricingStructure(InterestRateStreamPSTypes.DiscountCurve.ToString(), (IRateCurve)ratecurve.Clone());
+            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastCurve.ToString(), rateCurve);
+            market.AddPricingStructure(InterestRateStreamPSTypes.DiscountCurve.ToString(), (IRateCurve)rateCurve.Clone());
             var assetControllerData = new AssetControllerData(bavMetric, baseDate, market);
             //Create the interpolator and get the implied quote.
             var valuation = irSwap.Calculate(assetControllerData);
@@ -1170,27 +1171,27 @@ namespace HLV5r3.Financial
             var curveToPerturb = namedValueSet.GetString("CurveToPerturb", true);
             var forecastCurveId = namedValueSet.GetString("ForecastCurve", true);
             var discountCurveId = namedValueSet.GetString("DiscountCurve", true);
-            var fixedRate = namedValueSet.GetValue<Decimal>("Rate", true);
-            var floatingSpread = namedValueSet.GetValue<Decimal>("Spread", true);
+            var fixedRate = namedValueSet.GetValue<decimal>("Rate", true);
+            var floatingSpread = namedValueSet.GetValue<decimal>("Spread", true);
             var curvePerturbation = EnumHelper.Parse<CurvePerturbation>(curveToPerturb);
             //Map the ranges.
             var rollDates = DataRangeHelper.StripDateTimeRange(fixedRollDatesAsArray);
             var weights = DataRangeHelper.StripDecimalRange(fixedNotionalsAsArray);
             var floatingDates = DataRangeHelper.StripDateTimeRange(floatingRollDatesAsArray);
-            var floatingweights = DataRangeHelper.StripDecimalRange(floatingNotionalsAsArray);
+            var floatingWeights = DataRangeHelper.StripDecimalRange(floatingNotionalsAsArray);
             var floatingResets = DataRangeHelper.StripDecimalRange(floatingResetRatesAsArray);
             //Create a dummy rate.
             var bav = new BasicAssetValuation();
             var quote = BasicQuotationHelper.Create(fixedRate, "MarketQuote", "DecimalRate");
-            var spreadquote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
-            bav.quote = new[] { quote, spreadquote };
+            var spreadQuote = BasicQuotationHelper.Create(floatingSpread, "Spread", "DecimalRate");
+            bav.quote = new[] { quote, spreadQuote };
             //Create the BusinessDayConvention.
             var businessDayAdjustments = BusinessDayAdjustmentsHelper.Create(businessDayConvention, businessCentersAsString);
             //create the swap.
             var swap = PriceableAssetFactory.CreateIRSwap(rollDates,
                                                                     weights,
                                                                     floatingDates,
-                                                                    floatingweights,
+                                                                    floatingWeights,
                                                                     floatingResets,
                                                                     businessDayAdjustments, bav, namedValueSet);
             //Get the curve.
@@ -1582,8 +1583,7 @@ namespace HLV5r3.Financial
             var strikes = DataRangeHelper.StripDecimalRange(strikesAsArray);
             var assetIdentifiers = DataRangeHelper.StripRange(assetIdentifiersAsArray);
             var volatility = volatilityRange.Value[System.Reflection.Missing.Value] as object[,];
-            volatility = DataRangeHelper.RangeToMatrix(volatility);
-            var result = Engine.CreateLocalSurfaceAssets(assetIdentifiers, baseDate, volatility, strikes, namedValueSet);
+            var result = Engine.CreateLocalSurfaceAssets(assetIdentifiers, baseDate, DataRangeHelper.RangeToMatrix<decimal>(volatility), strikes, namedValueSet);
             return ArrayHelper.RangeToMatrix<object>(result);
         }
 

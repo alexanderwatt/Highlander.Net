@@ -20,6 +20,7 @@ namespace Highlander.Reporting.V5r3
     using System.Xml.Serialization;
 
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PropertyNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(LeaseNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(BondNodeStruct))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FutureNodeStruct))]

@@ -509,7 +509,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         }
 
         //determine if dt needs adjusted because a div occurs in proposed interval
-        private double CheckBetweenDiv(double t1, double t2, ref double discDiv, DivList myDiv)   //t1 & t2 are real times
+        private static double CheckBetweenDiv(double t1, double t2, ref double discDiv, DivList myDiv)   //t1 & t2 are real times
         {
             double temp = t2-t1;
             for (int idx = 0; idx < myDiv.DivPoints; idx++)
@@ -556,7 +556,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         }
 
         //compute Sstar for the BC's
-        private double ComputeDiscDiv(double tTemp, double T, ZeroCurve myZero, DivList mydiv)
+        private static double ComputeDiscDiv(double tTemp, double T, ZeroCurve myZero, DivList mydiv)
         {
             double temp = 0.0;
             for (int idx = 0; idx < mydiv.DivPoints; idx++)
@@ -571,7 +571,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         }
 
         //coeffiecients ffor the diffusion equation
-        private double a(double S, double T, double vol)
+        private static double a(double S, double T, double vol)
         {
             return 0.5 * vol * vol;
         }

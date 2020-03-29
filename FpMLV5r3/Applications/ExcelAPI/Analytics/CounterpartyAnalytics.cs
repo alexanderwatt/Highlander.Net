@@ -21,6 +21,7 @@ using Highlander.Reporting.Analytics.V5r3.Counterparty;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 
 #endregion
 

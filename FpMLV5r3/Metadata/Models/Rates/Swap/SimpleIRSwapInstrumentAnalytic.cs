@@ -29,31 +29,31 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swap
         /// Gets the break even rate.
         /// </summary>
         /// <value>The break even rate.</value>
-        public Decimal BreakEvenRate => EvaluateBreakEvenRate();
+        public decimal BreakEvenRate => EvaluateBreakEvenRate();
 
         /// <summary>
         /// Gets the break even spread.
         /// </summary>
         /// <value>The break even spread.</value>
-        public Decimal BreakEvenSpread => EvaluateBreakEvenSpread();
+        public decimal BreakEvenSpread => EvaluateBreakEvenSpread();
 
         /// <summary>
         /// Gets the PCE.
         /// </summary>
         /// <value>The PCE.</value>
-        public Decimal[] PCE => new decimal[]{};
+        public decimal[] PCE => Array.Empty<decimal>();
 
         /// <summary>
         /// Gets the PCE term.
         /// </summary>
         /// <value>The PCE term.</value>
-        public Decimal[] PCETerm => new Decimal[] { };
+        public decimal[] PCETerm => Array.Empty<decimal>();
 
         /// <summary>
         /// Evaluates the break even rate.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateBreakEvenRate()
+        public virtual decimal EvaluateBreakEvenRate()
         {
             var result = 0.0m;
             //TODO need to handle the case of a discount swap. There is no parameter flag yet for this.
@@ -107,7 +107,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Swap
         /// Evaluates the break even spread.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateBreakEvenSpread()
+        public virtual decimal EvaluateBreakEvenSpread()
         {
             var result = 0.0m;
             if (!AnalyticParameters.IsPayFixedInd)

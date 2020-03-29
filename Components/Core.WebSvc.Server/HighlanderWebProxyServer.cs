@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using Highlander.Core.Common;
 using Highlander.Utilities.Helpers;
-using Highlander.Utilities.Logging;
 
 #endregion
 

@@ -17,6 +17,7 @@
 
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 using Highlander.Utilities.NamedValues;
 using Highlander.Reporting.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments;
@@ -57,9 +58,8 @@ namespace Highlander.ValuationEngine.V5r3.Reports
 
         public override object[,] DoXLReport(InstrumentControllerBase instrument)
         {
-            var interestRateSwap = instrument as InterestRateSwapPricer;
             object[,] result = null;
-            if (interestRateSwap!=null)
+            if (instrument is InterestRateSwapPricer interestRateSwap)
             {
                 var receiveLegExchangesCount = 0;
                 if (interestRateSwap.ReceiveLeg.PriceablePrincipalExchanges != null)
@@ -199,15 +199,14 @@ namespace Highlander.ValuationEngine.V5r3.Reports
 
         public override List<object[]> DoExpectedCashflowReport(InstrumentControllerBase instrument)
         {
-             var interestRateSwap = instrument as InterestRateSwapPricer;
-             var result = new List<object[]>();
-             if (interestRateSwap != null)
+            var result = new List<object[]>();
+             if (instrument is InterestRateSwapPricer interestRateSwap)
              {
-                 foreach (var leg in interestRateSwap.Legs)
+                 foreach (var expectedCashFlows in interestRateSwap.Legs.Select(leg => CashflowReportHelper.DoCashflowReport(instrument.Id, leg)))
                  {
-                     var expectedCashFlows = CashflowReportHelper.DoCashflowReport(instrument.Id, leg);
                      result.AddRange(expectedCashFlows);
                  }
+
                  if (interestRateSwap.AdditionalPayments != null)
                  {
                      foreach (var payment in interestRateSwap.AdditionalPayments)
@@ -288,10 +287,9 @@ namespace Highlander.ValuationEngine.V5r3.Reports
                 {
                     result[index, 0] = interestRateSwap.swapStream[0].payerPartyReference.href;
                     result[index, 1] = interestRateSwap.swapStream[0].receiverPartyReference.href;
-                    var calcPeriod1 = coupon1.Items[0] as CalculationPeriod;
                     result[index, 2] = "Leg1_Coupon_" + index;
                     result[index, 3] = coupon1.adjustedPaymentDate;
-                    if (calcPeriod1 != null)
+                    if (coupon1.Items[0] is CalculationPeriod calcPeriod1)
                     {
                         result[index, 4] = calcPeriod1.adjustedStartDate;
                         result[index, 5] = calcPeriod1.adjustedEndDate;
@@ -314,10 +312,9 @@ namespace Highlander.ValuationEngine.V5r3.Reports
                 {
                     result[index, 0] = interestRateSwap.swapStream[1].payerPartyReference.href;
                     result[index, 1] = interestRateSwap.swapStream[1].receiverPartyReference.href;
-                    var calcPeriod2 = coupon2.Items[0] as CalculationPeriod;
                     result[index, 2] = "Leg2_Coupon_" + secondIndex;
                     result[index, 3] = coupon2.adjustedPaymentDate;
-                    if (calcPeriod2 != null)
+                    if (coupon2.Items[0] is CalculationPeriod calcPeriod2)
                     {
                         result[index, 4] = calcPeriod2.adjustedStartDate;
                         result[index, 5] = calcPeriod2.adjustedEndDate;

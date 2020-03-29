@@ -141,13 +141,11 @@ namespace Highlander.Core.Common
     [DataContract]
     public class V131UserInfo : IIdentity
     {
-        [DataMember]
-        private readonly string _userIdentityName;
-        public string UserIdentityName => _userIdentityName;
+        [field: DataMember]
+        public string UserIdentityName { get; }
 
-        [DataMember]
-        private readonly string _userFullName;
-        public string UserFullName => _userFullName;
+        [field: DataMember]
+        public string UserFullName { get; }
 
         /// <summary>
         /// 
@@ -166,15 +164,15 @@ namespace Highlander.Core.Common
             if (userIdentityName.Split('\\').Length != 2)
                 throw new ArgumentException("userIdentityName not in domain\\loginid format!");
 
-            _userIdentityName = userIdentityName;
-            _userFullName = userFullName;
+            UserIdentityName = userIdentityName;
+            UserFullName = userFullName;
         }
 
         // IIdentity methods
         /// <summary>
         /// 
         /// </summary>
-        public string Name => _userIdentityName;
+        public string Name => UserIdentityName;
 
         /// <summary>
         /// 
@@ -190,42 +188,34 @@ namespace Highlander.Core.Common
     [DataContract]
     public class V131ClientInfo
     {
-        [DataMember]
-        private readonly Guid _nodeGuid;
-        public Guid NodeGuid => _nodeGuid;
+        [field: DataMember]
+        public Guid NodeGuid { get; }
 
-        [DataMember]
-        private readonly V131EnvId _buildEnv;
-        public V131EnvId BuildEnv => _buildEnv;
+        [field: DataMember]
+        public V131EnvId BuildEnv { get; }
 
-        [DataMember]
-        private readonly V131EnvId _configEnv;
-        public V131EnvId ConfigEnv => _configEnv;
+        [field: DataMember]
+        public V131EnvId ConfigEnv { get; }
 
-        [DataMember]
-        private readonly string _hostName;
-        public string HostName => _hostName;
+        [field: DataMember]
+        public string HostName { get; }
 
-        [DataMember]
-        private readonly string _hostIpV4;
-        public string HostIpV4 => _hostIpV4;
+        [field: DataMember]
+        public string HostIpV4 { get; }
 
         [DataMember]
         private readonly string[] _netAddrs;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public string[] NetAddrs => _netAddrs;
 
-        [DataMember]
-        private readonly V131UserInfo _userInfo = new V131UserInfo();
-        public V131UserInfo UserInfo => _userInfo;
+        [field: DataMember]
+        public V131UserInfo UserInfo { get; } = new V131UserInfo();
 
-        [DataMember]
-        private readonly V131AssmInfo _compInfo = new V131AssmInfo();
-        public V131AssmInfo CompInfo => _compInfo;
+        [field: DataMember]
+        public V131AssmInfo CompInfo { get; } = new V131AssmInfo();
 
-        [DataMember]
-        private readonly V131AssmInfo _applInfo = new V131AssmInfo();
-        public V131AssmInfo ApplInfo => _applInfo;
+        [field: DataMember]
+        public V131AssmInfo ApplInfo { get; } = new V131AssmInfo();
 
         // constructors
         /// <summary>
@@ -247,11 +237,11 @@ namespace Highlander.Core.Common
             Assembly coreAssembly, Assembly applAssembly, 
             string userIdentityName, string userFullName)
         {
-            _nodeGuid = nodeGuid;
-            _buildEnv = CoreHelper.ToV131EnvId(EnvHelper.ParseEnvName(BuildConst.BuildEnv));
-            _configEnv = configEnv;
+            NodeGuid = nodeGuid;
+            BuildEnv = CoreHelper.ToV131EnvId(EnvHelper.ParseEnvName(BuildConst.BuildEnv));
+            ConfigEnv = configEnv;
             // get remaining data members from system
-            _hostName = Dns.GetHostName();
+            HostName = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(HostName);
             IPAddress[] hostIPs = hostEntry.AddressList;
             _netAddrs = new string[hostIPs.Length];
@@ -259,15 +249,15 @@ namespace Highlander.Core.Common
             {
                 _netAddrs[i] = hostIPs[i].ToString();
                 if (hostIPs[i].AddressFamily == AddressFamily.InterNetwork)
-                    _hostIpV4 = hostIPs[i].ToString();
+                    HostIpV4 = hostIPs[i].ToString();
             }
-            _userInfo = new V131UserInfo(userIdentityName, userFullName);
+            UserInfo = new V131UserInfo(userIdentityName, userFullName);
             // get calling application details
             // if unmanaged - get Win32 details
             Assembly application = applAssembly ?? Assembly.GetEntryAssembly();
-            _applInfo = application != null ? new V131AssmInfo(application) : new V131AssmInfo(Process.GetCurrentProcess().MainModule);
+            ApplInfo = application != null ? new V131AssmInfo(application) : new V131AssmInfo(Process.GetCurrentProcess().MainModule);
             // get calling component details
-            _compInfo = new V131AssmInfo(coreAssembly);
+            CompInfo = new V131AssmInfo(coreAssembly);
         }
     }
 

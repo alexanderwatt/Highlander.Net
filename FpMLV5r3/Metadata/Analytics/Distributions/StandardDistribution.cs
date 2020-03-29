@@ -108,7 +108,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
         ///</summary>
         ///<param name="x"></param>
         ///<returns></returns>
-        public double InverseCumulativeDistribution(double x)
+        public static double InverseCumulativeDistribution(double x)
         {
             return Maths.Constants.Sqrt12 * Fn.ErfInverse(2.0 * x - 1.0);
         }

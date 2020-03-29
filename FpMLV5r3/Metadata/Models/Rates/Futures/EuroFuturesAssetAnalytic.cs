@@ -84,19 +84,19 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Gets the PandL.
         /// </summary>
         /// <value>The market quote.</value>
-        public decimal PandL => 0.0m;
+        public static decimal PandL => 0.0m;
 
         /// <summary>
         /// Gets the initial margin.
         /// </summary>
         /// <value>The inital margin.</value>
-        public decimal InitialMargin => 0.0m;
+        public static decimal InitialMargin => 0.0m;
 
         /// <summary>
         /// Gets the variation margin.
         /// </summary>
         /// <value>The variation margin.</value>
-        public decimal VariationMargin => 0.0m;
+        public static decimal VariationMargin => 0.0m;
 
         /// <summary>
         /// Evaluates the npv.
@@ -188,7 +188,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Futures
         /// Evaluates the accrual factor
         /// </summary>
         /// <returns></returns>
-        public Decimal EvaluateAccrualFactor()
+        public static Decimal EvaluateAccrualFactor()
         {
             return 0.25m;
         }

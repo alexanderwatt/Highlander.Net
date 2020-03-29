@@ -133,7 +133,7 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Helpers
             {
                 string name = assemblyType.Name;
                 string fullName = $"{assemblyType.Namespace}.{assemblyType.Name}";
-                Type[] extendedTypes = { };
+                Type[] extendedTypes = Array.Empty<Type>();
                 if (theTypeImInterestedIn.IsGenericType)
                 {
                     extendedTypes = assemblyType.GetInterfaces();

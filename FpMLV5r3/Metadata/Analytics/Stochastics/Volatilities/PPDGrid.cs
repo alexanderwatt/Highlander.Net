@@ -42,7 +42,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities
         /// This method returns the expiries (rows) for this PPD grid
         /// </summary>
         /// <returns></returns>
-        public string[] GetExpiries()
+        public static string[] GetExpiries()
         {
             return null;
         }

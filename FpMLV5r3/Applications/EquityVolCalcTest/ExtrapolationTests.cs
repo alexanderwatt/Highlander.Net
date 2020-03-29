@@ -33,14 +33,13 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
         [TestMethod]
         public void TestGetVol()
         {
-            IStock stockASXParent = LoadStock("AGK");           
-            ExtrapolationHelper extrapHelper = new ExtrapolationHelper();
-            double vol0 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009,9,16), 0.05);
-            double vol1 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009,9,16), 0.60);
-            double vol2 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 0.80);
-            double vol3 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 1.00);
-            double vol4 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 2.00);
-            double vol5 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 3.00);
+            IStock stockASXParent = LoadStock("AGK");
+            double vol0 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009,9,16), 0.05);
+            double vol1 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009,9,16), 0.60);
+            double vol2 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 0.80);
+            double vol3 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 1.00);
+            double vol4 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 2.00);
+            double vol5 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 16), 3.00);
             //Extrap below
             Assert.AreEqual(0.6413, vol0, 0.001);
             Assert.AreEqual(0.5950, vol1,0.001);
@@ -59,10 +58,9 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
         public void TestGetVolWithTimeInterp()
         {         
             IStock stockASXParent = LoadStock("AGK");
-            ExtrapolationHelper extrapHelper = new ExtrapolationHelper();
-            double vol0 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 0.05);
-            double vol1 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 1.00);
-            double vol2 = extrapHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 2.00);
+            double vol0 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 0.05);
+            double vol1 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 1.00);
+            double vol2 = ExtrapolationHelper.GetVolAt(stockASXParent, new DateTime(2009, 9, 30), 2.00);
             //Extrap below
             Assert.AreEqual(0.592322, vol0, 0.001);
             Assert.AreEqual(0.290393, vol1, 0.001);
@@ -80,10 +78,9 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
             IStock stockASXChild = LoadStock("ANZ");
             IStock stockSDParent = LoadStock("AGK");
             IVolatilitySurface child = CreateTestVolSurface();
-            ExtrapolationHelper extrapHelper = new ExtrapolationHelper();            
             if (stockASXParent.VolatilitySurface.Expiry[0].Strikes[0].InterpolationModel.GetType() == typeof(WingModelInterpolation))
             {
-                extrapHelper.DoExtrapolation(stockASXParent,
+                ExtrapolationHelper.DoExtrapolation(stockASXParent,
                                       stockASXChild,
                                       stockSDParent,
                                       child);
@@ -105,16 +102,15 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
             IStock stockASXChild = LoadStock("ANZ");
             IStock stockSDParent = LoadStock("BHP");
             IVolatilitySurface child = CreateNullVolSurface();
-            ExtrapolationHelper extrapHelper = new ExtrapolationHelper();
             double factor = 0.314843 / 0.290393;
             double parentVol1 = 0.394634;         
-            double scal = extrapHelper.CalcExtrapolationFactor(stockASXParent, stockASXChild, new DateTime(2009, 9, 30));
+            double scal = ExtrapolationHelper.CalcExtrapolationFactor(stockASXParent, stockASXChild, new DateTime(2009, 9, 30));
             Assert.AreEqual(scal, factor, 0.001);
             double parentVol2 = 0.38754555;
             double parentVol3 = 0.71063645;
             if (stockASXParent.VolatilitySurface.Expiry[0].Strikes[0].InterpolationModel.GetType() == typeof(WingModelInterpolation))
             {
-                extrapHelper.DoExtrapolation(stockASXParent,
+                ExtrapolationHelper.DoExtrapolation(stockASXParent,
                                       stockASXChild,
                                       stockSDParent,
                                       child);
@@ -138,10 +134,9 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
             IStock stockASXChild = LoadStock("ANZ");
             IStock stockSDParent = LoadStock("BHP");
             IVolatilitySurface child = CreateOnePointChild();
-            ExtrapolationHelper extrapHelper = new ExtrapolationHelper();
-            double scal = extrapHelper.CalcExtrapolationFactor(stockASXParent, stockASXChild, new DateTime(2009, 9, 10));
+            double scal = ExtrapolationHelper.CalcExtrapolationFactor(stockASXParent, stockASXChild, new DateTime(2009, 9, 10));
             Assert.AreEqual(scal, 1.05239899198348, 0.001);//OLD 0.314301/0.298668 //1.06102304848855
-            extrapHelper.DoExtrapolation(stockASXParent, stockASXChild, stockSDParent, child);
+            ExtrapolationHelper.DoExtrapolation(stockASXParent, stockASXChild, stockSDParent, child);
             Assert.AreEqual(Convert.ToDouble(child.Expiry[0].Strikes[0].Volatility.Value), 0.997545918986369, 0.001);//0.930043543995147
         }
 
@@ -170,15 +165,14 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
             nullASXChild.Valuations.Add(new Valuation(new DateTime(2008, 12, 14), 218));
             nullASXChild.Valuations.Add(new Valuation(new DateTime(2008, 12, 15), 207));
             nullASXChild.Valuations.Add(new Valuation(new DateTime(2008, 12, 16), 201));
-            ExtrapolationHelper extrap  = new ExtrapolationHelper();
-            decimal histvol1 = extrap.DoHistVolCalc(stockASXParent);
-            decimal histvol2 = extrap.DoHistVolCalc(nullASXChild);
+            decimal histvol1 = ExtrapolationHelper.DoHistVolCalc(stockASXParent);
+            decimal histvol2 = ExtrapolationHelper.DoHistVolCalc(nullASXChild);
             Assert.AreEqual(0.375846, Convert.ToDouble(histvol1), 0.0001);
             Assert.AreEqual(0.770018, Convert.ToDouble(histvol2), 0.0001);
-            extrap.PopulateHistoricalVols(stockASXParent, nullASXChild, targetChild);
-            double scalFactor = Convert.ToDouble(extrap.GetHistoricalScaleFactor(stockASXParent, nullASXChild));
+            ExtrapolationHelper.PopulateHistoricalVols(stockASXParent, nullASXChild, targetChild);
+            double scalFactor = Convert.ToDouble(ExtrapolationHelper.GetHistoricalScaleFactor(stockASXParent, nullASXChild));
             Assert.AreEqual(scalFactor, 2.0487573, 0.0001);
-            //Spreadsheet fit SD parent to (5d, 1.000 * F) point, flatline endpoints.
+            //Spreadsheet fit SD parent to (5d, 1.000 * F) point, flat-line endpoints.
             decimal SDParentVol0 = 0.296175M;
             // Spreadsheet fit SD parent to (7d,0.867 * F) point
             decimal SDParentVol1 = 0.320240M;
@@ -236,7 +230,7 @@ namespace Highlander.EquitiesCalculator.Tests.V5r3
         }
 
         /// <summary>
-        /// Creates a null volatility surface to be used in extrapolation tests that utilise
+        /// Creates a null volatility surface to be used in extrapolation tests that utilize
         /// the historical volatility ratio
         /// </summary>
         /// <returns></returns>

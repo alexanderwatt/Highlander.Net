@@ -150,7 +150,7 @@ namespace Highlander.Configuration.Data.V5r3
             const string name = "Highlander.Configuration.Data.V5r3.Config.BoundaryRiderMappingVals.xml";
             var xml = ResourceHelper.GetResource(assembly, name);
             var boundaryRiderMappings = XmlSerializerHelper.DeserializeFromString<BoundaryRiderMappings>(xml);
-            ItemInfo itemInfo = StandardConfigProps("BoundaryRiderMappingVals", null, nameSpace);
+            ItemInfo itemInfo = StandardConfigProps("BoundaryRiderMappingValues", null, nameSpace);
             targetClient.SaveObject(boundaryRiderMappings, itemInfo.ItemName, itemInfo.ItemProps);
             logger.LogDebug("Loaded BoundaryRider mappings.");
         }
@@ -261,7 +261,6 @@ namespace Highlander.Configuration.Data.V5r3
             {
                 var data = XmlSerializerHelper.DeserializeFromString<CodeListDocument>(file.Value);
                 string classDefName = GetClassDefName(data.Identification.ShortName);
-
                 // determine primary key
                 string primaryKey = null;
                 foreach (Key key in data.ColumnSet.Key)
@@ -275,7 +274,6 @@ namespace Highlander.Configuration.Data.V5r3
                 }
                 if (primaryKey == null)
                     throw new ApplicationException("PrimaryKey is not defined!");
-
                 // load rows
                 IFpMLCodeScheme scheme = FpMLCodeSchemeFactory.CreateCodeScheme(classDefName);
                 foreach (Row row in data.SimpleCodeList.Row)

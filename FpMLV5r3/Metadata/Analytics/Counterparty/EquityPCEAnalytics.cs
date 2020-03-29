@@ -30,7 +30,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
     public class EquityPCEAnalytics
     {
 
-        private const int cSeed = 3151;
+        //private const int cSeed = 3151;
         private const int cPercentile = 95;
 
         /// <summary>
@@ -97,12 +97,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
                 Statistics.Statistics stats = new Statistics.Statistics();
                 double[] sample = res[idx].Sample();
                 double mean = res[idx].Mean;
-                double sterrEst = res[idx].ErrorEstimate;               
+                double stErrorEstimate = res[idx].ErrorEstimate;               
                 results[idx, 0] = mean;
                 results[idx, 1] = stats.Percentile(ref sample, cPercentile);       
-                results[idx, 2] = sterrEst; 
+                results[idx, 2] = stErrorEstimate; 
             }
-
             return results;
         }
 

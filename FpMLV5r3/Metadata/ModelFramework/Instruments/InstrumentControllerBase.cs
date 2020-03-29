@@ -128,7 +128,7 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments
         // BucketedCouponDates
         public Period BucketingInterval;
         //public IDictionary<string, DateTime[]> BucketCouponDates = new Dictionary<string, DateTime[]>();
-        public DateTime[] BucketedDates = { };
+        public DateTime[] BucketedDates = Array.Empty<DateTime>();
 
         /// <summary>
         /// Gets the bucketed dates list.

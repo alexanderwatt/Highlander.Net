@@ -18,7 +18,7 @@ using System;
 namespace Highlander.Reporting.Analytics.V5r3.Helpers
 {
     [Serializable]
-    public struct OrcWingParameters
+    public struct OrcWingParameters : IEquatable<OrcWingParameters>
     {
         #region Parameters
 
@@ -96,6 +96,31 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// The time to maturity.
         /// </summary>
         public double TimeToMaturity { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool operator ==(OrcWingParameters left, OrcWingParameters right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(OrcWingParameters left, OrcWingParameters right)
+        {
+            return !(left == right);
+        }
+
+        public bool Equals(OrcWingParameters other)
+        {
+            throw new NotImplementedException();
+        }
 
         ///// <summary>
         ///// The dsc.

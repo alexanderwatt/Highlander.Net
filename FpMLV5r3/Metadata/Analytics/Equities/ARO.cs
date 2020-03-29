@@ -52,20 +52,20 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             _resetAmts = resetAmts;
         }
 
-        private double _spot;
-        private double _strike;
-        private Boolean _isCall;
-        private double _tau;
-        private double[] _vols;
-        private int[] _rtdays;
-        private double[] _rtamts;
-        private int[] _divdays;
-        private double[] _divamts;
-        private int[] _resetDays;
-        private double[] _resetAmts;
-        private const int daybasis = 365;
-        private const double cEpsilon = 0.000001;
-        private NormalDistribution _nd = new NormalDistribution(0, 1);
+        private readonly double _spot;
+        private readonly double _strike;
+        private readonly bool _isCall;
+        private readonly double _tau;
+        private readonly double[] _vols;
+        private readonly int[] _rtdays;
+        private readonly double[] _rtamts;
+        private readonly int[] _divdays;
+        private readonly double[] _divamts;
+        private readonly int[] _resetDays;
+        private readonly double[] _resetAmts;
+        private const int Daybasis = 365;
+        private const double CEpsilon = 0.000001;
+        private readonly NormalDistribution _nd = new NormalDistribution(0, 1);
 
         /// <summary>
         /// Gets the price.
@@ -116,7 +116,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             if (strike <= 0)
             {
                 bond = System.Math.Abs(strike);
-                strike = cEpsilon;
+                strike = CEpsilon;
             }
             double z0 = (mu - System.Math.Log(strike)) / sigma;
             double i1 = 0.0;
@@ -158,7 +158,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// </summary>
         /// <param name="varlogs">The varlogs.</param>
         /// <param name="numVols">The numvols.</param>
-        private double[] CalcCovXXI(double[] varlogs, int numVols)
+        private static double[] CalcCovXXI(double[] varlogs, int numVols)
         {
             double trm1 = 0.0;
             double[] results = new double[numVols];
@@ -188,7 +188,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             int numresets = resetDays.Length;
             for (int idx = 0; idx < numresets; idx++)
             {
-                double dt0 = Convert.ToDouble(resetDays[idx])/daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx])/Daybasis;
                 double r0 = EquityAnalytics.GetRateCCLin365(0, dt0, _rtdays, _rtamts);                
                 double q0 = EquityAnalytics.GetYieldCCLin365(_spot,0, dt0, _divdays, _divamts, _rtdays,_rtamts);             
 
@@ -204,14 +204,14 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="resetDays">The reset dates.</param>
         /// <param name="vols">The vols.</param>
         /// <returns></returns>
-        private double CalcSigma(int[] resetDays, double[] vols)
+        private static double CalcSigma(int[] resetDays, double[] vols)
         {
             int numResets = resetDays.Length;
             double crossterms = 0;
             double cumvar = 0;
             for (int idx = 0; idx < numResets; idx++)
             {               
-                double dt0 = Convert.ToDouble(resetDays[idx]) / daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx]) / Daybasis;
                 double var = vols[idx] * vols[idx] * dt0;
                 cumvar += var;
                 crossterms += (numResets - (idx + 1)) * var;
@@ -227,13 +227,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="resetDays">The reset_days.</param>
         /// <param name="vols">The vols.</param>
         /// <returns></returns>
-        private double[] CalcVarLogs(int[] resetDays, double[] vols)
+        private static double[] CalcVarLogs(int[] resetDays, double[] vols)
         {
             int numresets = resetDays.Length;
             double[] res = new double[numresets];
             for (int idx = 0; idx < numresets; idx++)
             {
-                double dt0 = Convert.ToDouble(resetDays[idx]) / daybasis;
+                double dt0 = Convert.ToDouble(resetDays[idx]) / Daybasis;
                 double varlogs = vols[idx] * vols[idx] * dt0;
                 res[idx] = varlogs;
             }

@@ -120,7 +120,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
         /// <returns>
         /// <see langword="true"/> if lowerLimit &lt;= upperLimit; otherwise, <see langword="false"/>.
         /// </returns>
-        public bool IsValidParameterSet(double lowerLimit, double upperLimit)
+        public static bool IsValidParameterSet(double lowerLimit, double upperLimit)
         {
             return lowerLimit <= upperLimit;
         }

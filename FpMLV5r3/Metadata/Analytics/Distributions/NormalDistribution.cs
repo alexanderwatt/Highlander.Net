@@ -129,7 +129,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
         /// <returns>
         /// <see langword="true"/> if sigma is greater than 0.0; otherwise, <see langword="false"/>.
         /// </returns>
-        public bool IsValidParameterSet(double mu, double sigma)
+        public static bool IsValidParameterSet(double mu, double sigma)
         {
             return sigma >= 0.0;
         }

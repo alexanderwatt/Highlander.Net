@@ -256,7 +256,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
             else
             {
                 output = new object[items.Count, 1];
-                for (int i = 0; i < items.Count(); i++)
+                for (int i = 0; i < items.Count; i++)
                 {
                     output[i, 0] = items[i];
                 }

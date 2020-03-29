@@ -130,5 +130,45 @@ namespace Highlander.Utilities.Helpers
                    select new KeyValuePair<string, string>(f, GetResource(assembly, f))).ToDictionary(a => a.Key, a => a.Value);
             return chosenFiles;
         }
+
+        public static string LoadString(Assembly asm, Type nameScope, string resourceName)
+        {
+            string result;
+            string[] names = resourceName.Split(',');
+            if (names.Length == 1)
+            {
+                result = string.Compare(nameScope.Namespace, 0, resourceName, 0, nameScope.Namespace.Length, true) == 0 ? LoadEmbeddedString(asm, resourceName) : LoadEmbeddedString(asm, nameScope.Namespace + "." + resourceName);
+            }
+            else
+            {
+                names[0] = names[0].Trim();
+                names[1] = names[1].Trim();
+                result = string.Compare(nameScope.Namespace, 0, names[0], 0, nameScope.Namespace.Length, true) == 0 ? LoadResourceString(asm, names[0], names[1]) : LoadResourceString(asm, nameScope.Namespace + "." + names[0], names[1]);
+            }
+            return result;
+        }
+
+        private static string LoadEmbeddedString(Assembly asm, string resourceName)
+        {
+            string result = "";
+            using (Stream stream = asm.GetManifestResourceStream(resourceName))
+            {
+                if (stream != null)
+                {
+                    using (TextReader reader = new StreamReader(asm.GetManifestResourceStream(resourceName)))
+                    {
+                        result = reader.ReadToEnd();
+                    }
+                }
+            }
+            return result;
+        }
+
+        private static string LoadResourceString(Assembly asm, string resourceName, string itemName)
+        {
+            var m = new ResourceManager(resourceName, asm);
+            return m.GetString(itemName);
+        }
+
     }
 }

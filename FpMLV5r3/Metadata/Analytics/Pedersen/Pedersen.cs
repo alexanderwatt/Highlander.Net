@@ -493,7 +493,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Pedersen
         /// Displays post-Calibration result summary.
         /// </summary>
         /// <returns></returns>
-        public object CalSummary()
+        public static object CalSummary()
         {
             object temp;
             try
@@ -667,7 +667,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Pedersen
             }
         }
 
-        public object SimSummary()
+        public static object SimSummary()
         {
             object temp;
             try

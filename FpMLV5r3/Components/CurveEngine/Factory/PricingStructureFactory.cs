@@ -103,12 +103,12 @@ namespace Highlander.CurveEngine.V5r3.Factory
                 return CreatePricingStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, values);
             }
             var expiries = new List<DateTime>();
-            var vols = new List<double>();
+            var volatilities = new List<double>();
             int rowCount = values.GetUpperBound(0);
             for (int row = 0; row <= rowCount; row++)
             {
                 expiries.Add((DateTime)values[row, 0]);
-                vols.Add((double)values[row, 1]);
+                volatilities.Add((double)values[row, 1]);
             }
             int additionalLength = additional.GetUpperBound(0);
             var inputInstruments = new List<string>();
@@ -120,7 +120,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
                 inputSwapRates.Add((double)additional[row, 1]);
                 inputBlackVolRates.Add((double)additional[row, 2]);
             }
-            return new RateVolatilitySurface(logger, cache, nameSpace, properties, expiries.ToArray(), vols.ToArray(), inputInstruments.ToArray(),
+            return new RateVolatilitySurface(logger, cache, nameSpace, properties, expiries.ToArray(), volatilities.ToArray(), inputInstruments.ToArray(),
                 inputSwapRates.ToArray(), inputBlackVolRates.ToArray());
         }
 
@@ -235,7 +235,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     break;
                 default:
                     string message =
-                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognized.";
                     throw new ApplicationException(message);
             }
             var structure = CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, quotedAssetSet);
@@ -270,7 +270,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     break;
                 default:
                     string message =
-                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognized.";
                     throw new ApplicationException(message);
             }
             var structure = CreateRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, quotedAssetSet, algorithmProperties);
@@ -305,7 +305,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     break;
                 default:
                     var message =
-                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognized.";
                     throw new ApplicationException(message);
             }
             return structure;
@@ -393,19 +393,19 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     string baseCurveName = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
                     var baseCurve = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName);
                     string fxCurveName = PropertyHelper.ExtractReferenceFxCurveUniqueId(properties);
-                    var fxcurve = CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName);
+                    var fxCurve = CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName);
                     string currency2CurveName = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
                     var currency2Curve = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, currency2CurveName);
-                    structure = new RateXccySpreadCurve(logger, cache, nameSpace, properties, baseCurve, fxcurve, currency2Curve, quotedAssetSet, fixingCalendar, rollCalendar);
+                    structure = new RateXccySpreadCurve(logger, cache, nameSpace, properties, baseCurve, fxCurve, currency2Curve, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.XccySpreadCurve:
                     string baseCurveName2 = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
                     var baseCurve2 = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, baseCurveName2);
                     string fxCurveName2 = PropertyHelper.ExtractReferenceFxCurveUniqueId(properties);
-                    var fxcurve2 = (FxCurve)CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName2);
+                    var fxCurve2 = (FxCurve)CurveLoader.LoadFxCurve(logger, cache, nameSpace, fxCurveName2);
                     string currency2CurveName2 = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
                     var currency2Curve2 = (RateCurve)CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, null, null, currency2CurveName2);
-                    structure = new XccySpreadCurve(logger, cache, nameSpace, properties, quotedAssetSet, baseCurve2, currency2Curve2, fxcurve2, fixingCalendar, rollCalendar);
+                    structure = new XccySpreadCurve(logger, cache, nameSpace, properties, quotedAssetSet, baseCurve2, currency2Curve2, fxCurve2, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.FxCurve:
                     structure = new FxCurve(logger, cache, nameSpace, properties, (FxRateSet)quotedAssetSet, fixingCalendar, rollCalendar);
@@ -423,21 +423,21 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     break;
                 case PricingStructureTypeEnum.CapVolatilityCurve:
                     var discountCurveName = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var discountcurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, discountCurveName);
+                    var discountCurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, discountCurveName);
                     var forecastCurveName = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
-                    var forecastcurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, forecastCurveName);
-                    structure = new CapVolatilityCurve(logger, cache, nameSpace, properties, quotedAssetSet, discountcurve, forecastcurve, fixingCalendar, rollCalendar);
+                    var forecastCurve = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, forecastCurveName);
+                    structure = new CapVolatilityCurve(logger, cache, nameSpace, properties, quotedAssetSet, discountCurve, forecastCurve, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.GenericVolatilityCurve:
                     var discountCurveName1 = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
-                    var discountcurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, discountCurveName1);
+                    var discountCurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, discountCurveName1);
                     var forecastCurveName1 = PropertyHelper.ExtractReferenceCurrency2CurveId(properties);
-                    var forecastcurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, forecastCurveName1);
-                    structure = new GenericVolatilityCurve(logger, cache, nameSpace, properties, quotedAssetSet, discountcurve1, forecastcurve1, fixingCalendar, rollCalendar);
+                    var forecastCurve1 = CurveLoader.LoadInterestRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, forecastCurveName1);
+                    structure = new GenericVolatilityCurve(logger, cache, nameSpace, properties, quotedAssetSet, discountCurve1, forecastCurve1, fixingCalendar, rollCalendar);
                     break;
                 default:
                     var message =
-                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognised.";
+                        $"Specified pricing structure type : '{pricingStructureType}' has not been recognized.";
                     throw new ApplicationException(message);
             }
             return structure;
@@ -600,7 +600,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
         }
 
         /// <summary>
-        /// Initialises all valid pricing structures from the FpML.
+        /// Initialise all valid pricing structures from the FpML.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
@@ -744,7 +744,7 @@ namespace Highlander.CurveEngine.V5r3.Factory
                 return CreateCurveStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, values);
             }
             string[] expiries = ExtractExpiries(values);
-            double[,] volatilities = ExtractVols(values);
+            double[,] volatilities = ExtractVolatilities(values);
             if (psType == PricingStructureTypeEnum.RateATMVolatilityMatrix)
             {
                 string[] tenors = ExtractTenors(values);
@@ -756,6 +756,48 @@ namespace Highlander.CurveEngine.V5r3.Factory
             return CreateVolatilitySurface(logger, cache, nameSpace, properties, expiries, strikes, volatilities);
         }
 
+        /// <summary>
+        /// Create a pricing structure!
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="nameSpace">The nameSpace</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="properties">The curve properties</param>
+        /// <param name="additional">To be provided if building a curve.</param>
+        /// <param name="expiries">To be provided if building a volatility surface.</param>
+        /// <param name="tenors">To be provided if building a volatility surface.</param>
+        /// <param name="strikes">To be provided if building a volatility surface.</param>
+        /// <param name="volatilities">To be provided if building a volatility surface.</param>
+        /// <param name="instruments">To be provided if building a curve.</param>
+        /// <param name="rates">To be provided if building a curve.</param>
+        /// <returns></returns>
+        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, string nameSpace,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, string[] instruments, decimal[] rates,
+            decimal[] additional, string[] expiries, string[] tenors, double[] strikes, double[,] volatilities)
+        {
+            properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(EnvironmentProp.NameSpace, nameSpace);
+            string suppliedPricingStructureType = properties.GetString(CurveProp.PricingStructureType, true);
+            EnumHelper.TryParse(suppliedPricingStructureType, true, out PricingStructureTypeEnum psType);
+            if (PricingStructureHelper.CurveTypes.Contains(psType))
+            {
+                return CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments, rates, additional);
+            }
+            if (PricingStructureHelper.VolBootstrapperTypes.Contains(psType))
+            {
+                return CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments, rates, additional);
+            }
+            if (psType == PricingStructureTypeEnum.RateATMVolatilityMatrix)
+            {
+                return new RateATMVolatilitySurface(logger, cache, nameSpace, properties, expiries, tenors, volatilities);
+            }
+            if (!PricingStructureHelper.VolSurfaceTypes.Contains(psType))
+                throw new System.Exception($"{suppliedPricingStructureType} cannot be created using this function");
+            return CreateVolatilitySurface(logger, cache, nameSpace, properties, expiries, strikes, volatilities);
+        }
 
         /// <summary>
         /// Create a pricing structure!
@@ -777,12 +819,58 @@ namespace Highlander.CurveEngine.V5r3.Factory
             properties.Set(EnvironmentProp.NameSpace, nameSpace);
             string suppliedPricingStructureType = properties.GetString(CurveProp.PricingStructureType, true);
             EnumHelper.TryParse(suppliedPricingStructureType, true, out PricingStructureTypeEnum psType);
-            if (PricingStructureHelper.CurveTypes.Contains(psType))
-            {
-                //TODO Only does rate curves.
-                return CreateRateCurveStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, values, algorithm);
-            }
-            return null;
+            return PricingStructureHelper.CurveTypes.Contains(psType) ? CreateRateCurveStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, values, algorithm) : null;
+        }
+
+        /// <summary>
+        /// Create a pricing structure!
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="nameSpace">The nameSpace</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="properties">The curve properties</param>
+        /// <param name="instruments"></param>
+        /// <param name="values">A range object that contains the instruments and quotes.</param>
+        /// <param name="additional">Any additional values.</param>
+        /// <param name="algorithm">The algorithm properties. They had better be correct fot the pricing structure or else!!</param>
+        /// <returns></returns>
+        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, string nameSpace,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, List<string> instruments, 
+            List<decimal> values, List<decimal> additional, Algorithm algorithm)
+        {
+            properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(EnvironmentProp.NameSpace, nameSpace);
+            string suppliedPricingStructureType = properties.GetString(CurveProp.PricingStructureType, true);
+            EnumHelper.TryParse(suppliedPricingStructureType, true, out PricingStructureTypeEnum psType);
+            return PricingStructureHelper.CurveTypes.Contains(psType) ? CreateRateCurveStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments, values, additional, algorithm) : null;
+        }
+
+        /// <summary>
+        /// Create a pricing structure
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="cache">The cache.</param>
+        /// <param name="nameSpace">The nameSpace</param>
+        /// <param name="baseDate">The base date.</param>
+        /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
+        /// <param name="properties">The properties.</param>
+        /// <param name="instruments">The instrument list.</param>
+        /// <param name="values">A range object that contains the instruments and quotes.</param>
+        /// <param name="additional">Any additional data.</param>
+        /// <returns></returns>
+        public static IPricingStructure CreatePricingStructure(ILogger logger, ICoreCache cache, string nameSpace, DateTime baseDate,
+            IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar, NamedValueSet properties, List<string> instruments,
+            List<decimal> values, List<decimal> additional)
+        {
+            properties.Set(CurveProp.BaseDate, baseDate);
+            properties.Set(CurveProp.BuildDateTime, baseDate);
+            properties.Set(CurveProp.MarketDate, baseDate);
+            return CreatePricingStructure(logger, cache, nameSpace, fixingCalendar, rollCalendar,
+                properties, instruments.ToArray(), values.ToArray(), additional.ToArray(), null, null, null, null);
         }
 
         /// <summary>
@@ -793,8 +881,8 @@ namespace Highlander.CurveEngine.V5r3.Factory
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="fixingCalendar">The fixingCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
         /// <param name="rollCalendar">The rollCalendar. The calendar is only required if the curve needs to be re-bootstrapped or the priceable assets are required.</param>
-        /// <param name="properties">THe properties.</param>
-        /// <param name="headers">THe value headers</param>
+        /// <param name="properties">The properties.</param>
+        /// <param name="headers">The value headers</param>
         /// <param name="values">A range object that contains the instruments and quotes.</param>
         /// <returns></returns>
         public static List<IPricingStructure> CreatePricingStructures(ILogger logger, ICoreCache cache, string nameSpace,
@@ -892,6 +980,23 @@ namespace Highlander.CurveEngine.V5r3.Factory
             return structure;
         }
 
+        private static CurveBase CreateCurveStructure(ILogger logger, ICoreCache cache,
+            string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
+            NamedValueSet properties, List<string> instruments, List<decimal> values, List<decimal> additional)
+        {
+            var structure = (CurveBase)CreateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments.ToArray(), values.ToArray(), additional.ToArray());
+            return structure;
+        }
+
+        public static CurveBase CreateRateCurveStructure(ILogger logger, ICoreCache cache,
+            string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
+            NamedValueSet properties, List<string> instruments, List<decimal> values, List<decimal> additional, Algorithm algorithmProperties)
+        {
+            var structure = (CurveBase)CreateRateCurve(logger, cache, nameSpace, fixingCalendar, rollCalendar, properties, instruments.ToArray(), 
+                values.ToArray(), additional.ToArray(), algorithmProperties);
+            return structure;
+        }
+
         private static CurveBase CreateRateCurveStructure(ILogger logger, ICoreCache cache,
             string nameSpace, IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar,
             NamedValueSet properties, object[,] values, Algorithm algorithmProperties)
@@ -964,13 +1069,13 @@ namespace Highlander.CurveEngine.V5r3.Factory
         }
 
         /// <summary>
-        /// Extract the vols from the raw Data grid (everything except the first column and row)
+        /// Extract the volatilities from the raw Data grid (everything except the first column and row)
         /// </summary>
-        private static double[,] ExtractVols(object[,] rawGrid)
+        private static double[,] ExtractVolatilities(object[,] rawGrid)
         {
             int maxRows = rawGrid.GetUpperBound(0);
             int maxColumns = rawGrid.GetUpperBound(1);
-            var vols = new double[maxRows, maxColumns];
+            var volatilities = new double[maxRows, maxColumns];
             for (int column = 1; column <= maxColumns; column++)
             {
                 for (int row = 1; row <= maxRows; row++)
@@ -979,10 +1084,10 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     {
                         throw new InvalidCastException($"Cannot cast '{rawGrid[row, column]}' to volatility");
                     }
-                    vols[row - 1, column - 1] = vol;
+                    volatilities[row - 1, column - 1] = vol;
                 }
             }
-            return vols;
+            return volatilities;
         }
 
         #endregion

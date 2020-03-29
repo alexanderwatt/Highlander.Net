@@ -14,7 +14,6 @@
 */
 
 using System;
-using Highlander.Equity.Calculator.V5r3.Helpers;
 using Highlander.Reporting.Analytics.V5r3.Equities;
 
 namespace Highlander.Reporting.Analytics.V5r3.Helpers

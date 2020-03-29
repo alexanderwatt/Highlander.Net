@@ -14,6 +14,7 @@
 */
 
 using System;
+using static System.String;
 
 namespace Highlander.Reporting.Analytics.V5r3.Distributions
 {
@@ -58,12 +59,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Distributions
         /// </exception>
         protected ContinuousDistribution(Random random)
         {
-            if (random == null)
-            {
-                string message = string.Format(null, "ArgumentNull", "generator");
-                throw new ArgumentNullException($"RandomNumberGenerator", message);
-            }
-            _random = random;
+            _random = random ?? throw new ArgumentNullException($"RandomNumberGenerator", "ArgumentNull");
         }
         #endregion
 

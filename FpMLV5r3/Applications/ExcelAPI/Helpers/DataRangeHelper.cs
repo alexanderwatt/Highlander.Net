@@ -354,6 +354,31 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="inputRange"></param>
         /// <returns></returns>
+        public static T[,] RangeToMatrix<T>(object[,] inputRange)
+        {
+            int rowCount = inputRange.GetLength(0);
+            int colCount = inputRange.GetLength(1);
+            var result = new T[rowCount, colCount];
+            var rowIndex = 0;
+            var colIndex = 0;
+            for (int i = inputRange.GetLowerBound(0); i <= inputRange.GetUpperBound(0); i++)
+            {
+                for (int j = inputRange.GetLowerBound(1); j <= inputRange.GetUpperBound(1); j++)
+                {
+                    result[rowIndex, colIndex] = (T)inputRange[i, j];
+                    colIndex++;
+                }
+                colIndex = 0;
+                rowIndex++;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputRange"></param>
+        /// <returns></returns>
         public static object[,] RangeToMatrix(object[,] inputRange)
         {
             int rowCount = inputRange.GetLength(0);
@@ -619,7 +644,7 @@ namespace HLV5r3.Helpers
         }
 
         ///<summary>
-        /// Sttrips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<param name="tenorFilter">The tenor string to filter on.</param>
@@ -689,8 +714,7 @@ namespace HLV5r3.Helpers
         public static List<DateTime> StripDateTimeRange(Excel.Range excelRange)
         {
             var unqVals = new List<DateTime>();
-            var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];
-            if (values != null)
+            if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
             {
                 foreach (object obj in values)
                 {
@@ -717,8 +741,7 @@ namespace HLV5r3.Helpers
         public static List<int> StripIntRange(Excel.Range excelRange)
         {
             var unqVals = new List<int>();
-            var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];
-            if (values != null)
+            if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
             {
                 foreach (object obj in values)
                 {
@@ -749,7 +772,7 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="excelRange"></param>
         /// <returns></returns>
-        public static List<Double> StripDoubleRange(Excel.Range excelRange)
+        public static List<double> StripDoubleRange(Excel.Range excelRange)
         {
             var unqVals = new List<Double>();
             var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];

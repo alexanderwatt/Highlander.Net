@@ -276,7 +276,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Options
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected List<double> EvaluateImpliedQuote()
+        protected static List<double> EvaluateImpliedQuote()
         {
             //TODO Temporary only. This needs to be corrected.
             return new List<double> {0.0};

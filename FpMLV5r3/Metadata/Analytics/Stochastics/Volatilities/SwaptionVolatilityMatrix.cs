@@ -250,7 +250,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities
         /// <summary>
         /// An inner class that is used to provide quick access to the parameters stored in the PubSub grid.
         /// </summary>
-        public struct GridParameters
+        public struct GridParameters : IEquatable<GridParameters>
         {
             #region Properties
 
@@ -268,6 +268,31 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities
             /// The Rho parameter needed to recreate the surface
             /// </summary>
             public decimal Rho { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override int GetHashCode()
+            {
+                throw new NotImplementedException();
+            }
+
+            public static bool operator ==(GridParameters left, GridParameters right)
+            {
+                return left.Equals(right);
+            }
+
+            public static bool operator !=(GridParameters left, GridParameters right)
+            {
+                return !(left == right);
+            }
+
+            public bool Equals(GridParameters other)
+            {
+                throw new NotImplementedException();
+            }
 
             #endregion
         }

@@ -36,6 +36,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
 {
     #region Helper Classes
 
+    [Serializable]
     public class BillSwapPricer2CashflowItem
     {
         public DateTime StartDate;
@@ -47,6 +48,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         //don't need to store a PV - since it could be easily calculated on-the-fly
     }
 
+    [Serializable]
     public class AmortisingScheduleItem
     {
         public DateTime StartDate;
@@ -55,6 +57,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         public double AmortisingAmount;
     }
 
+    [Serializable]
     public class AmortisingResultItem
     {
         public string WasRolled;//indicated whether the roll date been adjusted or not.
@@ -63,6 +66,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         public double OutstandingValue;
     }
 
+    [Serializable]
     public class BillsSwapPricer2TermsRange
     {
         public DateTime StartDate;
@@ -76,6 +80,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         public string DayCountConvention;
     }
 
+    [Serializable]
     public class MetaScheduleRangeItem
     {
         public string RollFrequency;
@@ -102,20 +107,20 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
                                                           RollDate = pair.First, WasRolled = pair.Second, OutstandingValue = initialNotional
                                                       }).ToList();
             double currentNotional = initialNotional;
-            foreach (AmortisingScheduleItem amortScheduleItem in amortisingSchedule)
+            foreach (AmortisingScheduleItem amortisingScheduleItem in amortisingSchedule)
             {
-                DateTime startDate = amortScheduleItem.StartDate;
-                DateTime endDate = amortScheduleItem.EndDate;
+                DateTime startDate = amortisingScheduleItem.StartDate;
+                DateTime endDate = amortisingScheduleItem.EndDate;
                 IEnumerable<DateTime> rollDatesForItem = GetRollsForSchedule(rollDates, startDate, endDate);
                 int cashflowNumber = 0;
                 foreach (DateTime time in rollDatesForItem)
                 {
-                    if (cashflowNumber % amortScheduleItem.ApplyEveryNthRoll == 0)
+                    if (cashflowNumber % amortisingScheduleItem.ApplyEveryNthRoll == 0)
                     {
                         //  implement AS EVERY 1ST ROLL (amortisingScheduleItem.ApplyEveryNthRoll)
                         //
                         AmortisingResultItem amortisingResultItem = GetItem(result, time);
-                        amortisingResultItem.AmortisingAmount = amortScheduleItem.AmortisingAmount;
+                        amortisingResultItem.AmortisingAmount = amortisingScheduleItem.AmortisingAmount;
                         amortisingResultItem.OutstandingValue = currentNotional + amortisingResultItem.AmortisingAmount;
                         currentNotional = amortisingResultItem.OutstandingValue;
                     }
@@ -158,7 +163,6 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         {
             IDayCounter dayCounter = DayCounterHelper.Parse(terms.DayCountConvention);
             double effectiveFrequency = GetEffectiveFrequency(cashflowsSchedule, dayCounter);
-
             return effectiveFrequency;
         }
 

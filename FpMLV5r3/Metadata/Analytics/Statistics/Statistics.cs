@@ -66,8 +66,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Statistics
             {
                 xArray[i] = i;
             }
-            var interpObj = LinearInterpolation.Interpolate(xArray, yArray);
-            var percentileValue = interpObj.ValueAt(percentileIndex, true);
+            var interpolationObj = LinearInterpolation.Interpolate(xArray, yArray);
+            var percentileValue = interpolationObj.ValueAt(percentileIndex, true);
             return percentileValue;
         }
     }

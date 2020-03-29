@@ -19,7 +19,7 @@ using Highlander.Reporting.Analytics.V5r3.Interpolations;
 namespace Highlander.Reporting.Analytics.V5r3.Interpolators
 {
     /// <summary>
-    /// A wrapper to connect ExcelAPI interpolation functions to underlying analytics interp classes
+    /// A wrapper to connect ExcelAPI interpolation functions to underlying analytics interpolation classes
     /// </summary>
     public class SABRInterpolationInterface
     {
@@ -58,7 +58,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolators
         /// <param name="yValues">One dimensional array of known y-values. Length of the array must be equal to the length of the XArray parameter.</param>
         /// <param name="target">Value at which to compute the interpolation.</param>
         /// <returns></returns>
-        public double LinearInterpolate(Double[] xValues, Double[] yValues, double target)
+        public static double LinearInterpolate(double[] xValues, double[] yValues, double target)
         {
             if (xValues == null)
                 return 0;
@@ -73,7 +73,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolators
 
         #region Bilinear Interpolation
         /// <summary>
-        /// Compute a Bilinear interpolation at the ordered pair (ColumnTarget, RowTarget).
+        /// Compute a Bi-linear interpolation at the ordered pair (ColumnTarget, RowTarget).
         /// Extrapolation is flat-line in both the Column and Row dimensions.
         /// </summary>
         /// <param name="columnLabels">One dimensional array arranged in strict ascending order that governs HORIZONTAL interpolation.</param>
@@ -82,7 +82,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolators
         /// <param name="columnTarget">Column (horizontal) target of the interpolation.</param>
         /// <param name="rowTarget">Row (vertical) target of the interpolation.</param>
         /// <returns></returns>
-        public double BilinearInterpolate(double[] columnLabels, double[] rowLabels, double[,] dataTable,
+        public static double BilinearInterpolate(double[] columnLabels, double[] rowLabels, double[,] dataTable,
                                           double columnTarget, double rowTarget)
         {
             if (columnLabels == null)
@@ -107,7 +107,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Interpolators
         /// <param name="yArray">Array (row/column) of y-values.</param>
         /// <param name="target">Value at which to compute the interpolation.</param>
         /// <returns></returns>
-        public double CubicHermiteSplineInterpolate(double[] xArray, double[] yArray, double target)
+        public static double CubicHermiteSplineInterpolate(double[] xArray, double[] yArray, double target)
         {
             if (xArray == null)
                 return 0;

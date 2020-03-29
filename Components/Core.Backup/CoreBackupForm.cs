@@ -114,9 +114,7 @@ namespace Highlander.Core.Backup
         {
             Interlocked.Exchange(ref _cancelFlag, 0);
             txtLog.Clear();
-
             BuildFilter();
-
             if (rbSrcServer.Checked && rbTgtServer.Checked)
             {
                 // server-to-server transfer

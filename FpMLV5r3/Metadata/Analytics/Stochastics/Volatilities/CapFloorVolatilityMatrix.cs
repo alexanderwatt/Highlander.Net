@@ -320,7 +320,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities
             }
         }
 
-        private PricingStructurePoint CreatePricingStructurePoint(decimal? strike, decimal volatility, 
+        private static PricingStructurePoint CreatePricingStructurePoint(decimal? strike, decimal volatility, 
             TimeDimension expiration, AssetMeasureType measureType)
         {
             if (volatility < 0)

@@ -99,8 +99,7 @@ namespace HLV5r3.Analytics
             IDayCounter dayCountObj = Actual365.Instance;
             double tenor = dayCountObj.YearFraction(lastAmortisationDate,
                                                     amortisationDate);
-            var bgs = new BGSConvexityCorrection();
-            return bgs.ComputeBGSConvexityCorrection(tenor,
+            return BGSConvexityCorrection.ComputeBGSConvexityCorrection(tenor,
                                                      currentBondFactor,
                                                      alpha,
                                                      sigma,

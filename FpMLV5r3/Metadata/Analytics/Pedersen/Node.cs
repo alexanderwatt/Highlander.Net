@@ -73,7 +73,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Pedersen
             var result = new Node[s.Length];
             for (int i = 0; i < s.Length; i++)
             {
-                if (s[i] != "")
+                if (!string.IsNullOrEmpty(s[i]))
                 {
                     result[i] = new Node(s[i], nodeOps);
                 }

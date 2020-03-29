@@ -22,7 +22,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
 {
     public class BankBillsFuturesOptionAssetAnalytic : ModelAnalyticBase<IRateFuturesOptionAssetParameters, RateFuturesOptionMetrics>, IRateFuturesOptionAssetResults
     {
-        private const Decimal COne = 1.0m;
+        private const decimal COne = 1.0m;
 
         /// <summary>
         /// Gets the forward delta.
@@ -32,7 +32,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// <summary>
         /// Get the NPV
         /// </summary>
-        public Decimal NPV => EvaluateNPV();
+        public decimal NPV => EvaluateNPV();
 
         /// <summary>
         /// Gets the npv change from the base NPV.
@@ -55,13 +55,13 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// <summary>
         /// Gets the convexity adjustment.
         /// </summary>
-        public Decimal ConvexityAdjustment => EvaluateConvexityAdjustment();
+        public decimal ConvexityAdjustment => EvaluateConvexityAdjustment();
 
         /// <summary>
         /// Gets the adjusted rate.
         /// </summary>
         /// <value>The rate.</value>
-        public Decimal AdjustedRate => EvaluateAdjustedRate();
+        public decimal AdjustedRate => EvaluateAdjustedRate();
 
         /// <summary>
         /// Gets the Index At Maturity.
@@ -77,7 +77,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// <summary>
         /// Gets the initial margin.
         /// </summary>
-        /// <value>The inital margin.</value>
+        /// <value>The initial margin.</value>
         public decimal InitialMargin { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Gets the NPV.
         /// </summary>
         /// <value>The NPV.</value>
-        public Decimal Premium => EvaluatePremium();
+        public decimal Premium => EvaluatePremium();
 
         /// <summary>
         /// Gets the second derivative with respect to the Time.
@@ -108,13 +108,13 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Gets the market quote.
         /// </summary>
         /// <value>The quote.</value>
-        public Decimal MarketQuote => !AnalyticParameters.IsVolatilityQuote ? AnalyticParameters.Premium : AnalyticParameters.Volatility;
+        public decimal MarketQuote => !AnalyticParameters.IsVolatilityQuote ? AnalyticParameters.Premium : AnalyticParameters.Volatility;
 
         /// <summary>
         /// Gets the Implied Quote.
         /// </summary>
         /// <value>The NPV.</value>
-        public Decimal ImpliedQuote => EvaluateImpliedQuote();
+        public decimal ImpliedQuote => EvaluateImpliedQuote();
 
         /// <summary>
         /// Gets the expected value.
@@ -185,7 +185,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateNPV()
+        protected virtual decimal EvaluateNPV()
         {
             return EvaluateExpectedValue();
         }
@@ -194,7 +194,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluatePremium()
+        protected virtual decimal EvaluatePremium()
         {
             return CalculateOptionValue();
         }
@@ -203,7 +203,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateRawValue()//TODO this is incorrect.
+        protected decimal EvaluateRawValue()//TODO this is incorrect.
         {
             decimal result = CalculateOptionValue();
             return result;
@@ -213,7 +213,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateExpectedValue()//TODO this is incorrect.
+        protected decimal EvaluateExpectedValue()//TODO this is incorrect.
         {
             decimal result = AnalyticParameters.NumberOfContracts * 500000 *
                              (EvaluateMarketBillPrice() - EvaluateImpliedBillPrice());
@@ -223,7 +223,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateForwardRate()
+        protected virtual decimal EvaluateForwardRate()
         {
             return AnalyticParameters.Rate;
         }
@@ -232,7 +232,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateBreakEvenRate()
+        protected virtual decimal EvaluateBreakEvenRate()
         {
             return AnalyticParameters.Rate;
         }
@@ -241,7 +241,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateDelta0()//TODO
+        protected decimal EvaluateDelta0()//TODO
         {
             decimal result = EvaluateExpectedValue() * CalculateOptionDelta();
             return result;
@@ -251,7 +251,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the gamma wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateGamma0()//TODO
+        protected decimal EvaluateGamma0()//TODO
         {
             decimal result = EvaluateExpectedValue() * CalculateOptionGamma();
             return result;
@@ -261,7 +261,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the gamma wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateVega0()//TODO
+        protected decimal EvaluateVega0()//TODO
         {
             decimal result = EvaluateExpectedValue() * CalculateOptionVega();
             return result;
@@ -271,7 +271,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the gamma wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected Decimal EvaluateTheta0()//TODO
+        protected decimal EvaluateTheta0()//TODO
         {
             decimal result = EvaluateExpectedValue() * CalculateOptionTheta();
             return result;
@@ -281,7 +281,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateDeltaR()
+        protected virtual decimal EvaluateDeltaR()
         {
             var multiplier = 1.0m;
             if (!AnalyticParameters.IsPut)
@@ -296,7 +296,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// </summary>
         /// 
         /// <returns></returns>
-        protected virtual Decimal EvaluateVolatilityAtExpiry()
+        protected virtual decimal EvaluateVolatilityAtExpiry()
         {
             return AnalyticParameters.IsVolatilityQuote ? AnalyticParameters.Volatility : CalculateVolatility();
         }
@@ -305,47 +305,47 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        protected virtual Decimal EvaluateImpliedQuote()
+        protected virtual decimal EvaluateImpliedQuote()
         {
             return !AnalyticParameters.IsVolatilityQuote ? EvaluatePremium() : CalculateVolatility();
         }
 
-        protected virtual Decimal CalculateOptionValue()
+        protected virtual decimal CalculateOptionValue()
         {
             var result = OptionAnalytics.Opt(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Volatility, (double)AnalyticParameters.TimeToExpiry);
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionDelta()
+        protected virtual decimal CalculateOptionDelta()
         {
             var result = OptionAnalytics.OptWithGreeks(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Volatility, (double)AnalyticParameters.TimeToExpiry)[1];
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionGamma()
+        protected virtual decimal CalculateOptionGamma()
         {
             var result = OptionAnalytics.OptWithGreeks(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Volatility, (double)AnalyticParameters.TimeToExpiry)[2];
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionVega()
+        protected virtual decimal CalculateOptionVega()
         {
             var result = OptionAnalytics.OptWithGreeks(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Volatility, (double)AnalyticParameters.TimeToExpiry)[3];
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateOptionTheta()
+        protected virtual decimal CalculateOptionTheta()
         {
             var result = OptionAnalytics.OptWithGreeks(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Volatility, (double)AnalyticParameters.TimeToExpiry)[4];
             return (decimal)result;
         }
 
-        protected virtual Decimal CalculateVolatility()
+        protected virtual decimal CalculateVolatility()
         {
             var result = OptionAnalytics.OptSolveVol(!AnalyticParameters.IsPut, (double)AnalyticParameters.Rate, (double)AnalyticParameters.Strike,
                 (double)AnalyticParameters.Premium, 0.0, (double)AnalyticParameters.TimeToExpiry);
@@ -356,7 +356,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the implied quote.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateConvexityAdjustment()
+        private decimal EvaluateConvexityAdjustment()
         {
             return FuturesAnalytics.FuturesMarginConvexityAdjustment(AnalyticParameters.Rate,
                                                                      (double)AnalyticParameters.TimeToExpiry, (double)AnalyticParameters.Volatility);
@@ -366,7 +366,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateOptionVolatility()
+        public virtual decimal EvaluateOptionVolatility()
         {
             return AnalyticParameters.Volatility;
         }
@@ -375,7 +375,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public virtual Decimal EvaluateDiscountFactorAtMaturity()
+        public virtual decimal EvaluateDiscountFactorAtMaturity()
         {
             return AnalyticParameters.StartDiscountFactor / (COne + AnalyticParameters.YearFraction * (AnalyticParameters.Rate - EvaluateConvexityAdjustment()));
         }
@@ -384,7 +384,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateNPVChange()
+        private decimal EvaluateNPVChange()
         {
             return AnalyticParameters.BaseNPV - EvaluateNPV();
         }
@@ -393,7 +393,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateIndex()
+        private decimal EvaluateIndex()
         {
             return AnalyticParameters.Rate;
         }
@@ -402,7 +402,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the npv.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluatePandL()
+        private decimal EvaluatePandL()
         {
             return AnalyticParameters.BaseNPV - EvaluateNPV();
         }
@@ -411,7 +411,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateAdjustedRate()
+        private decimal EvaluateAdjustedRate()
         {
             return EvaluateMarketRate() - EvaluateConvexityAdjustment();
         }
@@ -420,7 +420,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the delta wrt the fixed rate R.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateMarketRate()
+        private decimal EvaluateMarketRate()
         {
             return AnalyticParameters.Rate;
         }
@@ -429,7 +429,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the accrual factor
         /// </summary>
         /// <returns></returns>
-        public Decimal EvaluateAccrualFactor()
+        public static decimal EvaluateAccrualFactor()
         {
             return 90.0m/365.0m;//Based on a 90 day bill.
         }
@@ -438,7 +438,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the discount factor at maturity.
         /// </summary>
         /// <returns></returns>
-        public Decimal EvaluateImpliedRate()
+        public decimal EvaluateImpliedRate()
         {
             var rate = (AnalyticParameters.StartDiscountFactor / AnalyticParameters.EndDiscountFactor - COne) / AnalyticParameters.YearFraction;
             return rate;
@@ -448,7 +448,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the bill price underlying the future.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateMarketBillPrice()
+        private decimal EvaluateMarketBillPrice()
         {
             return 1.0m / (COne + EvaluateMarketRate() * AnalyticParameters.YearFraction);
         }
@@ -457,7 +457,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.FuturesOptions
         /// Evaluates the bill price from the curve.
         /// </summary>
         /// <returns></returns>
-        private Decimal EvaluateImpliedBillPrice()
+        private decimal EvaluateImpliedBillPrice()
         {
             return 1.0m / (COne + ImpliedQuote * AnalyticParameters.YearFraction);
         }

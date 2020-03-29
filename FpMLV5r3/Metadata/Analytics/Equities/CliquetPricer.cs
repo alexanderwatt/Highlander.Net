@@ -54,7 +54,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="nobsout">The nobsout.</param>
         /// <param name="seed"></param>
         /// <param name="antithetic"></param>
-        public CliquetPricer(String payoffFunc, double spot, double strike, double yearFraction, int[] divDays, 
+        public CliquetPricer(string payoffFunc, double spot, double strike, double yearFraction, int[] divDays, 
                              double[] divAmts, int[] rateDays, double[] rateAmts, int[] resetDays, double[] resetAmounts,
                              double[] volsToResets, double floor, double cap, int numSimulations,
                              int nobsin, int nobsout, int seed, bool antithetic)
@@ -97,9 +97,9 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         private readonly double _floor;
         private readonly double _cap;
         private readonly int _numSimulations;
-        private const double CEpsilon = 0.000001;
+        //private const double CEpsilon = 0.000001;
         private LinearInterpolation _rateInterp;
-        private NormalDistribution _nd = new NormalDistribution(0, 1);        
+        //private NormalDistribution _nd = new NormalDistribution(0, 1);        
         private readonly bool _useAntithetic;
         private readonly int _nobsin;
         private readonly int _nobsout;
@@ -204,7 +204,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             double vega = accumulatorList[3].Mean;
             double theta = accumulatorList[4].Mean;
             double rho = accumulatorList[5].Mean;
-            double[,] res = new[,] {     {price, accumulatorList[0].ErrorEstimate}, 
+            double[,] res = {     {price, accumulatorList[0].ErrorEstimate}, 
                                                 {delta, accumulatorList[1].ErrorEstimate}, 
                                                 {gamma, accumulatorList[2].ErrorEstimate},
                                                 {vega, accumulatorList[3].ErrorEstimate},
@@ -218,7 +218,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// </summary>
         /// <param name="arr">The arr.</param>
         /// <returns></returns>
-        private double[] Sqrt(double[] arr)
+        private static double[] Sqrt(double[] arr)
         {
             int n = arr.Length;
             double[] x = new double[n];
@@ -342,7 +342,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// RNGs this instance.
         /// </summary>
         /// <returns></returns>
-        private IContinuousRng Rng(int seed)
+        private static IContinuousRng Rng(int seed)
         {
             IBasicRng basRng = new MCG31vsl(seed);
             //IContinuousRng unifRng = new UniformRng(basRng,0,1);
@@ -356,7 +356,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="times">The times.</param>
         /// <param name="vols">The vols.</param>
         /// <returns></returns>
-        double[] CalcForwardVariance(double[] times, double[] vols)
+        private static double[] CalcForwardVariance(double[] times, double[] vols)
         {
             int n = times.Length;
             double[] quadvar = new double[n];           

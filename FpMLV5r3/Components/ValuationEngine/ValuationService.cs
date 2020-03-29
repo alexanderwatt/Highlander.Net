@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Highlander.Core.Common;
 using Highlander.Reporting.Helpers.V5r3;
 using Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities;
@@ -279,6 +280,41 @@ namespace Highlander.ValuationEngine.V5r3
         #region Query Functions
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameSpace">The required nameSpace.</param>
+        /// <param name="uniqueTradeId">The unique trade identifier.</param>
+        /// <returns></returns>
+        public Trade GetTrade(string nameSpace, string uniqueTradeId)
+        {
+            return GetTrade(Logger, Cache, nameSpace, uniqueTradeId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger">A logger.</param>
+        /// <param name="cache">The injected cache.</param>
+        /// <param name="nameSpace">The required nameSpace.</param>
+        /// <param name="uniqueTradeId">The unique trade identifier.</param>
+        /// <returns></returns>
+        public Trade GetTrade(ILogger logger, ICoreCache cache, string nameSpace, string uniqueTradeId)
+        {
+            var tradeItem = cache.LoadItem<Trade>(nameSpace + "." + uniqueTradeId);
+            if (tradeItem != null)
+            {
+                //var properties = tradeItem.AppProps;
+                if (tradeItem.Data is Trade trade)
+                {
+                    logger.LogDebug("Returned trade: " + uniqueTradeId);
+                    return trade;
+                }
+            }
+            logger.LogDebug("No trade: " + uniqueTradeId);
+            return null;
+        }
+
+        /// <summary>
         /// Returns the header information for all trades matching the query properties.
         /// </summary>
         /// <param name="whereExpr">The query properties. A 2-column array of names and values.</param>
@@ -296,7 +332,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace"></param>
         /// <param name="query">The query properties. A 2-column array of names and values.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, String nameSpace, object[,] query)
+        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, string nameSpace, object[,] query)
         {
             int rowMin = query.GetLowerBound(0);
             int rowMax = query.GetUpperBound(0);
@@ -347,7 +383,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace"></param>
         /// <param name="query">The query properties whereExpr.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, String nameSpace, IExpression whereExpr)
+        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, string nameSpace, IExpression whereExpr)
         {
             List<ICoreItem> items = cache.LoadItems(typeof(Trade), whereExpr);//TODO what about confirmation?
             var result = new object[items.Count + 1, 17];
@@ -861,7 +897,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="curveMapRange">The curve mapping range.</param>
         /// <returns></returns>
-        public string ValueTrade(String sourceSystem, string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency,
+        public string ValueTrade(string sourceSystem, string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency,
             DateTime valuationDate, List<Pair<string, string>> curveMapRange)
         {
             return ValueTrade(Logger, Cache, NameSpace, sourceSystem, uniqueTradeId, reportingParty, metricsArray, reportingCurrency, valuationDate, curveMapRange);
@@ -893,7 +929,7 @@ namespace Highlander.ValuationEngine.V5r3
                 {
                     var pricer = new TradePricer(logger, cache, nameSpace, null, trade, properties);
                     //Get the market
-                    var marketEnviroment = Highlander.CurveEngine.V5r3.CurveEngine.GetCurves(logger, cache, nameSpace, curveMapRange, false);
+                    var marketEnviroment = CurveEngine.V5r3.CurveEngine.GetCurves(logger, cache, nameSpace, curveMapRange, false);
                     var controller = TradePricer.CreateInstrumentModelData(metricsArray, valuationDate, marketEnviroment, reportingCurrency, reportingParty);
                     var assetValuationReport = pricer.Price(controller, ValuationReportType.Full);
                     //Build the val report properties
@@ -1110,7 +1146,7 @@ namespace Highlander.ValuationEngine.V5r3
                     var tradeType = ProductTypeHelper.TradeTypeHelper(product);
                     var pricer = new TradePricer(logger, cache, nameSpace, null, trade, properties);
                     //Get the market
-                    var marketEnviroment = Highlander.CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
+                    var marketEnviroment = CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
                     //Use a pre-defined set of metrics temporarily.
                     var metrics = new List<string>
                                       {
@@ -1446,7 +1482,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="exchangeId">The exchange data to load.
         /// This must be consistent with the Exchange class</param>
         /// <returns></returns>
-        public object[,] ViewExchangeConfigData(string exchangeId)
+        public string[,] ViewExchangeConfigData(string exchangeId)
         {
             var id = NameSpace + "." + FunctionProp.Configuration + ".Exchanges." + exchangeId;
             var item = Cache.LoadItem<Exchange>(id);
@@ -1457,7 +1493,7 @@ namespace Highlander.ValuationEngine.V5r3
                     var data = config.ExchangeData;
                     if (data != null)
                     {
-                        var result = new object[13, 2];
+                        var result = new string[13, 2];
                         result[0, 0] = "Id";
                         result[0, 1] = data.Id;
                         result[1, 0] = "MIC";
@@ -1488,7 +1524,7 @@ namespace Highlander.ValuationEngine.V5r3
                     }
                 }
             }
-            return new object[,] {{"Could not find this particular exchange."}};
+            return new string[,] {{"Could not find this particular exchange."}};
         }
 
         /// <summary>

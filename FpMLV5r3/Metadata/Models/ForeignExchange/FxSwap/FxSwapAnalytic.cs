@@ -17,9 +17,9 @@ using Highlander.Reporting.ModelFramework.V5r3;
 
 namespace Highlander.Reporting.Models.V5r3.ForeignExchange.FxSwap
 {
-    public class FxSwapAnalytic : ModelAnalyticBase<IFxSwapParameters, FxSwapInstrumentMetrics>, IFxSwapInstrumentResults
+    public class FxSwapAnalytic : ModelAnalyticBase<IFxSwapParameters, FxSwapInstrumentMetric>, IFxSwapInstrumentResults
     {
-        public decimal NPV => 0.0m;
+        public static decimal NPV => 0.0m;
 
         public decimal BaseCurrencyNPV => 0.0m;
 

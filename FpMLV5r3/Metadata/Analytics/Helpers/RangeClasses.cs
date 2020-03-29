@@ -25,6 +25,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     ///<summary>
     /// PropertyNameValueType
     ///</summary>
+    [Serializable]
     public class PropertyNameValueType
     {
         /// <summary>
@@ -38,6 +39,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     ///<summary>
     /// MarketEnvironmentRangeItem
     ///</summary>
+    [Serializable]
     public class MarketEnvironmentRangeItem
     {
         public string IndexName;
@@ -47,6 +49,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// ValuationRange
     /// </summary>
+    [Serializable]
     public class ValuationRange
     {
         public string BaseParty;
@@ -59,6 +62,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// TradeRange
     /// </summary>
+    [Serializable]
     public class TradeRange
     {
         public string Id;
@@ -68,6 +72,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// DateTimeDoubleRangeItem
     /// </summary>
+    [Serializable]
     public class DateTimeDoubleRangeItem
     {
         ///<summary>
@@ -119,6 +124,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// InputPrincipalExchangeCashflowRangeItem
     /// </summary>
+    [Serializable]
     public class InputPrincipalExchangeCashflowRangeItem
     {
         public DateTime PaymentDate;
@@ -129,6 +135,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// DetailedCashflowRangeItem
     /// </summary>
+    [Serializable]
     public class PrincipalExchangeCashflowRangeItem : InputPrincipalExchangeCashflowRangeItem
     {
         //public int      PeriodNumber;
@@ -143,6 +150,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// AdditionalPaymentRangeItem
     /// </summary>
+    [Serializable]
     public class AdditionalPaymentRangeItem
     {
         //public int      PeriodNumber;
@@ -154,6 +162,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FilenameRange
     /// </summary>
+    [Serializable]
     public class FilenameRange
     {
         public string Filename;
@@ -163,7 +172,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// EffectiveDate: The effective date of the swap.
     /// TerminationDate: The termination date of the swap.
     /// InterpolationMethod>The interpolation to use.
-    /// MargineAboveFloatingRate>The margin on the floating leg.
+    /// MarginAboveFloatingRate>The margin on the floating leg.
     /// ResetRate: The rest rate for the last reset.
     /// DirectionDateGenerationPayLeg: The date generation logic: Forward or Backward.
     /// CashFlowFrequencyPayLeg: The frequency of pay leg payment.
@@ -177,13 +186,14 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FraInputRange
     /// </summary>
+    [Serializable]
     public class FincadSwapInputRange
     {
         public DateTime ValueDate;
         public DateTime EffectiveDate;
         public DateTime TerminationDate;
         public string InterpolationMethod;
-        public double MargineAboveFloatingRate;
+        public double MarginAboveFloatingRate;
         public double ResetRate;
         public int DirectionDateGenerationPayLeg;
         public string CashFlowFrequencyPayLeg;
@@ -198,6 +208,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FraInputRange
     /// </summary>
+    [Serializable]
     public class FraInputRange2
     {
         public string TradeId;
@@ -227,6 +238,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FraInputRange
     /// </summary>
+    [Serializable]
     public class FraInputRange
     {
         public DateTime AdjustedEffectiveDate;
@@ -255,6 +267,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// RateCurveTermsRange
     /// </summary>
+    [Serializable]
     public class RateCurveTermsRange
     {
         public DateTime BuildDateTime;
@@ -270,6 +283,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// DateTimeRangeItem
     /// </summary>
+    [Serializable]
     public class DateTimeRangeItem
     {
         public DateTime Value;
@@ -278,6 +292,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// DateTimePairRangeItem
     /// </summary>
+    [Serializable]
     public class DateTimePairRangeItem
     {
         public DateTime Value1;
@@ -287,6 +302,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// InstrumentIdAndQuoteRangeItem
     /// </summary>
+    [Serializable]
     public class InstrumentIdAndQuoteRangeItem
     {
         public string InstrumentId;
@@ -296,6 +312,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FuturesCodeAndConvexityAdjustmentRangeItem
     /// </summary>
+    [Serializable]
     public class FuturesCodeAndConvexityAdjustmentRangeItem
     {
         public string FuturesCode;
@@ -305,6 +322,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// DoubleRangeItem
     /// </summary>
+    [Serializable]
     public class DoubleRangeItem
     {
         public double Value;
@@ -313,6 +331,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// StringRangeItem
     /// </summary>
+    [Serializable]
     public class StringRangeItem
     {
         public string Value;
@@ -321,6 +340,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// StringDoubleRangeItem
     /// </summary>
+    [Serializable]
     public class StringDoubleRangeItem
     {
         public string StringValue;
@@ -330,6 +350,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// StringObjectRangeItem
     /// </summary>
+    [Serializable]
     public class StringObjectRangeItem
     {
         public string StringValue;
@@ -339,6 +360,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// ValuationInfoRangeItem
     /// </summary>
+    [Serializable]
     public class ValuationInfoRangeItem
     {
         public string Description;
@@ -348,6 +370,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// PartyIdRangeItem
     /// </summary>
+    [Serializable]
     public class PartyIdRangeItem
     {
         public string PartyId;
@@ -357,6 +380,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// OtherPartyPaymentRangeItem
     /// </summary>
+    [Serializable]
     public class OtherPartyPaymentRangeItem
     {
         public DateTime PaymentDate;
@@ -369,6 +393,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// FeePaymentRangeItem
     /// </summary>
+    [Serializable]
     public class FeePaymentRangeItem
     {
         public DateTime PaymentDate;
@@ -381,6 +406,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// <summary>
     /// ThreeStringsRangeItem
     /// </summary>
+    [Serializable]
     public class ThreeStringsRangeItem
     {
         public string Value1;

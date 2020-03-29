@@ -44,7 +44,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
                 var valuationList = new List<BasicAssetValuation>(valuations);
                 var assetIdentifier = assetReferenceKey;
                 var valuation = valuationList.Find(
-                    valuationItem => String.Compare(valuationItem.objectReference.href, assetIdentifier,
+                    valuationItem => string.Compare(valuationItem.objectReference.href, assetIdentifier,
                                             StringComparison.OrdinalIgnoreCase) == 0
                 );
                 //TODO loop through and aggregate

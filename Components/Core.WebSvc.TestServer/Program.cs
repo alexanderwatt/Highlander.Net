@@ -14,6 +14,7 @@
 */
 
 using System;
+using System.Reflection;
 using Highlander.Build;
 using Highlander.Core.Common;
 using Highlander.Core.V34;
@@ -31,7 +32,12 @@ namespace Highlander.Core.WebClient
             {
                 try
                 {
-                    using (Reference<ICoreClient> client = Reference<ICoreClient>.Create(new CoreClientFactory(loggerRef).SetEnv(BuildConst.BuildEnv).Create()))
+                    var factoryClient = new CoreClientFactory(loggerRef)
+                        .SetEnv(BuildConst.BuildEnv)
+                        //.SetServers(targetAddress)
+                        .SetApplication(Assembly.GetExecutingAssembly())
+                        .Create();
+                    using (Reference<ICoreClient> client = Reference<ICoreClient>.Create(factoryClient))
                     using (IServerBase2 server = new HighlanderWebProxyServer())
                     {
                         server.LoggerRef = loggerRef;

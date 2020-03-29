@@ -25,6 +25,7 @@ using Highlander.Reporting.Analytics.V5r3.Rates;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
@@ -779,7 +780,7 @@ namespace HLV5r3.Analytics
         public double LinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.LinearInterp(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
+            return InterpolationFunctions.LinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
         }
 
         ///<summary>
@@ -792,7 +793,7 @@ namespace HLV5r3.Analytics
         public double PiecewiseLinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.PiecewiseLinearInterp(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
+            return InterpolationFunctions.PiecewiseLinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
         }
 
         ///<summary>
@@ -805,7 +806,7 @@ namespace HLV5r3.Analytics
         public double HermiteSplineInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.HSplineInterp(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
+            return InterpolationFunctions.HSplineInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
         }
 
         ///<summary>
@@ -818,7 +819,7 @@ namespace HLV5r3.Analytics
         public double LogLinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.LogLinearInterp(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
+            return InterpolationFunctions.LogLinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
         }
 
         ///<summary>
@@ -830,7 +831,7 @@ namespace HLV5r3.Analytics
         public double BiLinearInterp(Excel.Range xyzData, double x, double y)
         {
             object[,] values = xyzData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.BiLinearInterp(ArrayHelper.RangeToMatrix(values), x, y);
+            return InterpolationFunctions.BiLinearInterpolation(ArrayHelper.RangeToMatrix(values), x, y);
         }
 
         ///<summary>
@@ -842,7 +843,7 @@ namespace HLV5r3.Analytics
         public double BiLinearInterp2(Excel.Range xyzData, double x, double y)
         {
             object[,] values = xyzData.Value[System.Reflection.Missing.Value] as object[,];
-            return InterpolationFunctions.BiLinearInterp2(ArrayHelper.RangeToMatrix(values), x, y);
+            return InterpolationFunctions.BiLinearInterpolation2(ArrayHelper.RangeToMatrix(values), x, y);
         }
 
         ///<summary>
@@ -860,7 +861,7 @@ namespace HLV5r3.Analytics
             interpSpace = interpSpace.Trim();
             method = method.ToUpper();
             method = method.Trim();
-            return InterpolationFunctions.GeneralZeroInterp(ArrayHelper.RangeToMatrix(values), interpX, interpSpace, zeroCompFreq, method);
+            return InterpolationFunctions.GeneralZeroInterpolation(ArrayHelper.RangeToMatrix(values), interpX, interpSpace, zeroCompFreq, method);
         }
 
         ///<summary>

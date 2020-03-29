@@ -26,6 +26,7 @@ using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
+using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using DivList = Highlander.Equities.DivList;
 using Excel = Microsoft.Office.Interop.Excel;
 using ZeroCurve = Highlander.Reporting.Analytics.V5r3.Rates.ZeroCurve;

@@ -29,37 +29,24 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
     {
         #region Attributes
         //diffusion parameters
-        private double _sig;
         private double _domR = 0.0;
         private double _forR = 0.0;
 
 
         //grid structure variables
-        private int _steps;
         private int _msteps;
-        private string _sPay;
-        private string _sStyle;
-        private double _strike;
-        private double _spot;
         private double _lnfwd;
         private double _n1;
         private double _n2;
         private double _dx;
         private double _dt;
-        private double _xl;
-        private double _xu;
         private double _theta = 0.5;
-        private double _T;
-        private int _nTsteps;
-        private bool _lbFlag = false;
-        private bool _ubFlag = false;
-     
+
         //rate and divs curve in
         int[] ratedays;
         double[] rateamts;
         int[] divdays;
         double[] divamts;
-        private double _tStepSize;
 
 
         //array lists
@@ -93,119 +80,67 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <summary>
         /// 
         /// </summary>
-        public double sig
-        {
-          get { return _sig; }
-          set { _sig = value; }
-        }
+        public double Sig { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int steps
-        {
-          get { return _steps; }
-          set { _steps = value; }
-        }
+        public int Steps { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int nTsteps
-        {
-          get { return _nTsteps; }
-          set { _nTsteps = value; }
-        }
+        public int NTsteps { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double T
-        {
-          get { return _T; }
-          set { _T = value; }
-        }
+        public double T { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double xu
-        {
-          get { return _xu; }
-          set { _xu = value; }
-        }
+        public double Xu { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double xl
-        {
-          get { return _xl; }
-          set { _xl = value; }
-        }
+        public double XL { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double spot
-        {
-          get { return _spot; }
-          set { _spot = value; }
-        }
+        public double Spot { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double strike
-        {
-          get { return _strike; }
-          set { _strike = value; }
-        }
+        public double Strike { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string sPay
-        {
-          get { return _sPay; }
-          set { _sPay = value; }
-        }
+        public string SPay { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string sStyle
-        {
-          get { return _sStyle; }
-          set { _sStyle = value; }
-        }
+        public string SStyle { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public double tStepSize
-        {
-            get { return _tStepSize; }
-            set { _tStepSize = value; }
-        }
+        public double StepSize { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool lbFlag
-        {
-          get { return _lbFlag; }
-          set { _lbFlag = value; }
-        }
+        public bool LbFlag { get; set; } = false;
 
         /// <summary>
         /// 
         /// </summary>
-        public bool ubFlag
-        {
-          get { return _ubFlag; }
-          set { _ubFlag = value; }
-        }        
+        public bool UbFlag { get; set; } = false;
 
         #endregion
 
@@ -228,21 +163,21 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         public CrankNicholson(bool isCall, bool isAmerican,  double spot, double strike, double yearFraction, double vol, int steps, double tStepSize, double far, int[] divdays,
                              double[] divamts, int[] ratedays, double[] rateamts)
         {
-            this.spot = spot;
-            this.strike = strike;
+            this.Spot = spot;
+            this.Strike = strike;
             T = yearFraction;
-            sig = vol;
+            Sig = vol;
             this.divdays = divdays;            
             this.divamts = divamts;
             PreValidateDivs();
             this.ratedays = ratedays;
             this.rateamts = rateamts;
-            sStyle = isAmerican ? "A" : "E";
-            sPay = isCall ? "C" : "P";
-            _xl = Math.Log(spot) - far * sig * Math.Sqrt(yearFraction);
-            _xu = Math.Log(spot) + far * sig * Math.Sqrt(yearFraction);
-            _steps = steps;
-            _nTsteps = Convert.ToInt32(_T / tStepSize);
+            SStyle = isAmerican ? "A" : "E";
+            SPay = isCall ? "C" : "P";
+            XL = Math.Log(spot) - far * Sig * Math.Sqrt(yearFraction);
+            Xu = Math.Log(spot) + far * Sig * Math.Sqrt(yearFraction);
+            this.Steps = steps;
+            NTsteps = Convert.ToInt32(T / tStepSize);
         }
 
         private void PreValidateDivs()
@@ -268,15 +203,15 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             double[] res = new double[4];
             _x = new List<double>();
             _v = new List<double>();
-            double tTemp = _T;  //real time
+            double tTemp = T;  //real time
             double tau = 0.0; //backward time
-            double dtnom = _T / (double)_nTsteps;
+            double dtnom = T / (double)NTsteps;
             double dt = dtnom;
             double tempInt = 0.0;
             //start the pricer
             CreateGrid();
             TerminalCondition();
-            while ((tau - _T) < -0.001 * _T)
+            while ((tau - T) < -0.001 * T)
             {
                 //set the increment
                 double t1 = tTemp - dtnom;
@@ -285,17 +220,17 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
                 dt = CheckBetweenDiv(t1, tTemp, ref divPay, divdays, divamts);
                 //compute the real time and backward time tau
                 tTemp -= dt;
-                tau = _T - tTemp;
+                tau = T - tTemp;
                 //compute the increment forward rate
                 _domR = EquityAnalytics.GetRateCCLin365(tTemp, tTemp + dt, ratedays, rateamts);
                 _forR = 0.0;
                 //compute the forward rate from real time tTemp to expiry for the BC'c
-                double domRbc = EquityAnalytics.GetRateCCLin365(tTemp, _T, ratedays, rateamts);
+                double domRbc = EquityAnalytics.GetRateCCLin365(tTemp, T, ratedays, rateamts);
                 //compute discounted dividends for the bc's
-                double DiscDiv = ComputeDiscDiv(tTemp, _T, ratedays, rateamts, divdays, divamts);
+                double DiscDiv = ComputeDiscDiv(tTemp, T, ratedays, rateamts, divdays, divamts);
                 //save the value at the spot for use in theta calcuation
-                int nKeyInt = (int)((Math.Log(_spot) - _xl) / _dx);
-                double fracInt = (Math.Log(_spot) - _x[nKeyInt]) / (_x[nKeyInt + 1] - _x[nKeyInt]);
+                int nKeyInt = (int)((Math.Log(Spot) - XL) / _dx);
+                double fracInt = (Math.Log(Spot) - _x[nKeyInt]) / (_x[nKeyInt + 1] - _x[nKeyInt]);
                 tempInt = _v[nKeyInt] * (1.0 - fracInt) + _v[nKeyInt + 1] * fracInt;
                 //get the fwd
                 _lnfwd = Math.Log(GetATMfwd(ratedays, rateamts, divdays, divamts, tTemp));
@@ -303,11 +238,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
                 OneStepSetUp(dt, tTemp);
                 //compute the q vec
                 MakeQVec();
-                if (_sStyle.ToUpper().Equals("E"))
+                if (SStyle.ToUpper().Equals("E"))
                 {
                     // set the exlicit BC
                     _v[0] = MakeLowerBC(tau, Math.Exp(_x[0]), domRbc, DiscDiv);
-                    _v[_steps - 1] = MakeUpperBC(tau, Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
+                    _v[Steps - 1] = MakeUpperBC(tau, Math.Exp(_x[Steps - 1]), domRbc, DiscDiv);
                     SORmethod();
                     //subract from q(1) and q(_steps-2) for explicit BC
                     //'_q[1] -= _SubDiagL[0] * _v[0];
@@ -331,7 +266,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
                 else
                 {
                     _v[0] = MakeLowerBC(tau, Math.Exp(_x[0]), domRbc, DiscDiv);
-                    _v[_steps - 1] = MakeUpperBC(tau, Math.Exp(_x[_steps - 1]), domRbc, DiscDiv);
+                    _v[Steps - 1] = MakeUpperBC(tau, Math.Exp(_x[Steps - 1]), domRbc, DiscDiv);
                     SORmethod();
                 }
                 //after having incremented back,  apply a grid shift if needed
@@ -340,8 +275,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
                     ApplyGridShift(tau, divPay, domRbc, DiscDiv);
                 }
             }
-            int nKey = (int)((Math.Log(_spot) - _xl) / _dx);
-            double frac = (Math.Log(_spot) - _x[nKey]) / (_x[nKey + 1] - _x[nKey]);
+            int nKey = (int)((Math.Log(Spot) - XL) / _dx);
+            double frac = (Math.Log(Spot) - _x[nKey]) / (_x[nKey + 1] - _x[nKey]);
             double temp = _v[nKey] * (1.0 - frac) + _v[nKey + 1] * frac;
             double[,] a = new double[4, 4];
             double[] b = new double[4];
@@ -366,8 +301,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             b[2] = _v[nKey + 1];
             b[3] = _v[nKey + 2];
             int info = NewtonGauss(4, ref a, ref b);
-            greeks[0] = b[1] + 2.0 * b[2] * _spot + 3.0 * b[3] * _spot * _spot;
-            greeks[1] = 2.0 * b[2] + 6.0 * b[3] * _spot;
+            greeks[0] = b[1] + 2.0 * b[2] * Spot + 3.0 * b[3] * Spot * Spot;
+            greeks[1] = 2.0 * b[2] + 6.0 * b[3] * Spot;
             greeks[2] = (tempInt - temp) / (365.0 * dt);
 
             /*
@@ -402,16 +337,16 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
                 temp0 = clone.GetPriceAndGreeks();
                 temp = temp0[0];
                 if (Math.Abs(temp - price) < 0.0001) break;
-                double sigold = sig;
-                double dsig = 0.01 * sig;
-                sig += dsig;
-                clone.sig = sig;            
+                double sigold = Sig;
+                double dsig = 0.01 * Sig;
+                Sig += dsig;
+                clone.Sig = Sig;            
                 double[] tempUp = clone.GetPriceAndGreeks();            
                 sigold -= (temp - price) * dsig / (tempUp[0] - temp);
-                sig = sigold;
-                clone.sig = sig;
+                Sig = sigold;
+                clone.Sig = Sig;
           }
-          return sig;
+          return Sig;
         }
 
         /// <summary>
@@ -425,7 +360,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <returns></returns>
         public double GetATMfwd(int[] ratedays, double[] rateamts, int[] divdays, double[] divamts,  double t)
         {
-            return EquityAnalytics.GetForwardCCLin365(_spot, t, divdays, divamts, ratedays, rateamts);         
+            return EquityAnalytics.GetForwardCCLin365(Spot, t, divdays, divamts, ratedays, rateamts);         
         }
     
         #endregion
@@ -435,33 +370,33 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         //Asset grid, create for this range
         private void CreateGrid()
         {
-          _msteps = _steps - 1;   //number of upper index for the matrix manipulations
-          _dx = (_xu - _xl) / ((double)_steps - 1.0);
+          _msteps = Steps - 1;   //number of upper index for the matrix manipulations
+          _dx = (Xu - XL) / ((double)Steps - 1.0);
           //
-          for (long idx = 0; idx < _steps; idx++)
+          for (long idx = 0; idx < Steps; idx++)
           {
-            _x.Add(_xl + idx * _dx);
+            _x.Add(XL + idx * _dx);
           }
         }
 
         //Payoff condition
         private void TerminalCondition()
         {
-          for (int idx = 0; idx < _steps; idx++)
+          for (int idx = 0; idx < Steps; idx++)
           {
-              switch (_sPay.ToUpper())
+              switch (SPay.ToUpper())
             {
               case "C":
-                _v.Add(Math.Max(Math.Exp(_x[idx]) - _strike, 0.0));
+                _v.Add(Math.Max(Math.Exp(_x[idx]) - Strike, 0.0));
                 break;
               case "P":
-                _v.Add(Math.Max(_strike - Math.Exp(_x[idx]), 0.0));
+                _v.Add(Math.Max(Strike - Math.Exp(_x[idx]), 0.0));
                 break;
               case "A":
-                _v.Add(((Math.Exp(_x[idx]) > _strike) ? 1.0 : 0.0));
+                _v.Add(((Math.Exp(_x[idx]) > Strike) ? 1.0 : 0.0));
                 break;
               case "B":
-                _v.Add(((Math.Exp(_x[idx]) > _strike) ? 0.0 : 1.0));
+                _v.Add(((Math.Exp(_x[idx]) > Strike) ? 0.0 : 1.0));
                 break;
               case "T":
                 _v.Add(1.0);
@@ -478,11 +413,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
           //create fresh matrix rows
           MakeNewMatrixRows();
           //scroll through rows
-          for (int idx = 0; idx < _steps; idx++)
+          for (int idx = 0; idx < Steps; idx++)
           {
             //set the Asset
             double S = Math.Exp(_x[idx]);
-            double vol = _sig;
+            double vol = Sig;
             //get the common functions
             double _a = a(S, T, vol);
             double _b = b(S, T, vol);
@@ -528,14 +463,14 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         private double MakeLowerBC(double tau, double S, double domRbc, double DiscDiv)
         {
           double temp = 0.0;
-          if (_lbFlag) return 0.0;
-          switch (_sPay.ToUpper())
+          if (LbFlag) return 0.0;
+          switch (SPay.ToUpper())
           {
             case "C":
               break;
             case "P":
-              temp = (_sStyle.ToUpper().Equals("E")) ? Math.Exp(-domRbc * tau) * _strike - Math.Max(S - DiscDiv, 0.0) :
-                  _strike - S;
+              temp = (SStyle.ToUpper().Equals("E")) ? Math.Exp(-domRbc * tau) * Strike - Math.Max(S - DiscDiv, 0.0) :
+                  Strike - S;
               break;
             case "A":
               break;
@@ -552,12 +487,12 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         private double MakeUpperBC(double tau, double S, double domRbc, double DiscDiv)
         {
           double temp = 0.0; 
-          if (_ubFlag) return 0.0;
-          switch (_sPay.ToUpper())
+          if (UbFlag) return 0.0;
+          switch (SPay.ToUpper())
           {
             case "C":
-              temp = (S - DiscDiv - Math.Exp(-domRbc * tau) * _strike);
-              temp = (_sStyle.ToUpper().Equals("A")) ? Math.Max(temp, S - _strike) : temp;
+              temp = (S - DiscDiv - Math.Exp(-domRbc * tau) * Strike);
+              temp = (SStyle.ToUpper().Equals("A")) ? Math.Max(temp, S - Strike) : temp;
               break;
             case "P":
               break;
@@ -617,7 +552,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
           double err = 1.0;
           //double[] temp = new double[_v.Count];
           double temp = 0.0;
-          bool bAm = (_sStyle.ToUpper().Equals("A")) ? true : false;
+          bool bAm = (SStyle.ToUpper().Equals("A")) ? true : false;
           while (Math.Sqrt(err) > tol)
           {
             err = 0.0;
@@ -640,11 +575,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
 
         private double AmPay(int idx)
         {
-          return (_sPay.ToUpper().Equals("C")) ? Math.Exp(_x[idx]) - _strike : _strike - Math.Exp(_x[idx]);
+          return (SPay.ToUpper().Equals("C")) ? Math.Exp(_x[idx]) - Strike : Strike - Math.Exp(_x[idx]);
         }
 
         //determine if dt needs adjusted because a div occurs in proposed interval
-        private double CheckBetweenDiv(double t1, double t2, ref double discDiv, int[] divdays, double[] divamts)   //t1 & t2 are real times
+        private static double CheckBetweenDiv(double t1, double t2, ref double discDiv, int[] divdays, double[] divamts)   //t1 & t2 are real times
         {
           double temp = t2-t1;
           int n = divdays.Length;
@@ -670,17 +605,17 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
 
           //for lower boundary, assign the lower bc using the immediate exercise
           temp = MakeLowerBC(tau, Math.Max(Math.Exp(_x[0]) - divPay,0.0), domRbc, DiscDiv);
-          _vn.Add(_sStyle.ToUpper().Equals("A") ? Math.Max(temp, AmPay(0)) : temp);
-          for (int idx = 1; idx < _steps; idx++)
+          _vn.Add(SStyle.ToUpper().Equals("A") ? Math.Max(temp, AmPay(0)) : temp);
+          for (int idx = 1; idx < Steps; idx++)
           {
             double xshift = Math.Log(Math.Exp(_x[idx]) - divPay);
-            if (xshift >= _xl)
+            if (xshift >= XL)
             {
-              int idNew = (int) ((xshift - _xl) / _dx);
+              int idNew = (int) ((xshift - XL) / _dx);
               double frac = (xshift - _x[idNew]) / (_x[idNew+1] - _x[idNew]);
               temp = (1.0 - frac) * _v[idNew] + frac * _v[idNew + 1];
 
-              if (_sStyle.ToUpper().Equals("A"))
+              if (SStyle.ToUpper().Equals("A"))
                _vn.Add(Math.Max(temp, AmPay(idx))); 
               else
                _vn.Add(temp); 
@@ -688,7 +623,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             else // the new points are still below the grid
             {
               temp = MakeLowerBC(tau, Math.Max(Math.Exp(_x[idx]) - divPay,0.0), domRbc, DiscDiv);
-              if (_sStyle.ToUpper().Equals("A"))
+              if (SStyle.ToUpper().Equals("A"))
                 _vn.Add(Math.Max(temp,AmPay(idx)));
               else
                 _vn.Add(temp);
@@ -710,13 +645,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// <param name="divdays">The divdays.</param>
         /// <param name="divamts">The divamts.</param>
         /// <returns></returns>
-        private double ComputeDiscDiv(double tTemp, double T, int[] ratedays, double[] rateamts, int[] divdays, double[] divamts)
+        private static double ComputeDiscDiv(double tTemp, double T, int[] ratedays, double[] rateamts, int[] divdays, double[] divamts)
         {
             return EquityAnalytics.GetPVDivsCCLin365(tTemp, T, divdays, divamts, ratedays, rateamts);          
         }
 
         //coeffiecients ffor the diffusion equation
-        private double a(double S, double T, double vol)
+        private static double a(double S, double T, double vol)
         {
           return 0.5 * vol * vol;
         }

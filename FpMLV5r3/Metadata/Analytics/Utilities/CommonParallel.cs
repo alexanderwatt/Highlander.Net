@@ -207,10 +207,10 @@ namespace Highlander.Reporting.Analytics.V5r3.Utilities
             // Special case: no action
             if (fromInclusive >= toExclusive)
             {
-                return reduce(new T[0]);
+                return reduce(Array.Empty<T>());
             }
             // Special case: single action, inline
-            if (fromInclusive == (toExclusive - 1))
+            if (fromInclusive == toExclusive - 1)
             {
                 return reduce(new[] { select(fromInclusive) });
             }
@@ -271,7 +271,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Utilities
             // Special case: no action
             if (array == null || array.Length == 0)
             {
-                return reduce(new TOut[0]);
+                return reduce(Array.Empty<TOut>());
             }
             // Special case: single action, inline
             if (array.Length == 1)
