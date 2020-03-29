@@ -1333,7 +1333,19 @@ namespace Highlander.Core.Interface.V5r3
         }
 
         /// <summary>
-        /// Caches the pricing structure to the database.
+        /// Gets the pricing structure with the specified identifier.
+        /// </summary>
+        /// <param name="identifier">The identifier.</param>
+        /// <returns>A list identifiers that can be uses as handles.</returns>
+        public PricingStructureData GetPricingStructure(string identifier)
+        {
+            var curve = Engine.GetCurve(identifier, false);
+            var pricingStructure = curve.PricingStructureData;
+            return pricingStructure;
+        }
+
+        /// <summary>
+        /// Returns the pricing structure from the cache.
         /// </summary>
         /// <param name="requestProperties">The request Properties.</param>
         /// <param name="numberToReturn">The number To Return.</param>

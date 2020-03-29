@@ -32,7 +32,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
 
         // POST api/values
         /// <summary>
-        /// Posts some very important data from the server.
+        /// Posts some very important data to the server.
         /// </summary>
         public void Post([FromBody]string value)
         {
@@ -40,7 +40,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
 
         // PUT api/values/5
         /// <summary>
-        /// Posts some very important data from the server.
+        /// Posts some very important data to the server.
         /// </summary>
         public void Put(int id, [FromBody]string value)
         {

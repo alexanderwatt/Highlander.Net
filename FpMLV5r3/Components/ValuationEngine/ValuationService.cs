@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Highlander.Core.Common;
 using Highlander.Reporting.Helpers.V5r3;
 using Highlander.Reporting.Analytics.V5r3.Stochastics.Volatilities;
@@ -277,6 +278,41 @@ namespace Highlander.ValuationEngine.V5r3
         #endregion
 
         #region Query Functions
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameSpace">The required nameSpace.</param>
+        /// <param name="uniqueTradeId">The unique trade identifier.</param>
+        /// <returns></returns>
+        public Trade GetTrade(string nameSpace, string uniqueTradeId)
+        {
+            return GetTrade(Logger, Cache, nameSpace, uniqueTradeId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger">A logger.</param>
+        /// <param name="cache">The injected cache.</param>
+        /// <param name="nameSpace">The required nameSpace.</param>
+        /// <param name="uniqueTradeId">The unique trade identifier.</param>
+        /// <returns></returns>
+        public Trade GetTrade(ILogger logger, ICoreCache cache, string nameSpace, string uniqueTradeId)
+        {
+            var tradeItem = cache.LoadItem<Trade>(nameSpace + "." + uniqueTradeId);
+            if (tradeItem != null)
+            {
+                //var properties = tradeItem.AppProps;
+                if (tradeItem.Data is Trade trade)
+                {
+                    logger.LogDebug("Returned trade: " + uniqueTradeId);
+                    return trade;
+                }
+            }
+            logger.LogDebug("No trade: " + uniqueTradeId);
+            return null;
+        }
 
         /// <summary>
         /// Returns the header information for all trades matching the query properties.
@@ -861,7 +897,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="curveMapRange">The curve mapping range.</param>
         /// <returns></returns>
-        public string ValueTrade(String sourceSystem, string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency,
+        public string ValueTrade(string sourceSystem, string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency,
             DateTime valuationDate, List<Pair<string, string>> curveMapRange)
         {
             return ValueTrade(Logger, Cache, NameSpace, sourceSystem, uniqueTradeId, reportingParty, metricsArray, reportingCurrency, valuationDate, curveMapRange);
@@ -893,7 +929,7 @@ namespace Highlander.ValuationEngine.V5r3
                 {
                     var pricer = new TradePricer(logger, cache, nameSpace, null, trade, properties);
                     //Get the market
-                    var marketEnviroment = Highlander.CurveEngine.V5r3.CurveEngine.GetCurves(logger, cache, nameSpace, curveMapRange, false);
+                    var marketEnviroment = CurveEngine.V5r3.CurveEngine.GetCurves(logger, cache, nameSpace, curveMapRange, false);
                     var controller = TradePricer.CreateInstrumentModelData(metricsArray, valuationDate, marketEnviroment, reportingCurrency, reportingParty);
                     var assetValuationReport = pricer.Price(controller, ValuationReportType.Full);
                     //Build the val report properties

@@ -199,6 +199,16 @@ namespace Highlander.Core.Interface.V5r3
             return result;
         }
 
+        /// <summary>
+        /// Gets the trade in the default name space.
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        public Trade GetTrade(string identifier)
+        {
+            return ValService.GetTrade(NameSpace, identifier);
+        }
+
         #endregion
 
         #region Information Functions

@@ -67,6 +67,9 @@ namespace Highlander.Core.Interface.V5r3
 
         #region Constructor
 
+        public PricingCache() : this(null)
+        {}
+
         public PricingCache(string nameSpace)
         {
             NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;

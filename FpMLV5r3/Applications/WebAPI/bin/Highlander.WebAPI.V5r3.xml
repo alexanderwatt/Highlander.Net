@@ -982,15 +982,44 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Highlander.WebAPI.V5r3.Controllers.TradeController">
+        <member name="T:Highlander.WebAPI.V5r3.Controllers.PricingCacheController">
             <summary>
             Creates and views trades.
             </summary>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.TradeController.Index">
+        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.LoggerRef">
             <summary>
-            Gets the main view
+            The logger
             </summary>
+        </member>
+        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.PricingCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetAllTrades">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetTrade(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetCurve(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:Highlander.WebAPI.V5r3.Controllers.ValuesController">
@@ -1011,12 +1040,12 @@
         </member>
         <member name="M:Highlander.WebAPI.V5r3.Controllers.ValuesController.Post(System.String)">
             <summary>
-            Posts some very important data from the server.
+            Posts some very important data to the server.
             </summary>
         </member>
         <member name="M:Highlander.WebAPI.V5r3.Controllers.ValuesController.Put(System.Int32,System.String)">
             <summary>
-            Posts some very important data from the server.
+            Posts some very important data to the server.
             </summary>
         </member>
         <member name="M:Highlander.WebAPI.V5r3.Controllers.ValuesController.Delete(System.Int32)">
@@ -1024,27 +1053,22 @@
             Deletes some very important data from the server.
             </summary>
         </member>
-        <member name="T:Highlander.WebAPI.V5r3.WebApplication">
+        <member name="T:Highlander.WebAPI.V5r3.HighlanderWebApplication">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.WebApplication.LoggerRef">
+        <member name="F:Highlander.WebAPI.V5r3.HighlanderWebApplication.LoggerRef">
             <summary>
             The logger
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.WebApplication.NameSpace">
-            <summary>
-            The namespace
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.WebApplication.Application_Start">
+        <member name="M:Highlander.WebAPI.V5r3.HighlanderWebApplication.Application_Start">
             <summary>
             Application start up.
             </summary>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.WebApplication.Application_End(System.Object,System.EventArgs)">
+        <member name="M:Highlander.WebAPI.V5r3.HighlanderWebApplication.Application_End(System.Object,System.EventArgs)">
             <summary>
             Application end
             </summary>
