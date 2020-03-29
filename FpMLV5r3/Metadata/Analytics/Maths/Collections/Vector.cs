@@ -89,10 +89,38 @@ namespace Highlander.Reporting.Analytics.V5r3.Maths.Collections
           _list.Sort(compare);
         }
 
-        public struct Position 
+        /// <summary>
+        /// 
+        /// </summary>
+        public struct Position : IEquatable<Position>
         {
           public int Index;
           public int Insert;
+
+            public override bool Equals(object obj)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override int GetHashCode()
+            {
+                throw new NotImplementedException();
+            }
+
+            public static bool operator ==(Position left, Position right)
+            {
+                return left.Equals(right);
+            }
+
+            public static bool operator !=(Position left, Position right)
+            {
+                return !(left == right);
+            }
+
+            public bool Equals(Position other)
+            {
+                throw new NotImplementedException();
+            }
         }
         //----------------------------------------------------------------------------------------------
         public Position Find(IComparable<T> func)

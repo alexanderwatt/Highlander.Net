@@ -24,6 +24,7 @@ using System.Web.Routing;
 using Highlander.Build;
 using Highlander.Constants;
 using Highlander.Core.Common;
+using Highlander.Core.Interface.V5r3;
 //using Highlander.Core.Server;
 using Highlander.Core.V34;
 using Highlander.Utilities.Helpers;
@@ -43,19 +44,14 @@ namespace Highlander.WebAPI.V5r3
         public static readonly Reference<ILogger> LoggerRef = Reference<ILogger>.Create(new TraceLogger(true));
 
         ////private CoreServer _server;
-        private ICoreClient _client;
+        private PricingCache  _pricingCache;
 
         //private static readonly EnvId BuildEnv = EnvHelper.ParseEnvName(BuildConst.BuildEnv);
 
         /// <summary>
-        /// The cache
-        /// </summary>
-        private ICoreCache _cache;
-
-        /// <summary>
         /// The namespace
         /// </summary>
-        public string NameSpace;
+        public string NameSpace = EnvironmentProp.DefaultNameSpace;
 
         /// <summary>
         /// Application start up.
@@ -70,27 +66,19 @@ namespace Highlander.WebAPI.V5r3
             //
             const string fullAppName = "Highlander.WebAPI.V5r3";
             LoggerRef.Target.LogInfo("Starting up...");
-            //try
-            //{
-            NameSpace = EnvironmentProp.DefaultNameSpace;
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            //    var factory = new CoreClientFactory(LoggerRef)
-            //        .SetEnv(BuildEnv.ToString())
-            //        .SetApplication(Assembly.GetExecutingAssembly())
-            //        .SetProtocols(WcfConst.AllProtocolsStr);
-            //   //     .SetServers("localhost");
-            //   _client = factory.SetServers("localhost").Create();
-            //   _cache = _client.CreateCache();
-            //    //Cache = factory.Create();
-            //    stopwatch.Stop();
-            Debug.Print("Initialized environment, in {0} seconds", stopwatch.Elapsed.TotalSeconds);
-            LoggerRef.Target.LogInfo("Loaded..." + fullAppName);
-            //}
-            //catch (Exception excp)
-            //{
-            //    LoggerRef.Target.Log(excp);
-            //}
+            try
+            {
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                _pricingCache = new PricingCache(NameSpace);
+                stopwatch.Stop();
+                Debug.Print("Initialized environment, in {0} seconds", stopwatch.Elapsed.TotalSeconds);
+                LoggerRef.Target.LogInfo("Loaded..." + fullAppName);
+            }
+            catch (Exception excp)
+            {
+                LoggerRef.Target.Log(excp);
+            }
         }
 
         /// <summary>
@@ -103,8 +91,8 @@ namespace Highlander.WebAPI.V5r3
             try
             {
                 LoggerRef.Target.LogInfo("Stopped.");
-                DisposeHelper.SafeDispose(ref _client);
-                DisposeHelper.SafeDispose(ref _cache);
+                //DisposeHelper.SafeDispose(ref _client);
+                //DisposeHelper.SafeDispose(ref _cache);
             }
             catch (Exception ex)
             {

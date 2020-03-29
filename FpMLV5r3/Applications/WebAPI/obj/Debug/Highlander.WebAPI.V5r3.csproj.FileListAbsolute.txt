@@ -252,3 +252,12 @@ C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Appl
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\obj\Debug\Highlander.WebAPI.V5r3.csproj.CopyComplete
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\obj\Debug\Highlander.WebAPI.V5r3.dll
 C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\obj\Debug\Highlander.WebAPI.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\xsdgen.bat
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Core.Interface.V5r3.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.ValuationEngine.V5r3.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Reporting.Contracts.V5r3.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Confirmation.V5r3.dll
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Core.Interface.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.ValuationEngine.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Reporting.Contracts.V5r3.pdb
+C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\FpMLV5r3\Applications\WebAPI\bin\Highlander.Confirmation.V5r3.pdb

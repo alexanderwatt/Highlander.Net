@@ -31,7 +31,7 @@ using Highlander.Reporting.Analytics.V5r3.Maths.Collections;
 namespace Highlander.Reporting.Analytics.V5r3.Options
 {
     /// <summary>
-    /// The back-scholes option class.
+    /// The back-Scholes option class.
     /// </summary>
     public class OptionAnalytics
     {
@@ -73,7 +73,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             }
             if (!callFlag)
             {
-                option = option + df * (strike - fwdPrice);
+                option += df * (strike - fwdPrice);
             }
             return option;
         }
@@ -141,7 +141,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
               }
               if(!callFlag)
               {
-                  option = option + df * (strike - fwdPrice);
+                  option += df * (strike - fwdPrice);
               }
               return option;
             }
@@ -174,7 +174,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
           }
           if(!callFlag)
           {
-              option = option + df * (strike - fwdPrice);
+              option += df * (strike - fwdPrice);
           }
           return option;
         }
@@ -205,7 +205,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
           }
           if(!callFlag)
           {
-              option = option + df * (strike - fwdPrice);
+              option += df * (strike - fwdPrice);
           }
           return option;
         }
@@ -241,7 +241,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         option *= -Constants.InvSqrt2Pi * df * dx;
         if (callFlag)
         {
-            option = option + df * (strike - fwdPrice);
+            option += df * (strike - fwdPrice);
         }
         return option;
         }
@@ -329,10 +329,10 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             x = uMin *= u;
               int j;
               for(j = 0; j <= i; j++, x *= u2)
-            {
-              call[j] = Math.Max(pd * call[j] + pu * call[j + 1], x - strike);
-              put[j] = Math.Max(pd * put[j] + pu * put[j + 1], strike - x);
-            }
+              {
+                  call[j] = Math.Max(pd * call[j] + pu * call[j + 1], x - strike);
+                  put[j] = Math.Max(pd * put[j] + pu * put[j + 1], strike - x);
+              }
           }
           var result = call[0];
           if (!callFlag)
@@ -452,7 +452,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         }
 
         /// <summary>
-        /// Cumulative bivariate normal distribution,
+        /// Cumulative bi-variate normal distribution,
         /// N_2 (x_1, x_2; \rho) =
         /// {1 \over 2\pi\sqrt{1-\rho^2}} \int_{-\infinity}^{x_1} dx\int_{-\infinity}^{x_2} dy
         /// exp(-{1\over 2}{(x^2 - 2\rho xy + y^2 \over 1-\rho^2)})
@@ -471,12 +471,12 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             var s = 1 / Math.Sqrt(1 - correlation * correlation);
             if (x1 == 0)
             {
-                if (x2 == 0) return 0.25 + Maths.Constants.Inv2PI * Math.Atan(correlation * s) * s;
-                return (x2 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x2, x2);
+                if (x2 == 0) return 0.25 + Constants.Inv2PI * Math.Atan(correlation * s) * s;
+                return (x2 > 0 ? 0.5 : 0) - Constants.Inv2PI * Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x2, x2);
             }
             if (x2 == 0)
-                return (x1 > 0 ? 0.5 : 0) - Maths.Constants.Inv2PI * Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x1, x1);
-            return (x1 < 0 || x2 < 0 ? 0 : 1) - Maths.Constants.Inv2PI * (
+                return (x1 > 0 ? 0.5 : 0) - Constants.Inv2PI * Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(-correlation * s * x1, x1);
+            return (x1 < 0 || x2 < 0 ? 0 : 1) - Constants.Inv2PI * (
                Math.Exp(-x2 * x2 / 2) * SimpsonsRuleIntegration.Value(s * (x1 - correlation * x2), x2) +
                Math.Exp(-x1 * x1 / 2) * SimpsonsRuleIntegration.Value(s * (x2 - correlation * x1), x1));
         }
@@ -492,7 +492,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
         /// <returns>An array of results for Black Scholes.</returns>
-        public static double[] OptWithGreeks(Boolean callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
+        public static double[] OptWithGreeks(bool callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
         {
             var result = new double[7];
             result[0] = 0.0;
@@ -651,7 +651,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
 
         /// <summary>
         /// To find a value for fwdPrice (the price to fix now for delivery of asset at time
-        /// t), which gives a premium prem for an option of strike strike expiring at time t
+        /// t), which gives a premium for an option of strike strike expiring at time t
         /// with volatility vol and continuously compounded interest rate 0->t of r.
         /// </summary>
         /// <param name="callFlag">Call or put flag.</param>
@@ -661,7 +661,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         /// <param name="t">The time to expiry.</param>
         /// <param name="premium"></param>
         /// <returns>The forward value for that price and volatility.</returns>
-        public static double OptSolveFwd(Boolean callFlag, double strike, double vol, double r, double t, double premium)
+        public static double OptSolveFwd(bool callFlag, double strike, double vol, double r, double t, double premium)
         {
             double fold;
             var rt = r * t;
@@ -691,7 +691,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         /// <param name="t"></param>
         /// <param name="premium"></param>
         /// <returns></returns>
-        public static double OptSolveStrike(Boolean callFlag, double fwd, double vol, double r, double t, double premium)
+        public static double OptSolveStrike(bool callFlag, double fwd, double vol, double r, double t, double premium)
         {
             double fold;
             var rt = r * t;
@@ -726,7 +726,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         /// <param name="fwdPrice">Outright: to pay now for assured delivery of asset at tL</param>
         /// <param name="vol">The volatility.</param>
         /// <returns>The order of the return types is: Premium, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
-        public static double[] CompoundOpt(Boolean callOnOptionFlag, double strikeS, double rS, double tS, 
+        public static double[] CompoundOpt(bool callOnOptionFlag, double strikeS, double rS, double tS, 
           Boolean callFlag, double strikeL, double rL, double tL, double fwdPrice, double vol)
         {
           double sqrttS, sqrttL;
@@ -856,7 +856,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         ///<summary>
         /// Compound option parameters.
         ///</summary>
-        public DoubleVector CompOptParam(double fwdPrice, Boolean cPs, Boolean cps, double ks, double Ks, double tTs, double vols, double rtTs)
+        public static DoubleVector CompoundOptionParameters(double fwdPrice, Boolean cPs, Boolean cps, double ks, double Ks, double tTs, double vols, double rtTs)
         {
             var result = new DoubleVector(7)
             {
@@ -877,7 +877,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         ///</summary>
         ///<param name="parameters">A vector of parameters: fwdPrice, CPs, cps, ks, Ks, tTs, vols, rtTs</param>
         ///<returns></returns>
-        public static double fComp(DoubleVector parameters)//TODO this needs to be PayOff function.
+        public static double CompoundOptionPayOff(DoubleVector parameters)//TODO this needs to be PayOff function.
         {
             var x = parameters[2] == 1.0;
             var q = Opt(x, parameters[0], parameters[3], parameters[6], parameters[5]) - parameters[4];
@@ -893,7 +893,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         /// notl1 is the notional amount of asset 1
         /// (similarly for asset 2)
         /// </summary>
-        public struct DsdnParam
+        public struct DsdnParam : IEquatable<DsdnParam>
         {
             /// <summary>
             /// 
@@ -939,6 +939,31 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             /// 
             /// </summary>
             public double C9S;
+
+            public override bool Equals(object obj)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override int GetHashCode()
+            {
+                throw new NotImplementedException();
+            }
+
+            public static bool operator ==(DsdnParam left, DsdnParam right)
+            {
+                return left.Equals(right);
+            }
+
+            public static bool operator !=(DsdnParam left, DsdnParam right)
+            {
+                return !(left == right);
+            }
+
+            public bool Equals(DsdnParam other)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         /// <summary>
@@ -1102,16 +1127,18 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
         public static DoubleVector SpreadOptParam(double s1, double Kk,double c1k,double c2k,double c3k,
             double c4k,double c5k,double c6k,double c7k)
         {
-            var vector = new DoubleVector(9);
-            vector[0] = s1;
-            vector[1] = Kk;
-            vector[2] = c1k;
-            vector[3] = c2k;
-            vector[4] = c3k;
-            vector[5] = c4k;
-            vector[6] = c5k;
-            vector[7] = c6k;
-            vector[8] = c7k;
+            var vector = new DoubleVector(9)
+            {
+                [0] = s1,
+                [1] = Kk,
+                [2] = c1k,
+                [3] = c2k,
+                [4] = c3k,
+                [5] = c4k,
+                [6] = c5k,
+                [7] = c6k,
+                [8] = c7k
+            };
             return vector;
         }
 
@@ -1566,7 +1593,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             DateTime[] dates = DateHelper.SFEBondDates(expiryMonthYear, holidays);
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
-            T = T / 365;
+            T /= 365;
             int lambda = 0;
             if (putCall == "C") lambda = 1;
             if (putCall == "P") lambda = -1;
@@ -1623,7 +1650,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             DateTime[] dates = DateHelper.SFEBillDates(expiryMonthYear, holidays);
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
-            T = T / 365;
+            T /= 365;
             int lambda = 0;
             if (putCall == "P") lambda = 1;
             if (putCall == "C") lambda = -1;
@@ -1679,7 +1706,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Options
             DateTime[] dates = DateHelper.CMEEuroDates(expiryMonthYear, holidays);
             TimeSpan span = (dates[2].Date - valueDate.Date);
             double T = span.Days;
-            T = T / 365;
+            T /= 365;
             int lambda = 0;
             if (putCall == "P") lambda = 1;
             if (putCall == "C") lambda = -1;

@@ -964,6 +964,35 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Highlander.WebAPI.V5r3.Controllers.ProductsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.ProductsController.GetAllProducts">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.ProductsController.GetProduct(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Highlander.WebAPI.V5r3.Controllers.TradeController">
+            <summary>
+            Creates and views trades.
+            </summary>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.TradeController.Index">
+            <summary>
+            Gets the main view
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Highlander.WebAPI.V5r3.Controllers.ValuesController">
             <summary>
             The main controller
@@ -1005,11 +1034,6 @@
             The logger
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.WebApplication._cache">
-            <summary>
-            The cache
-            </summary>
-        </member>
         <member name="F:Highlander.WebAPI.V5r3.WebApplication.NameSpace">
             <summary>
             The namespace
@@ -1027,381 +1051,30 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ConvertToDecimalArray(System.Object[0:,0:],System.Int32)">
+        <member name="T:Highlander.WebAPI.V5r3.Models.Product">
             <summary>
             
             </summary>
-            <param name="inputRange"></param>
-            <param name="rowHeaderCount"></param>
-            <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ConvertToDecimalArray(System.Object[])">
+        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Id">
             <summary>
             
             </summary>
-            <param name="inputRange"></param>
-            <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractExpiries(System.Object[0:,0:])">
-            <summary>
-             Gets the distinct expiries, which must be in the first column.
-            </summary>
-            <param name="inputRange">The input data range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractTenors(System.Object[0:,0:])">
-            <summary>
-             Gets the distinct expiries, which must be in the first column.
-            </summary>
-            <param name="inputRange">The input data range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.TrimNullRows(System.Object[0:,0:])">
+        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Name">
             <summary>
             
             </summary>
-            <param name="matrix"></param>
-            <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.TrimNulls(System.Array)">
+        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Category">
             <summary>
             
             </summary>
-            <param name="array"></param>
-            <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.CreatePricingStructure(Highlander.Utilities.Logging.ILogger,Highlander.Core.Common.ICoreCache,System.String,System.Object[][],System.Object[][],System.Object[][])">
+        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Price">
             <summary>
-            Mainly used for RateVolMatrix surfaces that have the inputs sent as additional
+            
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractStrikes(System.Object[][])">
-            <summary>
-            Extract the strikes information held in the first row of the array
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractExpiries(System.Object[][])">
-            <summary>
-            Extract the expiry column from the raw data grid
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractTenors(System.Object[][])">
-            <summary>
-            Extract the expiry column from the raw data grid
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructureFactory.ExtractVolatility(System.Object[][],System.Int32)">
-            <summary>
-            Extract the volatility from the raw Data grid (everything except the first column and row)
-            </summary>
-        </member>
-        <member name="T:Highlander.WebAPI.V5r3.PricingStructures">
-            <summary>
-            Summary description for PricingStructures
-            </summary>
-        </member>
-        <member name="F:Highlander.WebAPI.V5r3.PricingStructures.Cache">
-            <summary>
-            The core
-            </summary>
-        </member>
-        <member name="F:Highlander.WebAPI.V5r3.PricingStructures.NameSpace">
-            <summary>
-            The namespace
-            </summary>
-        </member>
-        <member name="P:Highlander.WebAPI.V5r3.PricingStructures.Logger">
-            <summary>
-            The logger
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.#ctor">
-            <summary>
-            Simplest constructor
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.#ctor(Highlander.Core.Common.ICoreCache)">
-            <summary>
-            Constructor which sets the cache
-            </summary>
-            <param name="cache"></param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.#ctor(Highlander.Utilities.RefCounting.Reference{Highlander.Utilities.Logging.ILogger},Highlander.Core.Common.ICoreCache,System.String)">
-            <summary>
-            Generic constructor
-            </summary>
-            <param name="loggerRef"></param>
-            <param name="cache"></param>
-            <param name="nameSpace"></param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.PublishCurve(System.Object[][],System.Object[][],System.Object[][])">
-            <summary>
-            Publishes a curve.
-            </summary>
-            <param name="structurePropertiesRange">The structure properties range.</param>
-            <param name="publishPropertiesRange">The publish properties range.</param>
-            <param name="valuesRange">The values range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.PublishCurveAdditional(System.Object[][],System.Object[][],System.Object[][],System.Object[][])">
-            <summary>
-            Publishes a curve.
-            </summary>
-            <param name="structurePropertiesRange">The structure properties range.</param>
-            <param name="publishPropertiesRange">The publish properties range.</param>
-            <param name="valuesRange">The values range.</param>
-            <param name="additionalRange">Extra data range</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.PublishVolatilityCube(System.Object[][],System.Object[][],System.Object[][],System.Object[][])">
-            <summary>
-            Publishes the volatility cube.
-            </summary>
-            <param name="structurePropertiesRange">The structure properties range.</param>
-            <param name="publishPropertiesRange">The publish properties range.</param>
-            <param name="strikesOrTenorsRange">The strikes or tenors range.</param>
-            <param name="valuesRange">The values range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.PublishLpmCapFloorVolMatrix(System.Object[][],System.Object[][],System.Object[][],System.Object[][])">
-            <summary>
-            Publishes the LPM cap floor vol matrix.
-            </summary>
-            <param name="structurePropertiesRange">The structure properties range.</param>
-            <param name="publishPropertiesRange">The publish properties range.</param>
-            <param name="valuesRange">The values range.</param>
-            <param name="rateCurveFiltersRange">The rate curve filters range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.PublishLpmSwaptionVolMatrix(System.Object[][],System.Object[][],System.Object[][],System.Object[][])">
-            <summary>
-            Publishes the LPM swaption vol matrix.
-            </summary>
-            <param name="structurePropertiesRange">The structure properties range.</param>
-            <param name="publishPropertiesRange">The publish properties range.</param>
-            <param name="valuesRange">The values range.</param>
-            <param name="rateCurveFiltersRange">The rate curve filters range.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.Publish(Highlander.Reporting.V5r3.Market,System.String,Highlander.Utilities.NamedValues.NamedValueSet,System.Object[][])">
-            <summary>
-            Publishes the curve and properties
-            </summary>
-            <param name="market"></param>
-            <param name="uniqueIdentifier"></param>
-            <param name="curveProperties"></param>
-            <param name="publishPropertiesRange"></param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.PricingStructures.GetCurve(System.String,System.Boolean)">
-            <summary>
-            Gets the curve.
-            </summary>
-            <param name="uniqueName">The uniqueName.</param>
-            <param name="forceBootstrap">The force a bootstrap flag.</param>
-            <returns></returns>
-        </member>
-        <member name="T:Highlander.WebAPI.V5r3.RangeExtension">
-            <summary>
-            Extension methods for object[,]
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToDictionary(System.Object[0:,0:])">
-            <summary>
-            Convert an Excel range (object[,]) to a Dictionary
-            </summary>
-            <param name="properties"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToList``2(System.Object[0:,0:])">
-            <summary>
-            Convert an Excel range (object[,]) to a List of Pairs of defined type
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToList(System.Object[0:,0:])">
-            <summary>
-            Convert an Excel range (object[,]) to a List of Pairs of string, object
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.GetRow(System.Object[0:,0:],System.Int32)">
-            <summary>
-            Gets the row.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="rowNumber">The row number.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.GetRow(System.Object[0:,0:],System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Gets the row.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="rowNumber">The row number.</param>
-            <param name="startColumn">The start column.</param>
-            <param name="endColumn">The end column.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.GetColumn(System.Object[0:,0:],System.Int32)">
-            <summary>
-            Gets the column.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="columnNumber">The column number.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.SetColumn(System.Object[0:,0:],System.Int32,System.Object[])">
-            <summary>
-            Sets the column.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="columnNumber">The column number.</param>
-            <param name="values">The values.</param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.GetRows(System.Object[0:,0:],System.Int32,System.Int32)">
-            <summary>
-            Gets the rows.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="startRow">The start row.</param>
-            <param name="endRow">The end row.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.GetRows(System.Object[0:,0:],System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Gets the rows.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <param name="startRow">The start row.</param>
-            <param name="endRow">The end row.</param>
-            <param name="startColumn">The start column.</param>
-            <param name="endColumn">The end column.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.RowCount(System.Object[0:,0:])">
-            <summary>
-            Rows the count.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ColumnCount(System.Object[0:,0:])">
-            <summary>
-            Columns the count.
-            </summary>
-            <param name="rawData">The raw data.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ValueAsArray(System.Object[0:,0:])">
-            <summary>
-            Values as array.
-            </summary>
-            <param name="valArray">The value array.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.TrimNulls(System.Array)">
-            <summary>
-            Trims nulls for a 2D array
-            </summary>
-            <param name="array">The array.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.TrimNulls``1(``0[])">
-            <summary>
-            Trims nulls for a 1D array.
-            </summary>
-            <param name="array">The array.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ResultOverFillsSelection(System.Object[0:,0:],System.Int32,System.Int32)">
-            <summary>
-            Results the over fills selection.
-            </summary>
-            <param name="result">The result.</param>
-            <param name="rowCount">The row count.</param>
-            <param name="columnCount">The column count.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.AddMoreText(System.Object[0:,0:],System.Int32,System.Int32)">
-            <summary>
-            Adds the more text.
-            </summary>
-            <param name="rowCount"></param>
-            <param name="columnCount"></param>
-            <param name="result">The result.</param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToNamedValueSet(System.Object[0:,0:])">
-            <summary>
-            Convert object[,] to a NamedValueSet
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToArray``1(System.Object[],System.Int32)">
-            <summary>
-            Convert an Excel 1D range (object[]) to an array of defined type
-            </summary>
-            <param name="range"></param>
-            <param name="rowHeaderCount">The number of header rows</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToArray``1(System.Object[])">
-            <summary>
-            Convert an Excel 1D range (object[]) to an array of defined type
-            </summary>
-            <param name="properties"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToArray``1(System.Object[0:,0:],System.Int32,System.Int32)">
-            <summary>
-            Convert an Excel 2D range (object[,]) to a 2D array of defined type
-            </summary>
-            <param name="range"></param>
-            <param name="rowHeaderCount">The number of header rows</param>
-            <param name="columnHeaderCount">The number of header columns</param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.RangeExtension.ToArray``1(System.Object[0:,0:])">
-            <summary>
-            Convert an Excel 2D range (object[,]) to a 2D array of defined type
-            </summary>
-            <param name="range"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Highlander.WebAPI.V5r3.SoapExceptionHandler">
-            <summary>
-            SoapExceptionHandler
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.SoapExceptionHandler.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)">
-            <summary>
-            GetInitializer
-            </summary>
-            <param name="methodInfo"></param>
-            <param name="attribute"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.SoapExceptionHandler.GetInitializer(System.Type)">
-            <summary>
-            GetInitializer
-            </summary>
-            <param name="serviceType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.SoapExceptionHandler.Initialize(System.Object)">
-            <summary>
-            Initialize
-            </summary>
-            <param name="initializer"></param>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.SoapExceptionHandler.ProcessMessage(System.Web.Services.Protocols.SoapMessage)">
-            <summary>
-            ProcessMessage
-            </summary>
-            <param name="message"></param>
         </member>
     </members>
 </doc>

@@ -41,6 +41,7 @@ using Highlander.ValuationEngine.V5r3;
 using Highlander.WinTools;
 using Highlander.Build;
 using Highlander.Metadata.Common;
+using Highlander.Utilities.NamedValues;
 using AppCfgRuleV2 = Highlander.Core.Common.AppCfgRuleV2;
 using Exception = System.Exception;
 
@@ -57,7 +58,7 @@ namespace Highlander.Core.Viewer.V5r3
         private int _queuedCalls;
         private readonly Guarded<Queue<ICoreItem>> _queuedItems = new Guarded<Queue<ICoreItem>>(new Queue<ICoreItem>());
         private string _navDetailSubject;
-        private string _nameSpace = EnvironmentProp.DefaultNameSpace;
+        private readonly string _nameSpace = EnvironmentProp.DefaultNameSpace;
 
         public CoreViewerForm()
         {
@@ -65,7 +66,7 @@ namespace Highlander.Core.Viewer.V5r3
             _syncContext = SynchronizationContext.Current;
         }
 
-        private void Form1Load(object sender, EventArgs e)
+        private void CoreViewerFormLoad(object sender, EventArgs e)
         {
             _loggerRef = Reference<ILogger>.Create(new TextBoxLogger(txtLog));
             // init controls
@@ -89,6 +90,17 @@ namespace Highlander.Core.Viewer.V5r3
             cbDataTypeValues.Items.Add(typeof(ValuationReport).FullName);
             cbDataTypeValues.Items.Add(typeof(AppCfgRuleV2).FullName);
             cbDataTypeValues.Items.Add(typeof(ConfigRule).FullName);
+            cbDataTypeValues.Items.Add(typeof(BusinessCenterCalendar).FullName);
+            cbDataTypeValues.Items.Add(typeof(LocationCalendarYear).FullName);
+            cbDataTypeValues.Items.Add(typeof(PricingStructureTypes).FullName);
+            cbDataTypeValues.Items.Add(typeof(BoundaryRiderMappings).FullName);
+            cbDataTypeValues.Items.Add(typeof(LocationCalendarYears).FullName);
+            cbDataTypeValues.Items.Add(typeof(ProviderRuleSet).FullName);
+            cbDataTypeValues.Items.Add(typeof(HostConfigRule).FullName);
+            cbDataTypeValues.Items.Add(typeof(ScenarioRule).FullName);
+            cbDataTypeValues.Items.Add(typeof(FileImportRule).FullName);
+            cbDataTypeValues.Items.Add(typeof(NamedValueSet).FullName);
+            cbDataTypeValues.Items.Add(typeof(FileImportRule).FullName);
             cbDataTypeValues.SelectedIndex = 0;
             // connect
             StartUp();
@@ -702,10 +714,14 @@ namespace Highlander.Core.Viewer.V5r3
                 {
                     // load configuration data
                     //AppSettingsLoader.Load(logRef.Target, _client, EnvironmentProp.DefaultNameSpace);
-                    LoadConfigDataHelper.LoadConfigurationData(logRef.Target, _client.Proxy, _nameSpace);
+                    var nameSpace = _nameSpace;
+                    if (!string.IsNullOrEmpty(nameSpaceTextBox1.Text))
+                    {
+                        nameSpace = nameSpaceTextBox1.Text;
+                    }
+                    LoadConfigDataHelper.LoadConfigurationData(logRef.Target, _client.Proxy, nameSpace);
                     // done
                     logRef.Target.LogInfo("Success");
-                    //}
                 }
                 catch (Exception exception)
                 {
@@ -718,6 +734,16 @@ namespace Highlander.Core.Viewer.V5r3
                     Environment.ExitCode = exitCode;
                 }
             }
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

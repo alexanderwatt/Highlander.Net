@@ -49,13 +49,13 @@ namespace Highlander.Core.Interface.V5r3
         public RuntimeEnvironment(string nameSpace)
         {
             NameSpace = nameSpace;
-            ApplicationName = $"Highlander.Core.API-{ApplicationHelper.Diagnostics("FileVersion")}";
+            ApplicationName = $"Highlander.Core.Interface-{ApplicationHelper.Diagnostics("FileVersion")}";
             try
             {
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
-                Log(LogRef.Target, "Starting...", ApplicationName, "StartUp");
                 LogRef = Reference<ILogger>.Create(new TraceLogger(true));
+                Log(LogRef.Target, "Starting...", ApplicationName, "StartUp");
                 CoreClientFactory factory = new CoreClientFactory(LogRef)
                     .SetEnv(BuildConst.BuildEnv)
                     .SetApplication(Assembly.GetExecutingAssembly())

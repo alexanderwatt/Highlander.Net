@@ -15,7 +15,6 @@
 
 #region Usings
 
-using System;
 using System.Collections.Generic;
 
 #endregion
@@ -27,9 +26,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public override List<String> GetRequiredPricingStructures()//TODO Need to add the case of floaters where there is a forecast curve.
+        public override List<string> GetRequiredPricingStructures()//TODO Need to add the case of floaters where there is a forecast curve.
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (bond?.Item is string && bond.currency != null)
             {
                 var tempId = bond.id.Split('-');
@@ -58,9 +57,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> { notionalAmount.currency.Value };
+            var result = new List<string> { notionalAmount.currency.Value };
             if (notionalAmount.currency.Value != bond.currency.Value)
             {
                 result.Add(bond.currency.Value);

@@ -18,7 +18,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Statistics
     /// <summary>
     /// Weighted sample.
     /// </summary>
-    public struct Sample 
+    public struct Sample : System.IEquatable<Sample>
     {
         ///<summary>
         ///</summary>
@@ -43,6 +43,31 @@ namespace Highlander.Reporting.Analytics.V5r3.Statistics
         public static explicit operator double(Sample sample)
         {
             return (double)sample.Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static bool operator ==(Sample left, Sample right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Sample left, Sample right)
+        {
+            return !(left == right);
+        }
+
+        public bool Equals(Sample other)
+        {
+            throw new System.NotImplementedException();
         }
     }
 

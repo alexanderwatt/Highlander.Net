@@ -93,7 +93,7 @@ namespace Highlander.Reporting.ModelFramework.V5r3
             {
                 throw new ArgumentException("The generic type C must be a class");
             }
-            if (type.GetConstructor(new Type[] { }) == null)
+            if (type.GetConstructor(Array.Empty<Type>()) == null)
             {
                 throw new ArgumentException("Failed to create instance of concrete class as there is no parameterless constructor");
             }
@@ -150,7 +150,7 @@ namespace Highlander.Reporting.ModelFramework.V5r3
             {
                 throw new ArgumentException("The generic type C must be a class");
             }
-            if (type.GetConstructor(new Type[] { }) == null)
+            if (type.GetConstructor(Array.Empty<Type>()) == null)
             {
                 throw new ArgumentException("Failed to create instance of concrete class as there is no parameterless constructor");
             }

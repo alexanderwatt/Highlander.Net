@@ -13,7 +13,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Highlander Home Page";
             return View();
         }
     }
