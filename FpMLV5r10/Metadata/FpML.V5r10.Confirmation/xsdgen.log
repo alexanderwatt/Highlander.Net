@@ -1,8 +1,0 @@
-xsdgen: Generating... 
-xsdgen:   (a) Confirmation.xsd 
-xsdgen:   (b) xmldsig-core-schema.xsd 
-Microsoft (R) Xml Schemas/DataTypes support utility
-[Microsoft (R) .NET Framework, Version 4.6.1055.0]
-Copyright (C) Microsoft Corporation. All rights reserved.
-Writing file 'C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander\Metadata\FpML.V5r10\FpML.V5r10.Confirmation\a_b.cs'.
-xsdgen: Done. 

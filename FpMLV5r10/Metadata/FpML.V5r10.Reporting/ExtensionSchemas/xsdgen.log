@@ -1,6 +1,0 @@
-instrumentgen: Generating... 
-instrumentgen:   (a) fpml-main-5-10.xsd 
-instrumentgen:   (b) fpmlext-main.xsd 
-instrumentgen:   (c) xmldsig-core-schema.xsd 
-instrumentgen:   (d) fpmlext-property.xsd 
-instrumentgen:   (e) qrscext-instruments.xsd 

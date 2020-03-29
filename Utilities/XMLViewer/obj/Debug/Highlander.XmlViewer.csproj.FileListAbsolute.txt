@@ -1,9 +1,0 @@
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\bin\Debug\Highlander.XmlViewer.exe.config
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\bin\Debug\Highlander.XmlViewer.exe
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\bin\Debug\Highlander.XmlViewer.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.csprojAssemblyReference.cache
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.XmlTreeDisplay.resources
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.csproj.GenerateResource.cache
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.exe
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Utilities\XMLViewer\obj\Debug\Highlander.XmlViewer.csproj.CoreCompileInputs.cache
