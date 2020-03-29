@@ -34,19 +34,6 @@ namespace Highlander.WebAPI.V5r3
         /// </summary>
         public static readonly Reference<ILogger> LoggerRef = Reference<ILogger>.Create(new TraceLogger(true));
 
-        ////private CoreServer _server;
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public PricingCache  PricingCache;
-
-        //private static readonly EnvId BuildEnv = EnvHelper.ParseEnvName(BuildConst.BuildEnv);
-
-        ///// <summary>
-        ///// The namespace
-        ///// </summary>
-        //public string NameSpace = EnvironmentProp.DefaultNameSpace;
-
         /// <summary>
         /// Application start up.
         /// </summary>
@@ -57,22 +44,6 @@ namespace Highlander.WebAPI.V5r3
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //
-            //const string fullAppName = "Highlander.WebAPI.V5r3";
-            //LoggerRef.Target.LogInfo("Starting up...");
-            //try
-            //{
-            //    var stopwatch = new Stopwatch();
-            //    stopwatch.Start();
-            //    PricingCache = new PricingCache(NameSpace);
-            //    stopwatch.Stop();
-            //    Debug.Print("Initialized environment, in {0} seconds", stopwatch.Elapsed.TotalSeconds);
-            //    LoggerRef.Target.LogInfo("Loaded..." + fullAppName);
-            //}
-            //catch (Exception excp)
-            //{
-            //    LoggerRef.Target.Log(excp);
-            //}
         }
 
         /// <summary>
@@ -85,8 +56,6 @@ namespace Highlander.WebAPI.V5r3
             try
             {
                 LoggerRef.Target.LogInfo("Stopped.");
-                //DisposeHelper.SafeDispose(ref _client);
-                //DisposeHelper.SafeDispose(ref _cache);
             }
             catch (Exception ex)
             {

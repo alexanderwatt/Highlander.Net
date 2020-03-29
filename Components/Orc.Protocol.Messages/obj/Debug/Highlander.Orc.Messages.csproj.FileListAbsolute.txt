@@ -1,6 +1,0 @@
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\bin\Debug\Highlander.Orc.Messages.dll
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\bin\Debug\Highlander.Orc.Messages.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\obj\Debug\Highlander.Orc.Messages.dll
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\obj\Debug\Highlander.Orc.Messages.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\obj\Debug\Highlander.Orc.Messages.csproj.CoreCompileInputs.cache
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Components\Orc.Protocol.Messages\obj\Debug\Highlander.Orc.Messages.csprojAssemblyReference.cache

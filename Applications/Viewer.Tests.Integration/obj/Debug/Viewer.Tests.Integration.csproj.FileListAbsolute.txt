@@ -1,1 +1,0 @@
-C:\Development\OrionVS12\Applications\Web\Viewer.Tests.Integration\obj\Debug\Viewer.Tests.Integration.csprojResolveAssemblyReference.cache

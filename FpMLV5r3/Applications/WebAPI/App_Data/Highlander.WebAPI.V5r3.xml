@@ -982,40 +982,40 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Highlander.WebAPI.V5r3.Controllers.PricingCacheController">
+        <member name="T:Highlander.WebAPI.V5r3.Controllers.PricingController">
             <summary>
             Creates and views trades.
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.LoggerRef">
+        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingController.LoggerRef">
             <summary>
             The logger
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.PricingCache">
+        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingController.PricingCache">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.#ctor">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetAllTrades">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetAllTrades">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetTrade(System.String)">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetTrade(System.String)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingCacheController.GetCurve(System.String)">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetCurve(System.String)">
             <summary>
             
             </summary>

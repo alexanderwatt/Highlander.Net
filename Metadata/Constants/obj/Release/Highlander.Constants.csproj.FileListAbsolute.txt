@@ -1,4 +1,0 @@
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\bin\Release\Highlander.Constants.dll
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\bin\Release\Highlander.Constants.pdb
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Release\Highlander.Constants.dll
-C:\Users\Alex\Documents\Visual Studio 2019\Projects\Highlander.Net\Metadata\Constants\obj\Release\Highlander.Constants.pdb
