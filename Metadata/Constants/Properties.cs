@@ -13,8 +13,11 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+using System;
+
 namespace Highlander.Constants
 {
+    [Serializable]
     public static class EquityProp
     {
         public static string DefaultType = "Equity";
@@ -41,6 +44,7 @@ namespace Highlander.Constants
         public const string ReferenceEquity = "ReferenceEquity";
     }
 
+    [Serializable]
     public static class PropertyProp
     {
         public static string DefaultType = "Property";
@@ -60,6 +64,7 @@ namespace Highlander.Constants
         public const string SchemaVersion = "SchemaVersion";
     }
 
+    [Serializable]
     public static class LeaseProp
     {
         public static string DefaultType = "Property";

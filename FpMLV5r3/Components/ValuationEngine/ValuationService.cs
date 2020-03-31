@@ -374,7 +374,7 @@ namespace Highlander.ValuationEngine.V5r3
                         throw new ApplicationException("Unknown Operator: '" + op + "'");
                 }
             }
-            return QueryTradeIds(logger, cache, nameSpace, whereExpr);
+            return QueryTradeIds(logger, cache, whereExpr);
         }
 
         /// </summary>
@@ -383,7 +383,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace"></param>
         /// <param name="query">The query properties whereExpr.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, string nameSpace, IExpression whereExpr)
+        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, IExpression whereExpr)
         {
             List<ICoreItem> items = cache.LoadItems(typeof(Trade), whereExpr);//TODO what about confirmation?
             var result = new object[items.Count + 1, 17];
@@ -418,8 +418,8 @@ namespace Highlander.ValuationEngine.V5r3
                     result[tradeNum, 3] = item.AppProps.GetValue<DateTime>(TradeProp.MaturityDate).ToShortDateString();
                     result[tradeNum, 4] = item.AppProps.GetValue<DateTime>(TradeProp.EffectiveDate).ToShortDateString();
                     result[tradeNum, 5] = item.AppProps.GetValue<string>(TradeProp.TradeState);
-                    result[tradeNum, 6] = String.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredCurrencies));
-                    result[tradeNum, 7] = String.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredPricingStructures));
+                    result[tradeNum, 6] = string.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredCurrencies));
+                    result[tradeNum, 7] = string.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredPricingStructures));
                     result[tradeNum, 8] = item.AppProps.GetValue<string>(TradeProp.ProductTaxonomy, null);
                     result[tradeNum, 9] = item.AppProps.GetValue<DateTime>(TradeProp.AsAtDate).ToShortDateString();
                     result[tradeNum, 10] = item.AppProps.GetValue<string>(EnvironmentProp.SourceSystem);

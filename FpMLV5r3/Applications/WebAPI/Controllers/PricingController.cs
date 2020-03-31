@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
 using Highlander.Core.Interface.V5r3;
+using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
@@ -52,7 +53,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Trade> GetAllTrades()
+        public IEnumerable<string> GetAllPropertyTradeIdentifiers()
         {
             return null;
         }
@@ -62,10 +63,11 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IHttpActionResult GetTrade(string id)
+        public Trade GetPropertyTrade(string id)
         {
+            //var identifier = "Trade.Reporting.Murex.swap.123456";
             var trade = PricingCache.GetTrade(id);
-            return Ok(trade);
+            return trade;
         }
 
         /// <summary>
@@ -73,10 +75,11 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IHttpActionResult GetCurve(string id)
+        public PricingStructureData GetCurve(string id)
         {
             var pricingStructure = PricingCache.GetPricingStructure(id);
-            return Ok(pricingStructure);
+            return pricingStructure;
+            //return Ok(pricingStructure);
         }
 
         ///// <summary>
@@ -84,10 +87,9 @@ namespace Highlander.WebAPI.V5r3.Controllers
         ///// </summary>
         ///// <param name="trade"></param>
         ///// <returns></returns>
-        //public ActionResult Create(Trade trade)
+        //public ActionResult CreatePropertyTrade(Trade trade)
         //{
-        //    db.Add(person);
-        //    db.SaveChanges();
+        //    PricingCache.Create(person);
         //    return Accepted();
         //}
     }
