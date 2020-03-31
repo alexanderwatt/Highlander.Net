@@ -1,12 +1,7 @@
-﻿using Highlander.Codes.V5r3;
-using Highlander.Core.Common;
+﻿using Highlander.Core.Interface.V5r3;
 using Highlander.Reporting.V5r3;
-using Highlander.Utilities.Expressions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using Highlander.Utilities.Logging;
+using Highlander.Utilities.RefCounting;
 using System.Web.Http;
 
 namespace Highlander.Web.API.V5r3.Controllers
@@ -14,21 +9,22 @@ namespace Highlander.Web.API.V5r3.Controllers
     [RoutePrefix("api/valuation")]
     public class ValuationController : ApiController
     {
-        private readonly ICoreClient client;
-        private readonly ICoreCache cache;
+        private readonly PricingCache pricingCache;
+        private readonly Reference<ILogger> logger;
 
-        public ValuationController(ICoreClient client, ICoreCache cache)
+        public ValuationController(PricingCache pricingCache, Reference<ILogger> logger)
         {
-            this.client = client;
-            this.cache = cache;
+            this.pricingCache = pricingCache;
+            this.logger = logger;
+            logger.Target.LogInfo("Instantiating ValuationController...");
         }
 
         [HttpGet]
         [Route("trade")]
-        public IHttpActionResult GetTradeValuation(string tradeId)
+        public IHttpActionResult GetTradeValuation(string id)
         {
-            var trade = cache.LoadItem<Trade>(tradeId);
-            if(trade == null)
+            var trade = pricingCache.GetTrade(id);
+            if (trade == null)
             {
                 return NotFound();
             }
@@ -39,8 +35,27 @@ namespace Highlander.Web.API.V5r3.Controllers
         [Route("trades")]
         public IHttpActionResult GetTrades()
         {
-            var trades = cache.LoadItems<Trade>(Expr.IsEQU("productType", "swap"));
-            return Ok(trades);
+            //TODO
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("trades")]
+        public IHttpActionResult Create(Trade trade)
+        {
+            //TODO
+            //db.Add(person);
+            //db.SaveChanges();
+            //pricingCache.CreatePropertyTrade()
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("curve")]
+        public IHttpActionResult GetCurve(string id)
+        {
+            var pricingStructure = pricingCache.GetPricingStructure(id);
+            return Ok(pricingStructure);
         }
     }
 }
