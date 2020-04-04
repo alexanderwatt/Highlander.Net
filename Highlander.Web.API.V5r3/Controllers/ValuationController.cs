@@ -48,6 +48,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             {
                 return NotFound();
             }
+            _logger.Target.LogInfo("Queried property trade ids.");
             return Ok(trades);
         }
 
@@ -65,6 +66,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             {
                 return NotFound();
             }
+            _logger.Target.LogInfo("Queried lease trade ids.");
             return Ok(trades);
         }
 
@@ -77,6 +79,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var result = _pricingCache.CreatePropertyTrade(tradeId, isParty1Buyer, party1, party2, tradeDate, effectiveDate,
                 purchaseAmount,
                 paymentDate, propertyType, currency, propertyIdentifier, tradingBook);
+            _logger.Target.LogInfo("Created property trade id: {}", result);
             return Ok(result);
         }
 
@@ -88,6 +91,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         {
             var result = _pricingCache.CreateLeaseTrade(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
                 currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description);
+            _logger.Target.LogInfo("Created lease trade id: {}", result);
             return Ok(result);
         }
 
