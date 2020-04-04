@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 using Highlander.CurveEngine.V5r3.Extensions;
 using Highlander.Reporting.Analytics.V5r3.LinearAlgebra;
+using Highlander.Utilities.Helpers;
+using Highlander.ValuationEngine.V5r3.Helpers;
 using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
@@ -33,41 +35,101 @@ namespace HLV5r3.Helpers
     {
         #region Equities
 
-        //[Serializable]
+        [Serializable]
         public class ZeroCurveRange
         {
             public DateTime RateDate;
             public double Rate;
         }
 
-        //[Serializable]
-        public class DividendRange
-        {
-            public DateTime DivDate;
-            public double DivAmt;
-        }
-
-        //[Serializable]
-        public class WingParamsRange
-        {
-            public double CurrentVolatility;
-            public double SlopeReference;
-            public double PutCurvature;
-            public double CallCurvature;
-            public double DownCutOff;
-            public double UpCutOff;
-            public double VolChangeRate;
-            public double SlopeChangeRate;
-            public double SkewSwimmingnessRate;
-            public double DownSmoothingRange;
-            public double UpSmoothingRange;
-            public double ReferenceForward;
-
-        }
-
         #endregion
 
         #region Helper Methods
+
+        /// <summary>
+        /// Returns the query properties.
+        /// </summary>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public static List<Triplet<string, string, object>> MapTradeQueryObject(object[,] query)
+        {
+            int rowMin = query.GetLowerBound(0);
+            int rowMax = query.GetUpperBound(0);
+            int colMin = query.GetLowerBound(1);
+            int colMax = query.GetUpperBound(1);
+            if (colMax - colMin + 1 != 3)
+                throw new ApplicationException("Input parameters must be 3 columns (name/op/value)!");
+            List<Triplet<string, string, object>> querySet = new List<Triplet<string, string, object>>();
+            for (int row = rowMin; row <= rowMax; row++)
+            {
+                int colName = colMin + 0;
+                int colOp = colMin + 1;
+                int colValue = colMin + 2;
+                var name = query[row, colName]?.ToString();
+                var op = query[row, colOp]?.ToString();
+                object value = query[row, colValue];
+                querySet.Add(new Triplet<string, string, object>(name, op, value));
+            }
+            return querySet;
+        }
+
+        /// <summary>
+        /// Map the trade data.
+        /// </summary>
+        /// <param name="tradeDataSet">The trade data.</param>
+        /// <returns></returns>
+        public static object[,] MapTradeQueryDataToObjectMatrix(List<TradeQueryData> tradeDataSet)
+        {
+
+            if (tradeDataSet != null)
+            {
+                int numRows = tradeDataSet.Count;
+                int numColumns = MapTradeQueryDataToObjectArray(tradeDataSet[0]).Length;
+                var result = new object[numRows, numColumns];
+                int row = 0;
+                foreach (var trade in tradeDataSet)
+                {
+                    var values = MapTradeQueryDataToObjectArray(trade);
+                    for(int i = 0; i < numColumns; i++)
+                    {
+                        result[row, i] = values[i];
+                    }
+                    row++;
+                }
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Map the trade data.
+        /// </summary>
+        /// <param name="tradeData">The trade data.</param>
+        /// <returns></returns>
+        public static object[] MapTradeQueryDataToObjectArray(TradeQueryData tradeData)
+        {
+            var tradeMap = new object[17];
+            tradeMap[0] = tradeData.ProductType;
+            tradeMap[1] = tradeData.TradeId;
+            tradeMap[2] = tradeData.TradeDate;
+            tradeMap[3] = tradeData.MaturityDate;
+            tradeMap[4] = tradeData.EffectiveDate;
+            tradeMap[5] = tradeData.TradeState;
+            tradeMap[6] = tradeData.RequiredCurrencies;
+            tradeMap[7] = tradeData.RequiredPricingStructures;
+            tradeMap[8] = tradeData.ProductTaxonomy;
+            tradeMap[9] = tradeData.AsAtDate;
+            tradeMap[10] = tradeData.SourceSystem;
+            tradeMap[11] = tradeData.TradingBookId;
+            tradeMap[12] = tradeData.TradingBookName;
+            tradeMap[13] = tradeData.BaseParty;
+            tradeMap[14] = tradeData.Party1;
+            tradeMap[15] = tradeData.Party2;
+            tradeMap[16] = tradeData.CounterPartyName;
+            tradeMap[17] = tradeData.OriginatingPartyName;
+            tradeMap[18] = tradeData.UniqueIdentifier;
+            return tradeMap;
+        }
 
         /// <summary>
         /// When Excel Ranges are converted to arrays they are 1 based...
@@ -76,7 +138,7 @@ namespace HLV5r3.Helpers
         /// <param name="rawTable"></param>
         /// <param name="convertPercentage">This is defaulted to be true. If false assume no conversion</param>
         /// <returns>0 based 2D array</returns>
-        public static object[,] RedimensionVolatilityGrid(object[,] rawTable, bool convertPercentage)
+        public static object[,] ReDimensionVolatilityGrid(object[,] rawTable, bool convertPercentage)
         {
             // Set the upper/lower bounds of the converted array and adjust the array we write to accordingly
             int hi1D = rawTable.GetUpperBound(0);
@@ -123,7 +185,7 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="rawTable"></param>
         /// <returns>0 based 2D array</returns>
-        public static object[,] RedimensionAssetGrid(object[,] rawTable)
+        public static object[,] ReDimensionAssetGrid(object[,] rawTable)
         {
             // Set the upper/lower bounds of the converted array and adjust the array we write to accordingly
             int rowCount = rawTable.GetUpperBound(0);
@@ -181,7 +243,7 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="rawTable"></param>
         /// <returns>0 based 2D array</returns>
-        public static object[,] RedimensionFullCapVolatilities(object[,] rawTable)
+        public static object[,] ReDimensionFullCapVolatilities(object[,] rawTable)
         {
             // Set the upper/lower bounds of the converted array and adjust the array we write to accordingly
             int hi1D = rawTable.GetUpperBound(0);

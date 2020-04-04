@@ -171,11 +171,11 @@ namespace Highlander.Utilities.Expressions
         {
             QuerySpec querySpec = XmlSerializerHelper.DeserializeFromString<QuerySpec>(queryXmlStr);
             if (querySpec == null)
-                throw new ArgumentNullException("querySpec");
+                throw new ArgumentNullException($"querySpec");
             if (querySpec.version != 1)
                 throw new NotSupportedException("QuerySpec version: " + querySpec.version);
             if (querySpec.v1QueryExpr == null)
-                throw new ArgumentNullException("querySpec.v1QueryExpr");
+                throw new ArgumentNullException($"querySpec.v1QueryExpr");
             return new Expr(querySpec.v1QueryExpr);
         }
 
@@ -540,7 +540,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds an ISNOTNULL expression from 1 argument.
+        /// Builds an IS NOT NULL expression from 1 argument.
         /// When evaluated, the expression returns: (arg1 != null)
         /// </summary>
         /// <param name="arg1">An expression</param>
@@ -550,7 +550,7 @@ namespace Highlander.Utilities.Expressions
             return new Expr(QueryOpCode.ISNOTNULL, arg1);
         }
         /// <summary>
-        /// Builds an ISNOTNULL expression using a property name.
+        /// Builds an IS NOT NULL expression using a property name.
         /// When evaluated, the expression returns: (Get(propName) != null)
         /// </summary>
         /// <param name="propName">Name of the property.</param>
@@ -663,7 +663,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds an ADDition expression from 2 numeric arguments.
+        /// Builds an (ADD) Addition expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 + arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -675,7 +675,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a MULtiplication expression from 2 numeric arguments.
+        /// Builds a (MULT) Multiplication expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 * arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -687,7 +687,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a SUBtraction expression from 2 numeric arguments.
+        /// Builds a (SUB) subtraction expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 - arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -699,7 +699,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a DIVision expression from 2 numeric arguments.
+        /// Builds a (DIV) division expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 / arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -811,7 +811,7 @@ namespace Highlander.Utilities.Expressions
         /// <param name="queryExpr">The query expr.</param>
         public Expr(V1QueryExpr queryExpr)
         {
-            // construct from deserialised xml message
+            // construct from deserialized xml message
             if (queryExpr == null)
                 throw new ArgumentNullException(nameof(queryExpr));
             // get node type: eg. const, propref, expr, etc.
@@ -840,7 +840,7 @@ namespace Highlander.Utilities.Expressions
                         {
                             try
                             {
-                                _operands[i] = new Expr(queryExpr.args[i]);
+                                if (queryExpr.args != null) _operands[i] = new Expr(queryExpr.args[i]);
                             }
                             catch (System.Exception excp)
                             {
@@ -863,6 +863,7 @@ namespace Highlander.Utilities.Expressions
                 _constValue = excp.ToString();
             }
         }
+
         private Expr(QueryNodeType nodeType, string propName, object constValue)
         {
             // constant/propref constructor
@@ -1138,8 +1139,8 @@ namespace Highlander.Utilities.Expressions
             if (TypeIsNumeric(type1) && TypeIsNumeric(type2))
             {
                 // numeric compare - as doubles
-                Double value1 = Convert.ToDouble(arg1);
-                Double value2 = Convert.ToDouble(arg2);
+                var value1 = Convert.ToDouble(arg1);
+                var value2 = Convert.ToDouble(arg2);
                 if (value1 == value2)
                     return 0;
                 if (value1 > value2)

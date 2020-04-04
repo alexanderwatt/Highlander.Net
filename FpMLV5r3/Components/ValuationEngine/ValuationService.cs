@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using Highlander.Core.Common;
 using Highlander.Reporting.Helpers.V5r3;
@@ -43,6 +44,7 @@ using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.Reporting.Identifiers.V5r3;
 using Highlander.Reporting.Analytics.V5r3.Helpers;
+using Highlander.ValuationEngine.V5r3.Helpers;
 using BondHelper = Highlander.Reporting.Helpers.V5r3.BondHelper;
 using XsdClassesFieldResolver = Highlander.Reporting.V5r3.XsdClassesFieldResolver;
 using Highlander.ValuationEngine.V5r3.Reports;
@@ -285,6 +287,17 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace">The required nameSpace.</param>
         /// <param name="uniqueTradeId">The unique trade identifier.</param>
         /// <returns></returns>
+        public Trade GetTrade(string uniqueTradeId)
+        {
+            return GetTrade(Logger, Cache, NameSpace, uniqueTradeId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameSpace">The required nameSpace.</param>
+        /// <param name="uniqueTradeId">The unique trade identifier.</param>
+        /// <returns></returns>
         public Trade GetTrade(string nameSpace, string uniqueTradeId)
         {
             return GetTrade(Logger, Cache, nameSpace, uniqueTradeId);
@@ -315,40 +328,83 @@ namespace Highlander.ValuationEngine.V5r3
         }
 
         /// <summary>
-        /// Returns the header information for all trades matching the query properties.
+        /// Returns the trade identifiers for all trades matching the query properties.
         /// </summary>
-        /// <param name="whereExpr">The query properties. A 2-column array of names and values.</param>
+        /// <param name="queryProperties">The query properties.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(object[,] whereExpr)
+        public List<string> QueryTradeIds(NamedValueSet queryProperties)
         {
-            return QueryTradeIds(Logger, Cache, NameSpace, whereExpr);
+            var trades = QueryTrades(Logger, Cache, NameSpace, queryProperties);
+            var result = new List<string>();
+            foreach (var trade in trades)
+            {
+                result.Add(trade.UniqueIdentifier);
+            }
+            return result;
         }
 
         /// <summary>
-        /// Returns the header information for all trades matching the query properties.
+        /// Returns the trades for all trades matching the query properties.
+        /// </summary>
+        /// <param name="queryProperties">The query properties.</param>
+        /// <returns></returns>
+        public List<TradeQueryData> QueryTrades(NamedValueSet queryProperties)
+        {
+            return QueryTrades(Logger, Cache, NameSpace, queryProperties);
+        }
+
+        /// <summary>
+        /// Returns the trade identifiers for all trades matching the query properties.
+        /// </summary>
+        /// <param name="whereExpr">The query properties. A 3-column array of names, operations and values.</param>
+        /// <returns></returns>
+        public List<TradeQueryData> QueryTrades(List<Triplet<string, string, object>> query)
+        {
+            return QueryTrades(Logger, Cache, NameSpace, query);
+        }
+
+        /// <summary>
+        /// Returns the trade data for all trades matching the query properties.
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
         /// <param name="query">The query properties. A 2-column array of names and values.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, string nameSpace, object[,] query)
+        public List<TradeQueryData> QueryTrades(ILogger logger, ICoreCache cache, string nameSpace,
+            NamedValueSet matchingPropertySet)
         {
-            int rowMin = query.GetLowerBound(0);
-            int rowMax = query.GetUpperBound(0);
-            int colMin = query.GetLowerBound(1);
-            int colMax = query.GetUpperBound(1);
-            if (colMax - colMin + 1 != 3)
-                throw new ApplicationException("Input parameters must be 3 columns (name/op/value)!");
-            IExpression whereExpr = null;
-            for (int row = rowMin; row <= rowMax; row++)
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            if (matchingPropertySet != null)
             {
-                int colName = colMin + 0;
-                int colOp = colMin + 1;
-                int colValue = colMin + 2;
-                var name = query[row, colName]?.ToString();
-                var op = query[row, colOp]?.ToString();
-                object value = query[row, colValue];
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            return QueryTrades(logger, cache, whereExpr);
+        }
+
+        /// <summary>
+        /// Returns the trade data for all trades matching the query properties.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public List<TradeQueryData> QueryTrades(ILogger logger, ICoreCache cache, string nameSpace, List<Triplet<string, string, object>> query)
+        {
+            IExpression whereExpr = null;
+            if (nameSpace != null)
+            {
+                whereExpr = Expr.IsEQU(EnvironmentProp.NameSpace, nameSpace);
+            }
+            foreach (var row in query)
+            {
+                var name = row.First;
+                var op = row.Second;
+                object value = row.Third;
                 if (name != null && (op != null) && (value != null))
                 {
                     op = op.ToLower().Trim();
@@ -374,7 +430,7 @@ namespace Highlander.ValuationEngine.V5r3
                         throw new ApplicationException("Unknown Operator: '" + op + "'");
                 }
             }
-            return QueryTradeIds(logger, cache, nameSpace, whereExpr);
+            return QueryTrades(logger, cache, whereExpr);
         }
 
         /// </summary>
@@ -383,52 +439,40 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace"></param>
         /// <param name="query">The query properties whereExpr.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(ILogger logger, ICoreCache cache, string nameSpace, IExpression whereExpr)
+        public List<TradeQueryData> QueryTrades(ILogger logger, ICoreCache cache, IExpression whereExpr)
         {
             List<ICoreItem> items = cache.LoadItems(typeof(Trade), whereExpr);//TODO what about confirmation?
-            var result = new object[items.Count + 1, 17];
-            // add heading row
-            result[0, 0] = TradeProp.ProductType;
-            result[0, 1] = TradeProp.TradeId;
-            result[0, 2] = TradeProp.TradeDate;
-            result[0, 3] = TradeProp.MaturityDate;
-            result[0, 4] = TradeProp.EffectiveDate;
-            result[0, 5] = TradeProp.TradeState;
-            result[0, 6] = TradeProp.RequiredCurrencies;
-            result[0, 7] = TradeProp.RequiredPricingStructures;
-            result[0, 8] = TradeProp.ProductTaxonomy;
-            result[0, 9] = TradeProp.AsAtDate;
-            result[0, 10] = EnvironmentProp.SourceSystem;
-            result[0, 11] = TradeProp.TradingBookId;
-            result[0, 12] = TradeProp.TradingBookName;
-            result[0, 13] = TradeProp.BaseParty;
-            result[0, 14] = TradeProp.Party1;
-            result[0, 15] = TradeProp.CounterPartyName;
-            result[0, 16] = TradeProp.Party2;
+            var result = new List<TradeQueryData>();
             // now add data rows
             int tradeNum = 1;
             foreach (ICoreItem item in items)
             {
                 try
                 {
-                    //var fpmlTrade = (Trade)item.Data;
-                    result[tradeNum, 0] = item.AppProps.GetValue<string>(TradeProp.ProductType);
-                    result[tradeNum, 1] = item.AppProps.GetValue<string>(TradeProp.TradeId);
-                    result[tradeNum, 2] = item.AppProps.GetValue<DateTime>(TradeProp.TradeDate).ToShortDateString();
-                    result[tradeNum, 3] = item.AppProps.GetValue<DateTime>(TradeProp.MaturityDate).ToShortDateString();
-                    result[tradeNum, 4] = item.AppProps.GetValue<DateTime>(TradeProp.EffectiveDate).ToShortDateString();
-                    result[tradeNum, 5] = item.AppProps.GetValue<string>(TradeProp.TradeState);
-                    result[tradeNum, 6] = String.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredCurrencies));
-                    result[tradeNum, 7] = String.Join(";", item.AppProps.GetArray<string>(TradeProp.RequiredPricingStructures));
-                    result[tradeNum, 8] = item.AppProps.GetValue<string>(TradeProp.ProductTaxonomy, null);
-                    result[tradeNum, 9] = item.AppProps.GetValue<DateTime>(TradeProp.AsAtDate).ToShortDateString();
-                    result[tradeNum, 10] = item.AppProps.GetValue<string>(EnvironmentProp.SourceSystem);
-                    result[tradeNum, 11] = item.AppProps.GetValue<string>(TradeProp.TradingBookId);
-                    result[tradeNum, 12] = item.AppProps.GetValue<string>(TradeProp.TradingBookName);
-                    result[tradeNum, 13] = item.AppProps.GetValue<string>(TradeProp.BaseParty);
-                    result[tradeNum, 14] = item.AppProps.GetValue<string>(TradeProp.Party1);
-                    result[tradeNum, 15] = item.AppProps.GetValue<string>(TradeProp.CounterPartyName);
-                    result[tradeNum, 16] = item.AppProps.GetValue<string>(TradeProp.OriginatingPartyName);
+                    var tradeData = new TradeQueryData
+                    {
+                        ProductType = item.AppProps.GetValue<string>(TradeProp.ProductType),
+                        TradeId = item.AppProps.GetValue<string>(TradeProp.TradeId),
+                        TradeDate = item.AppProps.GetValue<DateTime>(TradeProp.TradeDate),
+                        MaturityDate = item.AppProps.GetValue<DateTime>(TradeProp.MaturityDate),
+                        EffectiveDate = item.AppProps.GetValue<DateTime>(TradeProp.EffectiveDate),
+                        TradeState = item.AppProps.GetValue<string>(TradeProp.TradeState),
+                        RequiredCurrencies = string.Join(";",
+                            item.AppProps.GetArray<string>(TradeProp.RequiredCurrencies)),
+                        RequiredPricingStructures = string.Join(";",
+                            item.AppProps.GetArray<string>(TradeProp.RequiredPricingStructures)),
+                        ProductTaxonomy = item.AppProps.GetValue<string>(TradeProp.ProductTaxonomy, null),
+                        AsAtDate = item.AppProps.GetValue<DateTime>(TradeProp.AsAtDate),
+                        SourceSystem = item.AppProps.GetValue<string>(EnvironmentProp.SourceSystem),
+                        TradingBookId = item.AppProps.GetValue<string>(TradeProp.TradingBookId),
+                        TradingBookName = item.AppProps.GetValue<string>(TradeProp.TradingBookName),
+                        BaseParty = item.AppProps.GetValue<string>(TradeProp.BaseParty),
+                        Party1 = item.AppProps.GetValue<string>(TradeProp.Party1),
+                        Party2 = item.AppProps.GetValue<string>(TradeProp.Party2),
+                        UniqueIdentifier = item.AppProps.GetValue<string>(TradeProp.UniqueIdentifier),
+                        CounterPartyName = item.AppProps.GetValue<string>(TradeProp.CounterPartyName),
+                        OriginatingPartyName = item.AppProps.GetValue<string>(TradeProp.OriginatingPartyName)
+                    };
                     tradeNum++;
                 }
                 catch (System.Exception e)
@@ -436,7 +480,7 @@ namespace Highlander.ValuationEngine.V5r3
                     logger.LogError($"TradeStore.QueryTrades: Exception: {0}", e);
                 }
             }
-            logger.LogInfo("Trades retrieved from the cache.");
+            logger.LogInfo("{} trades retrieved from the cache.", tradeNum);
             return result;
         }
 
@@ -2549,8 +2593,8 @@ namespace Highlander.ValuationEngine.V5r3
             }
             var partya = properties.GetValue<string>(TradeProp.Party1, true);
             var partyb = properties.GetValue<string>(TradeProp.Party2, true);
-            var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
-            var businessDayAdjustments = properties.GetValue(BondProp.BusinessDayAdjustments, "FOLLOWING");
+            var businessDayCalendar = properties.GetValue(PropertyProp.BusinessDayCalendar, "AUSY");
+            var businessDayAdjustments = properties.GetValue(PropertyProp.BusinessDayAdjustments, "FOLLOWING");
             var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             properties.GetValue(TradeProp.EffectiveDate, effectiveDate);
             properties.GetValue(TradeProp.TradeDate, tradeDate);

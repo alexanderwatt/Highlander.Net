@@ -47,13 +47,13 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
         /// <param name="observedRatesSpecified">The observed rates specified.</param>
         /// <param name="observedRates">The observed rates.</param>
         /// <returns></returns>
-        internal static RateObservation[] CreateRateObservations(Boolean[] observedRatesSpecified, decimal[] observedRates)
+        internal static RateObservation[] CreateRateObservations(bool[] observedRatesSpecified, decimal[] observedRates)
         {
             var rateObservations = new List<RateObservation>();
             if (observedRates != null && observedRates.Length > 0)
             {
                 int index = 0;
-                foreach (Boolean observedRateSpecified in observedRatesSpecified)
+                foreach (bool observedRateSpecified in observedRatesSpecified)
                 {
                     if (observedRateSpecified)
                     {

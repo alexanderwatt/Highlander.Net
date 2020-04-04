@@ -1,29 +1,33 @@
-﻿using Highlander.Core.Interface.V5r3;
+﻿using System;
+using Highlander.Core.Interface.V5r3;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
 using System.Web.Http;
+using Highlander.Codes.V5r3;
+using Highlander.Constants;
+using Highlander.Utilities.NamedValues;
 
 namespace Highlander.Web.API.V5r3.Controllers
 {
     [RoutePrefix("api/valuation")]
     public class ValuationController : ApiController
     {
-        private readonly PricingCache pricingCache;
-        private readonly Reference<ILogger> logger;
+        private readonly PricingCache _pricingCache;
+        private readonly Reference<ILogger> _logger;
 
         public ValuationController(PricingCache pricingCache, Reference<ILogger> logger)
         {
-            this.pricingCache = pricingCache;
-            this.logger = logger;
+            _pricingCache = pricingCache;
+            _logger = logger;
             logger.Target.LogInfo("Instantiating ValuationController...");
         }
 
         [HttpGet]
         [Route("trade")]
-        public IHttpActionResult GetTradeValuation(string id)
+        public IHttpActionResult GetTrade(string id)
         {
-            var trade = pricingCache.GetTrade(id);
+            var trade = _pricingCache.GetTrade(id);
             if (trade == null)
             {
                 return NotFound();
@@ -33,28 +37,65 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("trades")]
-        public IHttpActionResult GetTrades()
+        public IHttpActionResult GetPropertyTradeIds()
         {
-            //TODO
-            return Ok();
+            var properties = new NamedValueSet();
+            properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
+            properties.Set(TradeProp.ProductType, ItemChoiceType15.propertyTransaction);
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            var trades = _pricingCache.QueryTradeIds(properties);
+            if (trades == null)
+            {
+                return NotFound();
+            }
+            return Ok(trades);
+        }
+
+        [HttpGet]
+        [Route("trades")]
+        public IHttpActionResult GetLeaseTradeIds(string propertyId)
+        {
+            var properties = new NamedValueSet();
+            properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
+            properties.Set(LeaseProp.ReferencePropertyIdentifier, propertyId);
+            properties.Set(TradeProp.ProductType, ItemChoiceType15.leaseTransaction);
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            var trades = _pricingCache.QueryTradeIds(properties);
+            if (trades == null)
+            {
+                return NotFound();
+            }
+            return Ok(trades);
         }
 
         [HttpPost]
         [Route("trades")]
-        public IHttpActionResult Create(Trade trade)
+        public IHttpActionResult CreatePropertyTrade(string tradeId, bool isParty1Buyer, string party1, string party2, 
+            DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount, DateTime paymentDate, string propertyType, 
+            string currency, string propertyIdentifier, string tradingBook)
         {
-            //TODO
-            //db.Add(person);
-            //db.SaveChanges();
-            //pricingCache.CreatePropertyTrade()
-            return Ok();
+            var result = _pricingCache.CreatePropertyTrade(tradeId, isParty1Buyer, party1, party2, tradeDate, effectiveDate,
+                purchaseAmount,
+                paymentDate, propertyType, currency, propertyIdentifier, tradingBook);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("trades")]
+        public IHttpActionResult CreateLeaseTrade(string tradeId, bool isParty1Tenant, string party1, string party2,
+            DateTime tradeDate, DateTime leaseStartDate, string currency, string portfolio, decimal startGrossAmount, string leaseId,
+            DateTime leaseExpiryDate, string referencePropertyIdentifier, string description)
+        {
+            var result = _pricingCache.CreateLeaseTrade(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
+                currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("curve")]
         public IHttpActionResult GetCurve(string id)
         {
-            var pricingStructure = pricingCache.GetPricingStructure(id);
+            var pricingStructure = _pricingCache.GetPricingStructure(id);
             return Ok(pricingStructure);
         }
     }

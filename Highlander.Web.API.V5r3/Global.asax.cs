@@ -76,10 +76,7 @@ namespace Highlander.Web.API.V5r3
 
             builder.Register(c => client).As<ICoreClient>().SingleInstance();
 
-            builder.Register(c =>
-            {
-                return c.Resolve<ICoreClient>().CreateCache();
-            }).As<ICoreCache>().SingleInstance();
+            builder.Register(c => c.Resolve<ICoreClient>().CreateCache()).As<ICoreCache>().SingleInstance();
 
             try
             {

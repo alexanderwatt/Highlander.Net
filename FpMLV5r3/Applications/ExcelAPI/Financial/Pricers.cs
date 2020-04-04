@@ -75,10 +75,11 @@ namespace HLV5r3.Financial
         /// </summary>
         /// <param name="queryRange">The query properties. A 2-column array of names and values.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(Range queryRange)
+        public object[,] QueryTrades(Range queryRange)
         {
             var query = queryRange.Value[System.Reflection.Missing.Value] as object[,];
-            return ValService.QueryTradeIds(query);
+            var result = ValService.QueryTrades(DataRangeHelper.MapTradeQueryObject(query));
+            return DataRangeHelper.MapTradeQueryDataToObjectMatrix(result);
         }
 
         /// <summary>

@@ -964,24 +964,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Highlander.WebAPI.V5r3.Controllers.ProductsController">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.ProductsController.GetAllProducts">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.ProductsController.GetProduct(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="T:Highlander.WebAPI.V5r3.Controllers.PricingController">
             <summary>
             Creates and views trades.
@@ -992,7 +974,7 @@
             The logger
             </summary>
         </member>
-        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingController.PricingCache">
+        <member name="F:Highlander.WebAPI.V5r3.Controllers.PricingController._pricingCache">
             <summary>
             
             </summary>
@@ -1002,13 +984,19 @@
             
             </summary>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetAllTrades">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetAllPropertyTradesIds">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetTrade(System.String)">
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetLeaseTradesIds(System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetPropertyTrade(System.String)">
             <summary>
             
             </summary>
@@ -1074,31 +1062,6 @@
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
-        </member>
-        <member name="T:Highlander.WebAPI.V5r3.Models.Product">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Category">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Highlander.WebAPI.V5r3.Models.Product.Price">
-            <summary>
-            
-            </summary>
         </member>
     </members>
 </doc>

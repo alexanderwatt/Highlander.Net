@@ -34,7 +34,7 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
         {
             if (XsdClassesFieldResolver.StubValueHasStubRateArray(stubValue))
             {
-                Decimal fixedRate = XsdClassesFieldResolver.GetStubValueStubRateArray(stubValue)[0];
+                decimal fixedRate = XsdClassesFieldResolver.GetStubValueStubRateArray(stubValue)[0];
                 // Fixed rate
                 //
                 XsdClassesFieldResolver.SetCalculationPeriodFixedRate(stubCalculationPeriod, fixedRate);

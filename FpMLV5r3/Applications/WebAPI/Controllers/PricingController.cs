@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Web.Http;
-using System.Web.Mvc;
 using Highlander.Core.Interface.V5r3;
+using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
@@ -24,7 +23,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// <summary>
         /// 
         /// </summary>
-        public PricingCache PricingCache;
+        private readonly PricingCache _pricingCache;
 
         /// <summary>
         /// 
@@ -37,7 +36,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
             {
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
-                PricingCache = new PricingCache();
+                _pricingCache = new PricingCache();
                 stopwatch.Stop();
                 Debug.Print("Initialized environment, in {0} seconds", stopwatch.Elapsed.TotalSeconds);
                 LoggerRef.Target.LogInfo("Loaded..." + fullAppName);
@@ -52,7 +51,16 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Trade> GetAllTrades()
+        public IEnumerable<string> GetAllPropertyTradesIds()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetLeaseTradesIds(string id)
         {
             return null;
         }
@@ -62,10 +70,10 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IHttpActionResult GetTrade(string id)
+        public Trade GetPropertyTrade(string id)
         {
-            var trade = PricingCache.GetTrade(id);
-            return Ok(trade);
+            var trade = _pricingCache.GetTrade(id);
+            return trade;//Ok(trade)
         }
 
         /// <summary>
@@ -73,10 +81,10 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IHttpActionResult GetCurve(string id)
+        public PricingStructureData GetCurve(string id)
         {
-            var pricingStructure = PricingCache.GetPricingStructure(id);
-            return Ok(pricingStructure);
+            var pricingStructure = _pricingCache.GetPricingStructure(id);
+            return pricingStructure;//Ok(pricingStructure)
         }
 
         ///// <summary>

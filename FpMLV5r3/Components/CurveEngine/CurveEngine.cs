@@ -781,7 +781,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <summary>
         /// Returns the header information for all curves matching the query properties.
         /// </summary>
-        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <param name="query">The query properties. A 3-column array of names, operations and values.</param>
         /// <returns></returns>
         public object[,] CurvesQuery(object[,] query)
         {

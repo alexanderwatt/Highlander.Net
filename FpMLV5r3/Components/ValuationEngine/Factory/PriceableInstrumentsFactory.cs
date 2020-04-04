@@ -27,7 +27,6 @@ using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.Reporting.Analytics.V5r3.Schedulers;
 using Highlander.CalendarEngine.V5r3.Helpers;
 using Highlander.CalendarEngine.V5r3.Schedulers;
-using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates;
 using Highlander.ValuationEngine.V5r3.Instruments;
@@ -100,8 +99,8 @@ namespace Highlander.ValuationEngine.V5r3.Factory
             {
                 var calculationPeriod = calculationPeriods[0];
                 //Money expectedCashFlow = null;
-                decimal notionalamount = XsdClassesFieldResolver.CalculationPeriodGetNotionalAmount(calculationPeriod);
-                Money money = buyerIsBase ? MoneyHelper.GetAmount(-1 * notionalamount, currency) : MoneyHelper.GetAmount(notionalamount, currency);
+                decimal notionalAmount = XsdClassesFieldResolver.CalculationPeriodGetNotionalAmount(calculationPeriod);
+                Money money = buyerIsBase ? MoneyHelper.GetAmount(-1 * notionalAmount, currency) : MoneyHelper.GetAmount(notionalAmount, currency);
                 var accrualStartDate = calculationPeriod.adjustedStartDateSpecified
                                            ? calculationPeriod.adjustedStartDate
                                            : calculationPeriod.unadjustedStartDate;
@@ -114,7 +113,7 @@ namespace Highlander.ValuationEngine.V5r3.Factory
                 {
                     //The floating rate definition.
                     FloatingRateDefinition floatingRateDefinition = XsdClassesFieldResolver.CalculationPeriodGetFloatingRateDefinition(calculationPeriod);
-                    //The floatingrateCalculation.
+                    //The floatingRateCalculation.
                     Debug.Assert(calculation.Items != null);
                     Debug.Assert(calculation.Items.Length > 0);
                     Debug.Assert(calculation.Items[0] is FloatingRateCalculation);
@@ -131,9 +130,9 @@ namespace Highlander.ValuationEngine.V5r3.Factory
                         margin = floatingRateDefinition.spread;
                     }
                     //The observed rate.
-                    Decimal? observedRate = null;
-                    Decimal? capStrike = null;
-                    Decimal? floorStrike = null;
+                    decimal? observedRate = null;
+                    decimal? capStrike = null;
+                    decimal? floorStrike = null;
                     if (floatingRateDefinition.capRate!=null)
                     {
                         capStrike = floatingRateDefinition.capRate[0].strikeRate;
@@ -398,7 +397,6 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         {
             string id1 = fxLeg.exchangedCurrency1.id ?? "Payment_" + fxLeg.exchangedCurrency1.paymentAmount.currency.Value;
             string id2 = fxLeg.exchangedCurrency2.id ?? "Payment_" + fxLeg.exchangedCurrency2.paymentAmount.currency.Value;
-
             var priceablePayments = new List<PriceablePayment>();
             bool payerIsBase = false;
             //payment1
@@ -436,7 +434,6 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         {
             string id1 = fxLeg.exchangedCurrency1.id ?? "Payment_" + fxLeg.exchangedCurrency1.paymentAmount.currency.Value;
             string id2 = fxLeg.exchangedCurrency2.id ?? "Payment_" + fxLeg.exchangedCurrency2.paymentAmount.currency.Value;
-            
             var priceablePayments = new List<PriceablePayment>();
             bool payerIsBase = false;
             //payment1

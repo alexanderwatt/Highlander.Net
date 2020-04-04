@@ -58,6 +58,8 @@ namespace Highlander.Constants
         public const string PropertyIndex = "PropertyIndex";
         public const string SchemaType = "SchemaType";
         public const string SchemaVersion = "SchemaVersion";
+        public const string BusinessDayCalendar = "BusinessDayCalendar";
+        public const string BusinessDayAdjustments = "BusinessDayAdjustments";
     }
 
     public static class LeaseProp

@@ -77,6 +77,5 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
             }
             return fra;
         }
-
     }
 }

@@ -13,6 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+using System;
 using Highlander.Codes.V5r3;
 using Highlander.Utilities.NamedValues;
 
@@ -31,6 +32,7 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
             var isValid = false;
             switch (productType)
             {
+                case ProductTypeSimpleEnum.LeaseTransaction:
                 case ProductTypeSimpleEnum.InterestRateSwap:
                 case ProductTypeSimpleEnum.AssetSwap:
                 case ProductTypeSimpleEnum.CrossCurrencySwap:
@@ -50,6 +52,42 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
                 case ProductTypeSimpleEnum.CommodityForward:
                     isValid = true;
                     break;
+                case ProductTypeSimpleEnum.Undefined:
+                    break;
+                case ProductTypeSimpleEnum.InflationSwap:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultSwap:
+                    break;
+                case ProductTypeSimpleEnum.TotalReturnSwap:
+                    break;
+                case ProductTypeSimpleEnum.VarianceSwap:
+                    break;
+                case ProductTypeSimpleEnum.EquityOption:
+                    break;
+                case ProductTypeSimpleEnum.BondOption:
+                    break;
+                case ProductTypeSimpleEnum.FxOptionStrategy:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultIndex:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultIndexTranche:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultBasket:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultBasketTranche:
+                    break;
+                case ProductTypeSimpleEnum.CreditDefaultOption:
+                    break;
+                case ProductTypeSimpleEnum.EquityForward:
+                    break;
+                case ProductTypeSimpleEnum.DividendSwap:
+                    break;
+                case ProductTypeSimpleEnum.ConvertibleBondOption:
+                    break;
+                case ProductTypeSimpleEnum._LAST_:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(productType), productType, null);
             }
             return isValid;
         }

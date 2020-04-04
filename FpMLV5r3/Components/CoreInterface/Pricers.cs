@@ -37,6 +37,7 @@ using Highlander.Utilities.Helpers;
 using Highlander.Utilities.NamedValues;
 using Highlander.ValuationEngine.V5r3;
 using Highlander.ValuationEngine.V5r3.Generators;
+using Highlander.ValuationEngine.V5r3.Helpers;
 using Highlander.ValuationEngine.V5r3.Pricers;
 using TradeIdentifier = Highlander.Reporting.Identifiers.V5r3.TradeIdentifier;
 using XsdClassesFieldResolver = Highlander.Reporting.V5r3.XsdClassesFieldResolver;
@@ -72,12 +73,23 @@ namespace Highlander.Core.Interface.V5r3
         /// <summary>
         /// Returns the header information for all trades matching the query properties.
         /// </summary>
-        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <param name="queryProperties">The query properties. A 2-column array of names and values.</param>
         /// <returns></returns>
-        public object[,] QueryTradeIds(object[,] query)
+        public List<string> QueryTradeIds(NamedValueSet queryProperties)
         {
-            return ValService.QueryTradeIds(query);
+            return ValService.QueryTradeIds(queryProperties);
         }
+
+        /// <summary>
+        /// Returns the header information for all trades matching the query properties.
+        /// </summary>
+        /// <param name="queryProperties">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public List<TradeQueryData> QueryTradeData(NamedValueSet queryProperties)
+        {
+            return ValService.QueryTrades(queryProperties);
+        }
+
 
         /// <summary>
         /// Returns the header information for all trades matching the query properties.
