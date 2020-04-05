@@ -350,7 +350,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseCurrency">The base Currency.</param>
         /// <param name="forceBootstrap">The force a bootstrap flag.</param>
         /// <returns></returns>
-        public static IMarketEnvironment GetMarket(ILogger logger, ICoreCache cache, string nameSpace, Product product, string market, string baseCurrency, Boolean forceBootstrap)
+        public static IMarketEnvironment GetMarket(ILogger logger, ICoreCache cache, string nameSpace, Product product, string market, string baseCurrency, bool forceBootstrap)
         {
             var curveNames = product.GetRequiredPricingStructures();
             var marketEnvironment = new MarketEnvironment {Id = market};
@@ -382,7 +382,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="curveMap">The curve Map.</param>
         /// <param name="forceBootstrap">The force a bootstrap flag.</param>
         /// <returns></returns>
-        public static IMarketEnvironment GetCurves(ILogger logger, ICoreCache cache, String nameSpace, List<Pair<string, string>> curveMap, Boolean forceBootstrap)
+        public static IMarketEnvironment GetCurves(ILogger logger, ICoreCache cache, String nameSpace, List<Pair<string, string>> curveMap, bool forceBootstrap)
         {
             var marketEnvironment = new MarketEnvironment();
             foreach (var pair in curveMap)
@@ -402,7 +402,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="uniqueName">The uniqueName.</param>
         /// <param name="forceBootstrap">The force a bootstrap flag.</param>
         /// <returns></returns>
-        public static IPricingStructure GetCurve(ILogger logger, ICoreCache cache, String nameSpace, String uniqueName, Boolean forceBootstrap)
+        public static IPricingStructure GetCurve(ILogger logger, ICoreCache cache, string nameSpace, string uniqueName, bool forceBootstrap)
         {
             var item = cache.LoadItem<Market>(nameSpace + "." + uniqueName);
             if (item == null)
@@ -413,7 +413,7 @@ namespace Highlander.CurveEngine.V5r3
             {
                 properties.Set("Bootstrap", true);
             }
-            //Handle rate basis curves that are dependent on another ratecurve.
+            //Handle rate basis curves that are dependent on another rate curve.
             //TODO This functionality needs to be extended for calibrations (bootstrapping),
             //TODO where there is AccountReference dependency on one or more pricing structures.
             var pst = PropertyHelper.ExtractPricingStructureType(properties);
@@ -887,6 +887,21 @@ namespace Highlander.CurveEngine.V5r3
         #endregion
 
         #region Assets Local Saving, Retrieval and Evaluation
+
+        /// <summary>
+        /// Load Asset Config from the XML in the database
+        /// </summary>
+        /// <param name="propertyAssetIdentifier"></param>
+        /// <returns></returns>
+        public Instrument GetPropertyAsset(string propertyAssetIdentifier)
+        {
+            if (string.IsNullOrEmpty(propertyAssetIdentifier))
+            {
+                throw new ArgumentException("Asset identifier must be entered");
+            }
+            string id = $"{FunctionProp.Configuration}.Instrument.{ReferenceDataProp.Property}.{propertyAssetIdentifier}";
+            return InstrumentDataHelper.GetInstrumentConfigurationData(Cache, NameSpace, id);
+        }
 
         /// <summary>
         /// Load Asset Config from the XML in the database

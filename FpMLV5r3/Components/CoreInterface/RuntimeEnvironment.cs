@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using Highlander.Build;
+using Highlander.Configuration.Data.V5r3;
 using Highlander.Constants;
 using Highlander.Core.Common;
 using Highlander.Core.V34;
@@ -62,6 +63,10 @@ namespace Highlander.Core.Interface.V5r3
                     .SetProtocols(WcfConst.AllProtocolsStr);
                 _client = factory.SetServers("localhost").Create();
                 Cache = _client.CreateCache();
+                // load configuration data
+                LogRef.Target.LogInfo("LoadReferenceData: Running...");
+                LoadConfigDataHelper.LoadConfigurationData(LogRef.Target, _client.Proxy, nameSpace);
+                LogRef.Target.LogInfo("LoadReferenceData: Loaded");
                 var time = stopwatch.ElapsedMilliseconds;
                 stopwatch.Stop();
                 Log(LogRef.Target, "The application :" + ApplicationName + "took " + time + " to start.", ApplicationName, "RuntimeEnvironment");

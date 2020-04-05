@@ -40,6 +40,7 @@ using Highlander.Utilities.Threading;
 using Highlander.ValuationEngine.V5r3;
 using Highlander.WinTools;
 using Highlander.Build;
+using Highlander.Core.Interface.V5r3;
 using Highlander.Metadata.Common;
 using Highlander.Utilities.NamedValues;
 using AppCfgRuleV2 = Highlander.Core.Common.AppCfgRuleV2;
@@ -59,6 +60,7 @@ namespace Highlander.Core.Viewer.V5r3
         private readonly Guarded<Queue<ICoreItem>> _queuedItems = new Guarded<Queue<ICoreItem>>(new Queue<ICoreItem>());
         private string _navDetailSubject;
         private readonly string _nameSpace = EnvironmentProp.DefaultNameSpace;
+        private readonly PricingCache _pricingCache = new PricingCache();
 
         public CoreViewerForm()
         {
@@ -131,7 +133,7 @@ namespace Highlander.Core.Viewer.V5r3
                 else
                     _client = factory.SetServers(txtSpecificServers.Text).Create();
                 _syncContext.Post(OnClientStateChange, new CoreStateChange(CoreStateEnum.Initial, _client.CoreState));
-                _client.OnStateChange += _Client_OnStateChange;
+                _client.OnStateChange += _clientOnStateChange;
             }
             catch (Exception excp)
             {
@@ -139,10 +141,7 @@ namespace Highlander.Core.Viewer.V5r3
             }
         }
 
-        void _Client_OnStateChange(CoreStateChange update)
-        {
-            _syncContext.Post(OnClientStateChange, update);
-        }
+        private void _clientOnStateChange(CoreStateChange update) => _syncContext.Post(OnClientStateChange, update);
 
         private void OnClientStateChange(object state)
         {
@@ -160,7 +159,7 @@ namespace Highlander.Core.Viewer.V5r3
 
         public void ProcessItems()
         {
-            int count = Interlocked.Decrement(ref _queuedCalls);
+            var count = Interlocked.Decrement(ref _queuedCalls);
             // exit if there are more callbacks following us
             if (count % 10000 == 0)
                 _loggerRef.Target.LogDebug("ProcessItems: Queued calls remaining: {0}", count);
@@ -284,36 +283,26 @@ namespace Highlander.Core.Viewer.V5r3
           return index == -1 ? top : index;
         }
 
-/*
-        private void PurgeExpiredItems(TreeNodeCollection nodes)
-        {
-            PurgeExpiredItems(nodes, 0);
-        }
-*/
 
-        //private void PurgeExpiredItems(TreeNodeCollection nodes, int level)
-        //{
-        //    // removes items that have expired
-        //    // then removes nodes that have no item or child nodes
-        //    // but does not remove root (level=0) nodes
-        //    foreach (TreeNode node in nodes)
-        //    {
-        //        // check children first
-        //        PurgeExpiredItems(node.Nodes, level + 1);
-        //        // now check this node
-        //        if (node.Tag != null)
-        //        {
-        //            if (node.Tag is ICoreItem)
-        //            {
-        //                var item = (ICoreItem)node.Tag;
-        //                if (!item.IsCurrent())
-        //                    node.Tag = null;
-        //            }
-        //        }
-        //        if ((level != 0) && (node.Tag == null) && (node.Nodes.Count == 0))
-        //            node.Remove();
-        //    }
-        //}
+        private void PurgeExpiredItems(TreeNodeCollection nodes, int level = 0)
+        {
+            // removes items that have expired
+            // then removes nodes that have no item or child nodes
+            // but does not remove root (level=0) nodes
+            foreach (TreeNode node in nodes)
+            {
+                // check children first
+                PurgeExpiredItems(node.Nodes, level + 1);
+                // now check this node
+                if (node.Tag is ICoreItem item)
+                {
+                    if (!item.IsCurrent())
+                        node.Tag = null;
+                }
+                if (level != 0 && node.Tag == null && node.Nodes.Count == 0)
+                    node.Remove();
+            }
+        }
 
         /// <summary>
         /// Shows message box confirming deleting 
@@ -506,20 +495,20 @@ namespace Highlander.Core.Viewer.V5r3
             CleanUp();
         }
 
-        private void SaveToFileToolStripMenuItemClick(object sender, EventArgs e)
+        private void StripMenuItemSaveToFileToolClick(object sender, EventArgs e)
         {
             if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToSave))
                 return;
             saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
             saveFileDialog1.FileName = itemToSave.Name + ".xml";
             saveFileDialog1.Filter = Resources.CoreViewerForm_SaveToFileToolStripMenuItemClick_XML_files____xml____xml;
-            DialogResult result = saveFileDialog1.ShowDialog();
+            var result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
                 // save item
-                string baseFilename = Path.GetFullPath(saveFileDialog1.FileName);
-                string xmlFilename = Path.ChangeExtension(baseFilename, ".xml");
-                string nvsFilename = Path.ChangeExtension(xmlFilename, ".nvs");
+                var baseFilename = Path.GetFullPath(saveFileDialog1.FileName);
+                var xmlFilename = Path.ChangeExtension(baseFilename, ".xml");
+                var nvsFilename = Path.ChangeExtension(xmlFilename, ".nvs");
                 try
                 {
                     using (var sr = new StreamWriter(xmlFilename))
@@ -538,7 +527,7 @@ namespace Highlander.Core.Viewer.V5r3
             }
         }
 
-        private void ViewPropertiesStripMenuItemClick(object sender, EventArgs e)
+        private void StripMenuItemCloneTradeClick(object sender, EventArgs e)
         {
             if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToValue))
                 return;
@@ -548,7 +537,17 @@ namespace Highlander.Core.Viewer.V5r3
             frm.ShowDialog();
         }
 
-        private void ViewXmlStripMenuItemClick(object sender, EventArgs e)
+        private void StripMenuItemViewPropertiesClick(object sender, EventArgs e)
+        {
+            if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToValue))
+                return;
+            //Load the form
+            //
+            var frm = new PropertiesForm(itemToValue);
+            frm.ShowDialog();
+        }
+
+        private void StripMenuItemViewXmlClick(object sender, EventArgs e)
         {
             if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToValue))
                 return;
@@ -558,7 +557,7 @@ namespace Highlander.Core.Viewer.V5r3
             xmlTreeDisplay.ShowDialog();
         }
 
-        private void ViewMarketStripMenuItemClick(object sender, EventArgs e)
+        private void StripMenuItemViewMarketClick(object sender, EventArgs e)
         {
             if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToValue))
                 return;
@@ -568,7 +567,7 @@ namespace Highlander.Core.Viewer.V5r3
             psv.ShowDialog();
         }
 
-        private void ValueStripMenuItemClick(object sender, EventArgs e)
+        private void StripMenuItemValueClick(object sender, EventArgs e)
         {
             if (!(treeNavigation.SelectedNode?.Tag is ICoreItem itemToValue))
                 return;
@@ -736,14 +735,17 @@ namespace Highlander.Core.Viewer.V5r3
             }
         }
 
-        private void groupBox5_Enter(object sender, EventArgs e)
+        //private void groupBox5_Enter(object sender, EventArgs e)
+        //{
+
+        //}
+
+        private void BtnCreateTradeClick(object sender, EventArgs e)
         {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
+            //Load the form
+            //
+            var frm = new CreateTradeForm(_pricingCache);
+            frm.ShowDialog();
         }
     }
 }

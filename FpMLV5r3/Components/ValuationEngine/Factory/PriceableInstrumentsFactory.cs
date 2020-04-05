@@ -520,7 +520,7 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         /// <param name="paymentCalendar"> </param>
         /// <param name="cache"></param>
         /// <returns></returns>
-        public static PriceableFxOptionPremium CreatePriceableFxOptionPremium(ICoreCache cache, String nameSpace,
+        public static PriceableFxOptionPremium CreatePriceableFxOptionPremium(ICoreCache cache, string nameSpace,
             DateTime? baseDateForRelativeOffset, string baseParty, FxOptionPremium optionPremia, 
             IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
@@ -647,9 +647,9 @@ namespace Highlander.ValuationEngine.V5r3.Factory
                         margin = floatingRateDefinition.spread;
                     }
                     //The observed rate.
-                    Decimal? observedRate = null;
-                    Decimal? capStrike = null;
-                    Decimal? floorStrike = null;
+                    decimal? observedRate = null;
+                    decimal? capStrike = null;
+                    decimal? floorStrike = null;
                     if (floatingRateDefinition.capRate != null)
                     {
                         capStrike = floatingRateDefinition.capRate[0].strikeRate;

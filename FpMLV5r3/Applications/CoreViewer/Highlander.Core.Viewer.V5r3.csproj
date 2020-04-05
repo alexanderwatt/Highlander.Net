@@ -120,6 +120,10 @@
       <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
       <Name>Highlander.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Components\CoreInterface\Highlander.Core.Interface.V5r3.csproj">
+      <Project>{e3df5f07-1420-4c0d-a8a3-bda19fb24810}</Project>
+      <Name>Highlander.Core.Interface.V5r3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Components\CurveEngine\Highlander.CurveEngine.V5r3.csproj">
       <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
       <Name>Highlander.CurveEngine.V5r3</Name>

@@ -32,14 +32,14 @@ namespace Highlander.Reporting.UI.V5r3
             //Set the trade identifier
             //
             textBox1.Text = coreItem.Name;
-            //Instantiate the datagrid
+            //Instantiate the data grid
             //
             dataGridView1.Columns.Add("PropertyName", "Name");
             dataGridView1.Columns.Add("PropertyValue", "Value");
             var properties = coreItem.AppProps.ToDictionary();
             foreach (var property in properties)
             {
-                String value = null;
+                string value = null;
                 if (property.Value is Array temp)
                 {
                     foreach (var element in temp)

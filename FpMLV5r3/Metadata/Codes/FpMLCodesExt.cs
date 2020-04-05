@@ -5433,6 +5433,11 @@ namespace Highlander.Codes.V5r3
         Equity_OrdinaryShares,
         Equity_Forward_Physical,
         Property_Residential,
+        Property_Commercial,
+        Property_Other,
+        Lease_Residential,
+        Lease_Commercial,
+        Lease_Other,
         Exchange_Traded_Future
     }
 

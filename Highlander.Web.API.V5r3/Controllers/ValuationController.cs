@@ -41,7 +41,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         {
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
-            properties.Set(TradeProp.ProductType, ItemChoiceType15.propertyTransaction);
+            properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             var trades = _pricingCache.QueryTradeIds(properties);
             if (trades == null)
@@ -59,7 +59,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
             properties.Set(LeaseProp.ReferencePropertyIdentifier, propertyId);
-            properties.Set(TradeProp.ProductType, ItemChoiceType15.leaseTransaction);
+            properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             var trades = _pricingCache.QueryTradeIds(properties);
             if (trades == null)

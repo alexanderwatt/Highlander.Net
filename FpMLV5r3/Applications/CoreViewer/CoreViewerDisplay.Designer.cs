@@ -51,13 +51,16 @@ namespace Highlander.Core.Viewer.V5r3
             this.viewXmlStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewMarketStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.valueStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createTradeStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.nameSpaceTextBox1 = new System.Windows.Forms.TextBox();
             this.btnLoadConfigData = new System.Windows.Forms.Button();
             this.groupBoxValuation = new System.Windows.Forms.GroupBox();
             this.listBoxMetrics = new System.Windows.Forms.ListBox();
             this.lblMetrics = new System.Windows.Forms.Label();
             this.comboBoxParty = new System.Windows.Forms.ComboBox();
+            this.txtBoxTradeDirectory = new System.Windows.Forms.TextBox();
             this.comboBoxMarket = new System.Windows.Forms.ComboBox();
             this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -66,7 +69,6 @@ namespace Highlander.Core.Viewer.V5r3
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePickerValuation = new System.Windows.Forms.DateTimePicker();
             this.btnLoadTrade = new System.Windows.Forms.Button();
-            this.txtBoxTradeDirectory = new System.Windows.Forms.TextBox();
             this.chkDebugRequests = new System.Windows.Forms.CheckBox();
             this.btnUnsubscribe = new System.Windows.Forms.Button();
             this.btnSubscribe = new System.Windows.Forms.Button();
@@ -113,7 +115,7 @@ namespace Highlander.Core.Viewer.V5r3
             this.treeNavigation = new System.Windows.Forms.TreeView();
             this.txtNavDetail = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.nameSpaceTextBox1 = new System.Windows.Forms.TextBox();
+            this.createTradeBtn = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -136,9 +138,10 @@ namespace Highlander.Core.Viewer.V5r3
             this.viewPropertiesStripMenuItem,
             this.viewXmlStripMenuItem,
             this.viewMarketStripMenuItem,
-            this.valueStripMenuItem});
+            this.valueStripMenuItem,
+            this.createTradeStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 136);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 158);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1Opening);
             // 
             // toolStripMenuItem1
@@ -153,35 +156,42 @@ namespace Highlander.Core.Viewer.V5r3
             this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
             this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.saveToFileToolStripMenuItem.Text = "Save to File...";
-            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.SaveToFileToolStripMenuItemClick);
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.StripMenuItemSaveToFileToolClick);
             // 
             // viewPropertiesStripMenuItem
             // 
             this.viewPropertiesStripMenuItem.Name = "viewPropertiesStripMenuItem";
             this.viewPropertiesStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.viewPropertiesStripMenuItem.Text = "View Properties...";
-            this.viewPropertiesStripMenuItem.Click += new System.EventHandler(this.ViewPropertiesStripMenuItemClick);
+            this.viewPropertiesStripMenuItem.Click += new System.EventHandler(this.StripMenuItemViewPropertiesClick);
             // 
             // viewXmlStripMenuItem
             // 
             this.viewXmlStripMenuItem.Name = "viewXmlStripMenuItem";
             this.viewXmlStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.viewXmlStripMenuItem.Text = "View Xml...";
-            this.viewXmlStripMenuItem.Click += new System.EventHandler(this.ViewXmlStripMenuItemClick);
+            this.viewXmlStripMenuItem.Click += new System.EventHandler(this.StripMenuItemViewXmlClick);
             // 
             // viewMarketStripMenuItem
             // 
             this.viewMarketStripMenuItem.Name = "viewMarketStripMenuItem";
             this.viewMarketStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.viewMarketStripMenuItem.Text = "View Market...";
-            this.viewMarketStripMenuItem.Click += new System.EventHandler(this.ViewMarketStripMenuItemClick);
+            this.viewMarketStripMenuItem.Click += new System.EventHandler(this.StripMenuItemViewMarketClick);
             // 
             // valueStripMenuItem
             // 
             this.valueStripMenuItem.Name = "valueStripMenuItem";
             this.valueStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.valueStripMenuItem.Text = "Value Trade...";
-            this.valueStripMenuItem.Click += new System.EventHandler(this.ValueStripMenuItemClick);
+            this.valueStripMenuItem.Click += new System.EventHandler(this.StripMenuItemValueClick);
+            // 
+            // createTradeStripMenuItem
+            // 
+            this.createTradeStripMenuItem.Name = "createTradeStripMenuItem";
+            this.createTradeStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.createTradeStripMenuItem.Text = "Create Trade...";
+            this.createTradeStripMenuItem.Click += new System.EventHandler(this.StripMenuItemCloneTradeClick);
             // 
             // panel1
             // 
@@ -236,7 +246,15 @@ namespace Highlander.Core.Viewer.V5r3
             this.groupBox5.TabIndex = 34;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Query definition";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+            //this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+            // 
+            // nameSpaceTextBox1
+            // 
+            this.nameSpaceTextBox1.Location = new System.Drawing.Point(464, 16);
+            this.nameSpaceTextBox1.Name = "nameSpaceTextBox1";
+            this.nameSpaceTextBox1.Size = new System.Drawing.Size(106, 20);
+            this.nameSpaceTextBox1.TabIndex = 69;
+            this.nameSpaceTextBox1.Text = "Highlander.V5r3";
             // 
             // btnLoadConfigData
             // 
@@ -250,6 +268,7 @@ namespace Highlander.Core.Viewer.V5r3
             // 
             // groupBoxValuation
             // 
+            this.groupBoxValuation.Controls.Add(this.createTradeBtn);
             this.groupBoxValuation.Controls.Add(this.listBoxMetrics);
             this.groupBoxValuation.Controls.Add(this.lblMetrics);
             this.groupBoxValuation.Controls.Add(this.comboBoxParty);
@@ -263,7 +282,7 @@ namespace Highlander.Core.Viewer.V5r3
             this.groupBoxValuation.Controls.Add(this.dateTimePickerValuation);
             this.groupBoxValuation.Location = new System.Drawing.Point(706, 0);
             this.groupBoxValuation.Name = "groupBoxValuation";
-            this.groupBoxValuation.Size = new System.Drawing.Size(459, 190);
+            this.groupBoxValuation.Size = new System.Drawing.Size(419, 190);
             this.groupBoxValuation.TabIndex = 67;
             this.groupBoxValuation.TabStop = false;
             this.groupBoxValuation.Text = "Trade Valuation";
@@ -331,7 +350,7 @@ namespace Highlander.Core.Viewer.V5r3
             this.listBoxMetrics.Location = new System.Drawing.Point(262, 17);
             this.listBoxMetrics.Name = "listBoxMetrics";
             this.listBoxMetrics.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxMetrics.Size = new System.Drawing.Size(151, 173);
+            this.listBoxMetrics.Size = new System.Drawing.Size(151, 134);
             this.listBoxMetrics.TabIndex = 75;
             // 
             // lblMetrics
@@ -355,6 +374,14 @@ namespace Highlander.Core.Viewer.V5r3
             this.comboBoxParty.Size = new System.Drawing.Size(141, 21);
             this.comboBoxParty.TabIndex = 73;
             this.comboBoxParty.Text = "CBA";
+            // 
+            // txtBoxTradeDirectory
+            // 
+            this.txtBoxTradeDirectory.Location = new System.Drawing.Point(6, 162);
+            this.txtBoxTradeDirectory.Name = "txtBoxTradeDirectory";
+            this.txtBoxTradeDirectory.Size = new System.Drawing.Size(250, 20);
+            this.txtBoxTradeDirectory.TabIndex = 59;
+            this.txtBoxTradeDirectory.Text = "c:\\Development\\";
             // 
             // comboBoxMarket
             // 
@@ -401,7 +428,6 @@ namespace Highlander.Core.Viewer.V5r3
             this.label12.Size = new System.Drawing.Size(51, 13);
             this.label12.TabIndex = 66;
             this.label12.Text = "Valuation";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label9
             // 
@@ -437,14 +463,6 @@ namespace Highlander.Core.Viewer.V5r3
             this.btnLoadTrade.Text = "Load Trade";
             this.btnLoadTrade.UseVisualStyleBackColor = true;
             this.btnLoadTrade.Click += new System.EventHandler(this.BtnLoadTradeClick);
-            // 
-            // txtBoxTradeDirectory
-            // 
-            this.txtBoxTradeDirectory.Location = new System.Drawing.Point(6, 162);
-            this.txtBoxTradeDirectory.Name = "txtBoxTradeDirectory";
-            this.txtBoxTradeDirectory.Size = new System.Drawing.Size(250, 20);
-            this.txtBoxTradeDirectory.TabIndex = 59;
-            this.txtBoxTradeDirectory.Text = "c:\\Development\\";
             // 
             // chkDebugRequests
             // 
@@ -846,7 +864,7 @@ namespace Highlander.Core.Viewer.V5r3
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1439, 523);
+            this.tabPage5.Size = new System.Drawing.Size(1304, 523);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Browser";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -864,8 +882,8 @@ namespace Highlander.Core.Viewer.V5r3
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.txtNavDetail);
-            this.splitContainer2.Size = new System.Drawing.Size(1433, 517);
-            this.splitContainer2.SplitterDistance = 472;
+            this.splitContainer2.Size = new System.Drawing.Size(1298, 517);
+            this.splitContainer2.SplitterDistance = 427;
             this.splitContainer2.TabIndex = 2;
             // 
             // treeNavigation
@@ -874,7 +892,7 @@ namespace Highlander.Core.Viewer.V5r3
             this.treeNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeNavigation.Location = new System.Drawing.Point(0, 0);
             this.treeNavigation.Name = "treeNavigation";
-            this.treeNavigation.Size = new System.Drawing.Size(472, 517);
+            this.treeNavigation.Size = new System.Drawing.Size(427, 517);
             this.treeNavigation.TabIndex = 0;
             this.treeNavigation.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeNavigationAfterSelect);
             this.treeNavigation.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TreeNavigationKeyUp);
@@ -886,16 +904,18 @@ namespace Highlander.Core.Viewer.V5r3
             this.txtNavDetail.Multiline = true;
             this.txtNavDetail.Name = "txtNavDetail";
             this.txtNavDetail.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtNavDetail.Size = new System.Drawing.Size(957, 517);
+            this.txtNavDetail.Size = new System.Drawing.Size(867, 517);
             this.txtNavDetail.TabIndex = 0;
             // 
-            // nameSpaceTextBox1
+            // createTradeBtn
             // 
-            this.nameSpaceTextBox1.Location = new System.Drawing.Point(464, 16);
-            this.nameSpaceTextBox1.Name = "nameSpaceTextBox1";
-            this.nameSpaceTextBox1.Size = new System.Drawing.Size(106, 20);
-            this.nameSpaceTextBox1.TabIndex = 69;
-            this.nameSpaceTextBox1.Text = "Highlander.V5r3";
+            this.createTradeBtn.Location = new System.Drawing.Point(262, 157);
+            this.createTradeBtn.Name = "createTradeBtn";
+            this.createTradeBtn.Size = new System.Drawing.Size(151, 25);
+            this.createTradeBtn.TabIndex = 76;
+            this.createTradeBtn.Text = "Create Trade";
+            this.createTradeBtn.UseVisualStyleBackColor = true;
+            this.createTradeBtn.Click += new System.EventHandler(this.BtnCreateTradeClick);
             // 
             // CoreViewerForm
             // 
@@ -982,6 +1002,7 @@ namespace Highlander.Core.Viewer.V5r3
         private System.Windows.Forms.ToolStripMenuItem viewXmlStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewMarketStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem valueStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createTradeStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox txtSpecificServers;
         private System.Windows.Forms.RadioButton rbSpecificServer;
@@ -1002,6 +1023,7 @@ namespace Highlander.Core.Viewer.V5r3
         private bool _suppressWarningMessageBox = false;
         private System.Windows.Forms.Button btnLoadConfigData;
         private System.Windows.Forms.TextBox nameSpaceTextBox1;
+        private System.Windows.Forms.Button createTradeBtn;
     }
 }
 

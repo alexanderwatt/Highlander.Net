@@ -1588,7 +1588,7 @@ namespace Highlander.ValuationEngine.V5r3
                 var item = Cache.LoadItem<Exchange>(newid);
                 // save item
                 string baseFilename = Path.GetFullPath(directoryPath);
-                baseFilename = baseFilename + id;
+                baseFilename += id;
                 string xmlFilename = baseFilename + ".xml";
                 string nvsFilename = baseFilename + ".nvs";
                 using (var sr = new StreamWriter(xmlFilename))
@@ -1811,7 +1811,7 @@ namespace Highlander.ValuationEngine.V5r3
                 var item = Cache.LoadItem<Bond>(newid);
                 // save item
                 string baseFilename = Path.GetFullPath(directoryPath);
-                baseFilename = baseFilename + id;
+                baseFilename += id;
                 string xmlFilename = baseFilename + ".xml";
                 string nvsFilename = baseFilename + ".nvs";
                 using (var sr = new StreamWriter(xmlFilename))
@@ -2293,7 +2293,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// </summary>
         /// <param name="cache">THe cache where the data is cached.</param>
         /// <param name="nameSpace">THe namespace.</param>
-        /// <param name="propertyIdentifier">The property identifier.</param>
+        /// <param name="propertyAssetIdentifier">The property asset identifier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
@@ -2310,30 +2310,35 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyIdentifier, string propertyType, string streetIdentifier, string streetName,
+        public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyAssetIdentifier, string propertyType, string streetIdentifier, string streetName,
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, string description, NamedValueSet properties)
         {
-            if (properties != null)
+            if (properties is null)
             {
-                properties.Set(PropertyProp.Currency, currency);
-                properties.Set(PropertyProp.AsAtDate, DateTime.Today);
-                properties.Set(PropertyProp.Function, FunctionProp.ReferenceData.ToString());
-                properties.Set(PropertyProp.DataGroup, NameSpace + "." + FunctionProp.ReferenceData.ToString());
-                properties.Set(PropertyProp.Domain, FunctionProp.ReferenceData.ToString() + ".Property");
-                properties.Set(PropertyProp.SourceSystem, "Highlander");
-                properties.Set(EnvironmentProp.NameSpace, nameSpace);
-                properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-                properties.Set(PropertyProp.Description, description);
-                properties.Set(PropertyProp.PropertyType, propertyType);
-                var property = PropertyAssetHelper.Create(propertyIdentifier, propertyType, streetIdentifier, streetName,
-                suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
-                var identifier = new PropertyIdentifier(propertyType, city, suburb, streetName, streetIdentifier);
-                properties.Set(PropertyProp.UniqueIdentifier, identifier.UniqueIdentifier);
-                cache.SaveObject(property, nameSpace + "." + identifier.UniqueIdentifier, properties);
-                logger.LogDebug("Created new property: {0}", identifier.UniqueIdentifier);
-                return identifier.Id;
+                properties = new NamedValueSet();
             }
-            return "Insufficent information provided to create the property.";
+            properties.Set(PropertyProp.Currency, currency);
+            properties.Set(PropertyProp.AsAtDate, DateTime.Today);
+            properties.Set(PropertyProp.Function, FunctionProp.Configuration.ToString());
+            properties.Set(PropertyProp.DataGroup, NameSpace + "." + FunctionProp.Configuration.ToString());
+            properties.Set(PropertyProp.Domain, FunctionProp.Configuration.ToString() + ".Property");
+            properties.Set(PropertyProp.SourceSystem, "Highlander");
+            properties.Set(EnvironmentProp.NameSpace, nameSpace);
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(PropertyProp.Description, description);
+            properties.Set(PropertyProp.PropertyType, propertyType);
+            var propertyAsset = PropertyAssetHelper.Create(propertyAssetIdentifier, propertyType, streetIdentifier, streetName,
+            suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
+            //This identifier is too complex.
+            //var identifier = new PropertyIdentifier(propertyType, city, suburb, streetName, streetIdentifier);
+            var assetIdentifier = NameSpace + "." + FunctionProp.Configuration + ".Instrument." + 
+                                  ReferenceDataProp.Property + "." + propertyAssetIdentifier;
+            properties.Set(PropertyProp.UniqueIdentifier, assetIdentifier);
+            var propertyInstrument = new PropertyNodeStruct {Property = propertyAsset};
+            //TODO Add the loan information
+            cache.SaveObject(propertyInstrument, assetIdentifier, properties);
+            logger.LogDebug("Created new property asset: {0}", assetIdentifier);
+            return assetIdentifier;
         }
 
         #endregion
@@ -2489,7 +2494,7 @@ namespace Highlander.ValuationEngine.V5r3
             properties.Set(TradeProp.UniqueIdentifier, null);
             var productType = new object[] { ProductTypeHelper.Create("LeaseTransaction") };
             var amount = Convert.ToDouble(upfrontAmount);
-            var leaseTransaction = new Highlander.Reporting.V5r3.LeaseTransaction
+            var leaseTransaction = new LeaseTransaction
             {
                 buyerPartyReference =
                     PartyReferenceHelper.Parse(buyer),
@@ -2600,8 +2605,8 @@ namespace Highlander.ValuationEngine.V5r3
             properties.GetValue(TradeProp.TradeDate, tradeDate);
             properties.GetValue(TradeProp.PaymentDate, paymentDate);
             properties.Set(TradeProp.TradingBookName, portfolio);
-            var propertyTradeIdentifier = $"{FunctionProp.Trade}.{sourceSystem}.{ItemChoiceType15.propertyTransaction}.{tradeId}";
-            var assetIdentifier = NameSpace + "." + FunctionProp.ReferenceData + "." + 
+            var propertyTradeIdentifier = $"{FunctionProp.Trade}.{FpML5R3NameSpaces.Reporting}.{sourceSystem}.{ItemChoiceType15.propertyTransaction}.{tradeId}";
+            var assetIdentifier = NameSpace + "." + FunctionProp.Configuration + "." + 
                                   ReferenceDataProp.Property + "." + propertyAssetIdentifier;
             var item = cache.LoadItem<PropertyAsset>(assetIdentifier);
             if (item?.Data is PropertyAsset property)
@@ -2706,8 +2711,8 @@ namespace Highlander.ValuationEngine.V5r3
         /// This is used to determine the base direction in calculations</param>
         /// <param name="numberOfShares">The number of shares. </param>
         /// <returns></returns>
-        public string CreateEquityTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Buyer, DateTime tradeDate, Decimal numberOfShares,
-            Decimal unitPrice, String unitPriceCurrency, string equityIdentifier, NamedValueSet properties)
+        public string CreateEquityTransactionWithProperties(ILogger logger, ICoreCache cache, string tradeId, bool isParty1Buyer, DateTime tradeDate, decimal numberOfShares,
+            decimal unitPrice, string unitPriceCurrency, string equityIdentifier, NamedValueSet properties)
         {
             //Party Information
             string buyer = "Party1";
@@ -2717,13 +2722,13 @@ namespace Highlander.ValuationEngine.V5r3
                 buyer = "Party2";
                 seller = "Party1";
             }
-            var partya = properties.GetValue<String>(TradeProp.Party1, true);
-            var partyb = properties.GetValue<String>(TradeProp.Party2, true);
+            var partya = properties.GetValue<string>(TradeProp.Party1, true);
+            var partyb = properties.GetValue<string>(TradeProp.Party2, true);
             var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
             var bondSettlemetDate = properties.GetValue(TradeProp.EffectiveDate, tradeDate);
             var businessDayCalendar = properties.GetValue(BondProp.BusinessDayCalendar, "AUSY");
             var businessDayAdjustments = properties.GetValue(BondProp.BusinessDayAdjustments, "FOLLOWING");
-            var equityTradeIdentifier = String.Format("{0}.{1}.{2}.{3}", FunctionProp.Trade, sourceSystem, ItemChoiceType15.equityTransaction, tradeId);
+            var equityTradeIdentifier = string.Format("{0}.{1}.{2}.{3}", FunctionProp.Trade, sourceSystem, ItemChoiceType15.equityTransaction, tradeId);
             var item = cache.LoadItem<EquityAsset>(NameSpace + "." + FunctionProp.ReferenceData + "." + ReferenceDataProp.Equity + "." + equityIdentifier);
             //properties.Add(item.AppProps);
             if (item.Data is EquityAsset equity)

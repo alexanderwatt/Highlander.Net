@@ -275,7 +275,7 @@ namespace HLV5r3.Helpers
 
         /// <summary>
         /// A range will devolve to a 2d array of object. This method will take this and generate
-        /// an array of strings. This is required by the Interpolated clibration engine routines.
+        /// an array of strings. This is required by the Interpolated calibration engine routines.
         /// </summary>
         public static string[] ConvertRangeToStringArray(object[,] objHandles)
         {
@@ -324,8 +324,7 @@ namespace HLV5r3.Helpers
             var colIndex = 0;
             if (rowCount > 1 || colCount > 1)
             {
-                var range = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-                if (range != null)
+                if (inputRange.Value[System.Reflection.Missing.Value] is object[,] range)
                     for (int i = range.GetLowerBound(0); i <= range.GetUpperBound(0); i++)
                     {
                         for (int j = range.GetLowerBound(1); j <= range.GetUpperBound(1); j++)
@@ -354,8 +353,7 @@ namespace HLV5r3.Helpers
             var colIndex = 0;
             if (rowCount > 1 || colCount > 1)
             {
-                var range = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-                if (range != null)
+                if (inputRange.Value[System.Reflection.Missing.Value] is object[,] range)
                     for (int i = range.GetLowerBound(0); i <= range.GetUpperBound(0); i++)
                     {
                         for (int j = range.GetLowerBound(1); j <= range.GetUpperBound(1); j++)
@@ -571,24 +569,24 @@ namespace HLV5r3.Helpers
         ///<param name="expiries">The expiry array.</param>
         ///<param name="tenors">The underlying tenor array.</param>
         ///<param name="strikes">The strike array.</param>
-        ///<param name="dataRange">The volatiltiy data range.</param>
+        ///<param name="dataRange">The volatility data range.</param>
         ///<param name="numTenors">The number of underlying tenors.</param>
         ///<returns></returns>
-        public static List<Matrix> MapFromSurface(String[] expiries, String[] tenors, Decimal strikes, Matrix dataRange, int numTenors)
+        public static List<Matrix> MapFromSurface(string[] expiries, string[] tenors, decimal strikes, Matrix dataRange, int numTenors)
         {
             var result = new List<Matrix>();
             return result;
         }
 
         ///<summary>
-        /// Sttrips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<param name="tenorFilter">The tenor string to filter on.</param>
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikes">The strike array.</param>
         ///<returns></returns>
-        public static double[,] FilterSurface(object[,] inputRange, String tenorFilter, int numTenors, Double[] strikes)
+        public static double[,] FilterSurface(object[,] inputRange, string tenorFilter, int numTenors, double[] strikes)
         {
             var result = GetTenorSurfaceFromCube2(inputRange, tenorFilter, numTenors, strikes);
             return result;
@@ -596,14 +594,14 @@ namespace HLV5r3.Helpers
         }
 
         ///<summary>
-        /// Sttrips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<param name="tenorFilter">The tenor string to filter on.</param>
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikes">The strike array.</param>
         ///<returns></returns>
-        public static object[,] FilterSurfaceWithExpiries(object[,] inputRange, String tenorFilter, int numTenors, Double[] strikes)
+        public static object[,] FilterSurfaceWithExpiries(object[,] inputRange, string tenorFilter, int numTenors, double[] strikes)
         {
             var result = GetTenorSurfaceFromCube3(inputRange, tenorFilter, numTenors, strikes);
             return result;
@@ -611,7 +609,7 @@ namespace HLV5r3.Helpers
         }
 
         ///<summary>
-        /// Gets the disctinct expisiries, which maust be in the first column.
+        /// Gets the distinct expiries, which must be in the first column.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<returns></returns>
@@ -627,7 +625,7 @@ namespace HLV5r3.Helpers
         }
 
         ///<summary>
-        /// Gets the disctinct expisiries, which maust be in the first column.
+        /// Gets the distinct expiries, which must be in the first column.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<returns></returns>
@@ -643,14 +641,14 @@ namespace HLV5r3.Helpers
         }
 
         ///<summary>
-        /// Sttrips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
         ///</summary>
         ///<param name="inputRange">The input data range.</param>
         ///<param name="tenorFilter">The tenor string to filter on.</param>
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikes">The strike array.</param>
         ///<returns></returns>
-        public static object[,] GetTenorSurfaceFromCube3(object[,] inputRange, String tenorFilter, int numTenors, Double[] strikes)
+        public static object[,] GetTenorSurfaceFromCube3(object[,] inputRange, string tenorFilter, int numTenors, double[] strikes)
         {
             var numRows = inputRange.GetLength(0);
             var rows = numRows / numTenors;
@@ -682,7 +680,7 @@ namespace HLV5r3.Helpers
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikes">The strike array.</param>
         ///<returns></returns>
-        public static double[,] GetTenorSurfaceFromCube2(object[,] inputRange, String tenorFilter, int numTenors, Double[] strikes)
+        public static double[,] GetTenorSurfaceFromCube2(object[,] inputRange, string tenorFilter, int numTenors, double[] strikes)
         {
             var numRows = inputRange.GetLength(0);
             var rows = numRows / numTenors;
@@ -713,7 +711,7 @@ namespace HLV5r3.Helpers
         ///<param name="numTenors">The number of tenors.</param>
         ///<param name="strikes">The strike array.</param>
         ///<returns></returns>
-        public static Matrix GetTenorSurfaceFromCube(object[,] inputRange, String tenorFilter, int numTenors, Decimal[] strikes)
+        public static Matrix GetTenorSurfaceFromCube(object[,] inputRange, string tenorFilter, int numTenors, decimal[] strikes)
         {
             var numRows = inputRange.GetLength(1);
             var rows = numRows/numTenors;
@@ -743,29 +741,27 @@ namespace HLV5r3.Helpers
         /// <returns></returns>
         public static List<string> StripRange(Excel.Range excelRange)
         {
-            var unqVals = new List<string>();
+            var unqValues = new List<string>();
             if (excelRange.Cells.Count == 1)
             {
-                var value = excelRange.Value[System.Reflection.Missing.Value] as string;
-                if (value != null)
+                if (excelRange.Value[System.Reflection.Missing.Value] is string value)
                 {
                     var elements = value.Split('-');
-                    unqVals.AddRange(elements);
+                    unqValues.AddRange(elements);
                 }
             }
             else
             {
-                var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];
-                if (values != null)
+                if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
                     foreach (object obj in values)
                     {
                         if (obj != null)
                         {
-                            unqVals.Add(obj.ToString());
+                            unqValues.Add(obj.ToString());
                         }
                     }
             }
-            return unqVals;
+            return unqValues;
         }
 
         /// <summary>
@@ -775,7 +771,7 @@ namespace HLV5r3.Helpers
         /// <returns></returns>
         public static List<DateTime> StripDateTimeRange(Excel.Range excelRange)
         {
-            var unqVals = new List<DateTime>();
+            var unqValues = new List<DateTime>();
             if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
             {
                 foreach (object obj in values)
@@ -783,16 +779,16 @@ namespace HLV5r3.Helpers
                     var date = obj is DateTime;
                     if (date)
                     {
-                        unqVals.Add((DateTime)obj);
+                        unqValues.Add((DateTime)obj);
                     }
                 }
             }
             else
             {
                 var date = (DateTime)excelRange.Value[System.Reflection.Missing.Value];
-                unqVals.Add(date);
+                unqValues.Add(date);
             }
-            return unqVals;
+            return unqValues;
         }
 
         /// <summary>
@@ -802,7 +798,7 @@ namespace HLV5r3.Helpers
         /// <returns></returns>
         public static List<int> StripIntRange(Excel.Range excelRange)
         {
-            var unqVals = new List<int>();
+            var unqValues = new List<int>();
             if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
             {
                 foreach (object obj in values)
@@ -810,7 +806,7 @@ namespace HLV5r3.Helpers
                     try
                     {
                         var result = obj is int;
-                        unqVals.Add(!result ? int.Parse(obj.ToString()) : Convert.ToInt32(obj));
+                        unqValues.Add(!result ? int.Parse(obj.ToString()) : Convert.ToInt32(obj));
                     }
                     catch
                     {
@@ -823,10 +819,10 @@ namespace HLV5r3.Helpers
                 var val = excelRange.Value[System.Reflection.Missing.Value];
                 if (val != null)
                 {
-                    unqVals.Add(Convert.ToInt32(val));
+                    unqValues.Add(Convert.ToInt32(val));
                 }
             }
-            return unqVals;
+            return unqValues;
         }
 
         /// <summary>
@@ -836,14 +832,14 @@ namespace HLV5r3.Helpers
         /// <returns></returns>
         public static List<double> StripDoubleRange(Excel.Range excelRange)
         {
-            var unqVals = new List<Double>();
+            var unqValues = new List<double>();
             var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];
             if (excelRange.Cells.Count > 1)
             {
                 if (values != null)
                     foreach (object obj in values)
                     {
-                        unqVals.Add(obj != null ? Convert.ToDouble(obj) : 0.0);
+                        unqValues.Add(obj != null ? Convert.ToDouble(obj) : 0.0);
                     }
             }
             else
@@ -851,10 +847,10 @@ namespace HLV5r3.Helpers
                 var val = excelRange.Value[System.Reflection.Missing.Value];
                 if (val != null)
                 {
-                    unqVals.Add(Convert.ToDouble(val));
+                    unqValues.Add(Convert.ToDouble(val));
                 }
             }
-            return unqVals;
+            return unqValues;
         }
 
         /// <summary>
@@ -862,16 +858,15 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="excelRange"></param>
         /// <returns></returns>
-        public static List<Decimal> StripDecimalRange(Excel.Range excelRange)
+        public static List<decimal> StripDecimalRange(Excel.Range excelRange)
         {
-            var unqVals = new List<Decimal>();
+            var unqValues = new List<decimal>();
             if (excelRange.Cells.Count > 1)
             {
-                var values = excelRange.Value[System.Reflection.Missing.Value] as object[,];
-                if (values != null)
+                if (excelRange.Value[System.Reflection.Missing.Value] is object[,] values)
                     foreach (object obj in values)
                     {
-                        unqVals.Add(obj != null ? Convert.ToDecimal(obj) : 0.0m);
+                        unqValues.Add(obj != null ? Convert.ToDecimal(obj) : 0.0m);
                     }
             }
             else
@@ -879,10 +874,10 @@ namespace HLV5r3.Helpers
                 var val = excelRange.Value[System.Reflection.Missing.Value];
                 if (val != null)
                 {
-                    unqVals.Add(Convert.ToDecimal(val));
+                    unqValues.Add(Convert.ToDecimal(val));
                 }
             }
-            return unqVals;
+            return unqValues;
         }
 
         #endregion

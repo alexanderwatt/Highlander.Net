@@ -73,6 +73,8 @@ namespace Highlander.Core.Interface.V5r3
         public PricingCache(string nameSpace)
         {
             NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
+            //This environment now loads default data
+            //TODO make the configuration data specific to the namespace!
             Environment = new RuntimeEnvironment(NameSpace);
             Engine = new CurveEngine.V5r3.CurveEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
             ValService = new ValuationService(Environment.LogRef.Target, Environment.Cache, NameSpace);
@@ -374,6 +376,17 @@ namespace Highlander.Core.Interface.V5r3
         #endregion
 
         #region Assets and Instruments
+
+        /// <summary>
+        /// Load Property Asset Config
+        /// </summary>
+        /// <param name="propertyAssetIdentifier"></param>
+        /// <returns></returns>
+        public Instrument GetPropertyAsset(string propertyAssetIdentifier)
+        {
+            return Engine.GetPropertyAsset(propertyAssetIdentifier);
+        }
+
 
         /// <summary>
         /// Load Asset Config from the XML in the database
@@ -1296,8 +1309,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="numParking">The number of car parking spots.</param>
         /// <param name="currency">THe currency.</param>
         /// <param name="description">The issuer description.</param>
-        /// <param name="propertyHeaders">An array property headers.</param>
-        /// <param name="propertyValues">An array of property values. All strings. </param>
+        /// <param name="properties">An array of properties. </param>
         /// <param name="city">The city</param>
         /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="state">The state</param>
@@ -1307,16 +1319,8 @@ namespace Highlander.Core.Interface.V5r3
         /// <returns></returns>
         public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName, 
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
-            string currency, string description, List<string> propertyHeaders, List<string> propertyValues)
+            string currency, string description, NamedValueSet properties)
         {
-            if (propertyHeaders.Count != propertyValues.Count) return "The arrays are not of equal length!";
-            var properties = new NamedValueSet();
-            var index = 0;
-            foreach (var header in propertyHeaders)
-            {
-                properties.Set(header, propertyValues[index]);
-                index++;
-            }
             var result = ValService.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;

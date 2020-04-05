@@ -915,7 +915,8 @@ namespace Highlander.Core.Interface.V5r3
             properties.Set(TradeProp.TradingBookId, TradeState.Pricing.ToString());
             properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction.ToString());
             properties.Set(TradeProp.TradeType, ItemChoiceType15.propertyTransaction.ToString());
-            properties.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Property_Residential));
+            //TODO Test for property type!
+            properties.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Property_Commercial));
             properties.Set(TradeProp.TradeDate, tradeDate);
             properties.Set(TradeProp.EffectiveDate, effectiveDate);
             properties.Set(TradeProp.PaymentDate, paymentDate);
@@ -947,8 +948,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="namedValueSet">The properties range</param>
         /// <returns></returns>
         public string CreatePropertyTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, 
-            decimal purchaseAmount,
-            DateTime paymentDate, string propertyType, string currency, string propertyIdentifier, string tradingBook, NamedValueSet namedValueSet)
+            decimal purchaseAmount, DateTime paymentDate, string propertyType, string currency, string propertyIdentifier, string tradingBook, NamedValueSet namedValueSet)
         {
             namedValueSet.Set(TradeProp.Party1, party1);
             namedValueSet.Set(TradeProp.Party2, party2);
@@ -965,9 +965,9 @@ namespace Highlander.Core.Interface.V5r3
             //Set the pricing information
             namedValueSet.Set(TradeProp.EffectiveDate, effectiveDate);
             //Set other properties
-            namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.EquityTransaction.ToString());
-            namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.equityTransaction.ToString());
-            namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Equity_OrdinaryShares));
+            namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction.ToString());
+            namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.propertyTransaction.ToString());
+            namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Property_Commercial));
             namedValueSet.Set(TradeProp.TradeDate, tradeDate);
             namedValueSet.Set(TradeProp.EffectiveDate, effectiveDate);
             namedValueSet.Set(TradeProp.MaturityDate, effectiveDate);
@@ -1075,9 +1075,9 @@ namespace Highlander.Core.Interface.V5r3
                 //Set the pricing information
                 namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
                 //Set other properties
-                namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.EquityTransaction.ToString());
-                namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.equityTransaction.ToString());
-                namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Equity_OrdinaryShares));
+                namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction.ToString());
+                namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.leaseTransaction.ToString());
+                namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Lease_Commercial));
                 namedValueSet.Set(TradeProp.TradeDate, tradeDate);
                 namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
                 namedValueSet.Set(TradeProp.MaturityDate, leaseExpiryDate);

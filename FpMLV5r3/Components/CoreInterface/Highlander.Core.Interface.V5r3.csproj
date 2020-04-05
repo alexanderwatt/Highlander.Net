@@ -98,6 +98,10 @@
       <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
       <Name>Highlander.Codes.V5r3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ConfigData\Highlander.Configuration.Data.V5r3.csproj">
+      <Project>{A99322D4-6D41-499F-BE4E-62DAB22FF97F}</Project>
+      <Name>Highlander.Configuration.Data.V5r3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
       <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
       <Name>Highlander.Reporting.Identifiers.V5r3</Name>

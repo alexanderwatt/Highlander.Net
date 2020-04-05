@@ -766,9 +766,7 @@ namespace Highlander.Utilities.Expressions
 
         public static IExpression Deserialise(string text)
         {
-            IExpression result;
-            System.Exception excp;
-            TryDeserialise(text, out result, out excp);
+            TryDeserialise(text, out var result, out _);
             return result;
         }
 

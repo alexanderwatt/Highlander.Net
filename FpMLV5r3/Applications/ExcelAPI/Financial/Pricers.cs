@@ -99,7 +99,7 @@ namespace HLV5r3.Financial
         /// <param name="requestProperties">The request Properties.</param>
         /// <param name="metricToReturn">The metric To Return.</param>
         /// <returns>A list identifiers that can be uses as handles.</returns>
-        public object[,] ShowValuationReports(Range requestProperties, String metricToReturn)
+        public object[,] ShowValuationReports(Range requestProperties, string metricToReturn)
         {
             var properties = requestProperties.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
@@ -412,7 +412,7 @@ namespace HLV5r3.Financial
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="marketsArray">The markets as a vertical range.</param>
         /// <returns></returns>
-        public string ValueTradeFromMarkets(String valuationPortfolioId, string uniqueTradeId, string reportingParty, Range metricsArray, string reportingCurrency, Range marketsArray,
+        public string ValueTradeFromMarkets(string valuationPortfolioId, string uniqueTradeId, string reportingParty, Range metricsArray, string reportingCurrency, Range marketsArray,
             DateTime valuationDate)
         {
             var metrics = DataRangeHelper.StripRange(metricsArray);
@@ -825,8 +825,8 @@ namespace HLV5r3.Financial
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="tradingBook">The trading book.</param>
         /// <returns></returns>
-        public string CreateEquityTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, DateTime tradeDate, DateTime effectiveDate, Decimal numberOfShares,
-            Decimal unitPrice, String unitPriceCurrency, string equityIdentifier, string tradingBook)
+        public string CreateEquityTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, DateTime tradeDate, DateTime effectiveDate, decimal numberOfShares,
+            decimal unitPrice, string unitPriceCurrency, string equityIdentifier, string tradingBook)
         {
             var properties = new NamedValueSet();
             properties.Set(TradeProp.Party1, party1);
@@ -877,8 +877,8 @@ namespace HLV5r3.Financial
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="properties2DRange">The properties range</param>
         /// <returns></returns>
-        public string CreateEquityTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, Decimal numberOfShares,
-            Decimal unitPrice, String unitPriceCurrency, string equityIdentifier, Range properties2DRange)
+        public string CreateEquityTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, decimal numberOfShares,
+            decimal unitPrice, string unitPriceCurrency, string equityIdentifier, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
@@ -986,8 +986,8 @@ namespace HLV5r3.Financial
         /// /// <param name="propertyType">The property type: Residential.</param>
         /// <param name="properties2DRange">The properties range</param>
         /// <returns></returns>
-        public string CreatePropertyTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, Decimal purchaseAmount,
-            DateTime paymentDate, String propertyType, String currency, string propertyIdentifier, string tradingBook, Range properties2DRange)
+        public string CreatePropertyTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount,
+            DateTime paymentDate, string propertyType, string currency, string propertyIdentifier, string tradingBook, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
@@ -1151,7 +1151,7 @@ namespace HLV5r3.Financial
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="tradingBook">The trading book.</param>
         /// <returns></returns>
-        public string CreateBondTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, DateTime tradeDate, DateTime effectiveDate, Decimal notional,
+        public string CreateBondTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, DateTime tradeDate, DateTime effectiveDate, decimal notional,
             Range priceHeaderArray, Range priceDataArray, string bondIdentifier, string tradingBook)
         {
             var properties = new NamedValueSet();
@@ -1213,7 +1213,7 @@ namespace HLV5r3.Financial
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="properties2DRange">The properties range.</param>
         /// <returns></returns>
-        public string CreateBondTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, Decimal notional,
+        public string CreateBondTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, string party2, DateTime tradeDate, DateTime effectiveDate, decimal notional,
             Range priceHeaderArray, Range priceDataArray, string bondIdentifier, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
@@ -1327,7 +1327,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string CreateIRFutureTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, 
             string party2, DateTime tradeDate, DateTime effectiveDate, int numberOfContracts,
-            Decimal purchasePrice, string futuresIdentifier, Range properties2DRange)
+            decimal purchasePrice, string futuresIdentifier, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             properties = (object[,])DataRangeHelper.TrimNulls(properties);
@@ -1429,7 +1429,7 @@ namespace HLV5r3.Financial
         /// <param name="spotRate">The spot Rate.</param>
         /// <returns></returns>
         public string CreateFxSpot(string tradeId, bool isPayerBase, DateTime tradeDate, string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference,
-            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, Decimal spotRate)
+            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, decimal spotRate)
         {
             return ValService.CreateFxSpot(tradeId, isPayerBase, tradeDate, exchangeCurrency1PayPartyReference, exchangeCurrency2PayPartyReference,
             exchangeCurrency1Amount, exchangeCurrency1, exchangeCurrency2, quoteBasis, valueDate, spotRate, "SpreadSheet");
@@ -1456,7 +1456,7 @@ namespace HLV5r3.Financial
         /// This is used to determine the base direction in calculations</param>
         /// <returns></returns>
         public string CreateFxSpotWithProperties(string tradeId, bool isPayerBase, DateTime tradeDate, string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference,
-            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, Decimal spotRate, Range properties2DRange)
+            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, decimal spotRate, Range properties2DRange)
         {
             var properties = properties2DRange.Value[System.Reflection.Missing.Value] as object[,];
             var props = properties.ToNamedValueSet();
@@ -1486,7 +1486,7 @@ namespace HLV5r3.Financial
         /// <param name="forwardPoints">The [Optional] forward Points.</param>
         /// <returns></returns>
         public string CreateFxForward(string tradeId, bool isPayerBase, DateTime tradeDate, string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference,
-            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, Decimal spotRate, Decimal forwardRate, [Optional] object forwardPoints)
+            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, decimal spotRate, decimal forwardRate, [Optional] object forwardPoints)
         {
             decimal? result = null;
             if (!(forwardPoints is System.Reflection.Missing))
@@ -1520,7 +1520,7 @@ namespace HLV5r3.Financial
         /// This is used to determine the base direction in calculations</param>
         /// <returns></returns>
         public string CreateFxForwardWithProperties(string tradeId, bool isPayerBase, DateTime tradeDate, string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference,
-            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, Decimal spotRate, Decimal forwardRate, Range properties2DRange, 
+            decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, string quoteBasis, DateTime valueDate, decimal spotRate, decimal forwardRate, Range properties2DRange, 
             [Optional] object forwardPoints)
         {
             decimal? result = null;
@@ -1558,7 +1558,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string CreateFxSwap(string tradeId, bool isCurrency1LenderBase, DateTime tradeDate, string currency1Lender, string currency2Lender,
             decimal currency1Amount, string currency1, string currency2, string quoteBasis,
-            DateTime startValueDate, DateTime forwardValueDate, Decimal startRate, Decimal forwardRate, [Optional] object forwardPoints)
+            DateTime startValueDate, DateTime forwardValueDate, decimal startRate, decimal forwardRate, [Optional] object forwardPoints)
         {
             decimal? result = null;
             if (!(forwardPoints is System.Reflection.Missing))
@@ -1594,7 +1594,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string CreateFxSwapWithProperties(string tradeId, bool isCurrency1LenderBase, DateTime tradeDate, string currency1Lender, string currency2Lender,
             decimal currency1Amount, string currency1, string currency2, string quoteBasis,
-            DateTime startValueDate, DateTime forwardValueDate, Decimal startRate, Decimal forwardRate, Range properties2DRange, [Optional] object forwardPoints)
+            DateTime startValueDate, DateTime forwardValueDate, decimal startRate, decimal forwardRate, Range properties2DRange, [Optional] object forwardPoints)
         {
             decimal? result = null;
             if (!(forwardPoints is System.Reflection.Missing))
@@ -1633,7 +1633,7 @@ namespace HLV5r3.Financial
         /// <returns></returns>
         public string CreateVanillaFxOptionWithProperties(string tradeId, DateTime tradeDate,
         bool isBuyerBase, string buyerPartyReference, string sellerPartyReference, bool isCall, string currencyPair,
-        Decimal strikePrice, decimal amount, string currency, DateTime expiryDate, string expiryBusinessCenter,
+        decimal strikePrice, decimal amount, string currency, DateTime expiryDate, string expiryBusinessCenter,
         string strikeQuoteBasis, DateTime valueDate, Range propertiesRange)
         {
             var properties = propertiesRange.Value[System.Reflection.Missing.Value] as object[,];

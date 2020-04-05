@@ -77,7 +77,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
         /// <returns></returns>
         public static Instrument GetInstrumentConfigurationData(ICoreCache cache, string nameSpace, params string[] parts)
         {
-            bool simplifiable = true;
+            bool simple = true;
             if (parts.Length == 1)
             {
                 parts = parts[0].Split('-');
@@ -89,7 +89,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
             var bondTypes = new[] { AssetTypesEnum.Bond};
             var commodityTypes = new[] { AssetTypesEnum.CommoditySpread, AssetTypesEnum.CommodityForward};
             var equityTypes = new[] { AssetTypesEnum.Equity, AssetTypesEnum.EquityForward, AssetTypesEnum.EquitySpread };
-            var irfuturesOptionTypes = new[] { AssetTypesEnum.IRFutureOption, AssetTypesEnum.IRCallFutureOption, AssetTypesEnum.IRPutFutureOption };
+            var interestRateFuturesOptionTypes = new[] { AssetTypesEnum.IRFutureOption, AssetTypesEnum.IRCallFutureOption, AssetTypesEnum.IRPutFutureOption };
             var otherTypes = new[] { AssetTypesEnum.BondForward, AssetTypesEnum.BondSpot };
             ICoreItem loadedItem;
             Instrument instrument;
@@ -98,7 +98,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
             {
                 uniqueName = CreateKey(nameSpace, parts[1], parts[0], parts[2], parts[3]);
             }
-            else if (irfuturesOptionTypes.Contains(assetType) && parts.Length > 2)
+            else if (interestRateFuturesOptionTypes.Contains(assetType) && parts.Length > 2)
             {
                 uniqueName = CreateKey(nameSpace, AssetTypesEnum.IRFutureOption.ToString(), parts[0], parts[2]);
             }
@@ -164,7 +164,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
                 else
                 {
                     uniqueName = CreateKey(nameSpace, parts[1], parts[0], exchangeMIC);
-                    simplifiable = false;
+                    simple = false;
                 }
             }
             else if (otherTypes.Contains(assetType) && parts.Length > 3)
@@ -180,10 +180,10 @@ namespace Highlander.CurveEngine.V5r3.Helpers
             else
             {
                 uniqueName = CreateKey(nameSpace, parts[1], parts[0]);
-                simplifiable = false;
+                simple = false;
             }
             loadedItem = cache.LoadItem<Instrument>(uniqueName);
-            if (loadedItem == null && simplifiable)
+            if (loadedItem == null && simple)
             {
                 if (swapTypes.Contains(assetType) && parts.Length > 3)
                 {

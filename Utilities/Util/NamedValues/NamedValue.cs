@@ -24,31 +24,29 @@ using System.Text;
 namespace Highlander.Utilities.NamedValues
 {
     /// <summary>
-    /// Holds an immutable, serialisable name/value couple with type support.
+    /// Holds an immutable, serializable name/value couple with type support.
     /// </summary>
     public class NamedValue
     {
-        private readonly string _name;
         private readonly object _value;
-        private readonly Type _valueType;
         private readonly IValueTypeHelper _valueTypeHelper;
         /// <summary>
         /// Gets the short (untyped) name of the couple.
         /// </summary>
         /// <value>The short name.</value>
-        public string Name => _name;
+        public string Name { get; }
 
         /// <summary>
         /// Gets the typed name of the couple.
         /// </summary>
         /// <value>The name of the typed.</value>
-        public string TypedName => _name + NameConst.sepType + _valueType.Name;
+        public string TypedName => Name + NameConst.sepType + ValueType.Name;
 
         /// <summary>
         /// Gets the type of the value.
         /// </summary>
         /// <value>The type of the value.</value>
-        public Type ValueType => _valueType;
+        public Type ValueType { get; }
 
         /// <summary>
         /// Gets the typed value.
@@ -69,19 +67,19 @@ namespace Highlander.Utilities.NamedValues
         /// <summary>
         /// Returns true if the value is an array.
         /// </summary>
-        public bool IsArray() { return _valueType.IsArray; }
+        public bool IsArray() { return ValueType.IsArray; }
         /// <summary>
-        /// Serialises this name/value pair.
+        /// Serializes this name/value pair.
         /// </summary>
         /// <returns></returns>
         public string Serialise()
         {
             var sb = new StringBuilder();
-            sb.Append(_name);
+            sb.Append(Name);
             sb.Append(NameConst.sepType);
-            sb.Append(_valueType.Name);
+            sb.Append(ValueType.Name);
             sb.Append(NameConst.sepPair);
-            sb.Append(EncodeText(SerialiseValue(_valueType, _value)));
+            sb.Append(EncodeText(SerialiseValue(ValueType, _value)));
             return sb.ToString();
         }
 
@@ -95,12 +93,12 @@ namespace Highlander.Utilities.NamedValues
         {
             // for display/debug purposes only (NOT serialisation)
             var sb = new StringBuilder();
-            sb.Append(_name);
+            sb.Append(Name);
             sb.Append(NameConst.sepType);
-            sb.Append(_valueType.Name);
+            sb.Append(ValueType.Name);
             sb.Append(NameConst.sepPair);
             // handle arrays
-            if (_valueType.IsArray)
+            if (ValueType.IsArray)
             {
                 var array = (Array)_value;
                 int i = 0;
@@ -124,9 +122,9 @@ namespace Highlander.Utilities.NamedValues
         /// </summary>
         public void LogValue(LogStringDelegate logger)
         {
-            if (_valueType.IsArray)
+            if (ValueType.IsArray)
             {
-                Type elementType = _valueType.GetElementType();
+                Type elementType = ValueType.GetElementType();
                 var values = (Array)_value;
                 logger($"{TypedName} ({values.Length} elements)'");
                 for (int i = 0; i < values.Length; i++)
@@ -136,11 +134,11 @@ namespace Highlander.Utilities.NamedValues
                 }
             }
             else
-                logger($"{TypedName}='{SerialiseValue(_valueType, _value)}'");
+                logger($"{TypedName}='{SerialiseValue(ValueType, _value)}'");
         }
 
         /// <summary>
-        /// Serialises a value to a string. Supported types are the CLR standard types and Guid.
+        /// Serializes a value to a string. Supported types are the CLR standard types and Guid.
         /// </summary>
         /// <param name="valueType"> </param>
         /// <param name="value">The value.</param>
@@ -161,26 +159,26 @@ namespace Highlander.Utilities.NamedValues
         public object Value => _value;
 
         /// <summary>
-        /// Serialises this value to a string.
+        /// Serializes this value to a string.
         /// </summary>
         /// <value>The value string.</value>
-        public string ValueString => SerialiseValue(_valueType, _value);
+        public string ValueString => SerialiseValue(ValueType, _value);
 
         private static IValueTypeHelper GetValueTypeHelper(string valueTypeName)
         {
             // commonly used types
-            if (valueTypeName == typeof(String).Name)
-                return new ValueTypeHelper<String>();
-            if (valueTypeName == typeof(Int32).Name)
-                return new ValueTypeHelper<Int32>();
-            if (valueTypeName == typeof(Double).Name)
-                return new ValueTypeHelper<Double>();
-            if (valueTypeName == typeof(Decimal).Name)
-                return new ValueTypeHelper<Decimal>();
+            if (valueTypeName == typeof(string).Name)
+                return new ValueTypeHelper<string>();
+            if (valueTypeName == typeof(int).Name)
+                return new ValueTypeHelper<int>();
+            if (valueTypeName == typeof(double).Name)
+                return new ValueTypeHelper<double>();
+            if (valueTypeName == typeof(decimal).Name)
+                return new ValueTypeHelper<decimal>();
             if (valueTypeName == typeof(Guid).Name)
                 return new ValueTypeHelper<Guid>();
-            if (valueTypeName == typeof(Boolean).Name)
-                return new ValueTypeHelper<Boolean>();
+            if (valueTypeName == typeof(bool).Name)
+                return new ValueTypeHelper<bool>();
             if (valueTypeName == typeof(DateTime).Name)
                 return new ValueTypeHelper<DateTime>();
             if (valueTypeName == typeof(DateTimeOffset).Name)
@@ -189,27 +187,27 @@ namespace Highlander.Utilities.NamedValues
                 return new ValueTypeHelper<TimeSpan>();
             if (valueTypeName == typeof(DayOfWeek).Name)
                 return new ValueTypeHelper<DayOfWeek>();
-            if (valueTypeName == typeof(Byte).Name)
-                return new ValueTypeHelper<Byte>();
+            if (valueTypeName == typeof(byte).Name)
+                return new ValueTypeHelper<byte>();
             // rarely used types
-            if (valueTypeName == typeof(Char).Name)
-                return new ValueTypeHelper<Char>();
-            if (valueTypeName == typeof(Int16).Name)
-                return new ValueTypeHelper<Int16>();
-            if (valueTypeName == typeof(Int64).Name)
-                return new ValueTypeHelper<Int64>();
-            if (valueTypeName == typeof(SByte).Name)
-                return new ValueTypeHelper<SByte>();
-            if (valueTypeName == typeof(Single).Name)
-                return new ValueTypeHelper<Single>();
-            if (valueTypeName == typeof(UInt16).Name)
-                return new ValueTypeHelper<UInt16>();
-            if (valueTypeName == typeof(UInt32).Name)
-                return new ValueTypeHelper<UInt32>();
-            if (valueTypeName == typeof(UInt64).Name)
-                return new ValueTypeHelper<UInt64>();
+            if (valueTypeName == typeof(char).Name)
+                return new ValueTypeHelper<char>();
+            if (valueTypeName == typeof(short).Name)
+                return new ValueTypeHelper<short>();
+            if (valueTypeName == typeof(long).Name)
+                return new ValueTypeHelper<long>();
+            if (valueTypeName == typeof(sbyte).Name)
+                return new ValueTypeHelper<sbyte>();
+            if (valueTypeName == typeof(float).Name)
+                return new ValueTypeHelper<float>();
+            if (valueTypeName == typeof(ushort).Name)
+                return new ValueTypeHelper<ushort>();
+            if (valueTypeName == typeof(uint).Name)
+                return new ValueTypeHelper<uint>();
+            if (valueTypeName == typeof(ulong).Name)
+                return new ValueTypeHelper<ulong>();
             // not supported - default to string
-            return new ValueTypeHelper<String>();
+            return new ValueTypeHelper<string>();
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedValue"/> class.
@@ -218,27 +216,27 @@ namespace Highlander.Utilities.NamedValues
         /// <param name="value">The value.</param>
         public NamedValue(string name, object value)
         {
-            _name = CheckName(name);
+            Name = CheckName(name);
             _value = value ?? throw new ArgumentNullException(nameof(value));
-            _valueType = _value.GetType();
-            _valueTypeHelper = GetValueTypeHelper(_valueType.IsArray ? _valueType.GetElementType().Name : _valueType.Name);
+            ValueType = _value.GetType();
+            _valueTypeHelper = GetValueTypeHelper(ValueType.IsArray ? ValueType.GetElementType()?.Name : ValueType.Name);
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedValue"/> class.
         /// </summary>
-        /// <param name="rawtext">The text.</param>
-        public NamedValue(string rawtext)
+        /// <param name="rawText">The text.</param>
+        public NamedValue(string rawText)
         {
-            // construct by deserialising text in the format: name/type=value
-            string text = rawtext.Trim();
+            // construct by deserializing text in the format: name/type=value
+            string text = rawText.Trim();
             string[] textParts = text.Split(NameConst.sepPair);
             if (textParts.Length != 2)
                 throw new FormatException("Text ('" + text + "') is not in name/type=value format");
             string[] nameParts = textParts[0].Split(NameConst.sepType);
             if (nameParts.Length != 2)
                 throw new FormatException("Text ('" + text + "') is not in name/type=value format");
-            _name = CheckName(nameParts[0]);
-            _valueType = typeof(string); // default type
+            Name = CheckName(nameParts[0]);
+            ValueType = typeof(string); // default type
             string baseTypeName = nameParts[1];
             bool isArray = false;
             if (baseTypeName.EndsWith("[]"))
@@ -251,12 +249,12 @@ namespace Highlander.Utilities.NamedValues
                 _valueTypeHelper = GetValueTypeHelper(baseTypeName);
                 if (isArray)
                 {
-                    _valueType = _valueTypeHelper.VectorType;
+                    ValueType = _valueTypeHelper.VectorType;
                     _value = _valueTypeHelper.DeserialiseVector(DecodeText(textParts[1]));
                 }
                 else
                 {
-                    _valueType = _valueTypeHelper.ScalarType;
+                    ValueType = _valueTypeHelper.ScalarType;
                     _value = _valueTypeHelper.DeserialiseScalar(DecodeText(textParts[1]));
                 }
             }
@@ -266,22 +264,21 @@ namespace Highlander.Utilities.NamedValues
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
-
             // check name now has allowed chars only
             // - allowed chars are: alphas digits underscore dash dot
             // - ignored chars are: whitespace
             var result = new StringBuilder();
             foreach (char ch in name)
             {
-                if (((ch >= 'A') && (ch <= 'Z')) ||
-                    ((ch >= 'a') && (ch <= 'z')) ||
-                    ((ch >= '0') && (ch <= '9')) ||
-                    (ch == '_') || (ch == '.' || (ch == '-')))
+                if (ch >= 'A' && ch <= 'Z' ||
+                    ch >= 'a' && ch <= 'z' ||
+                    ch >= '0' && ch <= '9' ||
+                    ch == '_' || ch == '.' || ch == '-')
                 {
                     // allowed
                     result.Append(ch);
                 }
-                else if ((ch == ' ') || (ch == '\t') || (ch == '\r') || (ch == '\n'))
+                else if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n')
                 {
                     // ignored
                 }
@@ -299,12 +296,12 @@ namespace Highlander.Utilities.NamedValues
             var sb = new StringBuilder();
             foreach (char ch in valueString)
             {
-                if ((ch < '\x0020') // whitespace and non-printable chars
-                    || (ch == NameConst.escChar)
-                    || (ch == NameConst.sepList)
-                    || (ch == NameConst.sepType)
-                    || (ch == NameConst.sepPair)
-                    || (ch == NameConst.sepElem)
+                if (ch < '\x0020' // whitespace and non-printable chars
+                    || ch == NameConst.escChar
+                    || ch == NameConst.sepList
+                    || ch == NameConst.sepType
+                    || ch == NameConst.sepPair
+                    || ch == NameConst.sepElem
                     )
                 {
                     sb.Append(NameConst.escChar);

@@ -45,6 +45,9 @@ namespace Highlander.Codes.V5r3
         public const string Credient = "Credient";
         public const string FSS = "FSS";
         public const string Sentry = "Sentry";
+        public const string Ion = "Ion";
+        public const string Adaptive = "Adaptive";
+        public const string Internal = "Internal";
     }
 
     /// <summary>

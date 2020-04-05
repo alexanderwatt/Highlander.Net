@@ -36,7 +36,7 @@ namespace Highlander.Reporting.UI.V5r3
         private void PricingStructureFormDisplayLoad(object sender, EventArgs e)
         {
             textBox1.Text = _item.Name;
-            //Instantiate the datagrid
+            //Instantiate the data grid
             //
             //dataGridView1.Columns.Add("PropertyName", "Name");
             //dataGridView1.Columns.Add("PropertyValue", "Value");
