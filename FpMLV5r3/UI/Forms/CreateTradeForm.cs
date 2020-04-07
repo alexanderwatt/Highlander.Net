@@ -19,6 +19,7 @@ using Highlander.Constants;
 using System.Windows.Forms;
 using Highlander.Core.Interface.V5r3;
 using Highlander.Reporting.V5r3;
+using Highlander.Utilities.Helpers;
 using Highlander.Utilities.NamedValues;
 
 namespace Highlander.Reporting.UI.V5r3
@@ -79,16 +80,17 @@ namespace Highlander.Reporting.UI.V5r3
         private void CreatePropertyAssetClick(object sender, EventArgs e)
         {
             propertyAssetIdentifierTextBox.Text = propertyIdentifierTextBox.Text;
-            _pricingCache.CreateProperty(propertyIdentifierTextBox.Text, propertyTypeListBox.Text, streetIdentifierTextBox.Text, streetNameTextBox.Text,
+            var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
+            _pricingCache.CreatePropertyAsset(propertyIdentifierTextBox.Text, propertyType, streetIdentifierTextBox.Text, streetNameTextBox.Text,
             suburbTextBox.Text, cityTextBox.Text, postcodeTextBox.Text, stateTextBox.Text, countryTextBox.Text, bedroomsTextBox.Text, bathroomsTextBox.Text,
             parkingTextBox.Text, currencyListBox.Text, descriptionTextBox.Text, null);
         }
 
         private void FindPropertyAssetButton_Click(object sender, EventArgs e)
         {
-            var instrument = _pricingCache.GetPropertyAsset(propertyIdentifierTextBox.Text);
-            if (instrument == null) return;
-            if (!(instrument.InstrumentNodeItem is PropertyNodeStruct propertyNodeStruct)) return;
+            var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
+            var instrument = _pricingCache.GetPropertyAsset(propertyType, cityTextBox.Text, postcodeTextBox.Text, descriptionTextBox.Text, propertyIdentifierTextBox.Text);
+            if (!(instrument is PropertyNodeStruct propertyNodeStruct)) return;
             var propertyAsset = propertyNodeStruct.Property;
             var address = propertyAsset.propertyAddress?.streetAddress;
             var length = address?.Length;

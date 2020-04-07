@@ -36,31 +36,31 @@ namespace Highlander.Reporting.Identifiers.V5r3
         ///<summary>
         /// The base party.
         ///</summary>
-        public string PropertyType{ get; set; }
+        public string PropertyType { get; set; }
 
         /// <summary>
         ///  An id for a bond.
         /// </summary>
         /// <param name="propertyType">The property Type. </param>
         /// <param name="city">The city.</param>
-        /// <param name="suburb">The suburb</param>
-        /// <param name="streetName">THe street</param>
-        /// <param name="streetIdentifier">THe street number or name of property.</param>
-        public PropertyIdentifier(string propertyType, string city, string suburb, string streetName, string streetIdentifier)
-            : base(BuildUniqueId(propertyType, city, suburb, streetName, streetIdentifier))
+        /// <param name="postcode">The postcode</param>
+        /// <param name="shortName">A short descriptive name</param>
+        /// <param name="identifier">An identifier.</param>
+        public PropertyIdentifier(PropertyType propertyType, string city, string postcode, string shortName, string identifier)
+            : base(BuildUniqueId(propertyType, city, postcode, shortName, identifier))
         {
-            PropertyType = propertyType;
-            Id = BuildId(propertyType, city, suburb, streetName, streetIdentifier);
+            PropertyType = propertyType.ToString();
+            Id = BuildId(propertyType, city, postcode, shortName, identifier);
         }
 
-        private static string BuildUniqueId(string propertyType, string city, string suburb, string streetName, string streetIdentifier)
+        private static string BuildUniqueId(PropertyType propertyType, string city, string postcode, string shortName, string identifier)
         {
-            return FunctionProp.ReferenceData + "." + ReferenceDataProp.Property + "." + propertyType + "." + city + "." + suburb + "." + streetName + "." + streetIdentifier;
+            return FunctionProp.ReferenceData + "." + ReferenceDataProp.Property + "." + propertyType+ "." + city + "." + postcode + "." + shortName + "." + identifier;
         }
 
-        public static string BuildId(string propertyType, string city, string suburb, string streetName, string streetIdentifier)
+        public static string BuildId(PropertyType propertyType, string city, string postcode, string shortName, string identifier)
         {
-            return propertyType + "." + city + "." + suburb + "." + streetName + "." + streetIdentifier;
+            return propertyType + "." + city + "." + postcode + "." + shortName + "." + identifier;
         }
     }
 }

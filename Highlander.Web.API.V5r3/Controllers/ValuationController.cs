@@ -54,6 +54,23 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("trades")]
+        public IHttpActionResult GetPropertyAssetIds()
+        {
+            var properties = new NamedValueSet();
+            properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
+            properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            var trades = _pricingCache.QueryPropertyAssetIds(properties);
+            if (trades == null)
+            {
+                return NotFound();
+            }
+            _logger.Target.LogInfo("Queried property trade ids.");
+            return Ok(trades);
+        }
+
+        [HttpGet]
+        [Route("trades")]
         public IHttpActionResult GetLeaseTradeIds(string propertyId)
         {
             var properties = new NamedValueSet();
@@ -68,6 +85,18 @@ namespace Highlander.Web.API.V5r3.Controllers
             }
             _logger.Target.LogInfo("Queried lease trade ids.");
             return Ok(trades);
+        }
+
+        [HttpPost]
+        [Route("trades")]
+        public IHttpActionResult CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName,
+            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
+            string currency, string shortName)
+        {
+            var result = _pricingCache.CreatePropertyAsset(propertyId, propertyType, streetIdentifier, streetName, suburb, city,
+                postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, shortName, null);
+            _logger.Target.LogInfo("Created property trade id: {}", result);
+            return Ok(result);
         }
 
         [HttpPost]

@@ -59,6 +59,7 @@
     <Compile Include="AssetTypes.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PropertyType.cs" />
     <Compile Include="VolatilityTypes.cs" />
     <Compile Include="FuturesTypes.cs" />
     <Compile Include="BondTypes.cs">

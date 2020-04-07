@@ -891,16 +891,17 @@ namespace Highlander.CurveEngine.V5r3
         /// <summary>
         /// Load Asset Config from the XML in the database
         /// </summary>
-        /// <param name="propertyAssetIdentifier"></param>
+        /// <param name="shortName"></param>
+        /// <param name="propertyIdentifier"></param>
+        /// <param name="propertyType"></param>
+        /// <param name="city"></param>
+        /// <param name="postCode"></param>
         /// <returns></returns>
-        public Instrument GetPropertyAsset(string propertyAssetIdentifier)
+        public PropertyNodeStruct GetPropertyAsset(PropertyType propertyType, string city, string postCode, string shortName, string propertyIdentifier)
         {
-            if (string.IsNullOrEmpty(propertyAssetIdentifier))
-            {
-                throw new ArgumentException("Asset identifier must be entered");
-            }
-            string id = $"{FunctionProp.Configuration}.Instrument.{ReferenceDataProp.Property}.{propertyAssetIdentifier}";
-            return InstrumentDataHelper.GetInstrumentConfigurationData(Cache, NameSpace, id);
+            var id = new PropertyIdentifier(propertyType, city, postCode, shortName, propertyIdentifier);
+            var propertyInstrument =  Cache.LoadItem<PropertyNodeStruct>(NameSpace + "." + id.UniqueIdentifier);
+            return (PropertyNodeStruct)propertyInstrument.Data;
         }
 
         /// <summary>

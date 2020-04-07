@@ -328,6 +328,17 @@ namespace Highlander.ValuationEngine.V5r3
         }
 
         /// <summary>
+        /// Returns the asset identifiers for all property assets matching the query properties.
+        /// </summary>
+        /// <param name="queryProperties">The query properties.</param>
+        /// <returns></returns>
+        public List<string> QueryPropertyAssetIds(NamedValueSet queryProperties)
+        {
+            var assets = QueryPropertyAssetProperties(Logger, Cache, NameSpace, queryProperties);
+            return assets;
+        }
+
+        /// <summary>
         /// Returns the trade identifiers for all trades matching the query properties.
         /// </summary>
         /// <param name="queryProperties">The query properties.</param>
@@ -361,6 +372,67 @@ namespace Highlander.ValuationEngine.V5r3
         public List<TradeQueryData> QueryTrades(List<Triplet<string, string, object>> query)
         {
             return QueryTrades(Logger, Cache, NameSpace, query);
+        }
+
+        /// <summary>
+        /// Returns the property data for all trades matching the query properties.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public List<string> QueryPropertyAssetProperties(ILogger logger, ICoreCache cache, string nameSpace,
+            NamedValueSet matchingPropertySet)
+        {
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            var result = new List<string>();
+            if (matchingPropertySet != null)
+            {
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            var assets = cache.LoadItems<PropertyNodeStruct>(whereExpr);
+            foreach (var asset in assets)
+            {
+                var property = asset.AppProps;
+                var id = property.GetString(PropertyProp.UniqueIdentifier, true);
+                result.Add(id);
+            }
+            logger.LogDebug("{} property assets returned;", result.Count);
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the property data for all properties matching the query properties.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public List<PropertyNodeStruct> QueryPropertyAssets(ILogger logger, ICoreCache cache, string nameSpace,
+            NamedValueSet matchingPropertySet)
+        {
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            var result = new List<PropertyNodeStruct>();
+            if (matchingPropertySet != null)
+            {
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            var assets = cache.LoadItems<PropertyNodeStruct>(whereExpr);
+            foreach (var asset in assets)
+            {
+                var property = (PropertyNodeStruct) asset.Data;
+                result.Add(property);
+            }
+            logger.LogDebug("{} property assets returned;", result.Count);
+            return result;
         }
 
         /// <summary>
@@ -2280,11 +2352,11 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
-        public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName,
+        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName,
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
-            return CreateProperty(Logger, Cache, NameSpace, propertyId, propertyType, streetIdentifier, streetName, suburb,
+            return CreatePropertyAsset(Logger, Cache, NameSpace, propertyId, propertyType, streetIdentifier, streetName, suburb,
                 city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, properties); 
         }
 
@@ -2300,7 +2372,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="propertyType">THe property type: residential, commercial, investment etc</param>
         /// <param name="numParking">The number of car parking spots.</param>
         /// <param name="currency">The currency.</param>
-        /// <param name="description">The issuer description.</param>
+        /// <param name="shortName">The short name alias.</param>
         /// <param name="properties">The properties. </param>
         /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="city">The city</param>
@@ -2310,8 +2382,10 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        public string CreateProperty(ILogger logger, ICoreCache cache, string nameSpace, string propertyAssetIdentifier, string propertyType, string streetIdentifier, string streetName,
-            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, string description, NamedValueSet properties)
+        public string CreatePropertyAsset(ILogger logger, ICoreCache cache, string nameSpace, string propertyAssetIdentifier, 
+            PropertyType propertyType, string streetIdentifier, string streetName, string suburb, string city, string postalCode, 
+            string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, 
+            string shortName, NamedValueSet properties)
         {
             if (properties is null)
             {
@@ -2325,14 +2399,13 @@ namespace Highlander.ValuationEngine.V5r3
             properties.Set(PropertyProp.SourceSystem, "Highlander");
             properties.Set(EnvironmentProp.NameSpace, nameSpace);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-            properties.Set(PropertyProp.Description, description);
+            properties.Set(PropertyProp.Description, shortName);
             properties.Set(PropertyProp.PropertyType, propertyType);
-            var propertyAsset = PropertyAssetHelper.Create(propertyAssetIdentifier, propertyType, streetIdentifier, streetName,
-            suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
+            var propertyAsset = PropertyAssetHelper.Create(propertyAssetIdentifier, propertyType.ToString(), streetIdentifier, streetName,
+            suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, shortName);
             //This identifier is too complex.
-            //var identifier = new PropertyIdentifier(propertyType, city, suburb, streetName, streetIdentifier);
-            var assetIdentifier = NameSpace + "." + FunctionProp.Configuration + ".Instrument." + 
-                                  ReferenceDataProp.Property + "." + propertyAssetIdentifier;
+            var identifier = new PropertyIdentifier(propertyType, city, postalCode, shortName, propertyAssetIdentifier);
+            var assetIdentifier = NameSpace + "." + identifier;
             properties.Set(PropertyProp.UniqueIdentifier, assetIdentifier);
             var propertyInstrument = new PropertyNodeStruct {Property = propertyAsset};
             //TODO Add the loan information

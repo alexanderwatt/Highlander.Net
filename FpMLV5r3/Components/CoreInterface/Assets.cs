@@ -378,13 +378,17 @@ namespace Highlander.Core.Interface.V5r3
         #region Assets and Instruments
 
         /// <summary>
-        /// Load Property Asset Config
+        /// Load Property Data
         /// </summary>
-        /// <param name="propertyAssetIdentifier"></param>
+        /// <param name="shortName"></param>
+        /// <param name="propertyIdentifier"></param>
+        /// <param name="propertyType"></param>
+        /// <param name="city"></param>
+        /// <param name="postCode"></param>
         /// <returns></returns>
-        public Instrument GetPropertyAsset(string propertyAssetIdentifier)
+        public PropertyNodeStruct GetPropertyAsset(PropertyType propertyType, string city, string postCode, string shortName, string propertyIdentifier)
         {
-            return Engine.GetPropertyAsset(propertyAssetIdentifier);
+            return Engine.GetPropertyAsset(propertyType, city, postCode, shortName, propertyIdentifier);
         }
 
 
@@ -1317,11 +1321,11 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
-        public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName, 
+        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName, 
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
-            var result = ValService.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
+            var result = ValService.CreatePropertyAsset(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;
         }

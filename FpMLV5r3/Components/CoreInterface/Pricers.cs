@@ -71,7 +71,17 @@ namespace Highlander.Core.Interface.V5r3
         }
 
         /// <summary>
-        /// Returns the header information for all trades matching the query properties.
+        /// Returns the ids for all trades matching the query properties.
+        /// </summary>
+        /// <param name="queryProperties">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public List<string> QueryPropertyAssetIds(NamedValueSet queryProperties)
+        {
+            return ValService.QueryPropertyAssetIds(queryProperties);
+        }
+
+        /// <summary>
+        /// Returns the ids for all trades matching the query properties.
         /// </summary>
         /// <param name="queryProperties">The query properties. A 2-column array of names and values.</param>
         /// <returns></returns>

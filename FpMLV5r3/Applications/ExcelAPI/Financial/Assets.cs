@@ -1538,7 +1538,8 @@ namespace HLV5r3.Financial
                 properties.Set(header, values[index]);
                 index++;
             }
-            var result = ValService.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
+            var property = EnumHelper.Parse<PropertyType>(propertyType);
+            var result = ValService.CreatePropertyAsset(propertyId, property, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;
         }
