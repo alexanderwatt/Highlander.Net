@@ -13,10 +13,13 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+using System;
+
 namespace Highlander.Constants
 {
     ///<summary>
     ///</summary>
+    [Serializable]
     public enum ValuationReportType
     {
         ///<summary>
@@ -27,6 +30,7 @@ namespace Highlander.Constants
         Full
     }
 
+    [Serializable]
     public class ValueProp
     {
         public const string UniqueIdentifier = "UniqueIdentifier";
@@ -56,6 +60,7 @@ namespace Highlander.Constants
         public const int ErrorCountOffset = 2;
     }
 
+    [Serializable]
     public class ValueConst
     {
         public const string SumValue = "(sum)";
@@ -64,6 +69,7 @@ namespace Highlander.Constants
         public const string AggTypeStdDev = "StD";
     }
 
+    [Serializable]
     public class StressConst
     {
         public const string ZeroStress = "ZeroStress";
@@ -95,6 +101,8 @@ namespace Highlander.Constants
             PercentDn10
         };
     }
+
+    [Serializable]
     public class ScenarioConst
     {
         public const string FxPrefix = "Fx";

@@ -72,6 +72,7 @@ namespace Highlander.WebAPI.V5r3.Controllers
         /// <returns></returns>
         public Trade GetPropertyTrade(string id)
         {
+            //var identifier = "Trade.Reporting.Murex.swap.123456";
             var trade = _pricingCache.GetTrade(id);
             return trade;//Ok(trade)
         }
@@ -92,10 +93,9 @@ namespace Highlander.WebAPI.V5r3.Controllers
         ///// </summary>
         ///// <param name="trade"></param>
         ///// <returns></returns>
-        //public ActionResult Create(Trade trade)
+        //public ActionResult CreatePropertyTrade(Trade trade)
         //{
-        //    db.Add(person);
-        //    db.SaveChanges();
+        //    PricingCache.Create(person);
         //    return Accepted();
         //}
     }
