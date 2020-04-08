@@ -897,11 +897,12 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="city"></param>
         /// <param name="postCode"></param>
         /// <returns></returns>
-        public PropertyNodeStruct GetPropertyAsset(PropertyType propertyType, string city, string postCode, string shortName, string propertyIdentifier)
+        public ICoreItem GetPropertyAsset(PropertyType propertyType, string city, string shortName, string postCode, string propertyIdentifier)
         {
-            var id = new PropertyIdentifier(propertyType, city, postCode, shortName, propertyIdentifier);
+            var id = new PropertyIdentifier(propertyType.ToString(), city, shortName, postCode, propertyIdentifier);
             var propertyInstrument =  Cache.LoadItem<PropertyNodeStruct>(NameSpace + "." + id.UniqueIdentifier);
-            return (PropertyNodeStruct)propertyInstrument.Data;
+            if(propertyInstrument?.Data is PropertyNodeStruct) return propertyInstrument;
+            return null;
         }
 
         /// <summary>

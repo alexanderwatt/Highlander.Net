@@ -2337,6 +2337,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// Creates a property in the data store.
         /// </summary>
         /// <param name="propertyId">The property identfier.</param>
+        /// <param name="shortName">A short name for the property.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="postalCode">The postal code. This could be a number or a string.</param>
@@ -2352,11 +2353,11 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
-        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName,
+        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string shortName, string streetIdentifier, string streetName,
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
-            return CreatePropertyAsset(Logger, Cache, NameSpace, propertyId, propertyType, streetIdentifier, streetName, suburb,
+            return CreatePropertyAsset(Logger, Cache, NameSpace, propertyId, propertyType, shortName, streetIdentifier, streetName, suburb,
                 city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, properties); 
         }
 
@@ -2383,9 +2384,9 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="logger"></param>
         /// <returns></returns>
         public string CreatePropertyAsset(ILogger logger, ICoreCache cache, string nameSpace, string propertyAssetIdentifier, 
-            PropertyType propertyType, string streetIdentifier, string streetName, string suburb, string city, string postalCode, 
+            PropertyType propertyType, string shortName, string streetIdentifier, string streetName, string suburb, string city, string postalCode, 
             string state, string country, string numBedrooms, string numBathrooms, string numParking, string currency, 
-            string shortName, NamedValueSet properties)
+            string description, NamedValueSet properties)
         {
             if (properties is null)
             {
@@ -2393,25 +2394,26 @@ namespace Highlander.ValuationEngine.V5r3
             }
             properties.Set(PropertyProp.Currency, currency);
             properties.Set(PropertyProp.AsAtDate, DateTime.Today);
-            properties.Set(PropertyProp.Function, FunctionProp.Configuration.ToString());
-            properties.Set(PropertyProp.DataGroup, NameSpace + "." + FunctionProp.Configuration.ToString());
-            properties.Set(PropertyProp.Domain, FunctionProp.Configuration.ToString() + ".Property");
+            properties.Set(PropertyProp.Function, FunctionProp.ReferenceData.ToString());
+            properties.Set(PropertyProp.DataGroup, NameSpace + "." + FunctionProp.ReferenceData.ToString());
+            properties.Set(PropertyProp.Domain, FunctionProp.ReferenceData.ToString() + ".Property");
             properties.Set(PropertyProp.SourceSystem, "Highlander");
             properties.Set(EnvironmentProp.NameSpace, nameSpace);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             properties.Set(PropertyProp.Description, shortName);
             properties.Set(PropertyProp.PropertyType, propertyType);
             var propertyAsset = PropertyAssetHelper.Create(propertyAssetIdentifier, propertyType.ToString(), streetIdentifier, streetName,
-            suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, shortName);
+            suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
             //This identifier is too complex.
-            var identifier = new PropertyIdentifier(propertyType, city, postalCode, shortName, propertyAssetIdentifier);
+            var identifier = new PropertyIdentifier(propertyType.ToString(), city, shortName, postalCode, propertyAssetIdentifier).UniqueIdentifier;
+            propertyAsset.id = identifier;
             var assetIdentifier = NameSpace + "." + identifier;
-            properties.Set(PropertyProp.UniqueIdentifier, assetIdentifier);
+            properties.Set(PropertyProp.UniqueIdentifier, identifier);
             var propertyInstrument = new PropertyNodeStruct {Property = propertyAsset};
             //TODO Add the loan information
             cache.SaveObject(propertyInstrument, assetIdentifier, properties);
             logger.LogDebug("Created new property asset: {0}", assetIdentifier);
-            return assetIdentifier;
+            return identifier;
         }
 
         #endregion
@@ -2673,20 +2675,18 @@ namespace Highlander.ValuationEngine.V5r3
             var partyb = properties.GetValue<string>(TradeProp.Party2, true);
             var businessDayCalendar = properties.GetValue(PropertyProp.BusinessDayCalendar, "AUSY");
             var businessDayAdjustments = properties.GetValue(PropertyProp.BusinessDayAdjustments, "FOLLOWING");
-            var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
+            var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.Internal);
             properties.GetValue(TradeProp.EffectiveDate, effectiveDate);
             properties.GetValue(TradeProp.TradeDate, tradeDate);
             properties.GetValue(TradeProp.PaymentDate, paymentDate);
             properties.Set(TradeProp.TradingBookName, portfolio);
             var propertyTradeIdentifier = $"{FunctionProp.Trade}.{FpML5R3NameSpaces.Reporting}.{sourceSystem}.{ItemChoiceType15.propertyTransaction}.{tradeId}";
-            var assetIdentifier = NameSpace + "." + FunctionProp.Configuration + "." + 
-                                  ReferenceDataProp.Property + "." + propertyAssetIdentifier;
-            var item = cache.LoadItem<PropertyAsset>(assetIdentifier);
-            if (item?.Data is PropertyAsset property)
+            var item = cache.LoadItem<PropertyNodeStruct>(propertyAssetIdentifier);
+            if (item?.Data is PropertyNodeStruct propertyNode)
             {
                 //  1) Build and publish the property transaction
                 //
-                properties.Set(TradeProp.UniqueIdentifier, null);
+                properties.Set(TradeProp.UniqueIdentifier, NameSpace + "." + propertyTradeIdentifier);
                 var productType = new object[] { ProductTypeHelper.Create("PropertyTransaction") };
                 var amount = Convert.ToDouble(purchaseAmount);
                 var propertyTransaction = new PropertyTransaction
@@ -2698,7 +2698,7 @@ namespace Highlander.ValuationEngine.V5r3
                     ItemsElementName = new[] { ItemsChoiceType2.productType },
                     sellerPartyReference =
                         PartyReferenceHelper.Parse(seller),
-                    property = property,
+                    property = propertyNode?.Property,
                 };
                 //  2) Create the trade
                 //          

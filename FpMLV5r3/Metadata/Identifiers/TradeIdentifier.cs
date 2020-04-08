@@ -200,7 +200,7 @@ namespace Highlander.Reporting.Identifiers.V5r3
         /// <returns></returns>
         private string BuildUniqueId(string tradeId)
         {
-            return $"{DataType}.{SourceSystem}.{TradeType}.{tradeId}";
+            return $"{DataType}.{FpML5R3NameSpaces.Reporting}.{SourceSystem}.{tradeId}.{TradeType}";
         }
     }
 }

@@ -735,11 +735,6 @@ namespace Highlander.Core.Viewer.V5r3
             }
         }
 
-        //private void groupBox5_Enter(object sender, EventArgs e)
-        //{
-
-        //}
-
         private void BtnCreateTradeClick(object sender, EventArgs e)
         {
             //Load the form

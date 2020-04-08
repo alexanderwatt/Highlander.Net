@@ -386,9 +386,9 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="city"></param>
         /// <param name="postCode"></param>
         /// <returns></returns>
-        public PropertyNodeStruct GetPropertyAsset(PropertyType propertyType, string city, string postCode, string shortName, string propertyIdentifier)
+        public ICoreItem GetPropertyAsset(PropertyType propertyType, string city, string shortName, string postCode, string propertyIdentifier)
         {
-            return Engine.GetPropertyAsset(propertyType, city, postCode, shortName, propertyIdentifier);
+            return Engine.GetPropertyAsset(propertyType, city, shortName, postCode, propertyIdentifier);
         }
 
 
@@ -1306,26 +1306,27 @@ namespace Highlander.Core.Interface.V5r3
         /// Creates a property in the data store.
         /// </summary>
         /// <param name="propertyId">The property identifier.</param>
+        /// <param name="propertyType">The property type: residential, commercial, investment etc</param>
+        /// <param name="shortName">A short name for the property</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
-        /// <param name="propertyType">THe property type: residential, commercial, investment etc</param>
-        /// <param name="numParking">The number of car parking spots.</param>
-        /// <param name="currency">THe currency.</param>
-        /// <param name="description">The issuer description.</param>
-        /// <param name="properties">An array of properties. </param>
         /// <param name="city">The city</param>
         /// <param name="postalCode">The postal code. This could be a number or a string.</param>
         /// <param name="state">The state</param>
         /// <param name="country">The country</param>
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
+        /// <param name="numParking">The number of car parking spots.</param>
+        /// <param name="currency">THe currency.</param>
+        /// <param name="description">The issuer description.</param>
+        /// <param name="properties">An array of properties. </param>
         /// <returns></returns>
-        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName, 
+        public string CreatePropertyAsset(string propertyId, PropertyType propertyType, string shortName, string streetIdentifier, string streetName, 
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
-            var result = ValService.CreatePropertyAsset(propertyId, propertyType, streetIdentifier, streetName, suburb, city, postalCode, state, country,
+            var result = ValService.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;
         }

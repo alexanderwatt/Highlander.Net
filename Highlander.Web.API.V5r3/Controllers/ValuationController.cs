@@ -89,12 +89,12 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpPost]
         [Route("trades")]
-        public IHttpActionResult CreatePropertyAsset(string propertyId, PropertyType propertyType, string streetIdentifier, string streetName,
+        public IHttpActionResult CreatePropertyAsset(string propertyId, PropertyType propertyType, string shortName, string streetIdentifier, string streetName,
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
-            string currency, string shortName)
+            string currency, string description)
         {
-            var result = _pricingCache.CreatePropertyAsset(propertyId, propertyType, streetIdentifier, streetName, suburb, city,
-                postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, shortName, null);
+            var result = _pricingCache.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city,
+                postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, null);
             _logger.Target.LogInfo("Created property trade id: {}", result);
             return Ok(result);
         }

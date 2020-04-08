@@ -45,6 +45,8 @@ namespace Highlander.Reporting.UI.V5r3
             propertyDataGridView.Rows.Add(row1);
             object[] row2 = { EnvironmentProp.SourceSystem, TradeSourceType.Internal };
             propertyDataGridView.Rows.Add(row2);
+            tradeTypeBox.SelectedIndex = 0;
+            propertyTypeListBox.SelectedIndex = 0;
         }
 
         private void CreateTradeButtonClick(object sender, EventArgs e)
@@ -72,50 +74,39 @@ namespace Highlander.Reporting.UI.V5r3
                 case ProductTypeSimpleEnum.PropertyTransaction:
                     _pricingCache.CreatePropertyTradeWithProperties(tradeIdentifierTxtBox.Text, isParty1BuyerCheckBox.Checked, Party1TextBox.Text, 
                         Party2TextBox.Text, startDateTimePicker.Value, effectiveDateTimePicker.Value, Convert.ToDecimal(purchaseAmountTextBox.Text),
-                        paymentDateTimePicker.Value, propertyTypeListBox.Text, currencyListBox.Text, propertyAssetIdentifierTextBox.Text, accountingBookTextBox.Text, properties);
+                        paymentDateTimePicker.Value, null, currencyListBox.Text, propertyAssetIdentifierTextBox.Text, accountingBookTextBox.Text, properties);
                     break;
             }
         }
 
         private void CreatePropertyAssetClick(object sender, EventArgs e)
         {
-            propertyAssetIdentifierTextBox.Text = propertyIdentifierTextBox.Text;
-            var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
-            _pricingCache.CreatePropertyAsset(propertyIdentifierTextBox.Text, propertyType, streetIdentifierTextBox.Text, streetNameTextBox.Text,
-            suburbTextBox.Text, cityTextBox.Text, postcodeTextBox.Text, stateTextBox.Text, countryTextBox.Text, bedroomsTextBox.Text, bathroomsTextBox.Text,
-            parkingTextBox.Text, currencyListBox.Text, descriptionTextBox.Text, null);
+            //Load the form
+            //
+            var frm = new PropertyAssetForm(_pricingCache);
+            frm.ShowDialog();
         }
 
-        private void FindPropertyAssetButton_Click(object sender, EventArgs e)
+        private void FindPropertyAssetButtonClick(object sender, EventArgs e)
         {
             var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
-            var instrument = _pricingCache.GetPropertyAsset(propertyType, cityTextBox.Text, postcodeTextBox.Text, descriptionTextBox.Text, propertyIdentifierTextBox.Text);
-            if (!(instrument is PropertyNodeStruct propertyNodeStruct)) return;
-            var propertyAsset = propertyNodeStruct.Property;
-            var address = propertyAsset.propertyAddress?.streetAddress;
-            var length = address?.Length;
-            propertyTypeListBox.Text = propertyAsset.propertyTaxonomyType;
-            if (length != null && length > 0)
+            var instrument = _pricingCache.GetPropertyAsset(propertyType, cityTextBox.Text, shortNameTextBox.Text,
+                postcodeTextBox.Text, propertyIdentifierTextBox.Text);
+            if (instrument is null)
             {
-                streetIdentifierTextBox.Text = address[0];
+                propertyAssetIdentifierTextBox.Text = "Non-existent Property!";
+                return;
             }
-            if (length != null && length > 1)
+
+            var properties = instrument.AppProps;
+            var id = properties.GetString(PropertyProp.UniqueIdentifier, false);
+            if (id != null)
             {
-                streetNameTextBox.Text = address[1];
+                propertyAssetIdentifierTextBox.Text = id;
             }
-            if (length != null && length > 2)
-            {
-                suburbTextBox.Text = address[2];
-            }
-            cityTextBox.Text = propertyAsset.propertyAddress?.city;
-            postcodeTextBox.Text = propertyAsset.propertyAddress?.postalCode;
-            stateTextBox.Text = propertyAsset.propertyAddress?.state;
-            countryTextBox.Text = propertyAsset.propertyAddress?.country.ToString();
-            bedroomsTextBox.Text = propertyAsset.bedrooms;
-            bathroomsTextBox.Text = propertyAsset.description;
-            parkingTextBox.Text = propertyAsset.description;
-            currencyListBox.Text = propertyAsset.description;
-            descriptionTextBox.Text = propertyAsset.description;
+
+            if (!(instrument.Data is PropertyNodeStruct propertyAsset)) return;
+            propertyTypeListBox.Text = propertyAsset.Property?.propertyTaxonomyType;
         }
     }
 }

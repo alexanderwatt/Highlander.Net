@@ -385,7 +385,7 @@ namespace Highlander.Configuration.Data.V5r3
             var curveNames = tradeVersion.Item.GetRequiredPricingStructures().ToArray();
             extraProps.Set(TradeProp.RequiredCurrencies, currencies);
             extraProps.Set(TradeProp.RequiredPricingStructures, curveNames);
-            string idSuffix = $"{tradeType}.{tradeId.Value}";
+            string idSuffix = $"{tradeId.Value}.{tradeType}";
             ItemInfo itemInfo2 = MakeReportingTradeProps("Trade", idSuffix, extraProps, nameSpace);
             logger.LogDebug("  {0} ...", idSuffix);
             targetClient.SaveObject(tradeVersion, itemInfo2.ItemName, itemInfo2.ItemProps, false, TimeSpan.MaxValue);
@@ -426,13 +426,13 @@ namespace Highlander.Configuration.Data.V5r3
             //Get the required currencies
             //1. need to convert to Reporting namespace, where the functionality exists.
             var xml = XmlSerializerHelper.SerializeToString(tradeVersion); 
-            var newxml = xml.Replace("FpML-5/confirmation", "FpML-5/reporting");
-            var reportingTrade = XmlSerializerHelper.DeserializeFromString<Trade>(newxml);
+            var newXml = xml.Replace("FpML-5/confirmation", "FpML-5/reporting");
+            var reportingTrade = XmlSerializerHelper.DeserializeFromString<Trade>(newXml);
             var currencies = reportingTrade.Item.GetRequiredCurrencies().ToArray();
             var curveNames = reportingTrade.Item.GetRequiredPricingStructures().ToArray();
             extraProps.Set(TradeProp.RequiredCurrencies, currencies);
             extraProps.Set(TradeProp.RequiredPricingStructures, curveNames);
-            string idSuffix = $"{tradeType}.{tradeId.Value}";
+            string idSuffix = $"{tradeId.Value}.{tradeType}";
             ItemInfo itemInfo = MakeConfirmationTradeProps("Trade", idSuffix, extraProps, nameSpace);
             logger.LogDebug("  {0} ...", idSuffix);
             targetClient.SaveObject(tradeVersion, itemInfo.ItemName, itemInfo.ItemProps, false, TimeSpan.MaxValue);

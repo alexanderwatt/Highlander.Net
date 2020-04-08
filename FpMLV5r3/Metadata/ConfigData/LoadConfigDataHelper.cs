@@ -62,7 +62,6 @@ namespace Highlander.Configuration.Data.V5r3
             MarketLoader.LoadFixedIncomeData(logger, targetClient, nameSpace);
             MarketLoader.LoadQasData(logger, targetClient, nameSpace);
             ConfigDataLoader.LoadFpMLCodes(logger, targetClient, nameSpace);
-            //TODO The serializer crashes!
             FpMLTradeLoader.LoadTrades1(logger, targetClient, nameSpace);
             //FpMLTradeLoader.LoadTrades2(logger, targetClient, nameSpace); 
         }

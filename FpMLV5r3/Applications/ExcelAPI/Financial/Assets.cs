@@ -1508,6 +1508,7 @@ namespace HLV5r3.Financial
         /// Creates a property in the data store.
         /// </summary>
         /// <param name="propertyId">The property identifier.</param>
+        /// <param name="shortName">A short name.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
         /// <param name="streetName">A street Name.</param>
         /// <param name="suburb">The suburb</param>
@@ -1524,7 +1525,7 @@ namespace HLV5r3.Financial
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <returns></returns>
-        public string CreateProperty(string propertyId, string propertyType, string streetIdentifier, string streetName, 
+        public string CreatePropertyAsset(string propertyId, string propertyType, string shortName, string streetIdentifier, string streetName, 
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, Excel.Range propertyHeaders, Excel.Range propertyValues)
         {
@@ -1539,7 +1540,7 @@ namespace HLV5r3.Financial
                 index++;
             }
             var property = EnumHelper.Parse<PropertyType>(propertyType);
-            var result = ValService.CreatePropertyAsset(propertyId, property, streetIdentifier, streetName, suburb, city, postalCode, state, country,
+            var result = ValService.CreatePropertyAsset(propertyId, property, shortName, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
             return result;
         }

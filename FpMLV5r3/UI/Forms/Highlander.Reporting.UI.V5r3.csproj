@@ -88,6 +88,12 @@
     <Compile Include="CurveBuildForm.xaml.cs">
       <DependentUpon>CurveBuildForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PropertyAssetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyAssetForm.Designer.cs">
+      <DependentUpon>PropertyAssetForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="XmlTreeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="PropertyAssetForm.resx">
+      <DependentUpon>PropertyAssetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="XmlTreeView.resx">
       <DependentUpon>XmlTreeView.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +176,10 @@
     <ProjectReference Include="..\..\Metadata\Confirmation\Highlander.Confirmation.V5r3.csproj">
       <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
       <Name>Highlander.Confirmation.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
+      <Project>{D573BEBD-DEED-4DAD-9382-4A67C55FE1F3}</Project>
+      <Name>Highlander.Reporting.Identifiers.V5r3</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
       <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
