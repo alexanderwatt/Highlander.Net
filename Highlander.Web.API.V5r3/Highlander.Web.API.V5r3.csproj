@@ -151,9 +151,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Auth\ApiKeyAuthFilter.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AssetsController.cs" />
-    <Compile Include="Controllers\TransactionsController.cs" />
-    <Compile Include="Controllers\ValuationController.cs" />
+    <Compile Include="Controllers\LeaseController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
