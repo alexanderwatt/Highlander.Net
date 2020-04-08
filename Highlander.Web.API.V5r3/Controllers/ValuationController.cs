@@ -1,9 +1,10 @@
 ﻿using System;
 using Highlander.Core.Interface.V5r3;
-using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
 using System.Web.Http;
+using Highlander.Reporting.ModelFramework.V5r3;
+using System.Web.Http.Description;
 
 namespace Highlander.Web.API.V5r3.Controllers
 {
@@ -22,6 +23,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("curve")]
+        [ResponseType(typeof(PricingStructureData))]
         public IHttpActionResult GetCurve(string id)
         {
             var pricingStructure = _pricingCache.GetPricingStructure(id);

@@ -7,6 +7,7 @@ using System.Web.Http;
 using Highlander.Codes.V5r3;
 using Highlander.Constants;
 using Highlander.Utilities.NamedValues;
+using System.Web.Http.Description;
 
 namespace Highlander.Web.API.V5r3.Controllers
 {
@@ -15,6 +16,7 @@ namespace Highlander.Web.API.V5r3.Controllers
     {
         private readonly PricingCache _pricingCache;
         private readonly Reference<ILogger> _logger;
+        public const string DetailsRouteName = "Details";
 
         public AssetsController(PricingCache pricingCache, Reference<ILogger> logger)
         {
@@ -25,6 +27,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpPost]
         [Route("properties")]
+        [ResponseType(typeof(string))]
         public IHttpActionResult CreatePropertyAsset(string propertyId, string propertyType, string streetIdentifier, string streetName,
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description)
@@ -32,11 +35,12 @@ namespace Highlander.Web.API.V5r3.Controllers
             var result = _pricingCache.CreateProperty(propertyId, propertyType, streetIdentifier, streetName, suburb, city,
                 postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, null);
             _logger.Target.LogInfo($"Created property id: {result}");
-            return Ok(result);
+            return Created(Url.Link(DetailsRouteName, new { id = result }), result);
         }
 
         [HttpGet]
-        [Route("property")]
+        [Route("property", Name = DetailsRouteName)]
+        [ResponseType(typeof(Instrument))]
         public IHttpActionResult GetPropertyAsset(string id)
         {
             var instrument = _pricingCache.GetPropertyAsset(id);

@@ -176,6 +176,7 @@
   <ItemGroup>
     <Content Include="Key.snk" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Components\Core.Common\Highlander.Core.Common.csproj">
