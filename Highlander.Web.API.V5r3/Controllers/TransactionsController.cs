@@ -7,6 +7,8 @@ using System.Web.Http;
 using Highlander.Codes.V5r3;
 using Highlander.Constants;
 using Highlander.Utilities.NamedValues;
+using System.Web.Http.Description;
+using System.Collections.Generic;
 
 namespace Highlander.Web.API.V5r3.Controllers
 {
@@ -25,6 +27,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("trade")]
+        [ResponseType(typeof(Trade))]
         public IHttpActionResult GetTrade(string id)
         {
             var trade = _pricingCache.GetTrade(id);
@@ -37,6 +40,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("trades/properties")]
+        [ResponseType(typeof(IEnumerable<string>))]
         public IHttpActionResult GetPropertyTradeIds()
         {
             var properties = new NamedValueSet();
@@ -54,6 +58,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpGet]
         [Route("trades/properties/leases")]
+        [ResponseType(typeof(IEnumerable<string>))]
         public IHttpActionResult GetLeaseTradeIds(string propertyId)
         {
             var properties = new NamedValueSet();
@@ -72,6 +77,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpPost]
         [Route("trades/properties")]
+        [ResponseType(typeof(string))]
         public IHttpActionResult CreatePropertyTrade(string tradeId, bool isParty1Buyer, string party1, string party2, 
             DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount, DateTime paymentDate, string propertyType, 
             string currency, string propertyIdentifier, string tradingBook)
@@ -85,6 +91,7 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpPost]
         [Route("trades/properties/leases")]
+        [ResponseType(typeof(string))]
         public IHttpActionResult CreateLeaseTrade(string tradeId, bool isParty1Tenant, string party1, string party2,
             DateTime tradeDate, DateTime leaseStartDate, string currency, string portfolio, decimal startGrossAmount, string leaseId,
             DateTime leaseExpiryDate, string referencePropertyIdentifier, string description)
