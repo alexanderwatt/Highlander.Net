@@ -401,7 +401,7 @@ namespace Highlander.ValuationEngine.V5r3
                 var id = property.GetString(PropertyProp.UniqueIdentifier, true);
                 result.Add(id);
             }
-            logger.LogDebug("{} property assets returned;", result.Count);
+            logger.LogDebug("{0} property assets returned;", result.Count);
             return result;
         }
 
@@ -431,7 +431,7 @@ namespace Highlander.ValuationEngine.V5r3
                 var property = (PropertyNodeStruct) asset.Data;
                 result.Add(property);
             }
-            logger.LogDebug("{} property assets returned;", result.Count);
+            logger.LogDebug("{0} property assets returned;", result.Count);
             return result;
         }
 
@@ -549,10 +549,10 @@ namespace Highlander.ValuationEngine.V5r3
                 }
                 catch (System.Exception e)
                 {
-                    logger.LogError($"TradeStore.QueryTrades: Exception: {0}", e);
+                    logger.LogError("TradeStore.QueryTrades: Exception: {0}", e);
                 }
             }
-            logger.LogInfo("{} trades retrieved from the cache.", tradeNum);
+            logger.LogInfo("{0} trades retrieved from the cache.", tradeNum);
             return result;
         }
 
@@ -2407,7 +2407,7 @@ namespace Highlander.ValuationEngine.V5r3
             //This identifier is too complex.
             var identifier = new PropertyIdentifier(propertyType.ToString(), city, shortName, postalCode, propertyAssetIdentifier).UniqueIdentifier;
             propertyAsset.id = identifier;
-            var assetIdentifier = NameSpace + "." + identifier;
+            var assetIdentifier = $"{NameSpace}.{identifier}";
             properties.Set(PropertyProp.UniqueIdentifier, identifier);
             var propertyInstrument = new PropertyNodeStruct {Property = propertyAsset};
             //TODO Add the loan information

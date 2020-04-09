@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using System.Collections.Generic;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Core.Common;
+using Highlander.Web.API.V5r3.Models;
 
 namespace Highlander.Web.API.V5r3.Controllers
 {
@@ -67,7 +68,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var result = _pricingCache.CreatePropertyTrade(tradeId, isParty1Buyer, party1, party2, tradeDate, effectiveDate,
                 purchaseAmount,
                 paymentDate, propertyType, currency, propertyIdentifier, tradingBook);
-            _logger.Target.LogInfo("Created property trade id: {}", result);
+            _logger.Target.LogInfo("Created property trade id: {0}", result);
             return Ok(result);
         }
 
@@ -77,8 +78,8 @@ namespace Highlander.Web.API.V5r3.Controllers
         public IHttpActionResult GetPropertyAssetIds()
         {
             var properties = new NamedValueSet();
-            properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
-            properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
+            //properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
+            //properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             var trades = _pricingCache.QueryPropertyAssetIds(properties);
             if (trades == null)
@@ -89,16 +90,27 @@ namespace Highlander.Web.API.V5r3.Controllers
             return Ok(trades);
         }
 
+        //[HttpPost]
+        //[Route("assets")]
+        //[ResponseType(typeof(string))]
+        //public IHttpActionResult CreatePropertyAsset(long companyId, string propertyId, PropertyType propertyType, string shortName, string streetIdentifier, string streetName,
+        //    string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
+        //    string currency, string description)
+        //{
+        //    var result = _pricingCache.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city,
+        //        postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, null);
+        //    _logger.Target.LogInfo("Created property trade id: {0}", result);
+        //    return Ok(result);
+        //}
+
         [HttpPost]
         [Route("assets")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreatePropertyAsset(string propertyId, PropertyType propertyType, string shortName, string streetIdentifier, string streetName,
-            string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
-            string currency, string description)
+        public IHttpActionResult CreatePropertyAsset([FromBody] PropertyAssetViewModel model)
         {
-            var result = _pricingCache.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city,
-                postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description, null);
-            _logger.Target.LogInfo("Created property trade id: {}", result);
+            var result = _pricingCache.CreatePropertyAsset(model.PropertyId, model.PropertyType, model.ShortName, model.StreetIdentifier, model.StreetName, model.Suburb, model.City,
+                model.PostalCode, model.State, model.Country, model.NumBedrooms.ToString(), model.NumBathrooms.ToString(), model.NumParking.ToString(), model.Currency, model.Description, null);
+            _logger.Target.LogInfo("Created property trade id: {0}", result);
             return Ok(result);
         }
 
@@ -110,7 +122,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var instrument = _pricingCache.GetPropertyAsset(propertyType, city, shortName, postCode, propertyIdentifier);
             if (instrument == null)
                 return NotFound();
-            return Ok(instrument);
+            return Ok(instrument.Data);
         }
 
         [HttpGet]

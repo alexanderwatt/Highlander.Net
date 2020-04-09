@@ -65,7 +65,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         {
             var result = _pricingCache.CreateLeaseTrade(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
                 currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description);
-            _logger.Target.LogInfo("Created lease trade id: {}", result);
+            _logger.Target.LogInfo("Created lease trade id: {0}", result);
             return Ok(result);
         }
     }

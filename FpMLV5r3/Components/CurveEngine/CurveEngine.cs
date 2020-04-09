@@ -900,7 +900,7 @@ namespace Highlander.CurveEngine.V5r3
         public ICoreItem GetPropertyAsset(PropertyType propertyType, string city, string shortName, string postCode, string propertyIdentifier)
         {
             var id = new PropertyIdentifier(propertyType.ToString(), city, shortName, postCode, propertyIdentifier);
-            var propertyInstrument =  Cache.LoadItem<PropertyNodeStruct>(NameSpace + "." + id.UniqueIdentifier);
+            var propertyInstrument =  Cache.LoadItem<PropertyNodeStruct>($"{NameSpace}.{id.UniqueIdentifier}");
             if(propertyInstrument?.Data is PropertyNodeStruct) return propertyInstrument;
             return null;
         }
