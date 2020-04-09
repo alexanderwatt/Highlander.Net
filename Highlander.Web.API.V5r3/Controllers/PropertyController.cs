@@ -61,13 +61,11 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("trades")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreatePropertyTrade(string tradeId, bool isParty1Buyer, string party1, string party2,
-            DateTime tradeDate, DateTime effectiveDate, decimal purchaseAmount, DateTime paymentDate, string propertyType,
-            string currency, string propertyIdentifier, string tradingBook)
+        public IHttpActionResult CreatePropertyTrade([FromBody] PropertyTradeViewModel model)
         {
-            var result = _pricingCache.CreatePropertyTrade(tradeId, isParty1Buyer, party1, party2, tradeDate, effectiveDate,
-                purchaseAmount,
-                paymentDate, propertyType, currency, propertyIdentifier, tradingBook);
+            var properties = new NamedValueSet();
+            var result = _pricingCache.CreatePropertyTradeWithProperties(model.TradeId, true, model.Purchaser, model.Seller, model.TradeTimeUtc, model.EffectiveTimeUtc,
+                model.PurchaseAmount, model.PaymentTimeUtc, model.PropertyType, model.Currency, model.PropertyId, model.TradingBook, properties);
             _logger.Target.LogInfo("Created property trade id: {0}", result);
             return Ok(result);
         }
@@ -78,15 +76,13 @@ namespace Highlander.Web.API.V5r3.Controllers
         public IHttpActionResult GetPropertyAssetIds()
         {
             var properties = new NamedValueSet();
-            //properties.Set(EnvironmentProp.NameSpace, _pricingCache.NameSpace);
-            //properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
             var trades = _pricingCache.QueryPropertyAssetIds(properties);
             if (trades == null)
             {
                 return NotFound();
             }
-            _logger.Target.LogInfo("Queried property trade ids.");
+            _logger.Target.LogInfo("Queried property assets.");
             return Ok(trades);
         }
 
@@ -110,7 +106,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         {
             var result = _pricingCache.CreatePropertyAsset(model.PropertyId, model.PropertyType, model.ShortName, model.StreetIdentifier, model.StreetName, model.Suburb, model.City,
                 model.PostalCode, model.State, model.Country, model.NumBedrooms.ToString(), model.NumBathrooms.ToString(), model.NumParking.ToString(), model.Currency, model.Description, null);
-            _logger.Target.LogInfo("Created property trade id: {0}", result);
+            _logger.Target.LogInfo("Created property id: {0}", result);
             return Ok(result);
         }
 
