@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DataDocument" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="partyA"/>
+            <tradeId tradeIdScheme="http://www.PartyA.com/com-trade-id">1234</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="partyB"/>
+            <tradeId tradeIdScheme="http://www.PartyB.com/com-trade-id">2345</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2009-01-28</tradeDate>
+      </tradeHeader>
+      <commodityForward>
+         <valueDate id="valueDate">
+            <adjustableDate>
+               <unadjustedDate>2009-05-12</unadjustedDate>
+               <dateAdjustments>
+                  <businessDayConvention>NotApplicable</businessDayConvention>
+                  <businessCenters>
+                     <businessCenter>USNY</businessCenter>
+                     <businessCenter>LONDON-GOLD</businessCenter>
+                  </businessCenters>
+               </dateAdjustments>
+            </adjustableDate>
+         </valueDate>
+         <fixedLeg id="fixedLeg">
+            <payerPartyReference href="partyA"/>
+            <receiverPartyReference href="partyB"/>
+            <fixedPrice>
+               <price>987.12</price>
+               <priceCurrency>USD</priceCurrency>
+               <priceUnit>ozt</priceUnit>
+            </fixedPrice>
+            <quantityReference href="deliveryQuantity"/>
+            <paymentDates>
+               <relativeDate>
+                  <periodMultiplier>0</periodMultiplier>
+                  <period>D</period>
+                  <businessDayConvention>NotApplicable</businessDayConvention>
+                  <dateRelativeTo href="valueDate"/>
+               </relativeDate>
+            </paymentDates>
+         </fixedLeg>
+         <bullionPhysicalLeg id="bullionLeg">
+            <payerPartyReference href="partyB"/>
+            <receiverPartyReference href="partyA"/>
+            <bullionType>Gold</bullionType>
+            <deliveryLocation>London</deliveryLocation>
+            <physicalQuantity id="deliveryQuantity">
+               <quantityUnit>ozt</quantityUnit>
+               <quantityFrequency>Term</quantityFrequency>
+               <quantity>1000.0</quantity>
+            </physicalQuantity>
+            <settlementDate>
+               <relativeDate>
+                  <periodMultiplier>0</periodMultiplier>
+                  <period>D</period>
+                  <businessDayConvention>NotApplicable</businessDayConvention>
+                  <dateRelativeTo href="valueDate"/>
+               </relativeDate>
+            </settlementDate>
+         </bullionPhysicalLeg>
+         <settlementDisruption>Negotiation</settlementDisruption>
+      </commodityForward>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2006</contractualDefinitions>
+         <contractualDefinitions>ISDA2005Commodity</contractualDefinitions>
+      </documentation>
+   </trade>
+   <party id="partyA">
+      <partyId>Party_A_BIC_CODE</partyId>
+      <partyName>Bank A</partyName>
+   </party>
+   <party id="partyB">
+      <partyId>Party_B_BIC_CODE</partyId>
+      <partyName>Bank B</partyName>
+   </party>
+</FpML>

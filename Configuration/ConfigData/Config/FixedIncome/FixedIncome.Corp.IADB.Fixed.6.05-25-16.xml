@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="IADB 6 05/25/16" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <instrumentId>AU300IADB049 Corp Isin</instrumentId>
+  <description>IADB 6 05/25/16</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>IADB</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Fixed</couponType>
+  <couponRate>6</couponRate>
+  <maturity>2016-05-25</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>6</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+</bond>

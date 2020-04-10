@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  --><!--
+  == ABN Amro pays 4% CHF fixed rate loan on ACT/360 basis a for 25 million Deposit from Midland starting
+  == February 14, 2002 and maturing February 15, 2002.
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="TradeConfirmed" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.abn.com/coding-scheme/conversationId">FX65431</conversationId>
+      <messageId messageIdScheme="http://www.abn.com/coding-scheme/messageId">FX87653</messageId>
+      <sentBy partyIdScheme="http://www.abn.com/partyId">ABNANL2A</sentBy>
+      <sendTo partyIdScheme="http://www.abn.com/partyId">MIDLGB22</sendTo>
+      <creationTimestamp>2001-12-04T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.hsbc.com/swaps/trade-id">MB87623</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.abnamro.com/swaps/trade-id">AA9876</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2002-02-14Z</tradeDate>
+      </tradeHeader>
+      <termDeposit>
+         <productType>Overnight Term Deposit</productType>
+         <initialPayerReference href="party1"/>
+         <initialReceiverReference href="party2"/>
+         <startDate>2002-02-14Z</startDate>
+         <maturityDate>2002-02-15Z</maturityDate>
+         <dayCountFraction>ACT/360</dayCountFraction>
+         <principal>
+            <currency>CHF</currency>
+            <amount>25000000.00</amount>
+         </principal>
+         <fixedRate>0.04</fixedRate>
+      </termDeposit>
+   </trade>
+   <party id="party1">
+      <partyId>MIDLGB22</partyId>
+   </party>
+   <party id="party2">
+      <partyId>ABNANL2A</partyId>
+   </party>
+</FpML>

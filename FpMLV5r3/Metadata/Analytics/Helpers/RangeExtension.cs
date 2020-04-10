@@ -17,8 +17,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml;
+using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.NamedValues;
+using Highlander.Utilities.Serialisation;
 
 #endregion
 
@@ -29,6 +32,72 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
     /// </summary>
     public static class RangeExtension
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instrument"></param>
+        /// <returns></returns>
+        public static object[,] ConvertAssetToRange(Instrument instrument)
+        {
+            var output = new List<Pair<string, string>>();
+            string xml = XmlSerializerHelper.SerializeToString(instrument);
+            var nodes = new XmlDocument();
+            nodes.LoadXml(xml);
+            output.AddRange(ConvertXmlToMatrix(nodes, ""));
+            var outputRange = new object[output.Count, 2];
+            // Remove the first row, XML def row
+            output.RemoveAt(0);
+            int i = 0;
+            foreach (var pair in output)
+            {
+                outputRange[i, 0] = pair.First;
+                outputRange[i, 1] = pair.Second;
+                i++;
+            }
+            return outputRange;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instrumentNode"></param>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
+        public static IEnumerable<Pair<string, string>> ConvertXmlToMatrix(XmlNode instrumentNode, string nodeName)
+        {
+            var output = new List<Pair<string, string>>();
+            foreach (XmlNode node in instrumentNode)
+            {
+                if (node.ChildNodes.Count == 0)
+                {
+                    string value = node.Value ?? "";
+                    string name = node.NodeType == XmlNodeType.Text ? nodeName : nodeName + "." + node.Name;
+                    output.Add(new Pair<string, string>(name, value));
+                }
+                else
+                {
+                    string newNodeName = nodeName == "" ? node.Name : nodeName + "." + node.Name;
+                    output.AddRange(ConvertXmlToMatrix(node, newNodeName));
+                }
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strikes"></param>
+        /// <returns></returns>
+        public static double[] ConvertStringArrayToDoubleArray(string[] strikes)
+        {
+            var result = new double[strikes.Length];
+            for (var i = 0; i < strikes.Length; i++)
+            {
+                result[i] = Convert.ToDouble(strikes[i]);
+            }
+            return result;
+        }
+
         /// <summary>
         /// Convert an Excel range (object[,]) to a Dictionary
         /// </summary>
@@ -334,8 +403,8 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
         /// <param name="result">The result.</param>
         public static void AddMoreText(this object[,] result, int rowCount, int columnCount)
         {
-            int maxRow = Math.Min(rowCount, result.GetUpperBound(0) + 1);
-            int maxCol = Math.Min(columnCount, result.GetUpperBound(1) + 1);
+            int maxRow = System.Math.Min(rowCount, result.GetUpperBound(0) + 1);
+            int maxCol = System.Math.Min(columnCount, result.GetUpperBound(1) + 1);
             result[maxRow - 1, maxCol - 1] = string.Format("more({0},{1})...", result.GetUpperBound(0) + 1, result.GetUpperBound(1) + 1);
         }
 

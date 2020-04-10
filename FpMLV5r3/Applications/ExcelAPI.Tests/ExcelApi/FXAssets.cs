@@ -15,8 +15,8 @@
 
 using System;
 using System.Collections.Generic;
-using Highlander.CurveEngine.V5r3.Extensions;
 using Highlander.CurveEngine.V5r3.Helpers;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Excel.Tests.V5r3.ExcelApi

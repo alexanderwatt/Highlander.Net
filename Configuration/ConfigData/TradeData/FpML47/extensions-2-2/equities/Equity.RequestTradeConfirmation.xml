@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:ext="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../FpML-4-7-8-TR-1/fpml-main-4-7.xsd http://www.fpml.org/2009/FpML-4-7/ext ../fpmlext-main.xsd" 
+	xsi:type="RequestTradeConfirmation" 
+	version="4-7">
+	
+	<header>
+		<messageId 
+			messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">345435345345</messageId>
+		<sentBy 
+			partyIdScheme="http://www.jpmorgan.com/coding-scheme/party-id">msdw</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="sh9204"/>
+				<tradeId 
+					tradeIdScheme="http://www.PartyA.com/coding-scheme/trade-id">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate id="agasd0290">2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:equityTransaction>
+		
+			<buyerPartyReference href="mm8294"/>
+			<sellerPartyReference href="sh9204"/>
+			
+			<ext:numberOfUnits>10000</ext:numberOfUnits>
+			<ext:unitPrice>
+				<currency>USD</currency>
+				<amount>78.20</amount>
+			</ext:unitPrice>
+			
+			<ext:equity>
+				<instrumentId 
+					instrumentIdScheme="http://www.reuters.com/coding-scheme/instrument-id">STM-FP</instrumentId>
+				<description>STMicroelectronics N.V. ordinary shares</description>
+				<exchangeId 
+					exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">NSE</exchangeId>
+			</ext:equity>
+			
+		</ext:equityTransaction>
+		
+	</trade>
+	
+	<party id="sh9204">
+		<partyId>Party A</partyId>
+	</party>
+	<party id="mm8294">
+		<partyId>Party B</partyId>
+	</party>
+	
+</FpML>

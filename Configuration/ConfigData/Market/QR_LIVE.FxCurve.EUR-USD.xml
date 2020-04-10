@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.FxCurve.EUR-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="EUR-USD">
+    <name>EUR-USD</name>
+    <currency>EUR</currency>
+    <quotedCurrencyPair>
+      <currency1>EUR</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="EUR-USD">
+    <baseDate>2010-08-30</baseDate>
+    <spotDate id="SpotDate">2010-09-01</spotDate>
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxSpot-SP" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-12M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-5Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-6Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-7Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-8Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-9Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="EURUSD-FxForward-10Y" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-ON" />
+        <quote>
+          <value>1.273252</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EURON BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-TN" />
+        <quote>
+          <value>1.273251</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EURTN BGN CURNCY/PX_MID</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxSpot-SP" />
+        <quote>
+          <value>1.2733</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-1W" />
+        <quote>
+          <value>1.27328</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR1W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-2W" />
+        <quote>
+          <value>1.273262</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR2W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-3W" />
+        <quote>
+          <value>1.27325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR3W BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-1M" />
+        <quote>
+          <value>1.27324</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR1M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-2M" />
+        <quote>
+          <value>1.273154</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR2M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-3M" />
+        <quote>
+          <value>1.273068</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR3M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-4M" />
+        <quote>
+          <value>1.272946</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR4M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-5M" />
+        <quote>
+          <value>1.272829</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR5M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-6M" />
+        <quote>
+          <value>1.272703</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR6M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-9M" />
+        <quote>
+          <value>1.272287</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR9M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-12M" />
+        <quote>
+          <value>1.272</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR12M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-15M" />
+        <quote>
+          <value>1.271875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR15M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-18M" />
+        <quote>
+          <value>1.272091</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR18M BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-2Y" />
+        <quote>
+          <value>1.27345</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR2Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-3Y" />
+        <quote>
+          <value>1.27871</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR3Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-4Y" />
+        <quote>
+          <value>1.308816</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR4Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-5Y" />
+        <quote>
+          <value>1.298586</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR5Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-6Y" />
+        <quote>
+          <value>1.310125</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR6Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-7Y" />
+        <quote>
+          <value>1.323195</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR7Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-8Y" />
+        <quote>
+          <value>1.334338</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR8Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-9Y" />
+        <quote>
+          <value>1.346505</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR9Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="EURUSD-FxForward-10Y" />
+        <quote>
+          <value>1.35705</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EUR10Y BGN CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:51.5746369+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </spotRate>
+    <fxForwardCurve>
+      <interpolationMethod>LinearInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point id="EURUSD-FxForward-ON">
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1.273252</mid>
+      </point>
+      <point id="EURUSD-FxForward-TN">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>1.273251</mid>
+      </point>
+      <point id="EURUSD-FxSpot-SP">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>1.2733</mid>
+      </point>
+      <point id="EURUSD-FxForward-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>1.27328</mid>
+      </point>
+      <point id="EURUSD-FxForward-2W">
+        <term>
+          <date>2010-09-15</date>
+        </term>
+        <mid>1.273262</mid>
+      </point>
+      <point id="EURUSD-FxForward-3W">
+        <term>
+          <date>2010-09-22</date>
+        </term>
+        <mid>1.27325</mid>
+      </point>
+      <point id="EURUSD-FxForward-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>1.27324</mid>
+      </point>
+      <point id="EURUSD-FxForward-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>1.273154</mid>
+      </point>
+      <point id="EURUSD-FxForward-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>1.273068</mid>
+      </point>
+      <point id="EURUSD-FxForward-4M">
+        <term>
+          <date>2011-01-04</date>
+        </term>
+        <mid>1.272946</mid>
+      </point>
+      <point id="EURUSD-FxForward-5M">
+        <term>
+          <date>2011-02-01</date>
+        </term>
+        <mid>1.272829</mid>
+      </point>
+      <point id="EURUSD-FxForward-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>1.272703</mid>
+      </point>
+      <point id="EURUSD-FxForward-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>1.272287</mid>
+      </point>
+      <point id="EURUSD-FxForward-12M">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>1.272</mid>
+      </point>
+      <point id="EURUSD-FxForward-15M">
+        <term>
+          <date>2011-12-01</date>
+        </term>
+        <mid>1.271875</mid>
+      </point>
+      <point id="EURUSD-FxForward-18M">
+        <term>
+          <date>2012-03-01</date>
+        </term>
+        <mid>1.272091</mid>
+      </point>
+      <point id="EURUSD-FxForward-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>1.27345</mid>
+      </point>
+      <point id="EURUSD-FxForward-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>1.27871</mid>
+      </point>
+      <point id="EURUSD-FxForward-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>1.308816</mid>
+      </point>
+      <point id="EURUSD-FxForward-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>1.298586</mid>
+      </point>
+      <point id="EURUSD-FxForward-6Y">
+        <term>
+          <date>2016-09-01</date>
+        </term>
+        <mid>1.310125</mid>
+      </point>
+      <point id="EURUSD-FxForward-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>1.323195</mid>
+      </point>
+      <point id="EURUSD-FxForward-8Y">
+        <term>
+          <date>2018-09-04</date>
+        </term>
+        <mid>1.334338</mid>
+      </point>
+      <point id="EURUSD-FxForward-9Y">
+        <term>
+          <date>2019-09-03</date>
+        </term>
+        <mid>1.346505</mid>
+      </point>
+      <point id="EURUSD-FxForward-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>1.35705</mid>
+      </point>
+    </fxForwardCurve>
+  </fxCurveValuation>
+</market>

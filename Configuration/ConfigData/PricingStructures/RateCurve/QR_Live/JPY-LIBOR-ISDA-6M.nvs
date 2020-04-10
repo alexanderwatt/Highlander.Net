@@ -1,0 +1,8 @@
+PricingStructureType/String=RateCurve
+Market/String=QR_LIVE
+IndexName/String=JPY-LIBOR-ISDA
+IndexTenor/String=6M
+CurveName/String=JPY-LIBOR-ISDA-6M
+DependencyDepth/Double=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=JPY

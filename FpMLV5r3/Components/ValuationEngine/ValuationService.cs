@@ -2364,7 +2364,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <summary>
         /// Creates a property in the data store.
         /// </summary>
-        /// <param name="cache">THe cache where the data is cached.</param>
+        /// <param name="cache">The cache where the data is cached.</param>
         /// <param name="nameSpace">THe namespace.</param>
         /// <param name="propertyAssetIdentifier">The property asset identifier.</param>
         /// <param name="streetIdentifier">A street Identifier.</param>
@@ -2404,7 +2404,6 @@ namespace Highlander.ValuationEngine.V5r3
             properties.Set(PropertyProp.PropertyType, propertyType);
             var propertyAsset = PropertyAssetHelper.Create(propertyAssetIdentifier, propertyType.ToString(), streetIdentifier, streetName,
             suburb, city, postalCode, state, country, numBedrooms, numBathrooms, numParking, currency, description);
-            //This identifier is too complex.
             var identifier = new PropertyIdentifier(propertyType.ToString(), city, shortName, postalCode, propertyAssetIdentifier).UniqueIdentifier;
             propertyAsset.id = identifier;
             var assetIdentifier = $"{NameSpace}.{identifier}";
@@ -2647,7 +2646,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
-        /// <param name="tradeId">THe trade identifier </param>
+        /// <param name="tradeId">The trade identifier </param>
         /// <param name="isParty1Buyer">Is party1 the bond buyer. If not then it is the seller. </param>
         /// <param name="tradeDate">The trade date.</param>
         /// <param name="purchaseAmount">The purchase Amount.</param>
@@ -2680,8 +2679,9 @@ namespace Highlander.ValuationEngine.V5r3
             properties.GetValue(TradeProp.TradeDate, tradeDate);
             properties.GetValue(TradeProp.PaymentDate, paymentDate);
             properties.Set(TradeProp.TradingBookName, portfolio);
-            var propertyTradeIdentifier = $"{FunctionProp.Trade}.{FpML5R3NameSpaces.Reporting}.{sourceSystem}.{ItemChoiceType15.propertyTransaction}.{tradeId}";
-            var item = cache.LoadItem<PropertyNodeStruct>(propertyAssetIdentifier);
+            var identifier = new Reporting.Identifiers.V5r3.TradeIdentifier(ItemChoiceType15.propertyTransaction, ProductTypeSimpleEnum.PropertyTransaction, tradeId, tradeDate, sourceSystem);
+            var propertyTradeIdentifier = identifier.UniqueIdentifier;
+            var item = cache.LoadItem<PropertyNodeStruct>($"{ NameSpace}.{ propertyAssetIdentifier}");
             if (item?.Data is PropertyNodeStruct propertyNode)
             {
                 //  1) Build and publish the property transaction

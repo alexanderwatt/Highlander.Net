@@ -60,10 +60,11 @@ namespace Highlander.Core.Viewer.V5r3
         private readonly Guarded<Queue<ICoreItem>> _queuedItems = new Guarded<Queue<ICoreItem>>(new Queue<ICoreItem>());
         private string _navDetailSubject;
         private readonly string _nameSpace = EnvironmentProp.DefaultNameSpace;
-        private readonly PricingCache _pricingCache = new PricingCache();
+        private PricingCache _pricingCache;
 
         public CoreViewerForm()
         {
+            _pricingCache = new PricingCache(EnvironmentProp.DefaultNameSpace, false);
             InitializeComponent();
             _syncContext = SynchronizationContext.Current;
         }

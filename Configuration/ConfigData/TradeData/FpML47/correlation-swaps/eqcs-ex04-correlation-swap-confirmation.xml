@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 
+	== Copyright (c) 2002-2009. All rights reserved. 
+	== Financial Products Markup Language is subject to the FpML public license. 
+	== A copy of this license is available at http://www.fpml.org/license/license.html-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header><!-- unique message id -->
+      <messageId messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">234233423420</messageId><!-- identify the sender of this message -->
+      <sentBy partyIdScheme="http://www.jpmorgan.com/coding-scheme/party-id">23902</sentBy>
+      <creationTimestamp>2007-05-02T08:57:00-00:00</creationTimestamp>
+   </header>
+   <trade><!-- trade header information -->
+      <tradeHeader>
+         <partyTradeIdentifier><!-- identify this trade from the perspective of gh4903 -->
+            <partyReference href="gh4903"/>
+            <tradeId tradeIdScheme="http://www.jpmorgan.com/coding-scheme/trade-id">6234</tradeId>
+         </partyTradeIdentifier><!-- trade date -->
+         <tradeDate>2006-11-07</tradeDate>
+      </tradeHeader><!-- correlation swap uses return swap framework -->
+      <correlationSwap><!-- extraordinary events -->
+         <extraordinaryEvents><!-- calculation agent determines handling of these merger events -->
+            <mergerEvents>
+               <shareForShare>CalculationAgent</shareForShare>
+               <shareForOther>CalculationAgent</shareForOther>
+               <shareForCombined>CalculationAgent</shareForCombined>
+            </mergerEvents><!-- tender offer applicable -->
+            <tenderOffer>true</tenderOffer><!-- calculation agent determines handling of these merger events -->
+            <tenderOfferEvents>
+               <shareForShare>ModifiedCalculationAgent</shareForShare>
+               <shareForOther>ModifiedCalculationAgent</shareForOther>
+               <shareForCombined>ModifiedCalculationAgent</shareForCombined>
+            </tenderOfferEvents><!-- failure to deliver or additional disruptions events mandatory -->
+            <failureToDeliver>true</failureToDeliver>
+            <representations><!-- non reliance applicable -->
+               <nonReliance>true</nonReliance><!-- agreements and acknowledgements regarding hedging activities applicable -->
+               <agreementsRegardingHedging>true</agreementsRegardingHedging><!-- additional acknowledgements applicable -->
+               <additionalAcknowledgements>true</additionalAcknowledgements>
+            </representations><!-- TODO do I need to add Share Substitution Procedure -->
+            <nationalisationOrInsolvency>CancellationAndPayment</nationalisationOrInsolvency>
+         </extraordinaryEvents><!-- floating correlation leg -->
+         <correlationLeg><!-- correlation seller responsible for making the payments defined by this structure -->
+            <payerPartyReference href="ab9560"/><!-- correlation buyer that receives the payments defined by this structure-->
+            <receiverPartyReference href="gh4903"/><!-- termination date is the cash settlement payment date -->
+            <terminationDate>
+               <relativeDate>
+                  <periodMultiplier>0</periodMultiplier>
+                  <period>D</period>
+                  <businessDayConvention>NONE</businessDayConvention>
+                  <dateRelativeTo href="sd2344"/>
+               </relativeDate>
+            </terminationDate><!-- define the underlying basket, showing only the first three shares-->
+            <underlyer>
+               <basket>
+                  <basketConstituent>
+                     <equity>
+                        <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">IBM.N</instrumentId>
+                        <description>ABN AMRO HOLDING NV</description><!-- exchange -->
+                        <exchangeId>AEX</exchangeId><!-- related exchange -->
+                        <relatedExchangeId>LIFFE</relatedExchangeId>
+                     </equity>
+                  </basketConstituent>
+                  <basketConstituent>
+                     <equity>
+                        <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">MSFT.O</instrumentId>
+                        <description>AEGON NV</description>
+                        <exchangeId>AEX</exchangeId>
+                        <relatedExchangeId>LIFFE</relatedExchangeId>
+                     </equity>
+                  </basketConstituent>
+                  <basketConstituent>
+                     <equity>
+                        <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0">B.N</instrumentId>
+                        <description>AIR LIQUIDE</description>
+                        <exchangeId>PAR</exchangeId>
+                        <relatedExchangeId>LIFFE</relatedExchangeId>
+                     </equity>
+                  </basketConstituent>
+               </basket>
+            </underlyer>
+            <settlementType>Cash</settlementType><!-- cash settlement payment date -->
+            <settlementDate id="sd2344"><!-- 2 TARGET business days after valuation -->
+               <relativeDate>
+                  <periodMultiplier>3</periodMultiplier>
+                  <period>D</period>
+                  <dayType>Business</dayType>
+                  <businessDayConvention>NONE</businessDayConvention>
+                  <businessCenters><!-- business days -->
+                     <businessCenter>EUTA</businessCenter>
+                  </businessCenters>
+                  <dateRelativeTo href="vd8290"/>
+               </relativeDate>
+            </settlementDate>
+            <valuation><!-- valuation date -->
+               <valuationDate id="vd8290">
+                  <adjustableDate>
+                     <unadjustedDate>2007-06-15</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NotApplicable</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </valuationDate>
+            </valuation>
+            <amount><!-- implicit return type price --><!-- implict participation 100% --><!-- observation start date -->
+               <observationStartDate>
+                  <adjustableDate>
+                     <unadjustedDate>2006-11-07</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NotApplicable</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </observationStartDate>
+               <correlation>
+                  <closingLevel>true</closingLevel><!-- expected number of business days -->
+                  <expectedN>30</expectedN><!-- equity notional amount -->
+                  <notionalAmount>
+                     <currency>EUR</currency>
+                     <amount>15000000</amount>
+                  </notionalAmount>
+                  <correlationStrikePrice>0.60123</correlationStrikePrice>
+                  <boundedCorrelation><!-- floor level -->
+                     <minimumBoundaryPercent>0.35123</minimumBoundaryPercent><!-- cap level -->
+                     <maximumBoundaryPercent>0.85123</maximumBoundaryPercent>
+                  </boundedCorrelation>
+                  <numberOfDataSeries>1</numberOfDataSeries>
+               </correlation>
+            </amount>
+         </correlationLeg>
+      </correlationSwap><!-- calculation agent -->
+      <calculationAgent>
+         <calculationAgentPartyReference href="gh4903"/>
+      </calculationAgent>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>2002</masterAgreementVersion>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2000</contractualDefinitions>
+         <contractualDefinitions>ISDA2002Equity</contractualDefinitions>
+      </documentation>
+      <governingLaw>USNY</governingLaw>
+   </trade>
+   <party id="ab9560"><!-- party id defaults to BIC -->
+      <partyId>CLNTGB20</partyId>
+      <partyName>Client</partyName>
+   </party>
+   <party id="gh4903"><!-- party id defaults to BIC -->
+      <partyId>CHASUS33</partyId>
+      <partyName>JP Morgan Chase</partyName><!-- account details -->
+      <account id="uw2992">
+         <accountId accountIdScheme="http://www.jpmorgan.com/coding-scheme/account-id">4345334</accountId>
+      </account>
+   </party>
+</FpML>

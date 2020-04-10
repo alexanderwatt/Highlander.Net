@@ -32,7 +32,6 @@ using Highlander.CurveEngine.Tests.V5r3.Properties;
 using Highlander.CurveEngine.V5r3.Assets.Helpers;
 using Highlander.CurveEngine.V5r3.Assets.Rates.Cash;
 using Highlander.CurveEngine.V5r3.Assets.Rates.Swaps;
-using Highlander.CurveEngine.V5r3.Extensions;
 using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.CurveEngine.V5r3.Markets;
@@ -44,6 +43,7 @@ using Highlander.CurveEngine.V5r3.PricingStructures.Helpers;
 using Highlander.CurveEngine.V5r3.PricingStructures.Interpolators;
 using Highlander.CurveEngine.V5r3.PricingStructures.Surfaces;
 using Highlander.Reporting.Analytics.V5r3.DayCounters;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.Analytics.V5r3.Interpolations;
 using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
 using Highlander.Reporting.Analytics.V5r3.PricingEngines;
@@ -89,6 +89,7 @@ using VolatilityMatrix = Highlander.Reporting.V5r3.VolatilityMatrix;
 using VolatilityRepresentation = Highlander.Reporting.V5r3.VolatilityRepresentation;
 using YieldCurve = Highlander.Reporting.V5r3.YieldCurve;
 using YieldCurveValuation = Highlander.Reporting.V5r3.YieldCurveValuation;
+using VolatilitySurfaceHelper = Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper;
 
 #endregion
 
@@ -2734,14 +2735,14 @@ namespace Highlander.CurveEngine.Tests.V5r3
         [TestMethod]
         public void TestConvertArrayOfTenorsToDouble()
         {
-            var expiryDoubleArray = VolatilitySurfaceHelper.ConvertArrayOfTenorsToDouble(_expiryStringArray);
+            var expiryDoubleArray = Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper.ConvertArrayOfTenorsToDouble(_expiryStringArray);
             //Debug.Print("ExpiryDoubleArray: {0}", ParameterFormatter.FormatObject(expiryDoubleArray));
         }
 
         [TestMethod]
         public void TestConvertArrayOfStringsToDouble()
         {
-            var strikesDoubleArray = VolatilitySurfaceHelper.ConvertArrayOfStringsToDouble(_strikesStringArray);
+            var strikesDoubleArray = Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper.ConvertArrayOfStringsToDouble(_strikesStringArray);
             //Debug.Print("StrikesDoubleArray: {0}", ParameterFormatter.FormatObject(strikesDoubleArray));
         }
 
@@ -2867,7 +2868,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                                _strikesStringArray,
                                _sortedVolArray);
 
-            var missingDimension = VolatilitySurfaceHelper.GetMissingDimension(points);
+            var missingDimension = Highlander.CurveEngine.V5r3.PricingStructures.Helpers.VolatilitySurfaceHelper.GetMissingDimension(points);
             Debug.Print("Missing dimension: {0}", missingDimension);
         }
 

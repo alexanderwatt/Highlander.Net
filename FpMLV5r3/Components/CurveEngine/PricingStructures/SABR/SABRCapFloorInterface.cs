@@ -26,13 +26,13 @@ using Highlander.CurveEngine.V5r3.PricingStructures.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
 using Highlander.CurveEngine.V5r3.Assets.Helpers;
-using Highlander.CurveEngine.V5r3.Extensions;
 using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
 using Highlander.Reporting.ModelFramework.V5r3.PricingStructures;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.NamedValues;
 using Math = System.Math;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 
 #endregion
 

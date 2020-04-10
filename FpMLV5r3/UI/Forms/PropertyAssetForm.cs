@@ -80,7 +80,7 @@ namespace Highlander.Reporting.UI.V5r3
         {
             var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
             uniqueIdentifierTextBox.Text = _pricingCache.CreatePropertyAsset(propertyIdentifierTextBox.Text, propertyType, shortNameTextBox.Text, streetIdentifierTextBox.Text, streetNameTextBox.Text,
-                suburbTextBox.Text, cityTextBox.Text, postcodeTextBox.Text, stateTextBox.Text, countryTextBox.Text, bedroomsTextBox.Text, bathroomsTextBox.Text,
+               suburbTextBox.Text, cityTextBox.Text, postcodeTextBox.Text, stateTextBox.Text, countryTextBox.Text, bedroomsTextBox.Text, bathroomsTextBox.Text,
                 parkingTextBox.Text, currencyTextBox.Text, descriptionTextBox.Text, null);
         }
     }

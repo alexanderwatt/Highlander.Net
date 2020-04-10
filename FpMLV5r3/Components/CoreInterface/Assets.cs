@@ -67,15 +67,15 @@ namespace Highlander.Core.Interface.V5r3
 
         #region Constructor
 
-        public PricingCache() : this(null)
+        public PricingCache() : this(EnvironmentProp.DefaultNameSpace, true)
         {}
 
-        public PricingCache(string nameSpace)
+        public PricingCache(string nameSpace, bool loadData)
         {
             NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
             //This environment now loads default data
             //TODO make the configuration data specific to the namespace!
-            Environment = new RuntimeEnvironment(NameSpace);
+            Environment = new RuntimeEnvironment(NameSpace, loadData);
             Engine = new CurveEngine.V5r3.CurveEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
             ValService = new ValuationService(Environment.LogRef.Target, Environment.Cache, NameSpace);
             CalendarService = new CalendarEngine.V5r3.CalendarEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
@@ -400,7 +400,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="maturityTenor"></param>
         /// <param name="variant"></param>
         /// <returns></returns>
-        public object[,] GetAssetConfigurationData(string currency, string asset, string maturityTenor, [Optional] string variant)
+        public Instrument GetAssetConfigurationData(string currency, string asset, string maturityTenor, [Optional] string variant)
         {
             var result = Engine.GetAssetConfigurationData(currency, asset, maturityTenor, variant);
             return result;
@@ -1318,7 +1318,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="numBedrooms">The number of bedrooms.</param>
         /// <param name="numBathrooms">The number of bathrooms</param>
         /// <param name="numParking">The number of car parking spots.</param>
-        /// <param name="currency">THe currency.</param>
+        /// <param name="currency">The currency.</param>
         /// <param name="description">The issuer description.</param>
         /// <param name="properties">An array of properties. </param>
         /// <returns></returns>

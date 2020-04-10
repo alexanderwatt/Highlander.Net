@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DrawdownNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://citi.com/messageId">12345</messageId>
+      <sentBy partyIdScheme="http://www.fpml.org/ext/iso9362">CITIUS33XXX</sentBy>
+      <sendTo partyIdScheme="http://www.fpml.org/ext/iso9362">BOLEUS31XXX</sendTo>
+      <creationTimestamp>2007-03-17T09:30:47.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2007-04-20</noticeDate>
+   <agentBankPartyReference href="citi"/>
+   <borrowerPartyReference href="giant"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">NOT PRESENT</instrumentId>
+      <description>Giant Eagle(06)</description>
+      <creditAgreementDate>2005-11-07</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">374458AB3</instrumentId>
+      <description>Giant Eagle(06) Revolving Credit</description>
+      <originalCommitmentAmount>
+         <currency>USD</currency>
+         <amount>350000000.00</amount>
+      </originalCommitmentAmount>
+   </facilitySummary>
+   <loanContract>
+      <loanContractSummary>
+         <identifier>
+            <partyReference href="citi"/>
+            <contractId contractIdScheme="http://citi.com/drawdownId">814BDPL07110000F</contractId>
+         </identifier>
+         <originalAmount>
+            <currency>USD</currency>
+            <amount>8800000.00</amount>
+         </originalAmount>
+      </loanContractSummary>
+      <borrowerPartyReference href="giant"/>
+      <amount>
+         <currency>USD</currency>
+         <amount>8800000.00</amount>
+      </amount>
+      <effectiveDate>2007-04-20</effectiveDate>
+      <currentInterestRatePeriod>
+         <rateFixingDate>2007-04-20</rateFixingDate>
+         <startDate>2007-04-20</startDate>
+         <endDate>2007-05-31</endDate>
+         <floatingRateIndex floatingRateIndexScheme="http://citi.com/scheme/floating-rate-index">CITIBANK PRIME</floatingRateIndex>
+         <interestRate>0.0825</interestRate>
+         <margin>0.0025</margin>
+         <allInRate>0.0850</allInRate>
+         <interestDayBasis>ACT/360</interestDayBasis>
+      </currentInterestRatePeriod>
+   </loanContract>
+   <drawdownEventType>NewDrawdownEvent</drawdownEventType>
+   <drawdownPayment>
+      <paymentDate>2007-04-20</paymentDate>
+      <shareLoanContractAmount>
+         <currency>USD</currency>
+         <amount>502857.14</amount>
+      </shareLoanContractAmount>
+   </drawdownPayment>
+   <party id="citi">
+      <partyId>CITIUS33XXX</partyId>
+      <partyName>Citicorp U.S.A</partyName>
+      <account id="citiAccount">
+         <accountId>36852248</accountId>
+         <accountName>AgencyMediurn Term Finance</accountName>
+      </account>
+   </party>
+   <party id="lenderParty">
+      <partyId>BOLEUS31XXX</partyId>
+      <partyName>Bank Of Tokyo-Mitsubishi</partyName>
+   </party>
+   <party id="giant">
+      <partyId>GIANTUS31XXX</partyId>
+      <partyName>Giant Eagle Incorporated</partyName>
+   </party>
+</FpML>

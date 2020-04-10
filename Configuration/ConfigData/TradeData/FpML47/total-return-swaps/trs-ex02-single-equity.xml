@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 
+        == Copyright (c) 2002-2009. All rights reserved.
+        == Financial Products Markup Language is subject to the FpML public license.
+        == A copy of this license is available at http://www.fpml.org/license/license.html         
+ -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DataDocument" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <trade id="trs-eq1-trade">
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.abc.com/swaps/trade-id">TRS-01</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.hedgeco.com/swaps/trade-id">total-ret-swap-01</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate id="d1">2004-10-10+05:00</tradeDate>
+      </tradeHeader>
+      <returnSwap>
+         <productType>TotalReturnSwap</productType>
+         <buyerPartyReference href="party1"/>
+         <sellerPartyReference href="party2"/>
+         <returnLeg legIdentifier="l1">
+            <payerPartyReference href="party1"/>
+            <receiverPartyReference href="party2"/>
+            <paymentFrequency>
+               <periodMultiplier>3</periodMultiplier>
+               <period>M</period>
+            </paymentFrequency>
+            <effectiveDate id="d2">
+               <adjustableDate>
+                  <unadjustedDate>2004-10-12+05:00</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </adjustableDate>
+            </effectiveDate>
+            <terminationDate id="d3">
+               <adjustableDate>
+                  <unadjustedDate>2006-10-12+05:00</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </adjustableDate>
+            </terminationDate>
+            <underlyer>
+               <singleUnderlyer>
+                  <equity id="a3">
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">SHPGY.O</instrumentId>
+                     <description>Shire Pharmeceuticals Group - American Depositary Receipts</description>
+                     <currency>EUR</currency>
+                     <exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">NASDAQ</exchangeId>
+                  </equity>
+                  <openUnits>760400</openUnits>
+                  <dividendPayout>
+                     <dividendPayoutRatio>0.85</dividendPayoutRatio>
+                     <dividendPayment>
+                        <paymentDate>2004-01-01+05:00</paymentDate>
+                        <amount>
+                           <currency>USD</currency>
+                           <amount>123456.00</amount>
+                        </amount>
+                        <accruedInterest>
+                           <currency>USD</currency>
+                           <amount>123.00</amount>
+                        </accruedInterest>
+                     </dividendPayment>
+                  </dividendPayout><!--
+                                                                <underlyerPrice>
+                                                                        <netPrice>
+                                                                                <currency>EUR</currency>
+                                                                                <amount>19785157.16</amount>
+                                                                                <priceExpression>AbsoluteTerms</priceExpression>
+                                                                        </netPrice>
+                                                                        <accruedInterestPrice>1234.56</accruedInterestPrice>
+                                                                        <quotationCharacteristics>
+                                                                                <side>Mid</side>
+                                                                                <currency>USD</currency>
+                                                                                <timing>Close</timing>
+                                                                        </quotationCharacteristics>
+                                                                </underlyerPrice>
+                                                                        -->
+                  <couponPayment>
+                     <paymentDate>2004-01-01+05:00</paymentDate>
+                     <amount>
+                        <currency>USD</currency>
+                        <amount>123456.00</amount>
+                     </amount>
+                     <accruedInterest>
+                        <currency>USD</currency>
+                        <amount>123.00</amount>
+                     </accruedInterest>
+                  </couponPayment>
+               </singleUnderlyer>
+            </underlyer>
+            <rateOfReturn>
+               <initialPrice>
+                  <commission>
+                     <commissionDenomination>BPS</commissionDenomination>
+                     <commissionAmount>60</commissionAmount>
+                     <commissionPerTrade>1234</commissionPerTrade>
+                  </commission>
+                  <netPrice>
+                     <currency>USD</currency>
+                     <amount>37.44</amount>
+                     <priceExpression>AbsoluteTerms</priceExpression>
+                  </netPrice>
+               </initialPrice>
+               <notionalReset>true</notionalReset>
+               <valuationPriceInterim>
+                  <commission>
+                     <commissionDenomination>BPS</commissionDenomination>
+                     <commissionAmount>60</commissionAmount>
+                     <commissionPerTrade>1234</commissionPerTrade>
+                  </commission>
+                  <determinationMethod>ValuationTime</determinationMethod>
+                  <valuationRules>
+                     <valuationDates id="d4">
+                        <adjustableDates>
+                           <unadjustedDate>2004-10-12+05:00</unadjustedDate>
+                           <unadjustedDate>2004-11-13+05:00</unadjustedDate>
+                           <unadjustedDate>2004-12-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-01-14+05:00</unadjustedDate>
+                           <unadjustedDate>2005-02-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-03-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-04-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-05-13+05:00</unadjustedDate>
+                           <unadjustedDate>2005-06-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-07-12+05:00</unadjustedDate>
+                           <unadjustedDate>2005-08-12+05:00</unadjustedDate>
+                           <dateAdjustments>
+                              <businessDayConvention>NotApplicable</businessDayConvention>
+                           </dateAdjustments>
+                        </adjustableDates>
+                     </valuationDates>
+                     <valuationTimeType>Close</valuationTimeType>
+                  </valuationRules>
+               </valuationPriceInterim>
+               <valuationPriceFinal>
+                  <commission>
+                     <commissionDenomination>BPS</commissionDenomination>
+                     <commissionAmount>60</commissionAmount>
+                     <commissionPerTrade>1234</commissionPerTrade>
+                  </commission>
+                  <determinationMethod>HedgeUnwind</determinationMethod>
+                  <valuationRules>
+                     <valuationDate id="d5">
+                        <adjustableDate>
+                           <unadjustedDate>2005-09-24+05:00</unadjustedDate>
+                           <dateAdjustments>
+                              <businessDayConvention>NotApplicable</businessDayConvention>
+                           </dateAdjustments>
+                        </adjustableDate>
+                     </valuationDate>
+                  </valuationRules>
+               </valuationPriceFinal>
+               <paymentDates id="d6">
+                  <paymentDatesInterim id="d7">
+                     <adjustableDates>
+                        <unadjustedDate>2004-10-14+05:00</unadjustedDate>
+                        <unadjustedDate>2005-10-14+05:00</unadjustedDate>
+                        <unadjustedDate>2006-10-14+05:00</unadjustedDate>
+                        <dateAdjustments>
+                           <businessDayConvention>FOLLOWING</businessDayConvention>
+                           <businessCenters>
+                              <businessCenter>EUTA</businessCenter>
+                              <businessCenter>GBLO</businessCenter>
+                           </businessCenters>
+                        </dateAdjustments>
+                     </adjustableDates>
+                  </paymentDatesInterim>
+                  <paymentDateFinal id="d8">
+                     <adjustableDate>
+                        <unadjustedDate>2006-10-14+05:00</unadjustedDate>
+                        <dateAdjustments>
+                           <businessDayConvention>FOLLOWING</businessDayConvention>
+                           <businessCenters>
+                              <businessCenter>EUTA</businessCenter>
+                              <businessCenter>GBLO</businessCenter>
+                           </businessCenters>
+                        </dateAdjustments>
+                     </adjustableDate>
+                  </paymentDateFinal>
+               </paymentDates>
+            </rateOfReturn>
+            <notional id="b1">
+               <notionalAmount>
+                  <currency>USD</currency>
+                  <amount>28469376</amount>
+               </notionalAmount>
+            </notional>
+            <amount>
+               <paymentCurrency id="b2">
+                  <currency>USD</currency>
+               </paymentCurrency>
+               <referenceAmount>ISDA Standard</referenceAmount>
+               <cashSettlement>true</cashSettlement>
+            </amount>
+            <return>
+               <returnType>Total</returnType>
+               <dividendConditions>
+                  <dividendReinvestment>false</dividendReinvestment>
+                  <dividendEntitlement>ExDate</dividendEntitlement>
+                  <dividendAmount>RecordAmount</dividendAmount>
+                  <dividendPaymentDate>
+                     <dividendDateReference>EquityPaymentDate</dividendDateReference>
+                  </dividendPaymentDate>
+                  <dividendPeriodEffectiveDate href="d1"/>
+                  <dividendPeriodEndDate href="d3"/>
+                  <extraOrdinaryDividends href="party1"/>
+                  <excessDividendAmount>RecordAmount</excessDividendAmount>
+                  <paymentCurrency>
+                     <determinationMethod>DividendCurrency</determinationMethod>
+                  </paymentCurrency>
+               </dividendConditions>
+            </return><!--The notionalAdjustments element indicates that this is an execution-style swap -->
+            <notionalAdjustments>Execution</notionalAdjustments>
+         </returnLeg>
+         <interestLeg legIdentifier="l2">
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <paymentFrequency>
+               <periodMultiplier>3</periodMultiplier>
+               <period>M</period>
+            </paymentFrequency>
+            <interestLegCalculationPeriodDates id="d10">
+               <effectiveDate>
+                  <adjustableDate>
+                     <unadjustedDate>2004-10-12+05:00</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NONE</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </effectiveDate>
+               <terminationDate>
+                  <adjustableDate>
+                     <unadjustedDate>2004-10-12+05:00</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NONE</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </terminationDate>
+               <interestLegResetDates>
+                  <calculationPeriodDatesReference href="d10"/>
+                  <resetRelativeTo>CalculationPeriodStartDate</resetRelativeTo>
+               </interestLegResetDates>
+               <interestLegPaymentDates>
+                  <adjustableDates>
+                     <unadjustedDate>2004-10-12+05:00</unadjustedDate>
+                     <unadjustedDate>2005-10-12+05:00</unadjustedDate>
+                     <unadjustedDate>2006-10-12+05:00</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>FOLLOWING</businessDayConvention>
+                        <businessCenters>
+                           <businessCenter>EUTA</businessCenter>
+                           <businessCenter>GBLO</businessCenter>
+                        </businessCenters>
+                     </dateAdjustments>
+                  </adjustableDates>
+               </interestLegPaymentDates>
+            </interestLegCalculationPeriodDates>
+            <notional>
+               <notionalAmount>
+                  <currency>EUR</currency>
+                  <amount>19785157.16</amount>
+               </notionalAmount>
+            </notional>
+            <interestAmount>
+               <paymentCurrency href="b2"/>
+               <referenceAmount>Standard ISDA</referenceAmount>
+            </interestAmount>
+            <interestCalculation>
+               <floatingRateCalculation>
+                  <floatingRateIndex>USD-LIBOR-BBA</floatingRateIndex>
+                  <indexTenor>
+                     <periodMultiplier>1</periodMultiplier>
+                     <period>M</period>
+                  </indexTenor>
+                  <spreadSchedule>
+                     <initialValue>0.0020</initialValue>
+                  </spreadSchedule>
+               </floatingRateCalculation>
+               <dayCountFraction>ACT/360</dayCountFraction>
+            </interestCalculation>
+         </interestLeg>
+         <earlyTermination>
+            <partyReference href="party1"/>
+            <startingDate>
+               <adjustableDate>
+                  <unadjustedDate>2005-10-12+05:00</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </adjustableDate>
+            </startingDate>
+         </earlyTermination>
+         <earlyTermination>
+            <partyReference href="party2"/>
+            <startingDate>
+               <adjustableDate>
+                  <unadjustedDate>2005-10-12+05:00</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </adjustableDate>
+            </startingDate>
+         </earlyTermination>
+         <extraordinaryEvents>
+            <mergerEvents>
+               <shareForShare>ModifiedCalculationAgent</shareForShare>
+               <shareForOther>ModifiedCalculationAgent</shareForOther>
+               <shareForCombined>ModifiedCalculationAgent</shareForCombined>
+            </mergerEvents>
+            <tenderOffer>true</tenderOffer>
+            <tenderOfferEvents>
+               <shareForShare>ModifiedCalculationAgent</shareForShare>
+               <shareForOther>ModifiedCalculationAgent</shareForOther>
+               <shareForCombined>ModifiedCalculationAgent</shareForCombined>
+            </tenderOfferEvents>
+            <compositionOfCombinedConsideration>true</compositionOfCombinedConsideration>
+            <additionalDisruptionEvents>
+               <changeInLaw>true</changeInLaw>
+               <failureToDeliver>true</failureToDeliver>
+               <insolvencyFiling>false</insolvencyFiling>
+               <hedgingDisruption>true</hedgingDisruption>
+               <lossOfStockBorrow>true</lossOfStockBorrow>
+               <increasedCostOfStockBorrow>false</increasedCostOfStockBorrow>
+               <increasedCostOfHedging>false</increasedCostOfHedging>
+               <determiningPartyReference href="party1"/>
+            </additionalDisruptionEvents>
+            <representations>
+               <nonReliance>true</nonReliance>
+               <agreementsRegardingHedging>true</agreementsRegardingHedging>
+               <additionalAcknowledgements>true</additionalAcknowledgements>
+            </representations>
+            <nationalisationOrInsolvency>CancellationAndPayment</nationalisationOrInsolvency>
+         </extraordinaryEvents>
+      </returnSwap><!-- end of TRS product -->
+      <collateral>
+         <independentAmount>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <paymentDetail>
+               <adjustedPaymentDate>2005-01-01+05:00</adjustedPaymentDate>
+               <paymentAmount>
+                  <currency>USD</currency>
+                  <amount>1000</amount>
+               </paymentAmount>
+            </paymentDetail>
+         </independentAmount>
+      </collateral>
+   </trade>
+   <party id="party1">
+      <partyId/>
+      <partyName>ABCD Securities Inc.</partyName>
+   </party>
+   <party id="party2">
+      <partyId>HEGDUS33</partyId>
+      <partyName>HedgeCo Capital L.L.C.</partyName>
+   </party>
+</FpML>

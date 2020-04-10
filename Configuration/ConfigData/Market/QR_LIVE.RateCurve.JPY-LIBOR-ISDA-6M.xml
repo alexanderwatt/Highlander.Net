@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.RateCurve.JPY-LIBOR-ISDA-6M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.JPY-LIBOR-ISDA-6M">
+    <name>JPY-LIBOR-ISDA-6M</name>
+    <currency>JPY</currency>
+    <algorithm>CalypsoAlgo4</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>LIBOR-ISDA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.JPY-LIBOR-ISDA-6M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-08-30T15:08:04.5163597+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-2D">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="JPY-Deposit-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="JPY-IRSwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-1" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-2" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-3" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-4" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-5" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-6" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-7" />
+        <underlyingAsset xsi:type="Future" id="JPY-IRFuture-EY-8" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-1D" />
+        <quote>
+          <value>0.00095</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYMU1T CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-2D" />
+        <quote>
+          <value>0.00106</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYMU2T CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-1W" />
+        <quote>
+          <value>0.0014563</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JY0001M CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-1M" />
+        <quote>
+          <value>0.0014563</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JY0001M CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-2M" />
+        <quote>
+          <value>0.0018438</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JY0002M CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-Deposit-3M" />
+        <quote>
+          <value>0.0023188</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JY0003M CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-3Y" />
+        <quote>
+          <value>0.0043755</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW3 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-4Y" />
+        <quote>
+          <value>0.0048</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW4 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-5Y" />
+        <quote>
+          <value>0.005475</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW5 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-7Y" />
+        <quote>
+          <value>0.0074845</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW7 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-10Y" />
+        <quote>
+          <value>0.0111155</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW10 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-12Y" />
+        <quote>
+          <value>0.013103</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW12 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-15Y" />
+        <quote>
+          <value>0.015316</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW15 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-20Y" />
+        <quote>
+          <value>0.017659</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW20 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-25Y" />
+        <quote>
+          <value>0.018562</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW25 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRSwap-30Y" />
+        <quote>
+          <value>0.0189375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>JYSW30 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-1" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0035</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY1 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-2" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00315</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY2 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-3" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.003</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY3 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-4" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.002725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY4 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-5" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0027</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY5 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-6" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00265</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY6 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-7" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.003</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY7 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="JPY-IRFuture-EY-8" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>EY8 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:08:04.5007296+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.000963309150519898</mid>
+        </point>
+        <point id="JPY-Deposit-1D">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.000963309150519898</mid>
+        </point>
+        <point id="JPY-Deposit-2D">
+          <term>
+            <date>2010-09-01</date>
+          </term>
+          <mid>0.00107486344833152</mid>
+        </point>
+        <point id="JPY-Deposit-1W">
+          <term>
+            <date>2010-09-08</date>
+          </term>
+          <mid>0.00138746018653713</mid>
+        </point>
+        <point id="JPY-Deposit-1M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.00145159276923756</mid>
+        </point>
+        <point id="JPY-Deposit-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.00184432246996025</mid>
+        </point>
+        <point id="JPY-Deposit-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.00232355920904581</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-1">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.00318621010461229</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-2">
+          <term>
+            <date>2011-03-15</date>
+          </term>
+          <mid>0.00316966335738211</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-3">
+          <term>
+            <date>2011-06-16</date>
+          </term>
+          <mid>0.00311541704006135</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-4">
+          <term>
+            <date>2011-09-15</date>
+          </term>
+          <mid>0.00302155533372606</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-5">
+          <term>
+            <date>2011-12-21</date>
+          </term>
+          <mid>0.00295707667346434</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-6">
+          <term>
+            <date>2012-03-21</date>
+          </term>
+          <mid>0.00290793462048899</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-7">
+          <term>
+            <date>2012-06-21</date>
+          </term>
+          <mid>0.00292070140523126</mid>
+        </point>
+        <point id="JPY-IRFuture-EY-8">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.00286907141036075</mid>
+        </point>
+        <point id="JPY-IRSwap-3Y">
+          <term>
+            <date>2013-09-02</date>
+          </term>
+          <mid>0.00437372256275736</mid>
+        </point>
+        <point id="JPY-IRSwap-4Y">
+          <term>
+            <date>2014-09-01</date>
+          </term>
+          <mid>0.00480062760559718</mid>
+        </point>
+        <point id="JPY-IRSwap-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.00548187934008304</mid>
+        </point>
+        <point id="JPY-IRSwap-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.00752726411537985</mid>
+        </point>
+        <point id="JPY-IRSwap-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0113060871874584</mid>
+        </point>
+        <point id="JPY-IRSwap-12Y">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0134272509811764</mid>
+        </point>
+        <point id="JPY-IRSwap-15Y">
+          <term>
+            <date>2025-09-01</date>
+          </term>
+          <mid>0.0158435699553863</mid>
+        </point>
+        <point id="JPY-IRSwap-20Y">
+          <term>
+            <date>2030-09-02</date>
+          </term>
+          <mid>0.0184825730680824</mid>
+        </point>
+        <point id="JPY-IRSwap-25Y">
+          <term>
+            <date>2035-09-03</date>
+          </term>
+          <mid>0.0194596391007682</mid>
+        </point>
+        <point id="JPY-IRSwap-30Y">
+          <term>
+            <date>2040-09-03</date>
+          </term>
+          <mid>0.0198105665809427</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="JPY-Deposit-1D">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999973611180748273004279628</mid>
+      </point>
+      <point id="JPY-Deposit-2D">
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>0.9999941111457899192324312145</mid>
+      </point>
+      <point id="JPY-Deposit-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>0.9999657951699218286755175053</mid>
+      </point>
+      <point id="JPY-Deposit-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.9998727682530894188718119054</mid>
+      </point>
+      <point id="JPY-Deposit-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.999681788895167057901697825</mid>
+      </point>
+      <point id="JPY-Deposit-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.9994083168445010782402372904</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-1">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.99906676786612</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-2">
+        <term>
+          <date>2011-03-15</date>
+        </term>
+        <mid>0.9982913889833129574033659961</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-3">
+        <term>
+          <date>2011-06-16</date>
+        </term>
+        <mid>0.997528759136239</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-4">
+        <term>
+          <date>2011-09-15</date>
+        </term>
+        <mid>0.99685214848343</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-5">
+        <term>
+          <date>2011-12-21</date>
+        </term>
+        <mid>0.996136358663196</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-6">
+        <term>
+          <date>2012-03-21</date>
+        </term>
+        <mid>0.9954787077045697803892346094</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-7">
+        <term>
+          <date>2012-06-21</date>
+        </term>
+        <mid>0.9947266132716219686475179193</mid>
+      </point>
+      <point id="JPY-IRFuture-EY-8">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.994108469280923</mid>
+      </point>
+      <point id="JPY-IRSwap-3Y">
+        <term>
+          <date>2013-09-02</date>
+        </term>
+        <mid>0.986924334701766</mid>
+      </point>
+      <point id="JPY-IRSwap-4Y">
+        <term>
+          <date>2014-09-01</date>
+        </term>
+        <mid>0.980953294957322</mid>
+      </point>
+      <point id="JPY-IRSwap-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.972937281597523</mid>
+      </point>
+      <point id="JPY-IRSwap-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.94864204176132</mid>
+      </point>
+      <point id="JPY-IRSwap-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.893100602877489</mid>
+      </point>
+      <point id="JPY-IRSwap-12Y">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.851257334186564</mid>
+      </point>
+      <point id="JPY-IRSwap-15Y">
+        <term>
+          <date>2025-09-01</date>
+        </term>
+        <mid>0.788641009317326</mid>
+      </point>
+      <point id="JPY-IRSwap-20Y">
+        <term>
+          <date>2030-09-02</date>
+        </term>
+        <mid>0.691284212500666</mid>
+      </point>
+      <point id="JPY-IRSwap-25Y">
+        <term>
+          <date>2035-09-03</date>
+        </term>
+        <mid>0.615178209046013</mid>
+      </point>
+      <point id="JPY-IRSwap-30Y">
+        <term>
+          <date>2040-09-03</date>
+        </term>
+        <mid>0.55239063111363</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

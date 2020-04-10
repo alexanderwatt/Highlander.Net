@@ -459,7 +459,7 @@ namespace HLV5r3.Financial
         public object[,] GetAssetConfigurationData(string currency, string asset, string maturityTenor, [Optional] string variant)
         {
             var result = Engine.GetAssetConfigurationData(currency, asset, maturityTenor, variant);
-            return result;
+            return RangeExtension.ConvertAssetToRange(result);
         }
     
         ///<summary>

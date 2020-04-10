@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:ext="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../FpML-4-7-8-TR-1/fpml-main-4-7.xsd http://www.fpml.org/2009/FpML-4-7/ext ../fpmlext-main.xsd" 
+	xsi:type="RequestTradeConfirmation" 
+	version="4-7">
+	
+	<header>
+		<messageId 
+			messageIdScheme="http://www.jpmorgan.com/coding-scheme/message-id">3454353454</messageId>
+		<sentBy 
+			partyIdScheme="http://www.jpmorgan.com/coding-scheme/party-id">msdw</sentBy>
+		<creationTimestamp>2000-08-01T08:57:00-00:00</creationTimestamp>
+	</header>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="jb2890"/>
+				<tradeId 
+					tradeIdScheme="http://www.PartyA.com/coding-scheme/tradeId">1234</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate id="TradeDate">2005-07-13</tradeDate>
+		</tradeHeader>
+		
+		<ext:exchangeTradedFundTransaction>
+			
+			<buyerPartyReference href="kow091"/>
+			<sellerPartyReference href="jb2890"/>
+			
+			<ext:numberOfUnits>10000</ext:numberOfUnits>
+			<ext:unitPrice>
+				<currency>USD</currency>
+				<amount>45.80</amount>
+			</ext:unitPrice>
+			
+			<ext:exchangeTradedFund>
+				<instrumentId 
+					instrumentIdScheme="http://www.jpmorgan.com/coding-scheme/instrumentId">SPX</instrumentId>
+				<description>S AND P 500 Index</description>
+				<exchangeId 
+					exchangeIdScheme="http://www.jpmorgan.com/coding-scheme/exchangeId">AMEX</exchangeId>
+			</ext:exchangeTradedFund>
+			
+		</ext:exchangeTradedFundTransaction>
+		
+	</trade>
+	
+	<party id="jb2890">
+		<partyId>Party A</partyId>
+	</party>
+	<party id="kow091">
+		<partyId>Party B</partyId>
+	</party>
+</FpML>

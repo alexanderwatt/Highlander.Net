@@ -1,0 +1,5 @@
+﻿WebSvcUrl/string=http://rdmws-stg/holiday/v1/holiday.asmx
+YearsPerCall/Int32=5
+YearRange/Int32=55
+MonitorPeriodOffset/TimeSpan=00:00:00
+MonitorPeriodWindow/TimeSpan=23:59:59

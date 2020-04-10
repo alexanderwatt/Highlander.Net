@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="TradeConfirmed" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.db.com/coding-scheme/conversationId">FX1234</conversationId>
+      <messageId messageIdScheme="http://www.db.com/coding-scheme/messageId">FX98765</messageId>
+      <sentBy partyIdScheme="http://www.db.com/partyId">DEUTDEFF</sentBy>
+      <sendTo partyIdScheme="http://www.db.com/partyId">ABNANL2A</sendTo>
+      <creationTimestamp>2001-11-12T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.db.com/fx/trade-id">FX048VS</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.abn.com/fx/trade-id">USABC023</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2001-11-12Z</tradeDate>
+      </tradeHeader>
+      <fxSingleLeg>
+         <exchangedCurrency1>
+            <payerPartyReference href="party1"/>
+            <receiverPartyReference href="party2"/>
+            <paymentAmount>
+               <currency>USD</currency>
+               <amount>13000000</amount>
+            </paymentAmount>
+            <settlementInformation>
+               <settlementInstruction>
+                  <settlementMethod>SWIFT</settlementMethod>
+                  <correspondentInformation>
+                     <routingIds>
+                        <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">DEUTUS33</routingId>
+                     </routingIds>
+                  </correspondentInformation>
+                  <beneficiary>
+                     <routingIds>
+                        <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNANL2A</routingId>
+                     </routingIds>
+                  </beneficiary>
+                  <splitSettlement>
+                     <splitSettlementAmount>
+                        <currency>USD</currency>
+                        <amount>3000000</amount>
+                     </splitSettlementAmount>
+                     <beneficiaryBank>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNAUS33</routingId>
+                        </routingIds>
+                     </beneficiaryBank>
+                     <beneficiary>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNANL2A</routingId>
+                        </routingIds>
+                     </beneficiary>
+                  </splitSettlement>
+                  <splitSettlement>
+                     <splitSettlementAmount>
+                        <currency>USD</currency>
+                        <amount>4000000</amount>
+                     </splitSettlementAmount>
+                     <beneficiaryBank>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNAUS4C</routingId>
+                        </routingIds>
+                     </beneficiaryBank>
+                     <beneficiary>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNANL2A</routingId>
+                        </routingIds>
+                     </beneficiary>
+                  </splitSettlement>
+                  <splitSettlement>
+                     <splitSettlementAmount>
+                        <currency>USD</currency>
+                        <amount>6000000</amount>
+                     </splitSettlementAmount>
+                     <beneficiaryBank>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNAUS6F</routingId>
+                        </routingIds>
+                     </beneficiaryBank>
+                     <beneficiary>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">ABNANL2A</routingId>
+                        </routingIds>
+                     </beneficiary>
+                  </splitSettlement>
+               </settlementInstruction>
+            </settlementInformation>
+         </exchangedCurrency1>
+         <exchangedCurrency2>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <paymentAmount>
+               <currency>EUR</currency>
+               <amount>14393600</amount>
+            </paymentAmount>
+            <settlementInformation>
+               <settlementInstruction>
+                  <beneficiaryBank>
+                     <routingIdsAndExplicitDetails>
+                        <routingIds>
+                           <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">DEUTDEFF</routingId>
+                        </routingIds>
+                        <routingName>DeutscheBank</routingName>
+                        <routingAccountNumber>/D/123-456-789</routingAccountNumber>
+                     </routingIdsAndExplicitDetails>
+                  </beneficiaryBank>
+                  <beneficiary>
+                     <routingIds>
+                        <routingId routingIdCodeScheme="http://www.fpml.org/ext/iso9362">DEUTDEFF</routingId>
+                     </routingIds>
+                  </beneficiary>
+               </settlementInstruction>
+            </settlementInformation>
+         </exchangedCurrency2>
+         <valueDate>2002-02-14Z</valueDate>
+         <exchangeRate>
+            <quotedCurrencyPair>
+               <currency1>USD</currency1>
+               <currency2>EUR</currency2>
+               <quoteBasis>Currency2PerCurrency1</quoteBasis>
+            </quotedCurrencyPair>
+            <rate>1.1072</rate>
+         </exchangeRate>
+      </fxSingleLeg>
+   </trade>
+   <party id="party1">
+      <partyId>DEUTDEFF</partyId>
+   </party>
+   <party id="party2">
+      <partyId>ABNANL2A</partyId>
+   </party>
+</FpML>

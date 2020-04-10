@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Highlander.CurveEngine.V5r3;
-using Highlander.CurveEngine.V5r3.Extensions;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using HLV5r3.Properties;

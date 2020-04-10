@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=JPY-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=JPY
+Currency2/String=USD
+CurrencyPair/String=JPY-USD
+QuoteBasis/String=Currency2PerCurrency1

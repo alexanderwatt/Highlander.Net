@@ -1451,7 +1451,7 @@ namespace HLV5r3.Financial
         ///<returns></returns>
         private String[] CreateVolatilitySurfaceCollection(NamedValueSet propertyRange, object[,] dataRange, String[] strikeArray)//TODO This only works with a single tenor. Extend to include more...
         {
-            var strikes = ConvertStringArrayToDoubleArray(strikeArray);
+            var strikes = RangeExtension.ConvertStringArrayToDoubleArray(strikeArray);
             var expiries = DataRangeHelper.ExtractExpiries(dataRange);
             var uniqueExpiries = expiries.Distinct().ToArray();
             var tenors = DataRangeHelper.ExtractTenors(dataRange);
@@ -1470,16 +1470,6 @@ namespace HLV5r3.Financial
                 ids.Add(pricingStructure.GetPricingStructureId().UniqueIdentifier);
             }
             return ids.ToArray();
-        }
-
-        private static double[] ConvertStringArrayToDoubleArray(string[] strikes)
-        {
-            var result = new double[strikes.Length];
-            for (var i = 0; i < strikes.Length; i++)
-            {
-                result[i] = Convert.ToDouble(strikes[i]);
-            }
-            return result;
         }
 
         ///<summary>

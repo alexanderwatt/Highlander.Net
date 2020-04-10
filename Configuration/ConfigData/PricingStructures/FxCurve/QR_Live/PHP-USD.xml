@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="NZD-USD" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <fxCurve id="PHP-USD">
+    <name>PHP-USD</name>
+    <currency>PHP</currency>
+    <quotedCurrencyPair>
+      <currency1>PHP</currency1>
+      <currency2>USD</currency2>
+      <quoteBasis>Currency2PerCurrency1</quoteBasis>
+    </quotedCurrencyPair>
+  </fxCurve>
+  <fxCurveValuation id="PHP-USD">
+    <spotRate>
+      <instrumentSet>
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-ON" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-TN" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxSpot-SP" />
+        <!--<underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-1W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-2W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-3W" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-1M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-2M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-3M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-4M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-5M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-6M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-9M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-12M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-15M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-18M" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-2Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-3Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-4Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-5Y" />-->
+        <!--<underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-6Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-7Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-8Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-9Y" />
+        <underlyingAsset xsi:type="FxRateAsset" id="PHPUSD-FxForward-10Y" />-->
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-ON" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-TN" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <side>Mid</side>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxSpot-SP" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <!--<assetQuote>
+        <objectReference href="PHPUSD-FxForward-1W" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-2W" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-3W" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-1M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-2M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-3M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-4M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-5M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-6M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-9M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-12M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-15M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-18M" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-2Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-3Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-4Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-5Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>-->
+      <!--<assetQuote>
+        <objectReference href="PHPUSD-FxForward-6Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-7Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-8Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-9Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="PHPUSD-FxForward-10Y" />
+        <quote>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>-->
+    </spotRate>
+  </fxCurveValuation>
+</market>

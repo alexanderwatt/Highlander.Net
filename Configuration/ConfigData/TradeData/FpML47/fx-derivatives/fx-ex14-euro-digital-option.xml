@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  --><!-- This example is an FX OTC Euro Binary Option
+  == UBS buys a two week GBP/USD European binary option and pays a premium.
+  == At expiry, if the spot rate is above the trigger rate, UBS receives a payout.
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="TradeConfirmed" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.citi.com/coding-scheme/conversationId">FX01234</conversationId>
+      <messageId messageIdScheme="http://www.citi.com/coding-scheme/messageId">FX109876</messageId>
+      <sentBy partyIdScheme="http://www.citi.com/partyId">CITIUS33</sentBy>
+      <sendTo partyIdScheme="http://www.citi.com/partyId">UBSWGB2L</sendTo>
+      <creationTimestamp>2001-11-12T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.citi.com/fx/trade-id">CITI10014</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.ubsw.com/fx/trade-id">UBSW20014</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2001-11-12Z</tradeDate>
+      </tradeHeader>
+      <fxDigitalOption>
+         <productType>Euro Binary</productType>
+         <buyerPartyReference href="party2"/>
+         <sellerPartyReference href="party1"/>
+         <expiryDateTime>
+            <expiryDate>2001-11-26Z</expiryDate>
+            <expiryTime>
+               <hourMinuteTime>14:00:00</hourMinuteTime>
+               <businessCenter>GBLO</businessCenter>
+            </expiryTime>
+            <cutName>LondonEveningPgm</cutName>
+         </expiryDateTime>
+         <fxOptionPremium>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <premiumAmount>
+               <currency>GBP</currency>
+               <amount>53000</amount>
+            </premiumAmount>
+            <premiumSettlementDate>2001-11-14Z</premiumSettlementDate>
+         </fxOptionPremium>
+         <valueDate>2001-11-28Z</valueDate>
+         <quotedCurrencyPair>
+            <currency1>GBP</currency1>
+            <currency2>USD</currency2>
+            <quoteBasis>Currency2PerCurrency1</quoteBasis>
+         </quotedCurrencyPair>
+         <spotRate>1.4800</spotRate>
+         <fxEuropeanTrigger>
+            <triggerCondition>Above</triggerCondition>
+            <quotedCurrencyPair>
+               <currency1>GBP</currency1>
+               <currency2>USD</currency2>
+               <quoteBasis>Currency2PerCurrency1</quoteBasis>
+            </quotedCurrencyPair>
+            <triggerRate>1.4800</triggerRate>
+            <informationSource>
+               <rateSource>Reuters</rateSource>
+               <rateSourcePage>GBP=</rateSourcePage>
+            </informationSource>
+         </fxEuropeanTrigger>
+         <triggerPayout>
+            <currency>GBP</currency>
+            <amount>750000</amount>
+            <payoutStyle>Immediate</payoutStyle>
+         </triggerPayout>
+      </fxDigitalOption>
+   </trade>
+   <party id="party1">
+      <partyId>CITIUS33</partyId>
+   </party>
+   <party id="party2">
+      <partyId>UBSWGB2L</partyId>
+   </party>
+</FpML>

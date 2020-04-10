@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://www.partyA.com/coding-scheme/messsage-id">456a789b</messageId>
+      <sentBy partyIdScheme="http://www.partyA.com/coding-scheme/party-id">msdw</sentBy>
+      <creationTimestamp>2000-08-01T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.partyA.com/">109257</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.partyB.com/"/>
+         </partyTradeIdentifier>
+         <tradeDate>2006-11-14Z</tradeDate>
+      </tradeHeader>
+      <creditDefaultSwap>
+         <generalTerms>
+            <effectiveDate>
+               <unadjustedDate>2006-11-17Z</unadjustedDate>
+               <dateAdjustments>
+                  <businessDayConvention>FOLLOWING</businessDayConvention>
+                  <businessCenters>
+                     <businessCenter>GBLO</businessCenter>
+                     <businessCenter>USNY</businessCenter>
+                  </businessCenters>
+               </dateAdjustments>
+            </effectiveDate>
+            <scheduledTerminationDate>
+               <adjustableDate>
+                  <unadjustedDate>2046-07-12Z</unadjustedDate>
+                  <dateAdjustments>
+                     <businessDayConvention>NONE</businessDayConvention>
+                  </dateAdjustments>
+               </adjustableDate>
+            </scheduledTerminationDate>
+            <sellerPartyReference href="party1"/>
+            <buyerPartyReference href="party2"/>
+            <dateAdjustments>
+               <businessDayConvention>FOLLOWING</businessDayConvention>
+               <businessCenters>
+                  <businessCenter>GBLO</businessCenter>
+                  <businessCenter>USNY</businessCenter>
+               </businessCenters>
+            </dateAdjustments>
+            <referenceInformation>
+               <referenceEntity>
+                  <entityName>MERRILL LYNCH/COUNTRYWIDE COMM, 2006-3</entityName>
+               </referenceEntity>
+               <referenceObligation>
+                  <mortgage>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">60687VAQ8</instrumentId>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-Bloomberg-1-0">MLCFC 2006-3</instrumentId>
+                     <currency>USD</currency>
+                     <maturity>2046-07-12</maturity>
+                     <originalPrincipalAmount>21219000</originalPrincipalAmount>
+                     <pool>
+                        <initialFactor>1</initialFactor>
+                     </pool>
+                     <sector>CMBS</sector>
+                     <tranche>H</tranche>
+                  </mortgage>
+                  <primaryObligor>
+                     <entityName>MERRILL LYNCH/COUNTRYWIDE COMM, 2006-3</entityName>
+                  </primaryObligor>
+               </referenceObligation>
+               <allGuarantees>false</allGuarantees>
+            </referenceInformation>
+         </generalTerms>
+         <feeLeg>
+            <periodicPayment>
+               <paymentFrequency>
+                  <periodMultiplier>1</periodMultiplier>
+                  <period>M</period>
+               </paymentFrequency>
+               <firstPaymentDate>2006-12-27Z</firstPaymentDate>
+               <lastRegularPaymentDate>2046-04-27Z</lastRegularPaymentDate>
+               <rollConvention>25</rollConvention>
+               <fixedAmountCalculation>
+                  <calculationAmount>
+                     <currency>USD</currency>
+                     <amount>15000000</amount>
+                  </calculationAmount>
+                  <fixedRate>0.050</fixedRate>
+                  <dayCountFraction>ACT/360</dayCountFraction>
+               </fixedAmountCalculation>
+            </periodicPayment>
+            <paymentDelay>false</paymentDelay>
+         </feeLeg>
+         <protectionTerms>
+            <calculationAmount>
+               <currency>USD</currency>
+               <amount>15000000.00</amount>
+            </calculationAmount>
+            <creditEvents>
+               <failureToPayPrincipal/>
+               <writedown/>
+            </creditEvents>
+            <floatingAmountEvents>
+               <failureToPayPrincipal/>
+               <interestShortfall>
+                  <interestShortfallCap>Fixed</interestShortfallCap>
+                  <compounding>true</compounding>
+                  <rateSource>USD-LIBOR-BBA</rateSource>
+               </interestShortfall>
+               <writedown/>
+               <floatingAmountProvisions>
+                  <WACCapInterestProvision/>
+               </floatingAmountProvisions>
+               <additionalFixedPayments>
+                  <interestShortfallReimbursement/>
+                  <principalShortfallReimbursement/>
+                  <writedownReimbursement/>
+               </additionalFixedPayments>
+            </floatingAmountEvents>
+         </protectionTerms>
+         <physicalSettlementTerms>
+            <physicalSettlementPeriod>
+               <businessDays>5</businessDays>
+            </physicalSettlementPeriod>
+            <escrow>true</escrow>
+         </physicalSettlementTerms>
+      </creditDefaultSwap>
+      <calculationAgent>
+         <calculationAgentPartyReference href="party1"/>
+      </calculationAgent>
+      <calculationAgentBusinessCenter>USNY</calculationAgentBusinessCenter>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>1992</masterAgreementVersion>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2003Credit</contractualDefinitions>
+         <contractualTermsSupplement>
+            <type>ISDA2003CreditMay2003</type>
+         </contractualTermsSupplement>
+      </documentation>
+   </trade>
+   <party id="party1">
+      <partyId>XYZBICXXX</partyId>
+      <partyName>XYZ Bank</partyName>
+   </party>
+   <party id="party2">
+      <partyId>ABCBICXXX</partyId>
+      <partyName>ABC Bank</partyName>
+   </party>
+</FpML>

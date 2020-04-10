@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.RateCurve.AUD-BBR-BBSW-1M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-BBR-BBSW-1M">
+    <name>AUD-BBR-BBSW-1M</name>
+    <currency>AUD</currency>
+    <algorithm>LinearSpreadZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>BBR-BBSW</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>1</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-BBR-BBSW-1M" definitionRef="RateBasisCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-08-30T15:07:41.9933856+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-1Y-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-2Y-1M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-3Y-1M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-4Y-1M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-5Y-1M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-7Y-1M">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-BasisSwap-10Y-1M">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-Deposit-1D" />
+        <quote>
+          <value>0.045</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>RBACTRD INDEX/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-1Y-1M" />
+        <quote>
+          <value>-0.001325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA1 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-2Y-1M" />
+        <quote>
+          <value>-0.001325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA2 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-3Y-1M" />
+        <quote>
+          <value>-0.001275</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA3 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-4Y-1M" />
+        <quote>
+          <value>-0.001225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA4 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-5Y-1M" />
+        <quote>
+          <value>-0.00115</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA5 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-7Y-1M" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA7 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-BasisSwap-10Y-1M" />
+        <quote>
+          <value>-0.00085</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADBBCA10 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:41.6338933+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.999876727526743</mid>
+      </point>
+      <point>
+        <term>
+          <date>2011-08-31</date>
+        </term>
+        <mid>0.955424488947657</mid>
+      </point>
+      <point>
+        <term>
+          <date>2012-08-31</date>
+        </term>
+        <mid>0.911910625300621</mid>
+      </point>
+      <point>
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.869209064095438</mid>
+      </point>
+      <point>
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.827576354739878</mid>
+      </point>
+      <point>
+        <term>
+          <date>2015-08-31</date>
+        </term>
+        <mid>0.78524411060033</mid>
+      </point>
+      <point>
+        <term>
+          <date>2017-08-31</date>
+        </term>
+        <mid>0.704324098397638</mid>
+      </point>
+      <point>
+        <term>
+          <date>2020-08-31</date>
+        </term>
+        <mid>0.598461829062203</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

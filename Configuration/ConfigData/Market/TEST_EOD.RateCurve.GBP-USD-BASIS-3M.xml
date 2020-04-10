@@ -1,0 +1,1589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.TEST_EOD.2010-08-30.RateCurve.GBP-USD-BASIS-3M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.GBP-USD-BASIS-3M">
+    <name>GBP-USD-BASIS-3M</name>
+    <currency>GBP</currency>
+    <algorithm>LinearZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>USD-BASIS</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.GBP-USD-BASIS-3M" definitionRef="RateSpreadCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:36:00.9960996+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XccySwap-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XccySwap-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XccySwap-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XccySwap-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XccySwap-9M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-1Y">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-6Y">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-8Y">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-9Y">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-11Y">
+          <term>
+            <periodMultiplier>11</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-13Y">
+          <term>
+            <periodMultiplier>13</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-14Y">
+          <term>
+            <periodMultiplier>14</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="GBP-XCCYSWAP-40Y">
+          <term>
+            <periodMultiplier>40</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="GBP-XccySwap-1M" />
+        <quote>
+          <value>-0.00071491672628817</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XccySwap-2M" />
+        <quote>
+          <value>-0.00122159131951296</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XccySwap-3M" />
+        <quote>
+          <value>-0.00198737297819659</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XccySwap-6M" />
+        <quote>
+          <value>-0.00152863566772202</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XccySwap-9M" />
+        <quote>
+          <value>-0.00144500324078902</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-1Y" />
+        <quote>
+          <value>-0.001325</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-2Y" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-3Y" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-4Y" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-5Y" />
+        <quote>
+          <value>-0.0013</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-6Y" />
+        <quote>
+          <value>-0.001375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-7Y" />
+        <quote>
+          <value>-0.00145</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-8Y" />
+        <quote>
+          <value>-0.00155</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-9Y" />
+        <quote>
+          <value>-0.00165</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-10Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-11Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-12Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-13Y" />
+        <quote>
+          <value>-0.001725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-14Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-15Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-20Y" />
+        <quote>
+          <value>-0.00175</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-25Y" />
+        <quote>
+          <value>-0.00145</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-30Y" />
+        <quote>
+          <value>-0.0012</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="GBP-XCCYSWAP-40Y" />
+        <quote>
+          <value>-0.001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-DEPOSIT-ON" />
+        <quote>
+          <value>0.0049</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-DEPOSIT-1M" />
+        <quote>
+          <value>0.005675</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-DEPOSIT-2M" />
+        <quote>
+          <value>0.0062188</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-DEPOSIT-3M" />
+        <quote>
+          <value>0.0072609</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-U0" />
+        <quote>
+          <value>0.007299682</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-Z0" />
+        <quote>
+          <value>0.007997341</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-H1" />
+        <quote>
+          <value>0.008493674</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-M1" />
+        <quote>
+          <value>0.009188708</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-U1" />
+        <quote>
+          <value>0.010280304</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-Z1" />
+        <quote>
+          <value>0.011862742</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-H2" />
+        <quote>
+          <value>0.013535686</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRFUTURE-L-M2" />
+        <quote>
+          <value>0.015296311</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-3Y" />
+        <quote>
+          <value>0.01328</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-4Y" />
+        <quote>
+          <value>0.016205</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-5Y" />
+        <quote>
+          <value>0.018875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-6Y" />
+        <quote>
+          <value>0.021305</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-7Y" />
+        <quote>
+          <value>0.02345</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-8Y" />
+        <quote>
+          <value>0.025355</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-9Y" />
+        <quote>
+          <value>0.026975</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-10Y" />
+        <quote>
+          <value>0.02838</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-12Y" />
+        <quote>
+          <value>0.0306</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-15Y" />
+        <quote>
+          <value>0.032725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-20Y" />
+        <quote>
+          <value>0.034375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-25Y" />
+        <quote>
+          <value>0.03505</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-30Y" />
+        <quote>
+          <value>0.03528</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-40Y" />
+        <quote>
+          <value>0.035315</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="BaseCurve">
+        <objectReference href="GBP-IRSWAP-50Y" />
+        <quote>
+          <value>0.035365</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-DEPOSIT-ON" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-DEPOSIT-TN" />
+        <quote>
+          <value>0.00225</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-1M" />
+        <quote>
+          <value>0.0025938</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-2M" />
+        <quote>
+          <value>0.0027531</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-XIBOR-3M" />
+        <quote>
+          <value>0.0029688</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U0" />
+        <quote>
+          <value>0.003137228</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z0" />
+        <quote>
+          <value>0.004172487</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H1" />
+        <quote>
+          <value>0.004668949</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M1" />
+        <quote>
+          <value>0.005664141</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U1" />
+        <quote>
+          <value>0.007007054</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z1" />
+        <quote>
+          <value>0.008696437</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H2" />
+        <quote>
+          <value>0.010532274</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M2" />
+        <quote>
+          <value>0.01251396</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-U2" />
+        <quote>
+          <value>0.014341472</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-Z2" />
+        <quote>
+          <value>0.016291275</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-H3" />
+        <quote>
+          <value>0.017886513</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRFUTURE-ED-M3" />
+        <quote>
+          <value>0.019726749</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-4Y" />
+        <quote>
+          <value>0.01359</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-5Y" />
+        <quote>
+          <value>0.01681</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-6Y" />
+        <quote>
+          <value>0.01959</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-7Y" />
+        <quote>
+          <value>0.02185</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-8Y" />
+        <quote>
+          <value>0.0237</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-9Y" />
+        <quote>
+          <value>0.02521</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-10Y" />
+        <quote>
+          <value>0.02647</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-11Y" />
+        <quote>
+          <value>0.02747</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-12Y" />
+        <quote>
+          <value>0.02846</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-13Y" />
+        <quote>
+          <value>0.0291235</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-14Y" />
+        <quote>
+          <value>0.0298065</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-15Y" />
+        <quote>
+          <value>0.03047</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-20Y" />
+        <quote>
+          <value>0.03208</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-25Y" />
+        <quote>
+          <value>0.03287</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-30Y" />
+        <quote>
+          <value>0.03334</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-35Y" />
+        <quote>
+          <value>0.0333</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-40Y" />
+        <quote>
+          <value>0.03326</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote definitionRef="QuoteCurve">
+        <objectReference href="USD-IRSWAP-50Y" />
+        <quote>
+          <value>0.03281</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.00421322932152268</mid>
+        </point>
+        <point>
+          <term>
+            <date>2010-09-01</date>
+          </term>
+          <mid>0.00421322932152268</mid>
+        </point>
+        <point id="GBP-DEPOSIT-1M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>0.00496209528194669</mid>
+        </point>
+        <point id="GBP-XccySwap-1M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.00498081241306547</mid>
+        </point>
+        <point id="GBP-DEPOSIT-2M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.00506124570761468</mid>
+        </point>
+        <point id="GBP-XccySwap-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.00511124878561642</mid>
+        </point>
+        <point id="GBP-DEPOSIT-3M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.00532364019370046</mid>
+        </point>
+        <point id="GBP-XccySwap-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.0052810063966291</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-U0">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.00510539649779673</mid>
+        </point>
+        <point id="GBP-XccySwap-6M">
+          <term>
+            <date>2011-03-01</date>
+          </term>
+          <mid>0.00586303803199506</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-Z0">
+          <term>
+            <date>2011-03-15</date>
+          </term>
+          <mid>0.00594616995817443</mid>
+        </point>
+        <point id="GBP-XccySwap-9M">
+          <term>
+            <date>2011-06-01</date>
+          </term>
+          <mid>0.00629240839881806</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-H1">
+          <term>
+            <date>2011-06-16</date>
+          </term>
+          <mid>0.006365493185303</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-1Y">
+          <term>
+            <date>2011-09-01</date>
+          </term>
+          <mid>0.00674996630091762</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-M1">
+          <term>
+            <date>2011-09-15</date>
+          </term>
+          <mid>0.0068024884475788</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-U1">
+          <term>
+            <date>2011-12-21</date>
+          </term>
+          <mid>0.00724089097857572</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-Z1">
+          <term>
+            <date>2012-03-21</date>
+          </term>
+          <mid>0.0077754188132646</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-H2">
+          <term>
+            <date>2012-06-21</date>
+          </term>
+          <mid>0.0084004813736227</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-2Y">
+          <term>
+            <date>2012-09-04</date>
+          </term>
+          <mid>0.00896390043811923</mid>
+        </point>
+        <point id="GBP-IRFUTURE-L-M2">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.00908306408489512</mid>
+        </point>
+        <point id="GBP-IRSWAP-3Y">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.0120066286149436</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-3Y">
+          <term>
+            <date>2013-09-03</date>
+          </term>
+          <mid>0.0120394088137656</mid>
+        </point>
+        <point id="GBP-IRSWAP-4Y">
+          <term>
+            <date>2014-08-29</date>
+          </term>
+          <mid>0.0149899528671416</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-4Y">
+          <term>
+            <date>2014-09-02</date>
+          </term>
+          <mid>0.0150202323289363</mid>
+        </point>
+        <point id="GBP-IRSWAP-5Y">
+          <term>
+            <date>2015-08-28</date>
+          </term>
+          <mid>0.017745516749339</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.01777314614678</mid>
+        </point>
+        <point id="GBP-IRSWAP-6Y">
+          <term>
+            <date>2016-08-30</date>
+          </term>
+          <mid>0.0202083766734473</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-6Y">
+          <term>
+            <date>2016-09-01</date>
+          </term>
+          <mid>0.0202204219358562</mid>
+        </point>
+        <point id="GBP-IRSWAP-7Y">
+          <term>
+            <date>2017-08-30</date>
+          </term>
+          <mid>0.0224054194531433</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0224162358851645</mid>
+        </point>
+        <point id="GBP-IRSWAP-8Y">
+          <term>
+            <date>2018-08-30</date>
+          </term>
+          <mid>0.0243515674577264</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-8Y">
+          <term>
+            <date>2018-09-04</date>
+          </term>
+          <mid>0.0243743545319584</mid>
+        </point>
+        <point id="GBP-IRSWAP-9Y">
+          <term>
+            <date>2019-08-30</date>
+          </term>
+          <mid>0.0260120803081216</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-9Y">
+          <term>
+            <date>2019-09-03</date>
+          </term>
+          <mid>0.026027997537085</mid>
+        </point>
+        <point id="GBP-IRSWAP-10Y">
+          <term>
+            <date>2020-08-28</date>
+          </term>
+          <mid>0.0274587050589643</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0274711952345479</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-11Y">
+          <term>
+            <date>2021-09-01</date>
+          </term>
+          <mid>0.0287284384696616</mid>
+        </point>
+        <point id="GBP-IRSWAP-12Y">
+          <term>
+            <date>2022-08-30</date>
+          </term>
+          <mid>0.0299781359462159</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-12Y">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0299826393958309</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-13Y">
+          <term>
+            <date>2023-09-01</date>
+          </term>
+          <mid>0.0308353908672085</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-14Y">
+          <term>
+            <date>2024-09-03</date>
+          </term>
+          <mid>0.0316305219784212</mid>
+        </point>
+        <point id="GBP-IRSWAP-15Y">
+          <term>
+            <date>2025-08-29</date>
+          </term>
+          <mid>0.0324400099441196</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-15Y">
+          <term>
+            <date>2025-09-02</date>
+          </term>
+          <mid>0.0324441461436971</mid>
+        </point>
+        <point id="GBP-IRSWAP-20Y">
+          <term>
+            <date>2030-08-30</date>
+          </term>
+          <mid>0.0343260837120782</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-20Y">
+          <term>
+            <date>2030-09-03</date>
+          </term>
+          <mid>0.0343275772944205</mid>
+        </point>
+        <point id="GBP-IRSWAP-25Y">
+          <term>
+            <date>2035-08-30</date>
+          </term>
+          <mid>0.0354665444147972</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-25Y">
+          <term>
+            <date>2035-09-04</date>
+          </term>
+          <mid>0.0354680557560059</mid>
+        </point>
+        <point id="GBP-IRSWAP-30Y">
+          <term>
+            <date>2040-08-30</date>
+          </term>
+          <mid>0.035959790832452</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-30Y">
+          <term>
+            <date>2040-09-04</date>
+          </term>
+          <mid>0.0359604008738881</mid>
+        </point>
+        <point id="GBP-IRSWAP-40Y">
+          <term>
+            <date>2050-08-30</date>
+          </term>
+          <mid>0.0359074414355263</mid>
+        </point>
+        <point id="GBP-XCCYSWAP-40Y">
+          <term>
+            <date>2050-09-01</date>
+          </term>
+          <mid>0.0359075350089215</mid>
+        </point>
+        <point id="GBP-IRSWAP-50Y">
+          <term>
+            <date>2060-08-31</date>
+          </term>
+          <mid>0.035760681623012</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-09-01</date>
+        </term>
+        <mid>0.999976926228035</mid>
+      </point>
+      <point id="GBP-DEPOSIT-1M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>0.999578911639273</mid>
+      </point>
+      <point id="GBP-XccySwap-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.999563692893066</mid>
+      </point>
+      <point id="GBP-DEPOSIT-2M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.9991688858879</mid>
+      </point>
+      <point id="GBP-XccySwap-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.999118736170627</mid>
+      </point>
+      <point id="GBP-DEPOSIT-3M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.998659941794509</mid>
+      </point>
+      <point id="GBP-XccySwap-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.998656219655051</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-U0">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.998505421828201</mid>
+      </point>
+      <point id="GBP-XccySwap-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>0.997066911592784</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-Z0">
+        <term>
+          <date>2011-03-15</date>
+        </term>
+        <mid>0.996798217005748</mid>
+      </point>
+      <point id="GBP-XccySwap-9M">
+        <term>
+          <date>2011-06-01</date>
+        </term>
+        <mid>0.99527407188304</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-H1">
+        <term>
+          <date>2011-06-16</date>
+        </term>
+        <mid>0.994959252224306</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-1Y">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>0.993241708282508</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-M1">
+        <term>
+          <date>2011-09-15</date>
+        </term>
+        <mid>0.992930458836826</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-U1">
+        <term>
+          <date>2011-12-21</date>
+        </term>
+        <mid>0.990570718110812</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-Z1">
+        <term>
+          <date>2012-03-21</date>
+        </term>
+        <mid>0.987963656602284</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-H2">
+        <term>
+          <date>2012-06-21</date>
+        </term>
+        <mid>0.984917916894467</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-2Y">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>0.982107083844984</mid>
+      </point>
+      <point id="GBP-IRFUTURE-L-M2">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.981481233638342</mid>
+      </point>
+      <point id="GBP-IRSWAP-3Y">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.964641470625844</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>0.964419748188061</mid>
+      </point>
+      <point id="GBP-IRSWAP-4Y">
+        <term>
+          <date>2014-08-29</date>
+        </term>
+        <mid>0.941907935662993</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.941639565740058</mid>
+      </point>
+      <point id="GBP-IRSWAP-5Y">
+        <term>
+          <date>2015-08-28</date>
+        </term>
+        <mid>0.915318818404342</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.915015162568258</mid>
+      </point>
+      <point id="GBP-IRSWAP-6Y">
+        <term>
+          <date>2016-08-30</date>
+        </term>
+        <mid>0.885984825123846</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-6Y">
+        <term>
+          <date>2016-09-01</date>
+        </term>
+        <mid>0.885823155108284</mid>
+      </point>
+      <point id="GBP-IRSWAP-7Y">
+        <term>
+          <date>2017-08-30</date>
+        </term>
+        <mid>0.855112068830794</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.854942911973609</mid>
+      </point>
+      <point id="GBP-IRSWAP-8Y">
+        <term>
+          <date>2018-08-30</date>
+        </term>
+        <mid>0.82336558613348</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-8Y">
+        <term>
+          <date>2018-09-04</date>
+        </term>
+        <mid>0.822942321062706</mid>
+      </point>
+      <point id="GBP-IRSWAP-9Y">
+        <term>
+          <date>2019-08-30</date>
+        </term>
+        <mid>0.791763240598771</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-9Y">
+        <term>
+          <date>2019-09-03</date>
+        </term>
+        <mid>0.791425443412302</mid>
+      </point>
+      <point id="GBP-IRSWAP-10Y">
+        <term>
+          <date>2020-08-28</date>
+        </term>
+        <mid>0.760542078790574</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.760219594363984</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-11Y">
+        <term>
+          <date>2021-09-01</date>
+        </term>
+        <mid>0.729587814445498</mid>
+      </point>
+      <point id="GBP-IRSWAP-12Y">
+        <term>
+          <date>2022-08-30</date>
+        </term>
+        <mid>0.69862457275944</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-12Y">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.698472741901665</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-13Y">
+        <term>
+          <date>2023-09-01</date>
+        </term>
+        <mid>0.670491888281418</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-14Y">
+        <term>
+          <date>2024-09-03</date>
+        </term>
+        <mid>0.64289351753997</mid>
+      </point>
+      <point id="GBP-IRSWAP-15Y">
+        <term>
+          <date>2025-08-29</date>
+        </term>
+        <mid>0.615756833885893</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-15Y">
+        <term>
+          <date>2025-09-02</date>
+        </term>
+        <mid>0.615500919642563</mid>
+      </point>
+      <point id="GBP-IRSWAP-20Y">
+        <term>
+          <date>2030-08-30</date>
+        </term>
+        <mid>0.504563826388455</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-20Y">
+        <term>
+          <date>2030-09-03</date>
+        </term>
+        <mid>0.504359910118095</mid>
+      </point>
+      <point id="GBP-IRSWAP-25Y">
+        <term>
+          <date>2035-08-30</date>
+        </term>
+        <mid>0.41340138849396</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-25Y">
+        <term>
+          <date>2035-09-04</date>
+        </term>
+        <mid>0.413185980480678</mid>
+      </point>
+      <point id="GBP-IRSWAP-30Y">
+        <term>
+          <date>2040-08-30</date>
+        </term>
+        <mid>0.341380331575899</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-30Y">
+        <term>
+          <date>2040-09-04</date>
+        </term>
+        <mid>0.341206763828973</mid>
+      </point>
+      <point id="GBP-IRSWAP-40Y">
+        <term>
+          <date>2050-08-30</date>
+        </term>
+        <mid>0.239101140429306</mid>
+      </point>
+      <point id="GBP-XCCYSWAP-40Y">
+        <term>
+          <date>2050-09-01</date>
+        </term>
+        <mid>0.239053423490887</mid>
+      </point>
+      <point id="GBP-IRSWAP-50Y">
+        <term>
+          <date>2060-08-31</date>
+        </term>
+        <mid>0.168393077747745</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

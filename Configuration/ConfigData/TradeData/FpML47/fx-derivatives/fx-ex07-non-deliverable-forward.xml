@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.chase.com/coding-scheme/conversationId">1234</conversationId>
+      <messageId messageIdScheme="http://www.chase.com/coding-scheme/messageId">09876</messageId>
+      <sentBy partyIdScheme="http://www.chase.com/partyId">CHASUS33</sentBy>
+      <sendTo partyIdScheme="http://www.chase.com/partyId">CSFBUS33</sendTo>
+      <creationTimestamp>2002-01-09T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.chase.com/fx/trade-id">CHASE345</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.csfb.com/fx/trade-id">CSFB9842</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2002-01-09Z</tradeDate>
+      </tradeHeader>
+      <fxSingleLeg>
+         <exchangedCurrency1>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <paymentAmount>
+               <currency>USD</currency>
+               <amount>10000000</amount>
+            </paymentAmount>
+         </exchangedCurrency1>
+         <exchangedCurrency2>
+            <payerPartyReference href="party1"/>
+            <receiverPartyReference href="party2"/>
+            <paymentAmount>
+               <currency>INR</currency>
+               <amount>434000000</amount>
+            </paymentAmount>
+         </exchangedCurrency2>
+         <valueDate>2002-04-11Z</valueDate>
+         <exchangeRate>
+            <quotedCurrencyPair>
+               <currency1>USD</currency1>
+               <currency2>INR</currency2>
+               <quoteBasis>Currency2PerCurrency1</quoteBasis>
+            </quotedCurrencyPair>
+            <rate>43.40</rate>
+            <spotRate>43.35</spotRate>
+            <forwardPoints>0.05</forwardPoints>
+         </exchangeRate>
+         <nonDeliverableForward>
+            <settlementCurrency>USD</settlementCurrency>
+            <fixing>
+               <primaryRateSource>
+                  <rateSource>Reuters</rateSource>
+                  <rateSourcePage>RBIB</rateSourcePage>
+               </primaryRateSource>
+               <fixingTime>
+                  <hourMinuteTime>14:30:00</hourMinuteTime>
+                  <businessCenter>INMU</businessCenter>
+               </fixingTime>
+               <quotedCurrencyPair>
+                  <currency1>USD</currency1>
+                  <currency2>INR</currency2>
+                  <quoteBasis>Currency2PerCurrency1</quoteBasis>
+               </quotedCurrencyPair>
+               <fixingDate>2002-04-09Z</fixingDate>
+            </fixing>
+         </nonDeliverableForward>
+      </fxSingleLeg>
+   </trade>
+   <party id="party1">
+      <partyId>CHASUS33</partyId>
+   </party>
+   <party id="party2">
+      <partyId>CSFBUS33</partyId>
+   </party>
+</FpML>

@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Highlander.Constants;
 using Highlander.Metadata.Common;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.UnitTestEnv.V5r3;
 using Highlander.Utilities.NamedValues;
@@ -196,7 +197,7 @@ namespace Highlander.Excel.Tests.V5r3.ExcelApi
         [TestMethod]
         public void GetExistingAsset()
         {
-            object[,] result = Engine.GetAssetConfigurationData("AUD", "FrA", "", "");
+            object[,] result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("AUD", "FrA", "", ""));
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[2, 0]);
             Assert.AreEqual("0", result[2, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[3, 0]);
@@ -207,28 +208,28 @@ namespace Highlander.Excel.Tests.V5r3.ExcelApi
         public void GetExistingAssetWithTenor()
         {
             // Check one
-            object[,] result = Engine.GetAssetConfigurationData("EUR", "XccyDepo", "1D", "");
+            object[,] result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("EUR", "XccyDepo", "1D", ""));
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[3, 0]);
             Assert.AreEqual("0", result[3, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[4, 0]);
             Assert.AreEqual("D", result[4, 1]);
 
             // Check another
-            result = Engine.GetAssetConfigurationData("EUR", "XccyDepo", "2D", "");
+            result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("EUR", "XccyDepo", "2D", ""));
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[3, 0]);
             Assert.AreEqual("0", result[3, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[4, 0]);
             Assert.AreEqual("D", result[4, 1]);
 
             // Check without
-            result = Engine.GetAssetConfigurationData("EUR", "XccyDepo", "", "");
+            result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("EUR", "XccyDepo", "", ""));
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[2, 0]);
             Assert.AreEqual("2", result[2, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[3, 0]);
             Assert.AreEqual("D", result[3, 1]);
 
             // Check with invalid tenor
-            result = Engine.GetAssetConfigurationData("EUR", "XccyDepo", "TEST", "");
+            result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("EUR", "XccyDepo", "TEST", ""));
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.periodMultiplier", result[2, 0]);
             Assert.AreEqual("2", result[2, 1]);
             Assert.AreEqual("Instrument.InstrumentNodeItem.SpotDate.period", result[3, 0]);
@@ -240,7 +241,7 @@ namespace Highlander.Excel.Tests.V5r3.ExcelApi
         {
             try
             {
-                object[,] result = Engine.GetAssetConfigurationData("XYZ", "FRa", "", "");
+                object[,] result = RangeExtension.ConvertAssetToRange(Engine.GetAssetConfigurationData("XYZ", "FRa", "", ""));
                 Assert.Fail();
             }
             catch (Exception)

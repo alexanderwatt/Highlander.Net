@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.example.com/conversationId">CS/2006/04/02/32-09</conversationId>
+      <messageId messageIdScheme="http://www.example.com/messageId">MS/2006/04/02/15-99</messageId>
+      <sentBy>PARTYABICXXX</sentBy>
+      <sendTo>PARTYBBICXXX</sendTo>
+      <creationTimestamp>2006-04-02T15:38:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.PartyA.com/eqd-trade-id">1234</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2000-06-28Z</tradeDate>
+      </tradeHeader>
+      <equityOption>
+         <productType>europeanCallIndex</productType>
+         <buyerPartyReference href="party2"/>
+         <sellerPartyReference href="party1"/>
+         <optionType>Call</optionType>
+         <underlyer>
+            <singleUnderlyer>
+               <index>
+                  <instrumentId instrumentIdScheme="http://www.fpml.org/schemes/4.1/instrumentId">.N225</instrumentId>
+                  <description>NIKKEI 225 INDEX</description>
+                  <exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">TSE</exchangeId>
+                  <relatedExchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">OSE</relatedExchangeId>
+               </index>
+            </singleUnderlyer>
+         </underlyer>
+         <equityExercise>
+            <equityEuropeanExercise>
+               <expirationDate>
+                  <adjustableDate>
+                     <unadjustedDate>2002-07-01Z</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NONE</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </expirationDate>
+               <equityExpirationTimeType>Close</equityExpirationTimeType>
+            </equityEuropeanExercise>
+            <automaticExercise>true</automaticExercise>
+            <equityValuation>
+               <valuationTimeType>Close</valuationTimeType>
+            </equityValuation>
+            <settlementCurrency>EUR</settlementCurrency>
+            <settlementType>Cash</settlementType>
+         </equityExercise>
+         <fxFeature>
+            <referenceCurrency>JPY</referenceCurrency>
+            <composite/>
+         </fxFeature>
+         <methodOfAdjustment>CalculationAgent</methodOfAdjustment>
+         <extraordinaryEvents>
+            <indexAdjustmentEvents>
+               <indexModification>CalculationAgentAdjustment</indexModification>
+               <indexCancellation>CancellationAndPayment</indexCancellation>
+               <indexDisruption>CalculationAgentAdjustment</indexDisruption>
+            </indexAdjustmentEvents>
+            <additionalDisruptionEvents>
+               <changeInLaw>true</changeInLaw>
+               <failureToDeliver>true</failureToDeliver>
+               <insolvencyFiling>false</insolvencyFiling>
+               <hedgingDisruption>true</hedgingDisruption>
+               <lossOfStockBorrow>true</lossOfStockBorrow>
+               <increasedCostOfStockBorrow>false</increasedCostOfStockBorrow>
+               <increasedCostOfHedging>false</increasedCostOfHedging>
+               <determiningPartyReference href="party1"/>
+            </additionalDisruptionEvents>
+            <representations>
+               <nonReliance>true</nonReliance>
+               <agreementsRegardingHedging>true</agreementsRegardingHedging>
+               <indexDisclaimer>true</indexDisclaimer>
+               <additionalAcknowledgements>true</additionalAcknowledgements>
+            </representations>
+         </extraordinaryEvents>
+         <equityFeatures>
+            <asian>
+               <averagingInOut>Out</averagingInOut>
+               <averagingPeriodOut>
+                  <averagingDateTimes>
+                     <dateTime>2000-08-01T08:57:00Z</dateTime>
+                     <dateTime>2000-09-01T08:57:00Z</dateTime>
+                     <dateTime>2000-10-01T08:57:00Z</dateTime>
+                     <dateTime>2000-11-01T08:57:00Z</dateTime>
+                     <dateTime>2000-12-01T08:57:00Z</dateTime>
+                     <dateTime>2001-01-04T08:57:00Z</dateTime>
+                     <dateTime>2001-02-01T08:57:00Z</dateTime>
+                     <dateTime>2001-03-01T08:57:00Z</dateTime>
+                  </averagingDateTimes>
+                  <marketDisruption>ModifiedPostponement</marketDisruption>
+               </averagingPeriodOut>
+            </asian>
+         </equityFeatures>
+         <strike>
+            <strikePrice>17475.90</strikePrice>
+         </strike>
+         <numberOfOptions>79.099093</numberOfOptions>
+         <optionEntitlement>1.00</optionEntitlement>
+         <equityPremium>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <paymentAmount>
+               <currency>EUR</currency>
+               <amount>213.5675511</amount>
+            </paymentAmount>
+            <paymentDate>
+               <unadjustedDate>2000-07-03Z</unadjustedDate>
+               <dateAdjustments>
+                  <businessDayConvention>NONE</businessDayConvention>
+               </dateAdjustments>
+            </paymentDate>
+            <pricePerOption>
+               <currency>EUR</currency>
+               <amount>2.70</amount>
+            </pricePerOption>
+         </equityPremium>
+      </equityOption>
+      <calculationAgent>
+         <calculationAgentPartyReference href="party1"/>
+      </calculationAgent>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>2002</masterAgreementVersion>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2000</contractualDefinitions>
+         <contractualDefinitions>ISDA2002Equity</contractualDefinitions>
+      </documentation>
+      <governingLaw>GBEN</governingLaw>
+   </trade>
+   <party id="party1">
+      <partyId>Party A</partyId>
+   </party>
+   <party id="party2">
+      <partyId>Party B</partyId>
+   </party>
+</FpML>

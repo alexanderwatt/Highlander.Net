@@ -28,6 +28,8 @@ namespace Highlander.Reporting.UI.V5r3
     {
         private readonly PricingCache _pricingCache;
 
+        private NamedValueSet _properties;
+
         public CreateTradeForm(PricingCache pricingCache)
         {
             InitializeComponent();
@@ -66,25 +68,31 @@ namespace Highlander.Reporting.UI.V5r3
             }
             //Create the transaction
             var transactionType = (ProductTypeSimpleEnum)Enum.Parse(typeof(ProductTypeSimpleEnum), tradeTypeBox.Text, true);
-            switch (transactionType)
+            if (transactionType == ProductTypeSimpleEnum.PropertyTransaction)
             {
-                case ProductTypeSimpleEnum.LeaseTransaction:
-                    // _pricingCache.CreateLeaseTrade();
-                    break;
-                case ProductTypeSimpleEnum.PropertyTransaction:
-                    _pricingCache.CreatePropertyTradeWithProperties(tradeIdentifierTxtBox.Text, isParty1BuyerCheckBox.Checked, Party1TextBox.Text, 
+                   tradeIdentifierTextBox.Text = _pricingCache.CreatePropertyTradeWithProperties(tradeIdentifierTxtBox.Text, isParty1BuyerCheckBox.Checked, Party1TextBox.Text, 
                         Party2TextBox.Text, startDateTimePicker.Value, effectiveDateTimePicker.Value, Convert.ToDecimal(purchaseAmountTextBox.Text),
                         paymentDateTimePicker.Value, null, currencyListBox.Text, propertyAssetIdentifierTextBox.Text, accountingBookTextBox.Text, properties);
-                    break;
             }
         }
 
-        private void CreatePropertyAssetClick(object sender, EventArgs e)
+        private void CheckPropertyAssetClick(object sender, EventArgs e)
         {
             //Load the form
             //
-            var frm = new PropertyAssetForm(_pricingCache);
-            frm.ShowDialog();
+            setProperties();
+            var transactionType = (ProductTypeSimpleEnum)Enum.Parse(typeof(ProductTypeSimpleEnum), tradeTypeBox.Text, true);
+            switch (transactionType)
+            {
+                case ProductTypeSimpleEnum.LeaseTransaction:
+                    var lease = new LeaseTransactionForm(_pricingCache, _properties);
+                    lease.ShowDialog();
+                    break;
+                case ProductTypeSimpleEnum.PropertyTransaction:
+                    var property = new PropertyAssetForm(_pricingCache);
+                    property.ShowDialog();
+                    break;
+            }
         }
 
         private void FindPropertyAssetButtonClick(object sender, EventArgs e)
@@ -107,6 +115,24 @@ namespace Highlander.Reporting.UI.V5r3
 
             if (!(instrument.Data is PropertyNodeStruct propertyAsset)) return;
             propertyTypeListBox.Text = propertyAsset.Property?.propertyTaxonomyType;
+        }
+
+        private void setProperties()
+        {
+            //Populate the properties
+            var properties = new NamedValueSet();
+            if (propertyDataGridView.Columns.Count > 1)
+            {
+                for (var i = 0; i < propertyDataGridView.Rows.Count; i++)
+                {
+                    var columnName1 = propertyDataGridView.Columns[0].Name;
+                    var columnName2 = propertyDataGridView.Columns[1].Name;
+                    if (propertyDataGridView[columnName1, i].Value == null || propertyDataGridView[columnName2, i].Value == null) continue;
+                    var namedValue = new NamedValue(propertyDataGridView[columnName1, i].Value.ToString(), propertyDataGridView[columnName2, i].Value);
+                    properties.Set(namedValue);
+                }
+            }
+            _properties = properties;
         }
     }
 }

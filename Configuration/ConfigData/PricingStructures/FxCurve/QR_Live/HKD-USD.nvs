@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=HKD-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=HKD
+Currency2/String=USD
+CurrencyPair/String=HKD-USD
+QuoteBasis/String=Currency2PerCurrency1

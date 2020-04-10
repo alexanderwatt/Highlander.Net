@@ -14,7 +14,7 @@
 */
 
 using System;
-using Highlander.CurveEngine.V5r3.Extensions;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

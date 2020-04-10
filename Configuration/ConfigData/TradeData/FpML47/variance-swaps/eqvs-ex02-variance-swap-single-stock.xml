@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 
+   == Copyright (c) 2002-2009. All rights reserved. 
+   == Financial Products Markup Language is subject to the FpML public license. 
+   == A copy of this license is available at http://www.fpml.org/license/license.html-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header><!-- unique message id -->
+      <messageId messageIdScheme="http://www.partyA.com/coding-scheme/message-id">234233423420</messageId><!-- identify the sender of this message -->
+      <sentBy partyIdScheme="http://www.partyA.com/coding-scheme/party-id">23902</sentBy>
+      <creationTimestamp>2007-05-02T08:57:00-00:00</creationTimestamp>
+   </header>
+   <trade><!-- Variance Swap Share Example -->
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="kom722"/>
+            <tradeId tradeIdScheme="http://www.partyA.com/coding-scheme/trade-id">6234</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="kow029"/>
+            <tradeId tradeIdScheme="http://www.partyB.com/coding-scheme/trade-id">6569</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate id="d989">2001-09-24Z</tradeDate>
+      </tradeHeader><!-- use distinct product type rather than deprecated variance leg within return swap -->
+      <varianceSwap>
+         <varianceLeg>
+            <payerPartyReference href="kom722"/>
+            <receiverPartyReference href="kow029"/>
+            <underlyer>
+               <singleUnderlyer>
+                  <equity>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/schemes/4.1/instrumentId">IBM</instrumentId>
+                     <description>IBM ordinary shares</description>
+                     <exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">NYSE</exchangeId>
+                  </equity>
+               </singleUnderlyer>
+            </underlyer>
+            <settlementType>Cash</settlementType>
+            <valuation>
+               <valuationDate id="FinalValuationDate">
+                  <adjustableDate>
+                     <unadjustedDate>2004-07-21Z</unadjustedDate>
+                     <dateAdjustments>
+                        <businessDayConvention>NotApplicable</businessDayConvention>
+                     </dateAdjustments>
+                  </adjustableDate>
+               </valuationDate>
+               <optionsPriceValuation>true</optionsPriceValuation>
+            </valuation>
+            <amount>
+               <optionsExchangeDividends>true</optionsExchangeDividends>
+               <additionalDividends>false</additionalDividends>
+               <variance>
+                  <closingLevel>true</closingLevel>
+                  <varianceAmount>
+                     <currency>USD</currency>
+                     <amount>350000</amount>
+                  </varianceAmount>
+                  <varianceStrikePrice>85.00</varianceStrikePrice>
+                  <exchangeTradedContractNearest>
+                     <instrumentId instrumentIdScheme="http://www.fpml.org/schemes/4.1/instrumentId">.IBM</instrumentId>
+                     <description>IBM ordinary shares</description>
+                     <currency>USD</currency>
+                     <exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">NYSE</exchangeId>
+                     <relatedExchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.1/exchangeId">CBOE</relatedExchangeId>
+                     <contractReference>CBOE SEP04 IBM EUROPEAN OPTION</contractReference>
+                     <expirationDate>
+                        <adjustableDate>
+                           <unadjustedDate>2004-09-23Z</unadjustedDate>
+                           <dateAdjustments>
+                              <businessDayConvention>NONE</businessDayConvention>
+                           </dateAdjustments>
+                        </adjustableDate>
+                     </expirationDate>
+                  </exchangeTradedContractNearest>
+               </variance>
+            </amount>
+         </varianceLeg>
+      </varianceSwap>
+      <calculationAgent>
+         <calculationAgentPartyReference href="kom722"/>
+      </calculationAgent>
+      <documentation>
+         <masterAgreement>
+            <masterAgreementType>ISDA</masterAgreementType>
+            <masterAgreementVersion>2002</masterAgreementVersion>
+         </masterAgreement>
+         <contractualDefinitions>ISDA2000</contractualDefinitions>
+         <contractualDefinitions>ISDA2002Equity</contractualDefinitions>
+      </documentation>
+      <governingLaw>GBEN</governingLaw>
+   </trade>
+   <party id="kom722">
+      <partyId>Party A</partyId>
+   </party>
+   <party id="kow029">
+      <partyId>Party B</partyId>
+   </party>
+</FpML>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<enumMaps xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://tempuri.org/GwmlEnumMaps.xsd">
+  <enumMap name="Business Centers" gwmlDomain="GWML/businessCenter/1.0" fpmlScheme="BusinessCenter">
+    <enumMapValue fpmlValue="AEAD" gwmlValue="ABU"/>
+    <enumMapValue fpmlValue="AEDU" gwmlValue="DBI"/>
+    <enumMapValue fpmlValue="ARBA" gwmlValue="BUA"/>
+    <enumMapValue fpmlValue="ATVI" gwmlValue="VIE"/>
+    <enumMapValue fpmlValue="AUAD" gwmlValue="ADL" />
+    <enumMapValue fpmlValue="AUBR" gwmlValue="BRI" />
+    <enumMapValue fpmlValue="AUHO" gwmlValue="HOB" />
+    <enumMapValue fpmlValue="AUME" gwmlValue="MEL" />
+    <enumMapValue fpmlValue="AUPE" gwmlValue="PER" />
+    <enumMapValue fpmlValue="AUSY" gwmlValue="SYD" />
+    <enumMapValue fpmlValue="BEBR" gwmlValue="BRU"/>
+    <enumMapValue fpmlValue="BMHA" gwmlValue="HML"/>
+    <enumMapValue fpmlValue="BRBR" gwmlValue="BII"/>
+    <enumMapValue fpmlValue="BRRJ" gwmlValue="RIO"/>
+    <enumMapValue fpmlValue="BRSP" gwmlValue="SAP"/>
+    <enumMapValue fpmlValue="CAMO" gwmlValue="MON"/>
+    <enumMapValue fpmlValue="CATO" gwmlValue="TOR" />
+    <enumMapValue fpmlValue="CHGE" gwmlValue="GEN"/>
+    <enumMapValue fpmlValue="CHZU" gwmlValue="ZUR" />
+    <enumMapValue fpmlValue="CLSA" gwmlValue="SAN"/>
+    <enumMapValue fpmlValue="CNBE" gwmlValue="BEI"/>
+    <enumMapValue fpmlValue="COBO" gwmlValue="BTA"/>
+    <enumMapValue fpmlValue="CZPR" gwmlValue="PRA"/>
+    <enumMapValue fpmlValue="DEDU" gwmlValue="DUS"/>
+    <enumMapValue fpmlValue="DEFR" gwmlValue="FRA"/>
+    <enumMapValue fpmlValue="DEST" gwmlValue="STU"/>
+    <enumMapValue fpmlValue="DKCO" gwmlValue="COP"/>
+    <enumMapValue fpmlValue="EETA" gwmlValue="TLI"/>
+    <enumMapValue fpmlValue="ESBA" gwmlValue="BAR"/>
+    <enumMapValue fpmlValue="ESMA" gwmlValue="MAD"/>
+    <enumMapValue fpmlValue="EURO" gwmlValue="EUR" />
+    <enumMapValue fpmlValue="EUTA" gwmlValue="TGT" />
+    <enumMapValue fpmlValue="FIHE" gwmlValue="HEL"/>
+    <enumMapValue fpmlValue="FRPA" gwmlValue="PAR"/>
+    <enumMapValue fpmlValue="GBLO" gwmlValue="LON" />
+    <enumMapValue fpmlValue="GRAT" gwmlValue="ATH"/>
+    <enumMapValue fpmlValue="HKHK" gwmlValue="HK" />
+    <enumMapValue fpmlValue="HUBU" gwmlValue="BDP"/>
+    <enumMapValue fpmlValue="IDJA" gwmlValue="JAK"/>
+    <enumMapValue fpmlValue="IEBE" gwmlValue="BEL"/>
+    <enumMapValue fpmlValue="IEDU" gwmlValue="DUB"/>
+    <enumMapValue fpmlValue="ILTA" gwmlValue="TEL"/>
+    <enumMapValue fpmlValue="INMU" gwmlValue="BOM"/>
+    <enumMapValue fpmlValue="ISRE" gwmlValue="RKJ"/>
+    <enumMapValue fpmlValue="ITMI" gwmlValue="MIL"/>
+    <enumMapValue fpmlValue="ITRO" gwmlValue="ROM"/>
+    <enumMapValue fpmlValue="JPTO" gwmlValue="TOK" />
+    <enumMapValue fpmlValue="KRSE" gwmlValue="SEO"/>
+    <enumMapValue fpmlValue="KYGE" gwmlValue="GEW"/>
+    <enumMapValue fpmlValue="LBBE" gwmlValue="BET"/>
+    <enumMapValue fpmlValue="LKCO" gwmlValue="COL"/>
+    <enumMapValue fpmlValue="LULU" gwmlValue="LUX"/>
+    <enumMapValue fpmlValue="MOMA" gwmlValue="MAC"/>
+    <enumMapValue fpmlValue="MXMC" gwmlValue="MEX" />
+    <enumMapValue fpmlValue="MYKL" gwmlValue="KLU"/>
+    <enumMapValue fpmlValue="MYLA" gwmlValue="LAB"/>
+    <enumMapValue fpmlValue="NLAM" gwmlValue="AMS"/>
+    <enumMapValue fpmlValue="NOOS" gwmlValue="OSL"/>
+    <enumMapValue fpmlValue="NZAU" gwmlValue="AUK" />
+    <enumMapValue fpmlValue="NZWE" gwmlValue="WEL" />
+    <enumMapValue fpmlValue="PAPC" gwmlValue="PNM"/>
+    <enumMapValue fpmlValue="PELI" gwmlValue="LMA"/>
+    <enumMapValue fpmlValue="PHMA" gwmlValue="MAN"/>
+    <enumMapValue fpmlValue="PKKA" gwmlValue="KAR"/>
+    <enumMapValue fpmlValue="PLWA" gwmlValue="WAR"/>
+    <enumMapValue fpmlValue="PTLI" gwmlValue="LIS"/>
+    <enumMapValue fpmlValue="ROBU" gwmlValue="BRT"/>
+    <enumMapValue fpmlValue="RUMO" gwmlValue="MOS"/>
+    <enumMapValue fpmlValue="SARI" gwmlValue="RIY"/>
+    <enumMapValue fpmlValue="SEST" gwmlValue="STO"/>
+    <enumMapValue fpmlValue="SGSI" gwmlValue="SIN"/>
+    <enumMapValue fpmlValue="SKBR" gwmlValue="BAV"/>
+    <enumMapValue fpmlValue="THBA" gwmlValue="BAK"/>
+    <enumMapValue fpmlValue="TRAN" gwmlValue="ANK"/>
+    <enumMapValue fpmlValue="TRIS" gwmlValue="IST"/>
+    <enumMapValue fpmlValue="TWTA" gwmlValue="TAI"/>
+    <enumMapValue fpmlValue="USCH" gwmlValue="CHI"/>
+    <enumMapValue fpmlValue="USLA" gwmlValue="LOS"/>
+    <enumMapValue fpmlValue="USNY" gwmlValue="NYC" />
+    <enumMapValue fpmlValue="USSE" gwmlValue="SEA"/>
+    <enumMapValue fpmlValue="VNHA" gwmlValue="HAN"/>
+    <enumMapValue fpmlValue="VECA" gwmlValue="CAR"/>
+    <enumMapValue fpmlValue="ZAJO" gwmlValue="JOH"/>
+    
+    <!-- todo - get FpML business center codes for below -->
+    <enumMapValue gwmlValue="VAN" fpmlValue="CAVA" /> <!--Vancouver-->
+
+    <!--todo get GWML/RDM codes for below-->
+    <enumMapValue fpmlValue="ESAS" gwmlValue="ESAS Settlement Day "/>    
+  </enumMap>
+  
+  <enumMap name="Floating Rate Indices" gwmlDomain="GWML/referenceSource/1.0" fpmlScheme="FloatingRateIndex">
+    <!--conversions-->
+    <!--equivalences-->
+    <enumMapValue gwmlValue="AUD-BBR-BBSY (BID)" fpmlValue="AUD-BBR-BBSY-BID" />
+    <!--<enumMapValue gwmlValue="AUD-BBR-BBSW" fpmlValue="AUD-BBR-BBSW" />
+    <enumMapValue gwmlValue="NZD-BBR-BID" fpmlValue="NZD-BBR-BID" />
+    <enumMapValue gwmlValue="NZD-BBR-FRA" fpmlValue="NZD-BBR-FRA" />
+    <enumMapValue gwmlValue="USD-LIBOR-BBA" fpmlValue="USD-LIBOR-BBA" />
+    <enumMapValue gwmlValue="GBP-LIBOR-BBA" fpmlValue="GBP-LIBOR-BBA" />
+    <enumMapValue gwmlValue="JPY-LIBOR-BBA" fpmlValue="JPY-LIBOR-BBA" />
+    <enumMapValue gwmlValue="CHF-LIBOR-BBA" fpmlValue="CHF-LIBOR-BBA" />
+    <enumMapValue gwmlValue="HKD-HIBOR-HKAB" fpmlValue="HKD-HIBOR-HKAB" />
+    <enumMapValue gwmlValue="EUR-EURIBOR-Reuters" fpmlValue="EUR-EURIBOR-Reuters" />
+    <enumMapValue gwmlValue="AUD-AONIA-OIS-COMPOUND" fpmlValue="AUD-AONIA-OIS-COMPOUND" />
+    <enumMapValue gwmlValue="NZD-NZIONIA-OIS-COMPOUND" fpmlValue="NZD-NZIONIA-OIS-COMPOUND" />-->
+  </enumMap>
+</enumMaps>

@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.EOD_Sydney.2011-08-23.DiscountCurve.AUD-LIBOR-SENIOR" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="DiscountCurve.AUD-LIBOR-SENIOR">
+    <name>AUD-LIBOR-SENIOR</name>
+    <currency>AUD</currency>
+    <algorithm>FastLinearZero</algorithm>
+  </yieldCurve>
+  <yieldCurveValuation id="DiscountCurve.AUD-LIBOR-SENIOR" definitionRef="DiscountCurve">
+    <baseDate>2011-08-23</baseDate>
+    <buildDateTime>2011-08-23T00:00:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-TN">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-2W">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-XccyDepo-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-9M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-1Y">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-6Y">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-8Y">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-9Y">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-XccySwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-1D" />
+        <quote>
+          <value>0.0661</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-TN" />
+        <quote>
+          <value>0.0659</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-1W" />
+        <quote>
+          <value>0.0659</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-2W" />
+        <quote>
+          <value>0.0663</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-1M" />
+        <quote>
+          <value>0.0666</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-2M" />
+        <quote>
+          <value>0.0692</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccyDepo-3M" />
+        <quote>
+          <value>0.0702</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-6M" />
+        <quote>
+          <value>0.0743</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-9M" />
+        <quote>
+          <value>0.0744</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-1Y" />
+        <quote>
+          <value>0.0744</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-2Y" />
+        <quote>
+          <value>0.0729</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-3Y" />
+        <quote>
+          <value>0.0714</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-4Y" />
+        <quote>
+          <value>0.0707</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-5Y" />
+        <quote>
+          <value>0.07</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-6Y" />
+        <quote>
+          <value>0.0694</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-7Y" />
+        <quote>
+          <value>0.0679</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-8Y" />
+        <quote>
+          <value>0.0668</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-9Y" />
+        <quote>
+          <value>0.0666</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-10Y" />
+        <quote>
+          <value>0.0656</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-12Y" />
+        <quote>
+          <value>0.0676</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-15Y" />
+        <quote>
+          <value>0.0689</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-20Y" />
+        <quote>
+          <value>0.0657</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-25Y" />
+        <quote>
+          <value>0.0657</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-XccySwap-30Y" />
+        <quote>
+          <value>0.0657</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2011-08-23</date>
+          </term>
+          <mid>0.0666430878949642</mid>
+        </point>
+        <point id="AUD-XccyDepo-1D">
+          <term>
+            <date>2011-08-24</date>
+          </term>
+          <mid>0.0666430878949642</mid>
+        </point>
+        <point id="AUD-XccyDepo-TN">
+          <term>
+            <date>2011-08-25</date>
+          </term>
+          <mid>0.0665414414683907</mid>
+        </point>
+        <point id="AUD-XccyDepo-1W">
+          <term>
+            <date>2011-09-01</date>
+          </term>
+          <mid>0.066434188599537</mid>
+        </point>
+        <point id="AUD-XccyDepo-2W">
+          <term>
+            <date>2011-09-08</date>
+          </term>
+          <mid>0.0667387570221081</mid>
+        </point>
+        <point id="AUD-XccyDepo-1M">
+          <term>
+            <date>2011-09-26</date>
+          </term>
+          <mid>0.0669359481071448</mid>
+        </point>
+        <point id="AUD-XccyDepo-2M">
+          <term>
+            <date>2011-10-25</date>
+          </term>
+          <mid>0.0693073326238673</mid>
+        </point>
+        <point id="AUD-XccyDepo-3M">
+          <term>
+            <date>2011-11-25</date>
+          </term>
+          <mid>0.0701171980387754</mid>
+        </point>
+        <point id="AUD-XccySwap-6M">
+          <term>
+            <date>2012-02-27</date>
+          </term>
+          <mid>0.0747222667203582</mid>
+        </point>
+        <point id="AUD-XccySwap-9M">
+          <term>
+            <date>2012-05-25</date>
+          </term>
+          <mid>0.0748397254315325</mid>
+        </point>
+        <point id="AUD-XccySwap-1Y">
+          <term>
+            <date>2012-08-27</date>
+          </term>
+          <mid>0.0743608996438132</mid>
+        </point>
+        <point id="AUD-XccySwap-2Y">
+          <term>
+            <date>2013-08-26</date>
+          </term>
+          <mid>0.0728201254070484</mid>
+        </point>
+        <point id="AUD-XccySwap-3Y">
+          <term>
+            <date>2014-08-25</date>
+          </term>
+          <mid>0.07123243244218</mid>
+        </point>
+        <point id="AUD-XccySwap-4Y">
+          <term>
+            <date>2015-08-25</date>
+          </term>
+          <mid>0.0704947704087528</mid>
+        </point>
+        <point id="AUD-XccySwap-5Y">
+          <term>
+            <date>2016-08-25</date>
+          </term>
+          <mid>0.0697288482066813</mid>
+        </point>
+        <point id="AUD-XccySwap-6Y">
+          <term>
+            <date>2017-08-25</date>
+          </term>
+          <mid>0.0690585925342937</mid>
+        </point>
+        <point id="AUD-XccySwap-7Y">
+          <term>
+            <date>2018-08-27</date>
+          </term>
+          <mid>0.0672642099783616</mid>
+        </point>
+        <point id="AUD-XccySwap-8Y">
+          <term>
+            <date>2019-08-26</date>
+          </term>
+          <mid>0.0659550661777741</mid>
+        </point>
+        <point id="AUD-XccySwap-9Y">
+          <term>
+            <date>2020-08-25</date>
+          </term>
+          <mid>0.0657883972772773</mid>
+        </point>
+        <point id="AUD-XccySwap-10Y">
+          <term>
+            <date>2021-08-25</date>
+          </term>
+          <mid>0.0645267733368264</mid>
+        </point>
+        <point id="AUD-XccySwap-12Y">
+          <term>
+            <date>2023-08-25</date>
+          </term>
+          <mid>0.067538762669531</mid>
+        </point>
+        <point id="AUD-XccySwap-15Y">
+          <term>
+            <date>2026-08-25</date>
+          </term>
+          <mid>0.0696119142490126</mid>
+        </point>
+        <point id="AUD-XccySwap-20Y">
+          <term>
+            <date>2031-08-25</date>
+          </term>
+          <mid>0.0637936500180301</mid>
+        </point>
+        <point id="AUD-XccySwap-25Y">
+          <term>
+            <date>2036-08-25</date>
+          </term>
+          <mid>0.064178887259656</mid>
+        </point>
+        <point id="AUD-XccySwap-30Y">
+          <term>
+            <date>2041-08-26</date>
+          </term>
+          <mid>0.0644345716269319</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2011-08-23</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="AUD-XccyDepo-1D">
+        <term>
+          <date>2011-08-24</date>
+        </term>
+        <mid>0.999818936899373</mid>
+      </point>
+      <point id="AUD-XccyDepo-TN">
+        <term>
+          <date>2011-08-25</date>
+        </term>
+        <mid>0.999638454230513</mid>
+      </point>
+      <point id="AUD-XccyDepo-1W">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>0.998376670236048</mid>
+      </point>
+      <point id="AUD-XccyDepo-2W">
+        <term>
+          <date>2011-09-08</date>
+        </term>
+        <mid>0.997102808130495</mid>
+      </point>
+      <point id="AUD-XccyDepo-1M">
+        <term>
+          <date>2011-09-26</date>
+        </term>
+        <mid>0.993835543789624</mid>
+      </point>
+      <point id="AUD-XccyDepo-2M">
+        <term>
+          <date>2011-10-25</date>
+        </term>
+        <mid>0.988209874715042</mid>
+      </point>
+      <point id="AUD-XccyDepo-3M">
+        <term>
+          <date>2011-11-25</date>
+        </term>
+        <mid>0.982258136561556</mid>
+      </point>
+      <point id="AUD-XccySwap-6M">
+        <term>
+          <date>2012-02-27</date>
+        </term>
+        <mid>0.962585851815639</mid>
+      </point>
+      <point id="AUD-XccySwap-9M">
+        <term>
+          <date>2012-05-25</date>
+        </term>
+        <mid>0.945474615555097</mid>
+      </point>
+      <point id="AUD-XccySwap-1Y">
+        <term>
+          <date>2012-08-27</date>
+        </term>
+        <mid>0.928033502404625</mid>
+      </point>
+      <point id="AUD-XccySwap-2Y">
+        <term>
+          <date>2013-08-26</date>
+        </term>
+        <mid>0.864917387136181</mid>
+      </point>
+      <point id="AUD-XccySwap-3Y">
+        <term>
+          <date>2014-08-25</date>
+        </term>
+        <mid>0.808643491166435</mid>
+      </point>
+      <point id="AUD-XccySwap-4Y">
+        <term>
+          <date>2015-08-25</date>
+        </term>
+        <mid>0.755710055280785</mid>
+      </point>
+      <point id="AUD-XccySwap-5Y">
+        <term>
+          <date>2016-08-25</date>
+        </term>
+        <mid>0.707231060099075</mid>
+      </point>
+      <point id="AUD-XccySwap-6Y">
+        <term>
+          <date>2017-08-25</date>
+        </term>
+        <mid>0.662611967042371</mid>
+      </point>
+      <point id="AUD-XccySwap-7Y">
+        <term>
+          <date>2018-08-27</date>
+        </term>
+        <mid>0.626234170130697</mid>
+      </point>
+      <point id="AUD-XccySwap-8Y">
+        <term>
+          <date>2019-08-26</date>
+        </term>
+        <mid>0.592008776284652</mid>
+      </point>
+      <point id="AUD-XccySwap-9Y">
+        <term>
+          <date>2020-08-25</date>
+        </term>
+        <mid>0.555340929286371</mid>
+      </point>
+      <point id="AUD-XccySwap-10Y">
+        <term>
+          <date>2021-08-25</date>
+        </term>
+        <mid>0.526767880607525</mid>
+      </point>
+      <point id="AUD-XccySwap-12Y">
+        <term>
+          <date>2023-08-25</date>
+        </term>
+        <mid>0.447259441435538</mid>
+      </point>
+      <point id="AUD-XccySwap-15Y">
+        <term>
+          <date>2026-08-25</date>
+        </term>
+        <mid>0.354753774274631</mid>
+      </point>
+      <point id="AUD-XccySwap-20Y">
+        <term>
+          <date>2031-08-25</date>
+        </term>
+        <mid>0.281669858540526</mid>
+      </point>
+      <point id="AUD-XccySwap-25Y">
+        <term>
+          <date>2036-08-25</date>
+        </term>
+        <mid>0.203252444380804</mid>
+      </point>
+      <point id="AUD-XccySwap-30Y">
+        <term>
+          <date>2041-08-26</date>
+        </term>
+        <mid>0.146671565306015</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

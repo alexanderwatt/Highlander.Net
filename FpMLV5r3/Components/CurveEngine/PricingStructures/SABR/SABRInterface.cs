@@ -26,11 +26,11 @@ using Highlander.Utilities.Logging;
 using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
 using Highlander.Reporting.Analytics.V5r3.Stochastics.SABR;
 using Highlander.CurveEngine.V5r3.Assets.Helpers;
-using Highlander.CurveEngine.V5r3.Extensions;
 using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
 using Highlander.Utilities.NamedValues;
 using Math = System.Math;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 
 #endregion
 

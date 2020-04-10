@@ -17,7 +17,6 @@
 
 using System;
 using System.Globalization;
-using System.Xml;
 using System.Linq;
 using System.Collections.Generic;
 using Highlander.Reporting.Helpers.V5r3;
@@ -27,7 +26,6 @@ using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
-using Highlander.Utilities.Serialisation;
 using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.CalendarEngine.V5r3;
 using Highlander.CalendarEngine.V5r3.Helpers;
@@ -42,6 +40,7 @@ using Highlander.CurveEngine.V5r3.PricingStructures.Helpers;
 using Highlander.CurveEngine.V5r3.PricingStructures.Surfaces;
 using Highlander.CurveEngine.V5r3.PricingStructures.Interpolators;
 using Highlander.Reporting.Identifiers.V5r3;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Assets;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments;
@@ -913,7 +912,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="maturityTenor"></param>
         /// <param name="variant"></param>
         /// <returns></returns>
-        public object[,] GetAssetConfigurationData(string currency, string asset, string maturityTenor, string variant)
+        public Instrument GetAssetConfigurationData(string currency, string asset, string maturityTenor, string variant)
         {
             #region Validate and convert arguments
 
@@ -939,47 +938,7 @@ namespace Highlander.CurveEngine.V5r3
             #endregion
 
             Instrument instrument = InstrumentDataHelper.GetInstrumentConfigurationData(Cache, NameSpace, id);
-            return ConvertAssetToRange(instrument);
-        }
-
-        private static object[,] ConvertAssetToRange(Instrument instrument)
-        {
-            var output = new List<Pair<string, string>>();
-            string xml = XmlSerializerHelper.SerializeToString(instrument);
-            var nodes = new XmlDocument();
-            nodes.LoadXml(xml);
-            output.AddRange(ConvertXmlToMatrix(nodes, ""));
-            var outputRange = new object[output.Count, 2];
-            // Remove the first row, XML def row
-            output.RemoveAt(0);
-            int i = 0;
-            foreach (var pair in output)
-            {
-                outputRange[i, 0] = pair.First;
-                outputRange[i, 1] = pair.Second;
-                i++;
-            }
-            return outputRange;
-        }
-
-        private static IEnumerable<Pair<string, string>> ConvertXmlToMatrix(XmlNode instrumentNode, string nodeName)
-        {
-            var output = new List<Pair<string, string>>();
-            foreach (XmlNode node in instrumentNode)
-            {
-                if (node.ChildNodes.Count == 0)
-                {
-                    string value = node.Value ?? "";
-                    string name = node.NodeType == XmlNodeType.Text ? nodeName : nodeName + "." + node.Name;
-                    output.Add(new Pair<string, string>(name, value));
-                }
-                else
-                {
-                    string newNodeName = nodeName == "" ? node.Name : nodeName + "." + node.Name;
-                    output.AddRange(ConvertXmlToMatrix(node, newNodeName));
-                }
-            }
-            return output;
+            return instrument;
         }
 
         /// <summary>
@@ -3110,7 +3069,7 @@ namespace Highlander.CurveEngine.V5r3
             var dimension2 = new double[strikesOrTenor.Length];
             if (pricingStructureType != PricingStructureTypeEnum.RateATMVolatilityMatrix)
             {
-                dimension2 = ConvertStringArrayToDoubleArray(strikesOrTenor);
+                dimension2 = RangeExtension.ConvertStringArrayToDoubleArray(strikesOrTenor);
             }
             PricingStructureBase pricingStructure;
             switch (pricingStructureType)
@@ -3123,16 +3082,6 @@ namespace Highlander.CurveEngine.V5r3
                     throw new ApplicationException(message);
             }
             return pricingStructure;
-        }
-
-        private static double[] ConvertStringArrayToDoubleArray(string[] strikes)
-        {
-            var result = new double[strikes.Length];
-            for (var i = 0; i < strikes.Length; i++)
-            {
-                result[i] = Convert.ToDouble(strikes[i]);
-            }
-            return result;
         }
 
         /// <summary>

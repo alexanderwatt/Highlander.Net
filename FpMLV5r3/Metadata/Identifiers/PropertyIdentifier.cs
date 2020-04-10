@@ -55,7 +55,7 @@ namespace Highlander.Reporting.Identifiers.V5r3
 
         private static string BuildUniqueId(string propertyType, string city, string shortName, string postcode, string identifier)
         {
-            return FunctionProp.ReferenceData + "." + ReferenceDataProp.Property + "." + BuildId(propertyType, city, postcode, shortName, identifier);
+            return FunctionProp.ReferenceData + "." + ReferenceDataProp.Property + "." + BuildId(propertyType, city, shortName, postcode, identifier);
         }
 
         public static string BuildId(string propertyType, string city, string shortName, string postcode, string identifier)

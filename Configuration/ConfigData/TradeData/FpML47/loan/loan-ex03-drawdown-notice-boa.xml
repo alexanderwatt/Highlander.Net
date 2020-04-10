@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+	== Copyright (c) 2002-2009. All rights reserved.
+	== Financial Products Markup Language is subject to the FpML public license.
+	== A copy of this license is available at http://www.fpml.org/license/license.html
+-->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="DrawdownNotice" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <messageId messageIdScheme="http://www.bankofamerica.com/messageId">000001</messageId>
+      <sentBy>BOARDN01AXX</sentBy>
+      <sendTo>BRIUS31XXX</sendTo>
+      <creationTimestamp>2007-10-10T11:40:40.0Z</creationTimestamp>
+   </header>
+   <noticeDate>2007-10-10</noticeDate>
+   <agentBankPartyReference href="boana"/>
+   <borrowerPartyReference href="acgi"/>
+   <lenderPartyReference href="lenderParty"/>
+   <dealSummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+      <description>American Color Graphics Inc</description>
+      <creditAgreementDate>2005-05-05</creditAgreementDate>
+   </dealSummary>
+   <facilitySummary>
+      <instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/instrument-id-CUSIP-1-0">123456789</instrumentId>
+      <description>Revolving Credit Facility</description>
+      <originalCommitmentAmount>
+         <currency>USD</currency>
+         <amount>55000000.0</amount>
+      </originalCommitmentAmount>
+   </facilitySummary>
+   <loanContract>
+      <loanContractSummary>
+         <identifier>
+            <partyReference href="boana"/>
+            <contractId contractIdScheme="http://www.bankofamerica.com/contractId">005869053</contractId>
+         </identifier>
+         <maturityDate>2009-12-15</maturityDate>
+      </loanContractSummary>
+      <borrowerPartyReference href="acgi"/>
+      <amount>
+         <currency>USD</currency>
+         <amount>2250000.0</amount>
+      </amount>
+      <effectiveDate>2007-10-07</effectiveDate>
+      <currentInterestRatePeriod>
+         <rateFixingDate>2007-10-07</rateFixingDate>
+         <startDate>2007-10-07</startDate>
+         <endDate>2009-12-15</endDate>
+         <floatingRateIndex>USD-Prime-H.15</floatingRateIndex>
+         <indexTenor>
+            <periodMultiplier>0</periodMultiplier>
+            <period>D</period>
+         </indexTenor>
+         <interestRate>0.0775</interestRate>
+         <margin>0.0500</margin>
+         <allInRate>0.1275</allInRate>
+         <interestDayBasis>ACT/ACT.ISDA</interestDayBasis>
+         <tenor>
+            <periodMultiplier>0</periodMultiplier>
+            <period>D</period>
+         </tenor>
+      </currentInterestRatePeriod>
+      <interestPaymentTenor>
+         <periodMultiplier>0</periodMultiplier>
+         <period>D</period>
+      </interestPaymentTenor>
+      <nextInterestPaymentDate>1967-08-13</nextInterestPaymentDate>
+   </loanContract>
+   <drawdownEventType>NewDrawdownEvent</drawdownEventType>
+   <drawdownPayment>
+      <paymentDate>2007-10-10</paymentDate>
+      <shareLoanContractAmount>
+         <currency>USD</currency>
+         <amount>894490.91</amount>
+      </shareLoanContractAmount>
+   </drawdownPayment>
+   <party id="boana">
+      <partyId>BOARDN01AXX</partyId>
+      <partyName>Bank of America</partyName>
+      <account id="id_1">
+         <accountId accountIdScheme="http://www.bankofamerica.com/accountId">XXXXX9593:XXXXXXXXXX7300</accountId>
+         <accountName>Bank of America</accountName>
+         <accountBeneficiary href="acgi"/>
+      </account>
+   </party>
+   <party id="lenderParty">
+      <partyId>BRIUS31XXX</partyId>
+      <partyName>Blue Ridge Investments LLC</partyName>
+   </party>
+   <party id="acgi">
+      <partyId>ACGIUS31XXX</partyId>
+      <partyName>American Color Graphics Inc</partyName>
+   </party>
+</FpML>

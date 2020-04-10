@@ -23,6 +23,7 @@ using Highlander.Core.Interface.V5r3.Helpers;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.Metadata.Common;
 using Highlander.Reporting.Analytics.V5r3.Rates;
+using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.PricingStructures;
 using Highlander.Reporting.V5r3;
@@ -1233,7 +1234,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<returns></returns>
         private List<string> CreateVolatilitySurfaceCollection(NamedValueSet propertyRange, object[,] dataRange, string[] strikeArray)//TODO This only works with a single tenor. Extend to include more...
         {
-            var strikes = ConvertStringArrayToDoubleArray(strikeArray);
+            var strikes = RangeExtension.ConvertStringArrayToDoubleArray(strikeArray);
             var expiries = DataRangeHelper.ExtractExpiries(dataRange);
             var uniqueExpiries = expiries.Distinct().ToArray();
             var tenors = DataRangeHelper.ExtractTenors(dataRange);
@@ -1252,16 +1253,6 @@ namespace Highlander.Core.Interface.V5r3
                 ids.Add(pricingStructure.GetPricingStructureId().UniqueIdentifier);
             }
             return ids;
-        }
-
-        private static double[] ConvertStringArrayToDoubleArray(string[] strikes)
-        {
-            var result = new double[strikes.Length];
-            for (var i = 0; i < strikes.Length; i++)
-            {
-                result[i] = Convert.ToDouble(strikes[i]);
-            }
-            return result;
         }
 
         ///<summary>

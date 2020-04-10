@@ -166,9 +166,6 @@
     <Compile Include="Assets\Rates\Spreads\PriceableBasisSwap.cs" />
     <Compile Include="Assets\Rates\Spreads\PriceableXccyBasisSwap.cs" />
     <Compile Include="CurveEngine.cs" />
-    <Compile Include="Extensions\DictionaryExtension.cs" />
-    <Compile Include="Extensions\ExceptionExtension.cs" />
-    <Compile Include="Extensions\RangeExtension.cs" />
     <Compile Include="Factory\PricingStructureFactory.cs">
       <SubType>Code</SubType>
     </Compile>

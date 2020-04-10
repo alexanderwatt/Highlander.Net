@@ -93,6 +93,7 @@
     <Compile Include="Compression\Compression.cs" />
     <Compile Include="DateTimeManager.cs" />
     <Compile Include="Diagnostics\AssemblyInfo.cs" />
+    <Compile Include="Extensions\DictionaryExtension.cs" />
     <Compile Include="Extensions\DoubleExtension.cs" />
     <Compile Include="Exception\DuplicateNotAllowedException.cs" />
     <Compile Include="Exception\CustomException.cs" />
@@ -105,6 +106,7 @@
       <DependentUpon>ExprFormat.xsd</DependentUpon>
     </Compile>
     <Compile Include="Expressions\IExpression.cs" />
+    <Compile Include="Extensions\ExceptionExtension.cs" />
     <Compile Include="Helpers\ApplicationHelper.cs" />
     <Compile Include="Helpers\ArrayHelper.cs" />
     <Compile Include="Helpers\AssemblyFileInfo.cs" />

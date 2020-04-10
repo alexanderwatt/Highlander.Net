@@ -47,7 +47,7 @@ namespace Highlander.Core.Interface.V5r3
         public readonly string NameSpace;
         public readonly string ApplicationName;
 
-        public RuntimeEnvironment(string nameSpace)
+        public RuntimeEnvironment(string nameSpace, bool loadData)
         {
             NameSpace = nameSpace;
             ApplicationName = $"Highlander.Core.Interface-{ApplicationHelper.Diagnostics("FileVersion")}";
@@ -63,10 +63,13 @@ namespace Highlander.Core.Interface.V5r3
                     .SetProtocols(WcfConst.AllProtocolsStr);
                 _client = factory.SetServers("localhost").Create();
                 Cache = _client.CreateCache();
-                // load configuration data
-                LogRef.Target.LogInfo("LoadReferenceData: Running...");
-                LoadConfigDataHelper.LoadConfigurationData(LogRef.Target, _client.Proxy, nameSpace);
-                LogRef.Target.LogInfo("LoadReferenceData: Loaded");
+                if (loadData)
+                {
+                    // load configuration data
+                    LogRef.Target.LogInfo("LoadReferenceData: Running...");
+                    LoadConfigDataHelper.LoadConfigurationData(LogRef.Target, _client.Proxy, nameSpace);
+                    LogRef.Target.LogInfo("LoadReferenceData: Loaded");
+                }
                 var time = stopwatch.ElapsedMilliseconds;
                 stopwatch.Stop();
                 Log(LogRef.Target, "The application :" + ApplicationName + "took " + time + " to start.", ApplicationName, "RuntimeEnvironment");

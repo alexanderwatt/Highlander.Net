@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.RateCurve.CHF-LIBOR-BBA-3M" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.CHF-LIBOR-BBA-3M">
+    <name>CHF-LIBOR-BBA-3M</name>
+    <currency>CHF</currency>
+    <algorithm>CalypsoAlgo4</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>LIBOR-BBA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.CHF-LIBOR-BBA-3M" definitionRef="RateCurve">
+    <baseDate>2012-03-22</baseDate>
+    <buildDateTime>2012-03-22T19:55:37.83</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-2D">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="CHF-Deposit-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-1" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-2" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-3" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-4" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-5" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-6" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-7" />
+        <underlyingAsset xsi:type="Future" id="CHF-IRFuture-ES-8" />
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-6Y">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-8Y">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-9Y">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="CHF-IRSwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-1D" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-2D" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-1W" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-1M" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-2M" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-Deposit-3M" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-1" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-2" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-3" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-4" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-5" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-6" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-7" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRFuture-ES-8" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.2</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-3Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-4Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-5Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-6Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-7Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-8Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-9Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-10Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-12Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-15Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-20Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-25Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="CHF-IRSwap-30Y" />
+        <quote>
+          <value>0.025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2012-03-22</date>
+          </term>
+          <mid>0.0254268166715841</mid>
+        </point>
+        <point id="CHF-Deposit-1D">
+          <term>
+            <date>2012-03-23</date>
+          </term>
+          <mid>0.0254268166715841</mid>
+        </point>
+        <point id="CHF-Deposit-2D">
+          <term>
+            <date>2012-03-26</date>
+          </term>
+          <mid>0.0254241601680327</mid>
+        </point>
+        <point id="CHF-Deposit-1W">
+          <term>
+            <date>2012-03-29</date>
+          </term>
+          <mid>0.0254215044037904</mid>
+        </point>
+        <point id="CHF-Deposit-1M">
+          <term>
+            <date>2012-04-23</date>
+          </term>
+          <mid>0.025399401741983</mid>
+        </point>
+        <point id="CHF-Deposit-2M">
+          <term>
+            <date>2012-05-22</date>
+          </term>
+          <mid>0.0253738266861214</mid>
+        </point>
+        <point id="CHF-Deposit-3M">
+          <term>
+            <date>2012-06-22</date>
+          </term>
+          <mid>0.0253465635509764</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-1">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.0253462526097623</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-2">
+          <term>
+            <date>2012-12-19</date>
+          </term>
+          <mid>0.0253445414748112</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-3">
+          <term>
+            <date>2013-03-19</date>
+          </term>
+          <mid>0.0253425334081161</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-4">
+          <term>
+            <date>2013-06-20</date>
+          </term>
+          <mid>0.025339447156564</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-5">
+          <term>
+            <date>2013-09-19</date>
+          </term>
+          <mid>0.0253359664393189</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-6">
+          <term>
+            <date>2013-12-18</date>
+          </term>
+          <mid>0.0253321809362284</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-7">
+          <term>
+            <date>2014-03-18</date>
+          </term>
+          <mid>0.0253279974779961</mid>
+        </point>
+        <point id="CHF-IRFuture-ES-8">
+          <term>
+            <date>2014-06-19</date>
+          </term>
+          <mid>0.0253228997434016</mid>
+        </point>
+        <point id="CHF-IRSwap-3Y">
+          <term>
+            <date>2015-03-26</date>
+          </term>
+          <mid>0.0251052816858195</mid>
+        </point>
+        <point id="CHF-IRSwap-4Y">
+          <term>
+            <date>2016-03-29</date>
+          </term>
+          <mid>0.025105554627026</mid>
+        </point>
+        <point id="CHF-IRSwap-5Y">
+          <term>
+            <date>2017-03-27</date>
+          </term>
+          <mid>0.0251067345509544</mid>
+        </point>
+        <point id="CHF-IRSwap-6Y">
+          <term>
+            <date>2018-03-26</date>
+          </term>
+          <mid>0.0251073837920552</mid>
+        </point>
+        <point id="CHF-IRSwap-7Y">
+          <term>
+            <date>2019-03-26</date>
+          </term>
+          <mid>0.0251077272982076</mid>
+        </point>
+        <point id="CHF-IRSwap-8Y">
+          <term>
+            <date>2020-03-26</date>
+          </term>
+          <mid>0.0251078785577832</mid>
+        </point>
+        <point id="CHF-IRSwap-9Y">
+          <term>
+            <date>2021-03-26</date>
+          </term>
+          <mid>0.0251080908906323</mid>
+        </point>
+        <point id="CHF-IRSwap-10Y">
+          <term>
+            <date>2022-03-28</date>
+          </term>
+          <mid>0.025108089810665</mid>
+        </point>
+        <point id="CHF-IRSwap-12Y">
+          <term>
+            <date>2024-03-26</date>
+          </term>
+          <mid>0.0251084451705079</mid>
+        </point>
+        <point id="CHF-IRSwap-15Y">
+          <term>
+            <date>2027-03-30</date>
+          </term>
+          <mid>0.0251084906020731</mid>
+        </point>
+        <point id="CHF-IRSwap-20Y">
+          <term>
+            <date>2032-03-30</date>
+          </term>
+          <mid>0.0251087443322646</mid>
+        </point>
+        <point id="CHF-IRSwap-25Y">
+          <term>
+            <date>2037-03-26</date>
+          </term>
+          <mid>0.0251090612637137</mid>
+        </point>
+        <point id="CHF-IRSwap-30Y">
+          <term>
+            <date>2042-03-26</date>
+          </term>
+          <mid>0.0251091531302272</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2012-03-22</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="CHF-Deposit-1D">
+        <term>
+          <date>2012-03-23</date>
+        </term>
+        <mid>0.999930560377752</mid>
+      </point>
+      <point id="CHF-Deposit-2D">
+        <term>
+          <date>2012-03-26</date>
+        </term>
+        <mid>0.999722299361289</mid>
+      </point>
+      <point id="CHF-Deposit-1W">
+        <term>
+          <date>2012-03-29</date>
+        </term>
+        <mid>0.999514125078087</mid>
+      </point>
+      <point id="CHF-Deposit-1M">
+        <term>
+          <date>2012-04-23</date>
+        </term>
+        <mid>0.997782705099778</mid>
+      </point>
+      <point id="CHF-Deposit-2M">
+        <term>
+          <date>2012-05-22</date>
+        </term>
+        <mid>0.995781757831409</mid>
+      </point>
+      <point id="CHF-Deposit-3M">
+        <term>
+          <date>2012-06-22</date>
+        </term>
+        <mid>0.993651669886834</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-1">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.987480497531961</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-2">
+        <term>
+          <date>2012-12-19</date>
+        </term>
+        <mid>0.981348818911865</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-3">
+        <term>
+          <date>2013-03-19</date>
+        </term>
+        <mid>0.975256317625928</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-4">
+        <term>
+          <date>2013-06-20</date>
+        </term>
+        <mid>0.969002682049709</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-5">
+        <term>
+          <date>2013-09-19</date>
+        </term>
+        <mid>0.962924467255797</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-6">
+        <term>
+          <date>2013-12-18</date>
+        </term>
+        <mid>0.956952738970061</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-7">
+        <term>
+          <date>2014-03-18</date>
+        </term>
+        <mid>0.951020557561211</mid>
+      </point>
+      <point id="CHF-IRFuture-ES-8">
+        <term>
+          <date>2014-06-19</date>
+        </term>
+        <mid>0.944932934664729</mid>
+      </point>
+      <point id="CHF-IRSwap-3Y">
+        <term>
+          <date>2015-03-26</date>
+        </term>
+        <mid>0.927414434402956</mid>
+      </point>
+      <point id="CHF-IRSwap-4Y">
+        <term>
+          <date>2016-03-29</date>
+        </term>
+        <mid>0.904243202330086</mid>
+      </point>
+      <point id="CHF-IRSwap-5Y">
+        <term>
+          <date>2017-03-27</date>
+        </term>
+        <mid>0.882009219924098</mid>
+      </point>
+      <point id="CHF-IRSwap-6Y">
+        <term>
+          <date>2018-03-26</date>
+        </term>
+        <mid>0.860263666141247</mid>
+      </point>
+      <point id="CHF-IRSwap-7Y">
+        <term>
+          <date>2019-03-26</date>
+        </term>
+        <mid>0.838997412290263</mid>
+      </point>
+      <point id="CHF-IRSwap-8Y">
+        <term>
+          <date>2020-03-26</date>
+        </term>
+        <mid>0.818201458550264</mid>
+      </point>
+      <point id="CHF-IRSwap-9Y">
+        <term>
+          <date>2021-03-26</date>
+        </term>
+        <mid>0.797975008677255</mid>
+      </point>
+      <point id="CHF-IRSwap-10Y">
+        <term>
+          <date>2022-03-28</date>
+        </term>
+        <mid>0.778143165500897</mid>
+      </point>
+      <point id="CHF-IRSwap-12Y">
+        <term>
+          <date>2024-03-26</date>
+        </term>
+        <mid>0.740196448854216</mid>
+      </point>
+      <point id="CHF-IRSwap-15Y">
+        <term>
+          <date>2027-03-30</date>
+        </term>
+        <mid>0.686461907255907</mid>
+      </point>
+      <point id="CHF-IRSwap-20Y">
+        <term>
+          <date>2032-03-30</date>
+        </term>
+        <mid>0.605623472923615</mid>
+      </point>
+      <point id="CHF-IRSwap-25Y">
+        <term>
+          <date>2037-03-26</date>
+        </term>
+        <mid>0.534485699213511</mid>
+      </point>
+      <point id="CHF-IRSwap-30Y">
+        <term>
+          <date>2042-03-26</date>
+        </term>
+        <mid>0.471576222769472</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

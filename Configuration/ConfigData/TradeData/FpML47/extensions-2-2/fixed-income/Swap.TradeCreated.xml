@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" 
+	xmlns:ext="http://www.fpml.org/2009/FpML-4-7/ext" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../FpML-4-7-8-TR-1/fpml-main-4-7.xsd http://www.fpml.org/2009/FpML-4-7/ext ../fpmlext-main.xsd" 
+	xsi:type="TradeCreated" 
+	version="4-7">
+	
+	<header>
+		<messageId 
+			messageIdScheme="http://www.cme.com/coding-schemes/message-id">GW:2W81Q117</messageId>
+		<sentBy 
+			partyIdScheme="http://www.cme.com/coding-schemes/party-id">BGIAGB2L</sentBy>
+		<creationTimestamp>2005-03-14T09:55:42-07:00</creationTimestamp>
+	</header>
+	
+	<trade>
+	
+		<tradeHeader>
+			<partyTradeIdentifier>
+				<partyReference href="cm9020"/>
+				<tradeId
+					tradeIdScheme="http://www.cme.com/coding-schemes/trade-id">IFSGBPBAR14YR377</tradeId>
+			</partyTradeIdentifier>
+			<tradeDate>2005-03-14</tradeDate>
+		</tradeHeader>
+		
+		<ext:swapTransaction>
+		
+			<buyerPartyReference href="gt2902"/>
+			<sellerPartyReference href="ko3626"/>
+					
+			<!-- USD 500,000 -->
+			<ext:notionalAmount>
+				<currency>USD</currency>
+				<amount>500000</amount>
+			</ext:notionalAmount>
+			
+			<!-- 5.355% -->
+			<ext:price>0.05355</ext:price>
+			
+			<ext:swap>
+				<instrumentId 
+					instrumentIdScheme="http://www.cme.com/coding-scheme/instrument-id">USD3L</instrumentId>
+				<floatingRateIndex>USD-LIBOR-BBA</floatingRateIndex>
+				<term>
+					<periodMultiplier>3</periodMultiplier>
+					<period>M</period>
+				</term>
+			</ext:swap>
+			
+		</ext:swapTransaction>
+		
+	</trade>
+	
+	<party id="gt2902">
+		<partyId>BARCGB21</partyId>
+	</party>
+	<party id="ko3626">
+		<partyId>JPMCGB90</partyId>
+	</party>
+	<party id="cm9020">
+		<partyId>CMECCH40</partyId>
+	</party>
+	
+</FpML>
