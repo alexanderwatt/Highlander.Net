@@ -33,9 +33,9 @@
             this.propertiesLabel = new System.Windows.Forms.Label();
             this.propertyDataGridView = new System.Windows.Forms.DataGridView();
             this.tradeTypeBox = new System.Windows.Forms.ListBox();
-            this.checkPropertyAssetButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.CreateLeaseTransactionButton = new System.Windows.Forms.Button();
             this.tradeIdentifierTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.postcodeTextBox = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.Party2TextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.createTradeButton = new System.Windows.Forms.Button();
+            this.CreatePropertyTradeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.Party1TextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -93,7 +93,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.propertiesLabel);
             this.splitContainer1.Panel1.Controls.Add(this.propertyDataGridView);
             this.splitContainer1.Panel1.Controls.Add(this.tradeTypeBox);
-            this.splitContainer1.Panel1.Controls.Add(this.checkPropertyAssetButton);
             // 
             // splitContainer1.Panel2
             // 
@@ -117,7 +116,7 @@
             // propertiesLabel
             // 
             this.propertiesLabel.AutoSize = true;
-            this.propertiesLabel.Location = new System.Drawing.Point(18, 218);
+            this.propertiesLabel.Location = new System.Drawing.Point(18, 193);
             this.propertiesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.propertiesLabel.Name = "propertiesLabel";
             this.propertiesLabel.Size = new System.Drawing.Size(81, 20);
@@ -127,11 +126,11 @@
             // propertyDataGridView
             // 
             this.propertyDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.propertyDataGridView.Location = new System.Drawing.Point(18, 243);
+            this.propertyDataGridView.Location = new System.Drawing.Point(22, 220);
             this.propertyDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.propertyDataGridView.Name = "propertyDataGridView";
             this.propertyDataGridView.RowHeadersWidth = 62;
-            this.propertyDataGridView.Size = new System.Drawing.Size(393, 258);
+            this.propertyDataGridView.Size = new System.Drawing.Size(393, 281);
             this.propertyDataGridView.TabIndex = 0;
             // 
             // tradeTypeBox
@@ -144,19 +143,8 @@
             this.tradeTypeBox.Location = new System.Drawing.Point(166, 18);
             this.tradeTypeBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tradeTypeBox.Name = "tradeTypeBox";
-            this.tradeTypeBox.Size = new System.Drawing.Size(245, 124);
+            this.tradeTypeBox.Size = new System.Drawing.Size(245, 164);
             this.tradeTypeBox.TabIndex = 0;
-            // 
-            // checkPropertyAssetButton
-            // 
-            this.checkPropertyAssetButton.Location = new System.Drawing.Point(166, 163);
-            this.checkPropertyAssetButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkPropertyAssetButton.Name = "checkPropertyAssetButton";
-            this.checkPropertyAssetButton.Size = new System.Drawing.Size(245, 58);
-            this.checkPropertyAssetButton.TabIndex = 1;
-            this.checkPropertyAssetButton.Text = "Check Underlying Asset";
-            this.checkPropertyAssetButton.UseVisualStyleBackColor = true;
-            this.checkPropertyAssetButton.Click += new System.EventHandler(this.CheckPropertyAssetClick);
             // 
             // label7
             // 
@@ -170,6 +158,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.CreateLeaseTransactionButton);
             this.panel2.Controls.Add(this.tradeIdentifierTextBox);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.accountingBookTextBox);
@@ -181,7 +170,7 @@
             this.panel2.Controls.Add(this.startDateTimePicker);
             this.panel2.Controls.Add(this.Party2TextBox);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.createTradeButton);
+            this.panel2.Controls.Add(this.CreatePropertyTradeButton);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.Party1TextBox);
             this.panel2.Controls.Add(this.label2);
@@ -196,6 +185,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(810, 472);
             this.panel2.TabIndex = 32;
+            // 
+            // CreateLeaseTransactionButton
+            // 
+            this.CreateLeaseTransactionButton.Location = new System.Drawing.Point(15, 426);
+            this.CreateLeaseTransactionButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CreateLeaseTransactionButton.Name = "CreateLeaseTransactionButton";
+            this.CreateLeaseTransactionButton.Size = new System.Drawing.Size(224, 34);
+            this.CreateLeaseTransactionButton.TabIndex = 72;
+            this.CreateLeaseTransactionButton.Text = "Create Lease Transaction";
+            this.CreateLeaseTransactionButton.UseVisualStyleBackColor = true;
+            this.CreateLeaseTransactionButton.Click += new System.EventHandler(this.CreateLeaseTransactionButton_Click);
             // 
             // tradeIdentifierTextBox
             // 
@@ -221,9 +221,9 @@
             this.groupBox1.Controls.Add(this.propertyIdentifierTextBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label24);
-            this.groupBox1.Location = new System.Drawing.Point(3, 75);
+            this.groupBox1.Location = new System.Drawing.Point(3, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(450, 385);
+            this.groupBox1.Size = new System.Drawing.Size(450, 366);
             this.groupBox1.TabIndex = 70;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Property Asset Information";
@@ -248,12 +248,12 @@
             // 
             // FindPropertyAssetButton
             // 
-            this.FindPropertyAssetButton.Location = new System.Drawing.Point(326, 235);
+            this.FindPropertyAssetButton.Location = new System.Drawing.Point(24, 39);
             this.FindPropertyAssetButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.FindPropertyAssetButton.Name = "FindPropertyAssetButton";
-            this.FindPropertyAssetButton.Size = new System.Drawing.Size(117, 34);
+            this.FindPropertyAssetButton.Size = new System.Drawing.Size(173, 34);
             this.FindPropertyAssetButton.TabIndex = 65;
-            this.FindPropertyAssetButton.Text = "Find Property";
+            this.FindPropertyAssetButton.Text = "Find Property Asset";
             this.FindPropertyAssetButton.UseVisualStyleBackColor = true;
             this.FindPropertyAssetButton.Click += new System.EventHandler(this.FindPropertyAssetButtonClick);
             // 
@@ -310,7 +310,7 @@
             "Commercial",
             "Residential",
             "Other"});
-            this.propertyTypeListBox.Location = new System.Drawing.Point(158, 26);
+            this.propertyTypeListBox.Location = new System.Drawing.Point(326, 108);
             this.propertyTypeListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.propertyTypeListBox.Name = "propertyTypeListBox";
             this.propertyTypeListBox.Size = new System.Drawing.Size(104, 64);
@@ -319,7 +319,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 27);
+            this.label10.Location = new System.Drawing.Point(320, 76);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(110, 20);
@@ -440,16 +440,16 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Start Date:";
             // 
-            // createTradeButton
+            // CreatePropertyTradeButton
             // 
-            this.createTradeButton.Location = new System.Drawing.Point(576, 426);
-            this.createTradeButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.createTradeButton.Name = "createTradeButton";
-            this.createTradeButton.Size = new System.Drawing.Size(224, 34);
-            this.createTradeButton.TabIndex = 0;
-            this.createTradeButton.Text = "Create Property Transaction";
-            this.createTradeButton.UseVisualStyleBackColor = true;
-            this.createTradeButton.Click += new System.EventHandler(this.CreateTradeButtonClick);
+            this.CreatePropertyTradeButton.Location = new System.Drawing.Point(576, 426);
+            this.CreatePropertyTradeButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CreatePropertyTradeButton.Name = "CreatePropertyTradeButton";
+            this.CreatePropertyTradeButton.Size = new System.Drawing.Size(224, 34);
+            this.CreatePropertyTradeButton.TabIndex = 0;
+            this.CreatePropertyTradeButton.Text = "Create Property Transaction";
+            this.CreatePropertyTradeButton.UseVisualStyleBackColor = true;
+            this.CreatePropertyTradeButton.Click += new System.EventHandler(this.CreatePropertyTradeButtonClick);
             // 
             // label3
             // 
@@ -574,7 +574,7 @@
         private System.Windows.Forms.DataGridView propertyDataGridView;
         private System.Windows.Forms.Label propertiesLabel;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button createTradeButton;
+        private System.Windows.Forms.Button CreatePropertyTradeButton;
         private System.Windows.Forms.Label transactionTypeLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -596,7 +596,6 @@
         private System.Windows.Forms.ListBox currencyListBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button checkPropertyAssetButton;
         private System.Windows.Forms.TextBox propertyAssetIdentifierTextBox;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button FindPropertyAssetButton;
@@ -612,5 +611,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tradeIdentifierTextBox;
+        private System.Windows.Forms.Button CreateLeaseTransactionButton;
     }
 }

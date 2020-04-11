@@ -1094,6 +1094,7 @@ namespace Highlander.Core.Interface.V5r3
                 namedValueSet.Set(TradeProp.TradeId, tradeId);
                 namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
                 namedValueSet.Set(LeaseProp.ReferenceProperty, referencePropertyIdentifier);
+                namedValueSet.Set(LeaseProp.ReferencePropertyIdentifier, referencePropertyIdentifier);
                 return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
                     upfrontAmount, leaseStartDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
                     leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);

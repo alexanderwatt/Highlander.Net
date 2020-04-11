@@ -30,16 +30,27 @@
         {
             this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.propertyIdentifierTextBox = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.descriptionTextBox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.leaseTradeIdentifierTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.FrequencyListBox = new System.Windows.Forms.ListBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.CityListBox = new System.Windows.Forms.ListBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.findLeaseAssetButton = new System.Windows.Forms.Button();
             this.leaseAssetIdentifierTextBox = new System.Windows.Forms.TextBox();
             this.leaseTypeListBox = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.currencyListBox = new System.Windows.Forms.ListBox();
             this.portfolioTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.currencyListBox = new System.Windows.Forms.ListBox();
             this.expiryDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.isParty1TenantCheckBox = new System.Windows.Forms.CheckBox();
@@ -56,17 +67,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.descriptionTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.CityListBox = new System.Windows.Forms.ListBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.FrequencyListBox = new System.Windows.Forms.ListBox();
-            this.propertyIdentifierTextBox = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.listBox4 = new System.Windows.Forms.ListBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -115,9 +123,63 @@
             this.panel2.Size = new System.Drawing.Size(902, 473);
             this.panel2.TabIndex = 34;
             // 
+            // propertyIdentifierTextBox
+            // 
+            this.propertyIdentifierTextBox.Location = new System.Drawing.Point(200, 427);
+            this.propertyIdentifierTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.propertyIdentifierTextBox.Name = "propertyIdentifierTextBox";
+            this.propertyIdentifierTextBox.Size = new System.Drawing.Size(656, 26);
+            this.propertyIdentifierTextBox.TabIndex = 77;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(44, 430);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(131, 20);
+            this.label16.TabIndex = 76;
+            this.label16.Text = "Propert Identifier:";
+            // 
+            // descriptionTextBox
+            // 
+            this.descriptionTextBox.Location = new System.Drawing.Point(145, 391);
+            this.descriptionTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.descriptionTextBox.Name = "descriptionTextBox";
+            this.descriptionTextBox.Size = new System.Drawing.Size(362, 26);
+            this.descriptionTextBox.TabIndex = 75;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(44, 394);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 20);
+            this.label6.TabIndex = 74;
+            this.label6.Text = "Description:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(379, 352);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(128, 26);
+            this.textBox1.TabIndex = 73;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(327, 358);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(50, 20);
+            this.label13.TabIndex = 72;
+            this.label13.Text = "Book:";
+            // 
             // leaseTradeIdentifierTextBox
             // 
-            this.leaseTradeIdentifierTextBox.Location = new System.Drawing.Point(43, 21);
+            this.leaseTradeIdentifierTextBox.Location = new System.Drawing.Point(18, 21);
             this.leaseTradeIdentifierTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leaseTradeIdentifierTextBox.Name = "leaseTradeIdentifierTextBox";
             this.leaseTradeIdentifierTextBox.ReadOnly = true;
@@ -126,6 +188,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.listBox4);
+            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.listBox3);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.listBox2);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.FrequencyListBox);
             this.groupBox1.Controls.Add(this.label14);
@@ -137,16 +207,73 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.currencyListBox);
-            this.groupBox1.Location = new System.Drawing.Point(38, 51);
+            this.groupBox1.Location = new System.Drawing.Point(15, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(415, 275);
+            this.groupBox1.Size = new System.Drawing.Size(483, 275);
             this.groupBox1.TabIndex = 70;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Property Asset Information";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(19, 159);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(88, 20);
+            this.label15.TabIndex = 70;
+            this.label15.Text = "Frequency:";
+            // 
+            // FrequencyListBox
+            // 
+            this.FrequencyListBox.FormattingEnabled = true;
+            this.FrequencyListBox.ItemHeight = 20;
+            this.FrequencyListBox.Items.AddRange(new object[] {
+            "1M",
+            "3M",
+            "6M",
+            "1Y"});
+            this.FrequencyListBox.Location = new System.Drawing.Point(118, 159);
+            this.FrequencyListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.FrequencyListBox.Name = "FrequencyListBox";
+            this.FrequencyListBox.Size = new System.Drawing.Size(104, 24);
+            this.FrequencyListBox.TabIndex = 69;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 118);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 20);
+            this.label14.TabIndex = 68;
+            this.label14.Text = "City:";
+            // 
+            // CityListBox
+            // 
+            this.CityListBox.FormattingEnabled = true;
+            this.CityListBox.ItemHeight = 20;
+            this.CityListBox.Items.AddRange(new object[] {
+            "Sydney"});
+            this.CityListBox.Location = new System.Drawing.Point(118, 118);
+            this.CityListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CityListBox.Name = "CityListBox";
+            this.CityListBox.Size = new System.Drawing.Size(104, 24);
+            this.CityListBox.TabIndex = 67;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 73);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(76, 20);
+            this.label11.TabIndex = 66;
+            this.label11.Text = "Currency:";
+            // 
             // findLeaseAssetButton
             // 
-            this.findLeaseAssetButton.Location = new System.Drawing.Point(264, 27);
+            this.findLeaseAssetButton.Location = new System.Drawing.Point(354, 225);
             this.findLeaseAssetButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.findLeaseAssetButton.Name = "findLeaseAssetButton";
             this.findLeaseAssetButton.Size = new System.Drawing.Size(117, 34);
@@ -161,7 +288,7 @@
             this.leaseAssetIdentifierTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leaseAssetIdentifierTextBox.Name = "leaseAssetIdentifierTextBox";
             this.leaseAssetIdentifierTextBox.ReadOnly = true;
-            this.leaseAssetIdentifierTextBox.Size = new System.Drawing.Size(396, 26);
+            this.leaseAssetIdentifierTextBox.Size = new System.Drawing.Size(327, 26);
             this.leaseAssetIdentifierTextBox.TabIndex = 28;
             // 
             // leaseTypeListBox
@@ -196,6 +323,18 @@
             this.label24.TabIndex = 27;
             this.label24.Text = "Lease Asset:";
             // 
+            // currencyListBox
+            // 
+            this.currencyListBox.FormattingEnabled = true;
+            this.currencyListBox.ItemHeight = 20;
+            this.currencyListBox.Items.AddRange(new object[] {
+            "AUD"});
+            this.currencyListBox.Location = new System.Drawing.Point(118, 73);
+            this.currencyListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.currencyListBox.Name = "currencyListBox";
+            this.currencyListBox.Size = new System.Drawing.Size(61, 24);
+            this.currencyListBox.TabIndex = 29;
+            // 
             // portfolioTextBox
             // 
             this.portfolioTextBox.Location = new System.Drawing.Point(117, 355);
@@ -213,18 +352,6 @@
             this.label12.Size = new System.Drawing.Size(71, 20);
             this.label12.TabIndex = 15;
             this.label12.Text = "Portfolio:";
-            // 
-            // currencyListBox
-            // 
-            this.currencyListBox.FormattingEnabled = true;
-            this.currencyListBox.ItemHeight = 20;
-            this.currencyListBox.Items.AddRange(new object[] {
-            "AUD"});
-            this.currencyListBox.Location = new System.Drawing.Point(118, 73);
-            this.currencyListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.currencyListBox.Name = "currencyListBox";
-            this.currencyListBox.Size = new System.Drawing.Size(61, 24);
-            this.currencyListBox.TabIndex = 29;
             // 
             // expiryDateTimePicker
             // 
@@ -247,7 +374,7 @@
             // isParty1TenantCheckBox
             // 
             this.isParty1TenantCheckBox.AutoSize = true;
-            this.isParty1TenantCheckBox.Location = new System.Drawing.Point(704, 150);
+            this.isParty1TenantCheckBox.Location = new System.Drawing.Point(707, 150);
             this.isParty1TenantCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.isParty1TenantCheckBox.Name = "isParty1TenantCheckBox";
             this.isParty1TenantCheckBox.Size = new System.Drawing.Size(141, 24);
@@ -378,116 +505,93 @@
             this.label8.TabIndex = 11;
             this.label8.Text = "Party 2:";
             // 
-            // textBox1
+            // label17
             // 
-            this.textBox1.Location = new System.Drawing.Point(379, 352);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(128, 26);
-            this.textBox1.TabIndex = 73;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(299, 29);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(39, 20);
+            this.label17.TabIndex = 72;
+            this.label17.Text = "City:";
             // 
-            // label13
+            // listBox1
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(327, 358);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(50, 20);
-            this.label13.TabIndex = 72;
-            this.label13.Text = "Book:";
-            // 
-            // descriptionTextBox
-            // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(145, 391);
-            this.descriptionTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(362, 26);
-            this.descriptionTextBox.TabIndex = 75;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 394);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 20);
-            this.label6.TabIndex = 74;
-            this.label6.Text = "Description:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 73);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(76, 20);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "Currency:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 118);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 20);
-            this.label14.TabIndex = 68;
-            this.label14.Text = "City:";
-            // 
-            // CityListBox
-            // 
-            this.CityListBox.FormattingEnabled = true;
-            this.CityListBox.ItemHeight = 20;
-            this.CityListBox.Items.AddRange(new object[] {
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Items.AddRange(new object[] {
             "Sydney"});
-            this.CityListBox.Location = new System.Drawing.Point(118, 118);
-            this.CityListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.CityListBox.Name = "CityListBox";
-            this.CityListBox.Size = new System.Drawing.Size(104, 24);
-            this.CityListBox.TabIndex = 67;
+            this.listBox1.Location = new System.Drawing.Point(358, 29);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(104, 24);
+            this.listBox1.TabIndex = 71;
             // 
-            // label15
+            // label18
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(19, 159);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(88, 20);
-            this.label15.TabIndex = 70;
-            this.label15.Text = "Frequency:";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(299, 156);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(39, 20);
+            this.label18.TabIndex = 74;
+            this.label18.Text = "City:";
             // 
-            // FrequencyListBox
+            // listBox2
             // 
-            this.FrequencyListBox.FormattingEnabled = true;
-            this.FrequencyListBox.ItemHeight = 20;
-            this.FrequencyListBox.Items.AddRange(new object[] {
-            "1M",
-            "3M",
-            "6M",
-            "1Y"});
-            this.FrequencyListBox.Location = new System.Drawing.Point(118, 159);
-            this.FrequencyListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.FrequencyListBox.Name = "FrequencyListBox";
-            this.FrequencyListBox.Size = new System.Drawing.Size(104, 24);
-            this.FrequencyListBox.TabIndex = 69;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 20;
+            this.listBox2.Items.AddRange(new object[] {
+            "Sydney"});
+            this.listBox2.Location = new System.Drawing.Point(358, 156);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(104, 24);
+            this.listBox2.TabIndex = 73;
             // 
-            // propertyIdentifierTextBox
+            // label19
             // 
-            this.propertyIdentifierTextBox.Location = new System.Drawing.Point(200, 427);
-            this.propertyIdentifierTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.propertyIdentifierTextBox.Name = "propertyIdentifierTextBox";
-            this.propertyIdentifierTextBox.Size = new System.Drawing.Size(656, 26);
-            this.propertyIdentifierTextBox.TabIndex = 77;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(299, 116);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(39, 20);
+            this.label19.TabIndex = 76;
+            this.label19.Text = "City:";
             // 
-            // label16
+            // listBox3
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(44, 430);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(131, 20);
-            this.label16.TabIndex = 76;
-            this.label16.Text = "Propert Identifier:";
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 20;
+            this.listBox3.Items.AddRange(new object[] {
+            "Sydney"});
+            this.listBox3.Location = new System.Drawing.Point(358, 116);
+            this.listBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(104, 24);
+            this.listBox3.TabIndex = 75;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(299, 73);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(39, 20);
+            this.label20.TabIndex = 78;
+            this.label20.Text = "City:";
+            // 
+            // listBox4
+            // 
+            this.listBox4.FormattingEnabled = true;
+            this.listBox4.ItemHeight = 20;
+            this.listBox4.Items.AddRange(new object[] {
+            "Sydney"});
+            this.listBox4.Location = new System.Drawing.Point(358, 73);
+            this.listBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox4.Name = "listBox4";
+            this.listBox4.Size = new System.Drawing.Size(104, 24);
+            this.listBox4.TabIndex = 77;
             // 
             // LeaseTransactionForm
             // 
@@ -548,5 +652,13 @@
         private System.Windows.Forms.ListBox FrequencyListBox;
         private System.Windows.Forms.TextBox propertyIdentifierTextBox;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

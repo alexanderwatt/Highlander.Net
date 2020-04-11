@@ -21,12 +21,15 @@ namespace Highlander.Reporting.UI.V5r3
 
         private readonly NamedValueSet _properties;
 
+        private Lease _lease;
+
         public LeaseTransactionForm(PricingCache pricingCache, NamedValueSet properties)
         {
             InitializeComponent();
             _pricingCache = pricingCache;
             _properties = properties;
             currencyListBox.SelectedIndex = 0;
+            propertyIdentifierTextBox.Text = _properties?.GetString(LeaseProp.ReferencePropertyIdentifier, true);
         }
 
         private void CreateLeaseTradeButton_Click(object sender, EventArgs e)
@@ -43,9 +46,9 @@ namespace Highlander.Reporting.UI.V5r3
             var intrument = _pricingCache.GetAssetConfigurationData(currencyListBox.Text, AssetTypesEnum.Lease.ToString(), leaseTypeListBox.Text);
             if(intrument != null && intrument.InstrumentNodeItem is LeaseNodeStruct leaseStruct)
             {
-                var lease = leaseStruct.Lease;
-                FrequencyListBox.Text = lease.paymentFrequency.ToFrequency().ToString();
-                leaseAssetIdentifierTextBox.Text = lease.id;
+                _lease = leaseStruct.Lease;
+                FrequencyListBox.Text = _lease.paymentFrequency.ToFrequency().ToString();
+                leaseAssetIdentifierTextBox.Text = _lease.leaseIdentifier;
                 //TODO set other data
             }
         }
