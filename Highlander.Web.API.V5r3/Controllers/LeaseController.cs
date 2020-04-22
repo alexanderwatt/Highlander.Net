@@ -59,30 +59,26 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreateLeaseTrade(string tradeId, bool isParty1Tenant, string party1, string party2,
-    DateTime tradeDate, DateTime leaseStartDate, string currency, string portfolio, decimal startGrossAmount, string leaseId,
-    DateTime leaseExpiryDate, string referencePropertyIdentifier, string description)
+        public IHttpActionResult CreateLeaseTrade(string tradeId, bool isParty1Tenant, string party1, string party2, string rollConvention, string businessCalendar,
+            string businessDayAdjustments, decimal upfrontAmount, string leaseType, string reviewFrequency, DateTime tradeDate, DateTime leaseStartDate, DateTime nextReviewDate,
+            DateTime leaseExpiryDate, decimal reviewAmountUpDown, string currency, string portfolio, decimal startGrossAmount, string leaseId, string referencePropertyIdentifier, string description)
         {
-            var result = _pricingCache.CreateLeaseTrade(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
-                currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description);
+            ////Create the transaction
+            var properties = new NamedValueSet();
+            properties.Set(LeaseProp.RollConvention, rollConvention);
+            properties.Set(LeaseProp.BusinessDayCalendar, businessCalendar);
+            properties.Set(LeaseProp.BusinessDayAdjustments, businessDayAdjustments);
+            properties.Set(LeaseProp.UpfrontAmount, upfrontAmount);
+            properties.Set(LeaseProp.LeaseType, leaseType);
+            properties.Set(LeaseProp.Area, 0.0m);
+            properties.Set(LeaseProp.UnitsOfArea, "sqm");
+            properties.Set(LeaseProp.ReviewFrequency, reviewFrequency);
+            properties.Set(LeaseProp.NextReviewDate, nextReviewDate);
+            properties.Set(LeaseProp.ReviewChange, reviewAmountUpDown);
+            var result = _pricingCache.CreateLeaseTradeWithProperties(tradeId, isParty1Tenant, party1, party2, tradeDate, leaseStartDate,
+                currency, portfolio, startGrossAmount, leaseId, leaseExpiryDate, referencePropertyIdentifier, description, properties);
             _logger.Target.LogInfo("Created lease trade id: {0}", result);
             return Ok(result);
         }
-
-        ////Create the transaction
-        //var properties = new NamedValueSet();
-        //properties.Set(LeaseProp.RollConvention, rollConventionTextBox.Text);
-        //properties.Set(LeaseProp.BusinessDayCalendar, businessCalendarListBox.Text);
-        //properties.Set(LeaseProp.BusinessDayAdjustments, businessDayAdjustmentsListBox.Text);
-        //properties.Set(LeaseProp.UpfrontAmount, 0.0m);
-        //properties.Set(LeaseProp.LeaseType, leaseTypeListBox.Text);
-        ////properties.Set(LeaseProp.Area, 0.0m);
-        ////properties.Set(LeaseProp.UnitsOfArea, "sqm");
-        //properties.Set(LeaseProp.ReviewFrequency, ReviewFrequencyListBox.Text);
-        //properties.Set(LeaseProp.NextReviewDate, startDateTimePicker.Value.AddYears(1));
-        //properties.Set(LeaseProp.ReviewChange, reviewAmountUpDown.Value);
-        //leaseTradeIdentifierTextBox.Text = _pricingCache.CreateLeaseTradeWithProperties(leaseIdentifierTxtBox.Text, isParty1TenantCheckBox.Checked, Party1TextBox.Text,
-        //Party2TextBox.Text, tradeDateTimePicker.Value, startDateTimePicker.Value, currencyListBox.Text, portfolioTextBox.Text, Convert.ToDecimal(purchaseAmountTextBox.Text),
-        //leaseIdentifierTxtBox.Text, expiryDateTimePicker.Value, propertyIdentifierTextBox.Text, descriptionTextBox.Text, _properties);
     }
 }
