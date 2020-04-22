@@ -4,15 +4,15 @@
 == Financial Products Markup Language is subject to the FpML public license. 
 == A copy of this license is available at http://www.fpml.org/documents/license.html
 -->
-<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-7/ext"
-	xmlns:fpml="http://www.fpml.org/2009/FpML-4-7"
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-5-3/ext"
+	xmlns:fpml="http://www.fpml.org/2009/FpML-5-3"
 	xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-	targetNamespace="http://www.fpml.org/2009/FpML-4-7/ext"
+	targetNamespace="http://www.fpml.org/2009/FpML-5-3/ext"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified"
 	attributeFormDefault="unqualified">
 
-  <xsd:import namespace="http://www.fpml.org/2009/FpML-4-7" schemaLocation="fpml-main-4-7.xsd"/>
+  <xsd:import namespace="http://www.fpml.org/2009/FpML-5-3" schemaLocation="fpml-main-5-3.xsd"/>
 
 	<xsd:complexType name="ExchangeTradedFundTransaction">
 		<xsd:annotation>

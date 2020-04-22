@@ -63,6 +63,7 @@ namespace Highlander.Configuration.Data.V5r3
             MarketLoader.LoadQasData(logger, targetClient, nameSpace);
             ConfigDataLoader.LoadFpMLCodes(logger, targetClient, nameSpace);
             FpMLTradeLoader.LoadTrades1(logger, targetClient, nameSpace);
+            FpMLTradeLoader.LoadReportingTradesOnly(logger, targetClient, nameSpace);
             //FpMLTradeLoader.LoadTrades2(logger, targetClient, nameSpace); 
         }
     }

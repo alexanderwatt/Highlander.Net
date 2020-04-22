@@ -508,6 +508,10 @@
     <EmbeddedResource Include="Config\Trade\Highlander.Trade.bulletPayment.t0001.nvs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporting\leases\lease-ex03-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex04-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex02-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex01-lease-transaction.xml" />
     <EmbeddedResource Include="TradeData\products\bond-options\bond-option.xml" />
     <EmbeddedResource Include="TradeData\products\bond-options\cb-option-2.xml" />
     <EmbeddedResource Include="TradeData\products\bond-options\cb-option.xml" />

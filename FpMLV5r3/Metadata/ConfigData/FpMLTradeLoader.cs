@@ -69,6 +69,7 @@ namespace Highlander.Configuration.Data.V5r3
         private static string TradeTypeHelper(Product product)
         {
             if (product is Swap) return "swap";
+            if (product is LeaseTransaction) return "lease";
             if (product is TermDeposit) return "termDeposit";
             if (product is BulletPayment) return "bulletPayment";
             if (product is BondOption) return "bondOption";
@@ -132,6 +133,22 @@ namespace Highlander.Configuration.Data.V5r3
             itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
             itemProps.Set(EnvironmentProp.NameSpace, nameSpace);
             string itemName = nameSpace + "." + type + ".Reporting.Murex" + (idSuffix != null ? "." + idSuffix : null);
+            itemProps.Set(TradeProp.UniqueIdentifier, itemName);
+            //itemProps.Set(TradeProp.TradeDate, null);
+            //itemProps.Set(CurveProp.MarketAndDate, marketEnv);
+            return new ItemInfo { ItemName = itemName, ItemProps = itemProps };
+        }
+
+        private static ItemInfo MakeInternalTradeProps(string type, string idSuffix, NamedValueSet extraProps, string nameSpace)
+        {
+            var itemProps = new NamedValueSet(extraProps);
+            itemProps.Set(EnvironmentProp.DataGroup, nameSpace + ".Reporting." + type);
+            itemProps.Set(EnvironmentProp.SourceSystem, "Murex");
+            itemProps.Set(EnvironmentProp.Function, FunctionProp.Trade.ToString());
+            itemProps.Set(EnvironmentProp.Type, type);
+            itemProps.Set(EnvironmentProp.Schema, "V5r3.Reporting");
+            itemProps.Set(EnvironmentProp.NameSpace, nameSpace);
+            string itemName = nameSpace + "." + type + ".Reporting.Internal" + (idSuffix != null ? "." + idSuffix : null);
             itemProps.Set(TradeProp.UniqueIdentifier, itemName);
             //itemProps.Set(TradeProp.TradeDate, null);
             //itemProps.Set(CurveProp.MarketAndDate, marketEnv);
@@ -346,6 +363,24 @@ namespace Highlander.Configuration.Data.V5r3
             logger.LogDebug("Loaded {0} trades.", chosenFiles.Count);
         }
 
+        public static void LoadReportingTradesOnly(ILogger logger, ICoreCache targetClient, string nameSpace)
+        {
+            logger.LogDebug("Loading trades...");
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            const string prefix = "Highlander.Configuration.Data.V5r3.Reporting";
+            Dictionary<string, string> chosenFiles = ResourceHelper.GetResources(assembly, prefix, "xml");
+            if (chosenFiles.Count == 0)
+                throw new InvalidOperationException("Missing Trades");
+            foreach (KeyValuePair<string, string> file in chosenFiles)
+            {
+                var reporting = XmlSerializerHelper.DeserializeFromString<Trade>(file.Value);
+                BuildReportingTrades(logger, targetClient, nameSpace, reporting);
+            } // foreach file
+            //as TradeConfirmed
+            logger.LogDebug("Loaded {0} trades.", chosenFiles.Count);
+        }
+
+
         public static void BuildTrade(ILogger logger, ICoreCache targetClient, string nameSpace, Trade tradeVersion, Party[] party)
         {
             var extraProps = new NamedValueSet();
@@ -389,7 +424,47 @@ namespace Highlander.Configuration.Data.V5r3
             ItemInfo itemInfo2 = MakeReportingTradeProps("Trade", idSuffix, extraProps, nameSpace);
             logger.LogDebug("  {0} ...", idSuffix);
             targetClient.SaveObject(tradeVersion, itemInfo2.ItemName, itemInfo2.ItemProps, false, TimeSpan.MaxValue);
-        } 
+        }
+
+        public static void BuildReportingTrades(ILogger logger, ICoreCache targetClient, string nameSpace, Trade reportingTrade)
+        {
+            var extraProps = new NamedValueSet();
+            var party1 = "abc";
+            var party2 = "def";
+            extraProps.Set(TradeProp.Party1, party1);
+            extraProps.Set(TradeProp.Party2, party2);
+            extraProps.Set(TradeProp.TradeDate, reportingTrade.tradeHeader.tradeDate.Value);
+            extraProps.Set(TradeProp.TradingBookName, "Test");
+            TradeId tradeId;
+            if (reportingTrade.tradeHeader.partyTradeIdentifier[0].Items[1] is VersionedTradeId tempId)
+            {
+                tradeId = tempId.tradeId;
+                extraProps.Set(TradeProp.TradeId, tradeId.Value);
+            }
+            else
+            {
+                tradeId = reportingTrade.tradeHeader.partyTradeIdentifier[0].Items[1] as TradeId ??
+                          new TradeId { Value = "temp001" };
+                extraProps.Set(TradeProp.TradeId, tradeId.Value);
+            }
+            extraProps.Set(TradeProp.TradeState, "Pricing");
+            extraProps.Set(TradeProp.TradeSource, "FPMLSamples");
+            extraProps.Set(TradeProp.BaseParty, TradeProp.Party1);//party1
+            extraProps.Set(TradeProp.CounterPartyName, TradeProp.Party2);//party2
+            extraProps.Set(TradeProp.AsAtDate, DateTime.Today);
+            var product = reportingTrade.Item;
+            var tradeType = TradeTypeHelper(product);
+            extraProps.Set(TradeProp.TradeType, tradeType);
+            extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
+            var currencies = reportingTrade.Item.GetRequiredCurrencies().ToArray();
+            var curveNames = reportingTrade.Item.GetRequiredPricingStructures().ToArray();
+            extraProps.Set(TradeProp.RequiredCurrencies, currencies);
+            extraProps.Set(TradeProp.RequiredPricingStructures, curveNames);
+            string idSuffix = $"{tradeId.Value}.{tradeType}";
+            ItemInfo itemInfo2 = MakeInternalTradeProps("Trade", idSuffix, extraProps, nameSpace);
+            logger.LogDebug("  {0} ...", idSuffix);
+            targetClient.SaveObject(reportingTrade, itemInfo2.ItemName, itemInfo2.ItemProps, false, TimeSpan.MaxValue);
+        }
 
         public static void BuildBothTrades(ILogger logger, ICoreCache targetClient, string nameSpace, Confirmation.V5r3.Trade tradeVersion, Confirmation.V5r3.Party[] party)
         {
