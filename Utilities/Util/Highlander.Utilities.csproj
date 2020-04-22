@@ -119,6 +119,7 @@
     <Compile Include="Helpers\PropertyHelper.cs" />
     <Compile Include="Helpers\RangeFunctions.cs" />
     <Compile Include="Helpers\RangeTermsHelper.cs" />
+    <Compile Include="Helpers\ResourceLoader.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Triplet.cs" />
     <Compile Include="Helpers\Utilities.cs" />

@@ -17,6 +17,7 @@
 
 using System;
 using System.Globalization;
+using Highlander.Utilities.Extensions;
 
 #endregion
 
@@ -45,14 +46,13 @@ namespace Highlander.Reporting.V5r3
                 return false;
             bool result
                 = period == periodToCompare.period
-                  && double.Parse(periodMultiplier) == double.Parse(periodToCompare.periodMultiplier);
+                  && double.Parse(periodMultiplier).IsEqual(double.Parse(periodToCompare.periodMultiplier));
             return result;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name=""></param>
         /// <returns></returns>
         public double ToYearFraction()
         {

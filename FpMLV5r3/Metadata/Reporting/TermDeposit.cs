@@ -15,7 +15,6 @@
 
 #region Usings
 
-using System;
 using System.Collections.Generic;
 
 #endregion
@@ -27,9 +26,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public override List<String> GetRequiredPricingStructures() 
+        public override List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (principal.currency != null)
             {
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(principal.currency, true);
@@ -42,9 +41,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> {principal.currency.Value};
+            var result = new List<string> {principal.currency.Value};
             return result;
         }
     }

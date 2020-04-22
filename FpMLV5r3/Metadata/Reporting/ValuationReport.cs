@@ -30,7 +30,7 @@ namespace Highlander.Reporting.V5r3
                 {
                     foreach (Quotation quote in assetValuation.quote)
                     {
-                        if (System.String.Compare(metricName, quote.measureType.Value, System.StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(metricName, quote.measureType.Value, System.StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             return quote;
                         }

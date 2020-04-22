@@ -66,16 +66,34 @@ namespace HLV5r3.Financial
     {
         #region Fields
 
+        /// <summary>
+        /// 
+        /// </summary>
         public CalendarEngine CalendarService;
+        /// <summary>
+        /// 
+        /// </summary>
         public CurveEngine Engine;
+        /// <summary>
+        /// 
+        /// </summary>
         public ValuationService ValService;
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly RuntimeEnvironment Environment;
+        /// <summary>
+        /// 
+        /// </summary>
         public string NameSpace;
 
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Cache()
         {
             //Be careful of using the default namespace.
@@ -86,10 +104,21 @@ namespace HLV5r3.Financial
             CalendarService = new CalendarEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
         public Cache(ILogger logger, ICoreCache cache)
             : this(logger, cache, EnvironmentProp.DefaultNameSpace)
         {}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
         public Cache(ILogger logger, ICoreCache cache, string nameSpace)
         {
             Engine = new CurveEngine(logger, cache, nameSpace);
@@ -127,7 +156,11 @@ namespace HLV5r3.Financial
 
         #region Information Functions
 
-        public String CurrentNameSpace()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string CurrentNameSpace()
         {
             return Engine.NameSpace;
         }

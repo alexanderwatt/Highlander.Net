@@ -30,7 +30,7 @@ namespace Highlander.Reporting.V5r3
         /// </summary>
         public override List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             //var putCurrency = PaymentHelper.Create(buyerPartyReference.href, sellerPartyReference.href, putCurrencyAmount.currency.Value, putCurrencyAmount.amount, valueDate);
             //var callCurrency = PaymentHelper.Create(sellerPartyReference.href, buyerPartyReference.href, callCurrencyAmount.currency.Value, callCurrencyAmount.amount, valueDate);
             result.AddRange(putCurrencyAmount.GetRequiredPricingStructures());
@@ -51,7 +51,7 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
             var result = new List<string> {putCurrencyAmount.currency.Value, callCurrencyAmount.currency.Value};
             if (premium != null)
@@ -70,9 +70,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredVolatilitySurfaces()
+        public List<string> GetRequiredVolatilitySurfaces()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             var quoteBasis = strike.strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             var fxRate = new FxRate
                              {
@@ -140,7 +140,7 @@ namespace Highlander.Reporting.V5r3
         /// <param name="fxRate"></param>
         /// <returns></returns>
         public static FxSingleLeg CreateFxSingleLeg(bool hasExpired, string putCurrencyPayPartyReference, string callCurrencyPayPartyReference, decimal putCurrencyAmount,
-                string putCurrency, decimal callCurrencyAmount, string callCurrency, StrikeQuoteBasisEnum strikeQuoteBasis, DateTime valueDate, Decimal fxRate)
+                string putCurrency, decimal callCurrencyAmount, string callCurrency, StrikeQuoteBasisEnum strikeQuoteBasis, DateTime valueDate, decimal fxRate)
         {
             QuoteBasisEnum quoteBasis = strikeQuoteBasis == StrikeQuoteBasisEnum.CallCurrencyPerPutCurrency ? QuoteBasisEnum.Currency2PerCurrency1 : QuoteBasisEnum.Currency1PerCurrency2;
             ExchangeRate exchangeRate = hasExpired ? ExchangeRate.Create(putCurrency, callCurrency, quoteBasis, fxRate)

@@ -81,34 +81,34 @@ namespace HLV5r3.Utility
 
         #region Helper Methods
 
-        ///<summary>
-        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
-        ///</summary>
-        ///<param name="inputRange">The input data range.</param>
-        ///<param name="tenorFilter">The tenor string to filter on.</param>
-        ///<param name="numTenors">The number of tenors.</param>
-        ///<param name="strikeArray">The strike array.</param>
-        ///<returns></returns>
-        public double[,] FilterSurface(Excel.Range inputRange, String tenorFilter, int numTenors, Excel.Range strikeArray)
-        {
-            var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-            var strike = DataRangeHelper.StripDoubleRange(strikeArray);
-            return DataRangeHelper.FilterSurface(values, tenorFilter, numTenors, strike.ToArray());
-        }
+        /////<summary>
+        ///// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /////</summary>
+        /////<param name="inputRange">The input data range.</param>
+        /////<param name="tenorFilter">The tenor string to filter on.</param>
+        /////<param name="numTenors">The number of tenors.</param>
+        /////<param name="strikeArray">The strike array.</param>
+        /////<returns></returns>
+        //public double[,] FilterSurface(Excel.Range inputRange, string tenorFilter, int numTenors, Excel.Range strikeArray)
+        //{
+        //    var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
+        //    var strike = DataRangeHelper.StripDoubleRange(strikeArray);
+        //    return DataRangeHelper.FilterSurface(values, tenorFilter, numTenors, strike.ToArray());
+        //}
 
-        ///<summary>
-        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
-        ///</summary>
-        ///<param name="inputRange">The input data range.</param>
-        ///<param name="tenorFilter">The tenor string to filter on.</param>
-        ///<param name="numTenors">The number of tenors.</param>
-        ///<param name="strikeArray">The strike array.</param>
-        ///<returns></returns>
-        public object[,] FilterSurfaceWithExpiries(Excel.Range inputRange, String tenorFilter, int numTenors, Double[] strikeArray)
-        {
-            var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-            return DataRangeHelper.FilterSurfaceWithExpiries(values, tenorFilter, numTenors, strikeArray); 
-        }
+        /////<summary>
+        ///// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        /////</summary>
+        /////<param name="inputRange">The input data range.</param>
+        /////<param name="tenorFilter">The tenor string to filter on.</param>
+        /////<param name="numTenors">The number of tenors.</param>
+        /////<param name="strikeArray">The strike array.</param>
+        /////<returns></returns>
+        //public object[,] FilterSurfaceWithExpiries(Excel.Range inputRange, String tenorFilter, int numTenors, Double[] strikeArray)
+        //{
+        //    var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
+        //    return DataRangeHelper.FilterSurfaceWithExpiries(values, tenorFilter, numTenors, strikeArray); 
+        //}
 
         ///<summary>
         /// Gets the version of the assembly
@@ -141,6 +141,14 @@ namespace HLV5r3.Utility
 
         #region Array Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arrayA"></param>
+        /// <param name="arrayB"></param>
+        /// <param name="acrossOrDown"></param>
+        /// <param name="pad"></param>
+        /// <returns></returns>
         public object[,] ArrayAppend(Excel.Range arrayA, Excel.Range arrayB, string acrossOrDown, object pad = null)
         {
             var values1 = arrayA.Value[System.Reflection.Missing.Value] as object[,];
@@ -150,11 +158,35 @@ namespace HLV5r3.Utility
             return AppendArray(values1, values2, across, pad);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputArray"></param>
+        /// <param name="pad"></param>
+        /// <param name="rows"></param>
+        /// <param name="cols"></param>
+        /// <returns></returns>
         public object[,] ArrayPad(Excel.Range inputArray, object pad = null, int rows = 0, int cols = 0)
         {
             return PadArray(inputArray, pad, rows, cols);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        /// <param name="arg4"></param>
+        /// <param name="arg5"></param>
+        /// <param name="arg6"></param>
+        /// <param name="arg7"></param>
+        /// <param name="arg8"></param>
+        /// <param name="arg9"></param>
+        /// <param name="arg10"></param>
+        /// <param name="arg11"></param>
+        /// <param name="arg12"></param>
+        /// <returns></returns>
         public object[] Vector(
             object arg1,
             object arg2 = null,

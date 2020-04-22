@@ -29,22 +29,36 @@ namespace Highlander.Reporting.UI.V5r3
             _pricingCache = pricingCache;
             _properties = properties;
             currencyListBox.SelectedIndex = 0;
+            ReviewFrequencyListBox.SelectedIndex = 0;
+            rollConventionTextBox.Text = @"EOM";
+            businessCalendarListBox.SelectedIndex = 0;
+            businessDayAdjustmentsListBox.SelectedIndex = 0;
             propertyIdentifierTextBox.Text = _properties?.GetString(LeaseProp.ReferencePropertyIdentifier, true);
         }
 
         private void CreateLeaseTradeButton_Click(object sender, EventArgs e)
         {
             //Create the transaction
-
+            var properties = new NamedValueSet();
+            properties.Set(LeaseProp.RollConvention, rollConventionTextBox.Text);
+            properties.Set(LeaseProp.BusinessDayCalendar, businessCalendarListBox.Text);
+            properties.Set(LeaseProp.BusinessDayAdjustments, businessDayAdjustmentsListBox.Text);
+            properties.Set(LeaseProp.UpfrontAmount, 0.0m);
+            properties.Set(LeaseProp.LeaseType, leaseTypeListBox.Text);
+            //properties.Set(LeaseProp.Area, 0.0m);
+            //properties.Set(LeaseProp.UnitsOfArea, "sqm");
+            properties.Set(LeaseProp.ReviewFrequency, ReviewFrequencyListBox.Text);
+            properties.Set(LeaseProp.NextReviewDate, startDateTimePicker.Value.AddYears(1));
+            properties.Set(LeaseProp.ReviewChange, reviewAmountUpDown.Value);
             leaseTradeIdentifierTextBox.Text = _pricingCache.CreateLeaseTradeWithProperties(leaseIdentifierTxtBox.Text, isParty1TenantCheckBox.Checked, Party1TextBox.Text,
                      Party2TextBox.Text, tradeDateTimePicker.Value, startDateTimePicker.Value, currencyListBox.Text, portfolioTextBox.Text, Convert.ToDecimal(purchaseAmountTextBox.Text),
-                     leaseIdentifierTxtBox.Text, expiryDateTimePicker.Value, leaseAssetIdentifierTextBox.Text, descriptionTextBox.Text, _properties);
+                     leaseIdentifierTxtBox.Text, expiryDateTimePicker.Value, propertyIdentifierTextBox.Text, descriptionTextBox.Text, _properties);
         }
 
         private void findLeaseAssetButton_Click(object sender, EventArgs e)
         {
-            var intrument = _pricingCache.GetAssetConfigurationData(currencyListBox.Text, AssetTypesEnum.Lease.ToString(), leaseTypeListBox.Text);
-            if(intrument != null && intrument.InstrumentNodeItem is LeaseNodeStruct leaseStruct)
+            var instrument = _pricingCache.GetAssetConfigurationData(currencyListBox.Text, AssetTypesEnum.Lease.ToString(), leaseTypeListBox.Text);
+            if(instrument != null && instrument.InstrumentNodeItem is LeaseNodeStruct leaseStruct)
             {
                 _lease = leaseStruct.Lease;
                 FrequencyListBox.Text = _lease.paymentFrequency.ToFrequency().ToString();

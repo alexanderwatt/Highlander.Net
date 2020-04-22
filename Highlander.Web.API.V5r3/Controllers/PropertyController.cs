@@ -64,6 +64,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         public IHttpActionResult CreatePropertyTrade([FromBody] PropertyTradeViewModel model)
         {
             var properties = new NamedValueSet();
+            //TODO
+            //Add the create property to this!!
+            //This way the property transaction isw closer to the Lendhaus model.
             var result = _pricingCache.CreatePropertyTradeWithProperties(model.TradeId, true, model.Purchaser, model.Seller, model.TradeTimeUtc, model.EffectiveTimeUtc,
                 model.PurchaseAmount, model.PaymentTimeUtc, model.PropertyType, model.Currency, model.PropertyId, model.TradingBook, properties);
             _logger.Target.LogInfo("Created property trade id: {0}", result);

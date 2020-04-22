@@ -49,9 +49,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> { equity.currency.Value };
+            var result = new List<string> { equity.currency.Value };
             if (unitPrice.currency.Value != equity.currency.Value)
             {
                 result.Add(unitPrice.currency.Value);

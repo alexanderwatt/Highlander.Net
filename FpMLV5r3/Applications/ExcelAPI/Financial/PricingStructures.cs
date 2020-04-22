@@ -34,7 +34,7 @@ using HLV5r3.Impl;
 using FxCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.FxCurve;
 using RateCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateCurve;
 using Excel = Microsoft.Office.Interop.Excel;
-using RangeFunctions = HLV5r3.Impl.RangeFunctions;
+using RangeFunctions = HLV5r3.Helpers.RangeFunctions;
 
 #endregion
 

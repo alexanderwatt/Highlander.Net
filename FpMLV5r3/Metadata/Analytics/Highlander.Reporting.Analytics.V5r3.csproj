@@ -163,6 +163,7 @@
     <Compile Include="Helpers\ForwardExpiryHelper.cs" />
     <Compile Include="Helpers\HermiteSplineBasisFunctions.cs" />
     <Compile Include="Helpers\InterpolationHelper.cs" />
+    <Compile Include="Helpers\MethodErrors.cs" />
     <Compile Include="Helpers\Misc.cs" />
     <Compile Include="Helpers\OptionGreeks.cs" />
     <Compile Include="Helpers\OptionHelper.cs" />

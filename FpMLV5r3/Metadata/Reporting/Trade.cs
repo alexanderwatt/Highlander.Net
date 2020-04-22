@@ -37,6 +37,8 @@ namespace Highlander.Reporting.V5r3
             if (type == typeof(BondTransaction)) return ItemChoiceType15.bondTransaction;
             if (type == typeof(EquityTransaction)) return ItemChoiceType15.equityTransaction;
             if (type == typeof(FutureTransaction)) return ItemChoiceType15.futureTransaction;
+            if (type == typeof(PropertyTransaction)) return ItemChoiceType15.propertyTransaction;
+            if (type == typeof(LeaseTransaction)) return ItemChoiceType15.leaseTransaction;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.commodityForward;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.equityForward;
             //if (type == typeof(FutureTransaction)) return ItemChoiceType15.commoditySwap;

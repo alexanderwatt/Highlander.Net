@@ -27,9 +27,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredPricingStructures() 
+        public List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (currency != null)
             {
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(currency, true);
@@ -42,9 +42,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<String> GetRequiredCurrencies()
+        public List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> {currency.Value};
+            var result = new List<string> {currency.Value};
             return result;
         }
     }

@@ -60,6 +60,9 @@ namespace Highlander.Constants
         public const string UniqueIdentifier = "UniqueIdentifier";
         public const string AsAtDate = "AsAtDate";
         public const string PropertyIndex = "PropertyIndex";
+        public const string City = "City";
+        public const string PostCode = "PostCode";
+        public const string ShortName = "ShortName";
         public const string SchemaType = "SchemaType";
         public const string SchemaVersion = "SchemaVersion";
         public const string BusinessDayCalendar = "BusinessDayCalendar";

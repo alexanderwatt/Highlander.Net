@@ -21,7 +21,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Highlander.Codes.V5r3;
 using Highlander.Constants;
-using Highlander.Core.Interface.V5r3.Helpers;
 using Highlander.CurveEngine.Helpers.V5r3;
 using Highlander.CurveEngine.V5r3.Markets;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
@@ -128,7 +127,7 @@ namespace Highlander.Core.Interface.V5r3
         /// </summary>
         /// <param name="requestProperties">Some extra properties.</param>
         /// <returns></returns>
-        public IList<string> GetQASUniqueIdentifiers(NamedValueSet requestProperties)
+        public IList<string> GetQasUniqueIdentifiers(NamedValueSet requestProperties)
         {
             return ValService.GetQasUniqueIdentifiers(requestProperties);
         }
@@ -141,7 +140,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="isShortName">If <true>isShortName</true> is true> then the id is of the form: Curve name.
         /// Otherwise it is of the form Orion.V5r3.QuotedAssetSet.CurveName.</param>
         /// <returns></returns>
-        public string SaveQAS(List<string> identifiers, string directoryPath, bool isShortName)
+        public string SaveQas(List<string> identifiers, string directoryPath, bool isShortName)
         {
             var result = ValService.SaveQas(identifiers, directoryPath, isShortName);
             return result;
@@ -985,6 +984,7 @@ namespace Highlander.Core.Interface.V5r3
             namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
             namedValueSet.Set(PropertyProp.PropertyIdentifier, propertyIdentifier);
             namedValueSet.Set(PropertyProp.PropertyType, propertyType);
+            namedValueSet.Set(PropertyProp.Currency, currency);
             return ValService.CreatePropertyTransactionWithProperties(tradeId, isParty1Buyer, tradeDate, effectiveDate, purchaseAmount, 
                 paymentDate, currency, propertyIdentifier, tradingBook, namedValueSet);
         }
@@ -1058,48 +1058,44 @@ namespace Highlander.Core.Interface.V5r3
             {
                 namedValueSet = properties.Clone();
             }
-
-            if (properties != null)
+            if (properties == null) return null;
+            var upfrontAmount = properties.GetValue(LeaseProp.UpfrontAmount, 0.0m);
+            var leaseType = properties.GetValue(LeaseProp.LeaseType, "unspecified");
+            var shopNumber = properties.GetValue(LeaseProp.ShopNumber, "unspecified");
+            var area = properties.GetValue(LeaseProp.Area, 0.0m);
+            var unitsOfArea = properties.GetValue(LeaseProp.UnitsOfArea, "sqm");
+            var reviewFrequency = properties.GetValue(LeaseProp.ReviewFrequency, "1Y");
+            var nextReviewDate = properties.GetValue(LeaseProp.NextReviewDate, leaseStartDate.AddYears(1));
+            var reviewChange = properties.GetValue(LeaseProp.ReviewChange, 0.0m);
+            //Set property values
+            namedValueSet.Set(TradeProp.Party1, party1);
+            namedValueSet.Set(TradeProp.Party2, party2);
+            if (isParty1Tenant)
             {
-                var upfrontAmount = properties.GetValue(LeaseProp.UpfrontAmount, 0.0m);
-                var leaseType = properties.GetValue(LeaseProp.LeaseType, "unspecified");
-                var shopNumber = properties.GetValue(LeaseProp.ShopNumber, "unspecified");
-                var area = properties.GetValue(LeaseProp.Area, 0.0m);
-                var unitsOfArea = properties.GetValue(LeaseProp.UnitsOfArea, "sqm");
-                var reviewFrequency = properties.GetValue(LeaseProp.ReviewFrequency, "1Y");
-                var nextReviewDate = properties.GetValue(LeaseProp.NextReviewDate, leaseStartDate.AddYears(1));
-                var reviewChange = properties.GetValue(LeaseProp.ReviewChange, 0.0m);
-                //Set property values
-                namedValueSet.Set(TradeProp.Party1, party1);
-                namedValueSet.Set(TradeProp.Party2, party2);
-                if (isParty1Tenant)
-                {
-                    namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party1);
-                    namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party2);
-                }
-                else
-                {
-                    namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party2);
-                    namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party1);
-                }
-                //Set the pricing information
-                namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
-                //Set other properties
-                namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction.ToString());
-                namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.leaseTransaction.ToString());
-                namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Lease_Commercial));
-                namedValueSet.Set(TradeProp.TradeDate, tradeDate);
-                namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
-                namedValueSet.Set(TradeProp.MaturityDate, leaseExpiryDate);
-                namedValueSet.Set(TradeProp.TradeId, tradeId);
-                namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
-                namedValueSet.Set(LeaseProp.ReferenceProperty, referencePropertyIdentifier);
-                namedValueSet.Set(LeaseProp.ReferencePropertyIdentifier, referencePropertyIdentifier);
-                return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
-                    upfrontAmount, leaseStartDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
-                    leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);
+                namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party1);
+                namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party2);
             }
-            return null;
+            else
+            {
+                namedValueSet.Set(TradeProp.BaseParty, TradeProp.Party2);
+                namedValueSet.Set(TradeProp.CounterPartyName, TradeProp.Party1);
+            }
+            //Set the pricing information
+            namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
+            //Set other properties
+            namedValueSet.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction.ToString());
+            namedValueSet.Set(TradeProp.TradeType, ItemChoiceType15.leaseTransaction.ToString());
+            namedValueSet.Set(TradeProp.ProductTaxonomy, ProductTaxonomyScheme.GetEnumString(ProductTaxonomyEnum.Lease_Commercial));
+            namedValueSet.Set(TradeProp.TradeDate, tradeDate);
+            namedValueSet.Set(TradeProp.EffectiveDate, leaseStartDate);
+            namedValueSet.Set(TradeProp.MaturityDate, leaseExpiryDate);
+            namedValueSet.Set(TradeProp.TradeId, tradeId);
+            namedValueSet.Set(TradeProp.AsAtDate, DateTime.Today);
+            namedValueSet.Set(LeaseProp.ReferenceProperty, referencePropertyIdentifier);
+            namedValueSet.Set(LeaseProp.ReferencePropertyIdentifier, referencePropertyIdentifier);
+            return ValService.CreateLeaseTransactionWithProperties(tradeId, isParty1Tenant, tradeDate, leaseStartDate,
+                upfrontAmount, leaseStartDate, currency, portfolio, startGrossAmount, leaseId, leaseType, shopNumber, area, unitsOfArea,
+                leaseExpiryDate, reviewFrequency, nextReviewDate, reviewChange, referencePropertyIdentifier, description, namedValueSet);
         }
 
         #endregion

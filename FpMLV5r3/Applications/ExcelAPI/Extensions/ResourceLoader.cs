@@ -19,8 +19,18 @@ using System.Reflection;
 
 namespace HLV5r3.Extensions
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public static class ResourceLoader
   {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="asm"></param>
+    /// <param name="nameScope"></param>
+    /// <param name="resourceName"></param>
+    /// <returns></returns>
     public static string LoadString(Assembly asm, Type nameScope, string resourceName)
     {
       string result;

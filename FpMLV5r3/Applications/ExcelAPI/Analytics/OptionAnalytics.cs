@@ -61,10 +61,6 @@ namespace HLV5r3.Analytics
         
         #region Constructor
 
-        public Options()
-        {
-        }
-
         #endregion
 
         #region Functions
@@ -77,7 +73,7 @@ namespace HLV5r3.Analytics
         ///<param name="volatility">The lognormal volatility.</param>
         ///<param name="timeToExpiry">The time to expiry.</param>
         ///<returns>The caplet value using BSM.</returns>
-        public double GetCapletValue(double floatRate, double strikeRate, double volatility, double timeToExpiry)
+        public static double GetCapletValue(double floatRate, double strikeRate, double volatility, double timeToExpiry)
         {
             return BlackModel.GetCapletValue(floatRate, strikeRate, volatility, timeToExpiry);
         }
@@ -90,7 +86,7 @@ namespace HLV5r3.Analytics
         ///<param name="volatility">The lognormal volatility.</param>
         ///<param name="timeToExpiry">The time to expiry.</param>
         ///<returns>The swaption value using BSM.</returns>
-        public double GetSwaptionValue(double rate, double strikeRate, double volatility, double timeToExpiry)
+        public static double GetSwaptionValue(double rate, double strikeRate, double volatility, double timeToExpiry)
         {
             var model = BlackScholesMertonModel.GetSwaptionValue(rate, strikeRate, volatility, timeToExpiry);
             return model;
@@ -104,7 +100,7 @@ namespace HLV5r3.Analytics
         ///<param name="volatility">The lognormal volatility.</param>
         ///<param name="timeToExpiry">The time to expiry.</param>
         ///<returns>The call value using BSM.</returns>
-        public decimal GetCallOptionValue(decimal floatRate, decimal strikeRate, decimal volatility, decimal timeToExpiry)
+        public static decimal GetCallOptionValue(decimal floatRate, decimal strikeRate, decimal volatility, decimal timeToExpiry)
         {
             var model = BlackScholesMertonModel.GetCallOptionValue(floatRate, strikeRate, volatility, timeToExpiry);
             return model;
@@ -118,7 +114,7 @@ namespace HLV5r3.Analytics
         ///<param name="volatility">The lognormal volatility.</param>
         ///<param name="timeToExpiry">The time to expiry.</param>
         ///<returns>The put value using BSM.</returns>
-        public decimal GetPutOptionValue(decimal floatRate, decimal strikeRate, decimal volatility, decimal timeToExpiry)
+        public static decimal GetPutOptionValue(decimal floatRate, decimal strikeRate, decimal volatility, decimal timeToExpiry)
         {
             var model = BlackScholesMertonModel.GetPutOptionValue(floatRate, strikeRate, volatility, timeToExpiry);
             return model;
@@ -135,7 +131,7 @@ namespace HLV5r3.Analytics
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
         /// <returns>An array of results for Black Scholes.</returns>
-        public object Greeks(bool callFlag, double fwdPrice, double strike, double vol, double t)
+        public static object Greeks(bool callFlag, double fwdPrice, double strike, double vol, double t)
         {
             var model = BlackScholesMertonModel.Greeks(callFlag, fwdPrice, strike, vol, t);
             return model;
@@ -161,7 +157,7 @@ namespace HLV5r3.Analytics
         /// Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
         /// <returns>An array of results for Black Scholes.</returns>
-        public object BSMGeneralisedWithGreeks(bool callFlag, double price, double strike,
+        public static object BSMGeneralisedWithGreeks(bool callFlag, double price, double strike,
                                                       double rate, double costOfCarry, double vol, double t)
         {
             var model = BlackScholesMertonModel.BSMGeneralisedWithGreeks(callFlag, price, strike, rate, costOfCarry, vol, t);
@@ -180,7 +176,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value of the cox european option.</returns>
-        public double CoxEuroOption(bool callFlag, double spotPrice, double fwdPrice, short nSteps,
+        public static double CoxEuroOption(bool callFlag, double spotPrice, double fwdPrice, short nSteps,
                                            double strike, double vol, double df, double t)
         {
             return OptionAnalytics.CoxEuroOption(callFlag, spotPrice, fwdPrice,nSteps,
@@ -195,7 +191,7 @@ namespace HLV5r3.Analytics
         /// <param name="b">The b parameter.</param>
         /// <param name="nSteps">The number of steps to use.</param>
         /// <returns>The calculated solution.</returns>
-        public double SolveU(double vol, double t, double b, short nSteps)
+        public static double SolveU(double vol, double t, double b, short nSteps)
         {
             return OptionAnalytics.SolveU(vol, t, b, nSteps);
         }
@@ -213,7 +209,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value.</returns>
-        public double CoxEuroOption1(bool callFlag, double spotPrice, double fwdPrice, short nSteps, 
+        public static double CoxEuroOption1(bool callFlag, double spotPrice, double fwdPrice, short nSteps, 
                                             double strike, double vol, double df, double t)
         {
             var result = OptionAnalytics.CoxEuroOption1(callFlag, spotPrice, fwdPrice, nSteps,
@@ -232,7 +228,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value.</returns>
-        public double CoxEuroOption2(bool callFlag, double fwdPrice, short nSteps, double strike, 
+        public static double CoxEuroOption2(bool callFlag, double fwdPrice, short nSteps, double strike, 
                                             double vol, double df, double t)
         {
             var result = OptionAnalytics.CoxEuroOption2(callFlag, fwdPrice, nSteps,
@@ -252,7 +248,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value.</returns>
-        public double CoxEuroOption3(bool callFlag, double fwdPrice, short nSteps, 
+        public static double CoxEuroOption3(bool callFlag, double fwdPrice, short nSteps, 
                                             double strike, double vol, double df, double t)
         {
             var result = OptionAnalytics.CoxEuroOption3(callFlag, fwdPrice, nSteps,
@@ -271,7 +267,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value</returns>
-        public double CoxEuroOption4(bool callFlag, double fwdPrice, short nSteps, 
+        public static double CoxEuroOption4(bool callFlag, double fwdPrice, short nSteps, 
                                             double strike, double vol, double df, double t)
         {
             var result = OptionAnalytics.CoxEuroOption4(callFlag, fwdPrice, nSteps,
@@ -291,7 +287,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns>The value.</returns>
-        public double CoxAmerOption(bool callFlag, double spotPrice, double fwdPrice, short nSteps,
+        public static double CoxAmerOption(bool callFlag, double spotPrice, double fwdPrice, short nSteps,
                                            double strike, double vol, double df, double t) 
         {
             return OptionAnalytics.CoxAmerOption( callFlag,  spotPrice,  fwdPrice,  nSteps,
@@ -309,7 +305,7 @@ namespace HLV5r3.Analytics
         /// <param name="df"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public double CoxFuturesAmerOption(bool callFlag, double fwdPrice, short nSteps,
+        public static double CoxFuturesAmerOption(bool callFlag, double fwdPrice, short nSteps,
                                                   double strike, double vol, double df, double t)
         {
             return OptionAnalytics.CoxFuturesAmerOption(callFlag, fwdPrice, nSteps,
@@ -325,7 +321,7 @@ namespace HLV5r3.Analytics
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2).</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
         /// <returns>The Black-Scholes value.</returns>
-        public double Opt(Boolean callFlag, double fwdPrice, double strike, double vol, double t)
+        public static double Opt(bool callFlag, double fwdPrice, double strike, double vol, double t)
         {
             return OptionAnalytics.Opt(callFlag, fwdPrice, 
                                             strike, vol, t);
@@ -392,7 +388,7 @@ namespace HLV5r3.Analytics
         /// <param name="vol">Per cent volatility in units of (year)^(-1/2)</param>
         /// <param name="t">Time in years to the maturity of the option.</param>
         /// <returns>An array of reuslts for Black Scholes.</returns>
-        public double[,] BlackScholesWithGreeks(bool callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
+        public static double[,] BlackScholesWithGreeks(bool callFlag, double fwdPrice, double strike, double vol, double t)//TODO put back rate.
         {
             var result = OptionAnalytics.BlackScholesWithGreeks(callFlag, fwdPrice, strike, vol, t);
             return result;
@@ -408,7 +404,7 @@ namespace HLV5r3.Analytics
         /// <param name="r">The continuously compounding zero rate.</param>
         /// <param name="t">The time to expiry.</param>
         /// <returns>The volatility for that price.</returns>
-        public double OptSolveVol(bool callFlag, double fwdPrice, double strike, double prem, double r, double t)
+        public static double OptSolveVol(bool callFlag, double fwdPrice, double strike, double prem, double r, double t)
         {
             var result = OptionAnalytics.OptSolveVol(callFlag, fwdPrice, strike, prem, r, t);
             return result;
@@ -426,7 +422,7 @@ namespace HLV5r3.Analytics
         /// <param name="t">The time to expiry.</param>
         /// <param name="premium">The premium of the option.</param>
         /// <returns>The forward value for that price and volatility.</returns>
-        public double OptSolveFwd(bool callFlag, double strike, double vol, double r, double t, double premium)
+        public static double OptSolveFwd(bool callFlag, double strike, double vol, double r, double t, double premium)
         {
             var result = OptionAnalytics.OptSolveFwd(callFlag, strike, vol, r, t, premium);
             return result;
@@ -446,7 +442,7 @@ namespace HLV5r3.Analytics
         /// <param name="fwdPrice">Outright: to pay now for assured delivery of asset at tL</param>
         /// <param name="vol">The volatility.</param>
         /// <returns>The order of the return types is: Premium, Delta, Gamma, Vega, ThetaS, ThetaL, RhoS, RhoL</returns>
-        public double[] CompoundOpt(bool callOnOptionFlag, double strikeS, double rS, double tS,
+        public static double[] CompoundOpt(bool callOnOptionFlag, double strikeS, double rS, double tS,
             bool callFlag, double strikeL, double rL, double tL, double fwdPrice, double vol)
         {
             var result = OptionAnalytics.CompoundOpt(callOnOptionFlag,  strikeS,  rS,  tS, 
@@ -624,7 +620,7 @@ namespace HLV5r3.Analytics
         /// <param name="price">The price of the asset.</param>
         /// <param name="yield">The yield of the asset.</param>
         /// <returns>The yield volatility measure.</returns>
-        public double PricetoYieldVol(double pricevol, double bpv, double price, double yield)
+        public static double PricetoYieldVol(double pricevol, double bpv, double price, double yield)
         {
             return OptionAnalytics.PriceToYieldVol(pricevol,  bpv,  price,  yield);
 
@@ -638,7 +634,7 @@ namespace HLV5r3.Analytics
         /// <param name="price">The price of the asset.</param>
         /// <param name="yield">The yield of the asset.</param>
         /// <returns>The price volatility measure.</returns>
-        public double YieldtoPriceVol(double yieldvol, double bpv, double price, double yield)
+        public static double YieldtoPriceVol(double yieldvol, double bpv, double price, double yield)
         {
             return OptionAnalytics.YieldToPriceVol(yieldvol,  bpv,  price,  yield);
         }
@@ -656,7 +652,7 @@ namespace HLV5r3.Analytics
         /// <param name="strike">strike of option</param>
         /// <param name="rL">exp(-rL.tL) is DF from now to time tL</param>
         /// <returns>An array of calculated doubles: Premium, delta, gamma, vega, rhoL, thetal, thetaS.</returns>
-        public object[,] ChooserOpt(double fwdPrice, double vol, double tS, double tL, double strike, double rL) 
+        public static object[,] ChooserOpt(double fwdPrice, double vol, double tS, double tL, double strike, double rL) 
         {
             var unqVals = OptionAnalytics.ChooserOpt(fwdPrice, vol, tS, tL, strike, rL);
             var result = RangeHelper.ConvertArrayToRange(unqVals);
@@ -679,7 +675,7 @@ namespace HLV5r3.Analytics
         ///<param name="r">riskless CC interest rate to option expiry</param>
         ///<param name="t">time to option expiry (years) </param>
         ///<returns></returns>
-        public double DualStrikeDualNotionalCall(
+        public static double DualStrikeDualNotionalCall(
             long nSteps,
             double notl1,
             double fwdPrice1,   
@@ -718,7 +714,7 @@ namespace HLV5r3.Analytics
         /// <param name="fwdPrice"></param>
         /// <param name="vol"></param>
         /// <returns></returns>
-        public double AvePriceOption(bool callFlag, double strike, double premDF,
+        public static double AvePriceOption(bool callFlag, double strike, double premDF,
                                             short nPoints, double[] times, double[] fwdPrice, double[] vol)
         {
             return OptionAnalytics.AvePriceOption(callFlag,  strike,  premDF,
@@ -737,7 +733,7 @@ namespace HLV5r3.Analytics
         /// <param name="corr">correlation coefficient</param>
         /// <param name="t"></param>
         /// <returns></returns>
-        public object[,] SpreadOption(
+        public static object[,] SpreadOption(
             long nSteps,
             double fwdPrice1,   
             double fwdPrice2,    
@@ -773,7 +769,7 @@ namespace HLV5r3.Analytics
         /// <param name="t">time to option expiry in years</param>
         /// <returns>delta1, delta2, gamma11, gamma22, 
         /// gamma12, vega1, vega2, corrSens, theta and the nsteps</returns>
-        public object[,] SpreadOptWithGreeks(long nSteps,   
+        public static object[,] SpreadOptWithGreeks(long nSteps,   
                                                    double fwdPrice1,   // price fixable now for purchase of asset 1 at time t
                                                    double fwdPrice2,   // price fixable now for purchase of asset 2 at time t
                                                    double strike,      // strike
@@ -806,7 +802,7 @@ namespace HLV5r3.Analytics
         /// <param name="corr">Correlation coefficient</param>
         /// <param name="t">Time to option expiry in years</param>
         /// <returns>A vector of value and greeks.</returns>
-        public object[,] BasketOption(
+        public static object[,] BasketOption(
             long nSteps,
             double fwdPrice1,  
             double fwdPrice2,   
@@ -841,7 +837,7 @@ namespace HLV5r3.Analytics
         /// <param name="corr"></param>
         /// <param name="t"></param>
         /// <returns>value, d_dfwdPrice, d2_dfwdPrice2, d_dvol1, d_dvol2, d_dcorr, d_dt, </returns>
-        public object[,] QOptWithGreeks(bool callFlag, double fwdPrice, 
+        public static object[,] QOptWithGreeks(bool callFlag, double fwdPrice, 
                                        double strike, double vol1, double vol2, double corr, double t)
         {
             var unqVals = OptionAnalytics.QOptWithGreeks(callFlag, fwdPrice, 
@@ -859,7 +855,7 @@ namespace HLV5r3.Analytics
         /// <param name="vol"></param>
         /// <param name="t"></param>
         /// <returns>value, d_dfwdPrice, d2_dfwdPrice2, d_dvol, d_dstrike, d2_dstrike2, d_dt</returns>
-        public object[,] DigitalWithGreeks(bool callFlag, double fwdPrice, double strike, double vol, double t) 
+        public static object[,] DigitalWithGreeks(bool callFlag, double fwdPrice, double strike, double vol, double t) 
         {
             var unqVals = OptionAnalytics.DigitalWithGreeks(callFlag, fwdPrice, strike, vol, t) ;
             var result = RangeHelper.ConvertArrayToRange(unqVals);

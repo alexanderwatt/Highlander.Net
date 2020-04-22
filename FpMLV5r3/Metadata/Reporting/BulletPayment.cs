@@ -30,7 +30,7 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public override List<String> GetRequiredPricingStructures() 
+        public override List<string> GetRequiredPricingStructures() 
         {
             var result = payment.GetRequiredPricingStructures();
             return result;

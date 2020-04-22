@@ -41,11 +41,21 @@ namespace HLV5r3.Runtime
     {
         #region Properties
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Reference<ILogger> LogRef; // { get; } //set; }
         private CoreServer _server;
         private ICoreClient _client;
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly string NameSpace ;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nameSpace"></param>
         public RuntimeEnvironment(string nameSpace)
         {
             NameSpace = nameSpace;
@@ -68,16 +78,30 @@ namespace HLV5r3.Runtime
                 LogRef.Target.Log(excp);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public ICoreClient Proxy => _client;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICoreCache Cache { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             DisposeHelper.SafeDispose(ref _client);
             DisposeHelper.SafeDispose(ref _server);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uniqueIds"></param>
+        /// <exception cref="Exception"></exception>
         public void TidyUpMarkets(IEnumerable<string> uniqueIds)
         {
             try

@@ -76,7 +76,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Helpers
                 }
                 else
                 {
-                    string newNodeName = nodeName == "" ? node.Name : nodeName + "." + node.Name;
+                    string newNodeName = string.IsNullOrEmpty(nodeName) ? node.Name : nodeName + "." + node.Name;
                     output.AddRange(ConvertXmlToMatrix(node, newNodeName));
                 }
             }

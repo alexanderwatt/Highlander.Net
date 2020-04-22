@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 
@@ -29,15 +30,12 @@ namespace Highlander.Reporting.V5r3
         /// </summary>
         public override List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             result.AddRange(exchangedCurrency1.GetRequiredPricingStructures());
             var curves = exchangedCurrency2.GetRequiredPricingStructures();
-            foreach (var curve in curves)
+            foreach (var curve in curves.Where(curve => !result.Contains(curve)))
             {
-                if (!result.Contains(curve))
-                {
-                    result.Add(curve);
-                }
+                result.Add(curve);
             }
             return result;
         }
@@ -46,7 +44,7 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
             var result = new List<string>
                              {
@@ -72,7 +70,7 @@ namespace Highlander.Reporting.V5r3
         /// <returns></returns>
         public static FxSingleLeg CreateForward(string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference,
             decimal exchangeCurrency1Amount, string exchangeCurrency1, string exchangeCurrency2, QuoteBasisEnum quoteBasis,
-            DateTime valueDate, Decimal spotRate, Decimal forwardRate, Decimal? forwardPoints)
+            DateTime valueDate,  decimal spotRate, decimal forwardRate, decimal? forwardPoints)
         {
             decimal exchange2Amount;
             if (quoteBasis == QuoteBasisEnum.Currency2PerCurrency1)
@@ -115,7 +113,7 @@ namespace Highlander.Reporting.V5r3
         /// <param name="spotRate"></param>
         /// <returns></returns>
         public static FxSingleLeg CreateSpot(string exchangeCurrency1PayPartyReference, string exchangeCurrency2PayPartyReference, decimal exchangeCurrency1Amount,
-                string exchangeCurrency1, string exchangeCurrency2, QuoteBasisEnum quoteBasis, DateTime valueDate, Decimal spotRate)
+                string exchangeCurrency1, string exchangeCurrency2, QuoteBasisEnum quoteBasis, DateTime valueDate, decimal spotRate)
         {
             decimal exchange2Amount;
             if (quoteBasis == QuoteBasisEnum.Currency2PerCurrency1)

@@ -5432,11 +5432,11 @@ namespace Highlander.Codes.V5r3
         Credit_Debt_ABS_RMBS,
         Equity_OrdinaryShares,
         Equity_Forward_Physical,
-        Property_Residential,
         Property_Commercial,
+        Property_Residential,
         Property_Other,
-        Lease_Residential,
         Lease_Commercial,
+        Lease_Residential,
         Lease_Other,
         Exchange_Traded_Future
     }
@@ -5759,7 +5759,12 @@ namespace Highlander.Codes.V5r3
             "Credit:Debt:ABS:RMBS",
             "Equity:OrdinaryShares",
             "Equity:Forward:Physical",
+            "Property:Commercial",
             "Property:Residential",
+            "Property:Other",
+            "Lease:Commercial",
+            "Lease:Residential",
+            "Lease:Other",
             "ExchangeTraded:Future",
             null // (nn) _LAST_
         };
@@ -5771,7 +5776,7 @@ namespace Highlander.Codes.V5r3
             // note: we cannot use Enum.Parse() here, hence the loop...
             foreach (ProductTaxonomyEnum tempId in Enum.GetValues(typeof(ProductTaxonomyEnum)))
             {
-                if (String.Compare(idString, EnumStrings[(int)tempId], StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(idString, EnumStrings[(int)tempId], StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     id = tempId;
                     return true;

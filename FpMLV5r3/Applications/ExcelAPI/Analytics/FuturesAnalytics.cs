@@ -61,9 +61,6 @@ namespace HLV5r3.Analytics
 
         #region Constructor
 
-        public Futures()
-        {
-        }
 
         #endregion
 
@@ -81,14 +78,14 @@ namespace HLV5r3.Analytics
         ///<param name="coverageArray"> The vector of time intervals between model 
         /// time nodes.</param>
         ///<param name="timeNodesArray"> The model time nodes</param>
-        ///<returns> Output, a 2-D array of ouput data. The first column is the 
+        ///<returns> Output, a 2-D array of output data. The first column is the 
         /// vector of adjusted cash forwards. The second column is the error 
-        /// from the optimisation (the implied futures rate minus the market 
+        /// from the optimization (the implied futures rate minus the market 
         /// rate). The third column is the number of iterations taken by the
-        /// optimisation routine to converge on each adjusted rate. In the first
+        /// optimization routine to converge on each adjusted rate. In the first
         /// entry in the fourth and fifth column is the time taken to work 
         /// through the whole set of time nodes, and the program version.</returns>
-        public object[,] CalculateCashForward(Excel.Range futuresPriceArray,
+        public static object[,] CalculateCashForward(Excel.Range futuresPriceArray,
                                                         Excel.Range volatilityRange,
                                                         Excel.Range correlationRange,
                                                         Excel.Range shiftArray,
@@ -113,7 +110,7 @@ namespace HLV5r3.Analytics
         /// <param name="timeToExpiry"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesMarginConvexityAdjustment(decimal rate, double timeToExpiry, double volatility)
+        public static decimal FuturesMarginConvexityAdjustment(decimal rate, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesMarginConvexityAdjustment(rate, timeToExpiry, volatility);
         }
@@ -126,7 +123,7 @@ namespace HLV5r3.Analytics
         /// <param name="timeToExpiry"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesImpliedQuoteFromMarginAdjusted(decimal impliedRate, double timeToExpiry, double volatility)
+        public static decimal FuturesImpliedQuoteFromMarginAdjusted(decimal impliedRate, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesImpliedQuoteFromMarginAdjusted(impliedRate, timeToExpiry, volatility);
         }
@@ -140,7 +137,7 @@ namespace HLV5r3.Analytics
         /// <param name="timeToExpiry"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesImpliedQuoteWithArrears(decimal impliedRate, double yearFraction, double timeToExpiry, double volatility)
+        public static decimal FuturesImpliedQuoteWithArrears(decimal impliedRate, double yearFraction, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesImpliedQuoteWithArrears(impliedRate, yearFraction, timeToExpiry, volatility);
         }
@@ -153,7 +150,7 @@ namespace HLV5r3.Analytics
         /// <param name="yearFraction"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesImpliedQuoteFromMarginAdjustedWithArrears(decimal impliedRate, double yearFraction, double timeToExpiry, double volatility)
+        public static decimal FuturesImpliedQuoteFromMarginAdjustedWithArrears(decimal impliedRate, double yearFraction, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesImpliedQuoteFromMarginAdjustedWithArrears(impliedRate, yearFraction, timeToExpiry, volatility);
         }
@@ -166,7 +163,7 @@ namespace HLV5r3.Analytics
         /// <param name="timeToExpiry"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesArrearsConvexityAdjustment(decimal rate, double yearFraction, double timeToExpiry, double volatility)
+        public static decimal FuturesArrearsConvexityAdjustment(decimal rate, double yearFraction, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesArrearsConvexityAdjustment(rate, yearFraction, timeToExpiry, volatility);
         }
@@ -179,7 +176,7 @@ namespace HLV5r3.Analytics
         /// <param name="timeToExpiry"></param>
         /// <param name="volatility"></param>
         /// <returns></returns>
-        public decimal FuturesMarginWithArrearsConvexityAdjustment(decimal rate, double yearFraction, double timeToExpiry, double volatility)
+        public static decimal FuturesMarginWithArrearsConvexityAdjustment(decimal rate, double yearFraction, double timeToExpiry, double volatility)
         {
             return FuturesAnalytics.FuturesMarginWithArrearsConvexityAdjustment(rate, yearFraction, timeToExpiry, volatility);
         }

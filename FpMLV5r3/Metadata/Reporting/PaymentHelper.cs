@@ -27,8 +27,8 @@ namespace Highlander.Reporting.V5r3
         /// <param name="currency"></param>
         /// <param name="paymentAmount"></param>
         /// <returns></returns>
-        public static Payment Create(String payerPartyReference,
-            String receiverPartyReference, String currency, Decimal paymentAmount)
+        public static Payment Create(string payerPartyReference,
+            string receiverPartyReference, string currency, decimal paymentAmount)
         {
             var payment = new Payment
             {
@@ -48,8 +48,8 @@ namespace Highlander.Reporting.V5r3
         /// <param name="paymentAmount"></param>
         /// <param name="valueDate"></param>
         /// <returns></returns>
-        public static Payment Create(String payerPartyReference,
-            String receiverPartyReference, String currency, Decimal paymentAmount,
+        public static Payment Create(string payerPartyReference,
+            string receiverPartyReference, string currency, decimal paymentAmount,
             DateTime valueDate)
         {
             var payment = new Payment

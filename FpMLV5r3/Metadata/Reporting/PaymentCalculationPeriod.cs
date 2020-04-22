@@ -28,9 +28,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredPricingStructures() 
+        public List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (forecastPaymentAmount != null)
             {
                 var currency = forecastPaymentAmount.currency;

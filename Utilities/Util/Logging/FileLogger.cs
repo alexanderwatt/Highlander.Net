@@ -43,8 +43,8 @@ namespace Highlander.Utilities.Logging
         private void EnsureFileIsOpen()
         {
             // replace date tokens in template with values
-            string proposedFilename = StringHelper.ReplaceDateTimeTokens(_templateFilename, DateTimeOffset.Now);
-            if (String.Compare(proposedFilename, _currentFilename, StringComparison.OrdinalIgnoreCase) != 0)
+            var proposedFilename = StringHelper.ReplaceDateTimeTokens(_templateFilename, DateTimeOffset.Now);
+            if (string.Compare(proposedFilename, _currentFilename, StringComparison.OrdinalIgnoreCase) != 0)
             {
                 // filename new or changed
                 DisposeHelper.SafeDispose(ref _streamWriter);
@@ -53,7 +53,8 @@ namespace Highlander.Utilities.Logging
                 // - append only if first open
                 string dirName = Path.GetDirectoryName(proposedFilename);
                 if (!Directory.Exists(dirName))
-                    Directory.CreateDirectory(dirName);
+                    if (dirName != null)
+                        Directory.CreateDirectory(dirName);
                 _streamWriter = new StreamWriter(proposedFilename, (_currentFilename == null));
                 _currentFilename = proposedFilename;
             }

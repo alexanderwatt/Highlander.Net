@@ -45,6 +45,7 @@ using Highlander.Metadata.Common;
 using Highlander.Utilities.NamedValues;
 using AppCfgRuleV2 = Highlander.Core.Common.AppCfgRuleV2;
 using Exception = System.Exception;
+using Message = System.Windows.Forms.Message;
 
 #endregion
 
@@ -64,7 +65,10 @@ namespace Highlander.Core.Viewer.V5r3
 
         public CoreViewerForm()
         {
-            _pricingCache = new PricingCache(EnvironmentProp.DefaultNameSpace, false);
+            //TODO The first time the core viewer is run this needs to be set to true for the 
+            // PricingCache to be able to load. Then it can be set to false.
+            //_pricingCache = new PricingCache(EnvironmentProp.DefaultNameSpace, false);
+            //Now only being set once the config data has been loaded.
             InitializeComponent();
             _syncContext = SynchronizationContext.Current;
         }
@@ -247,7 +251,7 @@ namespace Highlander.Core.Viewer.V5r3
             LogNavDetail("  AppProps  :");
             item.AppProps.LogValues(text => LogNavDetail("    " + text));
             //  dump system properties
-            LogNavDetail(string.Format("  SysProps  :"));
+            LogNavDetail("  SysProps  :");
             item.SysProps.LogValues(text => LogNavDetail("    " + text));
             // dump item data (xml text)
             LogNavDetail(item.Text);
@@ -720,6 +724,7 @@ namespace Highlander.Core.Viewer.V5r3
                         nameSpace = nameSpaceTextBox1.Text;
                     }
                     LoadConfigDataHelper.LoadConfigurationData(logRef.Target, _client.Proxy, nameSpace);
+                    _pricingCache = new PricingCache(EnvironmentProp.DefaultNameSpace, false);
                     // done
                     logRef.Target.LogInfo("Success");
                 }
@@ -738,10 +743,35 @@ namespace Highlander.Core.Viewer.V5r3
 
         private void BtnCreateTradeClick(object sender, EventArgs e)
         {
-            //Load the form
-            //
-            var frm = new CreateTradeForm(_pricingCache);
-            frm.ShowDialog();
+            if (_pricingCache != null)
+            {
+                //Load the form
+                //
+                var frm = new CreateTradeForm(_pricingCache);
+                frm.ShowDialog();
+            }
+            else
+            {
+                var message = "Load configuration data first!";
+                var title = "Create Trade Issue";
+                MessageBox.Show(message, title);
+            }
+        }
+
+        private void BtnSetCacheClick(object sender, EventArgs e)
+        {
+            if (_pricingCache != null)
+            {
+                try
+                {
+                    _pricingCache = new PricingCache(_nameSpace, false);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                    throw;
+                }
+            }
         }
     }
 }

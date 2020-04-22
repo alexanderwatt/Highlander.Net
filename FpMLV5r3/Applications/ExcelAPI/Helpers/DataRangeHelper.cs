@@ -35,10 +35,19 @@ namespace HLV5r3.Helpers
     {
         #region Equities
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Serializable]
         public class ZeroCurveRange
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public DateTime RateDate;
+            /// <summary>
+            /// 
+            /// </summary>
             public double Rate;
         }
 
@@ -290,6 +299,11 @@ namespace HLV5r3.Helpers
             return handleList.ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputRange"></param>
+        /// <returns></returns>
         public static object[,] ToRange(double[,] inputRange)
         {
             if (inputRange == null) return null;
@@ -314,6 +328,12 @@ namespace HLV5r3.Helpers
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputRange"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T[,] ToMatrix<T>(Excel.Range inputRange)
         {
             if (inputRange == null) return null;
@@ -343,6 +363,11 @@ namespace HLV5r3.Helpers
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputRange"></param>
+        /// <returns></returns>
         public static object[,] ToMatrix(Excel.Range inputRange)
         {
             if (inputRange == null) return null;

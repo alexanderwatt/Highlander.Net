@@ -66,7 +66,6 @@ namespace Highlander.Reporting.V5r3
         public static TermCurve Create(List<TermPoint> points)
         {
             var result = new TermCurve { point = points.ToArray() };
-
             return result;
         }
 

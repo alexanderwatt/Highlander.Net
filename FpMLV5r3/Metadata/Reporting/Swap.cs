@@ -30,7 +30,7 @@ namespace Highlander.Reporting.V5r3
         /// </summary>
         public override List<string> GetRequiredPricingStructures()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             foreach (var leg in swapStream)
                 result.AddRange(leg.GetRequiredPricingStructures());
             foreach (var payment in (additionalPayment ?? new Payment[] { }))
@@ -41,9 +41,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredVolatilitySurfaces()
+        public List<string> GetRequiredVolatilitySurfaces()
         {
-            var result = new List<String> { CurveNameHelpers.GetRateVolatilityMatrixName(this) };
+            var result = new List<string> { CurveNameHelpers.GetRateVolatilityMatrixName(this) };
             return result;
         }
 
@@ -51,9 +51,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             foreach (var leg in swapStream)
                 result.AddRange(leg.GetRequiredCurrencies());
             foreach (var payment in (additionalPayment ?? new Payment[] { }))

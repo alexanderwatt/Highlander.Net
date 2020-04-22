@@ -23,7 +23,6 @@ using Highlander.Reporting.Analytics.V5r3.Interpolations;
 using Highlander.Reporting.Analytics.V5r3.Options;
 using Highlander.Reporting.Analytics.V5r3.Rates;
 using Highlander.Utilities.Helpers;
-using HLV5r3.Helpers;
 using Microsoft.Win32;
 using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -67,10 +66,6 @@ namespace HLV5r3.Analytics
             
         #region Constructor
 
-        public Miscellaneous()
-        {
-        }
-
         #endregion
 
         #region Functions
@@ -81,7 +76,7 @@ namespace HLV5r3.Analytics
         ///<param name="min"></param>
         ///<param name="max"></param>
         ///<returns></returns>
-        public double DescaleVariable(double value, double min, double max)
+        public static double DescaleVariable(double value, double min, double max)
         {
             return Misc.DeScaleVariable(value, min, max);
         }
@@ -92,7 +87,7 @@ namespace HLV5r3.Analytics
         ///<param name="min"></param>
         ///<param name="max"></param>
         ///<returns></returns>
-        public double ScaleVariable(double value, double min, double max)
+        public static double ScaleVariable(double value, double min, double max)
         {
             return Misc.ScaleVariable(value, min, max);
         }
@@ -105,7 +100,7 @@ namespace HLV5r3.Analytics
         ///<param name="T"></param>
         ///<param name="lambda"></param>
         ///<returns></returns>
-        public object[] BlackFwdPrice(double f, double k, double sigma, double T, int lambda)
+        public static object[] BlackFwdPrice(double f, double k, double sigma, double T, int lambda)
         {
             if (f == 0 | k == 0 | sigma == 0 | T == 0 | lambda == 0) return null;
             object[] output = OptionAnalytics.BlackFwdPrice(f, k, sigma, T, lambda);
@@ -120,7 +115,7 @@ namespace HLV5r3.Analytics
         ///<param name="T"></param>
         ///<param name="lambda"></param>
         ///<returns></returns>
-        public double BlackImpliedVol(double f, double k, double price, double T, int lambda)
+        public static double BlackImpliedVol(double f, double k, double price, double T, int lambda)
         {
             if (f == 0 | k == 0 | price < 0 | T == 0 | lambda == 0) return 0;
             double output = OptionAnalytics.BlackImpliedVol(f, k, price, T, lambda);
@@ -132,7 +127,7 @@ namespace HLV5r3.Analytics
         ///<param name="contract"></param>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double SFEBondPrice(string contract, double futuresPrice)
+        public static double SfeBondPrice(string contract, double futuresPrice)
         {
             contract = contract.ToUpper();
             return FuturesAnalytics.SFEBondPrice(contract, futuresPrice);
@@ -143,7 +138,7 @@ namespace HLV5r3.Analytics
         ///<param name="contract"></param>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double SFEBondTickValue(string contract, double futuresPrice)
+        public static double SfeBondTickValue(string contract, double futuresPrice)
         {
             contract = contract.ToUpper();
             return FuturesAnalytics.SFEBondTickValue(contract, futuresPrice);
@@ -154,7 +149,7 @@ namespace HLV5r3.Analytics
         ///<param name="contract"></param>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double NZSFEBondPrice(string contract, double futuresPrice)
+        public static double NzsfeBondPrice(string contract, double futuresPrice)
         {
             contract = contract.ToUpper();
             return FuturesAnalytics.NZSFEBondPrice(contract, futuresPrice);
@@ -165,7 +160,7 @@ namespace HLV5r3.Analytics
         ///<param name="contract"></param>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double NZSFEBondTickValue(string contract, double futuresPrice)
+        public static double NzsfeBondTickValue(string contract, double futuresPrice)
         {
             contract = contract.ToUpper();
             return FuturesAnalytics.NZSFEBondTickValue(contract, futuresPrice);
@@ -182,7 +177,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public object[] SFEBondOptionPrice(string contract, double futuresPrice, double strikePrice, double volatility,
+        public static object[] SfeBondOptionPrice(string contract, double futuresPrice, double strikePrice, double volatility,
             DateTime valueDate, DateTime expiryMonthYear, string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (contract == null | futuresPrice == 0 | strikePrice == 0 | volatility == 0 | putCall == null) return null;
@@ -192,9 +187,9 @@ namespace HLV5r3.Analytics
             putCall = putCall.Substring(0, 1);
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -215,7 +210,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double SFEBondOptionImpliedVol(string contract, double futuresPrice, double strikePrice, double priceBp,
+        public static double SfeBondOptionImpliedVol(string contract, double futuresPrice, double strikePrice, double priceBp,
             DateTime valueDate, DateTime expiryMonthYear, string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (contract == null | futuresPrice == 0 | strikePrice == 0 | priceBp == 0 | putCall == null) return 0;
@@ -224,10 +219,10 @@ namespace HLV5r3.Analytics
             putCall = putCall.Trim();
             putCall = putCall.Substring(0, 1);
             object[,] holidays;
-            object[,] values = xlHolidays.get_Value(System.Reflection.Missing.Value) as object[,];
-            if (values.GetType().Name == "Missing")
+            object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -241,7 +236,7 @@ namespace HLV5r3.Analytics
         ///</summary>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double SFEBillPrice(double futuresPrice)
+        public static double SfeBillPrice(double futuresPrice)
         {
             return FuturesAnalytics.SFEBillPrice(futuresPrice);
         }
@@ -250,7 +245,7 @@ namespace HLV5r3.Analytics
         ///</summary>
         ///<param name="futuresPrice"></param>
         ///<returns></returns>
-        public double SFEBillTickValue(double futuresPrice)
+        public static double SfeBillTickValue(double futuresPrice)
         {
             return FuturesAnalytics.SFEBillTickValue(futuresPrice);
         }
@@ -265,7 +260,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public object[] SFEBillOptionPrice(double futuresPrice, double strikePrice, double volatility, DateTime valueDate,
+        public static object[] SfeBillOptionPrice(double futuresPrice, double strikePrice, double volatility, DateTime valueDate,
             DateTime expiryMonthYear, string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (futuresPrice == 0 | strikePrice == 0 | volatility == 0 | putCall == null) return null;
@@ -274,9 +269,9 @@ namespace HLV5r3.Analytics
             putCall = putCall.Substring(0, 1);
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -296,7 +291,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double SFEBillOptionImpliedVol(double futuresPrice, double strikePrice, double priceBp, DateTime valueDate,
+        public static double SfeBillOptionImpliedVol(double futuresPrice, double strikePrice, double priceBp, DateTime valueDate,
             DateTime expiryMonthYear, string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (futuresPrice == 0 | strikePrice == 0 | priceBp == 0 | putCall == null) return 0;
@@ -305,9 +300,9 @@ namespace HLV5r3.Analytics
             putCall = putCall.Substring(0, 1);
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -326,14 +321,14 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double SFEConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate,
+        public static double SfeConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate,
             DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -353,7 +348,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public object[] CMEEuroOptionPrice(double futuresPrice, double strikePrice, double volatility, DateTime valueDate, DateTime expiryMonthYear,
+        public static object[] CmeEuroOptionPrice(double futuresPrice, double strikePrice, double volatility, DateTime valueDate, DateTime expiryMonthYear,
             string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (futuresPrice == 0 | strikePrice == 0 | volatility == 0 | putCall == null) return null;
@@ -362,9 +357,9 @@ namespace HLV5r3.Analytics
             putCall = putCall.Substring(0, 1);
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -384,7 +379,7 @@ namespace HLV5r3.Analytics
         ///<param name="putCall"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double CMEEuroOptionImpliedVol(double futuresPrice, double strikePrice, double priceBp, DateTime valueDate, DateTime expiryMonthYear,
+        public static double CmeEuroOptionImpliedVol(double futuresPrice, double strikePrice, double priceBp, DateTime valueDate, DateTime expiryMonthYear,
             string putCall, [Optional] Excel.Range xlHolidays)
         {
             if (futuresPrice == 0 | strikePrice == 0 | priceBp == 0 | putCall == null) return 0;
@@ -393,9 +388,9 @@ namespace HLV5r3.Analytics
             putCall = putCall.Substring(0, 1);
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -414,13 +409,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double CMEConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate, DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static double CmeConvexityAdjustment(double futuresPrice, double absoluteVol, double meanReversion, DateTime valueDate, DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -435,13 +430,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] SFEBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] SfeBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -456,13 +451,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] SFEBondDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] SfeBondDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -477,13 +472,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] CMEEuroDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] CmeEuroDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -498,13 +493,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] NZBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] NZBillDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -519,13 +514,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] CBOT5YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] CBOT5YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -540,13 +535,13 @@ namespace HLV5r3.Analytics
         ///<param name="expiryMonthYear"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime[] CBOT10YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
+        public static DateTime[] CBOT10YrNoteDates(DateTime expiryMonthYear, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -564,13 +559,13 @@ namespace HLV5r3.Analytics
         ///<param name="rollMethod"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public DateTime DateRoll(DateTime startDate, int numRolls, string dwmy, string rollMethod, [Optional] Excel.Range xlHolidays)
+        public static DateTime DateRoll(DateTime startDate, int numRolls, string dwmy, string rollMethod, [Optional] Excel.Range xlHolidays)
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -593,9 +588,9 @@ namespace HLV5r3.Analytics
         {
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
@@ -611,7 +606,7 @@ namespace HLV5r3.Analytics
         ///<param name="maturity"></param>
         ///<param name="couponFreq"></param>
         ///<returns></returns>
-        public DateTime NextCouponDate(DateTime settlement, DateTime maturity, int couponFreq)
+        public static DateTime NextCouponDate(DateTime settlement, DateTime maturity, int couponFreq)
         {
             return DateHelper.NextCouponDate(settlement, maturity, couponFreq);
         }
@@ -622,7 +617,7 @@ namespace HLV5r3.Analytics
         ///<param name="maturity"></param>
         ///<param name="couponFreq"></param>
         ///<returns></returns>
-        public DateTime LastCouponDate(DateTime settlement, DateTime maturity, int couponFreq)
+        public static DateTime LastCouponDate(DateTime settlement, DateTime maturity, int couponFreq)
         {
             return DateHelper.LastCouponDate(settlement, maturity, couponFreq);
         }
@@ -636,11 +631,11 @@ namespace HLV5r3.Analytics
         ///<param name="couponFreq"></param>
         ///<param name="exIntPeriod"></param>
         ///<returns></returns>
-        public double BondPrice(DateTime settlement, DateTime maturity, double couponRate, double yield, int couponFreq, int exIntPeriod)
+        public static double BondPrice(DateTime settlement, DateTime maturity, double couponRate, double yield, int couponFreq, int exIntPeriod)
         {
             if (couponRate == 0 | yield == 0 | couponFreq == 0 | exIntPeriod < 0) return 0;
             if (settlement > maturity) return 0;
-            Double output = BondAnalytics.BondPrice(settlement, maturity, couponRate, yield, couponFreq, exIntPeriod);
+            double output = BondAnalytics.BondPrice(settlement, maturity, couponRate, yield, couponFreq, exIntPeriod);
             return output;
         }
 
@@ -658,23 +653,23 @@ namespace HLV5r3.Analytics
         ///<param name="exInt"></param>
         ///<param name="xlHolidays"></param>
         ///<returns></returns>
-        public double FRNPrice(DateTime settlement, DateTime maturity, double imBp, double tmBp, int pmtFreq,
+        public static double FrnPrice(DateTime settlement, DateTime maturity, double imBp, double tmBp, int pmtFreq,
             double rateSet, double rateToNextCoup, double swapRate, int dayCount, int exInt, [Optional] Excel.Range xlHolidays)
         {
             if (pmtFreq < 0 | rateSet < 0 | rateToNextCoup < 0 | swapRate < 0 | exInt < 0) return 0;
             if (settlement > maturity) return 0;
             object[,] values = xlHolidays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] holidays;
-            if (values.GetType().Name == "Missing")
+            if (values != null && values.GetType().Name == "Missing")
             {
-                holidays = new Object[1, 1];
+                holidays = new object[1, 1];
                 holidays[0, 0] = new DateTime(1, 1, 1);
             }
             else
             {
                 holidays = ArrayHelper.RangeToMatrix(values);
             }
-            Double output = BondAnalytics.FRNPrice(settlement, maturity, imBp, tmBp, pmtFreq, rateSet, rateToNextCoup, swapRate, dayCount, exInt, holidays);
+            var output = BondAnalytics.FRNPrice(settlement, maturity, imBp, tmBp, pmtFreq, rateSet, rateToNextCoup, swapRate, dayCount, exInt, holidays);
             return output;
         }
 
@@ -685,11 +680,11 @@ namespace HLV5r3.Analytics
         ///<param name="yield"></param>
         ///<param name="faceValue"></param>
         ///<returns></returns>
-        public double BillPrice(DateTime settlement, DateTime maturity, double yield, double faceValue)
+        public static double BillPrice(DateTime settlement, DateTime maturity, double yield, double faceValue)
         {
             if (yield == 0 | faceValue == 0) return 0;
             if (settlement > maturity) return 0;
-            Double output = BondAnalytics.BillPrice(settlement, maturity, yield, faceValue);
+            var output = BondAnalytics.BillPrice(settlement, maturity, yield, faceValue);
             return output;
         }
 
@@ -700,11 +695,11 @@ namespace HLV5r3.Analytics
         ///<param name="couponRate"></param>
         ///<param name="yield"></param>
         ///<returns></returns>
-        public double RBABondPrice(DateTime settlement, DateTime maturity, double couponRate, double yield)
+        public static double RBABondPrice(DateTime settlement, DateTime maturity, double couponRate, double yield)
         {
             if (couponRate == 0 | yield == 0) return 0;
             if (settlement > maturity) return 0;
-            Double output = BondAnalytics.RBABondPrice(settlement, maturity, couponRate, yield);
+            var output = BondAnalytics.RBABondPrice(settlement, maturity, couponRate, yield);
             return output;
         }
 
@@ -719,11 +714,11 @@ namespace HLV5r3.Analytics
         ///<param name="p"></param>
         ///<param name="exIntPeriod"></param>
         ///<returns></returns>
-        public double CIBPrice(DateTime settlement, DateTime maturity, double couponRate, double yield, int couponFreq, double kt, double p, int exIntPeriod)
+        public static double CIBPrice(DateTime settlement, DateTime maturity, double couponRate, double yield, int couponFreq, double kt, double p, int exIntPeriod)
         {
             if (couponRate < 0 | yield < 0 | couponFreq <= 0 | kt < 0 | exIntPeriod < 0) return 0;
             if (settlement > maturity) return 0;
-            Double output = BondAnalytics.CIBPrice(settlement, maturity, couponRate, yield, couponFreq, kt, p, exIntPeriod);
+            var output = BondAnalytics.CIBPrice(settlement, maturity, couponRate, yield, couponFreq, kt, p, exIntPeriod);
             return output;
         }
 
@@ -740,12 +735,12 @@ namespace HLV5r3.Analytics
         ///<param name="nextPmtKnownFlag"></param>
         ///<param name="exIntPeriod"></param>
         ///<returns></returns>
-        public double IABPrice(DateTime settlement, DateTime maturity, double baseAnnuity, double yield, int pmtFreq, 
+        public static double IABPrice(DateTime settlement, DateTime maturity, double baseAnnuity, double yield, int pmtFreq, 
             double cpiBase, double cpiLatest, double cpiPrevious, bool nextPmtKnownFlag, int exIntPeriod)
         {
             if (baseAnnuity < 0 | yield < 0 | pmtFreq <= 0 | cpiBase < 0 | exIntPeriod < 0) return 0;
             if (settlement > maturity) return 0;
-            Double output = BondAnalytics.IABPrice(settlement, maturity, baseAnnuity, yield, pmtFreq, cpiBase, cpiLatest, cpiPrevious, nextPmtKnownFlag, exIntPeriod);
+            var output = BondAnalytics.IABPrice(settlement, maturity, baseAnnuity, yield, pmtFreq, cpiBase, cpiLatest, cpiPrevious, nextPmtKnownFlag, exIntPeriod);
             return output;
         }
 
@@ -758,7 +753,7 @@ namespace HLV5r3.Analytics
         ///<param name="method"></param>
         ///<param name="seedRates"></param>
         ///<returns></returns>
-        public object[,] ZeroCalc(Excel.Range cf, Excel.Range cfDays, string interpSpace, double zeroCompFreq, string method, Excel.Range seedRates)
+        public static object[,] ZeroCalc(Excel.Range cf, Excel.Range cfDays, string interpSpace, double zeroCompFreq, string method, Excel.Range seedRates)
         {
             object[,] cfs = cf.Value[System.Reflection.Missing.Value] as object[,];
             object[,] cfDay = cfDays.Value[System.Reflection.Missing.Value] as object[,];
@@ -777,7 +772,7 @@ namespace HLV5r3.Analytics
         ///<param name="col1"></param>
         ///<param name="col2"></param>
         ///<returns></returns>
-        public double LinearInterp(Excel.Range xyData, double x, int col1, int col2)
+        public static double LinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.LinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
@@ -790,7 +785,7 @@ namespace HLV5r3.Analytics
         ///<param name="col1"></param>
         ///<param name="col2"></param>
         ///<returns></returns>
-        public double PiecewiseLinearInterp(Excel.Range xyData, double x, int col1, int col2)
+        public static double PiecewiseLinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.PiecewiseLinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
@@ -803,7 +798,7 @@ namespace HLV5r3.Analytics
         ///<param name="col1"></param>
         ///<param name="col2"></param>
         ///<returns></returns>
-        public double HermiteSplineInterp(Excel.Range xyData, double x, int col1, int col2)
+        public static double HermiteSplineInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.HSplineInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
@@ -816,7 +811,7 @@ namespace HLV5r3.Analytics
         ///<param name="col1"></param>
         ///<param name="col2"></param>
         ///<returns></returns>
-        public double LogLinearInterp(Excel.Range xyData, double x, int col1, int col2)
+        public static double LogLinearInterp(Excel.Range xyData, double x, int col1, int col2)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.LogLinearInterpolation(Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2), x);
@@ -828,7 +823,7 @@ namespace HLV5r3.Analytics
         ///<param name="x"></param>
         ///<param name="y"></param>
         ///<returns></returns>
-        public double BiLinearInterp(Excel.Range xyzData, double x, double y)
+        public static double BiLinearInterp(Excel.Range xyzData, double x, double y)
         {
             object[,] values = xyzData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.BiLinearInterpolation(ArrayHelper.RangeToMatrix(values), x, y);
@@ -840,7 +835,7 @@ namespace HLV5r3.Analytics
         ///<param name="x"></param>
         ///<param name="y"></param>
         ///<returns></returns>
-        public double BiLinearInterp2(Excel.Range xyzData, double x, double y)
+        public static double BiLinearInterp2(Excel.Range xyzData, double x, double y)
         {
             object[,] values = xyzData.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.BiLinearInterpolation2(ArrayHelper.RangeToMatrix(values), x, y);
@@ -854,7 +849,7 @@ namespace HLV5r3.Analytics
         ///<param name="zeroCompFreq"></param>
         ///<param name="method"></param>
         ///<returns></returns>
-        public double GeneralZeroInterp(Excel.Range xyData, double interpX, string interpSpace, double zeroCompFreq, string method)
+        public static double GeneralZeroInterp(Excel.Range xyData, double interpX, string interpSpace, double zeroCompFreq, string method)
         {
             object[,] values = xyData.Value[System.Reflection.Missing.Value] as object[,];
             interpSpace = interpSpace.ToUpper();
@@ -874,7 +869,7 @@ namespace HLV5r3.Analytics
         ///<param name="zeroCompFreq"></param>
         ///<param name="method"></param>
         ///<returns></returns>
-        public double PVFromCurve(Excel.Range cfDays, Excel.Range cf, Excel.Range curve, int instrumentNumber, string interpSpace, double zeroCompFreq, string method)
+        public static double PVFromCurve(Excel.Range cfDays, Excel.Range cf, Excel.Range curve, int instrumentNumber, string interpSpace, double zeroCompFreq, string method)
         {
             object[,] cfds = cfDays.Value[System.Reflection.Missing.Value] as object[,];
             object[,] cfs = cf.Value[System.Reflection.Missing.Value] as object[,];
@@ -889,7 +884,7 @@ namespace HLV5r3.Analytics
         ///<param name="zeroCompFreq"></param>
         ///<param name="T"></param>
         ///<returns></returns>
-        public double Zero2DF(double zero, double zeroCompFreq, double T)
+        public static double Zero2DF(double zero, double zeroCompFreq, double T)
         {
             return InterpolationFunctions.Zero2DF(zero, zeroCompFreq, T);
         }
@@ -900,7 +895,7 @@ namespace HLV5r3.Analytics
         ///<param name="zeroCompFreq"></param>
         ///<param name="T"></param>
         ///<returns></returns>
-        public double DF2Zero(double df, double zeroCompFreq, double T)
+        public static double DF2Zero(double df, double zeroCompFreq, double T)
         {
             return InterpolationFunctions.DF2Zero(df, zeroCompFreq, T);
         }
@@ -914,7 +909,7 @@ namespace HLV5r3.Analytics
         ///<param name="zeroCompFreq"></param>
         ///<param name="method"></param>
         ///<returns></returns>
-        public double FwDfromCurve(double startTime, double matTime, Excel.Range curve, string interpSpace, double zeroCompFreq, string method)
+        public static double FwDfromCurve(double startTime, double matTime, Excel.Range curve, string interpSpace, double zeroCompFreq, string method)
         {
             object[,] values = curve.Value[System.Reflection.Missing.Value] as object[,];
             return InterpolationFunctions.FWDfromCurve(startTime, matTime, ArrayHelper.RangeToMatrix(values), interpSpace, zeroCompFreq, method);
@@ -930,7 +925,7 @@ namespace HLV5r3.Analytics
         ///<param name="rho"></param>
         ///<param name="nu"></param>
         ///<returns></returns>
-        public double BlackVolSABR(double f, double k, double expiry, double beta, double alpha, double rho, double nu)
+        public static double BlackVolSABR(double f, double k, double expiry, double beta, double alpha, double rho, double nu)
         {
             return OptionAnalytics.BlackVolSABR(f, k, expiry, beta, alpha, rho, nu);
         }
@@ -943,7 +938,7 @@ namespace HLV5r3.Analytics
         ///<param name="xlParams"></param>
         ///<param name="interpMethod"></param>
         ///<returns></returns>
-        public double InterpBlackVolSABR(double f, double k, double expiry, Excel.Range xlParams, string interpMethod)
+        public static double InterpBlackVolSABR(double f, double k, double expiry, Excel.Range xlParams, string interpMethod)
         {
             object[,] values = xlParams.Value[System.Reflection.Missing.Value] as object[,];
             interpMethod = interpMethod.ToUpper();
@@ -952,10 +947,10 @@ namespace HLV5r3.Analytics
             return OptionAnalytics.InterpBlackVolSABR(f, k, expiry, ArrayHelper.RangeToMatrix(values), interpMethod);
         }
 
-        private object[,] XLMapRangeTo2DObject(object range)
+        private static object[,] XLMapRangeTo2DObject(object range)
         {
             Excel.Range r = range as Excel.Range;
-            var matrix = (Object[,])r.get_Value(System.Type.Missing);
+            var matrix = (object[,])r.Value[System.Type.Missing];
             int rows = matrix.GetUpperBound(0);
             int cols = matrix.GetUpperBound(1);
             object[,] output = new object[rows, cols];
@@ -982,7 +977,7 @@ namespace HLV5r3.Analytics
             return output;
         }
 
-        private int[,] Object2Int(object[,] input)
+        private static int[,] Object2Int(object[,] input)
         {
             int rows = input.GetUpperBound(0) + 1;
             int cols = input.GetUpperBound(1) + 1;
@@ -1000,7 +995,7 @@ namespace HLV5r3.Analytics
         ///</summary>
         ///<param name="z"></param>
         ///<returns></returns>
-        public double CummNormDist(double z)
+        public static double CummNormDist(double z)
         {
             return Misc.CummNormDist(z);
         }
@@ -1015,7 +1010,7 @@ namespace HLV5r3.Analytics
         ///<param name="num"></param>
         ///<param name="seed"></param>
         ///<returns></returns>
-        public double[,] NormVarZ(int num, int seed)
+        public static double[,] NormVarZ(int num, int seed)
         {
             return Misc.NormVarZ(num, seed);
         }
@@ -1028,7 +1023,7 @@ namespace HLV5r3.Analytics
         ///<param name="stDev2"></param>
         ///<param name="correlation"></param>
         ///<returns></returns>
-        public double ProductNormalMean(double mean1, double mean2, double stDev1, double stDev2, double correlation)
+        public static double ProductNormalMean(double mean1, double mean2, double stDev1, double stDev2, double correlation)
         {
             return Misc.ProductNormalMean(mean1, mean2, stDev1, stDev2, correlation);
         }
@@ -1041,7 +1036,7 @@ namespace HLV5r3.Analytics
         ///<param name="stDev2"></param>
         ///<param name="correlation"></param>
         ///<returns></returns>
-        public double ProductNormalStDev(double mean1, double mean2, double stDev1, double stDev2, double correlation)
+        public static double ProductNormalStDev(double mean1, double mean2, double stDev1, double stDev2, double correlation)
         {
             return Misc.ProductNormalStDev(mean1, mean2, stDev1, stDev2, correlation);
         }
@@ -1052,7 +1047,7 @@ namespace HLV5r3.Analytics
         ///<param name="col1"></param>
         ///<param name="col2"></param>
         ///<returns></returns>
-        public object[,] Extract2Columns(Excel.Range inputArray, int col1, int col2)
+        public static object[,] Extract2Columns(Excel.Range inputArray, int col1, int col2)
         {
             object[,] values = inputArray.Value[System.Reflection.Missing.Value] as object[,];
             return Misc.Extract2Columns(ArrayHelper.RangeToMatrix(values), col1, col2);
@@ -1062,7 +1057,7 @@ namespace HLV5r3.Analytics
         ///</summary>
         ///<param name="xlInput"></param>
         ///<returns></returns>
-        public double[,] CholeskyDecomp(Excel.Range xlInput)
+        public static double[,] CholeskyDecomp(Excel.Range xlInput)
         {
             object[,] values = xlInput.Value[System.Reflection.Missing.Value] as object[,];
             return Misc.CholeskyDecomp(Object2Double(ArrayHelper.RangeToMatrix(values)));
@@ -1072,7 +1067,7 @@ namespace HLV5r3.Analytics
         ///</summary>
         ///<param name="xlInput"></param>
         ///<returns></returns>
-        public double Determinant(Excel.Range xlInput)
+        public static double Determinant(Excel.Range xlInput)
         {
             object[,] values = xlInput.Value[System.Reflection.Missing.Value] as object[,];
             return Misc.Determinant(Object2Double(ArrayHelper.RangeToMatrix(values)));
@@ -1084,7 +1079,7 @@ namespace HLV5r3.Analytics
         ///<param name="row"></param>
         ///<param name="col"></param>
         ///<returns></returns>
-        public object[,] SquareSubMatrix(Excel.Range xlInput, int row, int col)
+        public static object[,] SquareSubMatrix(Excel.Range xlInput, int row, int col)
         {
             object[,] values = xlInput.Value[System.Reflection.Missing.Value] as object[,];
             return Misc.SquareSubMatrix(ArrayHelper.RangeToMatrix(values), row, col);

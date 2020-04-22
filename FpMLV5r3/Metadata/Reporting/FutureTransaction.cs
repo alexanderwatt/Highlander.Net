@@ -13,7 +13,6 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace Highlander.Reporting.V5r3
@@ -53,9 +52,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> { future.currency.Value };
+            var result = new List<string> { future.currency.Value };
             if (unitPrice.currency.Value != future.currency.Value)
             {
                 result.Add(unitPrice.currency.Value);

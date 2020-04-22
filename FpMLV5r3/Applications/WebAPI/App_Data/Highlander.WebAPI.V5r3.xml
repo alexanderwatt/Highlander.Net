@@ -1003,6 +1003,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Highlander.WebAPI.V5r3.Controllers.PricingController.GetCurve(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Highlander.WebAPI.V5r3.Controllers.ValuesController">
             <summary>
             The main controller

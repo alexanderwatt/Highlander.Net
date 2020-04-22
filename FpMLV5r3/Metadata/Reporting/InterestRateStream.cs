@@ -15,7 +15,6 @@
 
 #region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,9 +27,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredPricingStructures() 
+        public List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (calculationPeriodAmount.Item is Calculation amount)
             {
                 var currency = XsdClassesFieldResolver.CalculationGetNotionalSchedule(amount);
@@ -68,7 +67,7 @@ namespace Highlander.Reporting.V5r3
         /// </summary>
         public List<string> GetRequiredVolatilitySurfaces()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (calculationPeriodAmount.Item is Calculation amount)
             {
                 if (amount.Items[0] is FloatingRateCalculation floatingRateCalculation)

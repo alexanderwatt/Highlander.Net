@@ -28,9 +28,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public override List<String> GetRequiredPricingStructures()
+        public override List<string> GetRequiredPricingStructures()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (swap != null)
             {
                 result.AddRange(swap.GetRequiredPricingStructures());
@@ -46,9 +46,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredVolatilitySurfaces()
+        public List<string> GetRequiredVolatilitySurfaces()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (swap != null && Item is EuropeanExercise)
             {
                 result.AddRange(swap.GetRequiredVolatilitySurfaces());
@@ -60,9 +60,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public override List<String> GetRequiredCurrencies()
+        public override List<string> GetRequiredCurrencies()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (swap != null)
             {
                 result.AddRange(swap.GetRequiredCurrencies());

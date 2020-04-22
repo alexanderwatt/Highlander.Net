@@ -29,7 +29,7 @@ namespace Highlander.Reporting.V5r3
         /// </summary>
         public List<string> GetRequiredPricingStructures()
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (paymentAmount.currency != null)
             {
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(paymentAmount.currency, true);
@@ -42,9 +42,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<String> GetRequiredCurrencies()
+        public List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> { paymentAmount.currency.Value };
+            var result = new List<string> { paymentAmount.currency.Value };
             return result;
         }
     }
@@ -54,9 +54,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredPricingStructures() 
+        public List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (paymentAmount.currency != null)
             {
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(paymentAmount.currency, true);
@@ -69,9 +69,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<String> GetRequiredCurrencies()
+        public List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> {paymentAmount.currency.Value};
+            var result = new List<string> {paymentAmount.currency.Value};
             return result;
         }
     }
@@ -81,9 +81,9 @@ namespace Highlander.Reporting.V5r3
         /// <summary>
         /// Gets and sets the required pricing structures to value this leg.
         /// </summary>
-        public List<String> GetRequiredPricingStructures() 
+        public List<string> GetRequiredPricingStructures() 
         {
-            var result = new List<String>();
+            var result = new List<string>();
             if (paymentAmount.currency != null)
             {
                 var discountCurve = CurveNameHelpers.GetDiscountCurveName(paymentAmount.currency, true);
@@ -96,9 +96,9 @@ namespace Highlander.Reporting.V5r3
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<String> GetRequiredCurrencies()
+        public List<string> GetRequiredCurrencies()
         {
-            var result = new List<String> {paymentAmount.currency.Value};
+            var result = new List<string> {paymentAmount.currency.Value};
             return result;
         }
     }

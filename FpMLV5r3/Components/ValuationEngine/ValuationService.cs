@@ -2545,7 +2545,7 @@ namespace Highlander.ValuationEngine.V5r3
             var rollConvention = RollConventionEnumHelper.Parse(properties.GetValue(LeaseProp.RollConvention, defaultRollConvention.ToString()));
             var businessDayConvention = BusinessDayConventionHelper.Parse(businessDayAdjustments);
             var businessCenters = BusinessCentersHelper.Parse(businessDayCalendar);
-            var paymentFrequency = properties.GetValue(LeaseProp.BusinessDayAdjustments, "1M");
+            var paymentFrequency = properties.GetValue(LeaseProp.PaymentFrequency, "1M");
             string tenant = partyb;
             if (isParty1Tenant)
             {
@@ -2554,18 +2554,19 @@ namespace Highlander.ValuationEngine.V5r3
             var leaseProperties = CreateLeaseProperties(NameSpace, tenant, leaseId, leaseType,
                 referencePropertyIdentifier, currency, description);
             properties.Set(TradeProp.TradingBookName, portfolio);
-            var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.SpreadSheet);
+            var sourceSystem = properties.GetValue(EnvironmentProp.SourceSystem, TradeSourceType.Internal);
             properties.GetValue(TradeProp.EffectiveDate, leaseExpiryDate);
             properties.GetValue(TradeProp.TradeDate, tradeDate);
             properties.GetValue(TradeProp.PaymentDate, paymentDate);
-            var leaseTradeIdentifier = $"{"Trade"}.{sourceSystem}.{ItemChoiceType15.leaseTransaction}.{tradeId}";
+            //TODO change this!
+            var leaseTradeIdentifier = new Reporting.Identifiers.V5r3.TradeIdentifier(ItemChoiceType15.leaseTransaction, ProductTypeSimpleEnum.LeaseTransaction, tradeId, tradeDate, sourceSystem).UniqueIdentifier;
             properties.Add(leaseProperties);
             var lease = LeaseAssetHelper.Create(tenant, leaseId, leaseType, leaseExpiryDate, referencePropertyIdentifier, shopNumber,
                 leaseStartDate, reviewFrequency, nextReviewDate, reviewChange, currency, numberOfUnits, unitsOfArea, startGrossAmount, 
                 paymentFrequency, rollConvention, businessDayConvention, businessCenters, description);
-            //  1) Build and publish the equity transaction
+            //  1) Build and publish the lease transaction
             //
-            properties.Set(TradeProp.UniqueIdentifier, null);
+            properties.Set(TradeProp.UniqueIdentifier, leaseTradeIdentifier);
             var productType = new object[] { ProductTypeHelper.Create("LeaseTransaction") };
             var amount = Convert.ToDouble(upfrontAmount);
             var leaseTransaction = new LeaseTransaction
@@ -2585,7 +2586,7 @@ namespace Highlander.ValuationEngine.V5r3
             {
                 Item = leaseTransaction,
                 ItemElementName = ItemChoiceType15.leaseTransaction,
-                tradeHeader = new TradeHeader(), //TODO We need a new type here!
+                tradeHeader = new TradeHeader(),
             };
             var party1 = PartyTradeIdentifierHelper.Parse(tradeId, "party1");
             var party2 = PartyTradeIdentifierHelper.Parse(tradeId, "party2");

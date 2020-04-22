@@ -57,6 +57,8 @@
       <Link>BuildInfo.cs</Link>
     </Compile>
     <Compile Include="ExtensionClasses.cs" />
+    <Compile Include="LeaseTransaction.cs" />
+    <Compile Include="PropertyTransaction.cs" />
     <Compile Include="Period.cs" />
     <Compile Include="CurveNameHelpers.cs" />
     <Compile Include="PaymentHelper.cs" />

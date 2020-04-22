@@ -30,7 +30,7 @@ namespace Highlander.Reporting.V5r3
         /// <param name="forwardPoints"></param>
         /// <returns></returns>
         public static ExchangeRate Create(string currency1, string currency2, QuoteBasisEnum quoteBasis,
-                                         Decimal spotRate, Decimal forwardRate, Decimal? forwardPoints)
+                                         decimal spotRate, decimal forwardRate, decimal? forwardPoints)
         {
             var exchangeRate = new ExchangeRate
             {
@@ -56,7 +56,7 @@ namespace Highlander.Reporting.V5r3
         /// <param name="spotRate"></param>
         /// <returns></returns>
         public static ExchangeRate Create(string currency1, string currency2, QuoteBasisEnum quoteBasis,
-                                         Decimal spotRate)
+            decimal spotRate)
         {
             var exchangeRate = new ExchangeRate
             {

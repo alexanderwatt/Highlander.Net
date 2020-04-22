@@ -45,6 +45,12 @@ namespace HLV5r3.Financial
     {
         #region Calendar Functions
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertiesRange"></param>
+        /// <param name="dateArray"></param>
+        /// <returns></returns>
         public string CreateCalendar(Excel.Range propertiesRange, Excel.Range dateArray)
         {
             var properties = propertiesRange.Value[System.Reflection.Missing.Value] as object[,];

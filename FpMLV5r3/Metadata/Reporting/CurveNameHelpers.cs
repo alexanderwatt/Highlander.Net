@@ -88,6 +88,21 @@ namespace Highlander.Reporting.V5r3
             return result;
         }
 
+
+        ///<summary>
+        /// Gets all the Discount curve name.
+        ///</summary>
+        ///<returns></returns>
+        public static string GetDiscountCurveName(string currency, bool isSimple)
+        {
+            var result = PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + "OIS-SECURED";
+            if (isSimple)
+            {
+                result = PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + "LIBOR-SENIOR";
+            }
+            return result;
+        }
+
         ///<summary>
         /// Gets all the Discount curve name.
         ///</summary>
@@ -163,20 +178,6 @@ namespace Highlander.Reporting.V5r3
         public static string GetCounterPartyCurveName(string currency, string counterparty, string seniority)
         {
             return PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + counterparty + "-" + seniority;
-        }
-
-        ///<summary>
-        /// Gets all the Discount curve name.
-        ///</summary>
-        ///<returns></returns>
-        public static string GetDiscountCurveName(string currency, bool isSimple)
-        {
-            var result = PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + "OIS-SECURED";
-            if (isSimple)
-            {
-                result = PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + "LIBOR-SENIOR";
-            }
-            return result;
         }
 
         ///<summary>

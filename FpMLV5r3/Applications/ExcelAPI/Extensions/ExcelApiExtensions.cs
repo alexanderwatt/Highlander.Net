@@ -18,23 +18,49 @@ using System.Security;
 
 namespace HLV5r3.Extensions
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public static class ExcelApiExtensions
   {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="ch"></param>
+    /// <returns></returns>
     public static int CountChar(this string value, char ch)
     {
         return value.Count(t => t == ch);
     }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="value"></param>
+      /// <returns></returns>
       public static string EscapeXml(this string value)
     {
       return SecurityElement.Escape(value);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static object Default<T>()
     {
       return default(T);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="values"></param>
+    /// <param name="value"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static int IndexOf<T>(this T [] values, T value)
     {
       int result = -1;
@@ -49,6 +75,12 @@ namespace HLV5r3.Extensions
       return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="chars"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static int IndexOf(this char[] chars, char[] value)
     {
       int vdx = 0;

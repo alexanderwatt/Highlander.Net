@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -96,11 +96,7 @@
     <Compile Include="Helpers\DataRangeHelper.cs" />
     <Compile Include="Financial\Assets.cs" />
     <Compile Include="Financial\PricingStructures.cs" />
-    <Compile Include="Impl\ExcelApiException.cs" />
-    <Compile Include="Impl\MethodError.cs" />
-    <Compile Include="Impl\MethodErrors.cs" />
-    <Compile Include="Impl\RangeConversion.cs" />
-    <Compile Include="Impl\RangeFunctions.cs" />
+    <Compile Include="Helpers\RangeFunctions.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="Maths\Numerics.cs" />
     <Compile Include="Runtime\RuntimeEnvironment.cs" />
@@ -113,7 +109,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Utility\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
@@ -304,7 +299,9 @@
     <None Include="Spreadsheets\Volatility\VolCubePublisher_v2.xlsx" />
     <None Include="Spreadsheets\Volatility\VolPublisher_v2.xlsx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utility\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExcelApiResource.resx">
       <SubType>Designer</SubType>

@@ -51,6 +51,7 @@ namespace Highlander.Reporting.UI.V5r3
             propertyDataGridView.Rows.Add(row2);
             tradeTypeBox.SelectedIndex = 0;
             propertyTypeListBox.SelectedIndex = 0;
+            currencyListBox.SelectedIndex = 0;
         }
 
         private void CreatePropertyTradeButtonClick(object sender, EventArgs e)
@@ -72,39 +73,32 @@ namespace Highlander.Reporting.UI.V5r3
             var transactionType = (ProductTypeSimpleEnum)Enum.Parse(typeof(ProductTypeSimpleEnum), tradeTypeBox.Text, true);
             if (transactionType == ProductTypeSimpleEnum.PropertyTransaction)
             {
-                   tradeIdentifierTextBox.Text = _pricingCache.CreatePropertyTradeWithProperties(tradeIdentifierTxtBox.Text, isParty1BuyerCheckBox.Checked, Party1TextBox.Text, 
+                   transactionIdentifierTextBox.Text = _pricingCache.CreatePropertyTradeWithProperties(tradeIdentifierTextBox.Text, isParty1BuyerCheckBox.Checked, Party1TextBox.Text, 
                         Party2TextBox.Text, startDateTimePicker.Value, effectiveDateTimePicker.Value, Convert.ToDecimal(purchaseAmountTextBox.Text),
-                        paymentDateTimePicker.Value, null, currencyListBox.Text, propertyAssetIdentifierTextBox.Text, accountingBookTextBox.Text, properties);
+                        paymentDateTimePicker.Value, propertyTypeListBox.Text, currencyListBox.Text, propertyAssetIdentifierTextBox.Text, accountingBookTextBox.Text, properties);
             }
         }
 
-        //private void CheckPropertyAssetClick(object sender, EventArgs e)
-        //{
-        //    //Load the form
-        //    //
-        //    setProperties();
-        //    var transactionType = (ProductTypeSimpleEnum)Enum.Parse(typeof(ProductTypeSimpleEnum), tradeTypeBox.Text, true);
-        //    switch (transactionType)
-        //    {
-        //        case ProductTypeSimpleEnum.PropertyTransaction:
-        //            var property = new PropertyAssetForm(_pricingCache);
-        //            property.ShowDialog();
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
         private void FindPropertyAssetButtonClick(object sender, EventArgs e)
         {
-            setProperties();
+            SetProperties();
             var propertyType = EnumHelper.Parse<PropertyType>(propertyTypeListBox.Text);
             var instrument = _pricingCache.GetPropertyAsset(propertyType, cityTextBox.Text, shortNameTextBox.Text,
                 postcodeTextBox.Text, propertyIdentifierTextBox.Text);
             if (instrument is null)
             {
-                propertyAssetIdentifierTextBox.Text = "Non-existent Property!";
-                var property = new PropertyAssetForm(_pricingCache);
+                var assetProperties = new NamedValueSet();
+                assetProperties.Set(PropertyProp.PropertyType, propertyType);
+                if(!string.IsNullOrEmpty(cityTextBox.Text))
+                { assetProperties.Set(PropertyProp.City, cityTextBox.Text);}
+                if (!string.IsNullOrEmpty(shortNameTextBox.Text))
+                { assetProperties.Set(PropertyProp.ShortName, shortNameTextBox.Text);}
+                if (!string.IsNullOrEmpty(postcodeTextBox.Text))
+                { assetProperties.Set(PropertyProp.PostCode, postcodeTextBox.Text);}
+                if (!string.IsNullOrEmpty(propertyIdentifierTextBox.Text))
+                { assetProperties.Set(PropertyProp.PropertyIdentifier, propertyIdentifierTextBox.Text);}
+                propertyAssetIdentifierTextBox.Text = "No Property with this criteria!";
+                var property = new PropertyAssetForm(_pricingCache, assetProperties);
                 property.ShowDialog();
                 return;
             }
@@ -129,7 +123,7 @@ namespace Highlander.Reporting.UI.V5r3
             propertyTypeListBox.Text = propertyAsset.Property?.propertyTaxonomyType;
         }
 
-        private void setProperties()
+        private void SetProperties()
         {
             //Populate the properties
             var properties = new NamedValueSet();

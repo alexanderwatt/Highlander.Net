@@ -39,7 +39,6 @@ namespace Highlander.Reporting.V5r3
         {
             string dayCountFractionString = DayCountFractionScheme.GetEnumString(dayCountFractionEnum);
             var result = new DayCountFraction { Value = dayCountFractionString };
-
             return result;
         }
     }
