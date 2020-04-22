@@ -68,5 +68,21 @@ namespace Highlander.Web.API.V5r3.Controllers
             _logger.Target.LogInfo("Created lease trade id: {0}", result);
             return Ok(result);
         }
+
+        ////Create the transaction
+        //var properties = new NamedValueSet();
+        //properties.Set(LeaseProp.RollConvention, rollConventionTextBox.Text);
+        //properties.Set(LeaseProp.BusinessDayCalendar, businessCalendarListBox.Text);
+        //properties.Set(LeaseProp.BusinessDayAdjustments, businessDayAdjustmentsListBox.Text);
+        //properties.Set(LeaseProp.UpfrontAmount, 0.0m);
+        //properties.Set(LeaseProp.LeaseType, leaseTypeListBox.Text);
+        ////properties.Set(LeaseProp.Area, 0.0m);
+        ////properties.Set(LeaseProp.UnitsOfArea, "sqm");
+        //properties.Set(LeaseProp.ReviewFrequency, ReviewFrequencyListBox.Text);
+        //properties.Set(LeaseProp.NextReviewDate, startDateTimePicker.Value.AddYears(1));
+        //properties.Set(LeaseProp.ReviewChange, reviewAmountUpDown.Value);
+        //leaseTradeIdentifierTextBox.Text = _pricingCache.CreateLeaseTradeWithProperties(leaseIdentifierTxtBox.Text, isParty1TenantCheckBox.Checked, Party1TextBox.Text,
+        //Party2TextBox.Text, tradeDateTimePicker.Value, startDateTimePicker.Value, currencyListBox.Text, portfolioTextBox.Text, Convert.ToDecimal(purchaseAmountTextBox.Text),
+        //leaseIdentifierTxtBox.Text, expiryDateTimePicker.Value, propertyIdentifierTextBox.Text, descriptionTextBox.Text, _properties);
     }
 }
