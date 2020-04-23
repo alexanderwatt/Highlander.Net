@@ -8,6 +8,7 @@ using Highlander.Core.V34;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
 using Highlander.Web.API.V5r3.Auth;
+using Highlander.Web.API.V5r3.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -67,6 +68,9 @@ namespace Highlander.Web.API.V5r3
                     throw ex;
                 }
             }).AsSelf().SingleInstance();
+
+            builder.RegisterType<PropertyService>().AsSelf().SingleInstance();
+            builder.RegisterType<LeaseService>().AsSelf().SingleInstance();
 
             var factory = new CoreClientFactory(logger)
                 .SetEnv(environment)

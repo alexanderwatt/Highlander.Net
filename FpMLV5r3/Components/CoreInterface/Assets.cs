@@ -377,6 +377,12 @@ namespace Highlander.Core.Interface.V5r3
 
         #region Assets and Instruments
 
+        public void Clear()
+        {
+            Engine.Cache.Clear();
+            return;
+        }
+
         /// <summary>
         /// Load Property Data
         /// </summary>

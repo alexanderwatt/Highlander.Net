@@ -343,7 +343,7 @@ namespace Highlander.Core.Viewer.V5r3
             if (_suppressWarningMessageBox || DialogResult.Yes == MessageBox.Show(message, Resources.CoreViewerForm_ToolStripMenuItem1Click_Important_message, MessageBoxButtons.YesNo, MessageBoxIcon.Stop))
             {
                 _suppressWarningMessageBox = ModifierKeys == Keys.Control;
-                _client.DeleteItem(itemToDelete);                
+                _client.DeleteItem(itemToDelete);
                 treeNavigation.SelectedNode.Remove();
             }
         }
