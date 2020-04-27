@@ -31,9 +31,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("trades")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreatePropertyTrade([FromBody] PropertyTradeViewModel model)
+        public IHttpActionResult CreatePropertyTrade([FromBody] PropertyTradeViewModel model, string transactionId = null)
         {
-            var result = propertyService.CreatePropertyTrade(model);
+            var result = propertyService.CreatePropertyTrade(model, transactionId);
             return Ok(result);
         }
 
@@ -49,9 +49,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("assets")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreatePropertyAsset([FromBody] PropertyAssetViewModel model)
+        public IHttpActionResult CreatePropertyAsset([FromBody] PropertyAssetViewModel model, string transactionId = null)
         {
-            var result = propertyService.CreatePropertyAsset(model);
+            var result = propertyService.CreatePropertyAsset(model, transactionId);
             return Ok(result);
         }
 

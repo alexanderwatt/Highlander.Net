@@ -33,12 +33,14 @@ namespace Highlander.Web.API.V5r3.Services
             return trades;
         }
 
-        public string CreatePropertyTrade(PropertyTradeViewModel model)
+        public string CreatePropertyTrade(PropertyTradeViewModel model, string transactionId)
         {
             var properties = new NamedValueSet();
+            properties.Set(Constants.Constants.TransactionIdProperty, transactionId);
+
             //TODO
             //Add the create property to this!!
-            //This way the property transaction isw closer to the Lendhaus model.
+            //This way the property transaction is closer to the Lendhaus model.
             var result = cache.CreatePropertyTradeWithProperties(model.TradeId, true, model.Purchaser, model.Seller, model.TradeTimeUtc, model.EffectiveTimeUtc,
                 model.PurchaseAmount, model.PaymentTimeUtc, model.PropertyType, model.Currency, model.PropertyId, model.TradingBook, properties);
             logger.Target.LogInfo("Created property trade id: {0}", result);
@@ -54,10 +56,12 @@ namespace Highlander.Web.API.V5r3.Services
             return trades;
         }
 
-        public string CreatePropertyAsset(PropertyAssetViewModel model)
+        public string CreatePropertyAsset(PropertyAssetViewModel model, string transactionId)
         {
+            var props = new NamedValueSet();
+            props.Set(Constants.Constants.TransactionIdProperty, transactionId);
             var result = cache.CreatePropertyAsset(model.PropertyId, model.PropertyType, model.ShortName, model.StreetIdentifier, model.StreetName, model.Suburb, model.City,
-    model.PostalCode, model.State, model.Country, model.NumBedrooms.ToString(), model.NumBathrooms.ToString(), model.NumParking.ToString(), model.Currency, model.Description, null);
+    model.PostalCode, model.State, model.Country, model.NumBedrooms.ToString(), model.NumBathrooms.ToString(), model.NumParking.ToString(), model.Currency, model.Description, props);
             logger.Target.LogInfo($"Created property id: {result}");
             return result;
         }
@@ -74,10 +78,13 @@ namespace Highlander.Web.API.V5r3.Services
             return pricingStructure;
         }
 
-        public void ClearCache()
+        public int CleanTransaction(string transactionId)
         {
-            cache.Clear();
-            return;
+            var props = new NamedValueSet();
+            props.Set(Constants.Constants.TransactionIdProperty, transactionId);
+            var properties = cache.DeletePropertyAssetsByQuery(props);
+            var trades = cache.DeleteTradesByQuery(props);
+            return properties + trades;
         }
     }
 }

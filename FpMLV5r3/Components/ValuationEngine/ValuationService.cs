@@ -354,12 +354,24 @@ namespace Highlander.ValuationEngine.V5r3
             return result;
         }
 
+        public int DeletePropertyAssetsByQuery(NamedValueSet queryProperties)
+        {
+            var assets = DeletePropertyAssetsByQuery(Logger, Cache, NameSpace, queryProperties);
+            return assets;
+        }
+
+        public int DeleteTradesByQuery(NamedValueSet queryProperties)
+        {
+            var trades = DeleteTradesByQuery(Logger, Cache, NameSpace, queryProperties);
+            return trades;
+        }
+
         /// <summary>
         /// Returns the trades for all trades matching the query properties.
         /// </summary>
         /// <param name="queryProperties">The query properties.</param>
         /// <returns></returns>
-        public List<TradeQueryData> QueryTrades(NamedValueSet queryProperties)
+            public List<TradeQueryData> QueryTrades(NamedValueSet queryProperties)
         {
             return QueryTrades(Logger, Cache, NameSpace, queryProperties);
         }
@@ -403,6 +415,38 @@ namespace Highlander.ValuationEngine.V5r3
             }
             logger.LogDebug("{0} property assets returned;", result.Count);
             return result;
+        }
+
+        public int DeletePropertyAssetsByQuery(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet matchingPropertySet)
+        {
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            var result = new List<string>();
+            if (matchingPropertySet != null)
+            {
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            var assets = cache.DeleteTypedObjects(typeof(PropertyNodeStruct), whereExpr);
+            logger.LogDebug("{0} property assets deleted;", result.Count);
+            return assets;
+        }
+
+        public int DeleteTradesByQuery(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet matchingPropertySet)
+        {
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            var result = new List<string>();
+            if (matchingPropertySet != null)
+            {
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            var assets = cache.DeleteTypedObjects(typeof(Trade), whereExpr);
+            logger.LogDebug("{0} trades deleted;", result.Count);
+            return assets;
         }
 
         /// <summary>

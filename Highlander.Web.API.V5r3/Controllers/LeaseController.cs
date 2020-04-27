@@ -26,9 +26,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult CreateLeaseTrade([FromBody] LeaseTradeViewModel model)
+        public IHttpActionResult CreateLeaseTrade([FromBody] LeaseTradeViewModel model, string transactionId = null)
         {
-            var result = leaseService.CreateLeaseTrade(model);
+            var result = leaseService.CreateLeaseTrade(model, transactionId);
             return Ok(result);
         }
     }

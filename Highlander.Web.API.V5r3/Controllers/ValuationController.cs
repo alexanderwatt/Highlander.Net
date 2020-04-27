@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using System.Web.Http.Description;
 using Highlander.Web.API.V5r3.Models;
 using Highlander.Web.API.V5r3.Services;
@@ -22,21 +23,31 @@ namespace Highlander.Web.API.V5r3.Controllers
         [ResponseType(typeof(decimal))]
         public IHttpActionResult GetValue([FromBody] PropertyFullViewModel model)
         {
+            var transactionId = Guid.NewGuid().ToString();
+
             //create assets
-            var propertyAsset = propertyService.CreatePropertyAsset(model);
-            var propertyTrade = propertyService.CreatePropertyTrade(model.Trade);
+            var propertyAsset = propertyService.CreatePropertyAsset(model, transactionId);
+            model.Trade.PropertyId = propertyAsset;
+            var propertyTrade = propertyService.CreatePropertyTrade(model.Trade, transactionId);
             foreach (var lease in model.Leases)
             {
-                var result = leaseService.CreateLeaseTrade(lease);
+                lease.ReferencePropertyIdentifier = propertyAsset;
+                var result = leaseService.CreateLeaseTrade(lease, transactionId);
+                if(result.Error != null)
+                {
+                    propertyService.CleanTransaction(transactionId);
+                    throw new Exception("Failed to create a lease - valuation aborted");
+                }
             }
 
             //value
+            var value = 0m;
             //TODO
 
             //cleanup
-            propertyService.ClearCache();
+            var deleted = propertyService.CleanTransaction(transactionId);
 
-            return Ok(0m);
+            return Ok(value);
         }
     }
 }

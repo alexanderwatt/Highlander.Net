@@ -34,9 +34,10 @@ namespace Highlander.Web.API.V5r3.Services
             return trades;
         }
         
-        public (string Id, string Error) CreateLeaseTrade(LeaseTradeViewModel model)
+        public (string Id, string Error) CreateLeaseTrade(LeaseTradeViewModel model, string transactionId)
         {
             var properties = new NamedValueSet();
+            properties.Set(Constants.Constants.TransactionIdProperty, transactionId);
             properties.Set(LeaseProp.RollConvention, model.RollConvention ?? RollConventionEnum.EOM.ToString());
             properties.Set(LeaseProp.BusinessDayCalendar, model.BusinessCalendar ?? "AUSY");
             properties.Set(LeaseProp.BusinessDayAdjustments, model.BusinessDayAdjustments ?? "FOLLOWING");

@@ -89,6 +89,16 @@ namespace Highlander.Core.Interface.V5r3
             return ValService.QueryTradeIds(queryProperties);
         }
 
+        public int DeletePropertyAssetsByQuery(NamedValueSet queryProperties)
+        {
+            return ValService.DeletePropertyAssetsByQuery(queryProperties);
+        }
+
+        public int DeleteTradesByQuery(NamedValueSet queryProperties)
+        {
+            return ValService.DeleteTradesByQuery(queryProperties);
+        }
+
         /// <summary>
         /// Returns the header information for all trades matching the query properties.
         /// </summary>

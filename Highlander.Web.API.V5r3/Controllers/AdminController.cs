@@ -3,6 +3,7 @@ using Highlander.Constants;
 using Highlander.Core.Common;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
+using Highlander.Web.API.V5r3.Services;
 using System.Web.Http;
 
 namespace Highlander.Web.API.V5r3.Controllers
@@ -11,11 +12,13 @@ namespace Highlander.Web.API.V5r3.Controllers
     public class AdminController : ApiController
     {
         private readonly Reference<ILogger> logger;
+        private readonly PropertyService propertyService;
         private readonly ICoreCache cache;
 
-        public AdminController(ICoreCache cache, Reference<ILogger> logger)
+        public AdminController(ICoreCache cache, Reference<ILogger> logger, PropertyService propertyService)
         {
             this.logger = logger;
+            this.propertyService = propertyService;
             this.cache = cache;
             logger.Target.LogInfo("Instantiating AdminController...");
         }
@@ -37,6 +40,22 @@ namespace Highlander.Web.API.V5r3.Controllers
                 throw exception;
             }
             return Ok();
+        }
+
+        [HttpDelete]
+        [Route("clear-all")]
+        public IHttpActionResult ClearCache()
+        {
+            cache.Clear();
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("clear-transaction")]
+        public IHttpActionResult ClearCache(string transactionId)
+        {
+            var deleted = propertyService.CleanTransaction(transactionId);
+            return Ok(deleted);
         }
     }
 }
