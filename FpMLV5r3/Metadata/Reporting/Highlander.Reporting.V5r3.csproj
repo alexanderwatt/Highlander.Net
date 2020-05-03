@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="ExtensionClasses.cs" />
     <Compile Include="LeaseTransaction.cs" />
+    <Compile Include="ProductResultsHelper.cs" />
     <Compile Include="PropertyTransaction.cs" />
     <Compile Include="Period.cs" />
     <Compile Include="CurveNameHelpers.cs" />

@@ -27,8 +27,6 @@ using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
-using HLV5r3.Helpers;
-using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 
 #endregion
 

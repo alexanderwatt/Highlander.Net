@@ -124,7 +124,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Rates
         /// Creates the curve.
         /// </summary>
         /// <returns></returns>
-        internal IDictionary<int, decimal> CreateCurve(int[] times, double[] amounts)
+        internal static IDictionary<int, decimal> CreateCurve(int[] times, double[] amounts)
         {
             IDictionary<int, decimal> curve = new Dictionary<int, decimal>();
             for (int idx = 0; idx < times.Length; idx++)

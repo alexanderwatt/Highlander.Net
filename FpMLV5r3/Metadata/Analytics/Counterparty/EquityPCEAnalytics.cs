@@ -27,79 +27,88 @@ using Highlander.Reporting.Analytics.V5r3.Statistics;
 
 namespace Highlander.Reporting.Analytics.V5r3.Counterparty
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EquityPCEAnalytics
     {
 
         //private const int cSeed = 3151;
-        private const int cPercentile = 95;
+        private const int CPercentile = 95;
 
         /// <summary>
         /// Gets the collar PCE.
         /// </summary>
-        /// <param name="ratedays">The ratedays.</param>
-        /// <param name="rateamts">The rateamts.</param>
-        /// <param name="divdays">The divdays.</param>
-        /// <param name="divamts">The divamts.</param>
+        /// <param name="payoff"></param>
+        /// <param name="rateDays">The rate days.</param>
+        /// <param name="rateAmounts">The rate amounts.</param>
+        /// <param name="dividendDays">The dividend days.</param>
+        /// <param name="dividendAmounts">The dividend amounts.</param>
         /// <param name="volSurface">The vol surface.</param>
         /// <param name="spot">The spot.</param>
-        /// <param name="callstrike">The callstrike.</param>
-        /// <param name="putstrike">The putstrike.</param>
+        /// <param name="callStrike">The call strike.</param>
+        /// <param name="putStrike">The put strike.</param>
         /// <param name="maturity">The maturity of the collar</param>
-        /// <param name="meanrev">The meanrev parameter used in the OU dynamics.</param>
-        /// <param name="histvol">The historical vol estimate used in the OU dynamics.</param>
-        /// <param name="timeSlice">The time slice.</param>
+        /// <param name="sigma"></param>
+        /// <param name="profileTimes"></param>
+        /// <param name="confidence"></param>
+        /// <param name="tStepSize"></param>
+        /// <param name="simulations"></param>
+        /// <param name="seed"></param>
+        /// <param name="kappa"></param>
+        /// <param name="theta"></param>
         /// <returns></returns>
         public static double[,] GetCollarPCE(string payoff,
-                                    int[] ratedays,
-                                    double[] rateamts,
-                                    int[] divdays,
-                                    double[] divamts,
+                                    int[] rateDays,
+                                    double[] rateAmounts,
+                                    int[] dividendDays,
+                                    double[] dividendAmounts,
                                     List<OrcWingParameters> volSurface,
                                     double spot,
-                                    double callstrike,
-                                    double putstrike,
+                                    double callStrike,
+                                    double putStrike,
                                     double maturity,
                                     double kappa,
                                     double theta,
                                     double sigma,
-                                    double[] profiletimes, 
+                                    double[] profileTimes, 
                                     double confidence,                                
-                                    double tstepSize,
+                                    double tStepSize,
                                     int simulations,
                                     int seed)	
          
         {
-            int nprofile = profiletimes.Length;        
-            double[,] results = new double[nprofile,3];
-            List<double> profileList = new List<double>(profiletimes);
-            List<double> _profiletimes = profileList.FindAll(delegate(double item) { return (item <= maturity); });       
+            int nProfile = profileTimes.Length;        
+            double[,] results = new double[nProfile,3];
+            List<double> profileList = new List<double>(profileTimes);
+            List<double> times = profileList.FindAll(item => (item <= maturity));       
             List<RiskStatistics> res = Euler( payoff,
-                                             ratedays,
-                                             rateamts,
-                                             divdays,
-                                             divamts,
+                                             rateDays,
+                                             rateAmounts,
+                                             dividendDays,
+                                             dividendAmounts,
                                              volSurface,
                                              spot,
-                                             callstrike,
-                                             putstrike,
+                                             callStrike,
+                                             putStrike,
                                              maturity,
-                                             _profiletimes.ToArray(),
+                                             times.ToArray(),
                                              kappa,
                                              theta,
                                              sigma,
                                              confidence,
-                                             tstepSize,
+                                             tStepSize,
                                              simulations,
                                              seed);
 
-            for (int idx = 0; idx < _profiletimes.Count; idx++)
+            for (int idx = 0; idx < times.Count; idx++)
             {
                 Statistics.Statistics stats = new Statistics.Statistics();
                 double[] sample = res[idx].Sample();
                 double mean = res[idx].Mean;
                 double stErrorEstimate = res[idx].ErrorEstimate;               
                 results[idx, 0] = mean;
-                results[idx, 1] = stats.Percentile(ref sample, cPercentile);       
+                results[idx, 1] = stats.Percentile(ref sample, CPercentile);       
                 results[idx, 2] = stErrorEstimate; 
             }
             return results;
@@ -132,33 +141,35 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
         /// Evaluate function points using GetYValue()
         /// </summary>
         /// <param name="payoff"></param>
-        /// <param name="ratedays"></param>
-        /// <param name="rateamts"></param>
-        /// <param name="divdays"></param>
-        /// <param name="divamts"></param>
+        /// <param name="rateDays"></param>
+        /// <param name="rateAmounts"></param>
+        /// <param name="dividendDays"></param>
+        /// <param name="dividendAmounts"></param>
         /// <param name="volSurface"></param>
         /// <param name="spot"></param>
-        /// <param name="callstrike"></param>
-        /// <param name="putstrike"></param>
+        /// <param name="callStrike"></param>
+        /// <param name="putStrike"></param>
         /// <param name="maturity"></param>
-        /// <param name="profiletimes"></param>
+        /// <param name="profileTimes"></param>
         /// <param name="kappa"></param>
         /// <param name="theta"></param>
         /// <param name="sigma"></param>
+        /// <param name="confidence"></param>
         /// <param name="tStepSize"></param>
         /// <param name="sims"></param>
+        /// <param name="seed"></param>
         /// <returns></returns>
         private static List<RiskStatistics> Euler(  string payoff,
-                                                    int[] ratedays,
-                                                    double[] rateamts,
-                                                    int[] divdays,
-                                                    double[] divamts,
+                                                    int[] rateDays,
+                                                    double[] rateAmounts,
+                                                    int[] dividendDays,
+                                                    double[] dividendAmounts,
                                                     List<OrcWingParameters> volSurface,
                                                     double spot,
-                                                    double callstrike,
-                                                    double putstrike,
+                                                    double callStrike,
+                                                    double putStrike,
                                                     double maturity,
-                                                    double[] profiletimes,
+                                                    double[] profileTimes,
                                                     double kappa,
                                                     double theta,
                                                     double sigma,
@@ -168,19 +179,18 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
                                                     int seed                        
                                                     )
         {           
-            double[] times = CreateTimeGrid(profiletimes, tStepSize);
+            double[] times = CreateTimeGrid(profileTimes, tStepSize);
             int n = times.Length;
-            int profilepoints = profiletimes.Length;
+            int profilePoints = profileTimes.Length;
             double lns0 = Math.Log(spot);
             IBasicRng basRng = new MCG31vsl(seed);
             //IContinousRng unifRng = new UniformRng(basRng,0,1);
             BoxMullerGaussianRng gen = new BoxMullerGaussianRng(basRng, 0, 1);            
             double[] lns = new double[n];                   
-            double[] results = new double[profilepoints];
-            List<double> _profileTimeList = new List<double>(profiletimes);
-            List<RiskStatistics> samples = new List<RiskStatistics>(profilepoints);
-            for (int idx = 0; idx < profilepoints; idx++) {samples.Add(new RiskStatistics()); }                     
-         
+            double[] results = new double[profilePoints];
+            List<double> profileTimeList = new List<double>(profileTimes);
+            List<RiskStatistics> samples = new List<RiskStatistics>(profilePoints);
+            for (int idx = 0; idx < profilePoints; idx++) {samples.Add(new RiskStatistics()); }
             for (int kdx = 0;kdx<sims;kdx++)
             {
                 int jdx = 0;               
@@ -191,10 +201,9 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
                     double dt = times[idx] - times[idx - 1];
                     wdt = gen.NextDouble() * Math.Sqrt(dt);
                     lns[idx] = theta + Math.Exp(-kappa * dt) * (lns[idx-1] - theta) + sigma * wdt;
-
-                    if (_profileTimeList.Contains(times[idx]))
+                    if (profileTimeList.Contains(times[idx]))
                     {
-                        double y = GetYValue(payoff ,ratedays, rateamts, divdays, divamts, volSurface, spot, Math.Exp(lns[idx]), callstrike, putstrike, times[idx], maturity, confidence);                               
+                        double y = GetYValue(payoff ,rateDays, rateAmounts, dividendDays, dividendAmounts, volSurface, spot, Math.Exp(lns[idx]), callStrike, putStrike, times[idx], maturity, confidence);                               
                         samples[jdx++].Add(y);
                     }      
                 }                               
@@ -202,42 +211,40 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
             return samples;
         }
 
- 
 
         /// <summary>
         /// Return the y-value or function evaluation at our simulated point
         /// </summary>
         /// <param name="function"></param>
-        /// <param name="ratedays"></param>
-        /// <param name="rateamts"></param>
-        /// <param name="divdays"></param>
-        /// <param name="divamts"></param>
+        /// <param name="ratedDays"></param>
+        /// <param name="rateAmounts"></param>
+        /// <param name="dividendDays"></param>
+        /// <param name="dividendAmounts"></param>
         /// <param name="volSurface"></param>
         /// <param name="spot"></param>
         /// <param name="s"></param>
-        /// <param name="callstrike"></param>
-        /// <param name="putstrike"></param>
+        /// <param name="callStrike"></param>
+        /// <param name="putStrike"></param>
         /// <param name="t0"></param>
         /// <param name="maturity"></param>
+        /// <param name="confidence"></param>
         /// <returns></returns>
         private static double GetYValue(string function,
-                                         int[] ratedays,
-                                         double[] rateamts,
-                                         int[] divdays,
-                                         double[] divamts,
+                                         int[] ratedDays,
+                                         double[] rateAmounts,
+                                         int[] dividendDays,
+                                         double[] dividendAmounts,
                                          List<OrcWingParameters> volSurface,
                                          double spot,
                                          double s,
-                                         double callstrike,
-                                         double putstrike,                                      
+                                         double callStrike,
+                                         double putStrike,                                      
                                          double t0,
                                          double maturity,
                                          double confidence)
         {
-            //double df = EquityAnalytics.GetDFCCLin365(0, t0, ratedays, rateamts);
-
             if (function == "CollarPCE")
-                return CollarPCEFunction(ratedays, rateamts, divdays, divamts, volSurface, spot, s, callstrike, putstrike, t0, maturity);
+                return CollarPCEFunction(ratedDays, rateAmounts, dividendDays, dividendAmounts, volSurface, spot, s, callStrike, putStrike, t0, maturity);
             if (function == "Asset")
                 return s;
             return 0.0;
@@ -246,39 +253,39 @@ namespace Highlander.Reporting.Analytics.V5r3.Counterparty
         /// <summary>
         /// Evaluate the PCE for a collar given the parameters passed below
         /// </summary>
-        /// <param name="ratedays"></param>
-        /// <param name="rateamts"></param>
-        /// <param name="divdays"></param>
-        /// <param name="divamts"></param>
+        /// <param name="rateDays"></param>
+        /// <param name="rateAmounts"></param>
+        /// <param name="dividendDays"></param>
+        /// <param name="dividendAmounts"></param>
         /// <param name="volSurface"></param>
         /// <param name="spot"></param>
         /// <param name="s"></param>
-        /// <param name="callstrike"></param>
-        /// <param name="putstrike"></param>
+        /// <param name="callStrike"></param>
+        /// <param name="putStrike"></param>
         /// <param name="t0"></param>
         /// <param name="maturity"></param>
         /// <returns></returns>
-        private static double CollarPCEFunction( int[] ratedays,
-                                    double[] rateamts,
-                                    int[] divdays,
-                                    double[] divamts,
+        private static double CollarPCEFunction( int[] rateDays,
+                                    double[] rateAmounts,
+                                    int[] dividendDays,
+                                    double[] dividendAmounts,
                                     List<OrcWingParameters> volSurface,
                                     double spot,
                                     double s,
-                                    double callstrike,
-                                    double putstrike,                          
+                                    double callStrike,
+                                    double putStrike,                          
                                     double t0,
                                     double maturity)
         {
             t0 = Math.Min(t0, maturity); // cap profile point to maturity;
             double tau = maturity - t0;
-            double r = EquityAnalytics.GetRateCCLin365(t0, maturity, ratedays, rateamts);
-            double q = EquityAnalytics.GetYieldCCLin365(spot, t0, maturity, divdays, divamts, ratedays, rateamts);            
-            double callvol = EquityAnalytics.GetWingValue(volSurface, new LinearInterpolation(), tau, callstrike);
-            double putvol = EquityAnalytics.GetWingValue(volSurface, new LinearInterpolation(), tau, putstrike);          
+            double r = EquityAnalytics.GetRateCCLin365(t0, maturity, rateDays, rateAmounts);
+            double q = EquityAnalytics.GetYieldCCLin365(spot, t0, maturity, dividendDays, dividendAmounts, rateDays, rateAmounts);            
+            double callVolatility = EquityAnalytics.GetWingValue(volSurface, new LinearInterpolation(), tau, callStrike);
+            double putVolatility = EquityAnalytics.GetWingValue(volSurface, new LinearInterpolation(), tau, putStrike);          
             double fwd = s * Math.Exp((r - q) * tau);
             BlackScholes bs = new BlackScholes();
-            double lhs = Math.Max(bs.BSprice(fwd, tau, callstrike, r, callvol, true) - bs.BSprice(fwd, tau, putstrike, r, putvol, false),0) ;
+            double lhs = Math.Max(bs.BSprice(fwd, tau, callStrike, r, callVolatility, true) - bs.BSprice(fwd, tau, putStrike, r, putVolatility, false),0) ;
             return lhs;
         }
 

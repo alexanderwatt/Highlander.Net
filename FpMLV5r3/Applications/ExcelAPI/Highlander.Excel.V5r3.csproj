@@ -36,7 +36,7 @@
     </DocumentationFile>
     <CodeAnalysisRuleSet>..\..\..\Standard Minimum.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <RegisterForComInterop>false</RegisterForComInterop>
+    <RegisterForComInterop>true</RegisterForComInterop>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -84,31 +84,21 @@
     <Compile Include="Analytics\SwapAnalytics.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Financial\Pricers.cs" />
     <Compile Include="ExcelApiResource.Designer.cs" />
     <Compile Include="Extensions\ExcelApiExtensions.cs" />
     <Compile Include="Extensions\ResourceLoader.cs" />
-    <Compile Include="Financial\SABR.cs" />
-    <Compile Include="Helpers\ApplicationHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\AssemblyInfo.cs" />
     <Compile Include="Helpers\DataRangeHelper.cs" />
-    <Compile Include="Financial\Assets.cs" />
-    <Compile Include="Financial\PricingStructures.cs" />
     <Compile Include="Helpers\RangeFunctions.cs" />
     <Compile Include="Information.cs" />
     <Compile Include="Maths\Numerics.cs" />
     <Compile Include="Runtime\RuntimeEnvironment.cs" />
-    <Compile Include="Financial\Dates.cs" />
-    <Compile Include="Helpers\ProductResultsHelper.cs" />
-    <Compile Include="Helpers\RangeTermsHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Utility\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
@@ -299,9 +289,7 @@
     <None Include="Spreadsheets\Volatility\VolCubePublisher_v2.xlsx" />
     <None Include="Spreadsheets\Volatility\VolPublisher_v2.xlsx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utility\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="ExcelApiResource.resx">
       <SubType>Designer</SubType>

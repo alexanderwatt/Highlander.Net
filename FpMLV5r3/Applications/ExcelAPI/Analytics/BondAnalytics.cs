@@ -18,7 +18,7 @@
 using System;
 using System.Runtime.InteropServices;
 using Highlander.Reporting.Analytics.V5r3.Rates;
-using HLV5r3.Helpers;
+using Highlander.Utilities.Helpers;
 using Microsoft.Win32;
 
 #endregion

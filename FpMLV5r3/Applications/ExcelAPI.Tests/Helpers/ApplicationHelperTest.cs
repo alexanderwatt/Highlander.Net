@@ -14,7 +14,7 @@
 */
 
 using System.Diagnostics;
-using HLV5r3.Helpers;
+using Highlander.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Excel.Tests.V5r3.Helpers

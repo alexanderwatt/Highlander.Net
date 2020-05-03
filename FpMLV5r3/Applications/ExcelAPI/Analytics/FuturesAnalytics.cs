@@ -18,9 +18,9 @@
 using System;
 using System.Runtime.InteropServices;
 using Highlander.Reporting.Analytics.V5r3.Rates;
+using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
-using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
 
@@ -85,12 +85,12 @@ namespace HLV5r3.Analytics
         /// optimization routine to converge on each adjusted rate. In the first
         /// entry in the fourth and fifth column is the time taken to work 
         /// through the whole set of time nodes, and the program version.</returns>
-        public static object[,] CalculateCashForward(Excel.Range futuresPriceArray,
-                                                        Excel.Range volatilityRange,
-                                                        Excel.Range correlationRange,
-                                                        Excel.Range shiftArray,
-                                                        Excel.Range coverageArray,
-                                                        Excel.Range timeNodesArray)
+        public static object[,] CalculateCashForward(object futuresPriceArray,
+            object[,] volatilityRange,
+            object[,] correlationRange,
+            object shiftArray,
+            object coverageArray,
+            object timeNodesArray)
         {
             var futuresPrice = DataRangeHelper.StripDoubleRange(futuresPriceArray);
             var shift = DataRangeHelper.StripDoubleRange(shiftArray);

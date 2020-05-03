@@ -21,9 +21,9 @@ using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.Reporting.Analytics.V5r3.Rates;
 using Highlander.Reporting.Helpers.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3;
+using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
-using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
 
@@ -114,7 +114,7 @@ namespace HLV5r3.Analytics
         /// <param name="forwardRates">The forward rates.</param>
         /// <param name="notionals">The notionals</param>
         /// <returns>The break even rate.</returns>
-        public double NPV(Excel.Range notionals, Excel.Range forwardRates, Excel.Range paymentDiscountFactors, Excel.Range yearFractions)
+        public double NPV(object notionals, object forwardRates, object paymentDiscountFactors, object yearFractions)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqForwardRates = DataRangeHelper.StripDoubleRange(forwardRates);
@@ -133,8 +133,8 @@ namespace HLV5r3.Analytics
         /// <param name="principalNotionals">The principal exchange notionals.</param>
         /// <param name="principalPaymentDiscountFactors">The payment discount factors for the principal exchanges.</param>
         /// <returns>The break even rate.</returns>
-        public double NPVWithExchanges(Excel.Range couponNotionals, Excel.Range forwardRates, Excel.Range couponPaymentDiscountFactors,
-                                               Excel.Range yearFractions, Excel.Range principalNotionals, Excel.Range principalPaymentDiscountFactors)
+        public double NPVWithExchanges(object couponNotionals, object forwardRates, object couponPaymentDiscountFactors,
+            object yearFractions, object principalNotionals, object principalPaymentDiscountFactors)
         {
             var unqCouponNotionals = DataRangeHelper.StripDoubleRange(couponNotionals);
             var unqForwardRates = DataRangeHelper.StripDoubleRange(forwardRates);
@@ -154,7 +154,7 @@ namespace HLV5r3.Analytics
         /// <param name="forwardRates">The forward rates.</param>
         /// <param name="notionals">The notionals</param>
         /// <returns>The break even rate.</returns>
-        public double BreakEvenRate(Excel.Range notionals, Excel.Range forwardRates, Excel.Range paymentDiscountFactors, Excel.Range yearFractions)
+        public double BreakEvenRate(object notionals, object forwardRates, object paymentDiscountFactors, object yearFractions)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqForwardRates = DataRangeHelper.StripDoubleRange(forwardRates);
@@ -173,9 +173,9 @@ namespace HLV5r3.Analytics
         /// <param name="principalNotionals">The principal exchange notionals.</param>
         /// <param name="principalPaymentDiscountFactors">The payment discount factors for the principal exchanges.</param>
         /// <returns>The break even rate.</returns>
-        public double BreakEvenRateWithExchanges(Excel.Range couponNotionals, Excel.Range forwardRates,
-                                                         Excel.Range couponPaymentDiscountFactors, Excel.Range yearFractions, Excel.Range principalNotionals,
-                                                         Excel.Range principalPaymentDiscountFactors)
+        public double BreakEvenRateWithExchanges(object couponNotionals, object forwardRates,
+            object couponPaymentDiscountFactors, object yearFractions, object principalNotionals,
+            object principalPaymentDiscountFactors)
         {
             var unqCouponNotionals = DataRangeHelper.StripDoubleRange(couponNotionals);
             var unqForwardRates = DataRangeHelper.StripDoubleRange(forwardRates);
@@ -196,7 +196,7 @@ namespace HLV5r3.Analytics
         /// <param name="notionals">The notionals</param>
         /// <param name="fixedFlag">Delta0 is zero for fixed coupons.</param>
         /// <returns>The break even rate.</returns>
-        public double Delta0(Excel.Range notionals, Excel.Range paymentDiscountFactors, Excel.Range yearFractions, bool fixedFlag)
+        public double Delta0(object notionals, object paymentDiscountFactors, object yearFractions, bool fixedFlag)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -214,8 +214,8 @@ namespace HLV5r3.Analytics
         /// <param name="fixedFlag">Delta0 is zero for fixed coupons.</param>
         /// <param name="principalNotionals">The principal Exchanges.</param>
         /// <returns>The break even rate.</returns>
-        public double Delta0WithExchanges(Excel.Range notionals, Excel.Range paymentDiscountFactors, Excel.Range yearFractions,
-                                                  Excel.Range principalNotionals, Excel.Range principalPaymentDiscountFactors, bool fixedFlag)
+        public double Delta0WithExchanges(object notionals, object paymentDiscountFactors, object yearFractions,
+            object principalNotionals, object principalPaymentDiscountFactors, bool fixedFlag)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -234,8 +234,8 @@ namespace HLV5r3.Analytics
         /// <param name="curveYearFractions">The curve year fractions.</param>
         /// <param name="periodAsTimesPerYears">Delta1 compounding Frequency.</param>
         /// <returns>The break even rate.</returns>
-        public double Delta1(Excel.Range amounts, Excel.Range paymentDiscountFactors,
-                                     Excel.Range curveYearFractions, double periodAsTimesPerYears)
+        public double Delta1(object amounts, object paymentDiscountFactors,
+            object curveYearFractions, double periodAsTimesPerYears)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(amounts);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -255,9 +255,9 @@ namespace HLV5r3.Analytics
         /// <param name="couponCurveYearsFractions">The coupon time to payments.</param>
         /// <param name="principalNotionals">The principal Exchanges.</param>
         /// <returns>The break even rate.</returns>
-        public double Delta1WithExchanges(Excel.Range notionals, Excel.Range paymentDiscountFactors,
-                                                  Excel.Range yearFractions, Excel.Range couponCurveYearsFractions, Excel.Range principalNotionals,
-                                                  Excel.Range principalPaymentDiscountFactors, Excel.Range principalCurveYearFractions, double compoundingFrequency)
+        public double Delta1WithExchanges(object notionals, object paymentDiscountFactors,
+            object yearFractions, object couponCurveYearsFractions, object principalNotionals,
+            object principalPaymentDiscountFactors, object principalCurveYearFractions, double compoundingFrequency)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -279,8 +279,8 @@ namespace HLV5r3.Analytics
         /// <param name="periodAsTimesPerYears">The compounding year fractions.</param>
         /// <param name="curveYearFractions">The time to payment year fractions.</param>
         /// <returns></returns>
-        public double Delta1Arrays(Excel.Range amounts, Excel.Range paymentDiscountFactors,
-                                           Excel.Range curveYearFractions, double periodAsTimesPerYears)
+        public double Delta1Arrays(object amounts, object paymentDiscountFactors,
+            object curveYearFractions, double periodAsTimesPerYears)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(amounts);
             var unqCouponPaymentDiscountFactors = DataRangeHelper.StripDoubleRange(paymentDiscountFactors);
@@ -299,8 +299,8 @@ namespace HLV5r3.Analytics
         /// <param name="periodAsTimesPerYears">The compounding year fractions.</param>
         /// <param name="curveYearFractions">The time to payment year fractions.</param>
         /// <returns></returns>
-        public double Delta1Arrays2(Excel.Range notionals, Excel.Range yearFractions, Excel.Range rates,
-                                           Excel.Range paymentDiscountFactors, Excel.Range curveYearFractions, double periodAsTimesPerYears)
+        public double Delta1Arrays2(object notionals, object yearFractions, object rates,
+            object paymentDiscountFactors, object curveYearFractions, double periodAsTimesPerYears)
         {
             var unqNotionals = DataRangeHelper.StripDoubleRange(notionals);
             var unqRates = DataRangeHelper.StripDoubleRange(rates);

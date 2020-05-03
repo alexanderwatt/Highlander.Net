@@ -70,6 +70,7 @@ namespace Highlander.Configuration.Data.V5r3
         {
             if (product is Swap) return "swap";
             if (product is LeaseTransaction) return "lease";
+            if (product is PropertyTransaction) return "property";
             if (product is TermDeposit) return "termDeposit";
             if (product is BulletPayment) return "bulletPayment";
             if (product is BondOption) return "bondOption";

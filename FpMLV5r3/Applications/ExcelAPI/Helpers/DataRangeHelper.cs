@@ -367,6 +367,46 @@ namespace HLV5r3.Helpers
         /// 
         /// </summary>
         /// <param name="inputRange"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T[,] ToMatrix<T>(object inputRange)
+        {
+            if (inputRange == null) return null;
+            if (inputRange is object[,] matrix)
+            {
+                int rowCount = matrix.RowCount();
+                int colCount = matrix.ColumnCount();
+                var result = new T[rowCount, colCount];
+                var rowIndex = 0;
+                var colIndex = 0;
+                if (rowCount > 1 || colCount > 1)
+                {
+                    for (int i = 0; i <= rowCount; i++)
+                    {
+                        for (int j = 0; j <= colCount; j++)
+                        {
+                            result[rowIndex, colIndex] = (T)matrix[i, j];
+                            colIndex++;
+                        }
+
+                        colIndex = 0;
+                        rowIndex++;
+                    }
+                }
+            }
+            else
+            {
+                var result = new T[1, 1];
+                result[0,0] = (T)inputRange;
+                return result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputRange"></param>
         /// <returns></returns>
         public static object[,] ToMatrix(Excel.Range inputRange)
         {
@@ -794,6 +834,33 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="excelRange"></param>
         /// <returns></returns>
+        public static List<string> StripRange(object excelRange)
+        {
+            if (excelRange != null)
+            {
+                var unqValues = new List<string>();
+                if (excelRange is object[,] values)
+                {
+                    foreach (object obj in values)
+                    {
+                        unqValues.Add(obj.ToString());
+                    }
+                }
+                else
+                {
+                    var elements = excelRange.ToString().Split('-');
+                        unqValues.AddRange(elements);
+                }
+                return unqValues;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelRange"></param>
+        /// <returns></returns>
         public static List<DateTime> StripDateTimeRange(Excel.Range excelRange)
         {
             var unqValues = new List<DateTime>();
@@ -814,6 +881,37 @@ namespace HLV5r3.Helpers
                 unqValues.Add(date);
             }
             return unqValues;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelRange"></param>
+        /// <returns></returns>
+        public static List<DateTime> StripDateTimeRange(object excelRange)
+        {
+            if (excelRange != null)
+            {
+                var unqValues = new List<DateTime>();
+                if (excelRange is object[,] values)
+                {
+                    foreach (object obj in values)
+                    {
+                        var date = obj is DateTime;
+                        if (date)
+                        {
+                            unqValues.Add((DateTime) obj);
+                        }
+                    }
+                }
+                else
+                {
+                    var date = (DateTime) excelRange;
+                    unqValues.Add(date);
+                }
+                return unqValues;
+            }
+            return null;
         }
 
         /// <summary>
@@ -855,6 +953,41 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="excelRange"></param>
         /// <returns></returns>
+        public static List<int> StripIntRange(object excelRange)
+        {
+            if (excelRange != null)
+            {
+                var unqValues = new List<int>();
+                if (excelRange is object[,] values)
+                {
+                    foreach (object obj in values)
+                    {
+                        try
+                        {
+                            var result = obj is int;
+                            unqValues.Add(!result ? int.Parse(obj.ToString()) : Convert.ToInt32(obj));
+                        }
+                        catch
+                        {
+                            throw new Exception("The value of this range is not a valid integer.");
+                        }
+                    }
+                }
+                else
+                {
+                    unqValues.Add(Convert.ToInt32(excelRange));
+                }
+
+                return unqValues;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelRange"></param>
+        /// <returns></returns>
         public static List<double> StripDoubleRange(Excel.Range excelRange)
         {
             var unqValues = new List<double>();
@@ -883,6 +1016,33 @@ namespace HLV5r3.Helpers
         /// </summary>
         /// <param name="excelRange"></param>
         /// <returns></returns>
+        public static List<double> StripDoubleRange(object excelRange)
+        {
+            if (excelRange != null)
+            {
+                var unqValues = new List<double>();
+                if (excelRange is object[,] values)
+                {
+                    foreach (object obj in values)
+                    {
+                        unqValues.Add(obj != null ? Convert.ToDouble(obj) : 0.0);
+                    }
+                }
+                else
+                {
+                    unqValues.Add(Convert.ToDouble(excelRange));
+                }
+
+                return unqValues;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelRange"></param>
+        /// <returns></returns>
         public static List<decimal> StripDecimalRange(Excel.Range excelRange)
         {
             var unqValues = new List<decimal>();
@@ -903,6 +1063,33 @@ namespace HLV5r3.Helpers
                 }
             }
             return unqValues;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelRange"></param>
+        /// <returns></returns>
+        public static List<decimal> StripDecimalRange(object excelRange)
+        {
+            if (excelRange != null)
+            {
+                var unqValues = new List<decimal>();
+                if (excelRange is object[,] values)
+                {
+                    foreach (object obj in values)
+                    {
+                        unqValues.Add(obj != null ? Convert.ToDecimal(obj) : 0.0m);
+                    }
+                }
+                else
+                {
+                    unqValues.Add(Convert.ToDecimal(excelRange));
+                }
+
+                return unqValues;
+            }
+            return null;
         }
 
         #endregion

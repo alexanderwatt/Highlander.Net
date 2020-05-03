@@ -19,9 +19,7 @@ using System;
 using System.Runtime.InteropServices;
 using Highlander.Reporting.Analytics.V5r3.Counterparty;
 using Highlander.Utilities.Helpers;
-using HLV5r3.Helpers;
 using Microsoft.Win32;
-using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 
 #endregion
 
@@ -45,7 +43,7 @@ namespace HLV5r3.Analytics
         {
             Registry.ClassesRoot.CreateSubKey(ApplicationHelper.GetSubKeyName(type, "Programmable"));
             RegistryKey key = Registry.ClassesRoot.OpenSubKey(ApplicationHelper.GetSubKeyName(type, "InprocServer32"), true);
-            key.SetValue("", Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
+            key?.SetValue("", Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
         }
 
         /// <summary>
@@ -81,7 +79,7 @@ namespace HLV5r3.Analytics
         /// <param name="ffp"></param>
         /// <param name="fxRate"></param>
         /// <returns></returns>
-        public decimal[,] CalculateROE(decimal[,] revenue, decimal[] sp, decimal[] cost, decimal[] rore,
+        public decimal[,] CalculateReturnOnEquity(decimal[,] revenue, decimal[] sp, decimal[] cost, decimal[] rore,
             decimal[] dfCapital, decimal[] dfMarket, decimal taxRate, decimal frankingRate,
             decimal[] regCap, decimal ffp, decimal fxRate)
         {

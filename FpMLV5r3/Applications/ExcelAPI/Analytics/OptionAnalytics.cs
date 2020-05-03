@@ -19,7 +19,7 @@ using System;
 using System.Runtime.InteropServices;
 using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.Analytics.V5r3.Options;
-using HLV5r3.Helpers;
+using Highlander.Utilities.Helpers;
 using Microsoft.Win32;
 
 #endregion
@@ -44,7 +44,7 @@ namespace HLV5r3.Analytics
         {
             Registry.ClassesRoot.CreateSubKey(ApplicationHelper.GetSubKeyName(type, "Programmable"));
             RegistryKey key = Registry.ClassesRoot.OpenSubKey(ApplicationHelper.GetSubKeyName(type, "InprocServer32"), true);
-            key.SetValue("", System.Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
+            key?.SetValue("", System.Environment.SystemDirectory + @"\mscoree.dll", RegistryValueKind.String);
         }
 
         /// <summary>

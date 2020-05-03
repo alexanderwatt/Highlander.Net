@@ -26,9 +26,8 @@ using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
-using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using DivList = Highlander.Equities.DivList;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 using ZeroCurve = Highlander.Reporting.Analytics.V5r3.Rates.ZeroCurve;
 
 #endregion
@@ -66,50 +65,50 @@ namespace HLV5r3.Analytics
         }
 
         #endregion
-        
+
         #region Constructor
 
         #endregion
-        
+
         #region Portfolio Interface
 
-        //private const int CArrsize = 10000;
+        //private const int CArraySize = 10000;
 
-        //public object[,] PortfolioOptimizer(Excel.Range portfolioArray)
+        //public object[,] PortfolioOptimizer(object[,] portfolioArray)
+        //{
+        //    //var portfolioArray = portfolioArray.get_Value(System.Reflection.Missing.Value) as object[,];
+        //    if (portfolioArray != null)
         //    {
-        //        var _portfolioArray = portfolioArray.get_Value(System.Reflection.Missing.Value) as object[,];
-        //        if (_portfolioArray != null)
+        //        int iRows = portfolioArray.GetUpperBound(0);
+        //        //int iCols = _PortfolioArray.GetUpperBound(1);
+        //        var res = new object[iRows, 2];
+        //        var portfolio = new List<Stock>();
+        //        var lp = new LinearProgramming();
+        //        for (int idx = 1; idx <= iRows; idx++)
         //        {
-        //            int iRrows = _portfolioArray.GetUpperBound(0);
-        //            //int iRcols = _PortfolioArray.GetUpperBound(1);
-        //            var res = new object[iRrows, 2];
-        //            var portfolio = new List<Stock>();
-        //            var lp = new LinearProgramming();
-        //            for (int idx = 1; idx <= iRrows; idx++)
+        //            string stockName = Convert.ToString(portfolioArray[idx, 1]);
+        //            var stockDollars = (double)portfolioArray[idx, 2];
+        //            if (stockDollars > 0)
         //            {
-        //                string stockName = Convert.ToString(_portfolioArray[idx, 1]);
-        //                var stockDollars = (double)_portfolioArray[idx, 2];
-        //                if (stockDollars > 0)
-        //                {
-        //                    var stock = new Stock(stockName, stockDollars);
-        //                    portfolio.Add(stock);
-        //                }
+        //                var stock = new Stock(stockName, stockDollars);
+        //                portfolio.Add(stock);
         //            }
-        //            portfolio.Sort();
-        //            lp.Portfolio = portfolio;
-        //            double[] solutionVector = lp.CalcFinalOptimum();
-        //            var stockArray = new Stock[portfolio.Count];
-        //            portfolio.CopyTo(stockArray);
-        //            // Excel API expects a zero-based array to be returned;
-        //            for (int idx = 0; idx < solutionVector.Length; idx++)
-        //            {
-        //                res[idx, 0] = stockArray[idx].StockName;
-        //                res[idx, 1] = solutionVector[idx].ToString(CultureInfo.InvariantCulture);
-        //            }
-        //            return res;
         //        }
-        //        return null;
+        //        portfolio.Sort();
+        //        lp.Portfolio = portfolio;
+        //        double[] solutionVector = lp.CalcFinalOptimum();
+        //        var stockArray = new Stock[portfolio.Count];
+        //        portfolio.CopyTo(stockArray);
+        //        // Excel API expects a zero-based array to be returned;
+        //        for (int idx = 0; idx < solutionVector.Length; idx++)
+        //        {
+        //            res[idx, 0] = stockArray[idx].StockName;
+        //            res[idx, 1] = solutionVector[idx].ToString(CultureInfo.InvariantCulture);
+        //        }
+        //        return res;
         //    }
+        //    return null;
+        //}
 
         #endregion
 
@@ -124,22 +123,22 @@ namespace HLV5r3.Analytics
         /// <param name="style"></param>
         /// <param name="tradeDate"></param>
         /// <param name="expiryDate"></param>
-            /// <param name="zeroRange"></param>
-            /// <param name="divRange"></param>
-            /// <param name="orcParamsRange"></param>
+        /// <param name="zeroRange"></param>
+        /// <param name="divRange"></param>
+        /// <param name="orcParamsRange"></param>
         /// <returns></returns>
         public static double PutCollarPricer(string underlying, double spot, double callStrike,
                                       string style, DateTime tradeDate, DateTime expiryDate,
-                                      Excel.Range zeroRange,
-                                      Excel.Range divRange, Excel.Range orcParamsRange)
+                                      object[,] zeroRange,
+                                      object[,] divRange, object[,] orcParamsRange)
         {
-            var values = orcParamsRange.Value[System.Reflection.Missing.Value] as object[,];
-            values = (object[,])DataRangeHelper.TrimNulls(values);
-            var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(values));
-            var zeroArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
-            var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroArray);
-            var divArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
-            var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divArray);
+            //var values = ((Excel.Range)orcParamsRange).Value[System.Reflection.Missing.Value] as object[,];
+            orcParamsRange = (object[,])DataRangeHelper.TrimNulls(orcParamsRange);
+            var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(orcParamsRange));
+            //var zeroArray = ((Excel.Range)zeroRange).Value[System.Reflection.Missing.Value] as object[,];
+            var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroRange);
+            //var divArray = ((Excel.Range)zeroRange).Value[System.Reflection.Missing.Value] as object[,];
+            var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divRange);
             var result = CollarPricer.PutCollarPricer(underlying, spot, callStrike,
                                                                    style, tradeDate, expiryDate,
                                                                    zeroes, divs, orcParams);
@@ -161,16 +160,16 @@ namespace HLV5r3.Analytics
         /// <returns></returns>
         public static double CallCollarPricer(string underlying, double spot, double callStrike,
                                       string style, DateTime tradeDate, DateTime expiryDate,
-                                      Excel.Range zeroRange,
-                                      Excel.Range divRange, Excel.Range orcParamsRange)
+                                      object[,] zeroRange,
+                                      object[,] divRange, object[,] orcParamsRange)
         {
-            var values = orcParamsRange.Value[System.Reflection.Missing.Value] as object[,];
-            values = (object[,])DataRangeHelper.TrimNulls(values);
-            var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(values));
-            var zeroArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
-            var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroArray);
-            var divArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
-            var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divArray);
+            //var values = orcParamsRange.Value[System.Reflection.Missing.Value] as object[,];
+            orcParamsRange = (object[,])DataRangeHelper.TrimNulls(orcParamsRange);
+            var orcParams = RangeHelper.Convert2DArrayToClass<WingParamsRange>(ArrayHelper.RangeToMatrix(orcParamsRange));
+            //var zeroArray = zeroRange.Value[System.Reflection.Missing.Value] as object[,];
+            var zeroes = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<ZeroCurveRange>(zeroRange);
+            //var divArray = divRange.Value[System.Reflection.Missing.Value] as object[,];
+            var divs = ObjectToArrayOfPropertiesConverter.CreateListFromHorizontalArrayRange<DividendRange>(divRange);
             var result = CollarPricer.CallCollarPricer(underlying, spot, callStrike,
                                                                    style, tradeDate, expiryDate,
                                                                    zeroes, divs, orcParams);
@@ -207,10 +206,10 @@ namespace HLV5r3.Analytics
                 string sStyle,
                 int nGrid,
                 double tStep,
-                Excel.Range divAmountsAsArray,
-                Excel.Range divDatesAsArray,
-                Excel.Range zeroAmountsAsArray,
-                Excel.Range zeroDatesAsArray)
+                object divAmountsAsArray,
+                object divDatesAsArray,
+                object zeroAmountsAsArray,
+                object zeroDatesAsArray)
         {
             //Map the ranges
             var divAmounts = DataRangeHelper.StripDoubleRange(divAmountsAsArray);
@@ -275,80 +274,80 @@ namespace HLV5r3.Analytics
             /// <param name="spot"></param>
             /// <param name="strike"></param>
             /// <param name="sig"></param>
-            /// <param name="dexp"></param>
+            /// <param name="dExp"></param>
             /// <param name="sPay"></param>
             /// <param name="sStyle"></param>
             /// <param name="nGrid"></param>
             /// <param name="tStep"></param>
-            /// <param name="divamsAsArray"></param>
-            /// <param name="divdatesAsArray"></param>
-            /// <param name="zeramsAsArray"></param>
-            /// <param name="zerdatesAsArray"></param>
+            /// <param name="dividendAmountsAsArray"></param>
+            /// <param name="dividendDatesAsArray"></param>
+            /// <param name="zeroAmountsAsArray"></param>
+            /// <param name="zeroDatesAsArray"></param>
             /// <returns></returns>
             public static double GetEquityImpliedVol(double pTarget, DateTime today,
                 double spot,
                 double strike,
                 double sig,
-                DateTime dexp,
+                DateTime dExp,
                 string sPay,
                 string sStyle,
                 int nGrid,
                 double tStep,
-                Excel.Range divamsAsArray,
-                Excel.Range divdatesAsArray,
-                Excel.Range zeramsAsArray,
-                Excel.Range zerdatesAsArray)
+                object dividendAmountsAsArray,
+                object dividendDatesAsArray,
+                object zeroAmountsAsArray,
+                object zeroDatesAsArray)
             {
                 double sG = sig;
                 for (int idx = 0; idx != 25; idx++)
                 {
-                    double res = GetEquityPrice(today, spot, strike, sG, dexp, sPay, sStyle, nGrid, tStep, divamsAsArray, divdatesAsArray, zeramsAsArray, zerdatesAsArray)
+                    double res = GetEquityPrice(today, spot, strike, sG, dExp, sPay, sStyle, nGrid, tStep, dividendAmountsAsArray, dividendDatesAsArray, zeroAmountsAsArray, zeroDatesAsArray)
                         - pTarget;
                     if (Math.Abs(res) < 0.00001) { return sG; }
-                    var resUp = GetEquityPrice(today, spot, strike, sG + 0.001, dexp, sPay, sStyle, nGrid, tStep, divamsAsArray, divdatesAsArray, zeramsAsArray, zerdatesAsArray)
+                    var resUp = GetEquityPrice(today, spot, strike, sG + 0.001, dExp, sPay, sStyle, nGrid, tStep, dividendAmountsAsArray, dividendDatesAsArray, zeroAmountsAsArray, zeroDatesAsArray)
                         - pTarget;
                     sG -= res * 0.001 / (resUp - res);
                 }
                 return 0.0;
             }
 
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="today"></param>
-            /// <param name="spot"></param>
-            /// <param name="strike"></param>
-            /// <param name="sig"></param>
-            /// <param name="dexp"></param>
-            /// <param name="sPay"></param>
-            /// <param name="sStyle"></param>
-            /// <param name="nGrid"></param>
-            /// <param name="tStep"></param>
-            /// <param name="iNum"></param>
-            /// <param name="divAmountsAsArray"></param>
-            /// <param name="divDatesAsArray"></param>
-            /// <param name="zeroAmountsAsArray"></param>
-            /// <param name="zeroDatesAsArray"></param>
-            /// <returns></returns>
-            public static double GetEquityGreeks(DateTime today,
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="today"></param>
+        /// <param name="spot"></param>
+        /// <param name="strike"></param>
+        /// <param name="sig"></param>
+        /// <param name="dExp"></param>
+        /// <param name="sPay"></param>
+        /// <param name="sStyle"></param>
+        /// <param name="nGrid"></param>
+        /// <param name="tStep"></param>
+        /// <param name="iNum"></param>
+        /// <param name="dividendAmountsAsArray"></param>
+        /// <param name="dividendDatesAsArray"></param>
+        /// <param name="zeroAmountsAsArray"></param>
+        /// <param name="zeroDatesAsArray"></param>
+        /// <returns></returns>
+        public static double GetEquityGreeks(DateTime today,
                 double spot,
                 double strike,
                 double sig,
-                DateTime dexp,
+                DateTime dExp,
                 string sPay,
                 string sStyle,
                 int nGrid,
                 double tStep,
                 int iNum,
-                Excel.Range divAmountsAsArray,
-                Excel.Range divDatesAsArray,
-                Excel.Range zeroAmountsAsArray,
-                Excel.Range zeroDatesAsArray
+                object dividendAmountsAsArray,
+                object dividendDatesAsArray,
+                object zeroAmountsAsArray,
+                object zeroDatesAsArray
               )
             {
                 //Map the ranges
-                var divAmounts = DataRangeHelper.StripDoubleRange(divAmountsAsArray);
-                var divDates = DataRangeHelper.StripDateTimeRange(divAmountsAsArray);
+                var divAmounts = DataRangeHelper.StripDoubleRange(dividendAmountsAsArray);
+                var divDates = DataRangeHelper.StripDateTimeRange(dividendDatesAsArray);
                 var zeroAmounts = DataRangeHelper.StripDoubleRange(zeroAmountsAsArray);
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 //set up the DivList
@@ -374,11 +373,11 @@ namespace HLV5r3.Analytics
                     myZero.SetR(idx, r, ts.Days / 365.0);
                 }
                 //compute the discounted dividends to  expiry and work out continuous
-                TimeSpan tsE = dexp - today;
-                double texp = tsE.Days / 365.0;
+                TimeSpan tsE = dExp - today;
+                double tExp = tsE.Days / 365.0;
                 for (int idx = 0; idx != nd; idx++)
                 {
-                    if (myDiv.GetT(idx) <= texp)
+                    if (myDiv.GetT(idx) <= tExp)
                     {
                         double d = myDiv.GetD(idx)*Math.Exp(-myDiv.GetT(idx)*myZero.LinInterp(myDiv.GetT(idx)));
                     }
@@ -387,14 +386,14 @@ namespace HLV5r3.Analytics
                 //double rc = myZero.linInterp(texp);
                 var myG = new Grid
                     {
-                        XL = Math.Log(spot) - 8.0*sig*Math.Sqrt(texp),
-                        Xu = Math.Log(spot) + 8.0*sig*Math.Sqrt(texp),
+                        XL = Math.Log(spot) - 8.0*sig*Math.Sqrt(tExp),
+                        Xu = Math.Log(spot) + 8.0*sig*Math.Sqrt(tExp),
                         Steps = nGrid,
                         Strike = strike,
                         Spot = spot,
                         SPay = sPay,
                         SStyle = sStyle,
-                        T = texp
+                        T = tExp
                     };
                 myG.NTsteps = Convert.ToInt32(myG.T / tStep);
                 myG.Sig = sig;
@@ -408,71 +407,70 @@ namespace HLV5r3.Analytics
 
             ///<summary>
             ///</summary>
-            ///<param name="ratedaysAsArray"></param>
-            ///<param name="rateamtsAsArray"></param>
-            ///<param name="divdaysAsArray"></param>
-            ///<param name="divamtsAsArray"></param>
-            ///<param name="voltimesAsArray"></param>
+            ///<param name="rateDaysAsArray"></param>
+            ///<param name="rateAmountsAsArray"></param>
+            ///<param name="dividendDaysAsArray"></param>
+            ///<param name="dividendAmountsAsArray"></param>
+            ///<param name="volatilityTimesAsArray"></param>
             ///<param name="volatilitiesAsRange"></param>
             ///<param name="spot"></param>
-            ///<param name="callstrike"></param>
-            ///<param name="putstrike"></param>
+            ///<param name="callStrike"></param>
+            ///<param name="putStrike"></param>
             ///<param name="maturity"></param>
             ///<param name="kappa"></param>
             ///<param name="theta"></param>
             ///<param name="sigma"></param>
-            ///<param name="profiletimes"></param>
+            ///<param name="profileTimes"></param>
             ///<param name="confidence"></param>
-            ///<param name="tstepSize"></param>
+            ///<param name="tStepSize"></param>
             ///<param name="simulations"></param>
             ///<param name="seed"></param>
             ///<returns></returns>
-            public double[,] GetCollarPCE(Excel.Range ratedaysAsArray,
-                                                Excel.Range rateamtsAsArray,
-                                                Excel.Range divdaysAsArray,
-                                                Excel.Range divamtsAsArray,
-                                                Excel.Range voltimesAsArray,
-                                                Excel.Range volatilitiesAsRange,
+            public double[,] GetCollarPCE(object rateDaysAsArray,
+                                                object rateAmountsAsArray,
+                                                object dividendDaysAsArray,
+                                                object dividendAmountsAsArray,
+                                                object volatilityTimesAsArray,
+                                                object[,] volatilitiesAsRange,
                                                 double spot,
-                                                double callstrike,
-                                                double putstrike,
+                                                double callStrike,
+                                                double putStrike,
                                                 double maturity,
                                                 double kappa,
                                                 double theta,
                                                 double sigma,
-                                                Excel.Range profiletimes, 
+                                                object profileTimes, 
                                                 double confidence,                                
-                                                double tstepSize,
+                                                double tStepSize,
                                                 int simulations,
                                                 int seed)
             {
                 //Map Ranges
-                var rateamts = DataRangeHelper.StripDoubleRange(rateamtsAsArray);
-                var divamts = DataRangeHelper.StripDoubleRange(divamtsAsArray);
-                var voltimes = DataRangeHelper.StripDoubleRange(voltimesAsArray);
-                var divdays = DataRangeHelper.StripIntRange(divdaysAsArray);
-                var ratedays = DataRangeHelper.StripIntRange(ratedaysAsArray);
-                var profile = DataRangeHelper.StripDoubleRange(profiletimes);
-                var volatilities = volatilitiesAsRange.Value[System.Reflection.Missing.Value] as object[,];
-                var volatilitiesAsDoubles = RangeHelper.RangeToDoubleMatrix(volatilities);
-                List<OrcWingParameters> volSurf = UnpackWing(volatilitiesAsDoubles, voltimes.ToArray(), spot, ratedays.ToArray(), rateamts.ToArray(), divdays.ToArray(), divamts.ToArray());          
-                CleanDivs(ref divdays, ref divamts);
+                var rateAmounts = DataRangeHelper.StripDoubleRange(rateAmountsAsArray);
+                var dividendAmounts = DataRangeHelper.StripDoubleRange(dividendAmountsAsArray);
+                var volatilityTimes = DataRangeHelper.StripDoubleRange(volatilityTimesAsArray);
+                var dividendDays = DataRangeHelper.StripIntRange(dividendDaysAsArray);
+                var rateDays = DataRangeHelper.StripIntRange(rateDaysAsArray);
+                var profile = DataRangeHelper.StripDoubleRange(profileTimes);
+                var volatilitiesAsDoubles = RangeHelper.RangeToDoubleMatrix(volatilitiesAsRange);
+                List<OrcWingParameters> volSurf = UnpackWing(volatilitiesAsDoubles, volatilityTimes.ToArray(), spot, rateDays.ToArray(), rateAmounts.ToArray(), dividendDays.ToArray(), dividendAmounts.ToArray());          
+                CleanDivs(ref dividendDays, ref dividendAmounts);
                 double[,] results = EquityPCEAnalytics.GetCollarPCE("CollarPCE",
-                                                  ratedays.ToArray(),
-                                                  rateamts.ToArray(),
-                                                  divdays.ToArray(),
-                                                  divamts.ToArray(),
+                                                  rateDays.ToArray(),
+                                                  rateAmounts.ToArray(),
+                                                  dividendDays.ToArray(),
+                                                  dividendAmounts.ToArray(),
                                                   volSurf,
                                                   spot,
-                                                  callstrike,
-                                                  putstrike,
+                                                  callStrike,
+                                                  putStrike,
                                                   maturity,
                                                   kappa,
                                                   theta,
                                                   sigma,
                                                   profile.ToArray(),
                                                   confidence,
-                                                  tstepSize,
+                                                  tStepSize,
                                                   simulations,
                                                   seed);
                 //int n = profiletimes.Length;
@@ -486,7 +484,7 @@ namespace HLV5r3.Analytics
 
             ///<summary>
             ///</summary>
-            ///<param name="vols"></param>
+            ///<param name="volatilities"></param>
             ///<param name="days"></param>
             ///<param name="spot"></param>
             ///<param name="rateDays"></param>
@@ -494,10 +492,11 @@ namespace HLV5r3.Analytics
             ///<param name="divDays"></param>
             ///<param name="divAmounts"></param>
             ///<returns></returns>
-            private static List<OrcWingParameters> UnpackWing(double[,] vols, double[] days, double spot, int[] rateDays, double[] rateAmounts, int[] divDays, double[] divAmounts)
+            private static List<OrcWingParameters> UnpackWing(double[,] volatilities, double[] days, double spot, int[] rateDays, double[] rateAmounts, 
+                int[] divDays, double[] divAmounts)
             {
                 const double dayBasis = 365.0;
-                int rows = vols.GetLength(0);
+                int rows = volatilities.GetLength(0);
                 var opList = new List<OrcWingParameters>();
                 for (int idx = 0; idx < rows; idx++)
                 {
@@ -505,18 +504,18 @@ namespace HLV5r3.Analytics
                     var op = new OrcWingParameters
                                  {
                         AtmForward = fwd,
-                        CurrentVol = vols[idx, 0],
-                        SlopeRef = vols[idx, 1],
-                        PutCurve = vols[idx, 2],
-                        CallCurve = vols[idx, 3],
-                        DnCutoff = vols[idx, 4],
-                        UpCutoff = vols[idx, 5],
-                        Vcr = vols[idx, 6],
-                        Scr = vols[idx, 7],
-                        Ssr = 100*vols[idx, 8],
-                        Dsr = vols[idx, 9],
-                        Usr = vols[idx, 10],
-                        RefVol = vols[idx, 11],
+                        CurrentVol = volatilities[idx, 0],
+                        SlopeRef = volatilities[idx, 1],
+                        PutCurve = volatilities[idx, 2],
+                        CallCurve = volatilities[idx, 3],
+                        DnCutoff = volatilities[idx, 4],
+                        UpCutoff = volatilities[idx, 5],
+                        Vcr = volatilities[idx, 6],
+                        Scr = volatilities[idx, 7],
+                        Ssr = 100*volatilities[idx, 8],
+                        Dsr = volatilities[idx, 9],
+                        Usr = volatilities[idx, 10],
+                        RefVol = volatilities[idx, 11],
                         RefFwd = fwd,
                         TimeToMaturity = days[idx]/dayBasis
                     };
@@ -550,10 +549,10 @@ namespace HLV5r3.Analytics
             /// <param name="today"></param>
             /// <param name="expiry"></param>
             /// <param name="dates"></param>
-            /// <param name="amts"></param>
+            /// <param name="amounts"></param>
             /// <returns></returns>
             /// <exception cref="Exception"></exception>
-            public DivList UnpackDiv(DateTime today, DateTime expiry, DateTime[] dates, double[] amts)
+            public DivList UnpackDiv(DateTime today, DateTime expiry, DateTime[] dates, double[] amounts)
             {
                 int n1 = dates.Length;
                 int n2 = dates.Length;
@@ -564,7 +563,7 @@ namespace HLV5r3.Analytics
                 for (int idx = 0; idx < n1; idx++)
                 {
                     double time = dates[idx].Subtract(today).Days / 365.0;
-                    double rate = amts[idx];
+                    double rate = amounts[idx];
                     if (time > 0 & time <= timeToExp)
                     {
                         dl.SetD(_kdx, rate, time);
@@ -577,26 +576,26 @@ namespace HLV5r3.Analytics
             /// <summary>
             /// Clean up input dividends
             /// </summary>
-            /// <param name="divdays"></param>
-            /// <param name="divamts"></param>
-            private static void CleanDivs(ref List<int> divdays, ref List<double> divamts)
+            /// <param name="dividendDays"></param>
+            /// <param name="dividendAmounts"></param>
+            private static void CleanDivs(ref List<int> dividendDays, ref List<double> dividendAmounts)
             {
 	            var indices = new List<int>();
-	            for (int idx =0 ; idx< divdays.Count; idx++)
+	            for (int idx =0 ; idx< dividendDays.Count; idx++)
 	            {
-		            if (divdays[idx]>0)
+		            if (dividendDays[idx]>0)
 			            indices.Add(idx);
 	            }
                 var divDaysCopy = new List<int>();
-                var divAmtsCopy = new List<double>();        
+                var divAmountsCopy = new List<double>();        
                 foreach (int idx in indices)
                 {
-                    divDaysCopy.Add(divdays[idx]);
-                    divAmtsCopy.Add(divamts[idx]);
+                    divDaysCopy.Add(dividendDays[idx]);
+                    divAmountsCopy.Add(dividendAmounts[idx]);
                 
                 }
-                divdays.AddRange(divDaysCopy);
-                divamts.AddRange(divAmtsCopy);
+                dividendDays.AddRange(divDaysCopy);
+                dividendAmounts.AddRange(divAmountsCopy);
             }
 
         #endregion
@@ -612,24 +611,25 @@ namespace HLV5r3.Analytics
             /// <param name="vol">The vol.</param>
             /// <param name="today"></param>
             /// <param name="expiry"></param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The pay style.</param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray">The zero curve.</param>
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
-            /// <param name="gridsteps">The gridsteps.</param>
+            /// <param name="gridSteps">The grid steps.</param>
             /// <param name="smoo">The smoo.</param>
             /// <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
             /// <returns></returns>
             public static double BinomialPricer(string style, double spot, double strike, double vol, DateTime today, DateTime expiry,
-            string paystyle, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray, double gridsteps, string smoo, bool flatFlag)
+            string payStyle, object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray, 
+            double gridSteps, string smoo, bool flatFlag)
             {
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
                 double pr = EquitiesLibrary.BinomialPricer(style, spot, strike, vol, today, expiry,
-                paystyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridsteps, smoo, flatFlag);
+                payStyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridSteps, smoo, flatFlag);
                 return pr;
             }
 
@@ -642,23 +642,24 @@ namespace HLV5r3.Analytics
             /// <param name="vol">The vol.</param>
             /// <param name="today"></param>
             /// <param name="expiry"></param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The pay style.</param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray">The zero curve.</param>
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
-            /// <param name="gridsteps">The gridsteps.</param>
+            /// <param name="gridSteps">The grid steps.</param>
             /// <param name="smoo">The smoo.</param>
             /// <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
             /// <returns></returns>
             public static double BinomialRelativePricer(string style, double spot, double strike, double vol, DateTime today, DateTime expiry,
-            string paystyle, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray, double gridsteps, string smoo, bool flatFlag)
+            string payStyle, object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray, 
+            double gridSteps, string smoo, bool flatFlag)
             {
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
-                double pr = EquitiesLibrary.BinomialRelativePricer(style, spot, strike, vol, today, expiry, paystyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridsteps, smoo, flatFlag);
+                double pr = EquitiesLibrary.BinomialRelativePricer(style, spot, strike, vol, today, expiry, payStyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridSteps, smoo, flatFlag);
                 return pr;
             }
 
@@ -668,7 +669,7 @@ namespace HLV5r3.Analytics
             /// <param name="spot">The spot.</param>
             /// <param name="strike">The strike.</param>
             /// <param name="vol">The vol.</param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The pay style.</param>
             /// <param name="today"></param>
             /// <param name="expiry"></param>
             /// <param name="zeroDatesAsArray"></param>
@@ -676,14 +677,14 @@ namespace HLV5r3.Analytics
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
             /// <returns></returns>
-            public static double BlackScholesPricer(double spot, double strike, double vol, string paystyle, DateTime today, DateTime expiry,
-            Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray)
+            public static double BlackScholesPricer(double spot, double strike, double vol, string payStyle, DateTime today, DateTime expiry,
+                object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray)
             {
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
-                double pr = EquitiesLibrary.BlackScholesPricer(spot, strike, vol, paystyle, today, expiry, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray());
+                double pr = EquitiesLibrary.BlackScholesPricer(spot, strike, vol, payStyle, today, expiry, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray());
                 return pr;
             }
 
@@ -693,19 +694,19 @@ namespace HLV5r3.Analytics
             /// <param name="spot"></param>
             /// <param name="strike"></param>
             /// <param name="vol"></param>
-            /// <param name="paystyle"></param>
+            /// <param name="payStyle"></param>
             /// <param name="today"></param>
             /// <param name="expiry"></param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray"></param>
             /// <param name="q"></param>
             /// <returns></returns>
-            public static double BlackScholesPricerContDiv(double spot, double strike, double vol, string paystyle, DateTime today,
-            DateTime expiry, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, double q)
+            public static double BlackScholesPricerContDiv(double spot, double strike, double vol, string payStyle, DateTime today,
+            DateTime expiry, object zeroDatesAsArray, object zeroRatesAsArray, double q)
             {
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
-                double pr = EquitiesLibrary.BlackScholesPricerContDiv(spot, strike, vol, paystyle, today, expiry, zeroDates.ToArray(), zeroRates.ToArray(), q);
+                double pr = EquitiesLibrary.BlackScholesPricerContDiv(spot, strike, vol, payStyle, today, expiry, zeroDates.ToArray(), zeroRates.ToArray(), q);
                 return pr;
             }
 
@@ -719,26 +720,26 @@ namespace HLV5r3.Analytics
             /// <param name="vol0">The vol0.</param>
             /// <param name="today"></param>
             /// <param name="expiry"></param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The pay style.</param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray">The zero curve.</param>
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
             /// <param name="tol">The TOL.</param>
             /// <param name="step">The STEP.</param>
-            /// <param name="gridsteps">The gridsteps.</param>
+            /// <param name="gridSteps">The grid steps.</param>
             /// <param name="smoo">The smoo.</param>
             /// <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
             /// <returns></returns>
             public static double BinomialImpVol(double price, string style, double spot, double strike, double vol0, DateTime today, DateTime expiry,
-            string paystyle, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray, 
-                double tol, double step, double gridsteps, string smoo, bool flatFlag)
+            string payStyle, object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray, 
+                double tol, double step, double gridSteps, string smoo, bool flatFlag)
             {
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
-                double pr = EquitiesLibrary.BinomialImpVol(price, style, spot, strike, vol0, today, expiry, paystyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), tol, step, gridsteps, smoo, flatFlag);
+                double pr = EquitiesLibrary.BinomialImpVol(price, style, spot, strike, vol0, today, expiry, payStyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), tol, step, gridSteps, smoo, flatFlag);
                 return pr;
             }
 
@@ -750,24 +751,24 @@ namespace HLV5r3.Analytics
             /// <param name="strike">The strike.</param>
             /// <param name="vol">The vol.</param>
             /// <param name="expiry"></param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The pay style.</param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray">The zero curve.</param>
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
-            /// <param name="gridsteps">The gridsteps.</param>
+            /// <param name="gridSteps">The grid steps.</param>
             /// <param name="smoo">The smoo.</param>
             /// <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
             /// <param name="today"></param>
             /// <returns></returns>
             public static object[,] BinomialGetGreeks(string style, double spot, double strike, double vol, DateTime today, DateTime expiry,
-            string paystyle, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray, double gridsteps, string smoo, bool flatFlag)
+            string payStyle, object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray, double gridSteps, string smoo, bool flatFlag)
             {
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
-                var retArray = EquitiesLibrary.BinomialGetGreeks(style, spot, strike, vol, today, expiry, paystyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridsteps, smoo, flatFlag);
+                var retArray = EquitiesLibrary.BinomialGetGreeks(style, spot, strike, vol, today, expiry, payStyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridSteps, smoo, flatFlag);
                 var result = RangeHelper.ConvertArrayToRange(retArray);//TODO This is a matrix
                 return result;
             }
@@ -780,24 +781,24 @@ namespace HLV5r3.Analytics
             /// <param name="strike">The strike.</param>
             /// <param name="vol">The vol.</param>
             /// <param name="expiry"></param>
-            /// <param name="paystyle">The paystyle.</param>
+            /// <param name="payStyle">The paystyle.</param>
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray">The zero curve.</param>
             /// <param name="divDatesAsArray"></param>
             /// <param name="divAmsAsArray">The div curve.</param>
-            /// <param name="gridsteps">The gridsteps.</param>
+            /// <param name="gridSteps">The gridsteps.</param>
             /// <param name="smoo">The smoo.</param>
             /// <param name="flatFlag">if set to <c>true</c> [flat flag].</param>
             /// <param name="today"></param>
             /// <returns></returns>
             public static object[,] BinomialRelativeGetGreeks(string style, double spot, double strike, double vol, DateTime today, DateTime expiry,
-              string paystyle, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, Excel.Range divDatesAsArray, Excel.Range divAmsAsArray, double gridsteps, string smoo, bool flatFlag)
+              string payStyle, object zeroDatesAsArray, object zeroRatesAsArray, object divDatesAsArray, object divAmsAsArray, double gridSteps, string smoo, bool flatFlag)
             {
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
                 var divDates = DataRangeHelper.StripDateTimeRange(divDatesAsArray);
                 var divAms = DataRangeHelper.StripDoubleRange(divAmsAsArray);
-                var retArray = EquitiesLibrary.BinomialRelativeGetGreeks(style, spot, strike, vol, today, expiry, paystyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridsteps, smoo, flatFlag);
+                var retArray = EquitiesLibrary.BinomialRelativeGetGreeks(style, spot, strike, vol, today, expiry, payStyle, zeroDates.ToArray(), zeroRates.ToArray(), divDates.ToArray(), divAms.ToArray(), gridSteps, smoo, flatFlag);
                 var result = RangeHelper.ConvertArrayToRange(retArray);
                 return result;
             }
@@ -840,8 +841,8 @@ namespace HLV5r3.Analytics
             /// <param name="today"></param>
             /// <param name="expiry"></param>
             /// <returns></returns>
-            public static double GetForward(DateTime today, DateTime expiry, double spot, Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray, 
-            Excel.Range divDatesAsArray, Excel.Range divAmsAsArray)
+            public static double GetForward(DateTime today, DateTime expiry, double spot, object zeroDatesAsArray, object zeroRatesAsArray,
+                object divDatesAsArray, object divAmsAsArray)
             {
                 var zeroDates = DataRangeHelper.StripDateTimeRange(zeroDatesAsArray);
                 var zeroRates = DataRangeHelper.StripDoubleRange(zeroRatesAsArray);
@@ -856,30 +857,30 @@ namespace HLV5r3.Analytics
             /// <param name="valueDate"></param>
             /// <param name="datesAsArray"></param>
             /// <param name="amountsAsArray"></param>
-            /// <param name="interpType"></param>
+            /// <param name="interpolationType"></param>
             /// <returns></returns>
-            public static double InterpolateOnDates(DateTime valueDate, Excel.Range datesAsArray, Excel.Range amountsAsArray, string interpType)
+            public static double InterpolateOnDates(DateTime valueDate, object datesAsArray, object amountsAsArray, string interpolationType)
             {
                 //At this stage only linear interpolation is supported
                 var dates = DataRangeHelper.StripDateTimeRange(datesAsArray);
                 var amounts = DataRangeHelper.StripDoubleRange(amountsAsArray);
-                return EquitiesLibrary.InterpolateOnDates(valueDate, dates.ToArray(), amounts.ToArray(), interpType);
+                return EquitiesLibrary.InterpolateOnDates(valueDate, dates.ToArray(), amounts.ToArray(), interpolationType);
             }
 
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="xvalue"></param>
+            /// <param name="xValue"></param>
             /// <param name="xAsArray"></param>
             /// <param name="yAsArray"></param>
-            /// <param name="interpType"></param>
+            /// <param name="interpolationType"></param>
             /// <returns></returns>
-            public static double InterpolateOnValues(double xvalue, Excel.Range xAsArray, Excel.Range yAsArray, string interpType)
+            public static double InterpolateOnValues(double xValue, object xAsArray, object yAsArray, string interpolationType)
             {
                 //At this stage only linear interpolation is supported
                 var x = DataRangeHelper.StripDoubleRange(xAsArray);
                 var y = DataRangeHelper.StripDoubleRange(yAsArray);
-                return EquitiesLibrary.InterpolateOnValues(xvalue, x.ToArray(), y.ToArray(), interpType);
+                return EquitiesLibrary.InterpolateOnValues(xValue, x.ToArray(), y.ToArray(), interpolationType);
             }
   
             /// <summary>
@@ -894,8 +895,8 @@ namespace HLV5r3.Analytics
             /// <param name="zeroRatesAsArray">The rates corresponding to the ZCB discount curve.</param>
             /// <param name="finalDate">The final date on which payments are to be included.</param>
             /// <returns>A double representing the PV.</returns>
-            public static double PVofPaymentStream(DateTime valueDate, DateTime finalDate, Excel.Range paymentDatesAsArray, Excel.Range paymentAmountsAsArray,
-            Excel.Range zeroDatesAsArray, Excel.Range zeroRatesAsArray)
+            public static double PVofPaymentStream(DateTime valueDate, DateTime finalDate, object paymentDatesAsArray, object paymentAmountsAsArray,
+                object zeroDatesAsArray, object zeroRatesAsArray)
             {
                 var paymentDates = DataRangeHelper.StripDateTimeRange(paymentDatesAsArray);
                 var paymentAmounts = DataRangeHelper.StripDoubleRange(paymentAmountsAsArray);
@@ -910,7 +911,7 @@ namespace HLV5r3.Analytics
             /// <param name="rateAsArray"></param>
             /// <param name="compoundingFrequency"></param>
             /// <returns></returns>
-            public static object[,] ConvToContinuousRate(Excel.Range rateAsArray, string compoundingFrequency)
+            public static object[,] ConvToContinuousRate(object rateAsArray, string compoundingFrequency)
             {
                 var rate = DataRangeHelper.StripDoubleRange(rateAsArray);
                 var retArray = EquitiesLibrary.ConvToContinuousRate(rate.ToArray(), compoundingFrequency);
@@ -929,9 +930,8 @@ namespace HLV5r3.Analytics
             /// <param name="zeroDatesAsArray"></param>
             /// <param name="zeroRatesAsArray"></param>
             /// <returns></returns>
-            public static object[,] DivYield(double baseAmount, DateTime valueDate, Excel.Range finalDatesAsArray, Excel.Range paymentDatesAsArray,
-            Excel.Range paymentAmountsAsArray, Excel.Range zeroDatesAsArray,
-            Excel.Range zeroRatesAsArray)
+            public static object[,] DivYield(double baseAmount, DateTime valueDate, object finalDatesAsArray, object paymentDatesAsArray,
+                object paymentAmountsAsArray, object zeroDatesAsArray, object zeroRatesAsArray)
             {
                 var finalDates = DataRangeHelper.StripDateTimeRange(finalDatesAsArray);
                 var paymentDates = DataRangeHelper.StripDateTimeRange(paymentDatesAsArray);

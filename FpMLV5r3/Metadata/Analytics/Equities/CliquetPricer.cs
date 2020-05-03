@@ -327,7 +327,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
         /// </summary>
         /// <param name="times">The times.</param>
         /// <returns></returns>
-        private void Zero(double[] times)
+        private static void Zero(double[] times)
         {
             int n = times.Length;
             for (int idx = 0; idx < n; idx++)

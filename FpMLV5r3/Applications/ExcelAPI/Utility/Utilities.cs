@@ -19,13 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Highlander.CurveEngine.V5r3;
 using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using HLV5r3.Properties;
 using Microsoft.Win32;
-using ApplicationHelper = HLV5r3.Helpers.ApplicationHelper;
 using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
@@ -33,7 +31,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace HLV5r3.Utility
 {
     /// <summary>
-    /// This is a lightweight wrapper that interfaces between the SABRInterface class and the ExcelAPI.
+    /// This is a lightweight wrapper that interfaces between the SABR Interface class and the ExcelAPI.
     /// The wrapper acts as a layer that will map Excel specific data/operations to Interface expected types
     /// </summary>
     [ClassInterface(ClassInterfaceType.AutoDual)]
@@ -81,34 +79,32 @@ namespace HLV5r3.Utility
 
         #region Helper Methods
 
-        /////<summary>
-        ///// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
-        /////</summary>
-        /////<param name="inputRange">The input data range.</param>
-        /////<param name="tenorFilter">The tenor string to filter on.</param>
-        /////<param name="numTenors">The number of tenors.</param>
-        /////<param name="strikeArray">The strike array.</param>
-        /////<returns></returns>
-        //public double[,] FilterSurface(Excel.Range inputRange, string tenorFilter, int numTenors, Excel.Range strikeArray)
-        //{
-        //    var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-        //    var strike = DataRangeHelper.StripDoubleRange(strikeArray);
-        //    return DataRangeHelper.FilterSurface(values, tenorFilter, numTenors, strike.ToArray());
-        //}
+        ///<summary>
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        ///</summary>
+        ///<param name="inputRange">The input data range.</param>
+        ///<param name="tenorFilter">The tenor string to filter on.</param>
+        ///<param name="numTenors">The number of tenors.</param>
+        ///<param name="strikeArray">The strike array.</param>
+        ///<returns></returns>
+        public double[,] FilterSurface(object[,] inputRange, string tenorFilter, int numTenors, object[,] strikeArray)
+        {
+            var strike = DataRangeHelper.StripDoubleRange(strikeArray);
+            return DataRangeHelper.FilterSurface(inputRange, tenorFilter, numTenors, strike.ToArray());
+        }
 
-        /////<summary>
-        ///// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
-        /////</summary>
-        /////<param name="inputRange">The input data range.</param>
-        /////<param name="tenorFilter">The tenor string to filter on.</param>
-        /////<param name="numTenors">The number of tenors.</param>
-        /////<param name="strikeArray">The strike array.</param>
-        /////<returns></returns>
-        //public object[,] FilterSurfaceWithExpiries(Excel.Range inputRange, String tenorFilter, int numTenors, Double[] strikeArray)
-        //{
-        //    var values = inputRange.Value[System.Reflection.Missing.Value] as object[,];
-        //    return DataRangeHelper.FilterSurfaceWithExpiries(values, tenorFilter, numTenors, strikeArray); 
-        //}
+        ///<summary>
+        /// Strips a surface: expiry by strike, from a flattened cube, excluding the strike headers.
+        ///</summary>
+        ///<param name="inputRange">The input data range.</param>
+        ///<param name="tenorFilter">The tenor string to filter on.</param>
+        ///<param name="numTenors">The number of tenors.</param>
+        ///<param name="strikeArray">The strike array.</param>
+        ///<returns></returns>
+        public object[,] FilterSurfaceWithExpiries(object[,] inputRange, string tenorFilter, int numTenors, double[] strikeArray)
+        {
+            return DataRangeHelper.FilterSurfaceWithExpiries(inputRange, tenorFilter, numTenors, strikeArray);
+        }
 
         ///<summary>
         /// Gets the version of the assembly
@@ -149,13 +145,11 @@ namespace HLV5r3.Utility
         /// <param name="acrossOrDown"></param>
         /// <param name="pad"></param>
         /// <returns></returns>
-        public object[,] ArrayAppend(Excel.Range arrayA, Excel.Range arrayB, string acrossOrDown, object pad = null)
+        public object[,] ArrayAppend(object[,] arrayA, object[,] arrayB, string acrossOrDown, object pad = null)
         {
-            var values1 = arrayA.Value[System.Reflection.Missing.Value] as object[,];
-            var values2 = arrayB.Value[System.Reflection.Missing.Value] as object[,];
             bool across = (string.IsNullOrEmpty(acrossOrDown) ||
                            !acrossOrDown.Equals("down", StringComparison.CurrentCultureIgnoreCase));
-            return AppendArray(values1, values2, across, pad);
+            return AppendArray(arrayA, arrayB, across, pad);
         }
 
         /// <summary>
@@ -166,7 +160,7 @@ namespace HLV5r3.Utility
         /// <param name="rows"></param>
         /// <param name="cols"></param>
         /// <returns></returns>
-        public object[,] ArrayPad(Excel.Range inputArray, object pad = null, int rows = 0, int cols = 0)
+        public object[,] ArrayPad(object[,] inputArray, object pad = null, int rows = 0, int cols = 0)
         {
             return PadArray(inputArray, pad, rows, cols);
         }
@@ -224,12 +218,12 @@ namespace HLV5r3.Utility
         /// <param name="numRows">The number of rows in the padded array. The default is to use the input row size</param>
         /// <param name="numColumns">The number of columns in the padded array. The default is to use the input column size</param>
         /// <returns>The input array (or an enlarged version) with padding of any nulls</returns>
-        public object[,] PadArray(Excel.Range inputArray, [Optional] object padValue, [Optional] object numRows, [Optional] object numColumns)
+        public object[,] PadArray(object[,] inputArray, [Optional] object padValue, [Optional] object numRows, [Optional] object numColumns)
         {
-            if (inputArray.Value[System.Reflection.Missing.Value] is object[,] values1)
+            if (inputArray != null)
             {
-                int rows = values1.GetLength(RowDimension);
-                int cols = values1.GetLength(ColumnDimension);
+                int rows = inputArray.RowCount();
+                int cols = inputArray.ColumnCount();
                 // Set defaults - rows/cols must be at least the same size, pad cannot be null
                 var rowSize = 0;// (rows > rowSize) ? rows : rowSize;
                 var columnSize = 0;// (cols > columnSize) ? cols : columnSize;
@@ -250,7 +244,7 @@ namespace HLV5r3.Utility
                 // Only process the array if the rows and/or columns have changed in size
                 if (rowSize == rows && columnSize == cols)
                 {
-                    return values1;
+                    return inputArray;
                 }
                 // Create new array
                 var newArray = new object[rowSize, columnSize];
@@ -266,7 +260,7 @@ namespace HLV5r3.Utility
                         }
                         else
                         {
-                            newArray[rowIndex, colIndex] = values1[rowIndex, colIndex];
+                            newArray[rowIndex, colIndex] = inputArray[rowIndex, colIndex];
                         }
                     }
                 }
@@ -397,10 +391,10 @@ namespace HLV5r3.Utility
         /// <param name="firstVertical1DRange"></param>
         /// <param name="secondVertical1DRange"></param>
         /// <returns></returns>
-        public object StackVerticalArrays(Excel.Range firstVertical1DRange, Excel.Range secondVertical1DRange)
+        public object StackVerticalArrays(object[,] firstVertical1DRange, object[,] secondVertical1DRange)
         {
-            object[,] firstColumn = ArrayHelper.RangeToMatrix(firstVertical1DRange.Value[System.Reflection.Missing.Value] as object[,]);
-            object[,] secondColumn = ArrayHelper.RangeToMatrix(secondVertical1DRange.Value[System.Reflection.Missing.Value] as object[,]);
+            object[,] firstColumn = ArrayHelper.RangeToMatrix(firstVertical1DRange);
+            object[,] secondColumn = ArrayHelper.RangeToMatrix(secondVertical1DRange);
             var first = firstColumn.RowCount();
             var second = secondColumn.RowCount();
             if (first == second)
@@ -457,7 +451,7 @@ namespace HLV5r3.Utility
         /// <returns>The area.</returns>
         public double CalculateArea(object range)
         {
-            return range is Excel.Range r ? Convert.ToDouble(r.Width)*Convert.ToDouble(r.Height) : 0;
+            return range is object[,] r ? Convert.ToDouble(r.ColumnCount())*Convert.ToDouble(r.RowCount()) : 0;
         }
 
         /// <summary>
@@ -465,10 +459,13 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="range">The selected range.</param>
         /// <returns>The number of cells.</returns>
-        public double NumberOfCells(object range)
+        public int NumberOfCells(object range)
         {
-            var r = range as Excel.Range;
-            return r?.Cells.Count ?? 0;
+            if (range is object[,] r)
+            {
+                return r.ColumnCount() * r.RowCount();
+            }
+            return 1;
         }
 
         /// <summary>
@@ -486,56 +483,61 @@ namespace HLV5r3.Utility
         /// </summary>
         /// <param name="targetRange"></param>
         /// <returns></returns>
-        public object[,] UniqueValues(Excel.Range targetRange)
+        public object[,] UniqueValues(object[,] targetRange)
         {
-            var values = targetRange.Value[System.Reflection.Missing.Value] as object[,];
-            var unqVals = new List<object>();
-            if (values != null)
-                foreach (var obj in values)
+            var unqValues = new List<object>();
+            if (targetRange != null)
+                foreach (var obj in targetRange)
                 {
-                    if (!unqVals.Contains(obj))
-                        unqVals.Add(obj);
+                    if (!unqValues.Contains(obj))
+                        unqValues.Add(obj);
                 }
-            var resVals = new object[unqVals.Count, 1];
-            for (int idx = 0; idx < resVals.Length; ++idx)
-                resVals[idx, 0] = unqVals[idx];
-            return resVals;
+            var resValues = new object[unqValues.Count, 1];
+            for (int idx = 0; idx < resValues.Length; ++idx)
+                resValues[idx, 0] = unqValues[idx];
+            return resValues;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="range"></param>
+        /// <param name="excelRange"></param>
         /// <returns></returns>
-        public object[,] ConvertRangeTo2DArray(Excel.Range range)
+        public object[,] ConvertRangeTo2DArray(object excelRange)
         {
-            var valueArray = range.Value[Type.Missing] as object[,];
-            var formulaArray = (object[,])range.Formula;
-            if (
-                valueArray != null && (valueArray.GetUpperBound(0) != formulaArray.GetUpperBound(0) ||
-                                       valueArray.GetUpperBound(1) != formulaArray.GetUpperBound(1) ||
-                                       valueArray.GetLowerBound(0) != formulaArray.GetLowerBound(0) ||
-                                       valueArray.GetLowerBound(1) != formulaArray.GetLowerBound(1))
+            if (excelRange is Excel.Range range)
+            {
+                var valueArray = range.Value[Type.Missing] as object[,];
+                var formulaArray = (object[,]) range.Formula;
+                if (
+                    valueArray != null && (valueArray.GetUpperBound(0) != formulaArray.GetUpperBound(0) ||
+                                           valueArray.GetUpperBound(1) != formulaArray.GetUpperBound(1) ||
+                                           valueArray.GetLowerBound(0) != formulaArray.GetLowerBound(0) ||
+                                           valueArray.GetLowerBound(1) != formulaArray.GetLowerBound(1))
                 )
-            {
-                throw new Exception("RangeHelper.ConvertRangeTo2DArray method failed. Dimensions of the value and formula arrays must be the same.");
-            }
-            if (valueArray != null)
-            {
-                for (int i = valueArray.GetLowerBound(0); i <= valueArray.GetUpperBound(0); ++i)
                 {
-                    for (int j = valueArray.GetLowerBound(1); j <= valueArray.GetUpperBound(1); ++j)
+                    throw new Exception(
+                        "RangeHelper.ConvertRangeTo2DArray method failed. Dimensions of the value and formula arrays must be the same.");
+                }
+
+                if (valueArray != null)
+                {
+                    for (int i = valueArray.GetLowerBound(0); i <= valueArray.GetUpperBound(0); ++i)
                     {
-                        var formulaCellValue = (string) formulaArray[i, j];
-                        // if a correspondent formula value has indicated that there's no value in it - put the NULL into value array.
-                        //
-                        if (IsNAString(formulaCellValue))
+                        for (int j = valueArray.GetLowerBound(1); j <= valueArray.GetUpperBound(1); ++j)
                         {
-                            valueArray[i, j] = null;
+                            var formulaCellValue = (string) formulaArray[i, j];
+                            // if a correspondent formula value has indicated that there's no value in it - put the NULL into value array.
+                            //
+                            if (IsNAString(formulaCellValue))
+                            {
+                                valueArray[i, j] = null;
+                            }
                         }
                     }
+
+                    return valueArray;
                 }
-                return valueArray;
             }
             return new object[,] { };
         }

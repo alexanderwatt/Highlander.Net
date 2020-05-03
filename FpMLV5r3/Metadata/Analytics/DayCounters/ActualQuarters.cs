@@ -19,7 +19,7 @@ using Highlander.Reporting.ModelFramework.V5r3.Business;
 namespace Highlander.Reporting.Analytics.V5r3.DayCounters
 {
     ///<summary>
-    /// A class representing a daycount used in AUD CPI for the fixed leg
+    /// A class representing a day count used in AUD CPI for the fixed leg
     /// 
     /// it is calculated as Year(date2) - Year(date1) + (Quarter(date2) - Quarter(date1)) / 4
     /// 
@@ -77,7 +77,7 @@ namespace Highlander.Reporting.Analytics.V5r3.DayCounters
         /// </summary>
         /// <param name="month"></param>
         /// <returns></returns>
-        private double Quarter(int month)
+        private static double Quarter(int month)
         {
             return ((month-1)/3) + 1;
         }

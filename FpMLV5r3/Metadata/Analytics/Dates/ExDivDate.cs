@@ -59,8 +59,6 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
     /// </summary>
     public class ExDivDate
     {
-        private readonly DateTime _exDivDate;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ExDivDate"/> class.
         /// </summary>
@@ -69,11 +67,11 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
         /// <param name="calendar">The calendar.</param>
         public ExDivDate(ExDividendEnum xdt, DateTime nextCoupDate, IBusinessCalendar calendar)
         {
-            _exDivDate = CalcDate(xdt, nextCoupDate, calendar);
+            Date = CalcDate(xdt, nextCoupDate, calendar);
         }
 
         /// <summary>
-        /// Calcs the date.
+        /// Calculates the date.
         /// </summary>
         /// <param name="xdt">The XDT.</param>
         /// <param name="nextCoupDate">The next coup date.</param>
@@ -146,21 +144,21 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
         /// <summary>
         /// The date.
         /// </summary>
-        public DateTime Date => _exDivDate;
+        public DateTime Date { get; }
 
         /// <summary>
         /// Converts to FpML.
         /// </summary>
-        public DateTime ToFpML => _exDivDate;
+        public DateTime ToFpML => Date;
 
         /// <summary>
         /// Formats the ex div type.
         /// </summary>
-        /// <param name="XDT"></param>
+        /// <param name="xdt"></param>
         /// <returns></returns>
-        public static string FormatExDiv(ExDividendEnum XDT)
+        public static string FormatExDiv(ExDividendEnum xdt)
         {
-            switch (XDT)
+            switch (xdt)
             {
                 case ExDividendEnum.XD_none: return "None";
                 case ExDividendEnum.XD_7d: return "7d";
@@ -184,7 +182,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Dates
         /// </summary>
         /// <param name="exDivText"></param>
         /// <returns></returns>
-        ExDividendEnum ParseXDtype(string exDivText)
+        public static ExDividendEnum ParseXDtype(string exDivText)
         {
             switch (exDivText.ToLower())
             {

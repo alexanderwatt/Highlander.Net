@@ -15,6 +15,7 @@
 
 #region Usings
 
+using System;
 using System.Reflection;
 
 #endregion
@@ -44,6 +45,26 @@ namespace Highlander.Utilities.Helpers
         {
             var info = new AssemblyInfo(Assembly.GetExecutingAssembly());
             return info[itemName];
+        }
+
+        #endregion
+
+        #region Com Registration
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="subKeyName"></param>
+        /// <returns></returns>
+        public static string GetSubKeyName(Type type, string subKeyName)
+        {
+            var s = new System.Text.StringBuilder();
+            s.Append(@"CLSID\{");
+            s.Append(type.GUID.ToString().ToUpper());
+            s.Append(@"}\");
+            s.Append(subKeyName);
+            return s.ToString();
         }
 
         #endregion

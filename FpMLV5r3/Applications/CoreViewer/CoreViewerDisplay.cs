@@ -773,5 +773,10 @@ namespace Highlander.Core.Viewer.V5r3
                 }
             }
         }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

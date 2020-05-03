@@ -22,9 +22,9 @@ using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
 using Highlander.Reporting.Analytics.V5r3.Rates;
 using Highlander.Reporting.ModelFramework.V5r3;
+using Highlander.Utilities.Helpers;
 using HLV5r3.Helpers;
 using Microsoft.Win32;
-using Excel = Microsoft.Office.Interop.Excel;
 
 #endregion
 
@@ -132,7 +132,7 @@ namespace HLV5r3.Analytics
         /// <param name="times">A vertical array of times.</param>
         /// <param name="values">A vertical array of values.</param>
         /// <returns>The value at that point.</returns>
-        public static double GetPointValue(double pt, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
+        public static double GetPointValue(double pt, string interpolationType, bool extrapolation, object times, object values)
         {
             List<double> unqtimes = DataRangeHelper.StripDoubleRange(times);
             List<double> unqvalues = DataRangeHelper.StripDoubleRange(values);
@@ -149,7 +149,7 @@ namespace HLV5r3.Analytics
         /// <param name="times">A vertical array of times.</param>
         /// <param name="values">A vertical array of values.</param>
         /// <returns>The value at that point.</returns>
-        public static double GetDateValue(DateTime baseDate, DateTime targetDate, string interpolationType, bool extrapolation, Excel.Range times, Excel.Range values)
+        public static double GetDateValue(DateTime baseDate, DateTime targetDate, string interpolationType, bool extrapolation, object times, object values)
         {
             List<double> unqtimes = DataRangeHelper.StripDoubleRange(times);
             List<double> unqvalues = DataRangeHelper.StripDoubleRange(values);

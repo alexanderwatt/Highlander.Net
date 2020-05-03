@@ -64,7 +64,7 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             tr.TradeDate = tradeDate;
             tr.ExpiryDate = expiryDate;
             ist.Transaction = tr;
-            var testSt = new Highlander.Equities.Strike(OptionType.Call, callStrike);
+            var testSt = new Strike(OptionType.Call, callStrike);
             ist.Transaction.SetStrike(testSt);
             double putStrike = col.FindZeroCostPutStrike(ist, zeroCurve);
             return putStrike;
@@ -123,13 +123,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             // Unpack objects
             ZeroCurve myZero = CollarWrapper.UnpackZeroRateCurve(zeroRateCurve);
             DivList myDiv = CollarWrapper.UnpackDividends(stock, zeroRateCurve);
-            var myORC = CollarWrapper.UnpackOrcWingParameters(stock);
+            var myOrc = CollarWrapper.UnpackOrcWingParameters(stock);
             //
             TimeSpan ts = stock.Transaction.ExpiryDate - stock.Transaction.TradeDate;
             double t = ts.Days / 365.0;
             string payFlag = stock.Transaction.PayStyle.ToString().Substring(0, 1).ToUpper();
             string style = stock.Transaction.Strike.Style.ToString().Substring(0, 1).ToUpper();
-            double price = Collar.FindPrice(myZero, myDiv, myORC, t,
+            double price = Collar.FindPrice(myZero, myDiv, myOrc, t,
                                                                stock.Transaction.Strike.StrikePrice, stock.Transaction.CurrentSpot, payFlag, style, 100.0);        
             return price;
         }
@@ -145,13 +145,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             // Unpack objects
             ZeroCurve myZero = CollarWrapper.UnpackZeroRateCurve(zeroRateCurve);
             DivList myDiv = CollarWrapper.UnpackDividends(stock, zeroRateCurve);
-            var myORC = CollarWrapper.UnpackOrcWingParameters(stock);
+            var myOrc = CollarWrapper.UnpackOrcWingParameters(stock);
             //
             TimeSpan ts = stock.Transaction.ExpiryDate - stock.Transaction.TradeDate;
             double t = ts.Days / 365.0;
             string payFlag = stock.Transaction.PayStyle.ToString().Substring(0, 1).ToUpper();
             string style = stock.Transaction.Strike.Style.ToString().Substring(0, 1).ToUpper();
-            double price = Collar.FindZeroCostCall(myZero, myDiv, myORC, t,
+            double price = Collar.FindZeroCostCall(myZero, myDiv, myOrc, t,
                                                                       stock.Transaction.Strike.StrikePrice, stock.Transaction.CurrentSpot, payFlag, style, 100.0);
             return price;
         }
@@ -167,13 +167,13 @@ namespace Highlander.Reporting.Analytics.V5r3.Equities
             // Unpack objects
             ZeroCurve myZero = CollarWrapper.UnpackZeroRateCurve(zeroRateCurve);
             DivList myDiv = CollarWrapper.UnpackDividends(stock, zeroRateCurve);
-            var myORC = CollarWrapper.UnpackOrcWingParameters(stock);
+            var myOrc = CollarWrapper.UnpackOrcWingParameters(stock);
             //
             TimeSpan ts = stock.Transaction.ExpiryDate - stock.Transaction.TradeDate;
             double t = ts.Days / 365.0;
             string payFlag = stock.Transaction.PayStyle.ToString().Substring(0, 1).ToUpper();
             string style = stock.Transaction.Strike.Style.ToString().Substring(0, 1).ToUpper();
-            double price = Collar.FindZeroCostPut(myZero, myDiv, myORC, t,
+            double price = Collar.FindZeroCostPut(myZero, myDiv, myOrc, t,
                                                                      stock.Transaction.Strike.StrikePrice, stock.Transaction.CurrentSpot, payFlag, style, 100.0);
             return price;
         }
