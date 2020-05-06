@@ -102,6 +102,42 @@ namespace Highlander.Configuration.Data.V5r3
             return "swap";
         }
 
+        private static ProductTypeSimpleEnum ProductTypeHelper(Product product)
+        {
+            if (product is Swap) return ProductTypeSimpleEnum.InterestRateSwap;
+            if (product is LeaseTransaction) return ProductTypeSimpleEnum.LeaseTransaction;
+            if (product is PropertyTransaction) return ProductTypeSimpleEnum.PropertyTransaction;
+            if (product is TermDeposit) return ProductTypeSimpleEnum.TermDeposit;
+            if (product is BulletPayment) return ProductTypeSimpleEnum.BulletPayment;
+            if (product is BondOption) return ProductTypeSimpleEnum.BondOption;
+            if (product is BrokerEquityOption) return ProductTypeSimpleEnum.Undefined;
+            if (product is CapFloor) return ProductTypeSimpleEnum.CapFloor;
+            if (product is CommodityForward) return ProductTypeSimpleEnum.CommodityForward;
+            //if (product is CommodityOption) return ProductTypeSimpleEnum.CommodityOption;
+           // if (product is CommoditySwaption) return ProductTypeSimpleEnum.CommoditySwaption;
+            //if (product is CommoditySwap) return ProductTypeSimpleEnum.CommoditySwap;
+            if (product is CorrelationSwap) return ProductTypeSimpleEnum.Undefined;
+            if (product is CreditDefaultSwap) return ProductTypeSimpleEnum.CreditDefaultSwap;
+            if (product is CreditDefaultSwapOption) return ProductTypeSimpleEnum.CreditDefaultOption;
+            if (product is DividendSwapTransactionSupplement) return ProductTypeSimpleEnum.DividendSwap;
+            if (product is EquityForward) return ProductTypeSimpleEnum.EquityForward;
+            if (product is EquityOption) return ProductTypeSimpleEnum.EquityOption;
+            if (product is EquityOptionTransactionSupplement) return ProductTypeSimpleEnum.Undefined;
+            if (product is ReturnSwap) return ProductTypeSimpleEnum.TotalReturnSwap;
+            if (product is EquitySwapTransactionSupplement) return ProductTypeSimpleEnum.Undefined;
+            if (product is Fra) return ProductTypeSimpleEnum.FRA;
+            if (product is FxDigitalOption) return ProductTypeSimpleEnum.FxOption;
+            if (product is FxOption) return ProductTypeSimpleEnum.FxOption;
+            if (product is FxSingleLeg) return ProductTypeSimpleEnum.FxForward;
+            if (product is FxSwap) return ProductTypeSimpleEnum.FxSwap;
+            //if (product is Strategy) return "strategy";
+            if (product is Swaption) return ProductTypeSimpleEnum.InterestRateSwaption;
+            //if (product is VarianceOptionTransactionSupplement) return "varianceOptionTransactionSupplement";
+            if (product is VarianceSwap) return ProductTypeSimpleEnum.VarianceSwap;
+            if (product is VarianceSwapTransactionSupplement) return ProductTypeSimpleEnum.VarianceSwap;
+            return ProductTypeSimpleEnum.Undefined;
+        }
+
         private class ItemInfo
         {
             public string ItemName;
@@ -389,8 +425,6 @@ namespace Highlander.Configuration.Data.V5r3
             var party2 = party[1].partyId[0].Value;
             extraProps.Set(TradeProp.Party1, party1);
             extraProps.Set(TradeProp.Party2, party2);
-            //extraProps.Set(TradeProp.CounterPartyId, party2);//Redundant
-            //extraProps.Set(TradeProp.OriginatingPartyId, party1);//Redundant
             extraProps.Set(TradeProp.TradeDate, tradeVersion.tradeHeader.tradeDate.Value);
             extraProps.Set(TradeProp.TradingBookName, "Test");
             TradeId tradeId;
@@ -415,7 +449,7 @@ namespace Highlander.Configuration.Data.V5r3
             var product = tradeVersion.Item;
             var tradeType = TradeTypeHelper(product);
             extraProps.Set(TradeProp.TradeType, tradeType);
-            extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
+            //extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
             //Get the required currencies
             var currencies = tradeVersion.Item.GetRequiredCurrencies().ToArray();
             var curveNames = tradeVersion.Item.GetRequiredPricingStructures().ToArray();
@@ -456,7 +490,7 @@ namespace Highlander.Configuration.Data.V5r3
             var product = reportingTrade.Item;
             var tradeType = TradeTypeHelper(product);
             extraProps.Set(TradeProp.TradeType, tradeType);
-            extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
+            //extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
             var currencies = reportingTrade.Item.GetRequiredCurrencies().ToArray();
             var curveNames = reportingTrade.Item.GetRequiredPricingStructures().ToArray();
             extraProps.Set(TradeProp.RequiredCurrencies, currencies);
@@ -498,7 +532,7 @@ namespace Highlander.Configuration.Data.V5r3
             var product = tradeVersion.Item;
             var tradeType = TradeTypeHelper(product);
             extraProps.Set(TradeProp.TradeType, tradeType);
-            extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
+            //extraProps.Set(TradeProp.ProductType, tradeType);//TODO this should be a product type...
             //Get the required currencies
             //1. need to convert to Reporting namespace, where the functionality exists.
             var xml = XmlSerializerHelper.SerializeToString(tradeVersion); 

@@ -124,7 +124,8 @@ namespace Highlander.Reporting.Identifiers.V5r3
                 Domain = SourceSystem + '.' + DataType;
                 TradeDate = properties.GetValue<DateTime>(TradeProp.TradeDate);
                 TradeType = EnumHelper.Parse<ItemChoiceType15>(properties.GetValue<string>(TradeProp.TradeType), true);
-                ProductType = ProductTypeSimpleScheme.ParseEnumString(properties.GetValue<string>(TradeProp.ProductType, false));
+                //This needs to use the product taxonomy
+                //ProductType = properties.GetValue(TradeProp.ProductType, ProductTypeSimpleEnum.Undefined);
                 Party1 = properties.GetValue<string>(TradeProp.Party1, false);
                 Party2 = properties.GetValue<string>(TradeProp.Party2, false);
                 BaseParty = properties.GetValue<string>(TradeProp.BaseParty);

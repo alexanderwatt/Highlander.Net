@@ -1,4 +1,4 @@
-﻿/*
+/*
  Copyright (C) 2019 Alex Watt (alexwatt@hotmail.com)
 
  This file is part of Highlander Project https://github.com/alexanderwatt/Highlander.Net
@@ -13,128 +13,226 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-#region Usings
+#region Using directives
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Common;
-using FpML.V5r3.Reporting;
-using FpML.V5r3.Reporting.Helpers;
-using Orion.Analytics.Helpers;
-using Orion.Analytics.Utilities;
-using Orion.CalendarEngine.Helpers;
-using Orion.Constants;
-using Orion.ModelFramework;
-using Orion.ModelFramework.Assets;
-using Orion.ModelFramework.Instruments;
-using Orion.ModelFramework.Instruments.InterestRates;
-using Orion.ModelFramework.Instruments.Lease;
-using Orion.Models.Property.Lease;
-using Orion.Models.Rates.Stream;
-using Orion.Util.Logging;
-using Orion.ValuationEngine.Generators;
-using Orion.ValuationEngine.Instruments;
-using XsdClassesFieldResolver = FpML.V5r3.Reporting.XsdClassesFieldResolver;
+using Highlander.Core.Common;
+using Highlander.Reporting.Helpers.V5r3;
+using Highlander.CalendarEngine.V5r3.Helpers;
+using Highlander.Codes.V5r3;
+using Highlander.Reporting.Analytics.V5r3.Schedulers;
+using Highlander.CurveEngine.V5r3.Helpers;
+using Highlander.Reporting.ModelFramework.V5r3.Assets;
+using Highlander.Reporting.Models.V5r3.Rates.Bonds;
+using Highlander.Utilities.Helpers;
+using Highlander.Utilities.Logging;
+using Highlander.Reporting.V5r3;
+using Highlander.Constants;
+using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
+using Highlander.CurveEngine.V5r3.Assets.Rates.Bonds;
+using Highlander.CurveEngine.V5r3.Factory;
+using Highlander.Reporting.ModelFramework.V5r3;
+using Highlander.Reporting.ModelFramework.V5r3.Instruments;
+using Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates;
+using Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease;
+using Highlander.Reporting.ModelFramework.V5r3.MarketEnvironments;
+using Highlander.Reporting.ModelFramework.V5r3.PricingStructures;
+using Highlander.Reporting.Models.V5r3.Assets;
+using Highlander.Reporting.Models.V5r3.Property.Lease;
+using Highlander.Utilities.Serialisation;
+using Highlander.ValuationEngine.V5r3.Factory;
+using Highlander.ValuationEngine.V5r3.Instruments;
 
 #endregion
 
-namespace Orion.ValuationEngine.Pricers
+namespace Highlander.ValuationEngine.V5r3.Pricers
 {
-    [Serializable]
-    public class LeaseTransactionPricer : InstrumentControllerBase, IPriceableLeaseTransaction<ILeaseAssetParameters, ILeaseAssetResults>, IPriceableInstrumentController<LeaseTransaction>
+    public class LeaseTransactionPricer : InstrumentControllerBase, IPriceableLeaseTransaction<ILeaseTransactionParameters, ILeaseTransactionResults>, IPriceableInstrumentController<LeaseTransaction>
     {
-        #region Member Fields
+        #region Properties
 
-        // Analytics
-        public IModelAnalytic<ILeaseAssetParameters, LeaseAssetResults> AnalyticsModel { get; set; }
+        private const decimal CDefaultWeightingValue = 1.0m;
 
-        protected const string CModelIdentifier = "PaymentStream";
-        //protected const string CDefaultBucketingInterval = "3M";
+        /// <summary>
+        /// Gets the market quote.
+        /// </summary>
+        /// <value>The market quote.</value>
+        public BasicQuotation MarketQuote { get; set; }
 
-        // Requirements for pricing
-        public Currency Currency { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether [base party buyer].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [base party buyer]; otherwise, <c>false</c>.
+        /// </value>
+        public bool BasePartyBuyer { get; set; }
 
-        public string Tenant { get; set; }
+        public DateTime PaymentDate { get; }
 
-        public string DiscountCurveName { get; set; }
+        /// <summary>
+        /// The bond issuer code
+        /// </summary>
+        public string LeaseTenant { get; set; }
 
-        // Requirements for pricing
-        public string ReportingCurrencyFxCurveName { get; set; }
+        /// <summary>
+        /// The bond valuation curve.
+        /// </summary>
+        public string LeaseCurveName { get; set; }
 
-        //// BucketedCouponDates
-        //public Period BucketingInterval { get; set; }
-        protected IDictionary<string, DateTime[]> BucketCouponDates = new Dictionary<string, DateTime[]>();
-        //public DateTime[] BucketedDates { get; set; }
+        /// <summary>
+        /// The payment currency.
+        /// </summary>
+        public Currency PaymentCurrency { get; set; }
 
-        // THe payments
-        public List<PriceablePayment> Payments { get; set; }
+        /// <summary>
+        /// The coupon currency.
+        /// </summary>
+        public Currency CouponCurrency { get; set; }
 
+        /// <summary>
+        /// The base date from the trade pricer.
+        /// </summary>
+        public DateTime TradeDate { get; set; }
 
-        #endregion
+        ///<summary>
+        /// THe settlement calendar.
+        ///</summary>
+        public IBusinessCalendar SettlementCalendar { get; set; }
 
-        #region Public Fields
+        ///<summary>
+        /// The payment calendar.
+        ///</summary>
+        public IBusinessCalendar PaymentCalendar { get; set; }
+
+        /// <summary>
+        /// The buyer reference
+        /// </summary>
+        public string BuyerReference { get; set; }
+
+        /// <summary>
+        /// The seller reference
+        /// </summary>
+        public string SellerReference { get; set; }
+
+        /// <summary>
+        /// THe quote Type.
+        /// </summary>
+        public BondPriceEnum QuoteType { get; set; }
+
+        ///<summary>
+        ///</summary>
+        public const string RateQuotationType = "MarketQuote";
+
+        /// <summary>
+        /// The type of lease: 
+        /// Standard,
+        /// Other.
+        /// </summary>
+        public string LeaseType { get; set; }
+
+        /// <summary>
+        /// The notional amount
+        /// </summary>
+        public Money NotionalAmount { get; set; }
+
+        /// <summary>
+        /// The bond price information
+        /// </summary>
+        public BondPrice LeasePrice { get; set; }
+
+        /// <summary>
+        /// The settlement day convention.
+        /// </summary>
+        public  RelativeDateOffset SettlementDateConvention { get; set; }
+
+        /// <summary>
+        /// The ex-dividend date convention.
+        /// </summary>
+        public RelativeDateOffset ExDivDateConvention { get; set; }
+
+        /// <summary>
+        /// The business day adjustments for bond coupon and final exchange payments
+        /// </summary>
+        public BusinessDayAdjustments BusinessDayAdjustments { get; set; }
+
+        ///<summary>
+        ///</summary>
+        public decimal QuoteValue { get; set; }
+
+        /// <summary>
+        /// The lease details.
+        /// </summary>
+        public Lease Lease { get; set; }
+
+        /// <summary>
+        /// Gets the settlement date.
+        /// </summary>
+        /// <value>The settlement date.</value>
+        public DateTime SettlementDate { get; set; }
+
+        /// <summary>
+        /// Gets the maturity date.
+        /// </summary>
+        /// <value>The maturity date.</value>
+        public DateTime MaturityDate { get; set; }
+
+        /// <summary>
+        /// The underlying bond.
+        /// </summary>
+        public IPriceableLeaseAssetController UnderlyingLease { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether [adjust calculation dates indicator].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [adjust calculation dates indicator]; otherwise, <c>false</c>.
+        /// </value>
+        public bool AdjustCalculationDatesIndicator { get; set; }
+
+        /// <summary>
+        /// The final redemption amount
+        /// </summary>
+        public PriceablePayment FinalRedemption { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool PayerIsBaseParty { get; set; }
+        public List<PriceablePayment> AdditionalPayments { get; protected set; }
 
         /// <summary>
-        /// Gets the payer.
+        /// 
         /// </summary>
-        /// <value>The payer.</value>
-        public string Payer { get; protected set; }
+        public IModelAnalytic<ILeaseTransactionParameters, LeaseMetrics> AnalyticsModel { get; set; }
 
         /// <summary>
-        /// Gets the receiver.
+        /// Flag where: ForwardEndDate = forecastRateInterpolation ? 
+        /// AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), 
+        /// AccrualBusinessDayAdjustments);  
         /// </summary>
-        /// <value>The receiver.</value>
-        public string Receiver { get; protected set; }
+        public bool ForecastRateInterpolation { get; set; }
+
+        protected const string CModelIdentifier = "Lease";
+        //protected const string CDefaultBucketingInterval = "3M";
+
+        // Requirements for pricing
+        public string DiscountCurveName { get; set; }
+        //public string ForecastCurveName { get; set; }
+
+        //// BucketedCouponDates
+        protected IDictionary<string, DateTime[]> BucketCouponDates = new Dictionary<string, DateTime[]>();
 
         /// <summary>
         /// Gets the analytic model parameters.
         /// </summary>
         /// <value>The analytic model parameters.</value>
-        public ILeaseAssetParameters AnalyticModelParameters { get; protected set; }
+        public ILeaseTransactionParameters AnalyticModelParameters { get; protected set; }
 
         /// <summary>
-        /// Gets the last calculation results.
+        /// 
         /// </summary>
-        /// <value>The last results.</value>
-        public ILeaseAssetResults CalculationResults { get; protected set; }
-
-
-        ///// <summary>
-        ///// Gets the priceable coupons.
-        ///// </summary>
-        ///// <value>The priceable coupons.</value>
-        //public List<InstrumentControllerBase> Payments
-        //{
-        //    get 
-        //    {
-        //        List<InstrumentControllerBase> result = null;
-        //        if (Payments != null && Payments.Count > 0)
-        //        {
-        //            result = new List<InstrumentControllerBase>(Payments); 
-        //        }
-        //        return result;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// Gets the stream payment dates.
-        ///// </summary>
-        ///// <value>The stream payment dates.</value>
-        //public IList<DateTime> StreamPaymentDates
-        //{
-        //    get
-        //    {
-        //        var datesList = Coupons.Select(coupon => coupon.PaymentDate).ToList();
-        //        datesList.Sort();
-        //        return datesList;
-        //    }
-        //}
+        public PriceableLeaseCouponRateStream Coupons = new PriceableLeaseCouponRateStream();
 
         #endregion
 
@@ -143,187 +241,326 @@ namespace Orion.ValuationEngine.Pricers
         /// <summary>
         /// 
         /// </summary>
-        public LeaseTransactionPricer()
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="tradeDate"></param>
+        /// <param name="settlementDate">The payment settlement date.</param>
+        /// <param name="settlementCalendar"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <param name="leaseFpML"></param>
+        /// <param name="basePartyReference"></param>
+        /// <param name="leaseType"></param>
+        /// <param name="forecastRateInterpolation"></param>
+        public LeaseTransactionPricer(ILogger logger, ICoreCache cache, string nameSpace, DateTime tradeDate,
+            DateTime settlementDate, IBusinessCalendar settlementCalendar, IBusinessCalendar paymentCalendar,
+            LeaseTransaction leaseFpML, string basePartyReference, string leaseType, bool forecastRateInterpolation)
         {
             Multiplier = 1.0m;
-            AnalyticsModel = new LeaseAssetAnalytic();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PriceableInterestRateStream"/> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="cache">The cache.</param>
-        /// <param name="nameSpace">The client namespace.</param>
-        /// <param name="swapId">The swap Id.</param>
-        /// <param name="payerPartyReference">The payer party reference.</param>
-        /// <param name="receiverPartyReference">The receiver party reference.</param>
-        /// <param name="payerIsBase">The flag for whether the payer reference is the base party.</param>
-        /// : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);</param>
-        /// <param name="paymentCalendar">The paymentCalendar.</param>
-        public LeaseTransactionPricer
-            (
-            ILogger logger
-            , ICoreCache cache
-            , String nameSpace
-            , string swapId
-            , string payerPartyReference
-            , string receiverPartyReference 
-            , bool payerIsBase
-            , IBusinessCalendar paymentCalendar)
-        {
-            Multiplier = 1.0m;
-            Payer = payerPartyReference;
-            Receiver = receiverPartyReference;
-            PayerIsBaseParty = payerIsBase;
-            PaymentCurrencies = new List<string>();
-            AnalyticsModel = new StructuredStreamAnalytic();
-            Id = BuildId(swapId, CouponStreamType);
-            //Get the currency.
-            var currency = XsdClassesFieldResolver.CalculationGetNotionalSchedule(Calculation);
-            Currency = currency.notionalStepSchedule.currency;
-            if (!PaymentCurrencies.Contains(Currency.Value))
+            TradeDate = tradeDate;
+            LeaseType = leaseType;
+            logger.LogInfo("LeaseType set. Commence to build a bond transaction.");
+            if (leaseFpML == null) return;
+            BuyerReference = leaseFpML.buyerPartyReference.href;
+            PaymentCurrencies = new List<string> { leaseFpML.notionalAmount.currency.Value};
+            SellerReference = leaseFpML.sellerPartyReference.href;
+            BasePartyBuyer = basePartyReference == leaseFpML.buyerPartyReference.href;
+            if (!BasePartyBuyer)
             {
-                PaymentCurrencies.Add(Currency.Value);
+                Multiplier = -1.0m;
             }
-            //The calendars
-            if (paymentCalendar == null)
+            ForecastRateInterpolation = forecastRateInterpolation;
+            SettlementCalendar = settlementCalendar;
+            PaymentCalendar = paymentCalendar;
+            //Set the bond price information
+            BondPrice = new BondPrice();
+            if (leaseFpML.price.accrualsSpecified)
             {
-                paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, PaymentDates.paymentDatesAdjustments.businessCenters, nameSpace);
+                BondPrice.accrualsSpecified = true;
+                BondPrice.accruals = leaseFpML.price.accruals;
             }
-            //Set the default discount curve name.
-            DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Currency.Value, true);
-            RiskMaturityDate = LastDate();
-            logger.LogInfo("Stream built");
+            if (leaseFpML.price.dirtyPriceSpecified)
+            {
+                BondPrice.dirtyPriceSpecified = true;
+                BondPrice.dirtyPrice = leaseFpML.price.dirtyPrice;
+            }
+            BondPrice.cleanOfAccruedInterest = leaseFpML.price.cleanOfAccruedInterest;
+            BondPrice.cleanPrice = leaseFpML.price.cleanPrice;
+            //Set the currencies
+            CouponCurrency = leaseFpML.notionalAmount.currency;
+            PaymentCurrency = leaseFpML.notionalAmount.currency;//This could be another currency!
+            //Set the notional information
+            NotionalAmount = MoneyHelper.GetAmount(leaseFpML.notionalAmount.amount, leaseFpML.notionalAmount.currency.Value);
+            //Determines the quotation and units
+            QuoteType = BondPriceEnum.YieldToMaturity;
+            //We need to get the ytm in until there is a bond market price/spread.
+            if (BondPrice.dirtyPriceSpecified)
+            {
+                QuoteType = BondPriceEnum.DirtyPrice;
+                Quote = BasicQuotationHelper.Create(BondPrice.dirtyPrice, RateQuotationType);
+            }
+            //Get the instrument configuration information.
+            var assetIdentifier = leaseFpML.lease.currency.Value + "-Lease-" + LeaseType;
+            LeaseNodeStruct leaseTypeInfo = null;
+            //TODO Set the swap curves for asset swap valuation.
+            //
+            //Gets the template bond type
+            var instrument = InstrumentDataHelper.GetInstrumentConfigurationData(cache, nameSpace, assetIdentifier);
+            if (instrument != null)
+            {
+                leaseTypeInfo = instrument.InstrumentNodeItem as LeaseNodeStruct;
+            }
+            if (leaseFpML.lease != null && leaseTypeInfo != null)
+            {
+                if (SettlementCalendar == null)
+                {
+                    SettlementCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, leaseTypeInfo.SettlementDate.businessCenters, nameSpace);
+                }
+                if (PaymentCalendar == null)
+                {
+                    PaymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, leaseTypeInfo.BusinessDayAdjustments.businessCenters, nameSpace);
+                }
+                //Pre-processes the data for the priceable asset.
+                var lease = XmlSerializerHelper.Clone(leaseFpML.lease);
+                Lease = lease;
+                leaseTypeInfo.Lease = Lease;
+                //Set the curves to use for valuations.
+                LeaseCurveName = CurveNameHelpers.GetBondCurveName(Lease.currency.Value, Lease.id);
+                //THe discount curve is only for credit calculations.
+                DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Lease.currency.Value, true);
+                if (lease.maturitySpecified)
+                {
+                    MaturityDate = lease.maturity;
+                }
+                SettlementDateConvention = leaseTypeInfo.SettlementDate;
+                BusinessDayAdjustments = leaseTypeInfo.BusinessDayAdjustments;
+                ExDivDateConvention = leaseTypeInfo.ExDivDate;
+                //This is done because the config data is not stored in the correct way. Need to add a price quote units.
+                if (lease.couponRateSpecified)
+                {
+                    var coupon = lease.couponRate;
+                    Bond.couponRate = coupon;
+                }
+                leaseTypeInfo.Lease.faceAmount = NotionalAmount.amount;
+                leaseTypeInfo.Lease.faceAmountSpecified = true;
+                Bond.faceAmount = NotionalAmount.amount;
+                if (Bond.maturitySpecified)
+                {
+                    RiskMaturityDate = Bond.maturity;
+                }
+                SettlementDate = settlementDate;
+                if (!PaymentCurrencies.Contains(leaseFpML.bond.currency.Value))
+                {
+                    PaymentCurrencies.Add(leaseFpML.lease.currency.Value);
+                }
+                logger.LogInfo("Lease transaction has been successfully created.");
+            }
+            else
+            {
+                logger.LogInfo("Bond type data not available.");
+            }
+            //Set the underlying bond
+            UnderlyingLease = new PriceableSimpleBond(tradeDate, leaseTypeInfo, SettlementCalendar, PaymentCalendar, Quote, QuoteType);
+            //LeaseTenant = UnderlyingLease.Tenant;
+            if (BondPrice.dirtyPriceSpecified)
+            {
+                UnderlyingLease.PurchasePrice = BondPrice.dirtyPrice / 100; //PriceQuoteUnits
+            }
+            //Set the coupons
+            var leaseId = Lease.id;//Could use one of the instrumentIds
+            //bondStream is an interest Rate Stream but needs to be converted to a bond stream.
+            //It automatically contains the coupon currency.
+            Coupons = new PriceableLeaseCouponRateStream(logger, cache, nameSpace, leaseId, tradeDate,
+                leaseFpML.notionalAmount.amount, CouponStreamType.GenericFixedRate, Bond,
+                BusinessDayAdjustments, ForecastRateInterpolation, null, PaymentCalendar);
+            //Add payments like the settlement price
+            if (!BondPrice.dirtyPriceSpecified) return;
+            var amount = BondPrice.dirtyPrice * NotionalAmount.amount / 100;
+            var settlementPayment = PaymentHelper.Create(BuyerReference, SellerReference, PaymentCurrency.Value, amount, SettlementDate);
+            AdditionalPayments = PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] { settlementPayment }, SettlementCalendar);
+            //
+            var finalPayment = PaymentHelper.Create(LeaseTenant, BuyerReference, CouponCurrency.Value, NotionalAmount.amount, RiskMaturityDate);
+            FinalRedemption =
+                PriceableInstrumentsFactory.CreatePriceablePayment(basePartyReference, finalPayment, PaymentCalendar);
+            AdditionalPayments.Add(FinalRedemption);
+            if (!PaymentCurrencies.Contains(settlementPayment.paymentAmount.currency.Value))
+            {
+                PaymentCurrencies.Add(settlementPayment.paymentAmount.currency.Value);
+            }
         }
 
         #endregion
 
-        #region FpML Representation
-
-        /// <summary>
-        /// Builds this instance.
-        /// </summary>
-        /// <returns></returns>
-        public Lease Build()
-        {
-            var lease = new Lease
-            {
-                                  // cashflows = BuildCashflows(),
-            };
-            
-            return lease;
-        }
-
-        #endregion
-
-        #region Metrics for Valuation
+        #region Overrides of ModelControllerBase<IInstrumentControllerData,AssetValuation>
 
         /// <summary>
         /// Builds this instance and returns the underlying instrument associated with the controller
         /// </summary>
         /// <returns></returns>
-        LeaseTransaction IPriceableInstrumentController<FpML.V5r3.Reporting.LeaseTransaction>.Build()
+        public LeaseTransaction Build()
         {
-            throw new NotImplementedException();
+            var lease = Lease;
+            var buyerPartyReference = PartyReferenceHelper.Parse(BuyerReference);
+            var sellerPartyReference = PartyReferenceHelper.Parse(SellerReference);
+            var productType = new object[] {ProductTypeHelper.Create("LeaseTransaction")};
+            var itemName = new[] {ItemsChoiceType2.productType};
+            //TODO extend this
+            var leaseTransaction = new LeaseTransaction
+            {
+                               notionalAmount = NotionalAmount,
+                               lease = lease,
+                               //price = XmlSerializerHelper.Clone(BondPrice),
+                               buyerPartyReference = buyerPartyReference,
+                               sellerPartyReference = sellerPartyReference,
+                               id = Id,
+                               Items = productType,
+                               ItemsElementName = itemName
+                           };
+            return leaseTransaction;
         }
+
+        #endregion
+
+        #region Implementation of IMetricsCalculation<IRateCouponParameters,IRateInstrumentResults>
 
         public override AssetValuation Calculate(IInstrumentControllerData modelData)
         {
             ModelData = modelData;
             AnalyticModelParameters = null;
-            CalculationResults = null;
-            UpdateBucketingInterval(ModelData.ValuationDate, PeriodHelper.Parse(CDefaultBucketingInterval));
             // 1. First derive the analytics to be evaluated via the stream controller model 
             // NOTE: These take precedence of the child model metrics
             if (AnalyticsModel == null)
             {
-                AnalyticsModel = new StructuredStreamAnalytic();
+                AnalyticsModel = new BondTransactionAnalytic();
             }
-            var streamControllerMetrics = ResolveModelMetrics(AnalyticsModel.Metrics);
-            AssetValuation streamValuation;
-            // 2. Now evaluate only the child specific metrics (if any)
-            foreach (var coupon in Coupons)
+            var leaseControllerMetrics = ResolveModelMetrics(AnalyticsModel.Metrics);
+            AssetValuation leaseValuation;
+            var quotes = ModelData.AssetValuation.quote.ToList();
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.AccrualFactor.ToString()) == null)
             {
-                coupon.PricingStructureEvolutionType = PricingStructureEvolutionType;
-                coupon.BucketedDates = BucketedDates;
-                coupon.Multiplier = Multiplier;
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.AccrualFactor.ToString(), "DecimalValue");
+                quotes.Add(quote);
             }
-            var childControllers = new List<InstrumentControllerBase>(Coupons.ToArray());
-            //Now the stream analytics can be completed.
-            var childValuations = EvaluateChildMetrics(childControllers, modelData, Metrics);
-            var couponValuation = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
-            var childControllerValuations = new List<AssetValuation> {couponValuation};
-            if (Exchanges != null && Exchanges.Count > 0)
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.FloatingNPV.ToString()) == null)
             {
-                foreach (var exchange in Exchanges)
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.FloatingNPV.ToString(), "DecimalValue");
+                quotes.Add(quote);
+            }
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.NPV.ToString()) == null)
+            {
+                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.NPV.ToString(), "DecimalValue");
+                quotes.Add(quote);
+            }
+            ModelData.AssetValuation.quote = quotes.ToArray();
+            var marketEnvironment = modelData.MarketEnvironment;
+            IRateCurve rateDiscountCurve = null;
+            //2. Sets the evolution type for coupon and payment calculations.
+            Coupons.PricingStructureEvolutionType = PricingStructureEvolutionType;
+            Coupons.BucketedDates = BucketedDates;
+            Coupons.Multiplier = Multiplier;
+            if (AdditionalPayments != null)
+            {
+                foreach (var payment in AdditionalPayments)
                 {
-                    exchange.PricingStructureEvolutionType = PricingStructureEvolutionType;
-                    exchange.BucketedDates = BucketedDates;
-                    exchange.Multiplier = Multiplier;
+                    payment.PricingStructureEvolutionType = PricingStructureEvolutionType;
+                    payment.BucketedDates = BucketedDates;
+                    payment.Multiplier = Multiplier;
                 }
-                // Roll-Up and merge child valuations into parent Valuation
-                var childPrincipalControllers = new List<InstrumentControllerBase>(Exchanges.ToArray());
-                var childPrincipalValuations = EvaluateChildMetrics(childPrincipalControllers, modelData, Metrics);
-                var principalValuation = AssetValuationHelper.AggregateMetrics(childPrincipalValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
-                childControllerValuations.Add(principalValuation);
             }
-            // Child metrics have now been calculated so we can now evaluate the stream model metrics
-            if (streamControllerMetrics.Count > 0)
+            //3. Aggregate the child metrics.
+            List<AssetValuation> childValuations = new List<AssetValuation> {Coupons?.Calculate(modelData)};
+            if (GetAdditionalPayments() != null)
             {
-                var reportingCurrency = ModelData.ReportingCurrency == null ? Currency.Value : ModelData.ReportingCurrency.Value;
-                var notionals = GetCouponNotionals();
-                var accrualFactors = GetCouponAccrualFactors();
-                var discountFactors = GetPaymentDiscountFactors();
-                var floatingNPV = AggregateMetric(InstrumentMetrics.FloatingNPV, childControllerValuations);
-                var accrualFactor = AggregateMetric(InstrumentMetrics.AccrualFactor, childControllerValuations);
-                //TODO need to  set the notional amount and the weighting. Also amortisation??
-                IStructuredStreamParameters analyticModelParameters = new StructuredStreamParameters
-                                                                          {   Multiplier = Multiplier,
-                                                                              IsDiscounted = IsDiscounted,
-                                                                              CouponNotionals = notionals,
-                                                                              Currency = Currency.Value,
-                                                                              ReportingCurrency = reportingCurrency,
-                                                                              AccrualFactor = accrualFactor,
-                                                                              FloatingNPV = floatingNPV,
-                                                                              NPV = AggregateMetric(InstrumentMetrics.NPV, childControllerValuations),
-                                                                              CouponYearFractions = accrualFactors,
-                                                                              PaymentDiscountFactors = discountFactors,
-                                                                              TargetNPV = floatingNPV
-                                                                          };
-                CalculationResults = AnalyticsModel.Calculate<IStreamInstrumentResults, StreamInstrumentResults>(analyticModelParameters, streamControllerMetrics.ToArray());
-                // Now merge back into the overall stream valuation
-                var streamControllerValuation = GetValue(CalculationResults, modelData.ValuationDate);
-                streamValuation = AssetValuationHelper.UpdateValuation(streamControllerValuation,
-                                                                       childControllerValuations, ConvertMetrics(streamControllerMetrics), new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
+                var paymentControllers = new List<InstrumentControllerBase>(GetAdditionalPayments());
+                childValuations.AddRange(paymentControllers.Select(payment => payment.Calculate(modelData)));
+            }
+            var childControllerValuations = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
+            childControllerValuations.id = Id + ".LeaseCouponRateStreams";
+            //4. Calc the asset as a little extra
+            var metrics = ResolveModelMetrics(AnalyticsModel.Metrics);
+            var metricsAsString = metrics.Select(metric => metric.ToString()).ToList();
+            var controllerData = PriceableAssetFactory.CreateAssetControllerData(metricsAsString.ToArray(), modelData.ValuationDate, modelData.MarketEnvironment);
+            UnderlyingLease.Multiplier = Multiplier;
+            UnderlyingLease.Calculate(controllerData);
+            //5. Now do the lease calculations.
+            if (leaseControllerMetrics.Count > 0)
+            {
+                CalculationResults = new LeaseTransactionResults();
+                if (marketEnvironment.GetType() == typeof(MarketEnvironment))
+                {
+                    var leaseCurve = (IBondCurve)modelData.MarketEnvironment.GetPricingStructure(LeaseCurveName);
+                    if (leaseCurve != null)
+                    {
+                        var marketDataType =
+                            leaseCurve.GetPricingStructureId().Properties.GetValue<string>(AssetMeasureEnum.MarketQuote.ToString(), false);
+                        //TODO handle the other cases like: AssetSwapSpread; DirtyPrice and ZSpread.
+                        var mq = (decimal)leaseCurve.GetYieldToMaturity(modelData.ValuationDate, SettlementDate);
+                        Quote = BasicQuotationHelper.Create(mq, AssetMeasureEnum.MarketQuote.ToString(),
+                                                            PriceQuoteUnitsEnum.DecimalRate.ToString());
+                    }
+                    rateDiscountCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(DiscountCurveName);
+                }
+                //Generate the vectors
+                const bool isBuyerInd = true;
+                var analyticModelParameters = new LeaseTransactionParameters
+                {
+                    IsBuyerInd = isBuyerInd,
+                    AccrualYearFractions = GetCouponAccrualFactors(),
+                    Multiplier = Multiplier,
+                    Quote = QuoteValue,
+                    CouponRate = UnderlyingLease.GetCouponRate(),
+                    NotionalAmount = UnderlyingLease.Notional,
+                    Frequency = UnderlyingLease.Frequency,
+                    IsYTMQuote = IsYTMQuote,
+                    AccruedFactor = UnderlyingLease.GetAccruedFactor(),
+                    RemainingAccruedFactor = UnderlyingLease.GetRemainingAccruedFactor(),
+                    PaymentDiscountFactors =
+                        GetDiscountFactors(rateDiscountCurve, Coupons.StreamPaymentDates.ToArray(), modelData.ValuationDate),
+                };
+                //5. Get the Weightings
+                analyticModelParameters.Weightings =
+                    CreateWeightings(CDefaultWeightingValue, analyticModelParameters.PaymentDiscountFactors.Length);
+                //6. Set the analytic input parameters and Calculate the respective metrics 
                 AnalyticModelParameters = analyticModelParameters;
+                CalculationResults = AnalyticsModel.Calculate<ILeaseTransactionResults, LeaseTransactionResults>(analyticModelParameters, metrics.ToArray());
+                // Now merge back into the overall stream valuation
+                var leaseControllerValuation = GetValue(CalculationResults, modelData.ValuationDate);
+                leaseValuation = AssetValuationHelper.UpdateValuation(leaseControllerValuation,
+                                                                     childControllerValuations, ConvertMetrics(leaseControllerMetrics), new List<string>(Metrics));
             }
             else
             {
-                streamValuation = AssetValuationHelper.AggregateMetrics(childControllerValuations, new List<string>(Metrics), PaymentCurrencies);// modelData.ValuationDate);
+                leaseValuation = childControllerValuations;
             }
+            // store inputs and results from this run
             CalculationPerformedIndicator = true;
-            streamValuation.id = Id;
-            return streamValuation;
+            leaseValuation.id = Id;
+            return leaseValuation;
+        }
+
+        private decimal[] GetCouponAccrualFactors()
+        {
+            var result = Coupons.GetCouponAccrualFactors();
+            return result.ToArray();
         }
 
         /// <summary>
-        /// Updates the bucketing interval.
+        /// Gets the last calculation results.
         /// </summary>
-        /// <param name="baseDate">The base date for bucketing.</param>
-        /// <param name="bucketingInterval">The bucketing interval.</param>
-        public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketingInterval)
-        {
-            throw new NotImplementedException();
-        }
+        /// <value>The last results.</value>
+        public ILeaseTransactionResults CalculationResults { get; protected set; }
 
-        /// <summary>
-        /// Builds the product with the calculated data.
-        /// </summary>
-        /// <returns></returns>
-        public override Product BuildTheProduct()
+        #endregion
+
+        #region Overrides of InstrumentControllerBase
+
+        ///<summary>
+        /// Gets all the child controllers.
+        ///</summary>
+        ///<returns></returns>
+        public IList<InstrumentControllerBase> GetAdditionalPayments()
         {
-            return null;
+            return AdditionalPayments?.Cast<InstrumentControllerBase>().ToList();
         }
 
         ///<summary>
@@ -332,228 +569,154 @@ namespace Orion.ValuationEngine.Pricers
         ///<returns></returns>
         public override IList<InstrumentControllerBase> GetChildren()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Aggregates the coupon metric.
-        /// </summary>
-        /// <param name="metric">The metric.</param>
-        /// <param name="childValuations"> </param>
-        /// <returns></returns>
-        protected Decimal AggregateMetric(InstrumentMetrics metric, List<AssetValuation> childValuations)
-        {
-            var result = 0.0m;
-            if (childValuations != null && childValuations.Count > 0)
-            {
-                result = Aggregator.SumDecimals(childValuations.Select(valuation => Aggregator.SumDecimals(GetMetricResults(valuation, metric))).ToArray());
-            }
+            var result = new List<InstrumentControllerBase>();
+            result.AddRange(GetAdditionalPayments());
+            result.AddRange(GetCoupons());
             return result;
         }
 
-        //public void AddCoupon(PriceableRateCoupon newFlow)
-        //{
-        //    Coupons.Add(newFlow);
-        //}
-
-        //public void AddPrincipalExchange(PriceablePrincipalExchange newFlow)
-        //{
-        //    Exchanges.Add(newFlow);
-        //}
-
-        ///// <summary>
-        ///// Updates the name of the discount curve.
-        ///// </summary>
-        ///// <param name="newCurveName">New name of the curve.</param>
-        //public void UpdateDiscountCurveName(string newCurveName)
-        //{
-        //    foreach (PriceableRateCoupon coupon in Coupons)
-        //    {
-        //        coupon.UpdateDiscountCurveName(newCurveName);
-        //    }
-        //    DiscountCurveName = newCurveName;
-        //}
-
-        #endregion
-
-        #region Helper Methods
-
-        //public decimal[] GetCouponNotionals()
-        //{
-        //    var result = new List<decimal>();
-        //    Coupons.ForEach(cashflow => result.Add(cashflow.Notional));
-        //    return result.ToArray();
-        //}
-
-        //public decimal[] GetCouponAccrualFactors()
-        //{
-        //    var result = new List<decimal>();
-        //    Coupons.ForEach(cashflow => result.Add(cashflow.CouponYearFraction));
-        //    return result.ToArray();
-        //}
-
-        //public decimal[] GetPaymentDiscountFactors()
-        //{
-        //    var result = new List<decimal>();
-        //    Coupons.ForEach(cashflow => result.Add(cashflow.PaymentDiscountFactor));
-        //    return result.ToArray();
-        //}
-
-        /// <summary>
-        /// Aggregates the coupon metric.
-        /// </summary>
-        /// <param name="childValuations">The metrics.</param>
-        /// <param name="controllerMetrics">The controller metrics</param>
-        /// <returns></returns>
-        protected static AssetValuation AggregateMetrics(List<AssetValuation> childValuations, List<string> controllerMetrics)
+        ///<summary>
+        /// Gets all the child controllers.
+        ///</summary>
+        ///<returns></returns>
+        private IList<InstrumentControllerBase> GetCoupons()
         {
-            var result = new AssetValuation();
-            var quotes = new List<Quotation>();
-            foreach (var metric in controllerMetrics)
-            {
-                var quote = new Quotation();
-                var measure = new AssetMeasureType { Value = metric };
-                quote.measureType = measure;
-                quote.value = Aggregator.SumDecimals(childValuations.Select(valuation => Aggregator.SumDecimals(GetMetricResults(valuation, metric))).ToArray());
-                quote.valueSpecified = true;
-                quotes.Add(quote);
-            }
-            result.quote = quotes.ToArray();
-            return result;
+            return Coupons?.GetChildren();
         }
 
         #endregion
 
         #region Static Helpers
 
-        protected static Cashflows BuildCashflow(InterestRateStream stream, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+        /// <summary>
+        /// Gets the discount factors.
+        /// </summary>
+        /// <param name="discountFactorCurve">The discount factor curve.</param>
+        /// <param name="periodDates">The period dates.</param>
+        /// <param name="valuationDate">The valuation date.</param>
+        /// <returns></returns>
+        public static decimal[] GetDiscountFactors(IRateCurve discountFactorCurve, DateTime[] periodDates,
+                                            DateTime valuationDate)
         {
-            var cashflows = stream.cashflows;
-            if (stream.cashflows == null || stream.cashflows.cashflowsMatchParameters == false)
+            return periodDates.Select(periodDate => GetDiscountFactor(discountFactorCurve, periodDate, valuationDate)).ToArray();
+        }
+
+        /// <summary>
+        /// Gets the discount factor.
+        /// </summary>
+        /// <param name="discountFactorCurve">The discount factor curve.</param>
+        /// <param name="targetDate">The target date.</param>
+        /// <param name="valuationDate">The valuation date.</param>
+        /// <returns></returns>
+        public static decimal GetDiscountFactor(IRateCurve discountFactorCurve, DateTime targetDate,
+                                         DateTime valuationDate)
+        {
+            IPoint point = new DateTimePoint1D(valuationDate, targetDate);
+            var discountFactor = (decimal)discountFactorCurve.Value(point);
+            return discountFactor;
+        }
+
+        /// <summary>
+        /// Sets the marketQuote.
+        /// </summary>
+        /// <param name="marketQuote">The marketQuote.</param>
+        private void SetQuote(BasicQuotation marketQuote)
+        {
+            if (string.Compare(marketQuote.measureType.Value, RateQuotationType, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                cashflows = FixedAndFloatingRateStreamCashflowGenerator.GetCashflows(stream, fixingCalendar, paymentCalendar);
+                Quote = marketQuote;
             }
-            return cashflows;
-        }
-
-        protected static string BuildId(string leaseId)//, string payerPartyReference)
-        {
-            const string cUnknown = "UNKNOWN";
-            string leaseIdentifier = string.IsNullOrEmpty(leaseId) ? cUnknown : leaseId;
-            //return string.Format("{0}.{1}.{2}", swapIdentifier, couponStreamType, payerPartyReference);
-            return $"{leaseIdentifier}";
-        }
-
-        //public DateTime LastDate()
-        //{
-        //    if (LastExchangeDate() == null) return LastCouponDate();
-        //    var lastExchangeDate = LastExchangeDate();
-        //    return lastExchangeDate != null && LastCouponDate() <= (DateTime)lastExchangeDate ? (DateTime)lastExchangeDate : LastCouponDate();
-        //}
-
-        ////It is assumed that all coupons are ordered and there is at least one.
-        //public DateTime LastCouponDate()
-        //{
-        //    return Coupons[Coupons.Count - 1].AccrualEndDate;
-        //}
-
-        /// <summary>
-        /// Intervals the string.
-        /// </summary>
-        /// <param name="periodLength">Length of the period.</param>
-        /// <param name="periodTimeUnit">The period time unit.</param>
-        /// <returns></returns>
-        protected static string IntervalString(string periodLength, PeriodEnum periodTimeUnit)
-        {
-            return $"{periodLength}{periodTimeUnit}";
-        }
-
-        /// <summary>
-        /// Businesses the centers string.
-        /// </summary>
-        /// <param name="businessCenters">The business centers.</param>
-        /// <returns></returns>
-        protected static string BusinessCentersString(List<string> businessCenters)
-        {
-            return BusinessCentersString(businessCenters.ToArray());
-        }
-
-        /// <summary>
-        /// Businesses the centers as list.
-        /// </summary>
-        /// <param name="businessCenters">The business centers.</param>
-        /// <returns></returns>
-        internal static List<string> BusinessCentersAsList(BusinessCenter[] businessCenters)
-        {
-            return businessCenters.Select(bc => bc.Value).ToList();
-        }
-
-        /// <summary>
-        /// Businesses the centers string.
-        /// </summary>
-        /// <param name="businessCenters">The business centers.</param>
-        /// <returns></returns>
-        protected static string BusinessCentersString(string[] businessCenters)
-        {
-            return string.Join("-", businessCenters);
-        }
-
-        /// <summary>
-        /// Removes the duplicates
-        /// </summary>
-        /// <param name="inputList">The input list.</param>
-        /// <returns></returns>
-        protected static List<T> RemoveDuplicates<T>(List<T> inputList)
-        {
-            var uniqueStore = new List<T>();
-            foreach (T currencyValue in inputList)
+            else
             {
-                if (!uniqueStore.Contains(currencyValue))
-                {
-                    uniqueStore.Add(currencyValue);
-                }
+                throw new ArgumentException("Quotation must be of type {0}", RateQuotationType);
             }
-            return uniqueStore;
+        }
+
+        /// <summary>
+        /// Creates the weightings.
+        /// </summary>
+        /// <param name="weightingValue">The weighting value.</param>
+        /// <param name="noOfInstances">The no of instances.</param>
+        /// <returns></returns>
+        private static decimal[] CreateWeightings(decimal weightingValue, int noOfInstances)
+        {
+            var weights = new List<decimal>();
+            for (var index = 0; index < noOfInstances; index++)
+            {
+                weights.Add(weightingValue);
+            }
+            return weights.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the market quote.
+        /// </summary>
+        /// <value>The market quote.</value>
+        public BasicQuotation Quote
+        {
+            get => MarketQuote;
+            set
+            {
+                MarketQuote = value;
+                //if (value.quoteUnits.Value == "DecimalRate")
+                //{
+                //    IsYTMQuote = true;
+                //    QuoteValue = value.value;
+                //}
+                //if (value.quoteUnits.Value == "Rate")
+                //{
+                //    IsYTMQuote = true;
+                //    QuoteValue = value.value / 100.0m;
+                //}
+                //if (value.quoteUnits.Value == "DirtyPrice")
+                //{
+                //    IsYTMQuote = false;
+                //    QuoteValue = value.value / 100.0m;
+                //}
+                //if (value.quoteUnits.Value == "CleanPrice")
+                //{
+                //    IsYTMQuote = false;
+                //    QuoteValue = value.value / 100.0m;
+                //}
+            }
+        }
+
+        ///<summary>
+        ///</summary>
+        public DateTime GetMaturityDate()
+        {
+            return MaturityDate;
+        }
+
+        ///<summary>
+        ///</summary>
+        public DateTime GetSettlementDate(DateTime baseDate, IBusinessCalendar settlementCalendar, RelativeDateOffset settlementDateOffset)
+        {
+            try
+            {
+                return settlementCalendar.Advance(baseDate, settlementDateOffset, settlementDateOffset.businessDayConvention);
+            }
+            catch (System.Exception)
+            {
+                throw new System.Exception("No settlement calendar set.");
+            }
+        }
+
+        public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
+        {
+            var bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
+            return bucketDates.ToArray();
+        }
+
+        /// <summary>
+        /// Builds the product with the calculated data.
+        /// </summary>
+        /// <returns></returns>
+        public override Product BuildTheProduct()
+        {
+            return Build();
         }
 
         #endregion
-
-        #region Overrides of InstrumentControllerBase
-
-        /////<summary>
-        ///// Gets all the child controllers.
-        /////</summary>
-        /////<returns></returns>
-        //public override IList<InstrumentControllerBase> GetChildren()
-        //{
-        //    var children = Coupons.Cast<InstrumentControllerBase>().ToList();
-        //    if (Exchanges!=null)
-        //    {
-        //        children.AddRange(Exchanges);
-        //    }
-        //    return children;
-        //}
-
-        #endregion
-
-        /// <summary>
-        /// Gets a value indicating whether [base party paying fixed].
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if [base party buyer]; otherwise, <c>false</c>.
-        /// </value>
-        public bool BasePartyBuyer { get; }
-
-        /// <summary>
-        /// Gets the settlement date.
-        /// </summary>
-        /// <value>The settlement date.</value>
-        public DateTime PaymentDate { get; }
-
-        /// <summary>
-        /// Gets the underlying equity.
-        /// </summary>
-        /// <value>The underlying equity.</value>
-        public IPriceableLeaseAssetController UnderlyingLease { get; }
     }
 }

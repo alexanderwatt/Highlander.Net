@@ -63,6 +63,7 @@
     <Compile Include="Helpers\Functions.cs" />
     <Compile Include="Helpers\TradeQueryData.cs" />
     <Compile Include="Helpers\Utilities.cs" />
+    <Compile Include="Instruments\PriceableLeaseCouponRateStream.cs" />
     <Compile Include="Instruments\PriceableCommodityFixedLeg.cs" />
     <Compile Include="Instruments\PriceableFxOptionPremium.cs" />
     <Compile Include="Instruments\PriceableCapFloorCoupon.cs" />

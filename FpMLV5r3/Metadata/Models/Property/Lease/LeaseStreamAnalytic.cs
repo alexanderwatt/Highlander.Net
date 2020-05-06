@@ -21,9 +21,9 @@ using Highlander.Reporting.ModelFramework.V5r3;
 
 #endregion
 
-namespace Highlander.Reporting.Models.V5r3.Rates.Bonds
+namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public class BondStreamAnalytic : ModelAnalyticBase<IBondStreamParameters, BondInstrumentMetrics>, IBondStreamInstrumentResults, IObjectiveFunction
+    public class LeaseStreamAnalytic : ModelAnalyticBase<ILeaseStreamParameters, LeaseInstrumentMetrics>, ILeaseStreamInstrumentResults, IObjectiveFunction
     {
         #region Properties
 

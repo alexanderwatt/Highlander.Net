@@ -28,7 +28,6 @@ using Highlander.Core.Common;
 using Highlander.Core.V34;
 using Highlander.Reporting.Contracts.V5r3;
 using Highlander.Reporting.V5r3;
-using Highlander.Utilities;
 using Highlander.Utilities.Caching;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;

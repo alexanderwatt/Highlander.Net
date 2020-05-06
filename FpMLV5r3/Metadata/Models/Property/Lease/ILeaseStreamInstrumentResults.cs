@@ -15,26 +15,33 @@
 
 using System;
 
-namespace Highlander.Reporting.Models.V5r3.Rates.Bonds
+namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public class BondStreamInstrumentResults : IBondStreamInstrumentResults
+    public enum LeaseInstrumentMetrics
+    { 
+        BreakEvenRate 
+        , BreakEvenSpread
+        , ImpliedQuote
+    }
+
+    public interface ILeaseStreamInstrumentResults
     {
         /// <summary>
         /// Gets the break even spread.
         /// </summary>
         /// <value>The break even spread.</value>
-        public decimal BreakEvenSpread { get; set; }
+        decimal BreakEvenSpread { get; }
 
         /// <summary>
         /// Gets the break even rate.
         /// </summary>
         /// <value>The break even rate.</value>
-        public decimal BreakEvenRate { get; set; }
+        decimal BreakEvenRate { get; }
 
         /// <summary>
         /// Gets the break even rate.
         /// </summary>
         /// <value>The break even rate.</value>
-        public decimal ImpliedQuote { get; set; }
+        decimal ImpliedQuote { get; }
     }
 }

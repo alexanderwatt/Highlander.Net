@@ -118,7 +118,7 @@ namespace Highlander.Reporting.Models.V5r3.Rates.Bonds
 
         #endregion
 
-        private Decimal EvaluatePandL()
+        private decimal EvaluatePandL()
         {
             //This does not discount the profit.
             var dp = EvaluateDirtyPrice();

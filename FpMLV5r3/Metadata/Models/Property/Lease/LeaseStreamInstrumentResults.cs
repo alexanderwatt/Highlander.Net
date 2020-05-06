@@ -13,11 +13,9 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
-namespace Highlander.Reporting.Models.V5r3.Rates.Bonds
+namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public class BondStreamInstrumentResults : IBondStreamInstrumentResults
+    public class LeaseStreamInstrumentResults : ILeaseStreamInstrumentResults
     {
         /// <summary>
         /// Gets the break even spread.

@@ -212,7 +212,7 @@ namespace Highlander.ValuationEngine.V5r3
                             }
                             var future = (FutureTransaction)trade.Item;
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                            var type = tradeProps.GetValue<String>(FuturesProp.FuturesType, true);
+                            var type = tradeProps.GetValue<string>(FuturesProp.FuturesType, true);
                             var futureType = EnumHelper.Parse<ExchangeContractTypeEnum>(type);
                             //Get the instrument configuration data.
                             //Modify the pricer to include this data.
@@ -435,14 +435,14 @@ namespace Highlander.ValuationEngine.V5r3
                 {
                     case ItemChoiceType15.leaseTransaction:
                     {
-                        var lease = (Highlander.Reporting.V5r3.LeaseTransaction)trade.Item;
+                        var lease = (LeaseTransaction)trade.Item;
                         IBusinessCalendar settlementCalendar = null;
                         if (firstCalendarPair != null)
                         {
                             settlementCalendar = firstCalendarPair.First;
                         }
                         var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                        var referenceProperty = tradeProps.GetValue<String>(LeaseProp.LeaseIdentifier, false);
+                        var referenceProperty = tradeProps.GetValue<string>(LeaseProp.LeaseIdentifier, false);
                         //PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, lease, BaseParty, forecastRateInterpolation);
                         //ProductReporter = new LeaseTransactionReporter();
                     }
@@ -532,7 +532,6 @@ namespace Highlander.ValuationEngine.V5r3
                                 ProductIdentifier = tradeIdentifier
                             };
                             ProductReporter = new InterestRateSwapReporter();
-                            //var report =
                         }
                         break;
                     case ItemChoiceType15.fra: // todo

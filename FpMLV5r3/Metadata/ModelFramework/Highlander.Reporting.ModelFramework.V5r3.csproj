@@ -95,6 +95,7 @@
     <Compile Include="Instruments\Commodities\IPriceableCommodityCashflow.cs" />
     <Compile Include="Instruments\Commodities\IPriceableCommoditySwapLeg.cs" />
     <Compile Include="Instruments\InterestRates\IPriceableBondCouponRateStream.cs" />
+    <Compile Include="Instruments\Lease\IPriceableLeaseCouponRateStream.cs" />
     <Compile Include="Instruments\Lease\IPriceableLeaseTransaction.cs" />
     <Compile Include="Instruments\Property\IPriceablePropertyTransaction.cs" />
     <Compile Include="Instruments\Equity\IPriceableEquityTransaction.cs" />

@@ -27,6 +27,7 @@ using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.Reporting.Analytics.V5r3.Schedulers;
 using Highlander.CalendarEngine.V5r3.Helpers;
 using Highlander.CalendarEngine.V5r3.Schedulers;
+using Highlander.Codes.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates;
 using Highlander.ValuationEngine.V5r3.Instruments;
@@ -189,6 +190,76 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         /// 
         /// </summary>
         /// <param name="baseDate"></param>
+        /// <param name="leaseAsset"></param>
+        /// <param name="notionalAmount"></param>
+        /// <param name="paymentConvention"></param>
+        /// <param name="fOCalculationMethod"></param>
+        /// <param name="fixingCalendar"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <returns></returns>
+        public static List<PriceableRateCoupon> CreatePriceableLeaseCoupons(DateTime baseDate, Lease leaseAsset, decimal notionalAmount,
+            BusinessDayAdjustments paymentConvention, bool fOCalculationMethod, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+        {
+            List<PriceableRateCoupon> result = new List<PriceableRateCoupon>();
+            //This handles the case of a bond forward used in curve building.
+            if (leaseAsset.leaseExpiryDate.Value > baseDate)
+            {
+                var rollConvention =
+                    RollConventionEnumHelper.Parse(leaseAsset.leaseExpiryDate.Value.Day.ToString(CultureInfo.InvariantCulture));
+                //var frequency = FrequencyHelper.ToFrequency(bondAsset.paymentFrequency);
+                var unAdjustedPeriodDates = DateScheduler.GetUnadjustedCouponDatesFromMaturityDate(baseDate,
+                    leaseAsset.leaseExpiryDate.Value,
+                    leaseAsset.paymentFrequency,
+                    rollConvention,
+                    out _,
+                    out _);
+                var adjustedPeriodDates =
+                    AdjustedDateScheduler.GetAdjustedDateSchedule(unAdjustedPeriodDates,
+                        paymentConvention.businessDayConvention,
+                        paymentCalendar).ToArray();
+                var length = unAdjustedPeriodDates.Length;
+                for (int i = 0; i < length - 1; i++)
+                {
+                    var id = "Coupon" + "_" + i;
+                    var startDate = unAdjustedPeriodDates[i];
+                    var endDate = unAdjustedPeriodDates[i + 1];
+                    var paymentDate = adjustedPeriodDates[i + 1];
+                    var coupon = CreatePriceableLeaseCoupon(id, leaseAsset, notionalAmount, startDate, endDate, paymentDate, paymentCalendar);
+                    result.Add(coupon);
+                }
+                return result;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="couponId"></param>
+        /// <param name="leaseAsset"></param>
+        /// <param name="notionalAmount"></param>
+        /// <param name="paymentDate"></param>
+        /// <param name="unadjustedStartDate"></param>
+        /// <param name="unadjustedEndDate"></param>
+        /// <param name="paymentCalendar"></param>
+        /// <returns></returns>
+        public static PriceableRateCoupon CreatePriceableLeaseCoupon(string couponId, Lease leaseAsset, decimal notionalAmount, DateTime unadjustedStartDate,
+            DateTime unadjustedEndDate, DateTime paymentDate, IBusinessCalendar paymentCalendar)//bool fOCalculationMethod, IBusinessCalendar fixingCalendar, 
+        {
+            var currency = leaseAsset.currency;
+            var dayCountFraction = DayCountFractionHelper.ToDayCountFraction(DayCountFractionEnum.ACT_365_FIXED);
+            var money = MoneyHelper.GetAmount(notionalAmount, currency);
+            //  If has a fixed rate (fixed rate coupon)
+            PriceableRateCoupon rateCoupon = new PriceableFixedRateCoupon(couponId, false, unadjustedStartDate, unadjustedEndDate,
+                    dayCountFraction, leaseAsset.startGrossPrice.amount, money, null, paymentDate, null, null,
+                    null, paymentCalendar);
+            return rateCoupon;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseDate"></param>
         /// <param name="bondAsset"></param>
         /// <param name="notionalAmount"></param>
         /// <param name="bondCouponType"></param>
@@ -260,7 +331,6 @@ namespace Highlander.ValuationEngine.V5r3.Factory
                 }
                 throw new System.Exception("CalculationPeriod has neither fixedRate nor floatingRateDefinition.");
         }
-
 
         /// <summary>
         /// 
