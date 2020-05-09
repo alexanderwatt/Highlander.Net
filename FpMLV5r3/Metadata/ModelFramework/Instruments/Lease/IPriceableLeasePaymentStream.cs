@@ -22,22 +22,16 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease
     /// <summary>
     /// IPriceableInterestRateStream
     /// </summary>
-    public interface IPriceableLeaseCouponRateStream<AMP, AMR> : IMetricsCalculation<AMP, AMR>
+    public interface IPriceableLeasePaymentStream<AMP, AMR> : IMetricsCalculation<AMP, AMR>
     {
         /// <summary>
-        /// Gets the Issuer.
+        /// Gets the Tenant.
         /// </summary>
-        /// <value>The Issuer.</value>
-        string Issuer { get; }
+        /// <value>The Tenant.</value>
+        string Tenant { get; }
 
         /// <summary>
-        /// Gets the Buyer.
-        /// </summary>
-        /// <value>The Buyer.</value>
-        string Buyer { get; }
-
-        /// <summary>
-        /// The bond identifier for discounting.
+        /// The lease identifier for discounting.
         /// </summary>
         string LeaseId { get; set; }
 
@@ -45,31 +39,13 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease
         /// Gets the priceable coupons.
         /// </summary>
         /// <value>The priceable coupons.</value>
-        List<InstrumentControllerBase> PriceableCoupons { get;}
-
-        /// <summary>
-        /// Gets the stream start dates.
-        /// </summary>
-        /// <value>The stream start dates.</value>
-        IList<DateTime> StreamStartDates { get; }
-
-        /// <summary>
-        /// Gets the stream end dates.
-        /// </summary>
-        /// <value>The stream end dates.</value>
-        IList<DateTime> StreamEndDates { get; }
+        List<InstrumentControllerBase> PriceablePayments { get;}
 
         /// <summary>
         /// Gets the stream payment dates.
         /// </summary>
         /// <value>The stream payment dates.</value>
         IList<DateTime> StreamPaymentDates { get; }
-
-        /// <summary>
-        /// Gets the adjusted stream dates indicators.
-        /// </summary>
-        /// <value>The adjusted stream dates indicators.</value>
-        IList<bool> AdjustedStreamDatesIndicators { get; }
 
         /// <summary>
         /// Updates the name of the discount curve.

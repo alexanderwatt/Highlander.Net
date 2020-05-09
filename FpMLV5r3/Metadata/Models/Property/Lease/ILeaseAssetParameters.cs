@@ -21,15 +21,13 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
     public interface ILeaseAssetParameters
     {
         /// <summary>
-        /// Gets or sets the quote.
+        /// 
         /// </summary>
-        /// <value>The quote.</value>
         decimal Quote { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount.
+        /// 
         /// </summary>
-        /// <value>The amount.</value>
         decimal GrossAmount { get; set; }
 
         /// <summary>

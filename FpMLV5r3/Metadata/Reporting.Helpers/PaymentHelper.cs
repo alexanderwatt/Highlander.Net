@@ -33,7 +33,7 @@ namespace Highlander.Reporting.Helpers.V5r3
         }
 
         public static Payment Create(string payerPartyReference,
-            string receiverPartyReference, string currency, Decimal paymentAmount,
+            string receiverPartyReference, string currency, decimal paymentAmount,
             DateTime valueDate)
         {
             var payment = new Payment

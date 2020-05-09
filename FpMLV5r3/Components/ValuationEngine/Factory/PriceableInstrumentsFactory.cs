@@ -27,7 +27,6 @@ using Highlander.Reporting.Analytics.V5r3.DayCounters;
 using Highlander.Reporting.Analytics.V5r3.Schedulers;
 using Highlander.CalendarEngine.V5r3.Helpers;
 using Highlander.CalendarEngine.V5r3.Schedulers;
-using Highlander.Codes.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates;
 using Highlander.ValuationEngine.V5r3.Instruments;
@@ -190,23 +189,22 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         /// 
         /// </summary>
         /// <param name="baseDate"></param>
+        /// <param name="receiverPartyReference"></param>
+        /// <param name="payerIsBase"></param>
         /// <param name="leaseAsset"></param>
-        /// <param name="notionalAmount"></param>
-        /// <param name="paymentConvention"></param>
-        /// <param name="fOCalculationMethod"></param>
-        /// <param name="fixingCalendar"></param>
         /// <param name="paymentCalendar"></param>
+        /// <param name="payerPartyReference"></param>
         /// <returns></returns>
-        public static List<PriceableRateCoupon> CreatePriceableLeaseCoupons(DateTime baseDate, Lease leaseAsset, decimal notionalAmount,
-            BusinessDayAdjustments paymentConvention, bool fOCalculationMethod, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+        public static List<PriceablePayment> CreatePriceableLeasePayments(DateTime baseDate, string payerPartyReference, string receiverPartyReference, 
+            bool payerIsBase, Lease leaseAsset, IBusinessCalendar paymentCalendar)
         {
-            List<PriceableRateCoupon> result = new List<PriceableRateCoupon>();
-            //This handles the case of a bond forward used in curve building.
+            List<PriceablePayment> result = new List<PriceablePayment>();
             if (leaseAsset.leaseExpiryDate.Value > baseDate)
             {
+                var paymentConvention = leaseAsset.businessDayAdjustments;
+                var currency = leaseAsset.currency.Value;
                 var rollConvention =
                     RollConventionEnumHelper.Parse(leaseAsset.leaseExpiryDate.Value.Day.ToString(CultureInfo.InvariantCulture));
-                //var frequency = FrequencyHelper.ToFrequency(bondAsset.paymentFrequency);
                 var unAdjustedPeriodDates = DateScheduler.GetUnadjustedCouponDatesFromMaturityDate(baseDate,
                     leaseAsset.leaseExpiryDate.Value,
                     leaseAsset.paymentFrequency,
@@ -218,14 +216,17 @@ namespace Highlander.ValuationEngine.V5r3.Factory
                         paymentConvention.businessDayConvention,
                         paymentCalendar).ToArray();
                 var length = unAdjustedPeriodDates.Length;
+                //TODO
+                //Add logic for the step up.
+                var amount = leaseAsset.startGrossPrice.amount;
                 for (int i = 0; i < length - 1; i++)
                 {
-                    var id = "Coupon" + "_" + i;
-                    var startDate = unAdjustedPeriodDates[i];
-                    var endDate = unAdjustedPeriodDates[i + 1];
+                    var id = "Payment" + "_" + i;
                     var paymentDate = adjustedPeriodDates[i + 1];
-                    var coupon = CreatePriceableLeaseCoupon(id, leaseAsset, notionalAmount, startDate, endDate, paymentDate, paymentCalendar);
-                    result.Add(coupon);
+                    var money = MoneyHelper.GetAmount(amount, currency);
+                    var adjustableDate = AdjustableOrAdjustedDateHelper.Create( null,paymentDate, paymentConvention);
+                    var payment = CreatePriceableLeasePayment(id, payerPartyReference, receiverPartyReference, payerIsBase, money, adjustableDate, paymentCalendar);
+                    result.Add(payment);
                 }
                 return result;
             }
@@ -235,25 +236,20 @@ namespace Highlander.ValuationEngine.V5r3.Factory
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="couponId"></param>
-        /// <param name="leaseAsset"></param>
-        /// <param name="notionalAmount"></param>
+        /// <param name="paymentId"></param>
+        /// <param name="receiverPartyReference"></param>
+        /// <param name="payerIsBase"></param>
+        /// <param name="amount"></param>
         /// <param name="paymentDate"></param>
-        /// <param name="unadjustedStartDate"></param>
-        /// <param name="unadjustedEndDate"></param>
         /// <param name="paymentCalendar"></param>
+        /// <param name="payerPartyReference"></param>
         /// <returns></returns>
-        public static PriceableRateCoupon CreatePriceableLeaseCoupon(string couponId, Lease leaseAsset, decimal notionalAmount, DateTime unadjustedStartDate,
-            DateTime unadjustedEndDate, DateTime paymentDate, IBusinessCalendar paymentCalendar)//bool fOCalculationMethod, IBusinessCalendar fixingCalendar, 
+        public static PriceablePayment CreatePriceableLeasePayment(string paymentId, string payerPartyReference, string receiverPartyReference,
+            bool payerIsBase, Money amount, AdjustableOrAdjustedDate paymentDate, IBusinessCalendar paymentCalendar)
         {
-            var currency = leaseAsset.currency;
-            var dayCountFraction = DayCountFractionHelper.ToDayCountFraction(DayCountFractionEnum.ACT_365_FIXED);
-            var money = MoneyHelper.GetAmount(notionalAmount, currency);
-            //  If has a fixed rate (fixed rate coupon)
-            PriceableRateCoupon rateCoupon = new PriceableFixedRateCoupon(couponId, false, unadjustedStartDate, unadjustedEndDate,
-                    dayCountFraction, leaseAsset.startGrossPrice.amount, money, null, paymentDate, null, null,
-                    null, paymentCalendar);
-            return rateCoupon;
+            var payment = new PriceablePayment(paymentId, payerPartyReference, receiverPartyReference, payerIsBase,
+                amount, paymentDate, paymentCalendar);
+            return payment;
         }
 
         /// <summary>

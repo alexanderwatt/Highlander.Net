@@ -169,7 +169,7 @@ namespace Highlander.Reporting.V5r3
         }
 
         /// <summary>
-        ///  Gets all the Discount curve name.
+        ///  Gets the counter party curve name.
         /// </summary>
         ///  <param name="currency">The currency of the bond.</param>
         ///  <param name="counterparty">THe exchange code e.g. ASX</param>
@@ -178,6 +178,17 @@ namespace Highlander.Reporting.V5r3
         public static string GetCounterPartyCurveName(string currency, string counterparty, string seniority)
         {
             return PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + counterparty + "-" + seniority;
+        }
+
+        /// <summary>
+        ///  Gets all the lease tenant curve name.
+        /// </summary>
+        ///  <param name="currency">The currency of the bond.</param>
+        ///  <param name="tenant">THe tenant code</param>>
+        /// <returns></returns>
+        public static string GetLeaseCurveName(string currency, string tenant)
+        {
+            return PricingStructureTypeEnum.DiscountCurve + "." + currency + "-" + tenant;
         }
 
         ///<summary>

@@ -13,12 +13,10 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-using Highlander.Reporting.Models.V5r3.Rates.Coupons;
 
 namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public interface ILeaseStreamParameters : IRateCouponParameters
+    public interface ILeaseStreamParameters : ILeaseAssetParameters
     {
         /// <summary>
         /// Gets or sets the isDiscounted flag.
@@ -33,32 +31,10 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         decimal NPV { get; set; }
 
         /// <summary>
-        /// Gets or sets the floating npv.
+        /// Gets/Sets the amounts to be used for break even rate.
         /// </summary>
-        /// <value>The floating npv.</value>
-        decimal FloatingNPV { get; set; }
-
-        /// <summary>
-        /// Gets/Sets the weightings to be used for break even rate.
-        /// </summary>
-        /// <value>The Weightings.</value>
-        decimal[] Weightings { get; set; }
-
-        /// <summary>
-        /// Gets/Sets the notional to be used for break even rate.
-        /// </summary>
-        /// <value>The notionals.</value>
-        decimal[] CouponNotionals { get; set; }
-
-        /// <summary>
-        /// Gets/Sets the year fractions to be used for break even rate.
-        /// </summary>
-        decimal[] CouponYearFractions { get; set; }
-
-        /// <summary>
-        /// Gets/Sets the payment discount fractions to be used for break even rate.
-        /// </summary>
-        decimal[] PaymentDiscountFactors { get; set; }
+        /// <value>The amounts.</value>
+        decimal[] Amounts { get; set; }
 
         /// <summary>
         /// Gets or sets the target npv for solvers.

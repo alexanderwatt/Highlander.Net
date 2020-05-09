@@ -26,22 +26,22 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
 
     public interface ILeaseStreamInstrumentResults
     {
-        /// <summary>
-        /// Gets the break even spread.
-        /// </summary>
-        /// <value>The break even spread.</value>
-        decimal BreakEvenSpread { get; }
+        ///// <summary>
+        ///// Gets the break even spread.
+        ///// </summary>
+        ///// <value>The break even spread.</value>
+        //decimal BreakEvenSpread { get; }
+
+        ///// <summary>
+        ///// Gets the break even rate.
+        ///// </summary>
+        ///// <value>The break even rate.</value>
+        //decimal BreakEvenRate { get; }
 
         /// <summary>
         /// Gets the break even rate.
         /// </summary>
         /// <value>The break even rate.</value>
-        decimal BreakEvenRate { get; }
-
-        /// <summary>
-        /// Gets the break even rate.
-        /// </summary>
-        /// <value>The break even rate.</value>
-        decimal ImpliedQuote { get; }
+        decimal NPV { get; }
     }
 }

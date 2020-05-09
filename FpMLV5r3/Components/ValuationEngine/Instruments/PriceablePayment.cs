@@ -81,7 +81,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , string payerPartyReference
             , string receiverPartyReference
             , bool payerIsBase
-            , Decimal amount
+            , decimal amount
             , string currency
             , DateTime adjustedPaymentDate
             , IBusinessCalendar paymentCalendar) :

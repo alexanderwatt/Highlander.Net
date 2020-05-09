@@ -25,7 +25,7 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         #region ILeaseAssetParameters Members
 
         public decimal Quote { get; set; }
-
+        public decimal GrossAmount { get; set; }
 
         /// <summary>
         /// The multiplier which must be set.
@@ -33,16 +33,12 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         public decimal Multiplier { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>The amount.</value>
-        public decimal GrossAmount { get; set; }
-
-        /// <summary>
         /// Gets or sets the step up amount.
         /// </summary>
         /// <value>The amount.</value>
         public decimal StepUp { get; set; }
+
+        public decimal[] Amounts { get; set; }
 
         /// <summary>
         /// Gets or sets the step up amount.

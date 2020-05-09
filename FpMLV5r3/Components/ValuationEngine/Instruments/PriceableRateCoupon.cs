@@ -62,6 +62,18 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
 
         public bool AdjustCalculationDatesIndicator { get; protected set; }
 
+        /// <summary>
+        /// Gets the unadjusted start date.
+        /// </summary>
+        /// <value>The unadjusted start date.</value>
+        public DateTime UnadjustedStartDate { get; }
+
+        /// <summary>
+        /// Gets the unadjusted end date.
+        /// </summary>
+        /// <value>The unadjusted end date.</value>
+        public DateTime UnadjustedEndDate { get; }
+
         // payment
         //public PaymentCalculationPeriod PaymentCalculationPeriod {get; set;}
 
@@ -260,15 +272,15 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustCalculationDatesIndicator
+            , bool adjustCalculationDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
             , DayCountFraction dayCountFraction
-            , Decimal? fixedRate
+            , decimal? fixedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
             : base
@@ -286,6 +298,8 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             AdjustCalculationDatesIndicator = adjustCalculationDatesIndicator;
             NotionalAmount = MoneyHelper.GetAmount(notionalAmount.amount, notionalAmount.currency.Value);
             AccrualBusinessDayAdjustments = BusinessDayAdjustmentsHelper.Create(accrualRollConvention, accrualBusinessCenters);
+            UnadjustedStartDate = accrualStartDate;
+            UnadjustedEndDate = accrualEndDate;
             if (AdjustCalculationDatesIndicator)
             {
                 AccrualStartDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, accrualStartDate, AccrualBusinessDayAdjustments);
@@ -323,7 +337,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <param name="notionalAmount">The notional amount.</param>
         /// <param name="fixedRate">The fixed rate.</param>
         /// <param name="adjustedPaymentDate">The adjusted payment date.</param>
-        /// <param name="dayCountFraction">The daycount fraction.</param>
+        /// <param name="dayCountFraction">The day count fraction.</param>
         /// <param name="discountingType">The swap discounting type.</param>
         /// <param name="discountRate">The discount rate.</param>
         /// <param name="fraDiscounting">Determines whether the coupon is discounted or not. If this parameter is null, 
@@ -338,10 +352,10 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , DateTime accrualEndDate
             , Money notionalAmount
             , DayCountFraction dayCountFraction
-            , Decimal? fixedRate
+            , decimal? fixedRate
             , DateTime adjustedPaymentDate
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
             : base
@@ -358,6 +372,8 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         {
             AdjustCalculationDatesIndicator = false;
             NotionalAmount = MoneyHelper.GetAmount(notionalAmount.amount, notionalAmount.currency.Value);
+            UnadjustedStartDate = accrualStartDate;
+            UnadjustedEndDate = accrualEndDate;
             AccrualStartDate = accrualStartDate;
             AccrualEndDate = accrualEndDate;
             CalculationPeriodNumberOfDays = Math.Abs(AccrualEndDate.Subtract(AccrualStartDate).Days);
@@ -396,7 +412,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustCalculationDatesIndicator
+            , bool adjustCalculationDatesIndicator
             , BusinessDayAdjustments accrualBusinessDayAdjustments
             , Calculation calculation
             , Money notionalAmount
@@ -417,6 +433,8 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             AdjustCalculationDatesIndicator = adjustCalculationDatesIndicator;
             NotionalAmount = MoneyHelper.GetAmount(notionalAmount.amount, notionalAmount.currency.Value);
             AccrualBusinessDayAdjustments = accrualBusinessDayAdjustments;
+            UnadjustedStartDate = accrualStartDate;
+            UnadjustedEndDate = accrualEndDate;
             if (AdjustCalculationDatesIndicator)
             {
                 AccrualStartDate = AdjustedDateHelper.ToAdjustedDate(paymentCalendar, accrualStartDate, AccrualBusinessDayAdjustments);
@@ -439,7 +457,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             var discounting = XsdClassesFieldResolver.CalculationHasDiscounting(calculation)
                                   ? XsdClassesFieldResolver.CalculationGetDiscounting(calculation)
                                   : null;            
-            //May need to add the discount daycount fraction.
+            //May need to add the discount day count fraction.
             DiscountingType = discounting?.discountingType;
             DiscountType = GetDiscountType();
             DiscountRate = discounting?.discountRate;

@@ -293,7 +293,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             (
             ILogger logger
             , ICoreCache cache
-            , String nameSpace
+            , string nameSpace
             , string swapId
             , string payerPartyReference
             , string receiverPartyReference 
@@ -338,7 +338,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             (
             ILogger logger
             , ICoreCache cache
-            , String nameSpace
+            , string nameSpace
             , string swapId
             , string payerPartyReference
             , string receiverPartyReference 
@@ -416,7 +416,8 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             {
                 Coupons = PriceableInstrumentsFactory.CreatePriceableCoupons(PayerIsBaseParty,
                                                                              GetCashflowPaymentCalculationPeriods(),
-                                                                             Calculation, ForecastRateInterpolation, fixingCalendar, paymentCalendar);//TODO add the stubcalculation.
+                                                                             Calculation, ForecastRateInterpolation, fixingCalendar, paymentCalendar);
+                //TODO add the stub calculation.
                 UpdateCouponIds();
             }
             if (GetCashflowPrincipalExchanges() != null)
@@ -440,7 +441,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         public PriceableInterestRateStream(ILogger logger, ICoreCache cache
-            , String nameSpace, bool payerIsBase, InterestRateStream stream
+            , string nameSpace, bool payerIsBase, InterestRateStream stream
             , IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
             : this(logger, cache, nameSpace, payerIsBase, stream, true, fixingCalendar, paymentCalendar)
         {}
@@ -516,7 +517,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// Gets the stream adjusted indicators.
         /// </summary>
         /// <returns></returns>
-        public IList<Boolean> GetStreamAdjustedIndicators()
+        public IList<bool> GetStreamAdjustedIndicators()
         {
             var adjusted = new List<bool>();
             var lastCouponIndex = Coupons.Count - 1;
@@ -544,10 +545,14 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             var bucketDates = new List<DateTime>();
             foreach (IPriceableInstrumentController<PaymentCalculationPeriod> coupon in Coupons)
             {
-                var priceableRateCoupon = (IPriceableRateCoupon<IRateCouponParameters, IRateInstrumentResults>) coupon;
-                bucketDates.AddRange(new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(priceableRateCoupon.UnadjustedStartDate, priceableRateCoupon.UnadjustedEndDate, BucketingInterval, RollConventionEnum.NONE, out _, out _)));
-                bucketDates = RemoveDuplicates(bucketDates);
-                bucketCouponDates.Add(coupon.Id, bucketDates.ToArray());
+                if (coupon is PriceableRateCoupon priceableRateCoupon)
+                {
+                    bucketDates.AddRange(new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(
+                        priceableRateCoupon.UnadjustedStartDate, priceableRateCoupon.UnadjustedEndDate,
+                        BucketingInterval, RollConventionEnum.NONE, out _, out _)));
+                    bucketDates = RemoveDuplicates(bucketDates);
+                    bucketCouponDates.Add(coupon.Id, bucketDates.ToArray());
+                }
             }
             return bucketCouponDates;
         }

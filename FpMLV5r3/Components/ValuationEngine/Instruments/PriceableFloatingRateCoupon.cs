@@ -77,13 +77,13 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <summary>
         /// The observed rate has been specified [true];
         /// </summary>
-        public Boolean ObservedRateSpecified => RateObservation.observedRateSpecified;
+        public bool ObservedRateSpecified => RateObservation.observedRateSpecified;
 
         /// <summary>
         /// Gets or sets a value indicating whether [use observed rate].
         /// </summary>
         /// <value><c>true</c> if [use observed rate]; otherwise, <c>false</c>.</value>
-        public Boolean UseObservedRate { get; set; }
+        public bool UseObservedRate { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [requires reset].
@@ -113,13 +113,13 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// Gets the rate observation specified.
         /// </summary>
         /// <value>The rate observation specified.</value>
-        public Boolean RateObservationSpecified => RateObservation.observedRateSpecified;
+        public bool RateObservationSpecified => RateObservation.observedRateSpecified;
 
         /// <summary>
         /// Gets the observed rate.
         /// </summary>
         /// <value>The observed rate.</value>
-        public Decimal? ObservedRate => RateObservation.observedRateSpecified ? RateObservation.observedRate : (Decimal?)null;
+        public decimal? ObservedRate => RateObservation.observedRateSpecified ? RateObservation.observedRate : (decimal?)null;
 
         /// <summary>
         /// Gets the name of the forward curve.
@@ -190,13 +190,13 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , DateTime accrualEndDate
             , DateTime adjustedFixingDate
             , DayCountFraction dayCountFraction
-            , Decimal margin
-            , Decimal? observedRate
+            , decimal margin
+            , decimal? observedRate
             , Money notionalAmount
             , DateTime paymentDate
             , ForecastRateIndex forecastRateIndex
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar)
@@ -249,14 +249,14 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , DateTime accrualEndDate
             , DateTime adjustedFixingDate
             , DayCountFraction dayCountFraction
-            , Decimal margin
-            , Decimal baseRate
-            , Decimal? observedRate
+            , decimal margin
+            , decimal baseRate
+            , decimal? observedRate
             , Money notionalAmount
             , DateTime paymentDate
             , ForecastRateIndex forecastRateIndex
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar) 
@@ -317,19 +317,19 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustAccrualDatesIndicator
+            , bool adjustAccrualDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
             , DayCountFraction dayCountFraction
             , ResetRelativeToEnum resetRelativeTo
             , RelativeDateOffset fixingDateRelativeOffset
-            , Decimal margin
-            , Decimal? observedRate
+            , decimal margin
+            , decimal? observedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
             , ForecastRateIndex forecastRateIndex
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar)
@@ -388,20 +388,20 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
             , DateTime accrualStartDate
             , DateTime accrualEndDate
-            , Boolean adjustAccrualDatesIndicator
+            , bool adjustAccrualDatesIndicator
             , BusinessCenters accrualBusinessCenters
             , BusinessDayConventionEnum accrualRollConvention
             , DayCountFraction dayCountFraction
             , ResetRelativeToEnum resetRelativeTo
             , RelativeDateOffset fixingDateRelativeOffset
-            , Decimal margin
-            , Decimal baseRate
-            , Decimal? observedRate
+            , decimal margin
+            , decimal baseRate
+            , decimal? observedRate
             , Money notionalAmount
             , AdjustableOrAdjustedDate paymentDate
             , ForecastRateIndex forecastRateIndex
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar) 
@@ -460,12 +460,12 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
              , DateTime accrualStartDate
              , DateTime accrualEndDate
-             , Boolean adjustCalculationDatesIndicator
+             , bool adjustCalculationDatesIndicator
              , AdjustableOrAdjustedDate paymentDate
              , Money notionalAmount
              , ResetRelativeToEnum resetRelativeTo
              , RelativeDateOffset fixingDateRelativeOffset
-             , Decimal margin
+             , decimal margin
              , Calculation calculation
              , ForecastRateIndex forecastRateIndex
              , IBusinessCalendar fixingCalendar
@@ -511,13 +511,13 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , bool payerIsBase
              , DateTime accrualStartDate
              , DateTime accrualEndDate
-             , Boolean adjustCalculationDatesIndicator
+             , bool adjustCalculationDatesIndicator
              , AdjustableOrAdjustedDate paymentDate
              , Money notionalAmount
              , ResetRelativeToEnum resetRelativeTo
              , RelativeDateOffset fixingDateRelativeOffset
-             , Decimal margin
-             , Decimal baseRate
+             , decimal margin
+             , decimal baseRate
              , Calculation calculation
              , ForecastRateIndex forecastRateIndex
              , IBusinessCalendar fixingCalendar

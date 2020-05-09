@@ -25,15 +25,11 @@ using Highlander.Utilities.Logging;
 using Highlander.Reporting.V5r3;
 using Highlander.Constants;
 using Highlander.Reporting.Analytics.V5r3.Utilities;
-using Highlander.Reporting.Models.V5r3.Rates;
-using Highlander.Reporting.Models.V5r3.Rates.Coupons;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments;
-using Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates;
 using Highlander.CalendarEngine.V5r3.Helpers;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease;
 using Highlander.Reporting.Models.V5r3.Property.Lease;
-using Highlander.Reporting.Models.V5r3.Rates.Bonds;
 using Highlander.ValuationEngine.V5r3.Factory;
 
 #endregion
@@ -41,14 +37,14 @@ using Highlander.ValuationEngine.V5r3.Factory;
 namespace Highlander.ValuationEngine.V5r3.Instruments
 {
     [Serializable]
-    public class PriceableLeaseCouponRateStream : InstrumentControllerBase, IPriceableLeaseCouponRateStream<ILeaseStreamParameters, ILeaseStreamInstrumentResults>, IPriceableInstrumentController<Cashflows>
+    public class PriceableLeasePaymentStream : InstrumentControllerBase, IPriceableLeasePaymentStream<ILeaseStreamParameters, ILeaseStreamInstrumentResults>, IPriceableInstrumentController<List<Payment>>
     {
         #region Member Fields
 
         // Analytics
         public IModelAnalytic<ILeaseStreamParameters, LeaseInstrumentMetrics> AnalyticsModel { get; set; }
 
-        protected const string CModelIdentifier = "BondCouponRateStream";
+        protected const string CModelIdentifier = "LeasePaymentStream";
         //protected const string CDefaultBucketingInterval = "3M";
 
         /// <summary>
@@ -60,8 +56,6 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// </summary>
         public string LeaseCurveName { get; set; }
 
-        // Requirements for pricing
-        public string ReportingCurrencyFxCurveName { get; set; }
 
         //// BucketedCouponDates
         //public Period BucketingInterval { get; set; }
@@ -71,16 +65,11 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         public List<DateTime> ReviewDates { get; set; }
 
         // Children
-        public List<PriceableRateCoupon> Coupons { get; set; }
+        public List<PriceablePayment> Payments { get; set; }
 
         #endregion
 
         #region Public Fields
-
-        /// <summary>
-        /// Flag where: ForwardEndDate = forecastRateInterpolation ? AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);  
-        /// </summary>
-        public bool ForecastRateInterpolation { get; set; }
 
         /// <summary>
         /// Gets the currency.
@@ -92,13 +81,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// Gets the issuer.
         /// </summary>
         /// <value>The seller.</value>
-        public string Issuer { get; protected set; }
-
-        /// <summary>
-        /// Gets the buyer.
-        /// </summary>
-        /// <value>The buyer.</value>
-        public string Buyer { get; protected set; }
+        public string Tenant { get; protected set; }
 
         /// <summary>
         /// Gets the analytic model parameters.
@@ -116,44 +99,16 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// Gets the priceable coupons.
         /// </summary>
         /// <value>The priceable coupons.</value>
-        public List<InstrumentControllerBase> PriceableCoupons
+        public List<InstrumentControllerBase> PriceablePayments
         {
             get 
             {
                 List<InstrumentControllerBase> result = null;
-                if (Coupons != null && Coupons.Count > 0)
+                if (Payments != null && Payments.Count > 0)
                 {
-                    result = new List<InstrumentControllerBase>(Coupons); 
+                    result = new List<InstrumentControllerBase>(Payments); 
                 }
                 return result;
-            }
-        }
-
-        /// <summary>
-        /// Gets the stream start dates.
-        /// </summary>
-        /// <value>The stream start dates.</value>
-        public IList<DateTime> StreamStartDates
-        {
-            get
-            {
-                var datesList = Coupons.Select(coupon => coupon.AccrualStartDate).ToList();
-                datesList.Sort();
-                return datesList;
-            }
-        }
-
-        /// <summary>
-        /// Gets the stream end dates.
-        /// </summary>
-        /// <value>The stream end dates.</value>
-        public IList<DateTime> StreamEndDates
-        {
-            get
-            {
-                var datesList = Coupons.Select(coupon => coupon.AccrualEndDate).ToList();
-                datesList.Sort();
-                return datesList;
             }
         }
 
@@ -165,17 +120,11 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         {
             get
             {
-                var datesList = Coupons.Select(coupon => coupon.PaymentDate).ToList();
+                var datesList = Payments.Select(payment => payment.AdjustedPaymentDate.Value).ToList();
                 datesList.Sort();
                 return datesList;
             }
         }
-
-        /// <summary>
-        /// Gets the adjusted stream dates indicators.
-        /// </summary>
-        /// <value>The adjusted stream dates indicators.</value>
-        public IList<bool> AdjustedStreamDatesIndicators => GetStreamAdjustedIndicators();
 
         #endregion
 
@@ -184,39 +133,38 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <summary>
         /// 
         /// </summary>
-        public PriceableLeaseCouponRateStream()
+        public PriceableLeasePaymentStream()
         {
             Multiplier = 1.0m;
             AnalyticsModel = new LeaseStreamAnalytic();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PriceableLeaseCouponRateStream"/> class.
+        /// Initializes a new instance of the <see cref="PriceableLeasePaymentStream"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="cache">The cache.</param>
         /// <param name="nameSpace">The client namespace.</param>
         /// <param name="leaseId">The lease Id.</param>
         /// <param name="paymentConvention">The payment roll conventions</param>
-        /// <param name="forecastRateInterpolation">ForwardEndDate = forecastRateInterpolation ? AccrualEndDate 
-        /// : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);</param>
-        /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
+        /// <param name="payerIsBase">Is the payer/tenant the base party?</param>
         /// <param name="tradeDate">The trade date is used to set the base date for future coupon generation.</param>
-        /// <param name="notionalAmount">The notional amount</param>
-        /// <param name="lease">THe lease details.</param>
-        public PriceableLeaseCouponRateStream
+        /// <param name="lease">The lease details.</param>
+        /// <param name="payerPartyReference">The payer/tenant reference.</param>
+        /// <param name="receiverPartyReference">The receiver reference.</param>
+        public PriceableLeasePaymentStream
             (
             ILogger logger
             , ICoreCache cache
             , string nameSpace
             , string leaseId
+            , string payerPartyReference
+            , string receiverPartyReference
+            , bool payerIsBase 
             , DateTime tradeDate
-            , decimal notionalAmount
             , Lease lease
             , BusinessDayAdjustments paymentConvention
-            , bool forecastRateInterpolation
-            , IBusinessCalendar fixingCalendar
             , IBusinessCalendar paymentCalendar)
         {
             LeaseId = leaseId;
@@ -225,7 +173,6 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             AnalyticsModel = new LeaseStreamAnalytic();
             Id = BuildId(leaseId);
             Currency = lease.currency.Value;
-            ForecastRateInterpolation = forecastRateInterpolation;
             //Get the currency.
             if (!PaymentCurrencies.Contains(lease.currency.Value))
             {
@@ -237,34 +184,19 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
                 paymentCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, paymentConvention.businessCenters, nameSpace);
             }
             //Set the default discount curve name.
-            LeaseCurveName = CurveNameHelpers.GetBondCurveName(Currency, leaseId);
-            //Set the forecast curve name.//TODO extend this to the other types.
-            //if (BondCouponStreamType != CouponStreamType.GenericFixedRate)
-            //{
-            //    if (fixingCalendar == null)
-            //    {
-            //        fixingCalendar = BusinessCenterHelper.ToBusinessCalendar(cache, ResetDates.resetDatesAdjustments.businessCenters, nameSpace);
-            //    }
-            //    ForecastCurveName = null;
-            //    //if (Calculation.Items != null)
-            //    //{
-            //    //    var floatingRateCalculation = Calculation.Items;
-            //    //    var floatingRateIndex = (FloatingRateCalculation) floatingRateCalculation[0];
-            //    //    ForecastCurveName = CurveNameHelpers.GetForecastCurveName(floatingRateIndex);
-            //    //}
-            //}
-            //Build the coupons and principal exchanges.
-            Coupons = PriceableInstrumentsFactory.CreatePriceableLeaseCoupons(tradeDate, lease, notionalAmount,
-                paymentConvention, ForecastRateInterpolation, fixingCalendar, paymentCalendar);//TODO add the stub calculation.
-            UpdateCouponDiscountCurveNames();
-            UpdateCouponIds();
+            LeaseCurveName = CurveNameHelpers.GetDiscountCurveName(Currency, true);
+            //LeaseCurveName = CurveNameHelpers.GetLeaseCurveName(Currency, leaseId);
+            Payments = PriceableInstrumentsFactory.CreatePriceableLeasePayments(tradeDate, payerPartyReference, receiverPartyReference, payerIsBase, lease,
+                paymentCalendar);
+            UpdateDiscountCurveName(LeaseCurveName);
+            UpdatePaymentIds();
             //RiskMaturityDate = ;
-            logger.LogInfo("Lease Coupon Stream built");
+            logger.LogInfo("Lease Payment Stream built");
         }
 
         #endregion
 
-        #region Coupons
+        #region Payments
 
         /// <summary>
         /// Gets the stream dates.
@@ -272,64 +204,30 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <returns></returns>
         public DateTime[] GetStreamDates()
         {
-            var couponDates = new List<DateTime>();
-            for (var index = 1; index < Coupons.Count; index++)
+            var paymentDates = new List<DateTime>();
+            foreach (var payment in Payments)
             {
-                var firstCoupon = Coupons[index - 1];
-                var secondCoupon = Coupons[index];
-                if (!couponDates.Contains(firstCoupon.AccrualStartDate))
-                {
-                    couponDates.Add(firstCoupon.AccrualStartDate);
-                }
-                if (!couponDates.Contains(secondCoupon.AccrualStartDate))
-                {
-                    couponDates.Add(secondCoupon.AccrualStartDate);
-                }
-                if (index == Coupons.Count - 1)
-                {
-                    couponDates.Add(secondCoupon.AccrualEndDate);
-                }
+                paymentDates.Add(payment.PaymentDate);
             }
-            couponDates.Sort();
-            return couponDates.ToArray();
+            paymentDates.Sort();
+            return paymentDates.ToArray();
         }
 
         /// <summary>
-        /// Gets the stream adjusted indicators.
-        /// </summary>
-        /// <returns></returns>
-        public IList<bool> GetStreamAdjustedIndicators()
-        {
-            var adjusted = new List<bool>();
-            var lastCouponIndex = Coupons.Count - 1;
-            var index = 0;
-            foreach (var coupon in Coupons)
-            {
-                adjusted.Add(coupon.AdjustCalculationDatesIndicator);
-                if (lastCouponIndex == index)
-                {
-                    adjusted.Add(coupon.AdjustCalculationDatesIndicator);
-                }
-                index++;
-            }
-            return adjusted;
-        }
-
-        /// <summary>
-        /// Gets the bucketed coupon dates.
+        /// Gets the bucketed payment dates.
         /// </summary>
         /// <param name="bucketInterval">The bucket interval.</param>
         /// <returns></returns>
-        protected IDictionary<string, DateTime[]> GetBucketedCouponDates(Period bucketInterval)
+        protected IDictionary<string, DateTime[]> GetBucketedPaymentDates(Period bucketInterval)
         {
             IDictionary<string, DateTime[]> bucketCouponDates = new Dictionary<string, DateTime[]>();
             var bucketDates = new List<DateTime>();
-            foreach (IPriceableInstrumentController<PaymentCalculationPeriod> coupon in Coupons)
+            foreach (var payment in Payments)
             {
-                var priceableRateCoupon = (IPriceableRateCoupon<IRateCouponParameters, IRateInstrumentResults>) coupon;
-                bucketDates.AddRange(new List<DateTime>(DateScheduler.GetUnadjustedDatesFromTerminationDate(priceableRateCoupon.UnadjustedStartDate, priceableRateCoupon.UnadjustedEndDate, BucketingInterval, RollConventionEnum.NONE, out _, out _)));
+                var priceablePayment = payment;
+                bucketDates.Add(priceablePayment.PaymentDate);
                 bucketDates = RemoveDuplicates(bucketDates);
-                bucketCouponDates.Add(coupon.Id, bucketDates.ToArray());
+                bucketCouponDates.Add(payment.Id, bucketDates.ToArray());
             }
             return bucketCouponDates;
         }
@@ -343,45 +241,12 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         public override DateTime[] GetBucketingDates(DateTime baseDate, Period bucketInterval)
         {
             var bucketDates = new List<DateTime>();
-            if (Coupons.Count > 1)
+            if (Payments.Count > 1)
             {
                 bucketDates = new List<DateTime>(DateScheduler.GetUnadjustedDatesFromEffectiveDate(baseDate, RiskMaturityDate, BucketingInterval, RollConventionEnum.NONE, out _, out _));
             }
             return bucketDates.ToArray();
         }
-
-        /// <summary>
-        /// A mapping function to label a stream correctly.
-        /// </summary>
-        /// <param name="calculation"></param>
-        /// <returns>The coupon stream type</returns>
-        private static CouponStreamType CouponTypeFromCalculation(Calculation calculation)
-        {
-            var cpt = CouponStreamType.GenericFloatingRate;
-            // assume fixed if Items is null, alex!? todo
-            if ((null == calculation.Items) || (calculation.Items[0] is Schedule))
-            {
-                cpt = CouponStreamType.GenericFixedRate;
-            }
-            if (calculation.Items?[0] is FloatingRateCalculation frc)
-            {
-                if (frc.capRateSchedule != null && frc.floorRateSchedule == null)
-                {
-                    return CouponStreamType.CapRate;
-                }
-                if (frc.capRateSchedule == null && frc.floorRateSchedule != null)
-                {
-                    return CouponStreamType.FloorRate;
-                }
-                if (frc.capRateSchedule != null && frc.floorRateSchedule != null)
-                {
-                    return CouponStreamType.CollarRate;
-                }
-                cpt = CouponStreamType.GenericFloatingRate;
-            }
-            return cpt;
-        }
-
 
         #endregion
 
@@ -391,15 +256,11 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// Builds the cashflows.
         /// </summary>
         /// <returns></returns>
-        public Cashflows Build()
+        public List<Payment> Build()
         {
             //TODO what about the cash flow match parameter?
-            var cashflows = new Cashflows
-                                {
-                                    paymentCalculationPeriod = Coupons.Select(priceableCoupon => priceableCoupon.Build()).ToArray()
-                                    
-                                };
-            return cashflows;
+            var payments = Payments.Select(priceablePayment => priceablePayment.Build()).ToList();
+            return payments;
         }
 
         #endregion
@@ -421,13 +282,13 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             var streamControllerMetrics = ResolveModelMetrics(AnalyticsModel.Metrics);
             AssetValuation streamValuation;
             // 2. Now evaluate only the child specific metrics (if any)
-            foreach (var coupon in Coupons)
+            foreach (var payment in Payments)
             {
-                coupon.PricingStructureEvolutionType = PricingStructureEvolutionType;
-                coupon.BucketedDates = BucketedDates;
-                coupon.Multiplier = Multiplier;
+                payment.PricingStructureEvolutionType = PricingStructureEvolutionType;
+                payment.BucketedDates = BucketedDates;
+                payment.Multiplier = Multiplier;
             }
-            var childControllers = new List<InstrumentControllerBase>(Coupons.ToArray());
+            var childControllers = new List<InstrumentControllerBase>(Payments.ToArray());
             //Now the stream analytics can be completed.
             var childValuations = EvaluateChildMetrics(childControllers, modelData, Metrics);
             var couponValuation = AssetValuationHelper.AggregateMetrics(childValuations, new List<string>(Metrics), PaymentCurrencies);
@@ -435,25 +296,15 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             // Child metrics have now been calculated so we can now evaluate the stream model metrics
             if (streamControllerMetrics.Count > 0)
             {
-                var reportingCurrency = ModelData.ReportingCurrency == null ? Currency : ModelData.ReportingCurrency.Value;
-                var notionals = GetCouponNotionals();
-                var accrualFactors = GetCouponAccrualFactors();
+                var amounts = GetPaymentAmounts();
                 var discountFactors = GetPaymentDiscountFactors();
-                var floatingNPV = AggregateMetric(InstrumentMetrics.FloatingNPV, childControllerValuations);
-                var accrualFactor = AggregateMetric(InstrumentMetrics.AccrualFactor, childControllerValuations);
                 //TODO need to  set the notional amount and the weighting. Also amortisation??
                 ILeaseStreamParameters analyticModelParameters = new LeaseStreamParameters
                 {
                     Multiplier = Multiplier,
-                    CouponNotionals = notionals,
-                    Currency = Currency,
-                    ReportingCurrency = reportingCurrency,
-                    AccrualFactor = accrualFactor,
-                    FloatingNPV = floatingNPV,
+                    Amounts = amounts,
                     NPV = AggregateMetric(InstrumentMetrics.NPV, childControllerValuations),
-                    CouponYearFractions = accrualFactors,
-                    PaymentDiscountFactors = discountFactors,
-                    TargetNPV = floatingNPV
+                    PaymentDiscountFactors = discountFactors
                 };
                 CalculationResults = AnalyticsModel.Calculate<ILeaseStreamInstrumentResults, LeaseStreamInstrumentResults>(analyticModelParameters, streamControllerMetrics.ToArray());
                 // Now merge back into the overall stream valuation
@@ -486,7 +337,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         /// <param name="metric">The metric.</param>
         /// <param name="childValuations"> </param>
         /// <returns></returns>
-        protected Decimal AggregateMetric(InstrumentMetrics metric, List<AssetValuation> childValuations)
+        protected decimal AggregateMetric(InstrumentMetrics metric, List<AssetValuation> childValuations)
         {
             var result = 0.0m;
             if (childValuations != null && childValuations.Count > 0)
@@ -496,41 +347,21 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             return result;
         }
 
-        /// <summary>
-        /// Updates the name of the discount curve.
-        /// </summary>
-        /// <param name="newCurveName">New name of the curve.</param>
-        public void UpdateDiscountCurveName(string newCurveName)
-        {
-            foreach (PriceableRateCoupon coupon in Coupons)
-            {
-                coupon.UpdateDiscountCurveName(newCurveName);
-            }
-            LeaseCurveName = newCurveName;
-        }
-
         #endregion
 
         #region Helper Methods
 
-        public decimal[] GetCouponNotionals()
+        public decimal[] GetPaymentAmounts()
         {
             var result = new List<decimal>();
-            Coupons.ForEach(cashflow => result.Add(cashflow.Notional));
-            return result.ToArray();
-        }
-
-        public decimal[] GetCouponAccrualFactors()
-        {
-            var result = new List<decimal>();
-            Coupons.ForEach(cashflow => result.Add(cashflow.CouponYearFraction));
+            Payments.ForEach(cashflow => result.Add(cashflow.ForecastAmount.amount));
             return result.ToArray();
         }
 
         public decimal[] GetPaymentDiscountFactors()
         {
             var result = new List<decimal>();
-            Coupons.ForEach(cashflow => result.Add(cashflow.PaymentDiscountFactor));
+            Payments.ForEach(cashflow => result.Add(cashflow.PaymentDiscountFactor));
             return result.ToArray();
         }
 
@@ -561,19 +392,19 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
 
         #region Static Helpers
 
-        protected void UpdateCouponDiscountCurveNames()
+        public void UpdateDiscountCurveName(string name)
         {
-            foreach (var coupon in Coupons)
+            foreach (var payment in Payments)
             {
-                coupon.DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Currency, true);
+                payment.DiscountCurveName = name;
             }
         }
-        protected void  UpdateCouponIds()
+        protected void  UpdatePaymentIds()
         {
             var index = 1;
-            foreach (var coupon in Coupons)
+            foreach (var payment in Payments)
             {
-                coupon.Id = Id + "." + coupon.CashflowType.Value + "." + index;
+                payment.Id = Id + "." + payment.CashflowType.Value + "." + index;
                 index++;
             }
         }
@@ -597,9 +428,9 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         }
 
         //It is assumed that all coupons are ordered and there is at least one.
-        public DateTime LastCouponDate()
+        public DateTime LastPaymentDate()
         {
-            return Coupons[Coupons.Count - 1].AccrualEndDate;
+            return Payments[Payments.Count - 1].PaymentDate;
         }
 
         /// <summary>
@@ -644,22 +475,6 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         }
 
         /// <summary>
-        /// Updates the rate.
-        /// </summary>
-        /// <param name="newRate">The new rate.</param>
-        public void UpdateRate(Decimal newRate)
-        {
-            foreach (var priceableCoupon in Coupons)
-            {
-                if (priceableCoupon.GetType() == typeof(PriceableFixedRateCoupon))
-                {
-                    var coupon = (PriceableFixedRateCoupon) priceableCoupon;
-                    coupon.Rate = newRate;
-                }
-            }
-        }
-
-        /// <summary>
         /// Removes the duplicates
         /// </summary>
         /// <param name="inputList">The input list.</param>
@@ -687,7 +502,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         ///<returns></returns>
         public override IList<InstrumentControllerBase> GetChildren()
         {
-            var children = Coupons.Cast<InstrumentControllerBase>().ToList();
+            var children = Payments.Cast<InstrumentControllerBase>().ToList();
             return children;
         }
 

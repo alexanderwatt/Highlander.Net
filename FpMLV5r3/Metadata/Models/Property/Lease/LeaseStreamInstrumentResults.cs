@@ -17,22 +17,6 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
     public class LeaseStreamInstrumentResults : ILeaseStreamInstrumentResults
     {
-        /// <summary>
-        /// Gets the break even spread.
-        /// </summary>
-        /// <value>The break even spread.</value>
-        public decimal BreakEvenSpread { get; set; }
-
-        /// <summary>
-        /// Gets the break even rate.
-        /// </summary>
-        /// <value>The break even rate.</value>
-        public decimal BreakEvenRate { get; set; }
-
-        /// <summary>
-        /// Gets the break even rate.
-        /// </summary>
-        /// <value>The break even rate.</value>
-        public decimal ImpliedQuote { get; set; }
+        public decimal NPV { get; }
     }
 }

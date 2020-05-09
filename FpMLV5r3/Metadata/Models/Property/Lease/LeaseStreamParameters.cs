@@ -14,11 +14,11 @@
 */
 
 using System;
-using Highlander.Reporting.Models.V5r3.Rates.Coupons;
+using System.Collections.Generic;
 
 namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public class LeaseStreamParameters : RateCouponParameters, ILeaseStreamParameters
+    public class LeaseStreamParameters : ILeaseStreamParameters
     {
         /// <summary>
         /// Gets or sets the isDiscounted flag.
@@ -33,10 +33,31 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         public decimal NPV { get; set; }
 
         /// <summary>
-        /// Gets or sets the floating npv.
+        /// 
         /// </summary>
-        /// <value>The floating npv.</value>
-        public decimal FloatingNPV { get; set; }
+        public decimal Quote { get; set; }
+
+        public decimal GrossAmount { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal Amount { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal Multiplier { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal StepUp { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<DateTime> PaymentDates { get; set; }
 
         /// <summary>
         /// Gets/Sets the weightings to be used for break even rate.
@@ -48,12 +69,7 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         /// Gets/Sets the notional to be used for break even rate.
         /// </summary>
         /// <value>The notionals.</value>
-        public decimal[] CouponNotionals { get; set; }
-
-        /// <summary>
-        /// Gets/Sets the year fractions to be used for break even rate.
-        /// </summary>
-        public decimal[] CouponYearFractions { get; set; }
+        public decimal[] Amounts { get; set; }
 
         /// <summary>
         /// Gets/Sets the payment discount fractions to be used for break even rate.

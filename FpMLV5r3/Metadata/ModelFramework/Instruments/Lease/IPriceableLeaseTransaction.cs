@@ -14,7 +14,7 @@
 */
 
 using System;
-using Highlander.Reporting.ModelFramework.V5r3.Assets;
+using System.Collections.Generic;
 
 namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease
 {
@@ -30,18 +30,18 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.Lease
         /// <value>
         /// 	<c>true</c> if [base party buyer]; otherwise, <c>false</c>.
         /// </value>
-        Boolean BasePartyBuyer { get; }
+        bool BasePartyTenant { get; }
 
         /// <summary>
-        /// Gets the settlement date.
+        /// Gets the payment dates.
         /// </summary>
-        /// <value>The settlement date.</value>
-        DateTime PaymentDate { get; }
+        /// <value>The payment dates.</value>
+        List<DateTime> GetPaymentDates();
 
         /// <summary>
-        /// Gets the underlying equity.
+        /// Gets the payment amounts.
         /// </summary>
-        /// <value>The underlying equity.</value>
-        IPriceableLeaseAssetController UnderlyingLease { get; }
+        /// <value>The payment amounts.</value>
+        List<decimal> GetPaymentAmounts();
     }
 }

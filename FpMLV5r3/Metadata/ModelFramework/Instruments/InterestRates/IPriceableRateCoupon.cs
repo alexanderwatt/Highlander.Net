@@ -38,19 +38,19 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates
         /// <value>
         /// 	<c>true</c> if [payment day is adjusted]; otherwise, <c>false</c>.
         /// </value>
-        Boolean PaymentDayIsAdjusted { get; }
+        bool PaymentDayIsAdjusted { get; }
 
         /// <summary>
         /// Gets a value indicating whether [roll day is adjusted].
         /// </summary>
         /// <value><c>true</c> if [roll day is adjusted]; otherwise, <c>false</c>.</value>
-        Boolean EndDayIsAdjusted { get; }
+        bool EndDayIsAdjusted { get; }
 
         /// <summary>
         /// Gets a value indicating whether [start day is adjusted].
         /// </summary>
         /// <value><c>true</c> if [start day is adjusted]; otherwise, <c>false</c>.</value>
-        Boolean StartDayIsAdjusted { get; }
+        bool StartDayIsAdjusted { get; }
 
         /// <summary>
         /// Gets the unadjusted start date.
@@ -86,7 +86,7 @@ namespace Highlander.Reporting.ModelFramework.V5r3.Instruments.InterestRates
         /// Gets the coupon year fraction.
         /// </summary>
         /// <value>The coupon year fraction.</value>
-        Decimal CouponYearFraction { get; }
+        decimal CouponYearFraction { get; }
 
         /// <summary>
         /// Gets the day count fraction.

@@ -67,12 +67,12 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             , DateTime accrualStartDate
             , DateTime accrualEndDate
             , DayCountFraction dayCountFraction
-            , Decimal fixedRate
+            , decimal fixedRate
             , Money notionalAmount
             , Money expectedAmount
             , DateTime paymentDate
             , DiscountingTypeEnum? discountingType
-            , Decimal? discountRate
+            , decimal? discountRate
             , FraDiscountingEnum? fraDiscounting
             , IBusinessCalendar paymentCalendar)
             : base(cashflowId, CouponType.FixedRate, payerIsBase, accrualStartDate, accrualEndDate,
@@ -392,7 +392,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             get
             {
                 var rate = base.Rate;
-                if (rate != null) return (Decimal)rate;
+                if (rate != null) return (decimal)rate;
                 return 0;
             }
             set => base.Rate = value;

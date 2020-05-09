@@ -436,14 +436,13 @@ namespace Highlander.ValuationEngine.V5r3
                     case ItemChoiceType15.leaseTransaction:
                     {
                         var lease = (LeaseTransaction)trade.Item;
-                        IBusinessCalendar settlementCalendar = null;
+                        IBusinessCalendar paymentCalendar = null;
                         if (firstCalendarPair != null)
                         {
-                            settlementCalendar = firstCalendarPair.First;
+                            paymentCalendar = firstCalendarPair.First;
                         }
                         var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                        var referenceProperty = tradeProps.GetValue<string>(LeaseProp.LeaseIdentifier, false);
-                        //PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, lease, BaseParty, forecastRateInterpolation);
+                        PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, null, null, paymentCalendar, lease, BaseParty, "Standard");
                         //ProductReporter = new LeaseTransactionReporter();
                     }
                         break;
