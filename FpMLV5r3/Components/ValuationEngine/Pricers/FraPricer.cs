@@ -60,7 +60,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <summary>
         /// Flag where: ForwardEndDate = forecastRateInterpolation ? AccrualEndDate : AdjustedDateHelper.ToAdjustedDate(forecastRateIndex.indexTenor.Add(AccrualStartDate), AccrualBusinessDayAdjustments);  
         /// </summary>
-        public Boolean ForecastRateInterpolation { get; set; }
+        public bool ForecastRateInterpolation { get; set; }
 
         //Product parameters
         //public FraInputRange FraInputRange { get; set; } 
@@ -173,11 +173,11 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <param name="paymentCalendar"></param>
         /// <param name="fraFpML"></param>
         /// <param name="nameSpace"></param>
-        public FraPricer(ILogger logger, ICoreCache cache,
+        public FraPricer(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar,
             IBusinessCalendar paymentCalendar,
-            Fra fraFpML, string nameSpace)
-            : this(logger, cache, fixingCalendar, paymentCalendar, true, fraFpML, nameSpace)
+            Fra fraFpML)
+            : this(logger, cache, nameSpace, fixingCalendar, paymentCalendar, true, fraFpML)
         {}
 
         /// <summary>
@@ -190,11 +190,11 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <param name="fraFpML"></param>
         /// <param name="baseParty"></param>
         /// <param name="nameSpace"></param>
-        public FraPricer(ILogger logger, ICoreCache cache,
+        public FraPricer(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar,
             IBusinessCalendar paymentCalendar,
-            Fra fraFpML, string baseParty, string nameSpace)
-            : this(logger, cache, fixingCalendar, paymentCalendar, !IsBasePartyBuyer(baseParty, fraFpML), fraFpML, nameSpace)
+            Fra fraFpML, string baseParty)
+            : this(logger, cache, nameSpace, fixingCalendar, paymentCalendar, !IsBasePartyBuyer(baseParty, fraFpML), fraFpML)
         { }
 
         /// <summary>
@@ -207,10 +207,10 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <param name="isBuyer"></param>
         /// <param name="fraFpML"></param>
         /// <param name="nameSpace"></param>
-        public FraPricer(ILogger logger, ICoreCache cache,
+        public FraPricer(ILogger logger, ICoreCache cache, string nameSpace,
             IBusinessCalendar fixingCalendar,
             IBusinessCalendar paymentCalendar, 
-            bool isBuyer, Fra fraFpML, string nameSpace)
+            bool isBuyer, Fra fraFpML)
         {
             OrderedPartyNames = new List<string>();
             Multiplier = 1.0m;
@@ -692,7 +692,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             //var forwardCurve = (RateCurve)ObjectCacheHelper.GetPricingStructureFromSerialisable(fraInputRange.ForwardCurveId);
             //var discountCurve = (RateCurve)ObjectCacheHelper.GetPricingStructureFromSerialisable(fraInputRange.DiscountingCurveId);
             var market = CreateMarket(discountCurve, forwardCurve);
-            var agreement = new FraPricer(logger, cache, null, null, fra, nameSpace);
+            var agreement = new FraPricer(logger, cache, nameSpace, null, null, fra);
             var modelData = CreateInstrumentModelData(metrics, fraInputRange.ValuationDate, market, reportingCurrency);
             var assetValuation = agreement.Calculate(modelData);
             //  Add forward yield curve to the market environment ...
@@ -731,7 +731,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         }
 
         private static double GetPriceFromRange(ILogger logger, ICoreCache cache, IRateCurve forwardCurve, IRateCurve discountCurve,
-            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, FraInputRange fraInputRange, String nameSpace)
+            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, FraInputRange fraInputRange, string nameSpace)
         {
             Fra fra = ProductFactory.GetFpMLFra(fraInputRange);
             //var forwardCurve = ObjectCacheHelper.GetPricingStructureFromSerialisable(fraInputRange.ForwardCurveId);
@@ -742,7 +742,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         }
 
         private static double GetParRateFromRange(ILogger logger, ICoreCache cache, IRateCurve forwardCurve, IRateCurve discountCurve,
-            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, FraInputRange fraInputRange, String nameSpace)
+            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, FraInputRange fraInputRange, string nameSpace)
         {
             Fra fra = ProductFactory.GetFpMLFra(fraInputRange);
             //var forwardCurve = ObjectCacheHelper.GetPricingStructureFromSerialisable(fraInputRange.ForwardCurveId);
@@ -774,9 +774,9 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             Fra fra, 
             DateTime valuationDate, 
             IMarketEnvironment market,
-            String nameSpace)
+            string nameSpace)
         {
-            var agreement = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, nameSpace);
+            var agreement = new FraPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fra);
             var modelData = CreateInstrumentModelData(new[] { "NPV" }, valuationDate, market, "AUD");
             var av = agreement.Calculate(modelData);
             return (double)av.quote[0].value;
@@ -800,9 +800,9 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             Fra fra, 
             DateTime valuationDate, 
             IMarketEnvironment market,
-            String nameSpace)
+            string nameSpace)
         {
-            var agreement = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, nameSpace);
+            var agreement = new FraPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fra);
             var modelData = CreateInstrumentModelData(new[] { "ImpliedQuote" }, valuationDate, market, "AUD");
             var av = agreement.Calculate(modelData);
             return (double)av.quote[0].value;

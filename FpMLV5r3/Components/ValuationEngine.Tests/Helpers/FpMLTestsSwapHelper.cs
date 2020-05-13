@@ -48,6 +48,12 @@ namespace Highlander.ValuationEngine.Tests.V5r3.Helpers
         private const string FX09FXSwapExample = "fx_derivatives.fx-ex09-euro-opt.xml";
         private const string Swaption09IRSwaptionExample = "interest_rate_derivatives.ird-ex09-euro-swaption-explicit.xml";
         private const string Swaption10IRSwaptionExample = "interest_rate_derivatives.ird-ex10-euro-swaption-relative.xml";
+        private const string lease01Example = "lease_transactions.lease-ex01-lease-transaction.xml";
+
+        public static Trade GetLeaseExampleObject()
+        {
+            return GetLeaseTrade(lease01Example);
+        }
 
         public static Swaption GetIrSwaptionExampleObject()
         {
@@ -292,6 +298,14 @@ namespace Highlander.ValuationEngine.Tests.V5r3.Helpers
             var swap = XmlSerializerHelper.DeserializeNode<Swaption>(swaptionNode);
             swap.id = "TestTrade";
             return swap;
+        }
+
+        public static Trade GetLeaseTrade(string resourceName)
+        {
+            string resourceAsString = ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), resourceName);
+            var trade = XmlSerializerHelper.DeserializeFromString<Trade>(resourceAsString);
+            trade.id = "TestTrade";
+            return trade;
         }
 
         public static Trade GetTradeObject(string resourceName)

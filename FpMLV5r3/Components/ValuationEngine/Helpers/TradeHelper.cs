@@ -15,6 +15,7 @@
 
 using System;
 using Highlander.Codes.V5r3;
+using Highlander.Reporting.V5r3;
 using Highlander.Utilities.NamedValues;
 
 namespace Highlander.ValuationEngine.V5r3.Helpers
@@ -25,6 +26,30 @@ namespace Highlander.ValuationEngine.V5r3.Helpers
         {
             var productType = ProductTypeSimpleScheme.ParseEnumString(tradeProps.GetValue<string>(TradeProp.ProductType));
             return IsImplementedProductType(productType);
+        }
+
+        public static bool IsImplementedTradeType(ItemChoiceType15 tradeType)
+        {
+            switch (tradeType)
+            {
+                case ItemChoiceType15.leaseTransaction:
+                case ItemChoiceType15.swap:
+                case ItemChoiceType15.fra:
+                case ItemChoiceType15.fxSwap:
+                case ItemChoiceType15.bulletPayment:
+                case ItemChoiceType15.termDeposit:
+                case ItemChoiceType15.capFloor:
+                case ItemChoiceType15.swaption:
+                case ItemChoiceType15.fxOption:
+                case ItemChoiceType15.bondTransaction:
+                case ItemChoiceType15.equityTransaction:
+                case ItemChoiceType15.futureTransaction:
+                case ItemChoiceType15.propertyTransaction:
+                case ItemChoiceType15.commodityForward:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public static bool IsImplementedProductType(ProductTypeSimpleEnum productType)

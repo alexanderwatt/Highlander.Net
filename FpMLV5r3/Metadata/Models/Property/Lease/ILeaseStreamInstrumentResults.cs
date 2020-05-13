@@ -19,9 +19,7 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
     public enum LeaseInstrumentMetrics
     { 
-        BreakEvenRate 
-        , BreakEvenSpread
-        , ImpliedQuote
+        NPV
     }
 
     public interface ILeaseStreamInstrumentResults

@@ -15,6 +15,13 @@
 
 namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
+    public enum LeaseTransactionMetrics
+    {
+        NPV,
+        ExpectedCashflows,
+        CashflowPVs
+    }
+
     public interface ILeaseTransactionResults
     {
         /// <summary>

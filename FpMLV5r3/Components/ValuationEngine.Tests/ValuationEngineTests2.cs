@@ -2703,6 +2703,24 @@ namespace Highlander.ValuationEngine.Tests.V5r3
         #endregion
 
         [TestMethod]
+        public void TradeLeasePricerWithReportingCurrency()
+        {
+            var trade = FpMLTestsSwapHelper.GetLeaseExampleObject();
+            var tradeProps = new NamedValueSet(
+                ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleLease.nvs"));
+            //Create the trade pricer.
+            var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
+            var baseParty = tradeProps.GetValue<string>("Party1", true);
+            trade.id = tradePricer.TradeIdentifier.UniqueIdentifier;
+            //Calculate the metrics.
+            //Price.
+            var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "AUD", baseParty);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
+            Debug.Print(result);
+        }
+
+        [TestMethod]
         public void TradeIRSwapPricerWithReportingCurrency1()
         {
             var swap = FpMLTestsSwapHelper.GetSwap01ExampleObject();
@@ -2710,15 +2728,15 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             XsdClassesFieldResolver.TradeSetSwap(trade, swap);
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleSwap.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             trade.id = tradePricer.TradeIdentifier.UniqueIdentifier;
             //Calculate the metrics.
             //Price.
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "EUR", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 
@@ -2732,7 +2750,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             trade.id = "TestTrade001";
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleSwap.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             //Calculate the metrics.
@@ -2869,14 +2887,14 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             XsdClassesFieldResolver.TradeSetFra(trade, swap);
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleFra.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             trade.id = tradePricer.TradeIdentifier.UniqueIdentifier;
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             //Calculate the metrics.
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "CHF", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 
@@ -2888,7 +2906,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             XsdClassesFieldResolver.TradeSetFxSingleLeg(trade, swap);
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleFxForward.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             trade.id = tradePricer.TradeIdentifier.UniqueIdentifier;
             var baseParty = tradeProps.GetValue<string>("Party1", true);
@@ -2896,8 +2914,8 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             //Price.
             //var modelData = CreateInstrumentModelData(metrics, valuationDate, marketEnvironment, reportingCurrency, new PartyIdentifier("Unknown"));
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "AUD", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 

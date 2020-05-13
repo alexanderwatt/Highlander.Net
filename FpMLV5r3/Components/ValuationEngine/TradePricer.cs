@@ -129,20 +129,17 @@ namespace Highlander.ValuationEngine.V5r3
                     //    }
                     //    break;
                     case ProductTypeSimpleEnum.LeaseTransaction:
-                    {
-                        IBusinessCalendar settlementCalendar = null;
-                        if (firstCalendarPair != null)
                         {
-                            settlementCalendar = firstCalendarPair.First;
+                            var lease = (LeaseTransaction)trade.Item;
+                            IBusinessCalendar paymentCalendar = null;
+                            if (firstCalendarPair != null)
+                            {
+                                paymentCalendar = firstCalendarPair.First;
+                            }
+                            var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
+                            PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, null, null, paymentCalendar, lease, BaseParty, "Standard");
+                            //ProductReporter = new LeaseTransactionReporter();
                         }
-                        var property = (Highlander.Reporting.V5r3.LeaseTransaction)trade.Item;
-                        var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
-                        var referenceProperty = tradeProps.GetValue<string>(LeaseProp.LeaseIdentifier, false);
-                        //Get the instrument configuration data.
-                        //Modify the pricer to include this data.
-                        //PriceableProduct = new LeaseTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation);
-                        //ProductReporter = new LeaseTransactionReporter();
-                    }
                         break;
                     case ProductTypeSimpleEnum.PropertyTransaction:
                         {
@@ -154,7 +151,6 @@ namespace Highlander.ValuationEngine.V5r3
                             var property = (PropertyTransaction)trade.Item;
                             var tradeDate = tradeProps.GetValue<DateTime>(TradeProp.TradeDate, false);
                             var referenceProperty = tradeProps.GetValue<String>(PropertyProp.PropertyIdentifier, false);
-                            //Get the instrument configuration data.
                             //Modify the pricer to include this data.
                             PriceableProduct = new PropertyTransactionPricer(logger, cache, nameSpace, tradeDate, referenceProperty, settlementCalendar, property, BaseParty, forecastRateInterpolation)
                             {
@@ -265,7 +261,7 @@ namespace Highlander.ValuationEngine.V5r3
                                 fixingCalendar = firstCalendarPair.First;
                                 paymentCalendar = firstCalendarPair.Second;
                             }
-                            PriceableProduct = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, BaseParty, nameSpace)
+                            PriceableProduct = new FraPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fra, BaseParty)
                             {
                                 ProductIdentifier = tradeIdentifier,
                                 ForecastRateInterpolation = forecastRateInterpolation
@@ -544,7 +540,7 @@ namespace Highlander.ValuationEngine.V5r3
                                 paymentCalendar = firstCalendarPair.Second;
                             }
                             ProductType = ProductTypeSimpleEnum.FRA;
-                            PriceableProduct = new FraPricer(logger, cache, fixingCalendar, paymentCalendar, fra, BaseParty)
+                            PriceableProduct = new FraPricer(logger, cache, nameSpace, fixingCalendar, paymentCalendar, fra, BaseParty)
                             {
                                 ProductIdentifier = tradeIdentifier,
                                 ForecastRateInterpolation = forecastRateInterpolation
@@ -708,7 +704,7 @@ namespace Highlander.ValuationEngine.V5r3
         public override ValuationReport Price(IInstrumentControllerData modelData, ValuationReportType reportType)
         {
             //Price.
-            if (TradeHelper.IsImplementedProductType(ProductType))
+            if (TradeHelper.IsImplementedProductType(ProductType) || TradeHelper.IsImplementedTradeType(TradeType) )
             {
                 // A new valuationReport.
                 var valuationReport = new ValuationReport();

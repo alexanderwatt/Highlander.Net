@@ -212,6 +212,7 @@
     <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex31-non-deliverable-settlement-swap.xml" />
     <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex32-zero-coupon-swap.xml" />
     <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex33-BRL-CDI-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\lease-transactions\lease-ex01-lease-transaction.xml" />
     <Content Include="TestData\FpML xml samples\market-data-quotes\aud_depos_swaps_data.xml" />
     <Content Include="TestData\FpML\CapFloorVolsTest.xml" />
     <EmbeddedResource Include="TestData\FpML\MarketTest.xml" />
@@ -248,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="TestData\SampleLease.nvs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

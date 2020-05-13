@@ -298,7 +298,6 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
             {
                 var amounts = GetPaymentAmounts();
                 var discountFactors = GetPaymentDiscountFactors();
-                //TODO need to  set the notional amount and the weighting. Also amortisation??
                 ILeaseStreamParameters analyticModelParameters = new LeaseStreamParameters
                 {
                     Multiplier = Multiplier,

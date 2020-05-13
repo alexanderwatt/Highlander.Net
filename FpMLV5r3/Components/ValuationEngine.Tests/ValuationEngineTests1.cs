@@ -2289,13 +2289,13 @@ namespace Highlander.ValuationEngine.Tests.V5r3
                 ValuationDate = new DateTime(2007, 6, 15).AddDays(-10)
             };
             var fra = ProductFactory.GetFpMLFra(parameters);
-            var frapricer = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, true, fra, CurveEngine.NameSpace);
+            var frapricer = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, true, fra);
             var fraCopy = frapricer.Build();
             var result = XmlSerializerHelper.SerializeToString(fraCopy);
             Debug.WriteLine("--------------------------------------------------");
             Debug.Print(result);
             Debug.WriteLine("--------------------------------------------------");
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, fraCopy, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, fraCopy);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResults(priceableController, _metrics, _baseFraDate);
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2330,13 +2330,13 @@ namespace Highlander.ValuationEngine.Tests.V5r3
                 ValuationDate = new DateTime(2007, 6, 15).AddDays(-10)
             };
             var fra = ProductFactory.GetFpMLFra(parameters);
-            var frapricer = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, true, fra, CurveEngine.NameSpace);
+            var frapricer = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, true, fra);
             var fraCopy = frapricer.Build();
             var result = XmlSerializerHelper.SerializeToString(fra);
             Debug.WriteLine("--------------------------------------------------");
             Debug.Print(result);
             Debug.WriteLine("--------------------------------------------------");
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, fraCopy, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, fraCopy);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResults(priceableController, _metrics, _baseFraDate);
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2355,7 +2355,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             var fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, fraFpmlDes, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, fraFpmlDes);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResults(priceableController, _metrics, _baseFraDate);
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2376,7 +2376,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             var fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, fraFpmlDes, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, fraFpmlDes);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResults(priceableController, _metrics, _baseFraDate);
             //double d2 = (double)forwardRateAgreement.Price(new DateTime(2007, 6, 15).AddDays(-10), rateCurve.GetTermStructure()).amount;
@@ -2404,7 +2404,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             Fra fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, true, fraFpmlDes, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, true, fraFpmlDes);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResults(priceableController, _metrics, _baseFraDate);
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2423,7 +2423,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             Fra fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, true, fraFpmlDes, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, true, fraFpmlDes);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResultsWithCurrency(priceableController, _metrics, _baseFraDate, "AUD");
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2442,7 +2442,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             Fra fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, true, fraFpmlDes, CurveEngine.NameSpace);
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, true, fraFpmlDes);
             //var metrics = new[] { "MarketQuote", "NPV", "ImpliedQuote", "Delta1", "ImpliedQuote", "DeltaR", "NPV" };
             ProcessInstrumentControllerResultsWithCurrency(priceableController, _metrics, _baseFraDate, "USD");
             foreach (var priceableCashflow in priceableController.GetChildren())
@@ -2461,7 +2461,7 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             nsMgr.AddNamespace("f", "http://www.fpml.org/FpML-5/reporting");
             XmlNode node = document.SelectSingleNode("//f:fra", nsMgr);
             Fra fraFpmlDes = XmlSerializerHelper.DeserializeNode<Fra>(node);
-            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, null, null, fraFpmlDes, CurveEngine.NameSpace)
+            var priceableController = new FraPricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, null, fraFpmlDes)
             {
                 PricingStructureEvolutionType =
                     PricingStructureEvolutionType.SpotToForward
@@ -5146,6 +5146,96 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             {
                 Item = bondTransaction,
                 ItemElementName = ItemChoiceType15.bondTransaction,//TODO this has been added to the enum, but is a non schema product.
+                tradeHeader = new TradeHeader(), //TODO We need a new type here!
+            };
+            var party1 = PartyTradeIdentifierHelper.Parse("0001", "party1");
+            var party2 = PartyTradeIdentifierHelper.Parse("0001", "party2");
+            trade.tradeHeader.partyTradeIdentifier = new[] { party1, party2 };
+            trade.tradeHeader.tradeDate = new IdentifiedDate { Value = new DateTime() };
+            var tradeTemp = XmlSerializerHelper.SerializeToString(trade);
+            Debug.Print(tradeTemp);
+            var result2 = XmlSerializerHelper.DeserializeFromString<Trade>(tradeTemp);
+            Debug.Print(result2.id);
+        }
+
+        #endregion
+
+        #region Test PropertyTransactionPricer
+
+        [TestMethod]
+        public void PriceablePropertyTransaction()
+        {
+            string buyer = "Party1";
+            string seller = "Party2";
+            var identifier = string.Format("{0}.{1}.{2}", "Trade", "propertyTransaction", "0001");
+            var productType = new object[] { ProductTypeHelper.Create("PropertyTransaction") };
+            //var productId = new ProductId {Value = "BondTransation"};
+            //var productIds = new[] {productId};
+            var propertyTransaction = new PropertyTransaction
+            {
+                notionalAmount = MoneyHelper.GetAmount(1000000m, "AUD"),
+                buyerPartyReference =
+                    PartyReferenceHelper.Parse(buyer),
+                id = identifier,
+                Items = productType,
+                ItemsElementName = new[] { ItemsChoiceType2.productType },
+                sellerPartyReference =
+                    PartyReferenceHelper.Parse(seller),
+                property = new PropertyAsset()
+            };
+            var propertyTemp = XmlSerializerHelper.SerializeToString(propertyTransaction);
+            Debug.Print(propertyTemp);
+            var result = XmlSerializerHelper.DeserializeFromString<LeaseTransaction>(propertyTemp);
+            Debug.Print(result.id);
+            var trade = new Trade
+            {
+                Item = propertyTransaction,
+                ItemElementName = ItemChoiceType15.propertyTransaction,//TODO this has been added to the enum, but is a non schema product.
+                tradeHeader = new TradeHeader(), //TODO We need a new type here!
+            };
+            var party1 = PartyTradeIdentifierHelper.Parse("0001", "party1");
+            var party2 = PartyTradeIdentifierHelper.Parse("0001", "party2");
+            trade.tradeHeader.partyTradeIdentifier = new[] { party1, party2 };
+            trade.tradeHeader.tradeDate = new IdentifiedDate { Value = new DateTime() };
+            var tradeTemp = XmlSerializerHelper.SerializeToString(trade);
+            Debug.Print(tradeTemp);
+            var result2 = XmlSerializerHelper.DeserializeFromString<Trade>(tradeTemp);
+            Debug.Print(result2.id);
+        }
+
+        #endregion
+
+        #region Test LeaseTransactionPricer
+
+        [TestMethod]
+        public void PriceableLeaseTransaction()
+        {
+            string buyer = "Party1";
+            string seller = "Party2";
+            var identifier = string.Format("{0}.{1}.{2}", "Trade", "leaseTransaction", "0001");
+            var productType = new object[] { ProductTypeHelper.Create("LeaseTransaction") };
+            //var productId = new ProductId {Value = "BondTransation"};
+            //var productIds = new[] {productId};
+            var leaseTransaction = new LeaseTransaction
+            {
+                notionalAmount = MoneyHelper.GetAmount(1000000m, "AUD"),
+                buyerPartyReference =
+                    PartyReferenceHelper.Parse(buyer),
+                id = identifier,
+                Items = productType,
+                ItemsElementName = new[] { ItemsChoiceType2.productType },
+                sellerPartyReference =
+                    PartyReferenceHelper.Parse(seller),
+                lease = new Lease()
+            };
+            var leaseTemp = XmlSerializerHelper.SerializeToString(leaseTransaction);
+            Debug.Print(leaseTemp);
+            var result = XmlSerializerHelper.DeserializeFromString<LeaseTransaction>(leaseTemp);
+            Debug.Print(result.id);
+            var trade = new Trade
+            {
+                Item = leaseTransaction,
+                ItemElementName = ItemChoiceType15.leaseTransaction,//TODO this has been added to the enum, but is a non schema product.
                 tradeHeader = new TradeHeader(), //TODO We need a new type here!
             };
             var party1 = PartyTradeIdentifierHelper.Parse("0001", "party1");

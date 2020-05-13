@@ -25,7 +25,6 @@ using Highlander.Reporting.Analytics.V5r3.Schedulers;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Reporting.V5r3;
-using Highlander.Constants;
 using Highlander.Reporting.Analytics.V5r3.Interpolations.Points;
 using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Instruments;
@@ -87,11 +86,6 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         public Currency PaymentCurrency { get; set; }
 
         /// <summary>
-        /// The coupon currency.
-        /// </summary>
-        public Currency CouponCurrency { get; set; }
-
-        /// <summary>
         /// The base date from the trade pricer.
         /// </summary>
         public DateTime TradeDate { get; set; }
@@ -111,11 +105,6 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// </summary>
         public string PayerReference { get; set; }
 
-        /// <summary>
-        /// THe quote Type.
-        /// </summary>
-        public BondPriceEnum QuoteType { get; set; }
-
         ///<summary>
         ///</summary>
         public const string RateQuotationType = "MarketQuote";
@@ -130,7 +119,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <summary>
         /// The notional amount
         /// </summary>
-        public Money NotionalAmount { get; set; }
+        public Money Amount { get; set; }
 
         /// <summary>
         /// The business day adjustments for bond coupon and final exchange payments
@@ -163,7 +152,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
         /// <summary>
         /// 
         /// </summary>
-        public IModelAnalytic<ILeaseTransactionParameters, LeaseMetrics> AnalyticsModel { get; set; }
+        public IModelAnalytic<ILeaseTransactionParameters, LeaseTransactionMetrics> AnalyticsModel { get; set; }
 
         /// <summary>
         /// Flag where: ForwardEndDate = forecastRateInterpolation ? 
@@ -217,10 +206,10 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             Multiplier = 1.0m;
             TradeDate = tradeDate;
             LeaseType = leaseType;
-            logger.LogInfo("LeaseType set. Commence to build a bond transaction.");
+            logger.LogInfo("LeaseType set. Commence to build a lease transaction.");
             if (leaseFpMl == null) return;
             ReceiverReference = leaseFpMl.buyerPartyReference.href;
-            PaymentCurrencies = new List<string> { leaseFpMl.notionalAmount.currency.Value};
+            PaymentCurrencies = new List<string> { leaseFpMl.lease.currency.Value};
             PayerReference = leaseFpMl.sellerPartyReference.href;
             BasePartyTenant = basePartyReference == leaseFpMl.buyerPartyReference.href;
             if (!BasePartyTenant)
@@ -229,18 +218,13 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             }
             PaymentCalendar = paymentCalendar;
             //Set the currencies
-            CouponCurrency = leaseFpMl.notionalAmount.currency;
-            PaymentCurrency = leaseFpMl.notionalAmount.currency;//This could be another currency!
+            PaymentCurrency = leaseFpMl.lease.currency;//This could be another currency!
             //Set the notional information
-            NotionalAmount = MoneyHelper.GetAmount(leaseFpMl.notionalAmount.amount, leaseFpMl.notionalAmount.currency.Value);
-            //Determines the quotation and units
-            QuoteType = BondPriceEnum.YieldToMaturity;
+            Amount = leaseFpMl.notionalAmount;
             //Get the instrument configuration information.
             var assetIdentifier = leaseFpMl.lease.currency.Value + "-Lease-" + LeaseType;
             LeaseNodeStruct leaseTypeInfo = null;
-            //TODO Set the swap curves for asset swap valuation.
-            //
-            //Gets the template bond type
+            //Gets the template lease type
             var instrument = InstrumentDataHelper.GetInstrumentConfigurationData(cache, nameSpace, assetIdentifier);
             if (instrument != null)
             {
@@ -255,45 +239,37 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
                 //Pre-processes the data for the priceable asset.
                 var lease = XmlSerializerHelper.Clone(leaseFpMl.lease);
                 Lease = lease;
-                leaseTypeInfo.Lease = Lease;
                 //Set the curves to use for valuations.
-                LeaseCurveName = CurveNameHelpers.GetBondCurveName(Lease.currency.Value, Lease.id);
+                LeaseCurveName = CurveNameHelpers.GetLeaseCurveName(Lease.currency.Value, Lease.id);
                 //THe discount curve is only for credit calculations.
                 DiscountCurveName = CurveNameHelpers.GetDiscountCurveName(Lease.currency.Value, true);
-                MaturityDate = lease.leaseExpiryDate.Value;
-                //leaseTypeInfo.Lease.faceAmount = NotionalAmount.amount;
-                //leaseTypeInfo.Lease.faceAmountSpecified = true;
-                //Bond.faceAmount = NotionalAmount.amount;
-                RiskMaturityDate = leaseTypeInfo.Lease.leaseExpiryDate.Value;
+                MaturityDate = Lease.leaseExpiryDate.Value;
+                RiskMaturityDate = Lease.leaseExpiryDate.Value;
                 SettlementDate = settlementDate;
-                if (!PaymentCurrencies.Contains(leaseFpMl.lease.currency.Value))
+                if (!PaymentCurrencies.Contains(Lease.currency.Value))
                 {
-                    PaymentCurrencies.Add(leaseFpMl.lease.currency.Value);
+                    PaymentCurrencies.Add(Lease.currency.Value);
                 }
                 logger.LogInfo("Lease transaction has been successfully created.");
             }
             else
             {
-                logger.LogInfo("Bond type data not available.");
+                logger.LogInfo("Lease type data not available.");
             }
-            //Set the coupons
+            //Set the payments
             var leaseId = Lease.id;//Could use one of the instrumentIds
-            //bondStream is an interest Rate Stream but needs to be converted to a bond stream.
-            //It automatically contains the coupon currency.
             PaymentStream = new PriceableLeasePaymentStream(logger, cache, nameSpace, leaseId, ReceiverReference, PayerReference, BasePartyTenant, tradeDate,
                 leaseFpMl.lease, BusinessDayAdjustments, PaymentCalendar);
             //Add payments like the settlement price
-            if (settlementAmount != null && SettlementDate != null)
+            if (settlementAmount == null || SettlementDate == null) return;
+            var payment = PaymentHelper.Create(ReceiverReference, PayerReference, PaymentCurrency.Value,
+                (decimal)settlementAmount, (DateTime)SettlementDate);
+            AdditionalPayments =
+                PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] {payment},
+                    PaymentCalendar);
+            if (!PaymentCurrencies.Contains(payment.paymentAmount.currency.Value))
             {
-                var payment = PaymentHelper.Create(ReceiverReference, PayerReference, PaymentCurrency.Value,
-                    (decimal)settlementAmount, (DateTime)SettlementDate);
-                AdditionalPayments =
-                    PriceableInstrumentsFactory.CreatePriceablePayments(basePartyReference, new[] {payment},
-                        PaymentCalendar);
-                if (!PaymentCurrencies.Contains(payment.paymentAmount.currency.Value))
-                {
-                    PaymentCurrencies.Add(payment.paymentAmount.currency.Value);
-                }
+                PaymentCurrencies.Add(payment.paymentAmount.currency.Value);
             }
         }
 
@@ -315,7 +291,7 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             //TODO extend this
             var leaseTransaction = new LeaseTransaction
             {
-                               notionalAmount = NotionalAmount,
+                               notionalAmount = Amount,
                                lease = lease,
                                buyerPartyReference = buyerPartyReference,
                                sellerPartyReference = sellerPartyReference,
@@ -343,19 +319,9 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
             var leaseControllerMetrics = ResolveModelMetrics(AnalyticsModel.Metrics);
             AssetValuation leaseValuation;
             var quotes = ModelData.AssetValuation.quote.ToList();
-            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.AccrualFactor.ToString()) == null)
+            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, LeaseTransactionMetrics.NPV.ToString()) == null)
             {
-                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.AccrualFactor.ToString(), "DecimalValue");
-                quotes.Add(quote);
-            }
-            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.FloatingNPV.ToString()) == null)
-            {
-                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.FloatingNPV.ToString(), "DecimalValue");
-                quotes.Add(quote);
-            }
-            if (AssetValuationHelper.GetQuotationByMeasureType(ModelData.AssetValuation, InstrumentMetrics.NPV.ToString()) == null)
-            {
-                var quote = QuotationHelper.Create(0.0m, InstrumentMetrics.NPV.ToString(), "DecimalValue");
+                var quote = QuotationHelper.Create(0.0m, LeaseTransactionMetrics.NPV.ToString(), "DecimalValue");
                 quotes.Add(quote);
             }
             ModelData.AssetValuation.quote = quotes.ToArray();

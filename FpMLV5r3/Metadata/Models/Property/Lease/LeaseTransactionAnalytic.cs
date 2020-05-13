@@ -22,7 +22,7 @@ using Highlander.Reporting.ModelFramework.V5r3;
 
 namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
-    public class LeaseTransactionAnalytic : ModelAnalyticBase<ILeaseTransactionParameters, LeaseMetrics>, ILeaseTransactionResults
+    public class LeaseTransactionAnalytic : ModelAnalyticBase<ILeaseTransactionParameters, LeaseTransactionMetrics>, ILeaseTransactionResults
     {
         #region ILeaseAssetResults Members
 
