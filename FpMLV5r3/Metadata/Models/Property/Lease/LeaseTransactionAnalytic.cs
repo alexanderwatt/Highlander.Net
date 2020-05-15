@@ -66,16 +66,17 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         /// <returns></returns>
         private decimal EvaluateNPV()
         {
-            var dp = 0.0m;
-            var i = 0;
-            if (AnalyticParameters.PaymentDiscountFactors.Length != AnalyticParameters.Weightings.Length)
-                return AnalyticParameters.Multiplier * dp;
-            foreach (var flow in AnalyticParameters.Weightings)
+            var result = 0.0m;
+            if (AnalyticParameters.Amounts.Length == AnalyticParameters.PaymentDiscountFactors.Length)
             {
-                dp = dp + AnalyticParameters.GrossAmount * flow * AnalyticParameters.PaymentDiscountFactors[i];
-                i++;
+                var i = 0;
+                foreach (var amount in AnalyticParameters.Amounts)
+                {
+                    result += amount * AnalyticParameters.PaymentDiscountFactors[i];
+                    i++;
+                }
             }
-            return AnalyticParameters.Multiplier * dp;
+            return result;
         }
 
         /// <summary>

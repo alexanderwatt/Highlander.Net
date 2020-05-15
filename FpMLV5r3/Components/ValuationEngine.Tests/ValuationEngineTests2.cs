@@ -87,20 +87,6 @@ namespace Highlander.ValuationEngine.Tests.V5r3
 
         #region Test Initialize and Cleanup
 
-        //public static void Setup()
-        //{
-        //    UTE = new UnitTestEnvironment();
-        //    //Set the calendar engine
-        //    CurveEngine = new CurveEngine.CurveEngine(UTE.Logger, UTE.Cache, UTE.NameSpace);
-        //    CalendarEngine = new CalendarEngine.CalendarEngine(UTE.Logger, UTE.Cache, UTE.NameSpace);
-        //    // Set the Retention
-        //    //Retention = TimeSpan.FromHours(1);
-        //    const string center = "AUSY";
-        //    FixingCalendar = BusinessCenterHelper.ToBusinessCalendar(UTE.Cache, BusinessCentersHelper.Parse(center), UTE.NameSpace);
-        //    PaymentCalendar = BusinessCenterHelper.ToBusinessCalendar(UTE.Cache, BusinessCentersHelper.Parse(center), UTE.NameSpace);
-        //    Market = GetMarket();
-        //}
-
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
@@ -2328,10 +2314,10 @@ namespace Highlander.ValuationEngine.Tests.V5r3
         {
             var market = new SwapLegEnvironment();
             var curve = TestRateCurve(baseDate);
-            var fxcurve = TestFxCurve(baseDate);
+            var fxCurve = TestFxCurve(baseDate);
             market.AddPricingStructure("DiscountCurve", curve);
             market.AddPricingStructure("ForecastCurve", curve);
-            market.AddPricingStructure("ReportingCurrencyFxCurve", fxcurve);
+            market.AddPricingStructure("ReportingCurrencyFxCurve", fxCurve);
             return market;
         }
 
@@ -2755,8 +2741,8 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             //Calculate the metrics.
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "EUR", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 

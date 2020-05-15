@@ -15,6 +15,8 @@
 
 #region Usings
 
+using System.Numerics;
+using Highlander.Reporting.Analytics.V5r3.Maths.Collections;
 using Highlander.Reporting.ModelFramework.V5r3;
 
 #endregion
@@ -38,6 +40,15 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         public virtual decimal EvaluateNPV()
         {
             var result = 0.0m;
+            if (AnalyticParameters.Amounts.Length == AnalyticParameters.PaymentDiscountFactors.Length)
+            {
+                var i = 0;
+                foreach (var amount in AnalyticParameters.Amounts)
+                {
+                    result += amount * AnalyticParameters.PaymentDiscountFactors[i];
+                    i++;
+                }
+            }
             return result;         
         }
 

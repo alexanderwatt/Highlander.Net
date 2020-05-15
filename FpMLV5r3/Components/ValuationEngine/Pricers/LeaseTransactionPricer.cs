@@ -357,14 +357,13 @@ namespace Highlander.ValuationEngine.V5r3.Pricers
                 IRateCurve leaseCurve = null;
                 if (marketEnvironment.GetType() == typeof(MarketEnvironment))
                 {
-                    leaseCurve = (IDiscountCurve)modelData.MarketEnvironment.GetPricingStructure(LeaseCurveName);
+                    leaseCurve = (IRateCurve)modelData.MarketEnvironment.GetPricingStructure(DiscountCurveName);
                 }
                 //Generate the vectors
-                const bool isBuyerInd = true;
                 var analyticModelParameters = new LeaseTransactionParameters
                 {
                     Multiplier = Multiplier,
-                    //Amounts = UnderlyingLease.GetCouponRate(),
+                    Amounts = PaymentStream.GetPaymentAmounts(),
                     PaymentDiscountFactors =
                         GetDiscountFactors(leaseCurve, PaymentStream.StreamPaymentDates.ToArray(), modelData.ValuationDate),
                 };

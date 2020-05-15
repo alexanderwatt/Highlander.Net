@@ -353,7 +353,7 @@ namespace Highlander.ValuationEngine.V5r3.Instruments
         public decimal[] GetPaymentAmounts()
         {
             var result = new List<decimal>();
-            Payments.ForEach(cashflow => result.Add(cashflow.ForecastAmount.amount));
+            Payments.ForEach(cashflow => result.Add(cashflow.PaymentAmount.amount));
             return result.ToArray();
         }
 

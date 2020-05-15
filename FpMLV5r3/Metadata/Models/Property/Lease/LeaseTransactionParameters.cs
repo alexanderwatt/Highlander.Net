@@ -45,10 +45,16 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         public decimal StepUp { get; set; }
 
         /// <summary>
-        /// Gets or sets the step up amount.
+        /// Gets or sets the weightings.
+        /// </summary>
+        /// <value>The weightings.</value>
+        public decimal[] Weightings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the step up amounts.
         /// </summary>
         /// <value>The amount.</value>
-        public decimal[] Weightings { get; set; }
+        public decimal[] Amounts { get; set; }
 
         /// <summary>
         /// Gets or sets the dates.

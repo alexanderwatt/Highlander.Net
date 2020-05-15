@@ -17,6 +17,6 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
 {
     public class LeaseStreamInstrumentResults : ILeaseStreamInstrumentResults
     {
-        public decimal NPV { get; }
+        public decimal NPV { get; set; }
     }
 }

@@ -34,7 +34,7 @@
 			<numberOfUnits xmlns="http://www.fpml.org/FpML-5/reporting">0.0</numberOfUnits>
 			<units xmlns="http://www.fpml.org/FpML-5/reporting">sqm</units>
 			<startGrossPrice xmlns="http://www.fpml.org/FpML-5/reporting">
-				<amount>10000000</amount>
+				<amount>1000</amount>
 			</startGrossPrice>
 			<paymentFrequency xmlns="http://www.fpml.org/FpML-5/reporting">
 				<periodMultiplier>1</periodMultiplier>

@@ -57,6 +57,12 @@ namespace Highlander.Reporting.Models.V5r3.Property.Lease
         decimal[] Weightings { get; set; }
 
         /// <summary>
+        /// Gets or sets the step up amounts.
+        /// </summary>
+        /// <value>The amount.</value>
+        decimal[] Amounts { get; set; }
+
+        /// <summary>
         /// Gets or sets the discount factors to use.
         /// </summary>
         /// <value>The dfs.</value>
