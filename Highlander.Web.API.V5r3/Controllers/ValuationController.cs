@@ -11,11 +11,21 @@ namespace Highlander.Web.API.V5r3.Controllers
     {
         private readonly PropertyService propertyService;
         private readonly LeaseService leaseService;
+        private readonly CurveService curveService;
 
         public ValuationController(PropertyService propertyService, LeaseService leaseService)
         {
             this.propertyService = propertyService;
             this.leaseService = leaseService;
+        }
+
+        [HttpPost]
+        [Route("curve")]
+        [ResponseType(typeof(string))]
+        public IHttpActionResult UpdateCurveInputs([FromBody] CurveUpdateInputsViewModel model, string curveId = null)
+        {
+            var buildId =  curveService.UpdateCurveInputs(model, curveId);
+            return Ok(buildId);
         }
 
         [HttpPost]
