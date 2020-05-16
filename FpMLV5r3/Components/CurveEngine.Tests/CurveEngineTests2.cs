@@ -6849,7 +6849,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                     string tenr = expectedResult.First;
 
                     PriceableSimpleIRSwap swap
-                        = CurveEngine.CreateSimpleIRSwap(expectedResult.First, baseDate, "AUD", amount,
+                        = CurveEngine.CreateSimpleInterestRateSwap(expectedResult.First, baseDate, "AUD", amount,
                                                          discountingTypeEnum, baseDate.AddDays(2), tenr, dayCount, "AUSY-USNY",
                                                          "FOLLOWING", "3M", underlyingIndex, null, null, quote);
 
@@ -8301,7 +8301,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                 string paymentFrequency = firstYear.Contains(tenor) ? "1M" : "3M";
 
                 PriceableSimpleIRSwap swap
-                    = CurveEngine.CreateSimpleIRSwap(expectedResult.First, baseDate, "AUD", Amount,
+                    = CurveEngine.CreateSimpleInterestRateSwap(expectedResult.First, baseDate, "AUD", Amount,
                         DiscountingTypeEnum, baseDate.AddDays(2), tenor, dayCount, "AUSY-USNY",
                         "FOLLOWING", paymentFrequency, underlyingIndex, null, null, quote);
 
@@ -8332,7 +8332,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                 string paymentFrequency = firstYear.Contains(tenor) ? "1M" : "3M";
 
                 PriceableSimpleIRSwap swap
-                    = CurveEngine.CreateSimpleIRSwap(expectedResult.First, baseDate, "AUD", Amount,
+                    = CurveEngine.CreateSimpleInterestRateSwap(expectedResult.First, baseDate, "AUD", Amount,
                         DiscountingTypeEnum, baseDate.AddDays(2), tenor, dayCount, "AUSY-USNY",
                         "FOLLOWING", paymentFrequency, underlyingIndex, null, null, quote);
 
@@ -9118,7 +9118,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                 string paymentFrequency = firstYear.Contains(value) ? "1M" : "3M";
 
                 PriceableSimpleIRSwap swap
-                    = CurveEngine.CreateSimpleIRSwap(expectedResult.First, baseDate, "AUD", amount,
+                    = CurveEngine.CreateSimpleInterestRateSwap(expectedResult.First, baseDate, "AUD", amount,
                         discountingTypeEnum, baseDate.AddDays(2), value, dayCount, "AUSY-USNY",
                         "FOLLOWING", paymentFrequency, underlyingIndex, null, null, quote);
 
@@ -9349,7 +9349,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
                 string paymentFrequency = firstYear.Contains(tenor) ? "1M" : "3M";
 
                 PriceableSimpleIRSwap swap
-                    = CurveEngine.CreateSimpleIRSwap(expectedResult.First, baseDate, "AUD", Amount,
+                    = CurveEngine.CreateSimpleInterestRateSwap(expectedResult.First, baseDate, "AUD", Amount,
                         DiscountingTypeEnum, baseDate.AddDays(2), tenor, dayCount, "AUSY-USNY",
                         "FOLLOWING", paymentFrequency, underlyingIndex, null, null, quote);
 

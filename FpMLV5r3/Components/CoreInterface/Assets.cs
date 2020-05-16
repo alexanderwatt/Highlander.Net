@@ -894,7 +894,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
         ///<param name="properties">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
-        public string CreateIRSwap(DateTime effectiveDate,
+        public string CreateInterestRateSwap(DateTime effectiveDate,
             double notional, List<decimal> floatingResets,
             bool includeStubFlag, bool rollBackward,
             string resetBusinessDayConvention, string resetBusinessCentersAsString,
@@ -916,7 +916,7 @@ namespace Highlander.Core.Interface.V5r3
             //create the swap.
             var irSwap = PriceableAssetFactory.CreateIRSwap(Engine.Logger, Engine.Cache, NameSpace, effectiveDate, notional,
                 businessDayAdjustments, resetOffset, floatingResets, null, null, quote, spreadQuote, properties);
-            var id = Engine.SetIRSwap(irSwap, properties);
+            var id = Engine.SetInterestRateSwap(irSwap, properties);
             return id;
         }
 

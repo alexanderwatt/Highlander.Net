@@ -159,7 +159,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LeaseTradeViewModel.cs" />
-    <Compile Include="Models\CurveUpdateInputsViewModel.cs" />
     <Compile Include="Models\PropertyFullViewModel.cs" />
     <Compile Include="Models\PropertyTradeViewModel.cs" />
     <Compile Include="Models\PropertyAssetViewModel.cs" />
@@ -198,6 +197,10 @@
     <ProjectReference Include="..\FpMLV5r3\Components\CoreInterface\Highlander.Core.Interface.V5r3.csproj">
       <Project>{E3DF5F07-1420-4C0D-A8A3-BDA19FB24810}</Project>
       <Name>Highlander.Core.Interface.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpMLV5r3\Components\CurveEngine\Highlander.CurveEngine.V5r3.csproj">
+      <Project>{96EBE4A4-8389-498F-B6F2-326D7C7FEA8A}</Project>
+      <Name>Highlander.CurveEngine.V5r3</Name>
     </ProjectReference>
     <ProjectReference Include="..\FpMLV5r3\Metadata\Codes\Highlander.Codes.V5r3.csproj">
       <Project>{58B2D2DF-6E17-4CE3-A12F-863C811377EF}</Project>

@@ -2766,7 +2766,7 @@ namespace Highlander.CurveEngine.Tests.V5r3
             }
             //create the swap.
             //TODO check the volproperties as the interface has changed.
-            var cap = CurveEngine.CreateIRCap("Local", baseDate, Currency, dates,
+            var cap = CurveEngine.CreateInterestRateCap("Local", baseDate, Currency, dates,
                                                                     new List<double>(_notionals), new List<double>(_tradestrikes), null, null,
                                                                     businessDayAdjustments, Dc, null, FixingCalendar, _volproperties);
             var valuation = cap.CalculateRatePDH(baseDate, curve, curve, volcurve, CurvePerturbation.ForecastCurve);

@@ -260,7 +260,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="marketDataQuoteList">The quotes can be: P(Price).</param>
         /// <param name="quotesMatrix">The actual quote range consistent with the quote list.</param> 
         /// <returns></returns>
-        public string UpdateEquitiesMarkets(NamedValueSet properties, List<string> instrumentIdList, 
+        public string UpdateEquityMarkets(NamedValueSet properties, List<string> instrumentIdList, 
             List<string> marketDataQuoteList, double[,] quotesMatrix)
         {
             var result = ValService.UpdateSecuritiesMarkets(properties, instrumentIdList, marketDataQuoteList, quotesMatrix);
@@ -276,7 +276,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="marketDataQuoteList">The quotes can be: DP(DirtyPrice), CP(CleanPrice), ASW (AssetSwapSpread),	DS (DiscountSpread), YTM (YieldToMaturity).</param>
         /// <param name="quotesMatrix">The actual quote range consistent with the quote list.</param> 
         /// <returns></returns>
-        public string UpdateSecuritiesMarkets(NamedValueSet properties, List<string> instrumentIdList, List<string> marketDataQuoteList,
+        public string UpdateSecurityMarkets(NamedValueSet properties, List<string> instrumentIdList, List<string> marketDataQuoteList,
                                               double[,] quotesMatrix)
         {
             var result = ValService.UpdateSecuritiesMarkets(properties, instrumentIdList, marketDataQuoteList, quotesMatrix);
@@ -1136,6 +1136,20 @@ namespace Highlander.Core.Interface.V5r3
             int lbx = values.GetLowerBound(1);
             int ubx = values.GetUpperBound(1);
             IPricingStructure pricingStructure = (ubx - lbx) < 3 ? Engine.CreatePricingStructure(properties, values) : Engine.CreateGenericPricingStructure(properties, values);          
+            string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
+            Engine.SaveCurve(pricingStructure);
+            return structureId;
+        }
+
+        /// <summary>
+        /// Creates a curve and returns the identifier.
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public string CreateCurve(NamedValueSet properties, QuotedAssetSet values)
+        {
+            IPricingStructure pricingStructure = Engine.CreateCurve(properties, values, null, null);
             string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
             Engine.SaveCurve(pricingStructure);
             return structureId;

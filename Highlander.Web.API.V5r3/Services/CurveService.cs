@@ -1,36 +1,36 @@
 ﻿using Highlander.Codes.V5r3;
 using Highlander.Constants;
 using Highlander.Core.Interface.V5r3;
-using Highlander.Reporting.ModelFramework.V5r3;
+using Highlander.CurveEngine.V5r3.Assets.Helpers;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
-using Highlander.Web.API.V5r3.Models;
-using System.Collections.Generic;
 
 namespace Highlander.Web.API.V5r3.Services
 {
     public class CurveService
     {
-        private readonly PricingCache cache;
-        private readonly Reference<ILogger> logger;
+        private readonly PricingCache _cache;
+        private readonly Reference<ILogger> _logger;
 
         public CurveService(PricingCache cache, Reference<ILogger> logger)
         {
-            this.cache = cache;
-            this.logger = logger;
+            _cache = cache;
+            _logger = logger;
         }
 
-        public string UpdateCurveInputs(CurveUpdateInputsViewModel model, string curveId)
+        public string UpdateCurveInputs(string curveId, QuotedAssetSet quotedAssetSet)
         {
+            //string[] instruments, decimal[] adjustedRates, decimal[] additional
+            //var quotedAssetSet = AssetHelper.Parse(instruments, adjustedRates, additional);
             var properties = new NamedValueSet();
-            properties.Set(EnvironmentProp.NameSpace, cache.NameSpace);
+            properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
             properties.Set(LeaseProp.ReferencePropertyIdentifier, curveId);
             properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-            logger.Target.LogInfo("Updated curve :" + curveId);
-            return cache.CreateCurve(properties, null);
+            _logger.Target.LogInfo("Updated curve :" + curveId);
+            return _cache.CreateCurve(properties, quotedAssetSet);
         }
     }
 }

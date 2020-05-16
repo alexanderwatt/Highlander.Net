@@ -341,13 +341,13 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     structure = new InflationCurve(logger, cache, nameSpace, properties, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.BondFinancingCurve:
-                    var refId = properties.GetValue<String>(BondProp.ReferenceBond, true);
+                    var refId = properties.GetValue<string>(BondProp.ReferenceBond, true);
                     var refItem = cache.LoadItem<Bond>(nameSpace + '.' + "ReferenceData.FixedIncome." + refId);
                     var refAsset = refItem.Data as Bond;
                     structure = new SecuredRateCurve(logger, cache, nameSpace, refAsset, properties, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.BondFinancingBasisCurve:
-                    var ref1Id = properties.GetValue<String>(BondProp.ReferenceBond, true);
+                    var ref1Id = properties.GetValue<string>(BondProp.ReferenceBond, true);
                     var ref1Item = cache.LoadItem<Bond>(nameSpace + '.' + "ReferenceData.FixedIncome." + ref1Id);
                     var ref1Asset = ref1Item.Data as Bond;
                     string refCurve2Id = PropertyHelper.ExtractReferenceCurveUniqueId(properties);
@@ -358,17 +358,17 @@ namespace Highlander.CurveEngine.V5r3.Factory
                     structure = new BondCurve(logger, cache, nameSpace, properties, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.BondCurve:
-                    var bondId = properties.GetValue<String>(CurveProp.ReferenceBond, true);
-                    var currency = properties.GetValue<String>(CurveProp.Currency1, true);
+                    var bondId = properties.GetValue<string>(CurveProp.ReferenceBond, true);
+                    var currency = properties.GetValue<string>(CurveProp.Currency1, true);
                     var curve = CurveNameHelpers.GetBondCurveNameSimple(currency, bondId);
                     var curveName = properties.GetValue(CurveProp.CurveName, curve);
                     properties.Set(CurveProp.CurveName, curveName);
                     structure = new BondCurve(logger, cache, nameSpace, properties, quotedAssetSet, fixingCalendar, rollCalendar);
                     break;
                 case PricingStructureTypeEnum.ExchangeTradedCurve:
-                    var futuresCode = properties.GetValue<String>(CurveProp.ContractCode, true);
-                    var futuresCurrency = properties.GetValue<String>(CurveProp.Currency1, true);
-                    var exchange = properties.GetValue<String>(CurveProp.Exchange, true);
+                    var futuresCode = properties.GetValue<string>(CurveProp.ContractCode, true);
+                    var futuresCurrency = properties.GetValue<string>(CurveProp.Currency1, true);
+                    var exchange = properties.GetValue<string>(CurveProp.Exchange, true);
                     var exchangeCurve = CurveNameHelpers.GetExchangeTradedCurveNameSimple(futuresCurrency, exchange, futuresCode);
                     var exchangeCurveName = properties.GetValue(CurveProp.CurveName, exchangeCurve);
                     properties.Set(CurveProp.CurveName, exchangeCurveName);

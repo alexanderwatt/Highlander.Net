@@ -2137,7 +2137,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <returns></returns>
         public string UpdateSecuritiesMarkets(NamedValueSet properties,
                                               List<string> instrumentIdList, List<string> marketdataQuoteList,
-                                              Double[,] quotesList)
+                                              double[,] quotesList)
         {
             return UpdateSecuritiesMarkets(Logger, Cache, NameSpace, properties, instrumentIdList, marketdataQuoteList,
                                            quotesList);
@@ -2156,7 +2156,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="quotesMatrix">The actual quote data consistent with the quote list.</param> 
         /// <returns></returns>
         public string UpdateSecuritiesMarkets(ILogger logger, ICoreCache cache, string nameSpace, NamedValueSet properties,
-            List<string> instrumentIdList, List<string> marketdataQuoteList, Double[,] quotesMatrix)
+            List<string> instrumentIdList, List<string> marketdataQuoteList, double[,] quotesMatrix)
         {
             //Enrich the properties
             properties.Set(BondProp.Function, FunctionProp.Market.ToString());

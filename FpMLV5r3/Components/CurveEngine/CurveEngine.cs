@@ -1062,20 +1062,20 @@ namespace Highlander.CurveEngine.V5r3
                 foreach (var assetIdentifier in uniqueIds.Distinct())
                 {
                     var index = 0;
-                    var vals = new List<Decimal>();
-                    var measures = new List<String>();
-                    var quotes = new List<String>();
+                    var rates = new List<decimal>();
+                    var measures = new List<string>();
+                    var quotes = new List<string>();
                     foreach (var ids in assetIdentifiers)
                     {
                         index++;
                         if (ids != assetIdentifier) continue;
-                        vals.Add(values[index - 1]);
+                        rates.Add(values[index - 1]);
                         measures.Add(measureTypes[index - 1]);
                         quotes.Add(priceQuoteUnits[index - 1]);
                     }
                     var nvs = PriceableAssetFactory.BuildPropertiesForAssets("Local", assetIdentifier, baseDate);
                     var newProperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
-                    priceableAssets.Add(CreateLocalAsset(vals, measures, quotes,
+                    priceableAssets.Add(CreateLocalAsset(rates, measures, quotes,
                                                     newProperties));
                 }
                 return priceableAssets;
@@ -1251,11 +1251,11 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseDate">The base date.</param>
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
-        /// <param name="ytms">The yield to maturities.</param>
+        /// <param name="yieldToMaturity">The yield to maturities.</param>
         /// <returns>The string id.</returns>
-        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<decimal> ytms)
+        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<decimal> yieldToMaturity)
         {
-            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != ytms.Count)
+            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != yieldToMaturity.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(coupons), "the rates do not match the number of assets");
             }
@@ -1264,7 +1264,7 @@ namespace Highlander.CurveEngine.V5r3
             foreach (var assetIdentifier in assetIdentifiers)
             {
                 var properties = PriceableAssetFactory.BuildPropertiesForBondAssets("Local", assetIdentifier, baseDate, coupons[index], maturityDates[index]);
-                priceableAssets.Add(CreateLocalAsset(ytms[index], 0.0m, properties));
+                priceableAssets.Add(CreateLocalAsset(yieldToMaturity[index], 0.0m, properties));
                 index++;
             }
             return priceableAssets;
@@ -1277,12 +1277,12 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseDate">The base date.</param>
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
-        /// <param name="ytms">The yield to maturities.</param>
+        /// <param name="yieldToMaturity">The yield to maturities.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
-        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<decimal> ytms, NamedValueSet properties)
+        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<decimal> yieldToMaturity, NamedValueSet properties)
         {
-            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != ytms.Count)
+            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != yieldToMaturity.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(coupons), "the rates do not match the number of assets");
             }
@@ -1292,7 +1292,7 @@ namespace Highlander.CurveEngine.V5r3
             {
                 var nvs = PriceableAssetFactory.BuildPropertiesForBondAssets("Local", assetIdentifier, baseDate, coupons[index], maturityDates[index]);
                 var namedValueSet = CurveHelper.CombinePropertySetsClone(properties, nvs);
-                priceableAssets.Add(CreateLocalAsset(ytms[index], 0.0m, namedValueSet));
+                priceableAssets.Add(CreateLocalAsset(yieldToMaturity[index], 0.0m, namedValueSet));
                 index++;
             }
             return priceableAssets;
@@ -1307,13 +1307,13 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
         /// <param name="frequencies">The coupon frequency.</param>
-        /// <param name="ytms">The yield to maturities.</param>
+        /// <param name="yieldToMaturity">The yield to maturities.</param>
         /// <param name="dayCounts">The dayCounts used for repo, accrual and coupons.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
-        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<string> dayCounts, List<string> frequencies, List<decimal> ytms, NamedValueSet properties)
+        public List<string> CreateLocalBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons, List<string> dayCounts, List<string> frequencies, List<decimal> yieldToMaturity, NamedValueSet properties)
         {
-            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != dayCounts.Count && assetIdentifiers.Count != ytms.Count)
+            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != dayCounts.Count && assetIdentifiers.Count != yieldToMaturity.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(coupons), "the rates do not match the number of assets");
             }
@@ -1321,7 +1321,7 @@ namespace Highlander.CurveEngine.V5r3
             var priceableAssets = new List<string>();
             foreach (var assetIdentifier in assetIdentifiers)
             {
-                priceableAssets.Add(CreateLocalBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], dayCounts[index], frequencies[index], ytms[index], properties));
+                priceableAssets.Add(CreateLocalBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], dayCounts[index], frequencies[index], yieldToMaturity[index], properties));
                 index++;
             }
             return priceableAssets;
@@ -1334,7 +1334,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="priceableAsset">The priceable Asset.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public string SetIRSwap(IPriceableAssetController priceableAsset, NamedValueSet properties)
+        public string SetInterestRateSwap(IPriceableAssetController priceableAsset, NamedValueSet properties)
         {
             //sets the default.
             var uniqueId = "Asset not built-";
@@ -1481,14 +1481,14 @@ namespace Highlander.CurveEngine.V5r3
         ///<param name="fixedRate">The fixed rate.</param>
         ///<param name="businessDayConvention">The businessDayConvention.</param>
         ///<param name="notionalWeights">The notional weights.</param>
-        ///<param name="fixedLegDayCount">The daycount.</param>
+        ///<param name="fixedLegDayCount">The day count.</param>
         ///<param name="notional">The notional.</param>
         ///<param name="businessCentersAsString">The business centers.</param>
         ///<param name="metric">The metric.</param>
         ///<param name="dates">The dates.</param>
         ///<returns></returns>
-        public Decimal GetStructuredSwapMetric(String curveId, String currency, DateTime baseDate,
-            Decimal notional, List<DateTime> dates, List<Decimal> notionalWeights, String fixedLegDayCount, Decimal fixedRate,
+        public decimal GetStructuredSwapMetric(string curveId, string currency, DateTime baseDate,
+            decimal notional, List<DateTime> dates, List<decimal> notionalWeights, string fixedLegDayCount, decimal fixedRate,
             string businessDayConvention, string businessCentersAsString, string metric)
         {
             var result = 0.0m;
@@ -1508,8 +1508,8 @@ namespace Highlander.CurveEngine.V5r3
             var quoteMetric = BasicQuotationHelper.Create(0.0m, metric);
             bavMetric.quote = new[] { quoteMetric };
             //Get the curve.
-            var ratecurve = (IRateCurve)GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
-            market.AddPricingStructure("DiscountCurve", ratecurve);
+            var rateCurve = (IRateCurve)GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
+            market.AddPricingStructure("DiscountCurve", rateCurve);
             market.PricingStructureIdentifier = "DiscountCurve";
             var assetControllerData = new AssetControllerData(bavMetric, baseDate, market);
             //Create the interpolator and get the implied quote.
@@ -1529,12 +1529,12 @@ namespace Highlander.CurveEngine.V5r3
         /// This is used to get all default values and must exist in the cache.</param>
         ///<param name="baseDate">The base date.</param>
         ///<param name="spotDate">The spot date.</param>
-        ///<param name="fixedLegDayCount">The daycount.</param>
+        ///<param name="fixedLegDayCount">The day count.</param>
         ///<param name="term">The term of the swap.</param>
         ///<param name="paymentFrequency">The payment frequency.</param>
         ///<param name="rollConvention">The roll convention. This can include EOM, but is normally the roll day.</param>
         ///<returns></returns>
-        public Decimal GetSwapImpliedQuote(String curveId, String currency, DateTime baseDate, DateTime spotDate, String fixedLegDayCount,
+        public decimal GetSwapImpliedQuote(string curveId, string currency, DateTime baseDate, DateTime spotDate, string fixedLegDayCount,
             string term, string paymentFrequency, string rollConvention)
         {
             //Create a dummy rate.
@@ -1546,8 +1546,8 @@ namespace Highlander.CurveEngine.V5r3
                                                                     fixedLegDayCount, term, paymentFrequency,
                                                                     rollConvention, null, null, bav);
             //Get the cached curve.
-            var ratecurve = (IRateCurve)GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
-            var termCurve = ratecurve.GetTermCurve();
+            var rateCurve = (IRateCurve)GetCurve(curveId, false);//This requires an IPricingStructure to be cached.
+            var termCurve = rateCurve.GetTermCurve();
             //Create the interpolator and get the implied quote.
             var interpolator = new TermCurveInterpolator(termCurve, baseDate, Actual365.Instance);
             var impliedQuote = swap.CalculateImpliedQuote(interpolator);
@@ -1575,7 +1575,7 @@ namespace Highlander.CurveEngine.V5r3
         ///<param name="strike">The strike rate.</param>
         ///<param name="lastResetsAsArray">An array of last Reset rates. This may be null.</param>
         ///<param name="includeStubFlag">Include the first reset flag.</param>
-        ///<param name="dayCount">The daycount.</param>
+        ///<param name="dayCount">The day count.</param>
         ///<param name="maturityTerm">The maturity term.</param>
         ///<param name="rollFrequency">THe roll frequency of the caplets.</param>
         ///<param name="notional">The notional.</param>
@@ -1589,19 +1589,19 @@ namespace Highlander.CurveEngine.V5r3
         ///<param name="cashFlowDetail">A detail cashflow flag - mainly for debugging.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Object[,] GetIRCapFloorMetrics(String rateCurveId, String volCurveId,
-            Boolean isCap, String currency, DateTime baseDate, DateTime effectiveDate,
-            String maturityTerm, String rollFrequency, Double notional, double strike,
-            List<double> lastResetsAsArray, Boolean includeStubFlag, String dayCount,
-            string floatingRateIndex, string indexTenor, Boolean rollBackward,
+        public object[,] GetInterestRateCapFloorMetrics(string rateCurveId, string volCurveId,
+            bool isCap, string currency, DateTime baseDate, DateTime effectiveDate,
+            string maturityTerm, string rollFrequency,  double notional, double strike,
+            List<double> lastResetsAsArray, bool includeStubFlag, string dayCount,
+            string floatingRateIndex, string indexTenor, bool rollBackward,
             string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString,
-            string resetPeriod, List<string> metricsAsArray, Boolean cashFlowDetail, NamedValueSet properties)
+            string resetPeriod, List<string> metricsAsArray, bool cashFlowDetail, NamedValueSet properties)
         {
             if (paymentBusinessDayConvention == null) throw new ArgumentNullException(nameof(paymentBusinessDayConvention));
             var result = new Dictionary<string, decimal>();
             //Remove any empty cell values.          
-            List<Double> resetRates = null;
+            List<double> resetRates = null;
             if (lastResetsAsArray.Count > 0)
             {
                 resetRates = lastResetsAsArray;
@@ -1615,7 +1615,7 @@ namespace Highlander.CurveEngine.V5r3
             //Create the relative date offset.
             var forecastRate = ForecastRateIndexHelper.Parse(floatingRateIndex, indexTenor);
             //create the cap/floor.
-            var capfloor = isCap
+            var capFloor = isCap
                                ? PriceableAssetFactory.CreateIRCap(Logger, Cache, NameSpace, baseDate, effectiveDate, maturityTerm, currency,
                                                                      rollFrequency, includeStubFlag, notional, strike, rollBackward, resetRates,
                                                                      resetOffset, businessDayAdjustments, dayCount, forecastRate, null, null, properties)
@@ -1632,15 +1632,15 @@ namespace Highlander.CurveEngine.V5r3
             };
             //Set the quote metrics.
             //Get the curve.
-            var ratecurve = (IRateCurve)GetCurve(rateCurveId, false);//This requires an IPricingStructure to be cached.
-            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastCurve.ToString(), ratecurve);
-            market.AddPricingStructure(InterestRateStreamPSTypes.DiscountCurve.ToString(), (IRateCurve)ratecurve.Clone());
-            var volcurve = (IVolatilitySurface)GetCurve(volCurveId, false);//This requires an IPricingStructure to be cached.
-            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastIndexVolatilitySurface.ToString(), volcurve);
+            var rateCurve = (IRateCurve)GetCurve(rateCurveId, false);//This requires an IPricingStructure to be cached.
+            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastCurve.ToString(), rateCurve);
+            market.AddPricingStructure(InterestRateStreamPSTypes.DiscountCurve.ToString(), (IRateCurve)rateCurve.Clone());
+            var volCurve = (IVolatilitySurface)GetCurve(volCurveId, false);//This requires an IPricingStructure to be cached.
+            market.AddPricingStructure(InterestRateStreamPSTypes.ForecastIndexVolatilitySurface.ToString(), volCurve);
             //market.PricingStructureIdentifier = "CapMarket";
             var assetControllerData = new AssetControllerData(bavMetric, baseDate, market);
             //Create the interpolator and get the implied quote.
-            var valuation = capfloor.Calculate(assetControllerData);
+            var valuation = capFloor.Calculate(assetControllerData);
             if (valuation == null) return ArrayHelper.ConvertDictionaryTo2DArray(result);
             //Check to see if details are required.
             if (cashFlowDetail)
@@ -1671,14 +1671,14 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="coupons">The coupons.</param>
         /// <param name="maturityDates">The maturity dates.</param>
         /// <param name="frequencies">The coupon frequency.</param>
-        /// <param name="ytms">The yield to maturities.</param>
-        /// <param name="daycounts">The daycounts used for repo, accrual and coupons.</param>
+        /// <param name="yieldToMaturity">The yield to maturities.</param>
+        /// <param name="dayCounts">The day counts used for repo, accrual and coupons.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
-        public List<IPriceableAssetController> CreateBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<Decimal> coupons,
-            List<string> daycounts, List<string> frequencies, List<Decimal> ytms, NamedValueSet properties)
+        public List<IPriceableAssetController> CreateBonds(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates, List<decimal> coupons,
+            List<string> dayCounts, List<string> frequencies, List<decimal> yieldToMaturity, NamedValueSet properties)
         {
-            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != daycounts.Count && assetIdentifiers.Count != ytms.Count)
+            if (assetIdentifiers.Count != maturityDates.Count && assetIdentifiers.Count != coupons.Count && assetIdentifiers.Count != dayCounts.Count && assetIdentifiers.Count != yieldToMaturity.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(coupons), "the rates do not match the number of assets");
             }
@@ -1686,7 +1686,7 @@ namespace Highlander.CurveEngine.V5r3
             var priceableAssets = new List<IPriceableAssetController>();
             foreach (var assetIdentifier in assetIdentifiers)
             {
-                priceableAssets.Add(CreateBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], daycounts[index], frequencies[index], ytms[index], properties));
+                priceableAssets.Add(CreateBond(assetIdentifier, baseDate, maturityDates[index], coupons[index], dayCounts[index], frequencies[index], yieldToMaturity[index], properties));
                 index++;
             }
             return priceableAssets;
@@ -1701,16 +1701,16 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="maturityDate">The maturity date..</param>
         /// <param name="frequency">The coupon frequency.</param>
         /// <param name="ytm">The ytm.</param>
-        /// <param name="daycount">The daycount used for repo, accrual and coupons.</param>
+        /// <param name="dayCount">The day count used for repo, accrual and coupons.</param>
         /// <param name="properties">The properties.</param>
         /// <returns>The string id.</returns>
-        public IPriceableAssetController CreateBond(string assetIdentifier, DateTime baseDate, DateTime maturityDate, Decimal coupon, 
-            string daycount, string frequency, Decimal ytm, NamedValueSet properties)
+        public IPriceableAssetController CreateBond(string assetIdentifier, DateTime baseDate, DateTime maturityDate, decimal coupon, 
+            string dayCount, string frequency, decimal ytm, NamedValueSet properties)
         {
             properties.Set(CurveProp.BaseDate, baseDate);
             properties.Set("Maturity", maturityDate);
             properties.Set("Coupon", coupon);
-            var asset = AssetHelper.ParseBond(assetIdentifier, maturityDate, coupon, daycount, frequency, ytm);
+            var asset = AssetHelper.ParseBond(assetIdentifier, maturityDate, coupon, dayCount, frequency, ytm);
             var assetId = PropertyHelper.ExtractStringProperty("AssetId", properties);
             properties.Set("AssetId", assetId);
             var fixedRate = MarketQuoteHelper.FindQuotationByMeasureType("MarketQuote", asset.Second.quote);
@@ -1798,7 +1798,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixingCalendar">The fixing calendar.</param>
         /// <param name="paymentCalendar">The payment calendar.</param>
         ///<returns></returns>
-        public IPriceableAssetController CreatePriceableSurfaceAsset(Asset asset, Decimal? notional, Decimal strike, DateTime baseDate, BasicQuotation quotation,
+        public IPriceableAssetController CreatePriceableSurfaceAsset(Asset asset, decimal? notional, decimal strike, DateTime baseDate, BasicQuotation quotation,
             IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
             var result = PriceableAssetFactory.CreateSurface(Logger, Cache, NameSpace, asset, notional, strike, baseDate, quotation, fixingCalendar, paymentCalendar);
@@ -1844,13 +1844,13 @@ namespace Highlander.CurveEngine.V5r3
         ///<param name="baseDate">THe base Date.</param>
         ///<param name="ids">The asset ids.</param>
         ///<param name="values">The asset values.</param>
-        ///<param name="fixingcalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
+        ///<param name="fixingCalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
         ///<param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
         ///<returns></returns>
         public List<IPriceableRateAssetController> CreatePriceableRateAssets(DateTime baseDate, string[] ids, decimal[] values,
-            IBusinessCalendar fixingcalendar, IBusinessCalendar paymentCalendar)
+            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
-            var assets = PriceableAssetFactory.CreatePriceableRateAssets(Logger, Cache, NameSpace, baseDate, ids, values, null, fixingcalendar, paymentCalendar);
+            var assets = PriceableAssetFactory.CreatePriceableRateAssets(Logger, Cache, NameSpace, baseDate, ids, values, null, fixingCalendar, paymentCalendar);
             return assets;
         }
 
@@ -1870,13 +1870,13 @@ namespace Highlander.CurveEngine.V5r3
         ///</summary>
         ///<param name="bav">THe basic asset valuation.</param>
         ///<param name="properties">The asset properties.</param>
-        ///<param name="fixingcalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
+        ///<param name="fixingCalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
         ///<param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
         ///<returns></returns>
         public IPriceableAssetController CreatePriceableAsset(BasicAssetValuation bav, NamedValueSet properties,
-            IBusinessCalendar fixingcalendar, IBusinessCalendar paymentCalendar)
+            IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
-            var asset = PriceableAssetFactory.Create(Logger, Cache, NameSpace, bav, properties, fixingcalendar, paymentCalendar);
+            var asset = PriceableAssetFactory.Create(Logger, Cache, NameSpace, bav, properties, fixingCalendar, paymentCalendar);
             return asset;
         }
 
@@ -1888,7 +1888,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="additional">The additional. For a future this is the volatility. For a bond this is the coupon.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public IPriceableAssetController CreatePriceableAsset(Decimal rate, Decimal additional, NamedValueSet properties)
+        public IPriceableAssetController CreatePriceableAsset(decimal rate, decimal additional, NamedValueSet properties)
         {
             //sets the default.
             //AssetType property - make sure it exists.
@@ -1897,7 +1897,7 @@ namespace Highlander.CurveEngine.V5r3
             {
                 return null;
             }
-            Boolean isBondType = (assetType.Equals("BOND", StringComparison.OrdinalIgnoreCase));
+            bool isBondType = (assetType.Equals("BOND", StringComparison.OrdinalIgnoreCase));
             //make sure there is an AssetId.
             var assetIdentifier = PropertyHelper.ExtractStringProperty("AssetId", properties);
             if (assetIdentifier == null)
@@ -1915,7 +1915,7 @@ namespace Highlander.CurveEngine.V5r3
                 }
 
                 //make sure there is a coupon for the bond.
-                Decimal? coupon = PropertyHelper.ExtractDecimalProperty("Coupon", properties);
+                decimal? coupon = PropertyHelper.ExtractDecimalProperty("Coupon", properties);
                 if (coupon == null)
                 {
                     return null;
@@ -1944,7 +1944,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="priceQuoteUnits">The units of measure.</param>
         /// <param name="properties">the properties.</param>
         /// <returns>The string id.</returns>
-        public IPriceableAssetController CreatePriceableAsset(List<Decimal> values, List<string> measureType, List<string> priceQuoteUnits,
+        public IPriceableAssetController CreatePriceableAsset(List<decimal> values, List<string> measureType, List<string> priceQuoteUnits,
                                          NamedValueSet properties)
         {
             var clonedNvs = new NamedValueSet(properties.ToDictionary());
@@ -1961,8 +1961,8 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="additional">The additional.</param>
         /// <returns></returns>
         /// <param name="properties"></param>
-        public List<IPriceableAssetController> CreatePriceableAssets(List<DateTime> baseDates, List<Decimal> rates,
-                                           List<Decimal> additional, NamedValueSet properties)
+        public List<IPriceableAssetController> CreatePriceableAssets(List<DateTime> baseDates, List<decimal> rates,
+                                           List<decimal> additional, NamedValueSet properties)
         {
             if ((baseDates.Count != rates.Count) && (baseDates.Count != additional.Count))
             {
@@ -1988,8 +1988,8 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="additional">The additional.</param>
         /// <returns></returns>
         /// <param name="properties">This must include a BaseDate.</param>
-        public List<IPriceableAssetController> CreatePriceableAssets(List<string> assetIdentifiers, List<Decimal> rates,
-                                            List<Decimal> additional, NamedValueSet properties)
+        public List<IPriceableAssetController> CreatePriceableAssets(List<string> assetIdentifiers, List<decimal> rates,
+                                            List<decimal> additional, NamedValueSet properties)
         {
             if ((assetIdentifiers.Count != rates.Count) && (assetIdentifiers.Count != additional.Count))
             {
@@ -2019,17 +2019,17 @@ namespace Highlander.CurveEngine.V5r3
         /// Creates the specified asset identifiers.
         /// </summary>
         /// <param name="assetIdentifiers">The asset identifiers.</param>
-        /// <param name="values">The adjusted rates.</param>
+        /// <param name="rates">The adjusted rates.</param>
         /// <param name="measureTypes">The measure types. Currently supports MarketQuote and Volatility.</param>
         /// <param name="priceQuoteUnits">The price quote units. Currently supports Rates and LogNormalVolatility.</param>
         /// <returns></returns>
         /// <param name="properties"></param>
-        public List<IPriceableAssetController> CreatePriceableAssets(List<string> assetIdentifiers, List<Decimal> values,
+        public List<IPriceableAssetController> CreatePriceableAssets(List<string> assetIdentifiers, List<decimal> rates,
                                             List<string> measureTypes, List<string> priceQuoteUnits, NamedValueSet properties)
         {
-            if ((assetIdentifiers.Count != values.Count) && (assetIdentifiers.Count != priceQuoteUnits.Count) && (assetIdentifiers.Count != measureTypes.Count))
+            if ((assetIdentifiers.Count != rates.Count) && (assetIdentifiers.Count != priceQuoteUnits.Count) && (assetIdentifiers.Count != measureTypes.Count))
             {
-                throw new ArgumentOutOfRangeException(nameof(values), "the rates do not match the number of assets");
+                throw new ArgumentOutOfRangeException(nameof(rates), "the rates do not match the number of assets");
             }
             var priceableAssets = new List<IPriceableAssetController>();
             try
@@ -2039,20 +2039,20 @@ namespace Highlander.CurveEngine.V5r3
                 foreach (var assetIdentifier in uniqueIds.Distinct())
                 {
                     var index = 0;
-                    var vals = new List<Decimal>();
-                    var measures = new List<String>();
-                    var quotes = new List<String>();
+                    var values = new List<decimal>();
+                    var measures = new List<string>();
+                    var quotes = new List<string>();
                     foreach (var ids in assetIdentifiers)
                     {
                         index++;
                         if (ids != assetIdentifier) continue;
-                        vals.Add(values[index - 1]);
+                        values.Add(rates[index - 1]);
                         measures.Add(measureTypes[index - 1]);
                         quotes.Add(priceQuoteUnits[index - 1]);
                     }
                     var nvs = PriceableAssetFactory.BuildPropertiesForAssets("Local", assetIdentifier, baseDate);
                     var newProperties = CurveHelper.CombinePropertySetsClone(properties, nvs);
-                    priceableAssets.Add(CreatePriceableAsset(vals, measures, quotes,
+                    priceableAssets.Add(CreatePriceableAsset(values, measures, quotes,
                                                     newProperties));
                 }
                 return priceableAssets;
@@ -2071,8 +2071,8 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="rates">The rates.</param>
         /// <param name="additional">The additional.</param>
         /// <returns></returns>
-        public List<IPriceableAssetController> CreatePriceableAssets(string[] assetIdentifiers, DateTime baseDate, Decimal[] rates,
-                                            Decimal[] additional)
+        public List<IPriceableAssetController> CreatePriceableAssets(string[] assetIdentifiers, DateTime baseDate, decimal[] rates,
+                                            decimal[] additional)
         {
             if ((assetIdentifiers.Length != rates.Length) && (assetIdentifiers.Length != additional.Length))
             {
@@ -2123,7 +2123,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="discountingType">The discounting type.</param>
         /// <param name="effectiveDate">The base date.</param>
         /// <param name="tenor">The maturity tenor.</param>
-        /// <param name="fxdDayFraction">The fixed leg day fraction.</param>
+        /// <param name="fixedDayFraction">The fixed leg day fraction.</param>
         /// <param name="businessCenters">The payment business centers.</param>
         /// <param name="businessDayConvention">The payment business day convention.</param>
         /// <param name="fxdFrequency">The business day adjustments.</param>
@@ -2135,20 +2135,20 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="paymentCalendar">The paymentCalendar.</param>
         /// Initializes a new instance of the <see cref="PriceableSimpleIRSwap"/> class.
-        public PriceableSimpleIRSwap CreateSimpleIRSwap(string id, DateTime baseDate, string currency,
+        public PriceableSimpleIRSwap CreateSimpleInterestRateSwap(string id, DateTime baseDate, string currency,
                                      decimal amount, DiscountingTypeEnum? discountingType,
-                                     DateTime effectiveDate, string tenor, string fxdDayFraction,
+                                     DateTime effectiveDate, string tenor, string fixedDayFraction,
                                      string businessCenters, string businessDayConvention, string fxdFrequency,
                                      RateIndex underlyingRateIndex, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, BasicQuotation fixedRate)
         {
             var instrument = PriceableAssetFactory.CreateSimpleIRSwap(Logger, Cache, NameSpace, id, baseDate, currency, amount, discountingType,
-                effectiveDate, tenor, fxdDayFraction, businessCenters, businessDayConvention, fxdFrequency, underlyingRateIndex, fixingCalendar, paymentCalendar, fixedRate);
+                effectiveDate, tenor, fixedDayFraction, businessCenters, businessDayConvention, fxdFrequency, underlyingRateIndex, fixingCalendar, paymentCalendar, fixedRate);
             return instrument;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceableSimpleIRSwap"/> class.
         /// </summary>
-        /// <param name="fixedLegDayCount">The fixed leg daycount basis.</param>
+        /// <param name="fixedLegDayCount">The fixed leg day count basis.</param>
         /// <param name="term">The term of the swap.</param>
         /// <param name="paymentFrequency">The payment frequency.</param>
         /// <param name="rollConvention">The roll convention.</param>
@@ -2158,7 +2158,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="spotDate">The spot date.</param>
         /// <param name="fixingCalendar">The fixing calendar. If null, a new is constructed based on the business calendars.</param>
         /// <param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
-        public IPriceableAssetController CreateInterestRateSwap(String currency, DateTime baseDate, DateTime spotDate, String fixedLegDayCount,
+        public IPriceableAssetController CreateInterestRateSwap(string currency, DateTime baseDate, DateTime spotDate, string fixedLegDayCount,
             string term, string paymentFrequency, string rollConvention, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, BasicAssetValuation bav)
         {
             var instrument = PriceableAssetFactory.CreateInterestRateSwap(Logger, Cache, NameSpace, currency, baseDate, spotDate, fixedLegDayCount, term, paymentFrequency, rollConvention, fixingCalendar, paymentCalendar, bav);
@@ -2169,15 +2169,15 @@ namespace Highlander.CurveEngine.V5r3
         /// Initializes a new instance of the <see cref="PriceableSimpleIRSwap"/> class.
         /// </summary>
         /// <param name="notionalWeights">THe notional weights.</param>
-        /// <param name="fixedLegDayCount">The fixed leg daycount basis.</param>
+        /// <param name="fixedLegDayCount">The fixed leg day count basis.</param>
         /// <param name="fixingDateAdjustments">The fixingDateAdjustments.</param>
         /// <param name="bav">The basic asset valuation.</param>
         /// <param name="identifier">The swap configuration identifier.</param>
         /// <param name="baseDate">The base date.</param>
         /// <param name="notional">The actual first notional. THis must be consistent with the weights.</param>
         /// <param name="dates">The dates.</param>
-        public IPriceableAssetController CreateInterestRateSwap(String identifier, DateTime baseDate,
-            Money notional, DateTime[] dates, Decimal[] notionalWeights, String fixedLegDayCount,
+        public IPriceableAssetController CreateInterestRateSwap(string identifier, DateTime baseDate,
+            Money notional, DateTime[] dates, decimal[] notionalWeights, string fixedLegDayCount,
             BusinessDayAdjustments fixingDateAdjustments, BasicAssetValuation bav)
         {
             var instrument = PriceableAssetFactory.CreateInterestRateSwap(identifier, baseDate, notional, dates, notionalWeights, fixedLegDayCount, fixingDateAdjustments, bav);
@@ -2188,7 +2188,7 @@ namespace Highlander.CurveEngine.V5r3
         /// Initializes a new instance of the <see cref="PriceableSimpleBond"/> class.
         /// </summary>
         /// <param name="maturityDate">THe maturity Date.</param>
-        /// <param name="dayCountFraction">The fixed leg daycount basis.</param>
+        /// <param name="dayCountFraction">The fixed leg day count basis.</param>
         /// <param name="couponFrequency">The coupon frequency.</param>
         /// <param name="issuerName">The issuer name.</param>
         /// <param name="rollConvention">The roll convention e.g. FOLLOWING.</param>
@@ -2202,9 +2202,9 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="notional">The actual first notional. This must be consistent with the weights.</param>
         /// <param name="coupon">The coupon.</param>
         /// <param name="paymentCalendar">The payment calendar. If null, a new is constructed based on the business calendars.</param>
-        public Decimal GetBondAssetSwapSpread(string identifier, DateTime valuationDate, DateTime settlementDate, DateTime exDivDate,
-            Money notional, Decimal coupon, DateTime maturityDate, String dayCountFraction, string couponFrequency, String issuerName,
-            string rollConvention, string businessCenters, IRateCurve curve, Decimal ytm, IBusinessCalendar paymentCalendar)
+        public decimal GetBondAssetSwapSpread(string identifier, DateTime valuationDate, DateTime settlementDate, DateTime exDivDate,
+            Money notional, decimal coupon, DateTime maturityDate, string dayCountFraction, string couponFrequency, string issuerName,
+            string rollConvention, string businessCenters, IRateCurve curve, decimal ytm, IBusinessCalendar paymentCalendar)
         {
             var asw = PriceableAssetFactory.GetBondAssetSwapSpread(Logger, Cache, NameSpace, identifier, valuationDate, settlementDate, exDivDate, notional, coupon, maturityDate,
                 dayCountFraction, couponFrequency, issuerName, rollConvention, businessCenters, curve, ytm, paymentCalendar);
@@ -2226,9 +2226,9 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixedRate">The fixed rate.</param>
         /// <param name="spread">The spread on the floating leg.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRSwap CreateIRSwap(DateTime baseDate, DateTime spotDate,
-                                Double notional, Currency currency, BusinessDayAdjustments paymentBusinessDayAdjustments,
-                                RelativeDateOffset fixingDateOffset, List<Decimal> floatingResetRates,
+        public PriceableIRSwap CreateInterestRateSwap(DateTime baseDate, DateTime spotDate,
+                                double notional, Currency currency, BusinessDayAdjustments paymentBusinessDayAdjustments,
+                                RelativeDateOffset fixingDateOffset, List<decimal> floatingResetRates,
                                 IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar,
                                 BasicQuotation fixedRate, BasicQuotation spread, NamedValueSet properties)
         {
@@ -2242,16 +2242,16 @@ namespace Highlander.CurveEngine.V5r3
         /// </summary>
         /// <param name="fixedNotionals">The fixed notional. This must match the relevant date array i.e. count - 1</param>
         /// <param name="floatingResetRates">An array of override rest rates for the floating leg.</param>
-        /// <param name="floatingLegDayCount">The floating leg daycount.</param>
+        /// <param name="floatingLegDayCount">The floating leg day count.</param>
         /// <param name="dateAdjustments">The fixingDateAdjustments.</param>
         /// <param name="bav">The basic asset valuation.</param>
         /// <param name="fixedRollDates">The fixed roll dates, including the final maturity.</param>
         /// <param name="floatingRollDates">The floating roll dates, including the final maturity.</param>
         /// <param name="floatingNotionals">The floating leg notional. This must match the relevant date array i.e. count - 1.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRSwap CreateIRSwap(List<DateTime> fixedRollDates, List<Decimal> fixedNotionals,
-            List<DateTime> floatingRollDates, List<Decimal> floatingNotionals, List<Decimal> floatingResetRates,
-            String floatingLegDayCount, BusinessDayAdjustments dateAdjustments, BasicAssetValuation bav, NamedValueSet properties)
+        public PriceableIRSwap CreateInterestRateSwap(List<DateTime> fixedRollDates, List<decimal> fixedNotionals,
+            List<DateTime> floatingRollDates, List<decimal> floatingNotionals, List<decimal> floatingResetRates,
+            string floatingLegDayCount, BusinessDayAdjustments dateAdjustments, BasicAssetValuation bav, NamedValueSet properties)
         {
             var instrument = PriceableAssetFactory.CreateIRSwap(fixedRollDates, 
                 fixedNotionals, floatingRollDates, floatingNotionals, 
@@ -2269,7 +2269,7 @@ namespace Highlander.CurveEngine.V5r3
         /// Currently, rollForward is not implemented.</param>
         /// <param name="lastResets">A list of reset rates. This may be null.</param>
         /// <param name="resetConvention">The reset Convention.</param>
-        /// <param name="dayCount">The leg daycount.</param>
+        /// <param name="dayCount">The leg day count.</param>
         /// <param name="paymentDateAdjustments">The payment Date Adjustments.</param>
         /// <param name="floatingIndex">The floating index.</param>
         /// <param name="baseDate">The base date.</param>
@@ -2280,9 +2280,9 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRCap CreateIRCap(DateTime baseDate,
+        public PriceableIRCap CreateInterestRateCap(DateTime baseDate,
             DateTime effectiveDate, string term, string currency, string paymentFrequency,
-            Boolean includeStubFlag, double notional, double strike, Boolean rollBackwardFlag,
+            bool includeStubFlag, double notional, double strike, bool rollBackwardFlag,
             List<double> lastResets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex,
             IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, NamedValueSet properties)
@@ -2302,7 +2302,7 @@ namespace Highlander.CurveEngine.V5r3
         /// Currently, rollForward is not implemented.</param>
         /// <param name="lastResets">A list of reset rates. This may be null.</param>
         /// <param name="resetConvention">The reset Convention.</param>
-        /// <param name="dayCount">The leg daycount.</param>
+        /// <param name="dayCount">The leg day count.</param>
         /// <param name="paymentDateAdjustments">The payment Date Adjustments.</param>
         /// <param name="floatingIndex">The floating index.</param>
         /// <param name="baseDate">The base date.</param>
@@ -2313,9 +2313,9 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRFloor CreateIRFloor(DateTime baseDate,
+        public PriceableIRFloor CreateInterestRateFloor(DateTime baseDate,
             DateTime effectiveDate, string term, string currency, string paymentFrequency,
-            Boolean includeStubFlag, double notional, double strike, Boolean rollBackwardFlag,
+            bool includeStubFlag, double notional, double strike, bool rollBackwardFlag,
             List<double> lastResets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex,
             IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar, NamedValueSet properties)
@@ -2332,7 +2332,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="strikes">The strikes.</param>
         /// <param name="resets">An array of reset rates. This may be null.</param>
         /// <param name="resetConvention">The reset Convention.</param>
-        /// <param name="dayCount">The leg daycount.</param>
+        /// <param name="dayCount">The leg day count.</param>
         /// <param name="paymentDateAdjustments">The payment Date Adjustments.</param>
         /// <param name="floatingIndex">The floating index.</param>
         /// <param name="identifier">The swap configuration identifier.</param>
@@ -2341,7 +2341,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="rollDates">The roll dates.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRCap CreateIRCap(String identifier, DateTime baseDate, string currency,
+        public PriceableIRCap CreateInterestRateCap(string identifier, DateTime baseDate, string currency,
             List<DateTime> rollDates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex, IBusinessCalendar fixingCalendar, NamedValueSet properties)
         {
@@ -2357,7 +2357,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="strikes">The strikes.</param>
         /// <param name="resets">An array of reset rates. This may be null.</param>
         /// <param name="resetConvention">The reset Convention.</param>
-        /// <param name="dayCount">The leg daycount.</param>
+        /// <param name="dayCount">The leg day count.</param>
         /// <param name="paymentDateAdjustments">The payment Date Adjustments.</param>
         /// <param name="floatingIndex">The floating index.</param>
         /// <param name="identifier">The swap configuration identifier.</param>
@@ -2366,7 +2366,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="rollDates">The roll dates.</param>
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
-        public PriceableIRFloor CreateIRFloor(String identifier, DateTime baseDate, string currency,
+        public PriceableIRFloor CreateInterestRateFloor(string identifier, DateTime baseDate, string currency,
             List<DateTime> rollDates, List<double> notionals, List<double> strikes, List<double> resets, RelativeDateOffset resetConvention,
             BusinessDayAdjustments paymentDateAdjustments, string dayCount, ForecastRateIndex floatingIndex, IBusinessCalendar fixingCalendar, NamedValueSet properties)
         {
@@ -2855,7 +2855,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="paymentCalendar">The payment Calendar.</param>
         /// <returns></returns>
         public IPricingStructure CreateCurve(NamedValueSet properties, string[] instruments,
-                            Decimal[] values, string[] measures, string[] priceQuoteUnits, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+            decimal[] values, string[] measures, string[] priceQuoteUnits, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
             var quotedAssetSet = AssetHelper.Parse(instruments, values, measures, priceQuoteUnits);
             var structure = PricingStructureFactory.CreateCurve(Logger, Cache, NameSpace, fixingCalendar, paymentCalendar, properties, quotedAssetSet);
@@ -2911,7 +2911,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="value">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
-        public RateSpreadCurve CreateRateSpreadCurve(NamedValueSet properties, IPricingStructure refCurve, Decimal value,
+        public RateSpreadCurve CreateRateSpreadCurve(NamedValueSet properties, IPricingStructure refCurve, decimal value,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
         {
             var structure = new RateSpreadCurve(Logger, Cache, NameSpace, properties, refCurve, value, fixingCalendar, rollCalendar);
@@ -2926,7 +2926,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="values">The values.</param>
         /// <param name="fixingCalendar">The fixingCalendar.</param>
         /// <param name="rollCalendar">The rollCalendar.</param>
-        public RateSpreadCurve CreateRateSpreadCurve(NamedValueSet properties, IPricingStructure refCurve, Decimal[] values,
+        public RateSpreadCurve CreateRateSpreadCurve(NamedValueSet properties, IPricingStructure refCurve, decimal[] values,
             IBusinessCalendar fixingCalendar, IBusinessCalendar rollCalendar)
         {
             var structure = new RateSpreadCurve(Logger, Cache, NameSpace, properties, refCurve, values, fixingCalendar, rollCalendar);
@@ -3020,7 +3020,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="fixingCalendar">The fixing Calendar.</param>
         /// <param name="paymentCalendar">The payment Calendar.</param>
         /// <returns></returns>
-        public IPricingStructure CreateCurve(NamedValueSet properties, string[] instruments, Decimal[] adjustedRates, Decimal[] additional, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
+        public IPricingStructure CreateCurve(NamedValueSet properties, string[] instruments, decimal[] adjustedRates, decimal[] additional, IBusinessCalendar fixingCalendar, IBusinessCalendar paymentCalendar)
         {
             var structure = PricingStructureFactory.CreateCurve(Logger, Cache, NameSpace, fixingCalendar, paymentCalendar, properties, instruments, adjustedRates, additional);
             return structure;
@@ -3034,7 +3034,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="strikes">The strikes.</param>
         /// <param name="volatilities">The volatilities.</param>
         /// <returns></returns>
-        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, double[] strikes, Double[,] volatilities)
+        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, string[] expiryTerms, double[] strikes, double[,] volatilities)
         {
             var pricingStructureType = PricingStructureFactory.CreateVolatilitySurface(Logger, Cache, NameSpace, properties, expiryTerms, strikes, volatilities);
             return pricingStructureType;
@@ -3048,7 +3048,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="strikesOrTenors">The strikes or tenor.</param>
         /// <param name="volatilities">The volatilities.</param>
         /// <returns></returns>
-        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenors, Double[,] volatilities)
+        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, string[] expiryTerms, string[] strikesOrTenors, double[,] volatilities)
         {
             var pricingStructureType = PricingStructureFactory.CreateVolatilitySurface(Logger, Cache, NameSpace, properties, expiryTerms, strikesOrTenors, volatilities);
             return pricingStructureType;
@@ -3063,7 +3063,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
         /// <param name="forwards">An array of forwards to the expiry dates. Used for calibration of the wing model.</param>
         /// <returns></returns>
-        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenor, Double[,] volatilities, Double[] forwards)
+        public IPricingStructure CreateVolatilitySurface(NamedValueSet properties, string[] expiryTerms, string[] strikesOrTenor, double[,] volatilities, double[] forwards)
         {
             var pricingStructureType = PropertyHelper.ExtractPricingStructureType(properties);
             var dimension2 = new double[strikesOrTenor.Length];
@@ -3092,7 +3092,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="tenors"></param>
         /// <param name="volatilities"></param>
         /// <param name="strikes"></param>
-        public IPricingStructure CreateVolatilityCube(NamedValueSet properties, String[] expiryTerms, String[] tenors, decimal[,] volatilities, decimal[] strikes)
+        public IPricingStructure CreateVolatilityCube(NamedValueSet properties, string[] expiryTerms, string[] tenors, decimal[,] volatilities, decimal[] strikes)
         {
             var id = CreateVolatilityCubeInMarketAndReturnId(properties, expiryTerms, tenors, volatilities,
                                                              strikes);
@@ -3108,7 +3108,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
         /// <param name="strikes">The strike array.</param>
         /// <returns></returns>
-        public IPricingStructure CreateVolatilityCubeInMarketAndReturnId(NamedValueSet properties, String[] expiryTerms, String[] tenors, decimal[,] volatilities, decimal[] strikes)
+        public IPricingStructure CreateVolatilityCubeInMarketAndReturnId(NamedValueSet properties, string[] expiryTerms, string[] tenors, decimal[,] volatilities, decimal[] strikes)
         {
             var pricingStructure = new VolatilityCube(properties, expiryTerms, tenors, volatilities, strikes);
             return pricingStructure;
@@ -3291,7 +3291,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="curveId"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public object[,] GetATMSwapRate(int swapMaturity,
+        public object[,] GetAtTheMoneySwapRate(int swapMaturity,
                                              DateTime baseDate,
                                              string curveId,
                                              string currency)
@@ -3310,7 +3310,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="pricingStructureId"></param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetValue(string pricingStructureId, DateTime targetDate)
+        public double GetValue(string pricingStructureId, DateTime targetDate)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
             var baseDate = pricingStructure.GetBaseDate();
@@ -3325,7 +3325,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="pricingStructureId"></param>
         /// <param name="targetDates">The target dates.</param>
         /// <returns></returns>
-        public List<Double> GetValues(string pricingStructureId, DateTime[] targetDates)
+        public List<double> GetValues(string pricingStructureId, DateTime[] targetDates)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
             var baseDate = pricingStructure.GetBaseDate();
@@ -3340,7 +3340,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseDate">The base date.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetValue(string pricingStructureId, DateTime baseDate,
+        public double GetValue(string pricingStructureId, DateTime baseDate,
                                       DateTime targetDate)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
@@ -3356,7 +3356,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseDate">The base date.</param>
         /// <param name="targetDates">The target dates.</param>
         /// <returns></returns>
-        public List<Double> GetValues(string pricingStructureId, DateTime baseDate,
+        public List<double> GetValues(string pricingStructureId, DateTime baseDate,
                                       DateTime[] targetDates)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
@@ -3371,7 +3371,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="valuationDate">The base date.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetHorizonValue(string pricingStructureId, DateTime valuationDate,
+        public double GetHorizonValue(string pricingStructureId, DateTime valuationDate,
                                       DateTime targetDate)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
@@ -3390,7 +3390,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="baseDate">The base date.</param>
         /// <param name="targetDate">The target date.</param>
         /// <returns></returns>
-        public Double GetValue2(string pricingStructureId, DateTime baseDate,
+        public double GetValue2(string pricingStructureId, DateTime baseDate,
                                        DateTime targetDate)
         {
             var pricingStructure = GetCurve(pricingStructureId, false);
@@ -3548,7 +3548,7 @@ namespace Highlander.CurveEngine.V5r3
         /// Recalculates the curve.
         /// </summary>
         /// <returns></returns>
-        public IPricingStructure CreatePerturbedCopy(IPricingStructure baseCurve, Decimal[] values)
+        public IPricingStructure CreatePerturbedCopy(IPricingStructure baseCurve, decimal[] values)
         {
             var marketPair = baseCurve.GetPerturbedCopy(values);
             return TranslateToPricingStructure(marketPair.First, marketPair.Second, out string id);
@@ -3987,7 +3987,7 @@ namespace Highlander.CurveEngine.V5r3
             curveId = market.id;
             if (market.Items != null)
             {              
-                if (String.IsNullOrEmpty(curveId))
+                if (string.IsNullOrEmpty(curveId))
                 {
                     curveId = market.Items[0].id;//use yieldCurve.id, CurveGen 1.X compatible
                 }
