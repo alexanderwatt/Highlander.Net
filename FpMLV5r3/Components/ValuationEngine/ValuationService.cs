@@ -504,6 +504,46 @@ namespace Highlander.ValuationEngine.V5r3
         /// <summary>
         /// Returns the trade data for all trades matching the query properties.
         /// </summary>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public IEnumerable<(Trade Trade, NamedValueSet Props)> GetTrades(string nameSpace,
+            NamedValueSet matchingPropertySet)
+        {
+            return GetTrades(Cache, nameSpace, matchingPropertySet);
+        }
+
+        /// <summary>
+        /// Returns the trade data for all trades matching the query properties.
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="cache"></param>
+        /// <param name="nameSpace"></param>
+        /// <param name="query">The query properties. A 2-column array of names and values.</param>
+        /// <returns></returns>
+        public IEnumerable<(Trade Trade, NamedValueSet Props)> GetTrades(ICoreCache cache, string nameSpace,
+            NamedValueSet matchingPropertySet)
+        {
+            IExpression whereExpr = Expr.BoolAND(Expr.IsEQU("NameSpace", nameSpace));
+            if (matchingPropertySet != null)
+            {
+                foreach (var property in matchingPropertySet.ToArray())
+                {
+                    whereExpr = Expr.BoolAND(Expr.IsEQU(property.Name, property.Value), whereExpr);
+                }
+            }
+            return cache.LoadItems<Trade>(whereExpr).Select(i => (i.Data, i.AppProps)).Cast<(Trade, NamedValueSet)>();
+        }
+
+        public ICoreItem LoadItem<T>(ICoreCache cache, string nameSpace, string id)
+        {
+            return cache.LoadItem<T>($"{nameSpace}.{id}");
+        }
+
+        /// <summary>
+        /// Returns the trade data for all trades matching the query properties.
+        /// </summary>
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Highlander.Constants;
 using Highlander.Reporting.V5r3;
 using Highlander.Web.API.V5r3.Models;
 using Highlander.Web.API.V5r3.Services;
@@ -15,7 +17,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         private readonly LeaseService _leaseService;
         private readonly CurveService _curveService;
 
-        public ValuationController(PropertyService propertyService, LeaseService leaseService, CurveService curveService)
+        public ValuationController(PropertyService propertyService,
+            LeaseService leaseService,
+            CurveService curveService)
         {
             _propertyService = propertyService;
             _leaseService = leaseService;
@@ -41,7 +45,8 @@ namespace Highlander.Web.API.V5r3.Controllers
             //create assets
             var propertyAsset = _propertyService.CreatePropertyAsset(model, transactionId);
             model.Trade.PropertyId = propertyAsset;
-            var propertyTrade = _propertyService.CreatePropertyTrade(model.Trade, transactionId);
+            //var propertyTrade = _propertyService.CreatePropertyTrade(model.Trade, transactionId);
+            var leaseTradeIds = new Dictionary<string, LeaseTradeViewModel>();
             foreach (var lease in model.Leases)
             {
                 lease.ReferencePropertyIdentifier = propertyAsset;
@@ -51,16 +56,27 @@ namespace Highlander.Web.API.V5r3.Controllers
                     _propertyService.CleanTransaction(transactionId);
                     throw new Exception("Failed to create a lease - valuation aborted");
                 }
+                leaseTradeIds.Add(result.Id, lease);
             }
 
             //value
-            var value = 0m;
-            //TODO
+            var totalValue = 0m;
+            foreach (var lease in leaseTradeIds)
+            {
+                //var leaseValue = _leaseService.ValueLease($"{EnvironmentProp.DefaultNameSpace}.{lease.Key}", lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
+                var leaseValue = _leaseService.ValueLease(lease.Key, lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
+
+                if (leaseValue == null)
+                {
+                    throw new Exception($"Lease {lease.Key} could not be valued");
+                }
+                totalValue += leaseValue.Value;
+            }
 
             //cleanup
             var deleted = _propertyService.CleanTransaction(transactionId);
 
-            return Ok(value);
+            return Ok(totalValue);
         }
     }
 }

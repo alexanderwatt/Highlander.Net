@@ -21,6 +21,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Highlander.Codes.V5r3;
 using Highlander.Constants;
+using Highlander.Core.Common;
 using Highlander.CurveEngine.Helpers.V5r3;
 using Highlander.CurveEngine.V5r3.Markets;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
@@ -238,6 +239,21 @@ namespace Highlander.Core.Interface.V5r3
         public Trade GetTrade(string identifier)
         {
             return ValService.GetTrade(NameSpace, identifier);
+        }
+
+        /// <summary>
+        /// Gets the trades in the default name space according to query.
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        public IEnumerable<(Trade Trade, NamedValueSet Props)> GetTrades(NamedValueSet props)
+        {
+            return ValService.GetTrades(NameSpace, props);
+        }
+
+        public ICoreItem LoadItem<T>(string nameSpace, string id)
+        {
+            return ValService.LoadItem<T>(Environment.Cache, nameSpace, id);
         }
 
         #endregion

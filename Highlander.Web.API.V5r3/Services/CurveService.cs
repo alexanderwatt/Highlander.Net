@@ -26,9 +26,7 @@ namespace Highlander.Web.API.V5r3.Services
             //var quotedAssetSet = AssetHelper.Parse(instruments, adjustedRates, additional);
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
-            properties.Set(LeaseProp.ReferencePropertyIdentifier, curveId);
-            properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction);
-            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(CurveProp.Market, "test");
             _logger.Target.LogInfo("Updated curve :" + curveId);
             return _cache.CreateCurve(properties, quotedAssetSet);
         }
