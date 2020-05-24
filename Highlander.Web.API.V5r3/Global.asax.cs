@@ -71,6 +71,7 @@ namespace Highlander.Web.API.V5r3
 
             builder.RegisterType<PropertyService>().AsSelf().SingleInstance();
             builder.RegisterType<LeaseService>().AsSelf().SingleInstance();
+            builder.RegisterType<CurveService>().AsSelf().SingleInstance();
 
             var factory = new CoreClientFactory(logger)
                 .SetEnv(environment)
@@ -92,7 +93,6 @@ namespace Highlander.Web.API.V5r3
             catch (Exception exception)
             {
                 logger.Target.Log(exception);
-                logger.Target.LogInfo("FAILED");
                 throw exception;
             }
             

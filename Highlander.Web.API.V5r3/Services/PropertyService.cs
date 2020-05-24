@@ -84,6 +84,8 @@ namespace Highlander.Web.API.V5r3.Services
             props.Set(Constants.Constants.TransactionIdProperty, transactionId);
             var properties = cache.DeletePropertyAssetsByQuery(props);
             var trades = cache.DeleteTradesByQuery(props);
+            //TODOS
+            //var reports = cache.DeleteReportsByQuery(props);
             return properties + trades;
         }
     }

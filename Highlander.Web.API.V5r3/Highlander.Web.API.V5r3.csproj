@@ -202,6 +202,10 @@
       <Project>{96EBE4A4-8389-498F-B6F2-326D7C7FEA8A}</Project>
       <Name>Highlander.CurveEngine.V5r3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FpMLV5r3\Components\ValuationEngine\Highlander.ValuationEngine.V5r3.csproj">
+      <Project>{F9217F4F-10C1-4192-B8CC-8AEC06362FB5}</Project>
+      <Name>Highlander.ValuationEngine.V5r3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FpMLV5r3\Metadata\Codes\Highlander.Codes.V5r3.csproj">
       <Project>{58B2D2DF-6E17-4CE3-A12F-863C811377EF}</Project>
       <Name>Highlander.Codes.V5r3</Name>
@@ -213,6 +217,10 @@
     <ProjectReference Include="..\FpMLV5r3\Metadata\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
       <Project>{24D15C4D-667F-43A8-8BC0-146DDDCB7305}</Project>
       <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpMLV5r3\Metadata\Models\Highlander.Reporting.Models.V5r3.csproj">
+      <Project>{F28CE90C-41B6-4E1D-9077-9C7047F2A787}</Project>
+      <Name>Highlander.Reporting.Models.V5r3</Name>
     </ProjectReference>
     <ProjectReference Include="..\FpMLV5r3\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
       <Project>{22B79BC7-9789-4DD7-8CE4-38FC5E42ADD7}</Project>

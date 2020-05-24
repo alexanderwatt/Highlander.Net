@@ -28,10 +28,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/27/2020 20:48:42</publishTime>
     </File>
     <File Include="bin/Highlander.CalendarEngine.V5r3.dll">
-      <publishTime>04/23/2020 07:33:55</publishTime>
+      <publishTime>04/28/2020 08:24:07</publishTime>
     </File>
     <File Include="bin/Highlander.CalendarEngine.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:55</publishTime>
+      <publishTime>04/28/2020 08:24:07</publishTime>
     </File>
     <File Include="bin/Highlander.Codes.V5r3.dll">
       <publishTime>04/23/2020 07:33:06</publishTime>
@@ -64,10 +64,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2020 07:33:01</publishTime>
     </File>
     <File Include="bin/Highlander.Core.Interface.V5r3.dll">
-      <publishTime>04/23/2020 07:33:59</publishTime>
+      <publishTime>04/28/2020 08:24:10</publishTime>
     </File>
     <File Include="bin/Highlander.Core.Interface.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:59</publishTime>
+      <publishTime>04/28/2020 08:24:10</publishTime>
     </File>
     <File Include="bin/Highlander.Core.V34.dll">
       <publishTime>04/23/2020 07:33:12</publishTime>
@@ -76,10 +76,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2020 07:33:12</publishTime>
     </File>
     <File Include="bin/Highlander.CurveEngine.V5r3.dll">
-      <publishTime>04/23/2020 07:33:56</publishTime>
+      <publishTime>04/28/2020 08:24:08</publishTime>
     </File>
     <File Include="bin/Highlander.CurveEngine.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:56</publishTime>
+      <publishTime>04/28/2020 08:24:08</publishTime>
     </File>
     <File Include="bin/Highlander.Equities.dll">
       <publishTime>04/23/2020 07:33:06</publishTime>
@@ -94,10 +94,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2020 07:33:12</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Analytics.V5r3.dll">
-      <publishTime>04/23/2020 07:33:54</publishTime>
+      <publishTime>04/28/2020 08:24:05</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Analytics.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:54</publishTime>
+      <publishTime>04/28/2020 08:24:05</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Contracts.V5r3.dll">
       <publishTime>04/23/2020 07:33:49</publishTime>
@@ -112,22 +112,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2020 07:33:48</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Identifiers.V5r3.dll">
-      <publishTime>04/23/2020 07:33:53</publishTime>
+      <publishTime>04/28/2020 08:24:04</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Identifiers.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:53</publishTime>
+      <publishTime>04/28/2020 08:24:04</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.dll">
-      <publishTime>04/23/2020 07:33:49</publishTime>
+      <publishTime>04/28/2020 08:23:56</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:49</publishTime>
+      <publishTime>04/28/2020 08:23:56</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Models.V5r3.dll">
-      <publishTime>04/23/2020 07:33:55</publishTime>
+      <publishTime>04/28/2020 08:24:07</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.Models.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:55</publishTime>
+      <publishTime>04/28/2020 08:24:07</publishTime>
     </File>
     <File Include="bin/Highlander.Reporting.V5r3.dll">
       <publishTime>04/23/2020 07:33:47</publishTime>
@@ -142,16 +142,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2020 07:32:54</publishTime>
     </File>
     <File Include="bin/Highlander.ValuationEngine.V5r3.dll">
-      <publishTime>04/23/2020 07:33:58</publishTime>
+      <publishTime>04/28/2020 08:24:09</publishTime>
     </File>
     <File Include="bin/Highlander.ValuationEngine.V5r3.pdb">
-      <publishTime>04/23/2020 07:33:58</publishTime>
+      <publishTime>04/28/2020 08:24:09</publishTime>
     </File>
     <File Include="bin/Highlander.Web.API.V5r3.dll">
-      <publishTime>04/23/2020 07:34:02</publishTime>
+      <publishTime>04/28/2020 09:15:53</publishTime>
     </File>
     <File Include="bin/Highlander.Web.API.V5r3.pdb">
-      <publishTime>04/23/2020 07:34:02</publishTime>
+      <publishTime>04/28/2020 09:15:53</publishTime>
     </File>
     <File Include="bin/MathNet.Numerics.dll">
       <publishTime>03/20/2020 08:50:22</publishTime>
