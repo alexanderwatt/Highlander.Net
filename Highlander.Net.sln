@@ -240,6 +240,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "V5r3 Schema Clients", "V5r3 Schema Clients", "{DAEA6C34-3792-4BE1-88ED-3D176C3562A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experimental", "Experimental", "{53FACDB5-5029-4401-B596-7528FFDC909E}"
+	ProjectSection(SolutionItems) = preProject
+		starcount\src\functions\functions.js = starcount\src\functions\functions.js
+		starcount\manifest.xml = starcount\manifest.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Core.Interface.V5r3", "FpMLV5r3\Components\CoreInterface\Highlander.Core.Interface.V5r3.csproj", "{E3DF5F07-1420-4C0D-A8A3-BDA19FB24810}"
 EndProject

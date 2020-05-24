@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Highlander.Constants;
 using Highlander.Core.Interface.V5r3.Helpers;
+using Highlander.CurveEngine.V5r3.Assets.Helpers;
+using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.Metadata.Common;
 using Highlander.Reporting.Analytics.V5r3.Rates;
@@ -29,7 +31,6 @@ using Highlander.Reporting.ModelFramework.V5r3.PricingStructures;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.NamedValues;
-using Highlander.ValuationEngine.V5r3.Helpers;
 using FxCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.FxCurve;
 using RateCurve = Highlander.CurveEngine.V5r3.PricingStructures.Curves.RateCurve;
 
@@ -566,30 +567,6 @@ namespace Highlander.Core.Interface.V5r3
             return Enum.GetNames(typeof(PricingStructureTypeEnum)).ToList();
         }
 
-        ///// <summary>
-        ///// Creates the specified curve type.
-        ///// </summary>
-        ///// <param name="propertiesAs2DRange">The properties as a 2D range.</param>
-        ///// <param name="instrumentsAsArray">A vertical range of instruments.</param>
-        ///// <param name="ratesAsArray">A vertical range of the adjusted rates.</param>
-        ///// <param name="discountFactorDatesAsArray">The discount factors dates range.</param>
-        ///// <param name="discountFactorsAsArray">The discount factors range.</param>
-        ///// <returns>The curve identifier as a handle.</returns>
-        //public string CreateFincadRateCurve(Excel.Range propertiesAs2DRange, Excel.Range instrumentsAsArray, Excel.Range ratesAsArray,
-        //    Excel.Range discountFactorDatesAsArray, Excel.Range discountFactorsAsArray)
-        //{
-        //    var properties = propertiesAs2DRange.Value[System.Reflection.Missing.Value] as object[,];
-        //    properties = (object[,])DataRangeHelper.TrimNulls(properties);
-        //    var namedValueSet = properties.ToNamedValueSet();
-        //    List<string> unqInstruments = DataRangeHelper.StripRange(instrumentsAsArray);
-        //    List<decimal> unqRates = DataRangeHelper.StripDecimalRange(ratesAsArray);
-        //    List<DateTime> unqDiscountFactorDates = DataRangeHelper.StripDateTimeRange(discountFactorDatesAsArray);
-        //    List<decimal> unqDiscountFactors = DataRangeHelper.StripDecimalRange(discountFactorsAsArray);          
-        //    var curve = Engine.CreateFincadRateCurve(namedValueSet, unqInstruments.ToArray(), unqRates.ToArray(), unqDiscountFactorDates.ToArray(), unqDiscountFactors.ToArray());
-        //    Engine.SaveCurve(curve);
-        //    return curve.GetPricingStructureId().UniqueIdentifier;
-        //}
-
         /// <summary>
         /// Creates the rate curve with algorithm inputs.
         /// </summary>
@@ -729,8 +706,8 @@ namespace Highlander.Core.Interface.V5r3
                 if (time == 0)
                 {
                     var tempTime = ((DateTime)curve[index + 1].term.Items[0] - baseDate).Days;
-                    var tempDF = (double)curve[index + 1].mid;
-                    var pair = new Pair<int, double>(time, RateAnalytics.DiscountFactorToZeroRate(tempDF, tempTime / 365d, compounding));
+                    var tempDf = (double)curve[index + 1].mid;
+                    var pair = new Pair<int, double>(time, RateAnalytics.DiscountFactorToZeroRate(tempDf, tempTime / 365d, compounding));
                     result.Add(pair);
                 }
                 else
@@ -934,7 +911,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="expiryTerms">The expiry terms.</param>
         /// <param name="strikes">The strikes.</param>
         /// <returns>The interpolated value.</returns>
-        public object[,] GetExpiryTermStrikeValues(string pricingStructureId, List<string> expiryTerms, List<double> strikes)
+        public double[,] GetExpiryTermStrikeValues(string pricingStructureId, List<string> expiryTerms, List<double> strikes)
         {
             var value = Engine.GetExpiryTermStrikeValues(pricingStructureId, expiryTerms, strikes);
             return value;
@@ -1125,17 +1102,41 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="values">The values range should be made up of 4 columns:
         /// Column 1 - the instrumentId.
         /// Column 2 - the instrument value.
-        /// Column 3 - the measure type.
-        /// Column 4 - the price quote units.
+        /// Column 3 - any additional value.
         /// </param>
         /// <returns>The ID of the newly created curve.</returns>
-        public string CreateCurve(NamedValueSet properties, object[,] values)
+        public string CreateCurve(NamedValueSet properties, List<Tuple<string, decimal, decimal?>> values)
         {
+            var additional = new List<decimal>();
+            decimal extra = 0.0m;
+            foreach (var value in values)
+            {
+
+                if (value.Item3 != null) extra = (decimal)value.Item3;
+                additional.Add(extra);
+            }
+            var quotedAssetSet = AssetHelper.Parse(values.Select(value => value.Item1).ToArray(), 
+                values.Select(value => value.Item2).ToArray(), additional.ToArray());
+            var pricingStructure = PricingStructureFactory.CreateCurve(Environment.LogRef.Target, Environment.Cache, NameSpace, null, null, properties, quotedAssetSet);
+            string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
+            Engine.SaveCurve(pricingStructure);
+            return structureId;
+        }
+
+        /// <summary>
+        /// Process a more generic curve build
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="values">Values contains the instrument identifier, the value, the metric and the price quote units</param>
+        /// <returns></returns>
+        public string CreateCurve(NamedValueSet properties, List<Tuple<string, decimal, string, string>> values)
+        {
+            var quotedAssetSet = AssetHelper.Parse(values.Select(value => value.Item1).ToArray(),
+                values.Select(value => value.Item2).ToArray(), values.Select(value => value.Item3).ToArray(),
+                values.Select(value => value.Item4).ToArray());
+            //var quotedAssetSet = AssetHelper.Parse(instruments, rates, measures, units);
+            var pricingStructure = PricingStructureFactory.CreateCurve(Environment.LogRef.Target, Environment.Cache, NameSpace, null, null, properties, quotedAssetSet);
             properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.Spreadsheet.ToString());
-            //Check which type of range is it.
-            int lbx = values.GetLowerBound(1);
-            int ubx = values.GetUpperBound(1);
-            IPricingStructure pricingStructure = (ubx - lbx) < 3 ? Engine.CreatePricingStructure(properties, values) : Engine.CreateGenericPricingStructure(properties, values);          
             string structureId = pricingStructure.GetPricingStructureId().UniqueIdentifier;
             Engine.SaveCurve(pricingStructure);
             return structureId;
@@ -1282,7 +1283,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateEquityWingVolatilitySurface(NamedValueSet properties, List<string> expiries,
             List<string> tenorOrStrikes, double[,] volatilityMatrix, List<double> forwards)
         {
-            properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.Spreadsheet.ToString());
+            properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.ClientApi.ToString());
             var pricingStructure = Engine.CreateVolatilitySurface(properties, expiries.ToArray(), tenorOrStrikes.ToArray(), volatilityMatrix, forwards.ToArray());
             Engine.SaveCurve(pricingStructure);
             return pricingStructure.GetPricingStructureId().UniqueIdentifier;
@@ -1300,7 +1301,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateVolatilitySurfaceWithProperties(NamedValueSet properties, List<string> expiries, 
             List<string> tenorOrStrikes, double[,] volatilityMatrix)
         {
-            properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.Spreadsheet.ToString());
+            properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.ClientApi.ToString());
             var pricingStructure = Engine.CreateVolatilitySurface(properties, expiries.ToArray(), tenorOrStrikes.ToArray(), volatilityMatrix);
             Engine.SaveCurve(pricingStructure);
             return pricingStructure.GetPricingStructureId().UniqueIdentifier;
@@ -1393,339 +1394,6 @@ namespace Highlander.Core.Interface.V5r3
             IPricingStructure pricingStructure = Engine.GetCurve(pricingStructureId, false);
             Pair<PricingStructure, PricingStructureValuation> fpMLPair = pricingStructure.GetFpMLData();
             return fpMLPair;
-        }
-
-        #endregion
-
-        #region Fincad Functions
-
-
-        ///<summary>
-        /// This function emulates the fincad swap pricing function. In addition though Orion curves are referenced.
-        /// These curves must be cached.
-        ///</summary>
-        ///<param name="valueDate">The value date of the swap.</param>
-        ///<param name="effectiveDate">The effective date of the swap.</param>
-        ///<param name="terminationDate">The termination date of the swap.</param>
-        ///<param name="interpolationMethod">The interpolation to use.</param>
-        ///<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
-        ///<param name="resetRate">The rest rate for the last reset.</param>
-        ///<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
-        ///<param name="cashFlowFrequencyPayLeg">The frequency of pay leg payment.</param>
-        ///<param name="accrualMethodPayLeg">The accrual method for the pay leg.</param>
-        ///<param name="holidaysPayLeg">The holiday calendars to use on the pay leg.</param>
-        ///<param name="discountFactorCurvePayLeg">The discount factor collection as a Orion cure reference for the pay leg.</param>
-        ///<param name="directionDateGenerationRecLeg">The date generation logic: Forward or Backward.</param>
-        ///<param name="cashFlowFrequencyRecLeg">The frequency of receive leg payment.</param>
-        ///<param name="accrualMethodRecLeg">The accrual method for the receive leg.</param>
-        ///<param name="holidaysRecLeg">The holiday calendars to use on the receive leg.</param>
-        ///<param name="discountFactorCurveRecLeg">The discount factor collection as a Orion cure reference for the receive leg.</param>
-        ///<returns>The par swap rate is returned.</returns>
-        public double GetFincadSwapParRate
-            (
-            DateTime valueDate,
-            DateTime effectiveDate,
-            DateTime terminationDate,
-            string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-            double marginAboveFloatingRate,// use 0 initially
-            double resetRate,
-            int directionDateGenerationPayLeg,
-            string cashFlowFrequencyPayLeg,
-            string accrualMethodPayLeg,
-            string holidaysPayLeg,
-            string discountFactorCurvePayLeg,
-            int directionDateGenerationRecLeg,
-            string cashFlowFrequencyRecLeg,
-            string accrualMethodRecLeg,
-            string holidaysRecLeg,
-            string discountFactorCurveRecLeg
-            )
-        {
-            var result = new Functions();
-            var curve1 = (IRateCurve)Engine.GetCurve(discountFactorCurvePayLeg, false);
-            var curve2 = (IRateCurve)Engine.GetCurve(discountFactorCurveRecLeg, false);
-            return result.GetSwapParRateWithoutCurves(Engine.Logger, Engine.Cache, NameSpace,
-                valueDate, effectiveDate, terminationDate,
-                interpolationMethod,
-                marginAboveFloatingRate, resetRate,
-                directionDateGenerationPayLeg,
-                cashFlowFrequencyPayLeg,
-                accrualMethodPayLeg,
-                holidaysPayLeg,
-                curve1,
-                directionDateGenerationRecLeg,
-                cashFlowFrequencyRecLeg,
-                accrualMethodRecLeg,
-                holidaysRecLeg,
-                curve2);
-        }
-
-        ///// <summary>
-        /////  This function emulates the fincad swap pricing function.
-        ///// </summary>
-        ///// <param name="swapInputRangeAsObject">
-        ///// ValueDate: The value date of the swap.
-        ///// EffectiveDate: The effective date of the swap.
-        ///// TerminationDate: The termination date of the swap.
-        ///// InterpolationMethod>The interpolation to use.
-        ///// MarginAboveFloatingRate>The margin on the floating leg.
-        ///// ResetRate: The rest rate for the last reset.
-        ///// DirectionDateGenerationPayLeg: The date generation logic: Forward or Backward.
-        ///// CashFlowFrequencyPayLeg: The frequency of pay leg payment.
-        ///// AccrualMethodPayLeg: The accrual method for the pay leg.
-        ///// HolidaysPayLeg: The holiday calendars to use on the pay leg.
-        ///// DirectionDateGenerationRecLeg: The date generation logic: Forward or Backward.
-        ///// CashFlowFrequencyRecLeg: The frequency of receive leg payment.
-        ///// AccrualMethodRecLeg: The accrual method for the receive leg.
-        ///// HolidaysRecLeg: The holiday calendars to use on the receive leg.</param>
-        ///// <param name="discountFactorCurvePayLegAsObject">The discount factor collection for the pay leg.</param>
-        ///// <param name="discountFactorCurveRecLegAsObject">The discount factor collection for the receive leg.</param>
-        ///// <returns>The par swap rate is returned.</returns>
-        ///// <returns></returns>
-        //public double FincadSwapCpn2
-        //(
-        //    FincadSwapInputRange swapInputRangeAsObject,
-        //    Excel.Range discountFactorCurvePayLegAsObject,
-        //    Excel.Range discountFactorCurveRecLegAsObject
-        //)
-        //{
-        //    var discountFactorCurvePayLeg = discountFactorCurvePayLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var discountFactorCurveRecLeg = discountFactorCurveRecLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var values = swapInputRangeAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    values = (object[,])DataRangeHelper.TrimNulls(values);
-        //    var swapInputRange = RangeHelper.Convert2DArrayToClass<FincadSwapInputRange>(ArrayHelper.RangeToMatrix(values));
-        //    var result = new Functions();
-        //    return result.GetSwapParRate(Engine.Logger, Engine.Cache, NameSpace,
-        //        swapInputRange.ValueDate,
-        //        swapInputRange.EffectiveDate,
-        //        swapInputRange.TerminationDate,
-        //        swapInputRange.InterpolationMethod,
-        //        swapInputRange.MargineAboveFloatingRate,
-        //        swapInputRange.ResetRate,
-        //        swapInputRange.DirectionDateGenerationPayLeg,
-        //        swapInputRange.CashFlowFrequencyPayLeg,
-        //        swapInputRange.AccrualMethodPayLeg,
-        //        swapInputRange.HolidaysPayLeg,
-        //        discountFactorCurvePayLeg,
-        //        swapInputRange.DirectionDateGenerationRecLeg,
-        //        swapInputRange.CashFlowFrequencyRecLeg,
-        //        swapInputRange.AccrualMethodRecLeg,
-        //        swapInputRange.HolidaysRecLeg,
-        //        discountFactorCurveRecLeg);
-        //}
-
-        /////<summary>
-        ///// This function emulates the fincad swap pricing function.
-        /////</summary>
-        /////<param name="valueDate">The value date of the swap.</param>
-        /////<param name="effectiveDate">The effective date of the swap.</param>
-        /////<param name="terminationDate">The termination date of the swap.</param>
-        /////<param name="interpolationMethod">The interpolation to use.</param>
-        /////<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
-        /////<param name="resetRate">The rest rate for the last reset.</param>
-        /////<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
-        /////<param name="cashFlowFrequencyPayLeg">The frequency of pay leg payment.</param>
-        /////<param name="accrualMethodPayLeg">The accrual method for the pay leg.</param>
-        /////<param name="holidaysPayLeg">The holiday calendars to use on the pay leg.</param>
-        /////<param name="discountFactorCurvePayLegAsObject">The discount factor collection for the pay leg.</param>
-        /////<param name="directionDateGenerationRecLeg">The date generation logic: Forward or Backward.</param>
-        /////<param name="cashFlowFrequencyRecLeg">The frequency of receive leg payment.</param>
-        /////<param name="accrualMethodRecLeg">The accrual method for the receive leg.</param>
-        /////<param name="holidaysRecLeg">The holiday calendars to use on the receive leg.</param>
-        /////<param name="discountFactorCurveRecLegAsObject">The discount factor collection for the receive leg.</param>
-        /////<returns>The par swap rate is returned.</returns>
-        /////<returns></returns>
-        //public double FincadSwapCpn
-        //    (
-        //    DateTime valueDate,
-        //    DateTime effectiveDate,
-        //    DateTime terminationDate,
-        //    string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-        //    double marginAboveFloatingRate,// use 0 initially
-        //    double resetRate,
-        //    int directionDateGenerationPayLeg,
-        //    string cashFlowFrequencyPayLeg,
-        //    string accrualMethodPayLeg,
-        //    string holidaysPayLeg,
-        //    Excel.Range discountFactorCurvePayLegAsObject,
-        //    int directionDateGenerationRecLeg,
-        //    string cashFlowFrequencyRecLeg,
-        //    string accrualMethodRecLeg,
-        //    string holidaysRecLeg,
-        //    Excel.Range discountFactorCurveRecLegAsObject
-        //    )
-        //{
-        //    var discountFactorCurvePayLeg = discountFactorCurvePayLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var discountFactorCurveRecLeg = discountFactorCurveRecLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var result = new Functions();
-        //    return result.GetSwapParRate(Engine.Logger, Engine.Cache, NameSpace,
-        //        valueDate, effectiveDate, terminationDate,
-        //        interpolationMethod,
-        //        marginAboveFloatingRate, resetRate,
-        //        directionDateGenerationPayLeg,
-        //        cashFlowFrequencyPayLeg,
-        //        accrualMethodPayLeg,
-        //        holidaysPayLeg,
-        //        discountFactorCurvePayLeg,
-        //        directionDateGenerationRecLeg,
-        //        cashFlowFrequencyRecLeg,
-        //        accrualMethodRecLeg,
-        //        holidaysRecLeg,
-        //        discountFactorCurveRecLeg);
-        //}
-
-        /////<summary>
-        ///// This function emulates the fincad cashflow generation function.
-        /////</summary>
-        /////<param name="valueDate">The value date of the swap.</param>
-        /////<param name="effectiveDate">The effective date of the swap.</param>
-        /////<param name="terminationDate">The termination date of the swap.</param>
-        /////<param name="interpolationMethod">The interpolation to use.</param>
-        /////<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
-        /////<param name="resetRate">The rest rate for the last reset.</param>
-        /////<param name="notional">The notional of the swap.</param>
-        /////<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
-        /////<param name="cashFlowFrequencyPayLeg">The frequency of pay leg payment.</param>
-        /////<param name="accrualMethodPayLeg">The accrual method for the pay leg.</param>
-        /////<param name="holidaysPayLeg">The holiday calendars to use on the pay leg.</param>
-        /////<param name="discountFactorCurvePayLegAsObject">The discount factor collection for the pay leg.</param>
-        /////<param name="directionDateGenerationRecLeg">The date generation logic: Forward or Backward.</param>
-        /////<param name="cashFlowFrequencyRecLeg">The frequency of receive leg payment.</param>
-        /////<param name="accrualMethodRecLeg">The accrual method for the receive leg.</param>
-        /////<param name="holidaysRecLeg">The holiday calendars to use on the receive leg.</param>
-        /////<param name="discountFactorCurveRecLegAsObject">The discount factor collection for the receive leg.</param>
-        /////<param name="layout">A parameter clarifying the actual layout of the cashflows generated.</param>
-        /////<returns>The collection of cashflows.</returns>
-        //public object[,] FincadSwapCouponSchedule
-        //    (
-        //    DateTime valueDate,
-        //    DateTime effectiveDate,
-        //    DateTime terminationDate,
-        //    string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-        //    double marginAboveFloatingRate,// use 0 initially
-        //    double resetRate,
-        //    decimal notional,
-        //    int directionDateGenerationPayLeg,
-        //    string cashFlowFrequencyPayLeg,
-        //    string accrualMethodPayLeg,
-        //    string holidaysPayLeg,
-        //    Excel.Range discountFactorCurvePayLegAsObject,
-        //    int directionDateGenerationRecLeg,
-        //    string cashFlowFrequencyRecLeg,
-        //    string accrualMethodRecLeg,
-        //    string holidaysRecLeg,
-        //    Excel.Range discountFactorCurveRecLegAsObject,
-        //    double layout
-        //    )
-        //{
-        //    var discountFactorCurvePayLeg = discountFactorCurvePayLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var discountFactorCurveRecLeg = discountFactorCurveRecLegAsObject.Value[System.Reflection.Missing.Value] as object[,];
-        //    var result = new Functions();
-        //    return result.GetSwapCashflows(Engine.Logger, Engine.Cache, NameSpace,
-        //        valueDate, effectiveDate, terminationDate,
-        //        interpolationMethod,
-        //        marginAboveFloatingRate, resetRate,
-        //        notional,
-        //        directionDateGenerationPayLeg,
-        //        cashFlowFrequencyPayLeg,
-        //        accrualMethodPayLeg,
-        //        holidaysPayLeg,
-        //        discountFactorCurvePayLeg,
-        //        directionDateGenerationRecLeg,
-        //        cashFlowFrequencyRecLeg,
-        //        accrualMethodRecLeg,
-        //        holidaysRecLeg,
-        //        discountFactorCurveRecLeg,
-        //        Convert.ToInt32(layout));
-        //}
-
-        ///<summary>
-        /// This function emulates the fincad cashflow generation function. 
-        /// However the curves are referenced Orion rate curves.
-        ///</summary>
-        ///<param name="valueDate">The value date of the swap.</param>
-        ///<param name="effectiveDate">The effective date of the swap.</param>
-        ///<param name="terminationDate">The termination date of the swap.</param>
-        ///<param name="interpolationMethod">The interpolation to use.</param>
-        ///<param name="marginAboveFloatingRate">The margin on the floating leg.</param>
-        ///<param name="resetRate">The rest rate for the last reset.</param>
-        ///<param name="notional">The notional of the swap.</param>
-        ///<param name="directionDateGenerationPayLeg">The date generation logic: Forward or Backward.</param>
-        ///<param name="cashFlowFrequencyPayLeg">The frequency of pay leg payment.</param>
-        ///<param name="accrualMethodPayLeg">The accrual method for the pay leg.</param>
-        ///<param name="holidaysPayLeg">The holiday calendars to use on the pay leg.</param>
-        ///<param name="discountFactorCurvePayLeg">The referenced rate curve for the pay leg.</param>
-        ///<param name="directionDateGenerationRecLeg">The date generation logic: Forward or Backward.</param>
-        ///<param name="cashFlowFrequencyRecLeg">The frequency of receive leg payment.</param>
-        ///<param name="accrualMethodRecLeg">The accrual method for the receive leg.</param>
-        ///<param name="holidaysRecLeg">The holiday calendars to use on the receive leg.</param>
-        ///<param name="discountFactorCurveRecLeg">The referenced rate curve for the receive leg.</param>
-        ///<param name="layout">A parameter clarifying the actual layout of the cashflows generated.</param>
-        ///<returns>The collection of cashflows.</returns>
-        public object[,] GetSwapCashflows
-            (
-            DateTime valueDate,
-            DateTime effectiveDate,
-            DateTime terminationDate,
-            string interpolationMethod, //1 is linear on forward rates => make sure that the right curve is provided ...
-            double marginAboveFloatingRate,// use 0 initially
-            double resetRate,
-            decimal notional,
-            int directionDateGenerationPayLeg,
-            string cashFlowFrequencyPayLeg,
-            string accrualMethodPayLeg,
-            string holidaysPayLeg,
-            string discountFactorCurvePayLeg,
-            int directionDateGenerationRecLeg,
-            string cashFlowFrequencyRecLeg,
-            string accrualMethodRecLeg,
-            string holidaysRecLeg,
-            string discountFactorCurveRecLeg,
-            double layout
-            )
-        {
-            var result = new Functions();
-            var curve1 = (IRateCurve)Engine.GetCurve(discountFactorCurvePayLeg, false);
-            var curve2 = (IRateCurve)Engine.GetCurve(discountFactorCurveRecLeg, false);
-            return result.GetSwapCashflowsWithoutCurves(Engine.Logger, Engine.Cache, NameSpace,
-                valueDate, effectiveDate, terminationDate,
-                interpolationMethod,
-                marginAboveFloatingRate, resetRate,
-                notional,
-                directionDateGenerationPayLeg,
-                cashFlowFrequencyPayLeg,
-                accrualMethodPayLeg,
-                holidaysPayLeg,
-                curve1,
-                directionDateGenerationRecLeg,
-                cashFlowFrequencyRecLeg,
-                accrualMethodRecLeg,
-                holidaysRecLeg,
-                curve2,
-                Convert.ToInt32(layout));
-        }
-
-        ///<summary>
-        /// This function emulates the fincad futures convexity function.
-        ///</summary>
-        ///<param name="valueDate">The value date.</param>
-        ///<param name="effectiveDate">The effective date.</param>
-        ///<param name="terminationDate">The termination date.</param>
-        ///<param name="volatility">The volatility.</param>
-        ///<param name="manReversionConstant">A mean reversion constant.</param>
-        ///<returns>The convexity adjustment.</returns>
-        public double FincadEDFuturesConvexityAdjHW
-            (
-            DateTime valueDate,
-            DateTime effectiveDate,
-            DateTime terminationDate,
-            double volatility,
-            double manReversionConstant
-            )
-        {
-            return FuturesAnalytics.HullWhiteConvexityAdjustment(valueDate, effectiveDate, terminationDate,
-                                                    volatility,
-                                                    manReversionConstant);
         }
 
         #endregion

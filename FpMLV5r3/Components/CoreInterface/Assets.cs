@@ -28,7 +28,6 @@ using Highlander.CurveEngine.V5r3.Factory;
 using Highlander.CurveEngine.V5r3.Helpers;
 using Highlander.CurveEngine.V5r3.Markets;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
-using Highlander.Reporting.Analytics.V5r3.Helpers;
 using Highlander.Reporting.Helpers.V5r3;
 using Highlander.Reporting.ModelFramework.V5r3.Assets;
 using Highlander.Reporting.ModelFramework.V5r3.PricingStructures;
@@ -57,10 +56,29 @@ namespace Highlander.Core.Interface.V5r3
     {
         #region Fields
 
+        /// <summary>
+        /// The calendar service.
+        /// </summary>
         public CalendarEngine.V5r3.CalendarEngine CalendarService;
+
+        /// <summary>
+        /// The curve engine.
+        /// </summary>
         public CurveEngine.V5r3.CurveEngine Engine;
+
+        /// <summary>
+        /// The valuation service.
+        /// </summary>
         public ValuationService ValService;
+
+        /// <summary>
+        /// The central cache.
+        /// </summary>
         public readonly RuntimeEnvironment Environment;
+
+        /// <summary>
+        /// The name space.
+        /// </summary>
         public string NameSpace;
 
         #endregion
@@ -421,7 +439,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="dates">The roll dates.</param>
         ///<param name="businessCentersAsString">Te business centers.</param>
         ///<returns>The PDH array.</returns>
-        public List<decimal> GetSwapPDH(string curveId, string currency, DateTime baseDate,
+        public List<decimal> GetSwapPartialDifferentialHedge(string curveId, string currency, DateTime baseDate,
             decimal notional, List<DateTime> dates, List<decimal> notionalWeights, string fixedLegDayCount, decimal fixedRate,
             string businessDayConvention, string businessCentersAsString)
         {
@@ -531,7 +549,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="cashFlowDetail">A detail cashflow flag - mainly for debugging.</param>
         /// <param name="properties">Contains all the required properties.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Dictionary<string, decimal> GetIRCapFloorMetrics(
+        public Dictionary<string, decimal> GetInterestRateCapFloorMetrics(
             DateTime effectiveDate, double notional, double strike, List<double> resetRates, bool includeStubFlag, 
             bool rollBackward, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString,
@@ -626,7 +644,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="namedValueSet">Contains all the required properties.</param>
         /// <returns>The value of the metric requested.</returns>
-        public Dictionary<string, decimal> GetIRCapFloorMetric(List<DateTime> rollAndMaturityDates, List<double> notionalWeights,
+        public Dictionary<string, decimal> GetInterestRateCapFloorMetric(List<DateTime> rollAndMaturityDates, List<double> notionalWeights,
             List<double> strikeRates, List<double> resetRates, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString, string resetPeriod, string metric, NamedValueSet namedValueSet)
         {
@@ -707,7 +725,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="properties">Contains all the required properties.</param>
         ///<returns>The rate curve pdh.</returns>
-        public IDictionary<string, double> GetIRCapFloorPDH(List<DateTime> rollAndMaturityDates, List<double> notionalWeights,
+        public IDictionary<string, double> GetInterestRateCapFloorPartialDifferentialHedge(List<DateTime> rollAndMaturityDates, List<double> notionalWeights,
             List<double> strikeRates, List<double> resetRates, string paymentBusinessDayConvention, string paymentBusinessCentersAsString,
             string resetBusinessDayConvention, string resetBusinessCentersAsString, string resetPeriod, NamedValueSet properties)
         {
@@ -768,7 +786,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="floatingResets">The floating leg rest rate array.</param>
         ///<param name="properties">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
-        public decimal GetIRSwapMetric(List<DateTime> fixedRollDates, List<decimal> fixedNotionalWeights, 
+        public decimal GetInterestRateSwapMetric(List<DateTime> fixedRollDates, List<decimal> fixedNotionalWeights, 
             List<DateTime> floatingRollDates, List<decimal> floatingNotionalWeights,
             List<decimal> floatingResets, string metric, NamedValueSet properties)
         {
@@ -832,7 +850,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="floatingLegDayCount">The floating leg dayCount.</param>
         ///<param name="properties">The properties associated with the asset.</param>
         ///<returns>The metrics requested.</returns>
-        public Dictionary<string,decimal> GetIRSwapMetrics(List<DateTime> fixedRollDates, List<decimal> fixedNotionalSchedule,
+        public Dictionary<string,decimal> GetInterestRateSwapMetrics(List<DateTime> fixedRollDates, List<decimal> fixedNotionalSchedule,
             decimal fixedRate, List<DateTime> floatingRollDates, List<decimal> floatingNotionalSchedule,
             List<decimal> floatingResets, string floatingLegDayCount, decimal floatingSpread, 
             List<string> riskMetrics, NamedValueSet properties)
@@ -942,7 +960,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="resetBusinessDayConvention">The reset business day convention.</param>
         /// <param name="properties">The properties associated with the asset.</param>
         ///<returns>The value of the metric requested.</returns>
-        public Dictionary<string, decimal> GetIRSwapMetrics2(DateTime effectiveDate, double notional, List<decimal> floatingResetRates,
+        public Dictionary<string, decimal> GetInterestRateSwapMetrics2(DateTime effectiveDate, double notional, List<decimal> floatingResetRates,
             bool includeStubFlag, bool rollBackward, string paymentBusinessDayConvention,
             string paymentBusinessCentersAsString, string resetBusinessDayConvention, string resetBusinessCentersAsString,
             string resetPeriod, List<string> metrics, NamedValueSet properties)
@@ -1009,7 +1027,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="floatingNotionalSchedule">The floating leg notional weights.</param>
         /// <param name="properties">The properties Range: currency, baseDate and isDiscounted.</param>
         /// <returns>The VERTICAL ARRAY OF PARTIAL DERIVATIVES, WITH RESPECT TO EACH ASSET IN THE REFERENCED CURVE.</returns>
-        public IDictionary<string,decimal> GetIRSwapPDH(List<DateTime> fixedRollDates,
+        public IDictionary<string,decimal> GetInterestRateSwapPartialDifferentialHedge(List<DateTime> fixedRollDates,
             List<decimal> fixedNotionalSchedule, List<DateTime> floatingRollDates,
             List<decimal> floatingNotionalSchedule, List<decimal> floatingResets, 
             NamedValueSet properties)
@@ -1171,12 +1189,10 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="yieldToMaturities">The yield to maturities.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public object[,] CreateSimpleBondsWithProperties(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates,
+        public List<string> CreateSimpleBondsWithProperties(List<string> assetIdentifiers, DateTime baseDate, List<DateTime> maturityDates,
             List<decimal> coupons, List<decimal> yieldToMaturities, NamedValueSet properties)
         {
-            var rateAssets = Engine.CreateLocalBonds(assetIdentifiers, baseDate, maturityDates, coupons, yieldToMaturities, properties);
-            var result = RangeHelper.ConvertArrayToRange(rateAssets);
-            return result;
+            return Engine.CreateLocalBonds(assetIdentifiers, baseDate, maturityDates, coupons, yieldToMaturities, properties);
         }
 
         /// <summary>
@@ -1194,8 +1210,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateBondWithDetail(string assetIdentifier, DateTime baseDate, DateTime maturityDate,
                                                   decimal coupon, string dayCount, string frequency, decimal ytm, NamedValueSet properties)
         {
-            var result = Engine.CreateLocalBond(assetIdentifier, baseDate, maturityDate, coupon, dayCount, frequency, ytm, properties);
-            return result;
+            return Engine.CreateLocalBond(assetIdentifier, baseDate, maturityDate, coupon, dayCount, frequency, ytm, properties);
         }
 
         /// <summary>
@@ -1233,10 +1248,9 @@ namespace Highlander.Core.Interface.V5r3
                 properties.Set(header, propertyValues[index]);
                 index++;
             }
-            var result = ValService.CreateBond(instrumentId, clearanceSystem, couponType, couponRate, currency,
+            return ValService.CreateBond(instrumentId, clearanceSystem, couponType, couponRate, currency,
                                                faceAmount, maturityDate, paymentFrequency, dayCountFraction,
                                                creditSeniority, description, exchangeId, issuerName, properties);
-            return result;
         }
 
         /// <summary>
@@ -1249,8 +1263,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <returns></returns>
         public string SaveBonds(List<string> identifiers, string directoryPath, bool isShortName)
         {
-            var result = ValService.SaveBonds(identifiers, directoryPath, isShortName);
-            return result;
+            return ValService.SaveBonds(identifiers, directoryPath, isShortName);
         }
 
         /// <summary>
@@ -1298,8 +1311,7 @@ namespace Highlander.Core.Interface.V5r3
                 properties.Set(header, propertyValues[index]);
                 index++;
             }
-            var result = ValService.CreateEquity(instrumentId, clearanceSystem,  currency, assetId, description, exchangeId, issuerName, properties);
-            return result;
+            return ValService.CreateEquity(instrumentId, clearanceSystem,  currency, assetId, description, exchangeId, issuerName, properties);
         }
 
         /// <summary>
@@ -1326,9 +1338,8 @@ namespace Highlander.Core.Interface.V5r3
             string suburb, string city, string postalCode, string state, string country, string numBedrooms, string numBathrooms, string numParking,
             string currency, string description, NamedValueSet properties)
         {
-            var result = ValService.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city, postalCode, state, country,
+            return ValService.CreatePropertyAsset(propertyId, propertyType, shortName, streetIdentifier, streetName, suburb, city, postalCode, state, country,
                 numBedrooms, numBathrooms, numParking, currency, description, properties);
-            return result;
         }
 
         /// <summary>
@@ -1343,8 +1354,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateSurfaceAsset(string assetIdentifier, DateTime baseDate, decimal strike,
                                                 decimal volatility, NamedValueSet properties)
         {
-            var result = Engine.CreateLocalSurfaceAsset(assetIdentifier, baseDate, volatility, strike, properties);
-            return result;
+            return Engine.CreateLocalSurfaceAsset(assetIdentifier, baseDate, volatility, strike, properties);
         }
 
         /// <summary>
@@ -1373,9 +1383,8 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateAsset(string assetIdentifier, DateTime baseDate, double adjustedRate,
                                          double additionalValue)
         {
-            NamedValueSet namedValueSet = PriceableAssetFactory.BuildPropertiesForAssets(Engine.NameSpace, assetIdentifier, baseDate);
-            var result = Engine.CreateLocalAsset(Convert.ToDecimal(adjustedRate), Convert.ToDecimal(additionalValue), namedValueSet);
-            return result;
+            var namedValueSet = PriceableAssetFactory.BuildPropertiesForAssets(Engine.NameSpace, assetIdentifier, baseDate);
+            return Engine.CreateLocalAsset(Convert.ToDecimal(adjustedRate), Convert.ToDecimal(additionalValue), namedValueSet);
         }
 
         /// <summary>
@@ -1389,8 +1398,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateAssetWithProperties(double adjustedRate, double additionalValue,
                                          NamedValueSet properties)
         {
-            var result = Engine.CreateLocalAsset(Convert.ToDecimal(adjustedRate), Convert.ToDecimal(additionalValue), properties);
-            return result;
+            return Engine.CreateLocalAsset(Convert.ToDecimal(adjustedRate), Convert.ToDecimal(additionalValue), properties);
         }
 
         /// <summary>
@@ -1405,9 +1413,8 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateAssetWithUnits(string assetIdentifier, DateTime baseDate, List<decimal> values,
                                                   List<string> measures, List<string> priceQuoteUnits)
         {
-            NamedValueSet namedValueSet = PriceableAssetFactory.BuildPropertiesForAssets(NameSpace, assetIdentifier, baseDate);
-            var result = Engine.CreateLocalAsset(values, measures, priceQuoteUnits, namedValueSet);
-            return result;
+            var namedValueSet = PriceableAssetFactory.BuildPropertiesForAssets(NameSpace, assetIdentifier, baseDate);
+            return Engine.CreateLocalAsset(values, measures, priceQuoteUnits, namedValueSet);
         }
 
         /// <summary>
@@ -1421,8 +1428,7 @@ namespace Highlander.Core.Interface.V5r3
         public string CreateAssetWithUnitsAndProperties(List<decimal> values,
                                                   List<string> measureTypes, List<string> priceQuoteUnits, NamedValueSet properties)
         {
-            var result = Engine.CreateLocalAsset(values, measureTypes, priceQuoteUnits, properties);
-            return result;
+            return Engine.CreateLocalAsset(values, measureTypes, priceQuoteUnits, properties);
         }
 
         /// <summary>
@@ -1434,12 +1440,10 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="measureTypes">The measure types.</param>
         /// <param name="priceQuoteUnits">The price quote units.</param>
         /// <returns></returns>
-        public object[,] CreateAssetsWithUnits(List<string> assetIdentifiers, List<decimal> adjustedRates,
+        public List<string> CreateAssetsWithUnits(List<string> assetIdentifiers, List<decimal> adjustedRates,
             List<string> measureTypes, List<string> priceQuoteUnits, NamedValueSet properties)
         {
-            var rateAssets = Engine.CreateLocalAssets(assetIdentifiers, adjustedRates, measureTypes, priceQuoteUnits, properties);
-            var result = RangeHelper.ConvertArrayToRange(rateAssets);
-            return result;
+            return Engine.CreateLocalAssets(assetIdentifiers, adjustedRates, measureTypes, priceQuoteUnits, properties);
         }
 
         /// <summary>
@@ -1450,12 +1454,10 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="adjustedRates">The adjusted rates.</param>
         /// <param name="additional">The additional values.</param>
         /// <returns></returns>
-        public object[,] CreateAssets(List<string> assetIdentifiers, DateTime baseDate, List<decimal> adjustedRates,
+        public List<string> CreateAssets(List<string> assetIdentifiers, DateTime baseDate, List<decimal> adjustedRates,
             List<decimal> additional)
         {
-            var rateAssets = Engine.CreateLocalAssets(assetIdentifiers, baseDate, adjustedRates, additional);
-            var result = RangeHelper.ConvertArrayToRange(rateAssets);
-            return result;
+            return Engine.CreateLocalAssets(assetIdentifiers, baseDate, adjustedRates, additional);
         }
 
         /// <summary>
@@ -1466,12 +1468,10 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="additional">The additional values.</param>
         /// <param name="properties">The properties.</param>
         /// <returns></returns>
-        public object[,] CreateAssetsWithProperties(List<string> assetIdentifiers, List<decimal> adjustedRates,
+        public List<string> CreateAssetsWithProperties(List<string> assetIdentifiers, List<decimal> adjustedRates,
             List<decimal> additional, NamedValueSet properties)
         {
-            var rateAssets = Engine.CreateLocalAssets(assetIdentifiers, adjustedRates, additional, properties);
-            var result = RangeHelper.ConvertArrayToRange(rateAssets);
-            return result;
+            return Engine.CreateLocalAssets(assetIdentifiers, adjustedRates, additional, properties);
         }
 
         /// <summary>

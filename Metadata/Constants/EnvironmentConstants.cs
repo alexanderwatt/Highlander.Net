@@ -86,6 +86,7 @@ namespace Highlander.Constants
         Murex,
         WallStreet,
         Spreadsheet,
-        Highlander
+        Highlander,
+        ClientApi
     }
 }

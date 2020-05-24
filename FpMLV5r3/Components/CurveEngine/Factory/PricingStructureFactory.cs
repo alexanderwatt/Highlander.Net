@@ -454,9 +454,9 @@ namespace Highlander.CurveEngine.V5r3.Factory
         /// <param name="strikes">The strikes.</param>
         /// <param name="volatilities">The volatilities.</param>
         /// <returns></returns>
-        public static IPricingStructure CreateVolatilitySurface(ILogger logger, ICoreCache cache, 
-            String nameSpace, NamedValueSet properties, 
-            String[] expiryTerms, double[] strikes, Double[,] volatilities)
+        public static IPricingStructure CreateVolatilitySurface(ILogger logger, ICoreCache cache,
+            string nameSpace, NamedValueSet properties, 
+            string[] expiryTerms, double[] strikes, double[,] volatilities)
         {
             properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
             var pricingStructureType = PropertyHelper.ExtractPricingStructureType(properties);
@@ -501,8 +501,8 @@ namespace Highlander.CurveEngine.V5r3.Factory
         /// <param name="strikesOrTenor">An array of strikes or tenors.</param>
         /// <param name="volatilities">A range of volatilities of the correct dimension.</param>
         /// <returns></returns>
-        public static IPricingStructure CreateVolatilitySurface(ILogger logger, ICoreCache cache, String nameSpace,
-            NamedValueSet properties, String[] expiryTerms, String[] strikesOrTenor, Double[,] volatilities)
+        public static IPricingStructure CreateVolatilitySurface(ILogger logger, ICoreCache cache, string nameSpace,
+            NamedValueSet properties, string[] expiryTerms, string[] strikesOrTenor, double[,] volatilities)
         {
             properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);

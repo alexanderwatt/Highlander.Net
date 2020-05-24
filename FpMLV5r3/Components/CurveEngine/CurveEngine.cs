@@ -3291,7 +3291,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="curveId"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public object[,] GetAtTheMoneySwapRate(int swapMaturity,
+        public List<Tuple<string, string, decimal>> GetAtTheMoneySwapRate(int swapMaturity,
                                              DateTime baseDate,
                                              string curveId,
                                              string currency)
@@ -3522,14 +3522,14 @@ namespace Highlander.CurveEngine.V5r3
         /// <param name="expiryTermsAsList">The expiry terms.</param>
         /// <param name="strikesAsList">The strikes.</param>
         /// <returns>The interpolated value.</returns>
-        public object[,] GetExpiryTermStrikeValues(string pricingStructureId, List<string> expiryTermsAsList, List<double> strikesAsList)
+        public double[,] GetExpiryTermStrikeValues(string pricingStructureId, List<string> expiryTermsAsList, List<double> strikesAsList)
         {
             //Get the curve.
             var pricingStructure = (IStrikeVolatilitySurface)GetCurve(pricingStructureId, false);
             var rows = expiryTermsAsList.Count;
             var width = strikesAsList.Count;
             //populate the result matrix.
-            var result = new object[rows, width];
+            var result = new double[rows, width];
             for (var i = 0; i < rows; i++)
             {
                 for (var j = 0; j < width; j++)

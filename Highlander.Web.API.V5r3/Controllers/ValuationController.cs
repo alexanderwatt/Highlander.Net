@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Highlander.Reporting.V5r3;
@@ -25,9 +26,9 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("curve")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult UpdateCurveInputs([FromBody] QuotedAssetSet quotedAssetSet, string curveId = null)
+        public IHttpActionResult UpdateCurveInputs([FromBody] List<Tuple<string, decimal, decimal?>> values)
         {
-            var buildId =  _curveService.UpdateCurveInputs(curveId, quotedAssetSet);
+            var buildId =  _curveService.UpdateDiscountCurveInputs(values);
             return Ok(buildId);
         }
 
