@@ -4,5 +4,6 @@
     {
         public const string TransactionIdProperty = "_transactionId";
         public const string MarketName = "QR_LIVE";
+        public const string NameSpaceKey = "nameSpace";
     }
 }

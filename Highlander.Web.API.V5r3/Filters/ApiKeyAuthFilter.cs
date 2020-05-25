@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 
-namespace Highlander.Web.API.V5r3.Auth
+namespace Highlander.Web.API.V5r3.Filters
 {
     public class ApiKeyAuthFilter : IAutofacAuthorizationFilter
     {

@@ -3,23 +3,17 @@ using Autofac.Integration.WebApi;
 using Highlander.Configuration.Data.V5r3;
 using Highlander.Constants;
 using Highlander.Core.Common;
-using Highlander.Core.Interface.V5r3;
 using Highlander.Core.V34;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
-using Highlander.Web.API.V5r3.Auth;
+using Highlander.Web.API.V5r3.Filters;
 using Highlander.Web.API.V5r3.Services;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 
 namespace Highlander.Web.API.V5r3
 {
@@ -32,13 +26,16 @@ namespace Highlander.Web.API.V5r3
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
 
-            //auth
+            //filters
             var apiKeyHeader = ConfigurationManager.AppSettings["auth:apiKeyHeader"];
             var apiKey = ConfigurationManager.AppSettings["auth:apiKey"];
             builder.RegisterType<ApiKeyAuthFilter>()
                 .WithParameter("header", apiKeyHeader)
                 .WithParameter("privateKey", apiKey)
                 .AsWebApiAuthorizationFilterFor<ApiController>()
+                .SingleInstance();
+            builder.RegisterType<NameSpaceFilter>()
+                .AsWebApiActionFilterForAllControllers()
                 .SingleInstance();
             builder.RegisterWebApiFilterProvider(config);
 
@@ -52,26 +49,27 @@ namespace Highlander.Web.API.V5r3
 
             var environment = ConfigurationManager.AppSettings["env"];
 
-            builder.Register(c => {
-                try
-                {
-                    var stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    var cache = new PricingCache();
-                    stopwatch.Stop();
-                    Debug.Print($"Initialized pricing cache in {stopwatch.Elapsed.TotalSeconds} seconds");
-                    return cache;
-                }
-                catch(Exception ex)
-                {
-                    logger.Target.Log(ex);
-                    throw ex;
-                }
-            }).AsSelf().SingleInstance();
+            //TODO How to use dependency injection with a namespace argument dependent on the http request? Delegate factories seems like overkill
+            //builder.Register(c => {
+            //    try
+            //    {
+            //        var stopwatch = new Stopwatch();
+            //        stopwatch.Start();
+            //        var cache = new PricingCache();
+            //        stopwatch.Stop();
+            //        Debug.Print($"Initialized pricing cache in {stopwatch.Elapsed.TotalSeconds} seconds");
+            //        return cache;
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        logger.Target.Log(ex);
+            //        throw ex;
+            //    }
+            //}).AsSelf().InstancePerRequest();
 
-            builder.RegisterType<PropertyService>().AsSelf().SingleInstance();
-            builder.RegisterType<LeaseService>().AsSelf().SingleInstance();
-            builder.RegisterType<CurveService>().AsSelf().SingleInstance();
+            //builder.RegisterType<PropertyService>().AsSelf().InstancePerRequest();
+            //builder.RegisterType<LeaseService>().AsSelf().InstancePerRequest();
+            //builder.RegisterType<CurveService>().AsSelf().InstancePerRequest();
 
             var factory = new CoreClientFactory(logger)
                 .SetEnv(environment)
@@ -82,6 +80,8 @@ namespace Highlander.Web.API.V5r3
             builder.Register(c => client).As<ICoreClient>().SingleInstance();
 
             builder.Register(c => c.Resolve<ICoreClient>().CreateCache()).As<ICoreCache>().SingleInstance();
+
+            builder.RegisterType<CacheManager>().AsSelf().SingleInstance();
 
             try
             {

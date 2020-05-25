@@ -1,7 +1,5 @@
-﻿using Highlander.Codes.V5r3;
-using Highlander.Constants;
+﻿using Highlander.Constants;
 using Highlander.Core.Interface.V5r3;
-using Highlander.CurveEngine.V5r3.Assets.Helpers;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
@@ -14,9 +12,9 @@ namespace Highlander.Web.API.V5r3.Services
         private readonly PricingCache _cache;
         private readonly Reference<ILogger> _logger;
 
-        public CurveService(PricingCache cache, Reference<ILogger> logger)
+        public CurveService(string nameSpace, Reference<ILogger> logger)
         {
-            _cache = cache;
+            _cache = new PricingCache(nameSpace, false);
             _logger = logger;
         }
 

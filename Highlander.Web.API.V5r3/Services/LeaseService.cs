@@ -1,14 +1,11 @@
 ﻿using Highlander.Codes.V5r3;
 using Highlander.Constants;
-using Highlander.Core.Common;
 using Highlander.Core.Interface.V5r3;
-using Highlander.Reporting.ModelFramework.V5r3;
 using Highlander.Reporting.Models.V5r3.Property.Lease;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
-using Highlander.ValuationEngine.V5r3.Helpers;
 using Highlander.Web.API.V5r3.Models;
 using System;
 using System.Collections.Generic;
@@ -20,9 +17,9 @@ namespace Highlander.Web.API.V5r3.Services
         private readonly PricingCache cache;
         private readonly Reference<ILogger> logger;
 
-        public LeaseService(PricingCache cache, Reference<ILogger> logger)
+        public LeaseService(string nameSpace, Reference<ILogger> logger)
         {
-            this.cache = cache;
+            this.cache = new PricingCache(nameSpace, false);
             this.logger = logger;
         }
 
@@ -72,7 +69,7 @@ namespace Highlander.Web.API.V5r3.Services
             properties.Set(LeaseProp.NextReviewDate, model.NextReviewDate ?? model.LeaseStartDate.AddYears(1));
             properties.Set(LeaseProp.ReviewChange, model.ReviewAmountUpDown ?? 0m);
             properties.Set(LeaseProp.PaymentFrequency, model.PaymentFrequency ?? "1M");
-            var result = cache.CreateLeaseTradeWithProperties(model.Id, true, model.Tenant, model.Owner, model.TradeDate, model.LeaseStartDate,
+            var result = cache.CreateLeaseTradeWithProperties(Guid.NewGuid().ToString(), true, model.Tenant, model.Owner, model.TradeDate, model.LeaseStartDate,
                 model.Currency, model.Portfolio, model.StartGrossAmount, model.LeaseId ?? model.ReferencePropertyIdentifier, model.LeaseExpiryDate, model.ReferencePropertyIdentifier, model.Description, properties);
             logger.Target.LogInfo($"Created lease trade id: {result}");
             return (result, null);
@@ -80,9 +77,6 @@ namespace Highlander.Web.API.V5r3.Services
 
         public decimal? ValueLease(string leaseId, string owner, string currency, string market)
         {
-            //test code
-            //var lease = cache.LoadItem<Lease>(EnvironmentProp.DefaultNameSpace, leaseId);
-
             var leaseValueId = cache.ValueTradeFromMarket(leaseId, owner, new List<string> { "NPV" }, currency, market, DateTime.UtcNow);
             return GetValuationReport(leaseValueId);
         }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Highlander.Constants;
 using Highlander.Reporting.V5r3;
+using Highlander.Utilities.Logging;
+using Highlander.Utilities.RefCounting;
 using Highlander.Web.API.V5r3.Models;
 using Highlander.Web.API.V5r3.Services;
 using Exception = System.Exception;
@@ -13,47 +14,47 @@ namespace Highlander.Web.API.V5r3.Controllers
     [RoutePrefix("api/properties/valuation")]
     public class ValuationController : ApiController
     {
-        private readonly PropertyService _propertyService;
-        private readonly LeaseService _leaseService;
-        private readonly CurveService _curveService;
+        private readonly Reference<ILogger> _logger;
 
-        public ValuationController(PropertyService propertyService,
-            LeaseService leaseService,
-            CurveService curveService)
+        public ValuationController(
+            Reference<ILogger> logger
+            )
         {
-            _propertyService = propertyService;
-            _leaseService = leaseService;
-            _curveService = curveService;
+            _logger = logger;
         }
 
         [HttpPost]
         [Route("curve")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult UpdateCurveInputs([FromBody] QuotedAssetSet quotedAssetSet, string curveId = null)
+        public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] QuotedAssetSet quotedAssetSet, string curveId = null)
         {
-            var buildId =  _curveService.UpdateCurveInputs(curveId, quotedAssetSet);
+            var curveService = new CurveService(nameSpace, _logger);
+            var buildId =  curveService.UpdateCurveInputs(curveId, quotedAssetSet);
             return Ok(buildId);
         }
 
         [HttpPost]
         [Route("dcf-value")]
         [ResponseType(typeof(decimal))]
-        public IHttpActionResult GetValue([FromBody] PropertyFullViewModel model)
+        public IHttpActionResult GetValue(string nameSpace, [FromBody] PropertyFullViewModel model)
         {
             var transactionId = Guid.NewGuid().ToString();
 
+            var propertyService = new PropertyService(nameSpace, _logger);
+            var leaseService = new LeaseService(nameSpace, _logger);
+
             //create assets
-            var propertyAsset = _propertyService.CreatePropertyAsset(model, transactionId);
+            var propertyAsset = propertyService.CreatePropertyAsset(model, transactionId);
             model.Trade.PropertyId = propertyAsset;
             //var propertyTrade = _propertyService.CreatePropertyTrade(model.Trade, transactionId);
             var leaseTradeIds = new Dictionary<string, LeaseTradeViewModel>();
             foreach (var lease in model.Leases)
             {
                 lease.ReferencePropertyIdentifier = propertyAsset;
-                var result = _leaseService.CreateLeaseTrade(lease, transactionId);
+                var result = leaseService.CreateLeaseTrade(lease, transactionId);
                 if(result.Error != null)
                 {
-                    _propertyService.CleanTransaction(transactionId);
+                    propertyService.CleanTransaction(transactionId);
                     throw new Exception("Failed to create a lease - valuation aborted");
                 }
                 leaseTradeIds.Add(result.Id, lease);
@@ -63,8 +64,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var totalValue = 0m;
             foreach (var lease in leaseTradeIds)
             {
-                //var leaseValue = _leaseService.ValueLease($"{EnvironmentProp.DefaultNameSpace}.{lease.Key}", lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
-                var leaseValue = _leaseService.ValueLease(lease.Key, lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
+                var leaseValue = leaseService.ValueLease(lease.Key, lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
 
                 if (leaseValue == null)
                 {
@@ -74,7 +74,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             }
 
             //cleanup
-            var deleted = _propertyService.CleanTransaction(transactionId);
+            var deleted = propertyService.CleanTransaction(transactionId);
 
             return Ok(totalValue);
         }

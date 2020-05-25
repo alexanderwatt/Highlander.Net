@@ -16,9 +16,9 @@ namespace Highlander.Web.API.V5r3.Services
         private readonly PricingCache cache;
         private readonly Reference<ILogger> logger;
 
-        public PropertyService(PricingCache cache, Reference<ILogger> logger)
+        public PropertyService(string nameSpace, Reference<ILogger> logger)
         {
-            this.cache = cache;
+            this.cache = new PricingCache(nameSpace, false);
             this.logger = logger;
         }
 

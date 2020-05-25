@@ -149,12 +149,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Auth\ApiKeyAuthFilter.cs" />
+    <Compile Include="Filters\NameSpaceFilter.cs" />
+    <Compile Include="Filters\ApiKeyAuthFilter.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\LeaseController.cs" />
     <Compile Include="Controllers\ValuationController.cs" />
-    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +162,7 @@
     <Compile Include="Models\PropertyTradeViewModel.cs" />
     <Compile Include="Models\PropertyAssetViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CacheManager.cs" />
     <Compile Include="Services\CurveService.cs" />
     <Compile Include="Services\LeaseService.cs" />
     <Compile Include="Services\PropertyService.cs" />

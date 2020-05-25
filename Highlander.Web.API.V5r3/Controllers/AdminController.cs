@@ -12,13 +12,11 @@ namespace Highlander.Web.API.V5r3.Controllers
     public class AdminController : ApiController
     {
         private readonly Reference<ILogger> logger;
-        private readonly PropertyService propertyService;
         private readonly ICoreCache cache;
 
-        public AdminController(ICoreCache cache, Reference<ILogger> logger, PropertyService propertyService)
+        public AdminController(ICoreCache cache, Reference<ILogger> logger)
         {
             this.logger = logger;
-            this.propertyService = propertyService;
             this.cache = cache;
             logger.Target.LogInfo("Instantiating AdminController...");
         }
@@ -52,8 +50,9 @@ namespace Highlander.Web.API.V5r3.Controllers
 
         [HttpDelete]
         [Route("clear-transaction")]
-        public IHttpActionResult ClearCache(string transactionId)
+        public IHttpActionResult ClearCache(string nameSpace, string transactionId)
         {
+            var propertyService = new PropertyService(nameSpace, logger);
             var deleted = propertyService.CleanTransaction(transactionId);
             return Ok(deleted);
         }
