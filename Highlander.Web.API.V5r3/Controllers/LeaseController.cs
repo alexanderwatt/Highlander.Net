@@ -8,18 +8,18 @@ namespace Highlander.Web.API.V5r3.Controllers
     [RoutePrefix("api/properties/leases")]
     public class LeaseController : ApiController
     {
-        private readonly LeaseService leaseService;
+        private readonly LeaseService _leaseService;
 
         public LeaseController(LeaseService leaseService)
         {
-            this.leaseService = leaseService;
+            _leaseService = leaseService;
         }
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult GetLeaseTradeIds(string propertyId)
         {
-            var trades = leaseService.GetLeaseTradeIds(propertyId);
+            var trades = _leaseService.GetLeaseTradeIds(propertyId);
             return Ok(trades);
         }
 
@@ -28,7 +28,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         [ResponseType(typeof(string))]
         public IHttpActionResult CreateLeaseTrade([FromBody] LeaseTradeViewModel model, string transactionId = null)
         {
-            var result = leaseService.CreateLeaseTrade(model, transactionId);
+            var result = _leaseService.CreateLeaseTrade(model, transactionId);
             return Ok(result);
         }
     }
