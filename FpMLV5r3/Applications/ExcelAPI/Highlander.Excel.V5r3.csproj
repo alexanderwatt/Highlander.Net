@@ -203,6 +203,7 @@
     <None Include="Spreadsheets\Fx\LiveMultiRateCurvesPublisher.xlsx" />
     <None Include="Spreadsheets\Inflation\InflationAssets.xlsx" />
     <None Include="Spreadsheets\Inflation\InflationCurves.xlsx" />
+    <None Include="Spreadsheets\Leases\LeaseAssets.xlsx" />
     <None Include="Spreadsheets\Miscellaneous\FpML Examples.xlsx" />
     <None Include="Spreadsheets\Miscellaneous\ISDA OTC Derivatives Taxonomies - version 2012-10-22%281%29.xlsx" />
     <None Include="Spreadsheets\Miscellaneous\MarketData.xlsx" />

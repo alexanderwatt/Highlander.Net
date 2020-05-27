@@ -55,11 +55,10 @@ namespace Highlander.Core.Interface.V5r3
         /// A function to return the list of valid FpML calendars.
         /// </summary>
         /// <returns>A range object</returns>
-        public object[,] SupportedBusinessCenters()
+        public List<string> SupportedBusinessCenters()
         {
             var calendars = (from BusinessCenterEnum item in Enum.GetValues(typeof (BusinessCenterEnum)) select BusinessCenterScheme.GetEnumString(item) into bc where bc != null select bc).ToList();
-            var result = RangeHelper.ConvertArrayToRange(calendars);
-            return result;
+            return calendars;
         }
 
         /// <summary>
@@ -275,24 +274,24 @@ namespace Highlander.Core.Interface.V5r3
         /// Gets the last trading day.
         /// </summary>
         /// <param name="referenceDate">The reference date.</param>
-        /// <param name="absoluteIMMCode">The absolute IMM code eg EDZ8.</param>
+        /// <param name="absoluteImmCode">The absolute IMM code eg EDZ8.</param>
         /// <returns></returns>
-        public DateTime GetLastFuturesTradingDay(DateTime referenceDate, string absoluteIMMCode)
+        public DateTime GetLastFuturesTradingDay(DateTime referenceDate, string absoluteImmCode)
         {
-            var lastTradingDay = CalendarService.GetLastTradingDay(referenceDate, absoluteIMMCode);
+            var lastTradingDay = CalendarService.GetLastTradingDay(referenceDate, absoluteImmCode);
             return lastTradingDay;
         }
 
         /// <summary>
         /// Gets the last trading day.
         /// </summary>
-        /// <param name="absoluteIMMCode">The absolute IMM code.</param>
+        /// <param name="absoluteImmCode">The absolute IMM code.</param>
         /// <param name="decadeStartYear">The decade start year, in the form 2010</param>
         /// <returns></returns>
-        public DateTime GetLastTradingDayWithDecade(string absoluteIMMCode, int decadeStartYear)
+        public DateTime GetLastTradingDayWithDecade(string absoluteImmCode, int decadeStartYear)
         {
             var baseDate = new DateTime(decadeStartYear, 1, 1);
-            var lastTradingDay = CalendarService.GetLastTradingDay(baseDate, absoluteIMMCode);
+            var lastTradingDay = CalendarService.GetLastTradingDay(baseDate, absoluteImmCode);
             return lastTradingDay;
         }
 
@@ -502,8 +501,8 @@ namespace Highlander.Core.Interface.V5r3
         public List<DateTime> AdjustedDatesFromEffectiveDate(DateTime effectiveDate, DateTime terminationDate, string periodInterval, string rollConvention, 
             string businessCenters, string dateAdjustmentConvention)
         {
-            BusinessCenters centers = BusinessCentersHelper.Parse(businessCenters);
-            IBusinessCalendar calendar = Engine.ToBusinessCalendar(centers);
+            var centers = BusinessCentersHelper.Parse(businessCenters);
+            var calendar = Engine.ToBusinessCalendar(centers);
             var adjustments = EnumHelper.Parse<BusinessDayConventionEnum>(dateAdjustmentConvention);
             return AdjustedDateScheduler.AdjustedDatesFromEffectiveDate(effectiveDate, terminationDate, periodInterval, rollConvention, calendar, adjustments).ToList();
         }
@@ -521,8 +520,8 @@ namespace Highlander.Core.Interface.V5r3
         public List<DateTime> AdjustedDatesFromTerminationDate(DateTime effectiveDate, DateTime terminationDate, string periodInterval, 
             string rollConvention, string businessCenters, string dateAdjustmentConvention)
         {
-            BusinessCenters centers = BusinessCentersHelper.Parse(businessCenters);
-            IBusinessCalendar calendar = Engine.ToBusinessCalendar(centers);
+            var centers = BusinessCentersHelper.Parse(businessCenters);
+            var calendar = Engine.ToBusinessCalendar(centers);
             var adjustments = EnumHelper.Parse<BusinessDayConventionEnum>(dateAdjustmentConvention);
             return AdjustedDateScheduler.AdjustedDatesFromTerminationDate(effectiveDate, terminationDate, periodInterval,
                 rollConvention, calendar, adjustments).ToList();
@@ -556,8 +555,8 @@ namespace Highlander.Core.Interface.V5r3
                                                        string calendar,
                                                        string businessDayAdjustment)
         {
-            BusinessCenters centers = BusinessCentersHelper.Parse(calendar);
-            IBusinessCalendar businessCalendar = Engine.ToBusinessCalendar(centers);
+            var centers = BusinessCentersHelper.Parse(calendar);
+            var businessCalendar = Engine.ToBusinessCalendar(centers);
             return AdjustedDatesMetaSchedule.GetMetaDatesSchedule(metaScheduleDefinition, startDate, businessCalendar, calendar, businessDayAdjustment).ToList();
         }
 
@@ -577,7 +576,7 @@ namespace Highlander.Core.Interface.V5r3
                                                                     string periodInterval, string rollConvention, DateTime firstRegularPeriodDate, string stubPeriodType,
                                                                     List<string> calendars, string businessDayConvention)
         {
-            IBusinessCalendar businessCalendar = CalendarService.GetCalendar(calendars.ToArray());
+            var businessCalendar = CalendarService.GetCalendar(calendars.ToArray());
             return AdjustedDateScheduler.GetAdjustedCalculationPeriodDates(effectiveDate, terminationDate,
                                                                      periodInterval, rollConvention, firstRegularPeriodDate, stubPeriodType,
                                                                      businessCalendar, businessDayConvention).ToList();

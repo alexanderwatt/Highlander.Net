@@ -970,7 +970,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// </summary>
         /// <param name="uniqueTradeId">The unique trade identifier.</param>
         /// <returns></returns>
-        public object[,] GetRequiredCurves(string uniqueTradeId)
+        public List<string> GetRequiredCurves(string uniqueTradeId)
         {
             return GetRequiredCurves(Logger, Cache, NameSpace, uniqueTradeId);
         }
@@ -983,17 +983,17 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace">The namespace</param>
         /// <param name="uniqueTradeId">The unique trade identifier.</param>
         /// <returns></returns>
-        public object[,] GetRequiredCurves(ILogger logger, ICoreCache cache, string nameSpace, string uniqueTradeId)
+        public List<string> GetRequiredCurves(ILogger logger, ICoreCache cache, string nameSpace, string uniqueTradeId)
         {
             var tradeItem = cache.LoadItem<Trade>(nameSpace + "." + uniqueTradeId);
             if (tradeItem.Data is Trade trade)
             {
                 var curves = trade.Item.GetRequiredPricingStructures();
                 logger.LogDebug("Returned a list of required curves for the trade: {0}", uniqueTradeId);
-                return RangeHelper.ConvertArrayToRange(curves);
+                return curves;
             }
-            var result = new object[1, 1];
-            result[0, 0] = "The trade id uded does not return a valid trade!";
+            var result = new List<string>();
+            result.Add("The trade id uded does not return a valid trade!"); ;
             return result;
         }
 
@@ -1039,7 +1039,7 @@ namespace Highlander.ValuationEngine.V5r3
                     var product = trade.Item;
                     var pricer = new TradePricer(logger, cache, nameSpace, null, trade, properties, true);
                     //Get the market
-                    var marketEnviroment = Highlander.CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
+                    var marketEnviroment = CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
                     var controller = TradePricer.CreateInstrumentModelData(metricsArray, valuationDate, marketEnviroment, reportingCurrency, reportingParty);
                     pricer.Price(controller, ValuationReportType.Full);
                     logger.LogDebug("Returned a list of details for the trade: {0}", uniqueTradeId);
@@ -1390,7 +1390,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// </summary>
         /// <param name="valuationId">THe id of the report to view.</param>
         /// <returns></returns>
-        public object[,] ViewValuationReport(string valuationId)
+        public Dictionary<string, decimal> ViewValuationReport(string valuationId)
         {
             return ViewValuationReport(Logger, Cache, NameSpace, valuationId);
         }
@@ -1403,14 +1403,14 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="nameSpace">The nameSpace</param>
         /// <param name="valuationId">THe id of the report to view.</param>
         /// <returns></returns>
-        public object[,] ViewValuationReport(ILogger logger, ICoreCache cache, String nameSpace, string valuationId)
+        public Dictionary<string, decimal> ViewValuationReport(ILogger logger, ICoreCache cache, String nameSpace, string valuationId)
         {
             var id = nameSpace + "." + valuationId;
             var reportItem = cache.LoadObject<ValuationReport>(id);
             var tvi = reportItem.tradeValuationItem[0];
             var assetValuationReport = tvi.valuationSet.assetValuation[0];
             //Get the output data.
-            IDictionary<string, decimal> results = new Dictionary<string, decimal>();
+            var results = new Dictionary<string, decimal>();
             foreach (var point in assetValuationReport.quote)
             {
                 var riskType = point.measureType.Value;
@@ -1441,9 +1441,8 @@ namespace Highlander.ValuationEngine.V5r3
                     }                  
                 }
             }
-            object[,] result = ArrayHelper.ConvertDictionaryTo2DArray(results);
             logger.LogDebug("Viewed the valuation report: {0}", valuationId);
-            return result;
+            return results;
         }
 
         #endregion

@@ -26,10 +26,10 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("curve")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] QuotedAssetSet quotedAssetSet, string curveId = null)
+        public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] List<Tuple<string, decimal, decimal?>> values)
         {
             var curveService = new CurveService(nameSpace, _logger);
-            var buildId =  curveService.UpdateCurveInputs(curveId, quotedAssetSet);
+            var buildId = _curveService.UpdateDiscountCurveInputs(values);
             return Ok(buildId);
         }
 

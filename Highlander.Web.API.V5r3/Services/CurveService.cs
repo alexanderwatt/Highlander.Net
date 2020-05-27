@@ -1,4 +1,7 @@
-﻿using Highlander.Constants;
+﻿using System;
+using System.Collections.Generic;
+using Highlander.Codes.V5r3;
+using Highlander.Constants;
 using Highlander.Core.Interface.V5r3;
 using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
@@ -18,15 +21,25 @@ namespace Highlander.Web.API.V5r3.Services
             _logger = logger;
         }
 
-        public string UpdateCurveInputs(string curveId, QuotedAssetSet quotedAssetSet)
+        public string UpdateDiscountCurveInputs(List<Tuple<string, decimal, decimal?>> values)
         {
-            //string[] instruments, decimal[] adjustedRates, decimal[] additional
-            //var quotedAssetSet = AssetHelper.Parse(instruments, adjustedRates, additional);
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
-            properties.Set(CurveProp.Market, "test");
-            _logger.Target.LogInfo("Updated curve :" + curveId);
-            return _cache.CreateCurve(properties, quotedAssetSet);
+            properties.Set(EnvironmentProp.Function, FunctionProp.Market.ToString());
+            properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
+            properties.Set(EnvironmentProp.SourceSystem, CurveCalculationProp.ClientApi.ToString());
+            properties.Set(CurveProp.PricingStructureType, PricingStructureTypeEnum.DiscountCurve.ToString());
+            properties.Set(CurveProp.CurveName, "AUD-LIBOR-SENIOR");
+            properties.Set(CurveProp.Market, "QR_LIVE");
+            properties.Set(CurveProp.Currency1, "AUD");
+            properties.Set(CurveProp.Algorithm, "FastLinearZero");
+            properties.Set(CurveProp.BaseDate, DateTime.Now);
+            properties.Set(CurveProp.BootStrap, true);
+            properties.Set(CurveProp.UniqueIdentifier, "Market.QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR");
+            properties.Set(CurveProp.CreditSeniority, "SENIOR");
+            properties.Set(CurveProp.CreditInstrumentId, "LIBOR");
+            _logger.Target.LogInfo("Updated curve :");
+            return _cache.CreateCurve(properties, values);
         }
     }
 }

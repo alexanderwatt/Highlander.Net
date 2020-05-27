@@ -1,0 +1,171 @@
+{
+    "functions": [
+        {
+            "description": "Add two numbers",
+            "id": "ADD",
+            "name": "ADD",
+            "parameters": [
+                {
+                    "description": "First number",
+                    "name": "first",
+                    "type": "number"
+                },
+                {
+                    "description": "Second number",
+                    "name": "second",
+                    "type": "number"
+                }
+            ],
+            "result": {
+                "type": "number"
+            }
+        },
+        {
+            "description": "Displays the current time once a second",
+            "id": "CLOCK",
+            "name": "CLOCK",
+            "options": {
+                "stream": true
+            },
+            "parameters": [],
+            "result": {
+                "type": "string"
+            }
+        },
+        {
+            "description": "Simulates rolling a 6-sided dice.",
+            "id": "ROLL6SIDED",
+            "name": "ROLL6SIDED",
+            "options": {
+                "volatile": true
+            },
+            "parameters": [],
+            "result": {}
+        },
+        {
+            "description": "Increments a value once a second.",
+            "id": "INCREMENT",
+            "name": "INCREMENT",
+            "options": {
+                "stream": true
+            },
+            "parameters": [
+                {
+                    "description": "Amount to increment",
+                    "name": "incrementBy",
+                    "type": "number"
+                }
+            ],
+            "result": {
+                "type": "number"
+            }
+        },
+        {
+            "description": "Requests the names of the people currently on the International Space Station from a hypothetical API.",
+            "id": "WEBREQUEST",
+            "name": "WEBREQUEST",
+            "parameters": [],
+            "result": {}
+        },
+        {
+            "description": "Gets the star count for a given Github repository.",
+            "id": "GETSTARCOUNT",
+            "name": "GETSTARCOUNT",
+            "parameters": [
+                {
+                    "description": "string name of Github user or organization.",
+                    "name": "userName",
+                    "type": "string"
+                },
+                {
+                    "description": "string name of the Github repository.",
+                    "name": "repoName",
+                    "type": "string"
+                }
+            ],
+            "result": {
+                "type": "number"
+            }
+        },
+        {
+            "id": "GETRANGEVALUE",
+            "name": "GETRANGEVALUE",
+            "parameters": [
+                {
+                    "description": "range's address",
+                    "name": "address",
+                    "type": "any"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Get text values that spill down.",
+            "id": "SPILLDOWN",
+            "name": "SPILLDOWN",
+            "parameters": [],
+            "result": {
+                "dimensionality": "matrix",
+                "type": "string"
+            }
+        },
+        {
+            "description": "Get text values that spill to the right.",
+            "id": "SPILLRIGHT",
+            "name": "SPILLRIGHT",
+            "parameters": [],
+            "result": {
+                "dimensionality": "matrix",
+                "type": "string"
+            }
+        },
+        {
+            "description": "Get text values that spill both right and down.",
+            "id": "SPILLRECTANGLE",
+            "name": "SPILLRECTANGLE",
+            "parameters": [],
+            "result": {
+                "dimensionality": "matrix",
+                "type": "string"
+            }
+        },
+        {
+            "description": "Returns the volume of a sphere.",
+            "id": "SPHEREVOLUME",
+            "name": "SPHEREVOLUME",
+            "parameters": [
+                {
+                    "name": "radius",
+                    "type": "number"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Gets a comment from the hypothetical contoso.com/comments API.",
+            "id": "GETCOMMENT",
+            "name": "GETCOMMENT",
+            "parameters": [
+                {
+                    "description": "ID of a comment.",
+                    "name": "commentId",
+                    "type": "number"
+                }
+            ],
+            "result": {}
+        },
+        {
+            "description": "Writes a message to console.log().",
+            "id": "LOG",
+            "name": "LOG",
+            "parameters": [
+                {
+                    "description": "String to write.",
+                    "name": "message",
+                    "type": "string"
+                }
+            ],
+            "result": {}
+        }
+    ]
+}

@@ -125,7 +125,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
                 {
                     var assetIdentifier = assetReferenceKey;
                     var valuation = valuationList.Find(
-                        valuationItem => String.Compare(valuationItem.objectReference.href, assetIdentifier, StringComparison.OrdinalIgnoreCase) == 0
+                        valuationItem => string.Compare(valuationItem.objectReference.href, assetIdentifier, StringComparison.OrdinalIgnoreCase) == 0
                         );
                     if (valuation != null)
                     {
@@ -152,19 +152,18 @@ namespace Highlander.CurveEngine.V5r3.Helpers
         /// <param name="metrics">The metrics.</param>
         /// <param name="noOfAssets">The no of assets.</param>
         /// <returns></returns>
-        public static object[,] BuildEvaluationResultsClean(ICollection<string> metrics, IEnumerable<string> assetReferenceKeys,
+        public static List<Tuple<string, string, decimal>> BuildEvaluationResultsClean(ICollection<string> metrics, IEnumerable<string> assetReferenceKeys,
             IEnumerable<BasicAssetValuation> valuations, int noOfAssets)
         {
             var valuationList = new List<BasicAssetValuation>(valuations);
             var resultList = new List<Tuple<string, string, decimal>>();
-            var index = 0;
             foreach (var assetReferenceKey in assetReferenceKeys)
             {
                 if (assetReferenceKey.Length > 0)
                 {
                     var assetIdentifier = assetReferenceKey;
                     var valuation = valuationList.Find(
-                        valuationItem => String.Compare(valuationItem.objectReference.href, assetIdentifier, StringComparison.OrdinalIgnoreCase) == 0
+                        valuationItem => string.Compare(valuationItem.objectReference.href, assetIdentifier, StringComparison.OrdinalIgnoreCase) == 0
                         );
 
                     if (valuation != null)
@@ -179,17 +178,7 @@ namespace Highlander.CurveEngine.V5r3.Helpers
                     }
                 }
             }
-            var horizontalArrayCellCount = resultList.Count;
-            var verticalArrayCellCount = 3;
-            var result = new object[horizontalArrayCellCount, verticalArrayCellCount];
-            foreach (var tuple in resultList)
-            {
-                result[index, 0] = tuple.Item1;
-                result[index, 1] = tuple.Item2;
-                result[index, 2] = tuple.Item3;
-                index++;
-            }
-            return result;
+            return resultList;
         }
 
         ///<summary>
@@ -232,18 +221,6 @@ namespace Highlander.CurveEngine.V5r3.Helpers
             }
             return metricTypes.Distinct().ToList();
         }
-
-        ///// <summary>
-        ///// Finds the enum from string.
-        ///// </summary>
-        ///// <param name="list">The list.</param>
-        ///// <param name="findItem">The find item.</param>
-        ///// <returns></returns>
-        //private static TEnumT FindEnumFromString<TEnumT>(List<TEnumT> list, string findItem)
-        //{
-        //    var result = list.Find(metricItem => String.Compare(metricItem.ToString(), findItem, StringComparison.OrdinalIgnoreCase) == 0);
-        //    return result;
-        //}
 
         #endregion
 

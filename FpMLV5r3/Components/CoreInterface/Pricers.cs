@@ -22,7 +22,6 @@ using System.Runtime.InteropServices;
 using Highlander.Codes.V5r3;
 using Highlander.Constants;
 using Highlander.Core.Common;
-using Highlander.CurveEngine.Helpers.V5r3;
 using Highlander.CurveEngine.V5r3.Markets;
 using Highlander.CurveEngine.V5r3.PricingStructures.Curves;
 using Highlander.CurveEngine.V5r3.PricingStructures.Helpers;
@@ -244,11 +243,11 @@ namespace Highlander.Core.Interface.V5r3
         /// <summary>
         /// Gets the trades in the default name space according to query.
         /// </summary>
-        /// <param name="identifier"></param>
+        /// <param name="properties"></param>
         /// <returns></returns>
-        public IEnumerable<(Trade Trade, NamedValueSet Props)> GetTrades(NamedValueSet props)
+        public IEnumerable<(Trade Trade, NamedValueSet Props)> GetTrades(NamedValueSet properties)
         {
-            return ValService.GetTrades(NameSpace, props);
+            return ValService.GetTrades(NameSpace, properties);
         }
 
         public ICoreItem LoadItem<T>(string nameSpace, string id)
@@ -348,7 +347,7 @@ namespace Highlander.Core.Interface.V5r3
         /// </summary>
         /// <param name="uniqueTradeId">The unique trade identifier.</param>
         /// <returns></returns>
-        public object[,] GetRequiredCurves(string uniqueTradeId)
+        public List<string> GetRequiredCurves(string uniqueTradeId)
         {
             return ValService.GetRequiredCurves(uniqueTradeId);
         }
@@ -443,7 +442,7 @@ namespace Highlander.Core.Interface.V5r3
         /// </summary>
         /// <param name="valuationId">THe id of the report to view.</param>
         /// <returns></returns>
-        public object[,] ViewValuationReport(string valuationId) => ValService.ViewValuationReport(valuationId);
+        public Dictionary<string, decimal> ViewValuationReport(string valuationId) => ValService.ViewValuationReport(valuationId);
 
         #endregion
 
@@ -458,7 +457,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="market">The market.</param>
         /// <returns></returns>
-        public double GetNPV(string uniqueTradeId, string reportingParty, string reportingCurrency, DateTime valuationDate, string market)//Use a range mapping area
+        public double GetNetPresentValue(string uniqueTradeId, string reportingParty, string reportingCurrency, DateTime valuationDate, string market)//Use a range mapping area
         {
             return ValService.GetNPV(uniqueTradeId, reportingParty, reportingCurrency, valuationDate, market);
         }
@@ -472,7 +471,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="curveMap">The curve mapping range.</param>
         /// <returns></returns>
-        public double GetNPVWithSpecifiedCurves(string uniqueTradeId, string reportingParty, string reportingCurrency, 
+        public double GetNetPresentValueWithSpecifiedCurves(string uniqueTradeId, string reportingParty, string reportingCurrency, 
             DateTime valuationDate, List<Pair<string, string>> curveMap)//Use a range mapping area
         {
             return ValService.GetNPVWithSpecifiedCurves(uniqueTradeId, reportingParty, reportingCurrency, valuationDate, curveMap);
@@ -587,60 +586,6 @@ namespace Highlander.Core.Interface.V5r3
             return ValService.CreateDepositWithProperties(tradeDate, startDate, maturityDate, currency, notionalAmount, fixedRate, dayCount, properties);
         }
 
-
-        ///// <summary>
-        ///// Views a trade that has already been created.
-        ///// </summary>
-        ///// <param name="tradeId">The unique identifier.</param>
-        ///// <param name="reportingParty">The base reporting Party. This allows valuations from both base party and counter party perspectives.</param>
-        //public object[,] ViewDepositCashFlows(string tradeId, string reportingParty)//TODO May need to calculate this first to get the function working!
-        //{
-        //    var id = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.termDeposit, ProductTypeSimpleEnum.TermDeposit, tradeId);
-        //    var tradeItem = Engine.Cache.LoadItem<Trade>(NameSpace + "." + id.UniqueIdentifier);
-        //    var properties = tradeItem.AppProps;
-        //    var party1 = properties.GetValue<string>(TradeProp.Party1, true);
-        //    var party2 = properties.GetValue<string>(TradeProp.Party2, true);
-        //    var baseParty = reportingParty == party1 ? "Party1" : "Party2";
-        //    var trade = tradeItem.Data as Trade;
-        //    if (trade?.Item is TermDeposit termDeposit)
-        //    {
-        //        var pricer = new TermDepositPricer(Engine.Logger, Engine.Cache, termDeposit, baseParty);
-        //        pricer.OrderedPartyNames.Add(party1);
-        //        pricer.OrderedPartyNames.Add(party2);
-        //        object[,] report = new TermDepositReporter().DoXLReport(pricer);
-        //        return report;
-        //    }
-        //    return null;
-        //}
-
-        ///// <summary>
-        ///// Views a trade that has already been created.
-        ///// </summary>
-        ///// <param name="tradeId">The trade identifier.</param>
-        ///// <param name="reportingParty">The base reporting Party. This allows valuations from both base party and counter party perspectives.</param>
-        //public object[,] ViewTermDeposit(string tradeId, string reportingParty)//TODO May need to calculate this first to get the function working!
-        //{
-        //    object[,] report = null;
-        //    var id = new Orion.Identifiers.TradeIdentifier(ItemChoiceType15.termDeposit, ProductTypeSimpleEnum.TermDeposit, tradeId);
-        //    var tradeItem = Engine.Cache.LoadItem<Trade>(NameSpace + "." + id.UniqueIdentifier);
-        //    var properties = tradeItem.AppProps;
-        //    var party1 = properties.GetValue<string>(TradeProp.Party1, true);
-        //    var party2 = properties.GetValue<string>(TradeProp.Party2, true);
-        //    var baseParty = reportingParty == party1 ? "Party1" : "Party2";
-        //    if (tradeItem.Data is Trade trade)
-        //    {
-        //        if (trade.Item is TermDeposit termDeposit)
-        //        {
-        //            var pricer = new TermDepositPricer(Engine.Logger, Engine.Cache, termDeposit, baseParty);
-        //            pricer.OrderedPartyNames.Add(party1);
-        //            pricer.OrderedPartyNames.Add(party2);
-        //            var tempDeposit = pricer.BuildTheProduct();
-        //            report = new TermDepositReporter().DoReport(tempDeposit, properties);
-        //        }
-        //    }
-        //    return report;
-        //}
-
         /// <summary>
         /// Values a trade that has already been created.
         /// </summary>
@@ -747,7 +692,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="discountCurveId">The discountCurve identifier.</param>
         /// <returns></returns>
-        public double GetTermDepositNPV(string uniqueId, string reportingParty, string reportingCurrency, DateTime valuationDate, string discountCurveId)
+        public double GetTermDepositNetPresentValue(string uniqueId, string reportingParty, string reportingCurrency, DateTime valuationDate, string discountCurveId)
         {
             var tradeItem = Engine.Cache.LoadItem<Trade>(NameSpace + "." + uniqueId);
             var properties = tradeItem.AppProps;
@@ -1263,7 +1208,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="tradingBook">The trading book.</param>
         /// <returns></returns>
-        public string CreateIRFutureTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, 
+        public string CreateInterestRateFutureTrade(string tradeId, bool isParty1Buyer, string party1, string party2, string platform, 
             DateTime tradeDate, DateTime effectiveDate, int numberOfContracts, double price, string futuresIdentifier, string tradingBook)
         {
             var properties = new NamedValueSet();
@@ -1314,7 +1259,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="party2">Party2, the second party.</param>
         /// <param name="namedValueSet">The properties range.</param>
         /// <returns></returns>
-        public string CreateIRFutureTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, 
+        public string CreateInterestRateFutureTradeWithProperties(string tradeId, bool isParty1Buyer, string party1, 
             string party2, DateTime tradeDate, DateTime effectiveDate, int numberOfContracts,
             decimal purchasePrice, string futuresIdentifier, NamedValueSet namedValueSet)
         {
@@ -1687,7 +1632,7 @@ namespace Highlander.Core.Interface.V5r3
         /// returns an array of rates
         /// </summary>
         /// <returns></returns>
-        public object[,] GetFraEquivalentRates(NamedValueSet propertiesRange, object[,] curveData)
+        public double[] GetFraEquivalentRates(NamedValueSet propertiesRange, object[,] curveData)
         {
             int strCol = FraSolver.FindHeader(curveData, "Instrument");
             var instruments = FraSolver.GetObjects<string>(curveData, strCol);
@@ -1696,9 +1641,7 @@ namespace Highlander.Core.Interface.V5r3
             var newRates = rates.Select(Convert.ToDecimal).ToList();
             int fraCol = FraSolver.FindHeader(curveData, "Guess");
             var fraGuesses = FraSolver.GetObjects<object>(curveData, fraCol);
-            var fraEquivalents = ValService.CalculateFraEquivalents(propertiesRange, instruments, newRates, fraGuesses);
-            var result = RangeHelper.ConvertArrayToRange(fraEquivalents);
-            return result;
+            return ValService.CalculateFraEquivalents(propertiesRange, instruments, newRates, fraGuesses);
         }
 
         /// <summary>
@@ -1810,8 +1753,6 @@ namespace Highlander.Core.Interface.V5r3
 
         #region Interest Rate Swaps
 
-        #region Main Pricing Functions
-
         /// <summary>
         /// Builds a swap trade using configuration data.
         /// </summary>
@@ -1827,7 +1768,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="floatingLeg">The floating leg.</param>
         /// <param name="namedValueSet">A list of properties, including mandatory ones: trade date, trade id, currency and notional</param>
         /// <returns></returns>
-        public string VanillaIRSwap(string tradeId, DateTime tradeDate, DateTime effectiveDate, string maturityTenor,
+        public string VanillaInterestRateSwap(string tradeId, DateTime tradeDate, DateTime effectiveDate, string maturityTenor,
             string adjustedType, string currency, decimal notionalAmount, bool isParty1Base,
             SwapLegSimpleRange fixedLeg, SwapLegSimpleRange floatingLeg, NamedValueSet namedValueSet)
         {
@@ -2059,7 +2000,7 @@ namespace Highlander.Core.Interface.V5r3
         ///</param>
         ///<param name="valuationRange">The is a range that contains the valuation date to use.</param>
         ///<returns>An array of principal exchanges.</returns>
-        public List<PrincipalExchangeCashflowRangeItem> CreateIRSwapPrincipalExchanges(SwapLegParametersRange legParametersRange, List<DateTimeDoubleRangeItem> notionalValueItems,
+        public List<PrincipalExchangeCashflowRangeItem> CreateInterestRateSwapPrincipalExchanges(SwapLegParametersRange legParametersRange, List<DateTimeDoubleRangeItem> notionalValueItems,
             ValuationRange valuationRange)
         {
              var interestRatePricer = new InterestRateSwapPricer();
@@ -2241,68 +2182,6 @@ namespace Highlander.Core.Interface.V5r3
                 leg1DetailedCashflows, leg2DetailedCashflows, leg1PrincipalExchangeCashflow,
                 leg2PrincipalExchangeCashflow, leg1AdditionalPayment, leg2AdditionalPayment);
         }
-
-        #endregion
-
-        #region Failing Functions
-
-        ///// <summary>
-        ///// Solves for floating rate margin to zero NPV of the swap.
-        ///// </summary>
-        ///// <param name="uniqueTradeId">The unique trade identifier.</param>
-        ///// <param name="reportingParty">The base reporting Party. This allows valuations from both base party and counter party perspectives.</param>
-        ///// <param name="reportingCurrency">The reporting currency</param>
-        ///// <param name="valuationDate">The valuation date.</param>
-        ///////  <param name="curveMapRange">The curve mapping range.</param>
-        /////<returns>The fair spread.</returns>
-        //public double GetInterestRateSwapFairSpread(string uniqueTradeId, string reportingParty, string reportingCurrency,
-        //    DateTime valuationDate)
-        //{
-        //    var tradeItem = Engine.Cache.LoadItem<Trade>(NameSpace + "." + uniqueTradeId);
-        //    var properties = tradeItem.AppProps;
-        //    var party1 = properties.GetValue<string>(TradeProp.Party1, true);
-        //    //var party2 = properties.GetValue<string>(TradeProp.Party2, true);
-        //    var baseParty = reportingParty == party1 ? "Party1" : "Party2";
-        //    var trade = tradeItem.Data as Trade;
-        //    if (trade != null)
-        //    {
-        //        var swap = trade.Item as Swap;
-        //        var pricer = new InterestRateSwapPricer(Engine.Logger, Engine.Cache, NameSpace, null, swap, baseParty);
-        //        var result = pricer.GetFairSpread();
-        //        return result;
-        //    }
-        //    return 0;
-        //}
-
-        /////<summary>
-        ///// This calculates the par rate of a swap, using the cached curves referenced in the input ranges.
-        /////</summary>
-        ///// <param name="uniqueTradeId">The unique trade identifier.</param>
-        ///// <param name="reportingParty">The base reporting Party. This allows valuations from both base party and counter party perspectives.</param>
-        ///// <param name="reportingCurrency">The reporting currency</param>
-        ///// <param name="valuationDate">The valuation date.</param>
-        ///////  <param name="curveMapRange">The curve mapping range.</param>
-        /////<returns>The par rate.</returns>
-        //public double GetInterestRateSwapParRate(string uniqueTradeId, string reportingParty, string reportingCurrency,
-        //    DateTime valuationDate)//, Excel.Range curveMapRange
-        //{
-        //    var tradeItem = Engine.Cache.LoadItem<Trade>(NameSpace + "." + uniqueTradeId);
-        //    var properties = tradeItem.AppProps;
-        //    var party1 = properties.GetValue<string>(TradeProp.Party1, true);
-        //    //var party2 = properties.GetValue<string>(TradeProp.Party2, true);
-        //    var baseParty = reportingParty == party1 ? "Party1" : "Party2";
-        //    var trade = tradeItem.Data as Trade;
-        //    if (trade != null)
-        //    {
-        //        var swap = trade.Item as Swap;
-        //        var pricer = new InterestRateSwapPricer(Engine.Logger, Engine.Cache, NameSpace, null, swap, baseParty);//TODO Fix this!
-        //        var parRate = pricer.GetParRate();//TODO This does not work because the discount factors have not been set in the legs.
-        //        return parRate;
-        //    }
-        //    return 0;
-        //}
-
-        #endregion
 
         #endregion
 
@@ -2537,7 +2416,7 @@ namespace Highlander.Core.Interface.V5r3
         /// <param name="swaptionTerms">The swaption terms.</param>
         /// <param name="namedValueSet">A list of properties, including mandatory ones: trade date, trade id, currency and notional</param>
         /// <returns></returns>
-        public string SimpleIRSwaption(string tradeId, DateTime tradeDate, DateTime effectiveDate, string maturityTenor,
+        public string SimpleInterestRateSwaption(string tradeId, DateTime tradeDate, DateTime effectiveDate, string maturityTenor,
             string adjustedType, string currency, decimal notionalAmount, bool isParty1Base,
             SwapLegSimpleRange fixedLeg, SwapLegSimpleRange floatingLeg, SwaptionParametersRange swaptionTerms, NamedValueSet namedValueSet)
         {
@@ -2913,15 +2792,13 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="dayCounterAsString"></param>
         ///<param name="curveId"></param>
         ///<returns></returns>
-        public object[,] CalculatePurchaseCost(List<BillSwapPricerDateNotional> dateAndNotional, string dayCounterAsString, string curveId)
+        public List<BillSwapPricerCashflowRow> CalculatePurchaseCost(List<BillSwapPricerDateNotional> dateAndNotional, string dayCounterAsString, string curveId)
         {
             var billSwapPricer = new BillSwapPricer();
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
             IDayCounter dayCounter = DayCounterHelper.Parse(dayCounterAsString);
             List<BillSwapPricerCashflowRow> forwardRates = billSwapPricer.PopulateForwardRates(dateAndNotional, dayCounter, rc);
-            List<BillSwapPricerCashflowRow> pc = billSwapPricer.PopulatePurchaseCosts(forwardRates, dayCounter, rc);
-            object[,] result = ObjectToArrayOfPropertiesConverter.ConvertListToHorizontalArrayRange(pc);
-            return result;
+            return billSwapPricer.PopulatePurchaseCosts(forwardRates, dayCounter, rc);
         }
 
         ///<summary>
@@ -2970,9 +2847,9 @@ namespace Highlander.Core.Interface.V5r3
             string curveId, DateTime bulletPaymentDate, double bulletPaymentValue)
         {
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            double fixedSidePV = BillsSwapPricer2.CalculateFixedSidePV(valuationDate, floatMargin, fixedRate,
+            double fixedSidePresentValue = BillsSwapPricer2.CalculateFixedSidePV(valuationDate, floatMargin, fixedRate,
                 payTerms, payRolls, receiveTerms, receiveRolls, rc, bulletPaymentDate, bulletPaymentValue);
-            return fixedSidePV;
+            return fixedSidePresentValue;
         }
 
         ///<summary>
@@ -3018,7 +2895,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<param name="listInstrumentIdAndQuotes"></param>
         ///<param name="listPerturbations"></param>
         ///<returns></returns>
-        public object[,] CalculateFixedSideSensitivity2(
+        public List<DoubleRangeItem> CalculateFixedSideSensitivity2(
             DateTime valuationDate, double floatMargin, double fixedRate,
             BillsSwapPricer2TermsRange payTerms, List<AmortisingResultItem> payRolls,
             BillsSwapPricer2TermsRange receiveTerms, List<AmortisingResultItem> receiveRolls,
@@ -3027,11 +2904,9 @@ namespace Highlander.Core.Interface.V5r3
             List<DoubleRangeItem> listPerturbations)
         {
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            List<DoubleRangeItem> sensitivity = BillsSwapPricer2.CalculateFixedSideSensitivity2(valuationDate, floatMargin,
+            return BillsSwapPricer2.CalculateFixedSideSensitivity2(valuationDate, floatMargin,
                 fixedRate, payTerms, payRolls, receiveTerms, receiveRolls, rc, bulletPaymentDate,
                 bulletPaymentValue, listInstrumentIdAndQuotes, listPerturbations);
-            object[,] result = ObjectToArrayOfPropertiesConverter.ConvertListToHorizontalArrayRange(sensitivity);
-            return result;
         }
 
         ///<summary>
@@ -3059,9 +2934,8 @@ namespace Highlander.Core.Interface.V5r3
             List<DoubleRangeItem> listPerturbations, string filterByInstruments)
         {
             var rc = (RateCurve)Engine.GetCurve(curveId, false);
-            var sensitivity = BillsSwapPricer2.CalculateFixedSideDelta(valuationDate, floatMargin, fixedRate,
+            return BillsSwapPricer2.CalculateFixedSideDelta(valuationDate, floatMargin, fixedRate,
                 payTerms, payRolls, receiveTerms, receiveRolls, rc, bulletPaymentDate, bulletPaymentValue, listInstrumentIdAndQuotes, listPerturbations, filterByInstruments);
-            return sensitivity;
         }
 
         ///<summary>
@@ -3071,8 +2945,7 @@ namespace Highlander.Core.Interface.V5r3
         ///<returns></returns>
         public double GetEffectiveFrequency(List<AmortisingResultItem> cashflowsSchedule, BillsSwapPricer2TermsRange terms)
         {
-            double effectiveFrequency = BillsSwapPricer2.GetEffectiveFrequency(cashflowsSchedule, terms);
-            return effectiveFrequency;
+            return BillsSwapPricer2.GetEffectiveFrequency(cashflowsSchedule, terms);
         }
 
         ///<summary>
