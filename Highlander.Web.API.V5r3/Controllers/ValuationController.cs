@@ -29,7 +29,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] List<Tuple<string, decimal, decimal?>> values)
         {
             var curveService = new CurveService(nameSpace, _logger);
-            var buildId = _curveService.UpdateDiscountCurveInputs(values);
+            var buildId = curveService.UpdateDiscountCurveInputs(values);
             return Ok(buildId);
         }
 
