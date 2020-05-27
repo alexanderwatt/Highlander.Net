@@ -21,7 +21,7 @@ namespace Highlander.Web.API.V5r3.Services
             _logger = logger;
         }
 
-        public string UpdateDiscountCurveInputs(List<Tuple<string, decimal, decimal?>> values)
+        public string UpdateDiscountCurveInputs(List<(string, decimal, decimal?)> values)
         {
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);

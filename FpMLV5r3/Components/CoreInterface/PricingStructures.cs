@@ -1105,7 +1105,7 @@ namespace Highlander.Core.Interface.V5r3
         /// Column 3 - any additional value.
         /// </param>
         /// <returns>The ID of the newly created curve.</returns>
-        public string CreateCurve(NamedValueSet properties, List<Tuple<string, decimal, decimal?>> values)
+        public string CreateCurve(NamedValueSet properties, List<(string, decimal, decimal?)> values)
         {
             var additional = new List<decimal>();
             decimal extra = 0.0m;

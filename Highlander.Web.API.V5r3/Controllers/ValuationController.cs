@@ -26,7 +26,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         [HttpPost]
         [Route("curve")]
         [ResponseType(typeof(string))]
-        public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] List<Tuple<string, decimal, decimal?>> values)
+        public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] List<(string, decimal, decimal?)> values)
         {
             var curveService = new CurveService(nameSpace, _logger);
             var buildId = curveService.UpdateDiscountCurveInputs(values);
