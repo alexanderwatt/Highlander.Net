@@ -7,6 +7,7 @@ using Highlander.Reporting.V5r3;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
+using Highlander.Web.API.V5r3.Models;
 
 namespace Highlander.Web.API.V5r3.Services
 {
@@ -21,7 +22,7 @@ namespace Highlander.Web.API.V5r3.Services
             _logger = logger;
         }
 
-        public string UpdateDiscountCurveInputs(List<(string, decimal, decimal?)> values)
+        public string UpdateDiscountCurveInputs(CurveViewModel rateDefinitions)
         {
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
@@ -39,7 +40,18 @@ namespace Highlander.Web.API.V5r3.Services
             properties.Set(CurveProp.CreditSeniority, "SENIOR");
             properties.Set(CurveProp.CreditInstrumentId, "LIBOR");
             _logger.Target.LogInfo("Updated curve :");
-            return _cache.CreateCurve(properties, values);
+
+            var rates = new List<(string, decimal, decimal?)>();
+            rates.Add(("AUD-Deposit-1D", rateDefinitions.OneDayRate, null));
+            rates.Add(("AUD-Deposit-3M", rateDefinitions.ThreeMonthRate, null));
+            rates.Add(("AUD-Deposit-6M", rateDefinitions.SixMonthRate, null));
+            rates.Add(("AUD-IRSwap-1Y", rateDefinitions.OneYearRate, null));
+            rates.Add(("AUD-IRSwap-3Y", rateDefinitions.ThreeYearRate, null));
+            rates.Add(("AUD-IRSwap-5Y", rateDefinitions.FiveYearRate, null));
+            rates.Add(("AUD-IRSwap-7Y", rateDefinitions.SevenYearRate, null));
+            rates.Add(("AUD-IRSwap-10Y", rateDefinitions.TenYearRate, null));
+
+            return _cache.CreateCurve(properties, rates);
         }
     }
 }
