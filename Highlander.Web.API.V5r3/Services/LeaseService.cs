@@ -14,24 +14,24 @@ namespace Highlander.Web.API.V5r3.Services
 {
     public class LeaseService
     {
-        private readonly PricingCache cache;
-        private readonly Reference<ILogger> logger;
+        private readonly PricingCache _cache;
+        private readonly Reference<ILogger> _logger;
 
         public LeaseService(string nameSpace, Reference<ILogger> logger)
         {
-            this.cache = new PricingCache(nameSpace, false);
-            this.logger = logger;
+            this._cache = new PricingCache(nameSpace, false);
+            this._logger = logger;
         }
 
         public IEnumerable<string> GetLeaseTradeIds(string propertyId)
         {
             var properties = new NamedValueSet();
-            properties.Set(EnvironmentProp.NameSpace, cache.NameSpace);
+            properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
             properties.Set(LeaseProp.ReferencePropertyIdentifier, propertyId);
             properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.LeaseTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-            var trades = cache.QueryTradeIds(properties);
-            logger.Target.LogInfo("Queried lease trade ids.");
+            var trades = _cache.QueryTradeIds(properties);
+            _logger.Target.LogInfo("Queried lease trade ids.");
             return trades;
         }
 
@@ -39,15 +39,15 @@ namespace Highlander.Web.API.V5r3.Services
         {
             var props = new NamedValueSet();
             props.Set(Constants.Constants.TransactionIdProperty, transactionId);
-            var trades = cache.GetTrades(props);
+            var trades = _cache.GetTrades(props);
             return trades;
         }
 
         public decimal? GetValuationReport(string reportId)
         {
-            var report = cache.LoadItem<ValuationReport>(cache.NameSpace, reportId).Data as ValuationReport;
-            var quotation = report.GetFirstQuotationForMetricName(LeaseTransactionMetrics.NPV.ToString());
-            return quotation.valueSpecified ? quotation.value : (decimal?)null;
+            var report = _cache.LoadItem<ValuationReport>(_cache.NameSpace, reportId).Data as ValuationReport;
+            var quotation = report?.GetFirstQuotationForMetricName(LeaseTransactionMetrics.NPV.ToString());
+            return quotation != null && quotation.valueSpecified ? quotation.value : (decimal?)null;
         }
         
         public (string Id, string Error) CreateLeaseTrade(LeaseTradeViewModel model, string transactionId)
@@ -69,15 +69,15 @@ namespace Highlander.Web.API.V5r3.Services
             properties.Set(LeaseProp.NextReviewDate, model.NextReviewDate ?? model.LeaseStartDate.AddYears(1));
             properties.Set(LeaseProp.ReviewChange, model.ReviewAmountUpDown ?? 0m);
             properties.Set(LeaseProp.PaymentFrequency, model.PaymentFrequency ?? "1M");
-            var result = cache.CreateLeaseTradeWithProperties(Guid.NewGuid().ToString(), true, model.Tenant, model.Owner, model.TradeDate, model.LeaseStartDate,
+            var result = _cache.CreateLeaseTradeWithProperties(Guid.NewGuid().ToString(), true, model.Tenant, model.Owner, model.TradeDate, model.LeaseStartDate,
                 model.Currency, model.Portfolio, model.StartGrossAmount, model.LeaseId ?? model.ReferencePropertyIdentifier, model.LeaseExpiryDate, model.ReferencePropertyIdentifier, model.Description, properties);
-            logger.Target.LogInfo($"Created lease trade id: {result}");
+            _logger.Target.LogInfo($"Created lease trade id: {result}");
             return (result, null);
         }
 
         public decimal? ValueLease(string leaseId, string owner, string currency, string market)
         {
-            var leaseValueId = cache.ValueTradeFromMarket(leaseId, owner, new List<string> { "NPV" }, currency, market, DateTime.UtcNow);
+            var leaseValueId = _cache.ValueTradeFromMarket(leaseId, owner, new List<string> { "NPV" }, currency, market, DateTime.UtcNow);
             return GetValuationReport(leaseValueId);
         }
     }

@@ -41,15 +41,17 @@ namespace Highlander.Web.API.V5r3.Services
             properties.Set(CurveProp.CreditInstrumentId, "LIBOR");
             _logger.Target.LogInfo("Updated curve :");
 
-            var rates = new List<(string, decimal, decimal?)>();
-            rates.Add(("AUD-Deposit-1D", rateDefinitions.OneDayRate, null));
-            rates.Add(("AUD-Deposit-3M", rateDefinitions.ThreeMonthRate, null));
-            rates.Add(("AUD-Deposit-6M", rateDefinitions.SixMonthRate, null));
-            rates.Add(("AUD-IRSwap-1Y", rateDefinitions.OneYearRate, null));
-            rates.Add(("AUD-IRSwap-3Y", rateDefinitions.ThreeYearRate, null));
-            rates.Add(("AUD-IRSwap-5Y", rateDefinitions.FiveYearRate, null));
-            rates.Add(("AUD-IRSwap-7Y", rateDefinitions.SevenYearRate, null));
-            rates.Add(("AUD-IRSwap-10Y", rateDefinitions.TenYearRate, null));
+            var rates = new List<(string, decimal, decimal?)>
+            {
+                ("AUD-Deposit-1D", rateDefinitions.OneDayRate, null),
+                ("AUD-Deposit-3M", rateDefinitions.ThreeMonthRate, null),
+                ("AUD-Deposit-6M", rateDefinitions.SixMonthRate, null),
+                ("AUD-IRSwap-1Y", rateDefinitions.OneYearRate, null),
+                ("AUD-IRSwap-3Y", rateDefinitions.ThreeYearRate, null),
+                ("AUD-IRSwap-5Y", rateDefinitions.FiveYearRate, null),
+                ("AUD-IRSwap-7Y", rateDefinitions.SevenYearRate, null),
+                ("AUD-IRSwap-10Y", rateDefinitions.TenYearRate, null)
+            };
 
             return _cache.CreateCurve(properties, rates);
         }

@@ -42,9 +42,12 @@ namespace Highlander.Core.Interface.V5r3
         #region Properties
 
         public Reference<ILogger> LogRef;
+
         //private CoreServer _server;
         private ICoreClient _client;
-        public readonly string NameSpace;
+
+        public string NameSpace;
+
         public readonly string ApplicationName;
 
         public RuntimeEnvironment(string nameSpace, bool loadData)

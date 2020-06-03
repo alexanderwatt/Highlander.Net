@@ -75,7 +75,7 @@ namespace Highlander.CurveEngine.V5r3
         /// <summary>
         /// 
         /// </summary>
-        public readonly string NameSpace;
+        public string NameSpace;
 
         /// <summary>
         /// 

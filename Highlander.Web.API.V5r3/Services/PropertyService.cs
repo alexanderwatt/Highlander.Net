@@ -13,23 +13,23 @@ namespace Highlander.Web.API.V5r3.Services
 {
     public class PropertyService
     {
-        private readonly PricingCache cache;
-        private readonly Reference<ILogger> logger;
+        private readonly PricingCache _cache;
+        private readonly Reference<ILogger> _logger;
 
         public PropertyService(string nameSpace, Reference<ILogger> logger)
         {
-            this.cache = new PricingCache(nameSpace, false);
-            this.logger = logger;
+            this._cache = new PricingCache(nameSpace, false);
+            this._logger = logger;
         }
 
         public IEnumerable<string> GetPropertyTradeIds()
         {
             var properties = new NamedValueSet();
-            properties.Set(EnvironmentProp.NameSpace, cache.NameSpace);
+            properties.Set(EnvironmentProp.NameSpace, _cache.NameSpace);
             properties.Set(TradeProp.ProductType, ProductTypeSimpleEnum.PropertyTransaction);
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-            var trades = cache.QueryTradeIds(properties);
-            logger.Target.LogInfo("Queried property trade ids.");
+            var trades = _cache.QueryTradeIds(properties);
+            _logger.Target.LogInfo("Queried property trade ids.");
             return trades;
         }
 
@@ -41,9 +41,9 @@ namespace Highlander.Web.API.V5r3.Services
             //TODO
             //Add the create property to this!!
             //This way the property transaction is closer to the Lendhaus model.
-            var result = cache.CreatePropertyTradeWithProperties(model.TradeId, true, model.Purchaser, model.Seller, model.TradeTimeUtc, model.EffectiveTimeUtc,
+            var result = _cache.CreatePropertyTradeWithProperties(model.TradeId, true, model.Purchaser, model.Seller, model.TradeTimeUtc, model.EffectiveTimeUtc,
                 model.PurchaseAmount, model.PaymentTimeUtc, model.PropertyType, model.Currency, model.PropertyId, model.TradingBook, properties);
-            logger.Target.LogInfo("Created property trade id: {0}", result);
+            _logger.Target.LogInfo("Created property trade id: {0}", result);
             return result;
         }
 
@@ -51,8 +51,8 @@ namespace Highlander.Web.API.V5r3.Services
         {
             var properties = new NamedValueSet();
             properties.Set(EnvironmentProp.Schema, FpML5R3NameSpaces.ReportingSchema);
-            var trades = cache.QueryPropertyAssetIds(properties);
-            logger.Target.LogInfo("Queried property assets.");
+            var trades = _cache.QueryPropertyAssetIds(properties);
+            _logger.Target.LogInfo("Queried property assets.");
             return trades;
         }
 
@@ -60,21 +60,21 @@ namespace Highlander.Web.API.V5r3.Services
         {
             var props = new NamedValueSet();
             props.Set(Constants.Constants.TransactionIdProperty, transactionId);
-            var result = cache.CreatePropertyAsset(model.PropertyId, model.PropertyType, model.ShortName, model.StreetIdentifier, model.StreetName, model.Suburb, model.City,
+            var result = _cache.CreatePropertyAsset(model.PropertyId, model.PropertyType, model.ShortName, model.StreetIdentifier, model.StreetName, model.Suburb, model.City,
     model.PostalCode, model.State, model.Country, model.NumBedrooms.ToString(), model.NumBathrooms.ToString(), model.NumParking.ToString(), model.Currency, model.Description, props);
-            logger.Target.LogInfo($"Created property id: {result}");
+            _logger.Target.LogInfo($"Created property id: {result}");
             return result;
         }
 
         public PropertyNodeStruct GetPropertyAsset(PropertyType propertyType, string city, string shortName, string postCode, string propertyIdentifier)
         {
-            var instrument = cache.GetPropertyAsset(propertyType, city, shortName, postCode, propertyIdentifier);
+            var instrument = _cache.GetPropertyAsset(propertyType, city, shortName, postCode, propertyIdentifier);
             return instrument?.Data as PropertyNodeStruct;
         }
 
         public PricingStructureData GetValue(string id)
         {
-            var pricingStructure = cache.GetPricingStructure(id);
+            var pricingStructure = _cache.GetPricingStructure(id);
             return pricingStructure;
         }
 
@@ -82,8 +82,8 @@ namespace Highlander.Web.API.V5r3.Services
         {
             var props = new NamedValueSet();
             props.Set(Constants.Constants.TransactionIdProperty, transactionId);
-            var properties = cache.DeletePropertyAssetsByQuery(props);
-            var trades = cache.DeleteTradesByQuery(props);
+            var properties = _cache.DeletePropertyAssetsByQuery(props);
+            var trades = _cache.DeleteTradesByQuery(props);
             //TODOS
             //var reports = cache.DeleteReportsByQuery(props);
             return properties + trades;

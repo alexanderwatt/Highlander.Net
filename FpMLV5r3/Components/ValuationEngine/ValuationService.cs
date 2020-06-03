@@ -58,9 +58,10 @@ namespace Highlander.ValuationEngine.V5r3
         #region Private fields
 
         public ILogger Logger { get; private set; }
+
         public ICoreCache Cache { get; private set; }
-        public String NameSpace { get; private set; }
-        //private const string ClientNamespace = "ValuationEngine";
+
+        public string NameSpace { get; set; }
 
         #endregion
         
@@ -82,7 +83,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="logger"></param>
         /// <param name="cache"></param>
         /// <param name="nameSpace"></param>
-        public ValuationService(ILogger logger, ICoreCache cache, String nameSpace)
+        public ValuationService(ILogger logger, ICoreCache cache, string nameSpace)
         {
             Logger = logger;
             Cache = cache;
@@ -1183,7 +1184,7 @@ namespace Highlander.ValuationEngine.V5r3
         /// <param name="valuationDate">The valuation date.</param>
         ///  <param name="market">The market.</param>
         /// <returns></returns>
-        public string ValueTradeFromMarket(ILogger logger, ICoreCache cache, String nameSpace, 
+        public string ValueTradeFromMarket(ILogger logger, ICoreCache cache, string nameSpace, 
             string uniqueTradeId, string reportingParty, List<string> metricsArray, string reportingCurrency, string market,
             DateTime valuationDate)
         {
@@ -1196,7 +1197,7 @@ namespace Highlander.ValuationEngine.V5r3
                     var product = trade.Item;
                     var pricer = new TradePricer(logger, cache, nameSpace, null, trade, properties);
                     //Get the market
-                    var marketEnviroment = Highlander.CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
+                    var marketEnviroment = CurveEngine.V5r3.CurveEngine.GetMarket(logger, cache, nameSpace, product, market, reportingCurrency, false);
                     var controller = TradePricer.CreateInstrumentModelData(metricsArray, valuationDate, marketEnviroment, reportingCurrency, reportingParty);
                     var assetValuationReport = pricer.Price(controller, ValuationReportType.Full);
                     //var id = uniqueTradeId.Split('.')[uniqueTradeId.Split('.').Length - 1];

@@ -31,9 +31,7 @@ namespace Highlander.Core.Common
     {
         private readonly TimeSpan _cDebugMsgLifetime = TimeSpan.FromDays(1);
 
-        private readonly IModuleInfo _clientInfo = new ModuleInfo(BuildConst.BuildEnv, Guid.NewGuid(), "localhost\\user", null, null, null);
-        
-        public IModuleInfo ClientInfo => _clientInfo;
+        public IModuleInfo ClientInfo { get; } = new ModuleInfo(BuildConst.BuildEnv, Guid.NewGuid(), "localhost\\user", null, null, null);
 
         public ServiceAddress ServerAddress => null;
 
@@ -51,11 +49,9 @@ namespace Highlander.Core.Common
 
         public void Dispose()
         {
-            if (_cacheEngine != null)
-            {
-                _cacheEngine.Dispose();
-                _cacheEngine = null;
-            }
+            if (_cacheEngine == null) return;
+            _cacheEngine.Dispose();
+            _cacheEngine = null;
         }
 
         // ICoreClient methods
@@ -411,7 +407,7 @@ namespace Highlander.Core.Common
         // configuration methods
         public void SaveAppSettings(NamedValueSet newSettings, string applName, string userName, string hostName, bool replaceOldSettings)
         {
-            SaveAppSettings(newSettings, applName, userName, hostName, replaceOldSettings, _clientInfo.ConfigEnv);
+            SaveAppSettings(newSettings, applName, userName, hostName, replaceOldSettings, ClientInfo.ConfigEnv);
         }
 
         public void SaveAppSettings(NamedValueSet newSettings, string applName, string userName, string hostName, bool replaceOldSettings, EnvId env)
@@ -463,12 +459,12 @@ namespace Highlander.Core.Common
 
         public void SaveAppSettings(NamedValueSet settings)
         {
-            SaveAppSettings(settings, _clientInfo.ApplName, _clientInfo.UserName, _clientInfo.HostName, false);
+            SaveAppSettings(settings, ClientInfo.ApplName, ClientInfo.UserName, ClientInfo.HostName, false);
         }
 
         public void SaveAppSettings(NamedValueSet settings, string applName)
         {
-            SaveAppSettings(settings, applName, _clientInfo.UserName, _clientInfo.HostName, false);
+            SaveAppSettings(settings, applName, ClientInfo.UserName, ClientInfo.HostName, false);
         }
 
         public NamedValueSet LoadAppSettings(string applName, string userName, string hostName)
@@ -476,12 +472,12 @@ namespace Highlander.Core.Common
             NamedValueSet result = new NamedValueSet();
             IExpression query = Expr.BoolAND(
                 Expr.BoolOR(Expr.IsEQU(AppPropName.ApplName, "*"),
-                    (applName == null ? Expr.IsEQU(AppPropName.ApplName, _clientInfo.ApplName) : Expr.StartsWith(AppPropName.ApplName, applName))),
+                    (applName == null ? Expr.IsEQU(AppPropName.ApplName, ClientInfo.ApplName) : Expr.StartsWith(AppPropName.ApplName, applName))),
                 Expr.BoolOR(Expr.IsEQU(AppPropName.UserName, "*"),
-                    (userName == null ? Expr.IsEQU(AppPropName.UserName, _clientInfo.UserName) : Expr.IsEQU(AppPropName.UserName, userName))),
+                    (userName == null ? Expr.IsEQU(AppPropName.UserName, ClientInfo.UserName) : Expr.IsEQU(AppPropName.UserName, userName))),
                 Expr.BoolOR(Expr.IsEQU(AppPropName.HostName, "*"),
-                    (hostName == null ? Expr.IsEQU(AppPropName.HostName, _clientInfo.HostName) : Expr.IsEQU(AppPropName.HostName, hostName))),
-                Expr.BoolOR(Expr.IsEQU("Env", EnvHelper.EnvName(_clientInfo.ConfigEnv)), Expr.IsEQU("Env", "*")));
+                    (hostName == null ? Expr.IsEQU(AppPropName.HostName, ClientInfo.HostName) : Expr.IsEQU(AppPropName.HostName, hostName))),
+                Expr.BoolOR(Expr.IsEQU("Env", EnvHelper.EnvName(ClientInfo.ConfigEnv)), Expr.IsEQU("Env", "*")));
             //if (DebugRequests)
             //    _Logger.LogDebug("LoadAppSettings: Query={0}", query.DisplayString());
             List<AppCfgRuleV2> rules = LoadObjects<AppCfgRuleV2>(query);
@@ -965,8 +961,7 @@ namespace Highlander.Core.Common
             IExpression query, long minimumUSN, bool includeDeleted, DateTimeOffset asAtTime)
         {
             List<PrivateItem> results = new List<PrivateItem>();
-            if (query == null)
-                query = Expr.ALL;
+            query ??= Expr.ALL;
             // match subscription to existing cached Events
             _itemNameIndex.Locked(nameIndex =>
             {
@@ -992,8 +987,7 @@ namespace Highlander.Core.Common
 
         private PrivateItem GetCacheItem(string itemName, ItemKind itemKind, string appScope, string dataTypeName, bool includeDeleted, DateTimeOffset asAtTime)
         {
-            if (appScope == null)
-                appScope = _appScopeManager.DefaultAppScope;
+            appScope ??= _appScopeManager.DefaultAppScope;
             string uniqueItemName = CoreHelper.MakeUniqueName(itemKind, appScope, itemName);
             PrivateItem result = null;
             _itemNameIndex.Locked(nameIndex =>
@@ -1136,8 +1130,7 @@ namespace Highlander.Core.Common
                     _lifetime = TimeSpan.Zero;
                 _expires = _Created.Add(_lifetime);
             }
-            if (DataTypeName == null)
-                DataTypeName = "";
+            DataTypeName ??= "";
             // done
             Frozen = true;
         }

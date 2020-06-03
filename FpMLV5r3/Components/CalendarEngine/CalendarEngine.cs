@@ -48,7 +48,7 @@ namespace Highlander.CalendarEngine.V5r3
 
         public ICoreCache Cache;
         public ILogger Logger;
-        public readonly string NameSpace;
+        public string NameSpace;
 
         #endregion
 

@@ -8,7 +8,7 @@ namespace Highlander.Web.API.V5r3.Services
 {
     public class CacheManager
     {
-        Dictionary<string, bool> _loadedNameSpaces;
+        private readonly Dictionary<string, bool> _loadedNameSpaces;
         private readonly Reference<ILogger> _logger;
         private readonly ICoreCache _cache;
 

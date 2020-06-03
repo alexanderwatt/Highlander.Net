@@ -2777,13 +2777,13 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             trade.id = "TestTrade001";
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleSwap.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             //Calculate the metrics.
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "EUR", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 
@@ -2797,13 +2797,13 @@ namespace Highlander.ValuationEngine.Tests.V5r3
             trade.id = "TestTrade001";
             var tradeProps = new NamedValueSet(
                 ResourceHelper.GetResourceWithPartialName(Assembly.GetExecutingAssembly(), "SampleSwaption.nvs"));
-            //Create the tradepricer.
+            //Create the trade pricer.
             var tradePricer = new TradePricer(CurveEngine.Logger, CurveEngine.Cache, CurveEngine.NameSpace, null, trade, tradeProps);
             var baseParty = tradeProps.GetValue<string>("Party1", true);
             //Calculate the metrics.
             var modelData = ValuationEngineTests1.CreateInstrumentModelData(_metrics, _baseDate, Market, "AUD", baseParty);
-            var calcresult = tradePricer.Price(modelData, ValuationReportType.Summary);
-            var result = XmlSerializerHelper.SerializeToString(calcresult);
+            var calcResult = tradePricer.Price(modelData, ValuationReportType.Summary);
+            var result = XmlSerializerHelper.SerializeToString(calcResult);
             Debug.Print(result);
         }
 

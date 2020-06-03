@@ -76,10 +76,23 @@ namespace Highlander.Core.Interface.V5r3
         /// </summary>
         public readonly RuntimeEnvironment Environment;
 
+        private string _nameSpace;
+
         /// <summary>
         /// The name space.
         /// </summary>
-        public string NameSpace;
+        public string NameSpace
+        {
+            get => _nameSpace;
+            set
+            {
+                _nameSpace = value;
+                Environment.NameSpace = value;
+                Engine.NameSpace = value;
+                ValService.NameSpace = value;
+                CalendarService.NameSpace = value;
+            }
+        }
 
         #endregion
 
@@ -92,7 +105,6 @@ namespace Highlander.Core.Interface.V5r3
         {
             NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
             //This environment now loads default data
-            //TODO make the configuration data specific to the namespace!
             Environment = new RuntimeEnvironment(NameSpace, loadData);
             Engine = new CurveEngine.V5r3.CurveEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
             ValService = new ValuationService(Environment.LogRef.Target, Environment.Cache, NameSpace);
