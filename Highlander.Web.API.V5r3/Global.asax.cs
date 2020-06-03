@@ -3,6 +3,7 @@ using Autofac.Integration.WebApi;
 using Highlander.Configuration.Data.V5r3;
 using Highlander.Constants;
 using Highlander.Core.Common;
+using Highlander.Core.Interface.V5r3;
 using Highlander.Core.V34;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
@@ -10,6 +11,7 @@ using Highlander.Web.API.V5r3.Filters;
 using Highlander.Web.API.V5r3.Services;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
@@ -49,27 +51,27 @@ namespace Highlander.Web.API.V5r3
 
             var environment = ConfigurationManager.AppSettings["env"];
 
-            //TODO How to use dependency injection with a namespace argument dependent on the http request? Delegate factories seems like overkill
-            //builder.Register(c => {
-            //    try
-            //    {
-            //        var stopwatch = new Stopwatch();
-            //        stopwatch.Start();
-            //        var cache = new PricingCache();
-            //        stopwatch.Stop();
-            //        Debug.Print($"Initialized pricing cache in {stopwatch.Elapsed.TotalSeconds} seconds");
-            //        return cache;
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        logger.Target.Log(ex);
-            //        throw ex;
-            //    }
-            //}).AsSelf().InstancePerRequest();
+            builder.Register(c =>
+            {
+                try
+                {
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    var cache = new PricingCache();
+                    stopwatch.Stop();
+                    Debug.Print($"Initialized pricing cache in {stopwatch.Elapsed.TotalSeconds} seconds");
+                    return cache;
+                }
+                catch (Exception ex)
+                {
+                    logger.Target.Log(ex);
+                    throw ex;
+                }
+            }).AsSelf().SingleInstance();
 
-            //builder.RegisterType<PropertyService>().AsSelf().InstancePerRequest();
-            //builder.RegisterType<LeaseService>().AsSelf().InstancePerRequest();
-            //builder.RegisterType<CurveService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<PropertyService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<LeaseService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<CurveService>().AsSelf().InstancePerRequest();
 
             var factory = new CoreClientFactory(logger)
                 .SetEnv(environment)
@@ -79,22 +81,22 @@ namespace Highlander.Web.API.V5r3
 
             builder.Register(c => client).As<ICoreClient>().SingleInstance();
 
-            builder.Register(c => c.Resolve<ICoreClient>().CreateCache()).As<ICoreCache>().SingleInstance();
+            builder.Register(c => client.CreateCache()).As<ICoreCache>().SingleInstance();
 
             builder.RegisterType<CacheManager>().AsSelf().SingleInstance();
 
-            try
-            {
-                logger.Target.LogInfo("Loading data into cache...");
-                var nameSpace = EnvironmentProp.DefaultNameSpace;
-                LoadConfigDataHelper.LoadConfigurationData(logger.Target, client, nameSpace);
-                logger.Target.LogInfo("Loaded data into cache successfully");
-            }
-            catch (Exception exception)
-            {
-                logger.Target.Log(exception);
-                throw exception;
-            }
+            //try
+            //{
+            //    logger.Target.LogInfo("Loading data into cache...");
+            //    var nameSpace = EnvironmentProp.DefaultNameSpace;
+            //    LoadConfigDataHelper.LoadConfigurationData(logger.Target, client, nameSpace);
+            //    logger.Target.LogInfo("Loaded data into cache successfully");
+            //}
+            //catch (Exception exception)
+            //{
+            //    logger.Target.Log(exception);
+            //    throw exception;
+            //}
             
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 

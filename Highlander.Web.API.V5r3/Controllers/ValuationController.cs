@@ -13,12 +13,21 @@ namespace Highlander.Web.API.V5r3.Controllers
     [RoutePrefix("api/properties/valuation")]
     public class ValuationController : ApiController
     {
+        private readonly PropertyService _propertyService;
+        private readonly LeaseService _leaseService;
+        private readonly CurveService _curveService;
         private readonly Reference<ILogger> _logger;
 
         public ValuationController(
+            PropertyService propertyService,
+            LeaseService leaseService,
+            CurveService curveService,
             Reference<ILogger> logger
             )
         {
+            _propertyService = propertyService;
+            _leaseService = leaseService;
+            _curveService = curveService;
             _logger = logger;
         }
 
@@ -27,8 +36,7 @@ namespace Highlander.Web.API.V5r3.Controllers
         [ResponseType(typeof(string))]
         public IHttpActionResult UpdateCurveInputs(string nameSpace, [FromBody] CurveViewModel rateDefinitions)
         {
-            var curveService = new CurveService(nameSpace, _logger);
-            var buildId = curveService.UpdateDiscountCurveInputs(rateDefinitions);
+            var buildId = _curveService.UpdateDiscountCurveInputs(rateDefinitions);
             return Ok(buildId);
         }
 
@@ -39,21 +47,18 @@ namespace Highlander.Web.API.V5r3.Controllers
         {
             var transactionId = Guid.NewGuid().ToString();
 
-            var propertyService = new PropertyService(nameSpace, _logger);
-            var leaseService = new LeaseService(nameSpace, _logger);
-
             //create assets
-            var propertyAsset = propertyService.CreatePropertyAsset(model, transactionId);
+            var propertyAsset = _propertyService.CreatePropertyAsset(model, transactionId);
             model.Trade.PropertyId = propertyAsset;
             //var propertyTrade = _propertyService.CreatePropertyTrade(model.Trade, transactionId);
             var leaseTradeIds = new Dictionary<string, LeaseTradeViewModel>();
             foreach (var lease in model.Leases)
             {
                 lease.ReferencePropertyIdentifier = propertyAsset;
-                var result = leaseService.CreateLeaseTrade(lease, transactionId);
+                var result = _leaseService.CreateLeaseTrade(lease, transactionId);
                 if(result.Error != null)
                 {
-                    propertyService.CleanTransaction(transactionId);
+                    _propertyService.CleanTransaction(transactionId);
                     throw new Exception("Failed to create a lease - valuation aborted");
                 }
                 leaseTradeIds.Add(result.Id, lease);
@@ -63,7 +68,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             var totalValue = 0m;
             foreach (var lease in leaseTradeIds)
             {
-                var leaseValue = leaseService.ValueLease(lease.Key, lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
+                var leaseValue = _leaseService.ValueLease(lease.Key, lease.Value.Owner, lease.Value.Currency, Constants.Constants.MarketName);
 
                 if (leaseValue == null)
                 {
@@ -73,7 +78,7 @@ namespace Highlander.Web.API.V5r3.Controllers
             }
 
             //cleanup
-            var deleted = propertyService.CleanTransaction(transactionId);
+            var deleted = _propertyService.CleanTransaction(transactionId);
 
             return Ok(totalValue);
         }
