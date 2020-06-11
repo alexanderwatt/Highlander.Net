@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Core.Common", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EF1DC0A5-C2E7-42CC-BC32-4E4B5FFD95CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.GrpcService", "src\Core.Net\Highlander.GrpcService\Highlander.GrpcService.csproj", "{2C816F4D-52C9-437E-867E-D2C9EC6F2733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.GrpcService", "src\Core.Net\Highlander.GrpcService\Highlander.GrpcService.csproj", "{2C816F4D-52C9-437E-867E-D2C9EC6F2733}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Highlander.GrpcService.Discover";
+
+package highlander.discover;
+
+//requests
+message DiscoverServiceV111Request {
+}
+
+//replies
+
+message V111DiscoverReply {
+    repeated string supported_contracts = 1;
+}
+
+
+//services
+
+service IDiscoverV111 {
+    rpc DiscoverServiceV111 (DiscoverServiceV111Request) returns (V111DiscoverReply);
+}

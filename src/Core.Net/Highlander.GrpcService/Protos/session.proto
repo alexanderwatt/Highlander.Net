@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+option csharp_namespace = "Highlander.GrpcService.Session";
+
+package highlander.session;
+
+message V341BeginSession {
+    string subscription_id = 1;
+}
+
+message V341CloseSession {
+    sint32 reserved = 1;
+}
+
+message V131SessionHeader {
+    string session_id = 1; //GUID, client id
+    string request_id = 2; //GUID
+    string reply_address = 3;
+    string reply_contract = 4;
+    bool more_following = 5;
+    bool reply_required = 6;
+    bool debug_request = 7;
+}
+
+message V131SessionReply {
+    bool success = 1;
+    string session_id = 2; //GUID, client id
+    string message = 3;
+}
+
+message V131AssmInfo {
+    string assm_name = 1;
+    string assm_n_ver = 2;
+    string assm_f_ver = 3;
+    string assm_i_ver = 4;
+    string assm_p_tok = 5;
+    sint32 assm_hash = 6;
+}
+
+message V131UserInfo {
+    string user_identity_name = 1;
+    string user_full_name = 2;
+}
+
+enum V131EnvId {
+    Undefined = 0;
+    UTT_UnitTest = 1;
+    DEV_Development = 2;
+    SIT_SystemTest = 3;
+    STG_StagingLive = 4;
+    PRD_Production = 5;
+}
+
+message V131ClientInfo {
+    string node_guid = 1;
+    V131EnvId build_env = 2;
+    V131EnvId config_env = 3;
+    string host_name = 4;
+    string host_ip_v4 = 5;
+    repeated string net_addrs = 6;
+    V131UserInfo user_info = 7;
+    V131AssmInfo comp_info = 8;
+    V131AssmInfo appl_info = 9;
+}
+
+message V131ErrorDetail {
+    string full_name = 1;
+    string message = 2;
+    string source = 3;
+    string stack_trace = 4;
+    V131ErrorDetail inner_error = 5;
+}
+
+//requests
+message BeginSessionV131Request {
+    V131SessionHeader header = 1;
+    V131ClientInfo client_info = 2;
+}
+
+message CloseSessionV131Request {
+    V131SessionHeader header = 1;
+}
+
+//replies
+
+message CloseSessionV131Reply {
+}
+
+
+//services
+
+service ISessCtrlV131 {
+    rpc BeginSessionV131 (BeginSessionV131Request) returns (V131SessionReply);
+    rpc CloseSessionV131 (CloseSessionV131Request) returns (CloseSessionV131Reply);
+}

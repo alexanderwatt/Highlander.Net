@@ -1,0 +1,162 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "Protos/session.proto";
+
+option csharp_namespace = "Highlander.GrpcService.Contracts";
+
+package highlander.contracts;
+
+message V341Source {
+  string source_node_id = 1;
+}
+
+enum V341ItemKind {
+    Undefined = 0;
+    Event = 1;
+    Object = 2;
+    Debug = 3;
+    System = 4;
+    Local = 5;
+}
+
+message V341TransportItem {
+    string item_id = 1;
+    V341ItemKind item_kind = 2;
+    bool Transient = 3;
+    string item_name = 4;
+    string app_props = 5;
+    string data_type = 6;
+    string app_scope = 7;
+    google.protobuf.Timestamp created = 8;
+    google.protobuf.Timestamp expires = 9;
+    string sys_props = 10;
+    string net_scope = 11;
+    bytes y_data = 12;
+    bytes y_sign = 13;
+    sint64 source_u_s_n = 14;
+}
+
+message V341AnswerMultipleItems {
+    repeated V341TransportItem items = 2;
+}
+
+message V341NotifyMultipleItems {
+    string subscription_id = 1;
+    repeated V341TransportItem items = 2;
+}
+
+message V341QueryDefinition {
+    V341ItemKind item_kind = 1;
+    string data_type = 2;
+    repeated string app_scopes = 3;
+    repeated string item_names = 4;
+    string query_expr = 5;
+    sint64 minimum_u_s_n = 6;
+    bool exclude_deleted = 7;
+    google.protobuf.Timestamp as_at_time = 8;
+    bool exclude_existing = 9;
+    bool wait_for_existing = 10;
+    bool exclude_data_body = 11;
+}
+
+message V341SelectMultipleItems {
+    V341QueryDefinition query_def = 1;
+    repeated string item_ids = 2;
+    string order_expr = 3;
+    sint32 start_row = 4;
+    sint32 row_count = 5;
+}
+
+message V341CreateSubscription {
+    string subscription_id = 1;
+    V341QueryDefinition query_def = 2;
+    google.protobuf.Timestamp expiry_time = 3;
+}
+
+message V341ExtendSubscription {
+    string subscription_id = 1;
+    google.protobuf.Timestamp expiry_time = 2;
+}
+
+message V341CancelSubscription {
+    string subscription_id = 1;
+}
+
+message V341CompletionResult {
+    bool success = 1;
+    sint32 result = 2;
+    string message = 3;
+}
+
+//requests
+message TransferV341SelectMultipleItemsRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341SelectMultipleItems body = 2;
+}
+
+message TransferV341CompletionResultRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341CompletionResult body = 2;
+}
+
+message TransferV341CreateSubscriptionRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341CreateSubscription body = 2;
+}
+
+message TransferV341ExtendSubscriptionRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341ExtendSubscription body = 2;
+}
+
+message TransferV341CancelSubscriptionRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341CancelSubscription body = 2;
+}
+
+message TransferV341AnswerMultipleItemsRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341AnswerMultipleItems body = 2;
+}
+
+message TransferV341NotifyMultipleItemsRequest {
+    highlander.session.V131SessionHeader header = 1;
+    V341NotifyMultipleItems body = 2;
+}
+
+//replies
+
+message TransferV341SelectMultipleItemsReply {
+}
+
+message TransferV341CompletionResultReply {
+}
+
+message TransferV341CreateSubscriptionReply {
+}
+
+message TransferV341ExtendSubscriptionReply {
+}
+
+message TransferV341CancelSubscriptionReply {
+}
+
+message TransferV341AnswerMultipleItemsReply {
+}
+
+message TransferV341NotifyMultipleItemsReply {
+}
+
+//services
+
+service ITransferV341 {
+    rpc TransferV341SelectMultipleItems (TransferV341SelectMultipleItemsRequest) returns (TransferV341SelectMultipleItemsReply);
+    rpc TransferV341CompletionResult (TransferV341CompletionResultRequest) returns (TransferV341CompletionResultReply);
+    rpc TransferV341CreateSubscription (TransferV341CreateSubscriptionRequest) returns (TransferV341CreateSubscriptionReply);
+    rpc TransferV341ExtendSubscription (TransferV341ExtendSubscriptionRequest) returns (TransferV341ExtendSubscriptionReply);
+    rpc TransferV341CancelSubscription (TransferV341CancelSubscriptionRequest) returns (TransferV341CancelSubscriptionReply);
+    rpc TransferV341AnswerMultipleItems (TransferV341AnswerMultipleItemsRequest) returns (TransferV341AnswerMultipleItemsReply);
+    rpc TransferV341NotifyMultipleItems (TransferV341NotifyMultipleItemsRequest) returns (TransferV341NotifyMultipleItemsReply);
+}

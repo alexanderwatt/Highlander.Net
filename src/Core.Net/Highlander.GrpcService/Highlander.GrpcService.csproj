@@ -1,11 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\contracts.proto" />
+    <None Remove="Protos\discover.proto" />
+    <None Remove="Protos\greet.proto" />
+    <None Remove="Protos\session.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\contracts.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\discover.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\session.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
