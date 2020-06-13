@@ -17,16 +17,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.ServiceModel;
 using System.Threading;
 using Highlander.Core.Common;
-using Highlander.Core.Common.Encryption;
+using Highlander.Metadata.Common;
 using Highlander.Utilities.Compression;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -35,10 +34,41 @@ using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
 using Highlander.Utilities.Threading;
 using static System.String;
+using AppCfgRuleV2 = Highlander.Core.Common.AppCfgRuleV2;
+using AppPropName = Highlander.Core.Common.AppPropName;
+using AppScopeNames = Highlander.Core.Common.AppScopeNames;
+using CacheChangeHandler = Highlander.Core.Common.CacheChangeHandler;
+using CommonItem = Highlander.Core.Common.CommonItem;
+using Converters = Highlander.Core.Common.Converters;
+using CoreCache = Highlander.Core.Common.CoreCache;
+using CoreHelper = Highlander.Core.Common.CoreHelper;
+using CoreModeEnum = Highlander.Core.Common.CoreModeEnum;
+using CoreStateChange = Highlander.Core.Common.CoreStateChange;
+using CoreStateEnum = Highlander.Core.Common.CoreStateEnum;
+using CoreStateHandler = Highlander.Core.Common.CoreStateHandler;
+using EnvHelper = Highlander.Core.Common.EnvHelper;
+using EnvId = Highlander.Core.Common.EnvId;
+using ICoreCache = Highlander.Core.Common.ICoreCache;
+using ICoreClient = Highlander.Core.Common.ICoreClient;
+using ICoreItem = Highlander.Core.Common.ICoreItem;
+using ICoreItemInfo = Highlander.Core.Common.ICoreItemInfo;
+using ICoreObject = Highlander.Core.Common.ICoreObject;
+using IModuleInfo = Highlander.Core.Common.IModuleInfo;
+using ISubscription = Highlander.Core.Common.ISubscription;
+using ItemKind = Highlander.Core.Common.ItemKind;
+using ModuleInfo = Highlander.Core.Common.ModuleInfo;
+using RawItem = Highlander.Core.Common.RawItem;
+using SerialFormat = Highlander.Core.Common.SerialFormat;
+using ServiceAddress = Highlander.Core.Common.ServiceAddress;
+using ServiceAddresses = Highlander.Core.Common.ServiceAddresses;
+using ServiceHelper = Highlander.Core.Common.ServiceHelper;
+using SubscriptionCallback = Highlander.Core.Common.SubscriptionCallback;
+using SvcId = Highlander.Core.Common.SvcId;
+using SysPropName = Highlander.Core.Common.SysPropName;
 
 #endregion
 
-namespace Highlander.Core.V34
+namespace Highlander.Core.V1
 {
     internal class ClientItem : CommonItem, ICoreItem
     {
@@ -53,7 +83,6 @@ namespace Highlander.Core.V34
         private byte[] _zData;
         private string _text;
         private object _data;
-        private Type _dataTypeType;
 
         // constructors
         /// <summary>
@@ -86,7 +115,7 @@ namespace Highlander.Core.V34
             SysProps.Set(SysPropName.SAlg, (int)serialFormat);
             AppProps.Add(props);
             _data = data;
-            _dataTypeType = dataType ?? throw new ArgumentNullException(nameof(dataType));
+            DataType = dataType ?? throw new ArgumentNullException(nameof(dataType));
             DataTypeName = dataType.FullName;
             _lifetime = lifetime;
         }
@@ -143,7 +172,7 @@ namespace Highlander.Core.V34
         {
             _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
             _frozen = true;
-            _dataTypeType = dataType;
+            DataType = dataType;
         }
 
         /// <summary>
@@ -237,8 +266,7 @@ namespace Highlander.Core.V34
             }
             // serialise the data if required
             Serialise();
-            if (DataTypeName == null)
-                DataTypeName = "";
+            DataTypeName ??= "";
             if (_text == null)
             {
                 //_Text = "";
@@ -387,11 +415,11 @@ namespace Highlander.Core.V34
                         _text = BinarySerializerHelper.SerializeToString(_data);
                         SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Binary);
                         break;
-                    case SerialFormat.Soap:
-                        // try Soap serialiser
-                        _text = SoapSerializerHelper.SerializeToString(_data);
-                        SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Soap);
-                        break;
+                    //case SerialFormat.Soap:
+                    //    // try Soap serialiser
+                    //    _text = SoapSerializerHelper.SerializeToString(_data);
+                    //    SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Soap);
+                    //    break;
                     case SerialFormat.Json:
                         // try Json serialiser
                         _text = JsonSerializerHelper.SerializeToString(_data);
@@ -400,7 +428,7 @@ namespace Highlander.Core.V34
                     case SerialFormat.Xml:              
                         try
                         {
-                            _text = XmlSerializerHelper.SerializeToString(_dataTypeType, _data);
+                            _text = XmlSerializerHelper.SerializeToString(DataType, _data);
                             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Xml);
                         }
                         catch (Exception excp)
@@ -416,7 +444,7 @@ namespace Highlander.Core.V34
                         // use default xml serialiser
                         try
                         {
-                            _text = XmlSerializerHelper.SerializeToString(_dataTypeType, _data);
+                            _text = XmlSerializerHelper.SerializeToString(DataType, _data);
                             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Xml);
                         }
                         catch (Exception excp)
@@ -439,7 +467,7 @@ namespace Highlander.Core.V34
                 // decompress 1st if required
                 Decompress();
                 // now deserialise
-                Type dataTypeType = userDataType ?? _dataTypeType;
+                Type dataTypeType = userDataType ?? DataType;
                 if (dataTypeType == null && !IsNullOrEmpty(DataTypeName))
                 {
                     dataTypeType = Type.GetType(DataTypeName);
@@ -455,11 +483,11 @@ namespace Highlander.Core.V34
                     // use Binary deserializer
                     _data = BinarySerializerHelper.DeserializeFromString(_text);
                 }
-                else if (serialFormat == SerialFormat.Soap)
-                {
-                    // use Soap deserializer
-                    _data = SoapSerializerHelper.DeserializeFromString(_text);
-                }
+                //else if (serialFormat == SerialFormat.Soap)
+                //{
+                //    // use Soap deserializer
+                //    _data = SoapSerializerHelper.DeserializeFromString(_text);
+                //}
                 else if (serialFormat == SerialFormat.Json)
                 {
                     // use Json deserializer
@@ -503,7 +531,7 @@ namespace Highlander.Core.V34
             get
             {
                 // deserialise if required
-                Deserialise(_dataTypeType);
+                Deserialise(DataType);
                 return _data;
             }
         }
@@ -528,7 +556,7 @@ namespace Highlander.Core.V34
 
         /// <summary>
         /// </summary>
-        public Type DataType => _dataTypeType;
+        public Type DataType { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -537,7 +565,7 @@ namespace Highlander.Core.V34
             CheckNotFrozen();
             _data = data;
             _text = null;
-            _dataTypeType = dataType;
+            DataType = dataType;
             DataTypeName = dataType.FullName;
         }
 
@@ -563,7 +591,7 @@ namespace Highlander.Core.V34
             _text = text;
             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Undefined);
             _data = null;
-            _dataTypeType = null;
+            DataType = null;
             DataTypeName = dataTypeName;
         }
 
@@ -575,7 +603,7 @@ namespace Highlander.Core.V34
             _text = text;
             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Undefined);
             _data = null;
-            _dataTypeType = dataType;
+            DataType = dataType;
             DataTypeName = dataType.FullName;
         }
 

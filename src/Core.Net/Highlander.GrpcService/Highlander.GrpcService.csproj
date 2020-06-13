@@ -5,11 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Compile Remove="Contracts.3.4.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\comms.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common2\Highlander.Core.Common.csproj" />
+    <ProjectReference Include="..\Metadata.Common\Highlander.Metadata.Common.csproj" />
   </ItemGroup>
 
 </Project>

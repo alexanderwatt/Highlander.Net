@@ -24,7 +24,7 @@ using Highlander.Utilities.Threading;
 
 #endregion
 
-namespace Highlander.Core.V34
+namespace Highlander.Core.V1
 {
     /// <summary>
     /// A manager class for subscriptions.
@@ -211,7 +211,7 @@ namespace Highlander.Core.V34
         {
             CheckNotStarted();
             if (_itemKind == ItemKind.Undefined)
-                throw new ArgumentNullException("ItemKind");
+                throw new ArgumentNullException($"ItemKind");
             Interlocked.Exchange(ref _startCount, 1);
             _client.OnStateChange += NotifyUserStateChange;
             _client.StartSubscription(Id);

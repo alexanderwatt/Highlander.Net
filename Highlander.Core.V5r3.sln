@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Core.Common", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EF1DC0A5-C2E7-42CC-BC32-4E4B5FFD95CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.GrpcService", "src\Core.Net\Highlander.GrpcService\Highlander.GrpcService.csproj", "{2C816F4D-52C9-437E-867E-D2C9EC6F2733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.GrpcService", "src\Core.Net\Highlander.GrpcService\Highlander.GrpcService.csproj", "{2C816F4D-52C9-437E-867E-D2C9EC6F2733}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Core.V1", "src\Core.Net\Core.V1\Highlander.Core.V1.csproj", "{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -231,6 +233,30 @@ Global
 		{2C816F4D-52C9-437E-867E-D2C9EC6F2733}.UnitTest|Win32.Build.0 = Debug|Any CPU
 		{2C816F4D-52C9-437E-867E-D2C9EC6F2733}.UnitTest|x86.ActiveCfg = Debug|Any CPU
 		{2C816F4D-52C9-437E-867E-D2C9EC6F2733}.UnitTest|x86.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|Win32.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Debug|x86.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Win32.ActiveCfg = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|Win32.Build.0 = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.Release|x86.Build.0 = Release|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Win32.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|Win32.Build.0 = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|x86.ActiveCfg = Debug|Any CPU
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7}.UnitTest|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,6 +270,7 @@ Global
 		{B89BBAFC-D54F-449A-92DB-3347105E0405} = {678811DA-BEE6-4BC8-AA20-C210B4C88A68}
 		{C6F0D9E8-C2D9-4D80-8B9A-8AF1137DB5B3} = {EF1DC0A5-C2E7-42CC-BC32-4E4B5FFD95CB}
 		{2C816F4D-52C9-437E-867E-D2C9EC6F2733} = {EF1DC0A5-C2E7-42CC-BC32-4E4B5FFD95CB}
+		{CCFE331F-39EA-49B4-8AFD-2EFA91F4FCC7} = {EF1DC0A5-C2E7-42CC-BC32-4E4B5FFD95CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE1C46AE-29AA-423F-896A-2E19AC4F20FF}

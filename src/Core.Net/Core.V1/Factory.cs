@@ -25,7 +25,7 @@ using Highlander.Utilities.Threading;
 
 #endregion
 
-namespace Highlander.Core.V34
+namespace Highlander.Core.V1
 {
     internal class ClientSettings
     {
@@ -253,7 +253,7 @@ namespace Highlander.Core.V34
         /// </summary>
         /// <param name="env">The environment.</param>
         /// <returns></returns>
-        public CoreClientFactory SetEnv(string env)
+        public CoreClientFactory SetEnvironment(string env)
         {
             Env = env ?? throw new ArgumentNullException(nameof(env));
             return this;
@@ -392,7 +392,6 @@ namespace Highlander.Core.V34
                     offlineTimeout = cachedSettings.OfflineTimeout;
                     coreMode = cachedSettings.CoreMode;
                     applAssembly = cachedSettings.ApplAssembly;
-                    //_logger.LogDebug("Using cached settings: {0} --> {1}://{2}", cacheKey, scheme, servers);
                 }
             });
             ICoreClient client = new CoreClient(

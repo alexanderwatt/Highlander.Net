@@ -189,15 +189,19 @@ namespace Highlander.Core.Common
     {
         [DataMember]
         public readonly Guid SubscriptionId;
+
         [DataMember]
         public readonly V341TransportItem[] Items;
+
         // constructors
         public V341NotifyMultipleItems() { }
+
         public V341NotifyMultipleItems(Guid subscriptionId, V341TransportItem item)
         {
             SubscriptionId = subscriptionId;
             Items = new[] { item };
         }
+
         public V341NotifyMultipleItems(Guid subscriptionId, V341TransportItem[] items)
         {
             SubscriptionId = subscriptionId;
@@ -230,8 +234,10 @@ namespace Highlander.Core.Common
         public readonly bool WaitForExisting;
         [DataMember]
         public readonly bool ExcludeDataBody;
+
         // constructors
         public V341QueryDefinition() { }
+
         public V341QueryDefinition(
             ItemKind itemKind,
             string dataType,
@@ -274,6 +280,7 @@ namespace Highlander.Core.Common
         public readonly int RowCount;
         // constructors
         public V341SelectMultipleItems() { }
+
         // selecting by guid(s)
         public V341SelectMultipleItems(
             Guid itemId,
@@ -284,6 +291,7 @@ namespace Highlander.Core.Common
                 DateTimeOffset.MinValue, 0, false, true, false, excludeDataBody);
             ItemIds = new[] { itemId };
         }
+
         public V341SelectMultipleItems(
             Guid[] itemIds,
             bool excludeDataBody)
@@ -293,6 +301,7 @@ namespace Highlander.Core.Common
                 DateTimeOffset.MinValue, 0, false, true, false, excludeDataBody);
             ItemIds = itemIds;
         }
+
         // selecting by names(s)
         public V341SelectMultipleItems(
             string dataTypeName,
@@ -316,6 +325,7 @@ namespace Highlander.Core.Common
                 !includeDeleted,
                 excludeDataBody);
         }
+
         // selecting by names(s)
         public V341SelectMultipleItems(
             string dataTypeName,
@@ -339,6 +349,7 @@ namespace Highlander.Core.Common
                 !includeDeleted,
                 excludeDataBody);
         }
+
         // selecting by query
         public V341SelectMultipleItems(
             string dataTypeName,
@@ -375,15 +386,14 @@ namespace Highlander.Core.Common
     {
         [DataMember]
         public readonly V341QueryDefinition QueryDef;
-
         [DataMember]
         public readonly Guid SubscriptionId;
-
         [DataMember]
         public readonly DateTimeOffset ExpiryTime;
 
         // constructors
         public V341CreateSubscription() { }
+
         public V341CreateSubscription(
             Guid subscriptionId,
             DateTimeOffset expiryTime,
@@ -420,7 +430,6 @@ namespace Highlander.Core.Common
     {
         [DataMember]
         public readonly Guid SubscriptionId;
-
         [DataMember]
         public readonly DateTimeOffset ExpiryTime;
 
@@ -457,10 +466,8 @@ namespace Highlander.Core.Common
     {
         [DataMember]
         public readonly bool Success;
-
         [DataMember]
         public readonly int Result;
-
         [DataMember]
         public readonly string Message;
 

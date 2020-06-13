@@ -1,11 +1,11 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Highlander.Core.V34")]
-[assembly: AssemblyDescription("Highlander")]
+[assembly: AssemblyTitle("Highlander.Core.Server")]
+[assembly: AssemblyDescription("The central cache engine")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -14,4 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3EF04C73-ADB9-42B3-8407-685E9FA85323")]
+[assembly: Guid("53EA79EF-F86B-4BCB-85B7-0E5360355483")]
