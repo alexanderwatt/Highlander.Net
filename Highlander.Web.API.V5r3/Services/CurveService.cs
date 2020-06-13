@@ -14,9 +14,9 @@ namespace Highlander.Web.API.V5r3.Services
         private readonly PricingCache _cache;
         private readonly Reference<ILogger> _logger;
 
-        public CurveService(string nameSpace, Reference<ILogger> logger)
+        public CurveService(PricingCache cache, Reference<ILogger> logger)
         {
-            _cache = new PricingCache(nameSpace, false);
+            _cache = cache;
             _logger = logger;
         }
 

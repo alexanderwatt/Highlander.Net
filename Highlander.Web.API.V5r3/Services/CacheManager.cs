@@ -26,7 +26,10 @@ namespace Highlander.Web.API.V5r3.Services
 
         public void LoadConfig(string nameSpace)
         {
+            if (CheckConfig(nameSpace))
+                return;
             LoadConfigDataHelper.LoadConfigurationData(_logger.Target, _cache.Proxy, nameSpace);
+            _loadedNameSpaces.Add(nameSpace, true);
         }
     }
 }

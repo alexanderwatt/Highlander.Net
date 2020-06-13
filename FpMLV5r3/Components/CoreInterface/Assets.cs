@@ -103,7 +103,7 @@ namespace Highlander.Core.Interface.V5r3
 
         public PricingCache(string nameSpace, bool loadData)
         {
-            NameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
+            _nameSpace = nameSpace ?? EnvironmentProp.DefaultNameSpace;
             //This environment now loads default data
             Environment = new RuntimeEnvironment(NameSpace, loadData);
             Engine = new CurveEngine.V5r3.CurveEngine(Environment.LogRef.Target, Environment.Cache, NameSpace);
@@ -119,7 +119,7 @@ namespace Highlander.Core.Interface.V5r3
         {
             Engine = new CurveEngine.V5r3.CurveEngine(logger, cache, nameSpace);
             ValService = new ValuationService(logger, cache, nameSpace);
-            NameSpace = nameSpace;
+            _nameSpace = nameSpace;
         }
 
         #endregion
