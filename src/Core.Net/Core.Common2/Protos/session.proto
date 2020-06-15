@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Highlander.GrpcService.Session";
+option csharp_namespace = "Highlander.Grpc.Session";
 
 package highlander.session;
 
@@ -89,7 +89,7 @@ message CloseSessionV131Reply {
 
 //services
 
-service ISessCtrlV131 {
+service SessCtrlV131 {
     rpc BeginSessionV131 (BeginSessionV131Request) returns (V131SessionReply);
     rpc CloseSessionV131 (CloseSessionV131Request) returns (CloseSessionV131Reply);
 }

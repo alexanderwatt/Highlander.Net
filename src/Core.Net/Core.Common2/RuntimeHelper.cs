@@ -12,22 +12,10 @@
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
-
-using System;
 using System.Drawing;
 
 namespace Highlander.Core.Common
 {
-    public enum V131EnvId
-    {
-        Undefined,
-        UTT_UnitTest,
-        DEV_Development,
-        SIT_SystemTest,
-        STG_StagingLive,
-        PRD_Production
-    }
-
     public static class CoreHelper
     {
         public static Color CoreStateColor(CoreStateEnum state)
@@ -53,34 +41,6 @@ namespace Highlander.Core.Common
         public static string MakeUniqueName(ItemKind itemKind, string appScope, string itemName)
         {
             return ((appScope ?? AppScopeNames.Legacy) + "." + itemKind + "." + itemName).ToLower();
-        }
-
-        // V1.3
-        public static V131EnvId ToV131EnvId(EnvId env)
-        {
-            return env switch
-            {
-                EnvId.Undefined => V131EnvId.Undefined,
-                EnvId.Utt_UnitTest => V131EnvId.UTT_UnitTest,
-                EnvId.Dev_Development => V131EnvId.DEV_Development,
-                EnvId.Sit_SystemTest => V131EnvId.SIT_SystemTest,
-                EnvId.Stg_StagingLive => V131EnvId.STG_StagingLive,
-                EnvId.Prd_Production => V131EnvId.PRD_Production,
-                _ => throw new ArgumentException($"Unknown EnvId: {env}")
-            };
-        }
-        public static EnvId ToEnvId(V131EnvId env)
-        {
-            return env switch
-            {
-                V131EnvId.Undefined => EnvId.Undefined,
-                V131EnvId.UTT_UnitTest => EnvId.Utt_UnitTest,
-                V131EnvId.DEV_Development => EnvId.Dev_Development,
-                V131EnvId.SIT_SystemTest => EnvId.Sit_SystemTest,
-                V131EnvId.STG_StagingLive => EnvId.Stg_StagingLive,
-                V131EnvId.PRD_Production => EnvId.Prd_Production,
-                _ => throw new ArgumentException($"Unknown V131EnvId: {env}")
-            };
         }
     }
 }

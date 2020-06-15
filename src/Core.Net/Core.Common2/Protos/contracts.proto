@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "Protos/session.proto";
 
-option csharp_namespace = "Highlander.GrpcService.Contracts";
+option csharp_namespace = "Highlander.Grpc.Contracts";
 
 package highlander.contracts;
 
@@ -151,7 +151,7 @@ message TransferV341NotifyMultipleItemsReply {
 
 //services
 
-service ITransferV341 {
+service TransferV341 {
     rpc TransferV341SelectMultipleItems (TransferV341SelectMultipleItemsRequest) returns (TransferV341SelectMultipleItemsReply);
     rpc TransferV341CompletionResult (TransferV341CompletionResultRequest) returns (TransferV341CompletionResultReply);
     rpc TransferV341CreateSubscription (TransferV341CreateSubscriptionRequest) returns (TransferV341CreateSubscriptionReply);

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Highlander.GrpcService.Discover";
+option csharp_namespace = "Highlander.Grpc.Discover";
 
 package highlander.discover;
 
@@ -17,6 +17,6 @@ message V111DiscoverReply {
 
 //services
 
-service IDiscoverV111 {
+service DiscoverV111 {
     rpc DiscoverServiceV111 (DiscoverServiceV111Request) returns (V111DiscoverReply);
 }

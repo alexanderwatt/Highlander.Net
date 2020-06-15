@@ -1,25 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\contracts.proto" />
-    <None Remove="Protos\discover.proto" />
+    <None Remove="Legacy\Installation Notes.txt" />
+    <None Remove="Legacy\Store_Create.sql" />
     <None Remove="Protos\greet.proto" />
-    <None Remove="Protos\session.proto" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\contracts.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\discover.proto" GrpcServices="Server" />
+    <Content Include="Legacy\Installation Notes.txt" />
+    <Content Include="Legacy\Store_Create.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\session.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common2\Highlander.Core.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Legacy\ItemData2.designer.cs">
+      <DependentUpon>ItemData2.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Legacy\ItemData2.dbml">
+      <SubType>Designer</SubType>
+      <LastGenOutput>ItemData2.designer.cs</LastGenOutput>
+      <Generator>MSLinqToSQLGenerator</Generator>
+    </None>
+    <None Update="Legacy\ItemData2.dbml.layout">
+      <DependentUpon>ItemData2.dbml</DependentUpon>
+    </None>
   </ItemGroup>
 
 </Project>
