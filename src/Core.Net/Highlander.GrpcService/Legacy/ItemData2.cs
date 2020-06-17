@@ -22,7 +22,7 @@ namespace Highlander.Core.Server
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name= "Core_DEV")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Core_DEV")]
 	public partial class ItemData2DataContext : System.Data.Linq.DataContext
 	{
 		

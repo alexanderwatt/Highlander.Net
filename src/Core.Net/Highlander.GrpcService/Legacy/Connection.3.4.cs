@@ -18,6 +18,7 @@
 using System;
 using System.ServiceModel;
 using System.Threading;
+using Grpc.Net.Client;
 using Highlander.Core.Common;
 using Highlander.Core.Common.CommsInterfaces;
 using Highlander.Utilities.Helpers;
@@ -47,19 +48,18 @@ namespace Highlander.Core.Server
 
         public NodeType PeerNodeType => _peerNodeType;
 
-        private AddressBinding _peerAddressBinding;
+        private GrpcChannel _peerAddressBinding;
 
         private void SetAddressBinding(string replyAddress, NodeType peerNodeType)
         {
             _peerNodeType = peerNodeType;
-            _peerAddressBinding = WcfHelper.CreateAddressBinding(
-                replyAddress, WcfConst.LimitMultiplier, WcfConst.ExpressMsgLifetime);
+            _peerAddressBinding = GrpcChannel.ForAddress(replyAddress);
             // dispose any existing client base
             DisposeHelper.SafeDispose(ref _clientBase);
         }
         public string ReplyAddress
         {
-            get => _peerAddressBinding.Address.ToString();
+            get => _peerAddressBinding.Target;
             set => SetAddressBinding(value, _peerNodeType);
         }
 
@@ -81,7 +81,7 @@ namespace Highlander.Core.Server
 
         public bool HasFaulted => _faulted;
 
-        private TransferSenderV341 _clientBase;
+        private TransferV341Client _clientBase;
 
         private readonly AsyncThreadQueue _incomingThreadQueue;
 
@@ -112,7 +112,7 @@ namespace Highlander.Core.Server
             if (attempt == 1)
             {
                 _logger.LogWarning("Connection: '{0}' first send attempt ({1}) to client at '{2}' failed: {3}",
-                    ClientId, attempt, _peerAddressBinding.Address.Uri.AbsoluteUri, excp.GetType().Name);
+                    ClientId, attempt, _peerAddressBinding.Target, excp.GetType().Name);
             }
             // backoff (between 0 and 10 seconds) if max timeout not reached
             double backoff = 0.01 * (attempt - 1) * (attempt - 1) + 0.1 * (attempt - 1);
@@ -126,7 +126,7 @@ namespace Highlander.Core.Server
             {
                 _faulted = true;
                 _logger.LogWarning("Connection: '{0}' final send attempt ({1}) to client at '{2}' failed: {3}",
-                    ClientId, attempt, _peerAddressBinding.Address.Uri.AbsoluteUri, excp.GetType().Name);
+                    ClientId, attempt, _peerAddressBinding.Target, excp.GetType().Name);
             }
         }
 
@@ -187,7 +187,11 @@ namespace Highlander.Core.Server
             _outgoingThreadQueue.Dispatch(package1, (package2) =>
             {
                 PerformSyncSendWithRetry(false, () => _clientBase.TransferV341CompletionResult(
-                    package2.Header.ToV131Header(), package2.ToV341CompletionResult()));
+                    new Grpc.Contracts.TransferV341CompletionResultRequest
+                    {
+                        Header = package2.Header.ToV131Header(),
+                        Body = package2.ToV341CompletionResult()
+                    }));
             });
         }
 
@@ -200,7 +204,11 @@ namespace Highlander.Core.Server
             _outgoingThreadQueue.Dispatch(package1, (package2) =>
             {
                 PerformSyncSendWithRetry(true, () => _clientBase.TransferV341AnswerMultipleItems(
-                    package2.Header.ToV131Header(), package2.ToV341AnswerMultipleItems()));
+                    new Grpc.Contracts.TransferV341AnswerMultipleItemsRequest
+                    {
+                        Header = package2.Header.ToV131Header(),
+                        Body = package2.ToV341AnswerMultipleItems()
+                    }));
             });
         }
 
@@ -213,7 +221,11 @@ namespace Highlander.Core.Server
             _outgoingThreadQueue.Dispatch(package1, (package2) =>
             {
                 PerformSyncSendWithRetry(true, () => _clientBase.TransferV341NotifyMultipleItems(
-                    package2.Header.ToV131Header(), package2.ToV341NotifyMultipleItems()));
+                    new Grpc.Contracts.TransferV341NotifyMultipleItemsRequest
+                    {
+                        Header = package2.Header.ToV131Header(),
+                        Body = package2.ToV341NotifyMultipleItems()
+                    }));
             });
         }
 

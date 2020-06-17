@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Legacy\ItemData2.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Legacy\Installation Notes.txt" />
+    <None Remove="Legacy\ItemData2.dbml" />
+    <None Remove="Legacy\ItemData2.dbml.layout" />
     <None Remove="Legacy\Store_Create.sql" />
     <None Remove="Protos\greet.proto" />
   </ItemGroup>
@@ -21,29 +27,16 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Common2\Highlander.Core.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Legacy\ItemData2.designer.cs">
-      <DependentUpon>ItemData2.dbml</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Legacy\ItemData2.dbml">
-      <SubType>Designer</SubType>
-      <LastGenOutput>ItemData2.designer.cs</LastGenOutput>
-      <Generator>MSLinqToSQLGenerator</Generator>
-    </None>
-    <None Update="Legacy\ItemData2.dbml.layout">
-      <DependentUpon>ItemData2.dbml</DependentUpon>
-    </None>
   </ItemGroup>
 
 </Project>

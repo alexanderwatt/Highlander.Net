@@ -21,7 +21,8 @@ using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using Highlander.Build;
 using Highlander.Core.Common;
-using Highlander.Core.Common.Encryption;
+using Highlander.GrpcService.Data;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -183,9 +184,9 @@ namespace Highlander.Core.Server
 
         public string DbPrefix { get; }
 
-        public string V31AsyncEndpoints { get; }
+        //public string V31AsyncEndpoints { get; }
 
-        public string V31DiscoEndpoints { get; }
+        //public string V31DiscoEndpoints { get; }
 
         // constructor
         /// <summary>
@@ -199,15 +200,16 @@ namespace Highlander.Core.Server
         /// <param name="v31DiscoEndpoints"></param>
         public ServerCfg(
             IModuleInfo moduleInfo, NodeType serverMode, 
-            string dbServer, string dbPrefix,
-            string v31AsyncEndpoints, string v31DiscoEndpoints)
+            string dbServer, string dbPrefix
+            //string v31AsyncEndpoints, string v31DiscoEndpoints
+            )
         {
             ModuleInfo = moduleInfo;
             ServerMode = serverMode;
             DbServer = dbServer;
             DbPrefix = dbPrefix;
-            V31AsyncEndpoints = v31AsyncEndpoints;
-            V31DiscoEndpoints = v31DiscoEndpoints;
+            //V31AsyncEndpoints = v31AsyncEndpoints;
+            //V31DiscoEndpoints = v31DiscoEndpoints;
         }
     }
 
@@ -218,6 +220,8 @@ namespace Highlander.Core.Server
     public class CoreServer : BasicServer
     {
         private readonly ServerCfg _serverCfg;
+        private readonly HighlanderContext _dbContext;
+
         // security
         public ICryptoManager CryptoManager { get; } = new DefaultCryptoManager();
 
@@ -243,13 +247,13 @@ namespace Highlander.Core.Server
         /// </summary>
         /// <param name="loggerRef"></param>
         /// <param name="settings"></param>
-        public CoreServer(Reference<ILogger> loggerRef, NamedValueSet settings)
+        public CoreServer(Reference<ILogger> loggerRef, NamedValueSet settings, HighlanderContext dbContext)
         {
             // default configuration
             LoggerRef = loggerRef;
             NodeType serverMode = NodeType.Router;
             var envName = BuildConst.BuildEnv;
-            var dbServer = @"localhost\sqlexpress";
+            var dbServer = @"localhost\sqlite";
             var dbPrefix = "Core";
             // custom configuration
             if (settings != null)
@@ -269,23 +273,24 @@ namespace Highlander.Core.Server
                 port = settings.GetValue(CfgPropName.Port, port);
             }
             // service endpoints
-            var v31AsyncEndpoints = string.Format("{1}:{0};{2}:{0};{3}:{0}", port, WcfConst.NetMsmq, WcfConst.NetTcp, WcfConst.NetPipe);
-            var v31DiscoEndpoints = string.Format("{1}:{0}", port, WcfConst.NetTcp);
-            if (settings != null)
-            {
-                v31AsyncEndpoints = settings.GetValue(CfgPropName.Endpoints, v31AsyncEndpoints);
-                // add default port to endpoints if required
-                List<string> tempEndpoints = new List<string>();
-                foreach (var ep in v31AsyncEndpoints.Split(';'))
-                {
-                    var epParts = ep.Split(':');
-                    var scheme = epParts[0];
-                    if (epParts.Length > 1)
-                        port = int.Parse(epParts[1]);
-                    tempEndpoints.Add($"{scheme}:{port}"); 
-                }
-                v31AsyncEndpoints = string.Join(";", tempEndpoints.ToArray());
-            }
+            //var v31AsyncEndpoints = string.Format("{1}:{0};{2}:{0};{3}:{0}", port, WcfConst.NetMsmq, WcfConst.NetTcp, WcfConst.NetPipe);
+            //var v31DiscoEndpoints = string.Format("{1}:{0}", port, WcfConst.NetTcp);
+            //if (settings != null)
+            //{
+            //    v31AsyncEndpoints = settings.GetValue(CfgPropName.Endpoints, v31AsyncEndpoints);
+            //    // add default port to endpoints if required
+            //    List<string> tempEndpoints = new List<string>();
+            //    foreach (var ep in v31AsyncEndpoints.Split(';'))
+            //    {
+            //        var epParts = ep.Split(':');
+            //        var scheme = epParts[0];
+            //        if (epParts.Length > 1)
+            //            port = int.Parse(epParts[1]);
+            //        tempEndpoints.Add($"{scheme}:{port}"); 
+            //    }
+            //    v31AsyncEndpoints = string.Join(";", tempEndpoints.ToArray());
+            //}
+
             // get user identity and full name
             WindowsIdentity winIdent = WindowsIdentity.GetCurrent();
             UserPrincipal principal = null;
@@ -308,8 +313,10 @@ namespace Highlander.Core.Server
             _serverCfg = new ServerCfg(
                 new ModuleInfo(envName, serverId, winIdent.Name, userFullName, null, null),
                 serverMode, 
-                dbServer, dbPrefix,
-                v31AsyncEndpoints, v31DiscoEndpoints);
+                dbServer, dbPrefix
+                //v31AsyncEndpoints, v31DiscoEndpoints
+                );
+            _dbContext = dbContext;
         }
 
         // other constructors
@@ -320,10 +327,10 @@ namespace Highlander.Core.Server
         /// <param name="loggerRef"></param>
         /// <param name="env"></param>
         /// <param name="nodeType"></param>
-        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType)
+        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName },
-                new object[] { (int)nodeType, env }))
+                new object[] { (int)nodeType, env }), dbContext)
         { }
 
         /// <summary>
@@ -333,10 +340,10 @@ namespace Highlander.Core.Server
         /// <param name="env"></param>
         /// <param name="nodeType"></param>
         /// <param name="port"></param>
-        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port)
+        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName, CfgPropName.Port },
-                new object[] { (int)nodeType, env, port }))
+                new object[] { (int)nodeType, env, port }), dbContext)
         { }
 
         /// <summary>
@@ -347,10 +354,10 @@ namespace Highlander.Core.Server
         /// <param name="nodeType"></param>
         /// <param name="port"></param>
         /// <param name="endpoints"></param>
-        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port, string endpoints)
+        public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port, string endpoints, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName, CfgPropName.Port, CfgPropName.Endpoints },
-                new object[] { (int)nodeType, env, port, endpoints }))
+                new object[] { (int)nodeType, env, port, endpoints }), dbContext)
         { }
 
         #endregion
@@ -368,7 +375,7 @@ namespace Highlander.Core.Server
             {
                 // server mode requires an SQL store
                 if (_storeEngine == null)
-                    _storeEngine = new StoreEngine(Logger, _serverCfg);
+                    _storeEngine = new StoreEngine(Logger, _serverCfg, _dbContext);
             }
             _cacheEngine = new CacheEngine(Logger, _serverCfg, CryptoManager);
             _commsEngine = new CommsEngine(Logger, _serverCfg);

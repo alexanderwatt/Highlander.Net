@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Highlander.Core.Common;
+using Highlander.GrpcService.Data;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.Threading;
@@ -43,13 +44,13 @@ namespace Highlander.Core.Server
         public readonly ServerCfg ServerCfg;
         public readonly Queue<CommonItem> InsertQueue = new Queue<CommonItem>();
         public readonly Queue<Guid> DeleteQueue = new Queue<Guid>();
-        public readonly ItemData2Table ItemTable;
+        public HighlanderContext DbContext { get; set; }
         public int ExceptionCount;
         public int CompletedCount;
-        public StoreEngineState(ServerCfg serverCfg, string connectionString)
+        public StoreEngineState(ServerCfg serverCfg, HighlanderContext dbContext)
         {
             ServerCfg = serverCfg;
-            ItemTable = new ItemData2Table(connectionString);
+            DbContext = dbContext;
         }
     }
 
@@ -61,13 +62,17 @@ namespace Highlander.Core.Server
         private CacheEngine _cacheEngine;
         private Timer _dbRetryTimer;
 
-        public StoreEngine(ILogger logger, ServerCfg serverCfg)
+        public StoreEngine(
+            ILogger logger,
+            ServerCfg serverCfg,
+            HighlanderContext dbContext
+            )
             : base(PartNames.Store, logger)
         {
             _inboundCallQueue = new AsyncThreadQueue(Logger);
             string connectionString = EnvHelper.FormatDbCfgStr(serverCfg.ModuleInfo.ConfigEnv, serverCfg.DbServer, serverCfg.DbPrefix);
             Logger.LogDebug("Connection String: {0}", connectionString);
-            _state = new Guarded<StoreEngineState>(new StoreEngineState(serverCfg, connectionString));
+            _state = new Guarded<StoreEngineState>(new StoreEngineState(serverCfg, dbContext));
         }
 
         protected override void OnAttached(string name, IServerPart part)
@@ -130,7 +135,7 @@ namespace Highlander.Core.Server
         public List<CommonItem> SyncSelectAllItems()
         {
             List<ItemData> sqlList = null;
-            _state.Locked(state => sqlList = state.ItemTable.SelectAllItems());
+            _state.Locked(state => sqlList = state.DbContext.Items.ToList());
             var results = new List<CommonItem>();
             foreach (ItemData row in sqlList)
             {
@@ -162,7 +167,8 @@ namespace Highlander.Core.Server
                         {
                             CommonItem item = state.InsertQueue.Peek();
                             action = $"create {item.ItemKind}: '{item.Name}' {item.Id} ({item.AppScope})";
-                            state.ItemTable.InsertItem(item);
+                            state.DbContext.Items.Add(new ItemData(item));
+                            state.DbContext.SaveChanges(true);
                             // insert done
                             state.CompletedCount++;
                             state.InsertQueue.Dequeue();
@@ -175,7 +181,9 @@ namespace Highlander.Core.Server
                             {
                                 Guid itemId = state.DeleteQueue.Peek();
                                 action = $"delete {itemId}";
-                                state.ItemTable.DeleteItem(itemId);
+                                var itemToBeRemoved = state.DbContext.Items.Find(itemId);
+                                state.DbContext.Remove(itemToBeRemoved);
+                                state.DbContext.SaveChanges(true);
                                 // delete done
                                 state.CompletedCount++;
                                 state.DeleteQueue.Dequeue();

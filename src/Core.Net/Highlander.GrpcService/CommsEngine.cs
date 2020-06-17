@@ -63,13 +63,11 @@ namespace Highlander.Core.Server
 
     internal class CommsEngine : ServerPart,
         IDiscoverV111,
-        ISessCtrlV131, ITransferV341    // V3.4 contracts
+        ISessCtrlV131,
+        ITransferV341    // V3.4 contracts
     {
         // readonly state
         private readonly ServerCfg _serverCfg;
-        private readonly TransferReceiverV341 transferReceiverV341;
-        private readonly SessCtrlReceiverV131 sessCtrlReceiverV131;
-        private readonly DiscoverReceiverV111 discoverReceiverV111;
         private readonly AsyncThreadQueue _mainCommsDispatcher;
 
         // start-time state
@@ -87,17 +85,11 @@ namespace Highlander.Core.Server
         /// <param name="serverCfg"></param>
         public CommsEngine(
             ILogger logger,
-            ServerCfg serverCfg,
-            TransferReceiverV341 transferReceiverV341,
-            SessCtrlReceiverV131 sessCtrlReceiverV131,
-            DiscoverReceiverV111 discoverReceiverV111
+            ServerCfg serverCfg
             )
             : base(PartNames.Comms, logger)
         {
             _serverCfg = serverCfg;
-            this.transferReceiverV341 = transferReceiverV341;
-            this.sessCtrlReceiverV131 = sessCtrlReceiverV131;
-            this.discoverReceiverV111 = discoverReceiverV111;
             _mainCommsDispatcher = new AsyncThreadQueue(Logger);
         }
 
@@ -138,41 +130,41 @@ namespace Highlander.Core.Server
         protected override void OnStart()
         {
             //// restore un-expired connections
-            //Logger.LogDebug("Restoring connections...");
-            //DateTimeOffset dtNow = DateTimeOffset.Now;
-            //List<CommonItem> connItems = _cacheEngine.GetCacheItems(
-            //    null, ItemKind.Local, typeof(ClientConnectionState).FullName, null, 0, dtNow, true, false);
-            //foreach (CommonItem item in connItems)
-            //{
-            //    try
-            //    {
-            //        var oldConn = XmlSerializerHelper.DeserializeFromString<ClientConnectionState>(
-            //            CompressionHelper.DecompressToString(item.YData));
-            //        IConnection connection = null;
-            //        if (oldConn.Contract == typeof(ITransferV341).FullName)
-            //        {
-            //            var clientId = new Guid(oldConn.SourceId);
-            //            connection = new ConnectionV34(
-            //                Logger, _cacheEngine, _serverCfg,
-            //                clientId, oldConn.ReplyAddress, NodeType.Client);
-            //            connection.ExtendExpiry();
-            //            _connectionIndex.Set(clientId, connection);
-            //        }
-            //        if (connection != null)
-            //        {
-            //            Logger.LogDebug("Restored connection:");
-            //            Logger.LogDebug("  Client Id. : {0}", connection.ClientId);
-            //            Logger.LogDebug("  Client Addr: {0}", connection.ReplyAddress);
-            //        }
-            //        else
-            //            Logger.LogDebug("Ignoring unsupported connection: '{0}'", oldConn.ReplyAddress);
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        // failed, however the show must go on
-            //        Logger.Log(e);
-            //    }
-            //}
+            Logger.LogDebug("Restoring connections...");
+            DateTimeOffset dtNow = DateTimeOffset.Now;
+            List<CommonItem> connItems = _cacheEngine.GetCacheItems(
+                null, ItemKind.Local, typeof(ClientConnectionState).FullName, null, 0, dtNow, true, false);
+            foreach (CommonItem item in connItems)
+            {
+                try
+                {
+                    var oldConn = XmlSerializerHelper.DeserializeFromString<ClientConnectionState>(
+                        CompressionHelper.DecompressToString(item.YData));
+                    IConnection connection = null;
+                    if (oldConn.Contract == typeof(ITransferV341).FullName)
+                    {
+                        var clientId = new Guid(oldConn.SourceId);
+                        connection = new ConnectionV34(
+                            Logger, _cacheEngine, _serverCfg,
+                            clientId, oldConn.ReplyAddress, NodeType.Client);
+                        connection.ExtendExpiry();
+                        _connectionIndex.Set(clientId, connection);
+                    }
+                    if (connection != null)
+                    {
+                        Logger.LogDebug("Restored connection:");
+                        Logger.LogDebug("  Client Id. : {0}", connection.ClientId);
+                        Logger.LogDebug("  Client Addr: {0}", connection.ReplyAddress);
+                    }
+                    else
+                        Logger.LogDebug("Ignoring unsupported connection: '{0}'", oldConn.ReplyAddress);
+                }
+                catch (Exception e)
+                {
+                    // failed, however the show must go on
+                    Logger.Log(e);
+                }
+            }
 
             // restore subscriptions
             Logger.LogDebug("Restoring subscriptions...");

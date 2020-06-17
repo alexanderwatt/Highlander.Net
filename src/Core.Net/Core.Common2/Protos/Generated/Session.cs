@@ -30,30 +30,30 @@ namespace Highlander.Grpc.Session {
             "ZXNzaW9uSGVhZGVyEhIKCnNlc3Npb25faWQYASABKAkSEgoKcmVxdWVzdF9p",
             "ZBgCIAEoCRIVCg1yZXBseV9hZGRyZXNzGAMgASgJEhYKDnJlcGx5X2NvbnRy",
             "YWN0GAQgASgJEhYKDm1vcmVfZm9sbG93aW5nGAUgASgIEhYKDnJlcGx5X3Jl",
-            "cXVpcmVkGAYgASgIEhUKDWRlYnVnX3JlcXVlc3QYByABKAgiSAoQVjEzMVNl",
-            "c3Npb25SZXBseRIPCgdzdWNjZXNzGAEgASgIEhIKCnNlc3Npb25faWQYAiAB",
-            "KAkSDwoHbWVzc2FnZRgDIAEoCSKEAQoMVjEzMUFzc21JbmZvEhEKCWFzc21f",
-            "bmFtZRgBIAEoCRISCgphc3NtX25fdmVyGAIgASgJEhIKCmFzc21fZl92ZXIY",
-            "AyABKAkSEgoKYXNzbV9pX3ZlchgEIAEoCRISCgphc3NtX3BfdG9rGAUgASgJ",
-            "EhEKCWFzc21faGFzaBgGIAEoESJCCgxWMTMxVXNlckluZm8SGgoSdXNlcl9p",
-            "ZGVudGl0eV9uYW1lGAEgASgJEhYKDnVzZXJfZnVsbF9uYW1lGAIgASgJIuEC",
-            "Cg5WMTMxQ2xpZW50SW5mbxIRCglub2RlX2d1aWQYASABKAkSMAoJYnVpbGRf",
-            "ZW52GAIgASgOMh0uaGlnaGxhbmRlci5zZXNzaW9uLlYxMzFFbnZJZBIxCgpj",
-            "b25maWdfZW52GAMgASgOMh0uaGlnaGxhbmRlci5zZXNzaW9uLlYxMzFFbnZJ",
-            "ZBIRCglob3N0X25hbWUYBCABKAkSEgoKaG9zdF9pcF92NBgFIAEoCRIRCglu",
-            "ZXRfYWRkcnMYBiADKAkSMwoJdXNlcl9pbmZvGAcgASgLMiAuaGlnaGxhbmRl",
-            "ci5zZXNzaW9uLlYxMzFVc2VySW5mbxIzCgljb21wX2luZm8YCCABKAsyIC5o",
-            "aWdobGFuZGVyLnNlc3Npb24uVjEzMUFzc21JbmZvEjMKCWFwcGxfaW5mbxgJ",
-            "IAEoCzIgLmhpZ2hsYW5kZXIuc2Vzc2lvbi5WMTMxQXNzbUluZm8ilAEKD1Yx",
-            "MzFFcnJvckRldGFpbBIRCglmdWxsX25hbWUYASABKAkSDwoHbWVzc2FnZRgC",
-            "IAEoCRIOCgZzb3VyY2UYAyABKAkSEwoLc3RhY2tfdHJhY2UYBCABKAkSOAoL",
-            "aW5uZXJfZXJyb3IYBSABKAsyIy5oaWdobGFuZGVyLnNlc3Npb24uVjEzMUVy",
-            "cm9yRGV0YWlsIokBChdCZWdpblNlc3Npb25WMTMxUmVxdWVzdBI1CgZoZWFk",
-            "ZXIYASABKAsyJS5oaWdobGFuZGVyLnNlc3Npb24uVjEzMVNlc3Npb25IZWFk",
-            "ZXISNwoLY2xpZW50X2luZm8YAiABKAsyIi5oaWdobGFuZGVyLnNlc3Npb24u",
-            "VjEzMUNsaWVudEluZm8iUAoXQ2xvc2VTZXNzaW9uVjEzMVJlcXVlc3QSNQoG",
-            "aGVhZGVyGAEgASgLMiUuaGlnaGxhbmRlci5zZXNzaW9uLlYxMzFTZXNzaW9u",
-            "SGVhZGVyIhcKFUNsb3NlU2Vzc2lvblYxMzFSZXBseSp+CglWMTMxRW52SWQS",
+            "cXVpcmVkGAYgASgIEhUKDWRlYnVnX3JlcXVlc3QYByABKAgihAEKDFYxMzFB",
+            "c3NtSW5mbxIRCglhc3NtX25hbWUYASABKAkSEgoKYXNzbV9uX3ZlchgCIAEo",
+            "CRISCgphc3NtX2ZfdmVyGAMgASgJEhIKCmFzc21faV92ZXIYBCABKAkSEgoK",
+            "YXNzbV9wX3RvaxgFIAEoCRIRCglhc3NtX2hhc2gYBiABKBEiQgoMVjEzMVVz",
+            "ZXJJbmZvEhoKEnVzZXJfaWRlbnRpdHlfbmFtZRgBIAEoCRIWCg51c2VyX2Z1",
+            "bGxfbmFtZRgCIAEoCSLhAgoOVjEzMUNsaWVudEluZm8SEQoJbm9kZV9ndWlk",
+            "GAEgASgJEjAKCWJ1aWxkX2VudhgCIAEoDjIdLmhpZ2hsYW5kZXIuc2Vzc2lv",
+            "bi5WMTMxRW52SWQSMQoKY29uZmlnX2VudhgDIAEoDjIdLmhpZ2hsYW5kZXIu",
+            "c2Vzc2lvbi5WMTMxRW52SWQSEQoJaG9zdF9uYW1lGAQgASgJEhIKCmhvc3Rf",
+            "aXBfdjQYBSABKAkSEQoJbmV0X2FkZHJzGAYgAygJEjMKCXVzZXJfaW5mbxgH",
+            "IAEoCzIgLmhpZ2hsYW5kZXIuc2Vzc2lvbi5WMTMxVXNlckluZm8SMwoJY29t",
+            "cF9pbmZvGAggASgLMiAuaGlnaGxhbmRlci5zZXNzaW9uLlYxMzFBc3NtSW5m",
+            "bxIzCglhcHBsX2luZm8YCSABKAsyIC5oaWdobGFuZGVyLnNlc3Npb24uVjEz",
+            "MUFzc21JbmZvIpQBCg9WMTMxRXJyb3JEZXRhaWwSEQoJZnVsbF9uYW1lGAEg",
+            "ASgJEg8KB21lc3NhZ2UYAiABKAkSDgoGc291cmNlGAMgASgJEhMKC3N0YWNr",
+            "X3RyYWNlGAQgASgJEjgKC2lubmVyX2Vycm9yGAUgASgLMiMuaGlnaGxhbmRl",
+            "ci5zZXNzaW9uLlYxMzFFcnJvckRldGFpbCKJAQoXQmVnaW5TZXNzaW9uVjEz",
+            "MVJlcXVlc3QSNQoGaGVhZGVyGAEgASgLMiUuaGlnaGxhbmRlci5zZXNzaW9u",
+            "LlYxMzFTZXNzaW9uSGVhZGVyEjcKC2NsaWVudF9pbmZvGAIgASgLMiIuaGln",
+            "aGxhbmRlci5zZXNzaW9uLlYxMzFDbGllbnRJbmZvIlAKF0Nsb3NlU2Vzc2lv",
+            "blYxMzFSZXF1ZXN0EjUKBmhlYWRlchgBIAEoCzIlLmhpZ2hsYW5kZXIuc2Vz",
+            "c2lvbi5WMTMxU2Vzc2lvbkhlYWRlciJIChBWMTMxU2Vzc2lvblJlcGx5Eg8K",
+            "B3N1Y2Nlc3MYASABKAgSEgoKc2Vzc2lvbl9pZBgCIAEoCRIPCgdtZXNzYWdl",
+            "GAMgASgJIhcKFUNsb3NlU2Vzc2lvblYxMzFSZXBseSp+CglWMTMxRW52SWQS",
             "DQoJVW5kZWZpbmVkEAASEAoMVVRUX1VuaXRUZXN0EAESEwoPREVWX0RldmVs",
             "b3BtZW50EAISEgoOU0lUX1N5c3RlbVRlc3QQAxITCg9TVEdfU3RhZ2luZ0xp",
             "dmUQBBISCg5QUkRfUHJvZHVjdGlvbhAFMuEBCgxTZXNzQ3RybFYxMzESZQoQ",
@@ -69,13 +69,13 @@ namespace Highlander.Grpc.Session {
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V341BeginSession), global::Highlander.Grpc.Session.V341BeginSession.Parser, new[]{ "SubscriptionId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V341CloseSession), global::Highlander.Grpc.Session.V341CloseSession.Parser, new[]{ "Reserved" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131SessionHeader), global::Highlander.Grpc.Session.V131SessionHeader.Parser, new[]{ "SessionId", "RequestId", "ReplyAddress", "ReplyContract", "MoreFollowing", "ReplyRequired", "DebugRequest" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131SessionReply), global::Highlander.Grpc.Session.V131SessionReply.Parser, new[]{ "Success", "SessionId", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131AssmInfo), global::Highlander.Grpc.Session.V131AssmInfo.Parser, new[]{ "AssmName", "AssmNVer", "AssmFVer", "AssmIVer", "AssmPTok", "AssmHash" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131UserInfo), global::Highlander.Grpc.Session.V131UserInfo.Parser, new[]{ "UserIdentityName", "UserFullName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131ClientInfo), global::Highlander.Grpc.Session.V131ClientInfo.Parser, new[]{ "NodeGuid", "BuildEnv", "ConfigEnv", "HostName", "HostIpV4", "NetAddrs", "UserInfo", "CompInfo", "ApplInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131ErrorDetail), global::Highlander.Grpc.Session.V131ErrorDetail.Parser, new[]{ "FullName", "Message", "Source", "StackTrace", "InnerError" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.BeginSessionV131Request), global::Highlander.Grpc.Session.BeginSessionV131Request.Parser, new[]{ "Header", "ClientInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.CloseSessionV131Request), global::Highlander.Grpc.Session.CloseSessionV131Request.Parser, new[]{ "Header" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.V131SessionReply), global::Highlander.Grpc.Session.V131SessionReply.Parser, new[]{ "Success", "SessionId", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Highlander.Grpc.Session.CloseSessionV131Reply), global::Highlander.Grpc.Session.CloseSessionV131Reply.Parser, null, null, null, null, null)
           }));
     }
@@ -656,194 +656,6 @@ namespace Highlander.Grpc.Session {
 
   }
 
-  public sealed partial class V131SessionReply : pb::IMessage<V131SessionReply> {
-    private static readonly pb::MessageParser<V131SessionReply> _parser = new pb::MessageParser<V131SessionReply>(() => new V131SessionReply());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<V131SessionReply> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public V131SessionReply() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public V131SessionReply(V131SessionReply other) : this() {
-      success_ = other.success_;
-      sessionId_ = other.sessionId_;
-      message_ = other.message_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public V131SessionReply Clone() {
-      return new V131SessionReply(this);
-    }
-
-    /// <summary>Field number for the "success" field.</summary>
-    public const int SuccessFieldNumber = 1;
-    private bool success_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Success {
-      get { return success_; }
-      set {
-        success_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "session_id" field.</summary>
-    public const int SessionIdFieldNumber = 2;
-    private string sessionId_ = "";
-    /// <summary>
-    ///GUID, client id
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string SessionId {
-      get { return sessionId_; }
-      set {
-        sessionId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 3;
-    private string message_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Message {
-      get { return message_; }
-      set {
-        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as V131SessionReply);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(V131SessionReply other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Success != other.Success) return false;
-      if (SessionId != other.SessionId) return false;
-      if (Message != other.Message) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Success != false) hash ^= Success.GetHashCode();
-      if (SessionId.Length != 0) hash ^= SessionId.GetHashCode();
-      if (Message.Length != 0) hash ^= Message.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
-      }
-      if (SessionId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(SessionId);
-      }
-      if (Message.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Message);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Success != false) {
-        size += 1 + 1;
-      }
-      if (SessionId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionId);
-      }
-      if (Message.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(V131SessionReply other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Success != false) {
-        Success = other.Success;
-      }
-      if (other.SessionId.Length != 0) {
-        SessionId = other.SessionId;
-      }
-      if (other.Message.Length != 0) {
-        Message = other.Message;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Success = input.ReadBool();
-            break;
-          }
-          case 18: {
-            SessionId = input.ReadString();
-            break;
-          }
-          case 26: {
-            Message = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class V131AssmInfo : pb::IMessage<V131AssmInfo> {
     private static readonly pb::MessageParser<V131AssmInfo> _parser = new pb::MessageParser<V131AssmInfo>(() => new V131AssmInfo());
     private pb::UnknownFieldSet _unknownFields;
@@ -852,7 +664,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1121,7 +933,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1278,7 +1090,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1641,7 +1453,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1891,7 +1703,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2060,7 +1872,7 @@ namespace Highlander.Grpc.Session {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2179,6 +1991,194 @@ namespace Highlander.Grpc.Session {
               Header = new global::Highlander.Grpc.Session.V131SessionHeader();
             }
             input.ReadMessage(Header);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class V131SessionReply : pb::IMessage<V131SessionReply> {
+    private static readonly pb::MessageParser<V131SessionReply> _parser = new pb::MessageParser<V131SessionReply>(() => new V131SessionReply());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<V131SessionReply> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Highlander.Grpc.Session.SessionReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public V131SessionReply() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public V131SessionReply(V131SessionReply other) : this() {
+      success_ = other.success_;
+      sessionId_ = other.sessionId_;
+      message_ = other.message_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public V131SessionReply Clone() {
+      return new V131SessionReply(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "session_id" field.</summary>
+    public const int SessionIdFieldNumber = 2;
+    private string sessionId_ = "";
+    /// <summary>
+    ///GUID, client id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SessionId {
+      get { return sessionId_; }
+      set {
+        sessionId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "message" field.</summary>
+    public const int MessageFieldNumber = 3;
+    private string message_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Message {
+      get { return message_; }
+      set {
+        message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as V131SessionReply);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(V131SessionReply other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      if (SessionId != other.SessionId) return false;
+      if (Message != other.Message) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (SessionId.Length != 0) hash ^= SessionId.GetHashCode();
+      if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (SessionId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SessionId);
+      }
+      if (Message.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Message);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (SessionId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionId);
+      }
+      if (Message.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(V131SessionReply other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.SessionId.Length != 0) {
+        SessionId = other.SessionId;
+      }
+      if (other.Message.Length != 0) {
+        Message = other.Message;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            SessionId = input.ReadString();
+            break;
+          }
+          case 26: {
+            Message = input.ReadString();
             break;
           }
         }

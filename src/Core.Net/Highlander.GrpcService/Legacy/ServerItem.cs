@@ -17,8 +17,8 @@
 
 using System;
 using Highlander.Core.Common;
-using Highlander.Core.Common.Encryption;
 using Highlander.Utilities.Compression;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.Serialisation;
 
@@ -307,11 +307,6 @@ namespace Highlander.Core.Server
                         _text = BinarySerializerHelper.SerializeToString(_data);
                         SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Binary);
                         break;
-                    case SerialFormat.Soap:
-                        // try Soap serialiser
-                        _text = SoapSerializerHelper.SerializeToString(_data);
-                        SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Soap);
-                        break;
                     case SerialFormat.Json:
                         // try Json serialiser
                         _text = JsonSerializerHelper.SerializeToString(_data);
@@ -374,11 +369,6 @@ namespace Highlander.Core.Server
                 {
                     // use Binary deserialiser
                     _data = BinarySerializerHelper.DeserializeFromString(_text);
-                }
-                else if (serialFormat == SerialFormat.Soap)
-                {
-                    // use Soap deserialiser
-                    _data = SoapSerializerHelper.DeserializeFromString(_text);
                 }
                 else if (serialFormat == SerialFormat.Json)
                 {

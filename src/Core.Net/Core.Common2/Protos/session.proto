@@ -22,12 +22,6 @@ message V131SessionHeader {
     bool debug_request = 7;
 }
 
-message V131SessionReply {
-    bool success = 1;
-    string session_id = 2; //GUID, client id
-    string message = 3;
-}
-
 message V131AssmInfo {
     string assm_name = 1;
     string assm_n_ver = 2;
@@ -83,6 +77,11 @@ message CloseSessionV131Request {
 
 //replies
 
+message V131SessionReply {
+    bool success = 1;
+    string session_id = 2; //GUID, client id
+    string message = 3;
+}
 message CloseSessionV131Reply {
 }
 
