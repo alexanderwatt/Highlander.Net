@@ -160,7 +160,7 @@ namespace Highlander.Core.Server
         }
     }
 
-    internal class ServerCfg
+    public class ServerCfg
     {
         // tunable (not configurable) constants
         public static readonly TimeSpan ShutdownDisposeDelay = TimeSpan.FromSeconds(30);
@@ -225,7 +225,7 @@ namespace Highlander.Core.Server
         // security
         public ICryptoManager CryptoManager { get; } = new DefaultCryptoManager();
 
-        private CommsEngine _commsEngine;
+        internal CommsEngine CommsEngine { get; set; }
 
         private IStoreEngine _storeEngine;
 
@@ -238,7 +238,7 @@ namespace Highlander.Core.Server
         // 3.1 service endpoints
         public List<string> GetServerAddresses(string scheme)
         {
-            return _commsEngine.GetServerAddresses(scheme);
+            return CommsEngine.GetServerAddresses(scheme);
         }
 
         // main constructor
@@ -292,31 +292,44 @@ namespace Highlander.Core.Server
             //}
 
             // get user identity and full name
-            WindowsIdentity winIdent = WindowsIdentity.GetCurrent();
-            UserPrincipal principal = null;
-            try
-            {
-                var principalContext = new PrincipalContext(ContextType.Domain);
-                principal = UserPrincipal.FindByIdentity(principalContext, IdentityType.SamAccountName, winIdent.Name);
-            }
-            catch (PrincipalException principalException)
-            {
-                // swallow - can occur on machines not connected to domain controller
-                Logger.LogWarning("UserPrincipal.FindByIdentity failed: {0}: {1}", principalException.GetType().Name, principalException.Message);
-            }
+            var os = Environment.OSVersion;
             string userFullName = null;
-            if (principal != null)
+            string claimsIdentityName = null;
+            if(os.Platform == PlatformID.Win32NT)
             {
-                userFullName = principal.GivenName + " " + principal.Surname;
+                var winIdent = WindowsIdentity.GetCurrent();
+                claimsIdentityName = winIdent.Name;
+                UserPrincipal principal = null;
+                try
+                {
+                    var principalContext = new PrincipalContext(ContextType.Domain);
+                    principal = UserPrincipal.FindByIdentity(principalContext, IdentityType.SamAccountName, winIdent.Name);
+                }
+                catch (PrincipalException principalException)
+                {
+                    // swallow - can occur on machines not connected to domain controller
+                    Logger.LogWarning("UserPrincipal.FindByIdentity failed: {0}: {1}", principalException.GetType().Name, principalException.Message);
+                }
+                if (principal != null)
+                {
+                    userFullName = principal.GivenName + " " + principal.Surname;
+                }
             }
+            else if(os.Platform == PlatformID.Unix)
+            {
+                userFullName = "user";
+                claimsIdentityName = "Unix";
+            }
+
             var serverId = Guid.NewGuid();
             _serverCfg = new ServerCfg(
-                new ModuleInfo(envName, serverId, winIdent.Name, userFullName, null, null),
+                new ModuleInfo(envName, serverId, claimsIdentityName, userFullName, null, null),
                 serverMode, 
                 dbServer, dbPrefix
                 //v31AsyncEndpoints, v31DiscoEndpoints
                 );
             _dbContext = dbContext;
+            CommsEngine = new CommsEngine(Logger, _serverCfg);
         }
 
         // other constructors
@@ -378,16 +391,15 @@ namespace Highlander.Core.Server
                     _storeEngine = new StoreEngine(Logger, _serverCfg, _dbContext);
             }
             _cacheEngine = new CacheEngine(Logger, _serverCfg, CryptoManager);
-            _commsEngine = new CommsEngine(Logger, _serverCfg);
             // connect server parts
             _cacheEngine.Attach(PartNames.Store, _storeEngine);
-            _cacheEngine.Attach(PartNames.Comms, _commsEngine);
-            _commsEngine.Attach(PartNames.Cache, _cacheEngine);
+            _cacheEngine.Attach(PartNames.Comms, CommsEngine);
+            CommsEngine.Attach(PartNames.Cache, _cacheEngine);
             _storeEngine?.Attach(PartNames.Cache, _cacheEngine);
             // start server parts
             _storeEngine?.Start();
             _cacheEngine.Start();
-            _commsEngine.Start();
+            CommsEngine.Start();
         }
 
         protected sealed override void OnBasicSyncStop()
@@ -397,7 +409,7 @@ namespace Highlander.Core.Server
 
         private void CleanUp()
         {
-            DisposeHelper.SafeDispose(ref _commsEngine);
+            DisposeHelper.SafeDispose(CommsEngine);
             DisposeHelper.SafeDispose(ref _cacheEngine);
             DisposeHelper.SafeDispose(ref _storeEngine);
         }

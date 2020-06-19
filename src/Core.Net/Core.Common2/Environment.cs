@@ -392,9 +392,17 @@ namespace Highlander.Core.Common
             }
             // filter
             string hostName = Dns.GetHostName();
-            WindowsIdentity winIdent = WindowsIdentity.GetCurrent();
+            WindowsIdentity winIdent = null;
+            try
             {
-                string userName = winIdent.Name.Split('\\')[1];
+                winIdent = WindowsIdentity.GetCurrent();
+            }
+            catch(Exception)
+            {
+                //swallow - can't get windows identity
+            }
+            {
+                string userName = winIdent?.Name.Split('\\')[1] ?? "Unknown"; //TODO - get user name from linux env using whoami
                 string envName = EnvName(env);
                 var selectedRules = new List<EnvConfigRule>();
                 foreach (EnvConfigRuleSet ruleSet in _ruleSets)

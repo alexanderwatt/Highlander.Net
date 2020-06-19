@@ -36,7 +36,7 @@ namespace Highlander.Utilities.Logging
 
         public bool SplitLines { get; set; }
 
-        private readonly string _userName = IdentityHelper.GetIdentity().Name;
+        private readonly string _userName = "user"; //IdentityHelper.GetIdentity().Name;
         private readonly string _hostName = IdentityHelper.GetHostName();
 
         /// <summary>

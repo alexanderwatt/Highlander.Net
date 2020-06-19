@@ -3,19 +3,16 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Highlander.Core.Common.CommsInterfaces;
 using Highlander.Grpc.Contracts;
-using Microsoft.Extensions.Logging;
 using static Highlander.Grpc.Contracts.TransferV341;
 
 namespace Highlander.Core.Common.Services
 {
     public class TransferReceiverV341 : TransferV341Base
     {
-        private readonly ILogger<TransferReceiverV341> _logger;
         private readonly ITransferV341 transferV341Interface;
 
-        public TransferReceiverV341(ILogger<TransferReceiverV341> logger, ITransferV341 transferV341Interface)
+        public TransferReceiverV341(ITransferV341 transferV341Interface)
         {
-            _logger = logger;
             this.transferV341Interface = transferV341Interface;
         }
 

@@ -15,6 +15,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using Highlander.Utilities.Helpers;
 
 namespace Highlander.Utilities.Logging

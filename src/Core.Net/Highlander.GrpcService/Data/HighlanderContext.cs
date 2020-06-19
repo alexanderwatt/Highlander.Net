@@ -8,6 +8,10 @@ namespace Highlander.GrpcService.Data
 {
     public class HighlanderContext : DbContext
     {
+        public HighlanderContext(DbContextOptions<HighlanderContext> options): base(options)
+        {
+        }
+
         public DbSet<ItemData> Items { get; set; }
     }
 
@@ -45,6 +49,10 @@ namespace Highlander.GrpcService.Data
         public string SysProps { get; set; }
         public int StoreSRN { get; set; }
         public long StoreUSN { get; set; }
+
+        public ItemData()
+        {
+        }
 
         internal ItemData(CommonItem row)
         {
