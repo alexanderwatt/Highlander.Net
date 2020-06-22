@@ -62,6 +62,7 @@ namespace Highlander.GrpcService
             }
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseEndpoints(endpoints =>
             {

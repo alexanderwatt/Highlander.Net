@@ -14,15 +14,17 @@ RUN dotnet restore "src/Core.Net/Highlander.GrpcService/Highlander.GrpcService.c
 COPY . .
 WORKDIR "/src/src/Core.Net/Highlander.GrpcService"
 RUN dotnet build "Highlander.GrpcService.csproj" -c Release -o /app/build
-RUN dotnet ef database update
-WORKDIR /logs
 
 FROM build AS publish
 WORKDIR "/src/src/Core.Net/Highlander.GrpcService"
 RUN dotnet publish "Highlander.GrpcService.csproj" -c Release -o /app/publish
-
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+RUN dotnet ef database update
+RUN cp *.db /app/publish
 
 FROM base AS final
+WORKDIR /logs
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Highlander.GrpcService.dll"]

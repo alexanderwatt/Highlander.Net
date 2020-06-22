@@ -4,4 +4,7 @@
     <ShowAllFiles>false</ShowAllFiles>
     <ActiveDebugProfile>Docker</ActiveDebugProfile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

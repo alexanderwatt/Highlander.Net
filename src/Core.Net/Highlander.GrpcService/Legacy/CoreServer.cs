@@ -318,7 +318,7 @@ namespace Highlander.Core.Server
             else if(os.Platform == PlatformID.Unix)
             {
                 userFullName = "user";
-                claimsIdentityName = "Unix";
+                claimsIdentityName = "Unix\\user";
             }
 
             var serverId = Guid.NewGuid();
