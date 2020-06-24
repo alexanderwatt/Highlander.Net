@@ -69,9 +69,9 @@ namespace Highlander.Core.Interface.V5r3
                 if (loadData)
                 {
                     // load configuration data
-                    LogRef.Target.LogInfo("LoadReferenceData: Running...");
-                    LoadConfigDataHelper.LoadConfigurationData(LogRef.Target, _client.Proxy, nameSpace);
-                    LogRef.Target.LogInfo("LoadReferenceData: Loaded");
+                    LogRef.Target.LogInfo("Load configuration data: Running...");
+                    LoadBasicConfigDataHelper.Load(LogRef.Target, _client.Proxy, nameSpace);
+                    LogRef.Target.LogInfo("Configuration data: Loaded");
                 }
                 var time = stopwatch.ElapsedMilliseconds;
                 stopwatch.Stop();

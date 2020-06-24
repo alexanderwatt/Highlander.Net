@@ -80,6 +80,7 @@
     <Compile Include="ConfigDataLoader.cs" />
     <Compile Include="FileImportRulesLoader.cs" />
     <Compile Include="FpMLTradeLoader.cs" />
+    <Compile Include="LoadBasicConfigDataHelper.cs" />
     <Compile Include="LoadConfigDataHelper.cs" />
     <Compile Include="MarketDataConfigHelper.cs" />
     <Compile Include="PricingStructureLoader.cs" />
