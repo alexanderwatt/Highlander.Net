@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.QR_LIVE.RateCurve.USD-LIBOR-BBA-3M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.USD-LIBOR-BBA-3M">
+    <name>USD-LIBOR-BBA-3M</name>
+    <currency>USD</currency>
+    <algorithm>CalypsoAlgo4_360</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>LIBOR-BBA</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>3</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.USD-LIBOR-BBA-3M" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-08-30T15:07:39.6957609+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="USD-Deposit-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-Deposit-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>W</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-Deposit-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-Deposit-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-Deposit-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-4Y">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-5Y">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-7Y">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-10Y">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-12Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-15Y">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-20Y">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-25Y">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-IRSwap-30Y">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-1" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-2" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-3" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-4" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-5" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-6" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-7" />
+        <underlyingAsset xsi:type="Future" id="USD-IRFuture-ED-8" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="USD-Deposit-1D" />
+        <quote>
+          <value>0.0025</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USDR1T CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-Deposit-1W" />
+        <quote>
+          <value>0.00535</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USDR1Z CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-Deposit-1M" />
+        <quote>
+          <value>0.00205</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USDRA CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-Deposit-2M" />
+        <quote>
+          <value>0.0024</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USDRB CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-Deposit-3M" />
+        <quote>
+          <value>0.00675</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USDRC CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-3Y" />
+        <quote>
+          <value>0.010205</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW3 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-4Y" />
+        <quote>
+          <value>0.013585</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW4 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-5Y" />
+        <quote>
+          <value>0.016865</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW5 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-7Y" />
+        <quote>
+          <value>0.02189</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW7 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-10Y" />
+        <quote>
+          <value>0.026485</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW10 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-12Y" />
+        <quote>
+          <value>0.028465</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW12 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-15Y" />
+        <quote>
+          <value>0.03048</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW15 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-20Y" />
+        <quote>
+          <value>0.03211</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW20 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-25Y" />
+        <quote>
+          <value>0.03291</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW25 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRSwap-30Y" />
+        <quote>
+          <value>0.03336</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>USSW30 CMPL CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-1" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.003125</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED1 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-2" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00415</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED2 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-3" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0047</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED3 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-4" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00565</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED4 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-5" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.007</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED5 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-6" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.00875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED6 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-7" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0106</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED7 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-IRFuture-ED-8" />
+        <quote>
+          <value>0.15</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LogNormalVolatility</quoteUnits>
+        </quote>
+        <quote>
+          <value>0.0126</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ED8 COMDTY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:39.6801308+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.00250077272681803</mid>
+        </point>
+        <point id="USD-Deposit-1D">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.00250077272681803</mid>
+        </point>
+        <point id="USD-Deposit-1W">
+          <term>
+            <date>2010-09-08</date>
+          </term>
+          <mid>0.00478249144306542</mid>
+        </point>
+        <point id="USD-Deposit-1M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.00209622769616136</mid>
+        </point>
+        <point id="USD-Deposit-2M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.00241222776403749</mid>
+        </point>
+        <point id="USD-Deposit-3M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.00666464771947695</mid>
+        </point>
+        <point id="USD-IRFuture-ED-1">
+          <term>
+            <date>2010-12-15</date>
+          </term>
+          <mid>0.00325138105125333</mid>
+        </point>
+        <point id="USD-IRFuture-ED-2">
+          <term>
+            <date>2011-03-15</date>
+          </term>
+          <mid>0.00366187213078728</mid>
+        </point>
+        <point id="USD-IRFuture-ED-3">
+          <term>
+            <date>2011-06-16</date>
+          </term>
+          <mid>0.00399354657738193</mid>
+        </point>
+        <point id="USD-IRFuture-ED-4">
+          <term>
+            <date>2011-09-15</date>
+          </term>
+          <mid>0.00439063672149143</mid>
+        </point>
+        <point id="USD-IRFuture-ED-5">
+          <term>
+            <date>2011-12-21</date>
+          </term>
+          <mid>0.00491322349459544</mid>
+        </point>
+        <point id="USD-IRFuture-ED-6">
+          <term>
+            <date>2012-03-21</date>
+          </term>
+          <mid>0.00552624095288845</mid>
+        </point>
+        <point id="USD-IRFuture-ED-7">
+          <term>
+            <date>2012-06-21</date>
+          </term>
+          <mid>0.0062314170602038</mid>
+        </point>
+        <point id="USD-IRFuture-ED-8">
+          <term>
+            <date>2012-09-20</date>
+          </term>
+          <mid>0.00700230189507689</mid>
+        </point>
+        <point id="USD-IRSwap-3Y">
+          <term>
+            <date>2013-09-03</date>
+          </term>
+          <mid>0.0100752806346254</mid>
+        </point>
+        <point id="USD-IRSwap-4Y">
+          <term>
+            <date>2014-09-02</date>
+          </term>
+          <mid>0.0134686412695899</mid>
+        </point>
+        <point id="USD-IRSwap-5Y">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.0168048620337533</mid>
+        </point>
+        <point id="USD-IRSwap-7Y">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0220130710959978</mid>
+        </point>
+        <point id="USD-IRSwap-10Y">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0269286432438784</mid>
+        </point>
+        <point id="USD-IRSwap-12Y">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0291072153597662</mid>
+        </point>
+        <point id="USD-IRSwap-15Y">
+          <term>
+            <date>2025-09-02</date>
+          </term>
+          <mid>0.0313696680201687</mid>
+        </point>
+        <point id="USD-IRSwap-20Y">
+          <term>
+            <date>2030-09-03</date>
+          </term>
+          <mid>0.033187895597969</mid>
+        </point>
+        <point id="USD-IRSwap-25Y">
+          <term>
+            <date>2035-09-04</date>
+          </term>
+          <mid>0.0340473712474667</mid>
+        </point>
+        <point id="USD-IRSwap-30Y">
+          <term>
+            <date>2040-09-04</date>
+          </term>
+          <mid>0.0345013482527277</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="USD-Deposit-1D">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9999930556037805292963243697</mid>
+      </point>
+      <point id="USD-Deposit-1W">
+        <term>
+          <date>2010-09-08</date>
+        </term>
+        <mid>0.999880516271453</mid>
+      </point>
+      <point id="USD-Deposit-1M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.999813734805812</mid>
+      </point>
+      <point id="USD-Deposit-2M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.99957807641213</mid>
+      </point>
+      <point id="USD-Deposit-3M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.998281210876749</mid>
+      </point>
+      <point id="USD-IRFuture-ED-1">
+        <term>
+          <date>2010-12-15</date>
+        </term>
+        <mid>0.999034476264042</mid>
+      </point>
+      <point id="USD-IRFuture-ED-2">
+        <term>
+          <date>2011-03-15</date>
+        </term>
+        <mid>0.9979990634175953647886256961</mid>
+      </point>
+      <point id="USD-IRFuture-ED-3">
+        <term>
+          <date>2011-06-16</date>
+        </term>
+        <mid>0.996789745139618</mid>
+      </point>
+      <point id="USD-IRFuture-ED-4">
+        <term>
+          <date>2011-09-15</date>
+        </term>
+        <mid>0.995366558878321</mid>
+      </point>
+      <point id="USD-IRFuture-ED-5">
+        <term>
+          <date>2011-12-21</date>
+        </term>
+        <mid>0.993501541187478</mid>
+      </point>
+      <point id="USD-IRFuture-ED-6">
+        <term>
+          <date>2012-03-21</date>
+        </term>
+        <mid>0.9913094800381935853882513824</mid>
+      </point>
+      <point id="USD-IRFuture-ED-7">
+        <term>
+          <date>2012-06-21</date>
+        </term>
+        <mid>0.9886324334476804581827383419</mid>
+      </point>
+      <point id="USD-IRFuture-ED-8">
+        <term>
+          <date>2012-09-20</date>
+        </term>
+        <mid>0.985492027044195</mid>
+      </point>
+      <point id="USD-IRSwap-3Y">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>0.96972100455102</mid>
+      </point>
+      <point id="USD-IRSwap-4Y">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.946787629399754</mid>
+      </point>
+      <point id="USD-IRSwap-5Y">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.918372123003626</mid>
+      </point>
+      <point id="USD-IRSwap-7Y">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.855518761976831</mid>
+      </point>
+      <point id="USD-IRSwap-10Y">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.76148534468899</mid>
+      </point>
+      <point id="USD-IRSwap-12Y">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.70239573325599</mid>
+      </point>
+      <point id="USD-IRSwap-15Y">
+        <term>
+          <date>2025-09-02</date>
+        </term>
+        <mid>0.621371003592328</mid>
+      </point>
+      <point id="USD-IRSwap-20Y">
+        <term>
+          <date>2030-09-03</date>
+        </term>
+        <mid>0.511183548847906</mid>
+      </point>
+      <point id="USD-IRSwap-25Y">
+        <term>
+          <date>2035-09-04</date>
+        </term>
+        <mid>0.422997063618644</mid>
+      </point>
+      <point id="USD-IRSwap-30Y">
+        <term>
+          <date>2040-09-04</date>
+        </term>
+        <mid>0.351285279798871</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

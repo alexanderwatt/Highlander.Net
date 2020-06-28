@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Trade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<tradeHeader xmlns="http://www.fpml.org/FpML-5/reporting">
+		<partyTradeIdentifier>
+			<partyReference href="party1" />
+			<tradeId>1</tradeId>
+		</partyTradeIdentifier>
+		<partyTradeIdentifier>
+			<partyReference href="party2" />
+			<tradeId>1</tradeId>
+		</partyTradeIdentifier>
+		<tradeDate>2020-04-22</tradeDate>
+	</tradeHeader>
+	<leaseTransaction id="Trade.Reporting.Internal.1.leaseTransaction" xmlns="http://www.fpml.org/FpML-5/reporting">
+		<productType>LeaseTransaction</productType>
+		<buyerPartyReference href="Party1" />
+		<sellerPartyReference href="Party2" />
+		<lease id="1" xmlns="http://www.fpml.org/FpML-5/reporting/ext">
+			<description xmlns="http://www.fpml.org/FpML-5/reporting" />
+			<currency xmlns="http://www.fpml.org/FpML-5/reporting">AUD</currency>
+			<tenant xmlns="http://www.fpml.org/FpML-5/reporting">
+				<partyId>abc</partyId>
+			</tenant>
+			<propertyReference xmlns="http://www.fpml.org/FpML-5/reporting">ReferenceData.Property.Commercial.Sydney.cs.2000</propertyReference>
+			<shopNumber xmlns="http://www.fpml.org/FpML-5/reporting">unspecified</shopNumber>
+			<leaseType xmlns="http://www.fpml.org/FpML-5/reporting">unspecified</leaseType>
+			<startDate id="LeaseStartDate" xmlns="http://www.fpml.org/FpML-5/reporting">2020-04-22</startDate>
+			<reviewFrequency xmlns="http://www.fpml.org/FpML-5/reporting">
+				<periodMultiplier>1</periodMultiplier>
+				<period>Y</period>
+			</reviewFrequency>
+			<nextReviewDate id="NextReviewDate" xmlns="http://www.fpml.org/FpML-5/reporting">2021-04-22</nextReviewDate>
+			<reviewChange xmlns="http://www.fpml.org/FpML-5/reporting">0.0</reviewChange>
+			<numberOfUnits xmlns="http://www.fpml.org/FpML-5/reporting">0.0</numberOfUnits>
+			<units xmlns="http://www.fpml.org/FpML-5/reporting">sqm</units>
+			<startGrossPrice xmlns="http://www.fpml.org/FpML-5/reporting">
+				<amount>10000000</amount>
+			</startGrossPrice>
+			<paymentFrequency xmlns="http://www.fpml.org/FpML-5/reporting">
+				<periodMultiplier>1</periodMultiplier>
+				<period>M</period>
+			</paymentFrequency>
+			<leaseExpiryDate id="LeaseExpiryDate" xmlns="http://www.fpml.org/FpML-5/reporting">2020-04-22</leaseExpiryDate>
+			<rollConvention xmlns="http://www.fpml.org/FpML-5/reporting">22</rollConvention>
+			<businessDayAdjustments xmlns="http://www.fpml.org/FpML-5/reporting">
+				<businessCenters>
+					<businessCenter>AUSY</businessCenter>
+				</businessCenters>
+			</businessDayAdjustments>
+		</lease>
+	</leaseTransaction>
+</Trade>
+

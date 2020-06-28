@@ -248,7 +248,7 @@ namespace Highlander.Utilities.NamedValues
         }
 
         /// <summary>
-        /// Constructs a modifiable <see cref="NamedValueSet"/> by deserialsing.
+        /// Constructs a modifiable <see cref="NamedValueSet"/> by deserializing.
         /// </summary>
         /// <param name="text">The text.</param>
         public NamedValueSet(string text)
@@ -287,7 +287,7 @@ namespace Highlander.Utilities.NamedValues
         }
 
         /// <summary>
-        /// Serialises this <see cref="NamedValueSet"/>.
+        /// Serializes this <see cref="NamedValueSet"/>.
         /// </summary>
         /// <returns></returns>
         public string Serialise()
@@ -433,7 +433,7 @@ namespace Highlander.Utilities.NamedValues
         {
             NamedValue nv = Get(name, false);
             if (nv == null)
-                return default(T);
+                return default;
             return nv.AsValue<T>();
         }
         /// <summary>
@@ -477,7 +477,7 @@ namespace Highlander.Utilities.NamedValues
         {
             NamedValue nv = Get(name, isMandatory);
             if (nv == null)
-                return default(T);
+                return default;
             return nv.AsValue<T>();
         }
 

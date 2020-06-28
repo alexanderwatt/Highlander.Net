@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="CurveGenWinSvc.exe" version="1.0.0.0" publicKeyToken="61a9b7359e75e39a" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="CurveGenWinSvc" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="CurveGenWinSvc.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options
+            If you want to change the Windows User Account Control level replace the 
+            requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            Specifying requestedExecutionLevel node will disable file and registry virtualization.
+            If you want to utilize File and Registry Virtualization for backward 
+            compatibility then delete the requestedExecutionLevel node.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Core.Common.dll" size="151552">
+      <assemblyIdentity name="Core.Common" version="3.4.1.20" publicKeyToken="B57D76568CD5B0A9" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>fKt3MKqfn+pffAx/xpioFUgdhMY/JGSlnXGO9DTL+gI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Core.V34.dll" size="72192">
+      <assemblyIdentity name="Core.V34" version="3.4.1.20" publicKeyToken="B57D76568CD5B0A9" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>cntq1fneoWTpULPcGOCw8aRGLrxtIDHvm35UkESFfdg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CurveGenWinSvc.exe" size="7680">
+      <assemblyIdentity name="CurveGenWinSvc" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>0fRWX8zqWgY8uGc+cWpjQ5bIx62ZttHhrBvWK0qatMs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Extreme.Numerics.dll" size="958464">
+      <assemblyIdentity name="Extreme.Numerics" version="2.2.7266.0" publicKeyToken="9E513770F58567B2" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>zQGTy8tqfAUq8Ngm6uQG6NZVFG9JVczr+wDxQ9VP+cM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Analytics.dll" size="351744">
+      <assemblyIdentity name="FpML.V5r3.Analytics" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vvrcc2boAT3aKb73eGiy92cxMysxejRzt6XbQfZs4PY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.CalendarEngine.dll" size="77824">
+      <assemblyIdentity name="FpML.V5r3.CalendarEngine" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>QS2UUe3Xa4FNBySzFTbLdB5AvJnfWjcfK9zPC2Uyz6s=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Codes.dll" size="251904">
+      <assemblyIdentity name="FpML.V5r3.Codes" version="1.0.0.0" publicKeyToken="14843900396D6060" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ivMST3vZfCU9TywfRikmPy3xbZ2BZlKceFeRSQBMYHk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.ConfigTypes.dll" size="61952">
+      <assemblyIdentity name="FpML.V5r3.ConfigTypes" version="1.0.0.0" publicKeyToken="9485F4817B4E4140" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>HwHXXY5Uc+0MmmmA7nhJ614yArg93nvBd5xsYFjFJYU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.CurveEngine.dll" size="644608">
+      <assemblyIdentity name="FpML.V5r3.CurveEngine" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>7Pj2jy7NGdBipxl56RSojdXETj2/x61628CSx0REm8E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Helpers.dll" size="39424">
+      <assemblyIdentity name="FpML.V5r3.Helpers" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>8OqSQfRaVDoi+jc6DFJsbNDrJiGmmomamt7l20ishmk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.MDAS.Client.dll" size="16896">
+      <assemblyIdentity name="FpML.V5r3.MDAS.Client" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>v2st9zgHNiXC4xFSKCanF5/ACiTnBIMhjq1uRpncvJs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.dll" size="1544704">
+      <assemblyIdentity name="FpML.V5r3.Reporting" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>oVKb4Q14JUyX2t0n6HVJU++IulWIH6IupPB0c7Pw1bg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Common.dll" size="6144">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Common" version="0.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>+HBhnbIHzVQ/E76YH4B6YPI0i9IAEhwgIpW0usIvAvA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Contracts.dll" size="31744">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Contracts" version="1.0.0.0" publicKeyToken="FA0C6DEB4ABB9668" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>sLuhsOI4fK/J3KIpgZIephaYLD/q4ZRwSi5f1QRo3PM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.CurveGeneration.dll" size="24064">
+      <assemblyIdentity name="FpML.V5r3.Reporting.CurveGeneration" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>mzSakncQ+7P/wsmzvpUf5wltt6t5Z0qvHLK5H+b7/Ps=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Helpers.dll" size="122880">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Helpers" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vIjriCjvwoE1zm0YKNL73fDhqBp+T3C1Et5HZCSwYsI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Identifiers.dll" size="64512">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Identifiers" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>V2V3P4BZtJYwKcYxmNSNF7GcXWzWwbmn3UqAB1OAYXE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.ModelFramework.dll" size="96256">
+      <assemblyIdentity name="FpML.V5r3.Reporting.ModelFramework" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>eZYvdFsU9MmItp62Ws3nbbs26O/B6p6f60CGzLeVQrg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Models.dll" size="189440">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Models" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ILlrTjChMVaZVpEUsva3sdPasgB3jmOHqVUVgPDmgac=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FpML.V5r3.Reporting.Pedersen.dll" size="178688">
+      <assemblyIdentity name="FpML.V5r3.Reporting.Pedersen" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>FWVhLS/euPWT2KINqdslHjFbj/yKfkxptxxlI+f5NWg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Numerics.dll" size="543744">
+      <assemblyIdentity name="Numerics" version="1.0.0.0" publicKeyToken="7976ACFCBCDFC0B6" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>HP/PqxZtiMWM5GLkbm0+8GkDNs71VEhMJJU/zr7rja8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Orion.Constants.dll" size="29184">
+      <assemblyIdentity name="Orion.Constants" version="1.0.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>34agkXAkO4gm6hCskBbtuTBJ70IiyeM6Ldy3FVABv+A=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Orion.Util.dll" size="137216">
+      <assemblyIdentity name="Orion.Util" version="3.4.1.20" publicKeyToken="B57D76568CD5B0A9" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4Xi7znHaiV92R3SMU028UFUglAJupEwkZ16BP2xnIWI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Server.CurveGenerator.dll" size="8704">
+      <assemblyIdentity name="Server.CurveGenerator" version="3.3.0.0" publicKeyToken="2AD218757F6C92D7" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>c24x0tuFCYscAfvKipdqjrNUnegCsQdl//s1AA+YcFk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Workflow.dll" size="37376">
+      <assemblyIdentity name="Workflow" version="1.0.0.0" publicKeyToken="8AE865FB17D70D9D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>WjCDS2lYwc1W4xVmChNnxSzhXr2tQ1eGoLLp9S+nCuQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="CurveGenWinSvc.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xm4bo26HQ0LNVwz1vdPYtzhkpMnp2AI5i+f0b+OahTI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of all Windows versions that this application is designed to work with. 
+      Windows will automatically select the most compatible environment.-->
+      <!-- If your application is designed to work with Windows Vista, uncomment the following supportedOS node-->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"></supportedOS>-->
+      <!-- If your application is designed to work with Windows 7, uncomment the following supportedOS node-->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>-->
+      <!-- If your application is designed to work with Windows 8, uncomment the following supportedOS node-->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"></supportedOS>-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=Alex-PC\Alex" issuerKeyHash="f33887e2fa1c16699ccde34fd3df747177b1c1cb" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>/pVB+dTb8crCjtY1s5dypLwil8yQy3gNLagKRF9ddjo=</DigestValue></Reference></SignedInfo><SignatureValue>fu9JhX6Ddivv1lFRA3l7EESPPdPhV1iPjLWZ5w8N+hNZINzfkVZ37mos9k2A2qwvFw1KgJZLu+4RabqCbbEcqR1zzXNtqdkYDJ9aWiQj3W9vU8Y4Qr/eHQWn/emj9aFJlqnLm35AjaVELBLznwFnimWZowjONrThSJUlhIlRXgg=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>lxJKAZ6Vd3mYBCeGnWfR9hzUu0PdDPqFRqHRxWmP+0vfV0eCzOCaUhCYIoL4d67Z2DtUZ7u1lwqok6PRkV75TRR6lBy40HXRkM4b3m2Jxs4wlhuhn49ZERTUtwRnlnI/ej0C4PjyrHeO0OfVHkHcMjbYt67l4auZDNOgpbeNvmM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="3a765d5f440aa82d0d78cb90cc9722bca47297b335d68ec2caf1dbd4f94195fe" Description="" Url=""><as:assemblyIdentity name="CurveGenWinSvc.exe" version="1.0.0.0" publicKeyToken="61a9b7359e75e39a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Alex-PC\Alex</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>E3R1v90ELcA+eyG+vazXXvV34jTD1rGVc8/MR940X3w=</DigestValue></Reference></SignedInfo><SignatureValue>RsIk+ViRi0t+E2Vv/HAqRUxFH8mBG+4JBO/JV5TMPoU6A4UH+2xemFOx9VyXLpe+pMCfiZruZ6xru/frj9enqb3M6XEqpHQ14UpbKHbnkoTcykePwiCAg9TUmj2NbnZsMl2NHJzknjHmdHZbCaqh3zJoogU+/NuxjId3RUEOy70=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>lxJKAZ6Vd3mYBCeGnWfR9hzUu0PdDPqFRqHRxWmP+0vfV0eCzOCaUhCYIoL4d67Z2DtUZ7u1lwqok6PRkV75TRR6lBy40HXRkM4b3m2Jxs4wlhuhn49ZERTUtwRnlnI/ej0C4PjyrHeO0OfVHkHcMjbYt67l4auZDNOgpbeNvmM=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQbAfPc0dCf5dKcDVkE+MwajANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDHhgAQQBsAGUAeAAtAFAAQwBcAEEAbABlAHgwHhcNMTMxMDI1MjIzMjU5WhcNMTQxMDI2MDQzMjU5WjAjMSEwHwYDVQQDHhgAQQBsAGUAeAAtAFAAQwBcAEEAbABlAHgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAJcSSgGelXd5mAQnhp1n0fYc1LtD3Qz6hUah0cVpj/tL31dHgszgmlIQmCKC+Heu2dg7VGe7tZcKqJOj0ZFe+U0UepQcuNB10ZDOG95ticbOMJYboZ+PWREU1LcEZ5ZyP3o9AuD48qx3jtDn1R5B3DI22Leu5eGrmQzToKW3jb5jAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAA/Q21YwtYY+UWKvf55+oxNIxceF+niO6pdLQkOPdF8dWrMk0TRJxnTNGs54BhBG6/n2iVL27r0Jy9rio/Dtb7mLDDceQ5Vh+HiELFqSGl5GVF3V0vDsTL1Irz/g4RGwdEfwOFRMuBxxxOFdLBPe0VXKpMs1NiSw3RyYTb/0Frds=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

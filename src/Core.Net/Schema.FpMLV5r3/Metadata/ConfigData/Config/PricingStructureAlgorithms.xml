@@ -1,0 +1,1391 @@
+<PricingStructureTypes>
+  <PricingStructureType id="RateSpreadCurve">
+    <Algorithms>
+      <!-- Calypso -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Calypso ACT/360-->
+      <Algorithm id="CalypsoAlgo4_360">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/360</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FastFlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="RateBasisCurve">
+    <Algorithms>
+      <!-- Spread = LinearSpreadZero -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroSpreadCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearSpreadZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroSpreadCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType> 
+  <PricingStructureType id="RateXccyCurve">
+    <Algorithms>
+      <!-- Spread = LinearSpreadZero -->
+      <Algorithm id="LinearSpreadZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroSpreadCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      </Algorithms>
+    </PricingStructureType>
+  <PricingStructureType id="RateCurve">
+    <Algorithms>
+      <!-- Calypso -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Calypso ACT/360-->
+      <Algorithm id="CalypsoAlgo4_360">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/360</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FastFlatForward -->
+      <Algorithm id="FastFlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="Base algorithm">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="COE">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- SimpleGapStep -->
+      <Algorithm id="SimpleGapStep">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">PiecewiseConstantRateInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+          <Property name="DateGenerationRule">12</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="ClearedRateCurve">
+    <Algorithms>
+      <!-- Calypso -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Calypso ACT/360-->
+      <Algorithm id="CalypsoAlgo4_360">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/360</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FastFlatForward -->
+      <Algorithm id="FastFlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="Base algorithm">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="COE">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- SimpleGapStep -->
+      <Algorithm id="SimpleGapStep">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">PiecewiseConstantRateInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+          <Property name="DateGenerationRule">12</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="FastRateCurve">
+    <Algorithms>
+      <!-- Calypso -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Calypso ACT/360-->
+      <Algorithm id="CalypsoAlgo4_360">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/360</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FastFlatForward -->
+      <Algorithm id="FastFlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="Base algorithm">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- NB: provided for the backward compatibility with the CurveGen 1.0  -->
+      <Algorithm id="COE">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- SimpleGapStep -->
+      <Algorithm id="SimpleGapStep">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">PiecewiseConstantRateInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+          <Property name="DateGenerationRule">12</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="ExchangeTradedCurve">
+    <Algorithms>
+      <Algorithm id="FastLinear">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="DiscountCurve">
+    <Algorithms>
+      <!-- Calypso -->
+      <Algorithm id="CalypsoAlgo4">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Calypso ACT/360-->
+      <Algorithm id="CalypsoAlgo4_360">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/360</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- SimpleGapStep -->
+      <Algorithm id="SimpleGapStep">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">PiecewiseConstantRateInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+          <Property name="DateGenerationRule">12</Property>
+        </Properties>
+      </Algorithm>      
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="BondDiscountCurve">
+    <Algorithms>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>   
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="BondCurve">
+    <Algorithms>
+      <Algorithm id="FastLinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">FastBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>   
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="BondFinancingCurve">
+    <Algorithms>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="BondFinancingBasisCurve">
+    <Algorithms>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">RateSpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="InflationCurve">
+    <Algorithms>
+      <!-- Default = LinearZero -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="LinearZero">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">ZeroCurve</Property>
+          <Property name="CompoundingFrequency">Quarterly</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- FlatForward -->
+      <Algorithm id="FlatForward">
+        <Properties>
+          <Property name="Tolerance">1E-8</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LogLinearInterpolation</Property>
+          <Property name="CurveInterpolation">LogLinearInterpolation</Property>
+          <Property name="UnderlyingCurve">DiscountFactorCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="CommodityCurve">
+    <Algorithms>
+      <!-- Default = LinearForward -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleCommodityBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">CommodityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- LinearForward -->
+      <Algorithm id="LinearForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleCommodityBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">CommodityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="CommoditySpreadCurve">
+    <Algorithms>
+      <!-- Default = LinearForward -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleCommoditySpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">CommodityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- LinearForward -->
+      <Algorithm id="LinearForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleCommoditySpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">CommodityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="EquityCurve">
+    <Algorithms>
+      <!-- Default = LinearForward -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleEquityBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">EquityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- LinearForward -->
+      <Algorithm id="LinearForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleEquityBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">EquityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="EquitySpreadCurve">
+    <Algorithms>
+      <!-- Default = LinearForward -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleEquitySpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">EquityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- LinearForward -->
+      <Algorithm id="LinearForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleEquitySpreadBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">EquityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="FxCurve">
+    <Algorithms>
+      <!-- Default = LinearForward -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleFxBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">FxCurve</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- LinearForward -->
+      <Algorithm id="LinearForward">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleFxBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">FxCurve</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="RateVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="CommodityVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="FxVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="RateATMVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="EquityVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="EquityWingVolatilityMatrix">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">WingModelInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Wing -->
+      <Algorithm id="Wing">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">WingModelInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- SABR -->
+      <Algorithm id="SABR">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="xDimensionInterpolation">LinearInterpolation</Property>
+          <Property name="yDimensionInterpolation">SABRModelInterpolation</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="CapVolatilitySurface">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Linear -->
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="CapVolatilityCurve">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">CapFloorBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">VolatilityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Cubic Spline -->
+      <Algorithm id="Cubic">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">CapFloorBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">CubicHermiteSplineInterpolation</Property>
+          <Property name="CurveInterpolation">CubicHermiteSplineInterpolation</Property>
+          <Property name="UnderlyingCurve">VolatilityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Linear -->
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">CapFloorBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">VolatilityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="GenericVolatilityCurve">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">CapFloorBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">CubicHermiteSplineInterpolation</Property>
+          <Property name="CurveInterpolation">CubicHermiteSplineInterpolation</Property>
+          <Property name="UnderlyingCurve">VolatilityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Linear -->
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">CapFloorBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">VolatilityCurve</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="SwaptionVolSurface">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    <!-- Linear -->
+    <Algorithm id="Linear">
+      <Properties>
+        <Property name="Tolerance">1E-10</Property>
+        <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+        <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+        <Property name="CurveInterpolation">LinearInterpolation</Property>
+        <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+        <Property name="CompoundingFrequency">Continuous</Property>
+        <Property name="ExtrapolationPermitted">true</Property>
+        <Property name="DayCounter">ACT/365.FIXED</Property>
+      </Properties>
+    </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+  <PricingStructureType id="SwaptionVolCube">
+    <Algorithms>
+      <!-- Default = Linear -->
+      <Algorithm id="Default">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+      <!-- Linear -->
+      <Algorithm id="Linear">
+        <Properties>
+          <Property name="Tolerance">1E-10</Property>
+          <Property name="Bootstrapper">SimpleRateBootstrapper</Property>
+          <Property name="BootstrapperInterpolation">LinearRateInterpolation</Property>
+          <Property name="CurveInterpolation">LinearInterpolation</Property>
+          <Property name="UnderlyingCurve">LogNormalVolatility</Property>
+          <Property name="CompoundingFrequency">Continuous</Property>
+          <Property name="ExtrapolationPermitted">true</Property>
+          <Property name="DayCounter">ACT/365.FIXED</Property>
+        </Properties>
+      </Algorithm>
+    </Algorithms>
+  </PricingStructureType>
+</PricingStructureTypes>

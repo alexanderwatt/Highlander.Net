@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TestItem2"
+    targetNamespace="http://tempuri.org/TestItem2.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/TestItem2.xsd"
+    xmlns:mstns="http://tempuri.org/TestItem2.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="TestItem2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Id" type="xs:int" />
+        <xs:element name="Value" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestItem3">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Id" type="xs:int" />
+        <xs:element name="Value" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="field1" type="xs:string" />
+        <xs:element name="field2" type="xs:int" />
+        <xs:element name="array1" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="array2" type="xs:int" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

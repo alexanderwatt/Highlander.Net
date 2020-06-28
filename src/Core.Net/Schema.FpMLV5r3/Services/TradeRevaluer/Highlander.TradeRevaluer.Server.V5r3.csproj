@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D7730366-8830-4FFB-B9C1-5926ABF5A05B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.TradeRevaluer.Server.V5r3</RootNamespace>
+    <AssemblyName>Highlander.TradeRevaluer.Server.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PortfolioValuationServer.cs" />
+    <Compile Include="TradeValuationServer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\WorkflowFramework\Highlander.Workflow.csproj">
+      <Project>{646417a1-8c17-49af-93ec-f9055c8d43b7}</Project>
+      <Name>Highlander.Workflow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\PortfolioValuation\Highlander.Workflow.PortfolioValuation.V5r3.csproj">
+      <Project>{2b7bc7ce-bbfb-4454-8249-644ba35675c6}</Project>
+      <Name>Highlander.Workflow.PortfolioValuation.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Contracts\Highlander.Reporting.Contracts.V5r3.csproj">
+      <Project>{4559a0ee-c1ab-43b5-8eb5-9e4cd7a75af3}</Project>
+      <Name>Highlander.Reporting.Contracts.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

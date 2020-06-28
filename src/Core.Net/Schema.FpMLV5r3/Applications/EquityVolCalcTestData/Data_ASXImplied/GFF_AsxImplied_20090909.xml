@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Stock>
+  <Name>GFF</Name>
+  <AssetId>GFF</AssetId>
+  <VolatilitySurface>
+    <StockId>GFF</StockId>
+    <Date>2009-09-09T00:00:00</Date>
+    <IsComplete>false</IsComplete>
+    <Expiries>
+      <ForwardExpiry>
+        <ExpiryDate>2009-09-24T00:00:00</ExpiryDate>
+        <FwdPrice>164.221227</FwdPrice>
+        <InterestRate>0.030939</InterestRate>
+        <NodalPoint>true</NodalPoint>
+        <Strikes>
+          <Strike>
+            <Call>
+              <ContractId>GFF09SEP140C.BR7</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Call</Type>
+              <Volatility>
+                <Value>0.484226</Value>
+              </Volatility>
+            </Call>
+            <Put>
+              <ContractId>GFF09SEP140P.BS7</ContractId>
+              <ContractPrice>0</ContractPrice>
+              <Type>Put</Type>
+              <Volatility>
+                <Value>0.440721</Value>
+              </Volatility>
+            </Put>
+            <Moneyness>0.85250854933631692</Moneyness>
+            <StrikePrice>140</StrikePrice>
+            <Volatility>
+              <Value>0.46247350</Value>
+            </Volatility>
+            <VolatilityHasBeenSet>true</VolatilityHasBeenSet>
+          </Strike>
+        </Strikes>
+      </ForwardExpiry>
+    </Expiries>
+  </VolatilitySurface>
+</Stock>

@@ -89,7 +89,7 @@ namespace Highlander.Utilities.Serialisation
         public static T DeserializeFromString<T>(Type asRootType, string serializedObject)
         {
             if (serializedObject == null)
-                return default(T);
+                return default;
             using (var stringReader = new StringReader(serializedObject))
             {
                 var serializer = new XmlSerializer(asRootType);

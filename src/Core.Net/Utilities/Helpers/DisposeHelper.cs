@@ -31,20 +31,7 @@ namespace Highlander.Utilities.Helpers
             {
                 target?.Dispose();
             }
-            catch(Exception excp)
-            {
-                Debug.WriteLine($"DisposeHelper.SafeDispose<{typeof(T).Name}>: {excp.GetType().Name}");
-            }
-            target = null;
-        }
-
-        public static void SafeDispose<T>(T target) where T : class, IDisposable
-        {
-            try
-            {
-                target?.Dispose();
-            }
-            catch (Exception excp)
+            catch(System.Exception excp)
             {
                 Debug.WriteLine($"DisposeHelper.SafeDispose<{typeof(T).Name}>: {excp.GetType().Name}");
             }

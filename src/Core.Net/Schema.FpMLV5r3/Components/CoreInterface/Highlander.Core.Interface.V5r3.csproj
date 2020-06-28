@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E3DF5F07-1420-4C0D-A8A3-BDA19FB24810}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Core.Interface.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Core.Interface.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\BuildDef\BuildInfoLimited.cs">
+      <Link>BuildInfoLimited.cs</Link>
+    </Compile>
+    <Compile Include="Assets.cs" />
+    <Compile Include="Dates.cs" />
+    <Compile Include="Pricers.cs" />
+    <Compile Include="PricingStructures.cs" />
+    <Compile Include="Helpers\DataRangeHelper.cs" />
+    <Compile Include="Helpers\ProductResultsHelper.cs" />
+    <Compile Include="Impl\ExcelApiException.cs" />
+    <Compile Include="Impl\MethodErrors.cs" />
+    <Compile Include="Maths\Numerical.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuntimeEnvironment.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Core.Server\Highlander.Core.Server.csproj">
+      <Project>{114b78d2-1ccd-41e0-8b7e-2d042d381631}</Project>
+      <Name>Highlander.Core.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Components\Core.V34\Highlander.Core.V34.csproj">
+      <Project>{2227b445-976d-457a-b7e1-16c013599453}</Project>
+      <Name>Highlander.Core.V34</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Common\Highlander.Metadata.Common.csproj">
+      <Project>{214104c5-e2f7-4007-9a60-26d20d3cc80f}</Project>
+      <Name>Highlander.Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Analytics\Highlander.Reporting.Analytics.V5r3.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>Highlander.Reporting.Analytics.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ConfigData\Highlander.Configuration.Data.V5r3.csproj">
+      <Project>{A99322D4-6D41-499F-BE4E-62DAB22FF97F}</Project>
+      <Name>Highlander.Configuration.Data.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>Highlander.Reporting.Identifiers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Models\Highlander.Reporting.Models.V5r3.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>Highlander.Reporting.Models.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting.Helpers\Highlander.Reporting.Helpers.V5r3.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>Highlander.Reporting.Helpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalendarEngine\Highlander.CalendarEngine.V5r3.csproj">
+      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
+      <Name>Highlander.CalendarEngine.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveEngine\Highlander.CurveEngine.V5r3.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>Highlander.CurveEngine.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValuationEngine\Highlander.ValuationEngine.V5r3.csproj">
+      <Project>{f9217f4f-10c1-4192-b8cc-8aec06362fb5}</Project>
+      <Name>Highlander.ValuationEngine.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

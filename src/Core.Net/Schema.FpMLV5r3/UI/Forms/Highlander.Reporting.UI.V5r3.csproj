@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DD0C3C24-E40C-4AB5-95FE-2BA76D3E7100}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Highlander.Reporting.UI.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Reporting.UI.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CreateTradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateTradeForm.Designer.cs">
+      <DependentUpon>CreateTradeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InspectionForm.Designer.cs">
+      <DependentUpon>InspectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LeaseTransactionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LeaseTransactionForm.Designer.cs">
+      <DependentUpon>LeaseTransactionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PricingStructureVisualizerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PricingStructureVisualizerForm.Designer.cs">
+      <DependentUpon>PricingStructureVisualizerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertiesForm.Designer.cs">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CurveBuildForm.xaml.cs">
+      <DependentUpon>CurveBuildForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyAssetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyAssetForm.Designer.cs">
+      <DependentUpon>PropertyAssetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XmlTreeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XmlTreeView.Designer.cs">
+      <DependentUpon>XmlTreeView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CreateTradeForm.resx">
+      <DependentUpon>CreateTradeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InspectionForm.resx">
+      <DependentUpon>InspectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeaseTransactionForm.resx">
+      <DependentUpon>LeaseTransactionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PricingStructureVisualizerForm.resx">
+      <DependentUpon>PricingStructureVisualizerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PropertiesForm.resx">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PropertyAssetForm.resx">
+      <DependentUpon>PropertyAssetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XmlTreeView.resx">
+      <DependentUpon>XmlTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Key.snk" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Scripts\jquery-2.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Common\Highlander.Metadata.Common.csproj">
+      <Project>{214104c5-e2f7-4007-9a60-26d20d3cc80f}</Project>
+      <Name>Highlander.Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{AB717476-3485-4B65-A916-027F75928CA7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util.WinTools\Highlander.WinTools.csproj">
+      <Project>{c4b2055e-25df-45fe-8c7e-b2929a140e7a}</Project>
+      <Name>Highlander.WinTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\CoreInterface\Highlander.Core.Interface.V5r3.csproj">
+      <Project>{E3DF5F07-1420-4C0D-A8A3-BDA19FB24810}</Project>
+      <Name>Highlander.Core.Interface.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58B2D2DF-6E17-4CE3-A12F-863C811377EF}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Confirmation\Highlander.Confirmation.V5r3.csproj">
+      <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
+      <Name>Highlander.Confirmation.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
+      <Project>{D573BEBD-DEED-4DAD-9382-4A67C55FE1F3}</Project>
+      <Name>Highlander.Reporting.Identifiers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CurveBuildForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,8 @@
+PricingStructureType/String=DiscountCurve
+Market/String=QR_LIVE
+CreditInstrumentId/String=LIBOR
+CreditSeniority/String=SENIOR
+CurveName/String=HKD-LIBOR-SENIOR
+DependencyDepth/Double=0
+Algorithm/String=CalypsoAlgo4
+Currency/String=HKD

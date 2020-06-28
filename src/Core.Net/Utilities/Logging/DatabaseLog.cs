@@ -231,7 +231,7 @@ namespace Highlander.Utilities.Logging
                         _adapter.InsertCommand.Transaction.Commit();
                         _activeTable.Clear();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         System.Diagnostics.Trace.WriteLine(e.Message);
                         _adapter.InsertCommand.Transaction.Rollback();
@@ -242,7 +242,7 @@ namespace Highlander.Utilities.Logging
                     }
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 System.Diagnostics.Trace.WriteLine(e.Message);
             }

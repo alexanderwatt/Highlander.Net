@@ -119,7 +119,7 @@ namespace Highlander.Utilities.Logging
         /// 
         /// </summary>
         /// <param name="e"></param>
-        public void Log(Exception e)
+        public void Log(System.Exception e)
         {
             Log(LogSeverity.Error, "EXCEPTION: " + e);
         }
@@ -233,7 +233,7 @@ namespace Highlander.Utilities.Logging
             Log(LogSeverity.Error, String.Format(format, args));
         }
 
-        public void LogError(Exception ex)
+        public void LogError(System.Exception ex)
         {
             Log(LogSeverity.Error, ex.ToString());
         }
@@ -263,7 +263,7 @@ namespace Highlander.Utilities.Logging
             Log(LogSeverity.Fatal, String.Format(format, args));
         }
 
-        public void LogFatal(Exception ex)
+        public void LogFatal(System.Exception ex)
         {
             Log(LogSeverity.Fatal, ex.ToString());
         }

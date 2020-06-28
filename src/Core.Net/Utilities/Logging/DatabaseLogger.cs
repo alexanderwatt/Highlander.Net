@@ -100,7 +100,7 @@ namespace Highlander.Utilities.Logging
             FieldMappings = mandatoryFieldMappings ?? InitialiseMandatoryFields();
             Adapter = CreateDataAdapter(connectionString, LogTableName, FieldMappings, out var schemaTable);
             LogTable = CreateLogTable(LogTableName, schemaTable, FieldMappings);
-            Boolean delayPersistance = persistInterval > 0;
+            bool delayPersistance = persistInterval > 0;
             Logger = InitialiseLogger(delayPersistance);
             Logger.PersistInterval = persistInterval;
             Logger.Enabled = true;
@@ -176,7 +176,7 @@ namespace Highlander.Utilities.Logging
             {
                 row[FieldMappings[field]] = value;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 string message =
                     $"Mandatory log field {field} cannot be resolved. Please ensure this field has been correctly mapped int mandatory log fields prior to creating the logger";
@@ -297,7 +297,7 @@ namespace Highlander.Utilities.Logging
         /// <param name="source">The source.</param>
         /// <param name="message">What to enter.</param>
         /// <param name="exception">The exception.</param>
-        private static void WriteFailure(string source, string message, Exception exception)
+        private static void WriteFailure(string source, string message, System.Exception exception)
         {
             System.Diagnostics.Trace.WriteLine(string.Concat(" Database logging failure. Source: ", source, " Message: ", message, " Exception:", exception.Message));
         }

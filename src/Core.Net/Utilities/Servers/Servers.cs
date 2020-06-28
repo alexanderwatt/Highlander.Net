@@ -151,7 +151,7 @@ namespace Highlander.Utilities.Servers
             {
                 Stop();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -343,7 +343,7 @@ namespace Highlander.Utilities.Servers
             {
                 OnBasicSyncStart();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
                 SetState(BasicServerState.Faulted);
@@ -374,7 +374,7 @@ namespace Highlander.Utilities.Servers
             {
                 OnFirstCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -409,7 +409,7 @@ namespace Highlander.Utilities.Servers
             {
                 OnBasicSyncStop();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -440,7 +440,7 @@ namespace Highlander.Utilities.Servers
             {
                 OnCloseCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }
@@ -454,7 +454,7 @@ namespace Highlander.Utilities.Servers
             {
                 OnFinalCallback();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 _loggerRef.Target.Log(e);
             }

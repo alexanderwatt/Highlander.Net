@@ -184,7 +184,7 @@ namespace Highlander.Utilities.Threading
                 if (lockedObject is IDisposable disposable)
                     disposable.Dispose();
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Debug.WriteLine($"Guarded<{typeof(T).Name}>.Dispose: {excp.GetType().Name}");
             }

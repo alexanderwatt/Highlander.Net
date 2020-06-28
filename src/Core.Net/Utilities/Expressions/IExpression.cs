@@ -33,38 +33,48 @@ namespace Highlander.Utilities.Expressions
         /// <param name="propSet">The prop set.</param>
         /// <returns></returns>
         bool MatchesProperties(NamedValueSet propSet);
+        
         bool MatchesProperties(NamedValueSet propSet, string itemName, DateTimeOffset itemCreated, DateTimeOffset itemExpires, DateTimeOffset dtoNow);
+        
         bool MatchesProperties(IExprContext exprContext);
+        
         bool MatchesProperties(IExprContext exprContext, DateTimeOffset dtoNow);
+        
         /// <summary>
         /// Evaluates this expression in the given data context.
         /// </summary>
         /// <param name="dataContext">The data context.</param>
         /// <returns></returns>
         object Evaluate(NamedValueSet dataContext);
+        
         object Evaluate(NamedValueSet dataContext, DateTimeOffset asAtTime);
+        
         object Evaluate(NamedValueSet dataContext, string itemName, DateTimeOffset itemCreated, DateTimeOffset itemExpires, DateTimeOffset asAtTime);
+        
         object Evaluate(IExprContext exprContext, DateTimeOffset asAtTime);
+        
         /// <summary>
         /// Returns the expression in a readable form. Useful for debugging and displays.
         /// </summary>
         /// <returns></returns>
         string DisplayString();
+        
         /// <summary>
         /// Returns true if the expression contains errors and cannot be evaluated.
         /// </summary>
         /// <returns></returns>
         bool HasErrors();
+        
         /// <summary>
-        /// Serialises the expression for storage and transmission.
+        /// Serializes the expression for storage and transmission.
         /// </summary>
         /// <returns></returns>
         string Serialise();
+        
         /// <summary>
         /// Converts this expression to a WCF data contract.
         /// </summary>
         /// <returns></returns>
         V1QueryExpr ToV1QueryExpr();
     }
-
 }

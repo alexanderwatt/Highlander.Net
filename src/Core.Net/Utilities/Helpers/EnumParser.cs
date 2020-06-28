@@ -53,7 +53,7 @@ namespace Highlander.Utilities.Helpers
         /// <returns></returns>
         public static bool TryParse<T>(string s, bool ignoreCase, out T result) where T : struct
         {
-            result = default(T);
+            result = default;
             if (s == null)
                 return false;
             try

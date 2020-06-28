@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-16"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.fpml.org/2007/FpML-4-3">
+  <yieldCurve id="LiveUnitTest.AUDBondFuturesPay.310Y.Official.SydSwapDesk.16/07/2010">
+    <name>AUD-BondFuturesPay-310Y</name>
+    <currency>AUD</currency>
+    <algorithm>Base algorithm</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>AUDBondFuturesPay</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>310</periodMultiplier>
+        <period>Y</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="LiveUnitTest.AUDBondFuturesPay.310Y.Official.SydSwapDesk.16/07/2010">
+    <baseDate>2010-07-16</baseDate>
+    <buildDateTime>2010-07-16T09:20:36</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Future" id="Future-AUD-IR01-000">
+          <instrumentId>Future-AUD-IR01</instrumentId>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Future" id="Future-AUD-IR02-001">
+          <instrumentId>Future-AUD-IR02</instrumentId>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-U0" />
+        <quote>
+          <value>95.5300</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>IRFuturesPrice</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-Z0" />
+        <quote>
+          <value>94.9500</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>IRFuturesPrice</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Continuous</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-07-16</date>
+          </term>
+          <mid>0.0444554554073017</mid>
+        </point>
+        <point id="AUD-IRFuture-IR-U0">
+          <term>
+            <date>2010-12-09</date>
+          </term>
+          <mid>0.0444554554073017</mid>
+        </point>
+        <point id="AUD-IRFuture-IR-Z0">
+          <term>
+            <date>2011-03-10</date>
+          </term>
+          <mid>0.0466473747755336</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-07-16</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="AUD-IRFuture-IR-U0">
+        <term>
+          <date>2010-12-09</date>
+        </term>
+        <mid>0.982374987850848</mid>
+      </point>
+      <point id="AUD-IRFuture-IR-Z0">
+        <term>
+          <date>2011-03-10</date>
+        </term>
+        <mid>0.970165267290598</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

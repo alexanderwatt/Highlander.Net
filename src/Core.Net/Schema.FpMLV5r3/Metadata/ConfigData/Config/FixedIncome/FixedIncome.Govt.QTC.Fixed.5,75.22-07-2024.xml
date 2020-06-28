@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="QTC 5 3/4 07/22/24" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU0000XQLQU0 Corp Isin</instrumentId>
+  <description>QTC 5 3/4 07/22/24</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>QTC</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Fixed</couponType>
+  <couponRate>0.0575</couponRate>
+  <maturity>2024-07-22</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>6</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+</bond>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B94D5FA1-4213-43D2-AFEB-57DA2D47824C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.MDS.ServiceGui.V5r3</RootNamespace>
+    <AssemblyName>Highlander.MDS.ServiceGui.V5r3</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MDSServiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDSServiceForm.Designer.cs">
+      <DependentUpon>MDSServiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MDSServiceForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MDSServiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Components\Core.V34\Highlander.Core.V34.csproj">
+      <Project>{2227b445-976d-457a-b7e1-16c013599453}</Project>
+      <Name>Highlander.Core.V34</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Metadata\Common\Highlander.Metadata.Common.csproj">
+      <Project>{214104c5-e2f7-4007-9a60-26d20d3cc80f}</Project>
+      <Name>Highlander.Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Utilities\Util.WinTools\Highlander.WinTools.csproj">
+      <Project>{c4b2055e-25df-45fe-8c7e-b2929a140e7a}</Project>
+      <Name>Highlander.WinTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Reporting.Helpers\Highlander.Reporting.Helpers.V5r3.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>Highlander.Reporting.Helpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Client\Highlander.MarketData.Client.V5r3.csproj">
+      <Project>{18e30d20-b350-4354-b6b6-53ba9b58fa66}</Project>
+      <Name>Highlander.MarketData.Client.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Provider.Base\Highlander.MDS.Provider.Base.V5r3.csproj">
+      <Project>{c60cbe91-0845-462d-ac61-4d64412bf164}</Project>
+      <Name>Highlander.MDS.Provider.Base.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Provider.Bloomberg\Highlander.MDS.Provider.Bloomberg.V5r3.csproj">
+      <Project>{f255e7ac-8736-497f-a7db-a5d54aae11ea}</Project>
+      <Name>Highlander.MDS.Provider.Bloomberg.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Provider.GlobalIB\Highlander.MDS.Provider.GlobalIB.V5r3.csproj">
+      <Project>{d10ad133-55aa-4813-8239-592ef9ab360f}</Project>
+      <Name>Highlander.MDS.Provider.GlobalIB.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Provider.Simulator\Highlander.MDS.Provider.Simulator.V5r3.csproj">
+      <Project>{39b95a61-81b1-4a0d-b3a2-e95618c91789}</Project>
+      <Name>Highlander.MDS.Provider.Simulator.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDAS.Server\Highlander.MDS.Server.V5r3.csproj">
+      <Project>{af46b9ee-db72-4599-95d3-8d16c5ba58f5}</Project>
+      <Name>Highlander.MDS.Server.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="INTNED 0 06/24/14" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU3FN0008561 Corp Isin</instrumentId>
+  <description>INTNED 0 06/24/14</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>INTNED</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Float</couponType>
+  <couponRate>0.0417</couponRate>
+  <maturity>2014-06-24</maturity>
+  <faceAmount>100</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>3</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/365.FIXED</dayCountFraction>
+</bond>

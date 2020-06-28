@@ -20,13 +20,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Highlander.Core.Common;
+using Highlander.Core.Common.Encryption;
 using Highlander.Utilities;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.Threading;
-using Highlander.Utilities.Encryption;
 
 #endregion
 

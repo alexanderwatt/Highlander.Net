@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D11A5E48-BF11-4BAF-8297-96D6A473492E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.PublisherWebService.Tests.V5r3</RootNamespace>
+    <AssemblyName>Highlander.PublisherWebService.Tests.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.9.1.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.Signed.4.9.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="General.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CurveCalQTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RuntimeMock.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Components\CurveEngine\Highlander.CurveEngine.V5r3.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>Highlander.CurveEngine.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\TestHelpers\Highlander.TestHelpers.V5r3.csproj">
+      <Project>{320d2e83-2352-4a7b-ab1a-c5cabe9ffe93}</Project>
+      <Name>Highlander.TestHelpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\UnitTestEnv\Highlander.UnitTestEnv.V5r3.csproj">
+      <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
+      <Name>Highlander.UnitTestEnv.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PublisherWebService\Highlander.PublisherWebService.V5r3.csproj">
+      <Project>{6e8b1f14-124d-47ff-94d1-336f5bbba926}</Project>
+      <Name>Highlander.PublisherWebService.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\BondFuturesPay.Input.xml" />
+    <Content Include="Views\Trade\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay.Output.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesPay_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BondFuturesRec_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Output_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Expected_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Input_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Swaption_Expected_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapFloor_Fpml.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudSwap6m_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudSwap6m_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesPay_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesPay_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesReceive_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateAudBondFuturesReceive_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateSwaption_Properties.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateSwaption_Data.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PublishCapFloor_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PublishSwaptionVol_Expected.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ValidateCapFloor_Data_Release.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AUDSwap6M_Output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

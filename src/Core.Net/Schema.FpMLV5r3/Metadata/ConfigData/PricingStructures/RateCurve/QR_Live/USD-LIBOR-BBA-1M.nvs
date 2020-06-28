@@ -1,0 +1,8 @@
+Market/String=QR_LIVE
+PricingStructureType/String=RateCurve
+IndexName/String=USD-LIBOR-BBA
+IndexTenor/String=1M
+CurveName/String=USD-LIBOR-BBA-1M
+DependencyDepth/Int32=0
+Algorithm/String=CalypsoAlgo4_360
+Currency/String=USD

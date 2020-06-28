@@ -1,0 +1,11 @@
+﻿TradingBookId/String=X1893229717
+Party1/String=ABC
+Party2/String=DEF
+TradeType/String=leaseTransaction
+ProductType/String=leaseTransaction
+TradeDate/DateTime=2020-04-22T00:00:00
+TradeSource/String=Internal
+TradeId/String=100043
+AsAtDate/DateTime=2020-04-22T00:00:00
+SchemaType/String=FpML
+SchemaVersion/String=5.3

@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<confirmationAgreed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fpmlVersion="5-3" actualBuild="4" xmlns="http://www.fpml.org/FpML-5/confirmation">
+  <header>
+    <messageId messageIdScheme="scheme/1.0">12345678</messageId>
+    <inReplyTo messageIdScheme="scheme/1.0">87654321</inReplyTo>
+    <sentBy messageAddressScheme="scheme/1.0">trader@bigbank.com</sentBy>
+    <creationTimestamp>2020-03-28T17:03:56.9159696+11:00</creationTimestamp>
+  </header>
+  <validation validationScheme="scheme/1.0">Validation0</validation>
+  <correlationId correlationIdScheme="scheme/1.0">12345678</correlationId>
+  <trade>
+    <tradeHeader>
+      <partyTradeIdentifier>
+        <partyReference href="Party0" />
+        <accountReference href="Account0" />
+        <tradeId tradeIdScheme="scheme/1.0">Trade1234</tradeId>
+      </partyTradeIdentifier>
+      <tradeDate>2020-03-28</tradeDate>
+    </tradeHeader>
+    <equityOption>
+      <buyerPartyReference href="Party0" />
+      <buyerAccountReference href="Account0" />
+      <sellerPartyReference href="Party1" />
+      <sellerAccountReference href="Account1" />
+      <optionType>Forward</optionType>
+      <equityEffectiveDate>2020-03-28</equityEffectiveDate>
+      <underlyer>
+        <singleUnderlyer>
+          <equity>
+            <instrumentId instrumentIdScheme="scheme/1.0">BHP</instrumentId>
+          </equity>
+        </singleUnderlyer>
+      </underlyer>
+      <equityExercise>
+        <equityBermudaExercise>
+          <commencementDate>
+            <adjustableDate>
+              <unadjustedDate>2020-03-28</unadjustedDate>
+              <dateAdjustments>
+                <businessDayConvention>NONE</businessDayConvention>
+              </dateAdjustments>
+            </adjustableDate>
+          </commencementDate>
+          <expirationDate>
+            <adjustableDate>
+              <unadjustedDate>2020-03-28</unadjustedDate>
+              <dateAdjustments>
+                <businessDayConvention>NONE</businessDayConvention>
+              </dateAdjustments>
+            </adjustableDate>
+          </expirationDate>
+          <bermudaExerciseDates>
+            <dateTime>2002-04-21T00:00:00</dateTime>
+            <dateTime>2002-05-21T00:00:00</dateTime>
+            <dateTime>2002-06-21T00:00:00</dateTime>
+          </bermudaExerciseDates>
+          <equityExpirationTimeType>Close</equityExpirationTimeType>
+        </equityBermudaExercise>
+        <automaticExercise>true</automaticExercise>
+        <makeWholeProvisions>
+          <makeWholeDate>2020-03-28</makeWholeDate>
+          <recallSpread>1.0</recallSpread>
+        </makeWholeProvisions>
+        <equityValuation />
+        <settlementDate>
+          <adjustableDate>
+            <unadjustedDate>2020-03-28</unadjustedDate>
+            <dateAdjustments>
+              <businessDayConvention>NONE</businessDayConvention>
+            </dateAdjustments>
+          </adjustableDate>
+        </settlementDate>
+        <settlementCurrency currencyScheme="scheme/1.0">AUD</settlementCurrency>
+        <settlementPriceSource settlementPriceSourceScheme="scheme/1.0">Source0</settlementPriceSource>
+        <settlementType>Cash</settlementType>
+      </equityExercise>
+      <methodOfAdjustment>CalculationAgent</methodOfAdjustment>
+      <extraordinaryEvents>
+        <mergerEvents>
+          <shareForShare>AlternativeObligation</shareForShare>
+          <shareForOther>AlternativeObligation</shareForOther>
+          <shareForCombined>AlternativeObligation</shareForCombined>
+        </mergerEvents>
+        <tenderOffer>true</tenderOffer>
+        <tenderOfferEvents>
+          <shareForShare>AlternativeObligation</shareForShare>
+          <shareForOther>AlternativeObligation</shareForOther>
+          <shareForCombined>AlternativeObligation</shareForCombined>
+        </tenderOfferEvents>
+        <compositionOfCombinedConsideration>true</compositionOfCombinedConsideration>
+        <indexAdjustmentEvents>
+          <indexModification>CalculationAgentAdjustment</indexModification>
+          <indexCancellation>CalculationAgentAdjustment</indexCancellation>
+          <indexDisruption>CalculationAgentAdjustment</indexDisruption>
+        </indexAdjustmentEvents>
+        <failureToDeliver>false</failureToDeliver>
+      </extraordinaryEvents>
+      <optionEntitlement>1.0</optionEntitlement>
+      <equityPremium>
+        <payerPartyReference href="Party0" />
+        <payerAccountReference href="Account0" />
+        <receiverPartyReference href="Party1" />
+        <receiverAccountReference href="Account1" />
+      </equityPremium>
+    </equityOption>
+  </trade>
+  <party id="Party0">
+    <partyId partyIdScheme="scheme/1.0">Participant 0</partyId>
+  </party>
+  <party id="Party1">
+    <partyId partyIdScheme="scheme/1.0">Participant 1</partyId>
+  </party>
+  <account id="Account0">
+    <accountId accountIdScheme="scheme/1.0">Account0_Id</accountId>
+    <accountBeneficiary href="Party0" />
+  </account>
+  <account id="Account1">
+    <accountId accountIdScheme="scheme/1.0">Account1_Id</accountId>
+    <accountBeneficiary href="Party1" />
+  </account>
+</confirmationAgreed>

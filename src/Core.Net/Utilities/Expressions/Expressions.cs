@@ -171,11 +171,11 @@ namespace Highlander.Utilities.Expressions
         {
             QuerySpec querySpec = XmlSerializerHelper.DeserializeFromString<QuerySpec>(queryXmlStr);
             if (querySpec == null)
-                throw new ArgumentNullException("querySpec");
+                throw new ArgumentNullException($"querySpec");
             if (querySpec.version != 1)
                 throw new NotSupportedException("QuerySpec version: " + querySpec.version);
             if (querySpec.v1QueryExpr == null)
-                throw new ArgumentNullException("querySpec.v1QueryExpr");
+                throw new ArgumentNullException($"querySpec.v1QueryExpr");
             return new Expr(querySpec.v1QueryExpr);
         }
 
@@ -197,7 +197,7 @@ namespace Highlander.Utilities.Expressions
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static IExpression Error(Exception value)
+        public static IExpression Error(System.Exception value)
         {
             // create a constant query node
             return new Expr(QueryNodeType.ERROR, null, value);
@@ -540,7 +540,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds an ISNOTNULL expression from 1 argument.
+        /// Builds an IS NOT NULL expression from 1 argument.
         /// When evaluated, the expression returns: (arg1 != null)
         /// </summary>
         /// <param name="arg1">An expression</param>
@@ -550,7 +550,7 @@ namespace Highlander.Utilities.Expressions
             return new Expr(QueryOpCode.ISNOTNULL, arg1);
         }
         /// <summary>
-        /// Builds an ISNOTNULL expression using a property name.
+        /// Builds an IS NOT NULL expression using a property name.
         /// When evaluated, the expression returns: (Get(propName) != null)
         /// </summary>
         /// <param name="propName">Name of the property.</param>
@@ -598,7 +598,7 @@ namespace Highlander.Utilities.Expressions
         /// Builds a EndsWith expression from a property name and a string search value.
         /// When evaluated, the expression returns: ((String)Get(propName)).EndsWith(value)
         /// </summary>
-        /// <param name="propName">Name of the propery.</param>
+        /// <param name="propName">Name of the property.</param>
         /// <param name="value">The search string.</param>
         /// <returns>An expression</returns>
         public static IExpression EndsWith(string propName, string value)
@@ -608,7 +608,7 @@ namespace Highlander.Utilities.Expressions
 
         /// <summary>
         /// Builds a Contains expression from 2 string arguments.
-        /// When evaluated, the expression returns: (String)arg1.Constains((String)arg2)
+        /// When evaluated, the expression returns: (String)arg1.Contains((String)arg2)
         /// </summary>
         /// <param name="arg1">A string expression</param>
         /// <param name="arg2">An expression string expression</param>
@@ -621,7 +621,7 @@ namespace Highlander.Utilities.Expressions
         /// Builds a Contains expression from a property name and a string search value.
         /// When evaluated, the expression returns: ((String)Get(propName)).Contains(value)
         /// </summary>
-        /// <param name="propName">Name of the propery.</param>
+        /// <param name="propName">Name of the property.</param>
         /// <param name="value">The search string.</param>
         /// <returns>An expression</returns>
         public static IExpression Contains(string propName, string value)
@@ -663,7 +663,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds an ADDition expression from 2 numeric arguments.
+        /// Builds an (ADD) Addition expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 + arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -675,7 +675,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a MULtiplication expression from 2 numeric arguments.
+        /// Builds a (MULT) Multiplication expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 * arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -687,7 +687,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a SUBtraction expression from 2 numeric arguments.
+        /// Builds a (SUB) subtraction expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 - arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -699,7 +699,7 @@ namespace Highlander.Utilities.Expressions
         }
 
         /// <summary>
-        /// Builds a DIVision expression from 2 numeric arguments.
+        /// Builds a (DIV) division expression from 2 numeric arguments.
         /// When evaluated, the expression returns: (arg1 / arg2)
         /// </summary>
         /// <param name="arg1">A numeric expression</param>
@@ -747,7 +747,7 @@ namespace Highlander.Utilities.Expressions
             return expr?.Serialise();
         }
 
-        public static bool TryDeserialise(string text, out IExpression result, out Exception failReason)
+        public static bool TryDeserialise(string text, out IExpression result, out System.Exception failReason)
         {
             bool success = false;
             result = null;
@@ -757,7 +757,7 @@ namespace Highlander.Utilities.Expressions
                 result = Create(text);
                 success = true;
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 failReason = excp;
             }
@@ -766,9 +766,7 @@ namespace Highlander.Utilities.Expressions
 
         public static IExpression Deserialise(string text)
         {
-            IExpression result;
-            Exception excp;
-            TryDeserialise(text, out result, out excp);
+            TryDeserialise(text, out var result, out _);
             return result;
         }
 
@@ -776,14 +774,14 @@ namespace Highlander.Utilities.Expressions
         {
             if (value == null)
                 return defaultValue;
-            if (value is T)
-                return (T)value;
+            if (value is T value1)
+                return value1;
             // not exact type - attempt cast
             try
             {
                 return (T)Convert.ChangeType(value, typeof(T));
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Trace.WriteLine($"Expr.CastTo<{typeof(T).Name}>() failed: {excp}");
                 return defaultValue;
@@ -794,7 +792,7 @@ namespace Highlander.Utilities.Expressions
         
         #region Private Constructors
 
-        private Expr(Exception excp)
+        private Expr(System.Exception excp)
         {
             // construct an exception constant
             // - used for trapping query deserialisation errors
@@ -811,7 +809,7 @@ namespace Highlander.Utilities.Expressions
         /// <param name="queryExpr">The query expr.</param>
         public Expr(V1QueryExpr queryExpr)
         {
-            // construct from deserialised xml message
+            // construct from deserialized xml message
             if (queryExpr == null)
                 throw new ArgumentNullException(nameof(queryExpr));
             // get node type: eg. const, propref, expr, etc.
@@ -840,9 +838,9 @@ namespace Highlander.Utilities.Expressions
                         {
                             try
                             {
-                                _operands[i] = new Expr(queryExpr.args[i]);
+                                if (queryExpr.args != null) _operands[i] = new Expr(queryExpr.args[i]);
                             }
-                            catch (Exception excp)
+                            catch (System.Exception excp)
                             {
                                 _operands[i] = new Expr(excp);
                             }
@@ -855,7 +853,7 @@ namespace Highlander.Utilities.Expressions
                         break;
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 // exception creating expression node
                 // - convert node to exception constant
@@ -863,6 +861,7 @@ namespace Highlander.Utilities.Expressions
                 _constValue = excp.ToString();
             }
         }
+
         private Expr(QueryNodeType nodeType, string propName, object constValue)
         {
             // constant/propref constructor
@@ -1138,8 +1137,8 @@ namespace Highlander.Utilities.Expressions
             if (TypeIsNumeric(type1) && TypeIsNumeric(type2))
             {
                 // numeric compare - as doubles
-                Double value1 = Convert.ToDouble(arg1);
-                Double value2 = Convert.ToDouble(arg2);
+                var value1 = Convert.ToDouble(arg1);
+                var value2 = Convert.ToDouble(arg2);
                 if (value1 == value2)
                     return 0;
                 if (value1 > value2)
@@ -1698,7 +1697,7 @@ namespace Highlander.Utilities.Expressions
             switch (_nodeType)
             {
                 case QueryNodeType.CONST:
-                    return (_constValue is Exception);
+                    return (_constValue is System.Exception);
                 case QueryNodeType.ERROR:
                     return true;
                 case QueryNodeType.FIELD:
@@ -1781,7 +1780,7 @@ namespace Highlander.Utilities.Expressions
         private int CalcHash()
         {
             // hash is calculated from operator and operands
-            // - determinsitic operators
+            // - deterministic operators
             int result = _operator.GetHashCode();
             for (int i = 0; i < _operands.Length; i++)
             {
@@ -1789,7 +1788,7 @@ namespace Highlander.Utilities.Expressions
                     throw new ArgumentNullException("Argument[" + i + "]");
                 result ^= _operands[i].GetHashCode();
             }
-            // - special case non-determinsitic operators (eg. time-dependent scalar methods)
+            // - special case non-deterministic operators (eg. time-dependent scalar methods)
             switch (_operator)
             {
                 case QueryOpCode.NOW:

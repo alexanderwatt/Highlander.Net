@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Orion.Market.QR_LIVE.RateCurve.AUD-AONIA-OIS-COMPOUND-1D" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-AONIA-OIS-COMPOUND-1D">
+    <name>AUD-AONIA-OIS-COMPOUND-1D</name>
+    <currency>AUD</currency>
+    <algorithm>CalypsoAlgo4</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>AONIA-OIS-COMPOUND</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>1</periodMultiplier>
+        <period>D</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-AONIA-OIS-COMPOUND-1D" definitionRef="RateCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-08-30T15:07:49.8553259+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-1D">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-1W">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-1M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-2M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-3M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-4M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-5M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="AUD-OIS-9M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-OISSwap-1Y">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-OISSwap-2Y">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="AUD-OISSwap-3Y">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-OIS-1D" />
+        <quote>
+          <value>0.045</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSO1Z IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-1W" />
+        <quote>
+          <value>0.045</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSO1Z IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-1M" />
+        <quote>
+          <value>0.04485</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOA IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-2M" />
+        <quote>
+          <value>0.04485</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOB IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-3M" />
+        <quote>
+          <value>0.0448</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOC IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-4M" />
+        <quote>
+          <value>0.0448</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOD IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-5M" />
+        <quote>
+          <value>0.0448</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOE IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-6M" />
+        <quote>
+          <value>0.0448</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOF IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OIS-9M" />
+        <quote>
+          <value>0.04495</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOI IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OISSwap-1Y" />
+        <quote>
+          <value>0.04515</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSO1 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OISSwap-2Y" />
+        <quote>
+          <value>0.0467</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOB2 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-OISSwap-3Y" />
+        <quote>
+          <value>0.05015</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+          <informationSource>
+            <rateSource>Bloomberg</rateSource>
+            <rateSourcePage>ADSOB3 IAUS CURNCY/PX_LAST</rateSourcePage>
+          </informationSource>
+          <time>2010-08-30T15:07:49.8396958+10:00</time>
+          <valuationDate>0001-01-01</valuationDate>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.0452512717699784</mid>
+        </point>
+        <point id="AUD-OIS-1D">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.0452512717699784</mid>
+        </point>
+        <point id="AUD-OIS-1W">
+          <term>
+            <date>2010-09-06</date>
+          </term>
+          <mid>0.0452344507410585</mid>
+        </point>
+        <point id="AUD-OIS-1M">
+          <term>
+            <date>2010-09-30</date>
+          </term>
+          <mid>0.0450162183826359</mid>
+        </point>
+        <point id="AUD-OIS-2M">
+          <term>
+            <date>2010-10-29</date>
+          </term>
+          <mid>0.0449360085714394</mid>
+        </point>
+        <point id="AUD-OIS-3M">
+          <term>
+            <date>2010-11-30</date>
+          </term>
+          <mid>0.0447979457533245</mid>
+        </point>
+        <point id="AUD-OIS-4M">
+          <term>
+            <date>2010-12-30</date>
+          </term>
+          <mid>0.0447159808173261</mid>
+        </point>
+        <point id="AUD-OIS-5M">
+          <term>
+            <date>2011-01-31</date>
+          </term>
+          <mid>0.0446289897812902</mid>
+        </point>
+        <point id="AUD-OIS-6M">
+          <term>
+            <date>2011-02-28</date>
+          </term>
+          <mid>0.0445532406823057</mid>
+        </point>
+        <point id="AUD-OIS-9M">
+          <term>
+            <date>2011-05-30</date>
+          </term>
+          <mid>0.0444561356093214</mid>
+        </point>
+        <point id="AUD-OISSwap-1Y">
+          <term>
+            <date>2011-08-31</date>
+          </term>
+          <mid>0.0444071323194519</mid>
+        </point>
+        <point id="AUD-OISSwap-2Y">
+          <term>
+            <date>2012-08-31</date>
+          </term>
+          <mid>0.0459363777157753</mid>
+        </point>
+        <point id="AUD-OISSwap-3Y">
+          <term>
+            <date>2013-08-30</date>
+          </term>
+          <mid>0.0494258237657661</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="AUD-OIS-1D">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.9998767275267432782382978681</mid>
+      </point>
+      <point id="AUD-OIS-1W">
+        <term>
+          <date>2010-09-06</date>
+        </term>
+        <mid>0.9991377304518018706039707731</mid>
+      </point>
+      <point id="AUD-OIS-1M">
+        <term>
+          <date>2010-09-30</date>
+        </term>
+        <mid>0.9962052766946509357743243604</mid>
+      </point>
+      <point id="AUD-OIS-2M">
+        <term>
+          <date>2010-10-29</date>
+        </term>
+        <mid>0.9926813547244833128005683405</mid>
+      </point>
+      <point id="AUD-OIS-3M">
+        <term>
+          <date>2010-11-30</date>
+        </term>
+        <mid>0.9888340319287736049963066572</mid>
+      </point>
+      <point id="AUD-OIS-4M">
+        <term>
+          <date>2010-12-30</date>
+        </term>
+        <mid>0.9852466733753417214108014697</mid>
+      </point>
+      <point id="AUD-OIS-5M">
+        <term>
+          <date>2011-01-31</date>
+        </term>
+        <mid>0.9814487366469193838520413651</mid>
+      </point>
+      <point id="AUD-OIS-6M">
+        <term>
+          <date>2011-02-28</date>
+        </term>
+        <mid>0.9781494805356293116717835719</mid>
+      </point>
+      <point id="AUD-OIS-9M">
+        <term>
+          <date>2011-05-30</date>
+        </term>
+        <mid>0.9674734113788391322843852225</mid>
+      </point>
+      <point id="AUD-OISSwap-1Y">
+        <term>
+          <date>2011-08-31</date>
+        </term>
+        <mid>0.956682761215813</mid>
+      </point>
+      <point id="AUD-OISSwap-2Y">
+        <term>
+          <date>2012-08-31</date>
+        </term>
+        <mid>0.912470526324979</mid>
+      </point>
+      <point id="AUD-OISSwap-3Y">
+        <term>
+          <date>2013-08-30</date>
+        </term>
+        <mid>0.862859470174652</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

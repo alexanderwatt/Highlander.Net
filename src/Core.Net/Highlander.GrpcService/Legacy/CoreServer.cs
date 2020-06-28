@@ -21,8 +21,8 @@ using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using Highlander.Build;
 using Highlander.Core.Common;
+using Highlander.Core.Common.Encryption;
 using Highlander.GrpcService.Data;
-using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -387,8 +387,7 @@ namespace Highlander.Core.Server
             if (_serverCfg.ServerMode == NodeType.Server)
             {
                 // server mode requires an SQL store
-                if (_storeEngine == null)
-                    _storeEngine = new StoreEngine(Logger, _serverCfg, _dbContext);
+                _storeEngine ??= new StoreEngine(Logger, _serverCfg, _dbContext);
             }
             _cacheEngine = new CacheEngine(Logger, _serverCfg, CryptoManager);
             // connect server parts

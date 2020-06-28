@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  == Copyright (c) 2002-2009. All rights reserved.
+  == Financial Products Markup Language is subject to the FpML public license.
+  == A copy of this license is available at http://www.fpml.org/license/license.html
+  -->
+<FpML xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:fpml="http://www.fpml.org/2009/FpML-4-7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4-7" xsi:type="RequestTradeConfirmation" xsi:schemaLocation="http://www.fpml.org/2009/FpML-4-7 ../fpml-main-4-7.xsd http://www.w3.org/2000/09/xmldsig# ../xmldsig-core-schema.xsd">
+   <header>
+      <conversationId conversationIdScheme="http://www.chase.com/coding-scheme/conversationId">FX65432</conversationId>
+      <messageId messageIdScheme="http://www.chase.com/coding-scheme/messageId">FX87654</messageId>
+      <sentBy partyIdScheme="http://www.chase.com/partyId">CHASUS33</sentBy>
+      <sendTo partyIdScheme="http://www.chase.com/partyId">DEUTDEFF</sendTo>
+      <creationTimestamp>2001-08-16T08:57:00Z</creationTimestamp>
+   </header>
+   <trade>
+      <tradeHeader>
+         <partyTradeIdentifier>
+            <partyReference href="party1"/>
+            <tradeId tradeIdScheme="http://www.chase.com/fx/trade-id">CH-23948</tradeId>
+         </partyTradeIdentifier>
+         <partyTradeIdentifier>
+            <partyReference href="party2"/>
+            <tradeId tradeIdScheme="http://www.db.com/fx/trade-id">DB-89080</tradeId>
+         </partyTradeIdentifier>
+         <tradeDate>2001-08-16Z</tradeDate>
+      </tradeHeader>
+      <fxAverageRateOption>
+         <buyerPartyReference href="party2"/>
+         <sellerPartyReference href="party1"/>
+         <expiryDateTime>
+            <expiryDate>2001-11-30Z</expiryDate>
+            <expiryTime>
+               <hourMinuteTime>12:30:00</hourMinuteTime>
+               <businessCenter>MXMC</businessCenter>
+            </expiryTime>
+         </expiryDateTime>
+         <exerciseStyle>European</exerciseStyle>
+         <fxOptionPremium>
+            <payerPartyReference href="party2"/>
+            <receiverPartyReference href="party1"/>
+            <premiumAmount>
+               <currency>USD</currency>
+               <amount>1750</amount>
+            </premiumAmount>
+            <premiumSettlementDate>2001-08-18Z</premiumSettlementDate>
+         </fxOptionPremium>
+         <valueDate>2001-12-04Z</valueDate>
+         <putCurrencyAmount>
+            <currency>MXN</currency>
+            <amount>5750000</amount>
+         </putCurrencyAmount>
+         <callCurrencyAmount>
+            <currency>USD</currency>
+            <amount>585539.71</amount>
+         </callCurrencyAmount>
+         <fxStrikePrice>
+            <rate>9.82</rate>
+            <strikeQuoteBasis>PutCurrencyPerCallCurrency</strikeQuoteBasis>
+         </fxStrikePrice>
+         <payoutCurrency>USD</payoutCurrency>
+         <averageRateQuoteBasis>PutCurrencyPerCallCurrency</averageRateQuoteBasis>
+         <primaryRateSource>
+            <rateSource>Reuters</rateSource>
+            <rateSourcePage>BNBX</rateSourcePage>
+         </primaryRateSource>
+         <fixingTime>
+            <hourMinuteTime>18:00:00</hourMinuteTime>
+            <businessCenter>MXMC</businessCenter>
+         </fixingTime>
+         <averageRateObservationDate>
+            <observationDate>2001-11-01Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-02Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-05Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-06Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-07Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-08Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-09Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-13Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-14Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-15Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-16Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-19Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-20Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-21Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-23Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-26Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-27Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-28Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-29Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+         <averageRateObservationDate>
+            <observationDate>2001-11-30Z</observationDate>
+            <averageRateWeightingFactor>1</averageRateWeightingFactor>
+         </averageRateObservationDate>
+      </fxAverageRateOption>
+   </trade>
+   <party id="party1">
+      <partyId>CHASUS33</partyId>
+   </party>
+   <party id="party2">
+      <partyId>DEUTDEFF</partyId>
+   </party>
+</FpML>

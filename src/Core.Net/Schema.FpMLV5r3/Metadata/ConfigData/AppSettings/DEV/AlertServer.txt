@@ -1,0 +1,3 @@
+﻿SmtpServer/String=sydwatqur01:2525
+MailFrom/String=alexander.watt@yieldbroker.com
+MailTo/String=alex.watt@hotmail.com

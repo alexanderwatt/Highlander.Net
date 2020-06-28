@@ -1,0 +1,11 @@
+PricingStructureType/String=RateCurve
+IndexTenor/String=310Y
+Currency/String=AUD
+Index/String=BondFuturesRec
+Algorithm/String=Base algorithm
+MarketName/String=Live
+IndexName/String=AUD-BondFuturesRec
+Validity/String=Official
+UniqueIdentifier/String=Highlander.Market.Live.RateCurve.AUD-BondFuturesRec-310Y
+Domain/String=Highlander.Market
+Market/String=Live

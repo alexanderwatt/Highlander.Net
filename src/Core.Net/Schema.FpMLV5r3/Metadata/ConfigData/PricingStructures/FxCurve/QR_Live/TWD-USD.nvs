@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=TWD-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=TWD
+Currency2/String=USD
+CurrencyPair/String=TWD-USD
+QuoteBasis/String=Currency2PerCurrency1

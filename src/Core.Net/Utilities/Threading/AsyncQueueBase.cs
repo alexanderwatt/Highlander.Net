@@ -26,7 +26,7 @@ namespace Highlander.Utilities.Threading
     /// </summary>
     public abstract class AsyncQueueBase : IDisposable
     {
-        private readonly ILogger _Logger;
+        private readonly ILogger _logger;
 
         // virtual methods the derived class must implement
         protected virtual long OnGetQueueLength()
@@ -43,38 +43,38 @@ namespace Highlander.Utilities.Threading
         }
 
         // state used only during shutdown
-        private bool _Closed;
+        private bool _closed;
         // the queue state spinlock
-        private long _Lock;
+        private long _lock;
         // other dynamic state
-        private long _EnqueueThreads;
-        private long _DequeueThreads;
+        private long _enqueueThreads;
+        private long _dequeueThreads;
 
         private void AcquireLock()
         {
             // acquire spinlock
-            long locked = Interlocked.Increment(ref _Lock);
+            long locked = Interlocked.Increment(ref _lock);
             while (locked != 1)
             {
-                Interlocked.Decrement(ref _Lock);
-                locked = Interlocked.Increment(ref _Lock);
+                Interlocked.Decrement(ref _lock);
+                locked = Interlocked.Increment(ref _lock);
             }
             // spinlock acquired
         }
         private void ReleaseLock()
         {
             // release spinlock
-            Interlocked.Decrement(ref _Lock);
+            Interlocked.Decrement(ref _lock);
         }
 
-        public AsyncQueueBase(ILogger logger)
+        protected AsyncQueueBase(ILogger logger)
         {
-            _Logger = logger;
+            _logger = logger;
         }
 
         public void Dispose()
         {
-            _Closed = true;
+            _closed = true;
         }
 
         public long Length
@@ -99,7 +99,7 @@ namespace Highlander.Utilities.Threading
                 AcquireLock();
                 try
                 {
-                    return ((this.OnGetQueueLength() == 0) && (Interlocked.Add(ref _DequeueThreads, 0) == 0));
+                    return ((this.OnGetQueueLength() == 0) && (Interlocked.Add(ref _dequeueThreads, 0) == 0));
                 }
                 finally
                 {
@@ -116,7 +116,7 @@ namespace Highlander.Utilities.Threading
         public long WaitUntilLengthLEQ(long queueLength, TimeSpan timeout)
         {
             DateTimeOffset waitExpires = DateTimeOffset.Now + timeout;
-            while (((this.Length > queueLength) || (Interlocked.Add(ref _DequeueThreads, 0) > 0)) && (DateTimeOffset.Now < waitExpires))
+            while (((this.Length > queueLength) || (Interlocked.Add(ref _dequeueThreads, 0) > 0)) && (DateTimeOffset.Now < waitExpires))
             {
                 Thread.Sleep(1);
             }
@@ -130,7 +130,7 @@ namespace Highlander.Utilities.Threading
 
         protected void EnqueueData<T>(T data, AsyncQueueCallback<T> callback, AsyncQueuePriority priority, string itemKey)
         {
-            if (_Closed)
+            if (_closed)
                 return; // throw new InvalidOperationException("Cannot enqueue while closing!");
             AsyncQueueItemUser<T> item = new AsyncQueueItemUser<T>(callback, data);
             AcquireLock();
@@ -144,12 +144,12 @@ namespace Highlander.Utilities.Threading
             }
 
             // dispatch a dequeue thread if needed
-            Interlocked.Increment(ref _EnqueueThreads);
+            Interlocked.Increment(ref _enqueueThreads);
             ThreadPool.QueueUserWorkItem(DequeueItems);
         }
         private void DequeueItems(object notUsed)
         {
-            if (Interlocked.Decrement(ref _EnqueueThreads) > 0)
+            if (Interlocked.Decrement(ref _enqueueThreads) > 0)
             {
                 // another thread following - exit
                 return;
@@ -160,22 +160,21 @@ namespace Highlander.Utilities.Threading
             do
             {
                 checkDone = false;
-                threadCount = Interlocked.Increment(ref _DequeueThreads);
+                threadCount = Interlocked.Increment(ref _dequeueThreads);
                 try
                 {
                     if (threadCount == 1)
                     {
                         // we are the dequeue thread - dequeue all items
                         checkDone = true;
-                        long queueLength;
                         //new
                         AcquireLock();
                         try
                         {
-                            queueLength = this.OnGetQueueLength();
+                            var queueLength = OnGetQueueLength();
                             while (queueLength > 0)
                             {
-                                AsyncQueueItemBase item = this.OnDequeueItem();
+                                AsyncQueueItemBase item = OnDequeueItem();
                                 ReleaseLock();
                                 try
                                 {
@@ -183,16 +182,16 @@ namespace Highlander.Utilities.Threading
                                     {
                                         // process item
                                         // - or discard it if closed
-                                        if (!_Closed)
+                                        if (!_closed)
                                         {
                                             try
                                             {
                                                 item.CallUserCallback();
                                             }
-                                            catch (Exception e)
+                                            catch (System.Exception e)
                                             {
-                                                if (_Logger != null)
-                                                    _Logger.Log(e);
+                                                if (_logger != null)
+                                                    _logger.Log(e);
                                                 else
                                                     Debug.WriteLine("AsyncQueueBase: " + e.ToString());
                                             }
@@ -204,7 +203,7 @@ namespace Highlander.Utilities.Threading
                                     AcquireLock();
                                 }
                                 // next
-                                queueLength = this.OnGetQueueLength();
+                                queueLength = OnGetQueueLength();
                             }
                         }
                         finally
@@ -215,7 +214,7 @@ namespace Highlander.Utilities.Threading
                 }
                 finally
                 {
-                    threadCount = Interlocked.Decrement(ref _DequeueThreads);
+                    threadCount = Interlocked.Decrement(ref _dequeueThreads);
                 }
             } while ((threadCount == 0) && (!checkDone));
         }
@@ -244,23 +243,24 @@ namespace Highlander.Utilities.Threading
         }
         public void CallUserCallback()
         {
-            this.OnUserCallback();
+            OnUserCallback();
         }
     }
     public class AsyncQueueItemUser<T> : AsyncQueueItemBase
     {
-        private readonly AsyncQueueCallback<T> _UserCallback;
-        public AsyncQueueCallback<T> UserCallback { get { return _UserCallback; } }
-        private readonly T _UserData;
-        public T UserData { get { return _UserData; } }
+        public AsyncQueueCallback<T> UserCallback { get; }
+
+        public T UserData { get; }
+
         protected override void OnUserCallback()
         {
-            _UserCallback(_UserData);
+            UserCallback(UserData);
         }
+
         public AsyncQueueItemUser(AsyncQueueCallback<T> userCallback, T userData)
         {
-            _UserCallback = userCallback;
-            _UserData = userData;
+            UserCallback = userCallback;
+            UserData = userData;
         }
     }
 }

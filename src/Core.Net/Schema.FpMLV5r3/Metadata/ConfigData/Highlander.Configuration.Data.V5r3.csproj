@@ -1,0 +1,976 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A99322D4-6D41-499F-BE4E-62DAB22FF97F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.Configuration.Data.V5r3</RootNamespace>
+    <AssemblyName>Highlander.Configuration.Data.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettingsLoader.cs" />
+    <Compile Include="AlertRulesLoader.cs" />
+    <Compile Include="ConfigDataLoader.cs" />
+    <Compile Include="FileImportRulesLoader.cs" />
+    <Compile Include="FpMLTradeLoader.cs" />
+    <Compile Include="LoadConfigDataHelper.cs" />
+    <Compile Include="MarketDataConfigHelper.cs" />
+    <Compile Include="PricingStructureLoader.cs" />
+    <Compile Include="ServiceHostRulesLoader.cs" />
+    <Compile Include="StressDefinitionLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MarketLoader.cs" />
+    <Compile Include="TradeImportRulesLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Common\Highlander.Metadata.Common.csproj">
+      <Project>{214104c5-e2f7-4007-9a60-26d20d3cc80f}</Project>
+      <Name>Highlander.Metadata.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{C094FB37-4C14-425E-8977-69079F4F7AA0}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeListTool\Highlander.CodeListTool.V5r3.csproj">
+      <Project>{1b92f816-013b-4b6d-9355-74265c3ae52c}</Project>
+      <Name>Highlander.CodeListTool.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Confirmation\Highlander.Confirmation.V5r3.csproj">
+      <Project>{672016a1-82f4-451f-8a12-4c40139995fd}</Project>
+      <Name>Highlander.Confirmation.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\DateRules\BusinessCenterDateRules.xml" />
+    <EmbeddedResource Include="Config\DateRules\CentralBankDateRules.xml" />
+    <EmbeddedResource Include="Config\DateRules\LastTradingDayDateRules.xml" />
+    <EmbeddedResource Include="Config\HolidayDates\Holidays.xml" />
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\EUR-LIBOR-SENIOR.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\EUR-LIBOR-SENIOR.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\GBP-LIBOR-SENIOR.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\GBP-LIBOR-SENIOR.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\NZD-LIBOR-SENIOR.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\NZD-LIBOR-SENIOR.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\USD-LIBOR-SENIOR.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\USD-LIBOR-SENIOR.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-1M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-1M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-2M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-2M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-3M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-3M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSW-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSY-BID-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-BBR-BBSY-BID-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\GBP-LIBOR-BBA-3M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\GBP-LIBOR-BBA-3M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\NZD-BBR-FRA-3M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\NZD-BBR-FRA-3M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\USD-LIBOR-BBA-1M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\USD-LIBOR-BBA-1M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\USD-LIBOR-BBA-3M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\USD-LIBOR-BBA-3M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\JPY-LIBOR-SENIOR.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\JPY-LIBOR-SENIOR.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\EUR-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\EUR-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\GBP-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\GBP-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\JPY-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\JPY-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CAD-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CAD-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-AONIA-OIS-COMPOUND-1D.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\AUD-AONIA-OIS-COMPOUND-1D.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProviderRuleSets\Bloomberg.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProviderRuleSets\nabCurveDb.xml" />
+    <EmbeddedResource Include="ProviderRuleSets\GlobalIB.xml" />
+    <EmbeddedResource Include="ProviderRuleSets\ReutersDTS.xml" />
+    <EmbeddedResource Include="ProviderRuleSets\ReutersIDN.xml" />
+    <EmbeddedResource Include="ProviderRuleSets\Simulator.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\NZD-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\NZD-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\AUD-USD.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\AUD-USD.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\BoundaryRiderMappingVals.xml" />
+    <EmbeddedResource Include="Config\GwmlEnumMaps.xml" />
+    <EmbeddedResource Include="Config\Instruments.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\PricingStructureAlgorithms.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-1M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-3M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-1M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-3M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\EUR-EURIBOR-Reuters-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-6M.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-BBA-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\AUD-LIBOR-SENIOR.nvs" />
+    <None Include="Config\FixedIncomeReferenceData\NewBondStatic.xlsx" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ANZ.Fixed.5,25.16-01-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ANZ.Float.4,67.17-02-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ASIA.Fixed.5,5.15-02-2016.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.BACR.Float.5,43.13-08-2012.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.BQDAU.Float.4,81.22-10-2012.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.EIB.Fixed.6,25.15-04-2015.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.FMSWER.Fixed.5.20-03-2017.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IADB.Fixed.6,5.20-08-2019.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IADB.Fixed.6.25-05-2016.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IBRD.Fixed.6.9-11-2016.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ICBCAS.Float.5,26.14-07-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IFC.Fixed.5,75.24-06-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.INTNED.Float.4,17.24-06-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.KFW.Fixed.5,75.13-05-2015.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.LLOYDS.Float.3,66.19-03-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.NAB.Fixed.6,75.16-09-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.NIB.Fixed.6.20-08-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.OCBCSP.Float.5,04.14-07-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.RABOBK.Float.4,84.3-07-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.WSTP.Fixed.7,25.18-11-2016.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.WSTP.Float.4,7383.18-08-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.NSWTC.Fixed.6.1-02-2018.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.NTTC.Fixed.5,75.14-07-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.QTC.Fixed.5,75.22-07-2024.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.SAFA.Fixed.5,75.20-04-2015.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TASCOR.Fixed.6,5.15-04-2015.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.4,75.15-10-2014.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.5,5.15-11-2018.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.5,75.15-11-2016.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.6.15-06-2020.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.6.17-10-2022.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.5,5.17-07-2012.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-04-2015.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-07-2021.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-10-2019.nvs" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.8.15-07-2017.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.FxCurve.AUD-USD.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateATMVolatilityMatrix.AUD-IRSwap.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.nvs" />
+    <None Include="Key.snk" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.JPY-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-EUR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-GBP.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-JPY.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-NZD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.EUR-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.GBP-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.JPY-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.NZD-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-AONIA-OIS-COMPOUND.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-2M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.AUD-USD.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.EUR-USD.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.GBP-USD.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.NZD-USD.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.USD-HKD.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.USD-JPY.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-USD-BASIS.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-EURIBOR-Reuters-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-HIBOR-HKAB-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.JPY-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.JPY-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.NZD-BBR-FRA-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.NZD-USD-BASIS-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-ZERO-BANK-1M.nvs" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-ZERO-BANK-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.DiscountCurve.AUD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-IRSwap-5Y.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-IRSwap-10Y.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.CHF-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.CHF-USD.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-1M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-3M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-6M.nvs" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.EUR-IRSwap-5Y.nvs" />
+    <None Include="PricingStructures\DiscountCurve\QR_Live\HKD-LIBOR-SENIOR.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\HKD-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\KRW-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\SEK-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CHF-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\DKK-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CNY-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\INR-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\NOK-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\SGD-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\PHP-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\MYR-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\IDR-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\TWD-USD.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-1M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-3M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-6M.nvs" />
+    <None Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-1M.nvs" />
+    <None Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-3M.nvs" />
+    <None Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-6M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-1M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-3M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-6M.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-IRSwap-10Y.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-IRSwap-5Y.nvs" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\EUR-IRSwap-5Y.nvs" />
+    <None Include="TradeData\products\inflation-swaps\inflation-swap-ex04-yoy-interp.error" />
+    <None Include="TradeData\products\inflation-swaps\inflation-swap-ex05-zc.error" />
+    <None Include="TradeData\SampleAssetSwap.nvs" />
+    <None Include="TradeData\SampleBullet.nvs" />
+    <None Include="TradeData\SampleCapFloor.nvs" />
+    <None Include="TradeData\SampleFra.nvs" />
+    <None Include="TradeData\SampleFxForward.nvs" />
+    <None Include="TradeData\SampleFxSpot.nvs" />
+    <None Include="TradeData\SampleFxSwap.nvs" />
+    <None Include="TradeData\SampleSwap.nvs" />
+    <None Include="TradeData\SampleTermDeposit.nvs" />
+    <None Include="TradeData\SampleXccySwap.nvs" />
+    <EmbeddedResource Include="Config\Trade\Highlander.Trade.bulletPayment.t0001.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporting\leases\lease-ex03-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex04-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex02-lease-transaction.xml" />
+    <EmbeddedResource Include="Reporting\leases\lease-ex01-lease-transaction.xml" />
+    <EmbeddedResource Include="TradeData\products\bond-options\bond-option.xml" />
+    <EmbeddedResource Include="TradeData\products\bond-options\cb-option-2.xml" />
+    <EmbeddedResource Include="TradeData\products\bond-options\cb-option.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex1-gas-swap-daily-delivery-prices-last.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex10-physical-oil-pipeline-crude-wti-floating-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex11-physical-oil-pipeline-heating-oil-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex12-physical-gas-europe-zbt-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex13-physical-gas-us-tw-west-texas-pool-floating-price-4-days.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex14-physical-gas-europe-ttf-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex15-physical-oil-pipeline-crude-wcs-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex16-physical-power-us-eei-floating-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex17-physical-power-uk-gtma-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex18-physical-power-us-eei-fixed-price-shaped-volume.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex19-physical-bullion-forward.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex2-gas-swap-prices-first-day.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex20-physical-coal-us-fixed-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex21-physical-power-us-eei-fixed-price-shaped-volume-and-price.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex22-physical-gas-option-multiple-expiration.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex23-physical-power-option-daily-expiration-efet.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex3-gas-swap-prices-last-three-days.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex4-electricity-swap-hourly-off-peak.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex5-gas-v-electricity-spark-spread.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex6-gas-call-option.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex7-gas-put-option.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex8-oil-call-option-strip.xml" />
+    <EmbeddedResource Include="TradeData\products\commodity-derivatives\com-ex9-oil-put-option-american.xml" />
+    <EmbeddedResource Include="TradeData\products\correlation-swaps\eqcs-ex01-correlation-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\correlation-swaps\eqcs-ex02-correlation-swap-confirmation.xml" />
+    <EmbeddedResource Include="TradeData\products\correlation-swaps\eqcs-ex03-correlation-swap-confirmation.xml" />
+    <EmbeddedResource Include="TradeData\products\correlation-swaps\eqcs-ex04-correlation-swap-confirmation.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex01-long-asia-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex02-2003-short-asia-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex02-short-asia-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex03-long-aussie-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex04-short-aussie-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex05-long-emasia-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex06-long-emeur-sov-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex07-2003-long-euro-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex07-long-euro-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex08-2003-short-euro-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex08-short-euro-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex09-long-euro-sov-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex10-2003-long-us-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex10-long-us-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex11-2003-short-us-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex11-short-us-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex12-long-emasia-sov-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex13-long-asia-sov-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex14-long-emlatin-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex15-long-emlatin-sov-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex16-short-us-corp-fixreg-recovery-factor.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex17-short-us-corp-portfolio-compression.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-ex18-standard-north-american-corp.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-indamt-ex01-short-us-corp-fixreg.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-swaption-1.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cd-swaption-2.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cdindex-ex01-cdx.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cdindex-ex02-iTraxx.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cdindex-ex03-iTraxx-contractual-supplement.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-basket-tranche.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-custom-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-ELCDS-ReferenceObligation.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-index-tranche.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-loan-ReferenceObligation.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-loan-SecuredList.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-mortgage-CMBS.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cds-mortgage-RMBS.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\cdx-index-option.xml" />
+    <EmbeddedResource Include="TradeData\products\credit-derivatives\itraxx-index-option.xml" />
+    <EmbeddedResource Include="TradeData\products\dividend-swaps\div-ex01-dividend-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\dividend-swaps\div-ex02-dividend-swap-collateral.xml" />
+    <EmbeddedResource Include="TradeData\products\dividend-swaps\div-ex03-dividend-swap-short-form-japanese-underlyer.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-forwards\eqf-ex01-forward-stock-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex-27-equityOptionTransactionSupplement-EMEA-interdealer.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex01-american-call-stock-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex02-calendar-spread-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex03-call-or-put-spread-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex04-european-call-index-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex05-asian-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex06-averaging-in-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex07-barrier-knockout-rebate-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex08-basket-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex09-bermuda-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex10-binary-barrier-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex11-quanto-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex12-vanilla-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex13-1996-american-call-stock.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex14-american-call-stock-passthrough-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex15-basket-passthrough-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex16-equityOptionTransactionSupplement.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex17-equityOptionTransactionSupplement-non-deliverable-share.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex18-equityOptionTransactionSupplement-non-deliverable-index.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex19-dividend-adjustment.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex20-nested-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex21-flat-weight-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex22-equityOptionTransactionSupplement-index-option-asian-dates.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex23-equityOptionTransactionSupplement-index-option-cliquet.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex24-equityOptionTransactionSupplement-index-option-asian-schedule.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex25-equityOptionTransactionSupplement-index-option-knock-in-knock-out-features.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\eqd-ex26-mixed-asset-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-options\Option.TradeCreated.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex01-single-underlyer-execution-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex02-composite-basket-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex03-index-quanto-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex04-zero-strike-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex05-single-stock-plus-fee-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex06-single-index-long-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex07-long-form-with-stub.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex08-composite-basket-long-form-separate-spreads.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex09-compounding-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex10-short-form-interestLeg-driving-schedule-dates.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex11-on-european-index-underlyer-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex12-on-european-index-underlyer-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex13-pan-asia-interdealer-share-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex14-european-interdealer-share-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex15-forward-starting-pre-european-interdealer-share-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex16-forward-starting-post-european-interdealer-share-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex17-cfd.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex18-pan-asia-interdealer-index-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\eqs-ex19-european-interdealer-fair-value-share-swap-short-form.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\trs-ex01-equity-basket.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\trs-ex02-single-equity.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\trs-ex03-single-stock-execution-swap-with-fixing-and-dividend-payment-dates.xml" />
+    <EmbeddedResource Include="TradeData\products\equity-swaps\trs-ex04-index-ios.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\dcd-ex01-dual-currency-deposit.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex01-fx-spot.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex02-spot-cross-w-side-rates.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex03-fx-fwd.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex04-fx-fwd-w-settlement.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex05-fx-fwd-w-ssi.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex06-fx-fwd-w-splits.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex07-non-deliverable-forward.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex08-fx-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex09-euro-opt.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex10-amer-opt.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex11-non-deliverable-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex12-fx-barrier-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex13-fx-dbl-barrier-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex14-euro-digital-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex15-euro-range-digital-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex16-one-touch-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex17-no-touch-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex18-double-one-touch-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex19-double-no-touch-option.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex20-avg-rate-option-parametric.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex21-avg-rate-option-parametric-plus-rate-observation.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex22-avg-rate-option-specific.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex23-straddle.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\fx-ex24-delta-hedge.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\td-ex01-simple-term-deposit.xml" />
+    <EmbeddedResource Include="TradeData\products\fx-derivatives\td-ex02-term-deposit-w-settlement-etc.xml" />
+    <EmbeddedResource Include="TradeData\products\inflation-swaps\inflation-swap-ex01-yoy.xml" />
+    <EmbeddedResource Include="TradeData\products\inflation-swaps\inflation-swap-ex02-yoy-bond-reference.xml" />
+    <EmbeddedResource Include="TradeData\products\inflation-swaps\inflation-swap-ex03-yoy-initial-level.xml" />
+    <EmbeddedResource Include="TradeData\products\inflation-swaps\inflation-swap-ex04-yoy-interp_fixed.xml" />
+    <EmbeddedResource Include="TradeData\products\inflation-swaps\inflation-swap-ex05-zc_fixed.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex01-vanilla-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex02-stub-amort-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex03-compound-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex04-arrears-stepup-fee-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex05-long-stub-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex06-xccy-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex07-ois-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex08-fra.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex09-euro-swaption-explicit.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex10-euro-swaption-relative.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex11-euro-swaption-partial-auto-ex.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex12-euro-swaption-straddle-cash.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex13-euro-swaption-cash-with-cfs.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex14-berm-swaption.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex15-amer-swaption.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex16-mand-term-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex17-opt-euro-term-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex18-opt-berm-term-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex19-opt-amer-term-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex20-euro-cancel-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex21-euro-extend-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex22-cap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex23-floor.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex24-collar.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex25-fxnotional-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex26-fxnotional-swap-with-cfs.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex27-inverse-floater.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex28-bullet-payments.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex29-non-deliverable-settlement-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex30-swap-comp-avg-relative-date.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex31-non-deliverable-settlement-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex32-zero-coupon-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex33-BRL-CDI-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex34-MXN-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\interest-rate-derivatives\ird-ex35-inverse-floater-inverse-vs-floating.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex01-variance-swap-index.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex02-variance-swap-single-stock.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex03-conditional-variance-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex04-dispersion-variance-swap.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex05-dispersion-variance-swap-transaction-supplement.xml" />
+    <EmbeddedResource Include="TradeData\products\variance-swaps\eqvs-ex06-variance-option-transaction-supplement.xml" />
+    <EmbeddedResource Include="Config\Trade\Highlander.Trade.bulletPayment.t0001.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.JPY-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-EUR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-GBP.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-JPY.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-NZD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.AUD-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.EUR-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.GBP-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.JPY-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.NZD-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-AONIA-OIS-COMPOUND.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-2M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.AUD-BBR-BBSW-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Reuters-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.JPY-LIBOR-ISDA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.NZD-BBR-FRA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.AUD-USD.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.EUR-USD.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.GBP-USD.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.NZD-USD.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.USD-HKD.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.FxCurve.USD-JPY.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-USD-BASIS.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.AUD-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-EURIBOR-Reuters-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.EUR-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.GBP-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-HIBOR-HKAB-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.HKD-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.JPY-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.JPY-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.NZD-BBR-FRA-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.NZD-USD-BASIS-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-ZERO-BANK-1M.xml" />
+    <EmbeddedResource Include="Market\TEST_EOD.RateCurve.USD-ZERO-BANK-6M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-6M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-1M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateCurve\QR_Live\JPY-LIBOR-ISDA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.USD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.GBP-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-21.RateCurve.AUD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-22.RateCurve.AUD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-23.RateCurve.AUD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-24.RateCurve.AUD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\EOD_Sydney\2011-08-25.RateCurve.AUD-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-BBR-BBSW-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-IRSwap-5Y.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.AUD-IRSwap-10Y.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-IRSwap-5Y.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-1M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-BBR-BBSW-6M.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\AUD-IRSwap-10Y.xml" />
+    <EmbeddedResource Include="PricingStructures\RateVolatilityMatrix\QR_Live\EUR-IRSwap-5Y.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.DiscountCurve.CHF-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.CHF-LIBOR-BBA-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.FxCurve.CHF-USD.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-1M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-3M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateCurve.EUR-EURIBOR-Telerate-6M.xml" />
+    <EmbeddedResource Include="Market\QR_LIVE.RateVolatilityMatrix.EUR-IRSwap-5Y.xml" />
+    <EmbeddedResource Include="PricingStructures\DiscountCurve\QR_Live\AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\asset-measure-5-3.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\broker-confirmation-type-4-12.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\business-center-6-15.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\cashflow-type-2-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\cdx-index-annex-source-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\clearance-system-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\compounding-frequency-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\contractual-definitions-3-5.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\contractual-supplement-6-17.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\coupon-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\credit-seniority-2-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\credit-seniority-trading-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\credit-support-agreement-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\cut-name-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\day-count-fraction-2-2.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\derivative-calculation-method-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\designated-priority-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\entity-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\floating-rate-index-2-3.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\governing-law-1-2.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\inflation-index-description-2-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\inflation-index-source-2-1.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\inflation-main-publication-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\information-provider-2-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\interpolation-method-1-1.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\local-jurisdiction-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\market-disruption-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\master-agreement-type-2-2.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\master-confirmation-type-7-4.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\matrix-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\mortgage-sector-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\perturbation-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\position-status-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\price-quote-units-1-4.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\pricing-input-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\product-taxonomy-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\product-type-simple-1-4.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\query-parameter-operator-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\quote-timing-1-1.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\reason-code-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\restructuring-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\scheduled-date-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\settled-entity-matrix-source-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\settlement-method-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\settlement-price-source-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\settlement-rate-option-2-4.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\spread-schedule-type-1-0.xml" />
+    <EmbeddedResource Include="Config\FpMLCodes\trade-cashflows-status-1-0.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ANZ.Fixed.5,25.16-01-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ANZ.Float.4,67.17-02-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ASIA.Fixed.5,5.15-02-2016.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.BACR.Float.5,43.13-08-2012.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.BQDAU.Float.4,81.22-10-2012.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.EIB.Fixed.6,25.15-04-2015.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.FMSWER.Fixed.5.20-03-2017.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IADB.Fixed.6,5.20-08-2019.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IADB.Fixed.6.25-05-2016.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IBRD.Fixed.6.9-11-2016.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.ICBCAS.Float.5,26.14-07-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.IFC.Fixed.5,75.24-06-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.INTNED.Float.4,17.24-06-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.KFW.Fixed.5,75.13-05-2015.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.LLOYDS.Float.3,66.19-03-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.NAB.Fixed.6,75.16-09-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.NIB.Fixed.6.20-08-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.OCBCSP.Float.5,04.14-07-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.RABOBK.Float.4,84.3-07-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.WSTP.Fixed.7,25.18-11-2016.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Corp.WSTP.Float.4,7383.18-08-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.NSWTC.Fixed.6.1-02-2018.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.NTTC.Fixed.5,75.14-07-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.QTC.Fixed.5,75.22-07-2024.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.SAFA.Fixed.5,75.20-04-2015.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TASCOR.Fixed.6,5.15-04-2015.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.4,75.15-10-2014.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.5,5.15-11-2018.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.5,75.15-11-2016.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.6.15-06-2020.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.TCV.Fixed.6.17-10-2022.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.5,5.17-07-2012.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-04-2015.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-07-2021.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.7.15-10-2019.xml" />
+    <EmbeddedResource Include="Config\FixedIncome\FixedIncome.Govt.WATC.Fixed.8.15-07-2017.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.AUD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.EUR-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.GBP-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.NZD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.DiscountCurve.USD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.FxCurve.AUD-USD.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateATMVolatilityMatrix.AUD-IRSwap.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.AUD-BBR-BBSW-3M.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.EUR-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.GBP-LIBOR-BBA-3M.xml" />
+    <EmbeddedResource Include="Config\QuotedAssetSet\QuotedAssetSet.QR_LIVE.RateCurve.USD-LIBOR-BBA-3M.xml" />
+    <Content Include="AlertRules\DEV.CartooEODCurves.xml" />
+    <Content Include="AlertRules\DEV.QR_LIVE_Curves.xml" />
+    <Content Include="AppSettings\DEV\AlertServer.txt" />
+    <Content Include="AppSettings\DEV\AutoInstaller.txt" />
+    <Content Include="AppSettings\DEV\CalendarImporter.txt" />
+    <Content Include="AppSettings\DEV\Credit.txt" />
+    <Content Include="AppSettings\DEV\CurveCalQ.txt" />
+    <Content Include="AppSettings\DEV\ExcelWrapper.txt" />
+    <Content Include="AppSettings\DEV\PortfolioValuerServer.txt" />
+    <Content Include="AppSettings\SIT\AlertServer.txt" />
+    <Content Include="AppSettings\SIT\AutoInstaller.txt" />
+    <Content Include="AppSettings\SIT\CalendarImporter.txt" />
+    <Content Include="AppSettings\SIT\Credit.txt" />
+    <Content Include="AppSettings\SIT\CurveCalQ.txt" />
+    <Content Include="AppSettings\SIT\ExcelWrapper.txt" />
+    <Content Include="AppSettings\SIT\PortfolioValuerServer.txt" />
+    <Content Include="AppSettings\STG\AlertServer.txt" />
+    <Content Include="AppSettings\STG\AutoInstaller.txt" />
+    <Content Include="AppSettings\STG\CalendarImporter.txt" />
+    <Content Include="AppSettings\STG\Credit.txt" />
+    <Content Include="AppSettings\STG\CurveCalQ.txt" />
+    <Content Include="AppSettings\STG\ExcelWrapper.txt" />
+    <Content Include="AppSettings\STG\PortfolioValuerServer.txt" />
+    <Content Include="PricingStructures\DiscountCurve\QR_Live\HKD-LIBOR-SENIOR.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\HKD-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\KRW-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\SEK-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CHF-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\DKK-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\CNY-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\INR-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\NOK-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\SGD-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\PHP-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\MYR-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\IDR-USD.xml" />
+    <EmbeddedResource Include="PricingStructures\FxCurve\QR_Live\TWD-USD.xml" />
+    <Content Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-1M.xml" />
+    <Content Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-3M.xml" />
+    <Content Include="PricingStructures\RateCurve\QR_Live\HKD-HIBOR-HKAB-6M.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppConfigFiles\" />
+    <Folder Include="Config\Equity\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

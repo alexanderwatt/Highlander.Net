@@ -62,7 +62,7 @@ namespace Highlander.Utilities.Logging
                     }
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Trace.WriteLine($"TextBoxLogger.AsyncHandler: Unhandled exception: {excp}");
             }

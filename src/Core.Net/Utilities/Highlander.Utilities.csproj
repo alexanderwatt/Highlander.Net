@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Encryption\**" />
+    <EmbeddedResource Remove="Encryption\**" />
+    <None Remove="Encryption\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="CommonItem.cs" />
     <Compile Remove="Logging\TextBoxLogger.cs" />
     <Compile Remove="RuntimeHelper.cs" />

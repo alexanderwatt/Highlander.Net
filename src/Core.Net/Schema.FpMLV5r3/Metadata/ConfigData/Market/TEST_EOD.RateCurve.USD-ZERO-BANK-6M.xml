@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Market.TEST_EOD.2010-08-30.RateCurve.USD-ZERO-BANK-6M" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <yieldCurve id="RateCurve.USD-ZERO-BANK-6M">
+    <name>USD-ZERO-BANK-6M</name>
+    <currency>USD</currency>
+    <algorithm>LinearSpreadZero</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>ZERO-BANK</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>6</periodMultiplier>
+        <period>M</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.USD-ZERO-BANK-6M" definitionRef="RateBasisCurve">
+    <baseDate>2010-08-30</baseDate>
+    <buildDateTime>2010-10-20T15:36:04.808624+11:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Deposit" id="USD-SPREADDEPOSIT-ON-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>D</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-SPREADDEPOSIT-1M-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-SPREADDEPOSIT-2M-6M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="Deposit" id="USD-SPREADDEPOSIT-3M-6M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-6M-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>M</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-1Y-6M">
+          <term>
+            <periodMultiplier>1</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-2Y-6M">
+          <term>
+            <periodMultiplier>2</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-3Y-6M">
+          <term>
+            <periodMultiplier>3</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-4Y-6M">
+          <term>
+            <periodMultiplier>4</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-5Y-6M">
+          <term>
+            <periodMultiplier>5</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-6Y-6M">
+          <term>
+            <periodMultiplier>6</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-7Y-6M">
+          <term>
+            <periodMultiplier>7</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-8Y-6M">
+          <term>
+            <periodMultiplier>8</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-9Y-6M">
+          <term>
+            <periodMultiplier>9</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-10Y-6M">
+          <term>
+            <periodMultiplier>10</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-11Y-6M">
+          <term>
+            <periodMultiplier>11</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-12Y-6M">
+          <term>
+            <periodMultiplier>12</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-13Y-6M">
+          <term>
+            <periodMultiplier>13</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-14Y-6M">
+          <term>
+            <periodMultiplier>14</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-15Y-6M">
+          <term>
+            <periodMultiplier>15</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-20Y-6M">
+          <term>
+            <periodMultiplier>20</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-25Y-6M">
+          <term>
+            <periodMultiplier>25</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-30Y-6M">
+          <term>
+            <periodMultiplier>30</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-35Y-6M">
+          <term>
+            <periodMultiplier>35</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-40Y-6M">
+          <term>
+            <periodMultiplier>40</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+        <underlyingAsset xsi:type="SimpleIRSwap" id="USD-BASISSWAP-50Y-6M">
+          <term>
+            <periodMultiplier>50</periodMultiplier>
+            <period>Y</period>
+          </term>
+        </underlyingAsset>
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="USD-SPREADDEPOSIT-ON-6M" />
+        <quote>
+          <value>0.0015375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-SPREADDEPOSIT-1M-6M" />
+        <quote>
+          <value>0.0015375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-SPREADDEPOSIT-2M-6M" />
+        <quote>
+          <value>0.0015375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-SPREADDEPOSIT-3M-6M" />
+        <quote>
+          <value>0.0015375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-6M-6M" />
+        <quote>
+          <value>0.0015375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-1Y-6M" />
+        <quote>
+          <value>0.0013125</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-2Y-6M" />
+        <quote>
+          <value>0.0011875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-3Y-6M" />
+        <quote>
+          <value>0.0010875</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-4Y-6M" />
+        <quote>
+          <value>0.000975</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-5Y-6M" />
+        <quote>
+          <value>0.0009125</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-6Y-6M" />
+        <quote>
+          <value>0.000869</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-7Y-6M" />
+        <quote>
+          <value>0.000825</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-8Y-6M" />
+        <quote>
+          <value>0.000804</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-9Y-6M" />
+        <quote>
+          <value>0.000783</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-10Y-6M" />
+        <quote>
+          <value>0.0007625</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-11Y-6M" />
+        <quote>
+          <value>0.00075</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-12Y-6M" />
+        <quote>
+          <value>0.0007375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-13Y-6M" />
+        <quote>
+          <value>0.000725</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-14Y-6M" />
+        <quote>
+          <value>0.000712</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-15Y-6M" />
+        <quote>
+          <value>0.0007</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-20Y-6M" />
+        <quote>
+          <value>0.0006625</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-25Y-6M" />
+        <quote>
+          <value>0.0006375</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-30Y-6M" />
+        <quote>
+          <value>0.000625</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-35Y-6M" />
+        <quote>
+          <value>0.000577</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-40Y-6M" />
+        <quote>
+          <value>0.000542</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="USD-BASISSWAP-50Y-6M" />
+        <quote>
+          <value>0.000494</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalSpread</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Quarterly</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-08-30</date>
+          </term>
+          <mid>0.00378927374732196</mid>
+        </point>
+        <point id="USD-SPREADDEPOSIT-ON-6M">
+          <term>
+            <date>2010-08-31</date>
+          </term>
+          <mid>0.00378927374732196</mid>
+        </point>
+        <point id="USD-SPREADDEPOSIT-1M-6M">
+          <term>
+            <date>2010-10-01</date>
+          </term>
+          <mid>0.00411125824494807</mid>
+        </point>
+        <point id="USD-SPREADDEPOSIT-2M-6M">
+          <term>
+            <date>2010-11-01</date>
+          </term>
+          <mid>0.00427540136720683</mid>
+        </point>
+        <point id="USD-SPREADDEPOSIT-3M-6M">
+          <term>
+            <date>2010-12-01</date>
+          </term>
+          <mid>0.00449085087253565</mid>
+        </point>
+        <point id="USD-BASISSWAP-6M-6M">
+          <term>
+            <date>2011-03-01</date>
+          </term>
+          <mid>0.00500655167789965</mid>
+        </point>
+        <point id="USD-BASISSWAP-1Y-6M">
+          <term>
+            <date>2011-09-01</date>
+          </term>
+          <mid>0.00557779175927564</mid>
+        </point>
+        <point id="USD-BASISSWAP-2Y-6M">
+          <term>
+            <date>2012-09-04</date>
+          </term>
+          <mid>0.00800309092311213</mid>
+        </point>
+        <point id="USD-BASISSWAP-3Y-6M">
+          <term>
+            <date>2013-09-03</date>
+          </term>
+          <mid>0.0111929974292719</mid>
+        </point>
+        <point id="USD-BASISSWAP-4Y-6M">
+          <term>
+            <date>2014-09-02</date>
+          </term>
+          <mid>0.0144532739517187</mid>
+        </point>
+        <point id="USD-BASISSWAP-5Y-6M">
+          <term>
+            <date>2015-09-01</date>
+          </term>
+          <mid>0.0176672181977455</mid>
+        </point>
+        <point id="USD-BASISSWAP-6Y-6M">
+          <term>
+            <date>2016-09-01</date>
+          </term>
+          <mid>0.0204830875331874</mid>
+        </point>
+        <point id="USD-BASISSWAP-7Y-6M">
+          <term>
+            <date>2017-09-01</date>
+          </term>
+          <mid>0.0228009833847374</mid>
+        </point>
+        <point id="USD-BASISSWAP-8Y-6M">
+          <term>
+            <date>2018-09-04</date>
+          </term>
+          <mid>0.0247389670223983</mid>
+        </point>
+        <point id="USD-BASISSWAP-9Y-6M">
+          <term>
+            <date>2019-09-03</date>
+          </term>
+          <mid>0.0263352533946612</mid>
+        </point>
+        <point id="USD-BASISSWAP-10Y-6M">
+          <term>
+            <date>2020-09-01</date>
+          </term>
+          <mid>0.0276714502340854</mid>
+        </point>
+        <point id="USD-BASISSWAP-11Y-6M">
+          <term>
+            <date>2021-09-01</date>
+          </term>
+          <mid>0.0287486132904826</mid>
+        </point>
+        <point id="USD-BASISSWAP-12Y-6M">
+          <term>
+            <date>2022-09-01</date>
+          </term>
+          <mid>0.0298397259562258</mid>
+        </point>
+        <point id="USD-BASISSWAP-13Y-6M">
+          <term>
+            <date>2023-09-01</date>
+          </term>
+          <mid>0.0305535216548085</mid>
+        </point>
+        <point id="USD-BASISSWAP-14Y-6M">
+          <term>
+            <date>2024-09-03</date>
+          </term>
+          <mid>0.0313044557045838</mid>
+        </point>
+        <point id="USD-BASISSWAP-15Y-6M">
+          <term>
+            <date>2025-09-02</date>
+          </term>
+          <mid>0.0320589676117473</mid>
+        </point>
+        <point id="USD-BASISSWAP-20Y-6M">
+          <term>
+            <date>2030-09-03</date>
+          </term>
+          <mid>0.0338091836463734</mid>
+        </point>
+        <point id="USD-BASISSWAP-25Y-6M">
+          <term>
+            <date>2035-09-04</date>
+          </term>
+          <mid>0.0346245958820752</mid>
+        </point>
+        <point id="USD-BASISSWAP-30Y-6M">
+          <term>
+            <date>2040-09-04</date>
+          </term>
+          <mid>0.0350999439851041</mid>
+        </point>
+        <point id="USD-BASISSWAP-35Y-6M">
+          <term>
+            <date>2045-09-01</date>
+          </term>
+          <mid>0.0346850905519922</mid>
+        </point>
+        <point id="USD-BASISSWAP-40Y-6M">
+          <term>
+            <date>2050-09-01</date>
+          </term>
+          <mid>0.0343536303377086</mid>
+        </point>
+        <point id="USD-BASISSWAP-50Y-6M">
+          <term>
+            <date>2060-09-01</date>
+          </term>
+          <mid>0.0330040695798264</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-08-30</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point id="USD-SPREADDEPOSIT-ON-6M">
+        <term>
+          <date>2010-08-31</date>
+        </term>
+        <mid>0.999989479277411</mid>
+      </point>
+      <point id="USD-SPREADDEPOSIT-1M-6M">
+        <term>
+          <date>2010-10-01</date>
+        </term>
+        <mid>0.999634809197422</mid>
+      </point>
+      <point id="USD-SPREADDEPOSIT-2M-6M">
+        <term>
+          <date>2010-11-01</date>
+        </term>
+        <mid>0.999252483859913</mid>
+      </point>
+      <point id="USD-SPREADDEPOSIT-3M-6M">
+        <term>
+          <date>2010-12-01</date>
+        </term>
+        <mid>0.998841186231379</mid>
+      </point>
+      <point id="USD-BASISSWAP-6M-6M">
+        <term>
+          <date>2011-03-01</date>
+        </term>
+        <mid>0.997459825992659</mid>
+      </point>
+      <point id="USD-BASISSWAP-1Y-6M">
+        <term>
+          <date>2011-09-01</date>
+        </term>
+        <mid>0.994333825748656</mid>
+      </point>
+      <point id="USD-BASISSWAP-2Y-6M">
+        <term>
+          <date>2012-09-04</date>
+        </term>
+        <mid>0.983787334877628</mid>
+      </point>
+      <point id="USD-BASISSWAP-3Y-6M">
+        <term>
+          <date>2013-09-03</date>
+        </term>
+        <mid>0.966423569297769</mid>
+      </point>
+      <point id="USD-BASISSWAP-4Y-6M">
+        <term>
+          <date>2014-09-02</date>
+        </term>
+        <mid>0.943017241226759</mid>
+      </point>
+      <point id="USD-BASISSWAP-5Y-6M">
+        <term>
+          <date>2015-09-01</date>
+        </term>
+        <mid>0.914376677002422</mid>
+      </point>
+      <point id="USD-BASISSWAP-6Y-6M">
+        <term>
+          <date>2016-09-01</date>
+        </term>
+        <mid>0.88292545423963</mid>
+      </point>
+      <point id="USD-BASISSWAP-7Y-6M">
+        <term>
+          <date>2017-09-01</date>
+        </term>
+        <mid>0.850767157031589</mid>
+      </point>
+      <point id="USD-BASISSWAP-8Y-6M">
+        <term>
+          <date>2018-09-04</date>
+        </term>
+        <mid>0.818303409992788</mid>
+      </point>
+      <point id="USD-BASISSWAP-9Y-6M">
+        <term>
+          <date>2019-09-03</date>
+        </term>
+        <mid>0.786660074716891</mid>
+      </point>
+      <point id="USD-BASISSWAP-10Y-6M">
+        <term>
+          <date>2020-09-01</date>
+        </term>
+        <mid>0.755802799394908</mid>
+      </point>
+      <point id="USD-BASISSWAP-11Y-6M">
+        <term>
+          <date>2021-09-01</date>
+        </term>
+        <mid>0.726237598179831</mid>
+      </point>
+      <point id="USD-BASISSWAP-12Y-6M">
+        <term>
+          <date>2022-09-01</date>
+        </term>
+        <mid>0.696201997335264</mid>
+      </point>
+      <point id="USD-BASISSWAP-13Y-6M">
+        <term>
+          <date>2023-09-01</date>
+        </term>
+        <mid>0.669245123028742</mid>
+      </point>
+      <point id="USD-BASISSWAP-14Y-6M">
+        <term>
+          <date>2024-09-03</date>
+        </term>
+        <mid>0.641906542384431</mid>
+      </point>
+      <point id="USD-BASISSWAP-15Y-6M">
+        <term>
+          <date>2025-09-02</date>
+        </term>
+        <mid>0.614933664574373</mid>
+      </point>
+      <point id="USD-BASISSWAP-20Y-6M">
+        <term>
+          <date>2030-09-03</date>
+        </term>
+        <mid>0.504828923815651</mid>
+      </point>
+      <point id="USD-BASISSWAP-25Y-6M">
+        <term>
+          <date>2035-09-04</date>
+        </term>
+        <mid>0.416897852053699</mid>
+      </point>
+      <point id="USD-BASISSWAP-30Y-6M">
+        <term>
+          <date>2040-09-04</date>
+        </term>
+        <mid>0.344993984264815</mid>
+      </point>
+      <point id="USD-BASISSWAP-35Y-6M">
+        <term>
+          <date>2045-09-01</date>
+        </term>
+        <mid>0.293291462825697</mid>
+      </point>
+      <point id="USD-BASISSWAP-40Y-6M">
+        <term>
+          <date>2050-09-01</date>
+        </term>
+        <mid>0.249468651886174</mid>
+      </point>
+      <point id="USD-BASISSWAP-50Y-6M">
+        <term>
+          <date>2060-09-01</date>
+        </term>
+        <mid>0.188694164730506</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

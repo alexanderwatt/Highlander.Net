@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockFormat"
+    targetNamespace="http://tempuri.org/StockFormat.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/StockFormat.xsd"
+    xmlns:mstns="http://tempuri.org/StockFormat.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Stock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Name" type="xs:string" minOccurs="0" />
+        <xs:element name="AssetId" type="xs:string" minOccurs="0" />
+        <xs:element name="Spot" type="xs:decimal" minOccurs="0" />
+        <xs:element name="Date" type="xs:string" minOccurs="0" />      
+        <xs:element name="Dividends">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Dividend" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ExDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="Amount" type="xs:decimal" minOccurs="0" />
+                    <xs:element name="PriceUnits" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RateCurve" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+                    <xs:element name="BaseDate" type="xs:string" minOccurs="0" />
+                    <xs:element name="Ccy" type="xs:string" minOccurs="0" />
+                    <xs:element name="DateArray" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="RateArray" type="xs:double" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="RateType" type="xs:string" minOccurs="0" />                    
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VolatilitySurface">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StockId" type="xs:string" minOccurs="0" />       
+              <xs:element name="IsComplete" type="xs:string" minOccurs="0" />
+              <xs:element name="Expiries">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ForwardExpiry" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ExpiryDate" type="xs:string" minOccurs="0" />
+                          <xs:element name="FwdPrice" type="xs:decimal" minOccurs="0" />
+                          <xs:element name="NodalPoint" type="xs:string" minOccurs="0" />
+                          <xs:element name="Strikes" >
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Strike" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Moneyness" type="xs:double" minOccurs="0" />
+                                      <xs:element name="StrikePrice" type="xs:double" minOccurs="0" />                                      
+                                      <xs:element name="Volatility" minOccurs="0" >
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Value" type="xs:decimal" minOccurs="0" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="VolatilityHasBeenSet" type="xs:string" minOccurs="0" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

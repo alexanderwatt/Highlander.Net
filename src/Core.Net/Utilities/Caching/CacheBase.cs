@@ -50,16 +50,16 @@ namespace Highlander.Utilities.Caching
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="K"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <typeparam name="U"></typeparam>
-    public class CacheItem<K, V, U>
+    /// <typeparam name="TK"></typeparam>
+    /// <typeparam name="TV"></typeparam>
+    /// <typeparam name="TU"></typeparam>
+    public class CacheItem<TK, TV, TU>
     {
-        public readonly K UserKey;
-        public readonly V Value;
-        public readonly U UserParam;
+        public readonly TK UserKey;
+        public readonly TV Value;
+        public readonly TU UserParam;
         public readonly DateTimeOffset Expires;
-        public CacheItem(K userKey, V value, U userParam, DateTimeOffset expires)
+        public CacheItem(TK userKey, TV value, TU userParam, DateTimeOffset expires)
         {
             UserKey = userKey;
             Value = value;
@@ -71,21 +71,21 @@ namespace Highlander.Utilities.Caching
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="K"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <typeparam name="U"></typeparam>
-    public class CacheState<K, V, U> where V : class
+    /// <typeparam name="TK"></typeparam>
+    /// <typeparam name="TV"></typeparam>
+    /// <typeparam name="TU"></typeparam>
+    public class CacheState<TK, TV, TU> where TV : class
     {
-        public readonly Dictionary<K, CacheItem<K, V, U>> Cache = new Dictionary<K, CacheItem<K, V, U>>();
+        public readonly Dictionary<TK, CacheItem<TK, TV, TU>> Cache = new Dictionary<TK, CacheItem<TK, TV, TU>>();
     }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="K"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <typeparam name="U"></typeparam>
-    public class CacheBase<K, V, U> where V : class
+    /// <typeparam name="TK"></typeparam>
+    /// <typeparam name="TV"></typeparam>
+    /// <typeparam name="TU"></typeparam>
+    public class CacheBase<TK, TV, TU> where TV : class
     {
         // K the userKey type
         // V the reference type to be cached
@@ -129,19 +129,17 @@ namespace Highlander.Utilities.Caching
             if (cacheDuration <= TimeSpan.Zero)
                 throw new ArgumentException("cacheDuration");
             TimeSpan maxDuration = DateTimeOffset.MaxValue - now - TimeSpan.FromDays(1);
-            if (cacheDuration > maxDuration)
-                return now.Add(maxDuration);
-            return now.Add(cacheDuration);
+            return now.Add(cacheDuration > maxDuration ? maxDuration : cacheDuration);
         }
 
-        protected Guarded<CacheState<K, V, U>> CacheState =
-            new Guarded<CacheState<K, V, U>>(new CacheState<K, V, U>());
+        protected Guarded<CacheState<TK, TV, TU>> CacheState =
+            new Guarded<CacheState<TK, TV, TU>>(new CacheState<TK, TV, TU>());
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<V> GetValues()
+        public List<TV> GetValues()
         {
             return GetValues(LoadSaveType.Default);
         }
@@ -151,9 +149,9 @@ namespace Highlander.Utilities.Caching
         /// </summary>
         /// <param name="loadOption"></param>
         /// <returns></returns>
-        public List<V> GetValues(LoadSaveType loadOption)
+        public List<TV> GetValues(LoadSaveType loadOption)
         {
-            var items = new List<CacheItem<K, V, U>>();
+            var items = new List<CacheItem<TK, TV, TU>>();
             CacheState.Locked(state =>
             {
                 items = state.Cache.Values.ToList();
@@ -166,9 +164,9 @@ namespace Highlander.Utilities.Caching
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<K> GetKeys()
+        public List<TK> GetKeys()
         {
-            var items = new List<CacheItem<K, V, U>>();
+            var items = new List<CacheItem<TK, TV, TU>>();
             CacheState.Locked(state =>
             {
                 items = state.Cache.Values.ToList();
@@ -180,9 +178,9 @@ namespace Highlander.Utilities.Caching
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<CacheItem<K, V, U>> GetCacheItems()
+        public List<CacheItem<TK, TV, TU>> GetCacheItems()
         {
-            var result = new List<CacheItem<K, V, U>>();
+            var result = new List<CacheItem<TK, TV, TU>>();
             CacheState.Locked(state =>
             {
                 result = state.Cache.Values.ToList();
@@ -196,7 +194,7 @@ namespace Highlander.Utilities.Caching
         public void Clear()
         {
             CacheState.Locked(state => state.Cache.Clear());
-            OnUpdate(CacheChange.CacheCleared, default(K), null, null, default(U));
+            OnUpdate(CacheChange.CacheCleared, default, null, null, default);
         }
 
         /// <summary>
@@ -205,18 +203,18 @@ namespace Highlander.Utilities.Caching
         public void Purge()
         {
             DateTimeOffset now = DateTimeOffset.Now;
-            var purgedKVPs = new List<KeyValuePair<K,CacheItem<K,V,U>>>();
+            var purgedKVPs = new List<KeyValuePair<TK,CacheItem<TK,TV,TU>>>();
             CacheState.Locked(state =>
                                    {
                                        purgedKVPs.AddRange(state.Cache.Where(kvpItem => now > kvpItem.Value.Expires));
                                        foreach (var kvpItem in purgedKVPs)
-                {
-                    state.Cache.Remove(kvpItem.Key);
-                }
+                                       {
+                                           state.Cache.Remove(kvpItem.Key);
+                                       }
                                    });
             foreach (var kvpItem in purgedKVPs)
             {
-                CacheItem<K, V, U> cacheItem = kvpItem.Value;
+                CacheItem<TK, TV, TU> cacheItem = kvpItem.Value;
                 if (cacheItem.Value != null)
                     OnUpdate(CacheChange.ItemExpired, cacheItem.UserKey, cacheItem.Value, null, cacheItem.UserParam);
             }
@@ -229,7 +227,7 @@ namespace Highlander.Utilities.Caching
         /// </summary>
         /// <param name="userKey">The user key.</param>
         /// <returns></returns>
-        protected virtual K OnGetKey(K userKey) { return userKey; }
+        protected virtual TK OnGetKey(TK userKey) { return userKey; }
 
         /// <summary>
         /// Called after the cache has updated an item.
@@ -239,8 +237,8 @@ namespace Highlander.Utilities.Caching
         /// <param name="oldValue">The old item.</param>
         /// <param name="newValue">The new item.</param>
         /// <param name="userParam">The userParam.</param>
-        protected virtual void OnUpdate(CacheChange change, K userKey, V oldValue, V newValue, U userParam) { }
-        private void ProcessUpdate(K userKey, V oldValue, V newValue, bool expired, U userParam)
+        protected virtual void OnUpdate(CacheChange change, TK userKey, TV oldValue, TV newValue, TU userParam) { }
+        private void ProcessUpdate(TK userKey, TV oldValue, TV newValue, bool expired, TU userParam)
         {
             if (newValue != oldValue)
             {
@@ -260,16 +258,16 @@ namespace Highlander.Utilities.Caching
         /// <param name="userKey">The userKey.</param>
         /// <param name="userParam">The userParam.</param>
         /// <returns></returns>
-        protected virtual V OnLoad(K userKey, U userParam) { return null; }
+        protected virtual TV OnLoad(TK userKey, TU userParam) { return null; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="userKey"></param>
         /// <returns></returns>
-        public V Get(K userKey)
+        public TV Get(TK userKey)
         {
-            return Get(userKey, LoadSaveType.Default, default(U));
+            return Get(userKey, LoadSaveType.Default, default);
         }
 
         /// <summary>
@@ -278,9 +276,9 @@ namespace Highlander.Utilities.Caching
         /// <param name="userKey"></param>
         /// <param name="loadOption"></param>
         /// <returns></returns>
-        public V Get(K userKey, LoadSaveType loadOption)
+        public TV Get(TK userKey, LoadSaveType loadOption)
         {
-            return Get(userKey, loadOption, default(U));
+            return Get(userKey, loadOption, default);
         }
 
         /// <summary>
@@ -290,15 +288,15 @@ namespace Highlander.Utilities.Caching
         /// <param name="loadOption"></param>
         /// <param name="userParam"></param>
         /// <returns></returns>
-        public V Get(K userKey, LoadSaveType loadOption, U userParam)
+        public TV Get(TK userKey, LoadSaveType loadOption, TU userParam)
         {
             DateTimeOffset now = DateTimeOffset.Now;
             DateTimeOffset expires = CalculateExpiry(now, _defaultLoadCacheDuration);
             if (userKey == null)
                 throw new ArgumentNullException(nameof(userKey));
-            K cacheKey = OnGetKey(userKey);
-            V newValue = null;
-            V oldValue = null;
+            TK cacheKey = OnGetKey(userKey);
+            TV newValue = null;
+            TV oldValue = null;
             bool current = false;
             bool expired = false;
             CacheState.Locked(state =>
@@ -332,7 +330,7 @@ namespace Highlander.Utilities.Caching
                 newValue = OnLoad(userKey, userParam);
                 CacheState.Locked(state =>
                 {
-                    state.Cache[cacheKey] = new CacheItem<K, V, U>(userKey, newValue, userParam, expires);
+                    state.Cache[cacheKey] = new CacheItem<TK, TV, TU>(userKey, newValue, userParam, expires);
                 });
             }
             ProcessUpdate(userKey, oldValue, newValue, expired, userParam);
@@ -344,7 +342,7 @@ namespace Highlander.Utilities.Caching
         /// <param name="oldValue">The old item.</param>
         /// <param name="newValue">The new item.</param>
         /// <param name="userParam">The userParam.</param>
-        protected virtual void OnSave(V oldValue, V newValue, U userParam) { }
+        protected virtual void OnSave(TV oldValue, TV newValue, TU userParam) { }
 
         /// <summary>
         /// 
@@ -352,9 +350,9 @@ namespace Highlander.Utilities.Caching
         /// <param name="userKey"></param>
         /// <param name="newValue"></param>
         /// <returns></returns>
-        public V Put(K userKey, V newValue)
+        public TV Put(TK userKey, TV newValue)
         {
-            return Put(userKey, newValue, LoadSaveType.Default, default(U), _defaultSaveCacheDuration);
+            return Put(userKey, newValue, LoadSaveType.Default, default, _defaultSaveCacheDuration);
         }
 
         /// <summary>
@@ -364,7 +362,7 @@ namespace Highlander.Utilities.Caching
         /// <param name="newValue"></param>
         /// <param name="userParam"></param>
         /// <returns></returns>
-        public V Put(K userKey, V newValue, U userParam)
+        public TV Put(TK userKey, TV newValue, TU userParam)
         {
             return Put(userKey, newValue, LoadSaveType.Default, userParam, _defaultSaveCacheDuration);
         }
@@ -376,9 +374,9 @@ namespace Highlander.Utilities.Caching
         /// <param name="newValue"></param>
         /// <param name="saveOption"></param>
         /// <returns></returns>
-        public V Put(K userKey, V newValue, LoadSaveType saveOption)
+        public TV Put(TK userKey, TV newValue, LoadSaveType saveOption)
         {
-            return Put(userKey, newValue, saveOption, default(U), _defaultSaveCacheDuration);
+            return Put(userKey, newValue, saveOption, default, _defaultSaveCacheDuration);
         }
 
         /// <summary>
@@ -389,7 +387,7 @@ namespace Highlander.Utilities.Caching
         /// <param name="saveOption"></param>
         /// <param name="userParam"></param>
         /// <returns></returns>
-        public V Put(K userKey, V newValue, LoadSaveType saveOption, U userParam)
+        public TV Put(TK userKey, TV newValue, LoadSaveType saveOption, TU userParam)
         {
             return Put(userKey, newValue, saveOption, userParam, _defaultSaveCacheDuration);
         }
@@ -403,7 +401,7 @@ namespace Highlander.Utilities.Caching
         /// <param name="userParam"></param>
         /// <param name="cacheDuration"></param>
         /// <returns></returns>
-        public V Put(K userKey, V newValue, LoadSaveType saveOption, U userParam, TimeSpan cacheDuration)
+        public TV Put(TK userKey, TV newValue, LoadSaveType saveOption, TU userParam, TimeSpan cacheDuration)
         {
             DateTimeOffset now = DateTimeOffset.Now;
             DateTimeOffset expires = CalculateExpiry(now, cacheDuration);
@@ -411,8 +409,8 @@ namespace Highlander.Utilities.Caching
                 throw new ArgumentNullException(nameof(userKey));
             if (newValue == null)
                 throw new ArgumentNullException(nameof(newValue));
-            K cacheKey = OnGetKey(userKey);
-            V oldValue = null;
+            TK cacheKey = OnGetKey(userKey);
+            TV oldValue = null;
             bool expired = false;
             CacheState.Locked(state =>
             {
@@ -432,7 +430,7 @@ namespace Highlander.Utilities.Caching
                             expires = oldItem.Expires;
                     }
                 }
-                state.Cache[cacheKey] = new CacheItem<K, V, U>(userKey, newValue, userParam, expires);
+                state.Cache[cacheKey] = new CacheItem<TK, TV, TU>(userKey, newValue, userParam, expires);
             });
             if ((saveOption != LoadSaveType.Avoid) &&
                 ((saveOption == LoadSaveType.Force) || (newValue != oldValue)))
@@ -448,9 +446,9 @@ namespace Highlander.Utilities.Caching
         /// </summary>
         /// <param name="userKey"></param>
         /// <returns></returns>
-        public bool Remove(K userKey)
+        public bool Remove(TK userKey)
         {
-            return Remove(userKey, default(U));
+            return Remove(userKey, default);
         }
 
         /// <summary>
@@ -459,13 +457,13 @@ namespace Highlander.Utilities.Caching
         /// <param name="userKey"></param>
         /// <param name="userParam"></param>
         /// <returns></returns>
-        public bool Remove(K userKey, U userParam)
+        public bool Remove(TK userKey, TU userParam)
         {
             DateTimeOffset now = DateTimeOffset.Now;
             const bool found = false;
-            K cacheKey = OnGetKey(userKey);
-            V newValue = null;
-            V oldValue = null;
+            TK cacheKey = OnGetKey(userKey);
+            TV newValue = null;
+            TV oldValue = null;
             bool expired = false;
             CacheState.Locked(state =>
             {

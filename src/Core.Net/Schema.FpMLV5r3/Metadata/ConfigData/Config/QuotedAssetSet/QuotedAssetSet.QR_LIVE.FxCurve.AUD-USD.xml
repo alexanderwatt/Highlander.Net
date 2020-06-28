@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuotedAssetSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <instrumentSet xmlns="http://www.fpml.org/FpML-5/reporting">
+    <fx id="AUD-FxForward-0D" />
+    <fx id="AUD-FxForward-1D" />
+    <fx id="AUD-FxSpot-2D" />
+    <fx id="AUD-FxForward-1W" />
+    <fx id="AUD-FxForward-2W" />
+    <fx id="AUD-FxForward-3W" />
+    <fx id="AUD-FxForward-1M" />
+    <fx id="AUD-FxForward-2M" />
+    <fx id="AUD-FxForward-3M" />
+    <fx id="AUD-FxForward-4M" />
+    <fx id="AUD-FxForward-5M" />
+    <fx id="AUD-FxForward-6M" />
+    <fx id="AUD-FxForward-9M" />
+    <fx id="AUD-FxForward-1Y" />
+    <fx id="AUD-FxForward-15M" />
+    <fx id="AUD-FxForward-18M" />
+    <fx id="AUD-FxForward-21M" />
+    <fx id="AUD-FxForward-2Y" />
+    <fx id="AUD-FxForward-3Y" />
+    <fx id="AUD-FxForward-4Y" />
+    <fx id="AUD-FxForward-5Y" />
+    <fx id="AUD-FxForward-6Y" />
+    <fx id="AUD-FxForward-7Y" />
+    <fx id="AUD-FxForward-8Y" />
+    <fx id="AUD-FxForward-9Y" />
+    <fx id="AUD-FxForward-10Y" />
+    <fx id="AUD-FxForward-15Y" />
+    <fx id="AUD-FxForward-20Y" />
+  </instrumentSet>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-0D" />
+    <quote>
+      <value>0.98</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-1D" />
+    <quote>
+      <value>0.9799</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxSpot-2D" />
+    <quote>
+      <value>0.9798</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-1W" />
+    <quote>
+      <value>0.9797</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-2W" />
+    <quote>
+      <value>0.9787</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-3W" />
+    <quote>
+      <value>0.9777</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-1M" />
+    <quote>
+      <value>0.9767</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-2M" />
+    <quote>
+      <value>0.9727</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-3M" />
+    <quote>
+      <value>0.9687</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-4M" />
+    <quote>
+      <value>0.9647</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-5M" />
+    <quote>
+      <value>0.9607</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-6M" />
+    <quote>
+      <value>0.9567</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-9M" />
+    <quote>
+      <value>0.9527</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-1Y" />
+    <quote>
+      <value>0.9487</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-15M" />
+    <quote>
+      <value>0.9447</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-18M" />
+    <quote>
+      <value>0.9407</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-21M" />
+    <quote>
+      <value>0.9367</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-2Y" />
+    <quote>
+      <value>0.9267</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-3Y" />
+    <quote>
+      <value>0.9167</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-4Y" />
+    <quote>
+      <value>0.9067</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-5Y" />
+    <quote>
+      <value>0.8967</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-6Y" />
+    <quote>
+      <value>0.8867</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-7Y" />
+    <quote>
+      <value>0.8767</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-8Y" />
+    <quote>
+      <value>0.8667</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-9Y" />
+    <quote>
+      <value>0.8567</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-10Y" />
+    <quote>
+      <value>0.8467</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-15Y" />
+    <quote>
+      <value>0.8367</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+  <assetQuote xmlns="http://www.fpml.org/FpML-5/reporting">
+    <objectReference href="AUD-FxForward-20Y" />
+    <quote>
+      <value>0.8267</value>
+      <measureType>MarketQuote</measureType>
+      <quoteUnits>DecimalRate</quoteUnits>
+    </quote>
+  </assetQuote>
+</QuotedAssetSet>

@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=CNY-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=CNY
+Currency2/String=USD
+CurrencyPair/String=CNY-USD
+QuoteBasis/String=Currency2PerCurrency1

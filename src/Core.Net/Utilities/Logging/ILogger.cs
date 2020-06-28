@@ -22,7 +22,7 @@ namespace Highlander.Utilities.Logging
         void Clear();
         void Flush();
         void Log(int severity, string indent, string msg);
-        void Log(Exception e);
+        void Log(System.Exception e);
         void LogDebug(string msg);
         void LogDebug(string format, object arg0);
         void LogDebug(string format, object arg0, object arg1);
@@ -39,13 +39,13 @@ namespace Highlander.Utilities.Logging
         void LogWarning(string format, object arg0, object arg1, object arg2);
         void LogWarning(string format, params object[] args);
         void LogError(string msg);
-        void LogError(Exception ex);
+        void LogError(System.Exception ex);
         void LogError(string format, object arg0);
         void LogError(string format, object arg0, object arg1);
         void LogError(string format, object arg0, object arg1, object arg2);
         void LogError(string format, params object[] args);
         void LogFatal(string msg);
-        void LogFatal(Exception ex);
+        void LogFatal(System.Exception ex);
         void LogFatal(string format, object arg0);
         void LogFatal(string format, object arg0, object arg1);
         void LogFatal(string format, object arg0, object arg1, object arg2);

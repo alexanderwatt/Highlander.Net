@@ -51,7 +51,7 @@ namespace Highlander.Utilities.RefCounting
             {
                 Release();
             }
-            catch (Exception) { }
+            catch (System.Exception) { }
         }
         public Reference<T> Clone()
         {

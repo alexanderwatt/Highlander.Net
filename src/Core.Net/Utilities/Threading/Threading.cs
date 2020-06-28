@@ -34,7 +34,7 @@ namespace Highlander.Utilities.Threading
         private ManualResetEvent _mAsyncWaitHandle;
 
         // Fields set when operation completes
-        private Exception _mException;
+        private System.Exception _mException;
 
         public AsyncResultNoResult(AsyncCallback asyncCallback, Object state)
         {
@@ -42,7 +42,7 @@ namespace Highlander.Utilities.Threading
             AsyncState = state;
         }
 
-        public void SetAsCompleted(Exception exception, Boolean completedSynchronously)
+        public void SetAsCompleted(System.Exception exception, Boolean completedSynchronously)
         {
             // Passing null for exception means no error occurred; this is the common case
             _mException = exception;
@@ -122,13 +122,13 @@ namespace Highlander.Utilities.Threading
         // Field set when operation completes
         private TResult _mResult;
 
-        public AsyncResult(AsyncCallback asyncCallback, Object state) : base(asyncCallback, state) { }
+        public AsyncResult(AsyncCallback asyncCallback, object state) : base(asyncCallback, state) { }
 
-        public void SetAsCompleted(TResult result, Boolean completedSynchronously)
+        public void SetAsCompleted(TResult result, bool completedSynchronously)
         {
             // Save the asynchronous operation's result
             _mResult = result;
-            // Tell the base class that the operation completed sucessfully (no exception)
+            // Tell the base class that the operation completed successfully (no exception)
             base.SetAsCompleted(null, completedSynchronously);
         }
 
@@ -146,13 +146,13 @@ namespace Highlander.Utilities.Threading
         Stopped,
         Faulted
     }
-    public delegate void AsyncErrorDelegate<TContext>(Exception excp, TContext context);
-    public delegate void AsyncStateDelegate<TContext>(AsyncClassState oldState, AsyncClassState newState, string reason, TContext context);
-    public delegate void AsyncEventDelegate<TData, TContext>(TData data, TContext context);
+    public delegate void AsyncErrorDelegate<in TContext>(System.Exception excp, TContext context);
+    public delegate void AsyncStateDelegate<in TContext>(AsyncClassState oldState, AsyncClassState newState, string reason, TContext context);
+    public delegate void AsyncEventDelegate<in TData, in TContext>(TData data, TContext context);
     /// <summary>
     /// Defines methods for managing asynchronously connected classes
     /// </summary>
-    public interface IAsyncClass<TData, TContext>
+    public interface IAsyncClass
     {
         // control and monitoring
         // - general state management
@@ -160,7 +160,7 @@ namespace Highlander.Utilities.Threading
         void Start(TimeSpan waitTimeout);
         void Stop(TimeSpan waitTimeout, string reason);
     }
-    public interface IAsyncClassEx<TData, TContext> : IAsyncClass<TData, TContext>
+    public interface IAsyncClassEx<TData, TContext> : IAsyncClass
     {
         // - asynchronous control methods
         void AsyncStart();
@@ -173,16 +173,26 @@ namespace Highlander.Utilities.Threading
     public class AsyncClass<TData, TContext> : IAsyncClassEx<TData, TContext>
     {
         protected readonly ILogger Logger;
+
         private readonly TContext _context;
+
         public object Context => _context;
+
         private readonly DispatcherHandle _mainDispatcher;
+
         private readonly DispatcherHandle _userDispatcher;
+
         private volatile AsyncClassState _state = AsyncClassState.Initial;
+
         public AsyncClassState State => _state;
-        public bool IsRunning => (_state == AsyncClassState.Running);
-        public bool HasStarted => (_state >= AsyncClassState.Running);
-        public bool HasStopped => (_state >= AsyncClassState.Stopped);
-        public bool HasFaulted => (_state == AsyncClassState.Faulted);
+
+        public bool IsRunning => _state == AsyncClassState.Running;
+
+        public bool HasStarted => _state >= AsyncClassState.Running;
+
+        public bool HasStopped => _state >= AsyncClassState.Stopped;
+
+        public bool HasFaulted => _state == AsyncClassState.Faulted;
 
         // asynchronous extensions
         public AsyncClass(ILogger logger, TContext context)
@@ -193,6 +203,7 @@ namespace Highlander.Utilities.Threading
             _mainDispatcher = new Dispatcher(logger, GetType().Name + "-Main").GetDispatcherHandle(".");
             _userDispatcher = new Dispatcher(logger, GetType().Name + "-User").GetDispatcherHandle(".");
         }
+
         public AsyncClass(ILogger logger, TContext context, DispatcherHandle mainDispatcher, DispatcherHandle userDispatcher)
         {
             // constructor used when coordinating sequencing with container
@@ -201,6 +212,7 @@ namespace Highlander.Utilities.Threading
             _mainDispatcher = mainDispatcher ?? throw new ArgumentNullException(nameof(mainDispatcher));
             _userDispatcher = userDispatcher ?? new Dispatcher(logger, GetType().Name + "-User").GetDispatcherHandle(".");
         }
+
         public AsyncErrorDelegate<TContext> ErrorHandlers { get; set; }
 
         public AsyncStateDelegate<TContext> StateHandlers { get; set; }
@@ -213,27 +225,34 @@ namespace Highlander.Utilities.Threading
 
         public AsyncEventDelegate<TData, TContext> AsyncEventHandlers { get; set; }
 
-        protected virtual void OnAsyncException(Exception excp)
+        protected virtual void OnAsyncException(System.Exception excp)
         {
             Logger.Log(excp);
         }
+
         protected virtual void OnAsyncStateChanged(AsyncClassState oldState, AsyncClassState newState, string reason) { }
+
         protected virtual void OnAsyncStateInitial(AsyncClassState oldState, string reason) { }
+
         protected virtual void OnAsyncStateRunning(AsyncClassState oldState, string reason) { }
+
         protected virtual void OnAsyncStateStopped(AsyncClassState oldState, string reason) { }
+
         protected virtual void OnAsyncEvent(TData data) { }
+
         protected virtual void OnAsyncSendOther(object obj) { }
 
         private class AsyncErrorParams
         {
-            public readonly Exception Excp;
+            public readonly System.Exception Excp;
             public readonly TContext Context;
-            public AsyncErrorParams(Exception excp, TContext context)
+            public AsyncErrorParams(System.Exception excp, TContext context)
             {
                 Excp = excp;
                 Context = context;
             }
         }
+
         private void AsyncErrorCallback(AsyncErrorParams args)
         {
             AsyncErrorDelegate<TContext> handlers = AsyncErrorHandlers;
@@ -243,14 +262,15 @@ namespace Highlander.Utilities.Threading
                 {
                     handlers(args.Excp, args.Context);
                 }
-                catch (Exception excp)
+                catch (System.Exception excp)
                 {
                     // ignore client exceptions
                     Logger.Log(excp);
                 }
             }
         }
-        private void HandleException(Exception excp)
+
+        private void HandleException(System.Exception excp)
         {
             // ignore secondary exceptions
             if (_state == AsyncClassState.Faulted)
@@ -293,6 +313,7 @@ namespace Highlander.Utilities.Threading
                 Reason = reason;
             }
         }
+
         private void AsyncStateCallback(AsyncStateParams args)
         {
             AsyncStateDelegate<TContext> handlers = AsyncStateHandlers;
@@ -302,13 +323,14 @@ namespace Highlander.Utilities.Threading
                 {
                     handlers(args.OldState, args.NewState, args.Reason, args.Context);
                 }
-                catch (Exception excp)
+                catch (System.Exception excp)
                 {
                     // ignore client exceptions
                     Logger.Log(excp);
                 }
             }
         }
+
         private void NotifyStateHandlers(AsyncClassState oldState, AsyncClassState newState, string reason)
         {
             // notify asynchronous delegates
@@ -338,7 +360,7 @@ namespace Highlander.Utilities.Threading
                 }
                 StateHandlers?.Invoke(oldState, newState, reason, _context);
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -357,6 +379,7 @@ namespace Highlander.Utilities.Threading
             AsyncStart();
             WaitHelper.WaitFor(waitTimeout, () => (_state == AsyncClassState.Running), "Failed to start!");
         }
+
         public void Stop(TimeSpan waitTimeout, string reason)
         {
             if (_state == AsyncClassState.Faulted)
@@ -377,6 +400,7 @@ namespace Highlander.Utilities.Threading
         {
             _mainDispatcher.DispatchCall<object>(null, StartCallback);
         }
+
         private void StartCallback(object notUsed)
         {
             if (_state == AsyncClassState.Faulted)
@@ -395,7 +419,7 @@ namespace Highlander.Utilities.Threading
                     NotifyStateHandlers(oldState, _state, "");
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -429,7 +453,7 @@ namespace Highlander.Utilities.Threading
                     NotifyStateHandlers(oldState, _state, "");
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -439,6 +463,7 @@ namespace Highlander.Utilities.Threading
         {
             _mainDispatcher.DispatchCall<object>(null, ResetCallback);
         }
+
         private void ResetCallback(object notUsed)
         {
             if (_state == AsyncClassState.Faulted)
@@ -457,7 +482,7 @@ namespace Highlander.Utilities.Threading
                     NotifyStateHandlers(oldState, _state, "");
                 }
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -473,6 +498,7 @@ namespace Highlander.Utilities.Threading
                 Context = context;
             }
         }
+
         private void AsyncEventCallback(AsyncEventParams args)
         {
             AsyncEventDelegate<TData, TContext> handlers = AsyncEventHandlers;
@@ -482,13 +508,14 @@ namespace Highlander.Utilities.Threading
                 {
                     handlers(args.Data, args.Context);
                 }
-                catch (Exception excp)
+                catch (System.Exception excp)
                 {
                     // ignore client exceptions
                     Logger.Log(excp);
                 }
             }
         }
+
         private void NotifyEventHandlers(TData data)
         {
             // notify asynchronous delegates
@@ -503,7 +530,7 @@ namespace Highlander.Utilities.Threading
                 OnAsyncEvent(data);
                 EventHandlers?.Invoke(data, _context);
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -514,6 +541,7 @@ namespace Highlander.Utilities.Threading
             // outbound/downstream data
             _mainDispatcher.DispatchCall(data, SendEventCallback);
         }
+
         private void SendEventCallback(TData data)
         {
             if (_state == AsyncClassState.Faulted)
@@ -529,7 +557,7 @@ namespace Highlander.Utilities.Threading
                 }
                 NotifyEventHandlers(data);
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 HandleException(excp);
             }
@@ -537,6 +565,7 @@ namespace Highlander.Utilities.Threading
     }
 
     public delegate bool WaitConditionDelegate();
+
     public delegate void WaitLoggingDelegate();
     public class WaitHelper
     {
@@ -556,7 +585,7 @@ namespace Highlander.Utilities.Threading
             {
                 if (exitCondition())
                     return true;
-                if ((loggingCallback != null) && (dtNow > timeToLog))
+                if (loggingCallback != null && dtNow > timeToLog)
                 {
                     // time to call logging callback
                     loggingCallback();
@@ -576,14 +605,17 @@ namespace Highlander.Utilities.Threading
                 throw new TimeoutException(timeoutExceptionMessage);
             return false;
         }
+
         public static bool WaitFor(TimeSpan waitTimeout, WaitConditionDelegate exitCondition)
         {
             return WaitFor(waitTimeout, exitCondition, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(100), 2, TimeSpan.Zero, null, TimeSpan.Zero, null);
         }
+
         public static bool WaitFor(TimeSpan waitTimeout, WaitConditionDelegate exitCondition, string timeoutExceptionMessage)
         {
             return WaitFor(waitTimeout, exitCondition, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(100), 2, TimeSpan.Zero, timeoutExceptionMessage, TimeSpan.Zero, null);
         }
+
         public static bool WaitFor(TimeSpan waitTimeout, WaitConditionDelegate exitCondition, string timeoutExceptionMessage, TimeSpan logInterval, WaitLoggingDelegate logCallback)
         {
             return WaitFor(waitTimeout, exitCondition, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(100), 2, TimeSpan.Zero, timeoutExceptionMessage, logInterval, logCallback);

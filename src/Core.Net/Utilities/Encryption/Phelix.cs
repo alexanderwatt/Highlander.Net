@@ -29,7 +29,7 @@ namespace Highlander.Utilities.Encryption
     /// Phelix error container. Expect such an expectation for any class and
     /// method of this namespace to be on the safe side. 
     /// </summary>
-    public class PhelixException : Exception
+    public class PhelixException : System.Exception
     {
         /// <summary>
         /// Default ctor.

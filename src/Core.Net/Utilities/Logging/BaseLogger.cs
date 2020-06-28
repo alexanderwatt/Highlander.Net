@@ -36,7 +36,7 @@ namespace Highlander.Utilities.Logging
 
         public bool SplitLines { get; set; }
 
-        private readonly string _userName = "user"; //IdentityHelper.GetIdentity().Name;
+        private readonly string _userName = IdentityHelper.GetIdentity().Name;
         private readonly string _hostName = IdentityHelper.GetHostName();
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Highlander.Utilities.Logging
                 AppDomain.CurrentDomain.UnhandledException +=
                     UnhandledDomainException;
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
                 Debug.WriteLine($"Unable to register AppDomain exception handler: {excp}");
             }
@@ -99,7 +99,7 @@ namespace Highlander.Utilities.Logging
         /// 
         /// </summary>
         /// <param name="e"></param>
-        public void Log(Exception e)
+        public void Log(System.Exception e)
         {
             Log(LogSeverity.Error, "EXCEPTION: " + e);
         }
@@ -316,7 +316,7 @@ namespace Highlander.Utilities.Logging
         /// 
         /// </summary>
         /// <param name="ex"></param>
-        public void LogError(Exception ex)
+        public void LogError(System.Exception ex)
         {
             Log(LogSeverity.Error, ex.ToString());
         }
@@ -377,7 +377,7 @@ namespace Highlander.Utilities.Logging
         /// 
         /// </summary>
         /// <param name="ex"></param>
-        public void LogFatal(Exception ex)
+        public void LogFatal(System.Exception ex)
         {
             Log(LogSeverity.Fatal, ex.ToString());
         }
@@ -457,7 +457,7 @@ namespace Highlander.Utilities.Logging
                     else
                         OnWrite(severity, resultLine);
                 }
-                catch (Exception excp)
+                catch (System.Exception excp)
                 {
                     Debug.WriteLine($"BaseLogger.Log: Severity={severity},Message={input}");
                     Debug.WriteLine($"BaseLogger.Log: {GetType().Name}.OnWrite threw Exception: {excp}");
@@ -518,10 +518,10 @@ namespace Highlander.Utilities.Logging
         {
             try
             {
-                var excp = args.ExceptionObject as Exception;
+                var excp = args.ExceptionObject as System.Exception;
                 Log(excp);
             }
-            catch (Exception e2)
+            catch (System.Exception e2)
             {
                 Debug.WriteLine($"UnhandledDomainException: Secondary exception: {e2}");
             }

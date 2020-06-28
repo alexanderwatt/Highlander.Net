@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DateRules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://tempuri.org/DateRules.xsd">
+	<DateRuleProfile name="BHKMonthly" fPmlIdentifier="BHKM" culture="zh-HK">
+		<DateRule name="BHKFebDate" id="BHKFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKMarDate" id="BHKMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKAprDate" id="BHKAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKMayDate" id="BHKMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKJunDate" id="BHKJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKJulDate" id="BHKJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKAugDate" id="BHKAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKSepDate" id="BHKSepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKOctDate" id="BHKOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKNovDate" id="BHKNovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BHKDecDate" id="BHKDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BHKQuarterly" fPmlIdentifier="BHKQ" culture="zh-HK">
+		<DateRule name="BHKQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>2</DayOfWeek>
+					<WeekOfMonth>2</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BNZMonthly" fPmlIdentifier="BNZM" culture="en-NZ">
+		<DateRule name="BNZFebDate" id="BNZFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZMarDate" id="BNZMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZAprDate" id="BNZAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZMayDate" id="BNZMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZJunDate" id="BNZJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZJulDate" id="BNZJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZAugDate" id="BNZAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZSepDate" id="BNZSepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZOctDate" id="BNZOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZNovDate" id="BNZNovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BNZDecDate" id="BNZDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BNZQuarterly" fPmlIdentifier="BNZQ" culture="en-NZ">
+		<DateRule name="BNZQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>2</DayOfWeek>
+					<WeekOfMonth>2</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BOEMonthly" fPmlIdentifier="BOEM" culture="en">
+		<DateRule name="BOEFebDate" id="BOEFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEMarDate" id="BOEMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEAprDate" id="BOEAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEMayDate" id="BOEMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEJunDate" id="BOEJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEJulDate" id="BOEJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEAugDate" id="BOEAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOESepDate" id="BOESepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEOctDate" id="BOEOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOENovDate" id="BOENovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOEDecDate" id="BOEDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BOEQuarterly" fPmlIdentifier="BOEQ" culture="en">
+		<DateRule name="BOEQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>2</DayOfWeek>
+					<WeekOfMonth>2</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BOJMonthly" fPmlIdentifier="BOJM" culture="ja-JP">
+		<DateRule name="BOJFebDate" id="BOJFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJMarDate" id="BOJMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJAprDate" id="BOJAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJMayDate" id="BOJMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJJunDate" id="BOJJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJJulDate" id="BOJJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJAugDate" id="BOJAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJSepDate" id="BOJSepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJOctDate" id="BOJOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJNovDate" id="BOJNovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="BOJDecDate" id="BOJDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="BOJQuarterly" fPmlIdentifier="BOJQ" culture="ja-JP">
+		<DateRule name="BOJQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>2</DayOfWeek>
+					<WeekOfMonth>2</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="ECBMonthly" fPmlIdentifier="ECBM" culture="en">
+		<DateRule name="ECBFebDate" id="ECBFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBMarDate" id="ECBMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBAprDate" id="ECBAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBMayDate" id="ECBMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBJunDate" id="ECBJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBJulDate" id="ECBJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBAugDate" id="ECBAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBSepDate" id="ECBSepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBOctDate" id="ECBOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBNovDate" id="ECBNovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="ECBDecDate" id="ECBDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="ECBQuarterly" fPmlIdentifier="ECBQ" culture="en">
+		<DateRule name="ECBQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>2</DayOfWeek>
+					<WeekOfMonth>2</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="FOMCMonthly" fPmlIdentifier="FOMCM" culture="en-US">
+		<DateRule name="FOMCFebDate" id="FOMCFebDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCMarDate" id="FOMCMarDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCAprDate" id="FOMCAprDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCMayDate" id="FOMCMayDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCJunDate" id="FOMCJunDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCJulDate" id="FOMCJulDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCAugDate" id="FOMCAugDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCSepDate" id="FOMCSepDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCOctDate" id="FOMCOctDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCNovDate" id="FOMCNovDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="FOMCDecDate" id="FOMCDecDate">
+			<NthDayInMonth>
+				<Instance>2</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="FOMCQuarterly" fPmlIdentifier="FOMCQ" culture="en-US">
+		<DateRule name="FOMCQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>3</DayOfWeek>
+					<WeekOfMonth>1</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="RBAMonthly" fPmlIdentifier="RBAM" culture="en-AU">
+		<DateRule name="RBAFebDate" id="RBAFebDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>2</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAMarDate" id="RBAMarDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>2</DayOfWeek>
+				<Month>3</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAAprDate" id="RBAAprDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>4</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAMayDate" id="RBAMayDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>5</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAJunDate" id="RBAJunDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>6</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAJulDate" id="RBAJulDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>7</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAAugDate" id="RBAAugDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>8</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBASepDate" id="RBASepDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>9</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBAOctDate" id="RBAOctDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>10</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBANovDate" id="RBANovDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>11</Month>
+			</NthDayInMonth>
+		</DateRule>
+		<DateRule name="RBADecDate" id="RBADecDate">
+			<NthDayInMonth>
+				<Instance>1</Instance>
+				<DayOfWeek>3</DayOfWeek>
+				<Month>12</Month>
+			</NthDayInMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<DateRuleProfile name="RBAQuarterly" fPmlIdentifier="RBAQ" culture="en-AU">
+		<DateRule name="RBAQuarterlyCycle">
+			<EveryNMonth>
+				<DayOfWeekInWeek>
+					<DayOfWeek>1</DayOfWeek>
+					<WeekOfMonth>3</WeekOfMonth>
+				</DayOfWeekInWeek>
+				<MonthCycle>3</MonthCycle>
+			</EveryNMonth>
+		</DateRule>
+	</DateRuleProfile>
+	<Global>
+	</Global>
+</DateRules>

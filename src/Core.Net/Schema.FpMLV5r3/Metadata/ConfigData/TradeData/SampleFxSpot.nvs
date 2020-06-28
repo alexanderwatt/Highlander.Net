@@ -1,0 +1,15 @@
+DebugSourceFile/String=FxMUREX.20100908
+DebugSourceLine/Int32=214
+TradeSource/String=Murex
+OriginatingPartyId/String=party1
+OriginatingPartyName/String=NABAU FGNCCYOPTS1792
+PARTY_1/String=party1
+CounterPartyId/String=party2
+CounterPartyName/String=BARCLAYS BANK-LON
+PARTY_2/String=party2
+TradeDate/DateTime=2010-05-19T00:00:00
+TradeId/String=123000
+ProductType/String=FxSpot
+TradeState/String=Verified
+SchemaType/String=FpML
+SchemaVersion/String=5.3

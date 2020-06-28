@@ -1,0 +1,14 @@
+﻿PricingStructureType/String=RateCurve
+Market/String=GlobalIB_EOD
+Currency/String=AUD
+CurveName/String=AUD-BBR-BBSW-3M
+BaseDate/DateTime=2010-10-26T00:00:00
+Algorithm/String=LinearZero
+SourceSystem/String=Orion
+Function/String=Market
+Type/String=PricingStructures
+Index/String=BBR-BBSW
+IndexTenor/String=3M
+UniqueIdentifier/String=Market.GlobalIB_EOD.RateCurve.AUD-BBR-BBSW-3M
+Domain/String=Orion.Market
+MarketName/String=GlobalIB_EOD

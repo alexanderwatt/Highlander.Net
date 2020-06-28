@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bond xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="AUD-Bond-Govt.WATC.Fixed.7.15/10/2019" xmlns="http://www.fpml.org/FpML-5/reporting">
+  <instrumentId>AU000WT60339 Corp Isin</instrumentId>
+  <description>WATC 7 10/15/19</description>
+  <currency>AUD</currency>
+  <exchangeId>ASX</exchangeId>
+  <clearanceSystem>ASX</clearanceSystem>
+  <issuerName>WATC</issuerName>
+  <seniority>Senior</seniority>
+  <couponType>Fixed</couponType>
+  <couponRate>0.07</couponRate>
+  <maturity>2019-10-15</maturity>
+  <faceAmount>1</faceAmount>
+  <paymentFrequency>
+    <periodMultiplier>6</periodMultiplier>
+    <period>M</period>
+  </paymentFrequency>
+  <dayCountFraction>ACT/ACT.ISDA</dayCountFraction>
+</bond>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="Highlander.Market.Live.RateCurve.AUD-BondFuturesRec-310Y" xmlns="http://www.fpml.org/2009/FpML-4-7">
+  <yieldCurve id="RateCurve.AUD-BondFuturesRec-310Y">
+    <name>AUD-BondFuturesRec-310Y</name>
+    <currency>AUD</currency>
+    <algorithm>Base algorithm</algorithm>
+    <forecastRateIndex>
+      <floatingRateIndex>BondFuturesRec</floatingRateIndex>
+      <indexTenor>
+        <periodMultiplier>310</periodMultiplier>
+        <period>Y</period>
+      </indexTenor>
+    </forecastRateIndex>
+  </yieldCurve>
+  <yieldCurveValuation id="RateCurve.AUD-BondFuturesRec-310Y">
+    <baseDate>2010-07-14</baseDate>
+    <buildDateTime>2010-07-14T16:56:24.8273216+10:00</buildDateTime>
+    <inputs>
+      <instrumentSet>
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-U0" />
+        <underlyingAsset xsi:type="Future" id="AUD-IRFuture-IR-Z0" />
+      </instrumentSet>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-U0" />
+        <quote>
+          <value>0.0468000000000001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+      <assetQuote>
+        <objectReference href="AUD-IRFuture-IR-Z0" />
+        <quote>
+          <value>0.0518000000000001</value>
+          <measureType>MarketQuote</measureType>
+          <quoteUnits>DecimalRate</quoteUnits>
+        </quote>
+        <quote>
+          <value>0</value>
+          <measureType>Volatility</measureType>
+          <quoteUnits>LognormalVolatility</quoteUnits>
+        </quote>
+      </assetQuote>
+    </inputs>
+    <zeroCurve>
+      <compoundingFrequency>Continuous</compoundingFrequency>
+      <rateCurve>
+        <interpolationMethod>LinearInterpolation</interpolationMethod>
+        <point>
+          <term>
+            <date>2010-07-14</date>
+          </term>
+          <mid>0.0465320317347549</mid>
+        </point>
+        <point>
+          <term>
+            <date>2010-12-09</date>
+          </term>
+          <mid>0.0465320317347549</mid>
+        </point>
+        <point>
+          <term>
+            <date>2011-03-10</date>
+          </term>
+          <mid>0.0484052026732061</mid>
+        </point>
+      </rateCurve>
+    </zeroCurve>
+    <discountFactorCurve>
+      <interpolationMethod>LinearRateInterpolation</interpolationMethod>
+      <extrapolationPermitted>true</extrapolationPermitted>
+      <point>
+        <term>
+          <date>2010-07-14</date>
+        </term>
+        <mid>1</mid>
+      </point>
+      <point>
+        <term>
+          <date>2010-12-09</date>
+        </term>
+        <mid>0.981309099675248</mid>
+      </point>
+      <point>
+        <term>
+          <date>2011-03-10</date>
+        </term>
+        <mid>0.968801574559781</mid>
+      </point>
+    </discountFactorCurve>
+  </yieldCurveValuation>
+</market>

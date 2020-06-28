@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BF3D0E23-5C37-468B-B7CA-780B0A880612}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Highlander.ValuationEngine.Tests.V5r3</RootNamespace>
+    <AssemblyName>Highlander.ValuationEngine.Tests.V5r3</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.9.1.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.Signed.4.9.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XmlDiffPatch">
+      <HintPath>..\..\..\External\Microsoft\XmlDiffPatch\XmlDiffPatch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ValuationEngineTests2.cs" />
+    <Compile Include="Helpers\FpMLTestsSwapHelper.cs" />
+    <Compile Include="Helpers\TestConstants.cs" />
+    <Compile Include="ValuationEngineTests1.cs" />
+    <Compile Include="TestData\TenorConversion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TenorConversion.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Components\Core.Common\Highlander.Core.Common.csproj">
+      <Project>{c0a002b0-29f6-4f78-88fe-87e1c7a7f231}</Project>
+      <Name>Highlander.Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Metadata\Constants\Highlander.Constants.csproj">
+      <Project>{ab717476-3485-4b65-a916-027f75928ca7}</Project>
+      <Name>Highlander.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Utilities\Util\Highlander.Utilities.csproj">
+      <Project>{beaa39dd-56f2-459b-b05c-2b58e3b1c890}</Project>
+      <Name>Highlander.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Analytics\Highlander.Reporting.Analytics.V5r3.csproj">
+      <Project>{2e1b6968-028d-410f-8024-40e9ac44fc39}</Project>
+      <Name>Highlander.Reporting.Analytics.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Codes\Highlander.Codes.V5r3.csproj">
+      <Project>{58b2d2df-6e17-4ce3-a12f-863c811377ef}</Project>
+      <Name>Highlander.Codes.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Contracts\Highlander.Reporting.Contracts.V5r3.csproj">
+      <Project>{4559a0ee-c1ab-43b5-8eb5-9e4cd7a75af3}</Project>
+      <Name>Highlander.Reporting.Contracts.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting.Helpers\Highlander.Reporting.Helpers.V5r3.csproj">
+      <Project>{f45ecb8f-4e1f-4852-a3eb-fcae25d4844e}</Project>
+      <Name>Highlander.Reporting.Helpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Identifiers\Highlander.Reporting.Identifiers.V5r3.csproj">
+      <Project>{d573bebd-deed-4dad-9382-4a67c55fe1f3}</Project>
+      <Name>Highlander.Reporting.Identifiers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\ModelFramework\Highlander.Reporting.ModelFramework.V5r3.csproj">
+      <Project>{24d15c4d-667f-43a8-8bc0-146dddcb7305}</Project>
+      <Name>Highlander.Reporting.ModelFramework.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Models\Highlander.Reporting.Models.V5r3.csproj">
+      <Project>{f28ce90c-41b6-4e1d-9077-9c7047f2a787}</Project>
+      <Name>Highlander.Reporting.Models.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metadata\Reporting\Highlander.Reporting.V5r3.csproj">
+      <Project>{22b79bc7-9789-4dd7-8ce4-38fc5e42add7}</Project>
+      <Name>Highlander.Reporting.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\TestHelpers\Highlander.TestHelpers.V5r3.csproj">
+      <Project>{320d2e83-2352-4a7b-ab1a-c5cabe9ffe93}</Project>
+      <Name>Highlander.TestHelpers.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\UnitTestEnv\Highlander.UnitTestEnv.V5r3.csproj">
+      <Project>{df4ad835-9839-43a3-b713-0ce94d50fc75}</Project>
+      <Name>Highlander.UnitTestEnv.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalendarEngine\Highlander.CalendarEngine.V5r3.csproj">
+      <Project>{3c43f284-5a70-4ae2-8e88-b69f24c4c046}</Project>
+      <Name>Highlander.CalendarEngine.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CurveEngine\Highlander.CurveEngine.V5r3.csproj">
+      <Project>{96ebe4a4-8389-498f-b6f2-326d7c7fea8a}</Project>
+      <Name>Highlander.CurveEngine.V5r3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValuationEngine\Highlander.ValuationEngine.V5r3.csproj">
+      <Project>{f9217f4f-10c1-4192-b8cc-8aec06362fb5}</Project>
+      <Name>Highlander.ValuationEngine.V5r3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleAssetSwap.nvs" />
+    <EmbeddedResource Include="TestData\SampleFra.nvs" />
+    <EmbeddedResource Include="TestData\SampleSwap.nvs" />
+    <EmbeddedResource Include="TestData\SampleXccySwap.nvs" />
+    <EmbeddedResource Include="TestData\SampleFxForward.nvs" />
+    <EmbeddedResource Include="TestData\SampleFxSpot.nvs" />
+    <EmbeddedResource Include="TestData\SampleBullet.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex01-vanilla-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex02-stub-amort-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex03-compound-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex04-arrears-stepup-fee-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex05-long-stub-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex06-xccy-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex01-fx-spot.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex03-fx-fwd.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex02-spot-cross-w-side-rates.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex04-fx-fwd-w-settlement.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex05-fx-fwd-w-ssi.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex06-fx-fwd-w-splits.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex07-non-deliverable-forward.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex08-fx-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex09-euro-opt.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex10-amer-opt.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex11-non-deliverable-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex12-fx-barrier-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex13-fx-dbl-barrier-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex14-euro-digital-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex15-euro-range-digital-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex16-one-touch-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex17-no-touch-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex18-double-one-touch-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex19-double-no-touch-option.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex20-avg-rate-option-parametric.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex21-avg-rate-option-specific.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex22-straddle.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\fx-ex23-delta-hedge.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\td-ex01-simple-term-deposit.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\td-ex02-term-deposit-w-settlement-etc.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\fx-derivatives\td-ex03-dual-currency-deposit-strategy.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex07-ois-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex08-fra.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex09-euro-swaption-explicit.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex10-euro-swaption-relative.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex11-euro-swaption-partial-auto-ex.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex12-euro-swaption-straddle-cash.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex13-euro-swaption-cash-with-cfs.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex14-berm-swaption.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex15-amer-swaption.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex16-mand-term-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex17-opt-euro-term-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex18-opt-berm-term-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex19-opt-amer-term-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex20-euro-cancel-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex21-euro-extend-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex22-cap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex23-floor.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex24-collar.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex25-fxnotional-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex26-fxnotional-swap-with-cfs.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex27-inverse-floater.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex27a-inverse-floater-inverse-vs-floating.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex28-bullet-payments.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex29-non-deliverable-settlement-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex30-swap-comp-avg-relative-date.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex31-non-deliverable-settlement-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex32-zero-coupon-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\interest-rate-derivatives\ird-ex33-BRL-CDI-swap.xml" />
+    <EmbeddedResource Include="TestData\FpML xml samples\lease-transactions\lease-ex01-lease-transaction.xml" />
+    <Content Include="TestData\FpML xml samples\market-data-quotes\aud_depos_swaps_data.xml" />
+    <Content Include="TestData\FpML\CapFloorVolsTest.xml" />
+    <EmbeddedResource Include="TestData\FpML\MarketTest.xml" />
+    <Content Include="TestData\FpML\RateCurveFpMLFromPSS.xml" />
+    <Content Include="TestData\FpML\RateCurveV1.xml" />
+    <Content Include="TestData\FpML\RateCurve_CurveGen.xml" />
+    <Content Include="TestData\FpML\VolGridTest.xml" />
+    <EmbeddedResource Include="TestData\FpML\VolSurfaceExpirationByStrike.xml" />
+    <EmbeddedResource Include="TestData\TenorConversion.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TenorConversion.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Trades\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleTermDeposit.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleCapFloor.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleFxSwap.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleSwaption.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\SampleFxOptionLeg.nvs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <EmbeddedResource Include="TestData\SampleLease.nvs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -74,45 +74,43 @@ namespace Highlander.Utilities.Threading
     /// </summary>
     public class Dispatcher : IDispatcher
     {
-        private ILogger _Logger;
+        private ILogger _logger;
         public ILogger Logger
         {
-            get => _Logger;
-            set => _Logger = value ?? throw new ArgumentNullException("logger");
+            get => _logger;
+            set => _logger = value ?? throw new ArgumentNullException("logger");
         }
-        private readonly DispatcherNode _RootNode;
-        private readonly LoggedCounter _OutstandingCallbacks;
-        private int _UserExceptionCount;
+        private readonly DispatcherNode _rootNode;
+        private readonly LoggedCounter _outstandingCallbacks;
+        private int _userExceptionCount;
 
         public Dispatcher(ILogger logger, string debugName)
         {
-            _Logger = logger ?? throw new ArgumentNullException("logger");
-            _OutstandingCallbacks = new LoggedCounter(logger, debugName, 0, 250); // todo 1000
-            _RootNode = new DispatcherNode(this, 0, null);
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _outstandingCallbacks = new LoggedCounter(logger, debugName, 0, 250); // todo 1000
+            _rootNode = new DispatcherNode(this, 0, null);
         }
         public Dispatcher(ILogger logger) : this(logger, null) { }
 
         internal void IncOutstanding()
         {
-            _OutstandingCallbacks.Increment();
+            _outstandingCallbacks.Increment();
         }
 
         internal void DecOutstanding()
         {
-            _OutstandingCallbacks.Decrement();
+            _outstandingCallbacks.Decrement();
         }
 
-        internal void SetLastException(Exception excp)
+        internal void SetLastException(System.Exception excp)
         {
-            Interlocked.Increment(ref _UserExceptionCount);
+            Interlocked.Increment(ref _userExceptionCount);
         }
 
         public DispatcherHandle GetDispatcherHandle(string key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
-            DispatcherHandle result;
-            DispatcherNode[] nodeList;
             string[] keyParts = null;
             int level = 0;
             if (!string.IsNullOrEmpty(key))
@@ -120,22 +118,22 @@ namespace Highlander.Utilities.Threading
                 keyParts = key.Split('/');
                 level = keyParts.Length;
             }
-            nodeList = new DispatcherNode[level + 1];
-            nodeList[0] = _RootNode;
+            var nodeList = new DispatcherNode[level + 1];
+            nodeList[0] = _rootNode;
             if (level > 0)
-                _RootNode.BuildNodeList(level, nodeList, keyParts);
-            result = new DispatcherHandle(this, level, nodeList);
+                _rootNode.BuildNodeList(level, nodeList, keyParts);
+            var result = new DispatcherHandle(this, level, nodeList);
             return result;
         }
 
         public long Wait(TimeSpan timeout)
         {
-            DateTimeOffset WaitExpiry = DateTimeOffset.Now + timeout;
-            long counter = _OutstandingCallbacks.Counter;
-            while ((counter > 0) && (DateTimeOffset.Now < WaitExpiry))
+            DateTimeOffset waitExpiry = DateTimeOffset.Now + timeout;
+            long counter = _outstandingCallbacks.Counter;
+            while ((counter > 0) && (DateTimeOffset.Now < waitExpiry))
             {
                 Thread.Sleep(50);
-                counter = _OutstandingCallbacks.Counter;
+                counter = _outstandingCallbacks.Counter;
             }
             return counter;
         }
@@ -149,73 +147,73 @@ namespace Highlander.Utilities.Threading
     internal class DispatcherNode
     {
         // readonly state
-        private readonly Dispatcher _Dispatcher;
-        private readonly int _Level; // 0 = root
-        private readonly DispatcherNode _Parent; // null if root
+        private readonly Dispatcher _dispatcher;
+        private readonly int _level; // 0 = root
+        private readonly DispatcherNode _parent; // null if root
 
         // thread-safe state: index of child nodes, and queue of items
-        private readonly ILock _ChildIndexLock = new NonblockingSpinlock();
-        private readonly IDictionary<string, DispatcherNode> _ChildIndex = new Dictionary<string, DispatcherNode>();
+        private readonly ILock _childIndexLock = new NonblockingSpinlock();
+        private readonly IDictionary<string, DispatcherNode> _childIndex = new Dictionary<string, DispatcherNode>();
 
-        private Guarded<Queue<DispatcherItem>> _Queue = new Guarded<Queue<DispatcherItem>>(new Queue<DispatcherItem>());
+        private readonly Guarded<Queue<DispatcherItem>> _queue = new Guarded<Queue<DispatcherItem>>(new Queue<DispatcherItem>());
 
-        private long _ThisNodeRunning; // can only be 0 or 1
-        private long _ChildrenRunning;
-        private long _ThreadsInTree;
+        private long _thisNodeRunning; // can only be 0 or 1
+        private long _childrenRunning;
+        private long _threadsInTree;
 
         internal long IncThreadsInTree()
         {
             // increment parent first?
-            _Parent?.IncThreadsInTree();
-            return Interlocked.Increment(ref _ThreadsInTree);
+            _parent?.IncThreadsInTree();
+            return Interlocked.Increment(ref _threadsInTree);
         }
         internal long DecThreadsInTree()
         {
             // decrement parent first?
-            _Parent?.DecThreadsInTree();
-            return Interlocked.Decrement(ref _ThreadsInTree);
+            _parent?.DecThreadsInTree();
+            return Interlocked.Decrement(ref _threadsInTree);
         }
         internal long DecChildrenRunning()
         {
             // decrement parent first?
-            _Parent?.DecChildrenRunning();
-            return Interlocked.Decrement(ref _ChildrenRunning);
+            _parent?.DecChildrenRunning();
+            return Interlocked.Decrement(ref _childrenRunning);
         }
 
         // constructors
         internal DispatcherNode(Dispatcher Dispatcher, int level, DispatcherNode parent)
         {
-            _Dispatcher = Dispatcher;
+            _dispatcher = Dispatcher;
             if (level < 0)
                 throw new ArgumentException("Invalid", nameof(level));
-            _Level = level;
+            _level = level;
             if ((level == 0) && (parent != null))
                 throw new ArgumentException("Invalid", nameof(parent));
             if ((level > 0) && (parent == null))
                 throw new ArgumentNullException(nameof(parent));
-            _Parent = parent;
+            _parent = parent;
         }
 
         internal void BuildNodeList(int level, DispatcherNode[] nodeList, string[] keyParts)
         {
             // find/create subnode
-            nodeList[_Level] = this;
+            nodeList[_level] = this;
             DispatcherNode subNode;
-            _ChildIndexLock.Enter();
+            _childIndexLock.Enter();
             try
             {
-                if (!_ChildIndex.TryGetValue(keyParts[_Level], out subNode))
+                if (!_childIndex.TryGetValue(keyParts[_level], out subNode))
                 {
-                    subNode = new DispatcherNode(_Dispatcher, _Level + 1, this);
-                    _ChildIndex.Add(keyParts[_Level], subNode);
+                    subNode = new DispatcherNode(_dispatcher, _level + 1, this);
+                    _childIndex.Add(keyParts[_level], subNode);
                 }
             }
             finally
             {
-                _ChildIndexLock.Leave();
+                _childIndexLock.Leave();
             }
-            nodeList[_Level + 1] = subNode;
-            if (level > (_Level + 1))
+            nodeList[_level + 1] = subNode;
+            if (level > (_level + 1))
             {
                 subNode.BuildNodeList(level, nodeList, keyParts);
             }
@@ -223,7 +221,7 @@ namespace Highlander.Utilities.Threading
 
         internal void Enqueue(DispatcherItem item)
         {
-            _Queue.Locked((queue) => queue.Enqueue(item));
+            _queue.Locked((queue) => queue.Enqueue(item));
             ThreadPool.QueueUserWorkItem(AsyncProcessNode, null);
         }
 
@@ -236,12 +234,12 @@ namespace Highlander.Utilities.Threading
             {
                 userCallback(userContext);
             }
-            catch (Exception excp)
+            catch (System.Exception excp)
             {
-                _Dispatcher.SetLastException(excp);
-                _Dispatcher.Logger.Log(excp);
+                _dispatcher.SetLastException(excp);
+                _dispatcher.Logger.Log(excp);
             }
-            _Dispatcher.DecOutstanding();
+            _dispatcher.DecOutstanding();
 
             // now dispatch any waiting items
             ProcessNode(item);
@@ -261,9 +259,9 @@ namespace Highlander.Utilities.Threading
                 {
                     // completed item cleanup
                     DecThreadsInTree();
-                    long debugN = Interlocked.Decrement(ref _ThisNodeRunning);
+                    long debugN = Interlocked.Decrement(ref _thisNodeRunning);
                     Debug.Assert(debugN == 0);
-                    _Parent?.DecChildrenRunning();
+                    _parent?.DecChildrenRunning();
                     completedItem = null;
                 }
 
@@ -272,7 +270,7 @@ namespace Highlander.Utilities.Threading
                 {
                     looping = false;
                     // ensure that at least one pass through the dequeuing logic occurs
-                    _Queue.Locked((queue) =>
+                    _queue.Locked((queue) =>
                     {
                         // we have the queue
                         // we can dispatch the head of the queue if:
@@ -281,27 +279,27 @@ namespace Highlander.Utilities.Threading
                         if (queue.Count > 0)
                         {
                             DispatcherItem workItem = queue.Peek();
-                            Debug.Assert(workItem.Level >= _Level);
-                            if ((workItem.Level == _Level)
-                                && (Interlocked.Add(ref _ThisNodeRunning, 0) == 0)
-                                && (Interlocked.Add(ref _ChildrenRunning, 0) == 0))
+                            Debug.Assert(workItem.Level >= _level);
+                            if ((workItem.Level == _level)
+                                && (Interlocked.Add(ref _thisNodeRunning, 0) == 0)
+                                && (Interlocked.Add(ref _childrenRunning, 0) == 0))
                             {
                                 // item is for this level
                                 // dispatch it to the threadpool
                                 queue.Dequeue();
-                                long debugN = Interlocked.Increment(ref _ThisNodeRunning);
+                                long debugN = Interlocked.Increment(ref _thisNodeRunning);
                                 Debug.Assert(debugN == 1);
                                 IncThreadsInTree();
                                 ThreadPool.QueueUserWorkItem(CallbackWrapper, workItem);
                             }
-                            if ((workItem.Level > _Level)
-                                && (Interlocked.Add(ref _ThisNodeRunning, 0) == 0))
+                            if ((workItem.Level > _level)
+                                && (Interlocked.Add(ref _thisNodeRunning, 0) == 0))
                             {
                                 // item is for lower level
                                 // enqueue it to the child
                                 queue.Dequeue();
-                                Interlocked.Increment(ref _ChildrenRunning);
-                                DispatcherNode childNode = workItem.NodeList[_Level + 1];
+                                Interlocked.Increment(ref _childrenRunning);
+                                DispatcherNode childNode = workItem.NodeList[_level + 1];
                                 childNode.Enqueue(workItem);
                                 // dequeue next
                                 looping = true;
@@ -314,10 +312,10 @@ namespace Highlander.Utilities.Threading
             {
                 threadsInTree = DecThreadsInTree();
             }
-            if ((threadsInTree == 0) && (_Parent != null))
+            if ((threadsInTree == 0) && (_parent != null))
             {
                 // we are the last thread in this tree - handoff to parent
-                ThreadPool.QueueUserWorkItem(_Parent.AsyncProcessNode, null);
+                ThreadPool.QueueUserWorkItem(_parent.AsyncProcessNode, null);
             }
         }
     }

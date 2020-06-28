@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DataPooling\**" />
-    <Compile Remove="Encryption\**" />
-    <EmbeddedResource Remove="DataPooling\**" />
-    <EmbeddedResource Remove="Encryption\**" />
-    <None Remove="DataPooling\**" />
-    <None Remove="Encryption\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Contracts.3.4.cs" />
     <Compile Remove="CustomClientBase.cs" />
     <Compile Remove="CustomServiceHost.cs" />

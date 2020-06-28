@@ -1,0 +1,9 @@
+Market/String=QR_LIVE
+PricingStructureType/String=FxCurve
+CurveName/String=MYR-USD
+DependencyDepth/Int32=0
+Algorithm/String=LinearForward
+Currency/String=MYR
+Currency2/String=USD
+CurrencyPair/String=MYR-USD
+QuoteBasis/String=Currency2PerCurrency1
