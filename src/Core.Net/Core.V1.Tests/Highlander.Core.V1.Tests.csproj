@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.Bridge\Highlander.Core.Bridge.csproj" />
     <ProjectReference Include="..\Core.Common2\Highlander.Core.Common.csproj" />
+    <ProjectReference Include="..\Core.V1\Highlander.Core.V1.csproj" />
     <ProjectReference Include="..\Highlander.GrpcService\Highlander.GrpcService.csproj" />
     <ProjectReference Include="..\Schema.FpMLV5r3\Metadata\Codes\Highlander.Codes.V5r3.csproj" />
     <ProjectReference Include="..\Schema.FpMLV5r3\Metadata\Reporting\Highlander.Reporting.V5r3.csproj" />

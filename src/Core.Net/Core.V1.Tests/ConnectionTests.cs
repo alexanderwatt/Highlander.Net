@@ -18,7 +18,7 @@ using System.Threading;
 using Highlander.Core.Bridge;
 using Highlander.Core.Common;
 using Highlander.Core.Server;
-using Highlander.Core.V34.Tests;
+using Highlander.Utilities.Exception;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -40,75 +40,73 @@ namespace Highlander.Core.V1.Tests
             // - subscriptions are not supported.
             //TimeSpan outageDuration = TimeSpan.FromMinutes(1);
             //TimeSpan requestTimeout = TimeSpan.FromSeconds(30);
-            using (Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true)))
+            using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+            loggerRef.Target.LogDebug("----------> test commenced");
+            // create unit test storage
+            IStoreEngine unitTestStore = new UnitTestStoreEngine(loggerRef.Target);
+            CoreServer server = null;
+            try
             {
-                loggerRef.Target.LogDebug("----------> test commenced");
-                // create unit test storage
-                IStoreEngine unitTestStore = new UnitTestStoreEngine(loggerRef.Target);
-                CoreServer server = null;
-                try
+                var serverSettings = new NamedValueSet();
+                serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Server);
+                serverSettings.Set(CfgPropName.EnvName, "UTT");
+                server = new CoreServer(loggerRef, serverSettings) {StoreEngine = unitTestStore};
+                loggerRef.Target.LogDebug("----------> starting server");
+                server.Start();
+                // create 1st client and save object - should succeed
+                Guid id1;
+                using (ICoreClient client1 = new CoreClientFactory(loggerRef)
+                    .SetEnv("UTT")
+                    .Create())
                 {
-                    var serverSettings = new NamedValueSet();
-                    serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Server);
-                    serverSettings.Set(CfgPropName.EnvName, "UTT");
-                    server = new CoreServer(loggerRef, serverSettings) {StoreEngine = unitTestStore};
-                    loggerRef.Target.LogDebug("----------> starting server");
-                    server.Start();
-                    // create 1st client and save object - should succeed
-                    Guid id1;
-                    using (ICoreClient client1 = new CoreClientFactory(loggerRef)
-                        .SetEnv("UTT")
-                        .Create())
-                    {
-                        id1 = client1.SaveObject(new TestData("Test1", 1), "Test1", null, TimeSpan.MaxValue);
-                        // stop server and begin save - should fail with timeout
-                        loggerRef.Target.LogDebug("----------> stopping server");
-                        server.Stop();
-                        DisposeHelper.SafeDispose(ref server);
-                        client1.RequestTimeout = TimeSpan.FromSeconds(10);
-                        UnitTestHelper.AssertThrows<TimeoutException>(() =>
-                        {
-                            client1.SaveObject(new TestData("Test2a", 2), "Test2", null, TimeSpan.MaxValue);
-                        });
-                        // further use of client throws more timeout errors
-                        UnitTestHelper.AssertThrows<TimeoutException>(() => { client1.LoadObject<TestData>("Test2a"); });
-                    }
-                    // create 2nd client - should fail to connect
-                    UnitTestHelper.AssertThrows<EndpointNotFoundException>("No server in list 'localhost:9113' found!", () =>
-                    {
-                        using (ICoreClient client2 = new CoreClientFactory(loggerRef)
-                            .SetEnv("UTT")
-                            .Create())
-                        {
-                            client2.SaveObject(new TestData("Test2b", 2), "Test2", null, TimeSpan.MaxValue);
-                        }
-                    });
-                    // restart server
-                    server = new CoreServer(loggerRef, serverSettings) {StoreEngine = unitTestStore};
-                    loggerRef.Target.LogDebug("----------> restarting server");
-                    server.Start();
-                    // load 1st object - should succeed
-                    ICoreItem item1;
-                    ICoreItem item2;
-                    using (ICoreClient client3 = new CoreClientFactory(loggerRef)
-                        .SetEnv("UTT")
-                        .Create())
-                    {
-                        item1 = client3.LoadItem<TestData>("Test1");
-                        item2 = client3.LoadItem<TestData>("Test2");
-                    }
-                    Assert.IsNotNull(item1);
-                    Assert.AreEqual(id1, item1.Id);
-                    Assert.IsNull(item2);
-                    // done
-                    loggerRef.Target.LogDebug("----------> test completed");
+                    id1 = client1.SaveObject(new TestData("Test1", 1), "Test1", null, TimeSpan.MaxValue);
+                    // stop server and begin save - should fail with timeout
+                    loggerRef.Target.LogDebug("----------> stopping server");
                     server.Stop();
                     DisposeHelper.SafeDispose(ref server);
+                    client1.RequestTimeout = TimeSpan.FromSeconds(10);
+                    UnitTestHelper.AssertThrows<TimeoutException>(() =>
+                    {
+                        client1.SaveObject(new TestData("Test2a", 2), "Test2", null, TimeSpan.MaxValue);
+                    });
+                    // further use of client throws more timeout errors
+                    UnitTestHelper.AssertThrows<TimeoutException>(() => { client1.LoadObject<TestData>("Test2a"); });
                 }
-                finally
+                // create 2nd client - should fail to connect
+                UnitTestHelper.AssertThrows<EndpointNotFoundException>("No server in list 'localhost:9113' found!", () =>
                 {
-                    DisposeHelper.SafeDispose(ref server);
+                    using (ICoreClient client2 = new CoreClientFactory(loggerRef)
+                        .SetEnv("UTT")
+                        .Create())
+                    {
+                        client2.SaveObject(new TestData("Test2b", 2), "Test2", null, TimeSpan.MaxValue);
+                    }
+                });
+                // restart server
+                server = new CoreServer(loggerRef, serverSettings) {StoreEngine = unitTestStore};
+                loggerRef.Target.LogDebug("----------> restarting server");
+                server.Start();
+                // load 1st object - should succeed
+                ICoreItem item1;
+                ICoreItem item2;
+                using (ICoreClient client3 = new CoreClientFactory(loggerRef)
+                    .SetEnv("UTT")
+                    .Create())
+                {
+                    item1 = client3.LoadItem<TestData>("Test1");
+                    item2 = client3.LoadItem<TestData>("Test2");
                 }
+                Assert.IsNotNull(item1);
+                Assert.AreEqual(id1, item1.Id);
+                Assert.IsNull(item2);
+                // done
+                loggerRef.Target.LogDebug("----------> test completed");
+                server.Stop();
+                DisposeHelper.SafeDispose(ref server);
+            }
+            finally
+            {
+                DisposeHelper.SafeDispose(ref server);
             }
         }
 

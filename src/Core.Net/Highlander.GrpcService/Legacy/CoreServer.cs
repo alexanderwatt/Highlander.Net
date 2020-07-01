@@ -196,8 +196,6 @@ namespace Highlander.Core.Server
         /// <param name="serverMode"></param>
         /// <param name="dbServer"></param>
         /// <param name="dbPrefix"></param>
-        /// <param name="v31AsyncEndpoints"></param>
-        /// <param name="v31DiscoEndpoints"></param>
         public ServerCfg(
             IModuleInfo moduleInfo, NodeType serverMode, 
             string dbServer, string dbPrefix
@@ -247,6 +245,7 @@ namespace Highlander.Core.Server
         /// </summary>
         /// <param name="loggerRef"></param>
         /// <param name="settings"></param>
+        /// <param name="dbContext"></param>
         public CoreServer(Reference<ILogger> loggerRef, NamedValueSet settings, HighlanderContext dbContext)
         {
             // default configuration
@@ -340,6 +339,7 @@ namespace Highlander.Core.Server
         /// <param name="loggerRef"></param>
         /// <param name="env"></param>
         /// <param name="nodeType"></param>
+        /// <param name="dbContext"></param>
         public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName },
@@ -353,6 +353,7 @@ namespace Highlander.Core.Server
         /// <param name="env"></param>
         /// <param name="nodeType"></param>
         /// <param name="port"></param>
+        /// <param name="dbContext"></param>
         public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName, CfgPropName.Port },
@@ -367,6 +368,7 @@ namespace Highlander.Core.Server
         /// <param name="nodeType"></param>
         /// <param name="port"></param>
         /// <param name="endpoints"></param>
+        /// <param name="dbContext"></param>
         public CoreServer(Reference<ILogger> loggerRef, string env, NodeType nodeType, int port, string endpoints, HighlanderContext dbContext)
             : this(loggerRef, new NamedValueSet(
                 new[] { CfgPropName.NodeType, CfgPropName.EnvName, CfgPropName.Port, CfgPropName.Endpoints },
@@ -408,7 +410,7 @@ namespace Highlander.Core.Server
 
         private void CleanUp()
         {
-            DisposeHelper.SafeDispose(CommsEngine);
+            DisposeHelper.SafeDispose(ref CommsEngine);
             DisposeHelper.SafeDispose(ref _cacheEngine);
             DisposeHelper.SafeDispose(ref _storeEngine);
         }

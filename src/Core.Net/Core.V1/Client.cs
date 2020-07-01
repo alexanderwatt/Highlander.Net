@@ -22,10 +22,12 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.ServiceModel;
 using System.Threading;
 using Highlander.Core.Common;
+using Highlander.Core.Common.CommsInterfaces;
 using Highlander.Core.Common.Encryption;
+using Highlander.Grpc.Contracts;
+using Highlander.Grpc.Session;
 using Highlander.Utilities.Compression;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
@@ -38,12 +40,11 @@ using static System.String;
 
 #endregion
 
-namespace Highlander.Core.V34
+namespace Highlander.Core.V1
 {
     internal class ClientItem : CommonItem, ICoreItem
     {
         private readonly ICoreClient _proxy;
-        private bool _frozen;
         private bool _useExpiry;
         private TimeSpan _lifetime;
         // mutable until frozen
@@ -142,7 +143,7 @@ namespace Highlander.Core.V34
                 item.SourceUSN)
         {
             _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
-            _frozen = true;
+            Frozen = true;
             _dataTypeType = dataType;
         }
 
@@ -163,12 +164,12 @@ namespace Highlander.Core.V34
                 item.StoreUSN)
         {
             _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
-            _frozen = true;
+            Frozen = true;
         }
 
         /// <summary>
         /// </summary>
-        public bool Frozen => _frozen;
+        public bool Frozen { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -176,7 +177,7 @@ namespace Highlander.Core.V34
         {
             get
             {
-                if (_frozen || _useExpiry)
+                if (Frozen || _useExpiry)
                     return base.Expires;
                 return DateTimeOffset.Now + _lifetime;
             }
@@ -194,7 +195,7 @@ namespace Highlander.Core.V34
         {
             get
             {
-                if (_frozen || _useExpiry)
+                if (Frozen || _useExpiry)
                     return (base.Expires - DateTimeOffset.Now);
                 return _lifetime;
             }
@@ -208,7 +209,7 @@ namespace Highlander.Core.V34
 
         private void CheckNotFrozen()
         {
-            if (_frozen)
+            if (Frozen)
                 throw new ApplicationException("Item already frozen/saved!");
         }
 
@@ -216,7 +217,7 @@ namespace Highlander.Core.V34
         /// </summary>
         public void Freeze()
         {
-            if (_frozen)
+            if (Frozen)
                 return;
             if (Name == null)
                 throw new ApplicationException("Item name not set!");
@@ -291,7 +292,7 @@ namespace Highlander.Core.V34
             SysProps.Set(SysPropName.OrgEnvId, EnvHelper.EnvName(_proxy.ClientInfo.ConfigEnv));
             SysProps.Set(SysPropName.NodeGuid, _proxy.ClientInfo.NodeGuid);
             // done
-            _frozen = true;
+            Frozen = true;
         }
 
         // mutable props

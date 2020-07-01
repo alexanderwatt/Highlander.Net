@@ -20,6 +20,7 @@ using System.Net.Sockets;
 using System.Threading;
 using Highlander.Core.Common;
 using Highlander.Core.Server;
+using Highlander.GrpcService.Data;
 using Highlander.Utilities.Caching;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
@@ -74,26 +75,23 @@ namespace Highlander.Core.V1.Tests
         [TestMethod]
         public void TestBasicStartStop()
         {
+            HighlanderContext dbContext = null;
             // start the server, connect a client1, and shutdown
-            using (Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true)))
+            using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
+            // start server
+            server.Start();
+            // connect client
+            using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
             {
-                using (CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router))
-                {
-                    // start server
-                    server.Start();
-                    // connect client
-                    using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
-                    {
-                        // load something
-                        NamedValueSet settings = client.LoadAppSettings();
-                        loggerRef.Target.LogDebug("Loaded settings:");
-                        settings.LogValues((text) => loggerRef.Target.LogDebug("  " + text));
-                    }
-                    // explicit shutdown
-                    // - not necessary in a "using" block but run it anyway
-                    server.Stop();
-                }
+                // load something
+                NamedValueSet settings = client.LoadAppSettings();
+                loggerRef.Target.LogDebug("Loaded settings:");
+                settings.LogValues((text) => loggerRef.Target.LogDebug("  " + text));
             }
+            // explicit shutdown
+            // - not necessary in a "using" block but run it anyway
+            server.Stop();
         }
 
         [TestMethod]

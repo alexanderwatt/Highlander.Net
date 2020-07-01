@@ -25,7 +25,7 @@ using Highlander.Utilities.Threading;
 
 #endregion
 
-namespace Highlander.Core.V34
+namespace Highlander.Core.V1
 {
     internal class ClientSettings
     {
