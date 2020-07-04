@@ -17,8 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Highlander.Utilities.Encryption;
 using Highlander.Build;
+using Highlander.Core.Common.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
@@ -310,17 +310,17 @@ namespace Highlander.Core.Common
                 results.Add(item);
             return results;
         }
-        public List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, dataType.FullName, whereExpr, minimumUSN, includeDeleted, DateTimeOffset.Now, DebugRequests);
+            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, dataType.FullName, whereExpr, minimumUsn, includeDeleted, DateTimeOffset.Now, DebugRequests);
             List<ICoreItem> results = new List<ICoreItem>();
             foreach (PrivateItem item in items)
                 results.Add(item);
             return results;
         }
-        public List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, typeof(T).FullName, whereExpr, minimumUSN, includeDeleted, DateTimeOffset.Now, DebugRequests);
+            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, typeof(T).FullName, whereExpr, minimumUsn, includeDeleted, DateTimeOffset.Now, DebugRequests);
             List<ICoreItem> results = new List<ICoreItem>();
             foreach (PrivateItem item in items)
                 results.Add(item);
@@ -344,10 +344,10 @@ namespace Highlander.Core.Common
                 results.Add((T)item.Data);
             return results;
         }
-        public List<T> LoadObjects<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<T> LoadObjects<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
             List<T> results = new List<T>();
-            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, typeof(T).FullName, whereExpr, minimumUSN, includeDeleted, DateTimeOffset.Now, DebugRequests);
+            List<PrivateItem> items = _cacheEngine.SelectItems(null, ItemKind.Object, typeof(T).FullName, whereExpr, minimumUsn, includeDeleted, DateTimeOffset.Now, DebugRequests);
             foreach (PrivateItem item in items)
                 results.Add((T)item.Data);
             return results;
@@ -601,9 +601,9 @@ namespace Highlander.Core.Common
             SaveItem(MakePrivateItem(ItemKind.Debug, typeof(T), data, name, props, (data != null) ? _cDebugMsgLifetime : TimeSpan.Zero, true));
         }
 
-        public List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            List<PrivateItem> items = _cacheEngine.SelectItems(null, itemKind, dataType.FullName, whereExpr, minimumUSN, includeDeleted, DateTimeOffset.Now, DebugRequests);
+            List<PrivateItem> items = _cacheEngine.SelectItems(null, itemKind, dataType.FullName, whereExpr, minimumUsn, includeDeleted, DateTimeOffset.Now, DebugRequests);
             return items.Cast<ICoreItem>().ToList();
         }
 
@@ -847,7 +847,7 @@ namespace Highlander.Core.Common
     {
         private readonly ILogger _logger;
         // item cache
-        private long _lastStoreUSN;
+        private long _lastStoreUsn;
         private readonly Guarded<Dictionary<string, PrivateItem>> _itemNameIndex =
             new Guarded<Dictionary<string, PrivateItem>>(new Dictionary<string, PrivateItem>());
         private readonly IScopeManager _appScopeManager = new ScopeManager();
@@ -866,7 +866,7 @@ namespace Highlander.Core.Common
         {
             // process a received item
             // - assign a new USN
-            item.StoreUSN = Interlocked.Increment(ref _lastStoreUSN);
+            item.StoreUSN = Interlocked.Increment(ref _lastStoreUsn);
 
             try
             {
@@ -902,7 +902,7 @@ namespace Highlander.Core.Common
             ItemKind itemKind, 
             string dataType, 
             IExpression query,
-            long minimumUSN, 
+            long minimumUsn, 
             bool includeDeleted, 
             DateTimeOffset asAtTime, 
             bool debugRequests)
@@ -913,14 +913,14 @@ namespace Highlander.Core.Common
                 _logger.LogDebug("Local:   AppScopes: {0}", appScopes == null ? "*" : string.Join(",", appScopes));
                 _logger.LogDebug("Local:   ItemKind : {0}", itemKind == ItemKind.Undefined ? "(any)" : itemKind.ToString());
                 _logger.LogDebug("Local:   DataType : {0}", dataType ?? "(any)");
-                if (minimumUSN > 0)
-                    _logger.LogDebug("Local:   USN >    : {0}", minimumUSN);
+                if (minimumUsn > 0)
+                    _logger.LogDebug("Local:   USN >    : {0}", minimumUsn);
                 if (query != null)
                     _logger.LogDebug("Local:   Query    : {0}", query.DisplayString());
                 _logger.LogDebug("Local:   Deleted? : {0}", includeDeleted);
             }
             List<PrivateItem> results =
-                GetCacheItems(appScopes, itemKind, dataType, query, minimumUSN, includeDeleted, asAtTime);
+                GetCacheItems(appScopes, itemKind, dataType, query, minimumUsn, includeDeleted, asAtTime);
                 if (debugRequests)
                     _logger.LogDebug("Local: Found {0} items.", results.Count);
             return results;
@@ -958,7 +958,7 @@ namespace Highlander.Core.Common
         }
 
         private List<PrivateItem> GetCacheItems(string[] appScopes, ItemKind itemKind, string dataType, 
-            IExpression query, long minimumUSN, bool includeDeleted, DateTimeOffset asAtTime)
+            IExpression query, long minimumUsn, bool includeDeleted, DateTimeOffset asAtTime)
         {
             List<PrivateItem> results = new List<PrivateItem>();
             query ??= Expr.ALL;
@@ -969,7 +969,7 @@ namespace Highlander.Core.Common
                 {
                     if (ItemMatchesSubscription(item, itemKind, appScopes, query, dataType ?? "", asAtTime))
                     {
-                        if (item != null && (item.StoreUSN > minimumUSN) && (includeDeleted || item.IsCurrent(asAtTime)))
+                        if (item != null && (item.StoreUSN > minimumUsn) && (includeDeleted || item.IsCurrent(asAtTime)))
                         {
                             results.Add(item);
                         }
@@ -1049,9 +1049,9 @@ namespace Highlander.Core.Common
         // mutable until frozen (committed)
         private Type _dataTypeType;
 
-        protected DateTimeOffset _Created;
+        private DateTimeOffset _created;
 
-        public DateTimeOffset Created => _Created;
+        public DateTimeOffset Created => _created;
 
         private bool _useExpiry;
 
@@ -1116,11 +1116,11 @@ namespace Highlander.Core.Common
             if (Name == null)
                 throw new ApplicationException("Item name not set!");
             TimeSpan maxLifetime = DateTimeOffset.MaxValue - DateTimeOffset.Now - TimeSpan.FromDays(1);
-            _Created = DateTimeOffset.Now;
+            _created = DateTimeOffset.Now;
             if (_useExpiry)
             {
-                if (_expires < _Created)
-                    _expires = _Created;
+                if (_expires < _created)
+                    _expires = _created;
             }
             else
             {
@@ -1128,7 +1128,7 @@ namespace Highlander.Core.Common
                     _lifetime = maxLifetime;
                 if (_lifetime < TimeSpan.Zero)
                     _lifetime = TimeSpan.Zero;
-                _expires = _Created.Add(_lifetime);
+                _expires = _created.Add(_lifetime);
             }
             DataTypeName ??= "";
             // done
@@ -1216,18 +1216,18 @@ namespace Highlander.Core.Common
         }
         public string TranspKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.XTKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.XTKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Xtki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Xtki, value); }
         }
         public string SenderKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YSKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YSKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yski, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yski, value); }
         }
         public string RecverKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YRKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YRKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yrki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yrki, value); }
         }
         public SerialFormat SerialFormat
         {

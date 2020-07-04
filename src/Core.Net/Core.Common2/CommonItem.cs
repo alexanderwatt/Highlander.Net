@@ -55,11 +55,11 @@ namespace Highlander.Core.Common
         public const string TLen = "TLen";
         public const string XAlg = "XAlg";
         public const string XLen = "XLen";
-        public const string XTKI = "XTKI";
+        public const string Xtki = "XTKI";
         public const string YAlg = "YAlg";
         public const string YLen = "YLen";
-        public const string YRKI = "YRKI";
-        public const string YSKI = "YSKI";
+        public const string Yrki = "YRKI";
+        public const string Yski = "YSKI";
         public const string ZAlg = "ZAlg";
         public const string ZLen = "ZLen";
     }
@@ -195,7 +195,7 @@ namespace Highlander.Core.Common
             Guid itemId, ItemKind itemKind, bool transient,
             string itemName, NamedValueSet appProps, string dataTypeName, string appScope,
             NamedValueSet sysProps, string netScope, DateTimeOffset created, DateTimeOffset expires,
-            byte[] yData, byte[] ySign, long storeUSN)
+            byte[] yData, byte[] ySign, long storeUsn)
         {
             Id = itemId;
             ItemKind = itemKind;
@@ -211,7 +211,7 @@ namespace Highlander.Core.Common
             YData = yData;
             YDataHash = CalculateBufferHash(YData);
             YSign = ySign;
-            StoreUSN = storeUSN;
+            StoreUSN = storeUsn;
         }
 
         public bool IsCurrent(DateTimeOffset asAtTime)

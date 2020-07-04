@@ -13,27 +13,22 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-using System;
-
 namespace Highlander.Utilities.Exception
 {
     /// <summary>
-    /// An exception thrown when an operation attempts to connect to endpoints that do not exist.
+    /// When an invalid operation has been attempted.
     /// </summary>
-    [Serializable]
-    public class EndpointNotFoundException : System.Exception
+    public class InvalidOperationException : System.Exception
     {
         /// <summary>
         /// Create a simple exception with no further explanation.
         /// </summary>
-        public EndpointNotFoundException()
+        public InvalidOperationException()
         { }
-
         /// <summary>
         /// Create the exception with an explanation of the reason.
         /// </summary>
         /// <param name="message"></param>
-        public EndpointNotFoundException(string message) : base(message) { }
+        public InvalidOperationException(string message) : base(message) { }
     }
-
 }

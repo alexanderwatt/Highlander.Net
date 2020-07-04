@@ -30,7 +30,7 @@ namespace Highlander.Core.Server
     {
         private readonly IModuleInfo _moduleInfo;
         private readonly ICryptoManager _cryptoManager;
-        private bool _frozen;
+
         private TimeSpan _lifetime;
         // mutable until frozen
         private int _ySignedState;
@@ -125,14 +125,14 @@ namespace Highlander.Core.Server
                 item.YData, item.YSign,
                 item.StoreUSN)
         {
-            _frozen = true;
+            Frozen = true;
         }
 
-        public bool Frozen => _frozen;
+        public bool Frozen { get; private set; }
 
         private void CheckNotFrozen()
         {
-            if (_frozen)
+            if (Frozen)
                 throw new ApplicationException("Item already frozen/saved!");
         }
 
@@ -141,7 +141,7 @@ namespace Highlander.Core.Server
         /// </summary>
         public void Freeze()
         {
-            if (_frozen)
+            if (Frozen)
                 return;
             if (Name == null)
                 throw new ApplicationException("Item name not set!");
@@ -167,7 +167,7 @@ namespace Highlander.Core.Server
             SysProps.Set(SysPropName.ZAlg, 1);
             SysProps.Set(SysPropName.ZLen, _zData?.Length ?? 0);
             // do symmetric encryption 1st, if required
-            var xtki = SysProps.GetValue<String>(SysPropName.XTKI, null);
+            var xtki = SysProps.GetValue<String>(SysPropName.Xtki, null);
             if (xtki != null)
             {
                 _xData = _cryptoManager.EncryptWithTransportKey(xtki, _zData);
@@ -177,7 +177,7 @@ namespace Highlander.Core.Server
                 _xData = _zData;
             SysProps.Set(SysPropName.XLen, _xData?.Length ?? 0);
             // do asymmetric encryption 2nd, if required
-            var yrki = SysProps.GetValue<String>(SysPropName.YRKI, null);
+            var yrki = SysProps.GetValue<String>(SysPropName.Yrki, null);
             if (yrki != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -188,7 +188,7 @@ namespace Highlander.Core.Server
             YDataHash = CalculateBufferHash(YData);
             SysProps.Set(SysPropName.YLen, YData?.Length ?? 0);
             // do public signature 3rd, if required
-            var yski = SysProps.GetValue<String>(SysPropName.YSKI, null);
+            var yski = SysProps.GetValue<String>(SysPropName.Yski, null);
             if (yski != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -209,7 +209,7 @@ namespace Highlander.Core.Server
             SysProps.Set(SysPropName.NodeGuid, _moduleInfo.NodeGuid);
 
             // done
-            _frozen = true;
+            Frozen = true;
         }
 
         // mutable props
@@ -218,7 +218,7 @@ namespace Highlander.Core.Server
             if (_ySignedState == 0)
             {
                 var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                var yski = SysProps.GetValue<string>(SysPropName.YSKI, null);
+                var yski = SysProps.GetValue<string>(SysPropName.Yski, null);
                 if ((yAlg > 0) && (yski != null))
                 {
                     if (_cryptoManager.VerifySignature(yski, YData, YSign))
@@ -253,7 +253,7 @@ namespace Highlander.Core.Server
             get
             {
                 var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                var yrki = SysProps.GetValue<string>(SysPropName.YRKI, null);
+                var yrki = SysProps.GetValue<string>(SysPropName.Yrki, null);
                 return ((yAlg > 0) && (yrki != null));
             }
         }
@@ -266,7 +266,7 @@ namespace Highlander.Core.Server
                 if (_xData == null)
                 {
                     var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                    var yrki = SysProps.GetValue<string>(SysPropName.YRKI, null);
+                    var yrki = SysProps.GetValue<string>(SysPropName.Yrki, null);
                     if ((yAlg > 0) && (yrki != null))
                         _xData = _cryptoManager.DecryptWithSecretKey(yrki, YData);
                     else
@@ -275,7 +275,7 @@ namespace Highlander.Core.Server
                 }
                 // now do symmetric decryption 2nd, if required
                 var xAlg = SysProps.GetValue(SysPropName.XAlg, 0);
-                var xtki = SysProps.GetValue<string>(SysPropName.XTKI, null);
+                var xtki = SysProps.GetValue<string>(SysPropName.Xtki, null);
                 if ((xAlg > 0) && (xtki != null))
                     _zData = _cryptoManager.DecryptWithTransportKey(xtki, _xData);
                 else
@@ -519,7 +519,7 @@ namespace Highlander.Core.Server
         {
             get
             {
-                if (_frozen)
+                if (Frozen)
                     return (Expires - DateTimeOffset.Now);
                 return _lifetime;
             }
@@ -531,8 +531,8 @@ namespace Highlander.Core.Server
         /// </summary>
         public string TranspKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.XTKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.XTKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Xtki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Xtki, value); }
         }
 
         /// <summary>
@@ -540,8 +540,8 @@ namespace Highlander.Core.Server
         /// </summary>
         public string SenderKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YSKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YSKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yski, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yski, value); }
         }
 
         /// <summary>
@@ -549,8 +549,8 @@ namespace Highlander.Core.Server
         /// </summary>
         public string RecverKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YRKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YRKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yrki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yrki, value); }
         }
 
         /// <summary>

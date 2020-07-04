@@ -16,7 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Highlander.Utilities.Encryption;
+using Highlander.Core.Common.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.NamedValues;
 
@@ -103,12 +103,12 @@ namespace Highlander.Core.Common
 
         // multiple object load methods
         // - typed objects
-        List<T> LoadObjects<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted);
+        List<T> LoadObjects<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted);
         // - generic items
         List<ICoreItem> LoadItems(IExpression whereExpr);
         // - advanced
-        List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted);
-        List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUSN, bool includeDeleted);
+        List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted);
+        List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUsn, bool includeDeleted);
         List<ICoreItem> LoadUntypedItems(string dataTypeName, ItemKind itemKind, IExpression whereExpr, bool includeDeleted);
 
         // delete methods
@@ -142,7 +142,7 @@ namespace Highlander.Core.Common
         ICryptoManager CryptoManager { get; }
 
         // - other item kinds
-        List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUSN, bool includeDeleted);
+        List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUsn, bool includeDeleted);
 
         // - debug item methods
         void SaveDebug<T>(T data, string name, NamedValueSet props) where T : class;
@@ -185,21 +185,21 @@ namespace Highlander.Core.Common
         /// <returns></returns>
         ISubscription StartUntypedSubscription(string dataTypeName, IExpression whereExpr, SubscriptionCallback userCallback, object userContext);
         /// <summary>
-        /// Creates an unstarted subscription.
+        /// Creates an un-started subscription.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="whereExpr">The filter expression</param>
         /// <returns></returns>
         ISubscription CreateSubscription<T>(IExpression whereExpr); //, SubscriptionCallback userCallback);
         /// <summary>
-        /// Creates an unstarted subscription.
+        /// Creates an un-started subscription.
         /// </summary>
         /// <param name="whereExpr">The filter expression</param>
         /// <param name="dataType">The type of the data wanted</param>
         /// <returns></returns>
         ISubscription CreateTypedSubscription(Type dataType, IExpression whereExpr); //, SubscriptionCallback userCallback);
         /// <summary>
-        /// Creates an unstarted subscription.
+        /// Creates an un-started subscription.
         /// </summary>
         /// <param name="dataTypeName">The type of the data wanted</param>
         /// <param name="whereExpr">The filter expression</param>
@@ -225,5 +225,4 @@ namespace Highlander.Core.Common
         ICoreCache CreateCache();
         ICoreCache CreateCache(CacheChangeHandler changeHandler, SynchronizationContext syncContext);
     }
-
 }

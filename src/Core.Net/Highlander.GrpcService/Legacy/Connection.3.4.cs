@@ -16,7 +16,6 @@
 #region usings
 
 using System;
-using System.ServiceModel;
 using System.Threading;
 using Grpc.Net.Client;
 using Highlander.Core.Common;
@@ -44,15 +43,14 @@ namespace Highlander.Core.Server
         public Guid ClientId { get; }
 
         // managed state
-        private NodeType _peerNodeType;
 
-        public NodeType PeerNodeType => _peerNodeType;
+        public NodeType PeerNodeType { get; private set; }
 
         private GrpcChannel _peerAddressBinding;
 
         private void SetAddressBinding(string replyAddress, NodeType peerNodeType)
         {
-            _peerNodeType = peerNodeType;
+            PeerNodeType = peerNodeType;
             _peerAddressBinding = GrpcChannel.ForAddress(replyAddress);
             // dispose any existing client base
             DisposeHelper.SafeDispose(ref _clientBase);
@@ -60,7 +58,7 @@ namespace Highlander.Core.Server
         public string ReplyAddress
         {
             get => _peerAddressBinding.Target;
-            set => SetAddressBinding(value, _peerNodeType);
+            set => SetAddressBinding(value, PeerNodeType);
         }
 
         // - connection expiry
@@ -71,15 +69,14 @@ namespace Highlander.Core.Server
         public void ExtendExpiry()
         {
             // cannot extend a faulted connection
-            if (_faulted)
+            if (HasFaulted)
                 throw new InvalidOperationException("Connection has faulted!");
             _expiryTime = DateTimeOffset.Now.Add(ServerCfg.CommsConnectionExtension);
         }
 
         // - connection faulted
-        private bool _faulted;
 
-        public bool HasFaulted => _faulted;
+        public bool HasFaulted { get; private set; }
 
         private TransferV341Client _clientBase;
 
@@ -124,7 +121,7 @@ namespace Highlander.Core.Server
                 Thread.Sleep(TimeSpan.FromSeconds(backoff));
             else
             {
-                _faulted = true;
+                HasFaulted = true;
                 _logger.LogWarning("Connection: '{0}' final send attempt ({1}) to client at '{2}' failed: {3}",
                     ClientId, attempt, _peerAddressBinding.Target, excp.GetType().Name);
             }
@@ -132,8 +129,7 @@ namespace Highlander.Core.Server
 
         private void PerformSyncSendWithRetry(bool keepClientOpen, CodeSection codeSection)
         {
-
-            if (_faulted)
+            if (HasFaulted)
                 return;
             try
             {
@@ -143,7 +139,7 @@ namespace Highlander.Core.Server
                 // attempt to send
                 int attempt = 0;
                 bool sent = false;
-                while (!sent && !_faulted)
+                while (!sent && !HasFaulted)
                 {
                     attempt++;
                     try
@@ -166,14 +162,14 @@ namespace Highlander.Core.Server
                     catch (Exception unexpectedExcp)
                     {
                         // unexpected - fault immediately
-                        _faulted = true;
+                        HasFaulted = true;
                         _logger.Log(unexpectedExcp);
                     }
                 } // while
             }
             finally
             {
-                if (_faulted || !keepClientOpen)
+                if (HasFaulted || !keepClientOpen)
                     DisposeHelper.SafeDispose(ref _clientBase);
             }
         }

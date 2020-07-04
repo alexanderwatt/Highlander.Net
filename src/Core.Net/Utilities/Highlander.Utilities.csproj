@@ -23,7 +23,6 @@
     <Folder Include="Expressions\" />
     <Folder Include="Helpers\" />
     <Folder Include="NamedValues\" />
-    <Folder Include="Serialisation\" />
     <Folder Include="Threading\" />
   </ItemGroup>
 

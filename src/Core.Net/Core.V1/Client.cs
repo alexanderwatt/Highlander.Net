@@ -29,6 +29,7 @@ using Highlander.Core.Common.Encryption;
 using Highlander.Grpc.Contracts;
 using Highlander.Grpc.Session;
 using Highlander.Utilities.Compression;
+using Highlander.Utilities.Exception;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -37,6 +38,9 @@ using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
 using Highlander.Utilities.Threading;
 using static System.String;
+using static Highlander.Grpc.Contracts.TransferV341;
+using ArgumentException = System.ArgumentException;
+using InvalidOperationException = System.InvalidOperationException;
 
 #endregion
 
@@ -54,7 +58,6 @@ namespace Highlander.Core.V1
         private byte[] _zData;
         private string _text;
         private object _data;
-        private Type _dataTypeType;
 
         // constructors
         /// <summary>
@@ -87,7 +90,7 @@ namespace Highlander.Core.V1
             SysProps.Set(SysPropName.SAlg, (int)serialFormat);
             AppProps.Add(props);
             _data = data;
-            _dataTypeType = dataType ?? throw new ArgumentNullException(nameof(dataType));
+            DataType = dataType ?? throw new ArgumentNullException(nameof(dataType));
             DataTypeName = dataType.FullName;
             _lifetime = lifetime;
         }
@@ -134,7 +137,7 @@ namespace Highlander.Core.V1
             ICoreClient proxy,
             V341TransportItem item,
             Type dataType)
-            : base(item.ItemId, Converters.ToItemKind((int)item.ItemKind), item.Transient,
+            : base(new Guid(item.ItemId), Converters.ToItemKind((int)item.ItemKind), item.Transient,
                 item.ItemName, new NamedValueSet(item.AppProps),
                 item.DataType, item.AppScope,
                 new NamedValueSet(item.SysProps), item.NetScope,
@@ -144,7 +147,7 @@ namespace Highlander.Core.V1
         {
             _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
             Frozen = true;
-            _dataTypeType = dataType;
+            DataType = dataType;
         }
 
         /// <summary>
@@ -238,8 +241,7 @@ namespace Highlander.Core.V1
             }
             // serialise the data if required
             Serialise();
-            if (DataTypeName == null)
-                DataTypeName = "";
+            DataTypeName ??= "";
             if (_text == null)
             {
                 //_Text = "";
@@ -251,7 +253,7 @@ namespace Highlander.Core.V1
             SysProps.Set(SysPropName.ZAlg, 1);
             SysProps.Set(SysPropName.ZLen, _zData?.Length ?? 0);
             // do symmetric encryption 1st, if required
-            var xtki = SysProps.GetValue<String>(SysPropName.XTKI, null);
+            var xtki = SysProps.GetValue<String>(SysPropName.Xtki, null);
             if (xtki != null)
             {
                 _xData = _proxy.CryptoManager.EncryptWithTransportKey(xtki, _zData);
@@ -261,7 +263,7 @@ namespace Highlander.Core.V1
                 _xData = _zData;
             SysProps.Set(SysPropName.XLen, _xData?.Length ?? 0);
             // do asymmetric encryption 2nd, if required
-            var yrki = SysProps.GetValue<String>(SysPropName.YRKI, null);
+            var yrki = SysProps.GetValue<String>(SysPropName.Yrki, null);
             if (yrki != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -272,7 +274,7 @@ namespace Highlander.Core.V1
             YDataHash = CalculateBufferHash(YData);
             SysProps.Set(SysPropName.YLen, YData?.Length ?? 0);
             // do public signature 3rd, if required
-            var yski = SysProps.GetValue<String>(SysPropName.YSKI, null);
+            var yski = SysProps.GetValue<String>(SysPropName.Yski, null);
             if (yski != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -301,7 +303,7 @@ namespace Highlander.Core.V1
             if (_ySignedState == 0)
             {
                 var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                var yski = SysProps.GetValue<string>(SysPropName.YSKI, null);
+                var yski = SysProps.GetValue<string>(SysPropName.Yski, null);
                 if (yAlg > 0 && yski != null)
                 {
                     if (_proxy.CryptoManager.VerifySignature(yski, YData, YSign))
@@ -334,7 +336,7 @@ namespace Highlander.Core.V1
             get
             {
                 var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                var yrki = SysProps.GetValue<string>(SysPropName.YRKI, null);
+                var yrki = SysProps.GetValue<string>(SysPropName.Yrki, null);
                 return (yAlg > 0 && yrki != null);
             }
         }
@@ -347,7 +349,7 @@ namespace Highlander.Core.V1
                 if (_xData == null)
                 {
                     var yAlg = SysProps.GetValue(SysPropName.YAlg, 0);
-                    var yrki = SysProps.GetValue<string>(SysPropName.YRKI, null);
+                    var yrki = SysProps.GetValue<string>(SysPropName.Yrki, null);
                     if (yAlg > 0 && yrki != null)
                         _xData = _proxy.CryptoManager.DecryptWithSecretKey(yrki, YData);
                     else
@@ -356,7 +358,7 @@ namespace Highlander.Core.V1
                 }
                 // now do symmetric decryption 2nd, if required
                 var xAlg = SysProps.GetValue(SysPropName.XAlg, 0);
-                var xtki = SysProps.GetValue<string>(SysPropName.XTKI, null);
+                var xtki = SysProps.GetValue<string>(SysPropName.Xtki, null);
                 if (xAlg > 0 && xtki != null)
                     _zData = _proxy.CryptoManager.DecryptWithTransportKey(xtki, _xData);
                 else
@@ -388,11 +390,11 @@ namespace Highlander.Core.V1
                         _text = BinarySerializerHelper.SerializeToString(_data);
                         SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Binary);
                         break;
-                    case SerialFormat.Soap:
-                        // try Soap serialiser
-                        _text = SoapSerializerHelper.SerializeToString(_data);
-                        SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Soap);
-                        break;
+                    //case SerialFormat.Soap:
+                    //    // try Soap serialiser
+                    //    _text = SoapSerializerHelper.SerializeToString(_data);
+                    //    SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Soap);
+                    //    break;
                     case SerialFormat.Json:
                         // try Json serialiser
                         _text = JsonSerializerHelper.SerializeToString(_data);
@@ -401,7 +403,7 @@ namespace Highlander.Core.V1
                     case SerialFormat.Xml:              
                         try
                         {
-                            _text = XmlSerializerHelper.SerializeToString(_dataTypeType, _data);
+                            _text = XmlSerializerHelper.SerializeToString(DataType, _data);
                             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Xml);
                         }
                         catch (Exception excp)
@@ -417,7 +419,7 @@ namespace Highlander.Core.V1
                         // use default xml serialiser
                         try
                         {
-                            _text = XmlSerializerHelper.SerializeToString(_dataTypeType, _data);
+                            _text = XmlSerializerHelper.SerializeToString(DataType, _data);
                             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Xml);
                         }
                         catch (Exception excp)
@@ -440,7 +442,7 @@ namespace Highlander.Core.V1
                 // decompress 1st if required
                 Decompress();
                 // now deserialise
-                Type dataTypeType = userDataType ?? _dataTypeType;
+                Type dataTypeType = userDataType ?? DataType;
                 if (dataTypeType == null && !IsNullOrEmpty(DataTypeName))
                 {
                     dataTypeType = Type.GetType(DataTypeName);
@@ -456,11 +458,11 @@ namespace Highlander.Core.V1
                     // use Binary deserializer
                     _data = BinarySerializerHelper.DeserializeFromString(_text);
                 }
-                else if (serialFormat == SerialFormat.Soap)
-                {
-                    // use Soap deserializer
-                    _data = SoapSerializerHelper.DeserializeFromString(_text);
-                }
+                //else if (serialFormat == SerialFormat.Soap)
+                //{
+                //    // use Soap deserializer
+                //    _data = SoapSerializerHelper.DeserializeFromString(_text);
+                //}
                 else if (serialFormat == SerialFormat.Json)
                 {
                     // use Json deserializer
@@ -504,7 +506,7 @@ namespace Highlander.Core.V1
             get
             {
                 // deserialise if required
-                Deserialise(_dataTypeType);
+                Deserialise(DataType);
                 return _data;
             }
         }
@@ -529,7 +531,7 @@ namespace Highlander.Core.V1
 
         /// <summary>
         /// </summary>
-        public Type DataType => _dataTypeType;
+        public Type DataType { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -538,7 +540,7 @@ namespace Highlander.Core.V1
             CheckNotFrozen();
             _data = data;
             _text = null;
-            _dataTypeType = dataType;
+            DataType = dataType;
             DataTypeName = dataType.FullName;
         }
 
@@ -564,7 +566,7 @@ namespace Highlander.Core.V1
             _text = text;
             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Undefined);
             _data = null;
-            _dataTypeType = null;
+            DataType = null;
             DataTypeName = dataTypeName;
         }
 
@@ -576,7 +578,7 @@ namespace Highlander.Core.V1
             _text = text;
             SysProps.Set(SysPropName.SAlg, (int)SerialFormat.Undefined);
             _data = null;
-            _dataTypeType = dataType;
+            DataType = dataType;
             DataTypeName = dataType.FullName;
         }
 
@@ -584,24 +586,24 @@ namespace Highlander.Core.V1
         /// </summary>
         public string TranspKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.XTKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.XTKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Xtki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Xtki, value); }
         }
 
         /// <summary>
         /// </summary>
         public string SenderKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YSKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YSKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yski, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yski, value); }
         }
 
         /// <summary>
         /// </summary>
         public string RecverKeyId
         {
-            get => SysProps.GetValue<string>(SysPropName.YRKI, null);
-            set { CheckNotFrozen(); SysProps.Set(SysPropName.YRKI, value); }
+            get => SysProps.GetValue<string>(SysPropName.Yrki, null);
+            set { CheckNotFrozen(); SysProps.Set(SysPropName.Yrki, value); }
         }
 
         /// <summary>
@@ -2086,16 +2088,16 @@ namespace Highlander.Core.V1
         /// <param name="dataType"></param>
         /// <param name="itemKind"></param>
         /// <param name="whereExpr"></param>
-        /// <param name="minimumUSN"></param>
+        /// <param name="minimumUsn"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems(Type dataType, ItemKind itemKind, IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
             if (whereExpr == null)
                 throw new ArgumentNullException(nameof(whereExpr), "If you really want to load ALL objects then pass 'Expr.ALL'");
             IAsyncResult ar = LoadItemsBegin(null, dataType,
                 new V341SelectMultipleItems((dataType != null) ? dataType.FullName : null, itemKind, whereExpr.Serialise(),
-                    null, 0, 0, _defaultAppScopes, minimumUSN, includeDeleted, DateTimeOffset.Now, false));
+                    null, 0, 0, _defaultAppScopes, minimumUsn, includeDeleted, DateTimeOffset.Now, false));
             return LoadItemsEnd(ar);
         }
 
@@ -2104,12 +2106,12 @@ namespace Highlander.Core.V1
         /// </summary>
         /// <param name="dataType"></param>
         /// <param name="whereExpr"></param>
-        /// <param name="minimumUSN"></param>
+        /// <param name="minimumUsn"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems(Type dataType, IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            return LoadItems(dataType, ItemKind.Object, whereExpr, minimumUSN, includeDeleted);
+            return LoadItems(dataType, ItemKind.Object, whereExpr, minimumUsn, includeDeleted);
         }
 
         /// <summary>
@@ -2117,12 +2119,12 @@ namespace Highlander.Core.V1
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="whereExpr"></param>
-        /// <param name="minimumUSN"></param>
+        /// <param name="minimumUsn"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<ICoreItem> LoadItems<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            return LoadItems(typeof(T), ItemKind.Object, whereExpr, minimumUSN, includeDeleted);
+            return LoadItems(typeof(T), ItemKind.Object, whereExpr, minimumUsn, includeDeleted);
         }
 
         /// <summary>
@@ -2162,12 +2164,12 @@ namespace Highlander.Core.V1
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="whereExpr"></param>
-        /// <param name="minimumUSN"></param>
+        /// <param name="minimumUsn"></param>
         /// <param name="includeDeleted"></param>
         /// <returns></returns>
-        public List<T> LoadObjects<T>(IExpression whereExpr, long minimumUSN, bool includeDeleted)
+        public List<T> LoadObjects<T>(IExpression whereExpr, long minimumUsn, bool includeDeleted)
         {
-            List<ICoreItem> items = LoadItems(typeof(T), whereExpr, minimumUSN, includeDeleted);
+            List<ICoreItem> items = LoadItems(typeof(T), whereExpr, minimumUsn, includeDeleted);
             return items.Select(item => (T)item.Data).ToList();
         }
 
