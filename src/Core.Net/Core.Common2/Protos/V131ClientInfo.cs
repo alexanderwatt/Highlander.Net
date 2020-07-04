@@ -2,14 +2,53 @@
 using Google.Protobuf.WellKnownTypes;
 using Highlander.Core.Common;
 using System;
+using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
+using Highlander.Build;
 
 namespace Highlander.Grpc.Session
 {
     public partial class V131ClientInfo
     {
-        public Guid NodeGuidAsGuid
+        public Guid NodeGuidAsGuid => Guid.Parse(nodeGuid_);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nodeGuid"></param>
+        /// <param name="configEnv"></param>
+        /// <param name="coreAssembly"></param>
+        /// <param name="applAssembly"></param>
+        /// <param name="userIdentityName"></param>
+        /// <param name="userFullName"></param>
+        public V131ClientInfo(
+        Guid nodeGuid, V131EnvId configEnv,
+        Assembly coreAssembly, Assembly applAssembly,
+        string userIdentityName, string userFullName)
         {
-            get { return Guid.Parse(nodeGuid_); }
+            NodeGuid = nodeGuid.ToString();
+            BuildEnv = CoreHelper.ToV131EnvId(EnvHelper.ParseEnvName(BuildConst.BuildEnv));
+            ConfigEnv = configEnv;
+            // get remaining data members from system
+            HostName = Dns.GetHostName();
+            IPHostEntry hostEntry = Dns.GetHostEntry(HostName);
+            IPAddress[] hostIPs = hostEntry.AddressList;
+            _netAddrs = new string[hostIPs.Length];
+            for (int i = 0; i < hostIPs.Length; i++)
+            {
+                _netAddrs[i] = hostIPs[i].ToString();
+                if (hostIPs[i].AddressFamily == AddressFamily.InterNetwork)
+                    HostIpV4 = hostIPs[i].ToString();
+            }
+            UserInfo = new V131UserInfo(userIdentityName, userFullName);
+            // get calling application details
+            // if unmanaged - get Win32 details
+            Assembly application = applAssembly ?? Assembly.GetEntryAssembly();
+            ApplInfo = application != null ? new V131AssmInfo(application) : new V131AssmInfo(Process.GetCurrentProcess().MainModule);
+            // get calling component details
+            CompInfo = new V131AssmInfo(coreAssembly);
         }
     }
 }

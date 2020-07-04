@@ -20,20 +20,20 @@ namespace Highlander.GrpcService
 {
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
-            services.AddDbContext<HighlanderContext>(opt => opt.UseSqlite(configuration.GetConnectionString("Storage")), ServiceLifetime.Singleton);
+            services.AddDbContext<HighlanderContext>(opt => opt.UseSqlite(_configuration.GetConnectionString("Storage")), ServiceLifetime.Singleton);
 
             //logging
             ProcessModule pm = Process.GetCurrentProcess().MainModule;
@@ -43,11 +43,7 @@ namespace Highlander.GrpcService
             const EnvId env = EnvId.Dev_Development; // hack EnvId.Dev_Development
             //var settings = new NamedValueSet(EnvHelper.GetAppSettings(env, EnvHelper.SvcPrefix(SvcId.CoreServer), true));
             var settings = new NamedValueSet();
-            services.AddSingleton(sp =>
-            {
-                return new CoreServer(logger, settings, sp.GetService<HighlanderContext>());
-            });
-
+            services.AddSingleton(sp => new CoreServer(logger, settings, sp.GetService<HighlanderContext>()));
             services.AddSingleton<ITransferV341>(sp => sp.GetService<CoreServer>().CommsEngine);
             services.AddSingleton<ISessCtrlV131>(sp => sp.GetService<CoreServer>().CommsEngine);
             services.AddSingleton<IDiscoverV111>(sp => sp.GetService<CoreServer>().CommsEngine);
@@ -60,10 +56,8 @@ namespace Highlander.GrpcService
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
-            app.UseHttpsRedirection();
-
+            //app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<TransferReceiverV341>();
@@ -75,7 +69,6 @@ namespace Highlander.GrpcService
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
-
             //start core server
             Console.WriteLine("Starting server...");
             var coreServer = app.ApplicationServices.GetService<CoreServer>();

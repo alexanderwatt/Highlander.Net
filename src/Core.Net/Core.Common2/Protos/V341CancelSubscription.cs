@@ -4,9 +4,12 @@ namespace Highlander.Grpc.Contracts
 {
     public partial class V341CancelSubscription
     {
-        public Guid SubscriptionIdGuid
+        public Guid SubscriptionIdGuid => Guid.Parse(subscriptionId_);
+
+        public V341CancelSubscription(
+            Guid subscriptionId)
         {
-            get { return Guid.Parse(subscriptionId_); }
+            subscriptionId_ = subscriptionId.ToString();
         }
     }
 }

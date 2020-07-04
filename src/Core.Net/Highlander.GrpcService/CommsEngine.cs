@@ -22,7 +22,6 @@ using System.Threading;
 using Highlander.Core.Common;
 using Highlander.Core.Common.CommsInterfaces;
 using Highlander.Core.Common.Protos;
-using Highlander.Core.Common.Services;
 using Highlander.Grpc;
 using Highlander.Grpc.Contracts;
 using Highlander.Grpc.Discover;
@@ -208,7 +207,7 @@ namespace Highlander.Core.Server
             }
 
             //// discovery service
-            ///
+            //
             //string svcName = EnvHelper.SvcPrefix(SvcId.CoreServer);
             //_discoverV111ServerHost = new CustomServiceHost<IDiscoverV111, DiscoverRecverV111>(
             //    Logger, new DiscoverRecverV111(this), _serverCfg.V31DiscoEndpoints,
@@ -241,7 +240,7 @@ namespace Highlander.Core.Server
             {
                 DateTimeOffset dtCommenced = DateTimeOffset.Now;
                 int activeCount = 0;
-                var expiredConns = new List<IConnection>();
+                var expiredConnections = new List<IConnection>();
                 foreach (IConnection connection in _connectionIndex.GetValues())
                 {
                     bool removeConnection = false;
@@ -258,14 +257,14 @@ namespace Highlander.Core.Server
                     if (removeConnection)
                     {
                         // client not found or expired
-                        expiredConns.Add(connection);
+                        expiredConnections.Add(connection);
                     }
                     else
                     {
                         activeCount++;
                     }
                 }
-                foreach (IConnection connection in expiredConns)
+                foreach (IConnection connection in expiredConnections)
                 {
                     _connectionIndex.Remove(connection.ClientId);
                     _cacheEngine.DeleteConnectionState(connection.ClientId);
@@ -275,7 +274,7 @@ namespace Highlander.Core.Server
                 Logger.LogDebug("---------- Housekeep Connections ----------");
                 Logger.LogDebug("Connections");
                 Logger.LogDebug("  Active    : {0}", activeCount);
-                Logger.LogDebug("  Expired   : {0}", expiredConns.Count);
+                Logger.LogDebug("  Expired   : {0}", expiredConnections.Count);
                 Logger.LogDebug("Duration    : {0}s", duration.TotalSeconds);
                 Logger.LogDebug("---------- Housekeep Connections ----------");
             }
@@ -311,12 +310,7 @@ namespace Highlander.Core.Server
         /// <returns></returns>
         public V111DiscoverReply DiscoverServiceV111()
         {
-            return new V111DiscoverReply(new[]
-                {
-                    typeof(IDiscoverV111).FullName,
-                    typeof(ISessCtrlV131).FullName,
-                    typeof(ITransferV341).FullName
-                });
+            return new V111DiscoverReply(typeof(IDiscoverV111).FullName, typeof(ISessCtrlV131).FullName, typeof(ITransferV341).FullName);
         }
 
         #endregion
@@ -388,7 +382,7 @@ namespace Highlander.Core.Server
         {
             // validate new client
             Guid clientId = clientInfo.NodeGuidAsGuid;
-            // - ensure configured client/server envs are the same
+            // - ensure configured client/server environments are the same
             if (clientInfo.ConfigEnv.ToEnvId() != _serverCfg.ModuleInfo.ConfigEnv)
             {
                 // not valid

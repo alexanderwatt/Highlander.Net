@@ -223,7 +223,9 @@ namespace Highlander.Core.Server
         // security
         public ICryptoManager CryptoManager { get; } = new DefaultCryptoManager();
 
-        internal CommsEngine CommsEngine { get; set; }
+        private CommsEngine _commsEngine;
+
+        internal CommsEngine CommsEngine => _commsEngine;
 
         private IStoreEngine _storeEngine;
 
@@ -328,7 +330,7 @@ namespace Highlander.Core.Server
                 //v31AsyncEndpoints, v31DiscoEndpoints
                 );
             _dbContext = dbContext;
-            CommsEngine = new CommsEngine(Logger, _serverCfg);
+            _commsEngine = new CommsEngine(Logger, _serverCfg);
         }
 
         // other constructors
@@ -410,7 +412,7 @@ namespace Highlander.Core.Server
 
         private void CleanUp()
         {
-            DisposeHelper.SafeDispose(ref CommsEngine);
+            DisposeHelper.SafeDispose(ref _commsEngine);
             DisposeHelper.SafeDispose(ref _cacheEngine);
             DisposeHelper.SafeDispose(ref _storeEngine);
         }

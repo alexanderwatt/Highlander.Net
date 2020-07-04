@@ -7,10 +7,7 @@ namespace Highlander.Grpc.Contracts
 {
     public partial class V341TransportItem
     {
-        public Guid ItemIdGuid
-        {
-            get { return Guid.Parse(itemId_); }
-        }
+        public Guid ItemIdGuid => Guid.Parse(itemId_);
 
         public V341TransportItem(CommonItem item, bool excludeDataBody)
         {

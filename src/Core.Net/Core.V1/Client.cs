@@ -141,8 +141,8 @@ namespace Highlander.Core.V1
                 item.ItemName, new NamedValueSet(item.AppProps),
                 item.DataType, item.AppScope,
                 new NamedValueSet(item.SysProps), item.NetScope,
-                item.Created, item.Expires,
-                item.YData, item.YSign,
+                item.Created.ToDateTimeOffset(), item.Expires.ToDateTimeOffset(),
+                item.YData.ToByteArray(), item.YSign.ToByteArray(),
                 item.SourceUSN)
         {
             _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
@@ -651,7 +651,7 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="header"></param>
-        public void Transmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        public void Transmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
             OnTransmit(logger, clientBase, header);
         }
@@ -662,7 +662,7 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="header"></param>
-        protected virtual void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        protected virtual void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
             throw new NotImplementedException();
         }
@@ -694,7 +694,7 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="header"></param>
-        protected override void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        protected override void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
             if (DebugRequest)
             {
@@ -704,17 +704,17 @@ namespace Highlander.Core.V1
                     logger.LogDebug("  ItemKind : {0}", Body.QueryDef.ItemKind == V341ItemKind.Undefined ? "(any)" : Body.QueryDef.ItemKind.ToString());
                 if (Body.ItemIds != null)
                 {
-                    if (Body.ItemIds.Length == 1)
-                        logger.LogDebug("  ItemId   : {0}", Body.ItemIds[0].ToString());
+                    if (Body.ItemIds.Count == 1)
+                        logger.LogDebug("  ItemId   : {0}", Body.ItemIds[0]);
                     else
-                        logger.LogDebug("  ItemIds  : Multiple({0})", Body.ItemIds.Length);
+                        logger.LogDebug("  ItemIds  : Multiple({0})", Body.ItemIds.Count);
                 }
                 if (Body.QueryDef.ItemNames != null)
                 {
-                    if (Body.QueryDef.ItemNames.Length == 1)
+                    if (Body.QueryDef.ItemNames.Count == 1)
                         logger.LogDebug("  ItemName : '{0}'", Body.QueryDef.ItemNames[0]);
                     else
-                        logger.LogDebug("  ItemNames: Multiple({0})", Body.QueryDef.ItemNames.Length);
+                        logger.LogDebug("  ItemNames: Multiple({0})", Body.QueryDef.ItemNames.Count);
                 }
                 logger.LogDebug("  DataType : {0}", Body.QueryDef.DataType ?? "(any)");
                 if (Body.QueryDef.MinimumUSN > 0)
@@ -733,7 +733,7 @@ namespace Highlander.Core.V1
                 logger.LogDebug("  Excl.Old?: {0}", Body.QueryDef.ExcludeDeleted);
                 logger.LogDebug("  Excl.Data: {0}", Body.QueryDef.ExcludeDataBody);
             }
-            clientBase.TransferV341SelectMultipleItems(header, Body);
+            clientBase.TransferV341SelectMultipleItems(new TransferV341SelectMultipleItemsRequest { Header = header, Body = Body });
         }
     }
 
@@ -765,9 +765,9 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="header"></param>
-        protected override void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        protected override void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
-            clientBase.TransferV341CreateSubscription(header, Body);
+            clientBase.TransferV341CreateSubscription(new TransferV341CreateSubscriptionRequest { Header = header, Body = Body });
         }
     }
 
@@ -799,9 +799,9 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="header"></param>
-        protected override void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        protected override void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
-            clientBase.TransferV341ExtendSubscription(header, Body);
+            clientBase.TransferV341ExtendSubscription(new TransferV341ExtendSubscriptionRequest { Header = header, Body = Body });
         }
     }
 
@@ -829,9 +829,9 @@ namespace Highlander.Core.V1
 
         /// <summary>
         /// </summary>
-        protected override void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader header)
+        protected override void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader header)
         {
-            clientBase.TransferV341CancelSubscription(header, Body);
+            clientBase.TransferV341CancelSubscription(new TransferV341CancelSubscriptionRequest { Header = header, Body = Body });
         }
     }
 
@@ -863,7 +863,7 @@ namespace Highlander.Core.V1
         /// <param name="logger"></param>
         /// <param name="clientBase"></param>
         /// <param name="lastHeader"></param>
-        protected override void OnTransmit(ILogger logger, TransferSenderV341 clientBase, V131SessionHeader lastHeader)
+        protected override void OnTransmit(ILogger logger, TransferV341Client clientBase, V131SessionHeader lastHeader)
         {
             var page = new List<V341TransportItem>();
             foreach (V341TransportItem item in Body.Items)
@@ -873,13 +873,13 @@ namespace Highlander.Core.V1
                 {
                     // page limit - create intermediate page header
                     var pageHeader = new V131SessionHeader(
-                        lastHeader.SessionId, lastHeader.RequestId, true, false,
+                        lastHeader.SessionIdGuid, lastHeader.RequestIdGuid, true, false,
                         lastHeader.ReplyAddress, lastHeader.ReplyContract, lastHeader.DebugRequest);
-                    clientBase.TransferV341NotifyMultipleItems(pageHeader, new V341NotifyMultipleItems(Guid.Empty, page.ToArray()));
+                    clientBase.TransferV341NotifyMultipleItems(new TransferV341NotifyMultipleItemsRequest{Header = pageHeader, Body = new V341NotifyMultipleItems(Guid.Empty, page.ToArray())});
                     page.Clear();
                 }
             }
-            clientBase.TransferV341NotifyMultipleItems(lastHeader, new V341NotifyMultipleItems(Guid.Empty, page.ToArray()));
+            clientBase.TransferV341NotifyMultipleItems(new TransferV341NotifyMultipleItemsRequest { Header = lastHeader, Body = new V341NotifyMultipleItems(Guid.Empty, page.ToArray()) });
         }
     }
 
@@ -901,13 +901,11 @@ namespace Highlander.Core.V1
         // readonly state
         private readonly AsyncThreadQueue _mainThreadQueue;
         private readonly AsyncThreadQueue _userThreadQueue;
-        private readonly Reference<ILogger> _loggerRef;
 
         public ILogger Logger { get; }
 
-        private readonly AddressBinding _sessCtrlAddressBinding;
-        private readonly string[] _protocols;
-        private readonly AddressBinding _transferAddressBinding;
+        //private readonly AddressBinding _sessCtrlAddressBinding;
+        //private readonly AddressBinding _transferAddressBinding;
         private readonly V131ClientInfo _clientInfoV131;
         private readonly string _instanceName;
 
@@ -935,13 +933,13 @@ namespace Highlander.Core.V1
         // managed state
         public IModuleInfo ClientInfo { get; }
 
-        private CustomServiceHost<ITransferV341, TransferRecverV341> _replyServiceHost;
+        //private CustomServiceHost<ITransferV341, TransferRecverV341> _replyServiceHost;
         private string _replyAddress;
         private readonly string _replyContract = typeof(ITransferV341).FullName;
         private Guid _sessionId = Guid.Empty;
-        private TransferSenderV341 _clientBase;
+        private TransferV341Client _clientBase;
         private Timer _housekeepingTimer;
-        //private Timer _KeepaliveTimer;
+        //private Timer _KeepAliveTimer;
         //private ISubscription _DefaultSubscription;
         private readonly Guarded<IncompleteRequests> _incompleteRequests = new Guarded<IncompleteRequests>(new IncompleteRequests());
         private long _asyncCallProcessOutgoingRequestsCount;
@@ -1192,8 +1190,8 @@ namespace Highlander.Core.V1
             EnvId envId = EnvHelper.CheckEnv(EnvHelper.ParseEnvName(env));
             if (loggerRef == null)
                 throw new ArgumentNullException(nameof(loggerRef));
-            _loggerRef = Reference<ILogger>.Create(new FilterLogger(loggerRef, instanceName != null ? instanceName + ": " : "Proxy: "));
-            Logger = _loggerRef.Target;
+            var loggerRef1 = Reference<ILogger>.Create(new FilterLogger(loggerRef, instanceName != null ? instanceName + ": " : "Proxy: "));
+            Logger = loggerRef1.Target;
             _mainThreadQueue = new AsyncThreadQueue(Logger);
             _userThreadQueue = new AsyncThreadQueue(Logger);
             Guid clientId = Guid.NewGuid();
@@ -1238,7 +1236,7 @@ namespace Highlander.Core.V1
                 ClientInfo.Name,
                 ClientInfo.UserFullName);
             _instanceName = instanceName;
-            _protocols = (protocols ?? WcfConst.NetTcp).Split(';');
+            var protocols1 = (protocols ?? WcfConst.NetTcp).Split(';');
             DebugRequests = debugRequests;
             if (requestTimeout != TimeSpan.Zero)
                 _requestTimeout = CheckRange(requestTimeout, _minRequestTimeout, _maxRequestTimeout, "RequestTimeout");
@@ -1262,13 +1260,13 @@ namespace Highlander.Core.V1
             if (hostList != null)
                 serviceAddress = hostList.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             int defaultPort = EnvHelper.SvcPort(envId, svc);
-            ServiceAddress resolvedServer = V111Helpers.ResolveServer(Logger, svcName, new ServiceAddresses(_protocols, serviceAddress, defaultPort),
-                new[] { typeof(ISessCtrlV131).FullName, typeof(ITransferV341).FullName });
-            _sessCtrlAddressBinding = WcfHelper.CreateAddressBinding(
-                WcfConst.NetTcp, resolvedServer.Host, resolvedServer.Port, svcName, typeof(ISessCtrlV131).Name);
-            _transferAddressBinding = WcfHelper.CreateAddressBinding(
-                resolvedServer.Protocol, resolvedServer.Host, resolvedServer.Port, svcName, typeof(ITransferV341).Name);
-            ServerAddress = resolvedServer;
+            //ServiceAddress resolvedServer = V111Helpers.ResolveServer(Logger, svcName, new ServiceAddresses(protocols1, serviceAddress, defaultPort),
+            //    new[] { typeof(ISessCtrlV131).FullName, typeof(ITransferV341).FullName });
+            //_sessCtrlAddressBinding = WcfHelper.CreateAddressBinding(
+            //    WcfConst.NetTcp, resolvedServer.Host, resolvedServer.Port, svcName, typeof(ISessCtrlV131).Name);
+            //_transferAddressBinding = WcfHelper.CreateAddressBinding(
+            //    resolvedServer.Protocol, resolvedServer.Host, resolvedServer.Port, svcName, typeof(ITransferV341).Name);
+            //ServerAddress = resolvedServer;
             // initialise session
             OpenClientBaseAndSendRequest(false, null);
             // start housekeeping timer
@@ -1282,7 +1280,7 @@ namespace Highlander.Core.V1
                 TimeSpan.FromSeconds(60),
                 TimeSpan.FromSeconds(60));
             // successfully started
-            Logger.LogInfo("Client connected to: {0}", _transferAddressBinding.Address.Uri.AbsoluteUri);
+            //Logger.LogInfo("Client connected to: {0}", _transferAddressBinding.Address.Uri.AbsoluteUri);
         }
 
         /// <summary>
@@ -1293,11 +1291,11 @@ namespace Highlander.Core.V1
             // close connection
             try
             {
-                using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
-                {
-                    var header = new V131SessionHeader(_sessionId, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
-                    session.CloseSessionV131(header);
-                }
+                //using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
+                //{
+                //    var header = new V131SessionHeader(_sessionId, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
+                //    session.CloseSessionV131(header);
+                //}
             }
             catch (CommunicationException wcfExcp)
             {
@@ -1408,7 +1406,7 @@ namespace Highlander.Core.V1
             //DisposeHelper.SafeDispose(ref _IncompleteRequests);
             // close connections
             DisposeHelper.SafeDispose(ref _clientBase);
-            DisposeHelper.SafeDispose(ref _replyServiceHost);
+            //DisposeHelper.SafeDispose(ref _replyServiceHost);
             Logger.LogDebug("Closed");
         }
 
@@ -2654,7 +2652,7 @@ namespace Highlander.Core.V1
         {
             // data received - only accept messages with a valid request id
             RequestBase result = null;
-            _incompleteRequests.Locked(requests => requests.RequestCache.TryGetValue(header.RequestId, out result));
+            _incompleteRequests.Locked(requests => requests.RequestCache.TryGetValue(header.RequestIdGuid, out result));
             request = result;
             if (request == null)
             {
@@ -2699,7 +2697,7 @@ namespace Highlander.Core.V1
                 if (DebugRequests || package.Header.DebugRequest)
                     Logger.LogDebug("Request '{0}' received {1} items",
                         package.Header.RequestId,
-                        package.Body.Items?.Length ?? 0);
+                        package.Body.Items?.Count ?? 0);
                 CommenceHeaderProcessing(package.Header, out request);
                 if (request != null)
                 {
@@ -2729,17 +2727,17 @@ namespace Highlander.Core.V1
             // the received data is a match for a current subscription.
             if (DebugRequests || package.Header.DebugRequest)
             {
-                if (package.Body.SubscriptionId != Guid.Empty)
+                if (package.Body.SubscriptionIdGuid != Guid.Empty)
                 {
                     Logger.LogDebug("Subscription '{0}' received {1} items",
                     package.Body.SubscriptionId,
-                    package.Body.Items?.Length ?? 0);
+                    package.Body.Items?.Count ?? 0);
                 }
             }
             Subscription subscription = null;
             _subscriptions.Locked(subscriptions =>
             {
-                subscriptions.TryGetValue(package.Body.SubscriptionId, out var temp);
+                subscriptions.TryGetValue(package.Body.SubscriptionIdGuid, out var temp);
                 subscription = temp;
             });
             if (subscription != null)
@@ -2793,50 +2791,50 @@ namespace Highlander.Core.V1
 
         private void OpenServerHostForReplies()
         {
-            const int minPort = 10000;
-            const int maxPort = 65535;
-            const int maxAttempts = 10;
-            var random = new Random(Environment.TickCount);
-            int attempt = 0;
-            string protocol = ServerAddress.Protocol;
-            while (_replyServiceHost == null)
-            {
-                if (attempt >= maxAttempts)
-                    throw new ApplicationException(
-                        $"Aborting - open host attempt limit ({maxAttempts}) reached!");
-                // attempt to start a new host on a new port
-                attempt++;
-                int port = random.Next(minPort, maxPort);
-                // clear session id to force client reconnect
-                _sessionId = Guid.Empty;
-                try
-                {
-                    string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
-                    _replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
-                        Logger, new TransferRecverV341(this), endpoint,
-                        ClientInfo.ApplName, typeof(ITransferV341).Name, false);
-                }
-                catch (AddressAlreadyInUseException e1)
-                {
-                    // expected often
-                    Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e1.GetType().Name, e1.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
-                }
-                catch (InvalidOperationException e2)
-                {
-                    // expected but not often
-                    Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e2.GetType().Name, e2.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
-                }
-                catch (CommunicationException e3)
-                {
-                    // unexpected communications error
-                    Logger.LogWarning("Failed to open port {0}: {1}: {2}", port, e3.GetType().Name, e3.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
-                    throw;
-                }
-            } // while
-            _replyAddress = _replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
+            //const int minPort = 10000;
+            //const int maxPort = 65535;
+            //const int maxAttempts = 10;
+            //var random = new Random(Environment.TickCount);
+            //int attempt = 0;
+            //string protocol = ServerAddress.Protocol;
+            //while (_replyServiceHost == null)
+            //{
+            //    if (attempt >= maxAttempts)
+            //        throw new ApplicationException(
+            //            $"Aborting - open host attempt limit ({maxAttempts}) reached!");
+            //    // attempt to start a new host on a new port
+            //    attempt++;
+            //    int port = random.Next(minPort, maxPort);
+            //    // clear session id to force client reconnect
+            //    _sessionId = Guid.Empty;
+            //    try
+            //    {
+            //        string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
+            //        _replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
+            //            Logger, new TransferRecverV341(this), endpoint,
+            //            ClientInfo.ApplName, typeof(ITransferV341).Name, false);
+            //    }
+            //    catch (AddressAlreadyInUseException e1)
+            //    {
+            //        // expected often
+            //        Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e1.GetType().Name, e1.Message);
+            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
+            //    }
+            //    catch (InvalidOperationException e2)
+            //    {
+            //        // expected but not often
+            //        Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e2.GetType().Name, e2.Message);
+            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
+            //    }
+            //    catch (CommunicationException e3)
+            //    {
+            //        // unexpected communications error
+            //        Logger.LogWarning("Failed to open port {0}: {1}: {2}", port, e3.GetType().Name, e3.Message);
+            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
+            //        throw;
+            //    }
+            //} // while
+            //_replyAddress = _replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
         }
 
         private void BackoffRetryAlgorithm(Exception excp, Guid requestId, DateTimeOffset expiryTime, RequestBase request, int attempt)
@@ -2873,8 +2871,8 @@ namespace Highlander.Core.V1
             if (attempt <= 1)
             {
                 // initial catch
-                Logger.LogWarning("Request '{0}' to server at '{1}' failed: {2}",
-                    requestId, _transferAddressBinding.Address.Uri.AbsoluteUri, excp.GetType().Name);
+                //Logger.LogWarning("Request '{0}' to server at '{1}' failed: {2}",
+                //    requestId, _transferAddressBinding.Address.Uri.AbsoluteUri, excp.GetType().Name);
                 Logger.LogDebug("Request '{0}': connection attempts will continue until {1}", requestId, expiryTime);
             }
             else
@@ -2884,17 +2882,17 @@ namespace Highlander.Core.V1
                     requestId, attempt, excp.GetType().Name);
                 // 2nd or subsequent failure - could be a problem at our end
                 // - force restart of the reply host
-                DisposeHelper.SafeDispose(ref _replyServiceHost);
+                //DisposeHelper.SafeDispose(ref _replyServiceHost);
             }
             if (DateTimeOffset.Now < expiryTime)
                 Thread.Sleep(TimeSpan.FromSeconds(backoff));
             else
             {
-                Logger.LogError(
-                    "Request '{0}' to server at '{1}' failed: {2}",
-                    requestId,
-                    _transferAddressBinding.Address.Uri.AbsoluteUri,
-                    excp.GetType().Name);
+                //Logger.LogError(
+                //    "Request '{0}' to server at '{1}' failed: {2}",
+                //    requestId,
+                //    _transferAddressBinding.Address.Uri.AbsoluteUri,
+                //    excp.GetType().Name);
                 throw excp;
             }
         }
@@ -2923,23 +2921,24 @@ namespace Highlander.Core.V1
                         // reconnected if required
                         if (_clientBase == null)
                         {
-                            if (attempt > 1)
-                                Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
-                            if (_sessionId == Guid.Empty)
-                            {
-                                CoreState = CoreStateEnum.Connecting;
-                                using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
-                                {
-                                    var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
-                                    var sessionReply = session.BeginSessionV131(sessionHeader, _clientInfoV131);
-                                    if (!sessionReply.Success)
-                                    {
-                                        throw new ApplicationException("Connection rejected: " + sessionReply.Message);
-                                    }
-                                    _sessionId = sessionReply.SessionId;
-                                }
-                            }
-                            _clientBase = new TransferSenderV341(_transferAddressBinding);
+                            //if (attempt > 1)
+                            //    Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
+                            //if (_sessionId == Guid.Empty)
+                            //{
+                            //    CoreState = CoreStateEnum.Connecting;
+                            //    using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
+                            //    {
+                            //        var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
+                            //        var sessionReply = session.BeginSessionV131(sessionHeader, _clientInfoV131);
+                            //        if (!sessionReply.Success)
+                            //        {
+                            //            throw new ApplicationException("Connection rejected: " + sessionReply.Message);
+                            //        }
+                            //        _sessionId = sessionReply.SessionId;
+                            //    }
+                            //}
+                            ////instantiate a channel
+                            //_clientBase = new TransferV341Client(_transferAddressBinding);
                         }
                         if (request != null)
                         {
@@ -3326,7 +3325,7 @@ namespace Highlander.Core.V1
                 }
                 else
                 {
-                    Logger.LogDebug("Subscription '{0}' missing!", subscription.Id);
+                    Logger.LogDebug("Subscription '{0}' missing!", subscriptionId.ToString());
                 }
             });
             return ar;
