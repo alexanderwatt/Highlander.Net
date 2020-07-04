@@ -14,12 +14,11 @@
 */
 
 using System;
-using Highlander.Core.V1.Tests;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.NamedValues;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Highlander.Core.V34.Tests
+namespace Highlander.Core.V1.Tests
 {
     /// <summary>
     /// Summary description for ExpressionTests

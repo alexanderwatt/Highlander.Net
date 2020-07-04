@@ -48,8 +48,7 @@ namespace Highlander.Core.V1.Tests
         ///</summary>
         public TestContext TestContext { get; set; }
 
-        [TestInitialize()]
-        public static void MyTestInitialize(TestContext testContext)
+        public StressTests()
         {
             _dbContext = new HighlanderContext(null);
         }

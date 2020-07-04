@@ -17,7 +17,6 @@ using System;
 using System.Threading;
 using Highlander.Core.Common;
 using Highlander.Core.Server;
-using Highlander.Core.V34.Tests;
 using Highlander.GrpcService.Data;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
@@ -36,9 +35,7 @@ namespace Highlander.Core.V1.Tests
 
         public CoreCacheTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            _dbContext = new HighlanderContext(null);
         }
 
         /// <summary>
@@ -46,12 +43,6 @@ namespace Highlander.Core.V1.Tests
         ///information about and functionality for the current test run.
         ///</summary>
         public TestContext TestContext { get; set; }
-
-        [TestInitialize()]
-        public static void MyTestInitialize(TestContext testContext)
-        {
-            _dbContext = new HighlanderContext(null);
-        }
 
         [TestMethod]
         public void TestSaveLoadPrivateCacheItems()

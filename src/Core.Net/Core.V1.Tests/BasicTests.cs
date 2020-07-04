@@ -41,9 +41,7 @@ namespace Highlander.Core.V1.Tests
 
         public BasicTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            _dbContext = new HighlanderContext(null);
         }
 
         /// <summary>
@@ -53,11 +51,12 @@ namespace Highlander.Core.V1.Tests
         public TestContext TestContext { get; set; }
 
         #region Additional test attributes
-        [TestInitialize()]
-        public static void MyTestInitialize(TestContext testContext)
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+
+        //[ClassInitialize]
+        //public static void MyTestInitialize()
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
 
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]

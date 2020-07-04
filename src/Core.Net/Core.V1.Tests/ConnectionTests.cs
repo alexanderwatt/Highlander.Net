@@ -34,8 +34,7 @@ namespace Highlander.Core.V1.Tests
     {
         private static HighlanderContext _dbContext;
 
-        [TestInitialize()]
-        public static void MyTestInitialize(TestContext testContext)
+        public ConnectionTests()
         {
             _dbContext = new HighlanderContext(null);
         }
