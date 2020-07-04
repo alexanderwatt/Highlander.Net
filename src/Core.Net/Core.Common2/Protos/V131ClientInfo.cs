@@ -1,6 +1,4 @@
-﻿using Google.Protobuf;
-using Google.Protobuf.WellKnownTypes;
-using Highlander.Core.Common;
+﻿using Highlander.Core.Common;
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -35,13 +33,14 @@ namespace Highlander.Grpc.Session
             HostName = Dns.GetHostName();
             IPHostEntry hostEntry = Dns.GetHostEntry(HostName);
             IPAddress[] hostIPs = hostEntry.AddressList;
-            _netAddrs = new string[hostIPs.Length];
-            for (int i = 0; i < hostIPs.Length; i++)
+            var items = new Google.Protobuf.Collections.RepeatedField<string>();
+            foreach (var host in hostIPs)
             {
-                _netAddrs[i] = hostIPs[i].ToString();
-                if (hostIPs[i].AddressFamily == AddressFamily.InterNetwork)
-                    HostIpV4 = hostIPs[i].ToString();
+                netAddrs_.Add(host.ToString());
+                if (host.AddressFamily == AddressFamily.InterNetwork)
+                    HostIpV4 = host.ToString();
             }
+            netAddrs_ = items;
             UserInfo = new V131UserInfo(userIdentityName, userFullName);
             // get calling application details
             // if unmanaged - get Win32 details

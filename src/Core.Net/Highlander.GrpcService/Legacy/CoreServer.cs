@@ -125,7 +125,7 @@ namespace Highlander.Core.Server
             //ExpiryTime = subscription.ExpiryTime; // was DateTimeOffset.Now.AddMinutes(5);
             DataTypeName = subscription.Query.DataType;
             ItemKind = subscription.Query.ItemKind;
-            Expression = (subscription.Query.QueryExpr != null) ? Expr.Create(subscription.Query.QueryExpr) : Expr.ALL;
+            Expression = subscription.Query.QueryExpr != null ? Expr.Create(subscription.Query.QueryExpr) : Expr.ALL;
             AppScopes = subscription.Query.AppScopes;
             MinimumUSN = subscription.Query.MinimumUSN;
             ExcludeExisting = subscription.Query.ExcludeExisting;

@@ -14,6 +14,7 @@
 */
 
 using System;
+using Highlander.Core.V1.Tests;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.NamedValues;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -95,12 +96,10 @@ namespace Highlander.Core.V34.Tests
             DateTimeOffset dtoNow = DateTimeOffset.Now;
             DateTime dtNow = dtoNow.DateTime;
             DateTime dtToday = dtNow.Date;
-
             NamedValueSet props = new NamedValueSet();
             props.Set("dtoNow", dtoNow);
             props.Set("dtNow", dtNow);
             props.Set("dtToday", dtToday);
-
             // check DayOfWeek()
             {
                 IExpression expr = Expr.Create(Expr.BoolAND(
@@ -155,22 +154,17 @@ namespace Highlander.Core.V34.Tests
             IExpression expression = Expr.IsNEQ("Name", "");
             Assert.IsNotNull(expression);
             IExpression conditions = expression;
-
             expression = Expr.IsNotNull("Name");
             Assert.IsNotNull(expression);
-
             conditions = Expr.BoolAND(expression, conditions);
             Assert.IsNotNull(conditions);
-
             // Test that if there is Name that it passes
             NamedValueSet props = new NamedValueSet();
             props.Set("Name", "Test");
-
             object result = conditions.Evaluate(props);
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(bool), result.GetType());
             Assert.IsTrue((bool)result);
-
             // And if there isn't it fails
             props = new NamedValueSet();
             props.Set("NoName", "Test");
@@ -178,23 +172,18 @@ namespace Highlander.Core.V34.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(bool), result.GetType());
             Assert.IsFalse((bool)result);
-
             // Test serialization
             string serialized = conditions.Serialise();
             Assert.IsTrue(!string.IsNullOrEmpty(serialized));
-
             // And deserialization
             IExpression deserializedConditions = Expr.Deserialise(serialized);
-
             // Test that if there is Name that it passes
             props = new NamedValueSet();
             props.Set("Name", "Test");
-
             result = deserializedConditions.Evaluate(props);
             Assert.IsNotNull(result);
             Assert.AreEqual(typeof(bool), result.GetType());
             Assert.IsTrue((bool)result);
-
             // And if there isn't it fails
             props = new NamedValueSet();
             props.Set("NoName", "Test");

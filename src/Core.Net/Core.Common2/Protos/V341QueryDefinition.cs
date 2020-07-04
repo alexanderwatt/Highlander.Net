@@ -23,10 +23,10 @@ namespace Highlander.Grpc.Contracts
             DataType = dataType;
             var scope = new Google.Protobuf.Collections.RepeatedField<string>();
             scope.AddRange(appScopes);
-            AppScopes = scope;
+            appScopes_ = scope;
             var names = new Google.Protobuf.Collections.RepeatedField<string>();
             names.AddRange(itemNames);
-            ItemNames = names;
+            itemNames_ = names;
             QueryExpr = queryExpr;
             AsAtTime = Timestamp.FromDateTimeOffset(asAtTime);
             MinimumUSN = minimumUsn;

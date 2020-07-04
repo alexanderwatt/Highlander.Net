@@ -12,7 +12,7 @@ namespace Highlander.Grpc.Contracts
                 ItemKind.Undefined, null, null, null, null,
                 DateTimeOffset.MinValue, 0, false, true, false, excludeDataBody);
             var items = new Google.Protobuf.Collections.RepeatedField<string> {itemId.ToString()};
-            ItemIds = items;
+            itemIds_ = items;
         }
 
         public V341SelectMultipleItems(
@@ -27,7 +27,7 @@ namespace Highlander.Grpc.Contracts
             {
                 items.Add(itemId.ToString());
             }
-            ItemIds = items;
+            itemIds_ = items;
         }
 
         // selecting by names(s)
