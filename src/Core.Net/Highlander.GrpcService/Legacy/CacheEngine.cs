@@ -20,8 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Highlander.Core.Common;
-using Highlander.Core.Common.Encryption;
 using Highlander.Utilities;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
@@ -168,7 +168,7 @@ namespace Highlander.Core.Server
         //private Timer _HeartbeatTimer;
 
         // run-time state
-        private long _lastStoreUSN;
+        private long _lastStoreUsn;
 
         /// <summary>
         /// 
@@ -212,10 +212,10 @@ namespace Highlander.Core.Server
                 foreach (CommonItem item in items)
                 {
                     ProcessNewItem(item, ItemSource.LocalStore, false, Guid.Empty);
-                    if (item.StoreUSN > _lastStoreUSN)
-                        _lastStoreUSN = item.StoreUSN;
+                    if (item.StoreUSN > _lastStoreUsn)
+                        _lastStoreUsn = item.StoreUSN;
                 }
-                Logger.LogDebug("Loaded {0} items (StoreUSN={1})", items.Count, _lastStoreUSN);
+                Logger.LogDebug("Loaded {0} items (StoreUSN={1})", items.Count, _lastStoreUsn);
             }
             // start housekeeping timer
             _housekeepTimer = new Timer(DispatchHousekeepTimeout, null, ServerCfg.CacheHousekeepInterval, ServerCfg.CacheHousekeepInterval);
@@ -1091,7 +1091,7 @@ namespace Highlander.Core.Server
                     step = "B.1";
                     // assign a new USN if not load from store
                     if (itemSource != ItemSource.LocalStore)
-                        item.StoreUSN = Interlocked.Increment(ref _lastStoreUSN);
+                        item.StoreUSN = Interlocked.Increment(ref _lastStoreUsn);
                     // update indexes
                     InnerItemRef itemRef = new InnerItemRef(item, (itemSource == ItemSource.LocalStore));
                     // - outer name index
@@ -1295,7 +1295,7 @@ namespace Highlander.Core.Server
             return GetCacheItem(itemId, 0, DateTimeOffset.Now, true);
         }
 
-        private CommonItem GetCacheItem(Guid itemId, long minimumUSN, DateTimeOffset asAtTime, bool excludeDeleted)
+        private CommonItem GetCacheItem(Guid itemId, long minimumUsn, DateTimeOffset asAtTime, bool excludeDeleted)
         {
             InnerItemRef itemref;
             CommonItem result = null;
@@ -1304,7 +1304,7 @@ namespace Highlander.Core.Server
                 if (indexes.InnerGuids.TryGetValue(itemId, out itemref))
                 {
                     CommonItem item = itemref.Item;
-                    if (item != null && item.StoreUSN > minimumUSN && (!excludeDeleted || item.IsCurrent(asAtTime)))
+                    if (item != null && item.StoreUSN > minimumUsn && (!excludeDeleted || item.IsCurrent(asAtTime)))
                     {
                         result = item;
                     }

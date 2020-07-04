@@ -17,8 +17,8 @@
 
 using System;
 using Highlander.Core.Common;
-using Highlander.Core.Common.Encryption;
 using Highlander.Utilities.Compression;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.Serialisation;
 

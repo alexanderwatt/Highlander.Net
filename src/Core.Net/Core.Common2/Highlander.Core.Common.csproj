@@ -32,6 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Encryption\**" />
+    <EmbeddedResource Remove="Encryption\**" />
+    <None Remove="Encryption\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Protos\Generated\" />
   </ItemGroup>
 

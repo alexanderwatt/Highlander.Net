@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Highlander.Build;
-using Highlander.Core.Common.Encryption;
+using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;

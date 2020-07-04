@@ -16,7 +16,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Highlander.Utilities;
 using Highlander.Utilities.Encryption;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.NamedValues;
