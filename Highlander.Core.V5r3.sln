@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Service", "Compo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Development", "Development", "{678811DA-BEE6-4BC8-AA20-C210B4C88A68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.WebApp", "Applications\HighlanderWebApp\Highlander.WebApp.csproj", "{5305B54E-EA5B-4162-9B8F-BE14819D2684}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Utilities", "src\Core.Net\Utilities\Highlander.Utilities.csproj", "{31BBA71E-5AFC-4052-B9D6-F2E0168B5360}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Metadata.Common", "src\Core.Net\Metadata.Common\Highlander.Metadata.Common.csproj", "{A593ED3E-579D-4C99-A009-94137B1FBE5A}"
@@ -23,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.GrpcService", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0ABACF0-1EA8-498F-B2D0-4275871B52E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Core.V1.Tests", "src\Core.Net\Core.V1.Tests\Highlander.Core.V1.Tests.csproj", "{132BA962-07FE-4F7B-867E-6BE6A799D0DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Core.V1.Tests", "src\Core.Net\Core.V1.Tests\Highlander.Core.V1.Tests.csproj", "{132BA962-07FE-4F7B-867E-6BE6A799D0DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Core.Bridge", "src\Core.Net\Core.Bridge\Highlander.Core.Bridge.csproj", "{1DADCB51-1686-4E54-86F4-8653D042695F}"
 EndProject
@@ -37,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Constants", "src\Core.Net\Constants\Highlander.Constants.csproj", "{395CBB21-D85C-43D9-B051-3BD4C92AC4BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Core.V1", "src\Core.Net\Core.V1\Highlander.Core.V1.csproj", "{ABA5A0AD-9790-40FB-ABCB-30EE5A12621A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Highlander.Core.V1", "src\Core.Net\Core.V1\Highlander.Core.V1.csproj", "{ABA5A0AD-9790-40FB-ABCB-30EE5A12621A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,30 +77,6 @@ Global
 		{1A009F26-41BC-4EC9-AB42-E2275DAB47EF}.UnitTest|Win32.Build.0 = Debug|Any CPU
 		{1A009F26-41BC-4EC9-AB42-E2275DAB47EF}.UnitTest|x86.ActiveCfg = Debug|Any CPU
 		{1A009F26-41BC-4EC9-AB42-E2275DAB47EF}.UnitTest|x86.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|Win32.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Debug|x86.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Win32.ActiveCfg = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|Win32.Build.0 = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|x86.ActiveCfg = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.Release|x86.Build.0 = Release|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Any CPU.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Any CPU.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Win32.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|Win32.Build.0 = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|x86.ActiveCfg = Debug|Any CPU
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684}.UnitTest|x86.Build.0 = Debug|Any CPU
 		{31BBA71E-5AFC-4052-B9D6-F2E0168B5360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31BBA71E-5AFC-4052-B9D6-F2E0168B5360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31BBA71E-5AFC-4052-B9D6-F2E0168B5360}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -373,7 +347,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A009F26-41BC-4EC9-AB42-E2275DAB47EF} = {678811DA-BEE6-4BC8-AA20-C210B4C88A68}
-		{5305B54E-EA5B-4162-9B8F-BE14819D2684} = {678811DA-BEE6-4BC8-AA20-C210B4C88A68}
 		{31BBA71E-5AFC-4052-B9D6-F2E0168B5360} = {19D09A8B-5D97-489C-8176-54EB26942BEF}
 		{A593ED3E-579D-4C99-A009-94137B1FBE5A} = {19D09A8B-5D97-489C-8176-54EB26942BEF}
 		{2B3A2A7C-2266-482A-8CB0-D285C3895877} = {678811DA-BEE6-4BC8-AA20-C210B4C88A68}
