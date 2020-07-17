@@ -8,11 +8,16 @@ namespace Highlander.GrpcService.Data
 {
     public class HighlanderContext : DbContext
     {
-        public HighlanderContext(DbContextOptions<HighlanderContext> options): base(options)
+        public DbSet<ItemData> Items { get; set; }
+
+        public HighlanderContext(DbContextOptions<HighlanderContext> options) : base(options)
         {
         }
 
-        public DbSet<ItemData> Items { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+        }
     }
 
     //  <Type Name = "ItemData" >

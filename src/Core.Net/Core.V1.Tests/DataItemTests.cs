@@ -27,47 +27,11 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class DataItemTests
     {
-        public DataItemTests(TestContext testContext)
-        {
-            TestContext = testContext;
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext { get; set; }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         [TestMethod]
         public void TestIntegerStringFormats()
         {
             int intValue = 1001;
-            Assert.AreEqual("1,001.00", intValue.ToString("N"));
+            Assert.AreEqual("1,001.000", intValue.ToString("N"));
             Assert.AreEqual("1,001.00", intValue.ToString("N2"));
             Assert.AreEqual("1,001", intValue.ToString("N0"));
         }
@@ -92,8 +56,9 @@ namespace Highlander.Core.V1.Tests
             //we can see that it contains no value - it is set to "Empty"
             Assert.IsTrue(anyItem.IsEmpty);
             Assert.IsFalse(anyItem.HasValue);
+            Stream tmp = null;
             UnitTestHelper.AssertThrows<InvalidOperationException>(
-                                        () => { });
+                () => tmp = anyItem.Value);
         }
 
         [TestMethod]
@@ -234,7 +199,7 @@ namespace Highlander.Core.V1.Tests
             Assert.IsFalse(DataItem<TimeSpan>.DefaultIsEmpty);
             Assert.IsFalse(DataItem<DayOfWeek>.DefaultIsEmpty);
             // other types
-            Assert.IsTrue(DataItem<String>.DefaultIsEmpty);
+            Assert.IsTrue(DataItem<string>.DefaultIsEmpty);
         }
 
         [TestMethod]

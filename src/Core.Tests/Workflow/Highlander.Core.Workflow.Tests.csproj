@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core.Net\Core.Common2\Highlander.Core.Common.csproj" />
+    <ProjectReference Include="..\..\Core.Net\Utilities\Highlander.Utilities.csproj" />
+    <ProjectReference Include="..\..\Core.Net\Workflow\Highlander.Core.Workflow.csproj" />
+  </ItemGroup>
+
+</Project>

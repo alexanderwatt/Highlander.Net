@@ -30,6 +30,7 @@ using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -40,7 +41,7 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class StressTests
     {
-        private static HighlanderContext _dbContext;
+        //private static HighlanderContext _dbContext;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -48,10 +49,10 @@ namespace Highlander.Core.V1.Tests
         ///</summary>
         public TestContext TestContext { get; set; }
 
-        public StressTests()
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+        //public StressTests()
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
 
         [TestMethod]
         public void TestPagingTechniques()
@@ -66,7 +67,10 @@ namespace Highlander.Core.V1.Tests
             NamedValueSet serverSettings = new NamedValueSet();
             serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Router);
             serverSettings.Set(CfgPropName.EnvName, "UTT");
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             // save
             using (ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -151,7 +155,10 @@ namespace Highlander.Core.V1.Tests
             NamedValueSet serverSettings = new NamedValueSet();
             serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Router);
             serverSettings.Set(CfgPropName.EnvName, "UTT");
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             // save
             using (ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -218,7 +225,10 @@ namespace Highlander.Core.V1.Tests
             NamedValueSet serverSettings = new NamedValueSet();
             serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Router);
             serverSettings.Set(CfgPropName.EnvName, "UTT");
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").SetServers("localhost:8113").Create();
             // delete the test trades
@@ -290,7 +300,10 @@ namespace Highlander.Core.V1.Tests
             NamedValueSet serverSettings = new NamedValueSet();
             serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Router);
             serverSettings.Set(CfgPropName.EnvName, "UTT");
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").SetServers("localhost:8113").Create();
             // delete the test trades
@@ -435,7 +448,10 @@ namespace Highlander.Core.V1.Tests
             serverSettings.Set(CfgPropName.EnvName, "UTT");
             serverSettings.Set(CfgPropName.Port, serverPort);
             serverSettings.Set(CfgPropName.Endpoints, WcfConst.NetTcp);
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").SetServers(hostAddress).Create();
             List<IAsyncResult> completions = new List<IAsyncResult>();

@@ -417,7 +417,7 @@ namespace Highlander.Core.Server
                 string msg = $"Client version ({clientInfo.CompInfo.AssmFVer}) < optimal version ({optimalVersion})!";
                 Logger.LogWarning(msg);
             }
-            // - ensure STG/PRD envs servers only accessed by valid clients
+            // - ensure STG/PRD environment servers only accessed by valid clients
             if (_serverCfg.ModuleInfo.ConfigEnv >= EnvId.Stg_StagingLive && (clientInfo.CompInfo.AssmPTok != _serverCfg.ModuleInfo.CorePTok))
             {
                 string msg =

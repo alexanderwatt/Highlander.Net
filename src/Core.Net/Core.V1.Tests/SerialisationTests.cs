@@ -24,6 +24,7 @@ using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -34,12 +35,12 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class SerialisationTests
     {
-        private static HighlanderContext _dbContext;
+        //private static HighlanderContext _dbContext;
 
-        public SerialisationTests()
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+        //public SerialisationTests()
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -55,7 +56,10 @@ namespace Highlander.Core.V1.Tests
             // - type b (derived from a) is saved as a, loaded as a (but is type b).
             // (in this example a = PricingStructure, b = YieldCurve)
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -148,7 +152,10 @@ namespace Highlander.Core.V1.Tests
             // tests control of the serialisation type
             // - interface types
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -201,7 +208,10 @@ namespace Highlander.Core.V1.Tests
         {
             // tests the object mutation detector
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())

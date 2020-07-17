@@ -25,6 +25,7 @@ using Highlander.Utilities.Helpers;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -32,12 +33,12 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class ConnectionTests
     {
-        private static HighlanderContext _dbContext;
+        //private static HighlanderContext _dbContext;
 
-        public ConnectionTests()
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+        //public ConnectionTests()
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
 
         [TestMethod]
         public void TestManualRecovery()
@@ -49,6 +50,9 @@ namespace Highlander.Core.V1.Tests
             //TimeSpan outageDuration = TimeSpan.FromMinutes(1);
             //TimeSpan requestTimeout = TimeSpan.FromSeconds(30);
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
             loggerRef.Target.LogDebug("----------> test commenced");
             // create unit test storage
             IStoreEngine unitTestStore = new UnitTestStoreEngine(loggerRef.Target);
@@ -58,7 +62,7 @@ namespace Highlander.Core.V1.Tests
                 var serverSettings = new NamedValueSet();
                 serverSettings.Set(CfgPropName.NodeType, (int)NodeType.Server);
                 serverSettings.Set(CfgPropName.EnvName, "UTT");
-                server = new CoreServer(loggerRef, serverSettings, _dbContext) {StoreEngine = unitTestStore};
+                server = new CoreServer(loggerRef, serverSettings, dbContext) {StoreEngine = unitTestStore};
                 loggerRef.Target.LogDebug("----------> starting server");
                 server.Start();
                 // create 1st client and save object - should succeed
@@ -89,7 +93,7 @@ namespace Highlander.Core.V1.Tests
                     client2.SaveObject(new TestData("Test2b", 2), "Test2", null, TimeSpan.MaxValue);
                 });
                 // restart server
-                server = new CoreServer(loggerRef, serverSettings, _dbContext) {StoreEngine = unitTestStore};
+                server = new CoreServer(loggerRef, serverSettings, dbContext) {StoreEngine = unitTestStore};
                 loggerRef.Target.LogDebug("----------> restarting server");
                 server.Start();
                 // load 1st object - should succeed
@@ -131,11 +135,14 @@ namespace Highlander.Core.V1.Tests
             int localPort = 9214;
             int lowerPort = 9114;
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
             CoreClientFactory clientfactory = new CoreClientFactory(loggerRef);
             using CoreServer localServer =
-                new CoreServer(loggerRef, localEnvName, NodeType.Router, localPort, _dbContext);
+                new CoreServer(loggerRef, localEnvName, NodeType.Router, localPort, dbContext);
             using CoreServer lowerServer =
-                new CoreServer(loggerRef, lowerEnvName, NodeType.Router, lowerPort, _dbContext);
+                new CoreServer(loggerRef, lowerEnvName, NodeType.Router, lowerPort, dbContext);
             // start servers
             localServer.Start();
             lowerServer.Start();

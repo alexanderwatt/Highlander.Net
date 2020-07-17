@@ -22,6 +22,7 @@ using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -63,11 +64,11 @@ namespace Highlander.Core.V1.Tests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
         // public void MyTestCleanup() { }
@@ -80,39 +81,38 @@ namespace Highlander.Core.V1.Tests
             // tests key creation and exchange
             // - between 2 clients
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             server.Start();
-
             using (ICoreClient sender = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
             using (ICoreClient recver = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
             {
                 // check un-encrypted traffic
-                Guid evtId1 = sender.SaveObject<TestData>(new TestData("1", 1), "test", null, TimeSpan.MaxValue);
-
+                Guid evtId1 = sender.SaveObject(new TestData("1", 1), "test", null, TimeSpan.MaxValue);
                 List<ICoreItem> recdList1 = recver.LoadItems<TestData>(Expr.ALL);
-                Assert.AreEqual<int>(1, recdList1.Count);
+                Assert.AreEqual(1, recdList1.Count);
                 ICoreItem recdItem1 = recdList1[0];
-                Assert.AreEqual<Guid>(evtId1, recdItem1.Id);
+                Assert.AreEqual(evtId1, recdItem1.Id);
                 Assert.IsNull(recdItem1.TranspKeyId);
                 Assert.IsNull(recdItem1.SenderKeyId);
                 Assert.IsNull(recdItem1.RecverKeyId);
-
                 // generate keys
                 string senderKeyId = sender.CryptoManager.GenerateNewKeys();
                 string recverKeyId = recver.CryptoManager.GenerateNewKeys();
-
                 // send encrypted message and check receiver fails to decrypt
                 ICoreItem sentItem2 = sender.MakeObject<TestData>(new TestData("2", 2), "test", null);
                 sentItem2.TranspKeyId = senderKeyId;
                 sentItem2.SenderKeyId = senderKeyId;
                 Guid evtId2 = sender.SaveItem(sentItem2);
                 List<ICoreItem> recdList2 = recver.LoadItems<TestData>(Expr.ALL);
-                Assert.AreEqual<int>(1, recdList2.Count);
+                Assert.AreEqual(1, recdList2.Count);
                 ICoreItem recdItem2 = recdList2[0];
-                Assert.AreEqual<Guid>(evtId2, recdItem2.Id);
-                Assert.AreEqual<Guid>(evtId2, recdItem2.Id);
-                Assert.AreEqual<string>(senderKeyId, recdItem2.TranspKeyId);
-                Assert.AreEqual<string>(senderKeyId, recdItem2.SenderKeyId);
+                Assert.AreEqual(evtId2, recdItem2.Id);
+                Assert.AreEqual(evtId2, recdItem2.Id);
+                Assert.AreEqual(senderKeyId, recdItem2.TranspKeyId);
+                Assert.AreEqual(senderKeyId, recdItem2.SenderKeyId);
                 Assert.IsNull(recver.CryptoManager.GetTransportKey(senderKeyId));
                 // set public key at receiver and check authentication
                 recver.CryptoManager.SetPublicKey(senderKeyId, sender.CryptoManager.GetPublicKey(senderKeyId));
@@ -122,9 +122,8 @@ namespace Highlander.Core.V1.Tests
                 recver.CryptoManager.SetTransportKey(senderKeyId, sender.CryptoManager.GetTransportKey(senderKeyId));
                 object data2 = recdItem2.Data;
                 Assert.IsNotNull(data2);
-                Assert.AreEqual<Type>(typeof(TestData), data2.GetType());
+                Assert.AreEqual(typeof(TestData), data2.GetType());
             }
-
             server.Stop();
         }
 

@@ -21,6 +21,7 @@ using Highlander.GrpcService.Data;
 using Highlander.Utilities.Expressions;
 using Highlander.Utilities.Logging;
 using Highlander.Utilities.RefCounting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -31,12 +32,12 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class CoreCacheTests
     {
-        private static HighlanderContext _dbContext;
+        //private static HighlanderContext _dbContext;
 
-        public CoreCacheTests()
-        {
-            _dbContext = new HighlanderContext(null);
-        }
+        //public CoreCacheTests()
+        //{
+        //    _dbContext = new HighlanderContext(null);
+        //}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -48,7 +49,10 @@ namespace Highlander.Core.V1.Tests
         public void TestSaveLoadPrivateCacheItems()
         {
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create();
             using ICoreCache cacheA = client.CreateCache();
@@ -63,7 +67,10 @@ namespace Highlander.Core.V1.Tests
         public void TestUttCoreCaching()
         {
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create();
             using ICoreCache cacheA = client.CreateCache();

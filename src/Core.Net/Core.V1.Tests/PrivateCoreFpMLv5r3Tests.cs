@@ -226,15 +226,16 @@ namespace Highlander.Core.V1.Tests
                 Assert.AreEqual(itemA.Text, itemB.Text);
             }
             {
-                // this should fail because interfaces cant be serialised
-                UnitTestHelper.AssertThrows<ArgumentException>("Cannot be an interface type!\r\nParameter name: dataType", () =>
+                // this should fail because interfaces cant be serialised 
+                UnitTestHelper.AssertThrows<ArgumentException>("Cannot be an interface type! (Parameter 'dataType')", () =>
                 {
+                    //"Cannot be an interface type!\r\nParameter name: dataType"
                     client.SaveObject<IFpMLCodeValue>(codeValueInterface, "Test3", null, TimeSpan.MaxValue);
                 });
             }
             {
                 // note: this silently binds to SaveObject<IFpMLCodeValue>(...) which should fail
-                UnitTestHelper.AssertThrows<ArgumentException>("Cannot be an interface type!\r\nParameter name: dataType", () =>
+                UnitTestHelper.AssertThrows<ArgumentException>("Cannot be an interface type! (Parameter 'dataType')", () =>
                 {
                     client.SaveObject(codeValueInterface, "Test4", null, TimeSpan.MaxValue);
                 });

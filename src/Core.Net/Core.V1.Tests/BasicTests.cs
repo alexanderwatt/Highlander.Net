@@ -27,6 +27,7 @@ using Highlander.Utilities.Logging;
 using Highlander.Utilities.NamedValues;
 using Highlander.Utilities.RefCounting;
 using Highlander.Utilities.Serialisation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Highlander.Core.V1.Tests
@@ -37,11 +38,10 @@ namespace Highlander.Core.V1.Tests
     [TestClass]
     public class BasicTests
     {
-        private static HighlanderContext _dbContext;
+        //private static HighlanderContext _dbContext;
 
         public BasicTests()
         {
-            _dbContext = new HighlanderContext(null);
         }
 
         /// <summary>
@@ -50,35 +50,16 @@ namespace Highlander.Core.V1.Tests
         ///</summary>
         public TestContext TestContext { get; set; }
 
-        #region Additional test attributes
-
-        //[ClassInitialize]
-        //public static void MyTestInitialize()
-        //{
-        //    _dbContext = new HighlanderContext(null);
-        //}
-
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         [TestMethod]
         public void TestBasicStartStop()
         {
             
             // start the server, connect a client1, and shutdown
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             // connect client
@@ -99,11 +80,14 @@ namespace Highlander.Core.V1.Tests
         {
             const int maxLoops = 2;
             using Reference<ILogger> outerLoggerRef = Reference<ILogger>.Create(new TraceLogger(true));
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
             for (int loop = 0; loop < maxLoops; loop++)
             {
                 using Reference<ILogger> innerLoggerRef = Reference<ILogger>.Create(new FilterLogger(outerLoggerRef,
                     $"[{loop}] "));
-                using CoreServer server = new CoreServer(innerLoggerRef, "UTT", NodeType.Router, _dbContext);
+                using CoreServer server = new CoreServer(innerLoggerRef, "UTT", NodeType.Router, dbContext);
                 // start server
                 server.Start();
                 // connect client
@@ -121,7 +105,10 @@ namespace Highlander.Core.V1.Tests
         public void TestAppConfiguration()
         {
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             server.Start();
             using (ICoreClient manager = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
             using (ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -170,7 +157,10 @@ namespace Highlander.Core.V1.Tests
             // tests that object with simple types (including null) can be saved and loaded
             NamedValueSet props = new NamedValueSet();
             props.Set("Category", 10);
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -221,22 +211,22 @@ namespace Highlander.Core.V1.Tests
                 ICoreItem item5B = client.LoadItem<string>("String5");
                 Assert.IsNotNull(item5B.Data);
                 Assert.AreEqual(typeof(string), item5B.Data.GetType());
-                client.SaveTypedObject(typeof(Int64), (Int64)6, "Int64_6", null);
+                client.SaveTypedObject(typeof(long), (long)6, "Int64_6", null);
                 ICoreItem item6A = client.LoadItem("Int64_6");
                 Assert.IsNotNull(item6A.Data);
-                Assert.AreEqual(typeof(Int64), item6A.Data.GetType());
-                Assert.AreEqual((Int64)6, (Int64)item6A.Data);
-                ICoreItem item6B = client.LoadItem(typeof(Int64), "Int64_6");
+                Assert.AreEqual(typeof(long), item6A.Data.GetType());
+                Assert.AreEqual(6, (long)item6A.Data);
+                ICoreItem item6B = client.LoadItem(typeof(long), "Int64_6");
                 Assert.IsNotNull(item6B.Data);
-                Assert.AreEqual(typeof(Int64), item6B.Data.GetType());
-                client.SaveTypedObject(typeof(Decimal), 7M, "Decimal_7", null);
+                Assert.AreEqual(typeof(long), item6B.Data.GetType());
+                client.SaveTypedObject(typeof(decimal), 7M, "Decimal_7", null);
                 ICoreItem item7A = client.LoadItem("Decimal_7");
                 Assert.IsNotNull(item7A.Data);
-                Assert.AreEqual(typeof(Decimal), item7A.Data.GetType());
-                Assert.AreEqual((Decimal)7, (Decimal)item7A.Data);
-                ICoreItem item7B = client.LoadItem(typeof(Decimal), "Decimal_7");
+                Assert.AreEqual(typeof(decimal), item7A.Data.GetType());
+                Assert.AreEqual(7, (decimal)item7A.Data);
+                ICoreItem item7B = client.LoadItem(typeof(decimal), "Decimal_7");
                 Assert.IsNotNull(item7B.Data);
-                Assert.AreEqual(typeof(Decimal), item7B.Data.GetType());
+                Assert.AreEqual(typeof(decimal), item7B.Data.GetType());
                 Guid guid8 = Guid.NewGuid();
                 client.SaveTypedObject(typeof(Guid), guid8, "Guid_8", null);
                 ICoreItem item8A = client.LoadItem("Guid_8");
@@ -268,8 +258,7 @@ namespace Highlander.Core.V1.Tests
                 ICoreItem item = client.LoadItem(typeof(string), "Test");
                 Assert.IsNotNull(item);
                 Assert.IsNotNull(item.Data);
-                Assert.AreEqual<Type>(typeof(string), item.Data.GetType());
-                string text1 = item.Text;
+                Assert.AreEqual(typeof(string), item.Data.GetType());
                 string data1 = (item.Data) as string;
                 Assert.AreEqual(typeof(string), item.Data.GetType());
                 Assert.AreEqual(data0, data1);
@@ -284,7 +273,6 @@ namespace Highlander.Core.V1.Tests
                 Assert.IsNotNull(item);
                 Assert.IsNotNull(item.Data);
                 Assert.AreEqual(typeof(int), item.Data.GetType());
-                string text1 = item.Text;
                 int data1 = (int)(item.Data);
                 Assert.AreEqual(typeof(int), item.Data.GetType());
                 Assert.AreEqual(data0, data1);
@@ -304,7 +292,10 @@ namespace Highlander.Core.V1.Tests
                 field2 = 2
             };
             NamedValueSet props = new NamedValueSet(new NamedValue("Category", 10));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -326,9 +317,8 @@ namespace Highlander.Core.V1.Tests
                 Assert.AreEqual(typeof(TestData), item1A.Data.GetType());
                 // test builtin deserialisation fails until type is supplied
                 item1A.SetText(text0, typeof(TestData).FullName);
-                object data1a = null;
                 UnitTestHelper.AssertThrows<ApplicationException>("Cannot deserialise!",
-                    () => data1a = item1A.Data);
+                    () => { });
                 // deserialisation succeeds when type is supplied
                 item1A.SetText(text0, typeof(TestData));
                 TestData data1B = (TestData)item1A.Data;
@@ -404,7 +394,10 @@ namespace Highlander.Core.V1.Tests
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
             NamedValueSet props = new NamedValueSet();
             props.Set("Category", 10);
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient core = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -477,58 +470,59 @@ namespace Highlander.Core.V1.Tests
             const string cTestAppScopeA = "HL.AU.Syd.AppA";
             const string cTestAppScopeB = "HL.AU.Syd.AppB";
             string env = "UTT";
-            using (CoreServer server = new CoreServer(loggerRef, env, NodeType.Router, _dbContext))
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, env, NodeType.Router, dbContext);
+            server.Start();
+            CoreClientFactory clientFactory = new CoreClientFactory(loggerRef).SetEnv(env);
+            using (ICoreClient recverAppA = clientFactory.Create())
+            using (ICoreClient senderAppA = clientFactory.Create())
+            using (ICoreClient recverAppB = clientFactory.Create())
+            using (ICoreClient senderAppB = clientFactory.Create())
             {
-                server.Start();
-                CoreClientFactory clientFactory = new CoreClientFactory(loggerRef).SetEnv(env);
-                using (ICoreClient recverAppA = clientFactory.Create())
-                using (ICoreClient senderAppA = clientFactory.Create())
-                using (ICoreClient recverAppB = clientFactory.Create())
-                using (ICoreClient senderAppB = clientFactory.Create())
+                // AppA 'sender' saves
+                TestData dataSentAppA = new TestData
                 {
-                    // AppA 'sender' saves
-                    TestData dataSentAppA = new TestData
-                    {
-                        field1 = "AppA",
-                        field2 = 1
-                    };
-                    senderAppA.DefaultAppScopes = new[] { cTestAppScopeA };
-                    ICoreItem evtSentAppA = senderAppA.MakeObject(dataSentAppA, "Test", null);
-                    Guid evtIdAppA = senderAppA.SaveItem(evtSentAppA);
-                    // AppB 'sender' saves
-                    TestData dataSentAppB = new TestData {field1 = "AppB", field2 = 2};
-                    senderAppB.DefaultAppScopes = new[] { cTestAppScopeB };
-                    ICoreItem evtSentAppB = senderAppB.MakeObject<TestData>(dataSentAppB, "Test", null);
-                    Guid evtIdAppB = senderAppB.SaveItem(evtSentAppB);
-                    // AppA 'recver' loads
-                    recverAppA.DefaultAppScopes = new[] { cTestAppScopeA };
-                    List<ICoreItem> subsAppA = recverAppA.LoadItems<TestData>(Expr.ALL);
-                    Assert.AreEqual(1, subsAppA.Count);
-                    ICoreItem itemAppA = subsAppA[0];
-                    Assert.IsNotNull(itemAppA);
-                    Assert.IsNotNull(itemAppA.Data);
-                    Assert.AreNotEqual(evtIdAppB, itemAppA.Id);
-                    Assert.AreEqual(evtIdAppA, itemAppA.Id);
-                    TestData dataRecdAppA = (TestData)itemAppA.Data;
-                    Assert.AreEqual("AppA", dataRecdAppA.field1);
-                    Assert.AreEqual(1, dataRecdAppA.field2);
-                    Assert.AreEqual(cTestAppScopeA, itemAppA.AppScope);
-                    // AppB 'recver' loads
-                    recverAppB.DefaultAppScopes = new[] { cTestAppScopeB };
-                    List<ICoreItem> subsAppB = recverAppB.LoadItems<TestData>(Expr.ALL);
-                    Assert.AreEqual(1, subsAppB.Count);
-                    ICoreItem itemAppB = subsAppB[0];
-                    Assert.IsNotNull(itemAppB);
-                    Assert.IsNotNull(itemAppB.Data);
-                    Assert.AreNotEqual(evtIdAppA, itemAppB.Id);
-                    Assert.AreEqual(evtIdAppB, itemAppB.Id);
-                    TestData dataRecdAppB = (TestData)itemAppB.Data;
-                    Assert.AreEqual("AppB", dataRecdAppB.field1);
-                    Assert.AreEqual(2, dataRecdAppB.field2);
-                    Assert.AreEqual(cTestAppScopeB, itemAppB.AppScope);
-                }
-                server.Stop();
+                    field1 = "AppA",
+                    field2 = 1
+                };
+                senderAppA.DefaultAppScopes = new[] { cTestAppScopeA };
+                ICoreItem evtSentAppA = senderAppA.MakeObject(dataSentAppA, "Test", null);
+                Guid evtIdAppA = senderAppA.SaveItem(evtSentAppA);
+                // AppB 'sender' saves
+                TestData dataSentAppB = new TestData {field1 = "AppB", field2 = 2};
+                senderAppB.DefaultAppScopes = new[] { cTestAppScopeB };
+                ICoreItem evtSentAppB = senderAppB.MakeObject<TestData>(dataSentAppB, "Test", null);
+                Guid evtIdAppB = senderAppB.SaveItem(evtSentAppB);
+                // AppA 'recver' loads
+                recverAppA.DefaultAppScopes = new[] { cTestAppScopeA };
+                List<ICoreItem> subsAppA = recverAppA.LoadItems<TestData>(Expr.ALL);
+                Assert.AreEqual(1, subsAppA.Count);
+                ICoreItem itemAppA = subsAppA[0];
+                Assert.IsNotNull(itemAppA);
+                Assert.IsNotNull(itemAppA.Data);
+                Assert.AreNotEqual(evtIdAppB, itemAppA.Id);
+                Assert.AreEqual(evtIdAppA, itemAppA.Id);
+                TestData dataRecdAppA = (TestData)itemAppA.Data;
+                Assert.AreEqual("AppA", dataRecdAppA.field1);
+                Assert.AreEqual(1, dataRecdAppA.field2);
+                Assert.AreEqual(cTestAppScopeA, itemAppA.AppScope);
+                // AppB 'recver' loads
+                recverAppB.DefaultAppScopes = new[] { cTestAppScopeB };
+                List<ICoreItem> subsAppB = recverAppB.LoadItems<TestData>(Expr.ALL);
+                Assert.AreEqual(1, subsAppB.Count);
+                ICoreItem itemAppB = subsAppB[0];
+                Assert.IsNotNull(itemAppB);
+                Assert.IsNotNull(itemAppB.Data);
+                Assert.AreNotEqual(evtIdAppA, itemAppB.Id);
+                Assert.AreEqual(evtIdAppB, itemAppB.Id);
+                TestData dataRecdAppB = (TestData)itemAppB.Data;
+                Assert.AreEqual("AppB", dataRecdAppB.field1);
+                Assert.AreEqual(2, dataRecdAppB.field2);
+                Assert.AreEqual(cTestAppScopeB, itemAppB.AppScope);
             }
+            server.Stop();
         }
 
         [TestMethod]
@@ -538,7 +532,10 @@ namespace Highlander.Core.V1.Tests
             // 1) tests that a published Object can be retrieved
             TestData data0 = new TestData {field1 = "test", field2 = 2};
             NamedValueSet props = new NamedValueSet(new NamedValue("Category", 10));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using (ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -551,7 +548,7 @@ namespace Highlander.Core.V1.Tests
                 Assert.IsNotNull(objset0);
                 Assert.AreEqual(0, objset0.Count);
                 // create the object
-                Guid obj1AId = client1.SaveObject<TestData>(data0, "Test", props, TimeSpan.MaxValue);
+                Guid obj1AId = client1.SaveObject(data0, "Test", props, TimeSpan.MaxValue);
                 // retrieve asynchronously (typed)
                 IAsyncResult ar1 = client2.LoadItemBegin<TestData>(null, obj1AId);
                 // wait for completion
@@ -590,7 +587,10 @@ namespace Highlander.Core.V1.Tests
                     hostIpv4 = ipAddress.ToString();
             }
             Assert.IsNotNull(hostIpv4);
-            using CoreServer server = new CoreServer(loggerRef, serverSettings, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, serverSettings, dbContext);
             server.Start();
             List<string> serverAddresses = server.GetServerAddresses(null);
             Assert.AreEqual(3, serverAddresses.Count);
@@ -639,8 +639,11 @@ namespace Highlander.Core.V1.Tests
             settings2.Set(CfgPropName.NodeType, (int)NodeType.Router);
             settings2.Set(CfgPropName.Port, 9002);
             settings2.Set(CfgPropName.EnvName, "UTT");
-            using CoreServer server1 = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
-            using CoreServer server2 = new CoreServer(loggerRef, settings2, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server1 = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
+            using CoreServer server2 = new CoreServer(loggerRef, settings2, dbContext);
             server1.Start();
             server2.Start();
             using (ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create())
@@ -672,7 +675,10 @@ namespace Highlander.Core.V1.Tests
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
             TimeSpan itemLifetime = TimeSpan.FromSeconds(3);
             TestData data0 = new TestData {field1 = "test", field2 = 2};
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using ICoreClient client1 = new CoreClientFactory(loggerRef).SetEnv("UTT").Create();
@@ -731,7 +737,10 @@ namespace Highlander.Core.V1.Tests
         public void TestDisposeUnstartedSubscription()
         {
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             using ICoreClient client = new CoreClientFactory(loggerRef)
@@ -748,7 +757,10 @@ namespace Highlander.Core.V1.Tests
         {
             using Reference<ILogger> loggerRef = Reference<ILogger>.Create(new TraceLogger(true));
             TestData data0 = new TestData {field1 = "test", field2 = 2};
-            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, _dbContext);
+            var optionsBuilder = new DbContextOptionsBuilder<HighlanderContext>();
+            optionsBuilder.UseSqlite("Data Source=HL_Core.db");
+            using HighlanderContext dbContext = new HighlanderContext(optionsBuilder.Options);
+            using CoreServer server = new CoreServer(loggerRef, "UTT", NodeType.Router, dbContext);
             // start server
             server.Start();
             //TimeSpan refreshPeriod = TimeSpan.FromSeconds(3);
@@ -815,7 +827,7 @@ namespace Highlander.Core.V1.Tests
             int newCreatedCount = 0;
             int newUpdatedCount = 0;
             int newDeletedCount = 0;
-            using (ICoreCache newItems = client.CreateCache(delegate(CacheChangeData update)
+            using ICoreCache newItems = client.CreateCache(delegate(CacheChangeData update)
             {
                 loggerRef.Target.LogDebug("NewItems: {0}", update.Change);
                 switch (update.Change)
@@ -834,85 +846,83 @@ namespace Highlander.Core.V1.Tests
                         newUpdatedCount++;
                         break;
                 }
-            }, null))
-            {
-                newItems.SubscribeNewOnly<TestData>(Expr.BoolAND(itemProps), null, null);
-                Assert.AreEqual(0, newItems.ItemCount);
-                Assert.AreEqual(0, newItems.UpdateCount);
-                // check clear notification
-                newItems.Clear();
-                // wait a bit for propagation
-                Thread.Sleep(1000);
-                Assert.AreEqual(0, newItems.ItemCount);
-                Assert.AreEqual(0, newItems.CreateCount);
-                Assert.AreEqual(0, newItems.UpdateCount);
-                Assert.AreEqual(0, newItems.DeleteCount);
-                Assert.AreEqual(1, newClearedCount);
-                // update the object
-                Guid itemId2 = client.SaveObject(data0, item1B.Name, item1B.AppProps, TimeSpan.MaxValue);
-                // wait a bit for propagation
-                Thread.Sleep(1000);
-                Assert.AreEqual(1, allItems.ItemCount);
-                Assert.AreEqual(1, allItems.CreateCount);
-                Assert.AreEqual(1, allItems.UpdateCount);
-                Assert.AreEqual(0, allItems.DeleteCount);
-                Assert.AreEqual(1, allClearedCount);
-                Assert.AreEqual(1, allCreatedCount);
-                Assert.AreEqual(1, allUpdatedCount);
-                Assert.AreEqual(0, allDeletedCount);
-                ICoreItem item2B = allItems.Items[0];
-                Assert.AreEqual(itemId2, item2B.Id);
-                Assert.AreEqual(1, newItems.ItemCount);
-                Assert.AreEqual(1, newItems.CreateCount);
-                Assert.AreEqual(0, newItems.UpdateCount);
-                Assert.AreEqual(0, newItems.DeleteCount);
-                Assert.AreEqual(1, newClearedCount);
-                Assert.AreEqual(1, newCreatedCount);
-                Assert.AreEqual(0, newUpdatedCount);
-                Assert.AreEqual(0, newDeletedCount);
-                ICoreItem item2C = newItems.Items[0];
-                Assert.AreEqual(itemId2, item2C.Id);
-                // "delete" the object
-                // note this is really an update with null content
-                client.DeleteItem(item2B);
-                // wait a bit for propagation
-                Thread.Sleep(1000);
-                Assert.AreEqual(1, allItems.ItemCount);
-                Assert.AreEqual(1, allItems.CreateCount);
-                Assert.AreEqual(2, allItems.UpdateCount);
-                Assert.AreEqual(0, allItems.DeleteCount);
-                Assert.AreEqual(1, allClearedCount);
-                Assert.AreEqual(1, allCreatedCount);
-                Assert.AreEqual(2, allUpdatedCount);
-                Assert.AreEqual(0, allDeletedCount);
-                Assert.AreEqual(1, newItems.ItemCount);
-                Assert.AreEqual(1, newItems.CreateCount);
-                Assert.AreEqual(1, newItems.UpdateCount);
-                Assert.AreEqual(0, newItems.DeleteCount);
-                Assert.AreEqual(1, newClearedCount);
-                Assert.AreEqual(1, newCreatedCount);
-                Assert.AreEqual(1, newUpdatedCount);
-                Assert.AreEqual(0, newDeletedCount);
-                // null refresh
-                // wait a bit for propagation
-                Thread.Sleep(500);
-                Assert.AreEqual(1, allItems.ItemCount);
-                Assert.AreEqual(1, allItems.CreateCount);
-                Assert.AreEqual(2, allItems.UpdateCount);
-                Assert.AreEqual(0, allItems.DeleteCount);
-                Assert.AreEqual(1, allClearedCount);
-                Assert.AreEqual(1, allCreatedCount);
-                Assert.AreEqual(2, allUpdatedCount);
-                Assert.AreEqual(0, allDeletedCount);
-                Assert.AreEqual(1, newItems.ItemCount);
-                Assert.AreEqual(1, newItems.CreateCount);
-                Assert.AreEqual(1, newItems.UpdateCount);
-                Assert.AreEqual(0, newItems.DeleteCount);
-                Assert.AreEqual(1, newClearedCount);
-                Assert.AreEqual(1, newCreatedCount);
-                Assert.AreEqual(1, newUpdatedCount);
-                Assert.AreEqual(0, newDeletedCount);
-            }
+            }, null);
+            newItems.SubscribeNewOnly<TestData>(Expr.BoolAND(itemProps), null, null);
+            Assert.AreEqual(0, newItems.ItemCount);
+            Assert.AreEqual(0, newItems.UpdateCount);
+            // check clear notification
+            newItems.Clear();
+            // wait a bit for propagation
+            Thread.Sleep(1000);
+            Assert.AreEqual(0, newItems.ItemCount);
+            Assert.AreEqual(0, newItems.CreateCount);
+            Assert.AreEqual(0, newItems.UpdateCount);
+            Assert.AreEqual(0, newItems.DeleteCount);
+            Assert.AreEqual(1, newClearedCount);
+            // update the object
+            Guid itemId2 = client.SaveObject(data0, item1B.Name, item1B.AppProps, TimeSpan.MaxValue);
+            // wait a bit for propagation
+            Thread.Sleep(1000);
+            Assert.AreEqual(1, allItems.ItemCount);
+            Assert.AreEqual(1, allItems.CreateCount);
+            Assert.AreEqual(1, allItems.UpdateCount);
+            Assert.AreEqual(0, allItems.DeleteCount);
+            Assert.AreEqual(1, allClearedCount);
+            Assert.AreEqual(1, allCreatedCount);
+            Assert.AreEqual(1, allUpdatedCount);
+            Assert.AreEqual(0, allDeletedCount);
+            ICoreItem item2B = allItems.Items[0];
+            Assert.AreEqual(itemId2, item2B.Id);
+            Assert.AreEqual(1, newItems.ItemCount);
+            Assert.AreEqual(1, newItems.CreateCount);
+            Assert.AreEqual(0, newItems.UpdateCount);
+            Assert.AreEqual(0, newItems.DeleteCount);
+            Assert.AreEqual(1, newClearedCount);
+            Assert.AreEqual(1, newCreatedCount);
+            Assert.AreEqual(0, newUpdatedCount);
+            Assert.AreEqual(0, newDeletedCount);
+            ICoreItem item2C = newItems.Items[0];
+            Assert.AreEqual(itemId2, item2C.Id);
+            // "delete" the object
+            // note this is really an update with null content
+            client.DeleteItem(item2B);
+            // wait a bit for propagation
+            Thread.Sleep(1000);
+            Assert.AreEqual(1, allItems.ItemCount);
+            Assert.AreEqual(1, allItems.CreateCount);
+            Assert.AreEqual(2, allItems.UpdateCount);
+            Assert.AreEqual(0, allItems.DeleteCount);
+            Assert.AreEqual(1, allClearedCount);
+            Assert.AreEqual(1, allCreatedCount);
+            Assert.AreEqual(2, allUpdatedCount);
+            Assert.AreEqual(0, allDeletedCount);
+            Assert.AreEqual(1, newItems.ItemCount);
+            Assert.AreEqual(1, newItems.CreateCount);
+            Assert.AreEqual(1, newItems.UpdateCount);
+            Assert.AreEqual(0, newItems.DeleteCount);
+            Assert.AreEqual(1, newClearedCount);
+            Assert.AreEqual(1, newCreatedCount);
+            Assert.AreEqual(1, newUpdatedCount);
+            Assert.AreEqual(0, newDeletedCount);
+            // null refresh
+            // wait a bit for propagation
+            Thread.Sleep(500);
+            Assert.AreEqual(1, allItems.ItemCount);
+            Assert.AreEqual(1, allItems.CreateCount);
+            Assert.AreEqual(2, allItems.UpdateCount);
+            Assert.AreEqual(0, allItems.DeleteCount);
+            Assert.AreEqual(1, allClearedCount);
+            Assert.AreEqual(1, allCreatedCount);
+            Assert.AreEqual(2, allUpdatedCount);
+            Assert.AreEqual(0, allDeletedCount);
+            Assert.AreEqual(1, newItems.ItemCount);
+            Assert.AreEqual(1, newItems.CreateCount);
+            Assert.AreEqual(1, newItems.UpdateCount);
+            Assert.AreEqual(0, newItems.DeleteCount);
+            Assert.AreEqual(1, newClearedCount);
+            Assert.AreEqual(1, newCreatedCount);
+            Assert.AreEqual(1, newUpdatedCount);
+            Assert.AreEqual(0, newDeletedCount);
         }
     }
 }

@@ -253,7 +253,7 @@ namespace Highlander.Core.V1
             SysProps.Set(SysPropName.ZAlg, 1);
             SysProps.Set(SysPropName.ZLen, _zData?.Length ?? 0);
             // do symmetric encryption 1st, if required
-            var xtki = SysProps.GetValue<String>(SysPropName.Xtki, null);
+            var xtki = SysProps.GetValue<string>(SysPropName.Xtki, null);
             if (xtki != null)
             {
                 _xData = _proxy.CryptoManager.EncryptWithTransportKey(xtki, _zData);
@@ -263,7 +263,7 @@ namespace Highlander.Core.V1
                 _xData = _zData;
             SysProps.Set(SysPropName.XLen, _xData?.Length ?? 0);
             // do asymmetric encryption 2nd, if required
-            var yrki = SysProps.GetValue<String>(SysPropName.Yrki, null);
+            var yrki = SysProps.GetValue<string>(SysPropName.Yrki, null);
             if (yrki != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -274,7 +274,7 @@ namespace Highlander.Core.V1
             YDataHash = CalculateBufferHash(YData);
             SysProps.Set(SysPropName.YLen, YData?.Length ?? 0);
             // do public signature 3rd, if required
-            var yski = SysProps.GetValue<String>(SysPropName.Yski, null);
+            var yski = SysProps.GetValue<string>(SysPropName.Yski, null);
             if (yski != null)
             {
                 SysProps.Set(SysPropName.YAlg, 1);
@@ -904,6 +904,7 @@ namespace Highlander.Core.V1
 
         public ILogger Logger { get; }
 
+        private readonly string[] _protocols;
         //private readonly AddressBinding _sessCtrlAddressBinding;
         //private readonly AddressBinding _transferAddressBinding;
         private readonly V131ClientInfo _clientInfoV131;
@@ -1204,17 +1205,12 @@ namespace Highlander.Core.V1
             }
             try
             {
-                using (var principalContext = new PrincipalContext(ContextType.Domain))
-                {
-                    using (
-                        UserPrincipal principal = UserPrincipal.FindByIdentity(principalContext,
-                            IdentityType.SamAccountName,
-                            userLoginName))
-                    {
-                        if (principal != null)
-                            userFullName = principal.GivenName + " " + principal.Surname;
-                    }
-                }
+                using var principalContext = new PrincipalContext(ContextType.Domain);
+                using UserPrincipal principal = UserPrincipal.FindByIdentity(principalContext,
+                    IdentityType.SamAccountName,
+                    userLoginName);
+                if (principal != null)
+                    userFullName = principal.GivenName + " " + principal.Surname;
             }
             catch (PrincipalException principalException)
             {
@@ -2572,7 +2568,7 @@ namespace Highlander.Core.V1
             return results;
         }
 
-        private IAsyncResult SendKeepaliveBegin(AsyncCallback callback, Type dataTypeType, V341ExtendSubscription extendSubsRequest)
+        private IAsyncResult SendKeepAliveBegin(AsyncCallback callback, Type dataTypeType, V341ExtendSubscription extendSubsRequest)
         {
             var ar = new AsyncResult<GuardedList<ClientItem>>(callback, null);
             var request = new RequestExtendSubscription(ar, dataTypeType, _requestTimeout, DebugRequests, extendSubsRequest);
@@ -2628,7 +2624,7 @@ namespace Highlander.Core.V1
                 if (_coreState == CoreStateEnum.Faulted)
                     return;
                 // extend subscriptions
-                IAsyncResult ar = SendKeepaliveBegin(null, null, new V341ExtendSubscription());
+                IAsyncResult ar = SendKeepAliveBegin(null, null, new V341ExtendSubscription());
                 SendKeepAliveEnd(ar);
                 // send heartbeat message
                 string itemName =
@@ -2791,50 +2787,50 @@ namespace Highlander.Core.V1
 
         private void OpenServerHostForReplies()
         {
-            //const int minPort = 10000;
-            //const int maxPort = 65535;
-            //const int maxAttempts = 10;
-            //var random = new Random(Environment.TickCount);
-            //int attempt = 0;
-            //string protocol = ServerAddress.Protocol;
-            //while (_replyServiceHost == null)
-            //{
-            //    if (attempt >= maxAttempts)
-            //        throw new ApplicationException(
-            //            $"Aborting - open host attempt limit ({maxAttempts}) reached!");
-            //    // attempt to start a new host on a new port
-            //    attempt++;
-            //    int port = random.Next(minPort, maxPort);
-            //    // clear session id to force client reconnect
-            //    _sessionId = Guid.Empty;
-            //    try
-            //    {
-            //        string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
-            //        _replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
-            //            Logger, new TransferRecverV341(this), endpoint,
-            //            ClientInfo.ApplName, typeof(ITransferV341).Name, false);
-            //    }
-            //    catch (AddressAlreadyInUseException e1)
-            //    {
-            //        // expected often
-            //        Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e1.GetType().Name, e1.Message);
-            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
-            //    }
-            //    catch (InvalidOperationException e2)
-            //    {
-            //        // expected but not often
-            //        Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e2.GetType().Name, e2.Message);
-            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
-            //    }
-            //    catch (CommunicationException e3)
-            //    {
-            //        // unexpected communications error
-            //        Logger.LogWarning("Failed to open port {0}: {1}: {2}", port, e3.GetType().Name, e3.Message);
-            //        DisposeHelper.SafeDispose(ref _replyServiceHost);
-            //        throw;
-            //    }
-            //} // while
-            //_replyAddress = _replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
+            const int minPort = 10000;
+            const int maxPort = 65535;
+            const int maxAttempts = 10;
+            var random = new Random(Environment.TickCount);
+            int attempt = 0;
+            string protocol = ServerAddress.Protocol;
+            while (_replyServiceHost == null)
+            {
+                if (attempt >= maxAttempts)
+                    throw new ApplicationException(
+                        $"Aborting - open host attempt limit ({maxAttempts}) reached!");
+                // attempt to start a new host on a new port
+                attempt++;
+                int port = random.Next(minPort, maxPort);
+                // clear session id to force client reconnect
+                _sessionId = Guid.Empty;
+                try
+                {
+                    string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
+                    _replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
+                        Logger, new TransferRecverV341(this), endpoint,
+                        ClientInfo.ApplName, typeof(ITransferV341).Name, false);
+                }
+                catch (AddressAlreadyInUseException e1)
+                {
+                    // expected often
+                    Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e1.GetType().Name, e1.Message);
+                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                }
+                catch (InvalidOperationException e2)
+                {
+                    // expected but not often
+                    Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e2.GetType().Name, e2.Message);
+                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                }
+                catch (CommunicationException e3)
+                {
+                    // unexpected communications error
+                    Logger.LogWarning("Failed to open port {0}: {1}: {2}", port, e3.GetType().Name, e3.Message);
+                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                    throw;
+                }
+            } // while
+            _replyAddress = _replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
         }
 
         private void BackoffRetryAlgorithm(Exception excp, Guid requestId, DateTimeOffset expiryTime, RequestBase request, int attempt)
@@ -2921,24 +2917,24 @@ namespace Highlander.Core.V1
                         // reconnected if required
                         if (_clientBase == null)
                         {
-                            //if (attempt > 1)
-                            //    Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
-                            //if (_sessionId == Guid.Empty)
-                            //{
-                            //    CoreState = CoreStateEnum.Connecting;
-                            //    using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
-                            //    {
-                            //        var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
-                            //        var sessionReply = session.BeginSessionV131(sessionHeader, _clientInfoV131);
-                            //        if (!sessionReply.Success)
-                            //        {
-                            //            throw new ApplicationException("Connection rejected: " + sessionReply.Message);
-                            //        }
-                            //        _sessionId = sessionReply.SessionId;
-                            //    }
-                            //}
-                            ////instantiate a channel
-                            //_clientBase = new TransferV341Client(_transferAddressBinding);
+                            if (attempt > 1)
+                                Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
+                            if (_sessionId == Guid.Empty)
+                            {
+                                CoreState = CoreStateEnum.Connecting;
+                                using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
+                                {
+                                    var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
+                                    var sessionReply = session.BeginSessionV131(sessionHeader, _clientInfoV131);
+                                    if (!sessionReply.Success)
+                                    {
+                                        throw new ApplicationException("Connection rejected: " + sessionReply.Message);
+                                    }
+                                    _sessionId = sessionReply.SessionId;
+                                }
+                            }
+                            //instantiate a channel
+                            _clientBase = new TransferV341Client(_transferAddressBinding);
                         }
                         if (request != null)
                         {
