@@ -67,7 +67,7 @@ namespace Highlander.Utilities.Tests.Threading
         [TestMethod]
         public void TestObjectLockPerformance()
         {
-            bool _IsSingleCore = (Environment.ProcessorCount == 1);
+            bool isSingleCore = (Environment.ProcessorCount == 1);
 
             //---------------------------------------------------------------
             {
@@ -93,12 +93,12 @@ namespace Highlander.Utilities.Tests.Threading
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
                 int lockedCount = 0;
-                int _Spinlock = 0;
+                int spinlock = 0;
                 for (int i = 0; i < TestIterations; i++)
                 {
-                    while (Interlocked.CompareExchange(ref _Spinlock, 1, 0) != 0)
+                    while (Interlocked.CompareExchange(ref spinlock, 1, 0) != 0)
                     {
-                        if (_IsSingleCore)
+                        if (isSingleCore)
                             Thread.Sleep(0);
                     }
                     try
@@ -107,7 +107,7 @@ namespace Highlander.Utilities.Tests.Threading
                     }
                     finally
                     {
-                        Interlocked.Exchange(ref _Spinlock, 0);
+                        Interlocked.Exchange(ref spinlock, 0);
                     }
                 }
                 sw.Stop();
@@ -146,10 +146,10 @@ namespace Highlander.Utilities.Tests.Threading
                 for (int i = 0; i < TestIterations; i++)
                 {
                     int spinCount = 0;
-                    object lockedObject = null;
+                    object lockedObject;
                     while ((lockedObject = Interlocked.Exchange<object>(ref target, null)) == null)
                     {
-                        if (_IsSingleCore)
+                        if (isSingleCore)
                             Thread.Sleep(0);
                         else
                         {
@@ -261,7 +261,7 @@ namespace Highlander.Utilities.Tests.Threading
                 int lockedCount = 0;
                 for (int i = 0; i < TestIterations; i++)
                 {
-                    ObjectLock<object>.Protect(ref target, delegate(object lockedObject)
+                    ObjectLock<object>.Protect(ref target, delegate
                     {
                         lockedCount++;
                     });

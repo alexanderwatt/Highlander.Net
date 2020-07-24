@@ -13,6 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+using System.Diagnostics;
 using System.Reflection;
 using Highlander.Utilities.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,10 +31,23 @@ namespace Highlander.Utilities.Tests.Helpers
         ///A test for ReadResourceValue
         ///</summary>
         [TestMethod]
-        [Ignore] // Doesn't work
+        public void ReadResourcesTest()
+        {
+            var actual = ResourceHelper.GetResources(Assembly.GetExecutingAssembly());
+            foreach (var file in actual)
+            {
+                Debug.Print(file);
+            }
+        }
+
+
+        /// <summary>
+        ///A test for ReadResourceValue
+        ///</summary>
+        [TestMethod]
         public void ReadResourceValueTest()
         {
-            string actual = ResourceHelper.ReadResourceValue("Highlander.Utilities.Tests.Helpers.ResourceTest", "Name1");
+            string actual = ResourceHelper.ReadResourceValue("Highlander.Utilities.Tests.Helpers.ResourceTest.resources", "Name1");
             Assert.AreEqual("value1", actual);
         }
 
@@ -44,7 +58,7 @@ namespace Highlander.Utilities.Tests.Helpers
         public void GetResourceWithPartialNameTest()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            const string partialResourceName = "ResourceTest.txt";
+            const string partialResourceName = "ResourceTest.resources";
             string actual = ResourceHelper.GetResourceWithPartialName(assembly, partialResourceName);
             Assert.AreEqual("Resource Test", actual);
             actual = ResourceHelper.GetResourceWithPartialName(assembly, "invalid");
@@ -58,7 +72,7 @@ namespace Highlander.Utilities.Tests.Helpers
         public void GetResourceTest()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            const string resourceName = "Highlander.Utilities.Tests.Helpers.ResourceTest.txt";
+            const string resourceName = "Highlander.Utilities.Tests.Helpers.ResourceTest.resources";
             string actual = ResourceHelper.GetResource(assembly, resourceName);
             Assert.AreEqual("Resource Test", actual);
         }

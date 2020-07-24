@@ -44,19 +44,19 @@ namespace Highlander.Utilities.Tests.Helpers
         [TestMethod]
         public void ChangeTypeTest()
         {
-            object actual = ReflectionHelper.ChangeType((int)3, typeof(double));
+            object actual = ReflectionHelper.ChangeType(3, typeof(double));
             Assert.AreEqual(3d, actual);
 
             actual = ReflectionHelper.ChangeType('f', typeof(string));
             Assert.AreEqual("f", actual);
 
-            const EnumHelperTest.TestEnum Value = EnumHelperTest.TestEnum.Value2;
-            actual = ReflectionHelper.ChangeType(Value, typeof(decimal));
-            Assert.AreEqual((decimal)Value, actual);
+            const EnumHelperTest.TestEnum value = EnumHelperTest.TestEnum.Value2;
+            actual = ReflectionHelper.ChangeType(value, typeof(decimal));
+            Assert.AreEqual((decimal)value, actual);
 
-            const decimal Value2 = (decimal)EnumHelperTest.TestEnum.Value2;
-            actual = ReflectionHelper.ChangeType(Value2, typeof(EnumHelperTest.TestEnum));
-            Assert.AreEqual((EnumHelperTest.TestEnum)Value2, actual);
+            const decimal value2 = (decimal)EnumHelperTest.TestEnum.Value2;
+            actual = ReflectionHelper.ChangeType(value2, typeof(EnumHelperTest.TestEnum));
+            Assert.AreEqual((EnumHelperTest.TestEnum)value2, actual);
         }
     }
 }

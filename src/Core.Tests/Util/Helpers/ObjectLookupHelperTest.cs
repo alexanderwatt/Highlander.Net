@@ -49,7 +49,6 @@ namespace Highlander.Utilities.Tests.Helpers
             TestClass theObject = new TestClass { PropertyInt = 7, PropertyString = "Test" };
             bool actual = ObjectLookupHelper.ObjectPropertyExists(theObject, "PropertyString");
             Assert.IsTrue(actual);
-
             actual = ObjectLookupHelper.ObjectPropertyExists(theObject, "PropertyString1");
             Assert.IsFalse(actual);
         }
@@ -86,8 +85,7 @@ namespace Highlander.Utilities.Tests.Helpers
             TestClass theObject = new TestClass { PropertyInt = 7, PropertyString = "Test" };
 
             PropertyInfo[] expected
-                = new PropertyInfo[]
-                      {
+                = {
                           theObject.GetType().GetProperty("PropertyInt"),
                           theObject.GetType().GetProperty("PropertyString"),
                           theObject.GetType().GetProperty("Sub"),
@@ -102,8 +100,8 @@ namespace Highlander.Utilities.Tests.Helpers
         public void GetByIdTest()
         {
             // When Id is set the object is returned
-            TestSubClass testSubClass = new TestSubClass {id = "theId", name = "theName"};
-            TestClass theObject = new TestClass {PropertyInt = 7, PropertyString = "Test", Sub = testSubClass};
+            TestSubClass testSubClass = new TestSubClass { id = "theId", name = "theName" };
+            TestClass theObject = new TestClass { PropertyInt = 7, PropertyString = "Test", Sub = testSubClass };
             TestSubClass actual = ObjectLookupHelper.GetById<TestSubClass>(theObject, testSubClass.id);
             Assert.AreEqual(theObject.Sub, actual);
 
@@ -115,7 +113,7 @@ namespace Highlander.Utilities.Tests.Helpers
 
             // Id is set in Subs, that Sub is returned
             testSubClass = new TestSubClass { id = "theId", name = "theName" };
-            theObject = new TestClass { PropertyInt = 7, PropertyString = "Test", Sub = null, Subs = new TestSubClass[]{testSubClass} };
+            theObject = new TestClass { PropertyInt = 7, PropertyString = "Test", Sub = null, Subs = new TestSubClass[] { testSubClass } };
             actual = ObjectLookupHelper.GetById<TestSubClass>(theObject, testSubClass.id);
             Assert.AreEqual(theObject.Subs[0], actual);
 

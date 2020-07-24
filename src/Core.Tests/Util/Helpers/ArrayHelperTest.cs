@@ -62,7 +62,7 @@ namespace Highlander.Utilities.Tests.Helpers
                           {"Item3", "Value3"}
                       };
 
-            object[,] range1 = (object[,])Array.CreateInstance(typeof(object), new[] { 4, 2 }, new int[] { 1, 1 });
+            object[,] range1 = (object[,])Array.CreateInstance(typeof(object), new[] { 4, 2 }, new[] { 1, 1 });
             for (int i = 0; i <= range0.GetUpperBound(0); i++)
             {
                 range1[i + 1, 1] = range0[i, 0];

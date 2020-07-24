@@ -31,8 +31,7 @@ namespace Highlander.Utilities.Tests.NamedValues
         [TestMethod]
         public void RangeToNamedValueSetTest()
         {
-            object[,] properties = new object[,]
-                                       {
+            object[,] properties = {
                                            {"CurveType", "RateCurve"},
                                            {"ExpiryMins", 1}
                                        };
@@ -47,8 +46,7 @@ namespace Highlander.Utilities.Tests.NamedValues
         [TestMethod]
         public void DistinctInstancesTest()
         {
-            object[,] properties = new object[,]
-                                       {
+            object[,] properties = {
                                            {"CurveType", "RateCurve"},
                                            {"ExpiryMins", 1},
                                            {"ExpiryMins", 2}

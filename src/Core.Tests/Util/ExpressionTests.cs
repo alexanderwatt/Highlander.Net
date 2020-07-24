@@ -90,7 +90,7 @@ namespace Highlander.Utilities.Tests
                 IExpression expr2 = Expr.Const("Value2");
                 Assert.IsFalse(expr1.Equals(expr2));
             }
-            // incompatibale types
+            // incompatible types
             {
                 IExpression expr1 = Expr.Const("Value1");
                 IExpression expr2 = Expr.Const(true);
@@ -128,15 +128,15 @@ namespace Highlander.Utilities.Tests
             {
                 IExpression expr1 = Expr.FuncNow();
                 IExpression expr2 = Expr.FuncNow();
-                int hash1a = expr1.GetHashCode();
-                int hash2a = expr2.GetHashCode();
+                int hash1A = expr1.GetHashCode();
+                int hash2A = expr2.GetHashCode();
                 // these are usually equal but not always
                 //Assert.AreEqual<int>(hash1a, hash2a);
                 Thread.Sleep(30); // sleep at least 2 Windows time quanta (not ticks)
-                int hash1b = expr1.GetHashCode();
-                int hash2b = expr2.GetHashCode();
-                Assert.AreNotEqual<int>(hash1a, hash1b);
-                Assert.AreNotEqual<int>(hash1a, hash2b);
+                int hash1B = expr1.GetHashCode();
+                int hash2B = expr2.GetHashCode();
+                Assert.AreNotEqual(hash1A, hash1B);
+                Assert.AreNotEqual(hash1A, hash2B);
             }
         }
 
@@ -147,32 +147,32 @@ namespace Highlander.Utilities.Tests
             // - empty multi-AND = true
             {
                 IExpression[] args = { };
-                Assert.IsTrue(Expr.CastTo<bool>(Expr.BoolAND(args).Evaluate(null), false));
+                Assert.IsTrue(Expr.CastTo(Expr.BoolAND(args).Evaluate(null), false));
             }
             // - multi-AND true
             {
                 IExpression[] args = { Expr.Const(true), null, null, Expr.Const(true) };
-                Assert.IsTrue(Expr.CastTo<bool>(Expr.BoolAND(args).Evaluate(null), false));
+                Assert.IsTrue(Expr.CastTo(Expr.BoolAND(args).Evaluate(null), false));
             }
             // multi-AND false
             {
                 IExpression[] args = { Expr.Const(true), null, null, Expr.Const(false) };
-                Assert.IsFalse(Expr.CastTo<bool>(Expr.BoolAND(args).Evaluate(null), false));
+                Assert.IsFalse(Expr.CastTo(Expr.BoolAND(args).Evaluate(null), false));
             }
             // - empty multi-OR = false
             {
                 IExpression[] args = { };
-                Assert.IsFalse(Expr.CastTo<bool>(Expr.BoolOR(args).Evaluate(null), false));
+                Assert.IsFalse(Expr.CastTo(Expr.BoolOR(args).Evaluate(null), false));
             }
             // - multi-OR false
             {
                 IExpression[] args = { Expr.Const(false), null, null, Expr.Const(false) };
-                Assert.IsFalse(Expr.CastTo<bool>(Expr.BoolOR(args).Evaluate(null), false));
+                Assert.IsFalse(Expr.CastTo(Expr.BoolOR(args).Evaluate(null), false));
             }
             // multi-OR true
             {
                 IExpression[] args = { Expr.Const(false), null, null, Expr.Const(true) };
-                Assert.IsTrue(Expr.CastTo<bool>(Expr.BoolOR(args).Evaluate(null), false));
+                Assert.IsTrue(Expr.CastTo(Expr.BoolOR(args).Evaluate(null), false));
             }
         }
     }

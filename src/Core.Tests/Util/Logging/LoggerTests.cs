@@ -62,11 +62,9 @@ namespace Highlander.Utilities.Tests.Logging
         [TestMethod]
         public void TestFileLogger()
         {
-            using (FileLogger fileLogger = new FileLogger("c:\\temp\\test.log"))
-            {
-                fileLogger.LogInfo("testing 1 2 3");
-                fileLogger.LogDebug("testing 1 2 3");
-            }
+            using FileLogger fileLogger = new FileLogger("c:\\temp\\test.log");
+            fileLogger.LogInfo("testing 1 2 3");
+            fileLogger.LogDebug("testing 1 2 3");
         }
     }
 }

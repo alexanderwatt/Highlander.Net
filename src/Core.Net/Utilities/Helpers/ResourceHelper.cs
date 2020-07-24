@@ -44,7 +44,7 @@ namespace Highlander.Utilities.Helpers
             try
             {
                 // specify your resource file name 
-                string resourceFile = file;
+                var resourceFile = file;
                 var resourceManager = new ResourceManager(resourceFile, Assembly.GetExecutingAssembly());
                 resourceValue = resourceManager.GetString(key);
             }
@@ -65,12 +65,9 @@ namespace Highlander.Utilities.Helpers
         public static string GetResource(Assembly assembly, string resourceName)
         {
             // ReSharper disable AssignNullToNotNullAttribute
-            using (TextReader reader = new StreamReader(assembly.GetManifestResourceStream(resourceName)))
-            // ReSharper restore AssignNullToNotNullAttribute
-            {
-                string result = reader.ReadToEnd();
-                return result;
-            }
+            using TextReader reader = new StreamReader(assembly.GetManifestResourceStream(resourceName));
+            string result = reader.ReadToEnd();
+            return result;
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace Highlander.Utilities.Helpers
         /// <returns></returns>
         public static string GetResource(Assembly assembly, string shortResourceName, Type deriveNamespaceFromThisType)
         {
-            string resourceName = deriveNamespaceFromThisType.Namespace + "." + shortResourceName;
+            var resourceName = deriveNamespaceFromThisType.Namespace + "." + shortResourceName;
             return GetResource(assembly, resourceName);
         }
 
@@ -101,6 +98,17 @@ namespace Highlander.Utilities.Helpers
         /// 
         /// </summary>
         /// <param name="assembly"></param>
+        /// <returns></returns>
+        public static string[] GetResources(Assembly assembly)
+        {
+            string[] files = assembly.GetManifestResourceNames();
+            return files;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assembly"></param>
         /// <param name="partialResourceName"></param>
         /// <returns></returns>
         public static Dictionary<string, string> GetResources(Assembly assembly, string partialResourceName)
@@ -110,7 +118,6 @@ namespace Highlander.Utilities.Helpers
                 = (from f in files
                   where f.Contains(partialResourceName)
                   select new KeyValuePair<string, string>(f, GetResource(assembly, f))).ToDictionary(a=>a.Key, a=>a.Value);
-
             return chosenFiles;
         }
 
@@ -137,13 +144,13 @@ namespace Highlander.Utilities.Helpers
             string[] names = resourceName.Split(',');
             if (names.Length == 1)
             {
-                result = string.Compare(nameScope.Namespace, 0, resourceName, 0, nameScope.Namespace.Length, true) == 0 ? LoadEmbeddedString(asm, resourceName) : LoadEmbeddedString(asm, nameScope.Namespace + "." + resourceName);
+                result = nameScope.Namespace != null && string.Compare(nameScope.Namespace, 0, resourceName, 0, nameScope.Namespace.Length, true) == 0 ? LoadEmbeddedString(asm, resourceName) : LoadEmbeddedString(asm, nameScope.Namespace + "." + resourceName);
             }
             else
             {
                 names[0] = names[0].Trim();
                 names[1] = names[1].Trim();
-                result = string.Compare(nameScope.Namespace, 0, names[0], 0, nameScope.Namespace.Length, true) == 0 ? LoadResourceString(asm, names[0], names[1]) : LoadResourceString(asm, nameScope.Namespace + "." + names[0], names[1]);
+                result = nameScope.Namespace != null && string.Compare(nameScope.Namespace, 0, names[0], 0, nameScope.Namespace.Length, true) == 0 ? LoadResourceString(asm, names[0], names[1]) : LoadResourceString(asm, nameScope.Namespace + "." + names[0], names[1]);
             }
             return result;
         }
@@ -151,15 +158,11 @@ namespace Highlander.Utilities.Helpers
         private static string LoadEmbeddedString(Assembly asm, string resourceName)
         {
             string result = "";
-            using (Stream stream = asm.GetManifestResourceStream(resourceName))
+            using Stream stream = asm.GetManifestResourceStream(resourceName);
+            if (stream != null)
             {
-                if (stream != null)
-                {
-                    using (TextReader reader = new StreamReader(asm.GetManifestResourceStream(resourceName)))
-                    {
-                        result = reader.ReadToEnd();
-                    }
-                }
+                using TextReader reader = new StreamReader(asm.GetManifestResourceStream(resourceName));
+                result = reader.ReadToEnd();
             }
             return result;
         }
