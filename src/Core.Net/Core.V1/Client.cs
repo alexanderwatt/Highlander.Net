@@ -23,6 +23,8 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
+using Grpc.Core;
+using Grpc.Net.Client;
 using Highlander.Core.Common;
 using Highlander.Core.Common.CommsInterfaces;
 using Highlander.Grpc.Contracts;
@@ -904,7 +906,7 @@ namespace Highlander.Core.V1
 
         public ILogger Logger { get; }
 
-        private readonly string[] _protocols;
+        //private readonly string[] _protocols;
         //private readonly AddressBinding _sessCtrlAddressBinding;
         //private readonly AddressBinding _transferAddressBinding;
         private readonly V131ClientInfo _clientInfoV131;
@@ -940,8 +942,8 @@ namespace Highlander.Core.V1
         private Guid _sessionId = Guid.Empty;
         private TransferV341Client _clientBase;
         private Timer _housekeepingTimer;
-        //private Timer _KeepAliveTimer;
-        //private ISubscription _DefaultSubscription;
+        //private Timer _keepAliveTimer;
+        //private ISubscription _defaultSubscription;
         private readonly Guarded<IncompleteRequests> _incompleteRequests = new Guarded<IncompleteRequests>(new IncompleteRequests());
         private long _asyncCallProcessOutgoingRequestsCount;
 
@@ -1093,8 +1095,8 @@ namespace Highlander.Core.V1
                 throw new InvalidOperationException();
             // block until request count falls below maximum
             DateTime lastLogged = DateTime.Now;
-            bool logged = false;
-            int requestCount = 0;
+            var logged = false;
+            var requestCount = 0;
             _incompleteRequests.Locked(requests => requestCount = requests.OutgoingRequestQueue.Count);
             while (requestCount > _maxRequestCount)
             {
@@ -1250,11 +1252,16 @@ namespace Highlander.Core.V1
                     throw new NotSupportedException("CoreMode: " + CoreMode);
             }
             // create server connection
+            //
+            //All this looks redundant
+            //
+            //
             const SvcId svc = SvcId.CoreServer;
             string svcName = EnvHelper.SvcPrefix(svc);
+            //Get the URL for that server and service
             string[] serviceAddress = EnvHelper.GetServiceAddrs(envId, svc, useFallbackServers);
-            if (hostList != null)
-                serviceAddress = hostList.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //if (hostList != null)
+            //    serviceAddress = hostList.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             int defaultPort = EnvHelper.SvcPort(envId, svc);
             //ServiceAddress resolvedServer = V111Helpers.ResolveServer(Logger, svcName, new ServiceAddresses(protocols1, serviceAddress, defaultPort),
             //    new[] { typeof(ISessCtrlV131).FullName, typeof(ITransferV341).FullName });
@@ -2793,8 +2800,17 @@ namespace Highlander.Core.V1
             var random = new Random(Environment.TickCount);
             int attempt = 0;
             string protocol = ServerAddress.Protocol;
-            while (_replyServiceHost == null)
+            //
+            //New
+            //
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001"); //Get this from the configuration
+            SessCtrlV131.SessCtrlV131Client session = null; //Instantiate here??
+            //
+            //End
+            //
+            while (session == null) //_replyServiceHost
             {
+                session = new SessCtrlV131.SessCtrlV131Client(channel);
                 if (attempt >= maxAttempts)
                     throw new ApplicationException(
                         $"Aborting - open host attempt limit ({maxAttempts}) reached!");
@@ -2805,32 +2821,45 @@ namespace Highlander.Core.V1
                 _sessionId = Guid.Empty;
                 try
                 {
-                    string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
-                    _replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
-                        Logger, new TransferRecverV341(this), endpoint,
-                        ClientInfo.ApplName, typeof(ITransferV341).Name, false);
+                    //
+                    //New
+                    //
+                    var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false,
+                        false, "Nothing", _replyContract, DebugRequests);
+                    BeginSessionV131Request beginRequest = new BeginSessionV131Request
+                    {
+                        Header = sessionHeader
+                    };
+                    //
+                    //End
+                    //
+
+                    //string endpoint = ServiceHelper.FormatEndpoint(protocol, port);
+                    //_replyServiceHost = new CustomServiceHost<ITransferV341, TransferRecverV341>(
+                    //    Logger, new TransferRecverV341(this), endpoint,
+                    //    ClientInfo.ApplName, typeof(ITransferV341).Name, false);
                 }
                 catch (AddressAlreadyInUseException e1)
                 {
                     // expected often
                     Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e1.GetType().Name, e1.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                    //DisposeHelper.SafeDispose(ref _replyServiceHost);
                 }
                 catch (InvalidOperationException e2)
                 {
                     // expected but not often
                     Logger.LogDebug("Failed to open port {0}: {1}: {2}", port, e2.GetType().Name, e2.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                    //DisposeHelper.SafeDispose(ref _replyServiceHost);
                 }
                 catch (CommunicationException e3)
                 {
                     // unexpected communications error
                     Logger.LogWarning("Failed to open port {0}: {1}: {2}", port, e3.GetType().Name, e3.Message);
-                    DisposeHelper.SafeDispose(ref _replyServiceHost);
+                    //DisposeHelper.SafeDispose(ref _replyServiceHost);
                     throw;
                 }
             } // while
-            _replyAddress = _replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
+            _replyAddress = "Set the url"; //replyServiceHost.GetIpV4Addresses(protocol).ToArray()[0];
         }
 
         private void BackoffRetryAlgorithm(Exception excp, Guid requestId, DateTimeOffset expiryTime, RequestBase request, int attempt)
@@ -2918,29 +2947,39 @@ namespace Highlander.Core.V1
                         if (_clientBase == null)
                         {
                             if (attempt > 1)
-                                Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
-                            if (_sessionId == Guid.Empty)
                             {
-                                CoreState = CoreStateEnum.Connecting;
-                                using (var session = new SessCtrlSenderV131(_sessCtrlAddressBinding))
+                                //   Logger.LogDebug("Reconnect attempt ({0}) to server at: {1}", attempt, _sessCtrlAddressBinding.Address.Uri.AbsoluteUri);
+                                using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+                                if (_sessionId == Guid.Empty)
                                 {
-                                    var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false, false, _replyAddress, _replyContract, DebugRequests);
-                                    var sessionReply = session.BeginSessionV131(sessionHeader, _clientInfoV131);
+                                    CoreState = CoreStateEnum.Connecting;
+                                    var session = new SessCtrlV131.SessCtrlV131Client(channel);
+                                    //using (SessCtrlV131.SessCtrlV131Client session = new SessCtrlV131.SessCtrlV131Client(channel))
+                                    //{
+                                        var sessionHeader = new V131SessionHeader(Guid.Empty, Guid.NewGuid(), false,
+                                            false, "Nothing", _replyContract, DebugRequests);
+                                        BeginSessionV131Request beginRequest = new BeginSessionV131Request
+                                        {
+                                            Header = sessionHeader
+                                        };
+                                        var sessionReply = session.BeginSessionV131(beginRequest, new CallOptions()); //sessionHeader, _clientInfoV131
                                     if (!sessionReply.Success)
                                     {
-                                        throw new ApplicationException("Connection rejected: " + sessionReply.Message);
+                                        throw new ApplicationException(
+                                            "Connection rejected: " + sessionReply.Message);
                                     }
-                                    _sessionId = sessionReply.SessionId;
+                                    _sessionId = new Guid(sessionReply.SessionId);
+                                    //}
                                 }
+                                //instantiate a channel
+                                _clientBase = new TransferV341Client(channel); //_transferAddressBinding
                             }
-                            //instantiate a channel
-                            _clientBase = new TransferV341Client(_transferAddressBinding);
                         }
                         if (request != null)
                         {
                             if (request.DebugRequest)
                                 Logger.LogDebug("Request '{0}': sending {1} ...", requestId, request.GetType().Name);
-                            var header = new V131SessionHeader(_sessionId, request.RequestId, false, true, _replyAddress, _replyContract, request.DebugRequest);
+                            var header = new V131SessionHeader(_sessionId, request.RequestId, false, true, "Nothing", _replyContract, request.DebugRequest);
                             request.Transmit(Logger, _clientBase, header);
                         }
                         sent = true;

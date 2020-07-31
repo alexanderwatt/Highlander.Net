@@ -81,9 +81,9 @@
     <Compile Include="Helpers\ReflectionHelperTest.cs" />
     <Compile Include="Helpers\ResourceHelperTest.cs" />
     <Compile Include="Helpers\ResourceTest.Designer.cs">
-      <DependentUpon>ResourceTest.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceTest.resx</DependentUpon>
     </Compile>
     <Compile Include="NamedValues\NamedValueSetHelperTest.cs" />
     <Compile Include="Serialisation\JsonSerializerHelperTest.cs" />

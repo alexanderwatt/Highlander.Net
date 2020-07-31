@@ -59,7 +59,9 @@ namespace Highlander.Core.Common
     public class CoreStateChange
     {
         public readonly CoreStateEnum OldState;
+
         public readonly CoreStateEnum NewState;
+
         public CoreStateChange(CoreStateEnum oldState, CoreStateEnum newState)
         {
             OldState = oldState;

@@ -164,7 +164,6 @@ namespace Highlander.Core.Server
                     Logger.Log(e);
                 }
             }
-
             // restore subscriptions
             Logger.LogDebug("Restoring subscriptions...");
             List<CommonItem> subsItems = _cacheEngine.GetCacheItems(
@@ -185,8 +184,8 @@ namespace Highlander.Core.Server
                         Logger.LogDebug("  Client Id: {0}", connection.ClientId);
                         Logger.LogDebug("  Address  : {0}", connection.ReplyAddress);
                         Logger.LogDebug("  Subs. Id : {0}", subscription.SubscriptionId);
-                        Logger.LogDebug("  AppScopes: {0}", (subscription.AppScopes == null) ? "*" : String.Join(",", subscription.AppScopes));
-                        Logger.LogDebug("  ItemKind : {0}", (subscription.ItemKind == ItemKind.Undefined) ? "(any)" : subscription.ItemKind.ToString());
+                        Logger.LogDebug("  AppScopes: {0}", subscription.AppScopes == null ? "*" : string.Join(",", subscription.AppScopes));
+                        Logger.LogDebug("  ItemKind : {0}", subscription.ItemKind == ItemKind.Undefined ? "(any)" : subscription.ItemKind.ToString());
                         Logger.LogDebug("  DataType : {0}", subscription.DataTypeName ?? "(any)");
                         Logger.LogDebug("  Query    : {0}", subscription.Expression.DisplayString());
                         Logger.LogDebug("  MinimumUSN > : {0}", subscription.MinimumUSN);

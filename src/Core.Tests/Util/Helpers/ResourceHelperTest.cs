@@ -34,10 +34,7 @@ namespace Highlander.Utilities.Tests.Helpers
         public void ReadResourcesTest()
         {
             var actual = ResourceHelper.GetResources(Assembly.GetExecutingAssembly());
-            foreach (var file in actual)
-            {
-                Debug.Print(file);
-            }
+            Assert.AreEqual("Highlander.Utilities.Tests.Helpers.ResourceTest.resources", actual[0]);
         }
 
 
@@ -47,7 +44,7 @@ namespace Highlander.Utilities.Tests.Helpers
         [TestMethod]
         public void ReadResourceValueTest()
         {
-            string actual = ResourceHelper.ReadResourceValue("Highlander.Utilities.Tests.Helpers.ResourceTest.resources", "Name1");
+            string actual = ResourceHelper.ReadResourceValue("Highlander.Utilities.Tests.Helpers.ResourceTest", "Name1"); //
             Assert.AreEqual("value1", actual);
         }
 
@@ -58,7 +55,7 @@ namespace Highlander.Utilities.Tests.Helpers
         public void GetResourceWithPartialNameTest()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            const string partialResourceName = "ResourceTest.resources";
+            const string partialResourceName = "ResourceTest.txt";
             string actual = ResourceHelper.GetResourceWithPartialName(assembly, partialResourceName);
             Assert.AreEqual("Resource Test", actual);
             actual = ResourceHelper.GetResourceWithPartialName(assembly, "invalid");
@@ -72,7 +69,7 @@ namespace Highlander.Utilities.Tests.Helpers
         public void GetResourceTest()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            const string resourceName = "Highlander.Utilities.Tests.Helpers.ResourceTest.resources";
+            const string resourceName = "Highlander.Utilities.Tests.Helpers.ResourceTest.txt";
             string actual = ResourceHelper.GetResource(assembly, resourceName);
             Assert.AreEqual("Resource Test", actual);
         }
