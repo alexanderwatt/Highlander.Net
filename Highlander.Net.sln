@@ -249,7 +249,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Core.Interface.V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.PublisherWebService.V5r3", "FpMLV5r3\Applications\PublisherWebService\Highlander.PublisherWebService.V5r3.csproj", "{6E8B1F14-124D-47FF-94D1-336F5BBBA926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Web.API.V5r3", "Highlander.Web.API.V5r3\Highlander.Web.API.V5r3.csproj", "{34A6C3FA-353F-4D16-8E63-6CED65889A52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finhaus.Web.API.V5r3", "Highlander.Web.API.V5r3\Finhaus.Web.API.V5r3.csproj", "{34A6C3FA-353F-4D16-8E63-6CED65889A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Highlander.Web.API.V5r3", "Web.API.V5r3\Highlander.Web.API.V5r3.csproj", "{C6281B7D-29FE-4C0D-AB27-041005D194A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2733,6 +2735,30 @@ Global
 		{34A6C3FA-353F-4D16-8E63-6CED65889A52}.UnitTest|Win32.Build.0 = Release|Any CPU
 		{34A6C3FA-353F-4D16-8E63-6CED65889A52}.UnitTest|x86.ActiveCfg = Release|Any CPU
 		{34A6C3FA-353F-4D16-8E63-6CED65889A52}.UnitTest|x86.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|Win32.Build.0 = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Win32.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|Win32.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.Release|x86.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Any CPU.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Any CPU.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Mixed Platforms.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Win32.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|Win32.Build.0 = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|x86.ActiveCfg = Release|Any CPU
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1}.UnitTest|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2841,6 +2867,7 @@ Global
 		{E3DF5F07-1420-4C0D-A8A3-BDA19FB24810} = {A42736DB-A7DF-467D-B66A-368A40594116}
 		{6E8B1F14-124D-47FF-94D1-336F5BBBA926} = {9D87A49F-853E-4E50-9A25-D75776F7B071}
 		{34A6C3FA-353F-4D16-8E63-6CED65889A52} = {9D87A49F-853E-4E50-9A25-D75776F7B071}
+		{C6281B7D-29FE-4C0D-AB27-041005D194A1} = {9D87A49F-853E-4E50-9A25-D75776F7B071}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE1C46AE-29AA-423F-896A-2E19AC4F20FF}

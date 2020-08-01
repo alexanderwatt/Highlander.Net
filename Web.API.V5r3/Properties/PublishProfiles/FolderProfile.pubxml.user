@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Highlander\Highlander.Web.API.V5r3\bin\Debug\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>01/27/2020 20:48:42</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.dll">
+      <publishTime>01/30/2020 23:07:12</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.pdb">
+      <publishTime>01/30/2020 23:07:12</publishTime>
+    </File>
+    <File Include="bin/Autofac.pdb">
+      <publishTime>01/27/2020 20:48:42</publishTime>
+    </File>
+    <File Include="bin/Highlander.CalendarEngine.V5r3.dll">
+      <publishTime>06/03/2020 11:55:49</publishTime>
+    </File>
+    <File Include="bin/Highlander.CalendarEngine.V5r3.pdb">
+      <publishTime>06/03/2020 11:55:49</publishTime>
+    </File>
+    <File Include="bin/Highlander.Codes.V5r3.dll">
+      <publishTime>06/02/2020 08:12:57</publishTime>
+    </File>
+    <File Include="bin/Highlander.Codes.V5r3.pdb">
+      <publishTime>06/02/2020 08:12:57</publishTime>
+    </File>
+    <File Include="bin/Highlander.Configuration.Data.V5r3.dll">
+      <publishTime>06/02/2020 08:13:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.Configuration.Data.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.Confirmation.V5r3.dll">
+      <publishTime>06/02/2020 08:13:34</publishTime>
+    </File>
+    <File Include="bin/Highlander.Confirmation.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:34</publishTime>
+    </File>
+    <File Include="bin/Highlander.Constants.dll">
+      <publishTime>06/02/2020 08:12:44</publishTime>
+    </File>
+    <File Include="bin/Highlander.Constants.pdb">
+      <publishTime>06/02/2020 08:12:44</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Common.dll">
+      <publishTime>06/02/2020 08:12:53</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Common.pdb">
+      <publishTime>06/02/2020 08:12:53</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Interface.V5r3.dll">
+      <publishTime>06/03/2020 12:03:26</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.Interface.V5r3.pdb">
+      <publishTime>06/03/2020 12:03:26</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.V34.dll">
+      <publishTime>06/02/2020 08:13:02</publishTime>
+    </File>
+    <File Include="bin/Highlander.Core.V34.pdb">
+      <publishTime>06/02/2020 08:13:02</publishTime>
+    </File>
+    <File Include="bin/Highlander.CurveEngine.V5r3.dll">
+      <publishTime>06/03/2020 11:55:50</publishTime>
+    </File>
+    <File Include="bin/Highlander.CurveEngine.V5r3.pdb">
+      <publishTime>06/03/2020 11:55:50</publishTime>
+    </File>
+    <File Include="bin/Highlander.Equities.dll">
+      <publishTime>06/02/2020 08:12:57</publishTime>
+    </File>
+    <File Include="bin/Highlander.Equities.pdb">
+      <publishTime>06/02/2020 08:12:57</publishTime>
+    </File>
+    <File Include="bin/Highlander.Metadata.Common.dll">
+      <publishTime>06/02/2020 08:13:02</publishTime>
+    </File>
+    <File Include="bin/Highlander.Metadata.Common.pdb">
+      <publishTime>06/02/2020 08:13:02</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Analytics.V5r3.dll">
+      <publishTime>06/02/2020 08:13:42</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Analytics.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:42</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Contracts.V5r3.dll">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Contracts.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Helpers.V5r3.dll">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Helpers.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Identifiers.V5r3.dll">
+      <publishTime>06/02/2020 08:13:40</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Identifiers.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:40</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.dll">
+      <publishTime>06/02/2020 08:13:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.ModelFramework.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:36</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Models.V5r3.dll">
+      <publishTime>06/02/2020 08:13:43</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.Models.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:43</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.V5r3.dll">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Reporting.V5r3.pdb">
+      <publishTime>06/02/2020 08:13:35</publishTime>
+    </File>
+    <File Include="bin/Highlander.Utilities.dll">
+      <publishTime>06/02/2020 08:12:44</publishTime>
+    </File>
+    <File Include="bin/Highlander.Utilities.pdb">
+      <publishTime>06/02/2020 08:12:44</publishTime>
+    </File>
+    <File Include="bin/Highlander.ValuationEngine.V5r3.dll">
+      <publishTime>06/03/2020 11:55:51</publishTime>
+    </File>
+    <File Include="bin/Highlander.ValuationEngine.V5r3.pdb">
+      <publishTime>06/03/2020 11:55:51</publishTime>
+    </File>
+    <File Include="bin/Highlander.Web.API.V5r3.dll">
+      <publishTime>06/03/2020 12:03:27</publishTime>
+    </File>
+    <File Include="bin/Highlander.Web.API.V5r3.pdb">
+      <publishTime>06/03/2020 12:03:27</publishTime>
+    </File>
+    <File Include="bin/MathNet.Numerics.dll">
+      <publishTime>04/12/2020 16:28:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>11/15/2019 08:38:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Solver.Foundation.dll">
+      <publishTime>03/20/2020 08:50:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>03/20/2020 08:50:24</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/20/2020 08:50:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Globalization.Calendars.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Http.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Sockets.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>03/20/2020 08:50:23</publishTime>
+    </File>
+    <File Include="bin/Swashbuckle.Core.dll">
+      <publishTime>03/20/2020 08:50:24</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>09/18/2018 19:38:10</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/29/2018 15:39:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>03/20/2020 08:50:22</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>03/20/2020 08:50:28</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>03/20/2020 08:50:28</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>03/30/2020 08:13:15</publishTime>
+    </File>
+    <File Include="Key.snk">
+      <publishTime>04/06/2020 06:21:53</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/28/2020 08:29:32</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
